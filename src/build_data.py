@@ -178,7 +178,7 @@ META={'rules_updated':'2026-10-09','ban_updated':'2026-09-18','cards_snapshot':'
  'ban':BAN,'ban2':['Master Yi, Wuju Bladesman']}
 EXTRA={}
 import os
-for k in ('glossary','flow','patchnotes'):
+for k in ('glossary','flow','patchnotes','terms'):
     p='data/%s.json'%k
     if os.path.exists(p):
         try: EXTRA[k]=json.load(open(p,encoding='utf-8'))

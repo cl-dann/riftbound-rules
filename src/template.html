@@ -162,6 +162,16 @@ ol.flow a{font-family:var(--f-mono);font-size:12px;margin-left:6px}
 .pn{max-width:92ch;margin-bottom:14px}
 .pn ul{margin:4px 0 0;padding-left:18px;font-size:14px}
 .subnav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.gl{text-decoration:underline dotted var(--accent);text-underline-offset:3px;text-decoration-thickness:1.5px;cursor:help;border-radius:2px}
+.gl:focus-visible{outline:2px solid var(--accent)}
+#tip{position:fixed;z-index:50;max-width:min(340px,calc(100vw - 24px));background:var(--ink);color:var(--bg);border-radius:6px;padding:9px 12px;font-size:13.5px;line-height:1.45;box-shadow:0 6px 24px rgba(0,0,0,.25);pointer-events:none}
+#tip[hidden]{display:none}
+#tip b{display:block;font-family:var(--f-display);font-size:16px;margin-bottom:2px}
+#tip .rr{display:block;margin-top:4px;font-family:var(--f-mono);font-size:11.5px;opacity:.75}
+.terms{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:4px 18px;margin:0;padding:0;list-style:none}
+.terms li{border-bottom:1px solid var(--line);padding:6px 0;font-size:14px}
+.terms li b{font-weight:600}
+.terms li a{font-family:var(--f-mono);font-size:12px;margin-left:6px}
 .toc{display:flex;flex-direction:column;max-height:74vh;overflow:auto;border-top:1px solid var(--line)}
 .toc button{text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:5px 16px;cursor:pointer;font-size:13.5px;display:flex;gap:10px}
 .toc button:hover{background:var(--panel2)}
@@ -259,6 +269,7 @@ table.nt td.f{width:1%;white-space:nowrap}
   </section>
 
   <footer id="foot"></footer>
+<div id="tip" role="tooltip" hidden></div>
 </div>
 
 <script id="data" type="application/json">/*DATA*/</script>
@@ -330,9 +341,18 @@ function topicBlock(tp,why,open){
 }
 const FL=['szabály','levezetés','nyitott kérdés'];
 const FLT=['A Core Rules közvetlenül kimondja.','A szabályból és a kártyaszövegből levezetett következmény, nem hivatalos ruling.','A Core Rules nem dönti el egyértelműen, judge döntése kell.'];
+const TERMS=(D.extra&&D.extra.terms)||[];
+const TRE=TERMS.length?new RegExp('(?<![\\p{L}\\[])('+TERMS.map(x=>x.m).sort((a,b)=>b.length-a.length).join('|')+')(?![\\p{L}])','giu'):null;
+function termOf(w){const lw=w.toLowerCase();for(const x of TERMS){if(new RegExp('^(?:'+x.m+')$','iu').test(w))return x;}return null;}
+const NOHL=new Set(['unit','spell','gear','legend']);
+function glossify(html,seen){
+  if(!TRE)return html;seen=seen||new Set();
+  return html.replace(/(<[^>]+>)|([^<]+)/g,(m,tag,txt)=>tag?tag:txt.replace(TRE,w=>{const x=termOf(w);if(!x||NOHL.has(x.t)||seen.has(x.t))return w;seen.add(x.t);return '<span class="gl" tabindex="0" data-t="'+TERMS.indexOf(x)+'">'+w+'</span>';}));
+}
 function notesHTML(c){
   if(!c.nt)return '<h3>Hogyan érinti ezt a lapot</h3><p class="note">Ehhez a laphoz még nincs kézzel írt, lap-specifikus magyarázat. Lent a rá vonatkozó szabályszakaszok teljes szövege olvasható.</p>';
-  return '<h3>Hogyan érinti ezt a lapot<span class="n">'+c.nt.length+' pont, nem hivatalos ruling</span></h3><div class="ntwrap"><table class="nt">'+c.nt.map(n=>'<tr><td class="r">'+n[0].split(',').map(r=>'<a href="#szabalyok" data-ref="'+r.trim()+'">'+r.trim()+'</a>').join('')+'</td><td>'+esc(n[2])+'</td><td class="f"><span class="fl f'+n[1]+'" title="'+FLT[n[1]]+'">'+FL[n[1]]+'</span></td></tr>').join('')+'</table></div>';
+  const seen=new Set();
+  return '<h3>Hogyan érinti ezt a lapot<span class="n">'+c.nt.length+' pont, nem hivatalos ruling</span></h3><div class="ntwrap"><table class="nt">'+c.nt.map(n=>'<tr><td class="r">'+n[0].split(',').map(r=>'<a href="#szabalyok" data-ref="'+r.trim()+'">'+r.trim()+'</a>').join('')+'</td><td>'+glossify(esc(n[2]),seen)+'</td><td class="f"><span class="fl f'+n[1]+'" title="'+FLT[n[1]]+'">'+FL[n[1]]+'</span></td></tr>').join('')+'</table></div>';
 }
 function cardRulesHTML(c){
   let h=notesHTML(c);
@@ -639,7 +659,7 @@ function buildPDF(){
   put('Riftbound deck szabály-referencia',{size:20,style:'bold'});
   if(legend)put('Legend: '+legend,{size:12,style:'bold',color:[110,75,0]});
   put('Készült: '+new Date().toISOString().slice(0,10)+'. Források: Riftbound Core Rules (Last Updated '+META.rules_updated+'), Rules Hub ban lista ('+META.ban_updated+'), hivatalos errata cikkek, Card Gallery pillanatkép ('+META.cards_snapshot+').',{size:8.5,color:[90,98,115],before:1});
-  put('AI segítségével készült: Claude (Anthropic), Claude Fable 5.2 modell.',{size:8.5,color:[90,98,115]});
+  put('AI segítségével készült: Claude (Anthropic), Claude Fable 5.2 és Claude Opus 5.5 modell.',{size:8.5,color:[90,98,115]});
   put('Nem hivatalos segédanyag, készítette: Daneehunter. A Riftbound a Riot Games tulajdona, a Riot Games nem támogatja és nem szponzorálja ezt az anyagot. Hivatalos oldal: https://playriftbound.com',{size:8.5,color:[90,98,115]});
   put('Jelölés a kártyaszövegben: [1] Energy, [A] bármely domain Power, [C] a kártya saját domainjének Power-e, [Exhaust] a kártya kimerítése, Might a harci érték. A szabályszöveg az eredeti angol Core Rules szöveg.',{size:8.5,color:[90,98,115],after:2});
   rule();
@@ -728,17 +748,32 @@ $('rq').addEventListener('input',ruleSearch);
 /* ---------- váz ---------- */
 $('src').innerHTML='<span>Core Rules <b>'+META.rules_updated+'</b></span><span>Ban lista <b>'+META.ban_updated+'</b></span><span>Kártyaadat <b>'+META.cards_snapshot+'</b></span><span>Errata <b>'+CARDS.filter(c=>c.err!=null).length+' kártya</b></span><a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a>';
 $('foot').innerHTML='<p><strong>Készítette: Daneehunter.</strong> Nem hivatalos, rajongói segédeszköz, nem kereskedelmi célú.</p>'
- +'<p>Az oldal kódja, a kártya és szabály megfeleltetés és a magyar magyarázatok AI segítségével készültek: Claude (Anthropic), Claude Fable 5.2 modell. Az AI által írt magyarázat tévedhet, a hivatalos szabályszöveg az irányadó.</p>'
+ +'<p>Az oldal kódja, a kártya és szabály megfeleltetés és a magyar magyarázatok AI segítségével készültek: Claude (Anthropic), Claude Fable 5.2 és Claude Opus 5.5 modell. Az AI által írt magyarázat tévedhet, a hivatalos szabályszöveg az irányadó.</p>'
  +'<p>Riftbound szabálykereső was created under Riot Games\' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.</p>'
  +'<p>A Riftbound, a League of Legends, a kártyanevek, a kártyaszövegek, a kártyaképek és a Core Rules szövege a Riot Games, Inc. tulajdona, minden jog a Riot Gamest illeti. Hivatalos oldal: <a href="https://playriftbound.com/">playriftbound.com</a>, hivatalos szabályok: <a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a>, hivatalos kártyaadatbázis: <a href="https://playriftbound.com/en-us/card-gallery/">Card Gallery</a>.</p>'
  +'<p>Források: a szabályszöveg a Riftbound Core Rules (Last Updated '+META.rules_updated+') angol eredetije, változtatás nélkül. A ban lista ('+META.ban_updated+') és az errata a Rules Hubról és az onnan hivatkozott cikkekből származik: '+META.articles.map(a=>'<a href="'+a.u+'">'+esc(a.t)+'</a>').join(', ')+'. A kártyaadat a hivatalos Card Galleryből készült közösségi pillanatkép (LouisCourrian/riftbound-cards, '+META.cards_snapshot+'), a kártyaképek a Riot hivatalos szerveréről töltődnek be.</p>'
  +'<p>A kártya és szabály közti megfeleltetés automatikus, a "Hogyan érinti ezt a lapot" magyarázat pedig a készítő levezetése a Core Rules szövegéből. Egyik sem hivatalos ruling: versenyen a judge és a Core Rules teljes szövege dönt.</p>';
+const tip=$('tip');let tipFor=null;
+function showTip(el){const x=TERMS[+el.dataset.t];if(!x)return;tipFor=el;
+  tip.innerHTML='<b>'+esc(x.t)+'</b>'+esc(x.d)+'<span class="rr">Core Rules '+esc(x.r)+'</span>';tip.hidden=false;
+  const r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight;
+  let left=Math.min(Math.max(12,r.left+r.width/2-tw/2),window.innerWidth-tw-12);
+  let top=r.bottom+8;if(top+th>window.innerHeight-8)top=r.top-th-8;
+  tip.style.left=left+'px';tip.style.top=top+'px';}
+function hideTip(){tip.hidden=true;tipFor=null;}
+document.addEventListener('mouseover',e=>{const g=e.target.closest&&e.target.closest('.gl');if(g)showTip(g);else if(tipFor)hideTip();});
+document.addEventListener('focusin',e=>{const g=e.target.closest&&e.target.closest('.gl');if(g)showTip(g);});
+document.addEventListener('focusout',e=>{if(e.target.closest&&e.target.closest('.gl'))hideTip();});
+document.addEventListener('click',e=>{const g=e.target.closest&&e.target.closest('.gl');if(g){if(tipFor===g)hideTip();else showTip(g);}else if(tipFor)hideTip();});
+window.addEventListener('scroll',()=>{if(tipFor)hideTip();},{passive:true});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hideTip();});
 function renderTud(){
-  const X=D.extra||{};if(!X.glossary&&!X.flow&&!X.patchnotes)return;
-  $('tab-tud').hidden=false;let h='<div class="subnav">'+(X.glossary?'<a class="chip" href="#tud-kw" data-scroll="tud-kw">Kulcsszavak</a>':'')+(X.flow?'<a class="chip" href="#tud-flow" data-scroll="tud-flow">Játékmenet</a>':'')+(X.patchnotes?'<a class="chip" href="#tud-pn" data-scroll="tud-pn">Szabályváltozások</a>':'')+'</div>';
+  const X=D.extra||{};if(!X.glossary&&!X.flow&&!X.patchnotes&&!X.terms)return;
+  $('tab-tud').hidden=false;let h='<div class="subnav">'+(X.terms?'<a class="chip" href="#tud-fog" data-scroll="tud-fog">Fogalmak</a>':'')+(X.glossary?'<a class="chip" href="#tud-kw" data-scroll="tud-kw">Kulcsszavak</a>':'')+(X.flow?'<a class="chip" href="#tud-flow" data-scroll="tud-flow">Játékmenet</a>':'')+(X.patchnotes?'<a class="chip" href="#tud-pn" data-scroll="tud-pn">Szabályváltozások</a>':'')+'</div>';
   const rl=r=>'<a href="#szabalyok" data-ref="'+esc(r)+'">'+esc(r)+'</a>';
+  if(X.terms){h+='<h2 id="tud-fog" style="margin-top:14px">Fogalmak</h2><p class="note" style="margin:6px 0 12px">A magyarázatokban használt szakszavak egyszerűen. A kártyák magyarázataiban a pontozottan aláhúzott szóra mutatva vagy koppintva is megjelennek.</p><ul class="terms">'+[...X.terms].sort((a,b)=>a.t.localeCompare(b.t)).map(x=>'<li><b>'+esc(x.t)+'</b>'+rl(x.r)+'<br>'+esc(x.d)+'</li>').join('')+'</ul>';}
   if(X.glossary){
-    h+='<h2 id="tud-kw" style="margin-top:14px">Kulcsszavak</h2><p class="note" style="margin:6px 0 12px">A Core Rules 805-832 kulcsszavai röviden. A pontos szöveg a szabályszámra kattintva olvasható. AI által írt összefoglaló, nem hivatalos.</p><div class="kwgrid">';
+    h+='<h2 id="tud-kw" style="margin-top:28px">Kulcsszavak</h2><p class="note" style="margin:6px 0 12px">A Core Rules 805-832 kulcsszavai röviden. A pontos szöveg a szabályszámra kattintva olvasható. AI által írt összefoglaló, nem hivatalos.</p><div class="kwgrid">';
     X.glossary.forEach(g=>{const re=new RegExp('\\['+g.kw.replace(/[-]/g,'\\-')+'(?: \\d+)?\\]');const n=CARDS.filter(c=>c.ban!==1&&re.test(c.txt||'')).length;
       h+='<div class="kwc"><h4><span class="kw">'+esc(g.kw)+'</span>'+rl(g.rule)+'</h4><div class="k">'+esc(g.kind||'')+(g.on?' · '+esc(g.on):'')+'</div><p>'+esc(g.short||'')+'</p><ul>'+(g.points||[]).map(p=>'<li>'+rl(p[0])+'<span>'+esc(p[1])+'</span></li>').join('')+'</ul>'+(g.stack?'<p class="note">Több példány: '+esc(g.stack)+'</p>':'')+'<button data-kwq="['+esc(g.kw)+'">'+n+' lap ezzel a kulcsszóval</button></div>';});
     h+='</div>';
