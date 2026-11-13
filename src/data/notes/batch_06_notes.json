@@ -1,0 +1,673 @@
+{
+"Ava Achiever": [
+ ["383.3.a, 383.3.b", 0, "A \"you may\" után álló \"pay [C]\" a trigger base costja: a Mind Powert a trigger finalizálásakor fizeted ki, nem a resolve-kor. Ha nem fizetsz, a trigger lekerül a chainről."],
+ ["355.10.a, 420.3.c", 0, "A kéz nem Public zóna, ezért a kijátszandó lap nem target, a resolve-kor választod ki. Ha akkor nincs [Hidden] lapod a kezedben, nem történik semmi, a kifizetett Power nem jár vissza."],
+ ["356.1.b.1, 356.1.b.3", 0, "\"Ignoring its cost\": a lap Energy és Power costja nulla. Optional additional cost (például Accelerate) ettől még kifizethető."],
+ ["355.17, 466.2.c.3.a", 1, "Ha a lap unit, kötelezően Ava battlefieldjére érkezik, akkor is, ha azt nem te kontrollálod. A következő cleanupnál Attacker designationt kap, tehát beszáll a combatba."],
+ ["811.1.c.1, 811.3", 1, "Ez kijátszás kézből, nem Hide és nem facedown-ból játszás. A facedown-ból játszás célzási megkötései nem élnek, és a \"play a card from [Hidden]\" triggerek (Ember Monk) nem futnak le rá."],
+ ["148.1.a.1", 1, "Errata: korábban minden így kijátszott lap \"here\" érkezett. Most csak a unitra kötelező a battlefield, a gear a szokásos szabály szerint a base-be kerül."],
+ ["383.4.e.2.a", 0, "Attack trigger: combatonként egyszer fut le, amikor Ava először kap Attacker designationt."]
+],
+"Blastcone Fae": [
+ ["811.1.b, 811.6", 0, "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."],
+ ["811.1.d.3", 0, "A szabályzat név szerint ezt a lapot hozza példának: facedown-ból kijátszva a play effect targetje csak azon a battlefielden lévő unit lehet, ahová a Fae érkezett. Ha egy másik effect miatt máshová érkezik, akkor is az érkezési battlefield számít."],
+ ["355.10, 355.5.b", 0, "A unit target, és a trigger chain-re kerülésekor választod, nem a Fae kijátszásakor. Nincs \"enemy\" megkötés, saját unit is választható."],
+ ["355.8, 355.9.c", 1, "A trigger kötelező. Facedown-ból kijátszva, ha a battlefielden nincs más unit, a Fae saját magát kell hogy válassza, és 1 Mightra csökken."],
+ ["479.4.b", 0, "A \"to a minimum of 1\" korlát a resolve pillanatában rögzül: 2 Mightú unit -1-et kap a kör végéig. A később érkező buffok erre rakódnak rá, a levonás nem nő utólag -2-re."],
+ ["359.3.e.2.a", 0, "Facedown-ból kijátszva a battlefield megkötés is targeting restriction. Ha a target a resolve előtt elmozdul onnan, illegális lesz, a trigger nem csinál semmit."],
+ ["811.3", 0, "Kézből, teljes costért is kijátszható, ilyenkor bármelyik locationön lévő unit választható."]
+],
+"Elnuk Herd": [
+ ["811.1.b, 811.6", 0, "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."],
+ ["811.1.d.3", 0, "Facedown-ból kijátszva a +3 Might targetje csak az adott battlefielden lévő friendly unit lehet. Kézből kijátszva bármelyik friendly unit választható."],
+ ["417.1.a, 135.2.b.7", 0, "Facedown-ból kijátszva a resolve végén kötelezően recycle-ölődik, vagyis a Main Deck aljára kerül. Így facedown-ból egyszeri +3 Might, kézből kijátszva viszont a boardon marad."],
+ ["359.3.e.5", 1, "Ha a target a resolve előtt illegálissá válik, a +3 Might elmarad, de a recycle ettől még megtörténik, mert az nem a targetre hivatkozik."],
+ ["811.1.d.3.a", 0, "Ha a Herd a resolve előtt elhagyja a boardot, a facedown-ból kijátszott play effect nem tudja megállapítani, honnan érkezett, ezért mistargetel."],
+ ["355.9.c", 1, "Errata: korábban \"another friendly unit\" kellett. Most a Herd saját magát is választhatja, így facedown-ból akkor is kijátszható, ha nincs más unitod a battlefielden. Ekkor viszont a +3 a recycle miatt elvész."]
+],
+"Ember Monk": [
+ ["811.1.c.3", 0, "A \"from [Hidden]\" a facedown-ból kijátszást jelenti. A szabályzat a két kifejezést azonosnak veszi."],
+ ["811.1.c.1", 0, "A Hide nem Play. Egy lap elrejtése nem váltja ki a triggert, csak a későbbi kijátszása facedown-ból."],
+ ["420.4.a, 420.4.a.1", 0, "A trigger akkor fut le, amikor a facedown-ból kijátszott lap resolve-olt. Ha a lapot counterelik, a Monk nem kap Mightot."],
+ ["811.6", 1, "A facedown lapok [Reaction]-nel játszhatók ki, ezért a +2 Might combat közben, showdown alatt is megérkezhet."],
+ ["811.3", 1, "Egy [Hidden] kulcsszavas lap kézből, teljes costért kijátszva nem \"from [Hidden]\" érkezik, erre a Monk nem triggerel."],
+ ["365.1", 1, "Nincs \"here\" megkötés: a Monk base-ben vagy másik battlefielden állva is megkapja a +2-t. Több facedown lap kijátszása külön-külön triggerel, a bónuszok összeadódnak a kör végéig."]
+],
+"Mischievous Marai": [
+ ["811.1.b, 811.6", 0, "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."],
+ ["383.2.a.1", 0, "A \"to a battlefield\" a trigger feltételének része. Base-be kijátszva a trigger nem fut le."],
+ ["355.10, 355.8", 0, "Az enemy unit target, és Marai battlefieldjén kell lennie. Ha ott nincs enemy unit, a trigger nem kerül chain-re."],
+ ["355.2.a, 811.6", 1, "Unit alapból csak általad kontrollált battlefieldre játszható, ahol enemy unit jellemzően csak combat alatt áll. A sebzés ezért a gyakorlatban facedown-ból, [Reaction]-ként, combat közben használható."],
+ ["359.3.f.2, 811.1.d.3.a", 0, "A \"here\" a resolve-kor ellenőrzött hivatkozás. Ha Marai addigra elhagyja a boardot vagy elmozdul, a trigger mistargetel."],
+ ["142.4.b, 323.4", 0, "A 2 damage a uniton marad: ha eléri a unit Mightját, a következő cleanupnál meghal. Combat közben a combat damage ehhez adódik hozzá."]
+],
+"Noxus Saboteur": [
+ ["422.4, 054.1", 1, "A facedown lapot zónaváltáskor a tulajdonosa felfedi, a facedown-ból kijátszás pedig zónaváltás a chainre. Mivel a felfedés tilos, az opponent a Saboteur battlefieldjén lévő facedown lapját nem tudja kijátszani."],
+ ["107.3.c, 466.2.c.1", 1, "Facedown lap csak olyan battlefielden lehet, amit a lap controllere kontrollál. A Saboteur ezért a gyakorlatban támadóként hat: amíg ott áll, a defender nem fordíthatja fel a lapját a showdownban."],
+ ["365.1", 1, "Passive ability, csak addig él, amíg a Saboteur a boardon és azon a battlefielden van. Ha megölik vagy elmozdítják, az opponent azonnal újra kijátszhatja a facedown lapját."],
+ ["323.6.a", 2, "Ha az opponent elveszíti a battlefield kontrollját, a cleanup a facedown lapot a trashbe tenné, ami felfedéssel jár. Hogy a tiltás ezt megakadályozza-e, azt a Core Rules nem mondja ki, judge döntse el."],
+ ["811.1.c.2", 1, "Csak az opponentek lapjaira hat. A saját facedown lapjaidat ugyanott továbbra is kijátszhatod, és a Hide actiont sem tiltja."]
+],
+"Pakaa Cub": [
+ ["811.1.b, 811.6", 0, "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."],
+ ["811.1.d.1, 466.2.c.3.a", 0, "Facedown-ból csak arra a battlefieldre érkezhet, ahol el volt rejtve. Ha ott éppen combat zajlik, a következő cleanupnál megkapja a controllere szerinti Attacker vagy Defender designationt, és 3 Mighttal beszáll."],
+ ["323.6.a", 0, "Ha elveszíted a battlefield kontrollját, a facedown lap a következő cleanupnál a trashbe kerül."],
+ ["811.3", 0, "Kézből, 3 Energyért is kijátszható a szokásos időzítéssel, base-be vagy általad kontrollált battlefieldre."]
+],
+"Spiderling": [
+ ["103.3.b, 002", 1, "A kártyaszöveg felülírja a névenkénti 3 példányos limitet: Spiderlingből bármennyi lehet a Main Deckben."],
+ ["365.1, 198.1", 1, "A bónusz passive ability: minden más, ugyanazon a locationön álló, általad kontrollált Spiderling +1 Mightot ad. Három Spiderling egy helyen egyenként 3 Mightú. Külön locationön állók nem számítanak."],
+ ["479.4.b, 142.4.b", 1, "A bónusz folyamatosan újraszámolódik, nem rögzül. Ha egy társa meghal vagy elmozdul, a Might azonnal csökken, és a már rajta lévő damage halálossá válhat."],
+ ["107.3.b, 811.1.b", 0, "Egy battlefielden egyszerre csak egy facedown lapod lehet, tehát egy helyre csak egy Spiderling rejthető el."],
+ ["811.1.d.1, 811.6", 0, "Facedown-ból [Reaction]-ként érkezik az adott battlefieldre, így combat közben azonnal növeli a már ott álló Spiderlingek Mightját is."],
+ ["479.1.b.1", 1, "A név másolható tulajdonság. Egy Spiderlinget másoló token is \"with my name\" unitnak számít."]
+],
+"Teemo, Scout": [
+ ["811.1.b, 103.3.a.1", 0, "Hidden: kézből és a Champion Zone-ból is elrejthető [A]-ért egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."],
+ ["811.1.d.1, 466.2.c.3.a", 0, "Facedown-ból csak arra a battlefieldre érkezhet, ahol el volt rejtve. Folyamatban lévő combatba a következő cleanupnál kapcsolódik be."],
+ ["355.10", 1, "A play effect csak önmagára hivatkozik, nincs target. A +3 Might a kör végéig tart, addig Teemo 4 Mightú."],
+ ["383.4.a.2", 1, "A +3 trigger a chain-re kerül, lehet rá reagálni. Amíg nem resolve-ol, Teemo 1 Mightú, vagyis 1 damage is megöli."],
+ ["317.2.b, 317.2.c", 0, "A kör végén előbb gyógyul minden unit, és csak utána járnak le a \"this turn\" effectek. Teemo ezért nem hal bele abba, hogy a +3 lejár."]
+],
+"Teemo, Strategist": [
+ ["811.1.b, 103.3.a.1", 0, "Hidden: kézből és a Champion Zone-ból is elrejthető [A]-ért. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható arra a battlefieldre, ahol el volt rejtve."],
+ ["135.2.b.5.a", 0, "A szabályzat név szerint ezt a lapot hozza példának: a defend trigger négy külön instruction (choose, reveal, deal, recycle). Az enemy unit target, a trigger chain-re kerülésekor választod."],
+ ["418.8, 715.4", 0, "A sebzés egyetlen Deal action, akkora, ahány [Hidden] lap volt az 5 között. A szabályzat erre a lapra mondja ki: ha egy sem volt, nincs Deal action, ezért a Bonus Damage sem érvényesül."],
+ ["383.4.f.2.a, 466.2.c.3.a", 1, "Combatonként egyszer triggerel, amikor Teemo először kap Defender designationt. Ha facedown-ból érkezik egy combatba, ahol te védekezel, a következő cleanupnál Defender lesz, és a trigger lefut."],
+ ["432.1.c, 417.5", 0, "5-nél kevesebb lapnál annyit fedsz fel, amennyi van, Burn Out nélkül. A felfedett lapok kötelezően, véletlen sorrendben a deck aljára kerülnek."],
+ ["359.3.e.5", 1, "Ha a target a resolve előtt illegálissá válik, a sebzés elmarad, de a reveal és a recycle megtörténik."],
+ ["383.4.f", 1, "Errata: a régi szöveg akkor is triggerelt, ha Teemo [Hidden]-ből lett kijátszva. Most csak a védekezés váltja ki, tehát a saját támadásodba facedown-ból bedobva nem sebez."]
+],
+"Tornado Warrior": [
+ ["811.1.b, 811.6", 0, "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."],
+ ["383.2.a.1", 0, "A \"from face down\" a trigger feltételének része. Kézből kijátszva a Warrior sima 3 Mightú unit, az empower nem fut le."],
+ ["383.3.a", 0, "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz. Ha nem kéred, lekerül a chainről."],
+ ["355.10, 811.1.d.3", 0, "A \"something here\" target, és a Warrior battlefieldjén kell lennie. Nincs \"friendly\" megkötés."],
+ ["442.1.c, 442.2", 0, "Az Empowered állapot önmagában nem csinál semmit, csak az erre hivatkozó abilityk használják. Már Empowered objektumon az empower hatástalan."],
+ ["393, 443.1", 1, "A \"Disempower it at end of turn\" delayed trigger: akkor is lefut, ha a Warrior közben elhagyta a boardot. Olyan objektumról is leveszi az Empowered állapotot, amelyik azt máshonnan kapta."],
+ ["359.3.e.16", 1, "Ha a Warrior az Ending Phase-ben, az ending step kezdete után érkezik, az \"at end of turn\" delayed trigger már nem jön létre, a disempower elmarad."]
+],
+"Disciple of Shen": [
+ ["811.1.b, 811.6", 0, "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."],
+ ["814.1.c, 814.1.d.1", 0, "A Shield 3 csak addig ad +3 Mightot, amíg a Disciple Defender. Támadóként a feltétel teljesülése mellett is 1 Mightú."],
+ ["364.3.a", 1, "A feltétel folyamatos: pontosan egy másik, általad kontrollált unit kell ugyanarra a battlefieldre. Base-ben nem él. A tokenek is unitnak számítanak, az enemy unitok nem."],
+ ["142.4.b", 1, "Ha combat közben egy harmadik unitod érkezik, vagy a társa meghal vagy elmozdul, a Shield azonnal megszűnik. A Might 1-re esik, és a rajta lévő damage halálos lehet."],
+ ["811.1.d.1, 466.2.c.3.a", 1, "Facedown-ból, [Reaction]-ként egy egyedül védekező unitod mellé játszva a következő cleanupnál Defender lesz, és 4 Mighttal számol."],
+ ["814.2", 0, "Más forrásból kapott Shield értéke összeadódik a sajátjával."]
+],
+"Kennen, Keeper of Balance": [
+ ["811.1.b, 103.3.a.1", 0, "Hidden: kézből és a Champion Zone-ból is elrejthető [A]-ért. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható arra a battlefieldre, ahol el volt rejtve."],
+ ["383.3.a, 383.3.b", 0, "A \"you may\" után álló \"pay [2]\" a trigger base costja: a 2 Energyt a trigger finalizálásakor fizeted ki. Ha a target a resolve előtt illegálissá válik, a cost nem jár vissza."],
+ ["355.10, 811.1.d.3", 0, "A unit target, bármelyik játékosé lehet. Facedown-ból kijátszva a play effect csak az adott battlefielden lévő unitot választhatja. Az attack triggerre ez a megkötés nem vonatkozik."],
+ ["424.1.b, 424.1.a.2", 0, "A stunned unit Mightja nem számít bele a combat damage-be. A Stunned állapot a kör végi cleanupig tart."],
+ ["424.1.a.1", 0, "Már stunned unit is választható, de újra nem stunolható, a 2 Energy ilyenkor kárba vész."],
+ ["364.3.a, 359.3.f.2", 1, "A +2 Might passive: addig él, amíg Kennen battlefieldjén van stunned enemy unit, bárki stunolta is. Ha a unit elmozdul vagy meghal, a bónusz azonnal megszűnik."],
+ ["383.4.e.2.a", 0, "Az attack trigger combatonként egyszer fut le."]
+],
+"Keeper of Masks": [
+ ["811.1.b, 811.6", 0, "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."],
+ ["816.1.b", 0, "Temporary: a controllere következő Beginning Phase-ének elején, még a scoring előtt meghal. Hold pontot ezért nem tud tartani."],
+ ["187.6, 359.3.f.2", 0, "A két Reflection token 0 Mightú, domain nélküli unit, és a Keeper aktuális locationjére érkezik. A \"here\" a resolve-kor dől el."],
+ ["388.1, 389.1", 0, "A \"Then do this\" reflexive trigger: a másolás külön chain itemként kerül fel, lehet rá reagálni. Addig a tokenek 0 Mightú Reflectionök."],
+ ["479.1.b, 479.1.b.1, 185.1.a", 0, "A copy effect minden másolható tulajdonságot átvesz: név, cost, 1 Might, [Hidden], [Temporary] és a play effect szövege. A másolatok tokenek maradnak, és a [Temporary] miatt ők is meghalnak."],
+ ["383.4.a.2", 1, "Errata: a másolás a tokenek kijátszása után, külön lépésben történik. A tokenek Reflectionként érkeztek, ezért a másolt \"When you play me\" szöveg rájuk nem fut le, nincs láncreakció."],
+ ["811.1.d.3.a", 2, "Ha a Keeper a play effect vagy a reflexive trigger resolve-ja előtt elhagyja a boardot, nem egyértelmű, hogy a \"here\" és a \"copies of me\" mire hivatkozik. Judge döntse el."]
+],
+"Momentary Companion": [
+ ["811.1.b, 811.6", 0, "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."],
+ ["383.2.a.1", 0, "Az \"if it's not your turn\" közvetlenül a trigger feltétele után áll, ezért a feltétel része. A saját körödben kijátszva a trigger egyáltalán nem kerül chain-re."],
+ ["811.6, 155", 1, "Az opponent körében csak facedown-ból, a kapott [Reaction]-nel játszható ki. Kézből vagy a saját körödben facedown-ból kijátszva sima 4 Mightú unit marad."],
+ ["816.1.b", 0, "A kapott [Temporary] miatt a következő saját Beginning Phase-ed elején, a scoring előtt meghal. Azt a battlefieldet vele nem tudod holdolni."],
+ ["124.1", 0, "A kapott kulcsszó megszűnik, ha a unit elhagyja a boardot. Kézbe visszavéve és újra kijátszva tiszta lappal indul."]
+],
+"Arachnoid Horror": [
+ ["823.1.c.1, 823.2", 0, "Hunt 2: amikor a Horror conquerel vagy holdol, 2 XP-t kapsz. Más forrásból kapott Hunt értéke hozzáadódik."],
+ ["355.2.b, 740.2.a, 170.11.a", 0, "Engedély: olyan battlefieldre is kijátszható, amit nem te kontrollálsz, ha ott egy enemy unit egyedül áll, vagyis azon a locationön nincs másik unitja a controllerének."],
+ ["190.3.a.1, 466.2.c.1", 0, "Az így kijátszott unit Contested státuszt tesz a battlefieldre, ebből combat lesz, és te vagy az Attacker."],
+ ["143.4, 467.2.a", 1, "A unit exhausted lép be, de a combat damage az összes attacking unit Mightját összegzi, az exhausted állapot ezt nem csökkenti."],
+ ["365.1", 1, "A második mondat passive ability: amíg a Horror a boardon van (base-ben is), minden friendly unit megkapja ugyanezt az engedélyt. Az első mondat magára a Horrorra vonatkozik, amikor kijátszod."],
+ ["308.1.a", 1, "Az engedély a helyre szól, az időzítésre nem. [Action] vagy [Reaction] nélküli unit így is csak a saját körödben, showdownon kívül játszható ki."]
+],
+"Herald of Spring": [
+ ["730.1, 729.2", 0, "A play effect 2 XP-t ad. Az XP játékoshoz kötött, nyilvános érték, nem a uniton van."],
+ ["383.4.a.2", 1, "A trigger a chain-re kerül, de nincs targetje és nem hivatkozik a Heraldra. Ha a Herald közben meghal, a 2 XP így is megérkezik."],
+ ["823.1.c.1, 823.1.c.2", 0, "Hunt érték nélkül: amikor a Herald conquerel vagy holdol, 1 XP-t kapsz."],
+ ["383.4.c.2.a, 472", 0, "A Hunt csak akkor triggerel, ha a Herald jelen van azon a battlefielden, amikor score-olod. Egy battlefield körönként egyszer score-olható."]
+],
+"Kha'Zix, Evolving Hunter": [
+ ["823.1.c.1", 0, "Hunt: amikor Kha'Zix conquerel vagy holdol, 1 XP-t kapsz."],
+ ["383.3.a, 383.3.b, 203.3", 0, "A \"spend 3 XP\" a trigger base costja, a finalizáláskor fizeted ki. 3-nál kevesebb XP-vel a trigger nem tehető chain-re."],
+ ["355.10, 355.8", 0, "Az enemy unit target, és Kha'Zix battlefieldjén kell lennie. Ha a resolve előtt illegálissá válik, az XP nem jár vissza."],
+ ["359.3.f.2", 0, "A sebzés Kha'Zix resolve-kori Mightjával egyenlő, buffokkal és levonásokkal együtt. Ha Kha'Zix addigra elhagyja a boardot, a Might null, a trigger nem sebez."],
+ ["323.4, 467.1", 1, "A trigger a combat showdown elején resolve-ol. Az így megölt unit a cleanupnál a trashbe megy, a Combat Damage Stepben már nem sebez."],
+ ["824.1.d", 1, "Az elköltött 3 XP csökkenti az XP-det: ha emiatt egy [Level] küszöb alá esel, az érintett lapok Level abilityje azonnal inaktív lesz."],
+ ["383.4.e.2.a", 0, "Attack trigger, combatonként egyszer fut le."]
+],
+"Voracious Gromp": [
+ ["823.1.c.1, 823.1.b", 0, "Hunt 3: conquer és hold effect egyben. Amikor a Gromp conquerel vagy holdol, 3 XP-t kapsz."],
+ ["383.4.c.2.a, 383.4.d.2.a", 0, "Csak akkor triggerel, ha a Gromp jelen van a battlefielden a conquer vagy a hold pillanatában. Base-ben állva nem ad XP-t."],
+ ["472, 473.2.c", 0, "Egy battlefield körönként egyszer score-olható, ezért a Hunt battlefieldenként és körönként legfeljebb egyszer fut le."],
+ ["383.4.c.2.c", 0, "Ha a conquerért járó pontot valami negálja vagy lecseréli (például az utolsó pont helyett húzol), a Hunt ettől még triggerel."],
+ ["823.2", 0, "Más forrásból kapott Hunt értéke összeadódik a 3-mal."]
+],
+"Gemhand Hunter": [
+ ["823.1.c.1", 0, "Hunt: amikor a Hunter conquerel vagy holdol, 1 XP-t kapsz."],
+ ["824.1.b.1, 824.1.c", 0, "Level 6: amíg legalább 6 XP-d van, a Hunter +1 Mightot kap. A feltétel folyamatosan ellenőrzött, nem kell hozzá semmit aktiválni."],
+ ["824.1.d, 142.4.b", 1, "Ha XP-t költesz és 6 alá esel, a +1 azonnal megszűnik. Combat közben ez azt jelentheti, hogy a rajta lévő damage halálossá válik."],
+ ["824.1.c.1", 0, "Ha a Hunter controllert vált, az új controller XP-je számít."]
+],
+"Scorchclaw": [
+ ["823.1.c.1", 0, "Hunt 2: amikor a Scorchclaw conquerel vagy holdol, 2 XP-t kapsz."],
+ ["824.1.b.1, 369.3", 0, "Level 3: legalább 3 XP mellett +1 Mightot kap és ready lép be. Az \"enter ready\" replacement effect: a unit nem exhausted érkezik, majd áll fel, hanem eleve ready."],
+ ["366.2.a", 1, "A ready belépéshez a kijátszás pillanatában kell meglennie a 3 XP-nek. Ha a küszöböt később éred el, a már boardon lévő Scorchclaw nem lesz ready, csak a +1 Mightot kapja meg."],
+ ["144.1.a, 144.2", 1, "Ready belépve még abban a körben mehet Standard Move-val battlefieldre, mert a Move costja a unit exhaustolása."],
+ ["824.1.d", 0, "Ha az XP-d 3 alá esik, a +1 Might azonnal megszűnik."]
+],
+"Wuju Apprentice": [
+ ["823.1.c.1", 0, "Hunt: amikor az Apprentice conquerel vagy holdol, 1 XP-t kapsz."],
+ ["727.1.c.1, 824.1.b.1", 0, "Level 6: a \"When you play me, draw 1\" trigger csak akkor értékelődik ki, ha aktív. A kijátszás pillanatában kell legalább 6 XP, különben nincs húzás."],
+ ["727.1.c.1.b", 0, "Ha a trigger már a chainen van, és utána esel 6 XP alá, a trigger ettől még resolve-ol és húzol."],
+ ["414.4", 0, "A húzás kötelező. Üres Main Deck esetén Burn Outot okoz."]
+],
+"Dangerous Duo": [
+ ["812.1.b.1, 812.1.c", 0, "Legion: a play effect csak akkor aktív, ha ebben a körben már finalizáltál egy másik kártyát. Körönkénti első lapként sima 3 Mightú unit."],
+ ["420.4.b", 0, "A Legion feltétel a finalizálást nézi, nem a resolve-ot. Egy counterelt spell is \"played another card\"-nak számít."],
+ ["811.1.c.1, 185", 1, "A Hide nem Play, és a token nem kártya. Egy lap elrejtése vagy egy token kijátszása önmagában nem kapcsolja be a Legiont."],
+ ["355.10, 355.5.b", 0, "A unit target, a trigger chain-re kerülésekor választod. Nincs megkötés, saját és enemy unit, akár maga a Duo is lehet. A +2 Might a kör végéig tart."],
+ ["359.3.e.7", 0, "Ha a target a resolve előtt elhagyja a boardot, a trigger hatás nélkül resolve-ol."]
+],
+"Darius, Executioner": [
+ ["812.1.b.1, 420.4.b", 0, "Legion: a ready trigger csak akkor aktív, ha ebben a körben már finalizáltál egy másik kártyát. Counterelt lap is számít."],
+ ["416.1, 805.6", 1, "Ez nem \"enter ready\": Darius exhausted lép be, majd a trigger resolve-kor readyzi. A trigger a chainre kerül, lehet rá reagálni, és a \"becomes ready\" típusú triggereket kiváltja."],
+ ["144.1.a, 144.2", 1, "Ready állapotban még abban a körben mehet Standard Move-val battlefieldre."],
+ ["364.1, 198.1", 1, "A \"+1 Might here\" passive: a Dariusszal azonos locationön álló többi friendly unit kapja, base-ben is. Darius magát nem erősíti."],
+ ["142.4.b", 1, "Ha Darius elhagyja a locationt vagy meghal, a +1 azonnal megszűnik, és a társakon lévő damage halálossá válhat."],
+ ["103.3.a.1", 0, "Champion unit: Chosen Championként a Champion Zone-ból is kijátszható."]
+],
+"Noxus Hopeful": [
+ ["727.1", 0, "A szabályzat név szerint ezt a lapot hozza a Dependent Keyword példájának: a [Legion] a feltétel (játszottál már másik kártyát a körben), az \"I cost [2] less\" pedig a függő ability."],
+ ["812.1.c, 420.4.b", 0, "Ha ebben a körben már finalizáltál egy másik kártyát, 4 helyett 2 Energybe kerül. Counterelt lap is számít."],
+ ["356.4.b, 366.2.a", 0, "A kedvezmény a Determine Total Cost lépésben érvényesül, és minden olyan zónában él, ahonnan a lap kijátszható."],
+ ["206", 0, "A szabályzat név szerint említi: más effectek mindig a nyomtatott 4-es costot látják. Egy Noxus Hopefult másoló Reflection token megölése például 4-gyel csökkenti az Atakhan costját, a Legion kedvezménytől függetlenül."],
+ ["811.1.c.1", 1, "A Hide nem Play, egy lap elrejtése nem kapcsolja be a kedvezményt."]
+],
+"Scrapyard Champion": [
+ ["812.1.b.1, 420.4.b", 0, "Legion: a play effect csak akkor aktív, ha ebben a körben már finalizáltál egy másik kártyát. Counterelt lap is számít."],
+ ["423.2.a, 423.4", 0, "A discard kötelező, nincs \"may\". Ha 2-nél kevesebb lap van a kezedben, annyit dobsz, amennyi van, a maradék negálódik."],
+ ["359.3.e.11", 0, "A szabályzat pontosan ezt a szöveget hozza példának: üres kézzel a discard negálódik, de a draw 2 megtörténik."],
+ ["414.4", 0, "Ha 2-nél kevesebb lap van a Main Deckben, a húzás Burn Outot okoz."],
+ ["423.1", 0, "A discardolt lap közvetlenül a trashbe megy, a szövege nem hajtódik végre."]
+],
+"Trifarian Gloryseeker": [
+ ["812.1.b.1, 420.4.b", 0, "Legion: a buff trigger csak akkor aktív, ha ebben a körben már finalizáltál egy másik kártyát. Counterelt lap is számít."],
+ ["427.1.b, 703", 0, "A buff egy counter, ami +1 Mightot ad. Nem \"this turn\" hatás: addig marad, amíg a unit a boardon van, vagy amíg el nem költöd."],
+ ["702.3, 427.1.b.1", 0, "Egy uniton egyszerre egy buff lehet. Ha a Gloryseeker később újabb buffot kapna, az nem kerül rá."],
+ ["705", 0, "Ha a unit elhagyja a boardot, a buff lekerül róla."]
+],
+"Undying Legion": [
+ ["366.1", 0, "A szabályzat név szerint ezt a lapot hozza példának: a passive ability csak akkor él, amikor a lap a trashben van."],
+ ["812.1.c, 420.4.b", 0, "A trashből kijátszás csak akkor engedélyezett, ha ebben a körben már finalizáltál egy másik kártyát. Counterelt lap is számít."],
+ ["356.1.a", 0, "A \"for [3][C]\" a base cost helyére lép: a trashből 3 Energy és 1 Fury Power az ára, kézből továbbra is 3 Energy."],
+ ["420.1.a, 308.1.a", 1, "Az engedély csak a zónára szól. Az időzítés nem változik: a saját körödben, Open State-ben, showdownon kívül, base-be vagy általad kontrollált battlefieldre játszható."],
+ ["124", 0, "A trashből visszatérő példány új objektum, a korábbi damage, buff vagy kapott kulcsszó nem él rajta."],
+ ["429.2", 1, "Nincs korlát arra, hányszor térhet vissza: minden halála után újra kijátszható a trashből, ha a Legion feltétel teljesül és ki tudod fizetni."]
+],
+"Vanguard Captain": [
+ ["812.1.b.1, 420.4.b", 0, "Legion: a play effect csak akkor aktív, ha ebben a körben már finalizáltál egy másik kártyát. Counterelt lap is számít."],
+ ["187.1, 185.2.d", 0, "A Recruit domain nélküli, 1 Mightú unit token. A tokenek exhausted lépnek be, mint bármely unit."],
+ ["359.3.f.2", 0, "A \"here\" a resolve-kor ellenőrzött hivatkozás: a tokenek oda érkeznek, ahol a Captain akkor áll."],
+ ["359.3.f.2.a", 1, "Ha a Captain a resolve előtt elhagyja a boardot, a \"here\" null értéket ad, a tokenek nem jönnek létre."],
+ ["185.2.a, 420.4.a", 1, "A tokeneket \"play\"-eled, ezért a \"when you play a unit\" és a \"when you play a token unit\" triggerek (például Lillia, Protector of Dreams) tokenenként lefutnak."]
+],
+"Bandle Soldier": [
+ ["824.1.b.1, 369.3", 0, "Level 3: legalább 3 XP mellett ready lép be. Ez replacement effect: a unit nem exhausted érkezik, majd áll fel, hanem eleve ready."],
+ ["366.2.a", 1, "A kijátszás pillanatában kell meglennie a 3 XP-nek. Ha a küszöböt később éred el, a már boardon lévő Soldier nem lesz ready."],
+ ["144.1.a, 144.2", 1, "Ready belépve még abban a körben mehet Standard Move-val battlefieldre."],
+ ["805.6.a", 1, "Mivel eleve ready érkezik, a \"becomes ready\" típusú triggereket nem váltja ki."]
+],
+"Master Yi, Unstoppable": [
+ ["824.1.b.1, 356.4.b", 0, "A Level kedvezmények az XP-d alapján, a Determine Total Cost lépésben érvényesülnek. Az \"instead\" miatt mindig csak a legmagasabb elért szint számít, nem adódnak össze."],
+ ["356.6", 1, "A tényleges ár: 3 XP alatt 12 Energy és 3 Calm Power, 3 XP-től 10 és 2, 6 XP-től 8 és 1, 11 XP-től 6 Energy és 0 Power."],
+ ["366.2.a, 103.3.a.1", 0, "A cost módosító passive minden zónában él, ahonnan a lap kijátszható, tehát kézben és a Champion Zone-ban is."],
+ ["206", 0, "Más effectek a nyomtatott 12 Energy és 3 Power costot látják, a kedvezménytől függetlenül."],
+ ["757.1, 355.9.b", 0, "Level 16: enemy spell és ability nem választhatja targetnek. A saját spelljeid és abilityjeid továbbra is célozhatják."],
+ ["355.10.d", 1, "A nem célzó effectek (\"all units\", \"each player\") és a combat damage a Level 16 mellett is hatnak rá."],
+ ["758.1, 758.2.a, 824.1.d", 0, "Ha a targetelés után éred el a 16 XP-t, az enemy spell a resolve-kor mistargetel. Fordítva is igaz: ha a resolve-ra 16 XP alá esel, Yi újra legális target."]
+],
+"Targonian Visionary": [
+ ["824.1.b.1, 824.1.c", 0, "Level 11: amíg legalább 11 XP-d van, +4 Mightot kap, vagyis 10 Mightú. A feltétel folyamatosan ellenőrzött."],
+ ["824.1.d, 142.4.b", 1, "Ha XP-t költesz és 11 alá esel, a +4 azonnal megszűnik, és a rajta lévő damage halálossá válhat."],
+ ["729.2, 732", 0, "Az XP nyilvános, játékoshoz kötött érték. Csapatmódban a társad XP-je nem számít bele."]
+],
+"Fiora, Worthy": [
+ ["709", 0, "\"Becomes Mighty\": a trigger abban a pillanatban fut le, amikor egy unitod Mightja 5 alól 5-re vagy fölé változik. Már Mighty unit további erősítése nem váltja ki."],
+ ["383.3.a, 383.3.b", 0, "A \"you may\" után álló \"pay [C]\" a trigger base costja: az Order Powert a finalizáláskor fizeted ki. Ha nem fizetsz, a trigger lekerül a chainről."],
+ ["355.10.c", 0, "A unit csak a trigger feltételében szerepel, ezért nem target. \"Can't be chosen\" védelem nem akadályozza a readyt."],
+ ["814.1.c, 710", 1, "Minden Might változás számít, ami 5-re vagy fölé visz: buff, \"this turn\" bónusz, Equipment, vagy a Shield, amikor a unit Defender lesz. Fiora saját magára is triggerel."],
+ ["416.1.c", 0, "Ha a unit a resolve-kor már ready, nem történik semmi, a kifizetett Power elveszett."],
+ ["709, 711", 2, "Nem egyértelmű, hogy egy eleve 5 vagy több Mighttal a boardra lépő unit \"becomes Mighty\" eseménynek számít-e. A szabály csak a Might változását írja le, judge döntse el."]
+],
+"Kadregrin the Infernal": [
+ ["708, 710", 0, "Mighty az a unit, amelynek az aktuális Mightja 5 vagy több. A boardon lévő unitoknál a pillanatnyi Might számít, buffokkal és bónuszokkal együtt."],
+ ["135.2.b.3", 1, "A darabszámot a resolve-kor számolod. Kadregrin a boardon van, 9 Mighttal maga is beleszámít, tehát legalább 1 lapot húzol, ha addig túléli."],
+ ["359.3.f.2", 1, "Ha a trigger chainen léte alatt megölnek vagy legyengítenek egy Mighty unitodat (akár magát Kadregrint), az már nem számít bele a húzásba."],
+ ["414.4", 0, "A húzás kötelező. Ha több lapot kellene húznod, mint amennyi a Main Deckben van, Burn Out következik."]
+],
+"Raving Witness": [
+ ["421.1, 144.2", 0, "Minden Move-ra triggerel: Standard Move-ra és effect általi mozgatásra is, akkor is, ha az opponent mozgatja."],
+ ["458.1", 0, "A Recall nem Move. Ha a unitot recallolják a base-be (például vesztes támadás után), a trigger nem fut le."],
+ ["711", 0, "A Main Deckben lévő lap a nyomtatott Mightja alapján Mighty: 5 vagy több Mightú unit. Spell és gear nem lehet Mighty, azokat recycle-ölöd."],
+ ["425.1.a.2, 417.1.a", 0, "Mindkét ág kötelező: a Mighty unitot felhúzod, minden mást a Main Deck aljára teszel. A reveal miatt az opponent is látja a lapot."],
+ ["432.1.c", 0, "Üres Main Deck esetén nincs mit felfedni, a trigger nem csinál semmit, és ez nem okoz Burn Outot."]
+],
+"Diana, Lunari": [
+ ["344, 466.2.b", 1, "Minden showdownra triggerel, ami Diana battlefieldjén kezdődik: Non-Combat Showdownra és Combat Showdownra is, bárki körében, akár támad, akár védekezik."],
+ ["383.3.a, 383.3.b", 0, "A \"pay [1] to [Predict]\" cost within instructions közvetlenül a \"you may\" után, ezért a trigger base costja. Az 1 Energyt a finalizáláskor fizeted ki, különben a trigger lekerül a chainről."],
+ ["437.1", 0, "Predict: megnézed a Main Deck felső lapját, és eldöntöd, hogy recycle-ölöd-e."],
+ ["425.1.a.2", 1, "A Predict után az akkori felső lapot fedik fel. Ha spell, felhúzod. Ha nem spell, a deck tetején marad, és a következő húzásod ez lesz."],
+ ["437.4.a, 432.1.c", 0, "Üres vagy egylapos Main Deck mellett annyit hajtasz végre, amennyit lehet, Burn Out nélkül."],
+ ["205, 204.3", 1, "Errata: a régi \"you may pay [1]. If you do\" szövegnél a fizetés a resolve közben történt. Most a resolve előtt, a trigger chain-re tételekor kell fizetni, vagyis az opponent válasza előtt elköteleződsz."]
+],
+"Strigian Oracle": [
+ ["144.2, 415.3.a", 0, "A Standard Move costja a unit exhaustolása, tehát minden Standard Move kiváltja a Predictet. Bármely más effect vagy cost is, ami az Oracle-t exhaustolja."],
+ ["415.1.b, 415.1.c", 0, "Már exhausted unit nem exhaustolható újra, így újra sem triggerel, amíg nem lesz ready."],
+ ["143.4", 2, "Nem egyértelmű, hogy az exhausted belépés \"become exhausted\" eseménynek számít-e. A Core Rules ezt nem mondja ki, judge döntse el."],
+ ["437.1, 383.3.a.3", 0, "Predict: megnézed a Main Deck felső lapját, és a resolve közben döntesz, hogy recycle-ölöd-e."],
+ ["437.4.a", 0, "Üres Main Deck mellett a Predict nem csinál semmit, és nem okoz Burn Outot."]
+],
+"The Empyrean": [
+ ["832.1.c, 832.1.c.2", 0, "Show Off: a kijátszás finalizálása közben döntesz. Felfedhetsz egy lapot a kezedből, vagy kijelölhetsz egy másik friendly lapot a boardon. A felfedett lap a kezedben marad."],
+ ["355.7", 0, "A Show Off \"pick\", nem \"choose\": a megmutatott lap nem target, Deflect és \"can't be chosen\" nem érinti."],
+ ["383.2.a.1", 0, "Az \"if you showed off a card\" a trigger feltételének része. Show Off nélkül a play effect nem kerül chain-re, vagyis a 2 lap húzás is elmarad."],
+ ["832.1.d.1, 206", 0, "A Predict mérete a megmutatott lap nyomtatott Power costja, a megmutatás pillanatában rögzítve. Későbbi változás nem számít."],
+ ["437.1.a", 0, "Predict X: megnézel X lapot a Main Deck tetejéről, bármennyit recycle-ölhetsz közülük, a többit tetszőleges sorrendben visszateszed. Utána húzol 2-t."],
+ ["185, 437.3", 1, "0 Power costú lappal a Predict nulla lapra szól, de a 2 húzás megtörténik. Token nem mutatható meg, mert a token nem kártya."],
+ ["832.1.c.4", 0, "Ha a megmutatott lap a finalizálás közben elhagyja a zónáját, az Empyrean kijátszása ettől még érvényes marad."]
+],
+"Janna, Savior": [
+ ["813.1.c.1, 813.3.a", 0, "[Reaction]: Closed State-ben, bárki körében kijátszható, de unitként csak a base-edbe vagy általad kontrollált battlefieldre. Védekező combatba így be tud szállni."],
+ ["419.1, 355.10.d", 0, "A heal az összes ott álló unitodról leveszi a damage-et. \"Your units here\" nem választás, ezért nem target."],
+ ["355.13", 0, "Errata: az \"up to one\" miatt nulla enemy unit is választható. A play effect így akkor is chain-re kerül és gyógyít, ha nincs ott enemy unit. A régi szöveghez kötelező target kellett."],
+ ["355.4, 421.1", 0, "Az enemy unit a saját base-ébe megy. Ez Move, nem Recall, ezért a \"when I move\" triggerek lefutnak rá."],
+ ["359.3.e.5", 0, "Ha az enemy unit a resolve előtt elhagyja Janna battlefieldjét, a move rész ignorálódik, a heal ettől még megtörténik."],
+ ["467.1", 1, "Ha az utolsó támadó unitot küldöd haza, a Combat Damage Stepben nem marad mindkét oldal, így combat damage sem lesz."],
+ ["359.3.f.2", 0, "A \"here\" a resolve-kor ellenőrzött hivatkozás. Base-be kijátszva a base-ben álló unitjaidat gyógyítja, enemy unit ott nincs."]
+],
+"Shen, Kinkou": [
+ ["813.1.c.1, 813.3.a", 0, "[Reaction]: Closed State-ben, bárki körében kijátszható, de csak a base-edbe vagy általad kontrollált battlefieldre."],
+ ["466.2.c.3.a", 0, "Folyamatban lévő combatba kijátszva a következő cleanupnál kapja meg a Defender designationt."],
+ ["814.1.c, 814.2", 0, "Shield 2: Defenderként 5 Mightú. Más forrásból kapott Shield értéke hozzáadódik."],
+ ["815.1.b, 815.1.c.1", 0, "Tank: az opponentnek előbb Shenre kell halálos combat damage-et kiosztania, csak utána jöhet a Tank nélküli unitod."],
+ ["103.3.a.1", 0, "Champion unit: Chosen Championként a Champion Zone-ból is kijátszható reakcióként."]
+],
+"Syndra, Transcendent": [
+ ["343.1, 316.8.a", 1, "A passive csak addig él, amíg Syndra olyan battlefielden áll, ahol showdown zajlik. A combat showdownja is showdown. Base-ben állva nem ad semmit."],
+ ["308.1.a", 0, "Showdown State-ben csak [Action] vagy [Reaction] spell játszható ki, tehát a gyakorlatban csak ezek kapják meg a Repeatet."],
+ ["820.1.d, 820.1.c.1", 0, "A kapott Repeat optional additional cost: kijátszáskor fizetve a spell instructionjei a resolve-kor még egyszer végrehajtódnak."],
+ ["820.2.a, 820.3.a", 0, "A második végrehajtás választásait is a kijátszáskor teszed meg, és eltérhetnek az elsőtől. A spell így is csak egyszer számít kijátszottnak."],
+ ["820.1.c.2, 820.3", 0, "Ha a spellnek saját Repeatje is van, a két Repeat külön fizethető ki, és mindegyik egy további végrehajtást ad."],
+ ["135.2.e.6", 2, "A kapott cost [C] része: nem egyértelmű, hogy a spell saját domainjének Powerét vagy Syndra Chaos Powerét jelenti. A Core Rules a kapott [C] esetét nem rendezi, judge döntse el."],
+ ["365.1", 1, "A spell targetjének nem kell Syndra battlefieldjén lennie. Ha Syndra a spell finalizálása után hagyja el a boardot, a már kifizetett Repeat megmarad."]
+],
+"K'Sante, Dauntless": [
+ ["433.1, 433.1.a", 0, "A Double a unit aktuális Shield értékével megegyező bónuszt ad a kör végéig: Shield 1-ből 2, Shield 3-ból 6 lesz. A bónusz a resolve pillanatában rögzül."],
+ ["355.10, 355.9.b", 0, "A unit target: általad kontrollált unit K'Sante battlefieldjén, akár ő maga. A trigger kötelező."],
+ ["814.1.c", 1, "A Shield csak Defenderként ad Mightot. Az attack triggerrel duplázott Shield ezért csak akkor ér valamit, ha a unit még abban a körben védekezik is."],
+ ["433.1", 1, "Shield nélküli uniton nincs mit duplázni, a trigger hatástalan."],
+ ["814.2", 0, "A duplázás a unit összes Shield értékére számol, a máshonnan kapott Shielddel együtt."],
+ ["383.4.e.2.a, 383.4.f.2.a", 0, "Combatonként egyszer fut le, amikor K'Sante először kap Attacker vagy Defender designationt."]
+],
+"Lee Sin, Ascetic": [
+ ["427.1.b.2, 702.3", 0, "Az \"any number of buffs\" engedély felülírja az egy unit, egy buff szabályt. Bármilyen forrásból érkező buff rákerül, nem csak a saját abilityjéből."],
+ ["703", 0, "Minden buff külön +1 Mightot ad."],
+ ["381.1, 308.1.a", 0, "Az abilityn nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható, showdown és combat alatt nem."],
+ ["415.4, 143.4", 0, "A cost Lee Sin exhaustolása. Exhausted lép be, ezért a kijátszás körében az ability nem használható."],
+ ["144.2", 1, "Az exhaust a Standard Move costja is. Egy körben vagy buffol, vagy mozog, hacsak valami újra nem readyzi."],
+ ["705", 0, "Ha Lee Sin elhagyja a boardot, az összes buff lekerül róla."],
+ ["814.1.c", 0, "Shield: Defenderként +1 Mightot kap a buffokon felül."]
+],
+"Leona, Determined": [
+ ["355.10, 355.8", 0, "Az enemy unit target, és Leona battlefieldjén kell lennie. A trigger kötelező, nincs \"may\"."],
+ ["424.1.b", 0, "A stunned unit Mightja nem számít bele a combat damage-be, vagyis a kiválasztott defender ebben a combatban nem sebez."],
+ ["424.1.c, 815.1.c.1", 0, "A stunned unit megöléséhez továbbra is a teljes Mightjának megfelelő damage kell, és a Tank kiosztási kötelezettsége sem szűnik meg."],
+ ["424.1.a.1", 0, "Már stunned unit is választható, de újra nem stunolható. A \"when you stun\" triggerek ilyenkor nem futnak le."],
+ ["424.1.a.2", 0, "A Stunned állapot a kör végi cleanupig tart."],
+ ["383.4.e.2.a", 0, "Attack trigger, combatonként egyszer fut le."],
+ ["814.1.c", 0, "Shield: csak Defenderként ad +1 Mightot, támadáskor nem."]
+],
+"Orianna, Exquisite": [
+ ["467.2.a", 1, "Ha a Combat Damage Stepben nincs friendly gear Orianna battlefieldjén, a 4 Mightja nem adódik hozzá az oldalad összegéhez. Damage-et kapni ettől még tud."],
+ ["148.1.a.1, 149.3", 0, "Gear alapból csak base-be játszható, és a battlefielden lévő csatolatlan geart a cleanup visszaküldi a base-be. Ezért a feltételhez jellemzően csatolt Equipment kell."],
+ ["719.3", 1, "Az Equipment ott van, ahol a unit, amire csatolták. Nem kell Oriannán lennie: egy ugyanott álló másik unitod Equipmentje is teljesíti a feltételt."],
+ ["467.2", 1, "A feltétel a sebzés kiosztásakor számít. Ha az opponent a showdownban megöli vagy leválasztja a geart, Orianna abban a combatban nem sebez."],
+ ["424.1.b", 1, "Ez nem Stunned állapot. A stunra hivatkozó effectek (például Kennen, Keeper of Balance bónusza) nem látják Oriannát stunned unitnak."],
+ ["814.1.c", 0, "Shield: Defenderként 5 Mightú, vagyis 5 damage kell a megöléséhez."]
+],
+"Shen, Leader of the Kinkou Order": [
+ ["383.2.a.1", 0, "Az \"exactly one other unit\" feltétel a trigger feltételének része: a hold pillanatában kell teljesülnie. Ha a trigger már a chainen van, a későbbi változás nem számít."],
+ ["470.2, 473.1.a.1", 0, "A \"score 1 point\" pontszerzés, nem a Scoring folyamat. Nem conquerből származik, ezért az utolsó pontra vonatkozó megkötés nem érinti: ezzel a ponttal meg is nyerheted a játékot."],
+ ["383.4.d.2.a, 472", 0, "Hold effect: csak akkor triggerel, ha Shen jelen van a battlefielden, amikor a Beginning Phase-edben holdolod. Battlefieldenként és körönként egyszer."],
+ ["816.1.b", 1, "A [Temporary] unitok a Beginning Phase elején, a scoring előtt meghalnak. Egy Sprite token ezért nem számít bele a \"pontosan egy másik unit\" feltételbe."],
+ ["185.2.d", 1, "A másik unit lehet token is. Két vagy több másik unit, illetve nulla mellett a trigger nem fut le."],
+ ["814.1.c", 0, "Shield: Defenderként 8 Mightú."]
+],
+"Stalwart Goatherd": [
+ ["383.3.a", 0, "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz. Ha nem kéred, lekerül a chainről."],
+ ["355.10, 718.5.b", 0, "A gear target. Bármelyik játékos gearje választható, unitra csatolt Equipment is."],
+ ["206, 185.3.a.1", 0, "Az Energy cost feltétel a nyomtatott costot nézi. A tokenek costja 0-nak számít, tehát a Gold token is megölhető vele."],
+ ["359.3.e.7", 0, "Ha a gear a resolve előtt elhagyja a boardot, a trigger hatás nélkül resolve-ol."],
+ ["814.1.c", 0, "Shield 2: Defenderként 4 Mightú, támadóként 2."]
+],
+"Stalwart Poro": [
+ ["814.1.c, 814.1.b.3", 0, "Shield érték nélkül Shield 1-et jelent: Defenderként 3 Mightú, támadóként 2."],
+ ["814.2", 0, "A szabályzat név szerint ezt a lapot hozza példának: ha a Block (\"Give a unit [Shield 3] and [Tank] this turn\") célpontja, a két Shield összeadódik, és a kör végéig Shield 4-e van."],
+ ["383.3.e.2.b, 386.2.b", 0, "A szabályzat két másik példában is említi, de csak meghaló enemy unitként. Ezekből a lapra nézve nem következik külön szabály."]
+],
+"Stoic Ferryman": [
+ ["383.2.a.1", 0, "A \"to a battlefield\" a trigger feltételének része. Base-be kijátszva a trigger nem fut le."],
+ ["383.3.a", 0, "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz."],
+ ["355.10, 355.9.b", 0, "A target egy másik, általad kontrollált unit a Ferryman battlefieldjén. A Ferryman saját magát nem választhatja."],
+ ["421.1, 458.1", 0, "Ez Move, nem Recall: a hazaküldött unit \"when I move\" triggerei lefutnak. A unit állapota (exhausted, damage) nem változik."],
+ ["359.3.e.2", 0, "Ha a target a resolve előtt elhagyja a battlefieldet, illegális lesz, a trigger nem csinál semmit."],
+ ["814.1.c", 0, "Shield 3: Defenderként 5 Mightú, támadóként 2."]
+],
+"Wrath of the Freljord": [
+ ["369.3", 0, "Az \"I enter ready\" replacement effect: a unit nem exhausted érkezik, majd áll fel, hanem eleve ready lép be."],
+ ["144.1.a, 144.2", 1, "Ready belépve még abban a körben mehet Standard Move-val battlefieldre, mert a Move costja a unit exhaustolása."],
+ ["805.6.a", 1, "Mivel eleve ready érkezik, a \"becomes ready\" típusú triggereket nem váltja ki."],
+ ["814.1.c, 814.1.d.1", 0, "Shield 3: csak Defenderként ad +3 Mightot (10 Might). A kijátszás körében támadva 7 Mightú."]
+],
+"Zephyr Sage": [
+ ["814.1.c, 814.1.b.3", 0, "Shield érték nélkül Shield 1-et jelent: Defenderként 7 Mightú, támadóként 6."],
+ ["814.1.d.1", 0, "A bónusz csak addig él, amíg a unit Defender designationnel rendelkezik. Combaton kívül kapott damage-nél a 6-os Might számít."],
+ ["814.2", 0, "Más forrásból kapott Shield értéke hozzáadódik."]
+],
+"Vex, Mocking": [
+ ["424.1.a.1", 0, "A trigger csak tényleges stunra fut le. Ha a kiválasztott enemy unit már stunned volt, nem stunolod újra, Vex nem triggerel."],
+ ["383.2.a.1", 1, "Csak a te spelljeid és abilityjeid stunja számít, és csak battlefielden álló enemy uniton. Base-ben álló unit stunolása nem váltja ki."],
+ ["383.3.a, 355.10.c", 0, "A \"you may\" az effect elején áll, a finalizáláskor döntesz. A battlefield a trigger feltételéből jön, ezért nincs target."],
+ ["421.1, 144.2", 1, "Effect általi Move: nem kell hozzá ready állapot vagy Ganking, Vex base-ből és másik battlefieldről is átmehet, exhausted állapotban is."],
+ ["190.3.a.1, 323.2.a", 0, "Ha a cél battlefieldet nem te kontrollálod, Vex Contested státuszt tesz rá. Folyamatban lévő combatba érkezve a cleanupnál megkapja a controllere szerinti designationt."],
+ ["355.4.a", 0, "Ha Vex már azon a battlefielden áll, nincs érvényes Move, a trigger nem csinál semmit."],
+ ["815.1.b, 814.1.c", 0, "Tank és Shield: beérkezve neki kell először halálos damage-et kiosztani, Defenderként 6 Mightú."]
+],
+"Armored Tusker": [
+ ["421.1, 458.1", 0, "Minden Move-ra triggerel, Standard Move-ra és effect általi mozgatásra is. Recallra nem."],
+ ["383.3.a", 0, "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz."],
+ ["355.10, 355.9.b", 0, "A unit target, és battlefielden kell lennie. Bármelyik játékos unitja lehet, base-ben álló nem."],
+ ["814.1.b.2, 814.2", 1, "A sebzés a Tusker Shield értéke, alapból 3. Ehhez nem kell Defendernek lennie: a Shield érték a unit tulajdonsága, csak a Might bónusz függ a védekezéstől. A máshonnan kapott Shield hozzáadódik."],
+ ["359.3.f.2, 359.3.f.2.a", 0, "A Shield értéket a resolve-kor nézi a játék. Ha a Tusker addigra elhagyja a boardot, az érték null, a trigger nem sebez."],
+ ["815.1.b", 0, "Tank: neki kell először halálos combat damage-et kiosztani. Defenderként 7 Mightú."]
+],
+"Mutated Mouser": [
+ ["814.1.c", 0, "Shield 2: Defenderként 3 Mightú, támadóként 1."],
+ ["815.1.b, 815.1.c.1", 0, "Tank: az opponentnek előbb a Mouserre kell halálos combat damage-et kiosztania, csak utána jöhet a Tank nélküli unitod. Defenderként ez 3 damage-et nyel el."],
+ ["815.1.c.2", 0, "Ha több Tank unitod áll ott, az opponent választ köztük, de a Tank nélküliek csak az összes Tank után jönnek."]
+],
+"Needlessly Large Yordle": [
+ ["356.4.g", 0, "Változó kedvezmény: az értékét a Determine Total Cost lépésben nézi a játék. A hold a Beginning Phase-ben történik, így a Main Phase-re már ismert."],
+ ["356.6, 315.2.b.2", 1, "Holdolt battlefieldenként 2 Energyvel és 1 Calm Powerrel olcsóbb: egy hold után 8 Energy és 2 Power, kettő után 6 és 1, három után 4 Energy és 0 Power."],
+ ["206", 0, "Más effectek a nyomtatott 10 Energy és 3 Power costot látják."],
+ ["470.2", 2, "Nem egyértelmű, hogy a hold triggerekből kapott extra pont (például Shen, Leader of the Kinkou Order) \"point scored from holding\"-nak számít-e. Judge döntse el."],
+ ["814.1.c, 815.1.b", 0, "Shield 5 és Tank: Defenderként 10 Mightú, és neki kell először halálos combat damage-et kiosztani."]
+],
+"Sunlit Guardian": [
+ ["814.1.c", 0, "Shield: Defenderként 4 Mightú, támadóként 3."],
+ ["815.1.b, 815.1.c.1", 0, "Tank: az opponentnek előbb a Guardianre kell halálos combat damage-et kiosztania, csak utána jöhet a Tank nélküli unitod."],
+ ["815.1.c.2, 815.2", 0, "Több Tank unit között az opponent választ. Több Tank példány ugyanazon a uniton nem ad többet."]
+],
+"Taric, Protector": [
+ ["479.3.b, 364.1", 0, "Passive ability: a Tariccal azonos locationön álló többi friendly unit megkapja a Shield kulcsszót, amíg ott vannak."],
+ ["814.2", 0, "Ha a unitnak már van Shieldje, az értékek összeadódnak: saját Shield 2 mellett Shield 3 lesz."],
+ ["142.4.b", 1, "Ha Taric meghal vagy elmozdul, a kapott Shield azonnal megszűnik, és a társakon lévő damage halálossá válhat."],
+ ["815.1.b", 0, "Tank: az opponentnek előbb Taricra kell halálos combat damage-et kiosztania, csak utána jöhetnek a Tank nélküli társai."],
+ ["814.1.c", 0, "Taric saját Shieldje miatt Defenderként 5 Mightú. A passive magára Taricra nem vonatkozik."]
+],
+"Towering Combatant": [
+ ["814.1.c", 0, "Shield 2: Defenderként 5 Mightú, támadóként 3."],
+ ["815.1.b, 815.1.c.1", 0, "Tank: az opponentnek előbb a Combatantra kell halálos combat damage-et kiosztania, csak utána jöhet a Tank nélküli unitod."],
+ ["708", 1, "Defenderként a Shield miatt eléri az 5 Mightot, vagyis arra az időre Mighty unitnak számít."]
+],
+"Volibear, Imposing": [
+ ["421.1, 458.1", 0, "A trigger enemy unit Move-jára fut le, Standard Move-ra és effect általi mozgatásra is. Recall és unit kijátszása battlefieldre nem Move."],
+ ["198.1", 1, "\"Other than mine\": a cél battlefield nem lehet az, ahol Volibear áll. Ha Volibear a base-ben van, bármelyik battlefieldre mozgás kiváltja."],
+ ["144.3", 2, "Ha az opponent több unitot mozgat egyszerre ugyanarra a battlefieldre, az egy game action. Nem egyértelmű, hogy ez egy vagy unitonként egy triggert jelent, judge döntse el."],
+ ["414.4", 0, "A húzás kötelező, nincs \"may\". Üres Main Deck esetén Burn Outot okoz."],
+ ["814.1.c, 815.1.b", 0, "Shield 3 és Tank: Defenderként 13 Mightú, és neki kell először halálos combat damage-et kiosztani."]
+],
+"Trevor Snoozebottom": [
+ ["383.4.d.2.a", 0, "Hold effect: csak akkor triggerel, ha Trevor jelen van a battlefielden, amikor a Beginning Phase-edben holdolod."],
+ ["187.2, 184.1", 0, "A Sprite domain nélküli, 3 Mightú Fae unit token [Temporary]-vel. Az effect szerint ready lép be, tehát még abban a körben mozoghat."],
+ ["816.1.b, 315.2.a.1", 1, "A Sprite a scoring step alatt jön létre, a Beginning Phase eleje ekkor már elmúlt. Ezért a következő saját Beginning Phase-ed elején hal meg, a scoring előtt."],
+ ["359.3.f.2", 0, "A \"here\" a resolve-kor ellenőrzött hivatkozás: a Sprite oda érkezik, ahol Trevor akkor áll."],
+ ["814.1.c", 0, "Shield: Defenderként 4 Mightú."]
+],
+"Jeweled Colossus": [
+ ["817.1.b, 817.1.c", 0, "Vision: amikor a unit a boardra lép, Predict triggerel. Ez play effect, a chain-re kerül."],
+ ["437.1, 383.3.a.3", 0, "Predict: megnézed a Main Deck felső lapját, és a resolve közben döntesz, hogy recycle-ölöd-e. Nem húzol lapot."],
+ ["437.4.a", 0, "Üres Main Deck mellett a Predict nem csinál semmit, és nem okoz Burn Outot."],
+ ["817.2", 0, "Ha más forrásból (Gemcraft Seer) még egy Visiont kap, a két példány külön triggerel."],
+ ["814.1.c", 0, "Shield: Defenderként 6 Mightú, támadóként 5."]
+],
+"Incorrigible Construct": [
+ ["832.1.c, 832.1.c.2", 0, "Show Off a Mech: a kijátszás finalizálása közben felfedhetsz egy Mech lapot a kezedből, vagy kijelölhetsz egy másik friendly Mechet a boardon. A felfedett lap a kezedben marad."],
+ ["355.7", 0, "A Show Off \"pick\", nem \"choose\": a megmutatott Mech nem target."],
+ ["369.3", 0, "Ha megmutattál egy Mechet, a Construct ready lép be. Ez replacement effect: nem exhausted érkezik, majd áll fel, hanem eleve ready."],
+ ["187.4", 1, "A boardon lévő Mech token is megfelel a kijelöléshez. A Constructnak magának nincs Mech tagje, egy másik Construct ezért nem mutatható meg."],
+ ["144.1.a, 144.2", 1, "Ready belépve még abban a körben mehet Standard Move-val battlefieldre."],
+ ["832.1.c.4", 0, "Ha a megmutatott Mech a finalizálás közben elhagyja a zónáját, a Construct kijátszása ettől még érvényes."]
+],
+"Daisy!": [
+ ["103.3.d, 103.3.d.2", 0, "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és csak akkor, ha a legended Champion tagje Ivern."],
+ ["103.2.b.4, 135.2.e.6.c", 0, "Kétdomaines lap: csak olyan deckbe kerülhet, amelynek a Domain Identity-je a Calmot és az Ordert is tartalmazza. A Power costja bármelyik domain Poweréből fizethető."],
+ ["356.4.g, 355.9.a.1", 1, "A kedvezmény tagenként 1, legfeljebb 4, a Determine Total Cost lépésben számolva. A boardon lévő unitjaid számítanak, a kézben lévők nem. Több azonos tagű unit csak egyszer számít."],
+ ["369.3", 0, "Az \"I enter ready\" replacement effect: Daisy eleve ready lép be, így a kijátszás körében mozoghat és támadhat."],
+ ["383.4.e.2.b", 0, "Az attack trigger feltétele, hogy a unitjaidon mind a 4 tag meglegyen, amikor Daisy megkapja az Attacker designationt. Ha akkor nem teljesül, abban a combatban már nem triggerel."],
+ ["355.10, 424.1.b", 0, "Az enemy unit target, Daisy battlefieldjén kell lennie. A stunned unit Mightja nem számít bele a combat damage-be."],
+ ["206", 0, "Más effectek a nyomtatott 9 Energy és 2 Power costot látják."]
+],
+"Masa, Crashing Thunder": [
+ ["356.2.b.1, 355.1.a", 0, "Optional additional cost: a kijátszás 2. lépésében döntesz, hogy az Order Powert is kifizeted-e. Utólag, a boardon már nem pótolható."],
+ ["383.2.a.1", 0, "Az \"if you paid the additional cost\" a trigger feltételének része. Ha nem fizettél, a play effect nem kerül chain-re."],
+ ["355.10, 355.9.b", 0, "A target enemy unit bármelyik battlefielden. Base-ben álló unit nem választható. Masának nem kell ugyanott lennie."],
+ ["355.8", 1, "Ha a trigger chain-re kerülésekor nincs enemy unit battlefielden, a trigger elmarad, a kifizetett Power pedig elveszett. A stun kötelező, nincs \"may\"."],
+ ["356.4.f.1", 0, "Ha egy kedvezmény 0-ra csökkenti az additional costot, az a döntésed alapján így is kifizetettnek számít."],
+ ["424.1.b, 424.1.a.2", 0, "A stunned unit Mightja nem számít bele a combat damage-be. A Stunned állapot a kör végi cleanupig tart."]
+],
+"Pitiless Stalker": [
+ ["103.2.b.5, 135.2.e.6.b", 0, "Domain nélküli lap: bármilyen Domain Identity-jű deckbe betehető, és a Power costja bármelyik domain Poweréből kifizethető."],
+ ["381.1, 308.1.a", 0, "Az abilityn nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható, showdown és combat alatt nem."],
+ ["424.1.a.2", 1, "A stun a kör végéig tart, ezért a támadás előtt kell kiosztani: előbb stunolod a defendert, utána mozgatod be a többi unitodat."],
+ ["355.10, 355.9.a.1", 0, "A target bármelyik enemy unit a boardon, base-ben álló is."],
+ ["415.4, 143.4", 0, "A cost a Stalker exhaustolása. Exhausted lép be, ezért a kijátszás körében az ability nem használható."],
+ ["144.2", 1, "Az exhaust a Standard Move costja is: egy körben vagy stunol, vagy mozog, hacsak valami újra nem readyzi."]
+],
+"Alpha Wildclaw": [
+ ["757.1, 355.9.b", 0, "Az ugyanott álló, nála kisebb Mightú unitjaidat enemy spell és ability nem választhatja targetnek. Magát a Wildclaw-t és a vele azonos Mightú unitot nem védi."],
+ ["710", 0, "Az aktuális Might számít mindkét oldalon. Ha a Wildclaw Mightja nő, több unit kerül védelem alá, ha csökken, kevesebb."],
+ ["758.1", 0, "Ha egy unitod a targetelés után kerül védelem alá (például reakcióként megnöveled a Wildclaw Mightját), az enemy spell a resolve-kor mistargetel."],
+ ["758.2.a", 0, "A szabályzat név szerint ezt a lapot hozza példának: ha a resolve előtt a Wildclaw lekerül a boardról (a példában Star-Crossed viszi kézbe), a védelem megszűnik, és a korábban mistargetelő Rebuke mégis eléri a unitot."],
+ ["355.10.d", 1, "Csak a célzás ellen véd. A nem célzó effectek (\"all units\") és a combat damage a védett unitokra is hatnak."],
+ ["815.1.b", 0, "Tank: az opponentnek előbb a Wildclaw-ra kell halálos combat damage-et kiosztania."]
+],
+"Blitzcrank, Impassive": [
+ ["383.2.a.1, 383.3.a", 0, "A \"to a battlefield\" a trigger feltételének része, base-be kijátszva nem fut le. A \"you may\" az effect elején áll, a finalizáláskor döntesz."],
+ ["355.10, 355.9.a.1", 0, "Az enemy unit target, a boardon bárhol lehet: base-ben vagy másik battlefielden."],
+ ["421.1", 0, "Az áthúzás Move, ezért a unit \"when I move\" triggerei lefutnak. A unit állapota (exhausted, damage) nem változik."],
+ ["190.3.a.1, 466.2.c.1", 1, "A beérkező enemy unit teszi Contested-dé a battlefieldet, ezért a kialakuló combatban a controllere lesz az Attacker, te pedig a Defender, hiába te mozgattad."],
+ ["359.3.f.2", 0, "A \"here\" a resolve-kor ellenőrzött hivatkozás. Ha Blitzcrank addigra elhagyja a boardot, a move nem történik meg."],
+ ["383.4.d.2.a, 056.2", 0, "A hold trigger kötelező: a hold pont megszerzése után Blitzcrank visszamegy a tulajdonosa kezébe."],
+ ["190.4.c", 1, "Ha Blitzcrank volt az egyetlen unitod ott, a kézbe kerülése után a következő cleanupnál elveszíted a battlefield kontrollját."]
+],
+"Dune Surfer": [
+ ["766", 0, "Az ignorált ability inaktívnak számít az adott műveletre: amikor te osztasz combat damage-et a Surfer battlefieldjén, az enemy unitok Tankje nem köt, bármilyen sorrendben oszthatsz."],
+ ["767", 0, "Csak rád és csak a damage kiosztására vonatkozik. Az opponent a te Tank unitjaidra továbbra is köteles előbb osztani, és a Tank kulcsszó más szempontból megmarad."],
+ ["467.2.c.3", 0, "A többi kiosztási szabály él: egy unitra előbb halálos damage-et kell osztani, mielőtt a következőre lépsz."],
+ ["365.1, 467.2", 1, "A Surfernek a Combat Damage Stepben azon a battlefielden kell lennie. Ha a showdownban megölik vagy elmozdítják, a Tank újra köt."]
+],
+"Horns of the Dragon": [
+ ["815.1.b, 815.1.c.1", 0, "Tank: az opponentnek előbb erre a unitra kell halálos combat damage-et kiosztania (6 damage), csak utána jöhet a Tank nélküli unitod."],
+ ["815.1.c.2", 0, "Ha több Tank unitod áll ott, az opponent választ köztük, de a Tank nélküliek csak az összes Tank után jönnek."],
+ ["815.1.c", 1, "A Tank csak a combat damage kiosztását köti. Spellek és abilityk szabadon célozhatják a mögötte álló unitokat."]
+],
+"Lecturing Yordle": [
+ ["815.1.b", 0, "Tank: az opponentnek előbb a Yordle-ra kell halálos combat damage-et kiosztania (2 damage), csak utána jöhet a Tank nélküli unitod."],
+ ["383.4.a.2, 414.4", 0, "A húzás play effect, kötelező. Üres Main Deck esetén Burn Outot okoz."],
+ ["383.4.a.2", 1, "A trigger nem hivatkozik a Yordle-ra: ha a unitot a trigger resolve-ja előtt megölik, a lapot így is felhúzod."]
+],
+"Lillia, Protector of Dreams": [
+ ["185.2.a, 420.4.a", 0, "A tokeneket a tulajdonosuk \"play\"-eli, ezért minden token unit kijátszása triggerel, amikor a kijátszás befejeződött."],
+ ["383.3.d", 1, "Tokenenként külön trigger: két Recruit egyszerre +2 Mightot ad a kör végéig. A bónuszok összeadódnak."],
+ ["479.3.b, 365.1", 0, "A második mondat passive: amíg Lillia a boardon van, minden token unitod Tank, bárhol is álljon."],
+ ["815.1.c.2", 0, "Az opponentnek előbb az összes ott álló Tank tokenedre kell halálos damage-et kiosztania, Lillia és a többi Tank nélküli unit csak utána jöhet."],
+ ["142.4.b", 1, "Lillia magát nem védi. Ha meghal, a tokenek azonnal elveszítik a Tanket."]
+],
+"Maddened Marauder": [
+ ["355.10, 355.9.b", 0, "A unit target, és battlefielden kell lennie. Bármelyik játékos unitja választható."],
+ ["355.8", 1, "A trigger kötelező, nincs \"may\". Ha csak saját unitod áll battlefielden (akár maga a Marauder), azt kell választanod. Ha sehol nincs unit battlefielden, a trigger nem kerül chain-re."],
+ ["355.4, 421.1", 0, "A unit a saját base-ébe megy. Ez Move, nem Recall, ezért a \"when I move\" triggerek lefutnak rá."],
+ ["359.3.e.2", 0, "Ha a target a resolve előtt elhagyja a battlefieldet, illegális lesz, a trigger nem csinál semmit."],
+ ["358.3.a", 0, "Ha egy effect tiltja a mozgást arról a battlefieldről, a trigger attól még chain-re tehető, de a resolve-kor a move negálódik."],
+ ["815.1.b", 0, "Tank: az opponentnek előbb a Marauderre kell halálos combat damage-et kiosztania."]
+],
+"Party Crasher": [
+ ["356.4.g", 0, "Változó kedvezmény: az exhausted unitjaid számát a Determine Total Cost lépésben nézi a játék. A későbbi változás a kiszámolt costot nem módosítja."],
+ ["143.4, 144.2", 1, "A unitok exhausted lépnek be, és a Standard Move is exhaustol. A körben korábban kijátszott és elmozgatott unitjaid mind csökkentik az árat."],
+ ["356.4.c.2, 356.6", 0, "Csak az Energy cost csökken, legfeljebb 0-ig. Az 1 Order Powert mindig ki kell fizetni."],
+ ["206", 0, "Más effectek a nyomtatott 9-es costot látják."],
+ ["815.1.b", 0, "Tank: az opponentnek előbb a Crasherre kell halálos combat damage-et kiosztania."]
+],
+"Rell, Magnetic": [
+ ["383.3.a, 383.4.e.2.a", 0, "Attack trigger, combatonként egyszer. A \"you may\" az effect elején áll: a finalizáláskor döntesz, hogy kéred-e."],
+ ["420.1.a, 355.10.a", 0, "Az Equipmentet a kezedből játszod ki a resolve-kor. A kéz nem Public zóna, ezért nincs target."],
+ ["206, 356.1.b.1", 0, "A \"no more than [2]\" a nyomtatott Energy costot nézi. \"Ignoring its cost\": az Energy és a Power cost is nulla."],
+ ["388.1, 359.3.e.14.b", 0, "Az \"If you do, then do this\" reflexive trigger, ami a kijátszásra hivatkozik. Ha az Equipment kijátszása nem történt meg (például counterelték), az attach elmarad."],
+ ["148.1.a.1, 435.4", 1, "Errata: a csatolás külön chain item lett. Az Equipment előbb a base-be érkezik, a saját play effectjei lefutnak, és csak utána kerül Rellre. A csatolásra lehet reagálni."],
+ ["818.1.c.2", 1, "Ez Attach, nem Equip: az Equip costot nem kell kifizetni. Ha Rell a reflexive trigger resolve-ja előtt elhagyja a boardot, az Equipment a base-ben marad csatolatlanul."],
+ ["815.1.b", 0, "Tank: az opponentnek előbb Rellre kell halálos combat damage-et kiosztania."]
+],
+"Sett, Kingpin": [
+ ["364.1, 198.1", 1, "Passive: +1 Might minden buffolt friendly unit után, ami Settel azonos battlefielden áll. A base nem battlefield, ott a bónusz nulla."],
+ ["702.3, 703", 0, "Egy uniton egy buff lehet, ezért unitonként legfeljebb +1 jár Settnek. A buffolt unit a saját buffjából külön +1 Mightot kap."],
+ ["740.1.a", 2, "Nem egyértelmű, hogy a buffolt Sett saját magát is \"friendly unit\"-ként számolja-e. A Core Rules a friendly fogalmat két objektum viszonyaként írja le, judge döntse el."],
+ ["142.4.b", 1, "A bónusz folyamatosan újraszámolódik. Ha egy buffolt társa meghal, elmozdul vagy elkölti a buffját, Sett Mightja azonnal csökken, és a rajta lévő damage halálossá válhat."],
+ ["815.1.b", 0, "Tank: az opponentnek előbb Settre kell halálos combat damage-et kiosztania."]
+],
+"Steadfast Outrider": [
+ ["364.3.a", 0, "Feltételes passive: a +2 Might addig él, amíg legalább 2 másik friendly unit vagy gear van az Outrider battlefieldjén. Base-ben nem működik."],
+ ["719.3, 718.5.a", 1, "A unitra csatolt Equipment gearnek számít, és ott van, ahol a unitja. Egy társ a rá csatolt Equipmenttel együtt már kettőnek számít."],
+ ["149.3", 0, "Csatolatlan gear nem marad battlefielden, a cleanup visszaküldi a base-be. A feltételhez ezért unitok vagy csatolt Equipmentek kellenek."],
+ ["142.4.b", 1, "Ha combat közben a társak száma 2 alá esik, a +2 azonnal megszűnik, és az Outrideren lévő damage halálossá válhat."],
+ ["815.1.b", 0, "Tank: az opponentnek előbb az Outriderre kell halálos combat damage-et kiosztania."]
+],
+"Stormclaw Ursine": [
+ ["431.2", 0, "A szabályzat pontosan ezt a szöveget hozza példának: a Rune Deck felső rune-ja a boardra kerül, de exhausted állapotban."],
+ ["415.1.b, 164.2.b", 1, "Az exhausted rune abban a körben nem exhaustolható Energyért, de recycle-ölve Powert még adhat, mert annak nem cost az exhaust."],
+ ["431.3", 0, "Ha a Rune Deck üres, nem történik semmi. Ennek nincs büntetése, nem Burn Out."],
+ ["383.4.a.2", 0, "Play effect, kötelező. A normál Channel Phase-en felül ad egy rune-t, vagyis a következő körtől eggyel több rune-od van."],
+ ["815.1.b", 0, "Tank: az opponentnek előbb az Ursine-ra kell halálos combat damage-et kiosztania."]
+],
+"Xin Zhao, Vigilant": [
+ ["369.3, 364.3.a", 0, "Feltételes replacement effect: ha a belépéskor legalább 2 másik unitod áll a base-edben, Xin Zhao ready érkezik. Egyébként exhausted, mint bármely unit."],
+ ["185.2.d", 1, "A base-ben álló tokenek is számítanak, exhausted és ready unitok egyaránt. A battlefielden álló unitok nem."],
+ ["355.2.a", 1, "A feltétel a base-edet nézi, de Xin Zhao battlefieldre kijátszva is ready érkezik, ha a base-ben megvan a 2 unit."],
+ ["144.1.a, 144.2", 1, "Ready belépve még abban a körben mehet Standard Move-val battlefieldre."],
+ ["815.1.b", 0, "Tank: az opponentnek előbb Xin Zhaóra kell halálos combat damage-et kiosztania."]
+],
+"Yuumi, Magical Cat": [
+ ["355.10, 355.9.b", 0, "A target egy másik, általad kontrollált unit Yuumi battlefieldjén. Yuumi saját magát nem választhatja."],
+ ["355.8", 0, "A trigger kötelező, de ha Yuumi egyedül áll ott, nincs érvényes target, és a trigger nem kerül chain-re."],
+ ["815.1.b", 0, "A kapott Tank miatt az opponentnek előbb a megerősített unitra kell halálos damage-et kiosztania, Yuumi és a többi Tank nélküli unit csak utána jöhet."],
+ ["317.2.c", 0, "A +3 Might és a Tank a kör végéig tart, nem csak a combat végéig."],
+ ["383.4.e.2.a, 383.4.f.2.a", 0, "Combatonként egyszer fut le, amikor Yuumi először kap Attacker vagy Defender designationt."],
+ ["359.3.e.2", 0, "Ha a target a resolve előtt elhagyja a battlefieldet, illegális lesz, a trigger nem csinál semmit."]
+],
+"Petal Pixie": [
+ ["364.1, 198.1", 1, "Passive: +1 Might minden [Temporary] unitod után, ami a Pixie-vel azonos battlefielden áll. Base-ben nem működik, és az enemy [Temporary] unitok nem számítanak."],
+ ["816.3, 187.2", 0, "A Temporary megléte ellenőrizhető tulajdonság. A Sprite tokenek eleve [Temporary]-vel jönnek létre, egy Sprite a Pixie mellett +1 Mightot jelent."],
+ ["816.1.b, 142.4.b", 1, "A [Temporary] unitok a Beginning Phase-ed elején meghalnak, a bónusz ekkor azonnal megszűnik. A körödet a Pixie 2 Mighttal kezdi."],
+ ["124.1", 1, "A kör közben [Temporary]-t kapó unit is számít, amíg a boardon van."]
+],
+"Sprite": [
+ ["187.2, 185.3.b", 0, "A Sprite domain nélküli, 3 Mightú unit token Fae taggel és [Temporary] kulcsszóval."],
+ ["816.1.b", 0, "Temporary: a controllere Beginning Phase-ének elején, még a scoring előtt meghal. Holdolni ezért nem tud, conquerelni igen."],
+ ["186.1", 0, "Token: ha a boardról bármilyen más zónába kerül (kéz, trash, deck), megszűnik létezni."],
+ ["185.3.a.1, 185.2.d", 0, "Nincs costja, minden szempontból 0-nak számít. Egyébként rendes unit: exhausted lép be, hacsak a létrehozó effect nem mond mást, mozoghat, sebez és célozható."],
+ ["359.3.f.3", 0, "A szabályzat a Lillia, Fae Fawn példájában említi: a Sprite oda érkezik, amit a létrehozó trigger a feltétele teljesülésekor rögzített, akkor is, ha a forrás közben elhagyta a boardot."],
+ ["185.2.a", 1, "A Sprite-ot a tulajdonosa \"play\"-eli, ezért a \"when you play a token unit\" triggerek lefutnak rá."]
+],
+"Sprite Mother": [
+ ["187.2, 184.1", 0, "A Sprite domain nélküli, 3 Mightú Fae unit token [Temporary]-vel. Az effect szerint ready lép be, tehát még abban a körben mozoghat."],
+ ["359.3.f.2, 359.3.f.2.a", 0, "A \"here\" a resolve-kor ellenőrzött hivatkozás: a Sprite a Mother akkori locationjére érkezik. Ha a Mother addigra elhagyja a boardot, a token nem jön létre."],
+ ["816.1.b", 0, "A Sprite a következő saját Beginning Phase-ed elején, a scoring előtt meghal. Egy környi támadásra vagy védekezésre elég, holdra nem."],
+ ["186.1", 0, "Ha a Sprite kézbe vagy más Non-Board zónába kerülne, megszűnik létezni."]
+],
+"Sprite Queen": [
+ ["187.2, 184.1", 0, "A Sprite 3 Mightú Fae unit token [Temporary]-vel. Ready lép be, de mindig a base-edbe, onnan Standard Move-val mehet battlefieldre."],
+ ["315.2.a.1, 365.1", 0, "A második trigger minden saját Beginning Phase-ed elején lefut, ha a Queen akkor a boardon van."],
+ ["383.3.d", 0, "A Beginning Phase elején az előző Sprite Temporary triggere és a Queen új triggere egyszerre keletkezik, a sorrendjüket te döntöd el."],
+ ["816.1.c", 1, "Az új Sprite a Beginning Phase eleje után jön létre, ezért a saját Temporary-je csak a következő körödben fut le. Így mindig van egy Sprite-od a körödre."],
+ ["393", 1, "A trigger nem hivatkozik a Queen helyére. Ha a Queen a trigger chainen léte alatt elhagyja a boardot, a Sprite ettől még megérkezik a base-edbe."]
+],
+"Forecaster": [
+ ["479.3.b, 365.1", 0, "Passive: amíg a Forecaster a boardon van, minden Mech tagű lapod megkapja a Vision kulcsszót."],
+ ["383.2.c, 817.1.c", 1, "A Vision triggere a boardra lépés. A feltétel az esemény után értékelődik ki, amikor a Forecaster már a boardon van, és maga is Mech. A saját kijátszása ezért Predictet ad."],
+ ["187.4, 185.2.a", 1, "A Mech tokenek is Mechek, és a tokent is \"play\"-eled, tehát minden kijátszott Mech token Predictet ad."],
+ ["817.2, 817.2.a", 0, "Ha egy Mechnek saját Visionje is van, vagy más forrásból is kapja, a példányok külön triggerelnek, és külön döntesz a recycle-ről."],
+ ["437.1, 437.4.a", 0, "Predict: megnézed a Main Deck felső lapját, és recycle-ölheted. Üres deck mellett nem történik semmi, Burn Out nélkül."]
+],
+"Gemcraft Seer": [
+ ["817.1.b, 437.1", 0, "Vision: amikor a Seer a boardra lép, megnézed a Main Deck felső lapját, és recycle-ölheted."],
+ ["479.3.b, 365.1", 0, "Passive: amíg a Seer a boardon van, minden más friendly unit megkapja a Visiont. A később kijátszott unitjaid, tokenek is, Predictet adnak."],
+ ["817.2, 817.2.a", 0, "Saját Visionnel rendelkező unit így két példányt kap: külön triggerelnek, és külön döntesz a recycle-ről."],
+ ["817.2.b", 0, "Ha az első Predictnél nem recycle-ölsz, a második ugyanazt a lapot mutatja."],
+ ["817.1.c", 1, "A már boardon lévő unitok a Seer érkezésekor nem triggerelnek, mert a Vision a boardra lépésre fut le."]
+],
+"Jhin, Meticulous Killer": [
+ ["817.1.b, 437.1", 0, "Vision: amikor Jhin a boardra lép, megnézed a Main Deck felső lapját, és recycle-ölheted."],
+ ["356.1.a", 0, "A \"play me for [C]\" a base cost helyére lép: 4 Energy helyett 1 Mind Power az ára, ha a feltétel teljesül."],
+ ["366.2.a, 103.3.a.1", 0, "A passive minden zónában él, ahonnan Jhin kijátszható: kézből és a Champion Zone-ból is működik."],
+ ["206", 2, "A \"spent [4] or more to play a spell\" pontos jelentését a Core Rules nem rögzíti: a ténylegesen kifizetett Energy számít-e, egyetlen spellre vagy összesítve. Judge döntse el."],
+ ["356.1.b.3", 1, "Az olcsóbb ár csak a base costot váltja ki. Additional costok és cost növelések ettől még rákerülhetnek."],
+ ["308.1.a", 1, "Az időzítés nem változik: a saját körödben, Open State-ben, showdownon kívül játszható ki."]
+],
+"Karma, Channeler": [
+ ["817.1.b, 437.1", 0, "Vision: amikor Karma a boardra lép, megnézed a Main Deck felső lapját, és recycle-ölheted."],
+ ["417.1.a", 1, "Bármilyen recycle kiváltja, ami a te Main Deckedbe tesz lapot: Predict és Vision, trashből recycle, önmagát recycle-ölő unit. Karma saját Visionje is, ha recycle-ölöd a lapot."],
+ ["417.5", 1, "\"One or more\": egy recycle action egy triggert ad, akárhány lap megy egyszerre a deck aljára."],
+ ["052, 417.1.b", 0, "A rune nem kártya, és a Rune Deckbe megy. Egy rune recycle-ölése Powerért nem váltja ki."],
+ ["355.10, 427.1.c", 0, "A friendly unit target, a trigger kötelező. Már buffolt unit is választható, de nem kap második buffot."],
+ ["417.1.c", 1, "Errata: a \"to your Main Deck\" kiegészítés miatt csak a saját deckedbe kerülő lap számít. Ha te recycle-ölsz egy opponent lapját, az az ő deckjébe megy, és nem triggerel."]
+],
+"Mystic Poro": [
+ ["817.1.b, 817.1.c", 0, "Vision: amikor a Poro a boardra lép, Predict triggerel. A lapon nincs reminder text, de a kulcsszó ugyanúgy működik."],
+ ["437.1, 383.3.a.3", 0, "Predict: megnézed a Main Deck felső lapját, és a resolve közben döntesz, hogy recycle-ölöd-e. Nem húzol lapot."],
+ ["437.4.a", 0, "Üres Main Deck mellett a Predict nem csinál semmit, és nem okoz Burn Outot."],
+ ["817.2", 0, "Ha más forrásból még egy Visiont kap, a két példány külön triggerel."]
+],
+"Sai Scout": [
+ ["817.1.b, 437.1", 0, "Vision: amikor a Scout a boardra lép, megnézed a Main Deck felső lapját, és recycle-ölheted."],
+ ["170.11.c, 355.2.b", 0, "Open battlefield: se unit nincs rajta, se controllere. A Scout engedélyt kap, hogy ilyen helyre is kijátszd, nem csak base-be vagy általad kontrollált battlefieldre."],
+ ["190.3.a.1, 316.8.b.1", 0, "Az open battlefieldre érkező Scout Contested státuszt tesz rá, ebből Non-Combat Showdown lesz, amire az opponent [Action] és [Reaction] lapokkal válaszolhat."],
+ ["190.4, 471.1", 1, "Ha a showdown végén a Scout még ott áll, megszerzed a kontrollt. Ez conquer, ha azt a battlefieldet abban a körben még nem score-oltad."],
+ ["308.1.a", 1, "Az engedély a helyre szól, az időzítésre nem: a Scout csak a saját körödben, showdownon kívül játszható ki."]
+],
+"Swain, Visionary": [
+ ["817.1.b, 437.1", 0, "Vision: amikor Swain a boardra lép, megnézed a Main Deck felső lapját, és recycle-ölheted."],
+ ["383.2.a.1", 0, "A három lapos feltétel a trigger feltételének része: a conquer pillanatában kell teljesülnie, különben a trigger nem kerül chain-re."],
+ ["420.4.b", 0, "Az \"if you've played\" feltétel a finalizálást nézi. Egy counterelt unit, gear vagy spell is beleszámít."],
+ ["185, 811.1.c.1", 1, "Tokenek kijátszása nem számít, és a Hide sem Play. A három laptípusból egy-egy valódi kártya kell ugyanabban a körben."],
+ ["143.4", 1, "Maga Swain is lehet a non-token unit, ha abban a körben játszottad ki. Exhausted lép be, ezért ehhez egy effectnek kell battlefieldre vinnie vagy readyznie."],
+ ["470.2, 473.1.a.1", 0, "A \"score 1 point\" pontszerzés a conquer pontján felül. Nem conquerből származik, ezért az utolsó pontra vonatkozó megkötés nem érinti."],
+ ["383.4.c.2.a, 472", 0, "Conquer effect: Swainnek jelen kell lennie a conquerelt battlefielden. Battlefieldenként és körönként egyszer."]
+],
+"Akshan, Mischievous": [
+ ["356.2.b.1, 383.2.a.1", 0, "A 2 Body Power optional additional cost, a kijátszás 2. lépésében döntesz róla. Ha nem fizeted ki, a play effect nem kerül chain-re."],
+ ["355.10, 718.5.b", 0, "Az enemy gear target. Unitra csatolt Equipment is választható, ilyenkor leválik a korábbi unitjáról."],
+ ["391.5.b", 0, "A \"You control it until I leave the board\" delayed ability: a kontroll addig tart, amíg Akshan a boardon van. Utána a gear visszakerül az eredeti controlleréhez."],
+ ["359.3.e.16", 0, "A szabályzat név szerint ezt a lapot hozza példának: ha Akshan a play effect resolve-ja előtt elhagyja a boardot, a kontrollt adó ability létre sem jön, a geart egy pillanatra sem kontrollálod."],
+ ["435.1.f, 435.4", 0, "Ha a gear Equipment, Akshanra csatolódik, Equip cost nélkül. Az Equipment locationje ettől kezdve Akshané."],
+ ["821.1.c, 383.3.d", 1, "A Weaponmaster külön play effect, a targetjét a chain-re kerüléskor választod. Az ellopott Equipment akkor még nem a tiéd, ezért a Weaponmaster csak egy már általad kontrollált Equipmentet választhat."],
+ ["719.5, 323.6", 1, "Ha Akshan elhagyja a boardot, a rá csatolt Equipment leválik és a helyén marad. A következő cleanup a controllere base-ébe recallolja."]
+]
+}

@@ -1,0 +1,2206 @@
+{
+ "Marai Spire": [
+  [
+   "190.6.d, 364.3",
+   0,
+   "Passive ability, a \"you\" a battlefield controllere. Csak annak ad kedvezményt, aki éppen kontrollálja. Ha elveszíted a kontrollt, a kedvezmény azonnal megszűnik, kontroll nélkül senkinek nem jár."
+  ],
+  [
+   "820.1.c.1, 356.4.c",
+   0,
+   "A Repeat cost additional cost. A kedvezmény erre az egy cost-komponensre vonatkozik, és akkor alkalmazódik, amikor a Repeat cost a spell vagy ability cost-jához hozzáadódik."
+  ],
+  [
+   "356.4.c.2",
+   0,
+   "A komponensre szóló kedvezmény a Repeat costot legfeljebb 0-ig csökkenti. A spell base costjából nem vesz le semmit, és a Repeat Power részét sem csökkenti, csak 1 Energyt."
+  ],
+  [
+   "356.4.f.1",
+   0,
+   "Ha a Repeat cost 0-ra csökken, attól még kifizetettnek számít, ha úgy döntöttél, hogy fizeted. Az effect ilyenkor is kétszer hajtódik végre."
+  ],
+  [
+   "740.1.a, 820.1.a",
+   1,
+   "\"Friendly\": a saját és a teammate spelljeinek és abilityjeinek Repeat costjára is hat, nem csak a tiédre. Az opponent Repeat costjai nem lesznek olcsóbbak."
+  ]
+ ],
+ "The Academy": [
+  [
+   "471.2, 473.2.b, 472",
+   0,
+   "Hold ability: csak a saját Beginning Phase-edben triggerel, amikor megtartod a battlefieldet, körönként legfeljebb egyszer. Conquerre nem triggerel."
+  ],
+  [
+   "392",
+   0,
+   "A \"your next spell this turn\" Delayed Passive Ability. Csak a hold után elsőként kijátszott spellre érvényes. Ha abban a körben nem játszol spellt, a hatás a kör végén elvész."
+  ],
+  [
+   "356.1.c",
+   0,
+   "A \"base cost\" a spell nyomtatott base costját jelenti, nem a kedvezményekkel módosítottat. A Repeat ára tehát a teljes nyomtatott Energy és Power cost még egyszer."
+  ],
+  [
+   "820.1.d, 820.2.a",
+   0,
+   "A Repeat optional: ha kijátszáskor kifizeted, a spell effectje kétszer hajtódik végre. A második végrehajtás targetjeit is kijátszáskor választod, és lehetnek mások, mint az elsőé."
+  ],
+  [
+   "820.1.c.2, 820.3",
+   0,
+   "Ha a spellnek saját Repeatje is van, a két Repeat cost külön fizethető. Mindkettőt kifizetve az effect háromszor hajtódik végre."
+  ],
+  [
+   "820.3.a",
+   0,
+   "Repeattel is csak egyszer számít kijátszottnak a spell, a \"when you play a spell\" triggerek egyszer futnak le."
+  ]
+ ],
+ "Fortified Position": [
+  [
+   "383.4.f, 383.4.f.2.a",
+   0,
+   "Defend trigger: akkor triggerel, amikor a combat elején megkapod a Defender designationt. Combatonként egyszer nézi a feltételt."
+  ],
+  [
+   "190.6.d, 466.2.c.2",
+   1,
+   "A \"you\" a battlefield controllere. Csak akkor triggerel, ha a battlefieldet kontrolláló játékos a Defender, vagyis ha valaki megtámadja az általad kontrollált battlefieldet."
+  ],
+  [
+   "355.7, 355.9.b",
+   0,
+   "A \"choose a unit\" unitja target, megkötés nélkül. Bármelyik unit választható, de a Shield csak defender unitnak ér valamit."
+  ],
+  [
+   "814.1.c, 814.2",
+   0,
+   "A Shield 2 csak addig ad +2 Mightot, amíg a unit defender. Meglévő Shield értékkel összeadódik."
+  ],
+  [
+   "468.7.c",
+   0,
+   "A \"this combat\" hatás a combat végén lejár. Ha ugyanabban a körben új combat indul itt, a trigger újra lefut."
+  ],
+  [
+   "359.3.e.7",
+   0,
+   "Ha a target a resolve előtt elhagyja a boardot, az ability hatás nélkül resolve-ol, új targetet nem választhatsz."
+  ]
+ ],
+ "Black Flame Altar": [
+  [
+   "364.2, 479.3.a",
+   0,
+   "Passive ability, nem használ chaint és nem lehet rá reagálni. A Shield kulcsszót folyamatosan adja, amíg a unit itt van és Temporary van rajta."
+  ],
+  [
+   "190.6.d",
+   1,
+   "Nincs benne \"you\" vagy \"friendly\": minden játékos Temporary unitjára hat, aki itt áll, attól függetlenül, ki kontrollálja a battlefieldet."
+  ],
+  [
+   "814.1.c, 814.2",
+   0,
+   "A Shield csak defenderként ad +1 Mightot. Ha a unitnak már van Shieldje, az értékek összeadódnak."
+  ],
+  [
+   "816.1.b",
+   0,
+   "A Temporary unit a controllere következő Beginning Phase-ének elején, a scoring előtt meghal. A bónusz ezért jellemzően az opponent körében, védekezéskor él."
+  ],
+  [
+   "816.3",
+   1,
+   "A kapott Temporary is számít (például LeBlanc Reflection tokenje, Lillia Sprite tokenje), nem csak a nyomtatott kulcsszó."
+  ]
+ ],
+ "Durand Memorial": [
+  [
+   "383.4.f, 190.6.d",
+   0,
+   "Defend trigger, a \"you\" a battlefield controllere. Akkor triggerel, amikor defenderként combatba kerülsz itt, combatonként egyszer."
+  ],
+  [
+   "355.9.b",
+   0,
+   "A target csak általad kontrollált, ezen a battlefielden lévő unit lehet. Ha a resolve előtt elmozdul innen, illegális target, a Tank nem kerül rá."
+  ],
+  [
+   "815.1.b",
+   0,
+   "Tank: az opponentnek először erre a unitra kell lethal damage-et assignolnia, csak utána a többi, Tank nélküli unitodra."
+  ],
+  [
+   "815.1.c.2, 815.2",
+   0,
+   "Ha több Tank unitod van, az opponent választ köztük sorrendet. Tank uniton az újabb Tank redundáns, a trigger ilyenkor nem ad semmit."
+  ],
+  [
+   "468.7.c",
+   0,
+   "A \"this combat\" hatás a combat végén lejár."
+  ]
+ ],
+ "Kinkou Temple": [
+  [
+   "364.2",
+   0,
+   "Passive ability: a +1 Might folyamatos, nem csak combat alatt él, és nem lehet rá reagálni."
+  ],
+  [
+   "190.6.d",
+   1,
+   "Nincs benne \"you\" vagy \"friendly\": minden játékos Tank unitja megkapja, aki itt van, a battlefield kontrolljától függetlenül."
+  ],
+  [
+   "815.3",
+   1,
+   "A kapott Tank is számít. Ha egy unit itt ideiglenesen Tanket kap (például Shen legend abilityje), azonnal +1 Mightja lesz, amíg a Tank rajta van."
+  ],
+  [
+   "143.2.b",
+   1,
+   "Ha egy sebzett Tank unit elhagyja a battlefieldet vagy elveszíti a Tanket, a Mightja 1-gyel csökken. Ha a rajta lévő damage eléri az új Mightot, meghal."
+  ],
+  [
+   "709",
+   1,
+   "Egy 4 Mightú Tank unit ide érkezve 5 Mightú lesz, vagyis Mighty-vé válik, ami a \"becomes Mighty\" triggereket kiváltja."
+  ]
+ ],
+ "Ahri, Nine-Tailed Fox": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Mind domainje adja a deck Domain Identity-jét. Más domainű lap vagy rune nem kerülhet a deckbe."
+  ],
+  [
+   "383.4.e, 383.4.e.2.a",
+   0,
+   "Attack trigger: akkor fut le, amikor az enemy unit megkapja az Attacker designationt. Unitonként és combatonként egyszer, minden támadó unitra külön trigger megy a chain-re."
+  ],
+  [
+   "466.2.c.3.a, 383.4.e.2",
+   1,
+   "A combat közben később odaérkező enemy unit a következő cleanupban kapja meg az Attacker designationt, ekkor rá is triggerel."
+  ],
+  [
+   "355.10.c",
+   0,
+   "Az \"it\" a trigger feltételében szereplő unit, ezért nem target. Deflect és \"can't be chosen\" nem védi meg a -1 Mighttól."
+  ],
+  [
+   "479.4.b",
+   0,
+   "A \"to a minimum of 1\" az alkalmazás pillanatában rögzül. 1 Mightú unitra a hatás -0 lesz, és akkor sem csökkent később, ha a unit Mightja megnő."
+  ],
+  [
+   "317.2.c",
+   0,
+   "A -1 Might \"this turn\" tart, nem csak a combat végéig. A kör végi Expiration Stepben jár le."
+  ],
+  [
+   "190.2.b",
+   1,
+   "Csak általad kontrollált battlefield megtámadására triggerel. Ha egy senki által nem kontrollált battlefielden találkoztok, nem fut le. A trigger kötelező, nincs \"may\"."
+  ]
+ ],
+ "Ambessa, Matriarch of War": [
+  [
+   "103.2.b",
+   0,
+   "A legend Body és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "442.1.c",
+   0,
+   "Az Empowered bináris állapot. Ha a legend már Empowered, az újabb empower nem csinál semmit."
+  ],
+  [
+   "442.2.a, 442.1.c",
+   2,
+   "Nem egyértelmű, hogy triggerel-e, ha olyan objektumot \"empowerelsz\", ami már Empowered volt (ilyenkor nem történik semmi). A stun és a buff hasonló esetében a szabály szerint nincs trigger, de empowerre ezt nem mondja ki, judge döntse el."
+  ],
+  [
+   "443.1.a, 415.4",
+   1,
+   "A \"Disempower me\" és az Exhaust cost: az ability csak Empowered és ready legenddel aktiválható, plusz 1 bármilyen domainű Power kell hozzá."
+  ],
+  [
+   "381.1",
+   0,
+   "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható. Showdown alatt és az opponent körében nem."
+  ],
+  [
+   "355.10, 416.1.c",
+   0,
+   "A \"ready a unit\" unitja target, bármelyik játékos unitja lehet. Már ready uniton nem történik semmi, a cost nem jár vissza."
+  ]
+ ],
+ "Annie, Dark Child (Starter)": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "383.1, 317.1.a",
+   0,
+   "Az \"at the end of your turn\" triggered ability, a saját köröd Ending Stepjében kerül a chain-re. Lehet rá reagálni."
+  ],
+  [
+   "355.9.a, 355.13",
+   0,
+   "A boardon lévő rune-ok targetek. \"Up to 2\": 0, 1 vagy 2 rune választható, a trigger target nélkül is felmehet a chain-re."
+  ],
+  [
+   "355.8, 403.4",
+   1,
+   "Errata: a nyomtatott \"ready 2 runes\" helyett \"up to 2\". A gyakorlatban a trigger akkor is működik, ha csak 1 exhausted rune-od van, vagy egyet sem akarsz readyzni."
+  ],
+  [
+   "317.2.d, 167",
+   0,
+   "A Rune Pool a kör végén kiürül. A readyzett rune-okból a saját körödben már nem érdemes resource-t addolni, az elveszne."
+  ],
+  [
+   "164.2.a, 813.1.c.2",
+   1,
+   "A haszna: a 2 ready rune az opponent körében [Reaction] lapok és abilityk kifizetésére használható, mielőtt az Awaken Phase-ed amúgy is mindent readyzne."
+  ]
+ ],
+ "Draven, Glorious Executioner": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "468.3.a",
+   0,
+   "Combatot az nyer, aki Attacker vagy Defender volt, és a Resolution Stepben egyedül neki maradt unitja a battlefielden. Támadóként és védőként is jár a draw."
+  ],
+  [
+   "468.3.d",
+   0,
+   "\"No Result\" esetén nincs draw: ha mindkét félnek maradt unitja, ha senkinek sem maradt, vagy ha az attackereket recallolták, mert a defender túlélte."
+  ],
+  [
+   "316.8.b.1",
+   0,
+   "Üres battlefield elfoglalása Non-Combat Showdown, nem combat. Ilyenkor conquerelsz, de combatot nem nyertél, a trigger nem fut le."
+  ],
+  [
+   "468.3, 468.5",
+   0,
+   "A combat eredménye a kontroll megállapítása előtt dől el, ezért Draven triggere a conquer triggerek előtt kerül a chain-re."
+  ],
+  [
+   "414.4",
+   0,
+   "A draw kötelező. Üres Main Deck esetén Burn Outot okoz."
+  ]
+ ],
+ "Evelynn, Agony's Embrace": [
+  [
+   "103.2.b",
+   0,
+   "A legend Body és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "420.4.a, 420.4.a.1",
+   0,
+   "Akkor triggerel, amikor a facedown-ból kijátszott lap resolve-olt. Ha a lapot counterelik, nem húzol."
+  ],
+  [
+   "383.3.e.1",
+   0,
+   "\"Once each turn\": körönként egyszer hajtódik végre, de minden körben újra. A saját körödben és az opponent körében is húzhatsz vele egyet-egyet."
+  ],
+  [
+   "383.3.e.1",
+   1,
+   "Nincs \"may\": az adott kör első facedown-ból kijátszott lapja mindenképp elhasználja a körönkénti egy alkalmat, nem tartogathatod egy későbbi lapra."
+  ],
+  [
+   "811.6",
+   0,
+   "A Hidden lap az elrejtést követő körtől [Reaction]-t kap, ezért az opponent körében is kijátszható facedown-ból, ilyenkor is triggerel."
+  ],
+  [
+   "423.2.a, 423.1.a",
+   0,
+   "Ha nem a te köröd van, a draw után kötelező 1 lapot discardolni. Te választod, melyiket, lehet az éppen húzott lap is."
+  ],
+  [
+   "811.1.b",
+   0,
+   "Az elrejtés körében a lap még nem játszható ki facedown-ból, tehát a Hide és a trigger között legalább egy körváltás van."
+  ]
+ ],
+ "Garen, Might of Demacia (Starter)": [
+  [
+   "103.2.b",
+   0,
+   "A legend Body és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "383.2.a.1",
+   0,
+   "Az \"if you have 4+ units\" közvetlenül a feltétel után áll, ezért a trigger feltételének része. Ha a conquer pillanatában nincs ott 4 unitod, a trigger fel sem kerül a chain-re."
+  ],
+  [
+   "383.2.a.1",
+   0,
+   "Ha a trigger már a chainen van, és az opponent reakcióként elvesz onnan egy unitot, az ability ettől még resolve-ol, húzol 2-t."
+  ],
+  [
+   "185.2.d",
+   0,
+   "A token unitok is unitok, beleszámítanak a 4-be."
+  ],
+  [
+   "472, 383.4.c.2.b",
+   0,
+   "Battlefieldenként és körönként egyszer conquerelhetsz. Két battlefield elfoglalásakor két külön trigger megy, mindkettő a saját battlefieldjén számolja a unitokat."
+  ],
+  [
+   "383.4.c.2.c, 473.1.b.1",
+   0,
+   "Akkor is triggerel, ha a conquerért járó pont elmarad vagy helyettesítődik, például a Final Point helyett csak lapot húzol."
+  ],
+  [
+   "414.4",
+   0,
+   "A draw 2 kötelező. Ha nincs elég lap a Main Deckben, Burn Out következik."
+  ]
+ ],
+ "Irelia, Blade Dancer": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "383.4.b, 383.4.b.3",
+   0,
+   "Targeting Effect: akkor triggerel, amikor egy spelled vagy abilityd friendly unitot targetel. \"Pick\" jellegű és target nélküli (\"all units\") hatásokra nem."
+  ],
+  [
+   "383.4.b.2",
+   1,
+   "A trigger a targetelő spell vagy ability fölé kerül a chain-re, ezért előbb resolve-ol: a unit már ready, mire az eredeti spell hat rá."
+  ],
+  [
+   "383.3.a, 383.3.b, 415.4",
+   0,
+   "A \"you may\" után álló \"exhaust me and pay [A]\" a trigger base costja, a finalizáláskor fizeted. Exhausted legenddel a cost nem fizethető ki, a trigger lekerül a chainről."
+  ],
+  [
+   "355.10.c",
+   0,
+   "Az \"it\" a trigger feltételében szereplő unit, a triggernek nincs saját targetje. Már ready uniton a ready nem csinál semmit, a cost elveszett."
+  ],
+  [
+   "818.1.b.1",
+   1,
+   "Az Equip választása is target, ezért az Equip aktiválása friendly unitra szintén kiváltja a triggert."
+  ],
+  [
+   "383.4.c.2.b, 383.3.b",
+   0,
+   "A második trigger minden conquernél lefut. Az 1 Energy a finalizáláskor fizetendő, így Irelia egy körben többször is használható."
+  ]
+ ],
+ "Ivern, Green Father": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "383.3.a, 383.3.b",
+   1,
+   "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted. Mivel a legend ettől exhausted lesz, körönként jellemzően egy battlefield cserélhető."
+  ],
+  [
+   "355.10.c",
+   0,
+   "A \"that battlefield\" a trigger feltételéből jön, ezért nem target."
+  ],
+  [
+   "439.1, 439.5",
+   0,
+   "Replace: a Brush token az eredeti battlefield helyére jön létre, és minden rajta lévő hatást, státuszt örököl. Az eredeti battlefield a Banishmentbe kerül, de nem számít banisheltnek."
+  ],
+  [
+   "439.1.a",
+   0,
+   "A szabályzat név szerint ezt a lapot hozza példának: a lecserélt battlefield (Navori Fighting Pit) már chainen lévő conquer triggere a csere után is resolve-ol, a \"here\" és a targetje érvényes marad."
+  ],
+  [
+   "187.8",
+   0,
+   "A Brush szövege: Bird, Cat, Dog, Poro és Ivern unitok itt +1 Mightot kapnak, bármelyik játékoséi. Az eredeti battlefield abilityjei a csere idejére megszűnnek."
+  ],
+  [
+   "187.8, 439.7.b, 190.6.d",
+   1,
+   "A visszacserélés a Brush saját triggere: aki itt score-ol (akár az opponent), eldöntheti, hogy visszahozza-e az eredeti battlefieldet."
+  ]
+ ],
+ "Jax, Grandmaster at Arms": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Body domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "381.1",
+   0,
+   "Egyik abilityn sincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválhatók, showdown alatt nem."
+  ],
+  [
+   "355.10, 355.8",
+   0,
+   "Az Equipment és a unit is target. Mindkettőre kell érvényes választás: az első abilityhez detached, a másodikhoz attached, általad kontrollált Equipment."
+  ],
+  [
+   "435.3, 818.1.c.2",
+   1,
+   "Ez nem az Equip ability aktiválása, hanem közvetlen Attach: az Equipment saját Equip costját nem kell kifizetni, csak Jax costját."
+  ],
+  [
+   "435.1.f, 435.1.g",
+   0,
+   "A második abilityvel az Equipment leválik a korábbi unitról és az újra kerül. Ha ugyanazt a unitot választod, amelyiken már rajta van, nem történik semmi."
+  ],
+  [
+   "415.4",
+   1,
+   "Mindkét ability costja a legend exhaustolása, ezért körönként csak az egyik használható, egyszer."
+  ],
+  [
+   "359.3.e.2",
+   0,
+   "Ha a resolve előtt az Equipment állapota megváltozik (a detached felkerül valamire, vagy az attached leválik), illegális target, az ability nem csinál semmit."
+  ]
+ ],
+ "Jhin, Virtuoso": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Mind domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "420.4.a, 420.4.a.1",
+   0,
+   "A trigger a spell resolve-ja után fut le. Counterelt spellre nem triggerel."
+  ],
+  [
+   "383.2.a.1",
+   0,
+   "Az \"if you spent [4] or more\" közvetlenül a feltétel után áll, ezért a trigger feltételének része. Ha nem teljesül, a trigger fel sem kerül a chain-re."
+  ],
+  [
+   "206",
+   2,
+   "A \"spent\" a ténylegesen kifizetett mennyiségre utal, nem a nyomtatott costra. A Core Rules nem mondja ki, hogy a Power és az additional costok (Repeat) beleszámítanak-e a 4-be, judge döntse el."
+  ],
+  [
+   "383.3.a, 383.3.a.2",
+   0,
+   "A \"you may banish it\" az effect elején áll: a finalizáláskor döntesz. Ha nem banisheled, a trigger lekerül a chainről, és a \"Then\" rész sem fut le."
+  ],
+  [
+   "428.3, 428.3.a",
+   0,
+   "A \"banished with me\" csak az ezzel a legenddel banishelt spelleket számolja, a más hatással banishelt lapokat nem."
+  ],
+  [
+   "135.2.b.5.b, 431.2.a, 431.3",
+   0,
+   "A negyedik spellnél az \"if\" feltétel mindhárom utasításra vonatkozik: a spellek a trashbe mennek, 4 rune jön ready, és húzol 1-et. Ha kevesebb rune van a Rune Deckben, annyi jön, amennyi van."
+  ]
+ ],
+ "Jinx, Loose Cannon": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "103.3.a.2",
+   0,
+   "A szabályzat név szerint ezt a lapot hozza példának: a legend tagje Jinx, ezért Chosen Championnak csak Jinx tagű champion unit (Jinx, Rebel vagy Jinx, Demolitionist) választható."
+  ],
+  [
+   "383.2.a.1",
+   0,
+   "A szabályzat név szerint ezt a lapot hozza példának: az \"if you have one or fewer cards\" nem közvetlenül a feltétel után áll, ezért az effect része. A trigger mindig felkerül a chain-re, a kezet a resolve-kor nézi."
+  ],
+  [
+   "383.3.c, 813.1.c.1",
+   1,
+   "Mivel a kéz a resolve-kor számít, a triggerre válaszul [Reaction] lapot kijátszva 1 lapra csökkentheted a kezed, és így még megkapod a húzást."
+  ],
+  [
+   "315.2.a.1, 315.4.b",
+   0,
+   "A Beginning Step elején triggerel, a scoring és a Draw Phase előtt. A kör rendes húzása ettől független, az ezután jön."
+  ],
+  [
+   "414.4",
+   0,
+   "Ha a feltétel teljesül, a draw kötelező. Üres Main Deck esetén Burn Outot okoz."
+  ]
+ ],
+ "Lee Sin, Blind Monk": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Body domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "381.1",
+   0,
+   "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható. Combat közben már nem buffolhatsz vele."
+  ],
+  [
+   "355.9.b, 491.8.e",
+   0,
+   "A target friendly unit: a sajátod vagy a teammate-edé. Enemy unit nem választható."
+  ],
+  [
+   "427.1.c, 702.3",
+   0,
+   "Egy uniton egyszerre egy buff lehet. Már buffolt unit is választható, de nem kap második buffot, a cost elveszett."
+  ],
+  [
+   "703, 705",
+   0,
+   "A buff +1 Mightot ad, és nem jár le a kör végén. Addig marad, amíg el nem költik, vagy a unit el nem hagyja a boardot."
+  ]
+ ],
+ "Leona, Radiant Dawn": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "424.1.a.1",
+   0,
+   "Már stunned unit nem stunnolható újra. Ha a stun hatásod csak ilyen unitot ér, a trigger nem fut le."
+  ],
+  [
+   "370.1.a.2",
+   1,
+   "\"One or more\": ha egy hatás egyszerre több enemy unitot stunnol, az egy trigger, egy buff. Két külön stun hatás két triggert ad."
+  ],
+  [
+   "355.10, 403.4",
+   0,
+   "A buffolandó friendly unit target, a trigger chain-re kerülésekor választod. Ha nincs friendly unit, a trigger lekerül a chainről."
+  ],
+  [
+   "403.4.b",
+   0,
+   "A trigger kötelező, nincs \"may\": ha van választható friendly unit, választanod kell."
+  ],
+  [
+   "427.1.c",
+   0,
+   "Már buffolt unit is választható, de nem kap második buffot."
+  ]
+ ],
+ "Lux, Lady of Luminosity (Starter)": [
+  [
+   "103.2.b",
+   0,
+   "A legend Mind és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "206",
+   0,
+   "A \"costs [5] or more\" a spell nyomtatott Energy costját nézi. Kedvezménnyel vagy \"ignoring cost\" módon kijátszott 5+ costú spell is triggerel, mindegy, mennyit fizettél."
+  ],
+  [
+   "206, 820.1.c.1",
+   1,
+   "Fordítva is igaz: egy 3 costú spell a kifizetett Repeat vagy más additional cost miatt nem lesz \"5 vagy több\", a trigger nem fut le."
+  ],
+  [
+   "420.4.a, 420.4.a.1",
+   0,
+   "A trigger a spell resolve-ja után fut le. Counterelt spellre nem húzol."
+  ],
+  [
+   "359.3.e.10",
+   0,
+   "Ha a spell minden targetje illegális lett és hatás nélkül resolve-ol, attól még kijátszottnak számít, a trigger lefut."
+  ],
+  [
+   "414.4",
+   0,
+   "A draw kötelező. Üres Main Deck esetén Burn Outot okoz."
+  ]
+ ],
+ "Master Yi, Wuju Bladesman (Starter)": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Body domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "103.3.e",
+   1,
+   "A kártyaadat szerint ez a lap banned. A deck a játszott Format legalitási szabályai alá esik, sanctioned játék előtt ellenőrizd az aktuális listát."
+  ],
+  [
+   "740.2.a",
+   0,
+   "\"Alone\": a unit akkor van egyedül, ha nincs más friendly unit ugyanazon a locationön. Az enemy unitok száma nem számít."
+  ],
+  [
+   "364.3.a, 814.1.d",
+   1,
+   "Conditional passive ability: csak addig ad +2 Mightot, amíg a unit Defender designationnel bír és egyedül van. Ha a combat alatt második friendly unit érkezik mellé, a bónusz azonnal megszűnik."
+  ],
+  [
+   "491.8.e",
+   1,
+   "A teammate unitja is friendly: 2v2-ben a társad egyedül védekező unitja is megkapja, viszont a társad unitja a tiéd mellett megszünteti az \"alone\" állapotot."
+  ]
+ ],
+ "Mel, Soul's Reflection": [
+  [
+   "103.2.b",
+   0,
+   "A legend Mind és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "442.1.c",
+   0,
+   "Ha a legend már Empowered, az újabb empower nem csinál semmit, a trigger kárba vész."
+  ],
+  [
+   "443.1.a, 415.4",
+   1,
+   "A \"Disempower me\" és az Exhaust cost: az ability csak Empowered és ready legenddel aktiválható."
+  ],
+  [
+   "381.1",
+   0,
+   "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben megy. Showdown alatt nem, a -2 Mightot a mozgás előtt kell kiosztani."
+  ],
+  [
+   "355.9.b, 359.3.e.2",
+   0,
+   "A target csak battlefielden lévő unit lehet, bármelyik játékosé. Ha a resolve előtt base-be kerül, illegális target, az ability nem csinál semmit."
+  ],
+  [
+   "143.2.c, 143.2.b",
+   0,
+   "Nincs minimum: a Might 0 alá is mehet, ilyenkor 0-nak számít. Sebzetlen unit ettől nem hal meg, de ha van rajta damage, ami eléri a csökkentett Mightot, meghal."
+  ]
+ ],
+ "Nasus, Curator of the Sands": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Mind domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "206",
+   0,
+   "Unitnál és gearnél a nyomtatott Energy cost számít. Kedvezménnyel olcsóbban kijátszott 7+ costú lap is triggerel."
+  ],
+  [
+   "420.4.a, 377.2.a",
+   0,
+   "A trigger akkor fut le, amikor a unit vagy gear kijátszása, illetve az activated ability resolve-olt. Spell kijátszására nem triggerel."
+  ],
+  [
+   "206, 404.3",
+   2,
+   "Activated abilitynél nem egyértelmű, hogy a kiírt vagy a kedvezménnyel csökkentett Energy cost számít-e (például Lillia abilityje). A 206 csak kártyákról és tokenekről szól, judge döntse el."
+  ],
+  [
+   "383.3.a, 383.3.b, 415.4",
+   0,
+   "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted. Exhausted legenddel nem megy, vagyis körönként egyszer használható."
+  ],
+  [
+   "355.9.a, 355.13",
+   0,
+   "A rune-ok targetek, \"up to 2\": 0, 1 vagy 2 választható. Már ready rune-on a ready nem csinál semmit."
+  ]
+ ],
+ "Orianna, Lady of Clockwork": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Mind domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "316.3, 316.4, 430.3",
+   0,
+   "A trigger a Main Phase elején fut, a Rune Pool kiürítése után. Az 1 Energyt ekkor kell előteremteni, például egy rune exhaustolásával."
+  ],
+  [
+   "383.3.a, 383.3.b",
+   0,
+   "A \"pay [1]\" a trigger base costja, a finalizáláskor fizeted. A választott friendly gear target."
+  ],
+  [
+   "178.1.a.1, 178.2.a",
+   0,
+   "A gear egyszerre unit és gear lesz: van Mightja, sebezhető, Standard Move-val battlefieldre mehet, és a cleanup nem recallolja onnan."
+  ],
+  [
+   "178.3",
+   0,
+   "Unit gearként a unitokra és a gearekre ható effectek is elérik: \"kill a unit\" és \"kill a gear\" is megölheti."
+  ],
+  [
+   "206, 185.3.a.1",
+   0,
+   "A Might a nyomtatott Energy costtal egyenlő. Token gear (például Gold) costja 0, tehát 0 Mightú unit lesz."
+  ],
+  [
+   "435.1.h.2",
+   0,
+   "Ha a választott gear éppen egy unithoz csatolt Equipment, unittá válva leválik róla."
+  ],
+  [
+   "391.5",
+   1,
+   "A hatás nem jár le a kör végén: addig tart, amíg Oriannával másik geart nem választasz. Ha egy körben nem fizetsz, az előző gear unit marad."
+  ]
+ ],
+ "Poppy, Keeper of the Hammer": [
+  [
+   "103.2.b",
+   0,
+   "A legend Body és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "471.2, 383.4.d.2.b",
+   0,
+   "Hold csak a saját Beginning Phase-edben történik. Minden megtartott battlefield külön hold, tehát két battlefielddel körönként 2 XP jön."
+  ],
+  [
+   "729.2, 733, 731.1",
+   0,
+   "Az XP a játékoson lévő, nyilvános érték, nincs felső határa, és nem jár le a kör végén. Nem Game Object, nem targetelhető."
+  ],
+  [
+   "732",
+   0,
+   "2v2-ben az XP nem közös a teammate-tel, csak a sajátodból költhetsz."
+  ],
+  [
+   "381.1, 415.4",
+   0,
+   "A \"Spend 3 XP\" és az Exhaust az ability costja. Csak a saját Main Phase-edben, Open State-ben, ready legenddel aktiválható, körönként egyszer."
+  ],
+  [
+   "824.1.d",
+   1,
+   "Az elköltött XP csökkenti az összeget, ezért a [Level] abilityjű lapjaid inaktívvá válhatnak, ha a küszöb alá mész."
+  ]
+ ],
+ "Rek'Sai, Void Burrower": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "383.3.a, 383.3.b, 415.4",
+   0,
+   "Az \"exhaust me\" a trigger base costja, a conquer trigger finalizálásakor fizeted. Exhausted legenddel nem megy."
+  ],
+  [
+   "432.1.c, 432.1.c.1",
+   0,
+   "Ha 2-nél kevesebb lap van a Main Deckben, annyit revealelsz, amennyi van. Ez nem okoz Burn Outot."
+  ],
+  [
+   "383.3.a.3",
+   0,
+   "A \"you may banish one\" nem az effect elején áll: a resolve közben döntesz, miután láttad a két lapot. A deck nem Public zóna, a lap nem target."
+  ],
+  [
+   "420.3.a, 420.3.b",
+   1,
+   "A banishelt lap kijátszása a resolve része, de nincs \"ignoring cost\": a lap teljes costját ki kell fizetni. Ha nem tudod vagy nem akarod, a lap a Banishmentben marad."
+  ],
+  [
+   "355.2.a",
+   1,
+   "Unit a szokásos helyekre játszható: base-be vagy általad kontrollált battlefieldre, tehát az éppen elfoglaltra is."
+  ],
+  [
+   "417.4, 417.5",
+   0,
+   "A maradékot kötelező recycle-ölni. Ha mindkét lap megy, véletlen sorrendben kerülnek a deck aljára."
+  ]
+ ],
+ "Rengar, Pridestalker": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Body domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "420.4.a",
+   0,
+   "A trigger akkor fut le, amikor a unit kijátszása befejeződött, vagyis a unit már a boardon van. Counterelt unitra nem triggerel."
+  ],
+  [
+   "355.10, 355.9.b",
+   1,
+   "A \"give a unit\" unitja target, megkötés nélkül: lehet az éppen kijátszott unit, másik saját unit vagy akár enemy unit is."
+  ],
+  [
+   "403.4.b",
+   0,
+   "Kötelező, nincs \"may\". Ha van választható unit, választanod kell."
+  ],
+  [
+   "185.2.a, 440.2.c",
+   2,
+   "Token unit kijátszása (\"play a ... unit token\") valószínűleg szintén kiváltja, mert a tokent is \"play\"-eli a tulajdonosa. Ezt a Core Rules nem mondja ki külön, judge döntse el."
+  ],
+  [
+   "709, 317.2.c",
+   1,
+   "A +1 Might a kör végéig tart. Egy 4 Mightú unitot Mighty-vé tesz, ami a \"becomes Mighty\" triggereket kiváltja."
+  ]
+ ],
+ "Riven, The Exile": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "369.3",
+   0,
+   "Az \"enter ready\" replacement effect: a unit eleve ready lép be, nem exhausted, majd ready. Nem használ chaint, nem lehet rá reagálni."
+  ],
+  [
+   "805.6.a",
+   1,
+   "Az Accelerate-hez hasonlóan ez nem \"becomes ready\" esemény, az ilyen triggereket nem váltja ki."
+  ],
+  [
+   "355.2.a",
+   0,
+   "Csak az általad kontrollált battlefieldre kijátszott unitra hat. Base-be kijátszott unit továbbra is exhausted lép be."
+  ],
+  [
+   "811.1.d.1",
+   1,
+   "A facedown-ból kijátszott unit az adott (általad kontrollált) battlefieldre érkezik, tehát ready lép be, akár az opponent körében, showdown közben is."
+  ],
+  [
+   "144.4.b, 810.1.b",
+   1,
+   "A ready unit azonnal használhat Exhaust costú abilityt vagy Standard Move-ot. Ganking nélkül a battlefieldről csak a base-be léphet."
+  ]
+ ],
+ "Seraphine, Starry-Eyed Songstress": [
+  [
+   "103.2.b",
+   0,
+   "A legend Mind és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "356.2.b.1, 355.1.a",
+   0,
+   "Optional additional cost: a spell kijátszásakor, a választások lépésében döntöd el, hogy fizeted-e. Spellenként egyszer alkalmazható."
+  ],
+  [
+   "415.4",
+   0,
+   "A cost csak akkor fizethető ki, ha a legend és három friendly unit is ready. Exhausted unit nem exhaustolható újra costként."
+  ],
+  [
+   "355.10.c",
+   0,
+   "A három unit a cost része, ezért nem target. Az exhaustolásra nem lehet reagálni, mert a cost fizetése a finalizálás része."
+  ],
+  [
+   "356.4, 356.6",
+   0,
+   "A kedvezmény 2 Energy, és legfeljebb 0-ig csökkent. A Power costot nem érinti."
+  ],
+  [
+   "813.1.c.1",
+   1,
+   "Az opponent körében kijátszott [Reaction] spellre is használható, ha a legend és a unitok readyk. A védekező unitok exhaustolása a Mightjukat nem csökkenti."
+  ]
+ ],
+ "Sett, The Boss": [
+  [
+   "103.2.b",
+   0,
+   "A legend Body és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "369.1, 370.1.c",
+   0,
+   "Az \"if ... would die ... instead\" replacement effect. A halál megtörténte előtt lép közbe, nem megy chain-re, az opponent nem tud rá reagálni."
+  ],
+  [
+   "135.2.e.6.c, 415.4, 702.2.b.1",
+   0,
+   "A cost: 1 Body vagy Order Power, a legend exhaustolása és a unit buffjának elköltése. Exhausted legenddel vagy buff nélküli unitra nem alkalmazható."
+  ],
+  [
+   "383.2.c.3.a",
+   0,
+   "A szabályzat pont ezt az esetet hozza példának: ha a halált heal, exhaust és recall váltja ki, a unit Deathknell abilityje nem triggerel, mert a halál nem történt meg."
+  ],
+  [
+   "458.1, 458.3",
+   0,
+   "A recall nem Move: a \"when I move\" triggerek nem futnak le, és mozgást tiltó effect nem akadályozza meg."
+  ],
+  [
+   "460.1, 143.2.b",
+   1,
+   "Errata: a régi szöveg \"when\"-nel kezdődött és nem healelt. Most egyértelműen replacement effect, a buff elköltése a cost része, és a unit healelődik, így a rajta maradó damage nem öli meg újra a recall után."
+  ],
+  [
+   "370.1.a.2, 415.4",
+   1,
+   "Ha combatban több buffolt unitod hal meg egyszerre, csak egyet menthetsz meg, mert a legend csak egyszer exhaustolható. A conquer trigger utána readyzi."
+  ]
+ ],
+ "Sivir, Battle Mistress": [
+  [
+   "103.2.b",
+   0,
+   "A legend Body és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "164.2.b",
+   1,
+   "A rune recycle-ölése Powerért (a Basic Rune második abilityje) is \"recycle a rune\", tehát a Power cost fizetése közben is triggerel."
+  ],
+  [
+   "383.3.a, 383.3.b, 415.4",
+   0,
+   "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted. Exhausted legenddel nem megy, több recycle-ölt rune-ra is csak egy Gold jön."
+  ],
+  [
+   "187.5, 415.4",
+   0,
+   "A Gold token abilityje: [Reaction], Kill this, Exhaust: Add [A]. Exhausted lép be, ezért addig nem használható, amíg ready nem lesz (jellemzően a következő Awaken Phase-edben)."
+  ],
+  [
+   "370.1.a.2",
+   1,
+   "\"One or more\": az egyszerre meghaló enemy unitok (például combat damage után) egy triggert adnak. A legend akkor is ready lesz, ha nem te ölted meg őket."
+  ],
+  [
+   "416.1.c",
+   1,
+   "Ha a legend már ready, a második trigger nem csinál semmit."
+  ]
+ ],
+ "Vex, Gloomist": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "471.2, 315.2.b.2",
+   0,
+   "Hold a Beginning Phase Scoring Stepjében történik, annak a körében, aki a battlefieldet megtartja. A saját holdod a saját körödben, az ally-é az ő körében triggerel."
+  ],
+  [
+   "383.3.a, 383.3.b, 415.4",
+   0,
+   "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted. Több megtartott battlefield több triggert ad, de exhausted legenddel a többi nem fizethető ki."
+  ],
+  [
+   "315.1.b",
+   1,
+   "A legend csak a saját Awaken Phase-edben lesz ready. Ha az ally körében használod, a saját holdodra már ready lesz, tehát 2v2-ben körönként kétszer is húzhatsz."
+  ],
+  [
+   "491.8.e, 487.2",
+   1,
+   "1v1-ben nincs ally, ott csak a saját holdod számít."
+  ],
+  [
+   "414.4",
+   0,
+   "Üres Main Deck esetén a draw Burn Outot okoz."
+  ]
+ ],
+ "Vi, Piltover Enforcer": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "383.2.a.1",
+   0,
+   "Az \"if you assigned 3 or more excess damage\" közvetlenül a feltétel után áll, ezért a trigger feltételének része. Ha nem teljesül, a trigger fel sem kerül a chain-re."
+  ],
+  [
+   "467.2.c.4",
+   2,
+   "Az \"excess damage\" fogalmát a Core Rules nem definiálja. Valószínűleg a lethal fölött assignolt combat damage-et jelenti, ami csak akkor lehetséges, ha már minden enemy unit lethalt kapott. A pontos számítást judge döntse el."
+  ],
+  [
+   "316.8.b.1",
+   1,
+   "Üres battlefield elfoglalásakor nincs combat, nem assignolsz damage-et, tehát a trigger nem fut le."
+  ],
+  [
+   "383.3.a, 383.3.b, 415.4",
+   0,
+   "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted, csak ready legenddel."
+  ],
+  [
+   "355.10, 416.1.c",
+   0,
+   "A \"ready a unit\" unitja target, bármelyik unit lehet. Már ready uniton nem történik semmi."
+  ],
+  [
+   "144.2",
+   1,
+   "A haszna: a Standard Move-tól exhausted attacker újra ready lesz, és ugyanabban a körben tovább mozoghat."
+  ]
+ ],
+ "Viktor, Herald of the Arcane": [
+  [
+   "103.2.b",
+   0,
+   "A legend Mind és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "381.1",
+   0,
+   "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható, körönként egyszer."
+  ],
+  [
+   "187.1",
+   0,
+   "A Recruit token domain nélküli, 1 Mightú unit token Recruit taggel."
+  ],
+  [
+   "185.2.a, 355.2.a",
+   0,
+   "A tokent kijátszod, a unitokra vonatkozó szabályok szerint: base-be vagy általad kontrollált battlefieldre kerülhet. Az abilitynek nincs targetje."
+  ],
+  [
+   "185.2.d",
+   0,
+   "A token unit exhausted lép be, a kijátszás körében nem mozoghat."
+  ],
+  [
+   "186.1",
+   0,
+   "Ha a token kézbe, trashbe vagy más nem board zónába kerül, megszűnik létezni."
+  ]
+ ],
+ "Yasuo, Unforgiven": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "381.1",
+   0,
+   "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható. Showdown vagy combat alatt nem lehet vele unitot behozni vagy kimenteni."
+  ],
+  [
+   "355.4, 355.4.a",
+   0,
+   "A friendly unit target, a célt aktiváláskor választod. Base-ből bármely érvényes battlefieldre, battlefieldről a base-be mehet. Battlefieldről battlefieldre nem."
+  ],
+  [
+   "421.2.a, 144.2",
+   1,
+   "Ez nem Standard Move: a unitot nem kell exhaustolni, exhausted unit is mozgatható vele. Így egy már mozgott unit ugyanabban a körben újra léphet."
+  ],
+  [
+   "421.1, 452",
+   0,
+   "Ez Move, a \"when I move\" triggerek lefutnak. Ha a cél nem általad kontrollált battlefield, az Contested lesz, showdown vagy combat következik."
+  ],
+  [
+   "491.8.e",
+   1,
+   "Errata: \"your base\" helyett \"its base\". 2v2-ben a teammate unitja is friendly, és az a saját controllere base-ébe megy, illetve onnan indul, nem a tiédbe."
+  ]
+ ],
+ "Zed, Master of Shadows": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "428.1, 428.2.a",
+   0,
+   "Bármely zónából történő banish számít, ha a lap a tiéd: kézből, trashből, deckből vagy a boardról. A kill és a discard nem banish."
+  ],
+  [
+   "185, 052",
+   1,
+   "A token nem kártya, a \"card\" pedig Main Deck lapot jelent. Token vagy rune banishelése ezért nem empowerel."
+  ],
+  [
+   "439.4, 439.5.a",
+   0,
+   "A Replace nem banish: a lecserélt lap a Banishmentbe kerül ugyan, de nem számít banisheltnek."
+  ],
+  [
+   "442.1.c",
+   0,
+   "Ha a legend már Empowered, az újabb banish nem ad semmit."
+  ],
+  [
+   "806.1.c.2, 443.1.a",
+   0,
+   "[Action] ability: a saját Main Phase-edben és showdown alatt bárki körében aktiválható, Closed State-ben nem. Csak Empowered és ready legenddel megy."
+  ],
+  [
+   "423.4",
+   0,
+   "A discard itt effect, nem cost. Üres kézzel a discard negálódik, a draw ettől még megtörténik."
+  ]
+ ],
+ "Akali, Rogue Assassin": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Calm domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "827.1.c.1, 381.1",
+   0,
+   "Empower [3][A]: activated ability, csak akkor aktiválható, ha a legend még nem Empowered, a saját Main Phase-edben, Open State-ben."
+  ],
+  [
+   "135.2.b.5.b",
+   0,
+   "A szabályzat név szerint ezt a lapot hozza példának: az \"if it's your turn\" a mondat minden utasítására vonatkozik, az \"if I'm Empowered\" csak a ready-re."
+  ],
+  [
+   "806.1.c.2, 135.2.b.5.b",
+   1,
+   "[Action] miatt az opponent körében, showdown alatt is aktiválható lenne, de ott az \"if it's your turn\" feltétel nem teljesül, az ability nem csinál semmit."
+  ],
+  [
+   "355.9.b, 359.3.e.2",
+   0,
+   "A target showdownban lévő friendly unit. Ha a resolve előtt elhagyja a showdown battlefieldjét, illegális target."
+  ],
+  [
+   "443.1.a",
+   1,
+   "A ready nem disempowereli a legendet: a második ability costja csak az Exhaust. Az Empowered állapot megmarad, az Empower costot nem kell körönként újra kifizetni."
+  ],
+  [
+   "421.1, 416.1.c",
+   1,
+   "A base-be vitel Move, nem Recall. Az Empowered állapotot a resolve-kor nézi, a ready pedig lehetővé teszi, hogy a unit még abban a körben újra mozogjon."
+  ]
+ ],
+ "Shen, Eye of Twilight": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "806.1.c.2",
+   0,
+   "[Action] ability: a saját Main Phase-edben és showdown alatt bárki körében aktiválható, tehát védekezéskor is, amikor nálad a Focus."
+  ],
+  [
+   "358.4",
+   0,
+   "Nem [Reaction]: Closed State-ben, egy spellre vagy abilityre válaszul nem aktiválható."
+  ],
+  [
+   "815.1.b, 815.1.c.1",
+   0,
+   "Tank: az opponentnek erre a unitra kell először lethal damage-et assignolnia, mielőtt a Tank nélküli unitjaidra tenne. Támadó és védekező uniton is működik."
+  ],
+  [
+   "815.2",
+   0,
+   "Tank uniton az újabb Tank redundáns."
+  ],
+  [
+   "355.9.b, 317.2.c",
+   0,
+   "A target friendly unit, a hatás a kör végéig tart, nem csak egy combatra."
+  ]
+ ],
+ "Renata Glasc, Chem-Baroness": [
+  [
+   "103.2.b",
+   0,
+   "A legend Mind és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "471.2, 383.3.b, 415.4",
+   0,
+   "A saját vagy az ally holdjára triggerel a Beginning Phase-ben. Az \"exhaust me\" a trigger base costja, exhausted legenddel nem fizethető ki."
+  ],
+  [
+   "187.5",
+   0,
+   "A Gold token: [Reaction], Kill this, Exhaust: Add [A]. Exhausted lép be, ezért a létrehozás körében jellemzően még nem használható."
+  ],
+  [
+   "485.3, 487.3, 491.3",
+   0,
+   "A Victory Score a játékmódtól függ: 1v1 Duelben 8, 2v2-ben 11. A passive ability tehát 5, illetve 8 ponttól aktív."
+  ],
+  [
+   "430.5",
+   1,
+   "Amíg a feltétel teljesül, minden Goldod [A] mellé 1 Energyt is ad. A passive ability a feltételt folyamatosan nézi, pontvesztés után kikapcsol."
+  ],
+  [
+   "491.8.d.1",
+   0,
+   "2v2-ben a pontok közösek a teammate-tel, a \"your score\" a csapat pontszáma."
+  ]
+ ],
+ "Darius, Hand of Noxus": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "812.1.b.1, 812.1.c",
+   0,
+   "[Legion]: az ability csak akkor aktív, ha abban a körben már kijátszottál (finalizáltál) egy másik lapot. A kör első lapjának kifizetésében ezért nem segít."
+  ],
+  [
+   "420.4.b",
+   0,
+   "A Legion a finalizálást nézi: counterelt lap után is aktív."
+  ],
+  [
+   "430.3, 357.1.a",
+   0,
+   "[Reaction] Add ability: cost fizetése közben is aktiválható, akár az opponent körében, ha abban a körben már játszottál ki lapot."
+  ],
+  [
+   "430.2",
+   0,
+   "Az Add ability azonnal finalizálódik és resolve-ol, nem lehet rá reagálni."
+  ],
+  [
+   "167",
+   0,
+   "Az 1 Energy a Rune Poolba kerül, és a kör végén elvész, ha nem költöd el. Power costot nem fizet."
+  ]
+ ],
+ "Diana, Scorn of the Moon": [
+  [
+   "103.2.b",
+   0,
+   "A legend Mind és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "430.3, 430.2",
+   0,
+   "[Reaction] Add ability: cost fizetése közben is aktiválható, bárki körében. Azonnal resolve-ol, nem lehet rá reagálni."
+  ],
+  [
+   "002",
+   1,
+   "Az így kapott Energy csak showdown alatt költhető el, a lap szövege ezt a megkötést adja. Showdownon kívüli kijátszásra vagy abilityre nem fordítható."
+  ],
+  [
+   "167",
+   0,
+   "A Rune Pool a Main Phase elején és a kör végén kiürül. Az Energyt ugyanabban a körben kell showdownban elkölteni, különben elvész."
+  ],
+  [
+   "342, 806.1.c.1",
+   1,
+   "Showdown alatt csak [Action] vagy [Reaction] lap és ability megy, gyakorlatban ezekre fordítható, támadáskor és védekezéskor is."
+  ]
+ ],
+ "Kai'Sa, Daughter of the Void": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Mind domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "135.2.e.6.c",
+   0,
+   "A [C] a legend saját domainjeinek Powerje: Fury vagy Mind. Más domainű Power costot nem fizet, a bármilyen domainből fizethető [A] costot igen."
+  ],
+  [
+   "430.3, 430.2",
+   0,
+   "[Reaction] Add ability: a spell costjának fizetése közben is aktiválható, bárki körében. Nem lehet rá reagálni."
+  ],
+  [
+   "002",
+   1,
+   "Csak spell kijátszására költhető. Unit, gear, activated ability, Hide vagy trigger costja nem fizethető belőle."
+  ],
+  [
+   "356.2, 820.1.c.1",
+   1,
+   "A spell additional costja (például Repeat) a spell Total Costjának része, ezért a Power része ebből is fizethető."
+  ],
+  [
+   "167",
+   0,
+   "Ha a Powert nem költöd el spellre abban a körben, a Rune Pool ürítésekor elvész."
+  ]
+ ],
+ "Mordekaiser, Iron Revenant": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "355.10.c",
+   0,
+   "A trashből banishelt unit vagy gear a cost része, ezért nem target. A cost fizetésére nem lehet reagálni."
+  ],
+  [
+   "203, 417.3",
+   1,
+   "Ha nincs unit vagy gear a trashedben, a cost nem fizethető ki, az ability nem aktiválható. A banishelt lap végleg kikerül a trashből."
+  ],
+  [
+   "135.2.e.5.b",
+   0,
+   "Az [A] bármilyen domainű Power costra elkölthető."
+  ],
+  [
+   "002",
+   1,
+   "Csak unit vagy gear kijátszására költhető. Spellre, activated abilityre (például Equip costra) vagy Hide-ra nem."
+  ],
+  [
+   "430.3, 430.2",
+   0,
+   "[Reaction] Add ability: a unit vagy gear costjának fizetése közben is aktiválható, nem lehet rá reagálni."
+  ]
+ ],
+ "Ornn, Fire Below the Mountain": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Mind domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "135.2.e.5.b",
+   0,
+   "Az [A] bármilyen domainű Power costra elkölthető."
+  ],
+  [
+   "002",
+   1,
+   "Csak gear kijátszására vagy gear abilityjének használatára költhető. Unitra és spellre nem."
+  ],
+  [
+   "818.1.c.2, 150.3",
+   1,
+   "Az Equip a gear activated abilityje, ezért az Equip cost Power része fizethető belőle."
+  ],
+  [
+   "821.1.c.6",
+   2,
+   "Weaponmaster esetén az Equip cost kifizetése nem az Equip ability aktiválása. Nem egyértelmű, hogy ez \"gear ability használatának\" számít-e, judge döntse el."
+  ],
+  [
+   "430.3, 430.2",
+   0,
+   "[Reaction] Add ability: cost fizetése közben is aktiválható, nem lehet rá reagálni."
+  ]
+ ],
+ "Pyke, Bloodharbor Ripper": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "381.1",
+   0,
+   "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható. Combat közben nem menthetsz ki vele unitot."
+  ],
+  [
+   "355.8, 355.9.b",
+   0,
+   "A target battlefielden lévő friendly unit. Ha nincs ilyen, az ability nem aktiválható, tehát csak Goldért nem használható."
+  ],
+  [
+   "359.3.e.5",
+   0,
+   "A két utasítás nem linked. Ha a unit a resolve előtt illegális target lesz (például base-be kerül), nem megy kézbe, de a Gold token ettől még létrejön."
+  ],
+  [
+   "056.2, 186.1, 719.5",
+   0,
+   "A unit a tulajdonosa kezébe megy. Token unit megszűnik, a csatolt Equipment leválik és a boardon marad."
+  ],
+  [
+   "187.5, 415.4",
+   0,
+   "A Gold exhausted lép be, a saját Exhaust költségű Add abilityje addig nem használható, amíg ready nem lesz."
+  ]
+ ],
+ "Renekton, Butcher of the Sands": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Body domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "135.2.e.5.a, 164.2.b",
+   1,
+   "A cost 2 bármilyen domainű Power, ami jellemzően 2 rune recycle-ölését jelenti. Az ability Powert vált 2 Energyre."
+  ],
+  [
+   "430.3, 430.2",
+   0,
+   "[Reaction] Add ability: cost fizetése közben is aktiválható, bárki körében, és nem lehet rá reagálni."
+  ],
+  [
+   "002",
+   1,
+   "A 2 Energy csak unit kijátszására vagy unit activated abilityjére költhető. Spellre, gearre, legend abilityre nem."
+  ],
+  [
+   "415.4, 167",
+   0,
+   "A legend exhaustolása is cost, körönként egyszer használható. Az el nem költött Energy a Rune Pool ürítésekor elvész."
+  ]
+ ],
+ "Lucian, Purifier": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Body domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "364.2, 818.3.b",
+   1,
+   "Passive ability: minden unithoz csatolt Equipmented [Assault]-ot ad a viselőjének. Csatolatlan, base-ben fekvő Equipment nem ad semmit."
+  ],
+  [
+   "807.2",
+   0,
+   "Az Assault értékek összeadódnak: két Equipment egy uniton Assault 2, a unit saját Assaultjával együtt még több."
+  ],
+  [
+   "807.1.c, 807.1.d.1",
+   0,
+   "Az Assault csak addig ad +1 Mightot, amíg a unit Attacker designationnel bír. Védekezéskor nem ér semmit."
+  ],
+  [
+   "436.1.d, 719.5",
+   1,
+   "Ha az Equipment leválik (például a unit elhagyja a boardot, vagy átrakod másik unitra), az Assault azonnal megszűnik a régi uniton."
+  ]
+ ],
+ "K'Sante, Pride of Nazumah": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Body domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "381.1",
+   0,
+   "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható. A támadás előtt kell használni, showdown alatt már nem megy."
+  ],
+  [
+   "355.9.b, 317.2.c",
+   0,
+   "A target friendly unit, a kapott szöveg a kör végéig marad rajta."
+  ],
+  [
+   "814.2, 814.3",
+   1,
+   "Az Assault értéke a unit összesített Shield értékével egyenlő, és folyamatosan számolódik. A később kapott Shield is növeli. Shield nélküli uniton az érték 0, az ability nem ad semmit."
+  ],
+  [
+   "807.1.c, 814.1.c",
+   0,
+   "A Shield csak defenderként, az Assault csak attackerként ad Mightot. A unit így támadáskor kapja meg azt a bónuszt, amit a Shieldje védekezéskor adna."
+  ],
+  [
+   "807.2",
+   0,
+   "A unit meglévő Assaultjával összeadódik."
+  ]
+ ],
+ "Kha'Zix, Voidreaver": [
+  [
+   "103.2.b",
+   0,
+   "A legend Body és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "468.3.a, 468.3.d",
+   0,
+   "Combatot az nyer, akinek Attackerként vagy Defenderként egyedül maradt unitja a battlefielden. \"No Result\" esetén és üres battlefield elfoglalásakor nincs XP."
+  ],
+  [
+   "729.2, 732, 733",
+   0,
+   "Az XP nyilvános, nem jár le, nincs felső határa, és a teammate-tel nem közös."
+  ],
+  [
+   "381.1, 415.4",
+   0,
+   "Mindkét ability costja XP és a legend exhaustolása, ezért körönként csak az egyik megy, a saját Main Phase-edben, Open State-ben."
+  ],
+  [
+   "355.10, 427.1.c",
+   0,
+   "A \"buff a unit\" unitja target, bármelyik unit lehet. Már buffolt unit nem kap második buffot."
+  ],
+  [
+   "359.3.e.2, 359.3.e.4",
+   0,
+   "A második ability targetje exhausted friendly unit battlefielden. Ha a resolve előtt ready lesz vagy elhagyja a battlefieldet, illegális target."
+  ],
+  [
+   "421.1, 144.2",
+   1,
+   "A base-be vitel Move, nem Recall, és nem Standard Move: a \"when I move\" triggerek lefutnak, a unit exhausted marad."
+  ]
+ ],
+ "Jarvan IV, Exemplar of Demacia": [
+  [
+   "103.2.b",
+   0,
+   "A legend Body és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "830.1.b.1, 420.4.a",
+   0,
+   "[Deploy] gear bármelyik battlefieldre kijátszható, enemy és üres battlefieldre is. A trigger a gear resolve-ja után fut, amikor az már a battlefielden van."
+  ],
+  [
+   "383.3.a, 383.3.b, 415.4",
+   0,
+   "Az \"exhaust me and pay [A]\" a trigger base costja, a finalizáláskor fizeted. Exhausted legenddel nem megy."
+  ],
+  [
+   "355.10, 355.4.a",
+   0,
+   "A friendly unit target. A cél az a battlefield, ahová a gear került. Olyan unit nem választható, amelyik már ott van."
+  ],
+  [
+   "421.2.a, 144.2",
+   1,
+   "Ez nem Standard Move: a unitot nem kell exhaustolni, exhausted unit is mozgatható, és battlefieldről battlefieldre is mehet Ganking nélkül."
+  ],
+  [
+   "452",
+   0,
+   "Ha a cél nem általad kontrollált battlefield, az Contested lesz, showdown vagy combat következik."
+  ],
+  [
+   "185.2.a",
+   2,
+   "Deploy-os gear token (például Bomb) kijátszása valószínűleg szintén kiváltja, mert a tokent is \"play\"-eli a tulajdonosa. Ezt a Core Rules nem mondja ki külön, judge döntse el."
+  ]
+ ],
+ "Ziggs, Hexplosives Expert": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "381.1",
+   0,
+   "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható, körönként egyszer."
+  ],
+  [
+   "187.12",
+   0,
+   "A Bomb domain nélküli gear token: [Deploy], és Deathknell: 2 damage egy ott lévő enemy unitnak, majd a többi ottani Bombod is meghal."
+  ],
+  [
+   "830.1.b.1, 355.10.b",
+   0,
+   "A Bomb bármelyik battlefieldre lerakható, enemy és üres battlefieldre is. A battlefield nem target."
+  ],
+  [
+   "830.1.b.3",
+   0,
+   "A Deploy miatt a cleanup nem recallolja a base-be, a battlefielden marad."
+  ],
+  [
+   "830.1.b",
+   0,
+   "A Deploy része: amikor egy opponent holdol ott, a Bomb meghal. Ez kiváltja a Deathknelljét."
+  ],
+  [
+   "808.1.b, 187.12",
+   1,
+   "Több Bomb egy helyen: az első halála megöli a többit, és azok Deathknellje is triggerel, tehát minden Bomb külön 2 damage-et oszt."
+  ]
+ ],
+ "Ekko, Boy Who Shattered Time": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Mind domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "827.1.c.1, 827.1.c.2",
+   0,
+   "Az Empower costja 1 Energy és a legend exhaustolása. Csak akkor aktiválható, ha a legend még nem Empowered."
+  ],
+  [
+   "415.4, 315.1.b",
+   1,
+   "A második ability costja is Exhaust. Mivel az Empower exhaustolja a legendet, a kedvezmény leghamarabb a következő körödben használható, hacsak valami nem readyzi."
+  ],
+  [
+   "392, 356.4",
+   0,
+   "A kedvezmény Delayed Passive Ability: az adott körben következő kijátszott unitra érvényes, 2 Energy és 1 bármilyen Power erejéig. Ha abban a körben nem játszol unitot, elvész."
+  ],
+  [
+   "356.6",
+   0,
+   "A cost 0 alá nem csökken, az olcsóbb unitnál a kedvezmény fölös része elvész."
+  ],
+  [
+   "317.1.a, 429.1.a.1.b",
+   1,
+   "A unit megkapja a \"Kill me at end of turn\" triggert: az Ending Stepben meghal. Ez kill, tehát a Deathknell abilityje lefut."
+  ],
+  [
+   "381.1",
+   0,
+   "Egyik abilityn sincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválhatók."
+  ]
+ ],
+ "Jayce, Defender of Tomorrow": [
+  [
+   "103.2.b",
+   0,
+   "A legend Mind és Body domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "827.1.c.1, 381.1",
+   0,
+   "Empower [2][A][A]: csak akkor aktiválható, ha a legend még nem Empowered, a saját Main Phase-edben, Open State-ben. Ennek a costjában nincs Exhaust."
+  ],
+  [
+   "828.1.b.1, 828.1.c",
+   0,
+   "Az [Empowered] ability csak addig aktív, amíg a legend Empowered. Egyik ability sem disempowerel, az állapot megmarad."
+  ],
+  [
+   "415.4",
+   1,
+   "A két ready ability costja egyaránt 1 Energy és Exhaust, ezért körönként csak az egyik használható. Empowered állapotban a \"Ready 2 gear\" az erősebb választás ugyanazért az árért."
+  ],
+  [
+   "355.10, 355.8",
+   0,
+   "A gear target, bármelyik játékosé lehet. A \"Ready 2 gear\" abilityhez két választható gear kell a boardon, különben nem aktiválható."
+  ],
+  [
+   "416.2, 415.4",
+   1,
+   "A haszna: az Exhaust costú gear abilityk (például a Gold Add abilityje) ugyanabban a körben újra használhatók."
+  ]
+ ],
+ "Azir, Emperor of the Sands": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "187.3, 185.2.d",
+   0,
+   "A Sand Soldier domain nélküli, 2 Mightú unit token Shurima taggel. Az ability csak a base-be teszi, és exhausted lép be."
+  ],
+  [
+   "377.2.b, 420.4.b",
+   0,
+   "A \"use only if you've played an Equipment this turn\" feltételnek aktiváláskor igaznak kell lennie. A finalizálást nézi, tehát counterelt Equipment után is aktiválható."
+  ],
+  [
+   "821.1.c",
+   0,
+   "Weaponmaster: a Sand Soldier kijátszásakor választhatsz egy Equipmentedet, és az Equip costját [A]-val olcsóbban kifizetve rácsatolod, az Equip szokásos időzítésétől függetlenül."
+  ],
+  [
+   "821.1.c.3, 821.1.c.4",
+   0,
+   "Ha az Equip costban nincs [A], kifizethető, de nem lesz olcsóbb. Equip cost nélküli Equipment így nem csatolható."
+  ],
+  [
+   "821.1.c.6",
+   0,
+   "A Weaponmaster nem aktiválja az Equip abilityt, és a Sand Soldier nem \"chosen\", tehát a targetelésre figyelő triggerek nem futnak le rá."
+  ],
+  [
+   "364.2",
+   1,
+   "A passive ability minden általad kijátszott Sand Soldierre vonatkozik, a más lapokból érkezőkre is, nem csak a legend abilityjéből jövőre."
+  ]
+ ],
+ "Miss Fortune, Bounty Hunter": [
+  [
+   "103.2.b",
+   0,
+   "A legend Body és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "381.1",
+   0,
+   "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható, körönként egyszer. A cost csak a legend exhaustolása."
+  ],
+  [
+   "810.1.b",
+   0,
+   "Ganking: a unit Standard Move-val battlefieldről közvetlenül másik battlefieldre léphet, nem kell előbb a base-be visszamennie."
+  ],
+  [
+   "810.1.c.3, 144.2",
+   0,
+   "A Ganking nem ad plusz mozgást. A Standard Move costja továbbra is a unit exhaustolása, tehát csak ready unitnak ér valamit."
+  ],
+  [
+   "355.10, 810.2",
+   0,
+   "A unit target, megkötés nélkül. Már Gankinges uniton a hatás redundáns."
+  ],
+  [
+   "317.2.c",
+   0,
+   "A Ganking a kör végén lejár."
+  ]
+ ],
+ "Teemo, Swift Scout": [
+  [
+   "103.2.b",
+   0,
+   "A legend Mind és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "811.1.b, 002",
+   1,
+   "A Hide alapára 1 Power. A passive ability alternatívát ad: helyette 1 Energyt fizethetsz, vagyis az elrejtéshez nem kell rune-t recycle-ölni. A választás minden Hide-nál a tiéd."
+  ],
+  [
+   "811.1.b, 811.1.c.2",
+   0,
+   "A Hide többi feltétele nem változik: saját kör, Open State, általad kontrollált battlefield, ahol még nincs facedown lapod. A Hide nem nyit chaint."
+  ],
+  [
+   "381.1",
+   0,
+   "A második abilityn nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható."
+  ],
+  [
+   "355.10.a.1, 355.9.a.5",
+   0,
+   "A Champion Zone és a board Public, ezért a választott Teemo unit target. \"You own\": akkor is visszaveheted, ha éppen más kontrollálja."
+  ],
+  [
+   "124, 705, 719.5",
+   0,
+   "A boardról kézbe vett Teemo elveszíti a buffját és a rajta lévő damage-et, a csatolt Equipment pedig leválik és a boardon marad."
+  ],
+  [
+   "359.3.e.2",
+   1,
+   "Sebzett vagy veszélyben lévő Teemo így kimenthető és újra kijátszható vagy elrejthető. Ha a resolve előtt meghal, illegális target, az ability nem csinál semmit."
+  ]
+ ],
+ "Master Yi, Wuju Master": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Body domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "824.1.b.1",
+   0,
+   "[Level 6]: amíg legalább 6 XP-d van, minden unitod +1 Mightot kap. [Level 11]: amíg legalább 11 XP-d van, a unitjaid ready lépnek be."
+  ],
+  [
+   "730.1",
+   1,
+   "A legend maga nem ad XP-t. A decknek más lapokból kell XP-t termelnie, különben a legendnek nincs hatása."
+  ],
+  [
+   "824.1.d, 143.2.b",
+   1,
+   "Ha XP-t költesz és a küszöb alá mész, az ability azonnal inaktív lesz. A +1 Might elvesztése megölheti a sebzett unitjaidat."
+  ],
+  [
+   "369.3",
+   0,
+   "Az \"enter ready\" replacement effect: a unit eleve ready lép be, base-be és battlefieldre is. Nem \"becomes ready\" esemény."
+  ],
+  [
+   "732",
+   0,
+   "2v2-ben a teammate XP-je nem számít bele a te szintedbe."
+  ]
+ ],
+ "Fiora, Grand Duelist": [
+  [
+   "103.2.b",
+   0,
+   "A legend Body és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "709",
+   0,
+   "\"Becomes Mighty\": az a pillanat, amikor a unit Mightja 5 alattiról 5-re vagy fölé változik. Már 5+ Mightú unit további erősítése nem triggerel."
+  ],
+  [
+   "710",
+   1,
+   "A boardon az aktuális Might számít, ezért ideiglenes bónusz (buff, \"+X this turn\", attackerként az Assault) is kiváltja. Ugyanaz a unit körön belül többször is Mighty-vé válhat."
+  ],
+  [
+   "709",
+   2,
+   "Nem egyértelmű, hogy az eleve 5+ Mighttal a boardra lépő unit \"becomes Mighty\"-nek számít-e, mert a szabály csak a Might változásáról beszél. Judge döntse el."
+  ],
+  [
+   "383.3.a, 383.3.b, 415.4",
+   0,
+   "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted. Exhausted legenddel nem megy, vagyis körönként jellemzően egy rune jön."
+  ],
+  [
+   "431.2, 431.3",
+   0,
+   "A rune exhausted érkezik a Rune Deck tetejéről. Ha a Rune Deck üres, nem történik semmi."
+  ],
+  [
+   "164.2.b",
+   1,
+   "Az exhausted rune Energyt abban a körben nem ad, de Powerért azonnal recycle-ölhető, mert annak a costja nem Exhaust."
+  ]
+ ],
+ "Volibear, Relentless Storm": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Body domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "420.4.a, 710",
+   1,
+   "A trigger a unit resolve-ja után értékel, amikor a unit már a boardon van, ezért az aktuális Mightja számít. Egy 4 Mightú unit, amely belépéskor passzív +1-et kap, Mighty unitként triggerel."
+  ],
+  [
+   "708",
+   0,
+   "Mighty az a unit, amelynek Mightja legalább 5."
+  ],
+  [
+   "420.4.a.1",
+   0,
+   "Counterelt unitra nem triggerel."
+  ],
+  [
+   "383.3.a, 383.3.b, 415.4",
+   0,
+   "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted. Exhausted legenddel nem megy, körönként jellemzően egyszer használható."
+  ],
+  [
+   "431.2, 431.3",
+   0,
+   "A rune exhausted érkezik. Ha a Rune Deck üres, nem történik semmi."
+  ],
+  [
+   "164.2.b",
+   1,
+   "Az exhausted rune Powerért azonnal recycle-ölhető, Energyt viszont csak a következő readyzés után ad."
+  ]
+ ],
+ "Ezreal, Prodigal Explorer": [
+  [
+   "103.2.b",
+   0,
+   "A legend Mind és Chaos domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "377.2.b",
+   0,
+   "A \"use only if\" feltételnek az aktiválás pillanatában igaznak kell lennie, különben az ability nem aktiválható."
+  ],
+  [
+   "383.4.b.3, 355.7",
+   1,
+   "A \"chosen\" a targetelést jelenti. \"All enemy units\" jellegű, target nélküli hatások és a \"pick\" nem számítanak bele."
+  ],
+  [
+   "355.10",
+   2,
+   "Nem egyértelmű, hogy egy spell, amely egyszerre két enemy unitot targetel, egy vagy két \"választásnak\" számít-e. A Core Rules ezt nem mondja ki, judge döntse el."
+  ],
+  [
+   "002",
+   1,
+   "Csak spell és unit ability választása számít. Legend, gear vagy battlefield abilityvel targetelt enemy unit nem növeli a számlálót."
+  ],
+  [
+   "813.1.c.2, 430.2",
+   1,
+   "[Reaction]: Closed State-ben, bárki körében aktiválható, ha a feltétel abban a körben teljesült. Ez nem Add ability, chain-re kerül és lehet rá reagálni."
+  ],
+  [
+   "415.4, 414.4",
+   0,
+   "A cost a legend exhaustolása, körönként egyszer megy. Üres Main Deck esetén a draw Burn Outot okoz."
+  ]
+ ],
+ "Rumble, Mechanized Menace": [
+  [
+   "103.2.b",
+   0,
+   "A legend Fury és Mind domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "364.2, 143.1.b",
+   0,
+   "Passive ability: minden általad kontrollált, Mech tagű unit megkapja a Shieldet. Nem lehet rá reagálni."
+  ],
+  [
+   "187.4",
+   0,
+   "A 3 Mightú Mech unit token is Mech tagű, rá is vonatkozik."
+  ],
+  [
+   "814.1.c, 814.1.d.1",
+   0,
+   "A Shield csak addig ad +1 Mightot, amíg a unit Defender designationnel bír. Támadáskor nem ér semmit."
+  ],
+  [
+   "814.2",
+   0,
+   "Ha a Mechnek már van Shieldje, az értékek összeadódnak."
+  ]
+ ],
+ "LeBlanc, Deceiver": [
+  [
+   "103.2.b",
+   0,
+   "A legend Mind és Order domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "383.3.b, 423.3, 415.4",
+   0,
+   "A \"discard 1 and exhaust me\" a trigger base costja, a finalizáláskor fizeted. Üres kézzel vagy exhausted legenddel nem megy."
+  ],
+  [
+   "187.6, 143.2.b",
+   0,
+   "A Reflection 0 Mightú, domain nélküli unit token, ready érkezik arra a battlefieldre. 0 Mighttal önmagától nem hal meg, mert ahhoz nem nulla damage kell."
+  ],
+  [
+   "388.1, 389.1",
+   0,
+   "A \"Then do this\" Reflexive Trigger: külön chain item. A lemásolandó unitot akkor választod, amikor a token már a boardon van, és erre a részre külön lehet reagálni."
+  ],
+  [
+   "388.1, 355.9.b",
+   1,
+   "Errata: a régi szövegben nem volt \"Then do this\". A másolás most külön lépés. A target \"another unit there\": saját vagy enemy unit is lehet azon a battlefielden."
+  ],
+  [
+   "479.1.b, 185.3.a.2",
+   0,
+   "A szabályzat név szerint ezt a lapot hozza példának: a token a másolt unit minden másolható tulajdonságát megkapja (név, tagek, Might, szöveg), a costját is."
+  ],
+  [
+   "479.1.b.1",
+   1,
+   "Csak a nyomtatott értékek másolódnak: a másolt uniton lévő buff, damage és ideiglenes bónusz nem. A \"when you play me\" abilityk nem futnak le, mert a token már a boardon volt."
+  ],
+  [
+   "816.1.b",
+   0,
+   "A Temporary miatt a token a következő Beginning Phase-ed elején, a scoring előtt meghal."
+  ]
+ ],
+ "Lillia, Bashful Bloom": [
+  [
+   "103.2.b",
+   0,
+   "A legend Calm és Mind domainje adja a deck Domain Identity-jét."
+  ],
+  [
+   "381.1",
+   0,
+   "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható, körönként egyszer."
+  ],
+  [
+   "356.4.g, 356.6",
+   0,
+   "A kedvezmény értékét a Determine Total Cost lépésben nézi: minden Temporary-s friendly unit 1 Energyvel csökkenti a costot, legfeljebb 0-ig."
+  ],
+  [
+   "491.8.e",
+   1,
+   "\"Friendly\": 2v2-ben a teammate Temporary-s unitjai is beleszámítanak a kedvezménybe."
+  ],
+  [
+   "187.2, 355.2.a",
+   0,
+   "A Sprite domain nélküli, 3 Mightú unit token Fae taggel és Temporary-vel. Ready lép be, base-be vagy általad kontrollált battlefieldre játszható."
+  ],
+  [
+   "816.1.b",
+   0,
+   "A Temporary miatt a Sprite a következő Beginning Phase-ed elején, a scoring előtt meghal. A következő köröd holdjánál már nincs ott."
+  ],
+  [
+   "144.4.a",
+   1,
+   "Mivel ready érkezik, a base-be kijátszott Sprite még abban a körben Standard Move-val battlefieldre mehet."
+  ]
+ ],
+ "Body Rune": [
+  [
+   "103.4.a, 103.4.a.1",
+   0,
+   "A Rune Deck pontosan 12 rune, és mind a legend Domain Identity-jén belül kell legyen. Body Rune csak Body domainű legend mellé tehető."
+  ],
+  [
+   "164.2.a",
+   0,
+   "Exhaustolva 1 Energyt ad. Az Energynek nincs domainje, bármilyen lap Energy costjára jó."
+  ],
+  [
+   "164.2.b, 164.2.b.1, 417.1.b",
+   0,
+   "Recycle-ölve 1 Body Powert ad. A rune ilyenkor a Rune Deck aljára kerül, vagyis a boardról elveszíted."
+  ],
+  [
+   "430.3, 430.2",
+   0,
+   "Mindkét ability [Reaction] Add ability: cost fizetése közben is használható, bárki körében, és nem lehet rá reagálni."
+  ],
+  [
+   "315.3.b",
+   0,
+   "A Channel Phase-ben körönként 2 rune kerül a Rune Deckről a boardra."
+  ]
+ ],
+ "Calm Rune": [
+  [
+   "103.4.a, 103.4.a.1",
+   0,
+   "A Rune Deck pontosan 12 rune, és mind a legend Domain Identity-jén belül kell legyen. Calm Rune csak Calm domainű legend mellé tehető."
+  ],
+  [
+   "164.2.a",
+   0,
+   "Exhaustolva 1 Energyt ad, domaintől függetlenül."
+  ],
+  [
+   "164.2.b, 164.2.b.1, 417.1.b",
+   0,
+   "Recycle-ölve 1 Calm Powert ad, és a Rune Deck aljára kerül."
+  ],
+  [
+   "415.4",
+   1,
+   "A recycle costja nem Exhaust: az exhausted rune is recycle-ölhető, így egy rune ugyanabban a körben Energyt és Powert is adhat."
+  ],
+  [
+   "167",
+   0,
+   "A Rune Pool a Main Phase elején és a kör végén kiürül. A fel nem használt Energy és Power elvész."
+  ]
+ ],
+ "Fury Rune": [
+  [
+   "103.4.a, 103.4.a.1",
+   0,
+   "A Rune Deck pontosan 12 rune, és mind a legend Domain Identity-jén belül kell legyen. Fury Rune csak Fury domainű legend mellé tehető."
+  ],
+  [
+   "164.2.a",
+   0,
+   "Exhaustolva 1 Energyt ad, domaintől függetlenül."
+  ],
+  [
+   "164.2.b, 164.2.b.1, 417.1.b",
+   0,
+   "Recycle-ölve 1 Fury Powert ad, és a Rune Deck aljára kerül."
+  ],
+  [
+   "161.1.a",
+   0,
+   "A rune nem Main Deck lap és nem Permanent, a \"card\"-ra vagy permanentre ható effectek nem érintik."
+  ],
+  [
+   "315.1.b",
+   0,
+   "Az exhausted rune a saját Awaken Phase-edben lesz újra ready."
+  ]
+ ],
+ "Mind Rune": [
+  [
+   "103.4.a, 103.4.a.1",
+   0,
+   "A Rune Deck pontosan 12 rune, és mind a legend Domain Identity-jén belül kell legyen. Mind Rune csak Mind domainű legend mellé tehető."
+  ],
+  [
+   "164.2.a",
+   0,
+   "Exhaustolva 1 Energyt ad, domaintől függetlenül."
+  ],
+  [
+   "164.2.b, 164.2.b.1, 417.1.b",
+   0,
+   "Recycle-ölve 1 Mind Powert ad, és a Rune Deck aljára kerül."
+  ],
+  [
+   "135.2.e.6.c",
+   0,
+   "Kétdomaines lap [C] costja bármelyik saját domainjének Powerjéből fizethető, tehát egy Mind és másik domainű lapra a Mind Power is jó."
+  ],
+  [
+   "417.5.a",
+   0,
+   "Ha több rune-t recycle-ölsz egyszerre, te döntöd el, milyen sorrendben kerülnek a Rune Deck aljára."
+  ]
+ ]
+}

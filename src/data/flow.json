@@ -1,0 +1,251 @@
+[
+ {
+  "title": "Kör menete",
+  "rules": "301-317",
+  "steps": [
+   {
+    "name": "Awaken Phase",
+    "rule": "315.1.b",
+    "text": "A Turn Player minden általa controllált, ready-vé tehető Game Objectet ready-vé tesz. Az előző körben exhaustolt unitok és rune-ok újra használhatók."
+   },
+   {
+    "name": "Beginning Phase: Beginning Step",
+    "rule": "315.2.a.1",
+    "text": "Itt futnak a \"start of Beginning Phase\" effectek. Ami itt történik, az még a scoring előtt hat."
+   },
+   {
+    "name": "Beginning Phase: Scoring Step",
+    "rule": "315.2.b.2",
+    "text": "A Turn Player Holdol minden általa controllált battlefieldet. Ha a battlefieldet ebben a körben még nem score-olta, ez pontot adhat és Hold triggereket indít."
+   },
+   {
+    "name": "Channel Phase",
+    "rule": "315.3.b",
+    "text": "A Turn Player 2 rune-t channel-el a Rune Deckből. Ha kevesebb mint 2 van benne, annyit channel-el, amennyit tud (315.3.b.1)."
+   },
+   {
+    "name": "Draw Phase",
+    "rule": "315.4.b",
+    "text": "A Turn Player draw 1. Ha a Main Deck üres, Burn Out következik, és utána akkor is húz 1 lapot (315.4.b.2)."
+   },
+   {
+    "name": "Main Phase: Rune Pool ürítése",
+    "rule": "316.3",
+    "text": "A Main Phase elején minden játékos Rune Poolja kiürül. A korábbi fázisokban megtermelt, el nem költött Energy és Power elvész."
+   },
+   {
+    "name": "Main Phase: start of Main Phase effectek",
+    "rule": "316.4",
+    "text": "A Rune Pool ürítése után futnak a \"start of Main Phase\" effectek."
+   },
+   {
+    "name": "Main Phase: Discretionary Actions",
+    "rule": "316.5.a",
+    "text": "Nincs kötött sorrend: a Turn Player tetszőleges számú Discretionary Actiont végezhet. Ez Neutral Open State, itt csak a Turn Player játszhat spellt és aktiválhat abilityt (316.5.b)."
+   },
+   {
+    "name": "Main Phase: Combat és Showdown",
+    "rule": "316.6",
+    "text": "A Discretionary Actionök strukturált alfázist indíthatnak. Ha opposing unitok kerülnek egy battlefieldre, Combat lesz (316.7.a). Ha üres battlefieldre lépsz, Non-Combat Showdown (316.8.b.1)."
+   },
+   {
+    "name": "Kör befejezése",
+    "rule": "316.9",
+    "text": "Ha nincs több Discretionary Action, amit végre akarsz hajtani, jelezned kell a kör végét. Ezzel a Main Phase lezárul, és az Ending Phase jön."
+   },
+   {
+    "name": "Ending Phase: Ending Step",
+    "rule": "317.1.a",
+    "text": "Itt futnak az \"at the end of turn\" effectek."
+   },
+   {
+    "name": "Ending Phase: Expiration Step",
+    "rule": "317.2.a",
+    "text": "Ending Special Cleanup: minden unit healel, a \"this turn\" effectek egyszerre lejárnak, és minden Rune Pool kiürül (317.2.b, 317.2.c, 317.2.d). Ha közben chain item ment át a FEPR-en, a lépés újraindul, utána a következő játékos lesz a Turn Player (317.3)."
+   }
+  ]
+ },
+ {
+  "title": "Chain és priority",
+  "rules": "307-313, 325-340",
+  "steps": [
+   {
+    "name": "Neutral State és Showdown State",
+    "rule": "308.1.a",
+    "text": "Ha Showdown vagy Combat zajlik, a kör Showdown State-ben van, különben Neutral State-ben. Showdown State-ben csak [Action] vagy [Reaction] kártya és ability használható."
+   },
+   {
+    "name": "Open State és Closed State",
+    "rule": "309.1.a",
+    "text": "Ha létezik chain, a kör Closed State-ben van, különben Open State-ben. Closed State-ben csak [Reaction] kártya és ability használható."
+   },
+   {
+    "name": "Alapértelmezett időzítés",
+    "rule": "310.1.a",
+    "text": "A két tengely négy állapotot ad. Kulcsszó nélkül kártyát kijátszani és abilityt aktiválni csak a saját körödben, priority birtokában, Neutral Open State-ben lehet."
+   },
+   {
+    "name": "Priority",
+    "rule": "312.1",
+    "text": "A priority a Discretionary Action kizárólagos joga, egyszerre legfeljebb egy játékosnál van. Ha senkinél nincs, senki nem cselekedhet, de a Limited Action választásai ettől függetlenül megtehetők (312.1.b.1)."
+   },
+   {
+    "name": "Focus",
+    "rule": "313.1",
+    "text": "A Focus a Showdown Open State-beli cselekvés joga. Aki Focust kap, priorityt is kap (313.2). Aki passzolja a priorityt, a Focust megtartja (313.3). Neutral State-ben senkinek nincs Focusa (313.5)."
+   },
+   {
+    "name": "Chain létrejötte",
+    "rule": "330",
+    "text": "A chain addig létezik, amíg van rajta item, és egyszerre csak egy lehet. Ha már van chain, az új kártya vagy ability erre kerül rá (330.2). Az item Pendingként érkezik (329)."
+   },
+   {
+    "name": "HOT: Handle Outstanding Tasks",
+    "rule": "334",
+    "text": "Először az Outstanding Taskokat kell elvégezni (cleanup, fázislépések). A közben chainre került itemek várnak, és csak a Taskok után indul rájuk a FEPR (334.2)."
+   },
+   {
+    "name": "1. Finalize",
+    "rule": "337.1",
+    "text": "A legrégebbi Pending item controllere végigviszi a kijátszás lépéseit, amíg az item Finalized nem lesz vagy le nem kerül a chainről. A Finalize nem passzol priorityt (337.1.a)."
+   },
+   {
+    "name": "Azonnali resolve",
+    "rule": "337.2",
+    "text": "Ha a Finalized item unit, gear vagy resource-ot Add-oló ability, azonnal resolve-ol. Ezekre az opponent nem tud a chainen reagálni."
+   },
+   {
+    "name": "2. Execute",
+    "rule": "338.1",
+    "text": "A priorityvel rendelkező játékos vagy kijátszik egy legálisan időzített kártyát vagy abilityt (Closed State-ben ez [Reaction]-t jelent, 338.1.a.2), vagy passzol. Új item esetén vissza a Finalize-ra (338.1.a.7)."
+   },
+   {
+    "name": "3. Pass",
+    "rule": "339.1",
+    "text": "Ha minden játékos egymás után passzolt úgy, hogy senki nem tett új itemet a chainre, jön a Resolve. Különben a priority a Turn Order szerinti következő játékoshoz megy (339.2)."
+   },
+   {
+    "name": "4. Resolve",
+    "rule": "340.1",
+    "text": "A legújabb Finalized item resolve-ol, teljes egészében. Ha marad item, a legújabb item controllere kap priorityt (340.4). Ha a chain kiürült, Open State jön, és showdown alatt a Focus továbbmegy, kivéve ha a chaint trigger vagy Add ability nyitotta (340.2.a)."
+   }
+  ]
+ },
+ {
+  "title": "Kártya kijátszása",
+  "rules": "349-359",
+  "steps": [
+   {
+    "name": "1. Chainre helyezés",
+    "rule": "354",
+    "text": "A kártya a zónájából a chainre kerül Pending itemként. Ez Closed State-et hoz létre (354.1). Ha éppen másik effect resolve-ol, előbb az fejeződik be (354.3)."
+   },
+   {
+    "name": "2. Make relevant choices",
+    "rule": "355",
+    "text": "Itt dől el minden: Optional Additional Cost vállalása (355.1.a), unit helyszíne (355.2), mode-ok (355.3) és a targetek (355.5). Ha egy targethez nincs érvényes választás, a spell vagy ability nem tehető chainre (355.8)."
+   },
+   {
+    "name": "Unit helyszíne",
+    "rule": "355.2.a",
+    "text": "Unit alapból a saját base-edre vagy egy általad controllált battlefieldre játszható. Más helyszínhez külön engedélyt adó effect kell (355.2.b)."
+   },
+   {
+    "name": "3. Determine Total Cost",
+    "rule": "356",
+    "text": "Kötött sorrend: base cost módosítások, additional costok, cost increase-ek, discountok, végül a total cost módosításai. Energy és Power cost nem mehet 0 alá (356.6)."
+   },
+   {
+    "name": "4. Pay costs",
+    "rule": "357",
+    "text": "Egyben kifizeted az Energy és Power costot, valamint a nem standard costokat tetszőleges sorrendben (357.2). Közben használhatók a [Reaction] taggel rendelkező, resource-ot Add-oló abilityk (357.1.a)."
+   },
+   {
+    "name": "5. Check legality",
+    "rule": "358",
+    "text": "Ellenőrzés: érvényes választások, kifizetett costok, nem jön létre illegális állapot, és az időzítés megengedett (358.4). Ha bármelyik megbukik, minden lépés visszacsinálódik, és az action törlődik (358.5)."
+   },
+   {
+    "name": "6. Finalize: permanent",
+    "rule": "359.2",
+    "text": "A permanent lekerül a chainről, és Game Object lesz. A unit exhausted lép be a választott helyszínre (359.2.c), a non-unit gear ready a base-re (359.2.d)."
+   },
+   {
+    "name": "6. Finalize: spell",
+    "rule": "359.3",
+    "text": "A spell Finalized Chain Itemként a chainen marad, a többi játékos [Reaction]-nel válaszolhat (359.3.c). Resolve-kor a szöveg felülről lefelé végrehajtódik, majd a kártya az owner trashébe kerül (359.3.d)."
+   },
+   {
+    "name": "Illegális target resolve-kor",
+    "rule": "359.3.e.5",
+    "text": "A spell akkor is resolve-ol, ha a targetjei illegálisak (359.3.e.1). Az illegális targetre nem hat, a hozzá kötött utasítások kimaradnak, a többi utasítás lefut. A cost nem jár vissza."
+   }
+  ]
+ },
+ {
+  "title": "Combat és scoring",
+  "rules": "341-348, 461-474",
+  "steps": [
+   {
+    "name": "Showdown indul",
+    "rule": "344",
+    "text": "Ha egy battlefield controlja Contested lesz, a cleanup Showdownt nyit, ha a kör Neutral Open State-ben van. Ha két játékos unitjai vannak ott, a Showdown a Combat első lépése (344.1)."
+   },
+   {
+    "name": "Focus és váltás",
+    "rule": "347",
+    "text": "A Focust az kapja, aki a Contested státuszt rátette a battlefieldre (345). A Focus birtokosa kijátszik egy legálisan időzített kártyát vagy abilityt, vagy passzol. A chain lezárulta után a következő játékos kap Focust (347.1.b)."
+   },
+   {
+    "name": "Showdown lezárása",
+    "rule": "348",
+    "text": "Ha minden játékos egymás után passzolt, a Showdown lezárul. Combat Showdown után a Combat többi lépése jön (348.1). Non-Combat Showdown után az a játékos, akinek egyedül maradt unitja, controlt szerez (348.2.a)."
+   },
+   {
+    "name": "Combat staged",
+    "rule": "462",
+    "text": "Combat akkor indul, ha cleanupkor nincs item a chainen, van staged Combat, és máshol nem zajlik Showdown vagy Combat. Ha több battlefielden is staged, a Turn Player dönti el a sorrendet (463.1)."
+   },
+   {
+    "name": "1. Combat Showdown Step",
+    "rule": "466.2",
+    "text": "Sorrend: start of combat effectek, Attacker és Defender kijelölése, majd az ebből adódó triggerek chainre tétele. Attacker az, akinek a unitjai a Contested státuszt rátették (466.2.c.1). A később érkező unitok a következő cleanupban kapnak designationt (466.2.c.3.a)."
+   },
+   {
+    "name": "2. Combat Damage Step",
+    "rule": "467.2",
+    "text": "Ha mindkét oldalon maradt unit, mindkét fél összeadja a unitjai aktuális Mightját, és az Attackerrel kezdve kiosztja ennyi damage-ét a másik unitjai között. A damage egyszerre deal-elődik (467.2.c.1.a)."
+   },
+   {
+    "name": "Damage kiosztás szabályai",
+    "rule": "467.2.c.3",
+    "text": "Egy unitra teljes lethal damage-et kell osztani, mielőtt másikra lépsz. Lethalnál több csak akkor osztható, ha nincs több unit (467.2.c.4). A Tank és Backline sorrendet követni kell (467.2.c.6)."
+   },
+   {
+    "name": "3. Resolution Step: Combat Cleanup",
+    "rule": "468.1.a",
+    "text": "Combat Special Cleanup: minden unit healel (468.1.a.1). Ha Defender unit maradt a battlefielden, az ott lévő Attackerek recallolódnak (468.1.a.2). Aki nem ölte meg az összes defendert, nem marad a battlefielden."
+   },
+   {
+    "name": "Combat Result",
+    "rule": "468.3",
+    "text": "Az nyer, akinek egyedül maradt unitja a battlefielden. \"No Result\", ha recall történt, ha mindkét félnek maradt unitja, vagy ha egyiknek sem (468.3.d). Ha No Result mellett mindkét félnek van unitja, új Showdown és Combat lesz staged (468.3.d.1)."
+   },
+   {
+    "name": "Establish Control",
+    "rule": "468.5",
+    "text": "Ha nincs újabb staged Showdown vagy Combat, a megmaradt unitok controllere controlt szerez, ha még nem az övé a battlefield. A Contested státusz törlődik. Ha nem maradt unit, a battlefield Uncontrolled lesz (468.5.b). Utána a Combat véget ér, a \"this combat\" effectek lejárnak (468.7.c)."
+   },
+   {
+    "name": "Scoring: Conquer és Hold",
+    "rule": "471",
+    "text": "Conquer: controlt szerzel egy battlefielden, amelyet ebben a körben még nem score-oltál. Hold: a Beginning Phase-edben megtartod. Egy battlefield körönként csak egyszer score-olható (472). Scoringkor legfeljebb 1 pontot kapsz, és a Conquer vagy Hold abilityk triggerelnek (473.2)."
+   },
+   {
+    "name": "Final Point és győzelem",
+    "rule": "473.1.b.1",
+    "text": "Ha Conquerrel szereznél pontot, és már csak 1 pont hiányzik a Victory Score-hoz, a pontot csak akkor kapod meg, ha ebben a körben minden battlefieldet score-oltál. Különben húzol 1 lapot. Cleanupkor az nyer, aki elérte a Victory Score-t, és több pontja van minden opponentnél (474)."
+   }
+  ]
+ }
+]

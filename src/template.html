@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riftbound szabálykereső</title>
+<meta name="description" content="Nem hivatalos Riftbound szabálykereső: kártyánként a rá vonatkozó Core Rules szakaszok, errata és deck szintű szabálylista PDF exporttal. Készítette: Daneehunter.">
+<meta name="author" content="Daneehunter">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23161b26'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='20' text-anchor='middle' fill='%23e8b84a'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Saira+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: fejléc forrássávval, három nézet (kártyák, deck, szabályok); a kártya és deck nézet két hasábos: lista balra, szabályok jobbra. */
+:root{
+  --bg:#eef0f4; --panel:#ffffff; --panel2:#f6f7fa; --ink:#161b26; --muted:#5b6475; --line:#d5d9e2;
+  --accent:#9a6a00; --accent-bg:#fff4d6; --link:#1f4fb3;
+  --warn:#a23a12; --warn-bg:#fde9df; --ok:#1f6b45; --ok-bg:#e1f3e9;
+  --fury:#c0392b; --calm:#2e8b57; --mind:#2f6fd0; --body:#d2691e; --chaos:#7d4bc4; --order:#b8940a;
+  --f-display:"Saira Condensed","Arial Narrow",sans-serif; --f-body:"IBM Plex Sans",system-ui,"Segoe UI",sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10131a; --panel:#181c26; --panel2:#1f2430; --ink:#e8ebf2; --muted:#9aa3b5; --line:#2e3545;
+    --accent:#e8b84a; --accent-bg:#3a2e10; --link:#8fb4ff;
+    --warn:#ff9c78; --warn-bg:#3d1f14; --ok:#7fd3a4; --ok-bg:#143024;
+    --fury:#ff7b6b; --calm:#6fcf97; --mind:#7fb0ff; --body:#f2a15e; --chaos:#b996f0; --order:#e6c64a;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10131a; --panel:#181c26; --panel2:#1f2430; --ink:#e8ebf2; --muted:#9aa3b5; --line:#2e3545;
+  --accent:#e8b84a; --accent-bg:#3a2e10; --link:#8fb4ff;
+  --warn:#ff9c78; --warn-bg:#3d1f14; --ok:#7fd3a4; --ok-bg:#143024;
+  --fury:#ff7b6b; --calm:#6fcf97; --mind:#7fb0ff; --body:#f2a15e; --chaos:#b996f0; --order:#e6c64a;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+a{color:var(--link)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 20px 48px}
+header.top{padding:22px 0 12px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:flex-end;justify-content:space-between}
+h1{font-family:var(--f-display);font-weight:700;font-size:34px;line-height:1;margin:0;letter-spacing:.01em;text-wrap:balance}
+h1 small{display:block;font-family:var(--f-body);font-weight:400;font-size:13px;color:var(--muted);margin-top:6px;letter-spacing:0}
+.src{display:flex;flex-wrap:wrap;gap:6px;font-size:12px}
+.src span,.src a{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:3px 8px;color:var(--muted);text-decoration:none}
+.src b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+nav.tabs{display:flex;gap:2px;border-bottom:2px solid var(--ink);margin:10px 0 18px}
+nav.tabs a{font-family:var(--f-display);font-weight:600;font-size:19px;padding:7px 18px;text-decoration:none;color:var(--muted);border:1px solid transparent;border-bottom:none;border-radius:4px 4px 0 0}
+nav.tabs a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+.view{display:none}.view.on{display:block}
+.cols{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:20px;align-items:start}
+@media (max-width:860px){.cols{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.pad{padding:14px 16px}
+.filters{display:flex;flex-direction:column;gap:10px}
+.filters .row{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+input[type=search],input[type=text],select,textarea{background:var(--panel2);border:1px solid var(--line);border-radius:4px;padding:8px 10px;width:100%}
+select{width:auto;flex:1 1 120px}
+label.chk{display:inline-flex;gap:6px;align-items:center;font-size:13px;color:var(--muted);cursor:pointer}
+.count{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+ul.list{list-style:none;margin:0;padding:0;max-height:70vh;overflow:auto;border-top:1px solid var(--line)}
+ul.list li button{display:flex;gap:8px;align-items:baseline;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:8px 16px;cursor:pointer}
+ul.list li button:hover{background:var(--panel2)}
+ul.list li button[aria-selected="true"]{background:var(--accent-bg);box-shadow:inset 3px 0 0 var(--accent)}
+ul.list .nm{flex:1;font-weight:500}
+ul.list .ty{font-size:12px;color:var(--muted);white-space:nowrap}
+.more{display:block;width:100%;padding:10px;background:var(--panel2);border:0;border-top:1px solid var(--line);cursor:pointer;color:var(--link)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:2px;vertical-align:baseline;background:var(--muted)}
+.d-Fury{background:var(--fury)}.d-Calm{background:var(--calm)}.d-Mind{background:var(--mind)}.d-Body{background:var(--body)}.d-Chaos{background:var(--chaos)}.d-Order{background:var(--order)}
+.card-head{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}
+h2{font-family:var(--f-display);font-weight:700;font-size:28px;line-height:1.1;margin:0;text-wrap:balance}
+h3{font-family:var(--f-display);font-weight:600;font-size:19px;margin:22px 0 8px;letter-spacing:.02em}
+h3 .n{font-family:var(--f-body);font-size:12px;font-weight:400;color:var(--muted);margin-left:6px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;font-size:12.5px}
+.chip{display:inline-flex;gap:5px;align-items:center;border:1px solid var(--line);border-radius:3px;padding:2px 8px;background:var(--panel2);white-space:nowrap}
+.chip b{font-weight:600;font-variant-numeric:tabular-nums}
+.chip.ban{background:var(--warn-bg);color:var(--warn);border-color:var(--warn);font-weight:600}
+.chip.err{background:var(--accent-bg);color:var(--accent);border-color:var(--accent);font-weight:600}
+.chip.okc{background:var(--ok-bg);color:var(--ok);border-color:var(--ok)}
+.ctext{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--ink);border-radius:4px;padding:12px 14px;max-width:72ch}
+.ctext p{margin:0 0 8px}.ctext p:last-child{margin:0}
+.ctext.old{border-left-color:var(--muted);color:var(--muted)}
+.rem{color:var(--muted);font-style:italic}
+.kw{font-weight:600;background:var(--accent-bg);color:var(--accent);border-radius:3px;padding:0 5px;white-space:nowrap}
+.sym{display:inline-block;min-width:1.5em;text-align:center;font-family:var(--f-mono);font-size:.82em;font-weight:500;border:1px solid var(--muted);border-radius:10px;padding:0 5px;line-height:1.45;white-space:nowrap;vertical-align:baseline}
+.sym.en{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sym.dm{color:#fff;border-color:transparent}
+.note{font-size:13px;color:var(--muted);max-width:72ch}
+.errbox{border:1px solid var(--accent);background:var(--accent-bg);border-radius:4px;padding:10px 14px;margin:12px 0;max-width:72ch;font-size:14px}
+.banbox{border:1px solid var(--warn);background:var(--warn-bg);color:var(--warn);border-radius:4px;padding:10px 14px;margin:12px 0;max-width:72ch;font-size:14px}
+details.tp{border:1px solid var(--line);border-radius:4px;margin:6px 0;background:var(--panel)}
+details.tp>summary{cursor:pointer;padding:8px 12px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;list-style:none}
+details.tp>summary::-webkit-details-marker{display:none}
+details.tp>summary::before{content:"+";font-family:var(--f-mono);color:var(--muted);width:1ch}
+details.tp[open]>summary::before{content:"-"}
+details.tp>summary:hover{background:var(--panel2)}
+details.tp .rn{font-family:var(--f-mono);font-size:13px;color:var(--accent);font-weight:500;min-width:7ch}
+details.tp .tt{font-weight:600;flex:1 1 180px}
+details.tp .why{font-size:12.5px;color:var(--muted)}
+details.tp .why code{font-family:var(--f-mono);font-size:12px;background:var(--panel2);border:1px solid var(--line);border-radius:3px;padding:0 4px}
+.rules{padding:4px 12px 12px;border-top:1px solid var(--line);overflow-x:auto}
+.rule{display:grid;grid-template-columns:max-content 1fr;gap:0 10px;padding:3px 0;font-size:14px}
+.rule .id{font-family:var(--f-mono);font-size:12px;color:var(--muted);padding-top:2px;white-space:nowrap}
+.rule .tx{max-width:74ch;white-space:pre-line}
+.rule.h .tx{font-weight:600;font-family:var(--f-display);font-size:17px}
+.rule .ex{margin:4px 0 2px;padding:4px 10px;border-left:2px solid var(--accent);color:var(--muted);font-size:13px;white-space:normal}
+.rule.hit{background:var(--accent-bg)}
+.dp1{margin-left:14px}.dp2{margin-left:28px}.dp3{margin-left:42px}.dp4{margin-left:56px}.dp5{margin-left:70px}.dp6{margin-left:84px}
+.rel{font-size:12.5px;color:var(--muted);padding:6px 12px 10px;border-top:1px dashed var(--line)}
+.rel a{font-family:var(--f-mono);margin-right:8px;white-space:nowrap}
+mark{background:var(--accent-bg);color:inherit;outline:1px solid var(--accent)}
+textarea#deckin{min-height:420px;font-family:var(--f-mono);font-size:13px;line-height:1.45;resize:vertical}
+.btn{background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:4px;padding:8px 14px;font-weight:600;cursor:pointer}
+.btn.sec{background:var(--panel);color:var(--ink);border-color:var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+.btnrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.status{font-size:13px;color:var(--muted)}
+.fmt{font-family:var(--f-mono);font-size:13px;background:var(--panel2);border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin:0;overflow-x:auto;line-height:1.45}
+.chk-list{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:4px;font-size:13.5px}
+.chk-list li{display:grid;grid-template-columns:5.2em 1fr;gap:8px;align-items:baseline;border-bottom:1px solid var(--line);padding:4px 0}
+.st{font-size:11px;font-weight:600;border-radius:3px;padding:1px 6px;text-align:center;border:1px solid}
+.st.ok{color:var(--ok);background:var(--ok-bg);border-color:var(--ok)}.st.bad{color:var(--warn);background:var(--warn-bg);border-color:var(--warn)}.st.inf{color:var(--muted);background:var(--panel2);border-color:var(--line)}
+table.im{border-collapse:collapse;width:100%;font-size:13.5px}
+table.im th{text-align:left;font-weight:600;font-size:12px;color:var(--muted);padding:4px 10px 4px 0;border-bottom:1px solid var(--ink)}
+table.im td{border-bottom:1px solid var(--line);padding:6px 10px 6px 0;vertical-align:top}
+table.im td:first-child{font-weight:600;white-space:nowrap}
+.sum{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.warns{margin:0 0 12px;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.warns li{border:1px solid var(--warn);background:var(--warn-bg);color:var(--warn);border-radius:4px;padding:6px 10px;font-size:13.5px}
+.warns li button{background:none;border:0;color:var(--link);text-decoration:underline;cursor:pointer;padding:0 4px}
+.sec-title{font-family:var(--f-display);font-weight:600;font-size:18px;margin:16px 0 4px;display:flex;gap:8px;align-items:baseline}
+.drow{border:1px solid var(--line);border-radius:4px;margin:4px 0;background:var(--panel)}
+.drow>summary{cursor:pointer;list-style:none;padding:7px 12px;display:grid;grid-template-columns:2.2em minmax(140px,1.1fr) minmax(90px,.6fr) 2fr;gap:4px 10px;align-items:baseline}
+.drow>summary::-webkit-details-marker{display:none}
+.drow>summary:hover{background:var(--panel2)}
+.drow .q{font-family:var(--f-mono);color:var(--muted)}
+.drow .nm{font-weight:600}
+.drow .ty{font-size:12.5px;color:var(--muted)}
+.drow .rs{display:flex;flex-wrap:wrap;gap:4px;font-size:11.5px}
+.drow .rs span{font-family:var(--f-mono);border:1px solid var(--line);border-radius:3px;padding:0 5px;background:var(--panel2);white-space:nowrap}
+.drow .body{padding:10px 14px 14px;border-top:1px solid var(--line)}
+.drow.unk>summary{color:var(--warn)}
+@media (max-width:620px){.drow>summary{grid-template-columns:2.2em 1fr}.drow .ty,.drow .rs{grid-column:2}}
+.kwgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.kwc{border:1px solid var(--line);border-radius:5px;padding:12px 14px;background:var(--panel2)}
+.kwc h4{margin:0 0 2px;font-family:var(--f-display);font-size:20px;font-weight:700;display:flex;gap:8px;align-items:baseline;justify-content:space-between}
+.kwc h4 a{font-family:var(--f-mono);font-size:12px;font-weight:400}
+.kwc .k{font-size:12px;color:var(--muted);margin-bottom:6px}
+.kwc p{margin:0 0 6px;font-size:14px}
+.kwc ul{margin:0 0 6px;padding-left:0;list-style:none;font-size:13px}
+.kwc li{display:grid;grid-template-columns:max-content 1fr;gap:8px;padding:2px 0}
+.kwc li a{font-family:var(--f-mono);font-size:12px}
+.kwc button{background:none;border:0;color:var(--link);text-decoration:underline;cursor:pointer;padding:0;font-size:12.5px}
+ol.flow{margin:0 0 8px;padding:0;list-style:none;counter-reset:st;max-width:92ch}
+ol.flow li{counter-increment:st;display:grid;grid-template-columns:2.2em 1fr;gap:4px 8px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
+ol.flow li::before{content:counter(st);font-family:var(--f-mono);color:var(--accent);font-weight:500}
+ol.flow b{font-weight:600}
+ol.flow a{font-family:var(--f-mono);font-size:12px;margin-left:6px}
+.pn{max-width:92ch;margin-bottom:14px}
+.pn ul{margin:4px 0 0;padding-left:18px;font-size:14px}
+.subnav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.toc{display:flex;flex-direction:column;max-height:74vh;overflow:auto;border-top:1px solid var(--line)}
+.toc button{text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:5px 16px;cursor:pointer;font-size:13.5px;display:flex;gap:10px}
+.toc button:hover{background:var(--panel2)}
+.toc button .id{font-family:var(--f-mono);font-size:12px;color:var(--accent)}
+.toc button.major{font-family:var(--f-display);font-weight:700;font-size:16px;background:var(--panel2)}
+footer{margin-top:28px;font-size:12px;color:var(--muted);max-width:90ch;border-top:1px solid var(--line);padding-top:14px}
+footer p{margin:0 0 8px}
+footer strong{color:var(--ink);font-weight:600}
+.cardtop{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+.cardtop .main{flex:1 1 320px;min-width:0}
+.cardtop img{flex:0 0 auto;width:210px;max-width:100%;height:auto;border-radius:8px;border:1px solid var(--line)}
+table.nt{border-collapse:collapse;width:100%;max-width:92ch;font-size:14px}
+table.nt td{border-top:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:top}
+table.nt td.r{white-space:nowrap;font-family:var(--f-mono);font-size:12.5px;width:1%}
+table.nt td.r a{display:block}
+table.nt td.f{width:1%;white-space:nowrap}
+.fl{font-size:11px;border-radius:3px;padding:1px 6px;border:1px solid var(--line);color:var(--muted)}
+.fl.f1{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+.fl.f2{border-color:var(--warn);color:var(--warn);background:var(--warn-bg)}
+.ntwrap{overflow-x:auto}
+@media (prefers-reduced-motion:no-preference){details.tp>summary,ul.list li button{transition:background .12s}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Riftbound szabálykereső</h1>
+    <div class="src" id="src"></div>
+  </header>
+  <nav class="tabs" aria-label="Nézetek">
+    <a href="#kartyak" data-v="kartyak">Kártyák</a>
+    <a href="#deck" data-v="deck">Deck</a>
+    <a href="#szabalyok" data-v="szabalyok">Szabályzat</a>
+    <a href="#tudastar" data-v="tudastar" id="tab-tud" hidden>Tudástár</a>
+  </nav>
+
+  <section class="view" id="v-kartyak">
+    <div class="cols">
+      <div class="panel">
+        <div class="pad filters">
+          <input type="search" id="q" placeholder="Kártyanév, tag vagy kulcsszó" autocomplete="off" aria-label="Kártya keresése">
+          <div class="row">
+            <select id="f-type" aria-label="Típus"><option value="">Minden típus</option></select>
+            <select id="f-dom" aria-label="Domain"><option value="">Minden domain</option></select>
+          </div>
+          <div class="row">
+            <label class="chk"><input type="checkbox" id="f-text"> keresés a kártyaszövegben is</label>
+            <label class="chk"><input type="checkbox" id="f-err"> csak errata</label>
+            <label class="chk"><input type="checkbox" id="f-ban"> banned kártyák is</label>
+          </div>
+          <div class="count" id="count"></div>
+        </div>
+        <ul class="list" id="list" role="listbox" aria-label="Találatok"></ul>
+      </div>
+      <div class="panel pad" id="detail" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="view" id="v-deck">
+    <div class="cols">
+      <div class="panel pad">
+        <label for="deckin" class="note">Decklista. Szekciófejléc (<code>Legend:</code>, <code>Champion:</code>, <code>MainDeck:</code>, <code>Battlefields:</code>, <code>Rune Pool:</code>, <code>Sideboard:</code>), alatta soronként darabszám és kártyanév.</label>
+        <textarea id="deckin" spellcheck="false" style="margin-top:8px"></textarea>
+        <div class="btnrow">
+          <button class="btn" id="deckgo">Deck feldolgozása</button>
+          <button class="btn sec" id="deckpdf">PDF letöltése</button>
+          <button class="btn sec" id="decklink">Megosztható link másolása</button>
+        </div>
+        <div class="btnrow">
+          <label class="chk"><input type="checkbox" id="pdf-rel"> kapcsolódó szabályok szövege is a PDF-ben</label>
+          <label class="chk"><input type="checkbox" id="pdf-gen"> általános szabályok is (Golden/Silver, Playing Cards, Costs)</label>
+        </div>
+        <div class="status" id="pdfstatus" role="status"></div>
+        <input type="text" id="linkout" readonly hidden aria-label="Megosztható link" style="margin-top:8px;font-family:var(--f-mono);font-size:12px">
+      </div>
+      <div id="deckout"></div>
+    </div>
+  </section>
+
+  <section class="view" id="v-szabalyok">
+    <div class="cols">
+      <div class="panel">
+        <div class="pad filters">
+          <input type="search" id="rq" placeholder="Szabályszám (pl. 811.2) vagy szövegrészlet" autocomplete="off" aria-label="Keresés a szabályzatban">
+          <div class="count" id="rcount"></div>
+        </div>
+        <div class="toc" id="toc"></div>
+      </div>
+      <div class="panel pad" id="rview"></div>
+    </div>
+  </section>
+
+  <section class="view" id="v-tudastar">
+    <div class="panel pad" id="tud"></div>
+  </section>
+
+  <footer id="foot"></footer>
+</div>
+
+<script id="data" type="application/json">/*DATA*/</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+"use strict";
+const D=JSON.parse(document.getElementById('data').textContent);
+const RULES=D.rules, TOPICS=D.topics, CARDS=D.cards, META=D.meta;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[\u2018\u2019`]/g,"'").replace(/[^a-z0-9']+/g,' ').trim();
+
+/* ---------- szabály index ---------- */
+const top3=RULES.map(r=>parseInt(r[0].slice(0,3),10));
+const isHead=r=>/^\d{3}$/.test(r[0])&&r[1].length<70&&!/[.:]$/.test(r[1]);
+function expand(ref){
+  const out=[];
+  let m=/^(\d{3})-(\d{3})$/.exec(ref);
+  if(m){const a=+m[1],b=+m[2];for(let i=0;i<RULES.length;i++)if(top3[i]>=a&&top3[i]<=b)out.push(i);return out;}
+  for(let i=0;i<RULES.length;i++){const id=RULES[i][0];if(id===ref||id.startsWith(ref+'.'))out.push(i);}
+  return out;
+}
+const expandAll=refs=>{const s=new Set();refs.forEach(r=>expand(r).forEach(i=>s.add(i)));return [...s].sort((a,b)=>a-b);};
+function ruleHTML(idxs,hl){
+  if(!idxs.length)return '<p class="note">Nincs ilyen szabály.</p>';
+  const base=Math.min(...idxs.map(i=>RULES[i][0].split('.').length));
+  return idxs.map(i=>{
+    const r=RULES[i],dp=Math.min(6,r[0].split('.').length-base);
+    let tx=esc(r[1]);
+    if(hl)tx=tx.replace(hl,m=>'<mark>'+m+'</mark>');
+    const ex=(r[2]||[]).map(e=>'<div class="ex">'+(hl?esc(e).replace(hl,m=>'<mark>'+m+'</mark>'):esc(e))+'</div>').join('');
+    return '<div class="rule dp'+dp+(isHead(r)?' h':'')+'" data-rid="'+r[0]+'"><span class="id">'+r[0]+'.</span><div class="tx">'+tx+ex+'</div></div>';
+  }).join('');
+}
+const refLabel=refs=>refs.join(', ');
+const relLinks=rel=>rel&&rel.length?'<div class="rel">Kapcsolódó: '+rel.map(r=>'<a href="#szabalyok" data-ref="'+r+'">'+r+'</a>').join('')+'</div>':'';
+
+/* ---------- kártyaszöveg ---------- */
+const DOMS={R:'Fury',G:'Calm',B:'Mind',O:'Body',P:'Chaos',Y:'Order'};
+const SYMT={A:['A','Power, bármely domain'],C:['C','Power, a kártya saját domainje'],S:['Might','Might'],T:['Exhaust','Exhaust (a kártya kimerítése költségként)'],E:['Exhaust','Exhaust (a kártya kimerítése költségként)']};
+function cardText(t){
+  if(!t)return '<p class="rem">Nincs szabályszöveg.</p>';
+  return t.split('\n').map(line=>{
+    let h=esc(line);
+    h=h.replace(/\(([^()]*)\)/g,'<span class="rem">($1)</span>');
+    h=h.replace(/\[([^\]]+)\]/g,(m,k)=>{
+      if(/^\d+$/.test(k))return '<span class="sym en" title="Energy '+k+'">'+k+'</span>';
+      if(k==='&gt;')return '\u25B8';
+      if(k==='&gt;&gt;')return '\u00BB';
+      if(SYMT[k])return '<span class="sym" title="'+SYMT[k][1]+'">'+SYMT[k][0]+'</span>';
+      if(DOMS[k])return '<span class="sym dm d-'+DOMS[k]+'" title="'+DOMS[k]+' domain">'+DOMS[k]+'</span>';
+      return '<span class="kw">'+k+'</span>';
+    });
+    return '<p>'+h+'</p>';
+  }).join('');
+}
+const typeLine=c=>[...(c.st||[]).filter(s=>s!=='Basic'&&s!=='Token'),c.t,(c.st||[]).includes('Token')?'Token':''].filter(Boolean).join(' ');
+const domDots=c=>(c.d||[]).map(d=>'<i class="dot d-'+d+'" title="'+d+'"></i>').join('');
+function whyOf(tp,m){
+  if(tp.g==='kw')return 'kulcsszó a kártyán: <code>'+esc(m)+'</code>';
+  if(tp.g==='type')return esc(tp.why);
+  return 'a szövegben: <code>'+esc(m)+'</code>';
+}
+const GROUPS=[['kw','Kulcsszavak'],['act','Game Actions a szövegben'],['oth','A szövegből következő további szabályok'],['type','Kártyatípus szabályai']];
+
+function topicBlock(tp,why,open){
+  return '<details class="tp"'+(open?' open':'')+'><summary><span class="rn">'+refLabel(tp.refs)+'</span><span class="tt">'+esc(tp.title)+'</span><span class="why">'+why+'</span></summary><div class="rules" data-refs="'+tp.refs.join('|')+'"></div>'+relLinks(tp.rel)+'</details>';
+}
+const FL=['szabály','levezetés','nyitott kérdés'];
+const FLT=['A Core Rules közvetlenül kimondja.','A szabályból és a kártyaszövegből levezetett következmény, nem hivatalos ruling.','A Core Rules nem dönti el egyértelműen, judge döntése kell.'];
+function notesHTML(c){
+  if(!c.nt)return '<h3>Hogyan érinti ezt a lapot</h3><p class="note">Ehhez a laphoz még nincs kézzel írt, lap-specifikus magyarázat. Lent a rá vonatkozó szabályszakaszok teljes szövege olvasható.</p>';
+  return '<h3>Hogyan érinti ezt a lapot<span class="n">'+c.nt.length+' pont, nem hivatalos ruling</span></h3><div class="ntwrap"><table class="nt">'+c.nt.map(n=>'<tr><td class="r">'+n[0].split(',').map(r=>'<a href="#szabalyok" data-ref="'+r.trim()+'">'+r.trim()+'</a>').join('')+'</td><td>'+esc(n[2])+'</td><td class="f"><span class="fl f'+n[1]+'" title="'+FLT[n[1]]+'">'+FL[n[1]]+'</span></td></tr>').join('')+'</table></div>';
+}
+function cardRulesHTML(c){
+  let h=notesHTML(c);
+  if(c.ex&&c.ex.length){
+    h+='<h3>A szabályzat név szerint említi<span class="n">'+c.ex.length+' példa</span></h3>';
+    h+='<details class="tp"><summary><span class="rn">'+c.ex.slice(0,3).join(', ')+(c.ex.length>3?', ...':'')+'</span><span class="tt">Példák ezzel a kártyával</span><span class="why">a Core Rules példaszövegében szerepel a kártya neve</span></summary><div class="rules" data-ids="'+c.ex.join('|')+'" data-hl="'+esc(c.a[0])+'"></div></details>';
+  }
+  GROUPS.forEach(([g,label])=>{
+    const items=c.tp.filter(p=>TOPICS[p[0]].g===g);
+    if(!items.length)return;
+    h+='<h3>'+label+'<span class="n">'+items.length+'</span></h3>';
+    items.forEach(p=>{h+=topicBlock(TOPICS[p[0]],whyOf(TOPICS[p[0]],p[1]),false);});
+  });
+  const gen=D.general.filter(g=>g.for==='all'||['Unit','Gear','Spell'].includes(c.t));
+  h+='<h3>Minden kártyára érvényes általános szabályok<span class="n">'+gen.length+'</span></h3>';
+  gen.forEach(g=>{h+=topicBlock({refs:g.refs,title:g.title,rel:[]},'általános',false);});
+  return h;
+}
+function cardHeadHTML(c,tag){
+  const chips=[];
+  chips.push('<span class="chip">'+domDots(c)+esc(typeLine(c))+'</span>');
+  if(c.d&&c.d.length)chips.push('<span class="chip">'+esc(c.d.join(' + '))+'</span>');
+  if(c.e!=null)chips.push('<span class="chip">Energy <b>'+c.e+'</b></span>');
+  if(c.p)chips.push('<span class="chip">Power <b>'+c.p+'</b></span>');
+  if(c.m!=null)chips.push('<span class="chip">Might <b>'+c.m+'</b></span>');
+  if(c.tg&&c.tg.length)chips.push('<span class="chip">'+esc(c.tg.join(', '))+'</span>');
+  chips.push('<span class="chip">'+esc(c.sets.join(', '))+'</span>');
+  if(c.ban===1)chips.push('<span class="chip ban">BANNED (Constructed)</span>');
+  if(c.ban===2)chips.push('<span class="chip ban">BANNED 2v2 Constructed</span>');
+  if(c.err!=null)chips.push('<span class="chip err">ERRATA</span>');
+  const IMG='https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data_live/';
+  let h='<div class="cardtop"><div class="main"><div class="card-head"><'+tag+' style="margin:0">'+esc(c.n)+'</'+tag+'><a class="note" href="https://playriftbound.com/en-us/card-gallery/#card-gallery--'+c.code+'">hivatalos Card Gallery ('+c.code+')</a></div><div class="meta">'+chips.join('')+'</div>';
+  if(c.ban===1)h+='<div class="banbox">Ez a kártya a Rules Hub szerint tiltott a Constructed formátumban (lista frissítve: '+META.ban_updated+'). A keresőben csak a "banned kártyák is" kapcsolóval jelenik meg.</div>';
+  if(c.ban===2)h+='<div class="banbox">Ez a legend a Rules Hub szerint a 2v2 Constructed formátumban tiltott (lista frissítve: '+META.ban_updated+'). 1v1 Constructedben játszható.</div>';
+  h+='<h3>'+(c.err!=null?'Jelenlegi szöveg (errata után)':'Kártyaszöveg')+'</h3><div class="ctext">'+cardText(c.txt)+'</div>';
+  if(c.err!=null){
+    const a=META.articles[c.err];
+    h+='<div class="errbox">A kártya szövege megváltozott. Forrás: <a href="'+a.u+'">'+esc(a.t)+'</a>. A fenti szöveg a hatályos, a nyomtatott kártyán a régi szerepelhet.</div>';
+    if(c.old)h+='<h3>Nyomtatott szöveg (errata előtt)</h3><div class="ctext old">'+cardText(c.old)+'</div>';
+    else h+='<p class="note">A Card Gallery már a frissített szöveget mutatja, a régi szöveg az errata cikkben olvasható.</p>';
+  }
+  h+='</div>'+(c.img?'<img loading="lazy" src="'+IMG+c.img+'?w=420" alt="'+esc(c.n)+' kártyakép" onerror="this.remove()">':'')+'</div>';
+  return h;
+}
+/* lusta szabálykitöltés: a details megnyitásakor töltjük be a szöveget */
+document.addEventListener('toggle',e=>{
+  const d=e.target;if(!d.open||!d.matches||!d.matches('details'))return;
+  d.querySelectorAll(':scope > .rules, :scope > .body .rules-auto').forEach(()=>{});
+  const box=d.querySelector(':scope > .rules');
+  if(box&&!box.dataset.done){
+    if(box.dataset.ids){const ids=box.dataset.ids.split('|');const idx=ids.map(id=>RULES.findIndex(r=>r[0]===id)).filter(i=>i>=0);
+      const nm=box.dataset.hl||'';const hl=nm?new RegExp(nm.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/'/g,"['\u2019]"),'g'):null;
+      box.innerHTML=ruleHTML(idx,hl);}
+    else box.innerHTML=ruleHTML(expandAll(box.dataset.refs.split('|')));
+    box.dataset.done='1';
+  }
+},true);
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[data-ref]');if(!a)return;
+  pendingRef=a.dataset.ref; if(location.hash==='#szabalyok')showRef(pendingRef);
+});
+
+/* ---------- kártya nézet ---------- */
+const byName=new Map();
+CARDS.forEach(c=>{c._n=norm(c.n);c._s=norm([c.n].concat(c.a,c.tg||[],c.st||[],[c.t]).join(' '));c._t=norm(c.txt||'');[c.n].concat(c.a).forEach(a=>{const k=norm(a);if(!byName.has(k))byName.set(k,c);});});
+let sel=null,limit=80;
+function filtered(){
+  const q=norm($('q').value),ty=$('f-type').value,dm=$('f-dom').value,inT=$('f-text').checked,oe=$('f-err').checked,sb=$('f-ban').checked;
+  const words=q?q.split(' '):[];
+  const res=CARDS.filter(c=>{
+    if(c.ban===1&&!sb)return false;
+    if(ty&&c.t!==ty)return false;
+    if(dm&&!(dm==='none'?!(c.d&&c.d.length):(c.d||[]).includes(dm)))return false;
+    if(oe&&c.err==null)return false;
+    return words.every(w=>c._s.includes(w)||(inT&&c._t.includes(w)));
+  });
+  if(q)res.sort((a,b)=>(b._n.startsWith(q)-a._n.startsWith(q))||(b._n.includes(q)-a._n.includes(q))||a._n.localeCompare(b._n));
+  return res;
+}
+function renderList(){
+  const res=filtered();
+  const total=CARDS.filter(c=>c.ban!==1).length;
+  $('count').textContent=res.length+' találat, '+total+' nem banned egyedi kártya az adatbázisban';
+  $('list').innerHTML=res.slice(0,limit).map(c=>'<li><button role="option" data-n="'+esc(c.n)+'" aria-selected="'+(sel===c)+'"><span class="nm">'+domDots(c)+' '+esc(c.n)+(c.err!=null?' <span class="chip err" style="font-size:10px;padding:0 4px">errata</span>':'')+(c.ban?' <span class="chip ban" style="font-size:10px;padding:0 4px">ban</span>':'')+'</span><span class="ty">'+esc(typeLine(c))+'</span></button></li>').join('')
+    +(res.length>limit?'<li><button class="more" data-more="1">További '+(res.length-limit)+' találat megjelenítése</button></li>':'');
+  if(!res.length)$('list').innerHTML='<li class="pad note">Nincs találat. A banned kártyák alapból rejtve vannak.</li>';
+}
+function showCard(c){
+  sel=c;
+  $('detail').innerHTML=cardHeadHTML(c,'h2')+'<h3 style="margin-top:26px;border-top:2px solid var(--ink);padding-top:14px">Erre a kártyára érvényes szabályok</h3><p class="note">A szakaszok a Core Rules ('+META.rules_updated+') eredeti angol szövegét mutatják. Kattintásra nyílnak.</p>'+cardRulesHTML(c);
+  renderList();
+}
+$('list').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.more){limit+=200;renderList();return;}
+  const c=CARDS.find(x=>x.n===b.dataset.n);if(c){showCard(c);if(window.innerWidth<860)$('detail').scrollIntoView({behavior:'smooth'});}
+});
+['q','f-type','f-dom','f-text','f-err','f-ban'].forEach(id=>$(id).addEventListener('input',()=>{limit=80;renderList();}));
+[...new Set(CARDS.map(c=>c.t))].sort().forEach(t=>$('f-type').insertAdjacentHTML('beforeend','<option>'+t+'</option>'));
+['Fury','Calm','Mind','Body','Chaos','Order'].forEach(d=>$('f-dom').insertAdjacentHTML('beforeend','<option>'+d+'</option>'));
+$('f-dom').insertAdjacentHTML('beforeend','<option value="none">Domain nélkül</option>');
+
+/* ---------- deck ---------- */
+const FORMAT=`Legend:
+1 Champion neve, Legend címe
+
+Champion:
+1 Champion neve, Unit címe
+
+MainDeck:
+3 Kártyanév
+2 Másik kártyanév
+
+Battlefields:
+1 Battlefield neve
+1 Battlefield neve
+1 Battlefield neve
+
+Rune Pool:
+7 Fury Rune
+5 Chaos Rune
+
+Sideboard:
+2 Kártyanév`;
+function lev(a,b){const m=a.length,n=b.length;if(!m)return n;if(!n)return m;let p=[];for(let j=0;j<=n;j++)p[j]=j;for(let i=1;i<=m;i++){let q=[i];for(let j=1;j<=n;j++)q[j]=Math.min(p[j]+1,q[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=q;}return p[n];}
+function suggest(name){
+  const k=norm(name);const sc=[];
+  byName.forEach((c,key)=>{const d=key.includes(k)||k.includes(key)?1:lev(k,key);if(d<=Math.max(2,Math.floor(k.length*0.34)))sc.push([d,c]);});
+  sc.sort((a,b)=>a[0]-b[0]);
+  return [...new Set(sc.map(s=>s[1]))].slice(0,3);
+}
+function parseDeck(text){
+  const secs=[];let cur=null;
+  text.split(/\r?\n/).forEach(raw=>{
+    const line=raw.trim();if(!line)return;
+    let m=/^([A-Za-z][A-Za-z \-]*?)\s*:\s*$/.exec(line);
+    if(m){cur={name:m[1],rows:[]};secs.push(cur);return;}
+    if(!cur){cur={name:'Lista',rows:[]};secs.push(cur);}
+    m=/^(\d+)\s*[xX]?\s+(.+)$/.exec(line);
+    const qty=m?+m[1]:1,name=(m?m[2]:line).trim();
+    const c=byName.get(norm(name))||null;
+    cur.rows.push({qty,name,card:c,sug:c?[]:suggest(name)});
+  });
+  return secs;
+}
+let DECK=[];
+const secOf=re=>DECK.filter(s=>re.test(s.name)).flatMap(s=>s.rows.filter(r=>r.card));
+function checkDeck(){
+  const L=secOf(/legend/i),CH=secOf(/champion/i),M=secOf(/main/i),B=secOf(/battle/i),RN=secOf(/rune/i),SB=secOf(/side/i);
+  const sum=a=>a.reduce((x,r)=>x+r.qty,0);const out=[];
+  const add=(ok,rule,txt)=>out.push([ok,rule,txt]);
+  const leg=L.length?L[0].card:null;
+  add(sum(L)===1&&leg&&leg.t==='Legend','103.2','Pontosan 1 Champion Legend kell. A listában: '+sum(L)+'.');
+  if(!leg||leg.t!=='Legend')return out;
+  const id=leg.d||[];
+  const ch=CH.length?CH[0].card:null;
+  add(sum(CH)===1&&ch&&ch.t==='Unit'&&(ch.st||[]).includes('Champion'),'103.3.a','Pontosan 1 Chosen Champion kell, és Champion unitnak kell lennie.');
+  if(ch&&leg.ch)add((ch.tg||[]).includes(leg.ch),'103.3.a.2','A Chosen Champion tagje egyezzen a legend Champion tagjével ('+leg.ch+').');
+  const main=M.concat(CH);const n=sum(main);
+  add(n>=40,'103.3','A Main Deck legalább 40 lap, a Chosen Championnel együtt. Most: '+n+'.');
+  const wrong=main.filter(r=>!['Unit','Gear','Spell'].includes(r.card.t)||(r.card.st||[]).includes('Token'));
+  add(!wrong.length,'103.3','A Main Deckben csak Unit, Gear és Spell lehet.'+(wrong.length?' Nem odavaló: '+wrong.map(r=>r.card.n).join(', ')+'.':''));
+  const cnt={};main.forEach(r=>cnt[r.card.n]=(cnt[r.card.n]||0)+r.qty);
+  const over=Object.keys(cnt).filter(k=>cnt[k]>3);
+  add(!over.length,'103.3.b','Azonos nevű lapból legfeljebb 3 lehet, a Chosen Championt is beleszámolva.'+(over.length?' Túllépi: '+over.map(k=>k+' ('+cnt[k]+')').join(', ')+'.':''));
+  const uq=[...new Set(main.map(r=>r.card))].filter(c=>/\[Unique\]/.test(c.txt||'')&&cnt[c.n]>1);
+  if(main.some(r=>/\[Unique\]/.test(r.card.txt||'')))add(!uq.length,'825.3.a','[Unique] lapból csak 1 példány lehet.'+(uq.length?' Túllépi: '+uq.map(c=>c.n).join(', ')+'.':''));
+  const offDom=a=>[...new Set(a.map(r=>r.card))].filter(c=>(c.d||[]).some(d=>!id.includes(d)));
+  const od=offDom(main);
+  add(!od.length,'103.2.b','Minden lap domainje a legend Domain Identity-jén ('+id.join(' + ')+') belül legyen.'+(od.length?' Kilóg: '+od.map(c=>c.n+' ('+c.d.join('+')+')').join(', ')+'.':''));
+  const sig=main.filter(r=>(r.card.st||[]).includes('Signature'));const sn=sum(sig);
+  add(sn<=3,'103.3.d.1','Összesen legfeljebb 3 Signature lap lehet. Most: '+sn+'.');
+  if(sig.length&&leg.ch){const bad=sig.filter(r=>!(r.card.tg||[]).includes(leg.ch));add(!bad.length,'103.3.d.2','Minden Signature lap a legend Champion tagjét ('+leg.ch+') viselje.'+(bad.length?' Nem egyezik: '+bad.map(r=>r.card.n).join(', ')+'.':''));}
+  const rn=sum(RN);
+  add(rn===12&&RN.every(r=>r.card.t==='Rune'),'103.4.a','A Rune Deck pontosan 12 rune. Most: '+rn+'.');
+  const ro=offDom(RN);
+  add(!ro.length,'103.4.a.1','A rune-ok a legend Domain Identity-jén belül legyenek.'+(ro.length?' Kilóg: '+ro.map(c=>c.n).join(', ')+'.':''));
+  const bn=sum(B);
+  add(bn===3&&B.every(r=>r.card.t==='Battlefield'),'487.5','1v1 módban 3 Battlefield kell, ebből egy kerül véletlenszerűen játékba. Most: '+bn+'. Más módban a szám eltér (103.5.a).');
+  add(B.every(r=>r.qty===1),'103.5.c','Azonos nevű Battlefieldből csak egy lehet.');
+  const ban=main.concat(B,SB,L).filter(r=>r.card.ban===1);
+  add(!ban.length,'103.3.e','Tiltott lap nem lehet a deckben (Rules Hub, '+META.ban_updated+').'+(ban.length?' Tiltott: '+[...new Set(ban.map(r=>r.card.n))].join(', ')+'.':''));
+  if(SB.length){const all={};main.concat(SB).forEach(r=>all[r.card.n]=(all[r.card.n]||0)+r.qty);const o2=Object.keys(all).filter(k=>all[k]>3);
+    out.push([null,'','Sideboard: '+sum(SB)+' lap. A sideboard méretét és a példányszám-limit számítását a Tournament Rules szabályozza, azt ez az oldal nem ellenőrzi.'+(o2.length?' Main Deck és Sideboard együtt 3-nál több: '+o2.map(k=>k+' ('+all[k]+')').join(', ')+'.':'')]);}
+  return out;
+}
+function legalityHTML(){
+  const c=checkDeck();if(!c.length)return '';
+  const bad=c.filter(x=>x[0]===false).length;
+  return '<h3>Deck legalitás (Core Rules 103)<span class="n">'+(bad?bad+' hiba':'nincs hiba')+'</span></h3><ul class="chk-list">'+c.map(x=>'<li><span class="st '+(x[0]===null?'inf':x[0]?'ok':'bad')+'">'+(x[0]===null?'INFO':x[0]?'OK':'HIBA')+'</span><span>'+(x[1]?'<a href="#szabalyok" data-ref="'+x[1]+'" style="font-family:var(--f-mono);font-size:12px">'+x[1]+'</a> ':'')+esc(x[2])+'</span></li>').join('')+'</ul>';
+}
+const EVENTS=[
+ ['Move','421',/\bmove (?:a|an|up to|me|it|that|two|any|them|another|all)\b|\[Ganking\]/i,/when (?:i|you|a friendly unit|an? (?:enemy )?unit)[^.]{0,40}\bmoves?\b/i],
+ ['Discard','423',/\bdiscard (?:\d|a|your|that)/i,/when you discard|when i(?:'m| am) discarded/i],
+ ['Draw','414',/\bdraws? \d|\bdraw (?:it|a|that)/i,/when you draw/i],
+ ['Trash töltése és használata','441',/\[Burn|into your trash|\bdiscard \d/i,/in your trash|from your trash/i],
+ ['Deck tetejének megnézése','437',/look at the top|reveal the top|\[Predict|\[Vision\]/i,/as you look at or reveal me|revealed from your deck/i],
+ ['Kijátszás nem kézből','420',/from your trash|\[Flow\]|\[Hidden\]|from face ?down|banish[^.]*you may play/i,/from anywhere other than your hand/i],
+ ['Token','179',/\btokens?\b/i,/when you play a[^.]{0,30}token|for each[^.]{0,30}token/i],
+ ['Buff','427',/\[Buff\]|\bbuff (?:a|me|it|another|two|all)\b/i,/spend (?:my|a|its) buff|\bbuffed\b|has a buff|with a buff/i],
+ ['Stun','424',/\[Stun\]|\bstun (?:a|an|it|all)\b/i,/\bstunned\b|when you stun/i],
+ ['Exhaust','415',/\bexhaust (?:a|an|it|all|up to|two)\b/i,/when (?:i|a friendly unit) becomes? exhausted|exhausted (?:enemy |friendly )?unit/i],
+ ['Ready','416',/\bready (?:a|an|it|me|your|up to|two|all)\b/i,/when i become ready|\breadied\b/i],
+ ['Kill és halál','429',/\bkill (?:a|an|another|this|me|it|all)\b/i,/\[Deathknell\]|when (?:a|another) friendly unit dies|when i die/i],
+ ['Equipment','818',/\[Equip\]|\[Quick-Draw\]/i,/\[Weaponmaster\]|\bequipped\b|\bEquipment\b/],
+ ['Empower','442',/\bempower (?:me|it|a|this)\b|\[Empower\]/i,/\[Empowered\]|disempower/i],
+ ['XP','728',/gains? \d* ?XP|\[Hunt/i,/\[Level|spend \d* ?XP|pay \d+ XP/i],
+ ['Conquer','471.1',/(?!)/,/when (?:you|i) conquer/i],
+ ['Hold','471.2',/(?!)/,/when (?:you|i)(?: conquer or)? hold/i],
+ ['Spell kijátszása','420.4',null,/when you play a spell|spells you play|your spells/i],
+ ['Gear kijátszása','420.4',null,/when (?:you|an opponent) plays? a gear|friendly gear/i]];
+function interactionHTML(){
+  const cards=[];DECK.forEach(s=>s.rows.forEach(r=>{if(r.card&&!cards.includes(r.card))cards.push(r.card);}));
+  const rows=[];
+  EVENTS.forEach(e=>{
+    const prod=cards.filter(c=>e[2]===null?(e[0].startsWith('Spell')?c.t==='Spell':c.t==='Gear'):e[2].test(c.txt||''));
+    const cons=cards.filter(c=>e[3].test(c.txt||''));
+    if(cons.length&&(prod.length||/^(Conquer|Hold)$/.test(e[0])))rows.push('<tr><td><a href="#szabalyok" data-ref="'+e[1]+'" style="font-family:var(--f-mono);font-size:12px;font-weight:400">'+e[1]+'</a> '+e[0]+'</td><td>'+(prod.length?prod.map(c=>esc(c.n)).join(', '):'<span class="rem">a battlefield megszerzése</span>')+'</td><td>'+cons.map(c=>esc(c.n)).join(', ')+'</td></tr>');
+  });
+  if(!rows.length)return '';
+  return '<h3>Interakciós térkép<span class="n">automatikus, szövegminta alapján</span></h3><div class="ntwrap"><table class="im"><tr><th>Esemény</th><th>Ezek a lapok váltják ki</th><th>Ezek a lapok reagálnak rá</th></tr>'+rows.join('')+'</table></div><p class="note">A térkép azt mutatja, mely lapok szövege hoz létre és melyeké figyel egy eseményt. A pontos feltételeket a lapok saját magyarázata és a hivatkozott szabály adja.</p>';
+}
+function b64e(s){return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+function b64d(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return decodeURIComponent(escape(atob(s)));}
+function loadDeckFromHashOrStore(){
+  const m=/^#d=(.+)$/.exec(location.hash);
+  if(m){try{$('deckin').value=b64d(m[1]);return true;}catch(e){}}
+  try{const v=localStorage.getItem('rb-deck');if(v)$('deckin').value=v;}catch(e){}
+  return false;
+}
+function renderDeck(){
+  DECK=parseDeck($('deckin').value);
+  const out=$('deckout');
+  if(!DECK.length){out.innerHTML='<div class="panel pad"><h2>Decklista formátum</h2><p class="note" style="margin:8px 0">Illeszd be a decket a bal oldali mezőbe ebben a formában, aztán nyomd meg a Deck feldolgozása gombot. Szekciónként fejléc kettősponttal, alatta soronként darabszám és pontos angol kártyanév. A legend neve Champion, Legend cím alakban szerepel.</p><pre class="fmt">'+esc(FORMAT)+'</pre></div>';return;}
+  const warns=[];const tot={};
+  DECK.forEach(s=>s.rows.forEach(r=>{
+    if(!r.card){warns.push('Ismeretlen kártyanév a(z) '+esc(s.name)+' szekcióban: <b>'+esc(r.name)+'</b>.'+(r.sug.length?' Erre gondoltál? '+r.sug.map(c=>'<button data-fix="'+esc(r.name)+'" data-to="'+esc(c.a.find(a=>a.includes(','))||c.a[0])+'">'+esc(c.n)+'</button>').join(''):''));return;}
+    if(r.card.ban===1)warns.push('<b>'+esc(r.card.n)+'</b> a Rules Hub szerint tiltott Constructedben ('+META.ban_updated+').');
+    if(r.card.ban===2)warns.push('<b>'+esc(r.card.n)+'</b> a 2v2 Constructed formátumban tiltott ('+META.ban_updated+').');
+    if(['Unit','Gear','Spell'].includes(r.card.t)&&!/side/i.test(s.name))tot[r.card.n]=(tot[r.card.n]||0)+r.qty;
+  }));
+  Object.keys(tot).forEach(n=>{if(tot[n]>3)warns.push('<b>'+esc(n)+'</b>: '+tot[n]+' példány a Main Deckben (Champion zónával együtt). A 103.3.b szabály névenként legfeljebb 3 példányt enged.');});
+  let h='<div class="panel pad"><div class="sum">'+DECK.map(s=>'<span class="chip">'+esc(s.name)+' <b>'+s.rows.reduce((a,r)=>a+r.qty,0)+'</b></span>').join('');
+  const uniq=new Set();DECK.forEach(s=>s.rows.forEach(r=>r.card&&uniq.add(r.card)));
+  const ec=[...uniq].filter(c=>c.err!=null).length;
+  h+='<span class="chip okc">'+uniq.size+' egyedi kártya</span>'+(ec?'<span class="chip err">'+ec+' kártyán errata</span>':'')+'</div>';
+  if(warns.length)h+='<ul class="warns">'+warns.map(w=>'<li>'+w+'</li>').join('')+'</ul>';
+  h+=legalityHTML()+interactionHTML();
+  try{localStorage.setItem('rb-deck',$('deckin').value);}catch(e){}
+  DECK.forEach((s,si)=>{
+    h+='<div class="sec-title">'+esc(s.name)+'<span class="count">'+s.rows.reduce((a,r)=>a+r.qty,0)+' lap</span></div>';
+    s.rows.forEach((r,ri)=>{
+      const c=r.card;
+      if(!c){h+='<details class="drow unk"><summary><span class="q">'+r.qty+'</span><span class="nm">'+esc(r.name)+'</span><span class="ty">ismeretlen</span><span class="rs"></span></summary></details>';return;}
+      const rs=c.tp.map(p=>'<span title="'+esc(TOPICS[p[0]].title)+'">'+TOPICS[p[0]].refs[0]+'</span>').join('');
+      h+='<details class="drow" data-s="'+si+'" data-r="'+ri+'"><summary><span class="q">'+r.qty+'</span><span class="nm">'+domDots(c)+' '+esc(c.n)+(c.err!=null?' <span class="chip err" style="font-size:10px;padding:0 4px">errata</span>':'')+(c.ban?' <span class="chip ban" style="font-size:10px;padding:0 4px">ban</span>':'')+'</span><span class="ty">'+esc(typeLine(c))+'</span><span class="rs">'+rs+'</span></summary><div class="body"></div></details>';
+    });
+  });
+  h+='</div>';
+  out.innerHTML=h;
+}
+$('deckout').addEventListener('toggle',e=>{
+  const d=e.target;if(!d.classList||!d.classList.contains('drow')||!d.open)return;
+  const b=d.querySelector('.body');if(!b||b.dataset.done)return;
+  const c=DECK[+d.dataset.s].rows[+d.dataset.r].card;
+  b.innerHTML=cardHeadHTML(c,'h3')+cardRulesHTML(c);b.dataset.done='1';
+},true);
+$('deckout').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-fix]');if(!b)return;
+  const ta=$('deckin');ta.value=ta.value.split(b.dataset.fix).join(b.dataset.to);renderDeck();
+});
+$('deckgo').addEventListener('click',renderDeck);
+$('decklink').addEventListener('click',async()=>{
+  const st=$('pdfstatus'),txt=$('deckin').value.trim();
+  if(!txt){st.textContent='Nincs decklista, amiből link készülhetne.';return;}
+  const url=location.origin+location.pathname+'#d='+b64e(txt);
+  const lo=$('linkout');lo.hidden=false;lo.value=url;
+  try{await navigator.clipboard.writeText(url);st.textContent='A link a vágólapra került. Saját hostolású oldalon (Netlify, GitHub Pages) a link megnyitása betölti a decket.';}
+  catch(e){lo.select();st.textContent='A vágólap nem érhető el, a link a mezőben van, onnan másolható.';}
+});
+
+/* ---------- PDF ---------- */
+function pdfSafe(s){return String(s).replace(/\t/g,' ').replace(/[^\n\x20-\x7E\xA0-\u017F\u2010-\u2026\u2030\u20AC\u2122\u25B8]/g,'?');}
+const pdfCardText=t=>(t||'').replace(/\[S\]/g,'Might').replace(/\[>\]/g,' > ').replace(/\[>>\]/g,' >> ').replace(/\[[TE]\]/g,'[Exhaust]').replace(/\[([RGBOPY])\]/g,(m,k)=>'['+DOMS[k]+']');
+function buildPDF(){
+  const J=window.jspdf&&window.jspdf.jsPDF;if(!J)throw new Error('A jsPDF könyvtár nem töltődött be.');
+  const doc=new J({unit:'mm',format:'a4'});
+  const F=D.fonts;[['n','normal'],['b','bold'],['i','italic']].forEach(([k,st])=>{doc.addFileToVFS('dv-'+k+'.ttf',F[k]);doc.addFont('dv-'+k+'.ttf','DV',st);});
+  const PW=210,PH=297,ML=16,MR=16,MT=16,MB=16;let y=MT;
+  const lh=sz=>sz*0.3528*1.28;
+  function put(text,o){
+    o=o||{};const sz=o.size||9.5,ind=o.indent||0;
+    doc.setFont('DV',o.style||'normal');doc.setFontSize(sz);
+    const c=o.color||[20,24,34];doc.setTextColor(c[0],c[1],c[2]);
+    const lines=doc.splitTextToSize(pdfSafe(text),PW-ML-MR-ind);
+    if(o.before)y+=o.before;
+    if(o.keep&&y+lh(sz)*Math.min(lines.length+o.keep,6)>PH-MB){doc.addPage();y=MT;}
+    lines.forEach(l=>{if(y+lh(sz)>PH-MB){doc.addPage();y=MT;}doc.text(l,ML+ind,y+sz*0.3528);y+=lh(sz);});
+    if(o.after)y+=o.after;
+  }
+  const rule=()=>{doc.setDrawColor(150);doc.setLineWidth(0.2);doc.line(ML,y,PW-MR,y);y+=2;};
+  const withRel=$('pdf-rel').checked,withGen=$('pdf-gen').checked;
+  const legend=(DECK.find(s=>/legend/i.test(s.name))||{rows:[]}).rows.map(r=>r.card?r.card.n:r.name).join(', ');
+  put('Riftbound deck szabály-referencia',{size:20,style:'bold'});
+  if(legend)put('Legend: '+legend,{size:12,style:'bold',color:[110,75,0]});
+  put('Készült: '+new Date().toISOString().slice(0,10)+'. Források: Riftbound Core Rules (Last Updated '+META.rules_updated+'), Rules Hub ban lista ('+META.ban_updated+'), hivatalos errata cikkek, Card Gallery pillanatkép ('+META.cards_snapshot+').',{size:8.5,color:[90,98,115],before:1});
+  put('AI segítségével készült: Claude (Anthropic), Claude Fable 5.2 modell.',{size:8.5,color:[90,98,115]});
+  put('Nem hivatalos segédanyag, készítette: Daneehunter. A Riftbound a Riot Games tulajdona, a Riot Games nem támogatja és nem szponzorálja ezt az anyagot. Hivatalos oldal: https://playriftbound.com',{size:8.5,color:[90,98,115]});
+  put('Jelölés a kártyaszövegben: [1] Energy, [A] bármely domain Power, [C] a kártya saját domainjének Power-e, [Exhaust] a kártya kimerítése, Might a harci érték. A szabályszöveg az eredeti angol Core Rules szöveg.',{size:8.5,color:[90,98,115],after:2});
+  rule();
+  put('Deck összetétel',{size:13,style:'bold',before:1});
+  DECK.forEach(s=>{put(s.name+' ('+s.rows.reduce((a,r)=>a+r.qty,0)+')',{size:9.5,style:'bold',before:1.5});s.rows.forEach(r=>put(r.qty+'  '+(r.card?r.card.n:r.name+'  [ismeretlen kártyanév]')+(r.card&&r.card.err!=null?'  [errata]':'')+(r.card&&r.card.ban?'  [BANNED]':''),{size:9,indent:4}));});
+  const lc=checkDeck();if(lc.length){put('Deck legalitás (Core Rules 103)',{size:13,style:'bold',before:3});lc.forEach(x=>put((x[0]===null?'INFO':x[0]?'OK':'HIBA')+'   '+(x[1]?x[1]+'  ':'')+x[2],{size:9,indent:2,color:x[0]===false?[160,50,15]:[20,24,34]}));}
+  const seen=new Map();
+  DECK.forEach(s=>s.rows.forEach(r=>{if(!r.card)return;if(!seen.has(r.card))seen.set(r.card,[]);seen.get(r.card).push(r.qty+'x '+s.name);}));
+  const used=new Set(),usedRel=new Set();
+  doc.addPage();y=MT;
+  put('1. Kártyánként érvényes szabályok',{size:15,style:'bold',after:1});
+  seen.forEach((where,c)=>{
+    put(c.n,{size:12.5,style:'bold',before:3,keep:5});
+    const st=[typeLine(c)];if(c.d&&c.d.length)st.push(c.d.join(' + '));if(c.e!=null)st.push('Energy '+c.e);if(c.p)st.push('Power '+c.p);if(c.m!=null)st.push('Might '+c.m);st.push(where.join(', '));
+    put(st.join('   |   '),{size:8.5,color:[90,98,115]});
+    if(c.ban)put(c.ban===1?'BANNED: tiltott a Constructed formátumban.':'BANNED a 2v2 Constructed formátumban.',{size:9,style:'bold',color:[160,50,15]});
+    if(c.txt)put(pdfCardText(c.txt),{size:9.5,indent:3,before:1});
+    if(c.err!=null){put('Errata: a szöveg megváltozott, a fenti a hatályos. Forrás: '+META.articles[c.err].t+', '+META.articles[c.err].u,{size:8.5,style:'italic',color:[110,75,0],indent:3,before:0.5});
+      if(c.old)put('Nyomtatott szöveg: '+pdfCardText(c.old).replace(/\n/g,' / '),{size:8.5,color:[90,98,115],indent:3});}
+    if(c.nt){put('Hogyan érinti ezt a lapot (nem hivatalos ruling):',{size:9,style:'bold',before:1.2});
+      c.nt.forEach(n=>{put(n[0]+'  '+n[2]+(n[1]?'  ['+FL[n[1]]+']':''),{size:9,indent:3});n[0].split(',').forEach(r=>expand(r.trim()).forEach(i=>used.add(i)));});}
+    put('Érvényes szabályok:',{size:9,style:'bold',before:1.2});
+    if(c.ex&&c.ex.length){put('Név szerint említi a szabályzat: '+c.ex.join(', '),{size:9,indent:3});c.ex.forEach(id=>{const i=RULES.findIndex(r=>r[0]===id);if(i>=0)used.add(i);});}
+    c.tp.forEach(p=>{const tp=TOPICS[p[0]];
+      const why=tp.g==='kw'?'kulcsszó: '+p[1]:tp.g==='type'?tp.why:'szövegben: "'+p[1]+'"';
+      put(refLabel(tp.refs)+'  '+tp.title+'  ('+why+')'+(tp.rel&&tp.rel.length?'  kapcsolódó: '+tp.rel.join(', '):''),{size:9,indent:3});
+      expandAll(tp.refs).forEach(i=>used.add(i));
+      if(withRel&&tp.rel)expandAll(tp.rel).forEach(i=>usedRel.add(i));
+    });
+  });
+  if(withGen)D.general.forEach(g=>expandAll(g.refs).forEach(i=>used.add(i)));
+  usedRel.forEach(i=>used.add(i));
+  doc.addPage();y=MT;
+  put('2. A hivatkozott szabályok teljes szövege',{size:15,style:'bold'});
+  put('Riftbound Core Rules, Last Updated '+META.rules_updated+'. Csak a deck kártyáira vonatkozó szakaszok, szabályszám szerinti sorrendben'+(withRel?', a kapcsolódó szakaszokkal':'')+(withGen?', az általános szabályokkal':'')+'.',{size:8.5,color:[90,98,115],after:2});
+  [...used].sort((a,b)=>a-b).forEach(i=>{
+    const r=RULES[i],dp=Math.min(5,r[0].split('.').length-1),h=isHead(r);
+    put(r[0]+'.  '+r[1],{size:h?11:9,style:h?'bold':'normal',indent:dp*4,before:h?2.5:0.6,keep:h?3:0});
+    (r[2]||[]).forEach(e=>put(e,{size:8.3,style:'italic',color:[90,98,115],indent:dp*4+5,before:0.3}));
+  });
+  const n=doc.internal.getNumberOfPages();
+  for(let i=1;i<=n;i++){doc.setPage(i);doc.setFont('DV','normal');doc.setFontSize(8);doc.setTextColor(120);doc.text(pdfSafe('Riftbound deck szabály-referencia'+(legend?'  |  '+legend:'')),ML,PH-8);doc.text(i+' / '+n,PW-MR,PH-8,{align:'right'});}
+  return {blob:doc.output('blob'),pages:n,name:'riftbound-deck-szabalyok'+(legend?'-'+norm(legend).replace(/[^a-z0-9]+/g,'-').slice(0,40):'')+'.pdf'};
+}
+let downloads=null;
+if(window.claude&&typeof window.claude.use==='function'){window.claude.use('downloads').then(d=>{downloads=d;}).catch(()=>{});}
+$('deckpdf').addEventListener('click',async()=>{
+  const st=$('pdfstatus');renderDeck();
+  if(!DECK.some(s=>s.rows.some(r=>r.card))){st.textContent='Nincs felismert kártya a listában, nincs miből PDF-et készíteni.';return;}
+  let res;
+  try{st.textContent='PDF készítése...';await new Promise(r=>setTimeout(r,30));res=buildPDF();}
+  catch(err){st.textContent='A PDF készítése nem sikerült: '+err.message;return;}
+  try{
+    if(downloads){await downloads.save({filename:res.name,data:res.blob});st.textContent='Kész: '+res.name+', '+res.pages+' oldal.';}
+    else{const u=URL.createObjectURL(res.blob);const a=document.createElement('a');a.href=u;a.download=res.name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);
+      st.textContent='PDF elkészült ('+res.pages+' oldal). Ha a böngésző nem kezdte el a letöltést, ebben a nézetben a mentés nem engedélyezett: nyisd meg az oldalt a claude.ai-ban.';}
+  }catch(err){
+    const code=err&&err.code;
+    st.textContent=code==='declined'?'A mentést elutasítottad, a PDF nem lett letöltve.':code==='rate_limited'?'Már nyitva van egy mentési kérés. Zárd le, aztán próbáld újra.':'A mentés ebben a nézetben nem érhető el'+(code?' ('+code+')':'')+'.';
+  }
+});
+
+/* ---------- szabályzat nézet ---------- */
+let pendingRef=null;
+const heads=[];RULES.forEach((r,i)=>{if(isHead(r))heads.push(i);});
+function headExtent(i){const k=heads.indexOf(i);const end=k+1<heads.length?heads[k+1]:RULES.length;const a=[];for(let j=i;j<end;j++)a.push(j);return a;}
+$('toc').innerHTML=heads.map(i=>{const r=RULES[i];const major=/00$/.test(r[0])||r[0]==='483';return '<button data-i="'+i+'"'+(major?' class="major"':'')+'><span class="id">'+r[0]+'</span>'+esc(r[1])+'</button>';}).join('');
+$('toc').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.i;$('rq').value='';$('rcount').textContent='';
+  $('rview').innerHTML='<h2>'+RULES[i][0]+'. '+esc(RULES[i][1])+'</h2><div style="margin-top:12px">'+ruleHTML(headExtent(i))+'</div>';if(window.innerWidth<860)$('rview').scrollIntoView({behavior:'smooth'});});
+function showRef(ref){
+  $('rq').value='';$('rcount').textContent='';
+  $('rview').innerHTML='<h2>Szabály '+esc(ref)+'</h2><div style="margin-top:12px">'+ruleHTML(expand(ref))+'</div>';
+  $('rview').scrollIntoView({block:'start'});
+}
+function ruleSearch(){
+  const q=$('rq').value.trim();
+  if(!q){$('rcount').textContent=RULES.length+' szabálypont. Válassz szakaszt a listából, vagy keress.';return;}
+  let idx=[];let hl=null;
+  if(/^\d{3}[\d.a-z]*$/i.test(q)){const p=q.replace(/\.$/,'');RULES.forEach((r,i)=>{if(r[0]===p||r[0].startsWith(p+'.')||(p.length<3&&r[0].startsWith(p)))idx.push(i);});}
+  else{const lq=q.toLowerCase();hl=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');RULES.forEach((r,i)=>{if(r[1].toLowerCase().includes(lq)||(r[2]||[]).some(e=>e.toLowerCase().includes(lq)))idx.push(i);});}
+  $('rcount').textContent=idx.length+' találat'+(idx.length>200?', az első 200 látszik':'');
+  $('rview').innerHTML='<h2>Találatok: '+esc(q)+'</h2><div style="margin-top:12px">'+ruleHTML(idx.slice(0,200),hl)+'</div>';
+}
+$('rq').addEventListener('input',ruleSearch);
+
+/* ---------- váz ---------- */
+$('src').innerHTML='<span>Core Rules <b>'+META.rules_updated+'</b></span><span>Ban lista <b>'+META.ban_updated+'</b></span><span>Kártyaadat <b>'+META.cards_snapshot+'</b></span><span>Errata <b>'+CARDS.filter(c=>c.err!=null).length+' kártya</b></span><a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a>';
+$('foot').innerHTML='<p><strong>Készítette: Daneehunter.</strong> Nem hivatalos, rajongói segédeszköz, nem kereskedelmi célú.</p>'
+ +'<p>Az oldal kódja, a kártya és szabály megfeleltetés és a magyar magyarázatok AI segítségével készültek: Claude (Anthropic), Claude Fable 5.2 modell. Az AI által írt magyarázat tévedhet, a hivatalos szabályszöveg az irányadó.</p>'
+ +'<p>Riftbound szabálykereső was created under Riot Games\' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.</p>'
+ +'<p>A Riftbound, a League of Legends, a kártyanevek, a kártyaszövegek, a kártyaképek és a Core Rules szövege a Riot Games, Inc. tulajdona, minden jog a Riot Gamest illeti. Hivatalos oldal: <a href="https://playriftbound.com/">playriftbound.com</a>, hivatalos szabályok: <a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a>, hivatalos kártyaadatbázis: <a href="https://playriftbound.com/en-us/card-gallery/">Card Gallery</a>.</p>'
+ +'<p>Források: a szabályszöveg a Riftbound Core Rules (Last Updated '+META.rules_updated+') angol eredetije, változtatás nélkül. A ban lista ('+META.ban_updated+') és az errata a Rules Hubról és az onnan hivatkozott cikkekből származik: '+META.articles.map(a=>'<a href="'+a.u+'">'+esc(a.t)+'</a>').join(', ')+'. A kártyaadat a hivatalos Card Galleryből készült közösségi pillanatkép (LouisCourrian/riftbound-cards, '+META.cards_snapshot+'), a kártyaképek a Riot hivatalos szerveréről töltődnek be.</p>'
+ +'<p>A kártya és szabály közti megfeleltetés automatikus, a "Hogyan érinti ezt a lapot" magyarázat pedig a készítő levezetése a Core Rules szövegéből. Egyik sem hivatalos ruling: versenyen a judge és a Core Rules teljes szövege dönt.</p>';
+function renderTud(){
+  const X=D.extra||{};if(!X.glossary&&!X.flow&&!X.patchnotes)return;
+  $('tab-tud').hidden=false;let h='<div class="subnav">'+(X.glossary?'<a class="chip" href="#tud-kw" data-scroll="tud-kw">Kulcsszavak</a>':'')+(X.flow?'<a class="chip" href="#tud-flow" data-scroll="tud-flow">Játékmenet</a>':'')+(X.patchnotes?'<a class="chip" href="#tud-pn" data-scroll="tud-pn">Szabályváltozások</a>':'')+'</div>';
+  const rl=r=>'<a href="#szabalyok" data-ref="'+esc(r)+'">'+esc(r)+'</a>';
+  if(X.glossary){
+    h+='<h2 id="tud-kw" style="margin-top:14px">Kulcsszavak</h2><p class="note" style="margin:6px 0 12px">A Core Rules 805-832 kulcsszavai röviden. A pontos szöveg a szabályszámra kattintva olvasható. AI által írt összefoglaló, nem hivatalos.</p><div class="kwgrid">';
+    X.glossary.forEach(g=>{const re=new RegExp('\\['+g.kw.replace(/[-]/g,'\\-')+'(?: \\d+)?\\]');const n=CARDS.filter(c=>c.ban!==1&&re.test(c.txt||'')).length;
+      h+='<div class="kwc"><h4><span class="kw">'+esc(g.kw)+'</span>'+rl(g.rule)+'</h4><div class="k">'+esc(g.kind||'')+(g.on?' · '+esc(g.on):'')+'</div><p>'+esc(g.short||'')+'</p><ul>'+(g.points||[]).map(p=>'<li>'+rl(p[0])+'<span>'+esc(p[1])+'</span></li>').join('')+'</ul>'+(g.stack?'<p class="note">Több példány: '+esc(g.stack)+'</p>':'')+'<button data-kwq="['+esc(g.kw)+'">'+n+' lap ezzel a kulcsszóval</button></div>';});
+    h+='</div>';
+  }
+  if(X.flow){
+    h+='<h2 id="tud-flow" style="margin-top:28px">Játékmenet</h2><p class="note" style="margin:6px 0 12px">A kör, a chain, a kártyakijátszás és a combat lépései a Core Rules szerint. AI által írt összefoglaló, nem hivatalos.</p>';
+    X.flow.forEach(b=>{h+='<h3>'+esc(b.title)+'<span class="n">'+esc(b.rules||'')+'</span></h3><ol class="flow">'+(b.steps||[]).map(s=>'<li><span><b>'+esc(s.name)+'</b>'+rl(s.rule)+'<br>'+esc(s.text)+'</span></li>').join('')+'</ol>';});
+  }
+  if(X.patchnotes){
+    h+='<h2 id="tud-pn" style="margin-top:28px">Szabályváltozások</h2><p class="note" style="margin:6px 0 12px">A hivatalos patch notes cikkek rövid, saját szavas kivonata. A teljes szöveg a cikkekben olvasható.</p>';
+    X.patchnotes.forEach(p=>{h+='<div class="pn"><h3 style="margin-bottom:2px"><a href="'+esc(p.url)+'">'+esc(p.title)+'</a><span class="n">'+esc(p.date||'')+(p.effective?', hatályos: '+esc(p.effective):'')+'</span></h3><ul>'+(p.changes||[]).map(c=>'<li>'+(c.rule?rl(c.rule)+' ':'')+esc(c.text)+'</li>').join('')+'</ul></div>';});
+  }
+  $('tud').innerHTML=h;
+}
+$('tud').addEventListener('click',e=>{
+  const s=e.target.closest('a[data-scroll]');if(s){e.preventDefault();const el=$(s.dataset.scroll);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});return;}
+  const b=e.target.closest('button[data-kwq]');if(b){$('q').value=b.dataset.kwq;$('f-text').checked=true;limit=80;renderList();location.hash='#kartyak';}
+});
+function route(){
+  const v=/^#d=/.test(location.hash)?'deck':['kartyak','deck','szabalyok','tudastar'].includes(location.hash.slice(1))?location.hash.slice(1):'kartyak';
+  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  document.querySelectorAll('nav.tabs a').forEach(a=>{if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  if(v==='szabalyok'&&pendingRef){showRef(pendingRef);pendingRef=null;}
+}
+window.addEventListener('hashchange',route);
+$('deckin').placeholder=FORMAT;loadDeckFromHashOrStore();
+showCard(byName.get(norm('Star-Crossed'))||CARDS[0]);
+renderDeck();
+renderTud();
+ruleSearch();
+const h0=heads.find(i=>RULES[i][0]==='800');$('rview').innerHTML='<h2>'+RULES[h0][0]+'. '+esc(RULES[h0][1])+'</h2><div style="margin-top:12px">'+ruleHTML(headExtent(h0))+'</div>';
+route();
+window.__rb={buildPDF,parseDeck,CARDS,TOPICS};
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+[
+ {
+  "title": "Core Rules: Radiance Patch Notes (Effective October 16, 2026)",
+  "url": "https://playriftbound.com/en-us/news/announcements/core-rules-radiance-patch-notes-effective-october-16-2026/",
+  "date": "2026-10-09",
+  "effective": "2026-10-16",
+  "changes": [
+   {
+    "rule": "830",
+    "text": "Új keyword a Deploy: az ilyen gear bármelyik battlefieldre kijátszható, cleanupban nem kerül vissza a base-re, de elpusztul, ha ott egy ellenfél holdol."
+   },
+   {
+    "rule": "831",
+    "text": "Új keyword a Disarm: combatonként az első támadáskor egy ott lévő enemy unit Mightja a Disarm Value értékével csökken erre a körre, több Disarm egyetlen triggerré adódik össze."
+   },
+   {
+    "rule": "832",
+    "text": "Új keyword a Show Off: kézből felfedsz vagy a boardon kijelölsz egy megfelelő objektumot, és annak adatai a megmutatás pillanatában rögzülnek."
+   },
+   {
+    "rule": "355.7",
+    "text": "Új fogalom a Pick a nem targetelő választásokra, a Choose mostantól mindig targetelést jelent."
+   },
+   {
+    "rule": "",
+    "text": "A copy effectek saját, első layert kaptak, a Copy pedig game action lett: a létrehozott másolat a copyable traiteket printed traitként kapja meg."
+   },
+   {
+    "rule": "",
+    "text": "Különvált a negated és az ignored instruction: mistarget esetén a későbbi linked instruction is kimarad, más okból meghiúsult lépés után viszont még végrehajtódik."
+   },
+   {
+    "rule": "",
+    "text": "Pending item nem targetelhető spellel vagy abilityvel, és ha egy chainen lévő spell választásait újra kell hozni, minden döntés elölről indul, a targetelésre figyelő triggerek is újra elsülnek."
+   },
+   {
+    "rule": "143.5, 435.1.h, 718.6",
+    "text": "Unit nem attacholható más objektumhoz, és ha egy attacholt nem-unit unittá válik, azonnal leválik."
+   }
+  ]
+ },
+ {
+  "title": "October 2026 Tournament Rules Changelog",
+  "url": "https://playriftbound.com/en-us/news/announcements/october-2026-tournament-rules-changelog",
+  "date": "2026-10-09",
+  "effective": "2026-10-16",
+  "changes": [
+   {
+    "rule": "505.2-505.2.b, 505.13",
+    "text": "Loop csak akkor rövidíthető, ha teljesen determinisztikus, véletlen elem nem lehet benne."
+   },
+   {
+    "rule": "204.5.c",
+    "text": "A Floor Judge köteles közbelépni a látott hibánál akkor is, ha egyik játékos sem hívta."
+   },
+   {
+    "rule": "702.1.d",
+    "text": "Szigorúbb a penalty, ha a hibából a hibázó játékos húzott hasznot."
+   },
+   {
+    "rule": "601.3.c.6",
+    "text": "A Radiance bekerült a Standard formátum settjei közé."
+   },
+   {
+    "rule": "502.11",
+    "text": "Private információról szabad blöffölni."
+   },
+   {
+    "rule": "508.8",
+    "text": "A tokeneket olyan kártyaszerű tárggyal kell jelölni, amelyen az ellenfél számára is egyértelmű a ready vagy exhausted állapot."
+   },
+   {
+    "rule": "416.4-416.5",
+    "text": "Külső jegyzet használható sideboarding alatt és a Battlefieldek felfedése után, de a kezdőkéz felhúzásától már nem."
+   },
+   {
+    "rule": "410.4, 703.9.g",
+    "text": "Új penalty jár a tiltott scoutingért és a nem megengedett elektronikus eszközhasználatért."
+   }
+  ]
+ },
+ {
+  "title": "Core Rules: Vendetta Patch Notes",
+  "url": "https://playriftbound.com/en-us/news/announcements/core-rules-vendetta-patch-notes",
+  "date": "2026-07-17",
+  "effective": "2026-07-24",
+  "changes": [
+   {
+    "rule": "442",
+    "text": "Új az Empower, Empowered és Disempower: unit, gear és legend tartós empowered státuszt kaphat, amelyre más effectek hivatkozhatnak, és már empowered kártyán az ability nem használható újra."
+   },
+   {
+    "rule": "829",
+    "text": "Új keyword a Flow: a spell a trashből is kijátszható a Flow costért, utána banishelődik."
+   },
+   {
+    "rule": "444",
+    "text": "Új action a Burn (a Main Deck tetejéről X lap a trashbe kerül) és a Skip, amely egy eseményt a semmivel helyettesít, így annak triggerei sem sülnek el."
+   },
+   {
+    "rule": "",
+    "text": "A Token többé nem supertype, hanem az objektum eredendő kategóriája: token nem veszítheti el ezt a jellegét, kártya pedig nem válhat tokenné."
+   },
+   {
+    "rule": "",
+    "text": "Energy vagy Power fizetésére szóló utasítást a játékos figyelmen kívül hagyhat, más costok viszont továbbra is kikényszeríthetők."
+   },
+   {
+    "rule": "",
+    "text": "A unitoknak szóló sebzést módosító replacement effectek combatban már a combat damage assignmentre hatnak."
+   },
+   {
+    "rule": "",
+    "text": "Triggered abilityben a \"you may\" döntést finalizáláskor kell meghozni, nem a triggereléskor, és minden \"When I die\" ability használhatja a forrás halála előtti adatokat."
+   },
+   {
+    "rule": "",
+    "text": "Cleanupban lekerül a Contested arról a battlefieldről, ahol a státuszt adó játékosnak nincs unitja és nem zajlik Showdown vagy Combat."
+   }
+  ]
+ },
+ {
+  "title": "Riftbound Core Rules: Unleashed Patch Notes",
+  "url": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-core-rules-unleashed-patch-notes/",
+  "date": "2026-03-30",
+  "effective": "",
+  "changes": [
+   {
+    "rule": "",
+    "text": "Új erőforrás az XP: a Hunt keyworddel rendelkező unit conquer vagy hold esetén XP-t ad, a Level pedig adott XP-szinttől kapcsolja be a hozzá tartozó abilityt."
+   },
+   {
+    "rule": "",
+    "text": "Bevezették a dependent keyword fogalmát ([>] jelöléssel): a függő ability inaktív, amíg a feltétel nem teljesül, és a Legion is ilyen lett."
+   },
+   {
+    "rule": "822",
+    "text": "Új keyword az Ambush (kijátszás olyan battlefieldre, ahol van unitod, feltételes Reactionnel), valamint a Backline, amelynek unitja a combat damage-et utolsóként kapja."
+   },
+   {
+    "rule": "437",
+    "text": "Új actionök: Replace, Create, Predict és Prevent, a tokenek létrehozása például azonnal, a chain használata nélkül történik."
+   },
+   {
+    "rule": "",
+    "text": "A chain feloldása HOT FEPR lett: előbb a függőben lévő teendők rendezése jön, és a finalizálás kikerült a cleanupból."
+   },
+   {
+    "rule": "",
+    "text": "Nyerni cleanupban csak úgy lehet, ha a pontszám eléri a Victory Score-t és minden ellenfélénél magasabb."
+   },
+   {
+    "rule": "",
+    "text": "Battlefield feletti controlt a folyamatban lévő combat vagy showdown rögzíti, nem a contested státusz, és chainen lévő item mellett sem veszíthető el."
+   },
+   {
+    "rule": "734",
+    "text": "Új az Additional Turn: a soron lévő kör után ékelődik be, a Turn Ordert nem változtatja meg, emellett az Action phase neve main phase, az End of Turn Phase neve Ending Phase lett."
+   }
+  ]
+ },
+ {
+  "title": "Riftbound Core Rules: Spiritforged Patch Notes",
+  "url": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-core-rules-spiritforged-patch-notes/",
+  "date": "2025-12-05",
+  "effective": "2025-12-12",
+  "changes": [
+   {
+    "rule": "716",
+    "text": "Új rendszer az Attachment: kártya másik kártyához csatolható, a Might Bonus a felső kártya Mightját módosítja, és megjelent az Attach és a Detach action."
+   },
+   {
+    "rule": "720",
+    "text": "Új fogalom az inactive text: az attacholt kártya rules textje nem fejt ki hatást, de más effectek továbbra is hivatkozhatnak rá."
+   },
+   {
+    "rule": "818",
+    "text": "Új keyword az Equip: a cost kifizetésével az Equipment egy saját unitra kerül, és játékban marad, ha a unit távozik."
+   },
+   {
+    "rule": "819",
+    "text": "Új keyword a Quick-Draw: az Equipment Reaction időzítéssel játszható ki kézből, és Equip cost nélkül azonnal felkerül egy saját unitra."
+   },
+   {
+    "rule": "821",
+    "text": "Új keyword a Weaponmaster: kijátszáskor egy saját, akár már más uniton lévő Equipment csökkentett Equip costért átcsatolható."
+   },
+   {
+    "rule": "",
+    "text": "Új keyword a Repeat: opcionális additional cost, amellyel a spell hatása még egyszer végrehajtódik, de ez egyetlen kijátszásnak számít."
+   },
+   {
+    "rule": "",
+    "text": "Chainen lévő ability controllere nem változik, ha a forrás objektum gazdát cserél, a Priority pedig egyszerre csak egy játékosnál lehet, a Focus önmagában nem jogosít cselekvésre."
+   },
+   {
+    "rule": "",
+    "text": "Unit alapesetben a saját base-re vagy általad kontrollált battlefieldre játszható ki, továbbá game action lett a Double és a Swap a Might értékekre."
+   }
+  ]
+ },
+ {
+  "title": "Riftbound Core Rules: Patch Notes",
+  "url": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-core-rules-patch-notes/",
+  "date": "2025-10-24",
+  "effective": "",
+  "changes": [
+   {
+    "rule": "",
+    "text": "Két új Silver Rule került be: a tiltás erősebb az engedélynél (\"Can't beats can\"), és mindenből annyit kell végrehajtani, amennyit lehet (DAMAYC)."
+   },
+   {
+    "rule": "",
+    "text": "Új chain-feloldási folyamat a FEPR (Finalize, Execute, Pass, Resolve) a pending és finalizing rendszerrel, és triggered ability costja megtagadható, ekkor az ability nem finalizálódik."
+   },
+   {
+    "rule": "",
+    "text": "A cleanup addig ismétlődik, amíg egy kör érdemi történés nélkül le nem zajlik, és megjelentek az egyszer lefutó Special Cleanupok."
+   },
+   {
+    "rule": "",
+    "text": "Contested battlefield feletti control akkor sem veszíthető el, ha a játékosnak nincs ott unitja."
+   },
+   {
+    "rule": "",
+    "text": "Az Attack és Defend trigger combatonként egyszer sül el, amikor az objektum először kapja meg a designationt, ami eltér a korábbi FAQ-tól."
+   },
+   {
+    "rule": "",
+    "text": "A nem elérhető számérték null, nem 0."
+   },
+   {
+    "rule": "",
+    "text": "A Recall csak a base-re visz vissza, nem számít move-nak és nem változtat az objektum állapotán, az Accelerate costja pedig a unit domainjét követi, több vagy nulla domainnél [A]."
+   },
+   {
+    "rule": "",
+    "text": "2v2-ben a partnerek nem használhatják ugyanazt a battlefieldet és Champion Legendet, a Free-For-All \"Relevant Players\" fogalma pedig megszűnt."
+   }
+  ]
+ }
+]
