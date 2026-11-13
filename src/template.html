@@ -279,6 +279,10 @@ table.nt td.f{width:1%;white-space:nowrap}
 "use strict";
 const D=JSON.parse(document.getElementById('data').textContent);
 const RULES=D.rules, TOPICS=D.topics, CARDS=D.cards, META=D.meta;
+const TODAY=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');})();
+const BF=META.banfut;const BAN_ACTIVE=!!(BF&&TODAY>=BF.from);
+CARDS.forEach(c=>{if(c.banf&&TODAY>=c.banf){c.ban=1;c.banNew=1;}});
+const banDate=()=>BAN_ACTIVE?BF.from:META.ban_updated;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[\u2018\u2019`]/g,"'").replace(/[^a-z0-9']+/g,' ').trim();
@@ -382,10 +386,12 @@ function cardHeadHTML(c,tag){
   chips.push('<span class="chip">'+esc(c.sets.join(', '))+'</span>');
   if(c.ban===1)chips.push('<span class="chip ban">BANNED (Constructed)</span>');
   if(c.ban===2)chips.push('<span class="chip ban">BANNED 2v2 Constructed</span>');
+  if(c.banf&&!c.ban)chips.push('<span class="chip ban">BANNED '+c.banf+'-tól</span>');
   if(c.err!=null)chips.push('<span class="chip err">ERRATA</span>');
   const IMG='https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data_live/';
   let h='<div class="cardtop"><div class="main"><div class="card-head"><'+tag+' style="margin:0">'+esc(c.n)+'</'+tag+'><a class="note" href="https://playriftbound.com/en-us/card-gallery/#card-gallery--'+c.code+'">hivatalos Card Gallery ('+c.code+')</a></div><div class="meta">'+chips.join('')+'</div>';
-  if(c.ban===1)h+='<div class="banbox">Ez a kártya a Rules Hub szerint tiltott a Constructed formátumban (lista frissítve: '+META.ban_updated+'). A keresőben csak a "banned kártyák is" kapcsolóval jelenik meg.</div>';
+  if(c.banf&&!c.ban)h+='<div class="banbox">Ez a kártya '+c.banf+'-tól tiltott a Standard és a 2v2 Constructed formátumban. Forrás: <a href="'+BF.url+'">'+esc(BF.title)+'</a>. Addig még játszható.</div>';
+  if(c.ban===1)h+='<div class="banbox">Ez a kártya '+(c.banNew?'a '+esc(BF.title)+' cikk szerint':'a Rules Hub szerint')+' tiltott a Constructed formátumban (érvényes: '+(c.banNew?c.banf:META.ban_updated)+'). A keresőben csak a "banned kártyák is" kapcsolóval jelenik meg.</div>';
   if(c.ban===2)h+='<div class="banbox">Ez a legend a Rules Hub szerint a 2v2 Constructed formátumban tiltott (lista frissítve: '+META.ban_updated+'). 1v1 Constructedben játszható.</div>';
   h+='<h3>'+(c.err!=null?'Jelenlegi szöveg (errata után)':'Kártyaszöveg')+'</h3><div class="ctext">'+cardText(c.txt)+'</div>';
   if(c.err!=null){
@@ -436,7 +442,7 @@ function renderList(){
   const res=filtered();
   const total=CARDS.filter(c=>c.ban!==1).length;
   $('count').textContent=res.length+' találat, '+total+' nem banned egyedi kártya az adatbázisban';
-  $('list').innerHTML=res.slice(0,limit).map(c=>'<li><button role="option" data-n="'+esc(c.n)+'" aria-selected="'+(sel===c)+'"><span class="nm">'+domDots(c)+' '+esc(c.n)+(c.err!=null?' <span class="chip err" style="font-size:10px;padding:0 4px">errata</span>':'')+(c.ban?' <span class="chip ban" style="font-size:10px;padding:0 4px">ban</span>':'')+'</span><span class="ty">'+esc(typeLine(c))+'</span></button></li>').join('')
+  $('list').innerHTML=res.slice(0,limit).map(c=>'<li><button role="option" data-n="'+esc(c.n)+'" aria-selected="'+(sel===c)+'"><span class="nm">'+domDots(c)+' '+esc(c.n)+(c.err!=null?' <span class="chip err" style="font-size:10px;padding:0 4px">errata</span>':'')+(c.ban?' <span class="chip ban" style="font-size:10px;padding:0 4px">ban</span>':c.banf?' <span class="chip ban" style="font-size:10px;padding:0 4px">ban '+c.banf.slice(5)+'</span>':'')+'</span><span class="ty">'+esc(typeLine(c))+'</span></button></li>').join('')
     +(res.length>limit?'<li><button class="more" data-more="1">További '+(res.length-limit)+' találat megjelenítése</button></li>':'');
   if(!res.length)$('list').innerHTML='<li class="pad note">Nincs találat. A banned kártyák alapból rejtve vannak.</li>';
 }
@@ -534,7 +540,9 @@ function checkDeck(){
   add(bn===3&&B.every(r=>r.card.t==='Battlefield'),'487.5','1v1 módban 3 Battlefield kell, ebből egy kerül véletlenszerűen játékba. Most: '+bn+'. Más módban a szám eltér (103.5.a).');
   add(B.every(r=>r.qty===1),'103.5.c','Azonos nevű Battlefieldből csak egy lehet.');
   const ban=main.concat(B,SB,L).filter(r=>r.card.ban===1);
-  add(!ban.length,'103.3.e','Tiltott lap nem lehet a deckben (Rules Hub, '+META.ban_updated+').'+(ban.length?' Tiltott: '+[...new Set(ban.map(r=>r.card.n))].join(', ')+'.':''));
+  add(!ban.length,'103.3.e','Tiltott lap nem lehet a deckben (érvényes ban lista: '+banDate()+').'+(ban.length?' Tiltott: '+[...new Set(ban.map(r=>r.card.n))].join(', ')+'.':''));
+  const fut=main.concat(B,SB,L).filter(r=>r.card.banf&&!r.card.ban);
+  if(fut.length)out.push([null,'103.3.e','Figyelem: '+BF.from+'-tól tiltott lesz: '+[...new Set(fut.map(r=>r.card.n))].join(', ')+'. A deck addig legális, utána ezeket cserélni kell.']);
   if(SB.length){const all={};main.concat(SB).forEach(r=>all[r.card.n]=(all[r.card.n]||0)+r.qty);const o2=Object.keys(all).filter(k=>all[k]>3);
     out.push([null,'','Sideboard: '+sum(SB)+' lap. A sideboard méretét és a példányszám-limit számítását a Tournament Rules szabályozza, azt ez az oldal nem ellenőrzi.'+(o2.length?' Main Deck és Sideboard együtt 3-nál több: '+o2.map(k=>k+' ('+all[k]+')').join(', ')+'.':'')]);}
   return out;
@@ -590,7 +598,8 @@ function renderDeck(){
   const warns=[];const tot={};
   DECK.forEach(s=>s.rows.forEach(r=>{
     if(!r.card){warns.push('Ismeretlen kártyanév a(z) '+esc(s.name)+' szekcióban: <b>'+esc(r.name)+'</b>.'+(r.sug.length?' Erre gondoltál? '+r.sug.map(c=>'<button data-fix="'+esc(r.name)+'" data-to="'+esc(c.a.find(a=>a.includes(','))||c.a[0])+'">'+esc(c.n)+'</button>').join(''):''));return;}
-    if(r.card.ban===1)warns.push('<b>'+esc(r.card.n)+'</b> a Rules Hub szerint tiltott Constructedben ('+META.ban_updated+').');
+    if(r.card.ban===1)warns.push('<b>'+esc(r.card.n)+'</b> tiltott Constructedben ('+(r.card.banNew?r.card.banf:META.ban_updated)+').');
+    else if(r.card.banf)warns.push('<b>'+esc(r.card.n)+'</b> '+r.card.banf+'-tól tiltott lesz (<a href="'+BF.url+'">Radiance ban list</a>).');
     if(r.card.ban===2)warns.push('<b>'+esc(r.card.n)+'</b> a 2v2 Constructed formátumban tiltott ('+META.ban_updated+').');
     if(['Unit','Gear','Spell'].includes(r.card.t)&&!/side/i.test(s.name))tot[r.card.n]=(tot[r.card.n]||0)+r.qty;
   }));
@@ -608,7 +617,7 @@ function renderDeck(){
       const c=r.card;
       if(!c){h+='<details class="drow unk"><summary><span class="q">'+r.qty+'</span><span class="nm">'+esc(r.name)+'</span><span class="ty">ismeretlen</span><span class="rs"></span></summary></details>';return;}
       const rs=c.tp.map(p=>'<span title="'+esc(TOPICS[p[0]].title)+'">'+TOPICS[p[0]].refs[0]+'</span>').join('');
-      h+='<details class="drow" data-s="'+si+'" data-r="'+ri+'"><summary><span class="q">'+r.qty+'</span><span class="nm">'+domDots(c)+' '+esc(c.n)+(c.err!=null?' <span class="chip err" style="font-size:10px;padding:0 4px">errata</span>':'')+(c.ban?' <span class="chip ban" style="font-size:10px;padding:0 4px">ban</span>':'')+'</span><span class="ty">'+esc(typeLine(c))+'</span><span class="rs">'+rs+'</span></summary><div class="body"></div></details>';
+      h+='<details class="drow" data-s="'+si+'" data-r="'+ri+'"><summary><span class="q">'+r.qty+'</span><span class="nm">'+domDots(c)+' '+esc(c.n)+(c.err!=null?' <span class="chip err" style="font-size:10px;padding:0 4px">errata</span>':'')+(c.ban?' <span class="chip ban" style="font-size:10px;padding:0 4px">ban</span>':c.banf?' <span class="chip ban" style="font-size:10px;padding:0 4px">ban '+c.banf.slice(5)+'</span>':'')+'</span><span class="ty">'+esc(typeLine(c))+'</span><span class="rs">'+rs+'</span></summary><div class="body"></div></details>';
     });
   });
   h+='</div>';
@@ -658,13 +667,13 @@ function buildPDF(){
   const legend=(DECK.find(s=>/legend/i.test(s.name))||{rows:[]}).rows.map(r=>r.card?r.card.n:r.name).join(', ');
   put('Riftbound deck szabály-referencia',{size:20,style:'bold'});
   if(legend)put('Legend: '+legend,{size:12,style:'bold',color:[110,75,0]});
-  put('Készült: '+new Date().toISOString().slice(0,10)+'. Források: Riftbound Core Rules (Last Updated '+META.rules_updated+'), Rules Hub ban lista ('+META.ban_updated+'), hivatalos errata cikkek, Card Gallery pillanatkép ('+META.cards_snapshot+').',{size:8.5,color:[90,98,115],before:1});
+  put('Készült: '+new Date().toISOString().slice(0,10)+'. Források: Riftbound Core Rules (Last Updated '+META.rules_updated+'), Rules Hub ban lista ('+META.ban_updated+', plusz a '+BF.from+'-tól hatályos Radiance ban list), hivatalos errata cikkek, Card Gallery pillanatkép ('+META.cards_snapshot+').',{size:8.5,color:[90,98,115],before:1});
   put('AI segítségével készült: Claude (Anthropic), Claude Fable 5.2 és Claude Opus 5.5 modell.',{size:8.5,color:[90,98,115]});
   put('Nem hivatalos segédanyag, készítette: Daneehunter. A Riftbound a Riot Games tulajdona, a Riot Games nem támogatja és nem szponzorálja ezt az anyagot. Hivatalos oldal: https://playriftbound.com',{size:8.5,color:[90,98,115]});
   put('Jelölés a kártyaszövegben: [1] Energy, [A] bármely domain Power, [C] a kártya saját domainjének Power-e, [Exhaust] a kártya kimerítése, Might a harci érték. A szabályszöveg az eredeti angol Core Rules szöveg.',{size:8.5,color:[90,98,115],after:2});
   rule();
   put('Deck összetétel',{size:13,style:'bold',before:1});
-  DECK.forEach(s=>{put(s.name+' ('+s.rows.reduce((a,r)=>a+r.qty,0)+')',{size:9.5,style:'bold',before:1.5});s.rows.forEach(r=>put(r.qty+'  '+(r.card?r.card.n:r.name+'  [ismeretlen kártyanév]')+(r.card&&r.card.err!=null?'  [errata]':'')+(r.card&&r.card.ban?'  [BANNED]':''),{size:9,indent:4}));});
+  DECK.forEach(s=>{put(s.name+' ('+s.rows.reduce((a,r)=>a+r.qty,0)+')',{size:9.5,style:'bold',before:1.5});s.rows.forEach(r=>put(r.qty+'  '+(r.card?r.card.n:r.name+'  [ismeretlen kártyanév]')+(r.card&&r.card.err!=null?'  [errata]':'')+(r.card&&r.card.ban?'  [BANNED]':r.card&&r.card.banf?'  [BANNED '+r.card.banf+'-tól]':''),{size:9,indent:4}));});
   const lc=checkDeck();if(lc.length){put('Deck legalitás (Core Rules 103)',{size:13,style:'bold',before:3});lc.forEach(x=>put((x[0]===null?'INFO':x[0]?'OK':'HIBA')+'   '+(x[1]?x[1]+'  ':'')+x[2],{size:9,indent:2,color:x[0]===false?[160,50,15]:[20,24,34]}));}
   const seen=new Map();
   DECK.forEach(s=>s.rows.forEach(r=>{if(!r.card)return;if(!seen.has(r.card))seen.set(r.card,[]);seen.get(r.card).push(r.qty+'x '+s.name);}));
@@ -676,6 +685,7 @@ function buildPDF(){
     const st=[typeLine(c)];if(c.d&&c.d.length)st.push(c.d.join(' + '));if(c.e!=null)st.push('Energy '+c.e);if(c.p)st.push('Power '+c.p);if(c.m!=null)st.push('Might '+c.m);st.push(where.join(', '));
     put(st.join('   |   '),{size:8.5,color:[90,98,115]});
     if(c.ban)put(c.ban===1?'BANNED: tiltott a Constructed formátumban.':'BANNED a 2v2 Constructed formátumban.',{size:9,style:'bold',color:[160,50,15]});
+    else if(c.banf)put('BANNED '+c.banf+'-tól (Radiance ban list, Standard és 2v2 Constructed).',{size:9,style:'bold',color:[160,50,15]});
     if(c.txt)put(pdfCardText(c.txt),{size:9.5,indent:3,before:1});
     if(c.err!=null){put('Errata: a szöveg megváltozott, a fenti a hatályos. Forrás: '+META.articles[c.err].t+', '+META.articles[c.err].u,{size:8.5,style:'italic',color:[110,75,0],indent:3,before:0.5});
       if(c.old)put('Nyomtatott szöveg: '+pdfCardText(c.old).replace(/\n/g,' / '),{size:8.5,color:[90,98,115],indent:3});}
@@ -746,12 +756,12 @@ function ruleSearch(){
 $('rq').addEventListener('input',ruleSearch);
 
 /* ---------- váz ---------- */
-$('src').innerHTML='<span>Core Rules <b>'+META.rules_updated+'</b></span><span>Ban lista <b>'+META.ban_updated+'</b></span><span>Kártyaadat <b>'+META.cards_snapshot+'</b></span><span>Errata <b>'+CARDS.filter(c=>c.err!=null).length+' kártya</b></span><a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a>';
+$('src').innerHTML='<span>Core Rules <b>'+META.rules_updated+'</b></span><span>Ban lista <b>'+META.ban_updated+'</b>'+(BF?(BAN_ACTIVE?' + <b>'+BF.from+'</b>':', új: <b>'+BF.from+'</b>'):'')+'</span><span>Kártyaadat <b>'+META.cards_snapshot+'</b></span><span>Errata <b>'+CARDS.filter(c=>c.err!=null).length+' kártya</b></span><a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a>';
 $('foot').innerHTML='<p><strong>Készítette: Daneehunter.</strong> Nem hivatalos, rajongói segédeszköz, nem kereskedelmi célú.</p>'
  +'<p>Az oldal kódja, a kártya és szabály megfeleltetés és a magyar magyarázatok AI segítségével készültek: Claude (Anthropic), Claude Fable 5.2 és Claude Opus 5.5 modell. Az AI által írt magyarázat tévedhet, a hivatalos szabályszöveg az irányadó.</p>'
  +'<p>Riftbound szabálykereső was created under Riot Games\' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.</p>'
  +'<p>A Riftbound, a League of Legends, a kártyanevek, a kártyaszövegek, a kártyaképek és a Core Rules szövege a Riot Games, Inc. tulajdona, minden jog a Riot Gamest illeti. Hivatalos oldal: <a href="https://playriftbound.com/">playriftbound.com</a>, hivatalos szabályok: <a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a>, hivatalos kártyaadatbázis: <a href="https://playriftbound.com/en-us/card-gallery/">Card Gallery</a>.</p>'
- +'<p>Források: a szabályszöveg a Riftbound Core Rules (Last Updated '+META.rules_updated+') angol eredetije, változtatás nélkül. A ban lista ('+META.ban_updated+') és az errata a Rules Hubról és az onnan hivatkozott cikkekből származik: '+META.articles.map(a=>'<a href="'+a.u+'">'+esc(a.t)+'</a>').join(', ')+'. A kártyaadat a hivatalos Card Galleryből készült közösségi pillanatkép (LouisCourrian/riftbound-cards, '+META.cards_snapshot+'), a kártyaképek a Riot hivatalos szerveréről töltődnek be.</p>'
+ +'<p>Források: a szabályszöveg a Riftbound Core Rules (Last Updated '+META.rules_updated+') angol eredetije, változtatás nélkül. A ban lista ('+META.ban_updated+') a Rules Hubról, a '+BF.from+'-tól érvényes kiegészítés a <a href="'+BF.url+'">'+esc(BF.title)+'</a> cikkből, az errata a Rules Hubról és az onnan hivatkozott cikkekből származik: '+META.articles.map(a=>'<a href="'+a.u+'">'+esc(a.t)+'</a>').join(', ')+'. A kártyaadat a hivatalos Card Galleryből készült közösségi pillanatkép (LouisCourrian/riftbound-cards, '+META.cards_snapshot+'), a kártyaképek a Riot hivatalos szerveréről töltődnek be.</p>'
  +'<p>A kártya és szabály közti megfeleltetés automatikus, a "Hogyan érinti ezt a lapot" magyarázat pedig a készítő levezetése a Core Rules szövegéből. Egyik sem hivatalos ruling: versenyen a judge és a Core Rules teljes szövege dönt.</p>';
 const tip=$('tip');let tipFor=null;
 function showTip(el){const x=TERMS[+el.dataset.t];if(!x)return;tipFor=el;

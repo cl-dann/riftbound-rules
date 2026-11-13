@@ -24,6 +24,9 @@ MANUAL={ # hianyzik az adatforrasbol, az Unleashed errata cikkbol
 }
 BAN=["Called Shot","Ekko, Recurrent","Draven, Vanquisher","Fight or Flight","Scrapheap","Stealthy Pursuer","Stacked Deck","The Arena's Greatest","Aspirant's Climb","The Dreaming Tree","Obelisk of Power","Reaver's Row"]
 BAN2=["Wuju Bladesman"]
+# Radiance ban list frissites, kozzeteve 2026-11-13, hatalyos 2026-11-23 (Standard es 2v2 Constructed)
+BAN_FUT={'from':'2026-11-23','published':'2026-11-13','title':'Radiance Ban List Updates (hatályos 2026-11-23)','url':'https://playriftbound.com/en-us/news/announcements/radiance-ban-list-updates-effective-november-23-2026/',
+ 'cards':["Riven, Broken Blade","Zhonya's Hourglass","Stellacorn Herder","Nocturne, Horrifying","Rhasa the Sunderer","Brynhir Thundersong","Dazzling Aurora","Baited Hook","Emperor's Dais","Star Spring"]}
 champs={x['name'] for x in C if x['cardType']=='Unit' and 'Champion' in x['cardTypeLabels']}
 groups=collections.OrderedDict()
 for x in C:
@@ -56,6 +59,7 @@ for (fn,ty),vs in groups.items():
       'txt':txt,'old':printed if (err is not None and printed!=txt) else None,'err':err,
       'img':(base.get('imageUrl') or '').rsplit('/',1)[-1],
       'ch':chtag,
+      'banf':BAN_FUT['from'] if fn in BAN_FUT['cards'] else None,
       'ban':1 if fn in BAN else (2 if base['name'] in BAN2 and ty=='Legend' else 0),'_fn':fn,'_name':base['name']})
 assert all(any(c['_fn']==b for c in cards) for b in BAN), [b for b in BAN if not any(c['_fn']==b for c in cards)]
 TXT_OVERRIDE={ # a hivatalos Spiritforged errata cikk alapjan javitva (az adatforras hibasan vette at)
@@ -175,7 +179,7 @@ cards.sort(key=lambda c:c['n'].lower())
 GENERAL=[{'title':'Golden and Silver Rules','refs':['000-056'],'for':'all'},{'title':'Cards (felépítés, cost, domain, rules text)','refs':['125-139'],'for':'all'},
  {'title':'Playing Cards','refs':['349-359'],'for':'main'},{'title':'Costs','refs':['201-206'],'for':'main'},{'title':'Deck Construction','refs':['101-103'],'for':'all'}]
 META={'rules_updated':'2026-10-09','ban_updated':'2026-09-18','cards_snapshot':'2026-11-12','articles':ARTICLES,
- 'ban':BAN,'ban2':['Master Yi, Wuju Bladesman']}
+ 'ban':BAN,'ban2':['Master Yi, Wuju Bladesman'],'banfut':BAN_FUT}
 EXTRA={}
 import os
 for k in ('glossary','flow','patchnotes','terms'):
@@ -194,7 +198,7 @@ out={'meta':META,'rules':[[r['id'],r['t'],r.get('ex',[])] for r in R],'topics':T
 json.dump(out,open('data.json','w'),ensure_ascii=False,separators=(',',':'))
 print('cards',len(cards),'topics',len(T),'bytes',len(json.dumps(out,ensure_ascii=False)))
 print('errata',sum(c['err'] is not None for c in cards),collections.Counter(c['err'] for c in cards if c['err'] is not None))
-print('banned',[c['n'] for c in cards if c['ban']])
+print('banned',[c['n'] for c in cards if c['ban']]); print('future ban',[c['n'] for c in cards if c.get('banf')])
 print('avg topics',sum(len(c['tp']) for c in cards)/len(cards))
 cnt=collections.Counter(T[i]['title'] for c in cards for i,_ in c['tp']); print(cnt.most_common())
 
