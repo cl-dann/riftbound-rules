@@ -1,0 +1,348 @@
+[
+ {
+  "title": "1. Mi a cél?",
+  "rules": "194",
+  "paras": [
+   "Riftboundban pontokat gyűjtesz. 1v1 játékban az nyer, aki elsőként eléri a 8 pontot. A pontok nagy része a battlefieldekből jön: ezek a pálya közös mezői, amelyekért a két játékos harcol.",
+   "Egy battlefieldért kétféleképpen kapsz pontot. Conquer, amikor megszerzed az irányítását. Hold, amikor a saját köröd elején még mindig a tiéd. Ugyanazt a battlefieldet egy körben csak egyszer pontozhatod.",
+   "Az utolsó, győztes pontnál van egy csavar: ha conquerrel szereznéd meg, csak akkor kapod meg, ha abban a körben minden battlefieldet pontoztál. Különben a pont helyett húzol egy lapot. Holddal vagy kártyahatással ez a megkötés nem érvényes."
+  ],
+  "steps": [
+   [
+    "487.3",
+    "1v1 (Duel és Match) módban a Victory Score 8 pont, ennyit kell elérned."
+   ],
+   [
+    "194.1.a",
+    "Pontot kapsz, ha a köröd elején megtartasz (hold) egy battlefieldet."
+   ],
+   [
+    "194.1.b",
+    "Pontot kapsz, ha elfoglalsz (conquer) egy battlefieldet."
+   ],
+   [
+    "194.1.c",
+    "Egyes spellek és abilityk közvetlenül is adhatnak pontot."
+   ],
+   [
+    "194.1.d",
+    "Ha az opponent üres Main Deckből húzna (Burn Out), te kapsz 1 pontot."
+   ],
+   [
+    "472",
+    "Egy battlefield körönként csak egyszer pontozható, akár conquer, akár hold."
+   ],
+   [
+    "473.1.b.1",
+    "Az utolsó pontot conquerrel csak akkor kapod meg, ha abban a körben minden battlefieldet pontoztál, különben húzol 1 lapot."
+   ],
+   [
+    "194.2",
+    "Akkor nyersz, ha egy cleanupkor megvan a 8 pontod, és több pontod van, mint az opponentnek."
+   ]
+  ]
+ },
+ {
+  "title": "2. Mi kell a játékhoz?",
+  "rules": "103",
+  "paras": [
+   "A decked négy részből áll: egy Champion Legend, egy legalább 40 lapos Main Deck, egy pontosan 12 lapos Rune Deck, és a battlefieldek. 1v1-ben 3 battlefieldet hozol, de játékonként csak 1-et használsz.",
+   "A legend dönti el, milyen lapok mehetnek a deckbe: a bal felső sarkában lévő domain szimbólumok adják a deck Domain Identityjét, vagyis azt a domainkészletet, amelybe minden lapnak és rune-nak bele kell férnie. A Chosen Champion egy champion unit, amelynek a champion tagja egyezik a legendével. A Main Deck része, de a játék elején külön, a Champion Zone-ban vár, és onnan ugyanúgy kijátszhatod, mint egy lapot a kezedből.",
+   "Az asztalon mindkét játékosnak van saját base-e (itt állnak a unitjaid, gearjeid és rune-jaid), Legend Zone-ja, Champion Zone-ja, Main Deck és Rune Deck helye, trash-e és Banishmentje. A battlefieldek középen, a közös Battlefield Zone-ban vannak."
+  ],
+  "steps": [
+   [
+    "103.2",
+    "1 Champion Legend: a Legend Zone-ba kerül, és nem lehet kijátszani, megölni vagy elmozdítani."
+   ],
+   [
+    "103.3",
+    "Main Deck legalább 40 lappal: unitok, gearek és spellek, a Chosen Championnel együtt."
+   ],
+   [
+    "103.3.a.2",
+    "A Chosen Champion csak olyan champion unit lehet, amelynek a tagja egyezik a legend tagjával."
+   ],
+   [
+    "103.3.b",
+    "Azonos nevű lapból legfeljebb 3 lehet a Main Deckben, a Chosen Championt is beleszámolva."
+   ],
+   [
+    "103.4.a",
+    "Rune Deck: pontosan 12 rune, a legend Domain Identityjén belül."
+   ],
+   [
+    "487.4.a",
+    "1v1-ben 3 battlefieldet hozol a deckkel, ebből 1 kerül játékba."
+   ],
+   [
+    "107.1.c",
+    "A base-edben vannak a gearjeid és a rune-jaid, és innen indulnak a unitjaid a battlefieldekre."
+   ],
+   [
+    "107.2.a",
+    "A battlefieldek a közös Battlefield Zone-ban vannak, ezekért folyik a harc."
+   ]
+  ]
+ },
+ {
+  "title": "3. Előkészület",
+  "rules": "110-118",
+  "paras": [
+   "A setup rövid, és mindig ugyanaz a sorrend. Kiteszed a legendet és a Chosen Championt, kiválasztod a battlefieldet, megkevered a két paklit, eldöntitek, ki kezd, mindenki húz 4 lapot, majd jöhet a mulligan.",
+   "Mulligan: legfeljebb 2 lapot félreteszel a kezdőkezedből, húzol helyettük ugyanennyit, és a félretett lapok a Main Deck aljára kerülnek. Ha mind a 4 lap jó, nem kell cserélned.",
+   "A battlefield kiválasztása a két 1v1 módban eltér. Duelben (egy játék) mindenki véletlenszerűen húz egyet a saját 3 battlefieldje közül. Matchben (best of 3) mindenki maga választ, és amelyik battlefieldet egy megnyert játékban már használtátok, az a meccs további részében nem jöhet újra."
+  ],
+  "steps": [
+   [
+    "111",
+    "Tedd a Champion Legendet a Legend Zone-ba."
+   ],
+   [
+    "112",
+    "Tedd a Chosen Championt a Champion Zone-ba."
+   ],
+   [
+    "487.5",
+    "Duelben mindenki véletlenszerűen kiválaszt 1 battlefieldet a 3-ból, a másik kettő kimarad, a kiválasztottakat egyszerre teszitek középre."
+   ],
+   [
+    "114",
+    "Keverd meg külön a Main Decket és a Rune Decket, és tedd őket a helyükre."
+   ],
+   [
+    "115",
+    "Döntsétek el bármilyen tisztességes véletlen módszerrel, ki kezd."
+   ],
+   [
+    "116",
+    "Mindenki húz 4 lapot."
+   ],
+   [
+    "117",
+    "Kezdési sorrendben jön a mulligan: legfeljebb 2 lapot félreteszel, ugyanennyit húzol, a félretetteket a Main Deck aljára teszed."
+   ],
+   [
+    "487.7",
+    "Aki másodikként kezd, az első Channel Phase-ében 1 extra rune-t channel-el, vagyis 3-at."
+   ]
+  ]
+ },
+ {
+  "title": "4. Egy kör menete",
+  "rules": "314-317",
+  "paras": [
+   "A kör eleje szinte automatikus: mindent felállítasz, pontozod a battlefieldeket, amiket még tartasz, kapsz 2 rune-t és húzol 1 lapot. Ezután jön a Main Phase, ahol te döntesz mindenről, és a végén lezárod a kört.",
+   "A Main Phase-ben nincs kötött sorrend. Kijátszhatsz lapokat, mozgathatsz unitokat, használhatsz abilityket, amíg van mire és miből. Ha végeztél, jelzed, hogy vége a körödnek.",
+   "A kör végén minden unitról lekerül a damage, és lejár minden \"this turn\" hatás. Ami Energy vagy Power megmaradt, elveszik."
+  ],
+  "steps": [
+   [
+    "315.1.b",
+    "Awaken Phase: minden exhausted lapodat ready-vé teszed (visszafordítod állóba)."
+   ],
+   [
+    "315.2.b.2",
+    "Beginning Phase: minden battlefield, amit még te irányítasz, hold, és ez pontot ér."
+   ],
+   [
+    "315.3.b",
+    "Channel Phase: 2 rune-t teszel a Rune Deck tetejéről a boardra, ready állapotban."
+   ],
+   [
+    "315.4.b",
+    "Draw Phase: húzol 1 lapot a Main Deckből."
+   ],
+   [
+    "316.3",
+    "Main Phase eleje: mindkét játékos Rune Poolja kiürül."
+   ],
+   [
+    "316.5.a",
+    "Main Phase: bármennyi lapot kijátszhatsz, mozgathatsz és abilityt használhatsz, tetszőleges sorrendben."
+   ],
+   [
+    "316.9",
+    "Ha nincs több teendőd, jelzed a kör végét."
+   ],
+   [
+    "317.2.a",
+    "Ending Phase: a unitok healelnek, a \"this turn\" hatások lejárnak, a Rune Poolok kiürülnek, és a másik játékos jön."
+   ]
+  ]
+ },
+ {
+  "title": "5. Hogyan fizetsz?",
+  "rules": "160-168",
+  "paras": [
+   "Minden Main Deck lap bal felső sarkában ott az ára. A szám az Energy költség, ezt bármilyen rune fizetheti. Alatta a domain szimbólumok a Power költség, ehhez a megfelelő domainű Power kell. Nem minden lapnak van Power költsége.",
+   "A rune-ok adják a fizetőeszközt, két módon. Exhaustolod a rune-t (oldalra fordítod), és ez 1 Energyt ad. Vagy recycle-öd (a Rune Deck aljára teszed), és ez 1 Powert ad a rune domainjében. A második drágább döntés: a rune elhagyja a boardot, így a következő körökben eggyel kevesebb rune-od lesz.",
+   "Amit így termelsz, a Rune Poolba kerül, ez a pillanatnyilag elkölthető Energy és Power gyűjtőhelye. A Rune Pool minden Main Phase elején és minden kör végén kiürül, ezért nem érdemes előre termelni."
+  ],
+  "steps": [
+   [
+    "131.2.a",
+    "A lap árában a szám az Energy költség."
+   ],
+   [
+    "131.3.a",
+    "A lap árában az egymás alatti domain szimbólumok a Power költség."
+   ],
+   [
+    "164.2.a",
+    "Basic rune exhaustolása: 1 Energy kerül a Rune Poolodba."
+   ],
+   [
+    "164.2.b",
+    "Basic rune recycle-ölése: 1 Power kerül a Rune Poolodba a rune domainjében, a rune pedig a Rune Deck aljára megy."
+   ],
+   [
+    "163.2.b",
+    "Az univerzális Power (a lapokon [A]) bármelyik domain Power költségét kifizeti."
+   ],
+   [
+    "357.1.a",
+    "A rune-okat a kijátszás közben, a fizetésnél is használhatod, nem kell előre termelned."
+   ],
+   [
+    "167",
+    "A Rune Pool kiürül minden Main Phase elején és minden kör végén, a fel nem használt Energy és Power elvész."
+   ]
+  ]
+ },
+ {
+  "title": "6. Kártyák kijátszása és időzítés",
+  "rules": "307-310",
+  "paras": [
+   "Alapszabály: kulcsszó nélküli lapot csak a saját körödben, a Main Phase-ben játszhatsz ki, amikor nincs harc vagy showdown (a showdown egy battlefield körüli vita ideje, lásd a 7. részt), és semmi sem vár a chainen. A chain az a közös sor, ahová minden kijátszott lap és ability felkerül, mielőtt hatna. Amíg valami rajta van, a játék Closed State-ben van, vagyis \"zárt\": ilyenkor csak [Reaction] lap vagy ability jöhet.",
+   "Két kulcsszó ad kivételt. Az [Action] lap showdown alatt is kijátszható, akár az opponent körében. A [Reaction] mindent tud, amit az [Action], és ezen felül Closed State-ben is kijátszható, így válaszolhatsz vele egy chainen váró spellre. A basic rune-ok abilityjei is [Reaction]-ök, ezért bármikor fizethetsz velük.",
+   "A chain mindig fentről lefelé resolve-ol, vagyis a legutóbb felrakott tétel hatása fut le először (resolve: a hatás tényleges végrehajtása). Ha valamelyik lap konkrétan kiválaszt valamit, például \"kill a unit\", azt a lap targetjének hívjuk: a kiválasztott unit, játékos vagy zóna. Ha a target a resolve előtt eltűnik, a lap rá már nem hat."
+  ],
+  "steps": [
+   [
+    "310.1.a",
+    "Kulcsszó nélkül csak a saját körödben, priority birtokában (amikor te jössz), üres chain és harc nélkül játszhatsz ki lapot."
+   ],
+   [
+    "355.2.a",
+    "Unitot a saját base-edre vagy egy általad irányított battlefieldre játszhatsz ki."
+   ],
+   [
+    "143.4",
+    "A unit exhausted állapotban lép be, kivéve ha valami (például Accelerate) mást mond."
+   ],
+   [
+    "359.2.d",
+    "A gear ready állapotban, a base-edbe lép be."
+   ],
+   [
+    "359.3.d",
+    "A spell hatása felülről lefelé lefut, majd a lap a trash-edbe kerül."
+   ],
+   [
+    "806.1.c.1",
+    "[Action]: showdown alatt is kijátszható, bármelyik játékos körében."
+   ],
+   [
+    "813.1.c.1",
+    "[Reaction]: Closed State-ben is kijátszható, bármelyik játékos körében, tehát válaszolhatsz vele egy chainen váró lapra."
+   ],
+   [
+    "339.1",
+    "Ha mindenki passzolt anélkül, hogy újat tett volna a chainre, a legfelső tétel resolve-ol."
+   ]
+  ]
+ },
+ {
+  "title": "7. Mozgás, harc és pontszerzés",
+  "rules": "144",
+  "paras": [
+   "A unitjaid a Standard Move-val mozognak: exhaustolod a unitot, és a base-edből egy battlefieldre, vagy egy battlefieldről vissza a base-edbe lép. Battlefieldről battlefieldre alapból nem lehet. Több unitot egyszerre is mozgathatsz, ha ugyanoda mennek.",
+   "Ha olyan battlefieldre lépsz, amit nem te irányítasz, az Contested lesz, vagyis vitatott. Ha ott nincs ellenséges unit, showdown indul: felváltva játszhattok ki [Action] és [Reaction] lapot, és ha a végén csak a te unitjaid maradnak ott, megszerzed az irányítást. Ez conquer, és pontot ér.",
+   "Ha ellenséges unit is áll ott, combat lesz. Előbb egy showdown, utána mindkét fél összeadja a saját unitjainak Mightját, és ennyi damage-et oszt szét az ellenfél unitjai között, egyszerre. Akin a damage eléri a Mightját, meghal. Ha a defender unitjai közül marad valaki, a támadó unitjaid hazamennek a base-be. Ha csak a te unitjaid maradnak, tiéd a battlefield, és ez conquer."
+  ],
+  "steps": [
+   [
+    "144.2",
+    "A Standard Move költsége, hogy exhaustolod a unitot."
+   ],
+   [
+    "144.4.a",
+    "Base-ből battlefieldre, vagy battlefieldről vissza a base-be mozoghatsz, battlefieldek között csak Ganking képességgel."
+   ],
+   [
+    "144.1.c",
+    "Showdown vagy combat alatt nem lehet Standard Move-ot csinálni."
+   ],
+   [
+    "348.2.a",
+    "Non-Combat Showdown végén, ha csak a te unitjaid maradnak, megszerzed az irányítást (conquer)."
+   ],
+   [
+    "467.2",
+    "Combatban mindkét fél a unitjai összesített Mightjával egyenlő damage-et oszt ki, az attacker kezdi a kiosztást, és egyszerre hatnak."
+   ],
+   [
+    "468.1.a",
+    "Harc után a túlélők healelnek, és ha maradt defender unit, a támadók visszamennek a base-be."
+   ],
+   [
+    "468.5.d",
+    "Ha a combat után egyedül a te unitjaid maradnak, megszerzed az irányítást, ez conquer."
+   ],
+   [
+    "471.2",
+    "Ha a következő köröd elején a battlefield még a tiéd, az hold, és újabb pontot ér."
+   ]
+  ]
+ },
+ {
+  "title": "8. Gyakori kezdő hibák",
+  "rules": "143.4",
+  "paras": [
+   "Ezek a leggyakoribb félreértések az első néhány játékban. Mindegyik mellett ott a szabály, amit érdemes elolvasni."
+  ],
+  "steps": [
+   [
+    "143.4",
+    "Az éppen kijátszott unit exhausted, ezért abban a körben nem tud Standard Move-val mozogni."
+   ],
+   [
+    "167",
+    "Előre termelt Energy és Power nem marad meg: a Rune Pool a Main Phase elején és a kör végén kiürül."
+   ],
+   [
+    "164.2.b",
+    "Power miatt recycle-ölt rune elhagyja a boardot, ezért a következő körökben eggyel kevesebb rune-od lesz."
+   ],
+   [
+    "308.1.a",
+    "Showdown vagy combat alatt csak [Action] vagy [Reaction] lapot játszhatsz ki, sima spellt nem."
+   ],
+   [
+    "309.1.a",
+    "Ha az opponent spellje a chainen vár, csak [Reaction] lappal válaszolhatsz rá."
+   ],
+   [
+    "117.1",
+    "Mulligannál legfeljebb 2 lapot cserélhetsz, és a félretett lapok a Main Deck aljára mennek, nem vissza a kevert paklida."
+   ],
+   [
+    "472",
+    "Ugyanazt a battlefieldet egy körben nem pontozhatod kétszer, akkor sem, ha elveszted és visszafoglalod."
+   ],
+   [
+    "473.1.b.1",
+    "7 pontnál egy conquer csak akkor nyer, ha abban a körben minden battlefieldet pontoztál, különben csak húzol 1 lapot."
+   ]
+  ]
+ },
+ {
+  "title": "9. Hova tovább az oldalon?",
+  "rules": "001-002",
+  "paras": [
+   "Kártyák: itt keresheted meg bármelyik lap szövegét és adatait. Deck: ide illesztheted be a decklistádat, ellenőrzi a 40 lapos Main Decket, a 12 rune-t és a példányszámokat, és PDF-et is készít. Szabályzat: a teljes Core Rules kereshetően, szabályszám szerint. Tudástár: a kör menete, a chain, a combat és a kulcsszavak részletesen, egyszerű magyarázattal.",
+   "Egy fontos alapelv a továbbiakhoz: ha egy lap szövege ellentmond a szabályoknak, a lapnak van igaza."
+  ]
+ }
+]

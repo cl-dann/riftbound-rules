@@ -43,7 +43,7 @@ for (fn,ty),vs in groups.items():
         txt=fix(er[0]['abilityCorrected']); k=er[0]['matchedErrataCode'].split('-')[0]
         err=ART_OVERRIDE.get(fn,[a['k'] for a in ARTICLES].index(k))
     if fn in MANUAL: err,txt=MANUAL[fn][0],fix(MANUAL[fn][1])
-    labels=[l for l in base['cardTypeLabels'] if l!=ty]
+    labels=[l for l in base['cardTypeLabels'] if l!=ty and not (ty=='Legend' and l=='Champion')]
     tags=base.get('tags') or []
     disp=fn; al=[fn]; chtag=None
     if ty=='Legend':
@@ -186,7 +186,7 @@ META={'rules_updated':'2026-10-09','ban_updated':'2026-09-18','cards_snapshot':'
  'ban':BAN,'ban2':['Master Yi, Wuju Bladesman'],'banfut':BAN_FUT}
 EXTRA={}
 import os
-for k in ('glossary','flow','patchnotes','terms'):
+for k in ('glossary','flow','patchnotes','terms','guide'):
     p='data/%s.json'%k
     if os.path.exists(p):
         try: EXTRA[k]=json.load(open(p,encoding='utf-8'))
