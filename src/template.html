@@ -162,6 +162,9 @@ ol.flow a{font-family:var(--f-mono);font-size:12px;margin-left:6px}
 .pn{max-width:92ch;margin-bottom:14px}
 .pn ul{margin:4px 0 0;padding-left:18px;font-size:14px}
 .subnav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.short{border:1px solid var(--accent);background:var(--accent-bg);border-radius:6px;padding:12px 16px;margin:14px 0 4px;max-width:72ch;font-size:15px;line-height:1.55}
+.short b{display:block;font-family:var(--f-display);font-size:17px;margin-bottom:2px;color:var(--accent)}
+.short small{display:block;margin-top:6px;font-size:11.5px;color:var(--muted)}
 .gl{text-decoration:underline dotted var(--accent);text-underline-offset:3px;text-decoration-thickness:1.5px;cursor:help;border-radius:2px}
 .gl:focus-visible{outline:2px solid var(--accent)}
 #tip{position:fixed;z-index:50;max-width:min(340px,calc(100vw - 24px));background:var(--ink);color:var(--bg);border-radius:6px;padding:9px 12px;font-size:13.5px;line-height:1.45;box-shadow:0 6px 24px rgba(0,0,0,.25);pointer-events:none}
@@ -394,6 +397,7 @@ function cardHeadHTML(c,tag){
   if(c.ban===1)h+='<div class="banbox">Ez a kártya '+(c.banNew?'a '+esc(BF.title)+' cikk szerint':'a Rules Hub szerint')+' tiltott a Constructed formátumban (érvényes: '+(c.banNew?c.banf:META.ban_updated)+'). A keresőben csak a "banned kártyák is" kapcsolóval jelenik meg.</div>';
   if(c.ban===2)h+='<div class="banbox">Ez a legend a Rules Hub szerint a 2v2 Constructed formátumban tiltott (lista frissítve: '+META.ban_updated+'). 1v1 Constructedben játszható.</div>';
   h+='<h3>'+(c.err!=null?'Jelenlegi szöveg (errata után)':'Kártyaszöveg')+'</h3><div class="ctext">'+cardText(c.txt)+'</div>';
+  if(c.sh)h+='<div class="short"><b>Röviden</b>'+glossify(esc(c.sh))+'<small>Egyszerűsített összefoglaló, nem hivatalos. A pontos szabályok lent.</small></div>';
   if(c.err!=null){
     const a=META.articles[c.err];
     h+='<div class="errbox">A kártya szövege megváltozott. Forrás: <a href="'+a.u+'">'+esc(a.t)+'</a>. A fenti szöveg a hatályos, a nyomtatott kártyán a régi szerepelhet.</div>';
@@ -687,6 +691,7 @@ function buildPDF(){
     if(c.ban)put(c.ban===1?'BANNED: tiltott a Constructed formátumban.':'BANNED a 2v2 Constructed formátumban.',{size:9,style:'bold',color:[160,50,15]});
     else if(c.banf)put('BANNED '+c.banf+'-tól (Radiance ban list, Standard és 2v2 Constructed).',{size:9,style:'bold',color:[160,50,15]});
     if(c.txt)put(pdfCardText(c.txt),{size:9.5,indent:3,before:1});
+    if(c.sh)put('Röviden: '+c.sh,{size:9.5,indent:3,before:1,color:[110,75,0]});
     if(c.err!=null){put('Errata: a szöveg megváltozott, a fenti a hatályos. Forrás: '+META.articles[c.err].t+', '+META.articles[c.err].u,{size:8.5,style:'italic',color:[110,75,0],indent:3,before:0.5});
       if(c.old)put('Nyomtatott szöveg: '+pdfCardText(c.old).replace(/\n/g,' / '),{size:8.5,color:[90,98,115],indent:3});}
     if(c.nt){put('Hogyan érinti ezt a lapot (nem hivatalos ruling):',{size:9,style:'bold',before:1.2});

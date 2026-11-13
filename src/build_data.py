@@ -138,6 +138,9 @@ for r in R:
                 s=pat.sub(lambda m:'#'*len(m.group()),s)
 # ---------- apply
 import glob
+SH={}
+for f in sorted(glob.glob('data/short/s*_short.json')):
+    SH.update(json.load(open(f,encoding='utf-8')))
 BN={}
 for f in sorted(glob.glob('data/notes/batch_*_notes.json')):
     try: BN.update(json.load(open(f,encoding='utf-8')))
@@ -169,6 +172,7 @@ for c in cards:
     ks={T[i]['k'] for i,_ in tp}
     if 'kw:Empower' in ks or 'kw:Empowered' in ks: pass
     c['tp']=tp; c['ex']=ment.get(id(c),[])
+    if c['n'] in SH: c['sh']=SH[c['n']].replace('\u2014',',').replace('\u2013','-')
     if c['n'] in NOTES or c['_fn'] in NOTES: c['nt']=[[r,f,t] for r,f,t in NOTES.get(c['n'],NOTES.get(c['_fn']))]
     elif c['n'] in BN:
         cn=clean_notes(BN[c['n']])
@@ -210,7 +214,7 @@ def ok(ref):
     return ref in ids
 bad=[(n,r) for n,v in NOTES.items() for r,f,t in v for x in r.split(',') if not ok(x)]
 print('bad refs',bad)
-print('notes cards',sum('nt' in c for c in cards),'batch notes',len(BN),'of',len(NOTES),'unmatched',[n for n in NOTES if not any(c['n']==n for c in cards)])
+print('short',sum('sh' in c for c in cards)); print('notes cards',sum('nt' in c for c in cards),'batch notes',len(BN),'of',len(NOTES),'unmatched',[n for n in NOTES if not any(c['n']==n for c in cards)])
 import itertools
 alltxt=' '.join(t for v in NOTES.values() for r,f,t in v)
 print('dash check',[ch for ch in '\u2013\u2014' if ch in alltxt])
