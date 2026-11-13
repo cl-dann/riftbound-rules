@@ -1,0 +1,216 @@
+{
+ "checked": 92,
+ "fixes": {
+  "Shakedown": {
+   "notes": [
+    [
+     "355.9.b",
+     0,
+     "A target enemy unit, bárhol a boardon, base-ben is."
+    ],
+    [
+     "355.18",
+     1,
+     "Az \"unless\" a resolve-kor dől el: a unit controllere akkor választ, hogy a unitja 6 damage-et kap, vagy te húzol 2-t. A döntés az övé, nem a tiéd."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "Ha a unit a resolve előtt illegális target lesz, a teljes instruction ignorálódik: se damage, se húzás."
+    ],
+    [
+     "414.4",
+     0,
+     "Ha az opponent a húzást választja, és nincs 2 lap a Main Deckedben, te szenvedsz Burn Outot."
+    ],
+    [
+     "813.1.c.1",
+     0,
+     "[Reaction]: Closed State-ben, combat közben is kijátszható."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz hivatkozás: a 204.3 a \"[do X] to [do Y]\" cost formáról szól, az \"unless\" választás nem cost. A resolve-kori döntést a 355.18 mondja ki."
+  },
+  "Sprite Queen": {
+   "notes": [
+    [
+     "187.2,184.1",
+     0,
+     "A Sprite 3 Mightú Fae unit token [Temporary]-vel. Ready lép be, de mindig a base-edbe, onnan Standard Move-val mehet battlefieldre."
+    ],
+    [
+     "315.2.a.1,365.1",
+     0,
+     "A második trigger minden saját Beginning Phase-ed elején lefut, ha a Queen akkor a boardon van."
+    ],
+    [
+     "383.3.d",
+     0,
+     "A Beginning Phase elején az előző Sprite Temporary triggere és a Queen új triggere egyszerre keletkezik, a sorrendjüket te döntöd el."
+    ],
+    [
+     "816.1.c",
+     1,
+     "Az új Sprite a Beginning Phase eleje után jön létre, ezért a saját Temporary-je csak a következő körödben fut le. Így mindig van egy Sprite-od a körödre."
+    ],
+    [
+     "383.2.a.1",
+     1,
+     "A trigger nem hivatkozik a Queen helyére. Ha a Queen a trigger chainen léte alatt elhagyja a boardot, a Sprite ettől még megérkezik a base-edbe."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz hivatkozás: a 393 a Delayed Ability-kről szól, a Queen triggere nem az. Hogy a chainen lévő trigger a forrás távozása után is resolve-ol, azt a 383.2.a.1 példája mondja ki."
+  },
+  "Shadow": {
+   "notes": [
+    [
+     "103.3.d,103.3.d.3",
+     0,
+     "Signature lap Vex taggel: csak Vex legend deckjébe tehető, a deckben összesen legfeljebb 3 Signature lap lehet, és nem lehet Chosen Champion."
+    ],
+    [
+     "103.2.b.4",
+     0,
+     "Calm és Chaos domainű, ezért a deck Domain Identity-jének mindkettőt tartalmaznia kell."
+    ],
+    [
+     "369.3,355.2.a",
+     1,
+     "Általad kontrollált battlefieldre kijátszva ready érkezik (replacement effect). Base-be kijátszva exhausted, mint bármely unit."
+    ],
+    [
+     "806.1.c.2,204.1.b",
+     0,
+     "[Action] ability, a cost [1], egy bármilyen domainű Power és exhaust. Showdown alatt, bárki körében aktiválható, de Shadow-nak ready kell lennie."
+    ],
+    [
+     "355.9.b,466.2.c.3",
+     1,
+     "A target Attacker designationnel rendelkező enemy unit Shadow battlefieldjén. Vagyis csak olyan combatban használható, ahol te védekezel, és Shadow ott áll."
+    ],
+    [
+     "424.1.b,424.1.c",
+     0,
+     "A stunolt attacker nem adja hozzá a Mightját a combat sebzéshez, de megölni teljes Mightnyi sebzéssel kell."
+    ],
+    [
+     "359.3.e.2,359.3.f.2",
+     1,
+     "Ha a resolve előtt a target vagy Shadow elhagyja a battlefieldet, a target illegális, a stun elmarad."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz jelző és hiányos hivatkozás: a 359.3.e.2 csak a target távozását fedi. Hogy Shadow távozásakor a \"here\" miatt mistargetel, az a 359.3.f.2 példájából vett levezetés, ezért 1."
+  },
+  "Sett, The Boss": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Body és Order domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "369.1,370.1.c",
+     1,
+     "Az \"if ... would die ... instead\" replacement effect. A halál megtörténte előtt lép közbe, nem megy chain-re, az opponent nem tud rá reagálni."
+    ],
+    [
+     "135.2.e.6.c,415.4,702.2.b.1",
+     0,
+     "A cost: 1 Body vagy Order Power, a legend exhaustolása és a unit buffjának elköltése. Exhausted legenddel vagy buff nélküli unitra nem alkalmazható."
+    ],
+    [
+     "383.2.c.3.a",
+     0,
+     "A szabályzat pont ezt az esetet hozza példának: ha a halált heal, exhaust és recall váltja ki, a unit Deathknell abilityje nem triggerel, mert a halál nem történt meg."
+    ],
+    [
+     "458.1,458.3",
+     0,
+     "A recall nem Move: a \"when I move\" triggerek nem futnak le, és mozgást tiltó effect nem akadályozza meg."
+    ],
+    [
+     "460.1,143.2.b",
+     1,
+     "Errata: a régi szöveg \"when\"-nel kezdődött és nem healelt. Most egyértelműen replacement effect, a buff elköltése a cost része, és a unit healelődik, így a rajta maradó damage nem öli meg újra a recall után."
+    ],
+    [
+     "370.1.a.2,415.4",
+     1,
+     "Ha combatban több buffolt unitod hal meg egyszerre, csak egyet menthetsz meg, mert a legend csak egyszer exhaustolható. A conquer trigger utána readyzi."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz jelző: a 369.1 és a 370.1.c csak azt mondja ki, hogy replacement effect és az esemény előtt lép közbe. Hogy nem megy chain-re és nem lehet rá reagálni, az levezetés, ezért 1."
+  },
+  "Shen, Kinkou": {
+   "notes": [
+    [
+     "813.1.c.1,813.3.a",
+     0,
+     "[Reaction]: Closed State-ben, bárki körében kijátszható, de csak a base-edbe vagy általad kontrollált battlefieldre."
+    ],
+    [
+     "466.2.c.3.a",
+     0,
+     "Folyamatban lévő combatba kijátszva a következő cleanupnál kapja meg a Defender designationt."
+    ],
+    [
+     "814.1.c,814.2",
+     0,
+     "Shield 2: Defenderként 5 Mightú. Más forrásból kapott Shield értéke hozzáadódik."
+    ],
+    [
+     "815.1.b,815.1.c.1",
+     0,
+     "Tank: az opponentnek előbb Shenre kell halálos combat damage-et kiosztania, csak utána jöhet a Tank nélküli unitod."
+    ],
+    [
+     "103.3.a.1,420.1.a",
+     1,
+     "Champion unit: Chosen Championként a Champion Zone-ból is kijátszható reakcióként."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz jelző és hiányos hivatkozás: a 103.3.a.1 csak a Champion Zone-ba helyezést mondja ki, a zónából való kijátszást a 420.1.a. A [Reaction] időzítéssel való összekapcsolás levezetés, ezért 1."
+  },
+  "Smoke and Mirrors": {
+   "notes": [
+    [
+     "811.1.b,811.6,811.3",
+     0,
+     "Hide: a saját körödben [A]-ért facedown tehető egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható. Kézből, teljes costért csak [Action] időzítéssel megy."
+    ],
+    [
+     "355.7,355.8",
+     0,
+     "Két target, mindkettő általad kontrollált unit, két különböző locationön. Ha nincs ilyen párod, a spell nem játszható ki."
+    ],
+    [
+     "811.1.d.4",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: facedown-ból az első unitot az adott battlefieldről kell választani, a másodikat a \"different location\" megkötés miatt bárhonnan lehet."
+    ],
+    [
+     "359.3.f.2,816.3",
+     0,
+     "A [Temporary] feltételt a resolve-kor nézi a játék. Ha egyik unitnak sincs, nincs csere."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "A Draw 1 feltétel nélküli: akkor is húzol, ha nincs Temporary unit, vagy ha a targetek illegálisak lettek."
+    ],
+    [
+     "421.1",
+     1,
+     "A csere mindkét unitnál Move, a \"when I move\" triggerek lefutnak. Ha az egyik Move negálódik, a másik ettől még megtörténhet."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz jelző: a 421.1 csak a Move fogalmát adja meg. Hogy a csere két külön Move, és az egyik negálódása nem állítja meg a másikat, az levezetés, ezért 1."
+  }
+ }
+}

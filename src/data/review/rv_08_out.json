@@ -1,0 +1,391 @@
+{
+ "checked": 92,
+ "fixes": {
+  "Ornn's Forge": {
+   "notes": [
+    [
+     "356.4.b,356.6",
+     0,
+     "Discount: 1 Energyvel kevesebb, 0 alá nem mehet, a Power costot nem érinti."
+    ],
+    [
+     "356.4",
+     1,
+     "A kedvezményt a Determine Total Cost lépés nézi: abban a pillanatban kell kontrollálnod a battlefieldet, amikor a geart kijátszod."
+    ],
+    [
+     "185.1",
+     1,
+     "Token gear (például Gold) nem kap kedvezményt, és nem is használja el az \"első gear\" helyet."
+    ],
+    [
+     "740.1.a",
+     0,
+     "A \"friendly\" a csapattársad gearjét is jelenti. Csapatmódban a kör első friendly gearje kapja, bárkié is."
+    ],
+    [
+     "420.4.b,359.2",
+     1,
+     "\"Each turn\": az opponent körében [Reaction]-nel kijátszott első geared (például Quick-Draw Equipment) is olcsóbb. A gear a finalizálásával számít kijátszottnak. Counterelni nem lehet, mert permanentként nem marad a chainen."
+    ],
+    [
+     "386.3",
+     2,
+     "Ha a kör első gearjét még a control megszerzése előtt játszottad ki, nem egyértelmű, hogy a következő gear \"elsőnek\" számít-e. A Core Rules nem dönti el, judge kell."
+    ]
+   ],
+   "short": null,
+   "why": "A pont counterelt gearről beszélt, pedig a permanent a finalizáláskor elhagyja a chaint (359.2), így nem counterelhető. A facedown példa is félrevezető volt, mert ott a base cost eleve elmarad."
+  },
+  "Pit Crew": {
+   "notes": [
+    [
+     "420.4.a",
+     0,
+     "A trigger akkor fut le, amikor a gear kijátszása befejeződött, a gear ekkor már a boardon van."
+    ],
+    [
+     "185.2.a,185.2.d,440.2.c",
+     1,
+     "Gear token (például Gold) kijátszása is kiváltja: a token gear típusú, a tulajdonosa a kijátszás szabályai szerint \"play\"-eli, a szöveg pedig nem gear kártyát kér."
+    ],
+    [
+     "416.1.c",
+     0,
+     "Ha a Pit Crew már ready, a trigger nem csinál semmit."
+    ],
+    [
+     "144.2",
+     1,
+     "Ready állapotban újra ki tudja fizetni a Standard Move costját, így egy körben kétszer is mozoghat."
+    ]
+   ],
+   "short": null,
+   "why": "A 2-es jelző indokolatlan: a 185.2.a, 185.2.d és 440.2.c alapján a \"play a Gold gear token\" gear kijátszása, ez levezethető (1). Ugyanebben a batchben a Rakelstake is 1-esként kezeli."
+  },
+  "Plaza Guardian": {
+   "notes": [
+    [
+     "356.4.g",
+     0,
+     "A kedvezmény értékét a Determine Total Cost lépésben nézi a játék. Ha a geared száma utána változik, a kiszámolt cost már nem módosul."
+    ],
+    [
+     "356.4.g,187.5,135.2.e.5.b",
+     1,
+     "A Gold token gearként beleszámít a kedvezménybe. A Guardian costja csak Energy, a Gold [A]-ja pedig csak Power costra költhető, így a kifizetéséhez nem segít. Ha a kiszámolás után megölöd, a cost már nem nő."
+    ],
+    [
+     "150.4,718.5",
+     1,
+     "Minden általad kontrollált gear számít: unitra csatolt Equipment és gear token (Gold, Bomb) is."
+    ],
+    [
+     "356.6",
+     0,
+     "Az Energy cost 0 alá nem csökkenhet. 10 vagy több gearnél ingyenes."
+    ],
+    [
+     "206",
+     0,
+     "Más effectek a nyomtatott 10-es costot látják, nem a csökkentettet."
+    ],
+    [
+     "809.1.c",
+     0,
+     "[Deflect]: az opponent őt targetelő spellje vagy abilityje +[A]-ba kerül."
+    ]
+   ],
+   "short": "Minden gearedért 1 Energyvel olcsóbb, ebbe a csatolt Equipment és a tokenek, például a Gold is beleszámítanak. Az árat a kijátszáskor számolja ki a játék, a későbbi változás már nem módosítja. Deflect miatt az opponentnek drágább kiválasztani.",
+   "why": "A pont és a short azt sugallta, hogy a Gold feláldozása segít kifizetni a lapot, pedig a Guardiannek nincs Power costja, a Gold [A]-ja pedig csak Power costra költhető (135.2.e.5.b)."
+  },
+  "Poro Snax": {
+   "notes": [
+    [
+     "383.4.a.2,359.2,426.1.a",
+     1,
+     "A play effect a gear belépése után kerül chain-re, és kötelezően húzol 1-et. Magát a geart nem lehet counterelni, a chainen lévő play effectet viszont igen, ekkor nincs húzás."
+    ],
+    [
+     "429.1.a.1,415.4",
+     0,
+     "Az ability costja: [1], egy Calm Power, exhaust és a gear megölése. Az egészet az aktiváláskor fizeted, a Snax tehát akkor is elveszett, ha az abilityt counterelik."
+    ],
+    [
+     "149.1",
+     0,
+     "Ready lép be, ezért a második húzás már a kijátszás körében aktiválható."
+    ],
+    [
+     "151.2",
+     0,
+     "Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható."
+    ],
+    [
+     "414.4",
+     0,
+     "Üres Main Decknél a húzás Burn Outot okoz."
+    ]
+   ],
+   "short": null,
+   "why": "A pont a Snax countereléséről beszélt, de a gear permanent, a finalizáláskor elhagyja a chaint (359.2). Csak a play effect counterelhető, ez levezetés, ezért 1-es."
+  },
+  "Portal Rescue": {
+   "notes": [
+    [
+     "355.10,359.3.e.14.a",
+     0,
+     "A friendly unit target. Ha a resolve előtt illegális lesz, a banish és a kijátszás is ignorálódik."
+    ],
+    [
+     "124.1",
+     0,
+     "A visszatérő unit új objektum: lekerül róla a damage, a buff, a Stunned állapot és minden \"this turn\" módosító."
+    ],
+    [
+     "383.4.a,420.3",
+     0,
+     "Ez valódi kijátszás: a unit \"When you play me\" effectje újra lefut, és a \"when you play a unit\" triggerek is."
+    ],
+    [
+     "356.1.b.1,356.1.b.3",
+     0,
+     "\"Ignoring its cost\": az Energy és a Power cost nulla. Optional additional cost (például Accelerate) ettől még kifizethető."
+    ],
+    [
+     "143.4,436.4.a",
+     1,
+     "A unit a base-be, exhausted érkezik. A rá csatolt Equipment leválik és a boardon marad."
+    ],
+    [
+     "186.1",
+     0,
+     "Token unitra használva a token a Banishmentben megszűnik, nincs mit visszajátszani."
+    ],
+    [
+     "056.2",
+     0,
+     "Errata: a unitot a tulajdonosa játssza ki a saját base-ébe. Ha egy átvett enemy unitra használod, az visszakerül a tulajdonosához."
+    ],
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben nem, ezért a már chainen lévő, a unitot célzó spell vagy ability elől nem menti ki."
+    ]
+   ],
+   "short": "Egy saját unitod eltűnik, majd azonnal ingyen visszajön a tulajdonosa base-ébe, exhausted állapotban. Új unitnak számít: a sebzés és a stun lekerül róla, a kijátszási hatása újra lefut. Az Equipment leválik, a token nem jön vissza. Egy már kijátszott spellre válaszul nem használható.",
+   "why": "Hiányzott az időzítés: [Action], nem [Reaction] (806.1.c.1, 358.4), ezért Closed State-ben nem megy. A pont és a short mégis azt sugallta, hogy a chainen lévő, a unitot célzó spellek elől kimenti."
+  },
+  "Qiyana, Victorious": {
+   "notes": [
+    [
+     "383.4.c.2.a,472",
+     0,
+     "Csak akkor triggerel, ha ő maga ott van a battlefielden, amikor conquerelsz. Egy battlefield körönként egyszer score-olható."
+    ],
+    [
+     "383.4.c.2.c",
+     0,
+     "Akkor is triggerel, ha a conquerből járó pont elmarad vagy kicserélődik (például az utolsó pont helyett húzol)."
+    ],
+    [
+     "355.3,355.18",
+     1,
+     "A \"draw 1 or channel 1\" nem bulleted lista, ezért nem finalizáláskori módválasztás. A máshol nem szabályozott választások a resolve-kor történnek, tehát akkor döntesz a húzás és a rune között."
+    ],
+    [
+     "431.2,164.2.b",
+     1,
+     "A rune exhausted lép be, Energyt abban a körben nem ad. Recycle-ölni viszont azonnal lehet a rune domainje szerinti Powerért."
+    ],
+    [
+     "431.3,414.4",
+     0,
+     "Üres Rune Decknél a channel nem csinál semmit. Üres Main Decknél a draw Burn Outot okoz."
+    ],
+    [
+     "809.1.c",
+     0,
+     "[Deflect]: az opponent őt targetelő spellje vagy abilityje +[A]-ba kerül."
+    ]
+   ],
+   "short": null,
+   "why": "Nem nyitott kérdés: a 355.18 kimondja, hogy a 355-ben nem szabályozott választás a resolve-kor történik, a 355.3 pedig csak bulleted listára vonatkozik. 2-es helyett 1-es."
+  },
+  "Rakelstake": {
+   "notes": [
+    [
+     "383.1,190.6.c",
+     1,
+     "A \"first time\" triggered ability. A Predictet az a játékos hajtja végre, aki a lapot ide kijátszotta, és ő nézi a saját deckjét."
+    ],
+    [
+     "420.4.a",
+     0,
+     "A unit vagy gear kijátszásának befejezése után triggerel."
+    ],
+    [
+     "437.1,437.4.a",
+     0,
+     "Predict: megnézed a Main Deck felső lapját, és recycle-ölheted. Üres decknél Burn Out nincs."
+    ],
+    [
+     "148.1.a.1,830.1.b.1,811.1.d.1.a",
+     0,
+     "Gear alapból csak base-be megy. \"Ide\" [Deploy] gear vagy az itt elrejtett, facedown-ból kijátszott gear érkezhet."
+    ],
+    [
+     "185.2.a",
+     1,
+     "Nincs \"non-token\" megkötés: az ide kijátszott token unit is kiváltja, és el is használja a kör első alkalmát."
+    ],
+    [
+     "386.1",
+     1,
+     "Játékosonként és körönként egyszer, bárki körében."
+    ]
+   ],
+   "short": null,
+   "why": "A pont csak a facedown geart említette, pedig a [Deploy] gear bármelyik battlefieldre kijátszható (830.1.b.1), ez a gyakoribb eset."
+  },
+  "Rally the Troops": {
+   "notes": [
+    [
+     "391.2,355.10.c",
+     0,
+     "A buff rész delayed trigger a kör végéig. Nincs target, a unit csak a trigger feltételében szerepel."
+    ],
+    [
+     "420.4.a",
+     0,
+     "A trigger akkor fut le, amikor a unit kijátszása befejeződött, vagyis a unit már a boardon van."
+    ],
+    [
+     "391.2",
+     1,
+     "Csak a spell resolve-ja után kijátszott friendly unitokra hat. A már boardon lévők nem kapnak buffot."
+    ],
+    [
+     "185.2.a,185.2.d,440.2.c",
+     1,
+     "Unit token kijátszása is kiváltja: a token unit típusú, és a tulajdonosa a kijátszás szabályai szerint \"play\"-eli. A körben később kijátszott Recruit vagy Mech token is buffot kap."
+    ],
+    [
+     "414.4",
+     0,
+     "A Draw 1 azonnal, a resolve-kor történik. Üres decknél Burn Outot okoz."
+    ],
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ]
+   ],
+   "short": "Húzol 1 lapot, és a kör hátralévő részében minden saját unit, amit kijátszol, buffot kap, a tokenek is. A már boardon lévők nem kapnak. A saját körödben vagy showdown alatt játszható ki, egy másik spellre válaszul nem.",
+   "why": "Unitot nem lehet counterelni, mert a finalizáláskor elhagyja a chaint (359.2), ezt a mondatot töröltem. A token kérdés nem nyitott: 185.2.a, 185.2.d és 440.2.c alapján a token unit kijátszása unit kijátszása (1)."
+  },
+  "Ravenbloom Prefect": {
+   "notes": [
+    [
+     "420.4.a",
+     0,
+     "A trigger akkor fut le, amikor az opponent gearjének kijátszása resolve-val befejeződött, tehát a gear ekkor már a boardon van."
+    ],
+    [
+     "383.3.a, 383.3.b",
+     0,
+     "A \"you may\" után álló \"banish me\" a trigger base costja. A finalizáláskor kell kifizetni, vagyis a Prefect azonnal a Banishmentbe megy."
+    ],
+    [
+     "355.10.c",
+     0,
+     "A gear csak a trigger feltételében szerepel, ezért nem target. Deflect és \"can't be chosen\" nem védi meg."
+    ],
+    [
+     "428.2.a",
+     0,
+     "A banish nem kill: a gear nem a trashbe megy, és a halálra triggerelő abilityk nem futnak le."
+    ],
+    [
+     "185.2.a,185.2.d,186.1",
+     1,
+     "Gold és más gear token kijátszása is kiváltja, mert a token gear típusú, és a tulajdonosa \"play\"-eli. A banishelt token a Banishmentben megszűnik."
+    ]
+   ],
+   "short": null,
+   "why": "A 2-es jelző indokolatlan: a 185.2.a és 185.2.d alapján a gear token kijátszása gear kijátszása, ez levezethető (1)."
+  },
+  "Reckless Innovator": {
+   "notes": [
+    [
+     "805.1.b, 805.6",
+     0,
+     "Accelerate: kijátszáskor +[1][C] (Chaos Power) additional costért ready lép be. Ez replacement effect, nem \"exhausted, majd ready\", tehát a \"becomes ready\" triggereket nem váltja ki."
+    ],
+    [
+     "144.2, 415.3.a",
+     0,
+     "A Standard Move cost-ja a unit exhaustolása, tehát a mozgás is kiváltja a \"when I become exhausted\" triggert."
+    ],
+    [
+     "143.4",
+     2,
+     "Nem egyértelmű, hogy az exhausted belépés (Accelerate nélkül) \"become exhausted\" eseménynek számít-e. A Core Rules ezt nem mondja ki, judge döntse el."
+    ],
+    [
+     "415.1.b",
+     0,
+     "Már exhausted unit nem exhaustolható újra, így nem is triggerel újra, amíg nem lesz ready."
+    ],
+    [
+     "355.3",
+     0,
+     "A \"choose one\" módot a trigger chain-re kerülésekor választod ki, nem a resolve-kor."
+    ],
+    [
+     "204.3",
+     0,
+     "A \"Pay [C] to draw 1\" cost within instructions. Ha nem fizeted ki a Chaos Powert, nincs húzás."
+    ],
+    [
+     "184.1,187.5",
+     1,
+     "A Gold token exhausted lép be, ezért a saját Exhaust költségű abilityje abban a körben még nem használható."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz hivatkozás: a 185.3.a (tokennek nincs costja) és a 149.1 (gear ready lép be) nem támasztja alá az állítást. A helyes a 184.1 (a létrehozó effect adja meg az állapotot) és a 187.5 (Gold)."
+  },
+  "Prize of Progress": {
+   "notes": [
+    [
+     "377.2.a",
+     0,
+     "A \"use\" feltétel akkor teljesül, amikor a gear activated abilityje resolve-ol, nem az aktiváláskor."
+    ],
+    [
+     "430.2",
+     1,
+     "Add ability is számít (Gold token, Seal gearek). Ezek azonnal resolve-olnak, így a trigger cost fizetése közben is létrejöhet. A +1 Might viszont nem azonnali: a trigger a chainre kerül, és a resolve-jakor érkezik."
+    ],
+    [
+     "818.1.b",
+     1,
+     "Az Equip is gear activated abilityje, minden Equip aktiválás +1 Mightot ad."
+    ],
+    [
+     "164.2",
+     1,
+     "A rune-ok abilityje nem gear ability, az nem váltja ki."
+    ],
+    [
+     "317.2.c",
+     1,
+     "A bónuszok összeadódnak, és a kör végén járnak le."
+    ]
+   ],
+   "short": null,
+   "why": "Az Add ability azonnal resolve-ol (430.2), de a Prize triggere nem Add ability, a chainre kerül. A pont azt állította, hogy a +1 Might a cost fizetése közben megérkezhet."
+  }
+ }
+}

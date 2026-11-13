@@ -1,0 +1,164 @@
+{
+ "checked": 92,
+ "fixes": {
+  "Bloodscent Swarm": {
+   "notes": [
+    [
+     "356.4.g",
+     0,
+     "A kedvezményt a Determine Total Cost lépésben számolja a játék: annyiszor [2], ahány battlefieldet addig conquereltél a körben."
+    ],
+    [
+     "472",
+     1,
+     "Egy battlefield körönként egyszer score-olható, ezért két battlefieldes játékban a kedvezmény legfeljebb [4]: a Swarm 4 Energybe kerül."
+    ],
+    [
+     "356.6",
+     0,
+     "Az Energy cost 0 alá nem mehet. A 2 Body Powert mindig ki kell fizetni, a kedvezmény csak Energyre szól."
+    ],
+    [
+     "471.1,356.4.g",
+     1,
+     "Csak a conquer számít, a hold nem. A játékban egyetlen Main Phase van, a combat is azon belül zajlik: a Swarmot ugyanabban a Main Phase-ben, a conquer után érdemes kijátszani, mert a kedvezmény csak a kijátszásig megtörtént conquereket számolja."
+    ]
+   ],
+   "short": null,
+   "why": "A pont \"második Main Phase-es kijátszásról\" beszélt, de a Riftboundban egyetlen Main Phase van, a combat azon belül zajlik (316.5, 316.7). Ez más játékból átvett fogalom volt."
+  },
+  "Bone Skewer": {
+   "notes": [
+    [
+     "355.7,811.1.d.2",
+     1,
+     "A battlefield target, kijátszáskor választod. Facedown-ból kijátszva csak az a battlefield választható, ahol a lap el volt rejtve."
+    ],
+    [
+     "155,811.6",
+     0,
+     "Nincs [Action] vagy [Reaction]: kézből csak a saját körödben, Open State-ben, showdownon kívül játszható ki. Facedown-ból a Hide utáni körtől [Reaction]-t kap, így bárki körében, showdown alatt és válaszként is mehet."
+    ],
+    [
+     "355.10.a,420.3.c",
+     0,
+     "A kéz nem Public zóna, ezért a kiválasztott unit nem target, a resolve közben választod. Ha az opponent kezében nincs unit, vagy nem választasz, nem történik semmi."
+    ],
+    [
+     "420.3.b.2",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a kijátszás helyét (a választott battlefieldet) a spell resolve-jakor nézi a játék, nem a kijátszott unit finalizálásakor."
+    ],
+    [
+     "356.5.a",
+     0,
+     "\"Ignoring any and all costs\": a unit teljes costja 0, a nem standard costok is, vagyis a kötelező additional costot (például \"kill a friendly unit\") sem kell kifizetni."
+    ],
+    [
+     "190.3.a.1,191.4.d",
+     1,
+     "A unitot az opponent játssza ki és ő kontrollálja: a play effectjei neki triggerelnek. Ha a battlefieldet nem ő kontrollálja, az Contested lesz, ebből showdown vagy combat következik."
+    ],
+    [
+     "388.1,424.1.b,424.1.c",
+     0,
+     "A Stun reflexive trigger, külön kerül a chain-re. A stunned unit a kör végéig nem ad combat damage-et, de a megöléséhez továbbra is a teljes Mightjának megfelelő damage kell."
+    ],
+    [
+     "359.3.e.14.c",
+     1,
+     "Errata: a \"When they do\" helyett \"If they do, then do this\" áll. A feltétel csak azt nézi, hogy a unit kijátszása megtörtént-e. Ha egy replacement effect miatt máshová lép be, a Stun trigger akkor is létrejön."
+    ]
+   ],
+   "short": null,
+   "why": "Hiányzott az időzítés: a lapon nincs [Action] vagy [Reaction], kézből csak saját körben, showdownon kívül megy (155), a [Reaction]-t csak facedown-ból kapja meg (811.6)."
+  },
+  "Chronobreak": {
+   "notes": [
+    [
+     "204.2.a,356.2.a.1,355.1",
+     1,
+     "A Power fizetése mandatory additional cost, de az összeg szabad, 0 is lehet. Az összeget és a unitokat a finalizáláskor rögzíted, utólag nem módosítható."
+    ],
+    [
+     "355.5,355.10",
+     1,
+     "A banishelt unitok targetek: pontosan annyi általad kontrollált unitot kell választani, amennyi Powert fizettél."
+    ],
+    [
+     "124,124.1",
+     0,
+     "A visszajátszott unit új objektum: a damage, a buff, a \"this turn\" hatások és az Empowered státusz lekerül róla."
+    ],
+    [
+     "186.1",
+     1,
+     "Token unitot nem érdemes választani: a Banishmentbe kerülve a token azonnal megszűnik létezni, ezért nincs mit visszajátszani, a rá fizetett Power elveszett."
+    ],
+    [
+     "719.5,436.4.b",
+     0,
+     "A banishelt unitról az Equipment leválik és azon a locationön marad, ahol a unit állt. A visszatérő unitra nem kerül vissza magától."
+    ],
+    [
+     "356.1.b.1,356.1.b.3",
+     0,
+     "\"Ignoring its cost\": az Energy és a Power cost is nulla. Optional additional cost (például Accelerate) ettől még kifizethető, különben a unit exhausted lép be."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Ekko) kell viselnie."
+    ]
+   ],
+   "short": null,
+   "why": "Érdemi hiány: a banishelt token a 186.1 szerint megszűnik, tehát nem tér vissza, ez a lap használatát közvetlenül érinti."
+  },
+  "Blast Corps Cadet": {
+   "notes": [
+    [
+     "356.2.b.1,355.1.a",
+     0,
+     "Az [1] és 1 Fury Power optional additional cost. A kijátszás 2. lépésében döntesz róla, a unit costjával együtt fizeted."
+    ],
+    [
+     "383.2.a.1",
+     0,
+     "Az \"if you paid the additional cost\" a trigger feltétel része. Fizetés nélkül a trigger nem kerül chain-re."
+    ],
+    [
+     "355.5.b",
+     0,
+     "A targetet nem a unit kijátszásakor, hanem a trigger chain-re kerülésekor választod, amikor a Cadet már a boardon van."
+    ],
+    [
+     "355.8",
+     1,
+     "Ha a trigger chain-re kerülésekor nincs választható unit battlefielden, a trigger elvész, a kifizetett additional cost nem jár vissza."
+    ],
+    [
+     "355.8,355.9.c",
+     1,
+     "A trigger kötelező, és a Cadet a saját abilityjének is lehet targetje. Ha battlefieldre játszod ki, és nincs más unit battlefielden, a 2 damage-et saját magára kell kiosztania, vagyis meghal."
+    ],
+    [
+     "359.3.e.9",
+     0,
+     "Ha a target a resolve előtt base-be kerül, a trigger mistargetel, a 2 damage elmarad."
+    ],
+    [
+     "356.4.f.1",
+     0,
+     "Az additional cost akkor is \"paid\", ha egy kedvezmény (például Ezreal, Prodigy) 0-ra csökkenti."
+    ]
+   ],
+   "short": null,
+   "why": "Érdemi hiány: a play effectben nincs \"may\" és nincs \"another\", ezért battlefieldre kijátszva, más választható unit híján a Cadet önmagát kell hogy célozza (355.8, 355.9.c)."
+  }
+ }
+}

@@ -1,0 +1,411 @@
+{
+ "checked": 92,
+ "fixes": {
+  "Akali, Brash": {
+   "notes": null,
+   "short": "A körben az első mozgásakor 1 Energyt és 1 bármilyen domainű Powert kapsz. A második mozgásakor a Main Deck felső lapját félreteszed (banish), és a következő Ending Phase-edig kijátszhatod teljes áron. A második mozgáshoz kell valami, ami újra ready állapotba hozza vagy mozgatja, a Recall pedig nem számít mozgásnak.",
+   "why": "A short 1 Fury Powert írt, pedig az [Add] [1][A] bármely domainű Powert ad (135.2.e.5)."
+  },
+  "Akali, Deadly Weapon": {
+   "notes": null,
+   "short": "Valahányszor mozog, 1 damage-et adhat egy unitnak azon a battlefielden, ahová ment vagy ahonnan jött, Empowered állapotban 2-t. Saját unitot is választhatsz. 2 Energyért és 1 Fury Powerért Empowered lesz, és akkor +1 Mightja is van. A Recall nem számít mozgásnak.",
+   "why": "A short szerint az Empower 2 Powerbe kerül, a cost valójában [2][C]: 2 Energy és 1 Fury Power (827.1.c.1, 135.2.e.6)."
+  },
+  "Akali, Rogue Assassin": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Fury és Calm domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "827.1.c.1,381.1",
+     0,
+     "Empower [3][A]: activated ability, csak akkor aktiválható, ha a legend még nem Empowered, a saját Main Phase-edben, Open State-ben."
+    ],
+    [
+     "135.2.b.5.b",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: az \"if it's your turn\" a mondat minden utasítására vonatkozik, az \"if I'm Empowered\" csak a ready-re."
+    ],
+    [
+     "806.1.c.2,135.2.b.5.b",
+     1,
+     "[Action] miatt az opponent körében, showdown alatt is aktiválható lenne, de ott az \"if it's your turn\" feltétel nem teljesül, az ability nem csinál semmit."
+    ],
+    [
+     "355.9.b,359.3.e.2",
+     0,
+     "A target showdownban lévő friendly unit. Ha a resolve előtt elhagyja a showdown battlefieldjét, illegális target."
+    ],
+    [
+     "443.2.a,442.1.a",
+     1,
+     "A ready nem disempowereli a legendet: a második ability costja csak az Exhaust. Disempower csak akkor történik, ha egy effect utasít rá, ezért az Empowered állapot megmarad, az Empower costot nem kell körönként újra kifizetni."
+    ],
+    [
+     "421.1,416.1.c",
+     1,
+     "A base-be vitel Move, nem Recall. Az Empowered állapotot a resolve-kor nézi, a ready pedig lehetővé teszi, hogy a unit még abban a körben újra mozogjon."
+    ]
+   ],
+   "short": "Legend: exhaustolva a saját körödben egy showdownban álló saját unitodat a base-be viszed, és ha a legend Empowered, a unit ready lesz, így újra mozoghat. Az Empowered állapotot 3 Energyért és 1 bármilyen Powerért kapja meg, és az megmarad. Az ellenfél körében hiába aktiválod, nem csinál semmit.",
+   "why": "A short szerint az Empower 3 Power, a cost valójában [3][A]: 3 Energy és 1 bármilyen Power. A 6. pont hivatkozása (443.1.a) nem az állítást támasztja alá, a helyes a 443.2.a és 442.1.a."
+  },
+  "Altar of Blood": {
+   "notes": [
+    [
+     "369.1,370.1.c",
+     0,
+     "A \"would die ... instead\" replacement effect: a halál előtt lép közbe, a unit nem kerül a trashbe."
+    ],
+    [
+     "383.2.c.3.a",
+     0,
+     "A szabályzat pontosan ezt az esetet hozza példának: ha a halált heal, exhaust és recall váltja fel, a unit Deathknell abilityje nem triggerel, mert a halál nem történt meg."
+    ],
+    [
+     "445.2.b,445.2.c",
+     0,
+     "A 3 Power bármely domainből fizethető. Ha nem fizeted ki, nincs csere, a unit meghal. Fizetés közben [Reaction] Add ability (rune recycle) használható."
+    ],
+    [
+     "190.6.c,374",
+     1,
+     "A lap megnevezi, ki dönt: a meghaló unit controllere. A battlefield abilityjét az a játékos kontrollálja, akit az ability választásra kijelöl, ezért ő dönt és ő fizet, attól függetlenül, hogy ki kontrollálja a battlefieldet."
+    ],
+    [
+     "458.1,458.3",
+     0,
+     "A recall nem Move: \"when I move\" triggerek nem futnak le, és mozgást tiltó effect (például Vilemaw's Lair) nem akadályozza meg."
+    ],
+    [
+     "466.1,468.3.a",
+     1,
+     "Csak combat közbeni halálra él, de a Combat Showdown alatti spell általi kill is ide esik. A megmentett unit a base-be kerül, vagyis a battlefieldet ettől még elveszítheted."
+    ]
+   ],
+   "short": null,
+   "why": "A 4. pont nyitott kérdésnek (2) jelölte, hogy ki dönt, pedig a 190.6.c kimondja: ha a battlefield abilityje egy konkrét játékost jelöl ki választásra, ő az ability controllere."
+  },
+  "Altar to Unity": {
+   "notes": [
+    [
+     "473.2.b,472,190.6.d",
+     0,
+     "Csak annál triggerel, aki a Beginning Phase-ében holdolja ezt a battlefieldet, körönként egyszer. A \"you\" a battlefield controllere."
+    ],
+    [
+     "187.1,185.2.d",
+     0,
+     "A Recruit domain nélküli, 1 Mightú unit token. Unitként exhausted lép be."
+    ],
+    [
+     "440.2.c,185.2.a",
+     1,
+     "A tokent \"play\"-eled, vagyis a chainen jön létre és kijátszott unitnak számít. A \"when you play a unit\" triggereket kiváltja."
+    ],
+    [
+     "355.10.b",
+     1,
+     "Nincs target és nincs \"may\": a token kötelezően a saját base-edbe érkezik, máshova nem teheted."
+    ]
+   ],
+   "short": null,
+   "why": "A 3. pont 0-s jelzővel állította, hogy a token kiváltja a \"when you play a unit\" triggereket. A 440.2.c és 185.2.a csak azt mondja ki, hogy a token kijátszható, a trigger kiváltása levezetés."
+  },
+  "Antagonistic Apparatus": {
+   "notes": [
+    [
+     "103.2.b.5",
+     0,
+     "Nincs domainje, ezért bármilyen Domain Identity-jű deckbe betehető."
+    ],
+    [
+     "369.3",
+     0,
+     "Az \"I enter ready\" replacement effect: a unit eleve ready érkezik, nem exhausted lép be és utána lesz ready. A kijátszás körében már mozoghat."
+    ],
+    [
+     "187.4,184.1",
+     0,
+     "A token domain nélküli, 3 Mightú, Mech tages unit, és az effect szerint ready lép be."
+    ],
+    [
+     "359.3.f.2",
+     0,
+     "A \"here\" a resolve-kor ellenőrződik: a token oda érkezik, ahol az Apparatus akkor éppen áll."
+    ],
+    [
+     "359.3.e.12",
+     1,
+     "Ha az Apparatus a trigger resolve-ja előtt elhagyja a boardot, a \"here\" nem állapítható meg, a token valószínűleg nem jön létre."
+    ],
+    [
+     "185.2.a",
+     1,
+     "A tokent kijátszod (play), ezért a \"when you play a unit\" triggerek (például Cithria of Cloudfield) lefutnak rá."
+    ]
+   ],
+   "short": null,
+   "why": "A 6. pont 0-s jelzővel állította, hogy a kijátszott token kiváltja a \"when you play a unit\" triggereket. A 185.2.a csak a token kijátszhatóságát mondja ki, ez levezetés."
+  },
+  "Astral Heron": {
+   "notes": [
+    [
+     "420.5",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a kedvezmény a következő Play actionre jár, akár kézből játszol, akár egy effect játszat ki veled lapot."
+    ],
+    [
+     "420.4.a,420.4.a.1",
+     0,
+     "A trigger akkor fut le, amikor a kör első kártyája resolve-olt. Ha az első kártyádat counterelik, nem triggerel."
+    ],
+    [
+     "383.2.a.1",
+     0,
+     "Az \"if I'm at a battlefield\" a trigger feltétel része: base-ben álló Heron nem triggerel. Ha a trigger már chain-en van és a Heron elmozdul, a trigger így is resolve-ol."
+    ],
+    [
+     "356.4.d,356.6",
+     0,
+     "A [2][A][A] a teljes costból jön le, a komponens kedvezmények után. Az Energy és a Power cost sem mehet 0 alá, a fel nem használt rész elvész."
+    ],
+    [
+     "420.5",
+     1,
+     "Errata: a kedvezmény csak \"this turn\" él. Ha a körben nem játszol ki második lapot, nem megy át a következő körre."
+    ],
+    [
+     "383.2.c,383.2.c.1",
+     1,
+     "Ha maga a Heron a kör első kártyája és battlefieldre játszod ki, triggerel: a feltételt a játék az esemény feldolgozása után értékeli, amikor a Heron már a boardon, battlefielden áll. Base-be kijátszva az \"if I'm at a battlefield\" nem teljesül, nincs trigger."
+    ]
+   ],
+   "short": null,
+   "why": "A 6. pont nyitott kérdésnek (2) jelölte, hogy a Heron triggerel-e a saját kijátszására, pedig a 383.2.c és 383.2.c.1 eldönti: a feltételt az esemény feldolgozása után értékeli a játék, és az akkor zónába érkező objektum triggere is lefut."
+  },
+  "Azir, Emperor of the Sands": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Calm és Order domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "187.3,185.2.d",
+     0,
+     "A Sand Soldier domain nélküli, 2 Mightú unit token Shurima taggel. Az ability csak a base-be teszi, és exhausted lép be."
+    ],
+    [
+     "377.2.b,420.4.b",
+     0,
+     "A \"use only if you've played an Equipment this turn\" feltételnek aktiváláskor igaznak kell lennie. A finalizálást nézi, tehát counterelt Equipment után is aktiválható."
+    ],
+    [
+     "821.1.c",
+     0,
+     "Weaponmaster: a Sand Soldier kijátszásakor választhatsz egy Equipmentedet, és az Equip costját [A]-val olcsóbban kifizetve rácsatolod, az Equip szokásos időzítésétől függetlenül."
+    ],
+    [
+     "821.1.c.3,821.1.c.4",
+     0,
+     "Ha az Equip costban nincs [A], kifizethető, de nem lesz olcsóbb. Equip cost nélküli Equipment így nem csatolható."
+    ],
+    [
+     "821.1.c.6",
+     0,
+     "A Weaponmaster nem aktiválja az Equip abilityt, és a Sand Soldier nem \"chosen\", tehát a targetelésre figyelő triggerek nem futnak le rá."
+    ],
+    [
+     "364.2",
+     1,
+     "A passive ability minden általad kijátszott Sand Soldierre vonatkozik, a más lapokból érkezőkre is, nem csak a legend abilityjéből jövőre."
+    ],
+    [
+     "381.1,308.1.a",
+     0,
+     "A token ability [Action] és [Reaction] nélküli: csak a saját Main Phase-edben, Open State-ben aktiválható. Showdown és combat alatt, illetve az opponent körében nem."
+    ]
+   ],
+   "short": "Legend: 1 Energyért és exhaustolva kapsz egy 2 Mightú Sand Soldier unit tokent a base-edbe, de csak ha ebben a körben már kijátszottál egy Equipmentet, és csak a saját körödben, combaton kívül. Minden Sand Soldiered kijátszáskor olcsóbban felvehet egy Equipmentet. A deck Calm és Order lapokból állhat.",
+   "why": "Hiányzott az activated ability időzítése: [Action] és [Reaction] nélkül csak a saját Main Phase-ben, Open State-ben, showdownon kívül megy (381.1, 308.1.a)."
+  },
+  "Azir, Sovereign": {
+   "notes": [
+    [
+     "805.1.b,805.1.b.1",
+     0,
+     "[Accelerate]: kijátszáskor [1] és egy Order Power additional costért ready lép be. A Power csak a unit saját domainjéből fizethető."
+    ],
+    [
+     "383.4.e.2,383.3.a",
+     0,
+     "Attack trigger, a \"you may\" az effect elején áll: a finalizáláskor döntesz, kéred-e."
+    ],
+    [
+     "355.5,355.5.b",
+     1,
+     "A mozgatott token unitokat a trigger chain-re kerülésekor nevezed meg, ők targetek. Bárhonnan jöhetnek, base-ből és másik battlefieldről is, exhausted állapotban is."
+    ],
+    [
+     "421.1",
+     1,
+     "Ez effect általi Move: a tokeneket nem kell exhaustolni, és a \"when I move\" triggerek lefutnak."
+    ],
+    [
+     "466.2.c.3.a,383.4.e.2",
+     1,
+     "Az érkező tokenek a következő cleanupban Attacker designationt kapnak, ekkor a saját attack triggerük (például a Shadow Clone-é) is lefut."
+    ],
+    [
+     "359.3.f.3,359.3.f.2,355.4",
+     2,
+     "Nem egyértelmű, mi történik, ha Azirt a trigger alatt elmozdítják. A \"this battlefield\" lehet a trigger feltételéből rögzített hely (ahol Azir támadott), vagy Azir resolve-kori helye. A Core Rules erre a szövegre nem mondja ki, vita esetén judge dönt."
+    ]
+   ],
+   "short": "Amikor támad, bármennyi token unitodat odahozhatod a combatba, base-ből vagy másik battlefieldről, akár exhausted állapotban is. Erről és a mozgatott tokenekről a támadáskor döntesz. 1 Energy és 1 Order Power ráfizetéssel ready érkezik.",
+   "why": "A 6. pont és a short tényként állította, hogy a \"this battlefield\" Azir resolve-kori helye. A 359.3.f.3 szerint a trigger feltételéből vett információ a triggereléskor rögzül, a 355.4 szerint a Move célját finalizáláskor választod, a 359.3.f.2 viszont resolve-kori ellenőrzést ír: ez nyitott kérdés."
+  },
+  "Back Off": {
+   "notes": [
+    [
+     "811.1.b,811.6,811.3",
+     0,
+     "Hide: a saját körödben [A]-ért facedown tehető egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható. Kézből, teljes costért csak [Action] időzítéssel megy."
+    ],
+    [
+     "355.10,811.1.d.2",
+     0,
+     "A unit target, bármelyik játékosé lehet. Facedown-ból csak az adott battlefielden lévő unit választható."
+    ],
+    [
+     "135.2.b.7",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a resolve-kor azt nézi, kézből lett-e kijátszva. Ha igen, a spell aktuális controllere húz, akkor is, ha közben más vette át a kontrollt."
+    ],
+    [
+     "811.1.b,135.2.b.7",
+     1,
+     "Facedown-ból kijátszva nincs húzás. A csere: kézből 3 Energy, [Action] időzítés és draw, facedown-ból ingyen, [Reaction] időzítés, draw nélkül."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "A draw nem hivatkozik a unitra: ha a target illegális lesz, kézből kijátszva ettől még húzol."
+    ],
+    [
+     "424.1.b,424.1.a.2",
+     0,
+     "A Stunned unit Mightja nem számít bele a combat damage-be, az állapot a kör végi cleanupban szűnik meg."
+    ]
+   ],
+   "short": null,
+   "why": "A 2. pont facedown célzási megkötését a 355.10 nem mondja ki, a helyes hivatkozás a 811.1.d.2."
+  },
+  "Bandle Scouts' Academy": {
+   "notes": [
+    [
+     "422.1,107.3.c",
+     0,
+     "Elrejteni csak általad kontrollált battlefieldre lehet, tehát a trigger a battlefield controllerének jár."
+    ],
+    [
+     "811.1.c.2",
+     1,
+     "Maga a Hide nem nyit chaint, de ez a trigger igen: az opponent ilyenkor reagálhat."
+    ],
+    [
+     "187.5",
+     0,
+     "A Gold domain nélküli gear token: \"[Reaction], Kill this, Exhaust: Add [A]\"."
+    ],
+    [
+     "184.1,148.1.a.1",
+     0,
+     "A Gold exhausted érkezik a base-edbe, ezért abban a körben még nem ad Powert."
+    ],
+    [
+     "811.1.b",
+     1,
+     "A Hide [A]-ba kerül, a Gold később [A]-t ad. Az elrejtés ára így egy körrel később visszajön."
+    ],
+    [
+     "440.2.c,185.2.a",
+     1,
+     "A tokent kijátszod, a \"when you play a gear\" triggereket kiváltja. Nincs \"may\", a Gold kötelezően létrejön."
+    ]
+   ],
+   "short": null,
+   "why": "A 6. pont 0-s jelzővel állította, hogy a Gold token kiváltja a \"when you play a gear\" triggereket. A 440.2.c és 185.2.a csak a token kijátszását mondja ki, a trigger kiváltása levezetés."
+  },
+  "Bandle Soldier": {
+   "notes": [
+    [
+     "824.1.b.1,369.3",
+     0,
+     "Level 3: legalább 3 XP mellett ready lép be. Ez replacement effect: a unit nem exhausted érkezik, majd áll fel, hanem eleve ready."
+    ],
+    [
+     "824.1.c,369.3",
+     1,
+     "A kijátszás pillanatában kell meglennie a 3 XP-nek. Ha a küszöböt később éred el, a már boardon lévő Soldier nem lesz ready."
+    ],
+    [
+     "144.1.a,144.2",
+     1,
+     "Ready belépve még abban a körben mehet Standard Move-val battlefieldre."
+    ],
+    [
+     "805.6.a",
+     1,
+     "Mivel eleve ready érkezik, a \"becomes ready\" típusú triggereket nem váltja ki."
+    ]
+   ],
+   "short": null,
+   "why": "A 2. pont a 366.2.a-ra hivatkozott, ami a costot módosító passive abilitykről szól. A Level feltétel és a belépési replacement effect helyes hivatkozása a 824.1.c és a 369.3."
+  },
+  "Bedeviling Stranger": {
+   "notes": [
+    [
+     "811.1.b",
+     0,
+     "Hide: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ha ott még nincs facedown lapod. A következő körtől [Reaction]-t kap és a base cost nélkül kijátszható."
+    ],
+    [
+     "811.1.d.1, 811.1.d.3",
+     0,
+     "Facedown-ból csak arra a battlefieldre játszható ki, ahol el volt rejtve, és a play effect targetjeit is onnan kell választani."
+    ],
+    [
+     "811.1.d.3",
+     2,
+     "Facedown-ból kijátszva a \"choose a battlefield\" valószínűleg csak a saját battlefieldje lehet. A szabály unit targetekre hoz példát, battlefield választásra nem, ezt judge döntse el."
+    ],
+    [
+     "355.5.b",
+     0,
+     "A play effect választásait nem a unit kijátszásakor, hanem a trigger chain-re kerülésekor teszed meg."
+    ],
+    [
+     "056.2, 186.1",
+     0,
+     "A visszaküldött unit a tulajdonosa kezébe megy. Token unit a kézbe kerülve megszűnik létezni."
+    ],
+    [
+     "811.3",
+     0,
+     "Kézből, teljes costért is kijátszható, ilyenkor nincs célzási megkötés."
+    ],
+    [
+     "135.2.b.3,383.3.a.3",
+     1,
+     "A \"4 or more units there\" feltételt és a \"you may\" döntést a resolve-kor nézi a játék, nem a trigger chain-re kerülésekor. Ha az opponent válaszul elvisz onnan egy unitot és 4 alá csökken a szám, nem történik semmi. Minden ott álló unit számít, a tieid és maga a Stranger is."
+    ]
+   ],
+   "short": null,
+   "why": "Hiányzott, hogy a 4 unitos feltétel és a \"you may\" mikor dől el: a feltétel az instruction része, a resolve-kor ellenőrződik (135.2.b.3), a később álló \"you may\" pedig szintén resolve-kori döntés (383.3.a.3)."
+  }
+ }
+}

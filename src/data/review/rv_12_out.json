@@ -1,0 +1,149 @@
+{
+ "checked": 89,
+ "fixes": {
+  "Vex, Apathetic": {
+   "notes": [
+    [
+     "420.4.a,383.2.a.1",
+     0,
+     "Akkor triggerel, amikor az opponent unitjának kijátszása befejeződött, és Vex abban a pillanatban battlefielden van. Base-ből nem működik."
+    ],
+    [
+     "355.10.c",
+     0,
+     "A kijátszott unit csak a trigger feltételében szerepel, ezért nem target. Deflect és \"can't be chosen\" nem védi meg a stuntól."
+    ],
+    [
+     "424.1.b,424.1.a.2",
+     0,
+     "A stunned unit abban a körben nem ad Mightot a combat damage-hez. Az állapot a kör végi cleanupban szűnik meg."
+    ],
+    [
+     "054.1,358.3.a",
+     1,
+     "A \"can't move\" a Standard Move-ot és a mozgató effecteket is tiltja a kör végéig. Mozgató spell ráolvasható, de a Move a resolve-kor negálódik."
+    ],
+    [
+     "458.3",
+     0,
+     "A Recall nem Move, azt a tiltás nem akadályozza meg."
+    ],
+    [
+     "185.2.a,185.2.d",
+     1,
+     "Az opponent által kijátszott unit tokenre is triggerel: a token unit is unit, és a tokent a játékos ugyanúgy \"play\"-eli, a kártya kijátszásának lépéseit követve."
+    ],
+    [
+     "809.1.c",
+     0,
+     "[Deflect]: az opponent Vexet targetelő spellje vagy abilityje +[A]-ba kerül."
+    ]
+   ],
+   "short": "Amíg battlefielden áll, minden unit, amit az opponent kijátszik, stunolva lép be és abban a körben nem mozoghat. Base-ből nem működik. A stun nem célzott, Deflect nem véd ellene. Az opponent által kijátszott unit tokenekre is érvényes.",
+   "why": "A tokenes pont 2-es (nyitott kérdés) volt, pedig a 185.2.a (a tokent kijátsszák, a kijátszás lépései szerint) és a 185.2.d (a token unit unit) eldönti: 1-es levezetés. A short is nyitottként írta le."
+  },
+  "Vex, Gloomist": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Calm és Chaos domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "471.2,315.2.b.2",
+     0,
+     "Hold a Beginning Phase Scoring Stepjében történik, annak a körében, aki a battlefieldet megtartja. A saját holdod a saját körödben, az ally-é az ő körében triggerel."
+    ],
+    [
+     "383.3.a,383.3.b,415.4",
+     0,
+     "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted. Több megtartott battlefield több triggert ad, de exhausted legenddel a többi nem fizethető ki."
+    ],
+    [
+     "315.1.b",
+     1,
+     "A legend csak a saját Awaken Phase-edben lesz ready, a saját holdod előtt. Ha a saját holdodnál exhaustolod, az ally körében még exhausted. Körfordulónként ezért egy húzás jár: vagy a saját holdodra, vagy az ally-éra, hacsak más effect nem readyzi."
+    ],
+    [
+     "491.8.e,487.2",
+     1,
+     "1v1-ben nincs ally, ott csak a saját holdod számít."
+    ],
+    [
+     "414.4",
+     0,
+     "Üres Main Deck esetén a draw Burn Outot okoz."
+    ]
+   ],
+   "short": "Legend: amikor te vagy egy csapattársad megtart egy battlefieldet, exhaustolva húzhatsz egy lapot. Csak a saját köröd elején lesz újra ready, ezért 2v2-ben is körfordulónként egyszer használható: vagy a saját holdodra, vagy a társadéra.",
+   "why": "Tárgyi hiba: a pont és a short szerint 2v2-ben körönként kétszer is húzhatsz. A 315.1.b szerint a legend csak a saját Awaken Phase-edben readyződik, tehát körfordulónként egyszer exhaustolható."
+  },
+  "Whirling Twirligig": {
+   "notes": [
+    [
+     "415.4",
+     1,
+     "Mindhárom ability costjában ott az exhaust, ezért körönként csak az egyik használható."
+    ],
+    [
+     "151.2",
+     0,
+     "Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható."
+    ],
+    [
+     "355.10.c,429.1.a.1.b",
+     0,
+     "A megölt friendly gear vagy unit a cost része, nem target. A costként megölt unit Deathknell abilityje chain-re kerül."
+    ],
+    [
+     "185.2.d",
+     1,
+     "Token is feláldozható: az előző körben kapott Goldból Recruit, egy Recruitból 3 Mightú Mech lehet."
+    ],
+    [
+     "357.2",
+     2,
+     "A \"Kill a friendly gear\" nem mondja, hogy \"another\". Nem egyértelmű, hogy a Twirligig saját magát megölheti-e a cost részeként, judge döntse el."
+    ],
+    [
+     "355.2.a,149.2",
+     1,
+     "A unit tokenek a base-edbe vagy egy általad kontrollált battlefieldre érkeznek exhausted. A Gold a base-be jön exhausted, abban a körben nem használható."
+    ]
+   ],
+   "short": null,
+   "why": "Tárgyi hiba: az első pont domain nélküli lapnak írta le (103.2.b.5, 135.2.e.6.b), pedig a kártya Fury domainű, 1 Power costtal. A pont törölve, a lap csak Furyt tartalmazó Domain Identity-be tehető."
+  },
+  "Yeti Brawler": {
+   "notes": [
+    [
+     "383.2.a.1,383.4.c.2.a",
+     0,
+     "Az \"if you assigned 3 or more excess damage\" a trigger condition része. Ha a conquer pillanatában nem teljesül, a trigger nem kerül chain-re."
+    ],
+    [
+     "467.2.c.4",
+     0,
+     "Lethalnál több combat damage csak akkor osztható egy unitra, ha már nincs másik unit, amelyre damage-et lehetne osztani. Többlet ezért jellemzően csak az utolsó enemy unitnál keletkezhet."
+    ],
+    [
+     "467.2.c,468.5.d",
+     1,
+     "Combat nélküli conquer (üres battlefield elfoglalása) nem oszt ki damage-et, így nem ad Goldot. A feltétel a te összes kiosztott damage-edet nézi, nem csak a Yetiét."
+    ],
+    [
+     "467.2.c",
+     2,
+     "Az \"excess damage\" fogalmát a Core Rules nem definiálja. Valószínűleg a lethal fölött kiosztott combat damage-et jelenti, de hogy a már sebzett unitra kiosztott többlet vagy a prevent által elnyelt damage beleszámít-e, azt judge döntse el."
+    ],
+    [
+     "187.5,184.1",
+     0,
+     "A két Gold gear token exhausted lép be, a base-edbe, és csak ready állapotban adnak Powert."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz jelző és belső ellentmondás: egy pont 1-es levezetésként definiálta az excess damage-et, miközben egy másik pont szerint a Core Rules nem definiálja. A 467.2.c.4 csak a kiosztási korlátot mondja ki (0), a definíció nyitott kérdés (2)."
+  }
+ }
+}

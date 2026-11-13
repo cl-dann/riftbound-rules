@@ -1,0 +1,278 @@
+{
+ "checked": 92,
+ "fixes": {
+  "Emperor's Divide": {
+   "notes": [
+    [
+     "811.1.b,811.6,811.3",
+     0,
+     "Hide: a saját körödben [A]-ért facedown tehető egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható. Kézből, teljes costért csak [Action] időzítéssel megy."
+    ],
+    [
+     "811.1.d.2",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: facedown-ból kijátszva minden kiválasztott unitnak azon a battlefielden kell lennie, ahol a lap el volt rejtve."
+    ],
+    [
+     "355.13",
+     0,
+     "\"Any number\": nullát is választhatsz. Minden kiválasztott unit target."
+    ],
+    [
+     "355.11,355.11.b",
+     1,
+     "Kézből kijátszva is egyetlen battlefieldről kell jönniük a unitoknak: a szabályzat az azonos szerkezetű Fox-Fire szövegnél (\"any number of units at a battlefield\") egy kiválasztott battlefieldről beszél. Több battlefieldről vegyesen nem választhatsz."
+    ],
+    [
+     "359.3.e.9,358.4",
+     0,
+     "Védekezésre facedown-ból, [Reaction]-ként jó: a base-be mozgatott unit illegális target lesz minden olyan spellnek, amelyik \"unit at a battlefield\"-et választott. Kézből, [Action]-nel egy spellre válaszul nem játszható ki."
+    ],
+    [
+     "421.1,358.3.a",
+     0,
+     "Ez Move, nem Recall: a \"when I move\" triggerek lefutnak, és a mozgást tiltó effect az adott unit Move-ját negálja."
+    ]
+   ],
+   "short": "Bármennyi saját unitodat egy battlefieldről a base-be mozgatja. Kézből a saját körödben vagy showdownban játszható ki, egy másik spellre válaszul nem. Ha 1 Powerért elrejted, később reakcióként, ingyen jön: így kimentheted a unitokat a battlefieldre célzott spellek elől, de csak az ottaniakat.",
+   "why": "A 2-es pontot a 355.11.b Fox-Fire példája eldönti (azonos szövegszerkezet, egy kiválasztott battlefield), ezért 1-es levezetés. A védekező használat csak facedown-ból, [Reaction]-nel megy (358.4), a pont és a short ezt nem mondta ki."
+  },
+  "Enthralling Protector": {
+   "notes": [
+    [
+     "823.1.b,823.1.c.1",
+     0,
+     "[Hunt]: conquer és hold effect egyben. 1 XP-t kapsz, ha a unit ott van azon a battlefielden, amelyet conquerelsz vagy holdolsz."
+    ],
+    [
+     "472,823.2",
+     1,
+     "Egy battlefield körönként egyszer score-olható, így ugyanarról a battlefieldről körönként legfeljebb 1 XP jön. Ha hold után még abban a körben másik battlefieldet conquerel, az újabb 1 XP. Más forrásból kapott Hunt értéke hozzáadódik."
+    ],
+    [
+     "202,203.3,730.2",
+     0,
+     "A \"Spend 2 XP\" az activated ability cost-ja. 2 XP nélkül nem aktiválható, az XP játékoshoz tartozik, nem a unithoz."
+    ],
+    [
+     "381.1,145.2",
+     0,
+     "A saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható. Nincs Exhaust cost, ezért a kijátszás körében, exhausted unittal is megy."
+    ],
+    [
+     "427.1.b.1,702.3",
+     0,
+     "Egy uniton egyszerre egy buff lehet. Ha már buffolt, az ability resolve-ol, de nem történik semmi, a 2 XP elveszett."
+    ],
+    [
+     "705",
+     0,
+     "A buff addig marad, amíg a unit a boardon van vagy el nem költik. Nem jár le a kör végén."
+    ]
+   ],
+   "short": null,
+   "why": "A 472 battlefieldenként korlátoz, nem unitonként: hold után másik battlefield conquerelésével ugyanabban a körben második XP is jár, a pont körönkénti 1 XP-s plafont sugallt 0-s jelzővel."
+  },
+  "Entrenched Boar": {
+   "notes": [
+    [
+     "369.3",
+     0,
+     "A ready belépés replacement effect. A unit eleve ready érkezik, ez nem \"becomes ready\" esemény."
+    ],
+    [
+     "355.1,369.3",
+     2,
+     "A Core Rules nem mondja ki, hogy a ready belépésről a kijátszás választási lépésében vagy a belépés pillanatában döntesz. A gyakorlatban ritkán számít, vita esetén judge döntse el."
+    ],
+    [
+     "144.2",
+     1,
+     "Ha a ready belépést választod, abban a körben nem mozoghat: Standard Move sem megy. A ready állapot így csak nem mozgáshoz kötött célra jó (például exhaust cost)."
+    ],
+    [
+     "358.3.a",
+     1,
+     "Mozgató spell kijátszható rá, de a resolve-kor a Move negálódik."
+    ],
+    [
+     "458.3",
+     0,
+     "A Recall nem Move, a tiltás nem akadályozza."
+    ],
+    [
+     "103.2.b.5",
+     0,
+     "Nincs domainje, bármilyen Domain Identity-jű deckbe betehető."
+    ]
+   ],
+   "short": null,
+   "why": "A pont maga is \"valószínűleg\"-et írt 1-es jelzővel: a 355.1 az \"As I am played\" választásokról szól, a 369.3 pedig replacement effectként írja le a belépést, a döntés időpontját egyik sem rögzíti, ezért 2-es."
+  },
+  "Esteemed Hierophant": {
+   "notes": [
+    [
+     "364.3.a",
+     0,
+     "Feltételes passive: csak addig véd, amíg legalább 7 rune-t kontrollálsz. Az exhausted rune is számít."
+    ],
+    [
+     "164.2.b",
+     1,
+     "Ha Powerért recycle-ölsz egy rune-t és 7 alá esel, a védelem azonnal megszűnik, akár egy chain-en lévő enemy spell resolve-ja előtt."
+    ],
+    [
+     "438.1.b.1.b,438.4",
+     0,
+     "\"Prevent all\": az enemy spellek és abilityk damage-e 0 lesz, és nem számít kiosztottnak."
+    ],
+    [
+     "418.6.c",
+     1,
+     "A combat damage forrása a unit, nem spell vagy ability, az ellen nem véd."
+    ],
+    [
+     "418.6.b.3",
+     1,
+     "Ha egy enemy spell egy unitot jelöl meg a damage forrásának (\"they deal damage equal to their Mights\"), azt a unit osztja, nem a spell, ezért a védelem nem hat rá."
+    ],
+    [
+     "429.1.a.1",
+     1,
+     "Kill, bounce és Might csökkentés ellen nem véd, csak damage ellen."
+    ]
+   ],
+   "short": null,
+   "why": "A 418.6.b.3 és a Challenge példa egyértelmű: az ilyen damage-et a unit osztja, nem a spell. A bizonytalan \"valószínűleg\" megfogalmazás nem illett az 1-es jelzőhöz, az állítás határozottan kimondható."
+  },
+  "Existential Dread": {
+   "notes": [
+    [
+     "355.9.b,466.2.c.3",
+     1,
+     "A target csak támadó enemy unit lehet, ezért a spell csak combat alatt játszható ki. Kétjátékos játékban ez azt jelenti, hogy te vagy a defender."
+    ],
+    [
+     "359.3.f.2,424.1.a",
+     0,
+     "A Stunned állapotot a resolve-kor nézi a játék. Ha a unit már Stunned, a stun helyett a tulajdonosa kezébe megy."
+    ],
+    [
+     "820.1.d.1,820.2.a",
+     1,
+     "Repeat [2]: ugyanarra a nem Stunned unitra kétszer választva az első végrehajtás stunolja, a második már Stunned unitot talál és kézbe küldi."
+    ],
+    [
+     "056.2,186.1",
+     0,
+     "A unit a tulajdonosa kezébe megy. Token unit megszűnik."
+    ],
+    [
+     "359.3.e.2,323.2.c",
+     0,
+     "Ha a unit a resolve előtt elhagyja a combat battlefieldjét, már nem attacker, illegális target."
+    ],
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ]
+   ],
+   "short": null,
+   "why": "A szabály csak az Attacker designationt írja le, azt nem mondja ki, hogy neked kell defendernek lenned: többjátékos módban más ellen támadó enemy unit is attacking enemy unit. Ez levezetés, nem 0-s állítás."
+  },
+  "Faithful Manufactor": {
+   "notes": [
+    [
+     "187.1",
+     0,
+     "A Recruit domain nélküli, 1 Mightú unit token Recruit taggel."
+    ],
+    [
+     "359.3.f.2",
+     0,
+     "A \"here\" a resolve-kor ellenőrződik: a token oda érkezik, ahol a Manufactor akkor áll, base-be vagy battlefieldre."
+    ],
+    [
+     "185.2.a,185.2.d",
+     1,
+     "A token unitként viselkedik: exhausted lép be, és kijátszottnak számít a \"when you play a unit\" triggerekhez."
+    ],
+    [
+     "186.1",
+     0,
+     "Ha a token elhagyja a boardot (kéz, trash, deck), megszűnik létezni."
+    ]
+   ],
+   "short": null,
+   "why": "A 185.2.d nem mondja ki, hogy a token kijátszása kiváltja a \"when you play a unit\" triggereket: ez a 185.2.a és 185.2.d együtteséből levezetés, ezért 1-es jelző és kiegészített hivatkozás."
+  },
+  "Fanfare": {
+   "notes": [
+    [
+     "103.2.b.5",
+     0,
+     "Domain nélküli lap: bármilyen Domain Identity-jű deckbe betehető."
+    ],
+    [
+     "391.2,393",
+     0,
+     "A resolve egy Delayed Triggert hoz létre, ami a spelltől függetlenül él a kör végéig."
+    ],
+    [
+     "420.4.a,420.4.a.1",
+     0,
+     "A draw akkor jön, amikor a unit kijátszása a resolve-val befejeződött. Counterelt unit után nem húzol."
+    ],
+    [
+     "317.2.c",
+     1,
+     "Legfeljebb három unit után húzol, a fel nem használt alkalmak a kör végén elvesznek. A Fanfare előtt kijátszott unitok nem számítanak."
+    ],
+    [
+     "185.2.a,185.2.d",
+     1,
+     "Unit token kijátszása is beleszámít: a token unit, és a tulajdonosa a kártyakijátszás lépései szerint \"play\"-eli. Két tokent hozó effect két alkalmat használ el."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ]
+   ],
+   "short": "Ebben a körben a következő három kijátszott unitod után húzol 1-1 lapot. A Fanfare előtt kijátszott unitok nem számítanak, és counterelt unit után nem húzol. A token unitok kijátszása is számít.",
+   "why": "A token kérdés nem nyitott: a 185.2.a szerint a tokent a kártyakijátszás lépései szerint játsszák ki, a 185.2.d szerint a unit token unit. 2-es helyett 1-es levezetés, a short ennek megfelelően javítva."
+  },
+  "Flurry of Blades": {
+   "notes": [
+    [
+     "355.10.d",
+     0,
+     "Nincs target (\"all units at battlefields\"). Deflect és \"can't be chosen\" nem véd ellene."
+    ],
+    [
+     "355.5.a,418.1.d",
+     0,
+     "Minden battlefielden álló unitot sebez egyszerre, a sajátjaidat is. A base-ben lévő unitokat nem éri."
+    ],
+    [
+     "143.2.b,143.3.b",
+     0,
+     "Az 1 Mightú unitokat megöli, a már sebzetteket akkor, ha a rajtuk lévő damage így eléri a Mightjukat. A damage a kör végéig vagy a Combat Cleanupig a unitokon marad, a combat damage hozzáadódik."
+    ],
+    [
+     "429.5.c",
+     0,
+     "A következő cleanupban meghaló unitok megölése a spellnek és neked számít be."
+    ],
+    [
+     "813.1.c.1",
+     0,
+     "[Reaction]: combat showdown közben is kijátszható, a resolve-kor a battlefielden álló unitokra hat."
+    ]
+   ],
+   "short": null,
+   "why": "A pont azt állította, hogy a már sebzett unitokat megöli. A 143.2.b szerint csak akkor hal meg a unit, ha a rajta lévő damage eléri a Mightját."
+  }
+ }
+}

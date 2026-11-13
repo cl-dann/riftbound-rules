@@ -197,6 +197,17 @@ table.im td:first-child{font-weight:600;white-space:nowrap}
 .vscard b{font-size:16px}
 .vscard p{margin:4px 0;font-size:14px}
 #vs-out table.nt{max-width:900px}
+.cbstep{border:1px solid var(--line);border-radius:6px;padding:10px 12px;margin:0 0 10px;background:var(--panel2)}
+.cbstep .hd{display:flex;gap:8px;align-items:center;margin-bottom:6px;font-weight:600}
+.cbstep .hd .no{font-family:var(--f-mono);color:var(--accent)}
+.cbstep .hd button{margin-left:auto}
+.cbstep .row2{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.cbstep .row2 select{flex:1 1 140px;font-size:13px;padding:6px 8px}
+.cbstep input{font-size:14px}
+.cbstep .tl{font-size:12px;color:var(--muted);width:100%;margin-top:4px}
+.cbsec{margin:18px 0 6px}
+.res li{margin:4px 0}
+.stbad{color:var(--warn);font-weight:600}.stok{color:var(--ok);font-weight:600}
 .kwgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
 .kwc{border:1px solid var(--line);border-radius:5px;padding:12px 14px;background:var(--panel2)}
 .kwc h4{margin:0 0 2px;font-family:var(--f-display);font-size:20px;font-weight:700;display:flex;gap:8px;align-items:baseline;justify-content:space-between}
@@ -266,6 +277,7 @@ table.nt td.f{width:1%;white-space:nowrap}
     <a href="#kartyak" data-v="kartyak">Kártyák</a>
     <a href="#deck" data-v="deck">Deck</a>
     <a href="#szabalyok" data-v="szabalyok">Szabályzat</a>
+    <a href="#chain" data-v="chain">Chain</a>
     <a href="#tudastar" data-v="tudastar" id="tab-tud" hidden>Tudástár</a>
   </nav>
 
@@ -339,12 +351,25 @@ table.nt td.f{width:1%;white-space:nowrap}
     </div>
   </section>
 
+  <section class="view" id="v-chain">
+    <div class="cols">
+      <div class="panel pad">
+        <p class="note" style="margin-top:0">Rakd össze a chaint lépésenként: az első a kijátszott lap, minden további egy válasz az előzőekre. Lapnál add meg, ki játssza ki és mit választ (target). Az oldal ellenőrzi az időzítést és a targetet, majd lefuttatja a chaint a szabályok szerint.</p>
+        <div id="cb-steps"></div>
+        <div class="btnrow"><button class="btn sec" id="cb-add">+ Válasz hozzáadása</button><button class="btn" id="cb-run">Chain lefuttatása</button><button class="linkbtn" id="cb-clear">Törlés</button></div>
+        <div class="btnrow"><button class="linkbtn" id="cb-ex">Példa: Riptide Rex, rá Star-Crossed</button></div>
+      </div>
+      <div class="panel pad" id="cb-out"><h2>Chain elemzés</h2><p class="note">Adj meg legalább egy lapot, majd nyomd meg a Chain lefuttatása gombot.</p></div>
+    </div>
+  </section>
+
   <section class="view" id="v-tudastar">
     <div class="panel pad" id="tud"></div>
   </section>
 
   <footer id="foot"></footer>
 <div id="tip" role="tooltip" hidden></div>
+<datalist id="cardnames"></datalist>
 <div id="modal" hidden role="dialog" aria-modal="true" aria-label="Kártya"><div class="box"><button class="x" id="modal-x">Bezárás</button><div id="modal-body"></div></div></div>
 </div>
 
@@ -935,14 +960,13 @@ window.addEventListener('scroll',()=>{if(tipFor)hideTip();},{passive:true});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')hideTip();});
 function renderTud(){
   const X=D.extra||{};
-  $('tab-tud').hidden=false;let h='<div class="subnav">'+(X.guide?'<a class="chip" href="#tud-guide" data-scroll="tud-guide">Kezdő útmutató</a>':'')+'<a class="chip" href="#tud-vs" data-scroll="tud-vs">Lap a lap ellen</a><a class="chip" href="#tud-chain" data-scroll="tud-chain">Válasz a chainen</a><a class="chip" href="#tud-olvas" data-scroll="tud-olvas">A magyarázatok olvasása</a>'+(X.terms?'<a class="chip" href="#tud-fog" data-scroll="tud-fog">Fogalmak</a>':'')+(X.glossary?'<a class="chip" href="#tud-kw" data-scroll="tud-kw">Kulcsszavak</a>':'')+(X.flow?'<a class="chip" href="#tud-flow" data-scroll="tud-flow">Játékmenet</a>':'')+(X.patchnotes?'<a class="chip" href="#tud-pn" data-scroll="tud-pn">Szabályváltozások</a>':'')+'</div>';
+  $('tab-tud').hidden=false;let h='<div class="subnav">'+(X.guide?'<a class="chip" href="#tud-guide" data-scroll="tud-guide">Kezdő útmutató</a>':'')+'<a class="chip" href="#tud-vs" data-scroll="tud-vs">Lap a lap ellen</a><a class="chip" href="#tud-olvas" data-scroll="tud-olvas">A magyarázatok olvasása</a>'+(X.terms?'<a class="chip" href="#tud-fog" data-scroll="tud-fog">Fogalmak</a>':'')+(X.glossary?'<a class="chip" href="#tud-kw" data-scroll="tud-kw">Kulcsszavak</a>':'')+(X.flow?'<a class="chip" href="#tud-flow" data-scroll="tud-flow">Játékmenet</a>':'')+(X.patchnotes?'<a class="chip" href="#tud-pn" data-scroll="tud-pn">Szabályváltozások</a>':'')+'</div>';
   const rl=r=>'<a href="#szabalyok" data-ref="'+esc(r)+'">'+esc(r)+'</a>';
   if(X.guide){
     h+='<h2 id="tud-guide" style="margin-top:14px">Kezdő útmutató</h2><p class="note" style="margin:6px 0 12px">Az első játék lépésről lépésre, a Core Rules alapján. AI által írt összefoglaló, nem hivatalos.</p>';
     X.guide.forEach((g,i)=>{h+='<div class="guide"><h3>'+(i+1)+'. '+esc(String(g.title).replace(/^\s*\d+\.\s*/,''))+(g.rules?'<span class="n">'+rl(g.rules)+'</span>':'')+'</h3>'+(g.paras||[]).map(p=>'<p>'+glossify(esc(p))+'</p>').join('')+(g.steps&&g.steps.length?'<ol class="flow">'+g.steps.map(s=>'<li><span>'+esc(s[1])+rl(s[0])+'</span></li>').join('')+'</ol>':'')+'</div>';});
   }
-  h+='<h2 id="tud-vs" style="margin-top:28px">Lap a lap ellen</h2><p class="note" style="margin:6px 0 12px">Válassz két lapot: az oldal megmutatja, milyen ismert kölcsönhatás van köztük, és mely szabályokra hivatkozik mindkét lap magyarázata. Automatikus keresés, nem teljes és nem hivatalos.</p><div class="vsin"><input type="text" id="vs-a" list="cardnames" placeholder="Első lap neve" aria-label="Első lap"><span class="vsx">ellen</span><input type="text" id="vs-b" list="cardnames" placeholder="Második lap neve" aria-label="Második lap"><button class="btn" id="vs-go">Összevetés</button></div><datalist id="cardnames">'+CARDS.map(c=>'<option value="'+esc(c.n)+'">').join('')+'</datalist><div id="vs-out"></div>';
-  h+='<h2 id="tud-chain" style="margin-top:28px">Válasz a chainen</h2><p class="note" style="margin:6px 0 12px">Kijátszol egy lapot, és az ellenfél válaszol rá egy másikkal. Az oldal lépésenként megmutatja, mire lehet egyáltalán válaszolni, és mi történik, ha a válasz a forrást vagy a targetet távolítja el. Általános szabályokra épülő, automatikus levezetés, nem hivatalos ruling.</p><div class="vsin"><input type="text" id="ch-a" list="cardnames" placeholder="Kijátszott lap" aria-label="Kijátszott lap"><span class="vsx">erre válasz</span><input type="text" id="ch-b" list="cardnames" placeholder="Válaszként kijátszott lap" aria-label="Válasz lap"><button class="btn" id="ch-go">Mi történik?</button></div><div id="ch-out"></div>';
+  h+='<h2 id="tud-vs" style="margin-top:28px">Lap a lap ellen</h2><p class="note" style="margin:6px 0 12px">Válassz két lapot: az oldal megmutatja, milyen ismert kölcsönhatás van köztük, és mely szabályokra hivatkozik mindkét lap magyarázata. Automatikus keresés, nem teljes és nem hivatalos.</p><div class="vsin"><input type="text" id="vs-a" list="cardnames" placeholder="Első lap neve" aria-label="Első lap"><span class="vsx">ellen</span><input type="text" id="vs-b" list="cardnames" placeholder="Második lap neve" aria-label="Második lap"><button class="btn" id="vs-go">Összevetés</button></div><div id="vs-out"></div>';
   h+='<h2 id="tud-olvas" style="margin-top:28px">A magyarázatok olvasása</h2><div class="guide">'
    +'<p>Minden kártya "Hogyan érinti ezt a lapot" listájában a pontok mellett egy címke áll. Ez mutatja, mennyire biztos az adott állítás.</p>'
    +'<ul class="olv"><li><span class="fl f0">szabály</span>A hivatkozott Core Rules szakasz szó szerint kimondja, vagy példaként leírja. Erre nyugodtan lehet építeni.</li>'
@@ -965,7 +989,6 @@ function renderTud(){
     X.patchnotes.forEach(p=>{h+='<div class="pn"><h3 style="margin-bottom:2px"><a href="'+esc(p.url)+'">'+esc(p.title)+'</a><span class="n">'+esc(p.date||'')+(p.effective?', hatályos: '+esc(p.effective):'')+'</span></h3><ul>'+(p.changes||[]).map(c=>'<li>'+(c.rule?rl(c.rule)+' ':'')+esc(c.text)+'</li>').join('')+'</ul></div>';});
   }
   $('tud').innerHTML=h;
-  $('ch-go').addEventListener('click',runChain);['ch-a','ch-b'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter')runChain();}));
   $('vs-go').addEventListener('click',runVs);['vs-a','vs-b'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter')runVs();}));
 }
 const vsCard=v=>byName.get(norm(v))||CARDS.find(c=>norm(c.n).startsWith(norm(v)));
@@ -987,45 +1010,138 @@ function vsPairs(A,B){
   if(/\[Stun\]|\bstun/i.test(ta)&&B.t==='Unit')add(kwRef('Stun')||'424',A.n+' stunolhatja '+B.n+'-t.');
   return out;
 }
-function runChain(){
-  const A=vsCard($('ch-a').value),B=vsCard($('ch-b').value);const o=$('ch-out');
-  if(!A||!B){o.innerHTML='<p class="note">Nem találom '+(!A?'a kijátszott':'a válasz')+' lapot. Kezdd el gépelni a nevét, és válassz a listából.</p>';return;}
-  const ta=A.txt||'',tb=(B.txt||'')+' '+(B.eff||'');const S=[];
-  const add=(ref,txt,fl)=>S.push([ref,txt,fl||0]);
-  const perm=A.t==='Unit'||A.t==='Gear';
-  const pm=/when you play (?:me|this)[^,.]*[,.]?\s*([^\n]*)/i.exec(ta);
-  if(A.t==='Spell')add('337',A.n+' spell: kijátszás után a chainen vár, amíg a hatása le nem fut. Erre a várakozó spellre lehet válaszolni.');
-  else if(perm){add('337.2',A.n+' '+A.t.toLowerCase()+': a kijátszás lezárása után azonnal resolve-ol és a boardra kerül. Magára a lap kijátszására nem lehet válaszolni.');
-    if(pm)add('355.5.b, 420.4.a','A "When you play me" hatás külön triggerként kerül a chainre, miután '+A.n+' már a boardon van. A választásait ekkor teszed meg, és erre a triggerre már lehet válaszolni.');
-    else add('337.2','Ennek a lapnak nincs "When you play" hatása, ezért a kijátszásakor nincs mire válaszolni.',1);}
-  else add('349',A.n+' ('+A.t+') nem a chainen keresztül kijátszott lap, erre a nézet nem ad levezetést.',1);
-  const react=/\[Reaction\]/.test(tb)||/\[Hidden\]/.test(tb)||/\[Quick-Draw\]/.test(tb),action=/\[Action\]/.test(tb);
-  let can=false;
-  if(/\[Reaction\]/.test(tb)||/\[Quick-Draw\]/.test(tb)){can=true;add('813.1.c.1',B.n+' [Reaction] időzítésű: Closed State-ben, vagyis amikor már vár valami a chainen, válaszként kijátszható.');}
-  else if(/\[Hidden\]/.test(tb)){can=true;add('811.6',B.n+' kézből nem, de facedown-ból (Hidden) [Reaction]-ként kijátszható válaszul, ha korábban el lett rejtve az adott battlefielden.');}
-  else if(action)add('806.1.c.1',B.n+' csak [Action]: Closed State-ben nem játszható ki, tehát erre a chainre válaszként nem jöhet. Csak akkor, amikor a chain üres (a saját körödben vagy showdown alatt).');
-  else add('155',B.n+' szövegében nincs [Reaction], ezért válaszként nem játszható ki.',B.t==='Spell'?0:1);
-  if(can&&(A.t==='Spell'||pm)){
-    const eff=A.t==='Spell'?ta:(pm?pm[1]:'');
-    const cnt=/counter (?:a|an|that|target|it)\b[^.]{0,30}spell|counter a spell/i.test(tb);
-    if(cnt&&A.t==='Spell')add('426.1',B.n+' counterelheti '+A.n+'-t: a spell nem csinál semmit, a trashbe megy, a kifizetett cost nem jár vissza, és nem számít kijátszottnak.');
-    if(cnt&&perm)add('355.9.a.2, 154',B.n+' csak spellt counterel. '+A.n+' nem spell, a triggere pedig ability, ezért ezzel nem állítható meg.',1);
-    const removes=/return[^.]{0,70}hand|\bkill\b|\bbanish|\bdeal \d|\bmove\b|\brecall/i.test(tb);
-    if(removes&&perm&&pm){
-      const refSrc=/\b(my|here)\b|\bme\b/i.exec(eff);
-      add('355.9.c, 359.3.f.3','Ha '+B.n+' magát '+A.n+'-t (a forrást) viszi el a boardról: a trigger már a chainen van, és az ability a forrásától külön objektum. A trigger ettől még a chainen marad és lefut.',1);
-      if(refSrc)add('359.3.f.2','Figyelem: '+A.n+' hatása a forrásra hivatkozik ("'+refSrc[0]+'"). Az ilyen adatot a játék a végrehajtáskor nézi, ezért a forrás eltűnése vagy megváltozása módosíthatja az eredményt, akár el is maradhat a hatás.',1);
-      else add('359.3.f.1',A.n+' hatása nem hivatkozik a forrásra ("my", "here", "me" nincs benne), ezért a hatás változatlanul megtörténik akkor is, ha '+A.n+' közben kézbe, trashbe vagy máshova kerül.',1);
-    }
-    const tgt=(A.nt||[]).some(n=>/355\.(7|9|10|11)/.test(n[0]))||/\b(a|an|another|target) (?:friendly |enemy )?(unit|gear|spell)/i.test(eff);
-    if(removes&&tgt)add('359.3.e.9','Ha '+B.n+' azt a lapot viszi el vagy teszi illegálissá, amit '+A.n+' kiválasztott (kézbe, base-be, másik zónába kerül, vagy már nem felel meg a feltételnek): '+A.n+' arra a targetre vonatkozó része elmarad. A többi része lefut.');
-    if(removes&&tgt)add('359.3.e.4','Ha a kiválasztott lap elhagyja a boardot és visszajön, új objektumnak számít: '+A.n+' akkor sem éri el.');
-    if(!cnt&&!removes)add('340','A felismerhető mintákon (counter, eltávolítás, mozgatás, sebzés) kívül az oldal nem tud levezetést adni erre a párosra. '+B.n+' hatása előbb fut le, utána '+A.n+(perm?' triggere':'')+' a megmaradt állapot szerint.',1);
-    add('340','Sorrend: a chainen a legutóbb felrakott tétel fut le először. Előbb '+B.n+', utána '+A.n+(perm?' triggere':'')+'.');
+/* ---------- Chain builder ---------- */
+let CB=[];
+const effOf=c=>((c.txt||'')+' '+(c.eff||'')).replace(/\([^()]*\)/g,' ');
+function phrases(c){
+  const pt=/when you play (?:me|this)[^,.]*[,.]\s*([^\n]*)/i.exec(c.txt||'');
+  const e=(c.t==='Spell'?effOf(c):(pt?pt[1]:'')).replace(/\([^()]*\)/g,' ');
+  const out=[];const re=/\b(a|an|another|two|up to (\d+))\s+((?:other\s+)?(friendly|enemy)\s+)?(unit|gear|spell)s?\b/gi;let m;
+  const mm=/(\d+) \[S\] or less/i.exec(e);const bf=/at a battlefield|at the same battlefield|\bhere\b/i.test(e);
+  while((m=re.exec(e))){out.push({type:m[5].toLowerCase(),rel:(m[4]||'any').toLowerCase(),max:mm&&m[5].toLowerCase()==='unit'?+mm[1]:null,bf:bf&&m[5].toLowerCase()==='unit',multi:m[2]?+m[2]:(m[1].toLowerCase()==='two'?2:1)});}
+  return {eff:e,list:out,trig:!!pt};
+}
+function actOf(c,eff){
+  if(/counter (?:a|an|that|it)?\b[^.]{0,30}spell|counter a spell/i.test(eff))return {k:'counter'};
+  if(/return[^.]{0,80}hand/i.test(eff))return {k:'hand'};
+  if(/\bbanish/i.test(eff))return {k:'banish'};
+  if(/\bkill\b/i.test(eff))return {k:'kill'};
+  if(/\bmove\b[^.]{0,40}\bbase\b|\brecall/i.test(eff))return {k:'base'};
+  const d=/\bdeal (\d+)/i.exec(eff);if(d)return {k:'dmg',n:+d[1]};
+  if(/\bmove\b/i.test(eff))return {k:'move'};
+  return {k:'other'};
+}
+function timingOf(c){
+  const t=c.txt||'';const kw=k=>new RegExp('^\\['+k+'\\](?:\\s*\\(|\\s*$)','m').test(t);
+  if(kw('Reaction')||kw('Quick-Draw'))return 'reaction';
+  if(kw('Hidden'))return 'hidden';
+  if(kw('Action'))return 'action';
+  return c.t==='Spell'?'none':'perm';
+}
+function cbOptions(j){
+  const o=['<option value="">nincs kiválasztva</option>','<option value="x">egy másik lap a boardon</option>'];
+  for(let k=0;k<j;k++){const s=CB[k];const c=vsCard(s.name);if(!c)continue;o.push('<option value="s'+k+'">'+(k+1)+'. lap: '+esc(c.n)+'</option>');
+    (s.tg||[]).forEach((tv,ti)=>{if(tv==='x')o.push('<option value="t'+k+'_'+ti+'">'+esc(c.n)+' '+(ti+1)+'. célpontja</option>');});}
+  return o.join('');
+}
+function renderCB(){
+  if(!CB.length)CB=[{name:'',pl:'A',tg:[]}];
+  $('cb-steps').innerHTML=CB.map((s,j)=>{const c=vsCard(s.name);const ph=c?phrases(c):{list:[]};
+    const tsel=ph.list.slice(0,2).map((p,ti)=>'<select data-j="'+j+'" data-ti="'+ti+'" aria-label="Célpont"><option disabled>'+(ti+1)+'. célpont: '+(p.rel!=='any'?p.rel+' ':'')+p.type+(p.max!=null?', max '+p.max+' Might':'')+'</option>'+cbOptions(j)+'</select>').join('');
+    return '<div class="cbstep"><div class="hd"><span class="no">'+(j+1)+'.</span>'+(j?'válasz':'kijátszva')+'<button class="linkbtn" data-del="'+j+'">törlés</button></div><input type="text" list="cardnames" data-name="'+j+'" value="'+esc(s.name)+'" placeholder="Kártya neve" aria-label="Kártya"><div class="row2"><select data-pl="'+j+'" aria-label="Ki játssza ki"><option value="A"'+(s.pl==='A'?' selected':'')+'>Te</option><option value="B"'+(s.pl==='B'?' selected':'')+'>Ellenfél</option></select>'+tsel+'</div>'+(c&&!ph.list.length?'<div class="tl">Ennek a lapnak nincs felismert célpontja.</div>':'')+'</div>';}).join('')+'';
+  CB.forEach((s,j)=>(s.tg||[]).forEach((v,ti)=>{const el=document.querySelector('#cb-steps select[data-j="'+j+'"][data-ti="'+ti+'"]');if(el&&v!=null)el.value=v;}));
+}
+$('cb-steps').addEventListener('change',e=>{const el=e.target;
+  if(el.dataset.name!=null){CB[+el.dataset.name].name=el.value;CB[+el.dataset.name].tg=[];renderCB();}
+  else if(el.dataset.pl!=null)CB[+el.dataset.pl].pl=el.value;
+  else if(el.dataset.j!=null){const s=CB[+el.dataset.j];s.tg=s.tg||[];s.tg[+el.dataset.ti]=el.value;renderCB();}});
+$('cb-steps').addEventListener('click',e=>{const b=e.target.closest('button[data-del]');if(!b)return;CB.splice(+b.dataset.del,1);CB.forEach(s=>s.tg=[]);renderCB();});
+$('cb-add').addEventListener('click',()=>{CB.push({name:'',pl:CB.length&&CB[CB.length-1].pl==='A'?'B':'A',tg:[]});renderCB();});
+$('cb-clear').addEventListener('click',()=>{CB=[];renderCB();$('cb-out').innerHTML='<h2>Chain elemzés</h2><p class="note">Adj meg legalább egy lapot.</p>';});
+$('cb-ex').addEventListener('click',()=>{CB=[{name:'Riptide Rex',pl:'A',tg:['x']},{name:'Star-Crossed',pl:'B',tg:['t0_0','s0']}];renderCB();runCB();});
+$('cb-run').addEventListener('click',runCB);
+window.__setCB=sc=>{CB=sc;renderCB();runCB();};
+function runCB(){
+  const st=CB.map(s=>({...s,c:vsCard(s.name)})).filter(s=>s.c);
+  const o=$('cb-out');if(!st.length){o.innerHTML='<h2>Chain elemzés</h2><p class="note">Nem találok felismert kártyát. Válassz a listából.</p>';return;}
+  const P=p=>p==='A'?'Te':'Ellenfél';const L=[];const N=(k)=>(k+1)+'. '+st[k].c.n;
+  const line=(ref,txt,fl)=>'<tr><td class="r">'+String(ref).split(',').map(r=>r.trim()?'<a href="#szabalyok" data-ref="'+r.trim()+'">'+r.trim()+'</a>':'').join('')+'</td><td>'+txt+'</td><td class="f">'+(fl!=null?'<span class="fl f'+fl+'" title="'+FLT[fl]+'">'+FL[fl]+'</span>':'')+'</td></tr>';
+  let h='<h2>Chain elemzés</h2><p class="note">Automatikus levezetés a lapok szövegéből és a Core Rules általános szabályaiból. Nem játékmotor és nem hivatalos ruling: a "levezetés" címkéjű sorokat judge felülbírálhatja.</p>';
+  // objects
+  const obj={};const objName=id=>{if(id[0]==='s')return N(+id.slice(1));const [k,ti]=id.slice(1).split('_');return st[+k].c.n+' '+(+ti+1)+'. célpontja';};
+  const ctrlOf=(id,j)=>{if(id[0]==='s')return st[+id.slice(1)].pl;if(id[0]==='t'){const [k,ti]=id.slice(1).split('_').map(Number);const p=phrases(st[k].c).list[ti];if(!p)return null;return p.rel==='enemy'?(st[k].pl==='A'?'B':'A'):p.rel==='friendly'?st[k].pl:null;}return null;};
+  // 1. building phase
+  let chainItems=[];let rows='';
+  st.forEach(s=>{});st.forEach((s,j)=>{s.tg=(s.tg||[]).map((v,ti)=>v==='x'?'t'+j+'_'+ti:v);});
+  st.forEach((s,j)=>{const c=s.c;const ph=phrases(c);const tm=timingOf(c);let illegal=false;
+    const isPerm=c.t==='Unit'||c.t==='Gear';
+    if(j===0){rows+=line(c.t==='Spell'?'337':'337.2',(s.pl==='A'?'Kijátszod':'Az ellenfél kijátssza')+': <b>'+esc(c.n)+'</b>. '+(c.t==='Spell'?'A spell a chainre kerül.':'A '+c.t.toLowerCase()+' azonnal a boardra kerül, a kijátszására nem lehet válaszolni.'+(ph.trig?' A "When you play" hatása triggerként kerül a chainre, erre lehet válaszolni.':' Nincs play triggere, ezért nincs mire válaszolni.')),0);
+      if(c.t==='Spell'&&tm==='none')rows+=line('155','Spell [Action] és [Reaction] nélkül: csak a saját körödben, üres chain mellett, showdownon kívül játszható ki.',0);}
+    else{const empty=!chainItems.length;
+      if(empty)rows+=line('309',(s.pl==='A'?'Te':'Az ellenfél')+': <b>'+esc(c.n)+'</b>. A chain ezen a ponton üres, ezért ez nem válasz, hanem új kijátszás.',1);
+      else if(tm==='reaction')rows+=line('813.1.c.1',(s.pl==='A'?'Válaszolsz':'Az ellenfél válaszol')+': <b>'+esc(c.n)+'</b>. [Reaction] miatt kijátszható, amikor már van valami a chainen.',0);
+      else if(tm==='hidden')rows+=line('811.6',(s.pl==='A'?'Válaszolsz':'Az ellenfél válaszol')+': <b>'+esc(c.n)+'</b>. Csak akkor lehet, ha korábban facedown el lett rejtve egy battlefielden: onnan [Reaction]-ként jön.',1);
+      else{illegal=true;rows+=line(tm==='action'?'806.1.c.1':'155','<span class="stbad">Nem szabályos válasz:</span> '+(s.pl==='A'?'a te':'az ellenfél')+' <b>'+esc(c.n)+'</b> lapja nem [Reaction], ezért amíg van valami a chainen, nem játszható ki. A lefutásból kimarad.',0);}
+      if(isPerm)rows+=line('337.2','A '+c.t.toLowerCase()+' azonnal a boardra kerül'+(ph.trig?', a play triggere a chainre.':'.'),0);}
+    // targets
+    (s.tg||[]).forEach((tv,ti)=>{const p=ph.list[ti];if(!p||!tv)return;
+      if(tv==='t'+j+'_'+ti){rows+=line('355.7',(ti+1)+'. célpont: '+(p.rel==='enemy'?(s.pl==='A'?'az ellenfél egyik':'az egyik saját'):p.rel==='friendly'?(s.pl==='A'?'az egyik saját':'az ellenfél egyik'):'egy')+' '+p.type+'ja a boardon (a chainen kívül), a továbbiakban: '+esc(objName(tv))+'.'+(p.max!=null?' Feltétel: legfeljebb '+p.max+' Might.':''),0);return;}
+      const name=objName(tv);let ok=true;const why=[];
+      if(tv[0]==='s'){const tc=st[+tv.slice(1)].c;const onChain=tc.t==='Spell';
+        if(st[+tv.slice(1)].illegal){ok=false;why.push(esc(tc.n)+' nem szabályosan került volna játékba, ezért nincs mit kiválasztani.');}
+        if(p.type==='spell'&&!onChain){ok=false;why.push(esc(tc.n)+' nem spell, hanem '+tc.t.toLowerCase()+', ezért "spell" célpontnak nem választható (355.9.a.2).');}
+        if(p.type!=='spell'&&onChain){ok=false;why.push(esc(tc.n)+' spell a chainen, nem '+p.type+' a boardon.');}
+        if(p.type!=='spell'&&!onChain&&p.type!==tc.t.toLowerCase()){ok=false;why.push(esc(tc.n)+' '+tc.t.toLowerCase()+', nem '+p.type+'.');}
+        if(p.max!=null&&tc.m!=null&&tc.m>p.max){ok=false;why.push(esc(tc.n)+' Mightja '+tc.m+', a lap csak legfeljebb '+p.max+' Mightú unitot választhat.');}
+        if(/can.t be chosen by enemy|cannot be chosen by enemy/i.test(tc.txt||'')&&st[+tv.slice(1)].pl!==s.pl){ok=false;why.push(esc(tc.n)+' szövege szerint ellenséges spell vagy ability nem választhatja (757).');}
+        if(/\[Deflect/.test(tc.txt||'')&&st[+tv.slice(1)].pl!==s.pl)why.push(esc(tc.n)+' Deflectje miatt a választásért plusz költséget kell fizetni (356.2.a).');
+        if(p.bf&&!onChain)why.push('A lap battlefielden álló unitot kér: ellenőrizd, hogy '+esc(tc.n)+' battlefielden van-e, base-ben nem választható.');}
+      const cc=ctrlOf(tv,j);if(cc&&p.rel!=='any'){const need=p.rel==='enemy'?(s.pl==='A'?'B':'A'):s.pl;if(cc!==need){ok=false;why.push(name+' '+(cc===s.pl?'saját':'ellenséges')+' lap, de a választás '+(p.rel==='enemy'?'ellenséges':'saját')+' '+p.type+'t kér.');}}
+      if(!ok&&!illegal){illegal=true;why.push('Ha a lapnak nincs szabályos célpontja, nem játszható ki (355.8), ezért a lefutásból kimarad.');}
+      rows+=line('355.7, 355.9',(ti+1)+'. célpont: '+esc(name)+'. '+(ok?'<span class="stok">Választható.</span>':'<span class="stbad">Nem választható.</span>')+' '+why.join(' '),ok?0:0);
+    });
+    if(!illegal&&(c.t==='Spell'||ph.trig))chainItems.push(j);
+    s.illegal=illegal;
+  });
+  h+='<h3 class="cbsec">1. A chain felépítése</h3><table class="nt">'+rows+'</table>';
+  // 2. resolution
+  const zone={};const dmg={};const countered=new Set();const resolved=[];let rr='';
+  const zoneTxt={hand:'kézbe került',trash:'meghalt (trashbe került)',banish:'banishelődött',base:'base-be került'};
+  for(let q=chainItems.length-1;q>=0;q--){const j=chainItems[q];const s=st[j];const c=s.c;const ph=phrases(c);const isPerm=c.t!=='Spell';
+    let t='<b>'+esc(N(j))+'</b>'+(isPerm?' play triggere':'')+' resolve-ol. ';const refs=['340'];
+    if(countered.has('s'+j)){rr+=line('426.1',t+'Counterelték: nem csinál semmit, a trashbe kerül, a kifizetett cost nem jár vissza.',0);continue;}
+    if(isPerm&&zone['s'+j]){const self=/\b(my|me|here)\b/i.test(ph.eff);
+      s.lev=1;t+='A forrás ('+esc(c.n)+') már '+zoneTxt[zone['s'+j]]+', de a trigger a chainen maradt és lefut (355.9.c, 359.3.f.3). ';
+      if(self)t+='<span class="stbad">Figyelem:</span> a hatás a forrásra hivatkozik ("my/me/here"), ezt a játék a végrehajtáskor nézi (359.3.f.2), így ez a rész elmaradhat. ';refs.push('359.3.f');}
+    const act=actOf(c,ph.eff);const tgs=(s.tg||[]).map((v,ti)=>[v,ti]).filter(x=>x[0]);
+    if(!tgs.length&&ph.list.length){t+='Célpont nincs megadva, ezért a hatását nem tudom végigkövetni.';rr+=line(refs.join(','),t,1);continue;}
+    const parts=[];let anyOk=false;
+    tgs.forEach(([v,ti])=>{const nm=objName(v);
+      if(zone[v]){parts.push(esc(nm)+' már '+zoneTxt[zone[v]]+': erre a célpontra a hatás elmarad (mistarget, 359.3.e.9'+(zone[v]!=='base'?', és ha vissza is jönne, új objektum: 359.3.e.4':'')+').');refs.push('359.3.e.9');return;}
+      if(v[0]==='s'&&countered.has(v)){parts.push(esc(nm)+' már nincs a chainen.');return;}
+      anyOk=true;
+      if(act.k==='counter'&&v[0]==='s'&&st[+v.slice(1)].c.t==='Spell'){countered.add(v);parts.push(esc(nm)+' counterelve'+(/unless its controller pays/i.test(ph.eff)?', hacsak a controllere ki nem fizeti a kért költséget':'')+' (426.1).');refs.push('426');}
+      else if(['hand','banish','kill','base'].includes(act.k)){const z=act.k==='kill'?'trash':act.k;zone[v]=z;parts.push(esc(nm)+' '+zoneTxt[z]+'.');if(z==='hand')refs.push('056.2');}
+      else if(act.k==='dmg'){dmg[v]=(dmg[v]||0)+act.n;const tc=v[0]==='s'?st[+v.slice(1)].c:null;
+        if(tc&&tc.m!=null&&dmg[v]>=tc.m){zone[v]='trash';parts.push(esc(nm)+' '+act.n+' sebzést kap, ez eléri a '+tc.m+' Mightját: a következő cleanupban meghal (142.4).');}
+        else parts.push(esc(nm)+' '+act.n+' sebzést kap'+(tc&&tc.m!=null?' ('+tc.m+' Might, túléli)':'')+'.');}
+      else parts.push(esc(nm)+': a hatás lefut ('+esc(ph.eff.trim().slice(0,90))+').');
+    });
+    if(!anyOk&&tgs.length){t+='Minden célpontja illegális lett, ezért hatás nélkül resolve-ol'+(c.t==='Spell'?', de kijátszottnak számít (359.3.e.10)':'')+'. ';refs.push('359.3.e.10');}
+    else if(tgs.length>1&&parts.some(x=>/elmarad/.test(x)))refs.push('359.3.e.8');
+    rr+=line(refs.join(','),t+parts.join(' '),s.lev||parts.some(x=>/elmarad|Figyelem/.test(x))||/Figyelem/.test(t)?1:0);
   }
-  let h='<div class="vsgrid">'+[A,B].map((c,i)=>'<div class="vscard"><span class="note">'+(i?'Válasz':'Kijátszva')+'</span><b>'+domDots(c)+' '+esc(c.n)+'</b><span class="note">'+esc(typeLine(c))+'</span>'+(c.sh?'<p>'+glossify(esc(c.sh))+'</p>':'')+'<button class="linkbtn" data-sim="'+esc(c.n)+'">Teljes kártyalap</button></div>').join('')+'</div>';
-  const seen=new Set();
-  h+='<h3>Lépésről lépésre<span class="n">automatikus levezetés</span></h3><table class="nt">'+S.map(x=>'<tr><td class="r">'+x[0].split(',').map(r=>'<a href="#szabalyok" data-ref="'+r.trim()+'">'+r.trim()+'</a>').join('')+'</td><td>'+glossify(esc(x[1]),seen)+'</td><td class="f"><span class="fl f'+x[2]+'" title="'+FLT[x[2]]+'">'+FL[x[2]]+'</span></td></tr>').join('')+'</table>';
+  h+='<h3 class="cbsec">2. Lefutás (a legutóbb felrakott fut le először)</h3>'+(rr?'<table class="nt">'+rr+'</table>':'<p class="note">Nincs a chainen semmi.</p>');
+  // 3. result
+  const res=[];st.forEach((s,j)=>{const id='s'+j;if(s.illegal){res.push(esc(N(j))+': nem szabályos, ezért nem került a chainre');return;}if(s.c.t!=='Spell')res.push(esc(N(j))+': '+(zone[id]?zoneTxt[zone[id]]:'a boardon maradt')+(dmg[id]&&!zone[id]?', rajta '+dmg[id]+' damage':''));else res.push(esc(N(j))+': '+(countered.has(id)?'counterelve, trashbe került':'lefutott, trashbe került'));});
+  Object.keys(zone).filter(k=>k[0]==='t').forEach(k=>res.push(esc(objName(k))+': '+zoneTxt[zone[k]]));
+  Object.keys(dmg).filter(k=>k[0]==='t'&&!zone[k]).forEach(k=>res.push(esc(objName(k))+': '+dmg[k]+' damage-et kapott (ha ez eléri a Mightját, meghal)'));
+  h+='<h3 class="cbsec">3. Végeredmény</h3><ul class="res">'+res.map(x=>'<li>'+x+'</li>').join('')+'</ul>';
+  // 4. what else could have been added
+  const deckCards=[];try{(DECK||[]).forEach(sx=>sx.rows.forEach(r=>{if(r.card&&!deckCards.includes(r.card))deckCards.push(r.card);}));}catch(e){}
+  const resp=deckCards.filter(c=>['reaction','hidden'].includes(timingOf(c)));
+  h+='<h3 class="cbsec">4. Mit lehetett volna még rátenni?</h3><p>Amíg a chain nem ürül ki, mindkét játékos tehet rá újabb [Reaction] lapot vagy abilityt, és a legutóbbi fut le először (813.1.c.1, 340). '+(chainItems.length?'Így '+(st[st.length-1].pl==='A'?'az ellenfél':'te')+' még válaszolhatott'+(st[st.length-1].pl==='A'?'':'tál')+' volna a(z) '+esc(st[st.length-1].c.n)+' lapra is.':'')+'</p>';
+  h+=resp.length?'<p>A Deck fülön betöltött deckedből ezek jöhettek volna szóba, időzítés szerint:</p><ul class="res">'+resp.map(c=>'<li><b>'+esc(c.n)+'</b>: '+(timingOf(c)==='reaction'?'[Reaction], kézből':'[Hidden], csak ha előtte el volt rejtve')+(c.sh?' <span class="note">'+esc(c.sh.slice(0,140))+(c.sh.length>140?'...':'')+'</span>':'')+'</li>').join('')+'</ul><p class="note">Bármelyiket hozzáadhatod új lépésként, és újra lefuttathatod.</p>':'<p class="note">Ha a Deck fülön betöltöd a decked, itt felsorolom, mely lapjaid jöhettek volna még válaszként.</p>';
   o.innerHTML=h;
 }
 function runVs(){
@@ -1048,7 +1164,7 @@ $('tud').addEventListener('click',e=>{
 });
 function route(){
   const hh=location.hash;
-  const v=/^#d=/.test(hh)?'deck':/^#r-/.test(hh)?'szabalyok':/^#tud-/.test(hh)?'tudastar':['kartyak','deck','szabalyok','tudastar'].includes(hh.slice(1))?hh.slice(1):'kartyak';
+  const v=/^#d=/.test(hh)?'deck':/^#r-/.test(hh)?'szabalyok':/^#tud-/.test(hh)?'tudastar':['kartyak','deck','szabalyok','chain','tudastar'].includes(hh.slice(1))?hh.slice(1):'kartyak';
   if(/^#r-/.test(hh)){pendingRef=hashRef(hh);}
   document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
   document.querySelectorAll('nav.tabs a').forEach(a=>{if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
@@ -1059,7 +1175,7 @@ window.addEventListener('hashchange',route);
 $('deckin').placeholder=FORMAT;loadDeckFromHashOrStore();
 showCard(byName.get(norm('Star-Crossed'))||CARDS[0]);
 renderDeck();
-renderTud();
+$('cardnames').innerHTML=CARDS.map(c=>'<option value="'+esc(c.n)+'">').join('');renderTud();renderCB();
 ruleSearch();
 const h0=heads.find(i=>RULES[i][0]==='800');$('rview').innerHTML='<h2>'+RULES[h0][0]+'. '+esc(RULES[h0][1])+'</h2><div style="margin-top:12px">'+ruleHTML(headExtent(h0))+'</div>';
 route();

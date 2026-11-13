@@ -1,0 +1,149 @@
+{
+ "checked": 92,
+ "fixes": {
+  "Nasus, Curator of the Sands": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Calm és Mind domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "206",
+     0,
+     "Unitnál és gearnél a nyomtatott Energy cost számít. Kedvezménnyel olcsóbban kijátszott 7+ costú lap is triggerel."
+    ],
+    [
+     "420.4.a,377.2.a",
+     0,
+     "A trigger akkor fut le, amikor a unit vagy gear kijátszása, illetve az activated ability resolve-olt. Spell kijátszására nem triggerel."
+    ],
+    [
+     "206.1",
+     0,
+     "Activated abilitynél a base cost számít, a rá ható kedvezmények és drágítások nélkül. A szabályzat pontosan ezt a szöveget hozza példának: egy [12] base costú ability akkor is triggerel, ha a saját kedvezménye miatt 7-nél kevesebb Energyt fizettél érte."
+    ],
+    [
+     "383.3.a,383.3.b,415.4",
+     0,
+     "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted. Exhausted legenddel nem megy, vagyis körönként egyszer használható."
+    ],
+    [
+     "355.9.a,355.13",
+     0,
+     "A rune-ok targetek, \"up to 2\": 0, 1 vagy 2 választható. Már ready rune-on a ready nem csinál semmit."
+    ]
+   ],
+   "short": null,
+   "why": "A 4. pont nyitott kérdésnek (2) jelölte, hogy activated abilitynél a kiírt vagy a csökkentett cost számít-e, pedig a 206.1 kimondja (pontosan ezzel a kártyaszöveggel példázva), hogy a base cost számít. Jelző 2 -> 0, állítás javítva."
+  },
+  "Master Yi, Meditative": {
+   "notes": [
+    [
+     "364.3.a",
+     0,
+     "Conditional passive: a +4 Might pontosan addig él, amíg a feltétel igaz, és azonnal megszűnik, ha már nem az."
+    ],
+    [
+     "133.3.a",
+     1,
+     "A boardon lévő rune-jaid számítanak, ready és exhausted egyaránt. A Rune Deckben lévők nem."
+    ],
+    [
+     "164.2.b,142.4.b",
+     1,
+     "Ha Powerért recycle-ölsz egy rune-t és 8 alá mész, a bónusz azonnal elvész. Ha Yi-n ekkor legalább 4 damage van, a következő cleanupban meghal."
+    ],
+    [
+     "315.3.b,487.7,431.4.b",
+     1,
+     "A Channel Phase körönként 2 rune-t ad, így csak ebből a 8 rune a 4. körödre jön össze, a második játékos első körös plusz rune-jával együtt is. Rune-t channelelő effect (például Mobilize) ezt előbbre hozhatja, a Powerért recycle-ölt rune késlelteti."
+    ]
+   ],
+   "short": null,
+   "why": "A 4. pont tényként állította, hogy a 8 rune leghamarabb a 4. körben jön össze, de a 431.4.b szerint effectek is channelhetnek rune-t (és a 487.7 plusz rune-ja is számít), így hamarabb is elérhető."
+  },
+  "Mel, Defiant Soul": {
+   "notes": [
+    [
+     "827.1.c.2,423.3",
+     0,
+     "Az Empower cost egy spell discardolása a kezedből. Ha nincs spell a kezedben, az ability nem aktiválható."
+    ],
+    [
+     "145.2,827.1.c.1",
+     0,
+     "Az Empower activated ability, [Action] vagy [Reaction] nélkül: csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható. A banish ezért combat közben vagy az opponent körében nem időzíthető."
+    ],
+    [
+     "828.1.d,827.2.a",
+     0,
+     "A trigger akkor fut le, amikor az Empower action befejeződik. Bármilyen forrásból lesz Empowered, triggerel."
+    ],
+    [
+     "355.10,355.9.b",
+     0,
+     "A banish targetje battlefielden lévő, legfeljebb 3 aktuális Mightú enemy unit. Base-ben álló unit nem választható."
+    ],
+    [
+     "355.8",
+     1,
+     "Ha nincs érvényes target, a trigger nem kerül chain-re. Mel ettől még Empowered lesz. Ha van target, a banish kötelező."
+    ],
+    [
+     "359.3.e.2",
+     0,
+     "Ha a resolve előtt a target Mightja 3 fölé nő vagy base-be kerül, illegális, a banish nem történik meg."
+    ],
+    [
+     "428.2.a",
+     0,
+     "A banish nem kill: a unit a Banishmentbe megy, a Deathknellje nem fut le."
+    ],
+    [
+     "827.1.c.1",
+     1,
+     "Empowered állapotban nem aktiválható újra. Ismételni csak akkor lehet, ha előbb disempowerelik."
+    ]
+   ],
+   "short": null,
+   "why": "Hiányzott az Empower időzítése (145.2: csak saját Main Phase, showdownon kívül), ami a banish használhatóságát érdemben korlátozza. A 355.8-as pont levezetés (a szabály nem mondja ki, hogy Mel ettől még Empowered lesz), jelző 0 -> 1."
+  },
+  "Miss Fortune, Buccaneer": {
+   "notes": [
+    [
+     "170.11.c",
+     0,
+     "Open battlefield: nincs rajta unit, és senki nem kontrollálja."
+    ],
+    [
+     "355.2.b",
+     0,
+     "Az engedély érvényes locationné teszi az open battlefieldet a kijátszáskor. A base és a saját battlefield továbbra is választható."
+    ],
+    [
+     "366.1,365.1",
+     1,
+     "Az első ability a kézből és a Champion Zone-ból kijátszva is él. A második csak akkor, ha Miss Fortune már a boardon van."
+    ],
+    [
+     "190.3.a.1,316.8.b.1",
+     0,
+     "A battlefieldre kijátszott unit Contested státuszt ad. Üres battlefielden ebből Non-Combat Showdown lesz."
+    ],
+    [
+     "190.4,471.1",
+     1,
+     "Ha a showdown végén ott marad a unitod, megszerzed a kontrollt, és ez conquer, ha abban a körben még nem score-oltad azt a battlefieldet. Mozgás nélkül, exhausted unittal is."
+    ],
+    [
+     "355.17.b,054.2",
+     1,
+     "Battlefielden álló enemy Mageseeker Warden mellett nem működik: az \"only\" megkötés erősebb az engedélynél, az open battlefieldre kijátszott unit nem tud finalizálódni, csak base-be játszhatsz."
+    ]
+   ],
+   "short": null,
+   "why": "A Warden pont 0-s volt, de a 355.17.b nem mond ki semmit az open battlefield engedélyről, ez a 054.2-vel együtt levezetés (1). Hiányzott az is, hogy a Warden tiltása csak akkor él, ha battlefielden áll."
+  }
+ }
+}

@@ -1,0 +1,386 @@
+{
+ "checked": 92,
+ "fixes": {
+  "Crumbling Sands": {
+   "notes": [
+    [
+     "355.9.a.2,355.9.c",
+     1,
+     "A target egy chainen lévő, finalizált spell, saját magát nem választhatja. A feltétel nem targeting restriction, a spell teljesületlen feltétellel is kijátszható."
+    ],
+    [
+     "420.4.b",
+     1,
+     "A feltétel azt nézi, hogy egy opponent finalizált-e másik spellt ebben a körben. A counterelt és a még chainen lévő spell is számít. A megcélzott spell önmagát nem számolja."
+    ],
+    [
+     "135.2.b.3,135.2.b.5.a",
+     1,
+     "A feltételt a resolve-kor nézi a játék. Ha nem teljesül, a spell hatás nélkül resolve-ol, a costja elveszett."
+    ],
+    [
+     "420.4.b",
+     1,
+     "A \"másik spell\" bármelyik opponentedé lehet, nem kell a megcélzott spell controllerétől származnia. Az opponent első spelljét ebben a körben nem állítja meg."
+    ],
+    [
+     "426.1.b,426.1.c",
+     0,
+     "A counterelt spell a trashbe megy, a costja nem jár vissza, és nem számít kijátszottnak a \"when you play\" triggerekhez."
+    ]
+   ],
+   "short": null,
+   "why": "Az 1. pont második fele (teljesületlen feltétellel is kijátszható) levezetés, nem a 355.9 szövege, ezért 1-es. A 3. pont a 359.3.f.2-re (referensek: here, my, its) hivatkozott, a feltétel resolve-kori ellenőrzését a 135.2.b.3 és 135.2.b.5.a adja."
+  },
+  "Curtain Call": {
+   "notes": [
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "820.1.c.2,820.1.c.3,820.3",
+     0,
+     "Három külön Repeat cost van ([1], [A], [1][A]), mindegyik egyszer fizethető, egymástól függetlenül. Minden kifizetett cost egy további végrehajtást ad, legfeljebb négyet összesen."
+    ],
+    [
+     "355.3,820.2",
+     0,
+     "A módokat és a targeteket minden végrehajtáshoz kijátszáskor választod. Minden végrehajtás más módot kell válasszon, így mindhárom Repeat cost kifizetésével mind a négy mód lefut."
+    ],
+    [
+     "355.8",
+     0,
+     "Csak olyan mód választható, amelyhez van érvényes target: battlefielden álló unit a 2 damage-hez és a -4-hez, base-ben álló unit a 3 damage-hez."
+    ],
+    [
+     "359.3.e.2",
+     0,
+     "Ha a unit a resolve előtt battlefieldről base-be kerül vagy fordítva, az adott mód targetje illegális, az a végrehajtás elmarad."
+    ],
+    [
+     "103.3.d,135.2.e.5.a",
+     0,
+     "Signature lap (Jhin). A Repeat costok [A]-ja bármilyen domain Powerével fizethető."
+    ]
+   ],
+   "short": "Egy módot választasz a négyből (húzás, 2 sebzés battlefielden álló unitra, 3 sebzés base-ben álló unitra, -4 Might battlefielden álló unitnak). Három plusz költségért további, eltérő módokat is lefuttathatsz, mindhárom kifizetésével mind a négyet. Csak olyan mód választható, amihez van megfelelő unit.",
+   "why": "A lapon három Repeat cost van, nem négy: a 3. pont és a short \"négy cost\" kifizetéséről beszélt. Az [A] bármely domainből fizethetőségét a 135.2.e.5.a mondja ki, a 135.2.e.6.c a [C]-ről szól."
+  },
+  "Dancing Grenade": {
+   "notes": [
+    [
+     "355.10,355.10.d",
+     0,
+     "A unit target, a controllere nem. Bármelyik unit választható, base-ben is."
+    ],
+    [
+     "359.3.e.14.a",
+     0,
+     "Linked instructions: ha a unit illegális targetté válik, a sebzés ignorálódik, és a controllere sem játszhatja újra a spellt."
+    ],
+    [
+     "356.1.a",
+     0,
+     "A \"for [A]\" a base costot cseréli le: 2 Energy és 1 Fury Power helyett egy bármilyen domainű Power."
+    ],
+    [
+     "156,191.3.a",
+     1,
+     "Aki újrajátssza, az lesz a spell controllere, ő választ új targetet. Saját unitodat célozva te magad játszhatod újra."
+    ],
+    [
+     "714,715.1",
+     1,
+     "A Bonus Damage összeadódik és a 2-es sebzéshez járul: második kijátszáskor 3, harmadikra 4."
+    ],
+    [
+     "420.3",
+     2,
+     "A Core Rules nem írja le, hogyan játszható újra egy éppen resolve-oló spell, és hogy a számláló a példányt vagy a nevet követi-e. Ezt judge döntse el."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ]
+   ],
+   "short": null,
+   "why": "A \"második kijátszáskor 3, harmadikra 4\" számsor a kártyaszöveg értelmezése, a 714 és 715.1 csak a Bonus Damage összeadását mondja ki, és a számláló működését a lap saját 2-es pontja nyitottnak jelöli. Ezért 0 helyett 1."
+  },
+  "Darius, Trifarian": {
+   "notes": [
+    [
+     "420.4.a",
+     0,
+     "A trigger akkor fut le, amikor a kör második kártyájának kijátszása resolve-val befejeződött."
+    ],
+    [
+     "416.1.c",
+     0,
+     "Ha Darius már ready, a ready rész nem csinál semmit, a +2 Might így is jár."
+    ],
+    [
+     "384.2",
+     0,
+     "Bárhol működik a boardon, base-ben is. Az opponent körében is triggerel, ha ott játszol ki második kártyát (például két [Reaction] spell)."
+    ],
+    [
+     "420.4.a.1,426.1.b",
+     1,
+     "A counterelt kártya a kijátszásra triggerelő abilityk számára nem számít kijátszottnak. Ha a második lapodat counterelik, a trigger nem fut le rá, és a következő, sikeresen resolve-oló lapod számít másodiknak."
+    ],
+    [
+     "383.2.c.1,420.4.a",
+     1,
+     "Ha maga Darius a kör második kártyája, a trigger lefut: a feltétel a kijátszás befejeztével teljesül, ugyanakkor, amikor Darius a boardra lép, és az ilyenkor belépő objektum triggere kiértékelődik."
+    ]
+   ],
+   "short": "Amikor egy körben a második lapodat kijátszod, +2 Mightot kap és ready lesz. Bárhol működik, akár az ellenfél körében is, ha ott két reakciós lapot játszol. Akkor is beindul, ha maga Darius a kör második lapja. A counterelt lap nem számít kijátszottnak.",
+   "why": "Két 2-es pontot a szabály eldönt: a 426.1.b és 420.4.a.1 szerint a counterelt lap a kijátszásra triggerelő abilityknél nem számít kijátszottnak, a 383.2.c.1 szerint pedig a feltétel teljesülésével egy időben belépő objektum triggere lefut. A short nyitottnak állította őket."
+  },
+  "Deadbloom Predator": {
+   "notes": [
+    [
+     "809.1.c,809.1.c.1",
+     0,
+     "[Deflect]: az opponent minden spellje és abilityje, amely őt targeteli, választásonként 1 bármilyen domainű Powerrel többe kerül. Mandatory additional cost, a saját lapjaidra nem vonatkozik."
+    ],
+    [
+     "355.2.b",
+     0,
+     "A passzív plusz helyet ad a kijátszáshoz: olyan battlefieldre is lejöhet, amelyet egy opponent kontrollál és ahol unitja van. Üres vagy senki által nem kontrollált battlefieldre ez nem ad engedélyt."
+    ],
+    [
+     "310.1.a,813.3.a",
+     1,
+     "Időzítést nem ad: [Action] és [Reaction] nélkül csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "190.3.a.1,466.2.c.1",
+     0,
+     "Az enemy battlefieldre kijátszva az Contested lesz, combat indul, és te vagy az Attacker."
+    ],
+    [
+     "143.4,467.2.a",
+     1,
+     "Exhausted lép be, de a combat damage minden attacker unit Mightját összeadja, exhausted állapotra nincs kivétel: azonnal 8 Mighttal támad."
+    ],
+    [
+     "468.1.a.2",
+     0,
+     "Ha a combat után defender is maradt, a Predator recallolódik a base-edbe."
+    ]
+   ],
+   "short": null,
+   "why": "A 155 a spellek időzítéséről szól, unitra nem hivatkozható. A unit alapértelmezett kijátszási időzítését a 310.1.a adja (saját kör, Neutral Open State)."
+  },
+  "Demacian Illuminators": {
+   "notes": [
+    [
+     "383.2.c,370.1.a.2",
+     1,
+     "\"One or more\": ha több friendly unit hal meg ugyanabban a game actionben (például egy combat damage után), a trigger egyszer fut le. Külön eseményekben meghaló unitok külön triggerelnek."
+    ],
+    [
+     "383.2.c.2",
+     0,
+     "Ha az Illuminators ugyanakkor hal meg, mint a többi unit, nem triggerel, mert már nincs a boardon, amikor a feltételt értékelni kellene."
+    ],
+    [
+     "355.10,355.8",
+     0,
+     "A buffolt friendly unit target, az Illuminators maga is lehet. Ha nincs friendly unitod, a trigger nem kerül chain-re."
+    ],
+    [
+     "427.1.c,702.3",
+     0,
+     "Már buffolt unit is választható, de nem kap második buffot."
+    ],
+    [
+     "428.2.a,186.1",
+     1,
+     "Token unit halála is számít. Banish és kézbe vétel nem halál, arra nem triggerel."
+    ]
+   ],
+   "short": null,
+   "why": "A 383.2.c nem mondja ki, hogy a \"one or more\" trigger egyidejű halálokra egyszer fut le. Ez levezetés a 370.1.a.2 egyidejűség-definíciójából és a kártyaszövegből, ezért 0 helyett 1."
+  },
+  "Demacian Standard": {
+   "notes": [
+    [
+     "103.3.d,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Jarvan IV) kell viselnie. Két domainű, ezért csak olyan legend mellé fér, amelynek mindkét domainje megvan."
+    ],
+    [
+     "830.1.b.1,830.1.b",
+     0,
+     "Deploy: bármelyik battlefieldre kijátszható, olyanra is, amit éppen támadni készülsz. Ha egy opponent holdol itt, meghal."
+    ],
+    [
+     "383.4.e,383.4.e.2.a",
+     1,
+     "Az attack trigger akkor fut, amikor a unitjaid itt megkapják az Attacker designationt. Az együtt támadó unitokra egyszer triggerel, nem unitonként, akárhány unit támad."
+    ],
+    [
+     "355.10,359.3.e.5",
+     1,
+     "A +2 Mightot kapó unitot a trigger chainre kerülésekor választod a támadók közül, és target. Ha a resolve előtt elhagyja a battlefieldet, a bónusz elvész."
+    ],
+    [
+     "383.3.a,383.4.d.2.b",
+     0,
+     "A hold trigger \"you may\"-jel kezdődik: a finalizáláskor döntesz. Ha visszaveszed, újra kijátszhatod egy másik battlefieldre."
+    ],
+    [
+     "056.2",
+     0,
+     "A gear mindig a tulajdonosa kezébe megy vissza."
+    ]
+   ],
+   "short": null,
+   "why": "A 383.4.e.2.a egy unit ismételt Attacker jelölésére mondja ki a combatonkénti egyszeri ellenőrzést, a \"one or more friendly units\" gear triggerre nem. Hogy a combatba később érkező támadó újra kiváltja-e, azt a szabály nem zárja ki, ezért a \"combatonként egyszer\" állítás szűkítve, 1-es jelzővel."
+  },
+  "Demon Shade": {
+   "notes": [
+    [
+     "155,811.3",
+     0,
+     "Nincs [Action]: kézből csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "811.1.b,811.6",
+     0,
+     "Hide: [A]-ért facedown tehető. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható, bárki körében."
+    ],
+    [
+     "355.7,811.1.d.2",
+     0,
+     "A friendly unit target. Facedown-ból kijátszva csak azon a battlefielden lévő unitod választható, ahol a lap el volt rejtve."
+    ],
+    [
+     "355.3,170.11.c",
+     0,
+     "A módot kijátszáskor választod. \"Open\" battlefield az, amelyik unoccupied és uncontrolled: nincs rajta unit, és senki sem kontrollálja."
+    ],
+    [
+     "452,344.2",
+     0,
+     "Első mód: az open battlefieldre lépő unit Contested-dé teszi azt. Mivel nincs ott enemy unit, combat helyett a következő cleanupban showdown nyílik, utána conquer jöhet."
+    ],
+    [
+     "810.1.b",
+     0,
+     "Második mód: a unit a kör végéig Standard Move-val battlefieldről battlefieldre léphet. Ehhez readynek kell lennie."
+    ],
+    [
+     "355.3,135.2.b.5.a,135.2.b.3",
+     1,
+     "A második mód akkor is választható, ha van open battlefield: a feltétel nem a módválasztást korlátozza, hanem az instruction része, és a resolve-kor nézi a játék. Ha akkor van open battlefield, a unit nem kap Gankinget."
+    ]
+   ],
+   "short": null,
+   "why": "A 2-es pont eldönthető: a 135.2.b.5.a szerint a feltétel az instruction része, a 135.2.b.3 szerint az instruction a resolve-kor hajtódik végre, a 355.3 pedig nem köti feltételhez a módválasztást. Ugyanez az olvasat, mint a Crumbling Sands \"if\" feltételénél."
+  },
+  "Determined Sentry": {
+   "notes": [
+    [
+     "144.4.b",
+     1,
+     "Standard Move-val nem mehet battlefieldről base-be. Ganking nélkül így a battlefieldről nem tud elmozdulni."
+    ],
+    [
+     "458.3,468.1.a.2",
+     0,
+     "A Recall nem Move, és a mozgást tiltó effectek nem akadályozzák. Döntetlen combat után attackerként a Sentry is recallolódik a base-be."
+    ],
+    [
+     "358.3.a,359.3.e.6",
+     1,
+     "Base-be mozgató spell (például Flash) kijátszható rá, de a resolve-kor a Move negálódik, a Sentry a helyén marad. A szabályzat a Vilemaw's Lair azonos \"can't move to base\" tiltásánál ezt mondja ki. A spell többi része végrehajtódik."
+    ]
+   ],
+   "short": "Olcsó 1 Mightú unit, ami nem tud a base-be mozogni, így battlefieldről magától nem lép el. Harc után ettől még visszakerülhet a base-be, mert az nem mozgás. A base-be mozgató spell (például Flash) kijátszható rá, de a mozgás elmarad, a helyén marad.",
+   "why": "A 2-es pont ellentmondott a saját 1-es pontnak. A 358.3.a, 359.3.e.6 és 359.3.e.14.b példái a szövegében azonos Vilemaw's Lair tiltásnál egyértelműen negálást mondanak, a 449.2.c Recallja érvénytelen célhelyre (például idegen combat) vonatkozik. A nyitott kérdés törölve, a short javítva."
+  },
+  "Dragon's Rage, Lee Sin": {
+   "notes": [
+    [
+     "355.10,355.4",
+     0,
+     "Az első enemy unit target, a Move célját kijátszáskor választod."
+    ],
+    [
+     "388.1,389.1,355.5.b",
+     0,
+     "A \"Then do this:\" Reflexive Trigger. A második enemy unitot a trigger finalizálásakor választod, amikor az első már megérkezett."
+    ],
+    [
+     "418.6.b.3,418.6.b.4",
+     0,
+     "A két enemy unit egymást sebzi, nem a spell. A sebzésért a unitok controllerei felelősek. A két unit ugyanazé az opponenté is lehet."
+    ],
+    [
+     "359.3.e.14.a,359.3.e.12",
+     1,
+     "Ha az első unit illegális targetté válik, a Move ignorálódik. A második rész az \"its destination\"-re hivatkozik, ami ilyenkor null, ezért az sem történik meg: nincs második unit, nincs sebzés."
+    ],
+    [
+     "388.1",
+     1,
+     "Errata: korábban a második unitot is a spell választotta ki. Most külön chain item, amire az opponent a Move után reagálhat."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Lee Sin) kell viselnie."
+    ]
+   ],
+   "short": null,
+   "why": "A pont 0-s jelzővel állította, hogy a Reflexive Trigger létre sem jön. A 388.2 szerint a feltétel nélküli \"do this\" mindig chainre kerül, a hatás elmaradása a linked instruction és a null referens (359.3.e.14.a, 359.3.e.12) levezetése, ezért 1-es és pontosított szöveg."
+  },
+  "Eclipse Herald": {
+   "notes": [
+    [
+     "424.1.a.1",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: már Stunned unit nem stunolható újra. Ha ilyet választasz, a Herald nem triggerel."
+    ],
+    [
+     "412.4,412.1",
+     1,
+     "\"You stun\": a te spelled vagy abilityd stunol. Az opponent által stunolt unitra nem triggerel, és a saját unitod stunolására sem."
+    ],
+    [
+     "416.1.c",
+     0,
+     "Ha a Herald már ready, a ready rész nem csinál semmit, a +1 Might így is jár."
+    ],
+    [
+     "370.1.a.2,383.3.d",
+     2,
+     "Ha egy effect egyszerre több enemy unitot stunol, a Core Rules nem mondja ki, hogy a Herald unitonként külön vagy összesen egyszer triggerel. Ezt judge döntse el."
+    ],
+    [
+     "384.2",
+     0,
+     "A Heraldnak a boardon kell lennie a stun pillanatában, base-ben is működik."
+    ]
+   ],
+   "short": null,
+   "why": "A 4. pont \"valószínűleg\" szóval, 1-es jelzővel állított egy a szabályzatban el nem döntött kérdést, ez 2-es. A 2. pont a 424.2.a-ra hivatkozott (stunolni csak effect utasítására lehet), a \"you\" felelősségét a 412.4 és 412.1 adja."
+  },
+  "Ekko, Recurrent": {
+   "notes": null,
+   "short": "5 Mightú champion, plusz 1 Energy és 1 Powerért ready lép be. Amikor meghal, a deck aljára téve minden rune-od ready lesz. A lap jelenleg bannolt, versenyen ellenőrizd.",
+   "why": "A short \"a deck aljára teheted\" szöveggel választhatónak állította a recycle costot, miközben a lap 2-es pontja szerint éppen ez a nyitott kérdés (nincs \"may\" a szövegben)."
+  }
+ }
+}

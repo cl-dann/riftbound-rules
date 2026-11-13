@@ -1,0 +1,278 @@
+{
+ "checked": 92,
+ "fixes": {
+  "Rell, Magnetic": {
+   "notes": [
+    [
+     "383.3.a,383.4.e.2.a",
+     0,
+     "Attack trigger, combatonként egyszer. A \"you may\" az effect elején áll: a finalizáláskor döntesz, hogy kéred-e."
+    ],
+    [
+     "420.1.a,355.10.a",
+     0,
+     "Az Equipmentet a kezedből játszod ki a resolve-kor. A kéz nem Public zóna, ezért nincs target."
+    ],
+    [
+     "206,356.1.b.1",
+     0,
+     "A \"no more than [2]\" a nyomtatott Energy costot nézi. \"Ignoring its cost\": az Energy és a Power cost is nulla."
+    ],
+    [
+     "388.1,359.3.e.14.b",
+     0,
+     "Az \"If you do, then do this\" reflexive trigger, ami a kijátszásra hivatkozik. Ha az Equipment kijátszása nem történt meg (például counterelték), az attach elmarad."
+    ],
+    [
+     "148.1.a.1,389.1",
+     1,
+     "Errata: a csatolás külön chain item lett. Az Equipment előbb csatolatlanul a base-be érkezik, és csak a reflexive trigger resolve-jakor kerül Rellre. A csatolásra lehet reagálni."
+    ],
+    [
+     "818.1.c.2",
+     1,
+     "Ez Attach, nem Equip: az Equip costot nem kell kifizetni. Ha Rell a reflexive trigger resolve-ja előtt elhagyja a boardot, az Equipment a base-ben marad csatolatlanul."
+    ],
+    [
+     "815.1.b",
+     0,
+     "Tank: az opponentnek előbb Rellre kell halálos combat damage-et kiosztania."
+    ]
+   ],
+   "short": null,
+   "why": "A pont azt állította, hogy az Equipment saját play effectjei a csatolás előtt lefutnak. Ezt a 383.4.a.2 és a 389.1 nem támasztja alá (a később chainre kerülő reflexive trigger resolve-ol előbb), a sorrendi állítást töröltem."
+  },
+  "Reluctant Leader": {
+   "notes": [
+    [
+     "420.4.a",
+     0,
+     "A trigger akkor fut le, amikor a másik unit kijátszása befejeződött. Bármelyik zónából kijátszott unit számít, a Leader saját kijátszása nem."
+    ],
+    [
+     "185.2.a,185.2.d,440.2.c",
+     1,
+     "Token unit kijátszása is kiváltja: a \"play a ... unit token\" effecttel létrejövő tokent a tulajdonosa a kártyajátszás lépéseivel játssza ki, és a token unit minden szabály szerint unit."
+    ],
+    [
+     "317.2.c",
+     1,
+     "A bónuszok összeadódnak, és a kör végén járnak le."
+    ]
+   ],
+   "short": null,
+   "why": "A token pont 2-es (nyitott kérdés) volt, de a 185.2.a, a 185.2.d és a 440.2.c eldönti: a \"play\" szóval létrehozott token unit kijátszott unit. Jelző 1-re javítva, összhangban a batch többi lapjával (például Recruit the Vanguard)."
+  },
+  "Rengar, Pridestalker": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Fury és Body domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "420.4.a",
+     0,
+     "A trigger akkor fut le, amikor a unit kijátszása befejeződött, vagyis a unit már a boardon van. Counterelt unitra nem triggerel."
+    ],
+    [
+     "355.10,355.9.b",
+     1,
+     "A \"give a unit\" unitja target, megkötés nélkül: lehet az éppen kijátszott unit, másik saját unit vagy akár enemy unit is."
+    ],
+    [
+     "403.4.b",
+     0,
+     "Kötelező, nincs \"may\". Ha van választható unit, választanod kell."
+    ],
+    [
+     "185.2.a,185.2.d,440.2.c",
+     1,
+     "Token unit kijátszása is kiváltja: a \"play a ... unit token\" effecttel létrejövő tokent a tulajdonosa a kártyajátszás lépéseivel játssza ki, és a token unit minden szabály szerint unit."
+    ],
+    [
+     "709,317.2.c",
+     1,
+     "A +1 Might a kör végéig tart. Egy 4 Mightú unitot Mighty-vé tesz, ami a \"becomes Mighty\" triggereket kiváltja."
+    ]
+   ],
+   "short": null,
+   "why": "A token pont 2-es (nyitott kérdés) volt, de a 185.2.a, a 185.2.d és a 440.2.c eldönti: a \"play\" szóval létrehozott token unit kijátszott unit. Jelző 1-re javítva, összhangban a batch többi lapjával (például Recruit the Vanguard)."
+  },
+  "Ripper's Bay": {
+   "notes": [
+    [
+     "190.6.c",
+     1,
+     "A \"that player may\" miatt a triggert az kontrollálja, akinek a kezébe a unit visszakerült, nem a battlefield controllere."
+    ],
+    [
+     "056.2",
+     0,
+     "A unit mindig a tulajdonosa kezébe megy, tehát a tulajdonos kapja a lehetőséget."
+    ],
+    [
+     "383.3.b,383.3.b.1",
+     0,
+     "A \"pay [1]\" a trigger base costja, a finalizáláskor kell kifizetni."
+    ],
+    [
+     "431.2,431.3",
+     0,
+     "A rune exhausted érkezik. Üres Rune Decknél nincs mit channelni, a kifizetett Energy elveszett."
+    ],
+    [
+     "383.3.c",
+     1,
+     "Bárki körében működik, és saját effecttel (Gust, Star-Crossed, Emperor's Dais) visszavett unitra is."
+    ],
+    [
+     "186.1",
+     1,
+     "Token unitra is triggerel: a token előbb a kézbe kerül, és csak közvetlenül utána szűnik meg, tehát a kézbe visszakerülés megtörtént. A token tulajdonosa fizethet [1]-et a rune-ért."
+    ]
+   ],
+   "short": null,
+   "why": "A token pont 2-es volt, de a 186.1 szerint a token csak az új zónába kerülés után szűnik meg, tehát a kézbe kerülés megtörténik. Jelző 1-re javítva."
+  },
+  "Scorched Earth": {
+   "notes": [
+    [
+     "135.2.e.6,103.2.b.3",
+     0,
+     "Fury domainű lap: a [4][C] cost Power része csak Fury Powerből fizethető, és csak olyan deckbe tehető, amelynek Domain Identity-je tartalmazza a Furyt."
+    ],
+    [
+     "355.14.a,355.14.c",
+     0,
+     "Minden kiválasztott unit target. Legfeljebb 5 unit választható, kevesebb is, és a saját unitjaid is."
+    ],
+    [
+     "355.11",
+     0,
+     "A targeteknek együtt ugyanazon a battlefielden kell lenniük. Base-ben lévő unit nem választható."
+    ],
+    [
+     "355.14.e,355.14.f",
+     0,
+     "A damage elosztását a resolve-kor döntöd el, nem kijátszáskor. Minden targetnek legalább 1 damage-et kell kapnia."
+    ],
+    [
+     "355.11.b,355.11.b.1",
+     0,
+     "Ha a resolve-ra a targetek már nem egy battlefielden vannak, egy legális részhalmazt kell választanod közülük, és az 5 damage azok között oszlik el."
+    ],
+    [
+     "715.3",
+     0,
+     "Bonus Damage a szétosztandó összeget növeli, így a választható targetek száma is nő."
+    ],
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ]
+   ],
+   "short": "5 sebzést osztasz szét egyetlen battlefield unitjai között, akár a saját unitjaid is. Az elosztást a lap hatásának lefutásakor döntöd el, de minden kiválasztott unitnak legalább 1 jut. Saját körödben és showdown alatt is kijátszható, Fury Powerbe kerül.",
+   "why": "Félreolvasott kártyaadat: a lap Fury domainű, 1 Fury Power costtal, nem domain nélküli. A 135.2.e.6.b és a 103.2.b.5 nem vonatkozik rá, a short \"bármilyen deckbe betehető\" állítása is hibás volt."
+  },
+  "Renata Glasc, Mastermind": {
+   "notes": [
+    [
+     "377.2.b",
+     0,
+     "A \"use my abilities only while I'm at a battlefield\" aktiválási feltétel: base-ben álló Renata egyik abilityje sem aktiválható."
+    ],
+    [
+     "381.1,145.2",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválhatók, showdown alatt nem."
+    ],
+    [
+     "377.1",
+     1,
+     "A draw ability costja [1] és egy Mind Power, exhaust nélkül. Körönként annyiszor aktiválható, ahányszor ki tudod fizetni."
+    ],
+    [
+     "415.4,143.4",
+     0,
+     "A pontszerző ability costjában exhaust is van, ehhez Renatának ready-nek kell lennie. A belépése vagy a Standard Move-ja körében exhausted, akkor nem megy."
+    ],
+    [
+     "470.2,473.1.a.1",
+     0,
+     "A \"score 1 point\" pontszerzés, nem Scoring. Nem köti a Final Point megkötés, tehát a győztes pont is lehet."
+    ],
+    [
+     "377.2.b",
+     1,
+     "A feltétel csak az aktiváláskor számít. Ha Renata a resolve előtt lekerül a battlefieldről, az ability ettől még resolve-ol."
+    ]
+   ],
+   "short": null,
+   "why": "Hiányos hivatkozás: a 381.1 csak a Main Phase-t és az Open State-et mondja ki, azt, hogy unit activated abilityje showdown alatt nem használható, a 145.2 rögzíti. A hivatkozást kiegészítettem, a szöveg nem változott."
+  },
+  "Renekton, Brute": {
+   "notes": [
+    [
+     "381.1,145.2",
+     0,
+     "A \"[1]: +1 Might\" ability csak a saját Main Phase-edben, Open State-ben aktiválható. Combat közben nem pumpálható."
+    ],
+    [
+     "709",
+     1,
+     "A trigger abban a pillanatban fut le, amikor a Mightja 10 alól 10-re vagy fölé kerül, bármilyen forrásból (ability, buff, Equipment). 4 Mightról 6 aktiválás kell."
+    ],
+    [
+     "442.1.c",
+     0,
+     "Ha már Empowered, az újabb empower nem csinál semmit."
+    ],
+    [
+     "317.2.c,442.1.a",
+     1,
+     "A +1 Mightok a kör végén lejárnak, az Empowered állapot viszont megmarad. A [Deflect] és a [Ganking] a következő körökben is él."
+    ],
+    [
+     "383.3.c",
+     1,
+     "A trigger a chainre kerül, lehet rá reagálni. Ha közben a Mightja 10 alá esik, a trigger ettől még resolve-ol, és Empowered lesz."
+    ],
+    [
+     "124.1",
+     0,
+     "Ha elhagyja a boardot, az Empowered állapot elvész."
+    ]
+   ],
+   "short": null,
+   "why": "Hiányos hivatkozás: a 381.1 csak a Main Phase-t és az Open State-et mondja ki, azt, hogy unit activated abilityje showdown alatt nem használható, a 145.2 rögzíti. A hivatkozást kiegészítettem, a szöveg nem változott."
+  },
+  "Serene Ascetic": {
+   "notes": [
+    [
+     "827.1.c.1,381.1,145.2",
+     0,
+     "Empower [3]: csak a saját Main Phase-edben, Open State-ben, és csak ha még nem Empowered. Az opponent körében, védekezés közben nem aktiválható."
+    ],
+    [
+     "814.1.c,814.1.d.1",
+     0,
+     "A [Shield 3] csak Defenderként ad +3 Mightot. Meglévő Shield értékkel összeadódik."
+    ],
+    [
+     "356.2.a.2",
+     1,
+     "A [Deflect] costja a választáskor fizetendő. A már chainen lévő enemy spellt az utólagos Empower nem drágítja."
+    ],
+    [
+     "443.1,124.1",
+     0,
+     "Disempower vagy a board elhagyása után a Deflect és a Shield is megszűnik."
+    ]
+   ],
+   "short": null,
+   "why": "Hiányos hivatkozás: a 381.1 csak a Main Phase-t és az Open State-et mondja ki, azt, hogy unit activated abilityje showdown alatt nem használható, a 145.2 rögzíti. A hivatkozást kiegészítettem, a szöveg nem változott."
+  }
+ }
+}

@@ -1,0 +1,241 @@
+{
+ "checked": 92,
+ "fixes": {
+  "Gutter Palace": {
+   "notes": [
+    [
+     "195,315.2.a.1",
+     0,
+     "A győzelmi trigger a Beginning Step elején fut, a scoring és a Draw Phase előtt. A 4 lapnak tehát a körödbe lépéskor, húzás előtt kell a kezedben lennie."
+    ],
+    [
+     "383.2.a.1",
+     0,
+     "Az \"if\" feltétel közvetlenül a trigger feltétel után áll, ezért annak része: ha a Beginning Phase kezdetén nem pontosan 4 lap és pontosan 4 battlefielden lévő unit van, a trigger chainre sem kerül."
+    ],
+    [
+     "383.2.a.1",
+     1,
+     "A feltétel a trigger condition része, ezért csak a triggereléskor számít, a resolve-kor nem ellenőrződik újra. Ha a trigger már a chainen van, az opponent hiába változtat a kezed vagy a unitjaid számán: a trigger resolve-ol, és nyersz. A szabályzat Sona példája ugyanezt mondja ki."
+    ],
+    [
+     "816.1.c,383.3.d",
+     1,
+     "A base-ben lévő unit nem számít, 5 unit pedig már sok. A [Temporary] unitok ugyanekkor triggerelnek, de a feltétel vizsgálatakor még a boardon vannak, tehát beleszámítanak."
+    ],
+    [
+     "423.3,415.4",
+     0,
+     "A Bird ability costja 1 lap discardja és a gear exhaustolása. Üres kézzel vagy exhausted gearrel nem aktiválható."
+    ],
+    [
+     "187.7,185.2.a,355.2.a",
+     1,
+     "A Bird 1 Mightú, [Deflect] token. Az ability nem ad meg helyet, a tokent a unit kijátszás szabályai szerint a base-be vagy egy általad kontrollált battlefieldre teheted, exhausted."
+    ],
+    [
+     "151.2",
+     0,
+     "A Bird ability csak a saját Main Phase-edben, Open State-ben, showdownon kívül megy. A kéz és a unitok számát az előző köröd végéig kell beállítani."
+    ]
+   ],
+   "short": null,
+   "why": "A 3. pont nyitott kérdésnek (2) jelölte, hogy a feltétel a resolve-kor újra ellenőrződik-e, pedig a 383.2.a.1 és a Sona példa eldönti: a közvetlenül a condition után álló \"if\" a trigger condition része, a trigger a feltétel későbbi megszűnése után is resolve-ol."
+  },
+  "Heimerdinger, Academy Instructor": {
+   "notes": [
+    [
+     "369.1,371.2",
+     0,
+     "Replacement effect \"may\"-jel: minden alkalommal te döntesz, lecseréled-e a kijátszandó unit tokent 3 Mightú Mechre."
+    ],
+    [
+     "364.3.a",
+     0,
+     "Csak akkor él, ha Heimerdinger battlefielden áll. Base-ben nem cserél."
+    ],
+    [
+     "187.4",
+     0,
+     "A Mech domain nélküli, 3 Mightú unit token Mech taggel."
+    ],
+    [
+     "370.2",
+     0,
+     "Egy eseményre a replacement effect csak egyszer alkalmazható."
+    ],
+    [
+     "375,373",
+     1,
+     "A Mech megörökli az eredeti kijátszás módosításait: ha a token exhausted vagy ready lépne be, a Mech is úgy érkezik, és az eredeti tokenre hivatkozó kapcsolt instruction (például \"Then do this: Give it [Temporary]\") a Mechre hat. Több egyidejű token külön esemény, mindegyiknél külön döntesz."
+    ],
+    [
+     "370.1.a.1",
+     1,
+     "Az eredeti token nem jön létre, a rá figyelő effectek a Mechet látják. A gear tokenekre (Gold) nem hat."
+    ],
+    [
+     "375,187.4",
+     2,
+     "Nem egyértelmű, hogy a token leírásába írt kulcsszó (például \"token with [Temporary]\" vagy \"with [Deflect]\") a kijátszás módosításának számít-e, vagyis a Mech megkapja-e. Judge döntse el."
+    ]
+   ],
+   "short": null,
+   "why": "A nyitott kérdés (2) nagy részét a 375 példái eldöntik: a replacement effect megörökli az exhausted/ready belépést és a kapcsolt instruction hatását, a 373 szerint pedig az egyidejű események külön kezelendők. Csak a token leírásába írt kulcsszó öröklése maradt nyitott."
+  },
+  "Hungry Wolf": {
+   "notes": [
+    [
+     "145.2,381.1",
+     0,
+     "Activated ability [Action] nélkül: csak a saját Main Phase-edben, Open State-ben, showdownon kívül megy. Combat közben nem."
+    ],
+    [
+     "377.2.b",
+     0,
+     "Két feltétel kell az aktiváláshoz: választottál már enemy unitot a körben, és az abilityt még nem használtad ebben a körben."
+    ],
+    [
+     "383.4.b.3",
+     1,
+     "A \"chosen\" valószínűleg targetelést jelent: egy spelled vagy abilityd enemy unitot célzott. A nem targetelő effect (\"all enemy units\") nem elég."
+    ],
+    [
+     "135.2.e.6,135.2.e.5.b",
+     0,
+     "A cost 1 Order Power. Order rune recycle-jéből vagy bármely domain costjára elkölthető [A] Powerből (például Gold token) fizethető. Energyvel vagy más domain Powerével nem."
+    ],
+    [
+     "416.1.c",
+     0,
+     "Ha a Wolf már ready, a ready rész nem csinál semmit, a +1 Might így is jár."
+    ],
+    [
+     "144.4.b,144.4.c.1",
+     1,
+     "A ready Wolf újra tehet Standard Move-ot, de Ganking nélkül battlefieldről csak a base-be léphet. Második támadásra ezért akkor jó, ha a Wolf a base-ben áll exhausted, például döntetlen combat utáni recall után."
+    ]
+   ],
+   "short": "1 Order Powerért readyzi magát és +1 Mightot kap, ha ebben a körben már választottál ellenséges unitot. Körönként egyszer, csak a saját körödben, combaton kívül. A ready Wolf újra mozoghat, de battlefieldről alapból csak a base-be léphet vissza, másik battlefieldre nem.",
+   "why": "Tárgyi hiba: a 144.4.b szerint Ganking nélkül battlefieldről Standard Move-val csak base-be lehet lépni, így a ready Wolf nem támadhat meg egyből egy második battlefieldet. A cost pont \"csak Order forrásból\" állítása is pontatlan volt, mert a 135.2.e.5.b szerint az [A] Power bármely domain costjára elkölthető."
+  },
+  "Hunters' Circle": {
+   "notes": [
+    [
+     "356.4.b,356.6",
+     0,
+     "Discount: 1 Energyvel kevesebb, de a cost 0 alá nem mehet. A Power costot nem érinti."
+    ],
+    [
+     "355.2.a",
+     0,
+     "Unitot alapból csak általad kontrollált battlefieldre játszhatsz, ezért a kedvezményt jellemzően a battlefield controllere kapja."
+    ],
+    [
+     "148.1.a.1,811.1.d.1.a,830.1.b.1",
+     0,
+     "Gear alapból csak base-be játszható. \"Ide\" csak facedown-ból kijátszott vagy [Deploy] gear érkezhet."
+    ],
+    [
+     "356.4.d",
+     1,
+     "A kedvezmény a teljes costra vonatkozik. Facedown-ból (0 base cost) kijátszott unitnál az Accelerate additional cost Energy részét csökkentheti."
+    ],
+    [
+     "185.2.a,440.2.c,185.3.a.1",
+     1,
+     "Az ide \"play\"-jel érkező unit token is kijátszott unit: a tokent a Play lépései szerint játszod ki. Ha a körödben ez az első ide kijátszott unitod vagy geared, a kedvezmény rá megy el, pedig a 0 costján nincs mit csökkenteni."
+    ],
+    [
+     "386.3",
+     1,
+     "Játékosonként egyszer, és csak a saját körödben. Az opponent körében ide kijátszott lapod (facedown [Reaction]) teljes árú."
+    ]
+   ],
+   "short": null,
+   "why": "A token kérdése nem nyitott: a 185.2.a és a 440.2.c példája szerint a \"play a token\" rendes Play, a token unit tehát az első ide kijátszott unit lehet. A gear pontból hiányzott a [Deploy] gear (830.1.b.1), amely bármelyik battlefieldre kijátszható."
+  },
+  "Hold 'Em": {
+   "notes": [
+    [
+     "356.4.b,356.6",
+     0,
+     "A kedvezmény a Determine Total Cost lépésben érvényesül: 3 helyett 1 Energy. A cost 0 alá nem mehet."
+    ],
+    [
+     "420.4.b",
+     0,
+     "A feltétel azt nézi, hogy a unit vagy gear finalizálódott-e ebben a körben. Akkor is teljesül, ha azt a lapot utána counterelték."
+    ],
+    [
+     "148.1.a.1,811.1.d.1.a,830.1.b.1",
+     1,
+     "Gear alapból csak base-be játszható, tehát gearrel a feltétel csak facedown-ból kijátszott vagy [Deploy] gearrel teljesül. A base-be kijátszott unit sem számít."
+    ],
+    [
+     "185.2.a,440.2.c",
+     1,
+     "Battlefieldre \"play\"-jel érkező unit token is teljesíti a feltételt: a tokent a Play lépései szerint játszod ki, és a token unit unitnak számít. Ugyanígy a battlefieldre kijátszott gear token (például Bomb) is."
+    ],
+    [
+     "355.10",
+     0,
+     "A unit target, bármelyik játékosé lehet, base-ben is. Ha a resolve előtt illegális lesz, a spell hatás nélkül resolve-ol."
+    ],
+    [
+     "206",
+     0,
+     "Más effectek a nyomtatott 3 Energy costot látják, akkor is, ha kedvezménnyel játszottad ki."
+    ],
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz jelző: a pont nyitott kérdésként (2) kezelte, pedig a 185.2.a és a 440.2.c példája kimondja, hogy a \"play a token\" a Play lépéseit követi, a token pedig a típusa szerinti unit vagy gear."
+  },
+  "Ivern, Nurturer": {
+   "notes": [
+    [
+     "383.4.a.2,383.4.d.2.a",
+     0,
+     "Két külön trigger feltétel: amikor kijátszod, és amikor ott van egy általad holdolt battlefielden a Beginning Phase-edben."
+    ],
+    [
+     "355.10.a,383.3.a.3",
+     0,
+     "A deck nem Public zóna, itt nincs target. A \"you may reveal\" a resolve közben dől el, miután megnézted a lapokat."
+    ],
+    [
+     "432.1.c",
+     0,
+     "3-nál kevesebb lapnál annyit nézel meg, amennyi van, Burn Out nélkül."
+    ],
+    [
+     "417.4,417.5",
+     0,
+     "A maradékot kötelező recycle-ölni, több lap véletlen sorrendben kerül a deck aljára."
+    ],
+    [
+     "388.1,389.1",
+     0,
+     "A \"do this\" reflexive trigger: ha Bird, Cat, Dog vagy Poro unitot reveal-eltél, a buff új chain itemként kerül fel, a targetet ekkor választod, és külön lehet rá reagálni."
+    ],
+    [
+     "143.1.b,133.3",
+     1,
+     "A feltétel a felmutatott unit lap tagjét nézi. Például Daring Poro, Lonely Poro, Loyal Poro, Soaring Scout (Bird), Stalking Wolf (Dog), Nidalee, Cat Form és a Rengar unitok (Cat) váltják ki."
+    ],
+    [
+     "370.1.b.1,370.1.c.1",
+     1,
+     "A \"look at\" és a \"reveal\" kiváltja a deckben lévő lapok ilyen replacement effectjét: Undertitant reveal-elve 2 Energyt kapsz."
+    ]
+   ],
+   "short": "Kijátszáskor, és amikor ott áll, ahol a köröd elején holdolsz, megnézed a deck felső 3 lapját, egy unitot felhúzhatsz, a többi a deck aljára kerül. Ha Bird, Cat, Dog vagy Poro unitot húztál így, buffolsz egy saját unitot. A buffra külön reagálhat az ellenfél.",
+   "why": "A 6. pontban szerkesztési maradvány (\"Ebben a batchben\") és irreleváns hivatkozás (711, Might a nem board zónákban) állt. A short opcionálisnak írta a buffot, pedig a \"do this: Buff a friendly unit\" szövegben nincs \"may\"."
+  }
+ }
+}

@@ -1,0 +1,231 @@
+{
+ "checked": 92,
+ "fixes": {
+  "Jarvan IV, Exemplar of Demacia": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Body és Order domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "830.1.b.1,420.4.a",
+     0,
+     "[Deploy] gear bármelyik battlefieldre kijátszható, enemy és üres battlefieldre is. A trigger a gear resolve-ja után fut, amikor az már a battlefielden van."
+    ],
+    [
+     "383.3.a,383.3.b,415.4",
+     0,
+     "Az \"exhaust me and pay [A]\" a trigger base costja, a finalizáláskor fizeted. Exhausted legenddel nem megy."
+    ],
+    [
+     "355.10,355.4.a",
+     0,
+     "A friendly unit target. A cél az a battlefield, ahová a gear került. Olyan unit nem választható, amelyik már ott van."
+    ],
+    [
+     "421.2.a,144.2",
+     1,
+     "Ez nem Standard Move: a unitot nem kell exhaustolni, exhausted unit is mozgatható, és battlefieldről battlefieldre is mehet Ganking nélkül."
+    ],
+    [
+     "452",
+     0,
+     "Ha a cél nem általad kontrollált battlefield, az Contested lesz, showdown vagy combat következik."
+    ],
+    [
+     "185.2.a,440.2.c,420.4.a",
+     1,
+     "Deploy-os gear token (Bomb) is kiváltja: a Bombot adó effectek \"play a Bomb gear token\"-t írnak, a token így a chain-re jön létre és kijátszottnak számít. A trigger a token megérkezése után fut, a unit a Bomb battlefieldjére mehet."
+    ]
+   ],
+   "short": null,
+   "why": "A token pont 2-es volt, pedig a 440.2.c és a 185.2.a eldönti: a \"play a ... token\" utasítással érkező token kijátszottnak számít, tehát a \"when you play a gear with Deploy\" triggerel. Jelző 1-re javítva."
+  },
+  "Jax, Unmatched": {
+   "notes": [
+    [
+     "819.1.d",
+     0,
+     "[Quick-Draw]: az Equipment [Reaction]-t kap, és kijátszáskor triggerel: \"attach it to a unit you control\". Equip cost fizetése nélkül kerül unitra."
+    ],
+    [
+     "813.1.c.1",
+     0,
+     "A [Reaction] miatt az Equipment Closed State-ben, combat közben, az opponent körében is kijátszható, a Might bonus azonnal számít."
+    ],
+    [
+     "365.1",
+     1,
+     "A passive ability csak addig él, amíg Jax a boardon van. Ha a gear kijátszásakor már nincs ott, nincs Quick-Draw."
+    ],
+    [
+     "819.1.d",
+     1,
+     "Az errata óta nem csak a kézben lévő Equipment kapja meg: a trashből, facedown-ból vagy más zónából kijátszott Equipment is Reaction időzítést és azonnali csatolást kap."
+    ],
+    [
+     "819.1.c,813.1.c.1,813.1.c.2",
+     1,
+     "A boardon lévő Equipmentnek is van Quick-Draw-ja, de az a kártya kijátszásához ad [Reaction] időzítést és play effectet. Az Equip activated ability, saját [Reaction] nélkül az időzítése nem változik: csak a saját Main Phase-edben, Open State-ben megy."
+    ],
+    [
+     "355.5.b,148.1.a.1",
+     0,
+     "A csatolás targetjét a trigger chain-re kerülésekor választod, nem a gear kijátszásakor. A gear előbb a base-be lép be, onnan kerül a unitra."
+    ],
+    [
+     "809.1.c",
+     0,
+     "[Deflect]: az opponent Jaxot targetelő spellje vagy abilityje +[A]-ba kerül."
+    ]
+   ],
+   "short": null,
+   "why": "Nyitott kérdésként (2) szerepelt, hogy a Quick-Draw az Equip abilitynek is Reaction időzítést ad-e. A 813.1.c.1 és 813.1.c.2 külön kezeli a kártyát és az activated abilityt, és a Long Sword pontja is tényként írja, hogy az Equip csak Main Phase-ben megy. Jelző 1-re javítva."
+  },
+  "Jayce, Hammer in Hand": {
+   "notes": [
+    [
+     "416.3.a,416.3.b",
+     0,
+     "Akkor triggerel, amikor exhaustedből ready lesz: minden Awaken Phase-edben és ready effectre is."
+    ],
+    [
+     "416.1.b,416.1.c",
+     0,
+     "Már ready Jayce-t nem lehet újra readyvé tenni, ilyenkor nincs trigger."
+    ],
+    [
+     "355.3",
+     0,
+     "A módot a trigger chain-re kerülésekor választod, nem a resolve-kor. Egyet kell választanod."
+    ],
+    [
+     "807.2,809.2",
+     0,
+     "Ha egy körben többször lesz ready, a hatások halmozódnak: két [Assault 2] Assault 4, két [Deflect 2] Deflect 4. A Ganking többszörözése felesleges (810.2)."
+    ],
+    [
+     "809.1.b,809.1.c",
+     0,
+     "[Deflect 2]: az opponent minden őt targetelő spellje és abilityje 2 bármilyen Powerrel drágább, választásonként."
+    ],
+    [
+     "369.3,805.6.a",
+     1,
+     "Ha egy effect miatt eleve ready lép be (\"enter ready\"), az nem \"become ready\" esemény, a trigger nem fut le. Az Accelerate-re a 805.6.a ki is mondja, más enter ready effectnél a 369.3 szerint a belépés módja cserélődik le, a unit nem lesz utólag ready."
+    ]
+   ],
+   "short": null,
+   "why": "A pont 2-es volt, de a 369.3 szerint az \"enter ready\" replacement effect a belépést cseréli le, nincs exhaustedből ready váltás. A testvérlapok (Master Yi, Honed; Fretful Feline; Lingering Animus) ugyanezt 0-s vagy 1-es állításként írják. Jelző 1-re javítva."
+  },
+  "Katarina, Reckless": {
+   "notes": null,
+   "short": "Amikor elrejtesz egy lapot, Katarina ready lesz. Amikor elrejtett lapot kijátszol, 2 sebzést osztasz egy ellenséges unitnak bárhol, ez kötelező, ha van ilyen unit. Ha a lapot counterelik, nincs sebzés.",
+   "why": "A short \"oszthatsz\"-t írt, pedig a kártyaszövegben nincs \"may\": a trigger kötelező, ha van választható enemy unit (403.4.b), ahogy a pontok is mondják."
+  },
+  "Lacerate": {
+   "notes": [
+    [
+     "355.7",
+     0,
+     "\"Choose a unit\": a unit target, bármelyik játékos unitja lehet, base-ben is."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül."
+    ],
+    [
+     "443.1.a.1",
+     0,
+     "Ha a unit nem Empowered, a disempower rész nem csinál semmit, a spell megy tovább."
+    ],
+    [
+     "710",
+     0,
+     "A kill a unit aktuális Mightját nézi a resolve-kor. 3 fölötti Mightnál nem hal meg, de a disempower megtörtént."
+    ],
+    [
+     "359.3.d,828.1.c",
+     1,
+     "A sorrend számít: előbb a disempower, utána a Might ellenőrzés. Ha a unit az [Empowered] bónusza nélkül 3 vagy kevesebb Mightú, meghal. Például az egyszer Empowered Kayle, Justified 5-ről 3-ra esik, és a spell megöli."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "Ha a target illegálissá válik, a spell minden rá vonatkozó része ignorálódik."
+    ],
+    [
+     "829.1.c.1,829.1.b.2",
+     0,
+     "A Flow cost a base cost helyére lép: a trashből [4] és 2 Order Powerért játszható ki, utána banishelődik. Az időzítés nem változik, onnan is csak a saját körödben megy."
+    ]
+   ],
+   "short": null,
+   "why": "A Flow pont egy szabályból nem igazolható állítást tartalmazott (\"ebben a deckben csak 3 Order Rune van\"), ezt töröltem, és a 829.1.b.2 időzítési szabályát írtam a helyére. Hiányzott, hogy a disempower az Empowered Might bónuszt is leveszi a kill ellenőrzés előtt (359.3.d, 828.1.c)."
+  },
+  "Lux, Crownguard": {
+   "notes": [
+    [
+     "143.4,415.4",
+     0,
+     "Exhausted lép be, az Exhaust cost csak ready unittal fizethető. A kijátszás körében nem ad Energyt."
+    ],
+    [
+     "430.3,430.2",
+     0,
+     "[Reaction] Add ability: cost fizetése közben is aktiválható, bárki körében, azonnal resolve-ol és nem lehet rá reagálni."
+    ],
+    [
+     "154,356.2,820.1.c.1",
+     1,
+     "A 2 Energy csak spell kijátszására költhető, vagyis a spell Total Costjára. Ebbe az additional cost (például Repeat) Energy része is beletartozik. Unit, gear, ability cost (Equip, Empower) vagy Hide nem fizethető belőle."
+    ],
+    [
+     "166,166.3",
+     2,
+     "A Core Rules nem írja le, hogyan kell nyilvántartani a megkötött Energyt a Rune Poolban (a 166.3 szerint nincs fizikai jelölő). Érdemes külön jelezni, vitás esetben judge döntse el."
+    ],
+    [
+     "144.2",
+     1,
+     "A Standard Move is exhaustolja, így egy körben vagy mozog, vagy Energyt ad."
+    ]
+   ],
+   "short": null,
+   "why": "A két pont egymásnak és a Kai'Sa, Daughter of the Void pontjának is ellentmondott: a Deflect felárat tiltottnak, a Repeat költséget nyitott kérdésnek írta. A 356.2 és 820.1.c.1 szerint az additional cost a spell kijátszási költségének része, tehát fizethető belőle. A Deflect Power cost, Energyből amúgy sem fizethető."
+  },
+  "Lux, Illuminated": {
+   "notes": [
+    [
+     "206",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a spell nyomtatott costja számít. A kedvezménnyel 0-ért kijátszott Sky Splitter ([8]) is kiváltja."
+    ],
+    [
+     "420.4.a,420.4.a.1",
+     0,
+     "A trigger akkor fut le, amikor a spell kijátszása a resolve-val befejeződött. Counterelt spell után nincs +3 Might."
+    ],
+    [
+     "359.3.e.10",
+     0,
+     "Ha a spell minden targetje illegális lett és nem csinált semmit, akkor is kijátszottnak számít, Lux megkapja a bónuszt."
+    ],
+    [
+     "206,356.1.c",
+     1,
+     "Csak a nyomtatott Energy cost számít. Egy olcsó spell Repeat vagy más additional costtal megnövelt ára nem teszi 5-össé."
+    ],
+    [
+     "317.2.c",
+     1,
+     "Csak a saját spelljeid váltják ki. Több spell bónusza összeadódik, és mind a kör végén jár le."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz hivatkozás: a 356.1.b.3 az ignorált cost melletti additional costról szól. Az állítást a 206 (mindig a nyomtatott cost számít, akkor is, ha megnövelték) és a 356.1.c igazolja."
+  }
+ }
+}

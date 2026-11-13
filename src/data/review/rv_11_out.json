@@ -1,0 +1,539 @@
+{
+ "checked": 92,
+ "fixes": {
+  "Sumpworks Map": {
+   "notes": [
+    [
+     "813.1.c.1",
+     0,
+     "[Reaction] gear: Closed State-ben, bárki körében kijátszható, például az opponent showdownja közben, közvetlenül a conquerje előtt."
+    ],
+    [
+     "816.1.b",
+     0,
+     "[Temporary]: a következő Beginning Phase-ed elején meghal. A saját körödben kijátszva az opponent teljes körét lefedi."
+    ],
+    [
+     "471.1,471.2,472",
+     0,
+     "Conquer és hold is score, és minden battlefield külön számít. Ha az opponent egy körben holdol és két battlefieldet conquerel, háromszor húzol."
+    ],
+    [
+     "473.1.b.1",
+     1,
+     "Akkor is triggerel, ha az opponent a score-ért pont helyett csak lapot húz (Final Point szabály), mert a score megtörtént."
+    ],
+    [
+     "470.1,470.2",
+     1,
+     "A Scoring és a pontszerzés külön fogalom: effecttől kapott pont (például \"score 1 point\" szövegű ability vagy Burn Out) nem conquer és nem hold, ezért nem triggerel."
+    ],
+    [
+     "414.4",
+     0,
+     "A draw kötelező. Üres Main Deck esetén Burn Outot okoz."
+    ]
+   ],
+   "short": "Valahányszor egy opponent conquerel vagy holdol egy battlefieldet, húzol egy lapot, battlefieldenként külön, akkor is, ha ezért végül nem kap pontot. Más forrásból szerzett pontja nem számít. Bárki körében kijátszható, és a következő saját köröd elején magától meghal. A húzás kötelező, üres deckkel Burn Out.",
+   "why": "A short \"pontot szerez\"-t írt, pedig a trigger a Scoringra (conquer, hold) szól, ami a 470.1 szerint nem azonos a pontszerzéssel: pont nélküli score is triggerel (473.1.b.1), effecttől kapott pont viszont nem."
+  },
+  "Sun Disc": {
+   "notes": [
+    [
+     "812.1.b.1,812.1.c",
+     0,
+     "Legion: az effect csak akkor jön létre, ha ebben a körben már kijátszottál egy másik kártyát. A Sun Disc saját kijátszása nem számít."
+    ],
+    [
+     "420.4.b",
+     0,
+     "A Legion a finalizálást nézi: counterelt lap is számít korábban kijátszott kártyának."
+    ],
+    [
+     "727.1.b",
+     1,
+     "Legion nélkül aktiválva a gear exhaustolódik, de nem történik semmi."
+    ],
+    [
+     "391.3,369.3",
+     0,
+     "Az effect delayed replacement: a következő unitod exhausted helyett ready lép be. Ez nem \"becomes ready\" esemény, olyan triggert nem vált ki."
+    ],
+    [
+     "151.2,149.1",
+     0,
+     "Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható. Ready lép be, a kijátszás körében már használható."
+    ],
+    [
+     "185.2.a,440.2.c",
+     1,
+     "A token unitot is a tulajdonosa játssza ki, a \"play a token\" effect rendes Play. Ezért a körben következő token unit is elhasználja a \"next unit you play\" effectet, és az lép be ready."
+    ]
+   ],
+   "short": null,
+   "why": "A tokenes pont 2-es (nyitott) volt, pedig a 185.2.a és a 440.2.c kimondja, hogy a tokent kijátsszák (Play), tehát levezethető: jelző 1."
+  },
+  "Syndra, Transcendent": {
+   "notes": [
+    [
+     "343.1,316.8.a",
+     1,
+     "A passive csak addig él, amíg Syndra olyan battlefielden áll, ahol showdown zajlik. A combat showdownja is showdown. Base-ben állva nem ad semmit."
+    ],
+    [
+     "308.1.a",
+     0,
+     "Showdown State-ben csak [Action] vagy [Reaction] spell játszható ki, tehát a gyakorlatban csak ezek kapják meg a Repeatet."
+    ],
+    [
+     "820.1.d,820.1.c.1",
+     0,
+     "A kapott Repeat optional additional cost: kijátszáskor fizetve a spell instructionjei a resolve-kor még egyszer végrehajtódnak."
+    ],
+    [
+     "820.2.a,820.3.a",
+     0,
+     "A második végrehajtás választásait is a kijátszáskor teszed meg, és eltérhetnek az elsőtől. A spell így is csak egyszer számít kijátszottnak."
+    ],
+    [
+     "820.1.c.2,820.3",
+     0,
+     "Ha a spellnek saját Repeatje is van, a két Repeat külön fizethető ki, és mindegyik egy további végrehajtást ad."
+    ],
+    [
+     "135.2.e.6,135.2.e.6.c,135.2.e.6.b",
+     1,
+     "A kapott cost [C] része a Repeatet viselő spell saját domainjének Powere, nem Syndráé: a szabályzat Tibbers példája szerint a kapott kulcsszó [C]-je a kulcsszót kapó lap domainjét követi. Több domainű spellnél bármelyik domain jó, domain nélkülinél [A]."
+    ],
+    [
+     "365.1",
+     1,
+     "A spell targetjének nem kell Syndra battlefieldjén lennie. Ha Syndra a spell finalizálása után hagyja el a boardot, a már kifizetett Repeat megmarad."
+    ]
+   ],
+   "short": "Amíg Syndra egy showdownban részt vevő battlefielden áll, a spelljeid kapnak egy plusz fizethető árat ([2] és egy Power a spell saját domainjéből), amiért a hatásuk még egyszer lefut. A gyakorlatban ez a showdownban kijátszható spellekre vonatkozik. Base-ben állva nem ad semmit.",
+   "why": "A [C] kérdése nyitottként (2) szerepelt, pedig a 135.2.e.6 és a 135.2.e.6.c Tibbers példája eldönti: a kapott kulcsszó [C]-je a kulcsszót viselő lap (itt a spell) domainjét jelenti."
+  },
+  "Targon's Peak": {
+   "notes": [
+    [
+     "355.5.b",
+     0,
+     "A szabályzat név szerint hozza példának: a ready egy delayed trigger effectje. A rune-okat nem a conquer trigger finalizálásakor, hanem a kör végén, a delayed trigger finalizálásakor választod."
+    ],
+    [
+     "359.3.e.16",
+     0,
+     "A szabályzat név szerint hozza példának: ha az Ending Phase-ben, az Ending Step kezdete után conquerelsz itt (például Thrill of the Hunt), a delayed trigger létre sem jön."
+    ],
+    [
+     "355.13",
+     1,
+     "Errata: a régi szöveg pontosan 2 rune-t kért. Az \"up to 2\" óta 0, 1 vagy 2 választható, kevesebb exhausted rune-nal is működik."
+    ],
+    [
+     "393",
+     0,
+     "A delayed trigger nincs a battlefieldhez kötve. Akkor is lefut a kör végén, ha addigra elveszíted a controlt."
+    ],
+    [
+     "317.1.a,317.2.d",
+     1,
+     "A ready az Ending Stepben jön, utána a Rune Pool kiürül. A haszna az, hogy az opponent körére ready rune-jaid maradnak [Reaction] lapokra."
+    ],
+    [
+     "355.17.a,811.1.d.5",
+     0,
+     "A szabályzat Here to Help példájában helyszínként szerepel: az innen facedown-ból kijátszott Here to Help unitját kötelező ide játszani. Ha egy másik kötelező előírás (a példában Dragon Roost additional costja) ezzel ütközik, a játékos választ, melyiket teljesíti."
+    ]
+   ],
+   "short": null,
+   "why": "A pont azt állította, hogy a unitnak ide kell érkeznie, de a 355.17.a példája épp azt mutatja, hogy ütköző kötelező előírásnál a játékos választhat, és a unit Dragon Roostra is mehet."
+  },
+  "Teemo, Strategist": {
+   "notes": [
+    [
+     "811.1.b,103.3.a.1",
+     0,
+     "Hidden: kézből és a Champion Zone-ból is elrejthető [A]-ért. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható arra a battlefieldre, ahol el volt rejtve."
+    ],
+    [
+     "135.2.b.5.a",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a defend trigger négy külön instruction (choose, reveal, deal, recycle). Az enemy unit target, a trigger chain-re kerülésekor választod."
+    ],
+    [
+     "418.8,715.4",
+     0,
+     "A sebzés egyetlen Deal action, akkora, ahány [Hidden] lap volt az 5 között. A szabályzat erre a lapra mondja ki: ha egy sem volt, nincs Deal action, ezért a Bonus Damage sem érvényesül."
+    ],
+    [
+     "383.4.f.2.a,466.2.c.3.a",
+     1,
+     "Combatonként egyszer triggerel, amikor Teemo először kap Defender designationt. Ha facedown-ból érkezik egy combatba, ahol te védekezel, a következő cleanupnál Defender lesz, és a trigger lefut."
+    ],
+    [
+     "432.1.c,417.5",
+     0,
+     "5-nél kevesebb lapnál annyit fedsz fel, amennyi van, Burn Out nélkül. A felfedett lapok kötelezően, véletlen sorrendben a deck aljára kerülnek."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "Ha a target a resolve előtt illegálissá válik, a sebzés elmarad, de a reveal és a recycle megtörténik."
+    ],
+    [
+     "383.4.f,811.1.b",
+     1,
+     "Errata: a régi szöveg akkor is triggerelt, ha Teemo [Hidden]-ből lett kijátszva. Most csak a védekezés váltja ki: combaton kívül facedown-ból kijátszva nem sebez. Facedown lap csak általad kontrollált battlefielden lehet, ott combatban te védekezel."
+    ]
+   ],
+   "short": null,
+   "why": "Az errata pont példája (saját támadásba facedown-ból bedobva) nem állhat elő, mert a 811.1.b szerint csak kontrollált battlefieldre lehet rejteni, ahol a 466.2.c.1 szerint te vagy a defender; a valós különbség a combaton kívüli kijátszás."
+  },
+  "Temporal Breach": {
+   "notes": [
+    [
+     "355.7,811.1.d.2",
+     0,
+     "A unit target, lehet saját vagy enemy, base-ben is. Facedown-ból kijátszva csak azon a battlefielden lévő unit választható, ahol a lap el volt rejtve."
+    ],
+    [
+     "811.3,155,811.6",
+     0,
+     "Nincs [Action] vagy [Reaction]: kézből csak a saját körödben, Open State-ben, showdownon kívül játszható ki. Facedown-ból, az elrejtés utáni körtől [Reaction]-ként megy, bárki körében."
+    ],
+    [
+     "359.3.e.2.a",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: facedown-ból kijátszva a battlefield megkötés is targeting restriction. Ha a unit a resolve előtt máshová mozog, illegális target lesz, a spell nem csinál semmit."
+    ],
+    [
+     "124.1,705",
+     0,
+     "A banish után visszajátszott unit új objektum: a damage, a buff, a kapott kulcsszavak és a \"this turn\" módosítók eltűnnek róla. A rá célzó, chainen lévő spellek mistargetelnek."
+    ],
+    [
+     "420.3.a,143.4,191.4.d",
+     1,
+     "A unitot a tulajdonosa játssza ki újra, ez rendes Play: a \"when you play me\" effectjei újra triggerelnek, és exhausted lép be. Ha az opponent unitját választod, a play effectet ő kapja."
+    ],
+    [
+     "356.1.b.1,356.1.b.3",
+     0,
+     "\"Ignoring its cost\": az Energy és a Power base cost nulla. Optional additional cost (például Accelerate) ettől még kifizethető."
+    ],
+    [
+     "186.1,420.3.c",
+     1,
+     "Token uniton removalként működik: a token a Banishmentben megszűnik létezni, így nincs mit visszajátszani."
+    ],
+    [
+     "436.4.b",
+     0,
+     "A unitra csatolt Equipment leválik, és azon a locationön marad, ahol a unit a banish előtt volt."
+    ]
+   ],
+   "short": "Egy unitot eltávolítasz, majd a tulajdonosa ingyen visszajátssza ugyanoda, mintha új lenne: sebzés, buff és ideiglenes hatások eltűnnek, a kijátszáskori képességei újra lefutnak (enemy unitnál az opponentnek). Token esetén ez végleges eltávolítás. Kézből csak a saját körödben megy, elrejtve később válaszként is.",
+   "why": "Hiányzott az időzítés: a lapon nincs [Action], ezért kézből csak a 155 szerinti időben játszható (811.3), Reactionként csak facedown-ból (811.6)."
+  },
+  "The Zero Drive": {
+   "notes": [
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Energy és 1 Mind Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +2 Mightot is kap."
+    ],
+    [
+     "396,808.1.c,808.1.d.2",
+     1,
+     "A szabályzat név szerint idézi az Effect Textjét: \"[Deathknell][>] Banish me.\" A felszerelt unit ténylegesen meghal és a trashbe kerül (a halálra figyelő triggerek lefutnak), majd a Deathknell resolve-ja a Banishmentbe teszi. Ez az ability linked a gear activated abilityjével."
+    ],
+    [
+     "398,428.3.a",
+     0,
+     "Az activated ability csak azokat a unitokat játssza ki, amelyeket ennek a Zero Drive-nak a Deathknellje banishelt. Más effect vagy egy másik Zero Drive által banishelt unit nem jön vissza."
+    ],
+    [
+     "718.2,719.5",
+     0,
+     "Csatolva a Rules Text inaktív, ezért az ability csak csatolatlan gearrel megy. A unit halálakor a gear leválik, a következő cleanup a base-be recallolja, onnan aktiválható."
+    ],
+    [
+     "356.1.b.1,356.1.b.3,186.1",
+     0,
+     "\"Ignoring their costs\": az Energy és Power cost nulla, optional additional cost (például Accelerate) ráfizethető. Token unit a Banishmentben megszűnik, az nem tér vissza."
+    ],
+    [
+     "203,428.2",
+     1,
+     "A gear banishelése cost: az ability egyszer használható, és ha countert kap, a gear és a banishelt unitok is odavesznek."
+    ]
+   ],
+   "short": "Felszerelve +2 Mightot ad, és ha a unit meghal, a halála után a trashből félrerakódik (banish). Később a lerakott Zero Drive feláldozásával és fizetéssel ingyen visszahozhatod az így félrerakott unitokat. Tokenek nem jönnek vissza, és csak a saját maga által félrerakott unitokat hozza vissza.",
+   "why": "A pont és a short szerint a unit \"a trash helyett\" banishelődik, de a Deathknell nem replacement: a 808.1.d.1 és 808.1.d.2 szerint a unitnak a trashbe kell kerülnie, a banish csak utána, a trigger resolve-jakor történik."
+  },
+  "Thrill of the Hunt": {
+   "notes": [
+    [
+     "355.9.b",
+     0,
+     "A target friendly unit, bárhol a boardon."
+    ],
+    [
+     "355.2.b,190.3.a.1",
+     0,
+     "\"Any battlefield\": a unit olyan battlefieldre is kijátszható, amit nem te kontrollálsz. Az ilyen battlefield Contested lesz, ebből showdown vagy combat következik."
+    ],
+    [
+     "124.1,705,436.4.b",
+     0,
+     "A visszajátszott unit új objektum: a damage, a buff és a \"this turn\" módosítók eltűnnek róla, az Equipment leválik. A rá célzó, chainen lévő enemy spellek mistargetelnek."
+    ],
+    [
+     "420.3.a,143.4",
+     1,
+     "Ez rendes Play: a \"when you play me\" effectek újra triggerelnek, és a unit exhausted lép be."
+    ],
+    [
+     "359.3.e.16",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: ha az Ending Phase-ben conquerelsz vele, az \"at the end of this turn\" delayed triggerek (például Targon's Peak) már nem jönnek létre."
+    ],
+    [
+     "186.1,056.2",
+     1,
+     "Token unit a Banishmentben megszűnik, nincs mit visszajátszani. Ha a unit nem a tiéd, a tulajdonosa játssza ki és ő választ battlefieldet."
+    ],
+    [
+     "356.1.b.1,103.3.d,135.2.e.6.c",
+     0,
+     "A base cost nulla, optional additional cost (például Accelerate) fizethető. Signature lap (Rengar), a Power costja Fury vagy Body Powerrel megy."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz hivatkozás: a két domainű lap Power costjának fizetését a 135.2.e.6.c mondja ki, a pont által hivatkozott szabályok nem."
+  },
+  "Tomb-Raider Barbara": {
+   "notes": [
+    [
+     "383.2.a.1",
+     0,
+     "A \"7 or more runes\" a trigger feltétel része, a belépéskor nézi a játék. Ha akkor nincs 7 rune-od, a trigger nem kerül chain-re."
+    ],
+    [
+     "164.2.b,417.1.b",
+     1,
+     "Az exhausted rune számít, a recycle-ölt nem, mert az visszakerül a Rune Deckbe. Barbarának nincs Power costja, de ha a körben korábban más lap Power costjára recycle-öltél és 7 alá estél, a play effect elmarad."
+    ],
+    [
+     "355.7,355.8",
+     0,
+     "Az enemy gear target. Ha az opponentnek nincs választható gearje, a trigger nem kerül chain-re."
+    ],
+    [
+     "718.5.b,150.4",
+     0,
+     "Unitra csatolt Equipment és gear token (Gold, Bomb) is választható."
+    ],
+    [
+     "443.1.b",
+     1,
+     "Az Empowered állapotot a resolve-kor nézi. Empowered gear csak disempowerelődik, többszörösen Empowered gearről egy státusz kerül le."
+    ],
+    [
+     "809.1.c",
+     1,
+     "Deflectes gear (például Watchful Curator mellett) választása neked +[A]-ba kerül."
+    ]
+   ],
+   "short": "Kijátszáskor, ha legalább 7 rune-od van, egy enemy geart megöl, vagy ha Empowered, csak leveszi róla az Empowered állapotot. Buktató: a Powerért recycle-ölt rune már nem számít, ha emiatt 7 alá esel, a hatás elmarad.",
+   "why": "A pont és a short azt sugallta, hogy Barbara kijátszásához Powerért kell recycle-ölni, de a lap costja csak 4 Energy, Power costja nincs; a buktató más lapok Power costjából adódik."
+  },
+  "Twisted Fate, Gambler": {
+   "notes": [
+    [
+     "425.1,417.1.b",
+     0,
+     "A Rune Deck legfelső rune-ját minden játékos látja, majd recycle-lel a Rune Deck aljára kerül."
+    ],
+    [
+     "103.4.a.1,103.2.b.3",
+     1,
+     "A Rune Deckedben csak a legended Domain Identity-jébe tartozó rune lehet. Ez a lap Chaos, ezért a legend egyik domainje Chaos, és csak a másik domainje adhat módot: a háromból legfeljebb egy érhető el egy deckben. Chaos rune-nál nem történik semmi."
+    ],
+    [
+     "355.3",
+     2,
+     "A módot nem te választod, a rune domainje dönti el a resolve-kor. Nem egyértelmű, hogy a Fury és az Order mód targetjét előre, a trigger chain-re kerülésekor kell-e megnevezni. A Core Rules erre nem ad példát, judge döntse el."
+    ],
+    [
+     "355.9.b",
+     1,
+     "A Fury mód csak az ott lévő (\"here\") enemy unitokat éri. Az Order mód stunja bármelyik enemy unitra mehet, base-ben lévőre is."
+    ],
+    [
+     "055",
+     1,
+     "Ha a Rune Deck üres, nincs mit felfedni, az effect nem csinál semmit."
+    ]
+   ],
+   "short": "Amikor támad, felfeded a Rune Deck felső rune-ját és alulra teszed, a rune színe dönti el a hatást: sebzés az ott álló enemy unitoknak, egy lap húzás, vagy egy enemy unit stunolása. Nem te választasz. Egy deckben a háromból legfeljebb egy hatás érhető el, Chaos rune-nál nem történik semmi.",
+   "why": "Tárgyi hiba: a pont szerint a három módból kettő érhető el, de a lap Chaos, így a kétdomainű Domain Identity egyik fele Chaos (103.2.b.3), és a Rune Deck (103.4.a.1) csak egy mód domainjét tartalmazhatja."
+  },
+  "Strike Down": {
+   "notes": [
+    [
+     "355.9.b,355.8",
+     0,
+     "Két target: egy friendly unit, amin van csatolt Equipment, és egy enemy unit. Equipped unit nélkül a spell nem játszható ki."
+    ],
+    [
+     "359.3.e.12",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: ha a unitról a resolve előtt leválik az egyetlen Equipment, már nem equipped, illegális target. A Mightja \"null\", nincs sebzés."
+    ],
+    [
+     "418.6.b.3",
+     1,
+     "A sebzést a unit okozza, nem a spell, és csak egy irányban: az enemy unit nem üt vissza."
+    ],
+    [
+     "435.1.d",
+     1,
+     "A sebzés a detach előtt történik, ezért a unit Mightjában még benne van az Equipment Might bonusa."
+    ],
+    [
+     "436.3",
+     1,
+     "A detach kötelező. Több Equipment esetén a resolve-kor választasz egyet, ez a választás nem target."
+    ],
+    [
+     "436.4.a",
+     0,
+     "A levált Equipment a unit locationjén marad. Battlefieldről a következő cleanupban a base-be recallolódik, és az Equip costot újra ki kell fizetni."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz jelző: a 435.1.d csak azt mondja ki, hogy a csatolt lap Might bonusa módosítja a unit Mightját; hogy a sebzés a detach előtt számol, az a kártyaszöveg sorrendjéből levezetés (1)."
+  },
+  "Stormclaw Ursine": {
+   "notes": [
+    [
+     "431.2",
+     0,
+     "A szabályzat pontosan ezt a szöveget hozza példának: a Rune Deck felső rune-ja a boardra kerül, de exhausted állapotban."
+    ],
+    [
+     "415.1.b,164.2.b",
+     1,
+     "Az exhausted rune abban a körben nem exhaustolható Energyért, de recycle-ölve Powert még adhat, mert annak nem cost az exhaust."
+    ],
+    [
+     "431.3",
+     0,
+     "Ha a Rune Deck üres, nem történik semmi. Ennek nincs büntetése, nem Burn Out."
+    ],
+    [
+     "383.4.a.2",
+     1,
+     "Play effect, kötelező. A normál Channel Phase-en felül ad egy rune-t, vagyis a következő körtől eggyel több rune-od van."
+    ],
+    [
+     "815.1.b",
+     0,
+     "Tank: az opponentnek előbb az Ursine-ra kell halálos combat damage-et kiosztania."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz jelző: a 383.4.a.2 csak a play trigger chainre kerülését írja le, az extra rune-ra és a következő körre vonatkozó állítás levezetés (1)."
+  },
+  "Treasure Hoard": {
+   "notes": [
+    [
+     "383.3.b,383.3.b.1",
+     0,
+     "A \"you may\" után álló \"pay [1]\" a trigger base costja, a finalizáláskor fizeted."
+    ],
+    [
+     "187.5",
+     0,
+     "A Gold domain nélküli gear token: \"[Reaction], Kill this, Exhaust: Add [A]\", vagyis egyszer ad 1 bármilyen domainű Powert."
+    ],
+    [
+     "184.1,149.1",
+     0,
+     "A gear alapból ready lépne be, de az effect exhausted állapotot ír elő. A Gold ebben a körben nem használható, mert a cost-jához exhaustolni kell."
+    ],
+    [
+     "148.1.a.1",
+     0,
+     "A Gold a base-edbe kerül, nem a battlefieldre."
+    ],
+    [
+     "440.2.c,185.2.a",
+     1,
+     "A tokent kijátszod, ezért a \"when you play a gear\" triggereket kiváltja."
+    ],
+    [
+     "473.2.a,472",
+     0,
+     "Conquer trigger: annál fut le, aki itt conquerel, körönként legfeljebb egyszer."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz jelző: a 440.2.c és a 185.2.a azt mondja ki, hogy a tokent kijátsszák; hogy ez más lapok \"when you play a gear\" triggerét kiváltja, az levezetés (1)."
+  },
+  "The Dreaming Tree": {
+   "notes": [
+    [
+     "383.4.b,383.4.b.3",
+     0,
+     "Targeting Effect: csak akkor triggerel, ha a spell ténylegesen targeteli az itt lévő friendly unitot. \"All units\" típusú spell nem váltja ki."
+    ],
+    [
+     "383.4.b.2",
+     1,
+     "A trigger a targetelés után kerül chainre, a spell fölé. A húzás tehát a spell resolve-ja előtt megtörténik, akkor is, ha a spellt később counterelik."
+    ],
+    [
+     "740.1.a",
+     0,
+     "\"Friendly unit\": a spellt kijátszó játékos saját (vagy csapattársa) unitja. Abilityvel választás nem számít."
+    ],
+    [
+     "386.1",
+     2,
+     "Nem egyértelmű, hogy a \"first time each turn\" játékosonként vagy összesen egyszer él körönként. A Core Rules ezt nem dönti el, judge kell."
+    ],
+    [
+     "414.4",
+     0,
+     "Kötelező húzás, üres Main Decknél Burn Outot okoz."
+    ],
+    [
+     "383.4.b",
+     1,
+     "Errata: a nyomtatott \"The first time you choose... draw 1\" csak a lap kontrollerét jutalmazta. Most bármely játékos húz, aki spellel a saját itt álló unitját választja."
+    ],
+    [
+     "103.3.e",
+     1,
+     "A kártyaadat szerint banned. A legalitást verseny előtt a tiltólistán ellenőrizd."
+    ]
+   ],
+   "short": null,
+   "why": "Rossz jelző: a 383.4.b.2 csak azt mondja ki, hogy a trigger a targetelés után kerül chainre; a counterelt spellre vonatkozó következmény levezetés (1)."
+  }
+ }
+}
