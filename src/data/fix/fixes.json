@@ -1,0 +1,162 @@
+{
+ "Karma, Channeler": {
+  "tags": [
+   "Karma",
+   "Ionia"
+  ],
+  "domains": null,
+  "type_note": "",
+  "text": "[Vision] (When you play me, look at the top card of your Main Deck. You may recycle it.)\nWhen you recycle one or more cards to your Main Deck, buff a friendly unit. (If it doesn't have a buff, it gets a +1 [S] buff. Runes aren't cards.)",
+  "old_text": "[Vision] (When you play me, look at the top card of your Main Deck. You may recycle it.)\nWhen you recycle one or more cards, buff a friendly unit. (If it doesn't have a buff, it gets a +1 [S] buff. Runes aren't cards.)",
+  "source": "https://riftbound.gg/cards/ogn-235-karma-channeler/ ; https://playriftbound.com/en-us/news/rules-and-releases/riftbound-origins-card-errata/",
+  "note": "Tag \"Vi\" confirmed wrong. other.json had the pre-errata text; data.json already has the errata text. Correct card code is ogn-235 (guess_url sfd-237 was wrong)."
+ },
+ "Hunting Dog": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": null,
+  "old_text": null,
+  "source": "https://www.misprint.com/card/500001564",
+  "note": "riftbound.gg page not found by search. Type Unit, domain Order and text confirmed (misprint.com); tags not shown on any reachable source, left null."
+ },
+ "Clanging Sentry": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": null,
+  "old_text": null,
+  "source": "",
+  "note": "No reachable card page (riftbound.gg page not found). Core Rules 831.2 example (two Clanging Sentries both get Disarm 2) implies the card itself has the Mech tag, but the full tag list is unverified, left null."
+ },
+ "Patched Porobot": {
+  "tags": null,
+  "domains": null,
+  "type_note": "Unit / Gear: riftbound.gg lists the type as \"Unit / Gear\" (both types). Domain Mind, tags Mech, Poro, Piltover, text unchanged.",
+  "text": null,
+  "old_text": null,
+  "source": "https://riftbound.gg/cards/ven-058-patched-porobot/"
+ },
+ "Disintegrate": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": "[Action] (Play on your turn or in showdowns.)\nDeal 3 to a unit at a battlefield. If this kills it, do this: draw 1.",
+  "old_text": "[Action] (Play on your turn or in showdowns.)\nDeal 3 to a unit at a battlefield. If this kills it, draw 1.",
+  "source": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-origins-card-errata/",
+  "note": "The official errata article itself prints the new text as \"Action\" without brackets (its old text has [Action]); the keyword is [Action], bracket restored. coolstuffinc still shows the pre-errata text."
+ },
+ "Whirling Twirligig": {
+  "tags": null,
+  "domains": [
+   "Fury"
+  ],
+  "type_note": "",
+  "text": null,
+  "old_text": null,
+  "source": "https://riftbound.gg/cards/rad-022-whirling-twirligig/",
+  "note": "Text matches; riftbound.gg shows no tags field."
+ },
+ "Scorched Earth": {
+  "tags": null,
+  "domains": [
+   "Fury"
+  ],
+  "type_note": "",
+  "text": null,
+  "old_text": null,
+  "source": "https://riftbound.gg/cards/rad-006-scorched-earth/",
+  "note": "Text matches."
+ },
+ "One-Two Punch": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": null,
+  "old_text": null,
+  "source": "https://www.misprint.com/card/500001567",
+  "note": "Type Spell and text confirmed (misprint.com, tcgwatchtower); domain not shown on any reachable source, left null."
+ },
+ "Dune Drake": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": null,
+  "old_text": "When I attack, give me +2 [S] if there is a ready enemy unit here.",
+  "source": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-origins-card-errata/"
+ },
+ "Baited Hook": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": null,
+  "old_text": "[1][C], [E]: Kill a friendly unit. Look at the top 5 cards of your Main Deck. You may play a unit from among them that has Might up to 1 more than the killed unit, ignoring its cost. Then recycle the rest.",
+  "source": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-origins-card-errata/"
+ },
+ "Ravenborn Tome": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": null,
+  "old_text": "[E]: The next spell you play deals 1 Bonus Damage. (Each instance of damage the spell deals is increased by 1.)",
+  "source": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-origins-card-errata/"
+ },
+ "The Dreaming Tree": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": null,
+  "old_text": "The first time you choose a friendly unit with a spell here each turn, draw 1.",
+  "source": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-origins-card-errata/"
+ },
+ "Rek'Sai, Void Burrower": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": null,
+  "old_text": "When you conquer, you may exhaust me to reveal the top 2 cards of your Main Deck. You may play one. Then recycle the rest.",
+  "source": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-spiritforged-errata",
+  "note": "Errata article lists it as \"Void Burrower\" (Spiritforged section)."
+ },
+ "Reinforce": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": null,
+  "old_text": "Look at the top 5 cards of your Main Deck. You may play a unit from among them. Its Energy cost is reduced by [5]. Then recycle the remaining cards.",
+  "source": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-spiritforged-errata",
+  "note": "Listed in the Spiritforged errata article under \"Origins\"; not in the Origins errata article."
+ },
+ "Blind Fury": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": null,
+  "old_text": "[Action] (Play on your turn or in showdowns.)\nEach opponent reveals the top card of their Main Deck. Choose one and play it, ignoring its cost. Then recycle the rest.",
+  "source": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-origins-card-errata/"
+ },
+ "Kinkou Monk": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": null,
+  "old_text": "When you play me, buff two other friendly units. (Each one that doesn't have a buff gets a +1 [S] buff.)",
+  "source": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-origins-card-errata/"
+ },
+ "Convergent Mutation": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": null,
+  "old_text": "[Reaction] (Play any time, even before spells and abilities resolve.)\nChoose a friendly unit. Increase its Might until it equals the Might of another friendly unit.",
+  "source": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-origins-card-errata/"
+ },
+ "Sona, Harmonious": {
+  "tags": null,
+  "domains": null,
+  "type_note": "",
+  "text": null,
+  "old_text": "While I'm at a battlefield, ready 4 friendly runes at the end of your turn.",
+  "source": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-origins-card-errata/"
+ }
+}

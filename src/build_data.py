@@ -69,6 +69,24 @@ TXT_OVERRIDE={ # a hivatalos Spiritforged errata cikk alapjan javitva (az adatfo
 for c in cards:
     if c['_fn'] in TXT_OVERRIDE: c['txt'],c['old']=TXT_OVERRIDE[c['_fn']]
     if c['txt'] and c['txt'].endswith('instead.disa'): c['txt']=c['txt'][:-4]
+EFF=json.load(open('data/fix/effect_text.json',encoding='utf-8'))
+FIX=json.load(open('data/fix/fixes.json',encoding='utf-8'))
+for c in cards:
+    fn=c['_fn']
+    if fn in EFF:
+        e=EFF[fn]
+        if e.get('effect'): c['eff']=e['effect']; c['effsrc']=e.get('source') or ''
+        d=e.get('top_text_diff') or ''
+        if d.startswith('Equip cost is [A]') and c['txt']: c['txt']=c['txt'].replace('[Equip] [C] ([C]:','[Equip] [A] ([A]:')
+        if 'lacks brackets' in d and c['txt'] and '[Equip]' not in c['txt']: c['txt']=c['txt'].replace('Equip [C]','[Equip] [C]',1)
+        if fn=="Protector's Shield" and not c['d']: c['d']=['Order']
+    if fn in FIX:
+        f=FIX[fn]
+        if f.get('tags'): c['tg']=f['tags']
+        if f.get('domains'): c['d']=f['domains']
+        if f.get('old_text') and c.get('err') is not None and not c.get('old'): c['old']=fix(f['old_text'])
+        if fn=='Disintegrate' and f.get('text'): c['txt']=fix(f['text'])
+        if 'Unit / Gear' in (f.get('type_note') or '') and 'Gear' not in c['st']: c['st']=c['st']+['Gear']
 # ---------- topics
 T=[]
 def topic(k,title,g,refs,test=None,rel=(),why=None): T.append({'k':k,'title':title,'g':g,'refs':list(refs),'rel':list(rel),'why':why,'_t':test})
@@ -146,6 +164,7 @@ for f in sorted(glob.glob('data/notes/batch_*_notes.json')):
     try: BN.update(json.load(open(f,encoding='utf-8')))
     except Exception as e: print('BATCH LOAD FAIL',f,e)
 RID={r['id'] for r in R}
+BNFIX=json.load(open('data/notes/batch_zfix_notes.json',encoding='utf-8'))
 def clean_notes(v):
     out=[]
     for n in v:
@@ -155,7 +174,7 @@ def clean_notes(v):
         out.append([refs,n[1],str(n[2]).replace('\u2014',',').replace('\u2013','-')])
     return out
 for c in cards:
-    tx=c['txt'] or ''
+    tx=(c['txt'] or '')+('\n'+c['eff'] if c.get('eff') else '')
     tp=[]
     for i,t in enumerate(T):
         f=t['_t']
@@ -173,7 +192,9 @@ for c in cards:
     if 'kw:Empower' in ks or 'kw:Empowered' in ks: pass
     c['tp']=tp; c['ex']=ment.get(id(c),[])
     if c['n'] in SH: c['sh']=SH[c['n']].replace('\u2014',',').replace('\u2013','-')
-    if c['n'] in NOTES or c['_fn'] in NOTES: c['nt']=[[r,f,t] for r,f,t in NOTES.get(c['n'],NOTES.get(c['_fn']))]
+    if c['n'] in BNFIX:
+        c['nt']=clean_notes(BNFIX[c['n']])
+    elif c['n'] in NOTES or c['_fn'] in NOTES: c['nt']=[[r,f,t] for r,f,t in NOTES.get(c['n'],NOTES.get(c['_fn']))]
     elif c['n'] in BN:
         cn=clean_notes(BN[c['n']])
         if cn: c['nt']=cn

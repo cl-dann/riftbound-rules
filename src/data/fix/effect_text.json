@@ -1,0 +1,297 @@
+{
+ "Protector's Shield": {
+  "effect": "[Tank] (I must be assigned combat damage first.)",
+  "might_bonus": 1,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/rad-123-protectors-shield/",
+  "verified_with": "",
+  "note": "Domain on riftbound.gg: Order (equipment.json has domains null); tags: Equipment."
+ },
+ "Blade of the Exile": {
+  "effect": "[Ganking] (I can move from battlefield to battlefield.)",
+  "might_bonus": 3,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/rad-150-blade-of-the-exile/",
+  "verified_with": ""
+ },
+ "Pendulum Blade": {
+  "effect": "When I move to a battlefield, give me +2 [S] this turn.",
+  "might_bonus": 1,
+  "top_text_diff": "",
+  "source": "https://ohkogames2.tcgsync.com/products/pendulum-blade-011-166-vendetta-ven",
+  "verified_with": "",
+  "note": "riftbound.gg card page not found by search; text from TCGplayer-based store listing (tcgsync), single source."
+ },
+ "Hand Hammer": {
+  "effect": "I have +2 [S] while I'm at a battlefield with exactly one other unit you control.",
+  "might_bonus": 1,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/ven-027-hand-hammer/",
+  "verified_with": ""
+ },
+ "Jagged Cutlass": {
+  "effect": "I can't be moved by enemy spells and abilities.",
+  "might_bonus": 2,
+  "top_text_diff": "current_text lacks brackets: \"Equip [C]\" should be \"[Equip] [C]\" (source: \"[Equip Body]\").",
+  "source": "https://kanzengames.tcgsync.com/products/jagged-cutlass-073-166-vendetta-ven",
+  "verified_with": "",
+  "note": "riftbound.gg page (ven-073-jagged-cutlass) loads without card text; TCGplayer-based store listing used, single source."
+ },
+ "Shady Spectacles": {
+  "effect": "(I am a copy of the chosen unit.)",
+  "might_bonus": 0,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/ven-137-shady-spectacles/",
+  "verified_with": "",
+  "note": "Effect Text is reminder text only (+0 [S])."
+ },
+ "Blighted Battleaxe": {
+  "effect": "At the end of your turn, if I didn't conquer this turn, unattach this and deal 4 to me.",
+  "might_bonus": 4,
+  "top_text_diff": "",
+  "source": "https://avacynstcg.tcgsync.com/products/blighted-battleaxe-019-219",
+  "verified_with": "",
+  "note": "riftbound.gg page (unl-019) loads without card text; TCGplayer-based store listing used, single source."
+ },
+ "Soul Sword": {
+  "effect": "[Level 3][>] I have an additional +1 [S]. (While you have 3+ XP, get the effect.)",
+  "might_bonus": 1,
+  "top_text_diff": "",
+  "source": "https://www.coretcg.com/Products/211131/89/24560/Soul-Sword",
+  "verified_with": "https://www.coolstuffinc.com/p/Riftbound/Soul+Sword",
+  "note": "riftbound.gg card page not found by search."
+ },
+ "Hunter's Machete": {
+  "effect": "[Hunt] (When I conquer or hold, gain 1 XP.)",
+  "might_bonus": 2,
+  "top_text_diff": "UNRESOLVED: coretcg lists \"[EQUIP 1 BODY] (1 Body: ...)\" i.e. [Equip] [1][C]; zatu.com lists \"[Equip] {BR}\" i.e. [Equip] [C] (= current_text). Not changed.",
+  "source": "https://www.coretcg.com/Products/210963/89/24560/Hunters-Machete",
+  "verified_with": "",
+  "note": "riftbound.gg card page not found by search."
+ },
+ "Shepherd's Heirloom": {
+  "effect": "",
+  "might_bonus": 2,
+  "top_text_diff": "",
+  "source": "https://gmigames.tcgsync.com/products/shepherds-heirloom-158-219-unl",
+  "verified_with": "",
+  "note": "No Effect Text on any source (tcgsync, coretcg, cardsrealm, zatu). Might Bonus NOT verified: sources show \"Might: 0\" and no +N line; current value 2 kept. riftbound.gg page loads without card text."
+ },
+ "Hextech Gauntlets": {
+  "effect": "When I conquer, if you assigned 3 or more excess damage, draw 1.",
+  "might_bonus": 3,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/unl-188-hextech-gauntlets/",
+  "verified_with": ""
+ },
+ "Serrated Dirk": {
+  "effect": "[Assault 2] (+2 [S] while I'm an attacker.)",
+  "might_bonus": 0,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-009-serrated-dirk/",
+  "verified_with": ""
+ },
+ "Recurve Bow": {
+  "effect": "When I attack or defend, deal 2 to an enemy unit here.",
+  "might_bonus": 0,
+  "top_text_diff": "",
+  "source": "https://www.coretcg.com/Products/205535/89/24519/Recurve-Bow",
+  "verified_with": "https://www.coolstuffinc.com/p/Riftbound/Recurve+Bow",
+  "note": "coolstuffinc Card Text has only the Equip line (Effect Text missing there). riftbound.gg card page not found by search."
+ },
+ "Long Sword": {
+  "effect": "",
+  "might_bonus": 2,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-022-long-sword/",
+  "verified_with": ""
+ },
+ "Skyfall of Areion": {
+  "effect": "My hold effects are also conquer effects, and vice versa.",
+  "might_bonus": 2,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-030-skyfall-of-areion/",
+  "verified_with": ""
+ },
+ "Doran's Shield": {
+  "effect": "[Tank] (I must be assigned combat damage first.)",
+  "might_bonus": 1,
+  "top_text_diff": "",
+  "source": "https://www.coretcg.com/Products/205359/89/24519/Dorans-Shield",
+  "verified_with": "",
+  "note": "riftbound.gg page (sfd-033) shows only a truncated meta snippet \"+1 might Tank (I must be...\", consistent."
+ },
+ "Brutalizer": {
+  "effect": "If this was attached to me this turn, I have an additional +2 [S].",
+  "might_bonus": 1,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-042-brutalizer/",
+  "verified_with": "https://www.coolstuffinc.com/p/Riftbound/Brutalizer",
+  "note": "Also quoted verbatim in Core Rules 136.2.d. coolstuffinc Card Text omits the Effect Text."
+ },
+ "Guardian Angel": {
+  "effect": "If I would die, kill Guardian Angel instead. Heal me, exhaust me, and recall me.",
+  "might_bonus": 1,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-051-guardian-angel/",
+  "verified_with": "",
+  "note": "Also quoted verbatim in Core Rules 136.2.d."
+ },
+ "Sterak's Gage": {
+  "effect": "",
+  "might_bonus": 3,
+  "top_text_diff": "",
+  "source": "https://www.coretcg.com/Products/205609/89/24519/Steraks-Gage",
+  "verified_with": "https://www.coolstuffinc.com/p/Riftbound/Sterak%27s+Gage",
+  "note": "riftbound.gg page (sfd-056) loads without card text."
+ },
+ "Svellsongur": {
+  "effect": "",
+  "might_bonus": 0,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-059-svellsongur/",
+  "verified_with": "https://www.coolstuffinc.com/p/Riftbound/Svellsongur",
+  "note": "Printed Effect Text blank; filled by the copy effect while attached."
+ },
+ "Cloth Armor": {
+  "effect": "[Shield 2] (+2 [S] while I'm a defender.)",
+  "might_bonus": 0,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-064-cloth-armor/",
+  "verified_with": ""
+ },
+ "Experimental Hexplate": {
+  "effect": "I am a Mech.",
+  "might_bonus": 1,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-073-experimental-hexplate/",
+  "verified_with": ""
+ },
+ "World Atlas": {
+  "effect": "When I hold, play two Gold gear tokens exhausted.",
+  "might_bonus": 2,
+  "top_text_diff": "",
+  "source": "https://www.coolstuffinc.com/p/Riftbound/World+Atlas",
+  "verified_with": "",
+  "note": "riftbound.gg page (sfd-086) loads without card text; coolstuffinc only. Might Bonus not shown there, current 2 kept."
+ },
+ "The Zero Drive": {
+  "effect": "[Deathknell][>] Banish me. (When I die, get the effect.)",
+  "might_bonus": 2,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-090-the-zero-drive/",
+  "verified_with": "",
+  "note": "Also quoted in Core Rules 396."
+ },
+ "Doran's Blade": {
+  "effect": "",
+  "might_bonus": 2,
+  "top_text_diff": "",
+  "source": "https://www.coretcg.com/Products/205355/89/24519/Dorans-Blade",
+  "verified_with": "https://www.coolstuffinc.com/p/Riftbound/Doran's+Blade",
+  "note": "riftbound.gg card page not found by search."
+ },
+ "Hexdrinker": {
+  "effect": "[Deflect] (Opponents must pay [A] to choose me with a spell or ability.)",
+  "might_bonus": 1,
+  "top_text_diff": "",
+  "source": "https://starcitygames.com/hexdrinker-sgl-rift-sfd-102-enn/",
+  "verified_with": "",
+  "note": "riftbound.gg page (sfd-102) loads without card text; starcitygames only."
+ },
+ "Warmog's Armor": {
+  "effect": "When I conquer, buff me. (If I don't have a buff, I get a +1 [S] buff.)",
+  "might_bonus": 1,
+  "top_text_diff": "",
+  "source": "https://www.coretcg.com/Products/205657/89/24519/Warmogs-Armor",
+  "verified_with": "",
+  "note": "riftbound.gg card page not found; single source (coretcg). A riftbound.gg domain guide paraphrase does not match and was not used."
+ },
+ "Trinity Force": {
+  "effect": "When I hold, score 1 point.",
+  "might_bonus": 2,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-115-trinity-force",
+  "verified_with": "https://www.coolstuffinc.com/p/Riftbound/Trinity+Force"
+ },
+ "Boneshiver": {
+  "effect": "When I conquer, channel 1 rune exhausted.",
+  "might_bonus": 2,
+  "top_text_diff": "",
+  "source": "https://www.coolstuffinc.com/p/Riftbound/Boneshiver",
+  "verified_with": "",
+  "note": "riftbound.gg page (sfd-118) loads without card text; coolstuffinc, consistent with cardgamer.com summary."
+ },
+ "Doran's Ring": {
+  "effect": "When I conquer, discard 1, then draw 1.",
+  "might_bonus": 1,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-124-dorans-ring/",
+  "verified_with": ""
+ },
+ "Boots of Swiftness": {
+  "effect": "[Ganking] (I can move from battlefield to battlefield.)",
+  "might_bonus": 2,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-133-boots-of-swiftness/",
+  "verified_with": ""
+ },
+ "Cull": {
+  "effect": "When I conquer, play a Gold gear token exhausted.",
+  "might_bonus": 1,
+  "top_text_diff": "",
+  "source": "https://www.coretcg.com/Products/205337/89/24519/Cull",
+  "verified_with": "",
+  "note": "Source prints \"When I conquer play...\" without comma; comma added. riftbound.gg card page not found; single source."
+ },
+ "Last Rites": {
+  "effect": "When I conquer or hold, you may play a unit from your trash. (You still pay its costs.)",
+  "might_bonus": 2,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-150-last-rites/",
+  "verified_with": ""
+ },
+ "Eye of the Herald": {
+  "effect": "When I move, play a 1 [S] Recruit unit token here.",
+  "might_bonus": 0,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-153-eye-of-the-herald/",
+  "verified_with": ""
+ },
+ "B.F. Sword": {
+  "effect": "",
+  "might_bonus": 3,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-161-bf-sword/",
+  "verified_with": "https://www.coolstuffinc.com/p/Riftbound/B.F.+Sword"
+ },
+ "Sacred Shears": {
+  "effect": "[Deathknell][>] Draw 1. (When I die, get the effect.)",
+  "might_bonus": 1,
+  "top_text_diff": "",
+  "source": "https://riftbound.gg/cards/sfd-172-sacred-shears/",
+  "verified_with": ""
+ },
+ "Blade of the Ruined King": {
+  "effect": "",
+  "might_bonus": 4,
+  "top_text_diff": "",
+  "source": "https://coretcg.com/Products/205302/89/24519/Blade-of-the-Ruined-King",
+  "verified_with": "https://www.coolstuffinc.com/p/Riftbound/Blade+of+the+Ruined+King",
+  "note": "riftbound.gg page (sfd-178) loads without card text."
+ },
+ "Forgefire Cape": {
+  "effect": "When I attack or defend, deal 2 to all enemy units here.",
+  "might_bonus": 3,
+  "top_text_diff": "Equip cost is [A] (rainbow rune), not [C]: \"[Equip] [A] ([A]: Attach this to a unit you control.)\"",
+  "source": "https://riftbound.gg/cards/sfd-190-forgefire-cape/",
+  "verified_with": ""
+ },
+ "Rabadon's Deathcrown": {
+  "effect": "Your spells and abilities deal 3 Bonus Damage (while this is attached).",
+  "might_bonus": 3,
+  "top_text_diff": "Equip cost is [A] (rainbow rune / {Rune}), not [C]: \"[Equip] [A] ([A]: Attach this to a unit you control.)\"",
+  "source": "https://riftbound.gg/cards/sfd-191-rabadons-deathcrown/",
+  "verified_with": "https://www.coolstuffinc.com/p/Riftbound/Rabadon%27s+Deathcrown"
+ }
+}

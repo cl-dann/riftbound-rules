@@ -106,6 +106,7 @@ h3 .n{font-family:var(--f-body);font-size:12px;font-weight:400;color:var(--muted
 .chip.okc{background:var(--ok-bg);color:var(--ok);border-color:var(--ok)}
 .ctext{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--ink);border-radius:4px;padding:12px 14px;max-width:72ch}
 .ctext p{margin:0 0 8px}.ctext p:last-child{margin:0}
+.ctext.eff{border-left-color:var(--accent)}
 .ctext.old{border-left-color:var(--muted);color:var(--muted)}
 .rem{color:var(--muted);font-style:italic}
 .kw{font-weight:600;background:var(--accent-bg);color:var(--accent);border-radius:3px;padding:0 5px;white-space:nowrap}
@@ -490,6 +491,7 @@ function cardHeadHTML(c,tag){
   if(c.ban===1)h+='<div class="banbox">Ez a kártya '+(c.banNew?'a '+esc(BF.title)+' cikk szerint':'a Rules Hub szerint')+' tiltott a Constructed formátumban (érvényes: '+(c.banNew?c.banf:META.ban_updated)+'). A keresőben csak a "banned kártyák is" kapcsolóval jelenik meg.</div>';
   if(c.ban===2)h+='<div class="banbox">Ez a legend a Rules Hub szerint a 2v2 Constructed formátumban tiltott (lista frissítve: '+META.ban_updated+'). 1v1 Constructedben játszható.</div>';
   h+='<h3>'+(c.err!=null?'Jelenlegi szöveg (errata után)':'Kártyaszöveg')+'</h3><div class="ctext">'+cardText(c.txt)+'</div>';
+  if(c.eff)h+='<h3>Effect Text<span class="n">a felszerelt unit kapja meg, csak csatolva aktív (136)</span></h3><div class="ctext eff">'+cardText(c.eff)+'</div><p class="note">Az Effect Text a hivatalos adatforrásból hiányzott, közösségi forrásból pótolva: <a href="'+esc(c.effsrc||'')+'">'+esc((c.effsrc||'').replace(/^https?:\/\/(www\.)?/,'').split('/')[0])+'</a>.</p>';
   if(c.sh)h+='<div class="short"><b>Röviden</b>'+glossify(esc(c.sh))+'<small>Egyszerűsített összefoglaló, nem hivatalos. A pontos szabályok lent.</small></div>';
   if(c.err!=null){
     const a=META.articles[c.err];
@@ -832,6 +834,7 @@ function buildPDF(){
     if(c.ban)put(c.ban===1?'BANNED: tiltott a Constructed formátumban.':'BANNED a 2v2 Constructed formátumban.',{size:9,style:'bold',color:[160,50,15]});
     else if(c.banf)put('BANNED '+c.banf+'-tól (Radiance ban list, Standard és 2v2 Constructed).',{size:9,style:'bold',color:[160,50,15]});
     if(c.txt)put(pdfCardText(c.txt),{size:9.5,indent:3,before:1});
+    if(c.eff)put('Effect Text (csatolva): '+pdfCardText(c.eff),{size:9.5,indent:3,before:0.5});
     if(c.sh)put('Röviden: '+c.sh,{size:9.5,indent:3,before:1,color:[110,75,0]});
     if(c.err!=null){put('Errata: a szöveg megváltozott, a fenti a hatályos. Forrás: '+META.articles[c.err].t+', '+META.articles[c.err].u,{size:8.5,style:'italic',color:[110,75,0],indent:3,before:0.5});
       if(c.old)put('Nyomtatott szöveg: '+pdfCardText(c.old).replace(/\n/g,' / '),{size:8.5,color:[90,98,115],indent:3});}
@@ -966,7 +969,7 @@ function renderTud(){
 const vsCard=v=>byName.get(norm(v))||CARDS.find(c=>norm(c.n).startsWith(norm(v)));
 const kwRef=k=>{const t=TOPICS.find(x=>x.k==='kw:'+k);return t?t.refs[0]:'';};
 function vsPairs(A,B){
-  const out=[];const ta=A.txt||'',tb=B.txt||'';const refsA=(A.nt||[]).flatMap(n=>n[0].split(',').map(x=>x.trim()));
+  const out=[];const ta=(A.txt||'')+' '+(A.eff||''),tb=(B.txt||'')+' '+(B.eff||'');const refsA=(A.nt||[]).flatMap(n=>n[0].split(',').map(x=>x.trim()));
   const targets=refsA.some(r=>/^355\.(7|9|10|11)/.test(r));
   const add=(ref,txt)=>out.push([ref,txt]);
   if(targets&&/can.t be chosen|cannot be chosen/i.test(tb))add('757',A.n+' választást kér, '+B.n+' szövege viszont bizonyos helyzetben kizárja, hogy kiválasszák. Ha a feltétel teljesül (például enemy spell választaná), '+B.n+' nem választható.');
@@ -974,7 +977,7 @@ function vsPairs(A,B){
   if(/counter (?:a|an|target|that|it)\b[^.]{0,30}spell|counter (?:a|an) spell/i.test(ta)&&B.t==='Spell')add('426',A.n+' counterelheti '+B.n+'-t, amíg az a chainen vár. A counterelt spell nem hat, és a kifizetett cost nem jár vissza.');
   if(/\bkill\b|\bdeal \d/i.test(ta)&&/\[Deathknell\]/.test(tb))add(kwRef('Deathknell')||'429',A.n+' megölheti '+B.n+'-t, ekkor '+B.n+' Deathknell képessége elindul.');
   if(/\bbanish/i.test(ta)&&/\[Deathknell\]/.test(tb))add('428',A.n+' banish hatása nem kill, ezért ha így kerül el '+B.n+', a Deathknell képessége nem indul.');
-  if(/\bkill\b|\bdeal \d/i.test(ta)&&/(if (?:i|this|it) would die|would be killed)/i.test(tb))add('367',B.n+' replacement effectje helyettesítheti a halálát, ha '+A.n+' megölné.');
+  if(/\bkill\b|\bdeal \d/i.test(ta)&&/(if (?:i|this|it) would die|would be killed)/i.test(tb))add('367',B.t==='Gear'&&B.eff?B.n+' Effect Textje replacement effectet ad a felszerelt unitnak: ha '+A.n+' megölné azt a unitot, helyette a '+B.n+' hatása fut le.':B.n+' replacement effectje helyettesítheti a halálát, ha '+A.n+' megölné.');
   if(/return[^.]{0,60}hand/i.test(ta)&&(B.st||[]).includes('Token'))add('186.1',A.n+' kézbe küldené '+B.n+'-t, de token kézbe kerülve megszűnik.');
   if(/return[^.]{0,60}hand/i.test(ta)&&B.t==='Unit')add('719.5',A.n+' kézbe küldheti '+B.n+'-t: ha rajta Equipment van, az leválik és a boardon marad.');
   if(A.t==='Gear'&&(A.tg||[]).includes('Equipment')&&B.t==='Unit')add('716',A.n+' Equipment, felcsatolható '+B.n+'-re: ekkor '+B.n+' megkapja a Might bonust és az Effect Textet.');
