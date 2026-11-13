@@ -935,13 +935,14 @@ window.addEventListener('scroll',()=>{if(tipFor)hideTip();},{passive:true});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')hideTip();});
 function renderTud(){
   const X=D.extra||{};
-  $('tab-tud').hidden=false;let h='<div class="subnav">'+(X.guide?'<a class="chip" href="#tud-guide" data-scroll="tud-guide">Kezdő útmutató</a>':'')+'<a class="chip" href="#tud-vs" data-scroll="tud-vs">Lap a lap ellen</a><a class="chip" href="#tud-olvas" data-scroll="tud-olvas">A magyarázatok olvasása</a>'+(X.terms?'<a class="chip" href="#tud-fog" data-scroll="tud-fog">Fogalmak</a>':'')+(X.glossary?'<a class="chip" href="#tud-kw" data-scroll="tud-kw">Kulcsszavak</a>':'')+(X.flow?'<a class="chip" href="#tud-flow" data-scroll="tud-flow">Játékmenet</a>':'')+(X.patchnotes?'<a class="chip" href="#tud-pn" data-scroll="tud-pn">Szabályváltozások</a>':'')+'</div>';
+  $('tab-tud').hidden=false;let h='<div class="subnav">'+(X.guide?'<a class="chip" href="#tud-guide" data-scroll="tud-guide">Kezdő útmutató</a>':'')+'<a class="chip" href="#tud-vs" data-scroll="tud-vs">Lap a lap ellen</a><a class="chip" href="#tud-chain" data-scroll="tud-chain">Válasz a chainen</a><a class="chip" href="#tud-olvas" data-scroll="tud-olvas">A magyarázatok olvasása</a>'+(X.terms?'<a class="chip" href="#tud-fog" data-scroll="tud-fog">Fogalmak</a>':'')+(X.glossary?'<a class="chip" href="#tud-kw" data-scroll="tud-kw">Kulcsszavak</a>':'')+(X.flow?'<a class="chip" href="#tud-flow" data-scroll="tud-flow">Játékmenet</a>':'')+(X.patchnotes?'<a class="chip" href="#tud-pn" data-scroll="tud-pn">Szabályváltozások</a>':'')+'</div>';
   const rl=r=>'<a href="#szabalyok" data-ref="'+esc(r)+'">'+esc(r)+'</a>';
   if(X.guide){
     h+='<h2 id="tud-guide" style="margin-top:14px">Kezdő útmutató</h2><p class="note" style="margin:6px 0 12px">Az első játék lépésről lépésre, a Core Rules alapján. AI által írt összefoglaló, nem hivatalos.</p>';
     X.guide.forEach((g,i)=>{h+='<div class="guide"><h3>'+(i+1)+'. '+esc(String(g.title).replace(/^\s*\d+\.\s*/,''))+(g.rules?'<span class="n">'+rl(g.rules)+'</span>':'')+'</h3>'+(g.paras||[]).map(p=>'<p>'+glossify(esc(p))+'</p>').join('')+(g.steps&&g.steps.length?'<ol class="flow">'+g.steps.map(s=>'<li><span>'+esc(s[1])+rl(s[0])+'</span></li>').join('')+'</ol>':'')+'</div>';});
   }
   h+='<h2 id="tud-vs" style="margin-top:28px">Lap a lap ellen</h2><p class="note" style="margin:6px 0 12px">Válassz két lapot: az oldal megmutatja, milyen ismert kölcsönhatás van köztük, és mely szabályokra hivatkozik mindkét lap magyarázata. Automatikus keresés, nem teljes és nem hivatalos.</p><div class="vsin"><input type="text" id="vs-a" list="cardnames" placeholder="Első lap neve" aria-label="Első lap"><span class="vsx">ellen</span><input type="text" id="vs-b" list="cardnames" placeholder="Második lap neve" aria-label="Második lap"><button class="btn" id="vs-go">Összevetés</button></div><datalist id="cardnames">'+CARDS.map(c=>'<option value="'+esc(c.n)+'">').join('')+'</datalist><div id="vs-out"></div>';
+  h+='<h2 id="tud-chain" style="margin-top:28px">Válasz a chainen</h2><p class="note" style="margin:6px 0 12px">Kijátszol egy lapot, és az ellenfél válaszol rá egy másikkal. Az oldal lépésenként megmutatja, mire lehet egyáltalán válaszolni, és mi történik, ha a válasz a forrást vagy a targetet távolítja el. Általános szabályokra épülő, automatikus levezetés, nem hivatalos ruling.</p><div class="vsin"><input type="text" id="ch-a" list="cardnames" placeholder="Kijátszott lap" aria-label="Kijátszott lap"><span class="vsx">erre válasz</span><input type="text" id="ch-b" list="cardnames" placeholder="Válaszként kijátszott lap" aria-label="Válasz lap"><button class="btn" id="ch-go">Mi történik?</button></div><div id="ch-out"></div>';
   h+='<h2 id="tud-olvas" style="margin-top:28px">A magyarázatok olvasása</h2><div class="guide">'
    +'<p>Minden kártya "Hogyan érinti ezt a lapot" listájában a pontok mellett egy címke áll. Ez mutatja, mennyire biztos az adott állítás.</p>'
    +'<ul class="olv"><li><span class="fl f0">szabály</span>A hivatkozott Core Rules szakasz szó szerint kimondja, vagy példaként leírja. Erre nyugodtan lehet építeni.</li>'
@@ -964,6 +965,7 @@ function renderTud(){
     X.patchnotes.forEach(p=>{h+='<div class="pn"><h3 style="margin-bottom:2px"><a href="'+esc(p.url)+'">'+esc(p.title)+'</a><span class="n">'+esc(p.date||'')+(p.effective?', hatályos: '+esc(p.effective):'')+'</span></h3><ul>'+(p.changes||[]).map(c=>'<li>'+(c.rule?rl(c.rule)+' ':'')+esc(c.text)+'</li>').join('')+'</ul></div>';});
   }
   $('tud').innerHTML=h;
+  $('ch-go').addEventListener('click',runChain);['ch-a','ch-b'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter')runChain();}));
   $('vs-go').addEventListener('click',runVs);['vs-a','vs-b'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter')runVs();}));
 }
 const vsCard=v=>byName.get(norm(v))||CARDS.find(c=>norm(c.n).startsWith(norm(v)));
@@ -984,6 +986,47 @@ function vsPairs(A,B){
   if(/\bmove/i.test(ta)&&/can.t move|cannot move/i.test(tb))add('358.3.a',A.n+' mozgatást kér, de '+B.n+' tiltja: a lap kijátszható, a mozgás viszont negálódik.');
   if(/\[Stun\]|\bstun/i.test(ta)&&B.t==='Unit')add(kwRef('Stun')||'424',A.n+' stunolhatja '+B.n+'-t.');
   return out;
+}
+function runChain(){
+  const A=vsCard($('ch-a').value),B=vsCard($('ch-b').value);const o=$('ch-out');
+  if(!A||!B){o.innerHTML='<p class="note">Nem találom '+(!A?'a kijátszott':'a válasz')+' lapot. Kezdd el gépelni a nevét, és válassz a listából.</p>';return;}
+  const ta=A.txt||'',tb=(B.txt||'')+' '+(B.eff||'');const S=[];
+  const add=(ref,txt,fl)=>S.push([ref,txt,fl||0]);
+  const perm=A.t==='Unit'||A.t==='Gear';
+  const pm=/when you play (?:me|this)[^,.]*[,.]?\s*([^\n]*)/i.exec(ta);
+  if(A.t==='Spell')add('337',A.n+' spell: kijátszás után a chainen vár, amíg a hatása le nem fut. Erre a várakozó spellre lehet válaszolni.');
+  else if(perm){add('337.2',A.n+' '+A.t.toLowerCase()+': a kijátszás lezárása után azonnal resolve-ol és a boardra kerül. Magára a lap kijátszására nem lehet válaszolni.');
+    if(pm)add('355.5.b, 420.4.a','A "When you play me" hatás külön triggerként kerül a chainre, miután '+A.n+' már a boardon van. A választásait ekkor teszed meg, és erre a triggerre már lehet válaszolni.');
+    else add('337.2','Ennek a lapnak nincs "When you play" hatása, ezért a kijátszásakor nincs mire válaszolni.',1);}
+  else add('349',A.n+' ('+A.t+') nem a chainen keresztül kijátszott lap, erre a nézet nem ad levezetést.',1);
+  const react=/\[Reaction\]/.test(tb)||/\[Hidden\]/.test(tb)||/\[Quick-Draw\]/.test(tb),action=/\[Action\]/.test(tb);
+  let can=false;
+  if(/\[Reaction\]/.test(tb)||/\[Quick-Draw\]/.test(tb)){can=true;add('813.1.c.1',B.n+' [Reaction] időzítésű: Closed State-ben, vagyis amikor már vár valami a chainen, válaszként kijátszható.');}
+  else if(/\[Hidden\]/.test(tb)){can=true;add('811.6',B.n+' kézből nem, de facedown-ból (Hidden) [Reaction]-ként kijátszható válaszul, ha korábban el lett rejtve az adott battlefielden.');}
+  else if(action)add('806.1.c.1',B.n+' csak [Action]: Closed State-ben nem játszható ki, tehát erre a chainre válaszként nem jöhet. Csak akkor, amikor a chain üres (a saját körödben vagy showdown alatt).');
+  else add('155',B.n+' szövegében nincs [Reaction], ezért válaszként nem játszható ki.',B.t==='Spell'?0:1);
+  if(can&&(A.t==='Spell'||pm)){
+    const eff=A.t==='Spell'?ta:(pm?pm[1]:'');
+    const cnt=/counter (?:a|an|that|target|it)\b[^.]{0,30}spell|counter a spell/i.test(tb);
+    if(cnt&&A.t==='Spell')add('426.1',B.n+' counterelheti '+A.n+'-t: a spell nem csinál semmit, a trashbe megy, a kifizetett cost nem jár vissza, és nem számít kijátszottnak.');
+    if(cnt&&perm)add('355.9.a.2, 154',B.n+' csak spellt counterel. '+A.n+' nem spell, a triggere pedig ability, ezért ezzel nem állítható meg.',1);
+    const removes=/return[^.]{0,70}hand|\bkill\b|\bbanish|\bdeal \d|\bmove\b|\brecall/i.test(tb);
+    if(removes&&perm&&pm){
+      const refSrc=/\b(my|here)\b|\bme\b/i.exec(eff);
+      add('355.9.c, 359.3.f.3','Ha '+B.n+' magát '+A.n+'-t (a forrást) viszi el a boardról: a trigger már a chainen van, és az ability a forrásától külön objektum. A trigger ettől még a chainen marad és lefut.',1);
+      if(refSrc)add('359.3.f.2','Figyelem: '+A.n+' hatása a forrásra hivatkozik ("'+refSrc[0]+'"). Az ilyen adatot a játék a végrehajtáskor nézi, ezért a forrás eltűnése vagy megváltozása módosíthatja az eredményt, akár el is maradhat a hatás.',1);
+      else add('359.3.f.1',A.n+' hatása nem hivatkozik a forrásra ("my", "here", "me" nincs benne), ezért a hatás változatlanul megtörténik akkor is, ha '+A.n+' közben kézbe, trashbe vagy máshova kerül.',1);
+    }
+    const tgt=(A.nt||[]).some(n=>/355\.(7|9|10|11)/.test(n[0]))||/\b(a|an|another|target) (?:friendly |enemy )?(unit|gear|spell)/i.test(eff);
+    if(removes&&tgt)add('359.3.e.9','Ha '+B.n+' azt a lapot viszi el vagy teszi illegálissá, amit '+A.n+' kiválasztott (kézbe, base-be, másik zónába kerül, vagy már nem felel meg a feltételnek): '+A.n+' arra a targetre vonatkozó része elmarad. A többi része lefut.');
+    if(removes&&tgt)add('359.3.e.4','Ha a kiválasztott lap elhagyja a boardot és visszajön, új objektumnak számít: '+A.n+' akkor sem éri el.');
+    if(!cnt&&!removes)add('340','A felismerhető mintákon (counter, eltávolítás, mozgatás, sebzés) kívül az oldal nem tud levezetést adni erre a párosra. '+B.n+' hatása előbb fut le, utána '+A.n+(perm?' triggere':'')+' a megmaradt állapot szerint.',1);
+    add('340','Sorrend: a chainen a legutóbb felrakott tétel fut le először. Előbb '+B.n+', utána '+A.n+(perm?' triggere':'')+'.');
+  }
+  let h='<div class="vsgrid">'+[A,B].map((c,i)=>'<div class="vscard"><span class="note">'+(i?'Válasz':'Kijátszva')+'</span><b>'+domDots(c)+' '+esc(c.n)+'</b><span class="note">'+esc(typeLine(c))+'</span>'+(c.sh?'<p>'+glossify(esc(c.sh))+'</p>':'')+'<button class="linkbtn" data-sim="'+esc(c.n)+'">Teljes kártyalap</button></div>').join('')+'</div>';
+  const seen=new Set();
+  h+='<h3>Lépésről lépésre<span class="n">automatikus levezetés</span></h3><table class="nt">'+S.map(x=>'<tr><td class="r">'+x[0].split(',').map(r=>'<a href="#szabalyok" data-ref="'+r.trim()+'">'+r.trim()+'</a>').join('')+'</td><td>'+glossify(esc(x[1]),seen)+'</td><td class="f"><span class="fl f'+x[2]+'" title="'+FLT[x[2]]+'">'+FL[x[2]]+'</span></td></tr>').join('')+'</table>';
+  o.innerHTML=h;
 }
 function runVs(){
   const A=vsCard($('vs-a').value),B=vsCard($('vs-b').value);const o=$('vs-out');
