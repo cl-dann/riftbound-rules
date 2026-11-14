@@ -109,7 +109,7 @@ for c in cards:
 # Printed card images (data/audit/printed.json): tags, text and effect text read from the official card art
 PRN=json.load(open('data/audit/printed.json',encoding='utf-8'))
 for c in cards:
-    fn=c['_fn']
+    fn=c['n'] if (c['n'] in PRN['tags'] or c['n'] in PRN['txt_replace'] or c['n'] in PRN['eff']) else c['_fn']
     if fn in PRN['tags']: c['tg']=sorted(set(c['tg'])|set(PRN['tags'][fn]))
     if fn in PRN['txt_replace'] and c['txt']:
         a,b=PRN['txt_replace'][fn]
