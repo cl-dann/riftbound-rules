@@ -1,0 +1,76 @@
+{
+ "fixes": {
+  "Pitiless Stalker": {
+   "short": "Exhaustolva stunolhatsz egy enemy unitot bárhol, ami ebben a körben nem sebez combatban. Csak a saját Main Phase-edben, showdownon és combaton kívül használható, ezért a támadás előtt érdemes. Az exhaust miatt jellemzően egy körben vagy stunol, vagy mozog, és a kijátszás körében csak akkor használható, ha valami ready-vé teszi.",
+   "notes": [
+    [
+     "103.2.b.3",
+     0,
+     "Chaos domainű lap: csak Chaos domaint tartalmazó Domain Identity-jű deckbe tehető, a kijátszáshoz szükséges 1 Power Chaos Power."
+    ],
+    [
+     "381.1,308.1.a",
+     0,
+     "Az abilityn nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható, showdown és combat alatt nem."
+    ],
+    [
+     "424.1.a.2",
+     1,
+     "A stun a kör végéig tart, ezért a támadás előtt kell kiosztani: előbb stunolod a defendert, utána mozgatod be a többi unitodat."
+    ],
+    [
+     "355.10,355.9.a.1",
+     0,
+     "A target bármelyik enemy unit a boardon, base-ben álló is."
+    ],
+    [
+     "415.4,143.4",
+     0,
+     "A cost a Stalker exhaustolása. Exhausted lép be, ezért a kijátszás körében csak akkor használható, ha egy effect (például Perfect Execution) ready-vé teszi."
+    ],
+    [
+     "144.2",
+     1,
+     "Az exhaust a Standard Move costja is: egy körben vagy stunol, vagy mozog, hacsak valami újra nem readyzi."
+    ]
+   ],
+   "why": "A short és a 415.4,143.4 note kategorikusan állította, hogy a kijátszás körében nem használható és egy körben vagy stunol, vagy mozog; egy ready effect (416.3.b, például Perfect Execution, On the Hunt) után igen, ahogy a 144.2 note is mondja."
+  },
+  "Nasus, Guardian of Knowledge": {
+   "short": "Körönként egyszer, amikor egy enemy unit meghal azon a helyen, ahol Nasus áll, kapsz egy exhausted rune-t. Ha Nasus ugyanazzal a sebzéssel hal meg, nem indul el. A rune Energyt csak akkor ad, ha valami ready-vé teszi, de Powerért azonnal recycle-ölhető.",
+   "notes": [
+    [
+     "383.3.e.1",
+     0,
+     "\"Once each turn\": körönként egyszer triggerel, minden játékos körében külön. Ha abban a körben már lefutott, a további halálokra nem."
+    ],
+    [
+     "429.2.a,359.3.f.2",
+     1,
+     "Az enemy unitnak Nasus locationjén kell meghalnia, vagyis a boardról a trashbe kerülnie. Banish és kézbe visszavétel nem számít."
+    ],
+    [
+     "383.2.c.2",
+     0,
+     "Ha Nasus ugyanabban a game actionben hal meg, mint az enemy unit (például combat damage), a trigger nem fut le."
+    ],
+    [
+     "431.2,431.3",
+     0,
+     "A rune exhausted érkezik a Rune Deck tetejéről. Ha a Rune Deck üres, nem történik semmi."
+    ],
+    [
+     "164.2.b",
+     1,
+     "Az exhausted rune Energyt csak akkor ad, ha egy effect ready-vé teszi, de Powerért azonnal recycle-ölhető, mert annak a costja nem exhaust."
+    ]
+   ],
+   "why": "A short és a 164.2.b note kategorikusan állította, hogy a rune abban a körben nem ad Energyt; ready effecttel (416.3.b, például Nasus, Curator of the Sands) adhat."
+  }
+ },
+ "checked": 92,
+ "data_issues": [
+  "Nazuman Ntofo: a tags mező üres, pedig a lapon Equip van, és a 818.1.a szerint Equip csak Equipment tagű gearen szerepel (a többi Equip gear a cards.json-ban Equipment taget kap). Valószínűleg hiányzik az Equipment tag; a short Equipmentnek nevezi."
+ ],
+ "open": []
+}

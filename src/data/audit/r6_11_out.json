@@ -1,0 +1,89 @@
+{
+ "fixes": {
+  "Tideturner": {
+   "short": "Kijátszáskor helyet cserélhet egy másik helyen álló saját unitoddal, mindkettő mozgásnak számít. Hidden: 1 tetszőleges Powerért elrejtheted, és a következő körtől válaszként ingyen kijátszhatod. Így egy spell targetjét is elmozdíthatod, ami csak akkor menti meg, ha a célzási feltétel a csere után már nem teljesül (például a facedown-ból kijátszott spell csak a saját battlefieldjén lévő unitot érheti).",
+   "notes": [
+    [
+     "383.3.a",
+     0,
+     "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz, hogy végrehajtod-e. Ha nem, lekerül a chainről, mintha nem is triggerelt volna."
+    ],
+    [
+     "811.1.d.3",
+     1,
+     "Mivel a target csak \"at another location\" lehet, és ez kizárja az adott battlefieldről való választást, facedown-ból kijátszva is szabadon választható, nem csak az adott battlefieldről."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "A szabályzat példája: ha egy facedown-ból kijátszott enemy spell (Hidden Blade) a társat célozza, és a Tideturner egy másik battlefieldről, facedown-ból kijátszva cserél vele, a társ már nincs a megfelelő battlefielden, ezért a spell rá vonatkozó instructionjei ignorálódnak."
+    ],
+    [
+     "359.3.e.5,355.9.b",
+     1,
+     "A sima \"unit at a battlefield\" targetet a csere nem teszi illegálissá: facedown-ból kijátszva a társ a Tideturner battlefieldjére kerül, tehát továbbra is battlefielden áll."
+    ],
+    [
+     "421.1",
+     1,
+     "A csere mindkét unitnál Move, ezért a \"when I move\" triggerek (például Traveling Merchant) lefutnak."
+    ],
+    [
+     "452",
+     0,
+     "Ha a csere olyan battlefieldre visz unitot, amit nem te kontrollálsz, az Contested lesz, ebből showdown vagy combat lehet."
+    ],
+    [
+     "355.9.b",
+     0,
+     "Az errata óta a target csak általad kontrollált, másik locationön lévő unit lehet."
+    ]
+   ],
+   "why": "A short és a 359.3.e.5 note példája (\"unit at a battlefield\") rossz: facedown-ból reagálva a társ a Tideturner battlefieldjére kerül, így ez a feltétel továbbra is teljesül. A szabályzat 359.3.e.5 példája a facedown-ból kijátszott Hidden Blade battlefieldhez kötött célzását (811.1.d.3) hozza."
+  },
+  "Unchecked Power": {
+   "notes": [
+    [
+     "355.10.d",
+     0,
+     "Nem targetel semmit. Deflect és \"can't be chosen\" nem véd."
+    ],
+    [
+     "740.1.a,415.1.c",
+     0,
+     "Az exhaust minden friendly unitot érint, a csapattársaidét is, bármelyik locationön. A már exhausted unitokon nem történik semmi."
+    ],
+    [
+     "355.5.a",
+     1,
+     "A 12 damage a battlefieldeken álló összes unitot éri, a sajátjaidat is. A base-ben lévő unitok megmenekülnek; közülük csak a friendly unitok lesznek exhausted, az enemy unitok nem."
+    ],
+    [
+     "383.2.c.2",
+     1,
+     "A sebzett unitok ugyanabban a cleanupban halnak meg, ezért a velük együtt meghaló unit \"when another unit dies\" triggere nem fut le."
+    ],
+    [
+     "190.4.c",
+     0,
+     "Ha egy battlefielden minden unit meghal, a controllere a cleanupban elveszíti azt."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ]
+   ],
+   "why": "A 355.5.a note szerint minden base-beli unit exhausted lesz, pedig az exhaust csak a friendly unitokat érinti (lap szövege, 740.1.a)."
+  },
+  "Twilight Step": {
+   "short": "Egy legfeljebb 3 Mightú unitot, akár enemy unitot is, egy másik battlefieldre vagy a saját base-ébe mozgatsz, battlefieldről battlefieldre is. Csak a saját körödben, showdownon kívül játszható ki. Flow: a trashedből 4 Energy és 1 Chaos Power áron újra kijátszható, utána banishelődik.",
+   "why": "A short \"bármelyik másik locationre\" állítása túlzás: a unit csak olyan locationre mehet, ahol jelen lehet (355.4.a), más játékos base-ébe nem."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Walking Roost: a 182/183 szerint a Bird token tulajdonosa a Roost controllere, a 185.2.a viszont azt mondja, tokent a tulajdonosa játszik ki; a note flag 1-gyel a 183 szerinti olvasatot adja, a szabályzat ezt nem oldja fel egyértelműen."
+ ]
+}

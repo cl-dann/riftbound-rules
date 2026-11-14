@@ -1,0 +1,62 @@
+{
+ "fixes": {
+  "Serene Ascetic": {
+   "notes": [
+    [
+     "827.1.c.1,381.1,145.2",
+     0,
+     "Empower [3]: csak a saját Main Phase-edben, Open State-ben, és csak ha még nem Empowered. Az opponent körében, védekezés közben nem aktiválható."
+    ],
+    [
+     "814.1.c,814.1.d.1,814.2",
+     0,
+     "A [Shield 3] csak Defenderként ad +3 Mightot. Meglévő Shield értékkel összeadódik."
+    ],
+    [
+     "356.2.a.2",
+     1,
+     "A [Deflect] costja a választáskor fizetendő. A már chainen lévő enemy spellt az utólagos Empower nem drágítja."
+    ],
+    [
+     "443.1,124.1",
+     0,
+     "Disempower vagy a board elhagyása után a Deflect és a Shield is megszűnik."
+    ]
+   ],
+   "why": "A Shield értékek összeadódását a 814.2 mondja ki, a hivatkozott 814.1.c és 814.1.d.1 nem; 814.2 hozzáadva a hivatkozáshoz."
+  },
+  "Scorchclaw": {
+   "notes": [
+    [
+     "823.1.c.1",
+     0,
+     "Hunt 2: amikor a Scorchclaw conquerel vagy holdol, 2 XP-t kapsz."
+    ],
+    [
+     "824.1.b.1,369.3",
+     0,
+     "Level 3: legalább 3 XP mellett +1 Mightot kap és ready lép be. Az \"enter ready\" replacement effect: a unit nem exhausted érkezik, majd áll fel, hanem eleve ready."
+    ],
+    [
+     "824.1.c,369.3",
+     1,
+     "A ready belépéshez a kijátszás pillanatában kell meglennie a 3 XP-nek. Ha a küszöböt később éred el, a már boardon lévő Scorchclaw nem lesz ready, csak a +1 Mightot kapja meg."
+    ],
+    [
+     "144.1.a,144.2",
+     1,
+     "Ready belépve még abban a körben mehet Standard Move-val battlefieldre, mert a Move costja a unit exhaustolása."
+    ],
+    [
+     "824.1.d",
+     0,
+     "Ha az XP-d 3 alá esik, a +1 Might azonnal megszűnik."
+    ]
+   ],
+   "why": "A 366.2.a a costot módosító passive abilityk érvényességéről szól, nem a Level feltétel vizsgálatáról. A levezetés alapja a 824.1.c (a Level ability csak N XP mellett aktív) és a 369.3 (belépéskor alkalmazott replacement effect); a hivatkozás erre cserélve."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

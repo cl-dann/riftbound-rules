@@ -1,0 +1,177 @@
+{
+ "fixes": {
+  "Forbidding Waste": {
+   "notes": [
+    [
+     "740.2.a",
+     0,
+     "Egy unit akkor van egyedül, ha nincs más friendly unit ugyanazon a locationön. A facedown lap és a gear nem számít."
+    ],
+    [
+     "466.2.c.3",
+     1,
+     "A Defender designation csak combat alatt létezik. Combaton kívül az itt álló magányos unit Mightja nem csökken."
+    ],
+    [
+     "143.2.c",
+     0,
+     "Ha a Might így 0 alá megy, a combat damage számításánál 0-nak számít: a legfeljebb 2 Mightú magányos védő nem oszt sebzést."
+    ],
+    [
+     "143.2.b",
+     1,
+     "A csökkentett Might a halálos sebzést is lejjebb viszi: 4 Mightú magányos védő megöléséhez 2 damage elég."
+    ],
+    [
+     "466.2.c.3.a,740.2.a",
+     1,
+     "Ha combat közben még egy unitod érkezik ide, a magányos unit már nem egyedül van, ezért a -2 azonnal megszűnik, nem csak a cleanupnál; az érkező unit a következő cleanupban kapja meg a Defender jelölést. Ha a társ kiesik, a büntetés azonnal újra él."
+    ],
+    [
+     "364.3.a",
+     1,
+     "Mindig a védőt sújtja, bárki is az. A támadó magányos unitra nem vonatkozik."
+    ]
+   ],
+   "why": "N4 azt sugallta, hogy a büntetés a cleanupnál, a Defender jelöléssel együtt szűnik meg; a 740.2.a szerint az 'alone' csak a jelenlévő friendly unitokon múlik, így a büntetés azonnal megszűnik."
+  },
+  "Fox-Fire, Ahri": {
+   "notes": [
+    [
+     "103.3.d,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, mindnek a legend Champion tagjét (Ahri) kell viselnie, és a legendnek a lap mindkét domainjét tartalmaznia kell."
+    ],
+    [
+     "811.1.b,811.6,811.3",
+     0,
+     "Hide: a saját körödben [A]-ért facedown tehető egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható. Kézből, teljes costért csak [Action] időzítéssel megy."
+    ],
+    [
+     "355.11,355.13",
+     0,
+     "A targetek csoportos feltétele: egy battlefielden vannak, és az összesített Mightjuk legfeljebb 4. Nullát is választhatsz, saját és enemy unit vegyesen is mehet."
+    ],
+    [
+     "355.11.b",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: ha a resolve-ra az összeg 4 fölé nő, az eredeti targetek közül kell legális részhalmazt választanod. Új unit nem vehető be."
+    ],
+    [
+     "355.11.b.1,355.11.b",
+     0,
+     "A választott részhalmazt nem lehet tovább bővíteni: nem hagyhatsz ki olyan eredeti targetet, amely még beleférne a 4-es összegbe. Ez nem a legnagyobb darabszámot jelenti: a 355.11.b példájában 1, 1, 2, 2 Mightnál a két 2-es vagy a két 1-es plusz egy 2-es is választható."
+    ],
+    [
+     "811.1.d.2",
+     0,
+     "Facedown-ból kijátszva csak azon a battlefielden lévő unitok választhatók, ahol a lap el volt rejtve."
+    ],
+    [
+     "429.1.a.1.b",
+     0,
+     "Kill instruction: a megölt unitok Deathknellje a chain-re kerül."
+    ]
+   ],
+   "why": "N4 'a lehető legtöbb legális target' megfogalmazása ellentmond a 355.11.b Fox-Fire példájának, ahol a két 2 Mightú Recruit (2 unit) is legális választás a 3 unitos mellett; a 355.11.b.1 Bellow's Breath példája szerint is bármelyik maximális részhalmaz választható."
+  },
+  "Frostcoat Mother": {
+   "notes": [
+    [
+     "827.1.c.3,356.4.g",
+     0,
+     "Az Empower cost kedvezményét az ability Determine Total Cost lépésében nézi a játék, az akkor kontrollált rune-ok száma alapján. Az exhausted rune is számít."
+    ],
+    [
+     "356.6",
+     0,
+     "12 rune-nál az Empower ingyenes, 0 alá nem mehet."
+    ],
+    [
+     "827.1.c.3,206.1",
+     1,
+     "A rune-onkénti csökkentés az Empower ability saját szövege, ezért a 827.1.c.3 szerint bármilyen célú Empower cost vizsgálatnál beleszámít. Ez a 206.1 általános (base cost) szabálya alól kivétel, tehát a costot vizsgáló effectek a csökkentett értéket látják, nem a puszta 12-t."
+    ],
+    [
+     "381.1",
+     0,
+     "Csak a saját Main Phase-edben, Open State-ben aktiválható, és csak ha még nem Empowered."
+    ],
+    [
+     "828.1.c,443.1",
+     0,
+     "A +3 Might addig tart, amíg Empowered. Sebzett állapotban a disempower megölheti."
+    ]
+   ],
+   "why": "N2 a 206.1 alapján azt állította, hogy a costot vizsgáló effectek a 12-es base costot látják; a 827.1.c.3 kifejezetten kimondja, hogy az Empower costot módosító szöveget bármilyen célú costmeghatározásnál figyelembe kell venni."
+  },
+  "Grumpy Rockbear": {
+   "notes": [
+    [
+     "827.1.c.3,356.4.g",
+     0,
+     "Az Empower cost kedvezményét az ability Determine Total Cost lépésében nézi a játék, az akkor kontrollált rune-ok száma alapján."
+    ],
+    [
+     "356.4.g",
+     1,
+     "Az exhausted rune is számít. Ha a cost kiszámítása után rune-t recycle-ölsz a fizetéshez, a cost már nem változik."
+    ],
+    [
+     "356.6",
+     0,
+     "12 rune-nál az Empower ingyenes, 0 alá nem mehet."
+    ],
+    [
+     "827.1.c.3,206.1",
+     1,
+     "A rune-onkénti csökkentés az Empower ability saját szövege, ezért a 827.1.c.3 szerint bármilyen célú Empower cost vizsgálatnál beleszámít. Ez a 206.1 általános (base cost) szabálya alól kivétel, tehát a costot vizsgáló effectek a csökkentett értéket látják, nem a puszta 12-t."
+    ],
+    [
+     "814.1.c,814.1.d.1",
+     0,
+     "A [Shield 3] csak addig ad +3 Mightot, amíg Defender jelölése van. Attackerként nem ér semmit."
+    ],
+    [
+     "381.1",
+     0,
+     "Az Empower csak a saját Main Phase-edben megy, tehát a védekezés előtti körödben kell aktiválni."
+    ]
+   ],
+   "why": "N3 a 206.1 alapján azt állította, hogy a costot vizsgáló effectek a 12-es base costot látják, a kedvezmény nélkül; a 827.1.c.3 szerint az Empower costot módosító szöveg bármilyen célú costmeghatározásnál számít."
+  },
+  "Graves, Blasting Through": {
+   "notes": [
+    [
+     "383.4.e.2.a,383.4.f.2.a",
+     0,
+     "Combatonként egyszer triggerel, amikor Graves megkapja az Attacker vagy Defender jelölést. A Combat Showdown elején resolve-ol."
+    ],
+    [
+     "355.5.a",
+     0,
+     "\"All enemy units here\": nincs target, a \"can't be chosen\" unitokat is sebzi."
+    ],
+    [
+     "359.3.f.2",
+     1,
+     "A damage mértéke Graves resolve-kori Mightja, és a \"here\" is a resolve-kori helyét jelenti. Ha válaszul csökkentik a Mightját, kevesebbet oszt; ha elmozdítják (például base-be), az új helyén lévő enemy unitokat sebzi, ott jellemzően senkit. Targetje nincs, így mistargetelni sem tud."
+    ],
+    [
+     "467.2.a",
+     1,
+     "\"I don't deal combat damage\": Graves Mightja nem járul hozzá az oldalad combat damage-éhez. Damage-et viszont ugyanúgy kaphat."
+    ],
+    [
+     "418.6.b.2",
+     1,
+     "A trigger ability damage: a Bonus Damage (Annie, Fiery) növeli, és az enemy abilityk elleni Prevent (Esteemed Hierophant) megfogja."
+    ]
+   ],
+   "why": "N2 'mistargetel'-t írt, holott N1 szerint (355.5.a, 355.10.d) a képességnek nincs targetje; a 'here' és a Might a resolve-kor értékelődik (359.3.f.2), ez levezetés, ezért flag 1."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

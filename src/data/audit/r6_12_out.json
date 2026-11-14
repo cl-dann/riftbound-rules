@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "Akshan, Mischievous": {
+   "short": "Weaponmaster: kijátszáskor egy már általad kontrollált Equipmentet (akár másik unitról) rácsatolhatsz az Equip költség kifizetésével, ami 1 bármely Powerrel ([A]) kevesebb, ha a költségben van [A], különben teljes áron megy. Ha kijátszáskor plusz 2 Body Powert fizetsz, egy ellenséges geart a base-edbe mozgatsz, és addig a tiéd, amíg Akshan a boardon van. Ha Equipment, ingyen Akshanra csatolódik.",
+   "why": "A short feltétel nélkül állította, hogy a Weaponmaster 1 Powerrel olcsóbbá teszi az Equip költséget; a 821.1.c.3 szerint ha az Equip cost nem tartalmaz [A]-t, nincs csökkentés (például [C] Equip cost)."
+  }
+ },
+ "checked": 89,
+ "data_issues": [],
+ "open": []
+}

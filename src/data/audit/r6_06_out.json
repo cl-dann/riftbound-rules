@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "Mageseeker Warden": {
+   "short": "Amíg battlefielden áll, az opponentek csak a base-ükbe játszhatnak ki unitot, és semmilyen spell vagy ability nem teheti ready-vé az ő unitjaikat és gearjeiket. A kör eleji felállás és az eleve ready belépés továbbra is működik. A ready tiltású spell többi része ettől még lefut.",
+   "why": "A régi short alanya az opponent volt, így az \"enemy unitot vagy geart\" az opponent szemszögéből a te unitjaidat jelentette, és csak az opponent spelljeire korlátozta a tiltást. A kártya szerint (\"spells and abilities can't ready enemy units and gear\") bármely spell vagy ability tiltott, és az opponent (a Warden controllere számára enemy) unitjaira és gearjeire vonatkozik (365.1, 054.1)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

@@ -1,0 +1,354 @@
+{
+ "fixes": {
+  "Cloth Armor": {
+   "short": "Quick-Draw: Reactionje van, bármikor kijátszható, és a play effectje egy saját unitodra csatolja. A felszerelt unit Shield 2-t kap: +2 Might, amíg defender. Equip: 1 Mind Powerért a saját Main Phase-edben, showdownon kívül csatolhatod, ha éppen nincs csatolva; csatolva az Equip inaktív, így nem rakható át.",
+   "why": "Short: az activated ability időzítéséből hiányzott a \"showdownon kívül\" (151.2/145.2, 381.1): a saját Main Phase alatt is nyílhat showdown, akkor nem használható. A notes ezt már helyesen írta."
+  },
+  "Crowd Favorite": {
+   "short": "Hunt: amikor ott áll egy battlefielden, amelyet conquerelsz vagy holdolsz, 1 XP-t kapsz. Spend 2 XP: a saját Main Phase-edben, showdownon kívül, exhausted állapotban is, +1 Might buffot adhatsz neki, ha még nincs rajta buff. Ha már van, az XP elvész.",
+   "why": "Short: az activated ability időzítéséből hiányzott a \"showdownon kívül\" (151.2/145.2, 381.1): a saját Main Phase alatt is nyílhat showdown, akkor nem használható. A notes (381.1,145.2) ezt már helyesen írta."
+  },
+  "Cull": {
+   "short": "Equip: 1 Chaos Power, a saját Main Phase-edben, showdownon kívül egy saját unitodra rakhatod. A felszerelt unit +1 Mightot kap, és amikor részt vesz egy battlefield conquerében, kapsz egy exhausted Gold gear tokent. A Gold később megölve és exhaustolva 1 bármilyen Powert ad.",
+   "why": "Short: az activated ability időzítéséből hiányzott a \"showdownon kívül\" (151.2/145.2, 381.1): a saját Main Phase alatt is nyílhat showdown, akkor nem használható. A notes ezt már helyesen írta."
+  },
+  "Cursed Sarcophagus": {
+   "short": "Kijátszáskor a trashedben lévő összes unitot banisheli. Utána a gear exhaustolásával egy ilyen unitot újra kijátszhatsz, a teljes árát kifizetve, csak a saját Main Phase-edben, showdownon kívül; újra akkor, ha a gear ismét ready. Csak az ezzel a példánnyal banishelt unitok jönnek vissza, és ha a gear elhagyja a boardot, azok ott ragadnak.",
+   "why": "Short: az activated ability időzítéséből hiányzott a \"showdownon kívül\" (151.2/145.2, 381.1): a saját Main Phase alatt is nyílhat showdown, akkor nem használható. A notes (151.2) ezt már helyesen írta."
+  },
+  "Dame the Despoiler": {
+   "short": "5 Energy és 1 Body Powerért Empowered állapotba hozható, de csak a saját Main Phase-edben, showdownon kívül, védekezéshez tehát előre kell. Ezután támadáskor vagy védekezéskor felveszi egy ottani unit Mightját, ha az nagyobb, és még +1-et kap. A felvett érték rögzül, később nem követi a másik unit változását.",
+   "why": "Short: az activated ability időzítéséből hiányzott a \"showdownon kívül\" (151.2/145.2, 381.1): a saját Main Phase alatt is nyílhat showdown, akkor nem használható. (Empower, 827.1.c.1)"
+  },
+  "Doran's Blade": {
+   "short": "Felszerelhető gear: 1 Body Powerért egy saját unitodra teszed, ami így +2 Mightot kap. Felszerelni csak a saját Main Phase-edben, showdownon kívül lehet. Leválasztva a bónusz azonnal megszűnik.",
+   "why": "Short: \"harcon kívül\" pontatlan, az Equip non-combat showdown alatt sem aktiválható (151.2, 381.1); helyesen \"showdownon kívül\", ahogy a note írja."
+  },
+  "Doran's Shield": {
+   "short": "Felszerelve +1 Mightot ad, és a unit Tanket kap: harcban az ellenfélnek először őt kell lethal sebzéssel ellátnia. Equip: 1 Calm Powerért, csak a saját Main Phase-edben, showdownon kívül. Ha a unitnak már van Tankje, csak a +1 Might számít. Amíg nincs unitra rakva, semmit sem ad.",
+   "why": "Short: \"harcon kívül\" pontatlan, az Equip non-combat showdown alatt sem aktiválható (151.2, 381.1); helyesen \"showdownon kívül\", ahogy a note írja."
+  },
+  "Doran's Ring": {
+   "short": "1 Chaos Powerért, a saját Main Phase-edben, showdownon kívül saját unitra szerelhető, ekkor +1 Mightot ad. Amikor a felszerelt unit részt vesz egy battlefield conquerében, eldobsz 1 lapot, majd húzol 1-et, akkor is, ha a pont helyett húzást kapsz (utolsó pont). Ha a battlefieldet ebben a körben már score-oltad, nincs conquer, így trigger sem. Kötelező: üres kézzel csak húzol, üres deckkel a húzás Burn Outot okoz.",
+   "why": "Short: az Equip activated ability időzítése (saját Main Phase, showdownon kívül; 151.2, 381.1) hiányzott, a 420 karakteres korlát miatt a szöveg tömörítve."
+  },
+  "Clocktower Guardian": {
+   "notes": [
+    [
+     "383.4.a.2,383.4.d.2.a",
+     0,
+     "A Predict 3 kijátszáskor és akkor triggerel, amikor a Guardian ott van egy általad holdolt battlefielden."
+    ],
+    [
+     "437.1.a,437.4",
+     0,
+     "Predict 3: megnézed a felső 3 lapot, bármennyit recycle-ölhetsz, a többit tetszőleges sorrendben visszateszed. Kevesebb lapnál annyit nézel, amennyi van, Burn Out nélkül."
+    ],
+    [
+     "808.1.c,808.1.d.2",
+     0,
+     "[Deathknell]: \"When I die\" trigger. Még azelőtt chain-re kerül, hogy a unit a trashbe menne, lehet rá reagálni, és akkor is resolve-ol, ha a unit már nincs a boardon."
+    ],
+    [
+     "432.1.b",
+     0,
+     "A Deathknell banish-e kötelező. Üres Main Decknél Burn Out következik."
+    ],
+    [
+     "383.3.a.3,420.3",
+     0,
+     "A \"you may play it\" a resolve-kor dől el, és a kijátszás a resolve része."
+    ],
+    [
+     "420.3.b,358.4",
+     2,
+     "Nyitott kérdés, judge döntse el: a Core Rules nem mondja ki, hogy a lap saját időzítési megkötése (155) ilyenkor nem számít. A 420.3.b szerint a Play lépései a szokásosak, a 358.4 pedig az időzítési engedélyt is ellenőrzi."
+    ],
+    [
+     "356.1.b.2",
+     0,
+     "Csak az Energy cost nulla, a Power costot ki kell fizetni."
+    ],
+    [
+     "428.3.a",
+     1,
+     "Ha nem játszod ki azonnal, a lap a Banishmentben marad, később már nem játszható ki. Ez különbség Akali, Brash hasonló abilityjéhez képest."
+    ]
+   ],
+   "why": "A note flag 0-val állította, hogy a resolve közbeni kijátszásnál a lap időzítési megkötése (155) nem akadály; ezt a Core Rules nem mondja ki (420.3.b szerint a Play lépései a szokásosak, 358.4 az időzítést is ellenőrzi). A Drakehound Packmaster korábbi döntésével egyezően flag 2."
+  },
+  "Chronobreak": {
+   "notes": [
+    [
+     "204.2.a,356.2.a.1,355.1",
+     1,
+     "A Power fizetése mandatory additional cost, de az összeg szabad, 0 is lehet. Az összeget és a unitokat a finalizáláskor rögzíted, utólag nem módosítható."
+    ],
+    [
+     "355.5,355.10",
+     1,
+     "A banishelt unitok targetek: pontosan annyi általad kontrollált unitot kell választani, amennyi Powert fizettél."
+    ],
+    [
+     "124,124.1",
+     0,
+     "A visszajátszott unit új objektum: a damage, a buff, a \"this turn\" hatások és az Empowered státusz lekerül róla."
+    ],
+    [
+     "186.1",
+     1,
+     "Token unitot nem érdemes választani: a Banishmentbe kerülve a token azonnal megszűnik létezni, ezért nincs mit visszajátszani, a rá fizetett Power elveszett."
+    ],
+    [
+     "719.5,436.4.b",
+     0,
+     "A banishelt unitról az Equipment leválik és azon a locationön marad, ahol a unit állt. A visszatérő unitra nem kerül vissza magától."
+    ],
+    [
+     "356.1.b.1,356.1.b.3",
+     0,
+     "\"Ignoring its cost\": az Energy és a Power cost is nulla. Optional additional cost (például Accelerate) ettől még kifizethető, különben a unit exhausted lép be."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "103.3.d,103.3.d.1,103.3.d.2",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Ekko) kell viselnie."
+    ]
+   ],
+   "why": "A Signature note azt is állítja, hogy összesen legfeljebb 3 lehet és mindnek a legend Champion tagjét kell viselnie, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.1 és 103.3.d.2 mondja ki, a hivatkozás kiegészítve (Shurelya's Requiem korábbi javításával egyezően)."
+  },
+  "Counter Strike": {
+   "notes": [
+    [
+     "355.10.c",
+     0,
+     "A \"Choose a unit\" nem része a replacement effectnek, ezért a unit target. Bármelyik unit választható, enemy is."
+    ],
+    [
+     "438.7,438.4",
+     1,
+     "A következő damage eseményt teljes egészében megelőzi, az értékétől függetlenül, utána az effect elhasználódik. Az így megelőzött damage nem számít dealeltnek, \"when I take damage\" trigger nem fut le rá."
+    ],
+    [
+     "467.2.c.10",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a unit továbbra is kaphat damage-et, ezért combatban nem mentesül a kötelező lethal damage kiosztás alól, az opponent nem ugorhatja át."
+    ],
+    [
+     "438.5.a,467.2.c.10",
+     2,
+     "Nem egyértelmű, mennyi damage-et kell egy így védett unitra kiosztani ahhoz, hogy lethalnak számítson, mert a Prevent értéke itt nem szám. A Core Rules nem dönti el, judge döntése kell."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "A Draw 1 akkor is megtörténik, ha a unit a resolve előtt illegális target lett."
+    ],
+    [
+     "103.3.d,103.3.d.1,103.3.d.2",
+     0,
+     "Signature lap (Jax), legfeljebb 3 Signature lehet a deckben, mind a legend Champion tagjével."
+    ]
+   ],
+   "why": "A Signature note azt is állítja, hogy összesen legfeljebb 3 lehet és mindnek a legend Champion tagjét kell viselnie, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.1 és 103.3.d.2 mondja ki, a hivatkozás kiegészítve (Shurelya's Requiem korábbi javításával egyezően)."
+  },
+  "Death from Below": {
+   "notes": [
+    [
+     "355.9.b",
+     0,
+     "A unit target és battlefielden kell lennie. Kijátszáskor nincs Might korlát, bármelyik játékos unitja választható."
+    ],
+    [
+     "388.1,388.4",
+     0,
+     "A \"do this:\" Reflexive Trigger a resolve közben kerül a chainre, és a \"you may\" miatt a finalizálásakor döntöd el, élsz-e vele."
+    ],
+    [
+     "359.3.e.14.a",
+     0,
+     "Ha a unit a resolve előtt base-be kerül vagy elhagyja a boardot, a kill ignorálódik, és az újrajátszás trigger sem jön létre."
+    ],
+    [
+     "356.1.a,355.8",
+     0,
+     "A trashből [A]-ért megy ki, ez a base cost helyére lép. Új érvényes target kell hozzá. Amíg 3 vagy kevesebb Mightú unitot öl, újra és újra kijátszható."
+    ],
+    [
+     "388.1,389.1",
+     1,
+     "Errata: a \"do this:\" miatt az újrajátszás külön chain item, amire az opponent reagálhat. A gyakorlati hatás ugyanaz maradt."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "103.3.d,103.3.d.1,103.3.d.2",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Pyke) kell viselnie."
+    ]
+   ],
+   "why": "A Signature note azt is állítja, hogy összesen legfeljebb 3 lehet és mindnek a legend Champion tagjét kell viselnie, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.1 és 103.3.d.2 mondja ki, a hivatkozás kiegészítve (Shurelya's Requiem korábbi javításával egyezően)."
+  },
+  "Death Mark": {
+   "notes": [
+    [
+     "103.3.d,103.3.d.1,103.3.d.2,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, mindnek a legend Champion tagjét (Zed) kell viselnie, és a legendnek a lap mindkét domainjét tartalmaznia kell."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "441.3.a,441.4",
+     0,
+     "A Burn 3 kötelező. Ha 3-nál kevesebb lap van a Main Deckben, Burn Out következik: a trash visszakeveredik, és egy opponent 1 pontot kap."
+    ],
+    [
+     "187.11,143.2.b",
+     0,
+     "A Shadow Clone domain nélküli, 0 Mightú unit token. 0 Mighttal nem hal meg magától, csak ha damage kerül rá."
+    ],
+    [
+     "383.3.a,355.10.a",
+     0,
+     "A token attack triggere \"you may\"-jel kezdődik, a finalizáláskor döntesz. A trashedben lévő unit target, mert a trash Public zóna. Unit nélkül a trashben nincs Assault 4."
+    ],
+    [
+     "185.2.a,143.4",
+     0,
+     "A tokent kijátszod: a base-edbe vagy egy általad kontrollált battlefieldre megy, exhausted."
+    ],
+    [
+     "829.1.b,829.1.c.1,829.1.b.2",
+     0,
+     "Flow: a trashből [1] és 2 bármilyen domainű Power-ért újra kijátszható, ez a base cost helyére lép, utána a lap banishelődik. Az időzítés nem változik, a trashből is csak a saját körödben megy."
+    ]
+   ],
+   "why": "A Signature note azt is állítja, hogy összesen legfeljebb 3 lehet és mindnek a legend Champion tagjét kell viselnie, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.1 és 103.3.d.2 mondja ki, a hivatkozás kiegészítve (Shurelya's Requiem korábbi javításával egyezően)."
+  },
+  "Decisive Strike, Garen": {
+   "notes": [
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ],
+    [
+     "355.10.d",
+     0,
+     "Nem targetel: a resolve-kor minden friendly unit megkapja a +2 Mightot, bármelyik locationön."
+    ],
+    [
+     "740.1.a",
+     0,
+     "\"Friendly\": a saját unitjaid és a csapattársaid unitjai."
+    ],
+    [
+     "467.2",
+     0,
+     "A combat sebzés az aktuális Mighttal számol, ezért a combat showdownban kijátszva azonnal beleszámít az összegbe."
+    ],
+    [
+     "317.2.c",
+     0,
+     "A +2 az Ending Phase Expiration Stepjében jár le."
+    ],
+    [
+     "103.3.d,103.3.d.1,103.3.d.2",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Garen) kell viselnie."
+    ]
+   ],
+   "why": "A Signature note azt is állítja, hogy összesen legfeljebb 3 lehet és mindnek a legend Champion tagjét kell viselnie, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.1 és 103.3.d.2 mondja ki, a hivatkozás kiegészítve (Shurelya's Requiem korábbi javításával egyezően)."
+  },
+  "Demacian Standard": {
+   "notes": [
+    [
+     "103.3.d,103.3.d.1,103.3.d.2,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Jarvan IV) kell viselnie. Két domainű, ezért csak olyan legend mellé fér, amelynek mindkét domainje megvan."
+    ],
+    [
+     "830.1.b.1,830.1.b",
+     0,
+     "Deploy: bármelyik battlefieldre kijátszható, olyanra is, amit éppen támadni készülsz. Ha egy opponent holdol itt, meghal."
+    ],
+    [
+     "383.4.e,383.4.e.2.a",
+     1,
+     "Az attack trigger akkor fut, amikor a unitjaid itt megkapják az Attacker designationt. Az együtt támadó unitokra egyszer triggerel, nem unitonként, akárhány unit támad."
+    ],
+    [
+     "355.10,359.3.e.5",
+     1,
+     "A +2 Mightot kapó unitot a trigger chainre kerülésekor választod a támadók közül, és target. Ha a resolve előtt elhagyja a battlefieldet, a bónusz elvész."
+    ],
+    [
+     "383.3.a,383.4.d.2.b",
+     0,
+     "A hold trigger \"you may\"-jel kezdődik: a finalizáláskor döntesz. Ha visszaveszed, újra kijátszhatod egy másik battlefieldre."
+    ],
+    [
+     "056.2",
+     0,
+     "A gear mindig a tulajdonosa kezébe megy vissza."
+    ]
+   ],
+   "why": "A Signature note azt is állítja, hogy összesen legfeljebb 3 lehet és mindnek a legend Champion tagjét kell viselnie, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.1 és 103.3.d.2 mondja ki, a hivatkozás kiegészítve (Shurelya's Requiem korábbi javításával egyezően)."
+  },
+  "Dominus": {
+   "notes": [
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ],
+    [
+     "355.10",
+     0,
+     "A unit target. Nincs megkötés, de enemy unitra téve az opponent kapja a Mightot és az abilityt is."
+    ],
+    [
+     "433.1.a",
+     0,
+     "A Double a resolve-kori aktuális Mighttal megegyező fix bónuszt ad a kör végéig. A későbbi módosítók erre rakódnak rá, a bónusz nem számolódik újra."
+    ],
+    [
+     "381.1",
+     0,
+     "A kapott \"[A][A]: Ready me\" activated ability [Action] nélkül: csak a controllere saját Main Phase-ében, Open State-ben aktiválható, showdown alatt nem."
+    ],
+    [
+     "377,416.1.c",
+     1,
+     "Az ability többször is használható, alkalmanként 2 bármilyen domainű Powerért. Ready uniton nem csinál semmit."
+    ],
+    [
+     "317.2.c,124.1",
+     0,
+     "A Might bónusz és az ability a kör végén lejár, és akkor is elvész, ha a unit elhagyja a boardot."
+    ],
+    [
+     "103.3.d,103.3.d.1,103.3.d.2",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Renekton) kell viselnie."
+    ]
+   ],
+   "why": "A Signature note azt is állítja, hogy összesen legfeljebb 3 lehet és mindnek a legend Champion tagjét kell viselnie, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.1 és 103.3.d.2 mondja ki, a hivatkozás kiegészítve (Shurelya's Requiem korábbi javításával egyezően)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

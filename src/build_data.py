@@ -102,7 +102,7 @@ print('radiance domain fixes',len(DOMFIX))
 # Tags missing from the feed, proven by an official Core Rules example
 EQFIX=[]
 for c in cards:
-    if c['t']=='Gear' and re.search(r'\[(Equip|Quick-Draw)\]',c['txt'] or '') and 'Equipment' not in c['tg']: c['tg']=sorted(c['tg']+['Equipment']); EQFIX.append(c['_fn'])  # 818.1.a, 819.1.a
+    if c['t']=='Gear' and re.search(r'\[(Equip|Quick-Draw)\]|^Equip \[',c['txt'] or '',re.M) and 'Equipment' not in c['tg']: c['tg']=sorted(c['tg']+['Equipment']); EQFIX.append(c['_fn'])  # 818.1.a, 819.1.a
 print('equipment tag added',EQFIX)
 for c in cards:
     if c['_fn']=='Clanging Sentry' and 'Mech' not in c['tg']: c['tg']=sorted(c['tg']+['Mech'])  # 831.2 example: both Sentries get Disarm 2

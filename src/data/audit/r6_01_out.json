@@ -1,0 +1,15 @@
+{
+ "fixes": {
+  "Caitlyn, Patrolling": {
+   "short": "Combatban az ellenfél csak utoljára sebezheti, a többi unitod után. Ha battlefielden áll, exhaustolva a Mightjával egyenlő damage-et ad egy battlefielden álló unitnak. Ez csak a saját Main Phase-edben, showdownon kívül megy, és a kijátszás körében még nem, mert exhausted érkezik.",
+   "why": "A short szerint az ability \"a saját körödben, combaton kívül\" használható, ami non-combat showdown alatt is engedné. Keyword nélküli unit activated ability csak a saját Main Phase-ben, Open State-ben, showdownon kívül aktiválható (145.2, 381.1), ahogy a saját note is írja."
+  },
+  "Chemtech Cask": {
+   "short": "Amikor az ellenfél körében kijátszol egy spellt, exhaustolhatod a Caskot, és kapsz egy exhausted Gold gear tokent. Mivel a Cask exhaustolódik, egy újabb Goldhoz előbb ready állapotba kell kerülnie. Ha a spellt counterelik, a trigger nem fut le, arra nincs Gold.",
+   "why": "A short általános állítása (\"Counterelt spell nem számít kijátszottnak\") hamis: a 420.4.b szerint a nem triggered abilityk a counterelt lapot is kijátszottnak tekintik (Battering Ram példa). Csak a play triggerek nem futnak le (420.4.a.1), ez a helyes indoklás."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

@@ -1,0 +1,117 @@
+{
+ "fixes": {
+  "Hunters' Circle": {
+   "short": "Battlefield: minden játékosnál az első unit vagy gear, amit a saját körében ide játszik ki, 1 Energyvel olcsóbb. A Power költséget nem érinti. Unitot alapból csak általad irányított battlefieldre játszhatsz, ezért a kedvezményt főleg a battlefield irányítója kapja.",
+   "notes": [
+    [
+     "356.4.b,356.6",
+     0,
+     "Discount: 1 Energyvel kevesebb, de a cost 0 alá nem mehet. A Power costot nem érinti."
+    ],
+    [
+     "355.2.a",
+     0,
+     "Unitot alapból csak általad kontrollált battlefieldre játszhatsz, ezért a kedvezményt jellemzően a battlefield controllere kapja."
+    ],
+    [
+     "148.1.a.1,811.1.d.1.a,830.1.b.1",
+     0,
+     "Gear alapból csak base-be játszható. \"Ide\" csak facedown-ból kijátszott vagy [Deploy] gear érkezhet."
+    ],
+    [
+     "356.4.d",
+     1,
+     "A kedvezmény a teljes costra vonatkozik. Facedown-ból (0 base cost) kijátszott unitnál az Accelerate additional cost Energy részét csökkentheti."
+    ],
+    [
+     "185.2.a,440.2.c,185.3.a.1",
+     1,
+     "Az ide \"play\"-jel érkező unit token is kijátszott unit: a tokent a Play lépései szerint játszod ki. Ha a körödben ez az első ide kijátszott unitod vagy geared, a kedvezmény rá megy el, pedig a 0 costján nincs mit csökkenteni."
+    ],
+    [
+     "386.3,811.1.b",
+     1,
+     "Játékosonként egyszer, és csak a saját körödben. Az opponent körében ide kijátszott lapodra (facedown, [Reaction], base cost nélkül) a kedvezmény nem vonatkozik."
+    ]
+   ],
+   "why": "A short \"csak\" kitétellel abszolútnak állította, hogy unit csak általad irányított battlefieldre játszható, pedig ez csak az alapszabály (355.2.a, 355.2.b; Ambush, Last Caress kivétel). A 6. note \"teljes árú\"-nak nevezte a facedown kijátszást, holott az a base costot ignorálja (811.1.b), csak a kedvezmény nem jár."
+  },
+  "Hwei, Brooding Painter": {
+   "short": "Minden mozgásakor húzol egy lapot, majd eldobsz egyet, és az eldobott lap típusa szerint kapsz bónuszt: spell esetén még egy húzást, gear esetén legfeljebb 2 rune-t readyzhetsz, unit esetén Hwei +3 Mightot kap a kör végéig. A most húzott lapot is eldobhatod. Recallnál nem működik.",
+   "why": "A short kihagyta a \"this turn\" időtartamot a +3 Might ágnál (317.2.c)."
+  },
+  "Iron Ballista": {
+   "notes": [
+    [
+     "315.1.b,416.3.b",
+     1,
+     "A lap szövege szerint exhausted lép be, ezért a kijátszás körében csak akkor lő, ha egy effect readyzi. Egyébként a következő Awaken Phase-edben lesz ready."
+    ],
+    [
+     "355.10,355.9.b",
+     0,
+     "A unit target, és battlefielden kell lennie. Base-ben lévő unit nem választható. Lehet saját unit is."
+    ],
+    [
+     "359.3.e.9",
+     0,
+     "Ha a unit a resolve előtt base-be kerül, az ability mistargetel, nincs damage."
+    ],
+    [
+     "418.6.b.2.a",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a damage-et egyszerre a gear és az ability okozza. Ez az ilyen forrást figyelő effecteknél számít."
+    ],
+    [
+     "142.4.b,323.4",
+     0,
+     "A 2 damage a legfeljebb 2 Mightú unitot a következő cleanupban megöli. Nagyobb uniton a damage a kör végéig megmarad."
+    ],
+    [
+     "151.2",
+     0,
+     "Csak a saját Main Phase-edben, showdownon kívül aktiválható. Combat közben nem lő."
+    ]
+   ],
+   "why": "A példaként hozott Acceleration Gate Mind/Body Signature (Jayce) lap, Fury domainű Iron Ballistával nem lehet egy deckben (103.2.b.4, 103.3.d.2), ezért a példa félrevezető volt; törölve."
+  },
+  "Jayce, Defender of Tomorrow": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Mind és Body domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "827.1.c.1,381.1",
+     0,
+     "Empower [2][A][A]: csak akkor aktiválható, ha a legend még nem Empowered, a saját Main Phase-edben, Open State-ben. Ennek a costjában nincs Exhaust."
+    ],
+    [
+     "828.1.b.1,828.1.c",
+     0,
+     "Az [Empowered] ability csak addig aktív, amíg a legend Empowered. Egyik ability sem disempowerel, az állapot megmarad."
+    ],
+    [
+     "415.4,415.1.b",
+     1,
+     "A két ready ability costja egyaránt 1 Energy és Exhaust, ezért egy körben csak az egyik használható, hacsak egy másik effect közben nem readyzi a legendet. Empowered állapotban a \"Ready 2 gear\" az erősebb választás ugyanazért az árért."
+    ],
+    [
+     "355.10,355.8",
+     0,
+     "A gear target, bármelyik játékosé lehet. A \"Ready 2 gear\" abilityhez két választható gear kell a boardon, különben nem aktiválható."
+    ],
+    [
+     "416.2,415.4",
+     1,
+     "A haszna: az Exhaust costú gear abilityk (például a Tools of Empire vagy a Hextech Anomaly abilityje) ugyanabban a körben újra használhatók."
+    ]
+   ],
+   "why": "A példaként hozott Iron Ballista Fury domainű, Jayce Mind/Body Domain Identity-jű deckjébe nem tehető (103.2.b.3); a példa Tools of Empire-re (Body) cserélve."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

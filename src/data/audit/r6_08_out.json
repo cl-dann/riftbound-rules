@@ -1,0 +1,17 @@
+{
+ "fixes": {
+  "Reckoner's Arena": {
+   "short": "Ha itt holdolsz, az itt álló unitok conquer hatásai úgy futnak le, mintha conquereltél volna. Valódi conquer nem történik, és a legended vagy más battlefieldek conquer hatásai nem indulnak el.",
+   "why": "A short \"unitjaid\"-ra szűkítette, a lap szövege \"units here\" (383.4.g.1 példája is \"for each unit at the battlefield\"), friendly megkötés nincs."
+  },
+  "Resource Extractor": {
+   "short": "Deploy: csak battlefieldre játszható ki, de bármelyikre, base-be nem. Ha a köröd végén te kontrollálod azt a battlefieldet, kapsz egy exhausted Gold tokent a base-edbe. Ha egy ellenfél ott holdol, az Extractor meghal.",
+   "why": "A short (\"Bármelyik battlefieldre letehető\") elhagyta a Deploy \"Play this only to a battlefield\" kizárólagosságát (830.1.b), base-be is letehetőnek tűnt."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Red Brambleback: a short és a notes (flag 1) szerint a battlefield saját \"When you conquer here\" abilityje is \"your conquer effect\", ezért kétszer triggerel. A Core Rules ezt kifejezetten nem mondja ki (190.6.d alapján a battlefield abilityje a controlleré, 473.2.a conquer abilitynek nevezi), judge megerősítése javasolt."
+ ]
+}

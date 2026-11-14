@@ -1,0 +1,90 @@
+{
+ "fixes": {
+  "The Ball": {
+   "short": "Gear, ami csak battlefieldre játszható ki (Deploy), és meghal, ha egy opponent ott holdol. Amikor kijátszod vagy te mozgatod, választasz: húzol 1 lapot, vagy 2 sebzést kap minden ott álló enemy unit, ez nem célzott, Deflect nem véd ellene. A Ganking csak akkor számít, ha egy hatás unittá teszi: ekkor battlefieldről battlefieldre is mozoghat.",
+   "why": "A short szerint \"minden mozgáskor\" triggerel, de a szöveg \"When you play or move this\": csak akkor, ha te mozgatod (a \"you\" feltétel kimaradt)."
+  },
+  "The Empyrean": {
+   "short": "Kijátszáskor megmutathatsz egy lapot a kezedből, vagy kijelölhetsz egy másik saját lapot a boardon. Ha megtetted, annyi lapot nézel meg a deck tetejéről, amennyi a megmutatott lap Power costja, ezekből bármennyit a deck aljára tehetsz, a többit tetszőleges sorrendben visszarakod, aztán húzol 2-t. Megmutatás nélkül a húzás is elmarad.",
+   "why": "A short \"a boardról\" bármely lapot engedett, de a Show Off csak másik friendly objektumot jelölhet ki (832.1.c, \"pick another friendly one\")."
+  },
+  "Temporal Portal": {
+   "notes": [
+    [
+     "392,820.1.d",
+     0,
+     "Delayed ability: a körben kijátszott következő spelled kap Repeatet. A Repeat optional additional cost, kifizetve a spell effectje kétszer hajtódik végre."
+    ],
+    [
+     "206,356.4.f",
+     0,
+     "A Repeat ára a spell nyomtatott costja, Energy és Power is, nem a kedvezményekkel csökkentett ár. A teljes costra ható kedvezmény viszont az additional costot, így a Repeatet is csökkentheti."
+    ],
+    [
+     "392",
+     1,
+     "A következő spell akkor is elhasználja az effectet, ha nem fizeted ki a Repeatet. Az ability után a megfelelő spellt kell elsőként kijátszani."
+    ],
+    [
+     "820.2.a,820.3.a",
+     0,
+     "A második végrehajtáshoz más target vagy más mód is választható. A spell ettől még csak egyszer számít kijátszottnak."
+    ],
+    [
+     "820.1.c.2,820.3",
+     0,
+     "Ha a spellnek saját Repeatje is van, a két Repeat külön fizethető, együtt háromszori végrehajtást adnak."
+    ],
+    [
+     "151.2,813.1.c.1",
+     1,
+     "A Portal csak a saját Main Phase-edben, showdownon kívül aktiválható, de az effect a kör végéig vár: egy később, showdown közben kijátszott [Action] vagy [Reaction] spell is megkapja."
+    ],
+    [
+     "356.1.b.3",
+     1,
+     "Facedown-ból, base cost nélkül kijátszott spellnél a Repeat additional costot ettől még ki kell fizetni."
+    ]
+   ],
+   "why": "A note szerint a kedvezmények a Repeat árát nem csökkentik, de a 356.4.f szerint a kedvezmény additional costot is csökkenthet; csak a Repeat értékének alapja a nyomtatott cost (206)."
+  },
+  "Tianna Crownguard": {
+   "notes": [
+    [
+     "194.1,054.1",
+     1,
+     "Amíg battlefielden van, az opponent sem holdból, sem conquerből, sem pontot adó effectből, sem a te első Burn Outodból nem kap pontot. Az egyetlen kivétel a sorozatos Burn Out utáni pont, lásd lent."
+    ],
+    [
+     "470.2",
+     0,
+     "Az errata a \"score points\" szöveget \"gain points\"-ra cserélte. A szabályzat szerint a \"score X points\" is pontszerzést jelent, a mostani szöveg ezt teszi félreérthetetlenné: nem csak a hold és a conquer pontja marad el."
+    ],
+    [
+     "383.4.c.2.c,383.4.d.2.c",
+     0,
+     "A pont elmarad, de az opponent conquer és hold effectjei ettől még triggerelnek."
+    ],
+    [
+     "432.3.b",
+     1,
+     "Kivétel: ismétlődő Burn Out esetén az első utáni pontok semmilyen módon nem akadályozhatók meg, ezeket Tianna sem állítja meg."
+    ],
+    [
+     "365.1",
+     1,
+     "Base-ben a passive ability nem él, csak battlefielden. Ha a resolve előtt lekerül a battlefieldről, a pont megjár."
+    ],
+    [
+     "809.1.c",
+     0,
+     "[Deflect]: az opponent őt targetelő spellje vagy abilityje +[A]-ba kerül, ami drágítja az eltávolítását."
+    ]
+   ],
+   "why": "Az első note \"semmilyen forrásból\" tiltotta a pontot, ami ellentmondott a 432.3.b kivételt leíró note-nak és a shortnak; pontosítva."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}
