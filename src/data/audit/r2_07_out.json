@@ -1,0 +1,171 @@
+{
+ "fixes": {
+  "Nocturne, Horrifying": {
+   "notes": [
+    [
+     "810.1.b",
+     0,
+     "Ganking: Standard Move-val battlefieldről battlefieldre is léphet, nem kell base-be visszamennie."
+    ],
+    [
+     "370.1.b.1, 370.1.c.1",
+     0,
+     "Az \"as you look at or reveal me\" replacement effect. A szabályzat név szerint ezt a lapot hozza példának: titkos zónában is működik, a megnézéssel egy időben."
+    ],
+    [
+     "356.1.a",
+     0,
+     "A \"play me for [A]\" a base costot [A]-ra cseréli: 4 Energy és 1 Chaos Power helyett egy bármilyen domainű Power."
+    ],
+    [
+     "428",
+     1,
+     "Ha banisheled, de nem játszod ki, a Banishmentben marad."
+    ],
+    [
+     "441,414",
+     1,
+     "Burn (például Kennen, Storm of Shuriken Burn 2-je), a Minefield conquer hatása és a sima draw nem \"look at\" és nem \"reveal\", ezekre nem aktiválódik. A \"look at\" effectek viszont kiváltják, például a Trifarian Captain, a Lightning Rush és a The Candlelit Sanctum."
+    ],
+    [
+     "420.4.a",
+     1,
+     "Ha a legended Kennen, Heart of the Tempest, a banishmentből történő kijátszás nem kézből történik, ezért empowereli a legendet."
+    ]
+   ],
+   "why": "Az 5. és 6. note egy konkrét deckre utalt (\"A deckben\", \"a Kennen legendet\") a lap leírásában értelmezhetetlen módon. Átfogalmazva általános példákká, a Kennen legend nevével (Heart of the Tempest: \"When you play a card from anywhere other than your hand, empower me\")."
+  },
+  "Ornn's Forge": {
+   "notes": [
+    [
+     "356.4.b,356.6",
+     0,
+     "Discount: 1 Energyvel kevesebb, 0 alá nem mehet, a Power costot nem érinti."
+    ],
+    [
+     "356.4",
+     1,
+     "A kedvezményt a Determine Total Cost lépés nézi: abban a pillanatban kell kontrollálnod a battlefieldet, amikor a geart kijátszod."
+    ],
+    [
+     "185.1",
+     1,
+     "Token gear (például Gold) nem kap kedvezményt, és nem is használja el az \"első gear\" helyet."
+    ],
+    [
+     "740.1.a",
+     0,
+     "A \"friendly\" a csapattársad gearjét is jelenti. Csapatmódban a kör első friendly gearje kapja, bárkié is."
+    ],
+    [
+     "420.4.b",
+     1,
+     "\"Each turn\": az opponent körében [Reaction]-nel kijátszott első geared (például Quick-Draw Equipment) is olcsóbb. A gear a finalizálásával számít kijátszottnak."
+    ],
+    [
+     "386.3",
+     2,
+     "Ha a kör első gearjét még a control megszerzése előtt játszottad ki, nem egyértelmű, hogy a következő gear \"elsőnek\" számít-e. A Core Rules nem dönti el, judge kell."
+    ]
+   ],
+   "why": "Az 5. note szerint a gear \"nem counterelhető, mert permanentként nem marad a chainen\". Ez hamis indoklás: a kijátszott permanent a chainre kerül, és csak a resolve-kor lép le róla (359.2), a 426.1 szerint kártya is counterelhető. Az állítás törölve, a 359.2 hivatkozás is."
+  },
+  "Poro Snax": {
+   "notes": [
+    [
+     "383.4.a.2,426.1.a",
+     1,
+     "A play effect a gear belépése után kerül chain-re, és kötelezően húzol 1-et. A play effectre lehet reagálni; ha egy effect countereli, nincs húzás."
+    ],
+    [
+     "429.1.a.1,415.4",
+     0,
+     "Az ability costja: [1], egy Calm Power, exhaust és a gear megölése. Az egészet az aktiváláskor fizeted, a Snax tehát akkor is elveszett, ha az abilityt counterelik."
+    ],
+    [
+     "149.1",
+     0,
+     "Ready lép be, ezért a második húzás már a kijátszás körében aktiválható."
+    ],
+    [
+     "151.2",
+     0,
+     "Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható."
+    ],
+    [
+     "414.4",
+     0,
+     "Üres Main Decknél a húzás Burn Outot okoz."
+    ]
+   ],
+   "why": "Az 1. note \"Magát a geart nem lehet counterelni\" állítása a 359.2-re hivatkozott, de a gear a resolve-ig a chainen van, és a 426.1 szerint kártya is counterelhető. A megalapozatlan állítás törölve."
+  },
+  "Piercing Light": {
+   "notes": [
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "355.8,355.9.b",
+     0,
+     "Az első target kötelező, és battlefielden kell állnia. Ha nincs unit battlefielden, a lap nem játszható ki."
+    ],
+    [
+     "355.13",
+     0,
+     "A második target \"up to one other unit\": elhagyható, bárhol állhat (base-ben is), de nem lehet ugyanaz a unit."
+    ],
+    [
+     "359.3.e.5,359.3.e.14.a",
+     2,
+     "Ha az első target a resolve előtt illegális lesz (például base-be kerül), nem egyértelmű, hogy a második unit megkapja-e a 2 damage-et: a \"then ... other unit\" az első instructionre hivatkozhat, és linked instructionként a 359.3.e.14.a szerint az is ignorálódna. Judge döntse el."
+    ],
+    [
+     "820.2.a",
+     0,
+     "Repeat [2] és 1 Fury Power: a második végrehajtás választhatja ugyanazokat a unitokat is, így egy unit 4 damage-et kaphat két 2-es adagban."
+    ]
+   ],
+   "why": "A 4. note flag 1-gyel kijelentette, hogy az első target kiesése után a második unit megkapja a damage-et. A \"then deal 2 to up to one other unit\" a 359.3.e.14 szerint linked instruction lehet, ekkor a 359.3.e.14.a miatt ignorálódik. Nyitott kérdés, flag 2."
+  },
+  "Perched Grimwyrm": {
+   "short": "Olcsó, 5 Mightú unit, de csak olyan battlefieldre játszható ki, amit ebben a körben conquereltél és még kontrollálsz. Base-be sem tehető. Ha egy enemy Mageseeker Warden battlefielden áll, egyáltalán nem játszható ki.",
+   "notes": [
+    [
+     "355.17.b",
+     0,
+     "A \"play me only\" megkötés. Ha nem teljesíthető, a lap nem tud finalizálódni, akkor sem, ha egy másik effect (Here to Help) máshova játszatná ki."
+    ],
+    [
+     "054.2",
+     0,
+     "Az \"only\" kizár minden más helyet: base-be sem játszható ki."
+    ],
+    [
+     "471.1,355.2.a",
+     1,
+     "Abban a körben conquerelned kell egy battlefieldet, és azt a kijátszáskor még kontrollálnod kell. A megkötés nem ad engedélyt olyan battlefieldre, amit már elvesztettél."
+    ],
+    [
+     "355.17.b,054.1",
+     0,
+     "Ha egy enemy Mageseeker Warden battlefielden áll (\"While I'm at a battlefield, opponents can only play units to their base\"), a Grimwyrm egyáltalán nem játszható ki, mert akkor csak base-be tehetnél unitot. Base-ben álló Warden nem akadályozza."
+    ]
+   ],
+   "why": "A short és a 4. note feltétel nélkül állította, hogy enemy Mageseeker Warden \"mellett\" a lap nem játszható ki. A Warden tiltása csak akkor él, ha a Warden battlefielden áll (\"While I'm at a battlefield\"). Feltétel pótolva."
+  },
+  "Ornn, Forge God": {
+   "short": "Minden saját gearedért +1 Mightot kap, bárhol legyenek. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod az Equip costjáért, akkor is, ha másik unitodon van; ha a costban [A] szerepel, 1 bármilyen Powerrel olcsóbb. Deflect 2: az opponent rá célzó spellje vagy abilityje 2 bármilyen Powerrel drágább. Ha sebzetten gear vész el, meghalhat.",
+   "why": "A short feltétel nélkül 1 Powerrel olcsóbb Equip costot ígért. A 821.1.c.3 szerint ha az Equip costban nincs [A] (például [C] vagy csak Energy), a kedvezmény nem érvényesül."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Piercing Light: ha az első (battlefielden álló) target a resolve előtt illegális lesz, a \"then deal 2 to up to one other unit\" linked instructionnek számít-e (359.3.e.14.a), vagyis a második unit kap-e damage-et; a Core Rules nem dönti el egyértelműen, note flag 2-re állítva.",
+  "Mordekaiser, Twice Slain: a short és a note \"másik saját unitot\" mond, a szöveg csak \"a friendly unit\". Hogy a haldokló Mordekaiser saját magát választhatja-e a csere costjaként, a Core Rules nem mondja ki; gyakorlati jelentősége nincs, nem javítottam.",
+  "Poppy, Keeper of the Hammer: a short \"jellemzően körönként egyszer\" fogalmaz az exhaust cost miatt; a note pontosan kiírja, hogy readyzés után újra használható. Nem javítottam, de ha a \"körönként egyszer\" fordulat teljesen kerülendő, a shortból törölhető."
+ ]
+}

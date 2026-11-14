@@ -1,0 +1,105 @@
+{
+ "fixes": {
+  "Firestorm": {
+   "notes": [
+    [
+     "355.10.b,355.10.d",
+     0,
+     "A battlefield a target, az ott lévő unitok nem. Deflect és \"can't be chosen\" nem védi az enemy unitokat."
+    ],
+    [
+     "355.5.a",
+     1,
+     "A resolve pillanatában ott álló enemy unitokat sebzi. A reakcióban elmozgatott unit megmenekül, az odaérkező megkapja a 3-at."
+    ],
+    [
+     "418.1.d,323.4",
+     0,
+     "A damage egyszerre éri a unitokat, a halálos sebzést kapottak a resolve utáni cleanupban halnak meg."
+    ],
+    [
+     "715.2",
+     1,
+     "Bonus Damage esetén minden érintett unit külön megkapja a többletet. A 715.2 a több targetes Deal actionről szól, itt a unitok nem targetek, ezért ez levezetés."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ]
+   ],
+   "why": "A 715.2 a több targetes Deal actionre vonatkozik, a Firestorm unitjai viszont nem targetek (355.10.b), így a pont levezetés: flag 0 helyett 1."
+  },
+  "Forge of the Future": {
+   "short": "Kijátszáskor kapsz egy 1 Mightú Recruit tokent a base-edbe. Később feláldozhatod, hogy legfeljebb 4 lapot visszatégy bármelyik trashből a gazdája deckjének aljára. Ezt csak a saját Main Phase-edben, showdownon kívül teheted meg.",
+   "why": "A short \"harcon kívül\"-t írt, de a 151.2 szerint a gear activated abilityje semmilyen showdown alatt nem használható, combat nélküli showdownban sem."
+  },
+  "Fury Rune": {
+   "notes": [
+    [
+     "103.4.a,103.4.a.1",
+     0,
+     "A Rune Deck pontosan 12 rune, és mind a legend Domain Identity-jén belül kell legyen. Fury Rune csak Fury domainű legend mellé tehető."
+    ],
+    [
+     "164.2.a",
+     0,
+     "Exhaustolva 1 Energyt ad, domaintől függetlenül."
+    ],
+    [
+     "164.2.b,164.2.b.1,417.1.b",
+     0,
+     "Recycle-ölve 1 Fury Powert ad, és a Rune Deck aljára kerül."
+    ],
+    [
+     "161.1,161.1.a",
+     0,
+     "A rune nem Main Deck lap (161.1) és nem Permanent (161.1.a), ezért a Main Deck lapokra vagy permanentekre ható effectek nem érintik."
+    ],
+    [
+     "315.1.b",
+     0,
+     "Az exhausted rune a saját Awaken Phase-edben lesz újra ready."
+    ]
+   ],
+   "why": "A note szerint a \"card\"-ra ható effectek nem érintik a rune-t, pedig a rune is kártya (103.4.a, Rune Cards). A 161.1 és 161.1.a csak azt mondja, hogy nem Main Deck lap és nem Permanent."
+  },
+  "Hextech Anomaly": {
+   "short": "Exhaustolva Powert váltasz Energyre 1:1 arányban, annyit, amennyit akarsz. Bármikor, fizetés közben is használható, nem lehet rá reagálni. Csak ready állapotban megy, újra readyzve ismét használható. A Power általában rune feláldozásából jön, ezért drága, vészhelyzetre való.",
+   "notes": [
+    [
+     "204.3.a",
+     0,
+     "A \"Pay any amount of [A]\" cost within instructions: a resolve-kor fizeted ki, és annyi Energyt kapsz, amennyi Powert fizettél."
+    ],
+    [
+     "135.2.e.5.a",
+     0,
+     "Az [A] cost bármilyen domain Powerével fizethető. A lap Powert vált Energyre, 1:1 arányban."
+    ],
+    [
+     "430.2,430.3",
+     0,
+     "[Reaction] Add ability: egy másik cost kifizetése közben is aktiválható, azonnal resolve-ol, és nem lehet rá reagálni."
+    ],
+    [
+     "164.2.b,417.1.b",
+     1,
+     "A Power jellemzően rune recycle-ölésből jön, ami a rune elvesztésével jár. A váltás ezért drága, vészhelyzetre való."
+    ],
+    [
+     "415.4,149.1",
+     0,
+     "Az exhaust a cost: csak ready Anomalyval aktiválható, aktiválásonként egyszer váltasz. Ha egy effect újra readyzi, ugyanabban a körben ismét használható. Ready lép be, a kijátszás körében már használható."
+    ]
+   ],
+   "why": "A short és a 415.4 note \"körönként egyszer\"-t állított; az exhaust költségű ability csak ready állapotot kíván (415.1.b, 415.4), újra readyzve ugyanabban a körben ismét aktiválható."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Grand Strategem / For Demacia!: a Core Rules nem mondja ki, hogy a \"give friendly units ... this turn\" hatás csak a resolve-kor jelen lévő unitokra szól-e. A Grand Strategem ezt nyitott kérdésként (flag 2) kezeli, a For Demacia! viszont levezetésként (flag 1) és a shortban tényként állítja, hogy a később érkező unit nem kapja meg. Szabályszöveget erre nem találtam, egységesíteni kellene.",
+  "Flame Chompers: a \"pay [C] to play me\" esetén a 356.1.a csak a \"for [Cost]\" formát kezeli; hogy a 3 Energy base costot is fizetni kell-e, szabályból nem dönthető el (a lap már flag 2-vel jelzi)."
+ ]
+}

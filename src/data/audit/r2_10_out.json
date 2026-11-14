@@ -1,0 +1,53 @@
+{
+ "fixes": {
+  "Strike Down": {
+   "notes": [
+    [
+     "355.9.b,355.8",
+     0,
+     "Két target: egy friendly unit, amin van csatolt Equipment, és egy enemy unit. Equipped unit nélkül a spell nem játszható ki."
+    ],
+    [
+     "818.3.b,359.3.e.2,359.3.e.12",
+     1,
+     "Ha a unitról a resolve előtt leválik az egyetlen Equipment, már nem equipped, így illegális target. A Mightja ekkor \"null\", nincs sebzés."
+    ],
+    [
+     "418.6.b.3",
+     1,
+     "A sebzést a unit okozza, nem a spell, és csak egy irányban: az enemy unit nem üt vissza."
+    ],
+    [
+     "435.1.d",
+     1,
+     "A sebzés a detach előtt történik, ezért a unit Mightjában még benne van az Equipment Might bonusa."
+    ],
+    [
+     "436.3,355.10",
+     2,
+     "A detach kötelező. Hogy több Equipment esetén a leválasztott Equipment target-e (és így már a kijátszáskor kell-e kiválasztani), azt a 436.3 nyitva hagyja: a 355.10 általános szabálya szerint a boardon kiválasztott objektum target, kivétel itt nem látszik. Judge döntse el."
+    ],
+    [
+     "436.4.a",
+     0,
+     "A levált Equipment a unit locationjén marad. Battlefieldről a következő cleanupban a base-be recallolódik, és az Equip costot újra ki kell fizetni."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ]
+   ],
+   "why": "A 436.3 csak annyit mond, hogy a detach önmagában nem targetel, de az effect targetelhet; a 355.10 alapján a választott Equipment valószínűleg target, ezért a \"nem target, resolve-kor választasz\" f1 állítás nem megalapozott, nyitott kérdésként (flag 2) átírva."
+  },
+  "Soul Sword": {
+   "short": "Equipment: 1 Calm Powerért (Equip) egy saját unitodra csatolod, csak a saját Main Phase-edben, showdownon kívül. Csatolva +1 Mightot ad, és amíg legalább 3 XP-d van, további +1-et, összesen +2-t. Ha az XP-d 3 alá esik, a további +1 azonnal elvész; ha a kardot megölik, a teljes bónusz.",
+   "why": "A régi short szerint XP-csökkenéskor \"a bónusz\" elvész, ami a teljes +2-re érthető; a 824.1.d szerint csak a Level 3 dependent ability (+1) lesz inaktív, a gear Might bonusa (+1) csatolva marad (718.4)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Targon's Peak: a szöveg \"ready up to 2 runes\", nincs benne \"friendly\" (Sona szövegével ellentétben), a short és a notes viszont saját rune-okról beszél. Hogy az opponent rune-ja is választható-e, a Core Rules nem zárja ki kifejezetten; gyakorlati jelentősége minimális, ezért nem javítottam."
+ ]
+}

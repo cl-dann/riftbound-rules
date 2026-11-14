@@ -1,0 +1,175 @@
+{
+ "fixes": {
+  "Time Warp": {
+   "short": "Kapsz egy extra kört közvetlenül a mostani után. A lap utána a Banishmentbe kerül, trashből visszahozó hatással nem használható újra. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Hiányzott a showdownon kívüli megkötés (155: Open State, outside of Showdowns). A \"végleg kikerül a játékból\" túlzás, a lap a Banishmentbe kerül (428.1)."
+  },
+  "Tricksy Tentacles": {
+   "short": "Ugyanazon opponent tetszőleges számú, összesen legfeljebb 8 Mightú unitját egy általad választott helyre mozgatod. A saját battlefieldedre húzva ők lesznek a támadók, a base-ükbe küldve kiürítheted a battlefieldjüket. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Hiányzott a showdownon kívüli megkötés (155: Open State, outside of Showdowns)."
+  },
+  "Turn to Dust": {
+   "short": "Egy gear a controllere következő körének elején meghal, bármelyik játékosé lehet, Equipment és token is. Addig még működik és használható. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Hiányzott a showdownon kívüli megkötés (155: Open State, outside of Showdowns)."
+  },
+  "Twilight Shroud": {
+   "short": "Egy saját unit +1 Mightot kap a kör végéig, és ebben a körben enemy spell és ability nem választhatja. Csak a saját körödben, showdownon kívül játszható ki, válaszként nem, és a nem célzó, mindenkit érintő hatások ellen nem véd. Flow: a trashedből 2 Energyért újra kijátszható, utána banishelődik.",
+   "why": "Hiányzott a showdownon kívüli megkötés (155: Open State, outside of Showdowns)."
+  },
+  "Twilight Step": {
+   "short": "Egy legfeljebb 3 Mightú unitot, akár enemy unitot is, bármelyik másik locationre mozgatsz, battlefieldről battlefieldre is. Csak a saját körödben, showdownon kívül játszható ki. Flow: a trashedből 4 Energy és 1 Chaos Power áron újra kijátszható, utána banishelődik.",
+   "why": "Hiányzott a showdownon kívüli megkötés (155: Open State, outside of Showdowns)."
+  },
+  "Unchecked Power": {
+   "short": "Minden saját unitod exhausted lesz, aztán minden battlefielden álló unit 12 sebzést kap, a tieid is. A base-ben állókat a sebzés nem éri. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Hiányzott a showdownon kívüli megkötés (155: Open State, outside of Showdowns). A \"csak a base-ben állók élik túl\" túlzás: 12-nél nagyobb Mightú vagy prevent alatt álló unit battlefielden is túlélheti (142.4.b, 438)."
+  },
+  "Undying Legion": {
+   "short": "Ha ebben a körben már kijátszottál egy másik lapot, a trashből is kijátszhatod 3 Energy és 1 Fury Powerért. Ez minden halála után megismételhető. A trashből is csak a szokásos időzítéssel: a saját körödben, showdownon kívül.",
+   "why": "Hiányzott a showdownon kívüli megkötés (155: Open State, outside of Showdowns). (308.1.a)"
+  },
+  "Undying Loyalty": {
+   "short": "Kijátszol a trashedből egy legfeljebb 2 Energyért és 1 Powerért kapható unitot ingyen. Ha az Bird, Cat, Dog vagy Poro, maga a spell is 2 Energyvel olcsóbb. Megfelelő unit nélkül nem játszható ki. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Hiányzott a showdownon kívüli megkötés (155: Open State, outside of Showdowns)."
+  },
+  "Up from the Deep": {
+   "short": "Két 1 Mightú Tentacle unit tokent játszol ki, mindegyiket külön a base-edbe vagy egy általad kontrollált battlefieldre. Csak a saját körödben, showdownon kívül játszható ki. Flow: a trashedből 3 Energyért újra kijátszható, utána banishelődik.",
+   "why": "Hiányzott a showdownon kívüli megkötés (155: Open State, outside of Showdowns)."
+  },
+  "Vengeance": {
+   "short": "Megöl egy tetszőleges unitot, bármelyik játékosét, Might korlát nélkül. A megölt unit halálra induló képességei lefutnak. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Hiányzott a showdownon kívüli megkötés (155: Open State, outside of Showdowns)."
+  },
+  "Void Assault": {
+   "short": "Előbb egy saját, aztán egy enemy unitot mozgatsz, mindkét célt kijátszáskor választod. Ha mindkettőt ugyanarra, nem általad kontrollált battlefieldre küldöd, te leszel a támadó. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Hiányzott a showdownon kívüli megkötés (155: Open State, outside of Showdowns)."
+  },
+  "Void Rush": {
+   "short": "Felfeded a deck felső 2 lapját. Egyet eltávolíthatsz (banish) és rögtön kijátszhatod 2 Energyvel olcsóbban, a Power costot ki kell fizetni. A többit felhúzod. Ha az eltávolított lapot nem tudod kijátszani, elveszik. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Hiányzott a showdownon kívüli megkötés (155: Open State, outside of Showdowns)."
+  },
+  "Unlicensed Armory": {
+   "short": "Egy lap eldobásával és exhaustolással kiválasztasz egy saját unitot. Ha ebben a körben meghalna, egy Fury Powerért megmentheted: gyógyul, exhausted lesz és hazamegy a base-be. Csak a saját Main Phase-edben, showdownon kívül aktiválható, ezért előre kell felrakni.",
+   "why": "Hiányzott a showdownon kívüli megkötés (151.2 / 381.1)."
+  },
+  "Vanguard Armory": {
+   "short": "Exhaustolva három 1 Mightú Recruit tokent kapsz, külön-külön a base-edbe vagy saját battlefieldre. Mindegyik kijátszásnak számít, így a \"ha kijátszol egy unitot\" hatások háromszor futnak le. Csak a saját Main Phase-edben, showdownon kívül.",
+   "why": "Hiányzott a showdownon kívüli megkötés (151.2 / 381.1)."
+  },
+  "Vi, Destructive": {
+   "short": "Battlefieldről battlefieldre léphet. A trashedből egy lap deck aljára tételével a kör végéig +1 Mightot kap, ez többször is ismételhető. Csak a saját Main Phase-edben, showdownon kívül, a bónuszt mozgás előtt kell felépíteni.",
+   "why": "Hiányzott a showdownon kívüli megkötés (151.2 / 381.1)."
+  },
+  "Viktor, Herald of the Arcane": {
+   "short": "Legend: 1 Energy fizetésével és exhaustolásával kijátszol egy 1 Mightú Recruit unit tokent a base-edbe vagy egy általad kontrollált battlefieldre, exhausted állapotban. Csak a saját Main Phase-edben, showdownon kívül, és mivel exhaustol, jellemzően körönként egyszer.",
+   "why": "Hiányzott a showdownon kívüli megkötés (151.2 / 381.1)."
+  },
+  "Vi, Hotheaded": {
+   "short": "2 Energy és 1 Fury Power fizetésével a kör végéig megduplázza a Mightját, többször is (3, 6, 12, 24). Csak a saját Main Phase-edben, showdownon kívül használható (combat közben sem), a később kapott bónusz nem duplázódik. Deflect: az őt választó opponent spell vagy ability 1 bármely Powerrel drágább.",
+   "why": "A \"combaton kívül\" pontatlan: nem combat showdown alatt sem aktiválható (381.1, 308.1.a)."
+  },
+  "Upstage Comedy": {
+   "short": "Egy unitot ready-z, így a saját unitod még egyszer mozoghat ebben a körben. Plusz 2 Energyért (Repeat) egy második unitot is. Csak a saját körödben, combaton és showdownon kívül játszható ki.",
+   "why": "A Repeat költsége nem volt kiírva Energyként (820.1.d)."
+  },
+  "Tianna Crownguard": {
+   "short": "Amíg battlefielden áll, az opponent nem szerezhet pontot (hold, conquer, pontot adó effect), kivéve az ismételt Burn Out utáni pontokat. Az opponent conquer és hold effectjei ettől még lefutnak. Base-ben nem működik. Deflect: az őt választó opponent spell vagy ability 1 bármely Powerrel drágább.",
+   "why": "A \"semmilyen módon nem szerez pontot\" ellentmondott a notes 432.3.b pontjának: az ismételt Burn Out utáni pontok nem akadályozhatók meg. A Deflect költsége ([A], 809.1.c) nem volt kiírva."
+  },
+  "Veteran Poro": {
+   "short": "Kijátszáskor ráteheted egy saját Equipmentedet, akár egy másik unitról áthelyezve is, az Equip cost kifizetésével, amely 1 bármely Powerrel ([A]) kevesebb, ha a cost tartalmaz [A]-t; különben teljes áron megy. Ilyenkor az Equip szokásos időzítési korlátja nem számít.",
+   "why": "A short feltétel nélkül 1 Powerrel olcsóbb Equipet ígért, de [A] nélküli Equip cost nem csökken (821.1.c.3)."
+  },
+  "Void Hatchling": {
+   "short": "Mielőtt lapokat fedsz fel egy Main Deckből (a szöveg \"a deck\", nem csak a saját deckedet jelenti), megnézed annak felső lapját, és a deck aljára teheted, így a felfedés a következő lapokkal megy. Erre nem lehet reagálni. A Rune Deckre nem vonatkozik.",
+   "why": "A lap szövege \"from a deck\", nem \"your deck\"; a short indokolatlanul a saját deckre szűkítette (052: card = Main Deck card, de bármelyik játékosé)."
+  },
+  "Transpositionist": {
+   "notes": [
+    [
+     "204.1.b,415.4,143.4",
+     1,
+     "A cost egy Chaos Power és a unit exhaustolása. Mivel exhausted lép be, a kijátszás körében nem használható."
+    ],
+    [
+     "381.1,316.8.c",
+     1,
+     "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható, showdown és combat alatt nem."
+    ],
+    [
+     "355.10,355.9.c",
+     0,
+     "A friendly unit target. Saját magát is választhatja, mert az ability és a forrása külön objektum."
+    ],
+    [
+     "359.3.e.13,711",
+     1,
+     "A \"had\" a visszavett unit boardon lévő utolsó Mightjára néz vissza, buffokkal együtt. A kijátszandó unitnál a nyomtatott Might számít, mert az nincs a boardon."
+    ],
+    [
+     "420.1.a,355.10.a",
+     1,
+     "A szöveg nem nevez meg zónát, ezért a unit alapértelmezés szerint a kezedből vagy a Champion Zone-odból (Chosen Champion) játszható ki. Kézből választva nem target, mert a kéz nem public zóna."
+    ],
+    [
+     "359.3.e.12",
+     1,
+     "Ha a target a resolve előtt illegális lesz, a Mightja null, így nincs mihez mérni a kijátszandó unitot, a kijátszás elmarad."
+    ],
+    [
+     "356.1.b.1,356.1.b.3",
+     0,
+     "\"Ignoring its cost\": az Energy és a Power cost is nulla. Optional additional cost (például Accelerate) ettől még kifizethető."
+    ],
+    [
+     "056.2,186.1,359.3.e.13",
+     1,
+     "A unit a tulajdonosa kezébe megy. Token visszavételekor a token megszűnik, de a \"had\" visszanéz a board-on lévő utolsó Mightjára, ezért az ettől még számít."
+    ]
+   ],
+   "why": "420.1.a: alapból a Chosen Champion zone-ból is lehet kijátszani, a note csak a kezet említette. A token Mightjára vonatkozó állítás levezetés (359.3.e.13), nem közvetlen szabály, flag 1."
+  },
+  "Void Seeker": {
+   "notes": [
+    [
+     "135.2.b.5.a",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: két külön instruction, a \"Deal 4 to a unit at a battlefield\" és a \"Draw 1\". A második nem függ az elsőtől."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "Név szerinti példa: ha a unitot a resolve előtt base-be mozgatják, illegális target, nem kap damage-et, de a Void Seeker controllere ettől még húz 1-et."
+    ],
+    [
+     "418.1.e.1",
+     0,
+     "Név szerinti példa: 3 damage prevent mellett a Void Seeker 1 damage-et oszt, ami érvényes damage, ezért a \"when I take damage\" trigger lefut."
+    ],
+    [
+     "418.6.a,429.1.a.2",
+     0,
+     "A damage forrása maga a Void Seeker, tehát spell általi damage. Ha a unit ebbe belehal, az a cleanupban lethal damage miatti Passive Kill, nem a spell kill instructionje."
+    ],
+    [
+     "138.1",
+     0,
+     "A lapon lévő Kai'Sa idézet flavor text. A lapnak nincs Kai'Sa tagje, és nincs játékbeli kapcsolata a Kai'Sa Champion unittal."
+    ],
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ]
+   ],
+   "why": "A \"spell általi killnek számít\" állítás téves: a lethal damage miatti halál Passive Kill (429.1.a.2), nem a spell kill instructionje."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Veteran Poro: a 821.1.c.3 szerint [A] nélküli Equip cost nem csökken; hogy a [C] tartalmú Equip cost (például [1][C]) \"tartalmaz-e [A]-t\", a Core Rules nem mondja ki, judge döntse el.",
+  "Void Seeker: a notes Kai'Sa flavor text idézetre hivatkozik; a flavor text nincs a rendelkezésre álló adatokban, a nyomtatott lapon kell ellenőrizni.",
+  "Threshold of the Gray: a 466.2.b szerint a start of combat effectek az Attacker és Defender kijelölése (466.2.c) előtt futnak le, így nem egyértelmű, hogy a \"the attacker and defender\" ekkor hogyan azonosítható; a lap szándéka egyértelmű, de a Core Rules sorrendje alapján judge kérdés."
+ ]
+}

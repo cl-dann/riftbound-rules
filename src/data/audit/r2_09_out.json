@@ -1,0 +1,194 @@
+{
+ "fixes": {
+  "Royal Entourage": {
+   "notes": [
+    [
+     "355.10.a,355.9.a.4",
+     0,
+     "A legend target, mert a Legend Zone Public zóna. Bárki legendje választható, a sajátod is."
+    ],
+    [
+     "355.18",
+     1,
+     "A ready és az exhaust között nem felsorolt módokként választasz, ezért ez a döntés a resolve-kor történik."
+    ],
+    [
+     "415.1.c,416.1.c",
+     0,
+     "Már exhausted legend exhaustolása és már ready legend ready-zése nem csinál semmit."
+    ],
+    [
+     "315.1.b",
+     1,
+     "Az exhaustolt enemy legend addig nem tudja használni az exhaust costú abilityjét, amíg újra ready nem lesz: jellemzően a controllere következő Awaken Phase-éig, de egyes legendek (például Sett, The Boss vagy Sivir, Battle Mistress) saját triggerrel is readyzhetik magukat. A saját legended ready-zve még egyszer aktiválható."
+    ]
+   ],
+   "why": "315.1.b: a note abszolút \"következő Awaken Phase-éig\" állítást tett, pedig van legend, amely saját triggerrel readyzi magát (Sett, The Boss: \"When you conquer, ready me\")."
+  },
+  "Ruin Runner": {
+   "notes": [
+    [
+     "757.1",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának az Untargetability-re."
+    ],
+    [
+     "355.9.b,758",
+     0,
+     "Enemy spell és ability nem választhatja targetnek, akkor sem, ha minden más feltételnek megfelel."
+    ],
+    [
+     "355.5.a,355.10.e",
+     0,
+     "A nem célzó effectek érik: \"all units\" típusú spellek, és az \"each player kills a unit\" jellegűek, ahol te magad választod."
+    ],
+    [
+     "758,355.5.a",
+     1,
+     "Csak a targetelés ellen véd. A combat damage és az enemy passive abilityk ugyanúgy hatnak rá."
+    ],
+    [
+     "355.9.b",
+     1,
+     "A saját spelljeid és abilityjeid szabadon választhatják."
+    ]
+   ],
+   "why": "A 4. pont 355.10.c hivatkozása (cost, trigger condition, replacement) nem támasztja alá az állítást; helyesen 758 (csak a targetelés tiltott) és 355.5.a (a kritérium alapú hatás nem választás)."
+  },
+  "Sai Scout": {
+   "notes": [
+    [
+     "817.1.b,437.1",
+     0,
+     "Vision: amikor a Scoutot kijátszod, megnézed a Main Deck felső lapját, és recycle-ölheted. Ha nem kijátszással kerül a boardra, nem triggerel."
+    ],
+    [
+     "170.11.c,355.2.b",
+     0,
+     "Open battlefield: se unit nincs rajta, se controllere. A Scout engedélyt kap, hogy ilyen helyre is kijátszd, nem csak base-be vagy általad kontrollált battlefieldre."
+    ],
+    [
+     "190.3.a.1,316.8.b.1",
+     0,
+     "Az open battlefieldre érkező Scout Contested státuszt tesz rá, ebből Non-Combat Showdown lesz, amire az opponent [Action] és [Reaction] lapokkal válaszolhat."
+    ],
+    [
+     "190.4,471.1",
+     1,
+     "Ha a showdown végén a Scout még ott áll, megszerzed a kontrollt. Ez conquer, ha azt a battlefieldet abban a körben még nem score-oltad."
+    ],
+    [
+     "308.1.a",
+     1,
+     "Az engedély a helyre szól, az időzítésre nem: a Scout csak a saját körödben, showdownon kívül játszható ki."
+    ]
+   ],
+   "why": "817.1.b: a Vision \"When this is played\" trigger, nem a boardra lépésre fut le, a note \"a boardra lép\" megfogalmazása pontatlan volt."
+  },
+  "Scryer's Bloom": {
+   "short": "Egyszer használható gear, exhausted lép be. 1 Energy, exhaust és saját maga megölése árán Predict 2: megnézed a Main Deck felső 2 lapját, bármelyiket recycle-ölheted, a többit tetszőleges sorrendben visszateszed, majd húzol 1-et és kapsz 1 XP-t. Csak a saját Main Phase-edben, showdownon kívül, és csak ready állapotban, tehát jellemzően a kijátszás utáni körtől.",
+   "notes": [
+    [
+     "149.1,415.4",
+     1,
+     "\"This enters exhausted\" felülírja, hogy a gear ready lép be. Az ability exhaust costja miatt csak ready állapotban használható: a kijátszás körében csak akkor, ha egy hatás közben readyzi, egyébként a következő körödtől."
+    ],
+    [
+     "203,429.6",
+     0,
+     "A \"kill this\" cost: az ability egyszer használható, a gear a trashbe megy. A cost része még [1] és az exhaust."
+    ],
+    [
+     "437.1.a",
+     0,
+     "Predict 2: megnézed a deck felső két lapját, bármennyit recycle-ölhetsz közülük, a többit tetszőleges sorrendben visszateszed. A draw 1 ez után jön, tehát azt húzod, amit felülre tettél."
+    ],
+    [
+     "437.4.a,414.4",
+     0,
+     "Ha 2-nél kevesebb lap van a deckben, annyit Predictelsz, amennyi van, Burn Out nélkül. Az utána következő draw viszont üres decknél Burn Outot okoz."
+    ],
+    [
+     "730.1",
+     0,
+     "Az 1 XP mindig jár a resolve-kor, a Predict eredményétől függetlenül."
+    ],
+    [
+     "151.2",
+     0,
+     "Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható."
+    ]
+   ],
+   "why": "415.4: az exhaust cost csak ready állapotot kíván; a short és az 1. note abszolút \"kijátszás utáni körtől\" állítása figyelmen kívül hagyta, hogy egy ready effect után már a kijátszás körében is használható."
+  },
+  "Sky Cruiser": {
+   "short": "Egy gear lap eldobása a kezedből, 1 Energy és exhaust árán 4 sebzést ad egy battlefielden álló unitnak. Exhausted lép be, ezért a kijátszás körében csak akkor használható, ha egy hatás readyzi. Csak a saját Main Phase-edben, showdownon kívül megy.",
+   "notes": [
+    [
+     "423.3,204.1.b",
+     0,
+     "A cost három része: egy gear lap discardolása a kezedből, [1] és a unit exhaustolása. Gear lap nélkül a kézben az ability nem aktiválható."
+    ],
+    [
+     "415.4,143.4",
+     1,
+     "Az Exhaust cost miatt ready kell legyen. Mivel exhausted lép be, a kijátszás körében csak akkor használható, ha egy hatás (például Shurelya's Requiem) readyzi."
+    ],
+    [
+     "381.1,316.8.c",
+     1,
+     "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben megy, showdown és combat alatt nem."
+    ],
+    [
+     "355.9.b,359.3.e.9",
+     0,
+     "A target battlefielden lévő unit. Ha a resolve előtt base-be mozgatják, az ability mistargetel, a sebzés elmarad, a cost nem jár vissza."
+    ],
+    [
+     "423.1",
+     0,
+     "A discardolt gear a trashbe megy, a szövege nem hajtódik végre."
+    ]
+   ],
+   "why": "415.4, 143.4: az exhaust cost csak ready állapotot kíván; a short és a 2. note abszolút \"a kijátszás körében még nem használható\" állítása figyelmen kívül hagyta a readyző hatásokat."
+  },
+  "Sivir, Battle Mistress": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Body és Chaos domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "164.2.b",
+     1,
+     "A rune recycle-ölése Powerért (a Basic Rune második abilityje) is \"recycle a rune\", tehát a Power cost fizetése közben is triggerel."
+    ],
+    [
+     "383.3.a,383.3.b,415.4",
+     0,
+     "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted. Exhausted legenddel nem fizethető, ezért egyszerre több rune recycle-ölésekor is csak egy Gold jön, hacsak a legend közben újra ready nem lesz."
+    ],
+    [
+     "187.5,415.4",
+     0,
+     "A Gold token abilityje: [Reaction], Kill this, Exhaust: Add [A]. Exhausted lép be, ezért addig nem használható, amíg ready nem lesz (jellemzően a következő Awaken Phase-edben)."
+    ],
+    [
+     "370.1.a.2",
+     1,
+     "\"One or more\": az egyszerre meghaló enemy unitok (például combat damage után) egy triggert adnak. A legend akkor is ready lesz, ha nem te ölted meg őket."
+    ],
+    [
+     "416.1.c",
+     1,
+     "Ha a legend már ready, a második trigger nem csinál semmit."
+    ]
+   ],
+   "why": "415.4: a note abszolút \"csak egy Gold jön\" állítása nem vette figyelembe, hogy a legend saját második triggerével (enemy unit halála) közben újra ready lehet."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

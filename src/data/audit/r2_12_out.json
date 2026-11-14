@@ -1,0 +1,119 @@
+{
+ "fixes": {
+  "Warmog's Armor": {
+   "notes": [
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Body Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +1 Mightot is kap."
+    ],
+    [
+     "383.4.c,427.1.b,427.1.b.1",
+     0,
+     "Conquer trigger: amikor a felszerelt unit conquerel, buffot kap. Ha már van buffja, nem kap másodikat, a trigger ilyenkor nem ad semmit."
+    ],
+    [
+     "703,705,702.2.b",
+     1,
+     "A buff tartós +1 Might: a uniton marad akkor is, ha a Warmog's később leválik vagy átkerül. Csak akkor tűnik el, ha elköltik, vagy ha a unit elhagyja a boardot."
+    ],
+    [
+     "359.3.e.5,818.1.b.1",
+     1,
+     "Az Equip a chainre kerül, lehet rá reagálni. Ha a megcélzott unit a resolve előtt elhagyja a boardot, az Equip nem csatol semmit, a gear a helyén marad, a kifizetett cost elveszett."
+    ]
+   ],
+   "why": "Notes: a \"csak akkor tűnik el, ha a unit elhagyja a boardot\" hamis, a buff elkölthető is (702.2.b), ilyenkor szintén lekerül."
+  },
+  "Ahri, Nine-Tailed Fox": {
+   "short": "Legend: minden ellenséges unit, amely egy általad kontrollált battlefieldet támad, -1 Mightot kap erre a körre, de legfeljebb 1 Mightig. Minden támadóra külön hat, és nem mutatsz rá, ezért Deflect sem véd. A deckbe Calm, Mind és domain nélküli lapok kerülhetnek.",
+   "notes": [
+    [
+     "103.2.b,103.2.b.4,103.2.b.5",
+     0,
+     "A legend Calm és Mind domainje adja a deck Domain Identity-jét. Calm, Mind, Calm/Mind és domain nélküli lap kerülhet a deckbe, más domainű lap nem."
+    ],
+    [
+     "383.4.e,383.4.e.2.a",
+     0,
+     "Attack trigger: akkor fut le, amikor az enemy unit megkapja az Attacker designationt. Unitonként és combatonként egyszer, minden támadó unitra külön trigger megy a chain-re."
+    ],
+    [
+     "466.2.c.3.a,383.4.e.2",
+     1,
+     "A combat közben később odaérkező enemy unit a következő cleanupban kapja meg az Attacker designationt, ekkor rá is triggerel."
+    ],
+    [
+     "355.10.c",
+     0,
+     "Az \"it\" a trigger feltételében szereplő unit, ezért nem target. Deflect és \"can't be chosen\" nem védi meg a -1 Mighttól."
+    ],
+    [
+     "479.4.b",
+     0,
+     "A \"to a minimum of 1\" az alkalmazás pillanatában rögzül. 1 Mightú unitra a hatás -0 lesz, és akkor sem csökkent később, ha a unit Mightja megnő."
+    ],
+    [
+     "317.2.c",
+     0,
+     "A -1 Might \"this turn\" tart, nem csak a combat végéig. A kör végi Expiration Stepben jár le."
+    ],
+    [
+     "190.2.b",
+     1,
+     "Csak általad kontrollált battlefield megtámadására triggerel. Ha egy senki által nem kontrollált battlefielden találkoztok, nem fut le. A trigger kötelező, nincs \"may\"."
+    ]
+   ],
+   "why": "Short és notes: a \"csak Calm és Mind lapokból állhat\" hamis, domain nélküli lap bármely Domain Identity-be betehető (103.2.b.5)."
+  },
+  "Ancient Henge": {
+   "short": "Exhaustolva tetszőleges mennyiségű Energyt bármilyen domainű Powerré váltasz 1:1 arányban, akár egy másik költség kifizetése közben is. Az exhaust miatt ready-zó hatás nélkül egyszer használható, amíg újra ready nem lesz, de akkor bármennyit válthatsz. Ready érkezik, a kijátszás körében már működik, a fel nem használt Power viszont elvész.",
+   "notes": [
+    [
+     "204.3.a",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a \"Pay any amount of Energy\" cost within instructions, a resolve-kor fizeted ki, és annyi [A]-t kapsz, amennyit fizettél."
+    ],
+    [
+     "135.2.e.5.b",
+     0,
+     "Energyt vált bármilyen domain Powerére, 1:1 arányban. A kapott [A] bármely domain Power costjára jó."
+    ],
+    [
+     "430.2,430.3",
+     0,
+     "[Reaction] Add ability: egy másik cost kifizetése közben is aktiválható, azonnal resolve-ol, és nem lehet rá reagálni."
+    ],
+    [
+     "415.4,415.1.b,149.1",
+     0,
+     "Az exhaust a cost, ezért ready-zó effect nélkül egyszer váltasz, amíg újra ready nem lesz, de akkor bármennyi Energyt. Ha valami ready-zi, újra használható. Ready lép be, a kijátszás körében már használható."
+    ],
+    [
+     "167",
+     0,
+     "A kapott Power a Main Phase elején és a kör végén elvész, ha nem költöd el."
+    ]
+   ],
+   "why": "Short és notes: az exhaust költségű ability nem \"körönként egyszer\" használható, hanem csak ready állapotban; ha valami ready-zi, ugyanabban a körben újra (415.1.b, 415.4)."
+  },
+  "Annie, Dark Child (Starter)": {
+   "short": "Legend: a köröd végén legfeljebb 2 rune-t (jellemzően a sajátjaidat) ready állapotba hozol. Így az ellenfél körében ezekből tudsz Reaction lapokat fizetni. A saját körödben már ne használd őket, mert a kapott erőforrás a kör végén elvész. A deck Fury és Chaos lapokból állhat.",
+   "why": "Short: a szöveg \"ready up to 2 runes\", nincs friendly megkötés (355.9.a), a \"rune-odat\" kitalált feltétel."
+  },
+  "Aphelios, Exalted": {
+   "short": "Valahányszor Equipmentet csatolsz rá, választasz egyet: 2 rune (jellemzően a sajátod) ready lesz, vagy kapsz egy exhausted rune-t, vagy egy saját unitod buffot kap. Körönként mindegyik lehetőség csak egyszer választható. Az újra csatolt, már rajta lévő Equipment nem indítja be.",
+   "why": "Short: a \"Ready 2 runes\" mód nem köti ki, hogy saját rune legyen (355.9.a), a \"rune-od\" kitalált feltétel."
+  }
+ },
+ "checked": 89,
+ "data_issues": [],
+ "open": [
+  "Albus Ferros: a notes 2. pontja (flag 1) szerint a \"spend any number of buffs\" nem cost, hanem resolve-kori action (205, 355.18). A 205 csak a linked effect nélküli spendet zárja ki a costok közül, itt viszont van linked effect (\"For each buff spent, channel\"), a 383.3.b pedig az effect elején álló costot base costnak tekinti. Hogy a buffok számát a finalizáláskor (costként) vagy a resolve-kor döntöd el, azt a Core Rules nem zárja le egyértelműen; ha judge szerint cost, a pont flag 2-re vagy javításra szorul."
+ ]
+}

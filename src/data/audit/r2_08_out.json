@@ -1,0 +1,172 @@
+{
+ "fixes": {
+  "Pouty Poro": {
+   "short": "2 Mightú Poro unit Deflecttel: ha az opponent spellel vagy abilityvel kiválasztja, választásonként 1 bármilyen domainű Powert kell pluszban fizetnie. A mindenkit érintő hatások és a combat sebzés ellen nem véd.",
+   "why": "short: a Deflect [A] costja bármely domain Powere (809.1.c.1, 135.2.e.5.a), és választásonként jár (809.1.c); ez hiányzott."
+  },
+  "Prepared Neophyte": {
+   "notes": [
+    [
+     "364.3.a",
+     0,
+     "Conditional passive: a +4 Might addig él, amíg a feltétel igaz. A feltétel az adott körre szól, a kör végével megszűnik."
+    ],
+    [
+     "420.4.b",
+     1,
+     "Nem triggerelt feltétel, ezért a spell finalizálása számít: counterelt spell után is jár a bónusz."
+    ],
+    [
+     "365.1",
+     1,
+     "Visszamenőleg is működik: ha előbb játszod ki a spellt és utána a Neophyte-ot, belépéskor már 5 Mightú."
+    ],
+    [
+     "206,356.5",
+     2,
+     "A \"spent [4] or more\" a fizetésre kérdez rá, ezért a kifizetett Energyt nézi. A 206 a nyomtatott costot csak akkor írja elő, ha egy effect a lap costját határozza meg, így erre nem ad választ. Hogy több spell költése összeadódik-e, és a kedvezmény vagy az additional cost hogyan számít bele, a Core Rules nem dönti el, judge kell."
+    ]
+   ],
+   "why": "N3: a hivatkozott 206 a nyomtatott cost használatát írja elő, nem a kifizetett Energyt; a pont úgy hivatkozott rá, mintha alátámasztaná. Átírva, a nyitott kérdés jelölése (flag 2) marad."
+  },
+  "Production Surge": {
+   "notes": [
+    [
+     "356.4,356.4.g",
+     0,
+     "A kedvezmény feltételét a Determine Total Cost lépésben nézi a játék: ha akkor kontrollálsz Mech tagű unitot, az Energy cost 4 helyett 2."
+    ],
+    [
+     "163.1,356.6",
+     1,
+     "A kedvezmény csak az Energy costra hat, az 1 Mind Powert mindig ki kell fizetni."
+    ],
+    [
+     "187.4,184.2",
+     0,
+     "A Mech domain nélküli, 3 Mightú, Mech tagű unit token. A szöveg miatt csak a base-edbe játszható ki."
+    ],
+    [
+     "143.4",
+     1,
+     "A token exhausted lép be. Maga is Mech, ezért a következő Production Surge már kedvezményes."
+    ],
+    [
+     "206",
+     0,
+     "Más effectek a nyomtatott 4 Energy costot látják, kedvezménytől függetlenül."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ]
+   ],
+   "why": "N1: a 356.6 csak a 0 alá csökkentést tiltja, azt nem mondja, hogy a [2] Energy; a számos cost Energy costként a 163.1-ből jön."
+  },
+  "Profiteer": {
+   "short": "Kijátszáskor disempowerelhetsz egy általad kontrollált Empowered legendet, unitot vagy geart, hogy Empowered legyen egy legend, unit vagy gear, akár az opponenté is. Ha nincs Empowered dolgod, nem használható. Az új Empowered objektumon a \"when I become Empowered\" triggerek lefutnak.",
+   "why": "short: a szövegben nincs \"another\", a \"másik\" kitalált megkötés volt; a target nincs friendly megkötéshez kötve (355.10, 442.2.a); az \"Empowered lesz hatások\" megfogalmazás érthetetlen volt."
+  },
+  "Protector's Shield": {
+   "short": "Csatolva +1 Mightot ad, és a unit Tanket kap: combatban neki kell elsőként lethal damage-et kapnia. Quick-Draw: Reactionje van, bármikor kijátszható, és kijátszáskor rácsatolódik egy saját unitodra. Equip: csatolatlanul 1 Energyért a saját Main Phase-edben rácsatolható egy saját unitodra; csatolva az Equip inaktív, vele nem rakható át.",
+   "notes": [
+    [
+     "819.1.b,819.1.d,813.1.c.1",
+     0,
+     "Quick-Draw: a lapnak [Reaction]-je van, Closed State-ben, bárki körében kijátszható, és a play effectje azonnal egy saját unitra csatolja. Showdown közben is felrakható."
+    ],
+    [
+     "355.5.b,355.10,359.3.e.5",
+     1,
+     "A Quick-Draw csatolása play effect: a unitot a trigger chainre kerülésekor választod, és target. Ha a resolve előtt elhagyja a boardot, a gear csatolatlanul a base-ben marad."
+    ],
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Energy costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "718.2,721.2,821.1.c",
+     1,
+     "Csatolva a gear Rules Textje inaktív, és inaktív ability nem aktiválható, így az Equip sem. Az Equip csak csatolatlan Shielden használható (például ha a unitja meghalt, vagy a Quick-Draw triggernek nem volt targetje). Másik unitra csak külön effect tudja átrakni, például Weaponmaster, amely kifejezetten újra aktívvá teszi az Equipet."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +1 Mightot is kap."
+    ],
+    [
+     "815.1.b,815.1.c.2",
+     0,
+     "A felszerelt unit Tanket kap: combat damage kiosztásakor előbb neki kell lethal damage-et kapnia, csak utána a kontrollere Tank nélküli unitjainak. Több Tank unit között az osztó szabadon választ."
+    ],
+    [
+     "815.2",
+     0,
+     "Ha a unitnak már van Tankje, a Shield Tankje redundáns, ilyenkor csak a +1 Might számít."
+    ],
+    [
+     "355.8,148.1.a.1",
+     1,
+     "Ha kijátszáskor nincs unitod, a Quick-Draw triggernek nincs érvényes targetje, nem kerül chainre. A gear ettől még bejön a base-be, később Equippel csatolható."
+    ]
+   ],
+   "why": "short: 'Equip: átrakható egy másik saját unitodra' hibás, csatolva a gear Rules Textje (az Equip is) inaktív és nem aktiválható (718.2, 721.2; ezt a lap saját N3-ja is kimondja, a Weaponmaster 821.1.c pont ezért aktiválja újra). Új note a magyarázattal."
+  },
+  "Punch First": {
+   "short": "Egy unit +5 Mightot kap a kör végéig, bármelyik játékosé lehet. Action: a saját körödben és bármely showdown alatt kijátszható, combatban is, és a bónusz beleszámít a sebzésbe, de egy chainen lévő spellre válaszul nem. Lejártakor a sebzett unit nem hal meg, mert a sebzés előbb gyógyul.",
+   "why": "short: az [Action] időzítése (saját kör vagy showdown, Closed State-ben nem) hiányzott, csak a combat volt említve (806.1.c.1, 358.4)."
+  },
+  "Pyke, Bloodharbor Ripper": {
+   "short": "1 Energyért és exhaustért egy battlefielden álló saját unitot visszaküldesz a tulajdonosa kezébe (általában a tiéd), és kapsz egy exhausted Gold tokent. Csak a saját körödben, showdownon kívül használható, ezért combatból nem ment ki. Ha a unit közben base-be kerül, a Gold akkor is jár.",
+   "why": "short: a szöveg \"to its owner's hand\", a \"kezedbe\" pontatlan, ha az opponent tulajdonában lévő unitot kontrollálod (056.2)."
+  },
+  "Questionable Tome": {
+   "short": "Exhaustolva Empowered lesz, majd az Empowered állapot elhasználásával, 1 Energyért és exhaustért húzol 1 lapot. Mivel mindkettő exhaustol, alapból két saját körödönként ad egy lapot. Csak a saját körödben, showdownon kívül használható.",
+   "notes": [
+    [
+     "827.1.c.1,827.1.c.2",
+     0,
+     "Az Empower costja itt maga az exhaust, Energy vagy Power nem kell hozzá. Csak akkor aktiválható, ha a gear ready és még nem Empowered."
+    ],
+    [
+     "443.1.a,415.4",
+     1,
+     "A draw ability costja disempower, [1] és exhaust. Mivel az Empower is exhaustol, a kettő között a gearnek readyvé kell válnia: alapból két saját körödönként húz egy lapot."
+    ],
+    [
+     "149.1,151.2",
+     0,
+     "Ready lép be, a kijátszás körében már Empowerelhető. Mindkét ability csak a saját Main Phase-edben, Open State-ben, showdownon kívül megy."
+    ],
+    [
+     "414.4",
+     0,
+     "Üres Main Deck esetén a draw Burn Outot okoz."
+    ]
+   ],
+   "why": "short és N1: a \"két körönként\" félreérthető, mindkét ability csak a saját Main Phase-edben megy (151.2), tehát két saját körödönként ad egy lapot."
+  },
+  "Rage Amplifier": {
+   "short": "Minden unitod +1 Mightot kap, bárhol álljon. 6 Energy és egy Fury Power egyszeri kifizetésével, a saját Main Phase-edben, showdownon kívül Empowered lesz, ekkor +2 a bónusz, nem +3. Ha a geart megölik, a bónusz azonnal elvész, ami sebzett unitokat megölhet.",
+   "why": "short: az Empower activated ability időzítése (csak saját Main Phase, showdownon kívül, 151.2) hiányzott."
+  },
+  "Ravenborn Tome": {
+   "short": "Exhaustolva a következő spelled ebben a körben minden sebzésnél 1-gyel többet sebez. Csak a saját Main Phase-edben, showdownon kívül aktiválható, de a bónusz egy későbbi showdownban kijátszott spellre is jó. Csak a legelső spellre szól, ha az nem sebez, a bónusz elvész, és a kör végén akkor is, ha nem használtad.",
+   "why": "short: a gear activated ability időzítése (saját Main Phase, showdownon kívül, 151.2) hiányzott."
+  },
+  "Rift Herald": {
+   "short": "Amikor battlefieldre mozog, megnézed a Main Decked felső 3 lapját, egy unitot felfedhetsz és felhúzhatsz közülük, a többit a deck aljára teszed. Deathknell: amikor meghal, a kezedből kijátszol egy unitot a base-edbe Energy cost nélkül; a Power costot ki kell fizetni, ha nem fizeted, a unit a kezedben marad.",
+   "why": "short: a Deathknell szövegében nincs \"may\", a \"játszhatsz\" kitalált opcionalitás volt; a kijátszás kötelező, csak a Power cost meg nem fizetése vonja vissza (403.4.b, 445.2.a, a lap N7-je szerint)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [
+  "Protector's Shield: Quick-Draw, Equip, Effect Text és Might Bonus van rajta, tehát Equipment (150.1, 818.1.a), de a tags mezőből továbbra is hiányzik az Equipment tag; az Equipmentet számláló vagy választó effecteknél (például Weaponmaster, Relentless Pursuit, Riven, Shattered) ez félrevezető."
+ ],
+ "open": [
+  "Rebuttal: N7 szerint a saját 1 Power costja Mind vagy Chaos Powerrel fizethető (135.2.e.6.c), ez csak akkor igaz, ha a nyomtatott Power szimbólum [C]. A kártyaadat (power: 1) ezt nem mutatja, kártyakép nélkül nem dönthető el.",
+  "Riposte: N5 szerint a 2 Power cost Body és Order Powerrel tetszőleges arányban fizethető (135.2.e.6.c); ugyanaz a kérdés, mint a Rebuttalnál: csak [C][C] nyomtatott szimbólumnál igaz, a kártyaadatból nem dönthető el."
+ ]
+}

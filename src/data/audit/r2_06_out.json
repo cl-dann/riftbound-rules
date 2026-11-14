@@ -1,0 +1,54 @@
+{
+ "fixes": {
+  "Kinkou Lifeblade": {
+   "short": "2 Energyért Empowerelhető, ha még nem Empowered: ekkor +1 Mightot és Gankinget kap, vagyis battlefieldről battlefieldre léphet. Az Empower nem exhaustolja, így utána még abban a körben mozoghat. Csak a saját Main Phase-edben, showdownon kívül aktiválható.",
+   "why": "A short szerint 'csak a saját körödben' tölthető; az Empower keyword nélküli activated ability, saját körben showdown alatt sem aktiválható (381.1, 308.1.a)."
+  },
+  "Lee Sin, Ascetic": {
+   "short": "Exhaustolva buffolja magát, és akárhány buffja lehet, mindegyik +1 Might. Védekezéskor a Shield miatt további +1 Mightot kap. Az ability csak a saját Main Phase-edben, showdownon kívül használható. Exhausted lép be, és a buff ugyanúgy exhaustolja, mint a mozgás, ezért ready hatás nélkül a kijátszás körében nem buffolhat, később pedig egy körben vagy buffol, vagy mozog.",
+   "why": "A short kihagyta a [Shield] keywordöt (814.1.c), ami a lap egyik képessége."
+  },
+  "Miss Fortune, Bounty Hunter": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Body és Chaos domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "381.1,415.4,416.3.b",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható. A cost csak a legend exhaustolása, ezért csak ready legenddel használható. Ha egy effect újra readyzi, ugyanabban a körben ismét aktiválható."
+    ],
+    [
+     "810.1.b",
+     0,
+     "Ganking: a unit Standard Move-val battlefieldről közvetlenül másik battlefieldre léphet, nem kell előbb a base-be visszamennie."
+    ],
+    [
+     "810.1.c.3,144.2",
+     0,
+     "A Ganking nem ad plusz mozgást. A Standard Move costja továbbra is a unit exhaustolása, tehát csak ready unitnak ér valamit."
+    ],
+    [
+     "355.10,810.2",
+     0,
+     "A unit target, megkötés nélkül. Már Gankinges uniton a hatás redundáns."
+    ],
+    [
+     "317.2.c",
+     0,
+     "A Ganking a kör végén lejár."
+    ]
+   ],
+   "why": "N1 'körönként egyszer' állítása hibás: az exhaust cost csak ready állapotot kíván, újra readyzve ismét használható (415.4, 416.3.b)."
+  },
+  "Miss Fortune, Buccaneer": {
+   "short": "Kijátszható üres, senki által nem kontrollált battlefieldre, és amíg a boardon van, a többi unitod is. Ha a showdown végén ott maradsz, conquereled a battlefieldet mozgás nélkül. Battlefielden álló enemy Mageseeker Warden mellett nem működik.",
+   "why": "A short elhagyta a Warden feltételét: a tiltás csak 'While I'm at a battlefield' él (Mageseeker Warden szövege, 365.1); base-ben álló Warden nem blokkol."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

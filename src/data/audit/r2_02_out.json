@@ -1,0 +1,258 @@
+{
+ "fixes": {
+  "Carnivorous Snapvine": {
+   "notes": [
+    [
+     "355.10,355.8",
+     0,
+     "Az enemy unit target, battlefielden kell lennie. Ha nincs ilyen választható unit, a trigger nem kerül chain-re."
+    ],
+    [
+     "418.6.b.3,418.6.b.4",
+     0,
+     "A damage-et a két unit osztja egymásnak, nem az ability. A Snapvine damage-éért te, az enemy unitéért a controllere felel."
+    ],
+    [
+     "359.3.f.2,710",
+     0,
+     "Mindkét Might a resolve-kor számít. A Snapvine base-ben, exhausted állapotban is oszt és kap damage-et."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "Ha az enemy unit a resolve előtt base-be kerül vagy elhagyja a boardot, illegális target: egyik irányban sem történik damage."
+    ],
+    [
+     "359.3.e.12",
+     1,
+     "Ha a Snapvine hagyja el a boardot a resolve előtt, a Mightja null, ő nem oszt damage-et."
+    ],
+    [
+     "143.3.b.1",
+     1,
+     "Ez nem combat. A Snapvine-on maradó damage a kör végéig megmarad, egy későbbi combatban hozzáadódik a kapott damage-hez."
+    ]
+   ],
+   "why": "A felelősségről (ki \"felel\" a damage-ért) a 418.6.b.4 szól, nem a hivatkozott 418.6.b.3; a hivatkozás kiegészítve."
+  },
+  "Chemtech Enforcer": {
+   "notes": [
+    [
+     "807.1.c,807.1.d.1",
+     0,
+     "[Assault 2]: csak addig ad +2 Mightot, amíg a unit Attacker designationnel combatban van. Védekezéskor és combaton kívül nem számít."
+    ],
+    [
+     "807.2",
+     0,
+     "Ha más forrásból is kap Assaultot, az értékek összeadódnak."
+    ],
+    [
+     "423.2.a,383.4.a.2",
+     0,
+     "A discard kötelező, nincs \"may\". A play effect azután kerül chain-re, hogy az Enforcer belépett a boardra, tehát a kezedben maradt lapok közül kell dobnod."
+    ],
+    [
+     "423.4",
+     0,
+     "Ha az Enforcer volt az utolsó lapod, a discard negálódik, hátrány nélkül megúszod."
+    ],
+    [
+     "423.1,423.1.b",
+     0,
+     "A dobott lap szövege nem hajtódik végre, de a \"when I am discarded\" és a discardot figyelő effectek (például Raging Soul feltétele) teljesülnek."
+    ],
+    [
+     "132.3,103.3.b",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a különböző nyelvű nyomtatások ugyanannak a névnek számítanak, a 3 példányos limit együtt vonatkozik rájuk."
+    ]
+   ],
+   "why": "A 132.3 csak az azonos nevet mondja ki; a 3 példányos limit a 103.3.b-ből jön, a hivatkozás kiegészítve."
+  },
+  "Clanging Sentry": {
+   "notes": [
+    [
+     "831.2",
+     1,
+     "A szabályzat név szerint ezt a lapot hozza példának: ha második Clanging Sentryt játszol ki, mindkettőnek Disarm 2-je lesz. A szabályzat tehát Mech-ként kezeli a Sentryt."
+    ],
+    [
+     "831.1.d.1",
+     0,
+     "Bármennyi Disarm forrás van egy Mech-en, támadáskor csak egyszer triggerel, az összesített értékkel."
+    ],
+    [
+     "187.4",
+     0,
+     "A 3 Mightú Mech token is Mech, megkapja a Disarmot."
+    ],
+    [
+     "831.1.b,383.4.e.2.a",
+     0,
+     "A Disarm Attack Trigger: minden támadó Mech-ed külön triggerel, combatonként egyszer, és mindegyik választhat más enemy unitot."
+    ],
+    [
+     "365.1",
+     1,
+     "Ha a Sentry elhagyja a boardot, a Mech-ek elveszítik a tőle kapott Disarmot. A már chainen lévő trigger ettől még resolve-ol."
+    ]
+   ],
+   "why": "A \"Mech-ként kezeli a Sentryt\" a 831.2 példájából levont következtetés, nem a szabály szövege: flag 0 helyett 1."
+  },
+  "Combat Chef": {
+   "short": "Weaponmaster: kijátszáskor egy saját Equipmentedet rácsatolhatod, akár egy másik unitról áthozva is, az Equip costját [A]-val, vagyis 1 bármilyen Powerrel olcsóbban fizetve. Ha az Equip costban nincs [A], nincs kedvezmény; ha nincs Equip costja, nem rakható rá. Ha nem tudod kifizetni, az Equipment ott marad, ahol volt.",
+   "why": "821.1.c.3: ha az Equip cost nem tartalmaz [A]-t, nem csökken; a short feltétel nélkül 1 Powerrel olcsóbbat ígért."
+  },
+  "Chemtech Cask": {
+   "short": "Amikor az ellenfél körében kijátszol egy spellt, exhaustolhatod a Caskot, és kapsz egy exhausted Gold gear tokent. Mivel a Cask exhaustolódik, egy újabb Goldhoz előbb ready állapotba kell kerülnie. Counterelt spell nem számít kijátszottnak, arra nincs Gold.",
+   "notes": [
+    [
+     "420.4.a,420.4.a.1",
+     0,
+     "A trigger akkor fut le, amikor a spell resolve-olt. Ha a spellt counterelik, nincs Gold."
+    ],
+    [
+     "806.1.c.1,813.1.c.1",
+     1,
+     "Az opponent körében csak [Action] vagy [Reaction] spellt tudsz kijátszani, ezért a Cask csak ilyen lapokkal működik."
+    ],
+    [
+     "359.3.e.10",
+     1,
+     "Ha a spell minden targetje illegális lett, a spell hatás nélkül resolve-ol, de kijátszottnak számít, a Cask triggerel."
+    ],
+    [
+     "383.3.a,383.3.b,415.4",
+     0,
+     "Az exhaust a trigger costja, a finalizáláskor fizeted. Exhausted Cask nem tud fizetni, ezért egy opponent körben csak akkor ad újabb Goldot, ha közben valami readyzi."
+    ],
+    [
+     "187.5,415.4",
+     1,
+     "A Gold exhausted lép be. Mivel a saját abilityjének costja az exhaust, csak akkor használható, ha már ready lett."
+    ],
+    [
+     "315.1.b",
+     0,
+     "A Cask és a Gold is a saját Awaken Phase-edben lesz újra ready."
+    ]
+   ],
+   "why": "Az exhaust cost nem \"körönként egyszer\" korlát (415.4): ha egy hatás readyzi a Caskot, ugyanabban az opponent körben újra fizethető. A short és a note \"legfeljebb egy Gold\" állítása túlzás volt."
+  },
+  "Cursed Sarcophagus": {
+   "short": "Kijátszáskor a trashedben lévő összes unitot banisheli. Utána a gear exhaustolásával egy ilyen unitot újra kijátszhatsz, a teljes árát kifizetve, csak a saját Main Phase-edben; újra akkor, ha a gear ismét ready. Csak az ezzel a példánnyal banishelt unitok jönnek vissza, és ha a gear elhagyja a boardot, azok ott ragadnak.",
+   "notes": [
+    [
+     "383.4.a.2,355.10.d",
+     0,
+     "A play effect a gear boardra érkezése után kerül chain-re. Az \"all units\" nem target, a resolve-kor a trashedben lévő összes unit banishelődik."
+    ],
+    [
+     "428.3,428.3.a",
+     0,
+     "Csak az ezzel a példánnyal banishelt unitok játszhatók ki. Egy másik Cursed Sarcophagus vagy más effect által banishelt unit nem."
+    ],
+    [
+     "124",
+     1,
+     "Ha a Sarcophagus elhagyja a boardot és visszatér, új objektumnak számít. A korábban banishelt unitok a Banishmentben ragadnak."
+    ],
+    [
+     "355.10.a,108.6.e,403.3",
+     1,
+     "A Banishment Public zóna, ezért a kijátszandó unit target, az aktiváláskor választod. Ha nincs ezzel banishelt unit, az ability nem aktiválható."
+    ],
+    [
+     "420.3.b",
+     0,
+     "A unitot a resolve közben játszod ki, a teljes costját kifizetve. A helyválasztás a szokásos: base vagy általad kontrollált battlefield."
+    ],
+    [
+     "151.2",
+     0,
+     "Csak a saját Main Phase-edben, showdownon kívül aktiválható. Az exhaust a cost, ezért csak ready állapotban használható; ha egy hatás readyzi, ugyanabban a körben újra aktiválható."
+    ],
+    [
+     "383.4.a.2",
+     1,
+     "Csak a kijátszáskor a trashben lévő unitok banishelődnek. A később meghaló unitok a trashben maradnak."
+    ]
+   ],
+   "why": "Az exhaust költségű ability nem körönként egyszer használható, hanem ready állapotban (415.4, 151.2); readyzés után újra aktiválható. A short és a note \"körönként egy\" állítása hibás volt."
+  },
+  "Crowd Favorite": {
+   "notes": [
+    [
+     "823.1.b,823.1.c.1",
+     0,
+     "[Hunt]: conquer és hold effect egyben. 1 XP-t kapsz, ha a unit ott van azon a battlefielden, amelyet conquerelsz vagy holdolsz."
+    ],
+    [
+     "472,823.2",
+     0,
+     "Egy battlefieldet körönként egyszer score-olhatsz, így battlefieldenként körönként legfeljebb 1 XP jön belőle. Ha a Crowd Favorite egy körben több battlefieldnél is részt vesz conquerben vagy holdban, több XP is jöhet. Más forrásból kapott Hunt értéke hozzáadódik."
+    ],
+    [
+     "202,203.3,730.2",
+     0,
+     "A \"Spend 2 XP\" az activated ability cost-ja. 2 XP nélkül nem aktiválható, az XP játékoshoz tartozik, nem a unithoz."
+    ],
+    [
+     "381.1,145.2",
+     0,
+     "A saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható. Nincs Exhaust cost, ezért a kijátszás körében, exhausted unittal is megy."
+    ],
+    [
+     "427.1.b.1,702.3",
+     0,
+     "Egy uniton egyszerre egy buff lehet. Ha már buffolt, az ability resolve-ol, de nem történik semmi, a 2 XP elveszett."
+    ],
+    [
+     "705",
+     0,
+     "A buff addig marad, amíg a unit a boardon van vagy el nem költik. Nem jár le a kör végén."
+    ]
+   ],
+   "why": "A 472 battlefieldenként korlátoz (\"once per Battlefield per turn\"); a note \"körönként legfeljebb 1 XP\" állítása hibás, a hold és egy másik battlefield conquere egy körben 2 XP-t adhat."
+  },
+  "Demacian Illuminators": {
+   "short": "Ha egy vagy több saját unitod meghal, egy saját unitod buffot kap (+1 Might), ha még nincs rajta. Egyszerre több halál csak egyszer indítja el. Hogy akkor is működik-e, ha maga is velük együtt hal meg, a szabályzat nem dönti el egyértelműen, judge kérdés.",
+   "notes": [
+    [
+     "383.2.c,370.1.a.2",
+     1,
+     "\"One or more\": ha több friendly unit hal meg ugyanabban a game actionben (például egy combat damage után), a trigger egyszer fut le. Külön eseményekben meghaló unitok külön triggerelnek."
+    ],
+    [
+     "383.2.c,383.2.c.2,383.2.c.3",
+     2,
+     "Nyitott kérdés, judge döntse el: a 383.2.c.2 (Viktor, Leader példa) szerint a velük együtt távozó objektum nem triggerel, de az Illuminators feltétele (\"one or more friendly units\") a saját halálát is tartalmazza, amire a 383.2.c kivétele és a 383.2.c.3 szerint a trigger a távozás előtt értékelődik. A Core Rules nem dönti el egyértelműen."
+    ],
+    [
+     "355.10,355.8",
+     0,
+     "A buffolt friendly unit target, az Illuminators maga is lehet. Ha nincs friendly unitod, a trigger nem kerül chain-re."
+    ],
+    [
+     "427.1.c,702.3",
+     0,
+     "Már buffolt unit is választható, de nem kap második buffot."
+    ],
+    [
+     "428.2.a,186.1",
+     1,
+     "Token unit halála is számít. Banish és kézbe vétel nem halál, arra nem triggerel."
+    ]
+   ],
+   "why": "A 383.2.c.2 példája (Viktor, Leader) \"another\" feltételű lapra szól; az Illuminators feltétele a saját halálát is lefedi, amire a 383.2.c kivétele és a 383.2.c.3 vonatkozhat. Flag 0 tényállítás helyett nyitott kérdés (flag 2), a short ennek megfelelően."
+  }
+ },
+ "checked": 92,
+ "data_issues": [
+  "Clanging Sentry: a tags mező üres, de a 831.2 példája (\"both of them will have Disarm 2\") szerint a Sentry maga is Mech; a nyomtatott lap tagjét érdemes ellenőrizni."
+ ],
+ "open": [
+  "Darius, Trifarian: a 4. note (flag 1) szerint counterelt második lap után a következő sikeresen resolve-oló lap számít \"második lapnak\". A 426.1.b csak azt mondja ki, hogy a counterelt lap a play triggerek szempontjából nem kijátszott; hogy a \"second card in a turn\" számlálásba beleszámít-e, a Core Rules nem rögzíti egyértelműen (a 420.4.b a nem trigger ellenőrzéseknél a finalizálást nézi). Nem javítottam, judge kérdésként érdemes megjelölni."
+ ]
+}

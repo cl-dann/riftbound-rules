@@ -1,0 +1,450 @@
+{
+ "fixes": {
+  "Hidden Blade": {
+   "short": "Action: a saját körödben vagy showdown alatt megöl egy battlefielden álló unitot, és annak irányítója húz 2 lapot. Ha a unit a resolve előtt base-be kerül, se ölés, se húzás; ha valami megmenti a haláltól, a húzás akkor is jár. Hidden: a saját körödben 1 bármely Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionként, ingyen kijátszhatod, de csak az ottani unitra.",
+   "notes": [
+    [
+     "355.10.d,359.3.e.14",
+     0,
+     "A 355.10.d példája (\"Kill a unit. Its controller draws 2\") majdnem szó szerint ez a szöveg, a 359.3.e.14 példái pedig név szerint a Hidden Bladet hozzák: a unit target, a controllere nem. A húzó játékos nem target, ezért a draw rész önmagában nem tud mistargetelni."
+    ],
+    [
+     "359.3.e.14.a",
+     0,
+     "Linked instructions: ha a unit illegális targetté válik (például base-be mozgatják), a kill ignorálódik, és a controller sem húz."
+    ],
+    [
+     "359.3.e.14.b",
+     0,
+     "Ha a kill negálódik (például replacement effect megmenti a unitot), a controller ettől még húz 2-t."
+    ],
+    [
+     "811.1.d.2",
+     0,
+     "Facedown-ból kijátszva csak az adott battlefielden lévő unitot célozhatja."
+    ],
+    [
+     "355.9.b",
+     0,
+     "Base-ben lévő unit nem választható."
+    ],
+    [
+     "429.1.a.1.b",
+     0,
+     "Kill instruction: a megölt unit Deathknell abilityje chain-re kerül, mielőtt a unit a trashbe megy."
+    ]
+   ],
+   "why": "811.1.b: a Hide csak a saját körödben, általad kontrollált battlefieldre történhet, ez hiányzott a shortból. A 0. note szerint a szabályzat ezt a szöveget hozza példának; a 355.10.d példája nem azonos a lappal (nincs benne 'at a battlefield'), név szerint a 359.3.e.14 példái hozzák."
+  },
+  "Honest Broker": {
+   "short": "Amikor meghal, kapsz egy Gold tokent exhausted állapotban a base-edbe. A Gold csak ready állapotban adhat Powert, ezért általában csak a következő körödben használható, hacsak egy hatás nem readyzi. Ha nem a trashbe kerül, például banish miatt, nem kapsz semmit.",
+   "notes": [
+    [
+     "808.1.c,808.1.d.2",
+     0,
+     "[Deathknell]: \"When I die\" trigger. Még azelőtt chain-re kerül, hogy a unit a trashbe menne, lehet rá reagálni, és akkor is resolve-ol, ha a unit már nincs a boardon."
+    ],
+    [
+     "808.1.d.1,428.2.a",
+     0,
+     "Nem triggerel, ha a unit nem a trashbe kerül: banish, kézbe vétel, recycle, vagy ha a halálát replacement effect lecseréli."
+    ],
+    [
+     "187.5,184.1,416.3.b",
+     0,
+     "A Gold gear token exhausted lép be a base-edbe. A \"Kill this, Exhaust: Add [A]\" abilityje csak ready állapotban használható: jellemzően a következő Awaken Phase-ed után, vagy korábban, ha egy effect readyzi."
+    ],
+    [
+     "479.1.b",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza copy példának: a róla másolt Reflection token minden másolható tulajdonságát átveszi, a nevét és a Deathknelljét is."
+    ]
+   ],
+   "why": "A 'leghamarabb a következő körödben' abszolút állítás hibás: gear ready-zó effect (például Acceleration Gate, Jayce, Defender of Tomorrow) után a Gold korábban is használható (415.4, 416.3.b)."
+  },
+  "Honeyfruit": {
+   "short": "Exhaustolva 1 bármilyen domainű Powert ad, bárki körében, fizetés közben is. Ha legalább 6 XP-d van, helyette 1 Energyt és 1 bármilyen domainű Powert is kérhetsz. Exhausted lép be, ezért a kijátszás körében csak akkor ad valamit, ha egy hatás readyzi.",
+   "notes": [
+    [
+     "315.1.b,416.3.b",
+     1,
+     "A lap szövege szerint exhausted lép be. A következő Awaken Phase-edben lesz ready, előbb csak akkor, ha egy effect readyzi."
+    ],
+    [
+     "135.2.e.5.b",
+     0,
+     "Az [A] bármilyen domain Power costjára elkölthető."
+    ],
+    [
+     "430.2,430.3",
+     0,
+     "[Reaction] Add ability: cost kifizetése közben is aktiválható, bárki körében, azonnal resolve-ol, és nem lehet rá reagálni."
+    ],
+    [
+     "824.1.b.1,824.1.d",
+     0,
+     "Level 6: a második ability csak addig létezik, amíg legalább 6 XP-d van. Ha XP-t költesz és 6 alá esel, azonnal inaktív lesz."
+    ],
+    [
+     "415.4,415.1.b,416.3.b",
+     1,
+     "Mindkét ability costja az exhaust, ezért egy ready állapotból csak az egyik használható; ha egy effect újra readyzi, ismét aktiválható. 6 XP fölött a második a jobb: 1 Energy és 1 Power."
+    ],
+    [
+     "167",
+     0,
+     "A fel nem használt Energy és Power a Main Phase elején és a kör végén elvész."
+    ]
+   ],
+   "why": "A 'körönként csak az egyik' és a 'kijátszás körében nem ad' abszolút állítás hibás: az exhaust cost csak ready állapotot kíván, gear ready-zó effect után újra használható (415.4, 416.3.b). A 369.3 unit belépésére vonatkozik, nem gearre."
+  },
+  "Horns of the Dragon": {
+   "short": "6 Mightú unit Tankkal: combatban az ellenfélnek előbb erre kell halálos sebzést kiosztania, csak utána jöhetnek a Tank nélküli többi unitod. Spellek és képességek ettől még szabadon választhatják a mögötte álló unitokat.",
+   "why": "815.1.b, 815.1.c.2: a Tank csak a Tank nélküli unitokat előzi meg; ha másik Tank unitod is ott áll, az ellenfél köztük szabadon oszt. A short 'a többi unitod' megfogalmazása ezt elhagyta."
+  },
+  "Hostile Takeover": {
+   "short": "Átveszed egy battlefielden álló ellenséges unit irányítását és readyzed: ha ott más ellenséges unit is van, combat indul, ha nincs, conquerelsz. A kör végén elveszíted, és recallolódik. Hidden: a saját körödben 1 bármely Powerért elrejtheted egy általad kontrollált battlefielden, a következő körtől Reactionként, ingyen kijátszhatod, csak az ottani unitra. Ending Phase-ben kijátszva a visszaadás elmarad.",
+   "why": "811.1.b: a Hide csak a saját körödben, általad kontrollált battlefieldre történhet; ez hiányzott, így az 'ottani unit' hivatkozás nem volt egyértelmű."
+  },
+  "Hungry Wolf": {
+   "short": "1 Order Powerért readyzi magát és +1 Mightot kap, ha ebben a körben már választottál ellenséges unitot. Körönként egyszer, csak a saját Main Phase-edben, showdownon kívül, így combat közben sem. A ready Wolf újra mozoghat, de battlefieldről alapból csak a base-be léphet vissza, másik battlefieldre nem.",
+   "notes": [
+    [
+     "145.2,381.1",
+     0,
+     "Activated ability [Action] nélkül: csak a saját Main Phase-edben, Open State-ben, showdownon kívül megy. Combat közben nem."
+    ],
+    [
+     "377.2.b",
+     0,
+     "Két feltétel kell az aktiváláshoz: választottál már enemy unitot a körben, és az abilityt még nem használtad ebben a körben."
+    ],
+    [
+     "383.4.b.3",
+     2,
+     "Hogy egy activated ability feltételében a \"chosen\" mit jelent, a Core Rules nem definiálja. A 383.4.b.3 a triggered abilityknél targetelést ért alatta, ezért valószínűleg itt is az számít, hogy egy spelled vagy abilityd enemy unitot targetelt, és a nem targetelő effect (\"all enemy units\") nem elég. Judge döntse el."
+    ],
+    [
+     "135.2.e.6,135.2.e.5.b",
+     0,
+     "A cost 1 Order Power. Order rune recycle-jéből vagy bármely domain costjára elkölthető [A] Powerből (például Gold token) fizethető. Energyvel vagy más domain Powerével nem."
+    ],
+    [
+     "416.1.c",
+     0,
+     "Ha a Wolf már ready, a ready rész nem csinál semmit, a +1 Might így is jár."
+    ],
+    [
+     "144.4.b,144.4.c.1",
+     1,
+     "A ready Wolf újra tehet Standard Move-ot, de Ganking nélkül battlefieldről csak a base-be léphet. Második támadásra ezért akkor jó, ha a Wolf a base-ben áll exhausted, például döntetlen combat utáni recall után."
+    ]
+   ],
+   "why": "145.2, 381.1: a korlát a showdown (nem csak a combat) és a saját Main Phase; a short 'combaton kívül' megfogalmazása megengedte volna a nem combat showdownt. A 2. note 'valószínűleg' fogalmazású nyitott kérdést közölt 1-es flaggel, a 383.4.b.3 csak triggered abilitykre szól."
+  },
+  "Hunter's Machete": {
+   "short": "Equipment, +2 Might. Equip: 1 Body Power, saját unitra, a saját Main Phase-edben, showdownon kívül. A felszerelt unit Huntot kap: ha ott áll azon a battlefielden, amelyet conquerelsz vagy holdolsz, 1 XP-t kapsz. Meglévő Hunttal összeadódik.",
+   "why": "151.2: a gear activated ability showdown alatt nem használható; ez a megkötés hiányzott a shortból."
+  },
+  "Hunting Blind": {
+   "notes": [
+    [
+     "830.1.b.1,830.1.b",
+     0,
+     "Deploy: bármelyik battlefieldre kijátszható. Ha egy opponent holdol itt, meghal."
+    ],
+    [
+     "383.3.a,355.10",
+     0,
+     "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz. Az enemy unit target, base-ből és másik battlefieldről is elhozható."
+    ],
+    [
+     "809.1.c,355.9.b",
+     0,
+     "Deflectes enemy unit választása [A]-val többe kerül, \"can't be chosen\" unit nem választható."
+    ],
+    [
+     "421.1,452",
+     0,
+     "Ez Move: az áthozott unit \"when I move\" triggerei lefutnak, és ha a battlefieldet nem a unit controllere kontrollálja, Contested lesz."
+    ],
+    [
+     "814.1.c,814.2",
+     0,
+     "Az itt álló friendly unitok Shield 2-t kapnak: +2 Might, amíg defenderek. Meglévő Shield értékkel összeadódik, attackerként nem ér semmit."
+    ],
+    [
+     "323.8,814.1.d,466.2.c.1",
+     1,
+     "Ha olyan battlefieldre húzod az enemy unitot, amelyet te kontrollálsz és ahol unitod áll, combat lesz belőle. A Contested státuszt az ő unitja adja, ezért ő támad, a te unitjaid pedig a Shield 2-vel védekeznek."
+    ]
+   ],
+   "why": "323.8, 466.2.c.1: combat csak akkor indul, ha a behúzott enemy unit mellett neked is van ott unitod; a 'saját battlefield' önmagában ezt nem garantálja."
+  },
+  "Hush": {
+   "short": "Megsemmisít (counterel) egy spellt, amelynek nyomtatott Power költsége legalább 2. Bármikor, válaszként játszható ki. Calm lap: 1 Energy és 2 Calm Power az ára, csak Calm domaint tartalmazó deckbe tehető. Kedvezmény vagy plusz költség nem számít bele a 2-be.",
+   "notes": [
+    [
+     "103.2.b.3",
+     0,
+     "Calm domainű lap, ezért csak olyan deckbe tehető, amelynek Domain Identity-je tartalmazza a Calmot."
+    ],
+    [
+     "135.2.e.6,135.2.e.5.b",
+     0,
+     "A 2 Power cost a lap saját domainjéből, azaz Calm Powerrel fizethető, illetve bármely domainre költhető [A]-val."
+    ],
+    [
+     "206,355.9.b",
+     0,
+     "A target spell nyomtatott Power costja legalább 2 kell legyen. Kedvezmény nem számít, és a Repeat vagy más additional cost Powerje sem."
+    ],
+    [
+     "355.9.a.2",
+     0,
+     "Csak chainen lévő spell választható, unit, gear és ability nem."
+    ],
+    [
+     "426.1.b,426.1.c",
+     0,
+     "A counterelt spell a trashbe megy, a costja nem jár vissza, és nem számít kijátszottnak a \"when you play\" triggerekhez."
+    ]
+   ],
+   "why": "A bemenet szerint a lap Calm domainű (a Riot feed domainje üres); a short és a 0., 1. note tévesen domain nélkülinek mondta (103.2.b.3, 135.2.e.6)."
+  },
+  "Icathian Rain, Kai'Sa": {
+   "notes": [
+    [
+     "355.10",
+     1,
+     "Hat külön \"Deal 2 to a unit\" instruction, mindegyik unitja target. Ugyanaz a unit többször is választható, vagy szétosztható több unit között."
+    ],
+    [
+     "355.8",
+     0,
+     "Chain-re csak úgy tehető, ha mind a hat targetre van érvényes választás. Egyetlen unit is elég hozzá."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "Ha egy target a resolve előtt illegálissá válik, csak a rá mutató instructionök maradnak el, a többi damage megtörténik."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és a legend Champion tagjét (Kai'Sa) kell viselnie."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "388.1",
+     1,
+     "Errata: a régi \"Do this 6 times:\" forma helyett hat sima instruction áll. A targeteket kijátszáskor választod, és a spell egy chain itemként resolve-ol."
+    ]
+   ],
+   "why": "Hogy ugyanaz a unit több külön instructionhöz is választható, a Core Rules nem mondja ki közvetlenül; a 355.10-ből és a régi szöveg emlékeztetőjéből levezetett állítás, ezért flag 1."
+  },
+  "Icevale Archer": {
+   "short": "Amikor támad, fizethetsz 1 Energyt: ekkor egy ugyanott álló unit 1 Mightot veszít a kör végéig, akár a sajátod is. Ha a kiválasztott unit vagy az Archer közben elhagyja a battlefieldet, nem történik semmi, az Energy elveszett. A -1 megölheti a sebzett unitot.",
+   "why": "A 'you may pay [1]' opcionális jellege hiányzott a shortból (383.3.a, 383.3.b)."
+  },
+  "Immortal Phoenix": {
+   "short": "Támadáskor +2 Mightot kap. Ha egy spelleddel unitot ölsz meg, 1 Energy és 1 Fury Power megfizetésével kijátszhatod a trashből (hogy a saját költségét is fizetni kell-e, judge kérdés). Akkor is működik, ha a spell épp a Phoenixet ölte meg. Combatban vagy unit, gear képességével megölt unit nem számít, a spell saját \"do this\" képességével megölt igen.",
+   "why": "A short tényként közölte, hogy az [1][C] a teljes ár, miközben az 5. note (flag 2) ezt nyitott kérdésnek jelöli (356.1.a, 420.3.b); az ellentmondás megszüntetve."
+  },
+  "Industrious Mechsmith": {
+   "short": "Kijátszáskor ugyanoda kapsz egy 3 Mightú Mech tokent, ahol a Mechsmith áll. Az ellenfél reagálhat, mielőtt a token megjelenik; ha addigra a Mechsmith elhagyja a boardot, nem kapsz tokent. Mind lap, csak Mind domaint tartalmazó deckbe tehető.",
+   "notes": [
+    [
+     "103.2.b.3",
+     0,
+     "Mind domainű lap, ezért csak olyan deckbe tehető, amelynek Domain Identity-je tartalmazza a Mindot."
+    ],
+    [
+     "187.4,185.2.d",
+     0,
+     "A Mech token domain nélküli, 3 Mightú unit Mech taggel. Unitként exhausted lép be."
+    ],
+    [
+     "383.4.a.2",
+     0,
+     "Play effect: azután kerül chain-re, hogy a Mechsmith belépett a boardra. Az opponent reagálhat rá, mielőtt a token megjelenik."
+    ],
+    [
+     "359.3.f.2,359.3.e.6",
+     1,
+     "A \"here\" a resolve-kor a Mechsmith aktuális helyét jelenti. Ha addigra lekerült a boardról, ez az információ nem elérhető, a token nem jön létre."
+    ],
+    [
+     "184.2",
+     0,
+     "A token csak oda kerülhet, ahol a Mechsmith áll, nem választhatsz neki másik locationt."
+    ]
+   ],
+   "why": "A bemenet szerint a lap Mind domainű (a Riot feed domainje üres); a short és a 0. note tévesen domain nélkülinek mondta (103.2.b.3)."
+  },
+  "Invigorating Bloom": {
+   "short": "Kijátszáskor egy saját unitod +3 Mightot kap a kör végéig. A gear és egy ready, Mighty (legalább 5 Mightú) saját unitod exhaustolásával húzol 1 lapot, akár már a kijátszás körében is. Ez csak a saját körödben, showdownon kívül használható, és az exhaustolt unit utána csak akkor tehet Standard Move-ot abban a körben, ha valami újra readyzi.",
+   "notes": [
+    [
+     "355.10,355.8",
+     0,
+     "A play effect friendly unitja target. Ha nincs unitod, a trigger nem kerül chainre, a gear ettől még bejön."
+    ],
+    [
+     "317.2.c,709",
+     0,
+     "A +3 Might a kör végéig tart. Egy 2 vagy több Mightú unit ettől abban a körben Mighty lesz."
+    ],
+    [
+     "708,415.4,355.10.c",
+     0,
+     "A draw ability costja egy ready, legalább 5 Mightú friendly unit és a gear exhaustolása. A unit cost, nem target. Exhausted Mighty unittal nem fizethető ki."
+    ],
+    [
+     "144.2,416.3.b",
+     1,
+     "Az így exhaustolt unit abban a körben csak akkor tud Standard Move-ot tenni, ha egy effect újra readyzi; a húzás ára jellemzően egy mozgás."
+    ],
+    [
+     "151.2,149.1",
+     0,
+     "Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható. A gear ready lép be, a kijátszás körében már használható."
+    ],
+    [
+     "414.4",
+     0,
+     "Üres Main Deck esetén a draw Burn Outot okoz."
+    ]
+   ],
+   "why": "Abszolút 'nem mozoghat' állítás a shortban és a 3. note-ban: ready effect után az exhaustolt unit ugyanabban a körben újra tehet Standard Move-ot (416.3.b, 144.2)."
+  },
+  "Irelia, Blade Dancer": {
+   "short": "Amikor egy spelled vagy képességed saját unitra mutat, a legend exhaustolásával és 1 bármely domainű Powerért readyzheted azt a unitot, még mielőtt a spell hatna rá. Ha conquerelsz, 1 Energyért readyzheted a legendet, így egy körben többször is használható. Az \"összes unit\" típusú hatások nem váltják ki.",
+   "why": "Az [A] bármely domain 1 Powere (135.2.e.5.b); a short '1 Powerért' alakja ezt nem mondta ki."
+  },
+  "Iridescent Avian": {
+   "short": "Exhaustolva buffol egy unitot (tartós +1 Might). Ha az már buffolt, helyette +2 Mightot kap a kör végéig. Csak a saját körödben, showdownon kívül használható. Exhausted lép be, és a Standard Move is exhaustol, ezért ready hatás nélkül a kijátszás körében nem használható, és egy körben vagy mozog, vagy buffol.",
+   "notes": [
+    [
+     "381.1,145.2",
+     0,
+     "Activated ability [Action] és [Reaction] nélkül: csak a saját Main Phase-edben, Open State-ben, showdownon kívül. Combat közben már nem használható."
+    ],
+    [
+     "143.4,415.4,416.3.b",
+     0,
+     "Exhausted lép be, az Exhaust cost csak ready unittal fizethető, így ready effect nélkül a kijátszás körében nem megy. A Standard Move is exhaustolja, tehát egy ready állapotból vagy mozog, vagy buffol; ha egy effect újra readyzi, mindkettő mehet."
+    ],
+    [
+     "355.10,355.9.a.1",
+     0,
+     "A unit target, bármelyik boardon lévő unit lehet, az Avian maga és enemy unit is."
+    ],
+    [
+     "359.3.f.2,427.1.b",
+     0,
+     "Hogy a unit már buffolt-e, a resolve-kor dől el. Ha nem az, tartós +1 Might buffot kap. Ha igen, +2 Mightot a kör végéig, buff nélkül."
+    ],
+    [
+     "359.3.e.7",
+     0,
+     "Ha a target a resolve előtt elhagyja a boardot, az ability nem csinál semmit, az Avian exhausted marad."
+    ]
+   ],
+   "why": "Abszolút állítás a shortban és az 1. note-ban: ready effect után az ability a kijátszás körében, illetve Standard Move után is használható (415.4, 416.3.b)."
+  },
+  "Iron Ballista": {
+   "short": "Exhaustolva 2 sebzést oszt egy battlefielden álló unitnak, akár a sajátodnak is. Exhausted lép be, ezért általában csak a következő körödtől lő, hacsak egy hatás nem readyzi. Csak a saját körödben, showdownon kívül használható, így combat közben sem.",
+   "notes": [
+    [
+     "315.1.b,416.3.b",
+     1,
+     "A lap szövege szerint exhausted lép be, ezért a kijátszás körében csak akkor lő, ha egy effect (például Acceleration Gate) readyzi. Egyébként a következő Awaken Phase-edben lesz ready."
+    ],
+    [
+     "355.10,355.9.b",
+     0,
+     "A unit target, és battlefielden kell lennie. Base-ben lévő unit nem választható. Lehet saját unit is."
+    ],
+    [
+     "359.3.e.9",
+     0,
+     "Ha a unit a resolve előtt base-be kerül, az ability mistargetel, nincs damage."
+    ],
+    [
+     "418.6.b.2.a",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a damage-et egyszerre a gear és az ability okozza. Ez az ilyen forrást figyelő effecteknél számít."
+    ],
+    [
+     "142.4.b,323.4",
+     0,
+     "A 2 damage a legfeljebb 2 Mightú unitot a következő cleanupban megöli. Nagyobb uniton a damage a kör végéig megmarad."
+    ],
+    [
+     "151.2",
+     0,
+     "Csak a saját Main Phase-edben, showdownon kívül aktiválható. Combat közben nem lő."
+    ]
+   ],
+   "why": "Abszolút 'csak a következő körödtől lő' állítás a shortban és a 0. note-ban: gear ready-zó effect (például Acceleration Gate, Jayce, Defender of Tomorrow) után a kijátszás körében is lőhet (415.4, 416.3.b). A 369.3 unit belépésére vonatkozik, nem gearre."
+  },
+  "Jarvan IV, Exemplar of Demacia": {
+   "short": "Amikor Deploy kulcsszavas geart játszol ki, a legend exhaustolásával és 1 bármely domainű Powerért odamozgathatsz egy saját unitot. Ez nem rendes mozgás: exhausted unit is mehet, és battlefieldről battlefieldre is. Ha a battlefield nem a tiéd, harc vagy showdown jöhet.",
+   "why": "Az [A] bármely domain 1 Powere (135.2.e.5.b); a short '1 Powerért' alakja ezt nem mondta ki."
+  },
+  "Jayce, Defender of Tomorrow": {
+   "short": "1 Energyért és a legend exhaustjáért readyzhetsz egy geart, így az exhaustos gear képességek egy körben kétszer is használhatók. Ha 2 Energyért és 2 bármely domainű Powerért egyszer Empowereled, ugyanazért az árért 2 geart readyzhet. Csak a saját körödben, showdownon kívül.",
+   "why": "Az Empower cost [2][A][A], vagyis 2 Energy és 2 bármely domainű Power (135.2.e.5.b); a short a Power domainjét nem mondta ki."
+  },
+  "Jhin, Murderous Artist": {
+   "short": "Minden mozgásakor kapsz 1 Energyt és 1 bármely domainű Powert, akkor is, ha az ellenfél mozgatja. Battlefieldről battlefieldre is léphet, és az ellenfélnek plusz 1 Power, hogy rá mutasson. A kapott erőforrást a mozgással induló harcban rögtön elköltheted.",
+   "why": "A kapott [A] bármely domain Powere (135.2.e.5.b); a short '1 Powert' alakja ezt nem mondta ki."
+  },
+  "Kennen, Storm of Shuriken": {
+   "notes": [
+    [
+     "103.3.a.1,103.3.b.1",
+     0,
+     "Ha ő a Chosen Champion, egy példány a Champion Zone-ból indul, és ez is beleszámít a névenkénti 3 példányos limitbe."
+    ],
+    [
+     "441.3.a, 441.4, 432",
+     0,
+     "A Burn 2 kötelező. Ha kevesebb mint 2 lap van a Main Deckben, Burn Out következik: a trash visszakeveredik, és egy opponent 1 pontot kap."
+    ],
+    [
+     "471.1, 472, 473.2.a",
+     0,
+     "A conquer trigger csak akkor fut le, ha a battlefieldet conquerrel score-olod. Egy battlefield körönként egyszer score-olható, ugyanott másodszor nem triggerel."
+    ],
+    [
+     "355.10.a, 355.8",
+     0,
+     "A trash Public zóna, ezért a trashben lévő spell target. Ha nincs spell a trashedben, nincs érvényes választás, a trigger nem kerül chain-re."
+    ],
+    [
+     "829.1.b, 829.1.b.2",
+     0,
+     "A kapott Flow-val a spell a trashből játszható ki a saját cost-jáért, utána banishelődik. A Flow nem változtat az időzítésen: [Action] vagy [Reaction] nélküli spell továbbra is csak a saját körödben megy."
+    ],
+    [
+     "829",
+     1,
+     "A Flow csak \"this turn\" él. Ha abban a körben nem tudod kifizetni a spellt, a hatás elveszett."
+    ]
+   ],
+   "why": "A 0. note feltétel nélkül állította, hogy egy példány a Champion Zone-ból indul; ez csak akkor igaz, ha ő a Chosen Champion (103.3.a.1, 103.3.b.1)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Immortal Phoenix: a 'pay [1][C] to play me' mellett a saját base cost fizetése a Core Rulesból nem dönthető el (356.1.a csak a 'for [Cost]' alakot kezeli, 420.3.b szerint a Play lépései normálisan futnak); a short és a note judge kérdésként kezeli.",
+  "Hungry Wolf: az activated ability feltételében a 'chosen' jelentését (targetelés vagy bármilyen választás) a Core Rules nem definiálja; a note flag 2-re állítva."
+ ]
+}

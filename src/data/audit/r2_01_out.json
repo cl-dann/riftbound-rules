@@ -1,0 +1,235 @@
+{
+ "fixes": {
+  "Armed Assailant": {
+   "short": "Kijátszáskor fizethetsz plusz 1 Energy és 1 Fury Power költséget: ekkor ready lép be. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod, akár egy másik unitról áthozva, és az Equip költségéből egy bármilyen domainű Powert ([A]) elengedhetsz, ha van benne ilyen. Ha az Equipmentnek nincs Equip költsége, így nem csatolható.",
+   "notes": [
+    [
+     "805.1.b,805.1.b.1",
+     0,
+     "[Accelerate]: kijátszáskor [1] és egy Fury Power additional costért ready lép be. A Power csak a unit saját domainjéből fizethető."
+    ],
+    [
+     "821.1.c,383.3.a",
+     0,
+     "[Weaponmaster]: play effect, a \"you may\" az elején áll. Kiválasztasz egy általad kontrollált Equipmentet, és az Equip costját [A]-val (egy bármely domainű Powerrel) csökkentve kifizetve rácsatolod."
+    ],
+    [
+     "821.1.b,821.1.c.6",
+     0,
+     "Az Equip ability szokásos időzítése nem számít, és az ability nem aktiválódik. Az Equip aktiválására figyelő effectek nem futnak le."
+    ],
+    [
+     "821.1.c.3,821.1.c.4",
+     0,
+     "Ha az Equip cost nem tartalmaz [A]-t (például csak [C] vagy csak Energy), kifizethető, de nem lesz olcsóbb. Equip cost nélküli Equipment így nem csatolható."
+    ],
+    [
+     "435.1.f",
+     0,
+     "Már másik unitra csatolt Equipment is választható: onnan leválik."
+    ],
+    [
+     "821.1.c.5",
+     0,
+     "Ha a cost nem fizethető ki, az Equipment a helyén marad, ahhoz csatolva, amihez addig volt."
+    ]
+   ],
+   "why": "A short és a notes \"1 Powerrel olcsóbban\" / \"ha nincs Power\" megfogalmazása pontatlan: a 821.1.c szerint a csökkentés [A], és a 821.1.c.3 szerint csak akkor csökken a cost, ha [A]-t tartalmaz ([C] vagy konkrét domain Power nem csökken)."
+  },
+  "Armored Tusker": {
+   "notes": [
+    [
+     "421.1,458.1",
+     0,
+     "Minden Move-ra triggerel, Standard Move-ra és effect általi mozgatásra is. Recallra nem."
+    ],
+    [
+     "383.3.a",
+     0,
+     "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz."
+    ],
+    [
+     "355.10,355.9.b",
+     0,
+     "A unit target, és battlefielden kell lennie. Bármelyik játékos unitja lehet, base-ben álló nem."
+    ],
+    [
+     "814.1.b.2,814.2",
+     1,
+     "A sebzés a Tusker Shield értéke, alapból 3. Ehhez nem kell Defendernek lennie: a Shield érték a unit tulajdonsága, csak a Might bónusz függ a védekezéstől. A máshonnan kapott Shield hozzáadódik."
+    ],
+    [
+     "359.3.f.2,359.3.e.12",
+     0,
+     "A Shield értéket a resolve-kor nézi a játék. Ha a Tusker addigra elhagyja a boardot, az érték null, a trigger nem sebez."
+    ],
+    [
+     "815.1.b",
+     0,
+     "Tank: neki kell először halálos combat damage-et kiosztani. Defenderként 7 Mightú."
+    ]
+   ],
+   "why": "A 359.3.f.2.a targetre vonatkozik, a Tusker nem target. A board elhagyása miatti null érték a 359.3.e.12-ből jön; hivatkozás javítva."
+  },
+  "Assembly Rig": {
+   "notes": [
+    [
+     "417.3,355.10.c",
+     0,
+     "A \"Recycle a unit from your trash\" a cost része, nem target. Ha nincs unit a trashedben, a cost nem fizethető ki, az ability nem aktiválható."
+    ],
+    [
+     "417.1.a",
+     0,
+     "A recycle-ölt unit a Main Deck aljára kerül, tehát később újra húzható."
+    ],
+    [
+     "135.2.e.6",
+     0,
+     "A [C] ennél a lapnál Fury Powert jelent, más domain Powerével nem fizethető."
+    ],
+    [
+     "187.4,185.2.d",
+     0,
+     "A Mech token domain nélküli, 3 Mightú unit Mech taggel. Unitként exhausted lép be, a szöveg szerint a base-edbe."
+    ],
+    [
+     "151.2,415.4",
+     0,
+     "Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, és csak ready állapotban, mert a cost része az exhaust. Ha egy effect újra readyzi, ugyanabban a körben ismét aktiválható."
+    ],
+    [
+     "185.2.a,440.2.c",
+     1,
+     "A tokent \"play\"-eled, ezért a \"when you play a unit\" triggerek (például Blood Rose, Ephemeral Ward) erre is lefutnak."
+    ]
+   ],
+   "why": "A note \"körönként egyszer\" állítása hamis: az exhaust cost csak ready állapotot követel (415.4), újrareadyzés után ismét aktiválható."
+  },
+  "Atakhan": {
+   "short": "Kijátszáskor feláldozhatsz egy saját unitot, és Atakhan annyival olcsóbb, amennyi a feláldozott unit Energy és Power költsége volt. Sima token feláldozása nem ad kedvezményt, de egy lapot másoló token a másolt költséget adja. Battlefieldről battlefieldre is mozoghat, és amikor támad, a védőnek meg kell ölnie egy saját ott álló unitját, amit ő maga választ ki.",
+   "why": "A short szerint \"a token feláldozása nem ad kedvezményt\", de a 206 példája szerint a Noxus Hopefult másoló Reflection token [4] kedvezményt ad; ez a short és a saját note ellentmondása volt."
+  },
+  "Azir, Emperor of the Sands": {
+   "short": "Legend: 1 Energyért és exhaustolva kapsz egy 2 Mightú Sand Soldier unit tokent a base-edbe, de csak ha ebben a körben már kijátszottál egy Equipmentet, és csak a saját Main Phase-edben, showdownon kívül. Az általad kijátszott Sand Soldierek Weaponmastert kapnak: kijátszáskor felvehetnek egy Equipmentet, az Equip költségéből egy [A] Powert elengedve, ha van benne ilyen.",
+   "why": "A short \"1 Powerrel olcsóbban\" állítása pontatlan: a 821.1.c.3 szerint csak [A]-t tartalmazó Equip cost csökken."
+  },
+  "Back-Alley Bar": {
+   "short": "Minden unit, amely innen elmozog, +1 Mightot kap erre a körre, az ellenfelé is. A Recall és a kézbe visszaküldés nem számít mozgásnak. Jó ugródeszka: ha innen Gankinggel vagy egy effecttel közvetlenül másik battlefieldre mész támadni, a bónusz ott is él.",
+   "why": "A short úgy fogalmazott, mintha innen bármely unit átléphetne másik battlefieldre; a 810.1.b szerint battlefieldről battlefieldre Standard Move-val csak Ganking engedi (vagy effect)."
+  },
+  "Bandle Scouts' Academy": {
+   "short": "Amikor ide elrejtesz (Hide) egy lapot, kapsz egy exhausted Gold gear tokent, ami később 1 bármilyen Powert ad. Külön ready effect nélkül a következő saját körödtől használható, így a rejtés ára akkor jön vissza, az ellenfél köre alatt még nem. Az ellenfél a token érkezésére reagálhat.",
+   "notes": [
+    [
+     "422.1,107.3.c",
+     0,
+     "Elrejteni csak általad kontrollált battlefieldre lehet, tehát a trigger a battlefield controllerének jár."
+    ],
+    [
+     "811.1.c.2",
+     1,
+     "Maga a Hide nem nyit chaint, de ez a trigger igen: az opponent ilyenkor reagálhat."
+    ],
+    [
+     "187.5",
+     0,
+     "A Gold domain nélküli gear token: \"[Reaction], Kill this, Exhaust: Add [A]\"."
+    ],
+    [
+     "184.1,148.1.a.1",
+     0,
+     "A Gold exhausted érkezik a base-edbe, ezért abban a körben még nem ad Powert."
+    ],
+    [
+     "811.1.b,315.1.b",
+     1,
+     "A Hide [A]-ba kerül, a Gold később [A]-t ad. Mivel a Gold exhausted érkezik, külön ready effect nélkül a következő saját köröd Awaken Phase-ében lesz ready, az elrejtés ára így akkor jön vissza."
+    ],
+    [
+     "440.2.c,185.2.a",
+     1,
+     "A tokent kijátszod, a \"when you play a gear\" triggereket kiváltja. Nincs \"may\", a Gold kötelezően létrejön."
+    ]
+   ],
+   "why": "Az \"egy körrel később visszajön\" félrevezető: a következő kör az ellenfélé, amikor a Gold még exhausted; csak a következő saját Awaken Phase-ben readyzik (315.1.b)."
+  },
+  "Baron Pit": {
+   "short": "Token battlefield, amit Baron Nashor hoz létre, nem lehet vele kezdeni. Bármelyik battlefieldről ide lehet lépni, külön képesség nélkül, innen tovább viszont a szokásos szabályok élnek. Létrejöttekor senki sem kontrollálja.",
+   "why": "A \"senki sem tartja\" a hold (pontszerzés) fogalommal keverhető; a 440.4.b szerint a létrehozott battlefield uncontrolled, ezt mondja ki pontosan."
+  },
+  "Blue Sentinel": {
+   "short": "Védekezéskor +2 Mightot kap. Ha az ő battlefieldjét tartod (hold), az ehhez kötött összes hold hatásod kétszer fut le, a sajátja is. Saját holdjakor ugyanannak a körnek a Main Phase elején 1 Powert kapsz, a duplázás miatt összesen 2-t, és ez akkor is jár, ha addigra lekerült.",
+   "notes": [
+    [
+     "814.1.c,814.1.d.1",
+     0,
+     "[Shield 2]: csak addig ad +2 Mightot, amíg Defender designationje van. Attackerként nem ér semmit."
+    ],
+    [
+     "383.4.d.2.a,383.4.d.2.b",
+     1,
+     "A passzív minden olyan hold effectedet megduplázza, amely az ő battlefieldjének holdjára triggerel: az ottani unitjaid \"When I hold\" abilityjét, a battlefield \"When you hold here\" abilityjét és a saját triggerét is."
+    ],
+    [
+     "391.2,393",
+     0,
+     "A saját hold triggere delayed abilityt hoz létre. Ez akkor is lefut a Main Phase elején, ha a Sentinel közben elhagyta a boardot."
+    ],
+    [
+     "315.2.b,316.3,316.4",
+     0,
+     "A hold a Beginning Phase-ben történik, a \"next Main Phase\" ugyanannak a körnek a Main Phase-e. A Rune Pool előbb ürül ki, utána jön az [Add], tehát a Power megmarad a körre."
+    ],
+    [
+     "383.4.g,383.4.g.2",
+     1,
+     "Ha egy effect csak \"aktiválja\" a hold effecteket, tényleges hold nélkül, a 383.4.g.2 szerint hold esemény nem történik. A szabály példája az azonos szerkezetű Red Brambleback duplázásra kimondja, hogy az így aktivált effectek nem triggerelnek még egyszer, így a Sentinel duplázása sem él ilyenkor."
+    ],
+    [
+     "472",
+     0,
+     "Egy battlefield körönként egyszer score-olható, a hold triggerek körönként egyszer indulnak (duplázva kétszer)."
+    ]
+   ],
+   "why": "A short 1 Powert írt, holott a note szerint (383.4.d.2.a) a saját hold triggerét is duplázza, így 2 Power jár. A nyitottnak jelölt \"aktivált hold\" kérdést a 383.4.g.2 Red Brambleback példája analóg szöveggel eldönti."
+  },
+  "Bushwhack Trap": {
+   "notes": [
+    [
+     "830.1.b.1,830.1.b.3",
+     0,
+     "Deploy: bármelyik battlefieldre kijátszható és ott marad. Ha egy opponent holdol itt, meghal."
+    ],
+    [
+     "811.1.b",
+     0,
+     "Alapból battlefieldenként egy facedown lapod lehet. A Trap mellett egy második is elrejthető ugyanoda, a szokásos [A] costért, a saját körödben."
+    ],
+    [
+     "811.1.b,323.6.a",
+     1,
+     "Az engedély csak addig él, amíg te (vagy egy ally) kontrollálod a battlefieldet. Ha elveszíted a kontrollt, a cleanup minden ott lévő Hidden lapodat a trashbe teszi."
+    ],
+    [
+     "107.3.b.1,107.3.b.2",
+     1,
+     "Ha a Trap elhagyja a boardot, miközben két facedown lapod van itt, a férőhely visszaesik 1-re, és a 107.3.b.2 szerint a többletet a Facedown Zone controllerének a trashbe kell tennie."
+    ],
+    [
+     "148.1.a.3",
+     0,
+     "Gearként célozható és megölhető, az opponent így spellel is megszüntetheti az extra helyet."
+    ]
+   ],
+   "why": "A nyitott kérdésnek jelölt helyzetet a 107.3.b.2 szabályozza (férőhely csökkenésekor a többlet a trashbe kerül), ahogy a Bandle Tree notes is hivatkozza."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Blade of the Ruined King: a short és a 357.3-ra épülő note szerint a costként megölt unit nem lehet az Equip targetje, ha van más választás. A 357.3 a kijátszási folyamaton belüli illegális választásról szól; hogy a target megölése (resolve-kori mistarget) ide tartozik-e, a szabály nem mondja ki egyértelműen. A gyakorlati következtetés (két unit kell) helyes, a tiltás formális alapja bizonytalan.",
+  "Back-Alley Bar: a short \"minden unit\" +1-et ad, a notes viszont nyitottnak jelöli (190.6.b vs 190.6.d), hogy uncontrolled battlefieldről elmozduló unit kap-e bónuszt. Ha a judge a 190.6.d szerint dönt, a short túláltalánosít.",
+  "Bullet Time, Miss Fortune: a 204.3.a példája \"Pay any amount of [A]\" szöveggel idézi a lapot, a kártya hivatalos szövege [C]. A notes a kártyaszöveget követi (Body vagy Chaos Power); a szabálykönyv példája eltér."
+ ]
+}

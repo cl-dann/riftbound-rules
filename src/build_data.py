@@ -99,6 +99,13 @@ for c in cards:
         want=[RAD_BLOCK[(int(m.group(1))-1)//23]]
         if c['d']!=want: DOMFIX[c['_fn']]=(c['d'],want); c['d']=want
 print('radiance domain fixes',len(DOMFIX))
+# Tags missing from the feed, proven by an official Core Rules example
+EQFIX=[]
+for c in cards:
+    if c['t']=='Gear' and re.search(r'\[(Equip|Quick-Draw)\]',c['txt'] or '') and 'Equipment' not in c['tg']: c['tg']=sorted(c['tg']+['Equipment']); EQFIX.append(c['_fn'])  # 818.1.a, 819.1.a
+print('equipment tag added',EQFIX)
+for c in cards:
+    if c['_fn']=='Clanging Sentry' and 'Mech' not in c['tg']: c['tg']=sorted(c['tg']+['Mech'])  # 831.2 example: both Sentries get Disarm 2
 # ---------- topics
 T=[]
 def topic(k,title,g,refs,test=None,rel=(),why=None): T.append({'k':k,'title':title,'g':g,'refs':list(refs),'rel':list(rel),'why':why,'_t':test})

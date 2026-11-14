@@ -1,0 +1,282 @@
+{
+ "fixes": {
+  "Divining Shells": {
+   "short": "Kijátszáskor megnézed a decked felső lapját, és a deck aljára teheted. Később feláldozhatod és exhaustolhatod, hogy egy unit a kör végéig +2 Mightot kapjon, akár harc közben, a kijátszás körében is. Egyszer használható.",
+   "why": "A short elhagyta a \"this turn\" időtartamot: a +2 Might csak a kör végéig tart (317.2.c)."
+  },
+  "Doran's Ring": {
+   "short": "1 Chaos Powerért saját unitra szerelhető, ekkor +1 Mightot ad. Amikor a felszerelt unit részt vesz egy battlefield conquerében, eldobsz 1 lapot, majd húzol 1-et, akkor is, ha a conquer pontja helyett mást kapsz (például az utolsó pontnál húzást). Ha a battlefieldet ebben a körben már score-oltad, nincs conquer, így trigger sem. Ez kötelező: üres kézzel csak húzol, üres deckkel a húzás Burn Outot okoz.",
+   "why": "A short feltétel nélkül állította, hogy pont nélkül is triggerel; ez csak akkor igaz, ha a conquer pontja negálódik vagy helyettesítődik (383.4.c.2.c, 473.1.b.1). Ha a battlefieldet abban a körben már score-oltad, nincs conquer, így trigger sem (348.2.a.1, 468.5.d, 472)."
+  },
+  "Dragon Roost": {
+   "short": "Battlefield: bármelyik játékos plusz 2 bármilyen domainű Powerért ide játszhat egy Dragont, akkor is, ha nem ő tartja a helyet. Ha kifizetted, kötelező ide tenni. Ha nem a tiéd a hely, a Dragon érkezése showdownt vagy harcot indít.",
+   "why": "A short nem írta ki, hogy az [A][A] bármely domain Powere lehet (356.2.b.1)."
+  },
+  "Dragonsoul Sage": {
+   "short": "1 Mightú unit, ami exhausttal 1 Energyt ad, bárki körében, akár egy másik lap kifizetése közben. Exhausted lép be, ezért a kijátszás körében csak akkor ad Energyt, ha egy hatás readyzi. A Standard Move is exhaustolja, így mozgás után csak újbóli ready esetén tud Energyt adni.",
+   "notes": [
+    [
+     "143.4,415.4",
+     1,
+     "Exhausted lép be, az Exhaust cost pedig csak ready unittal fizethető ki. A kijátszás körében ezért csak akkor ad Energyt, ha egy hatás readyzi."
+    ],
+    [
+     "430.3,445.2.c",
+     0,
+     "[Reaction] Add ability: bármikor aktiválható, amikor egy costot fizetni kell, akár az opponent körében, akár egy másik lap kifizetése közben."
+    ],
+    [
+     "430.2",
+     0,
+     "Azonnal finalizálódik és resolve-ol, nem lehet rá reagálni."
+    ],
+    [
+     "144.2,415.4",
+     1,
+     "A Standard Move is exhaustolja. Mozgás után csak akkor ad Energyt, ha egy hatás újra readyzi; Energy adása után pedig csak újbóli ready esetén mozoghat."
+    ],
+    [
+     "167",
+     0,
+     "A hozzáadott Energy a kör végén és a Main Phase elején elvész a Rune Poolból."
+    ]
+   ],
+   "why": "A short és két note feltétel nélkül állította, hogy a kijátszás körében, illetve mozgás után nem ad Energyt. Egy ready effect után az Exhaust cost újra fizethető (415.4, 416)."
+  },
+  "Draven, Vanquisher": {
+   "short": "4 Mightú champion. Támadáskor vagy védekezéskor 1 Fury Powerért a kör végéig +2 Mightot kaphat, ezt előre, a trigger chainre tételekor kell kifizetned. Ha megnyeri a harcot, kapsz egy exhausted Gold tokent.",
+   "notes": [
+    [
+     "103.3.e",
+     1,
+     "A kártyaadat szerint ez a lap jelenleg banned. A deck a formátum kártyalegalitásának alá van vetve, verseny előtt ellenőrizd."
+    ],
+    [
+     "468.3.a,468.3.c",
+     0,
+     "\"Win a combat\": a combat végén csak neked maradt unitod a battlefielden, és Draven ott van. Döntetlennél nincs Gold."
+    ],
+    [
+     "383.3.a,383.3.b",
+     0,
+     "A \"you may\" után álló \"pay [C]\" a trigger base costja: a Fury Powert a finalizáláskor fizeted. Ha nem fizetsz, a trigger lekerül a chainről."
+    ],
+    [
+     "205",
+     1,
+     "Errata: a régi \"you may pay [C]. If you do\" szövegnél a fizetés a resolve-kor történt. Most előre fizetsz, az opponent a kifizetett trigger láttán reagál."
+    ],
+    [
+     "383.4.e.2.a,383.4.f.2.a",
+     0,
+     "Combatonként egyszer triggerel, akkor, amikor először kap Attacker vagy Defender jelölést."
+    ],
+    [
+     "187.5,184.1",
+     1,
+     "A Gold exhausted lép be, az abilityje pedig Exhaust costot kér: abban a körben csak akkor ad Powert, ha egy hatás readyzi."
+    ]
+   ],
+   "why": "A short elhagyta a \"this turn\" időtartamot (317.2.c). A Gold note feltétel nélkül állította, hogy abban a körben nem ad Powert; ready effect után igen (415.4)."
+  },
+  "Eminent Benefactor": {
+   "short": "5 Mightú unit. Ha a köröd elején tartja a battlefieldjét, kapsz két exhausted Gold tokent a base-edbe. Exhausted jönnek, ezért abban a körben csak akkor adnak Powert, ha egy hatás readyzi őket.",
+   "notes": [
+    [
+     "383.4.d.2.a",
+     0,
+     "Hold effect: akkor triggerel, ha a Benefactor azon a battlefielden áll, amelyet a Beginning Phase-edben holdolsz."
+    ],
+    [
+     "187.5,184.1",
+     1,
+     "Két Gold gear token jön exhausted. Az abilityjük Exhaust costot kér, ezért abban a körben csak akkor adnak Powert, ha egy hatás readyzi őket."
+    ],
+    [
+     "149.2",
+     0,
+     "A Gold gear, ezért a base-edbe érkezik, nem a battlefieldre."
+    ],
+    [
+     "472",
+     0,
+     "Egy battlefield körönként egyszer score-olható, a trigger körönként legfeljebb egyszer fut le."
+    ]
+   ],
+   "why": "A short és a note feltétel nélkül állította, hogy a Gold abban a körben nem ad Powert; ready effect után igen (187.5, 415.4)."
+  },
+  "Fae Dragon": {
+   "notes": [
+    [
+     "355.13,355.10",
+     0,
+     "\"Up to four\": 0 és 4 közötti friendly unit választható, mind target. A Fae Dragon is lehet köztük."
+    ],
+    [
+     "427.1.c",
+     0,
+     "Már buffolt unit is választható, de nem kap második buffot."
+    ],
+    [
+     "702.2.b",
+     0,
+     "\"Spend a buff\": egy buff counter levétele egy általad kontrollált unitról, jellemzően egy másik lap costjaként."
+    ],
+    [
+     "705",
+     1,
+     "Ha a buff azért tűnik el, mert a unit elhagyja a boardot, az nem spend, nincs Gold."
+    ],
+    [
+     "702.2.b",
+     2,
+     "Ha egy effect egyszerre több buffot költ el (például Albus Ferros), valószínűleg buffonként külön triggerel. A Core Rules ezt nem mondja ki, judge döntse el."
+    ],
+    [
+     "187.5,184.1",
+     1,
+     "A Gold exhausted lép be a base-edbe, az abilityje Exhaust costot kér: abban a körben csak akkor ad Powert, ha egy hatás readyzi."
+    ]
+   ],
+   "why": "A note feltétel nélkül állította, hogy a Gold abban a körben nem ad Powert; ready effect után igen (187.5, 415.4)."
+  },
+  "Fiora, Grand Duelist": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Body és Order domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "709",
+     0,
+     "\"Becomes Mighty\": az a pillanat, amikor a unit Mightja 5 alattiról 5-re vagy fölé változik. Már 5+ Mightú unit további erősítése nem triggerel."
+    ],
+    [
+     "710",
+     1,
+     "A boardon az aktuális Might számít, ezért ideiglenes bónusz (buff, \"+X this turn\", attackerként az Assault) is kiváltja. Ugyanaz a unit körön belül többször is Mighty-vé válhat."
+    ],
+    [
+     "709",
+     2,
+     "Nem egyértelmű, hogy az eleve 5+ Mighttal a boardra lépő unit \"becomes Mighty\"-nek számít-e, mert a szabály csak a Might változásáról beszél. Judge döntse el."
+    ],
+    [
+     "383.3.a,383.3.b,415.4",
+     0,
+     "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted. Exhausted legenddel nem megy, vagyis körönként jellemzően egy rune jön."
+    ],
+    [
+     "431.2,431.3",
+     0,
+     "A rune exhausted érkezik a Rune Deck tetejéről. Ha a Rune Deck üres, nem történik semmi."
+    ],
+    [
+     "164.2.b",
+     1,
+     "Az exhausted rune abban a körben csak akkor ad Energyt, ha egy hatás readyzi, Powerért viszont azonnal recycle-ölhető, mert annak a costja nem Exhaust."
+    ]
+   ],
+   "why": "A note feltétel nélkül állította, hogy az exhausted rune abban a körben nem ad Energyt; ready effect után igen (415.4, 416)."
+  },
+  "Entrenched Boar": {
+   "notes": [
+    [
+     "369.3",
+     0,
+     "A ready belépés replacement effect. A unit eleve ready érkezik, ez nem \"becomes ready\" esemény."
+    ],
+    [
+     "355.1,369.3",
+     2,
+     "A Core Rules nem mondja ki, hogy a ready belépésről a kijátszás választási lépésében vagy a belépés pillanatában döntesz. A gyakorlatban ritkán számít, vita esetén judge döntse el."
+    ],
+    [
+     "144.2",
+     1,
+     "Ha a ready belépést választod, abban a körben nem mozoghat: Standard Move sem megy. A ready állapot így csak nem mozgáshoz kötött célra jó (például exhaust cost)."
+    ],
+    [
+     "358.3.a",
+     1,
+     "Mozgató spell kijátszható rá, de a resolve-kor a Move negálódik."
+    ],
+    [
+     "458.3",
+     0,
+     "A Recall nem Move, a tiltás nem akadályozza."
+    ],
+    [
+     "103.2.b.3",
+     0,
+     "Calm domainű lap: csak olyan deckbe tehető, amelynek Domain Identity-je tartalmazza a Calmot."
+    ]
+   ],
+   "why": "A note domain nélküli lapnak mondta és bármely deckbe betehetőnek; a lap domainje Calm (103.2.b.3), a 103.2.b.5 nem vonatkozik rá."
+  },
+  "En Garde": {
+   "notes": [
+    [
+     "355.9.b",
+     0,
+     "A target általad kontrollált unit, bárhol a boardon, base-ben is."
+    ],
+    [
+     "359.3.f.2,740.2.a",
+     1,
+     "A második +1 feltételét a resolve-kor nézi a játék: akkor jár, ha a unit locationjén nincs másik általad kontrollált unit. Enemy unitok nem számítanak, és base-ben egyedül álló unitra is teljesül."
+    ],
+    [
+     "359.3.f.2",
+     1,
+     "A megkapott bónusz a kör végéig marad, akkor is, ha később másik unitod érkezik oda."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "Ha a unit illegális target lesz, mindkét bónusz elmarad."
+    ],
+    [
+     "813.1.c.1,359.3.f.2",
+     1,
+     "[Reaction]: a feltételt a resolve-kor nézi a játék. Elrontja, ha a resolve előtt másik saját unitod kerül oda: ezt te okozhatod, de az opponent is, egy [Reaction] időzítésű mozgató hatással a te unitodat odamozgatva vagy a targetet elmozgatva. Reaction nélküli spell (például Charm) a chain alatt, Closed State-ben nem játszható ki."
+    ]
+   ],
+   "why": "A note a Charmot hozta példának az En Garde-ra adott válaszra, de a Charmnak nincs [Reaction]-je, Closed State-ben nem játszható ki (155, 813.1.c.1)."
+  },
+  "Draven, Audacious": {
+   "short": "6 Mightú champion, akit az ellenfél csak plusz 1 bármilyen Powerért választhat ki. Körönként az első megnyert harcáért 1 pontot kapsz, ezzel akár meg is nyerheted a játékot. Ha viszont harcban meghal, egy ellenfeled kap 1 pontot.",
+   "why": "A short nem írta ki, hogy a Deflect cost bármely domain Powere lehet (809.1.c.1)."
+  },
+  "Dune Devourer": {
+   "short": "7 Mightú unit, amit az ellenfél csak plusz 1 bármilyen Powerért választhat ki. Ha kijátszáskor feláldozol egy saját unitot, 2 Energyvel olcsóbb lesz. Az áldozat Deathknell képessége is lefut.",
+   "why": "A short nem írta ki, hogy a Deflect cost bármely domain Powere lehet (809.1.c.1)."
+  },
+  "Ekko, Boy Who Shattered Time": {
+   "short": "Legend: 1 Energyért és exhausttal Empowered lesz. Később exhausttal levéve az Empowered állapotot, a kör következő unitja 2 Energy és 1 bármilyen Power kedvezményt kap, de a kör végén meghal. Mivel mindkét képesség exhaustol, a kedvezmény általában csak a következő körödben használható.",
+   "why": "A short nem írta ki, hogy a kedvezmény [A], vagyis bármely domain Powere."
+  },
+  "Ezreal, Prodigy": {
+   "short": "3 Mightú champion. Kijátszáskor eldobsz 1 lapot, majd húzol 2-t. Amíg a boardon van, a választható plusz költségeid (például Accelerate) 1 Energyvel vagy 1 bármilyen Powerrel olcsóbbak. A lap alapárát és a kötelező plusz költségeket nem csökkenti.",
+   "why": "A short nem írta ki, hogy a kedvezmény [A], vagyis bármely domain Powere."
+  },
+  "Fiora, Victorious": {
+   "short": "Amíg Mighty (legalább 5 Might), Deflectet, Gankinget és Shieldet kap: az ellenfél rá célzott spelljei és képességei 1 bármilyen Powerrel többe kerülnek, battlefieldről battlefieldre mozoghat, és védekezéskor +1 Mightot kap. Alapból 4 Mightú, tehát legalább +1 kell hozzá. Ha elveszíti a Mighty állapotot, mindhárom egyszerre megszűnik.",
+   "why": "A short nem írta ki, hogy a Deflect cost bármely domain Powere lehet (809.1.c.1)."
+  },
+  "Fight or Flight": {
+   "short": "Action: a saját körödben vagy showdown alatt egy battlefielden álló unitot, bárkiét, a base-ébe mozgat, így kiveheted a harcból. Hidden: a saját körödben 1 bármely Powerért elrejtheted egy általad kontrollált battlefielden, a következő körtől Reactionként ingyen kijátszhatod, de csak az ottani unitokra.",
+   "why": "A short nem írta ki, hogy elrejteni csak a saját körödben, általad kontrollált battlefieldre lehet (811.1.b)."
+  },
+  "Facebreaker": {
+   "short": "Action: a saját körödben vagy showdown alatt stunnol egy saját és egy ellenséges unitot ugyanazon a battlefielden, így abban a körben egyik sem sebez a harcban. Ilyen pár nélkül nem játszható ki. Hidden: a saját körödben 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől reakcióként ingyen kijátszhatod, de akkor csak az ottani unitokra.",
+   "why": "A short nem írta ki, hogy elrejteni csak a saját körödben, általad kontrollált battlefieldre lehet (811.1.b)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Dockside Lock-Up: a short szerint a hold triggernél a geart \"feláldozhatod\". A szövegben nincs \"may\", a \"kill this to play\" cost within instructions (383.3.b, 204.1.c, 204.3.a); a Core Rules nem mondja ki egyértelműen, hogy may nélkül a cost kifizetése megtagadható-e. A notes ezt a kérdést már judge-ra bízza, a shortot nem módosítottam."
+ ]
+}
