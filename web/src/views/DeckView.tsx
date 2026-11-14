@@ -76,6 +76,12 @@ export function DeckView() {
       setStatus('PDF készítése...');
       const [fonts, { jsPDF }] = await Promise.all([loadFonts(), import('jspdf')]);
       const res = buildPDF(rel, gen, fonts, jsPDF);
+      // claude.ai artifactként a böngészős letöltés tiltott, ott a downloads képesség ment.
+      const cl = (window as any).claude;
+      if (cl && typeof cl.use === 'function') {
+        try { const dl = await cl.use('downloads'); await dl.save({ filename: res.name, data: res.blob }); setStatus('Kész: ' + res.name + ', ' + res.pages + ' oldal.'); return; }
+        catch (e: any) { if (e?.code === 'declined') { setStatus('A mentést elutasítottad, a PDF nem lett letöltve.'); return; } }
+      }
       const u = URL.createObjectURL(res.blob), a = document.createElement('a');
       a.href = u; a.download = res.name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000);
       setStatus('PDF elkészült (' + res.pages + ' oldal): ' + res.name);
