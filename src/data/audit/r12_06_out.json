@@ -1,0 +1,136 @@
+{
+ "fixes": {
+  "Rebuttal": {
+   "notes": [
+    [
+     "355.9.a.2,206",
+     0,
+     "A target chainen lévő spell, amelynek nyomtatott Energy costja legfeljebb 4. A Power costja bármennyi lehet, kedvezmény vagy Repeat nem számít."
+    ],
+    [
+     "204.3.a,359.3.d",
+     1,
+     "A \"You may pay [A]. If you do\" a Rebuttal resolve-ja közben történik, nem a kijátszási cost része: akkor döntesz, és akkor kell meglennie a Powernek."
+    ],
+    [
+     "430.3",
+     1,
+     "A resolve közbeni fizetéshez is használhatsz [Reaction] Add abilityt, például rune-t recycle-ölhetsz Powerért."
+    ],
+    [
+     "752.1,753,753.1",
+     0,
+     "Ha fizettél, a spell controllere te leszel, és újraválaszthatod a módjait és targetjeit. Ha újraválasztasz, mindent újra kell választanod, és csak legálisan."
+    ],
+    [
+     "426.1.b,426.1.c",
+     0,
+     "Ha nem fizetsz, a spell counterelődik: a trashbe megy, a costja nem jár vissza."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "Ha a megcélzott spell a resolve előtt lekerül a chainről, a Rebuttal nem csinál semmit, fizetni sem kell."
+    ],
+    [
+     "103.3.d,103.2.b.4",
+     0,
+     "Signature lap (Mel): a deckben összesen legfeljebb 3 Signature kártya lehet, mindnek a legend Champion tagjét kell viselnie, és a legendnek a Mind és a Chaos domaint is tartalmaznia kell."
+    ],
+    [
+     "135.2.e.5.b",
+     0,
+     "Az effectben szereplő [A] bármilyen domainű Powerrel fizethető."
+    ],
+    [
+     "135.2.e.6.c",
+     0,
+     "A lap saját 1 Power costja a nyomtatott lapon [C], ami a 135.2.e.6.c szerint a lap bármelyik domainjének, vagyis Mind vagy Chaos Powerrel fizethető."
+    ]
+   ],
+   "why": "A nyomtatott lapon a több domainű lap Power szimbóluma [C]; a 135.2.e.6.c szerint Mind vagy Chaos Powerrel fizethető, ez már nem nyitott kérdés (flag 2 helyett 0)."
+  },
+  "Ravenbloom Conservatory": {
+   "notes": [
+    [
+     "383.4.f,383.4.f.2.a",
+     0,
+     "Defend trigger: akkor fut le, amikor a combat elején megkapod a Defender designationt. Combatonként egyszer nézi a játék."
+    ],
+    [
+     "190.6.d",
+     0,
+     "A \"you\" a battlefield controllere. Ha a védő nem kontrollálja a battlefieldet, nem triggerel."
+    ],
+    [
+     "355.10.a",
+     0,
+     "A Main Deck nem Public zóna, nincs target. Nincs \"may\": a reveal és a folytatás kötelező."
+    ],
+    [
+     "432.1.c,432.1.c.1",
+     0,
+     "Üres Main Decknél nincs mit revealelni, a további instructionök negálódnak, Burn Out nincs."
+    ],
+    [
+     "414.1",
+     1,
+     "A spell kézbe tétele nem Draw action, a \"when you draw\" triggereket nem váltja ki."
+    ],
+    [
+     "417.1.a",
+     0,
+     "Ha nem spell, a lap a Main Deck aljára kerül."
+    ],
+    [
+     "370.1.b.1",
+     0,
+     "A reveal kiváltja az \"as I'm revealed\" típusú replacement effecteket, például az Undertitan \"As I'm revealed from your deck, [Add] [2]\" abilityjét."
+    ]
+   ],
+   "why": "A Nocturne, Horrifying nem \"as I'm revealed\" replacement effect, hanem \"When you look at cards ... and see me\" triggered ability (kártyaszöveg), ezért a 370.1.b.1 példájaként hibás volt."
+  },
+  "Pyke, Returned": {
+   "short": "Körönként egyszer, amikor egy enemy unit meghal, miközben Pyke battlefielden áll, kapsz egy exhausted Gold tokent. Ha Pyke ugyanakkor hal meg, nincs Gold. Backline: csak akkor kaphat lethal damage-et, ha a társai már megkapták. Hidden: a saját körödben, showdownon kívül 1 bármilyen Powerért elrejthető egy általad kontrollált battlefielden, és a következő körtől Reactionnel, base cost nélkül oda kijátszható.",
+   "why": "A Hide időzítési feltétele hiányzott: csak a saját körödben, Open State-ben, showdownon kívül rejthető el (811.1.b)."
+  },
+  "Resonating Strike": {
+   "short": "Egy saját unitodat egy másik helyről átmozgat egy általad kontrollált battlefieldre, és a kör végéig +2 Mightot ad neki. Reaction, ezért combat közben erősítésnek is jó. Hidden: a saját körödben, showdownon kívül 1 bármilyen Powerért elrejtheted, és a következő körtől base cost nélkül kijátszhatod, ekkor a cél csak az a battlefield lehet, ahol elrejtetted.",
+   "why": "A Hide időzítési feltétele hiányzott: csak a saját körödben, Open State-ben, showdownon kívül rejthető el (811.1.b)."
+  },
+  "Rengar, Trophy Hunter": {
+   "short": "Ambush: Reactionnel, akár az opponent körében is kijátszható egy battlefieldre, ahol van unitod, és olyanra is, ahol enemy unit áll, még ha neked ott nincs is unitod. Ha nem te kontrollálod azt a battlefieldet, és az még nem Contested, combat stagelődik, amiben te vagy az attacker, és akkor indul, amikor a chain kiürült.",
+   "notes": [
+    [
+     "822.1.d",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: az [Ambush] igeként azt jelenti, hogy az Ambush kulcsszó engedélyeivel játszod ki. Az ability ezt kiterjeszti az olyan battlefieldekre, ahol enemy unit van."
+    ],
+    [
+     "822.1.b,813.1.c.1",
+     1,
+     "Gyakorlati különbség az errata óta: enemy unitos battlefieldre is [Reaction]-nel mehet ki, akkor is, ha ott nincs unitod. A régi szöveg csak a helyet engedte meg, az időzítést nem."
+    ],
+    [
+     "190.3.a.1,323.8",
+     0,
+     "Ha nem általad kontrollált és még nem Contested battlefieldre játszod, az Contested lesz, és combat stagelődik. Folyamatban lévő combatba beugorva új combat nem jön létre, Rengar a meglévőhöz csatlakozik. Combat csak akkor indul, amikor a chain kiürült és Neutral Open State van."
+    ],
+    [
+     "466.2.c.1",
+     0,
+     "Ha az ő érkezése teszi Contesteddé a battlefieldet, te leszel az Attacker, tehát az opponent körében beugorva is te támadsz."
+    ],
+    [
+     "143.1.b",
+     1,
+     "A Cat tag miatt jó cost a Stalking Wolfhoz, és kiváltja Ivern, Nurturer buffját."
+    ]
+   ],
+   "why": "A Contested státuszt csak akkor kapja meg a battlefield, ha még nem Contested (190.3.a.1); egy már zajló combatba (például ahol épp támadsz) Ambushsal beugorva nem stagelődik új combat, és az Attacker szerepét nem Rengar érkezése dönti el (466.2.c.1, 466.2.c.3.a)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

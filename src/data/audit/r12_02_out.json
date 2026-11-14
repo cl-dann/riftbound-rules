@@ -1,0 +1,130 @@
+{
+ "fixes": {
+  "Fight or Flight": {
+   "short": "Action: a saját körödben vagy showdown alatt egy battlefielden álló unitot, bárkiét, a base-ébe mozgat, így kiveheted a harcból. Hidden: a saját körödben, showdownon kívül 1 bármely Powerért elrejtheted egy általad kontrollált battlefielden, a következő körtől Reactionként ingyen kijátszhatod, de csak az ottani unitokra.",
+   "notes": [
+    [
+     "103.3.e",
+     1,
+     "A lap az adatok szerint tiltólistán van. A deck minden lapjának legálisnak kell lennie az adott formátumban, ezért sanctioned játék előtt ellenőrizd az aktuális listát."
+    ],
+    [
+     "811.1.b,411.1.a,811.6,811.3",
+     0,
+     "Hide: a saját körödben, Open State-ben, showdownon kívül [A]-ért facedown tehető egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható. Kézből, teljes costért csak [Action] időzítéssel megy."
+    ],
+    [
+     "355.10,355.9.b",
+     0,
+     "A unit target, battlefielden kell lennie, és bármelyik játékosé lehet. A unit a saját controllere base-ébe megy."
+    ],
+    [
+     "811.1.d.2",
+     0,
+     "Facedown-ból kijátszva csak azon a battlefielden lévő unit választható, ahol a lap el volt rejtve."
+    ],
+    [
+     "359.3.f.2",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: ha a támadó Yasuo, Remorsefult az attack triggerére válaszul base-be mozgatod, a trigger \"here\" hivatkozása már nem a combat battlefieldje, a trigger mistargetel."
+    ],
+    [
+     "421.1,458",
+     0,
+     "Ez Move, nem Recall, ezért a \"when I move\" triggerek lefutnak, és mozgást tiltó effect negálhatja."
+    ]
+   ],
+   "why": "A Hide időzítésénél hiányzott a showdown kizárása (811.1.b, 411.1.a, 151.2): a hide csak saját körben, showdownon kívül tehető meg."
+  },
+  "Fox-Fire, Ahri": {
+   "short": "Action: a saját körödben vagy showdown alatt megöl bármennyi unitot egy battlefielden, akár a sajátodat is, ha a kiválasztottak együttes Mightja legfeljebb 4. Hidden: a saját körödben, showdownon kívül 1 bármely Powerért elrejtheted egy általad irányított battlefielden, és a következő körtől Reactionként, ingyen kijátszhatod, de csak az ottani unitokra.",
+   "notes": [
+    [
+     "103.3.d,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, mindnek a legend Champion tagjét (Ahri) kell viselnie, és a legendnek a lap mindkét domainjét tartalmaznia kell."
+    ],
+    [
+     "811.1.b,411.1.a,811.6,811.3",
+     0,
+     "Hide: a saját körödben, Open State-ben, showdownon kívül [A]-ért facedown tehető egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható. Kézből, teljes costért csak [Action] időzítéssel megy."
+    ],
+    [
+     "355.11,355.13",
+     0,
+     "A targetek csoportos feltétele: egy battlefielden vannak, és az összesített Mightjuk legfeljebb 4. Nullát is választhatsz, saját és enemy unit vegyesen is mehet."
+    ],
+    [
+     "355.11.b",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: ha a resolve-ra az összeg 4 fölé nő, az eredeti targetek közül kell legális részhalmazt választanod. Új unit nem vehető be."
+    ],
+    [
+     "355.11.b.1,355.11.b",
+     0,
+     "A választott részhalmazt nem lehet tovább bővíteni: nem hagyhatsz ki olyan eredeti targetet, amely még beleférne a 4-es összegbe. Ez nem a legnagyobb darabszámot jelenti: a 355.11.b példájában 1, 1, 2, 2 Mightnál a két 2-es vagy a két 1-es plusz egy 2-es is választható."
+    ],
+    [
+     "811.1.d.2",
+     0,
+     "Facedown-ból kijátszva csak azon a battlefielden lévő unitok választhatók, ahol a lap el volt rejtve."
+    ],
+    [
+     "429.1.a.1.b",
+     0,
+     "Kill instruction: a megölt unitok Deathknellje a chain-re kerül."
+    ]
+   ],
+   "why": "A Hide időzítésénél hiányzott a showdown kizárása (811.1.b, 411.1.a): a hide csak saját körben, showdownon kívül tehető meg."
+  },
+  "Guerilla Warfare, Teemo": {
+   "short": "Legfeljebb két Hidden kulcsszavas lapot visszavehetsz a trashedből a kezedbe, és ebben a körben költség nélkül rejthetsz el lapokat. Az elrejtés többi feltétele marad: saját kör showdownon kívül, általad irányított battlefield, ahol még nincs facedown lap. Csak a saját körödben, showdownon kívül játszható ki.",
+   "notes": [
+    [
+     "103.3.d,103.3.d.2",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Teemo) kell viselnie."
+    ],
+    [
+     "355.10.a,355.13",
+     0,
+     "A trash Public zóna, ezért a visszavett lapok targetek. \"Up to two\": 0, 1 vagy 2 lapot választhatsz, a spell target nélkül is kijátszható."
+    ],
+    [
+     "811.5",
+     0,
+     "A [Hidden] a lap tulajdonsága, a trashben is ellenőrizhető. Unit, gear és spell is visszavehető, ha van rajta Hidden."
+    ],
+    [
+     "811.1.b,411.1.a",
+     1,
+     "\"Hide ignoring costs\": a kör végéig az [A] hide cost elmarad. A többi feltétel marad: saját kör, Open State, showdownon kívül, általad kontrollált battlefield, ahol még nincs facedown lapod. Battlefieldenként továbbra is egy lap rejthető el."
+    ],
+    [
+     "811.1.c.1,811.1.b",
+     0,
+     "A Hide nem Play: nem nyit chaint és nem vált ki \"when you play\" triggereket. Az elrejtett lap legkorábban a következő körben játszható ki."
+    ],
+    [
+     "359.3.e.2,359.3.e.8",
+     0,
+     "Ha az egyik kiválasztott lap a resolve előtt kikerül a trashből, az illegális target lesz. A másik lap ettől még visszajön a kezedbe."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül megy."
+    ],
+    [
+     "135.2.e.6.c",
+     0,
+     "A lap 2 Energy és 1 Power. A nyomtatott Power szimbólum [C], amely több domainű lapon a lap bármelyik domainjének Powerével fizethető, tehát Mind vagy Chaos Powerrel."
+    ]
+   ],
+   "why": "A short a Hide feltételeinél a saját kört showdown kizárása nélkül írta (811.1.b, 411.1.a). A [C] Power note flag 2 volt; a nyomtatott lap alapján [C], 135.2.e.6.c szerint Mind vagy Chaos Powerrel fizethető, flag 0."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

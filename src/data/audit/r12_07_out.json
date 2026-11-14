@@ -1,0 +1,45 @@
+{
+ "fixes": {
+  "Riposte": {
+   "notes": [
+    [
+     "355.8",
+     0,
+     "Két target kell: egy friendly unit és egy chainen lévő spell. Ha nincs unitod, a lap nem játszható ki, így counterelni sem tudsz vele."
+    ],
+    [
+     "206",
+     0,
+     "A bónusz a spell nyomtatott Energy costja. Kedvezménnyel vagy ingyen kijátszott spell is a teljes nyomtatott értéket adja, a Power cost és a Repeat nem számít."
+    ],
+    [
+     "359.3.e.12",
+     0,
+     "Ha a spell a resolve előtt lekerül a chainről, a costja \"null\": a counter és a Might bónusz is ignorálódik."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "Ha csak a unit lesz illegális target, a spell ettől még counterelődik."
+    ],
+    [
+     "103.3.d,135.2.e.6.c",
+     0,
+     "Signature lap (Fiora): csak Fiora legend deckjébe tehető. A 2 Power a nyomtatott lapon [C][C], amely a 135.2.e.6.c szerint a lap bármelyik domainjének (Body vagy Order) Powerével fizethető, tetszőleges arányban."
+    ]
+   ],
+   "why": "A nyomtatott lapon ellenőrzött [C] szimbólum miatt a Power fizetése a 135.2.e.6.c szerint szabályból közvetlenül következik; a flag 2-es nyitott kérdés helyett flag 0."
+  },
+  "Risen Altar": {
+   "short": "Az itt álló unitjaid Empower costja 1 Energyvel vagy 1 Powerrel olcsóbb. Csak a battlefield controllerének itt álló unitjaira hat, a legendre nem. Az időzítés nem változik: csak a saját Main Phase-edben, showdownon kívül használható.",
+   "why": "Az Empower activated ability (827.1.c.1), a 145.2 szerint showdown alatt nem aktiválható; a short időzítéséből hiányzott a showdown kizárása."
+  },
+  "Ruined Monastery": {
+   "short": "Amikor itt conquerelsz, dönthetsz úgy, hogy eldobsz 1 lapot és channelsz 1 rune-t exhausted: a kettő együtt jár, nem választhatod csak a rune-t. Üres kézzel a discard elmarad, de a rune-t megkapod. Játékosonként körönként legfeljebb egyszer fut le.",
+   "why": "A 471.1 és 472 szerint a score (így a conquer) korlát játékosonként és battlefieldenként körönként egy; a 190.6.d miatt a 'you' a conquer után az új controller, így egy körön belül két különböző játékosnál is lefuthat. A 'körönként legfeljebb egyszer' túl erős volt."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

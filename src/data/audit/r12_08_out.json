@@ -1,0 +1,50 @@
+{
+ "fixes": {
+  "Showstopper, Sett": {
+   "short": "Sett Signature lapja: egy base-ben álló saját unitod buffot kap (ha még nincs buffja), majd átmegy egy battlefieldre. Exhausted unitot is átvisz, mert nem kér exhaustot. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A short feltétel nélkül állította, hogy a unit buffot kap; már buffolt unit nem kap újat (427.1.b.1, 427.1.c)."
+  },
+  "Siphon Power, Viktor": {
+   "notes": [
+    [
+     "355.10.d",
+     0,
+     "A battlefield a target, a unitok nem (\"units there\"). Deflect és \"can't be chosen\" a unitokon nem számít."
+    ],
+    [
+     "355.5.a",
+     1,
+     "A resolve-kor ott álló unitokra hat. A később érkező unit nem kap módosítót, a távozó unit pedig a kör végéig megtartja."
+    ],
+    [
+     "479.4.b",
+     0,
+     "A \"minimum of 1\" korlát a resolve-kor rögzül: az 1 Mightú enemy unit -0-t kap, és ez a kör végéig így marad, akkor is, ha később nő a Mightja."
+    ],
+    [
+     "740.1.b",
+     0,
+     "\"Enemy units\": minden opponent ott álló unitja. \"Friendly units\": a tieid."
+    ],
+    [
+     "103.3.d,103.3.d.1,103.3.d.2",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Viktor) kell viselnie."
+    ],
+    [
+     "135.2.e.6.c",
+     0,
+     "Az 1 Power cost nyomtatott jele [C]: a lap két domainje miatt Mind vagy Order Powerrel is fizethető."
+    ]
+   ],
+   "why": "A nyomtatott lap alapján a Power szimbólum [C], ami a 135.2.e.6.c szerint Mind vagy Order Powerrel fizethető; a flag 2 nyitott kérdés helyett flag 0 tényállítás."
+  },
+  "Sudden Storm": {
+   "short": "2 sebzés egy battlefielden álló unitnak, támadó unitnak 4. Kézből csak a saját körödben vagy showdownban játszható ki. Hidden: a saját körödben, showdownon kívül 1 tetszőleges Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionként ingyen kijátszhatod, de csak az ott álló unitra, például a rád támadóra 4 sebzéssel.",
+   "why": "A Hide időzítésénél hiányzott a showdown kizárása (811.1.b, Open State, showdownon kívül)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

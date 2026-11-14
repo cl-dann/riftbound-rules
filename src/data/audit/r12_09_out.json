@@ -1,0 +1,49 @@
+{
+ "fixes": {
+  "The Zero Drive": {
+   "notes": [
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Energy és 1 Mind Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +2 Mightot is kap."
+    ],
+    [
+     "396,808.1.c,808.1.d.2",
+     1,
+     "Az Effect Text \"[Deathknell][>] Banish me.\" A felszerelt unit ténylegesen meghal és a trashbe kerül (a halálra figyelő triggerek lefutnak), majd a Deathknell resolve-ja a Banishmentbe teszi. Ez az ability linked a gear activated abilityjével, mert ugyanazon a lapon szerepelnek."
+    ],
+    [
+     "398,428.3.a",
+     0,
+     "Az activated ability csak azokat a unitokat játssza ki, amelyeket ennek a Zero Drive-nak a Deathknellje banishelt. Más effect vagy egy másik Zero Drive által banishelt unit nem jön vissza."
+    ],
+    [
+     "718.2,719.5,436.4.a",
+     0,
+     "Csatolva a Rules Text inaktív, ezért az ability csak csatolatlan gearrel megy. A unit halálakor a gear leválik és ott marad, ahol a unit volt: ha az battlefield, a következő cleanup a base-be recallolja, ha base, ott marad."
+    ],
+    [
+     "356.1.b.1,356.1.b.3,186.1",
+     0,
+     "\"Ignoring their costs\": az Energy és Power cost nulla, optional additional cost (például Accelerate) ráfizethető. Token unit a Banishmentben megszűnik, az nem tér vissza."
+    ],
+    [
+     "203,428.2",
+     1,
+     "A gear banishelése cost: az ability egyszer használható, és ha countert kap, a gear és a banishelt unitok is odavesznek."
+    ]
+   ],
+   "why": "A 718.2,719.5 note általánosan állította, hogy a levált geart a cleanup a base-be recallolja; a 436.4/436.4.a szerint ez csak battlefielden levált gearre igaz, base-ben álló unit halálakor a gear eleve a base-ben marad."
+  }
+ },
+ "checked": 92,
+ "data_issues": [
+  "Teemo, Swift Scout: a text szerint az elrejtésnél [1] fizethető \"instead of [C]\", a Hidden reminder és a 811.1.b szerint viszont a Hide költsége [A]. Érdemes a nyomtatott lapon ellenőrizni, hogy [C] vagy [A] áll-e ott. A short és a notes \"1 Power helyett\" megfogalmazása mindkét esetben helyes."
+ ],
+ "open": []
+}

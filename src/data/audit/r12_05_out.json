@@ -1,0 +1,119 @@
+{
+ "fixes": {
+  "Nazuman Ntofo": {
+   "short": "1 Energyért egy saját unitodra csatolható Equipment. Csatolva a unit Shield 2-t kap: védekezőként +2 Mightot, támadóként nem erősít, és felszerelt lesz, amire más hatások figyelhetnek. Az Equip a saját Main Phase-edben, showdownon kívül aktiválható, Weaponmaster viszont ettől eltérő időzítéssel is rácsatolhatja.",
+   "notes": [
+    [
+     "818.1.c.2,818.1.b.1",
+     0,
+     "Equip [1]: 1 Energyért egy általad kontrollált unitra csatolod. A unit target."
+    ],
+    [
+     "151.2",
+     0,
+     "Az Equip csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható."
+    ],
+    [
+     "136.2.c,718.5.g,814.1.c,814.2",
+     0,
+     "A Might bonus +0, de az Equipment Effect Textje (Shield 2) a unit Rules Textjéhez fűződik: Defenderként +2 Mightot kap, támadóként nem. Meglévő Shielddel összeadódik. Emellett a unit Equipped állapotba kerül (818.3.b), amit más effectek figyelhetnek."
+    ],
+    [
+     "821.1.c.3",
+     0,
+     "Weaponmasterrel is csatolható, de az Equip costban nincs Power, ezért a kedvezmény nem csökkenti: az [1]-et ki kell fizetni."
+    ],
+    [
+     "719.5,436.4.a",
+     0,
+     "Ha a unit elhagyja a boardot, a gear leválik és a unit utolsó helyén marad. Ha ez battlefield volt, a következő cleanupban a base-be recallolódik."
+    ],
+    [
+     "718.2,721.2,435.1.f",
+     1,
+     "Csatolva a gear Rules Textje, így az Equip is inaktív: a saját Equipjével nem rakható át másik unitra. Ezt csak külön effect teheti meg (például Weaponmaster, amely újra aktívvá teszi az Equipet, és az Equip costot ki kell fizetni); ekkor az előző unitról leválik."
+    ]
+   ],
+   "why": "A short és a notes azt állította, hogy nem ad Mightot; az equip_effect_text Shield 2-t ad, ami a 136.2.c, 718.5.g és 814.1.c szerint csatolva a unitra kerül (defenderként +2 Might)."
+  },
+  "On the Hunt": {
+   "short": "Minden unitodat ready-vé teszi, így egy körben újra mozoghatnak, és a mozgás újabb showdownhoz vagy combathoz vezethet. Csak a saját körödben, showdownon kívül játszható ki. Költsége 1 Energy és 2 Power, a Power Body vagy Chaos Powerből is fizethető, tetszőleges arányban.",
+   "notes": [
+    [
+     "355.10.d",
+     0,
+     "Nem targetel: a resolve-kor általad kontrollált összes unitot readyzi, bármelyik locationön."
+    ],
+    [
+     "416.1.c",
+     0,
+     "A már ready unitokon nem történik semmi."
+    ],
+    [
+     "144.2,144.1.c",
+     1,
+     "A ready unitok újra fizethetik a Standard Move exhaust cost-ját, így egy körben másodszor is támadhatnak. Showdown és combat alatt Standard Move nincs."
+    ],
+    [
+     "135.2.e.6.c",
+     0,
+     "Kétdomaines (Body, Chaos) lap, a nyomtatott Power szimbólum [C]: a 2 Power bármelyik Body vagy Chaos Powerből fizethető, tetszőleges arányban."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Sivir) kell viselnie."
+    ]
+   ],
+   "why": "A nyomtatott lapon a Power szimbólum [C] (hibrid ikon), a 135.2.e.6.c szerint a lap bármelyik domainjének Powerével fizethető; a flag 2 és a short 'nézd meg a nyomtatott lapot' része elavult."
+  },
+  "Neeko, Blending In": {
+   "notes": [
+    [
+     "103.2.b.5",
+     0,
+     "Nincs domainje, bármilyen Domain Identity-jű deckbe betehető."
+    ],
+    [
+     "103.1",
+     0,
+     "A szabályzat a lap errata előtti szövegét hozza példának: a plusz legendeket deck építéskor választod ki, nem a játék közben."
+    ],
+    [
+     "103.1",
+     1,
+     "Errata: \"choose 3\" helyett \"choose up to 3\". A gyakorlatban nem kötelező három plusz legendet hoznod, lehet kevesebb vagy egy sem."
+    ],
+    [
+     "107.4.d.1,103.2.b.2",
+     0,
+     "A behozott legend nem Champion Legend. A deck Domain Identity-jét továbbra is az eredeti legended adja."
+    ],
+    [
+     "391.5.b,107.4.d.2",
+     0,
+     "A legend addig marad a Legend Zone-ban, amíg Neeko a boardon van. Ha Neeko elhagyja a boardot, a legend kikerül."
+    ],
+    [
+     "440.3.c",
+     0,
+     "A deck építéskor választott készletből egyszerre egy példány létezhet. Ha egy második Neeko olyan legendet hozna, ami már bent van, az negálódik."
+    ],
+    [
+     "355.10.g",
+     0,
+     "Két legenddel a \"your legend\" szövegű effecteknél a resolve-kor választod ki, melyikre vonatkozik."
+    ]
+   ],
+   "why": "A 103.1 példája az errata előtti 'choose 3' szöveget idézi, nem a jelenlegi 'up to 3'-at; pontosítva."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

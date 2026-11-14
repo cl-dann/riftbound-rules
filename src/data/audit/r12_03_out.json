@@ -1,0 +1,96 @@
+{
+ "fixes": {
+  "Hidden Blade": {
+   "short": "Action: a saját körödben vagy showdown alatt megöl egy battlefielden álló unitot, és annak irányítója húz 2 lapot. Ha a unit a resolve előtt base-be kerül, se ölés, se húzás; ha valami megmenti a haláltól, a húzás akkor is jár. Hidden: a saját körödben, showdownon kívül 1 bármely Powerért elrejtheted egy saját battlefielden, és a következő körtől Reactionként, ingyen kijátszhatod, de csak az ottani unitra.",
+   "why": "A Hide időzítése a short szerint \"a saját körödben\", de a showdown kizárása hiányzott: a Hide csak saját körben, Neutral Open State-ben, showdownon kívül végezhető (811.1.b, 411.1.a)."
+  },
+  "Hostile Takeover": {
+   "notes": [
+    [
+     "355.9.b,811.1.d.2",
+     0,
+     "A target enemy unit, amely battlefielden áll, base-ben lévő nem választható. Facedown-ból kijátszva csak azon a battlefielden lévő enemy unit választható, ahol a lap el volt rejtve."
+    ],
+    [
+     "190.3.a.2",
+     0,
+     "Ha a unit olyan battlefielden vált controllert, amit nem te kontrollálsz, a battlefield Contested lesz. Ha maradt ott más enemy unit, combat indul, ha nem, conquerelsz."
+    ],
+    [
+     "359.3.e.16",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: ha az Ending Phase-ben játszod ki, az \"at end of turn\" delayed trigger már nem jön létre, a \"lose control and recall\" rész nem fut le."
+    ],
+    [
+     "359.3.f.4",
+     0,
+     "A szabályzat példája: ha facedown-ból egy enemy unit attack triggerére válaszul elveszed a unitot, a trigger ettől nem változik. Az \"enemy\" a trigger controlleréhez képest értendő, ezért a trigger rendben resolve-ol."
+    ],
+    [
+     "458.1,458.3,460.1",
+     0,
+     "A kör végi visszaküldés Recall, nem Move: \"when I move\" triggereket nem vált ki, mozgást tiltó effect nem állítja meg, a uniton lévő damage és státusz pedig megmarad. A unit a saját base-ébe megy."
+    ],
+    [
+     "393,317.1.a",
+     0,
+     "A delayed trigger a spelltől független, az Ending Stepben kerül a chain-re. Lehet rá reagálni, de a spell counterelése utólag már nem állítja meg."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap (Renata Glasc), legfeljebb 3 Signature lehet a deckben."
+    ],
+    [
+     "135.2.e.6.c",
+     0,
+     "A lap 5 Energy és 2 Power. A nyomtatott Power szimbólum [C], ami több domainű lapnál a lap bármelyik domainjének Powerével fizethető: a 2 Power Mind és Order Powerből tetszőleges arányban állhat össze."
+    ]
+   ],
+   "why": "A 135.2.e.6.c pont flag 2-vel nyitott kérdésnek jelölte a Power szimbólumot; a nyomtatott lap alapján ellenőrzött, hogy [C], ezért a 135.2.e.6.c szerint közvetlenül eldönthető (flag 0)."
+  },
+  "Incorrigible Construct": {
+   "notes": [
+    [
+     "832.1.c,832.1.c.2",
+     0,
+     "Show Off a Mech: a kijátszás finalizálása közben felfedhetsz egy Mech lapot a kezedből, vagy kijelölhetsz egy másik friendly Mechet a boardon. A felfedett lap a kezedben marad."
+    ],
+    [
+     "355.7",
+     0,
+     "A Show Off \"pick\", nem \"choose\": a megmutatott Mech nem target."
+    ],
+    [
+     "369.3",
+     0,
+     "Ha megmutattál egy Mechet, a Construct ready lép be. Ez replacement effect: nem exhausted érkezik, majd áll fel, hanem eleve ready."
+    ],
+    [
+     "187.4",
+     1,
+     "A boardon lévő Mech token is megfelel a kijelöléshez."
+    ],
+    [
+     "832.1.c",
+     1,
+     "A Construct maga is Mech taget visel, ezért a kezedben lévő másik Incorrigible Construct is megmutatható. A kijátszott példány saját magát nem jelölheti ki, mert a szöveg \"another friendly Mech\", és kijátszás közben már nincs a kezedben."
+    ],
+    [
+     "144.1.a,144.2",
+     1,
+     "Ready belépve még abban a körben mehet Standard Move-val battlefieldre."
+    ],
+    [
+     "832.1.c.4",
+     0,
+     "Ha a megmutatott Mech a finalizálás közben elhagyja a zónáját, a Construct kijátszása ettől még érvényes."
+    ]
+   ],
+   "why": "A note flag 2-vel azt állította, hogy a Mech tag az adatból nem ellenőrizhető; a Radiance lapok tagjei mostantól a nyomtatott lapról jönnek, és a lapnak van Mech tagje, így a kérdés eldönthető (832.1.c, flag 1)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

@@ -1,0 +1,83 @@
+{
+ "fixes": {
+  "Bullet Time, Miss Fortune": {
+   "notes": [
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ],
+    [
+     "204.3,204.3.a",
+     0,
+     "A Power fizetése cost within instructions (\"[do X] to [do Y]\"): a resolve-kor fizeted, és ekkor döntöd el az összeget."
+    ],
+    [
+     "204.3.a,135.2.e.5.a",
+     0,
+     "A lap [A]-t ír, tehát a Power bármely domainből fizethető (135.2.e.5.a). A Core Rules 204.3.a példája is [A]-val idézi a lapot, ez egyezik a nyomtatott szöveggel."
+    ],
+    [
+     "445.2.c",
+     0,
+     "A resolve közbeni fizetéskor is használhatod a [Reaction] Add abilityket, vagyis a rune-jaidat akkor is recycle-ölheted Powerért."
+    ],
+    [
+     "355.10.b",
+     0,
+     "A battlefield a target, az ott lévő enemy unitok nem. Deflect és \"can't be chosen\" nem védi őket."
+    ],
+    [
+     "445.2",
+     1,
+     "0 Powert is fizethetsz, ekkor nincs sebzés. Az opponent úgy reagál a spellre, hogy még nem tudja az összeget."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Miss Fortune) kell viselnie."
+    ]
+   ],
+   "why": "A note [C]-t állított a lap szövegeként és flag 2-vel nyitott kérdésnek jelölte; a hivatalos és nyomtatott szöveg [A] (bármely domain, 135.2.e.5.a), a 204.3.a példája is így idézi. Flag 0-ra javítva."
+  },
+  "Carnivorous Snapvine": {
+   "short": "Kijátszáskor választasz egy battlefielden álló ellenséges unitot, és a Snapvine meg az ellenség a Mightjuknak megfelelő damage-et adnak egymásnak. Ez nem combat, és base-ből is működik. A Snapvine-on maradó damage legfeljebb a kör végéig marad meg, egy Combat Cleanup is legyógyítja.",
+   "notes": [
+    [
+     "355.10,355.8",
+     0,
+     "Az enemy unit target, battlefielden kell lennie. Ha nincs ilyen választható unit, a trigger nem kerül chain-re."
+    ],
+    [
+     "418.6.b.3,418.6.b.4",
+     0,
+     "A damage-et a két unit osztja egymásnak, nem az ability. A Snapvine damage-éért te, az enemy unitéért a controllere felel."
+    ],
+    [
+     "359.3.f.2,710",
+     0,
+     "Mindkét Might a resolve-kor számít. A Snapvine base-ben, exhausted állapotban is oszt és kap damage-et."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "Ha az enemy unit a resolve előtt base-be kerül vagy elhagyja a boardot, illegális target: egyik irányban sem történik damage."
+    ],
+    [
+     "359.3.e.12",
+     1,
+     "Ha a Snapvine hagyja el a boardot a resolve előtt, a Mightja null, ő nem oszt damage-et."
+    ],
+    [
+     "143.3.b,143.3.b.1,143.3.b.2",
+     0,
+     "Ez nem combat. A Snapvine-on maradó damage legfeljebb a kör végéig marad meg: a kör végén, illetve egy Combat Cleanup során gyógyul. Ha addig combatba kerül, a combat damage step-ben hozzáadódik a kapott sebzéshez."
+    ]
+   ],
+   "why": "A short és a note szerint a damage a kör végéig megmarad; a 143.3.b.2 (468.1.a.1) szerint a Combat Cleanup is gyógyít, így csak legfeljebb a kör végéig marad."
+  }
+ },
+ "checked": 89,
+ "data_issues": [],
+ "open": []
+}

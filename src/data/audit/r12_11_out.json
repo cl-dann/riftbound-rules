@@ -1,0 +1,108 @@
+{
+ "fixes": {
+  "Back Off": {
+   "short": "Stunol egy unitot: ebben a körben nem ad combat damage-et. Kézből a saját körödben vagy showdownban játszható, és akkor húzol is egy lapot. Hidden: a saját körödben, showdownon kívül 1 Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reaction időzítéssel kijátszhatod, de akkor nincs húzás, és csak az ottani unitot választhatod.",
+   "notes": [
+    [
+     "811.1.b,411.1.a,811.6,811.3",
+     0,
+     "Hide: a saját körödben, showdownon kívül (Neutral Open State) [A]-ért facedown tehető egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható. Kézből, teljes costért csak [Action] időzítéssel megy."
+    ],
+    [
+     "355.10,811.1.d.2",
+     0,
+     "A unit target, bármelyik játékosé lehet. Facedown-ból csak az adott battlefielden lévő unit választható."
+    ],
+    [
+     "135.2.b.7",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a resolve-kor azt nézi, kézből lett-e kijátszva. Ha igen, a spell aktuális controllere húz, akkor is, ha közben más vette át a kontrollt."
+    ],
+    [
+     "811.1.b,135.2.b.7",
+     1,
+     "Facedown-ból kijátszva nincs húzás. A csere: kézből 3 Energy, [Action] időzítés és draw, facedown-ból ingyen, [Reaction] időzítés, draw nélkül."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "A draw nem hivatkozik a unitra: ha a target illegális lesz, kézből kijátszva ettől még húzol."
+    ],
+    [
+     "424.1.b,424.1.a.2",
+     0,
+     "A Stunned unit Mightja nem számít bele a combat damage-be, az állapot a kör végi cleanupban szűnik meg."
+    ]
+   ],
+   "why": "A short és az első note a Hide időzítését \"a saját körödben\" formában adta meg, a showdown kizárása nélkül. A Hide Discretionary Action, csak Neutral Open State-ben, vagyis showdownon kívül végezhető (811.1.b, 411.1.a)."
+  },
+  "Bandle Tree": {
+   "short": "Itt egyszerre 2 lapot rejthetsz el egy helyett, a szokásos módon, a saját körödben, showdownon kívül 1 Powerért. Ha elveszíted a battlefieldet, mindkét rejtett lapod a trashbe kerül.",
+   "notes": [
+    [
+     "107.3.b,107.3.b.1",
+     0,
+     "Egy Facedown Zone alapból 1 lapot bír el, de ez a szám növelhető. Itt 2 facedown lapod lehet egyszerre."
+    ],
+    [
+     "811.1.b,411.1.a",
+     1,
+     "A második lap elrejtése is a szokásos Hide: [A] a cost, a saját körödben, showdownon kívül (Neutral Open State), és kontrollálnod kell a battlefieldet."
+    ],
+    [
+     "811.1.d.1,811.1.d.2",
+     0,
+     "Mindkét lap csak ide játszható ki facedown-ból, és a targetjeiket is erről a battlefieldről kell választani."
+    ],
+    [
+     "107.3.d,323.6.a",
+     0,
+     "Ha elveszíted a controlt, a következő cleanupnál mindkét facedown lapod a trashbe kerül."
+    ],
+    [
+     "107.3.b.2",
+     0,
+     "Ha a férőhely visszacsökken (például a battlefieldet lecserélik), a többletet a controllernek a trashbe kell tennie."
+    ]
+   ],
+   "why": "A short és a 811.1.b note a Hide időzítését a showdown kizárása nélkül adta meg (\"a saját körödben\", \"Open State-ben\"); a Hide csak Neutral Open State-ben, showdownon kívül végezhető (411.1.a)."
+  },
+  "Block": {
+   "short": "Egy unit erre a körre Shield 3-at kap (defenderként +3 Might) és Tankot, vagyis elsőként rá kell halálos damage-et osztani. Kézből a saját körödben vagy showdownban játszható. Hidden: a saját körödben, showdownon kívül 1 Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reaction időzítéssel kijátszhatod, de csak az ottani unitot választhatod.",
+   "notes": [
+    [
+     "811.1.b,411.1.a,811.6,811.3",
+     0,
+     "Hide: a saját körödben, showdownon kívül (Neutral Open State) [A]-ért facedown tehető egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható. Kézből, teljes costért csak [Action] időzítéssel megy."
+    ],
+    [
+     "355.10,811.1.d.2",
+     0,
+     "A unit target, bármelyik játékosé lehet. Facedown-ból csak az adott battlefielden lévő unit választható."
+    ],
+    [
+     "814.2",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a Shielddel rendelkező Stalwart Poro a Block után Shield 4-et kap a körre, az értékek összeadódnak."
+    ],
+    [
+     "814.1.c,814.1.d.1",
+     0,
+     "A Shield csak addig ad +3 Mightot, amíg a unit defender. Attackerre játszva a Shield rész nem ér semmit."
+    ],
+    [
+     "815.1.b,815.1.c.2",
+     0,
+     "Tank: az opponentnek először erre a unitra kell lethal damage-et assignolnia, a Tank nélküli unitjaid csak utána kaphatnak. Ha több Tank unitod van, köztük ő választ."
+    ]
+   ],
+   "why": "A short és az első note a Hide időzítését a showdown kizárása nélkül adta meg; a Hide Discretionary Action, csak Neutral Open State-ben, showdownon kívül végezhető (811.1.b, 411.1.a)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Blast Cone: a short és a 355.4.a note \"védő kihúzását\" említi a play effectnél; mivel a gear csak a saját Main Phase-ben, showdownon kívül játszható ki, ott még nincs Defender designation, a \"védő\" csak a battlefieldet őrző unitként értelmezhető. Tárgyi hibának nem minősítettem, nem javítottam.",
+  "Back-Alley Bar: a short \"Minden unit\" kijelentése mellett a note uncontrolled battlefieldre flag 2 nyitott kérdést tart fenn (190.6.b vs 190.6.d); ritka eset, a short nem javítva."
+ ]
+}

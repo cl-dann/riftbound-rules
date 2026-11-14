@@ -12,5 +12,8 @@ export async function loadData() {
   return D;
 }
 
+/** A Tanulás modul tartalma csak a nézet megnyitásakor töltődik be. */
+export const loadLearn = () => import('./generated/learn.json').then((m) => m.default as any);
+
 /** A PDF fontjai csak a PDF készítésekor töltődnek be. */
 export const loadFonts = () => import('./generated/fonts.json').then((m) => m.default);

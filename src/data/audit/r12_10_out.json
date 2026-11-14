@@ -1,0 +1,80 @@
+{
+ "fixes": {
+  "Wages of Pain": {
+   "short": "3 sebzés egy battlefielden álló unitnak, és egy exhausted Gold gear tokent kapsz akkor is, ha a sebzés elmarad. Kézből a saját körödben vagy showdownban játszható ki. Hidden: a saját körödben, showdownon kívül 1 bármely Powerért elrejtheted egy általad kontrollált battlefielden, a következő körtől Reactionnel, ingyen játszhatod ki, és csak az ottani unit választható.",
+   "why": "A Hide Discretionary Action, csak saját körben, Neutral Open állapotban (showdownon kívül) végezhető (411.1.a, 811.1.b); a shortból hiányzott a showdown kizárása."
+  },
+  "Wild Claw": {
+   "notes": [
+    [
+     "355.10.a,432.1.c",
+     0,
+     "A deck nem Public zóna, a kiválasztott lap nem target. 5-nél kevesebb lapnál annyit nézel meg, amennyi van, Burn Out nélkül."
+    ],
+    [
+     "356.4.c.2,356.6",
+     0,
+     "A kedvezmény csak az Energy costot csökkenti, legfeljebb 0-ig. A Power costot ki kell fizetni."
+    ],
+    [
+     "417.4,417.5",
+     0,
+     "A maradékot kötelező recycle-ölni, véletlen sorrendben kerülnek a deck aljára."
+    ],
+    [
+     "388.4,158.3.a",
+     1,
+     "A \"Then you may do this:\" Reflexive Trigger: a spell resolve-ja közben kerül a chainre, de csak a spell összes hatásának befejezése után jön sorra. A finalizálásakor döntöd el, élsz-e vele."
+    ],
+    [
+     "442.1.c,442.2,828.1.c",
+     0,
+     "Már Empowered lapon az Empower nem csinál semmit. Az Empowered státusz a lap saját [Empowered] abilityjét aktiválja, de más effectek is hivatkozhatnak rá, ezért [Empowered] ability nélküli lapon sem feltétlenül hatástalan."
+    ],
+    [
+     "389.1,158.3.a",
+     2,
+     "A Core Rules nem mondja ki egyértelműen, hogy a kijátszott permanent már a boardon van-e, amikor az Empower trigger resolve-ol. A sorrendet judge döntse el."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ]
+   ],
+   "why": "A 388.4 példája szerint a reflexive trigger a spell resolve-ja közben kerül a chainre (nem utána); a sorrendet a 158.3.a adja."
+  },
+  "Wraith of Echoes": {
+   "notes": [
+    [
+     "383.1.b",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: ha több friendly unit egyszerre hal meg, te választod ki, melyik halál a trigger. Az ability így is csak egyszer fut le."
+    ],
+    [
+     "383.1",
+     1,
+     "\"The first time each turn\": körönként egyszer, de minden körben, az opponent körében is húzhat."
+    ],
+    [
+     "383.1.b,383.2.c,383.2.c.2",
+     2,
+     "A kártyaszöveg \"a friendly unit\", a szabályzat példája viszont \"another friendly unit\" szöveggel idézi a lapot. Hogy a Wraith saját halála kiváltja-e, az a hatályos szövegtől függ, judge döntse el."
+    ],
+    [
+     "414.4",
+     0,
+     "A draw kötelező. Üres deck esetén Burn Out következik."
+    ]
+   ],
+   "why": "Az \"another friendly unit\" szövegű példa a 383.1.b-ben van, nem a 383.2.c.2-ben (az Viktor, Leader példája); a saját halál kérdéséhez a 383.2.c és 383.2.c.2 releváns. Flag 2 marad."
+  },
+  "Zed, Master of Shadows": {
+   "short": "Legend: ha bármelyik saját lapodat eltávolítod a játékból (banish), Empowered lesz. Ezt az állapotot elhasználva és exhaustolva eldobsz egy lapot, majd húzol egyet, a saját körödben vagy showdownban is. Kill és eldobás nem számít banishnek.",
+   "why": "Az \"eldobhatsz\" opcionálisnak mutatta a discardot; aktiváláskor a \"Discard 1, then draw 1\" kötelező effect (423.4), csak az aktiválás választható."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

@@ -1,0 +1,51 @@
+{
+ "fixes": {
+  "Elnuk Herd": {
+   "short": "Kijátszáskor egy másik saját unitod (maga a Herd nem) +3 Mightot kap a kör végéig. Hidden: a saját körödben, showdownon kívül 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden, a következő körtől reakcióként ingyen kijátszhatod oda. Ekkor a +3 csak egy ottani másik saját unitra mehet, utána a Herd a deck aljára kerül. Ha ott nincs másik unitod, a trigger elmarad, és a Herd a boardon marad.",
+   "notes": [
+    [
+     "811.1.b,811.6",
+     0,
+     "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."
+    ],
+    [
+     "811.1.d.3",
+     0,
+     "Facedown-ból kijátszva a +3 Might targetje csak az adott battlefielden lévő másik friendly unit lehet. Kézből kijátszva bármelyik másik friendly unit választható."
+    ],
+    [
+     "417.1.a,135.2.b.7",
+     0,
+     "Facedown-ból kijátszva a resolve végén kötelezően recycle-ölődik, vagyis a Main Deck aljára kerül. Így facedown-ból egyszeri +3 Might, kézből kijátszva viszont a boardon marad."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "Ha a target a resolve előtt illegálissá válik, a +3 Might elmarad, de a recycle ettől még megtörténik, mert az nem a targetre hivatkozik."
+    ],
+    [
+     "811.1.d.3.a,359.3.e.12",
+     1,
+     "Ha a Herd a resolve előtt elhagyja a boardot, a facedown-ból kijátszott play effect nem tudja megállapítani, honnan érkezett, ezért mistargetel."
+    ],
+    [
+     "355.9.b,355.8",
+     1,
+     "A szöveg \"another friendly unit\": a Herd saját magát nem választhatja. Ha nincs másik friendly unitod (facedown-ból kijátszva az adott battlefielden), a play effectnek nincs legális targetje, nem kerül chainre, így a recycle is elmarad, és a Herd a boardon marad."
+    ]
+   ],
+   "why": "A lap szövege (nyomtatva is) \"another friendly unit\", errata nincs: a short és a 355.9.c note tévesen állította, hogy a Herd magát is választhatja. Javítva 355.9.b és 355.8 alapján: másik unit nélkül a play effect nem kerül chainre, recycle sincs."
+  },
+  "Edge of Night": {
+   "short": "Felszerelhető gear: +2 Might, Equip 1 Chaos Powerért a saját Main Phase-edben, showdownon kívül. Hidden: a saját körödben, showdownon kívül 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden. A következő körtől reakcióként, akár harc közben, ingyen kijátszhatod, és rögtön egy ottani saját unitodra kerül, ha van ott unitod.",
+   "why": "A Hide időzítéséből hiányzott a showdown kizárása (411.1.a, 811.1.b): \"a saját körödben\" mellé \"showdownon kívül\" kell."
+  },
+  "Facebreaker": {
+   "short": "Action: a saját körödben vagy showdown alatt stunnol egy saját és egy ellenséges unitot ugyanazon a battlefielden, így abban a körben egyik sem sebez a harcban. Ilyen pár nélkül nem játszható ki. Hidden: a saját körödben, showdownon kívül 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől reakcióként ingyen kijátszhatod, de akkor csak az ottani unitokra.",
+   "why": "A Hide időzítéséből hiányzott a showdown kizárása (411.1.a, 811.1.b): \"a saját körödben\" mellé \"showdownon kívül\" kell."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

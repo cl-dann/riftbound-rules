@@ -1,0 +1,115 @@
+{
+ "fixes": {
+  "Kayn, Unleashed": {
+   "notes": [
+    [
+     "467.2.c.10",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: amíg nem kaphat sebzést, a combat damage kiosztásakor figyelmen kívül kell hagyni, rá nem kell lethal damage-et tenni."
+    ],
+    [
+     "421.1,458.1",
+     0,
+     "Csak a Move számít, Standard Move és effect általi is. A Recall nem Move, nem számít bele a kettőbe."
+    ],
+    [
+     "144.2",
+     1,
+     "A Standard Move exhaustolja, ezért a második mozgáshoz ready effect vagy mozgató spell kell."
+    ],
+    [
+     "418.1,467.2.c.10",
+     1,
+     "A védelem minden sebzésre szól, spellre és abilityre is, a kör végéig. Kill, banish és Might csökkentés ellen nem véd."
+    ],
+    [
+     "124",
+     1,
+     "Ha elhagyja a boardot és visszatér, új objektumnak számít, a mozgások számlálása elölről indul."
+    ],
+    [
+     "810.1.b",
+     0,
+     "[Ganking]: Standard Move-val battlefieldről battlefieldre léphet."
+    ]
+   ],
+   "why": "A 418.1.e (Valid Damage pozitív egész szám) nem támasztja alá, hogy a védelem minden sebzésforrásra szól; helyes hivatkozás 418.1 (spell, unit, ability is sebezhet) és 467.2.c.10 (Kayn mint sebzést nem kapó unit)."
+  },
+  "Kayle, Justified": {
+   "notes": [
+    [
+     "827.1.c.5,442.1.c.1",
+     0,
+     "Többször is Empowered lehet: nála ez nem bináris állapot, hanem halmozódó státusz, a \"use only if not Empowered\" megkötés nem vonatkozik rá."
+    ],
+    [
+     "442.1.b",
+     1,
+     "Három Empowered státusz a felső határ. A negyedik aktiválás már nem adna semmit."
+    ],
+    [
+     "381.1",
+     0,
+     "Az Empower csak a saját Main Phase-edben, Open State-ben aktiválható. Egy körben többször is, ha van rá Energy."
+    ],
+    [
+     "828.1.b.1",
+     1,
+     "Státuszonként +2 Might: háromnál 9 Might, [Deflect 3] és [Ganking]. Ez összesen 9 Energy az Empowerekre."
+    ],
+    [
+     "443.1.b",
+     0,
+     "A disempower egyszerre csak egy státuszt vesz le. Háromról kettőre esve elveszíti a Deflect 3-at, a Gankinget és 2 Mightot."
+    ],
+    [
+     "809.1.b,809.1.c",
+     0,
+     "[Deflect 3]: az opponent őt targetelő spellje vagy abilityje +[A][A][A]-ba kerül."
+    ]
+   ],
+   "why": "A 809.1.b csak a \"Deflect [X]\" formátumot írja le; a targetelő spell vagy ability többletköltségét a 809.1.c mondja ki, hivatkozás kiegészítve."
+  },
+  "Lilting Lullaby": {
+   "notes": [
+    [
+     "355.9.a.2,355.9.c",
+     0,
+     "A target chainen lévő spell, saját magát nem választhatja."
+    ],
+    [
+     "359.3.e.14.a",
+     0,
+     "Linked instructions (\"Its controller\"): ha a megcélzott spell a resolve előtt lekerül a chainről, a counter ignorálódik, és a tiltás sem jön létre."
+    ],
+    [
+     "359.3.e.14.b",
+     1,
+     "Ha a counter negálódik, a spell controllere ettől még nem játszhat ki spellt a kör végéig, mert a második rész nem a counter megtörténtére hivatkozik."
+    ],
+    [
+     "054.1,154",
+     1,
+     "A tiltás csak spellekre szól: unit, gear kijátszása és ability aktiválása megengedett. A facedown-ból kijátszott spellt is tiltja. A chainen már ott lévő spellek rendben resolve-olnak."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap: a deckben legfeljebb 3 olyan Signature kártya lehet, amely a legend Champion tagjét (Lillia) viseli."
+    ],
+    [
+     "135.2.e.6.c",
+     0,
+     "A 2 Power cost nyomtatott szimbóluma [C], amely több domainű lapon a lap bármelyik domainjének Powerével fizethető: Calm és Mind Powerrel, tetszőleges arányban."
+    ]
+   ],
+   "why": "A nyomtatott lap alapján ellenőrzött: a több domainű lapok Power szimbóluma [C], a 135.2.e.6.c szerint bármelyik domainből fizethető; a flag 2 nyitott kérdés lezárva flag 0-ra."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Maduli the Gatekeeper: a short szerint 'alapból exhausted lép be és úgy is marad', ezért Standard Move-val nem mozog; a 6. note (flag 2) viszont nyitva hagyja, hogy egy 'enter ready' replacement effect (Accelerate, Magma Wurm) hat-e rá. Az 'alapból' szó fedi az esetet, ezért nem javítottam, de ha a judge szerint ready léphet be, a Standard Move-os mondat pontosítandó.",
+  "Mel, Soul's Reflection: a 381.1-es note (flag 0) 'a -2 Mightot a mozgás előtt kell kiosztani' mondata gyakorlati tanács, a Core Rules nem mondja ki, hogy mozgás után, a showdown kezdete előtt nincs Open State ablak. Nem javítottam, mert nem bizonyíthatóan hamis."
+ ]
+}

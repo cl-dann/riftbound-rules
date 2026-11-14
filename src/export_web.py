@@ -8,3 +8,6 @@ w('cards.json',D['cards'])
 w('rules.json',D['rules'])
 w('meta.json',{k:D[k] for k in ('meta','topics','general','extra')})
 w('fonts.json',{k:base64.b64encode(open('font_%s.ttf'%k,'rb').read()).decode() for k in 'nbi'})
+# Tanulás modul: fejezetek, kvízek, szituációk (src/data/learn.json)
+L=json.load(open('data/learn.json',encoding='utf-8')) if os.path.exists('data/learn.json') else {'chapters':[],'scenarios':[]}
+w('learn.json',L)

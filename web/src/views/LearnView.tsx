@@ -1,0 +1,282 @@
+import { useEffect, useMemo, useState } from 'react';
+import { AlertTriangle, BookOpen, Check, ChevronLeft, ChevronRight, Compass, Lightbulb, RotateCcw, Swords } from 'lucide-react';
+import { loadLearn } from '../data';
+import { IMGBASE, esc, glossify, vsCard } from '../legacy/core';
+
+type Block =
+  | { type: 'p'; text: string }
+  | { type: 'callout'; kind: 'tip' | 'warn' | 'rule' | 'strategy'; title?: string; text: string }
+  | { type: 'steps'; title?: string; items: { title: string; text: string }[] }
+  | { type: 'cards'; names: string[]; caption?: string }
+  | { type: 'table'; head: string[]; rows: string[][] };
+type Quiz = { q: string; options: string[]; correct: number; why: string };
+type Chapter = { id: string; level: 'kezdo' | 'halado'; title: string; lead?: string; rules?: string; blocks: Block[]; quiz?: Quiz[] };
+type Unit = { n: string; m: number; ex?: boolean; dmg?: number; tag?: string };
+type Side = { base?: Unit[]; runes?: { ready: number; exhausted: number }; hand?: string[]; score?: number };
+type Board = { me: Side; opp: Side; bfs: { name: string; ctrl?: string | null; me?: Unit[]; opp?: Unit[] }[]; chain?: string[]; note?: string };
+type Step = { say: string; board?: Board; choice?: { q: string; opts: { t: string; ok?: boolean; why: string }[] } };
+type Scenario = { id: string; title: string; level: string; intro: string; rules?: string; steps: Step[] };
+type Learn = { chapters: Chapter[]; scenarios: Scenario[] };
+
+const LEVELS: [string, string, string][] = [
+  ['kezdo', 'Kezdő', 'Az első játékhoz szükséges minden: cél, kör, fizetés, harc és a chain.'],
+  ['halado', 'Haladó', 'Tempo, decképítés és a showdown finomságai.'],
+];
+const KEY = 'rb-learn-v1';
+type Progress = { done: Record<string, 1>; quiz: Record<string, number[]>; scn: Record<string, 1> };
+const loadP = (): Progress => {
+  try { return { done: {}, quiz: {}, scn: {}, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return { done: {}, quiz: {}, scn: {} }; }
+};
+const saveP = (p: Progress) => { try { localStorage.setItem(KEY, JSON.stringify(p)); } catch { /* privát mód */ } };
+
+/** [[Kártya]] kártyalink, {{123.4}} szabálylink, plusz fogalom-tooltip. */
+function inline(text: string, seen?: Set<string>) {
+  let h = esc(text)
+    .replace(/\[\[([^\]]+)\]\]/g, (_, n) => '<span class="cl" data-card="' + n + '">' + n + '</span>')
+    .replace(/\{\{([\d.a-z\-, ]+)\}\}/gi, (_, r) => String(r).split(/\s*,\s*/).map((x: string) => '<a class="rref" href="#szabalyok" data-ref="' + x + '">' + x + '</a>').join(' '));
+  try { h = glossify(h, seen || new Set()); } catch { /* glossify nélkül is olvasható */ }
+  return h;
+}
+const H = ({ t, seen, as = 'span' }: { t: string; seen?: Set<string>; as?: 'span' | 'p' | 'div' }) => {
+  const El = as as any;
+  return <El dangerouslySetInnerHTML={{ __html: inline(t, seen) }} />;
+};
+const openCard = (n: string) => window.dispatchEvent(new CustomEvent('rb:open-card', { detail: n }));
+
+function Callout({ b, seen }: { b: Extract<Block, { type: 'callout' }>; seen: Set<string> }) {
+  const Icon = b.kind === 'warn' ? AlertTriangle : b.kind === 'strategy' ? Compass : b.kind === 'rule' ? BookOpen : Lightbulb;
+  const def = { tip: 'Tipp', warn: 'Figyelem', rule: 'Szabály', strategy: 'Stratégia, nem szabály' }[b.kind] || 'Megjegyzés';
+  return (
+    <div className={'callout ' + b.kind}>
+      <Icon size={18} aria-hidden />
+      <b className="t">{b.title || def}</b>
+      <H as="p" t={b.text} seen={seen} />
+    </div>
+  );
+}
+
+function Blocks({ blocks }: { blocks: Block[] }) {
+  const seen = useMemo(() => new Set<string>(), [blocks]);
+  return (
+    <div className="lesson">
+      {blocks.map((b, i) => {
+        if (b.type === 'p') return <H key={i} as="p" t={b.text} seen={seen} />;
+        if (b.type === 'callout') return <Callout key={i} b={b} seen={seen} />;
+        if (b.type === 'steps') return (
+          <div key={i}>{b.title && <h3>{b.title}</h3>}
+            <ol className="lsteps">{b.items.map((s, j) => <li key={j}><b>{s.title}</b><H t={s.text} seen={seen} /></li>)}</ol>
+          </div>);
+        if (b.type === 'cards') return (
+          <div key={i}>
+            <div className="lcards">
+              {b.names.map((n) => { const c: any = vsCard(n); return c ? (
+                <figure key={n} onClick={() => openCard(c.n)} title="Részletek">
+                  <img loading="lazy" src={IMGBASE + c.img} alt={c.n} />
+                  <figcaption>{c.n}</figcaption>
+                </figure>) : null; })}
+            </div>
+            {b.caption && <H as="p" t={b.caption} seen={seen} />}
+          </div>);
+        if (b.type === 'table') return (
+          <table key={i} className="ltable"><thead><tr>{b.head.map((h, j) => <th key={j}>{h}</th>)}</tr></thead>
+            <tbody>{b.rows.map((r, j) => <tr key={j}>{r.map((c, k) => <td key={k}><H t={c} seen={seen} /></td>)}</tr>)}</tbody></table>);
+        return null;
+      })}
+    </div>
+  );
+}
+
+function QuizBox({ ch, p, setP }: { ch: Chapter; p: Progress; setP: (p: Progress) => void }) {
+  const qs = ch.quiz || [];
+  const [ans, setAns] = useState<number[]>(() => p.quiz[ch.id] || []);
+  useEffect(() => setAns(p.quiz[ch.id] || []), [ch.id]);
+  if (!qs.length) return null;
+  const pick = (qi: number, oi: number) => {
+    if (ans[qi] != null) return;
+    const a = [...ans]; a[qi] = oi; setAns(a);
+    const np = { ...p, quiz: { ...p.quiz, [ch.id]: a } };
+    if (qs.every((_, k) => a[k] != null)) np.done = { ...np.done, [ch.id]: 1 };
+    setP(np);
+  };
+  const right = qs.filter((q, i) => ans[i] === q.correct).length;
+  const all = qs.every((_, i) => ans[i] != null);
+  return (
+    <div className="quiz">
+      <h3>Ellenőrizd magad <small>{all ? right + ' / ' + qs.length + ' helyes' : Object.keys(ans).length + ' / ' + qs.length}</small></h3>
+      {qs.map((q, qi) => (
+        <div key={qi} style={{ marginBottom: 14 }}>
+          <H as="p" t={(qi + 1) + '. ' + q.q} />
+          <div className="qopts">
+            {q.options.map((o, oi) => {
+              const st = ans[qi] == null ? '' : oi === q.correct ? 'ok' : oi === ans[qi] ? 'bad' : '';
+              return <button key={oi} className={st} disabled={ans[qi] != null} onClick={() => pick(qi, oi)}><H t={o} /></button>;
+            })}
+          </div>
+          {ans[qi] != null && <div className="qwhy"><H t={(ans[qi] === q.correct ? 'Helyes. ' : 'Nem egészen. ') + q.why} /></div>}
+        </div>
+      ))}
+      {all && <button className="btn sec sm" onClick={() => { setAns([]); const q = { ...p.quiz }; delete q[ch.id]; setP({ ...p, quiz: q }); }}><RotateCcw size={14} /> Újra</button>}
+    </div>
+  );
+}
+
+function UnitChip({ u, side }: { u: Unit; side: 'me' | 'opp' }) {
+  const c: any = vsCard(u.n);
+  return (
+    <span className={'scn-u ' + side + (u.ex ? ' ex' : '')}>
+      <i title="Might">{u.m}</i>
+      {c ? <span className="cl" data-card={c.n}>{u.n}</span> : <span>{u.n}</span>}
+      {!!u.dmg && <em>{u.dmg} dmg</em>}
+      {u.tag && <small>{u.tag}</small>}
+    </span>
+  );
+}
+function Runes({ r }: { r?: { ready: number; exhausted: number } }) {
+  if (!r) return null;
+  return <span className="scn-runes">{Array.from({ length: r.ready }, (_, i) => <span key={'r' + i} className="r" />)}{Array.from({ length: r.exhausted }, (_, i) => <span key={'x' + i} className="r x" />)} {r.ready} ready, {r.exhausted} exhausted</span>;
+}
+function BoardView({ b }: { b: Board }) {
+  const side = (s: Side, who: 'me' | 'opp', label: string) => (
+    <div className="scn-row"><b>{label}{s.score != null ? ' · ' + s.score + ' pont' : ''}</b>
+      <div className="scn-side">{(s.base || []).map((u, i) => <UnitChip key={i} u={u} side={who} />)}{!(s.base || []).length && <span className="note">üres base</span>}
+        <Runes r={s.runes} />{s.hand?.length ? <span className="note">Kéz: {s.hand.map((h, i) => <span key={i}>{i ? ', ' : ''}<span className="cl" data-card={h}>{h}</span></span>)}</span> : null}</div></div>
+  );
+  return (
+    <div className="scn-board">
+      {side(b.opp, 'opp', 'Ellenfél base')}
+      <div className="scn-bfs">
+        {b.bfs.map((f, i) => (
+          <div key={i} className={'scn-bf ' + (f.ctrl || '')}>
+            <h5><span className="cl" data-card={f.name}>{f.name}</span><small>{f.ctrl === 'me' ? 'te kontrollálod' : f.ctrl === 'opp' ? 'ellenfél kontrollálja' : 'senkié'}</small></h5>
+            <div className="scn-side">{(f.opp || []).map((u, j) => <UnitChip key={j} u={u} side="opp" />)}</div>
+            <div className="scn-side">{(f.me || []).map((u, j) => <UnitChip key={j} u={u} side="me" />)}</div>
+          </div>))}
+      </div>
+      {side(b.me, 'me', 'Te base')}
+      {!!b.chain?.length && <div className="scn-row"><b>Chain</b><div className="scn-chain">{b.chain.map((c, i) => <span key={i}>{i === 0 ? 'Felül: ' : ''}<H t={c} /></span>)}</div></div>}
+      {b.note && <div className="scn-row"><b>Állapot</b><span className="note">{b.note}</span></div>}
+    </div>
+  );
+}
+
+function ScenarioView({ s, p, setP }: { s: Scenario; p: Progress; setP: (p: Progress) => void }) {
+  const [i, setI] = useState(0);
+  const [pick, setPick] = useState<Record<number, number>>({});
+  useEffect(() => { setI(0); setPick({}); }, [s.id]);
+  const st = s.steps[i];
+  let board: Board | undefined; for (let k = i; k >= 0 && !board; k--) board = s.steps[k].board;
+  const blocked = !!st.choice && pick[i] == null;
+  const last = i === s.steps.length - 1;
+  const next = () => { if (last) { setP({ ...p, scn: { ...p.scn, [s.id]: 1 } }); location.hash = '#tanulas'; } else setI(i + 1); };
+  return (
+    <>
+      <div className="crumb">Tanulás › Szituációk</div>
+      <h2>{s.title}</h2>
+      <H as="p" t={s.intro} />
+      <div className="scn-dots" aria-label="Lépések">{s.steps.map((_, k) => <i key={k} className={k === i ? 'on' : k < i ? 'seen' : ''} />)}</div>
+      {board && <BoardView b={board} />}
+      <H as="div" t={st.say} />
+      {st.choice && (
+        <div className="quiz" style={{ marginTop: 14 }}>
+          <H as="p" t={st.choice.q} />
+          <div className="qopts">{st.choice.opts.map((o, k) => {
+            const cls = pick[i] == null ? '' : o.ok ? 'ok' : k === pick[i] ? 'bad' : '';
+            return <button key={k} className={cls} disabled={pick[i] != null} onClick={() => setPick({ ...pick, [i]: k })}><H t={o.t} /></button>;
+          })}</div>
+          {pick[i] != null && <div className="qwhy"><H t={st.choice.opts[pick[i]].why} /></div>}
+          {pick[i] != null && !st.choice.opts[pick[i]].ok && <div className="qwhy"><H t={'A jó válasz: ' + (st.choice.opts.find((o) => o.ok)?.t || '') + '. ' + (st.choice.opts.find((o) => o.ok)?.why || '')} /></div>}
+        </div>
+      )}
+      <div className="pager">
+        {i > 0 ? <a href="#" onClick={(e) => { e.preventDefault(); setI(i - 1); }}><small>Vissza</small><b>{i}. lépés</b></a> : <span />}
+        <button className="btn hex next" disabled={blocked} onClick={next}>{last ? <><Check size={16} /> Befejezés</> : <>Tovább <ChevronRight size={16} /></>}</button>
+      </div>
+    </>
+  );
+}
+
+export function LearnView({ hash }: { hash: string }) {
+  const [L, setL] = useState<Learn | null>(null);
+  const [p, setP0] = useState<Progress>(loadP);
+  const setP = (np: Progress) => { setP0(np); saveP(np); };
+  useEffect(() => { loadLearn().then(setL); }, []);
+  const m = /^#tanulas\/(sz\/)?([\w-]+)/.exec(hash);
+  useEffect(() => { if (m) window.scrollTo({ top: 0 }); }, [hash]);
+  if (!L) return <div className="panel pad"><p className="note">Betöltés…</p></div>;
+  const chs = L.chapters;
+  const ch = m && !m[1] ? chs.find((c) => c.id === m[2]) : undefined;
+  const sc = m && m[1] ? L.scenarios.find((s) => s.id === m[2]) : undefined;
+  const total = chs.length + L.scenarios.length;
+  const doneN = chs.filter((c) => p.done[c.id]).length + L.scenarios.filter((s) => p.scn[s.id]).length;
+  const firstOpen = chs.find((c) => !p.done[c.id]) || chs[0];
+
+  const side = (
+    <aside className="panel learn-side">
+      <h4>Haladás <small>{doneN} / {total}</small></h4>
+      <div className="progress"><i style={{ width: (total ? (100 * doneN) / total : 0) + '%' }} /></div>
+      {LEVELS.map(([lv, name]) => {
+        const list = chs.filter((c) => c.level === lv);
+        if (!list.length) return null;
+        return (<div key={lv}><h4>{name} <small>{list.filter((c) => p.done[c.id]).length} / {list.length}</small></h4>
+          <ol>{list.map((c) => (
+            <li key={c.id} className={p.done[c.id] ? 'done' : ''}>
+              <a href={'#tanulas/' + c.id} aria-current={ch?.id === c.id ? 'page' : undefined}>
+                <span className="num">{p.done[c.id] ? <Check size={13} /> : chs.indexOf(c) + 1}</span>{c.title}</a></li>))}</ol></div>);
+      })}
+      {!!L.scenarios.length && (<><h4>Szituációk <small>{L.scenarios.filter((s) => p.scn[s.id]).length} / {L.scenarios.length}</small></h4>
+        <ol>{L.scenarios.map((s) => (
+          <li key={s.id} className={p.scn[s.id] ? 'done' : ''}>
+            <a href={'#tanulas/sz/' + s.id} aria-current={sc?.id === s.id ? 'page' : undefined}>
+              <span className="num">{p.scn[s.id] ? <Check size={13} /> : <Swords size={12} />}</span>{s.title}</a></li>))}</ol></>)}
+      <h4>Tovább</h4>
+      <ol><li><a href="#kezikonyv"><span className="num"><BookOpen size={12} /></span>Kézikönyv: fogalmak, kulcsszavak</a></li>
+        <li><a href="#chain"><span className="num"><Swords size={12} /></span>Chain elemző</a></li></ol>
+    </aside>
+  );
+
+  let main;
+  if (sc) main = <ScenarioView s={sc} p={p} setP={setP} />;
+  else if (ch) {
+    const idx = chs.indexOf(ch); const prev = chs[idx - 1], next = chs[idx + 1];
+    main = (
+      <>
+        <div className="crumb">Tanulás › {LEVELS.find((l) => l[0] === ch.level)?.[1]} › {idx + 1} / {chs.length}</div>
+        <h2>{ch.title}</h2>
+        {ch.lead && <p className="lead">{ch.lead}</p>}
+        {ch.rules && <p className="note">Core Rules: <span dangerouslySetInnerHTML={{ __html: inline('{{' + ch.rules + '}}') }} /></p>}
+        <div className="orn"><i /></div>
+        <Blocks blocks={ch.blocks} />
+        <QuizBox ch={ch} p={p} setP={setP} />
+        {!(ch.quiz || []).length && !p.done[ch.id] && <button className="btn sm" style={{ marginTop: 20 }} onClick={() => setP({ ...p, done: { ...p.done, [ch.id]: 1 } })}><Check size={14} /> Elolvastam</button>}
+        <div className="pager">
+          {prev ? <a href={'#tanulas/' + prev.id}><small><ChevronLeft size={11} /> Előző</small><b>{prev.title}</b></a> : <span />}
+          {next ? <a className="next" href={'#tanulas/' + next.id}><small>Következő <ChevronRight size={11} /></small><b>{next.title}</b></a>
+            : L.scenarios[0] && <a className="next" href={'#tanulas/sz/' + L.scenarios[0].id}><small>Gyakorlás <ChevronRight size={11} /></small><b>Szituációk</b></a>}
+        </div>
+      </>
+    );
+  } else main = (
+    <>
+      <div className="hero" style={{ margin: '-26px calc(-1 * clamp(16px, 4vw, 42px)) 18px' }}>
+        <div className="crumb">Tanulás</div>
+        <h2>Tanuld meg a Riftboundot</h2>
+        <p>Fejezetekre bontott útmutató a Core Rules alapján: rövid leckék valódi lapokkal, minden fejezet végén néhány kérdéssel. Utána interaktív szituációkban gyakorolhatod a harcot és a chaint. A haladásod ebben a böngészőben mentődik.</p>
+        <a className="btn hex" href={'#tanulas/' + (firstOpen?.id || '')}>{doneN ? 'Folytatás' : 'Kezdés'}: {firstOpen?.title} <ChevronRight size={16} /></a>
+      </div>
+      <div className="levels">
+        {LEVELS.map(([lv, name, d]) => { const list = chs.filter((c) => c.level === lv); return list.length ? (
+          <a key={lv} className="level" href={'#tanulas/' + list[0].id}><b>{name}</b><span>{d} {list.length} fejezet.</span></a>) : null; })}
+        {!!L.scenarios.length && <a className="level" href={'#tanulas/sz/' + L.scenarios[0].id}><b>Szituációk</b><span>Valódi board state-ek lépésenként, döntési pontokkal. {L.scenarios.length} gyakorlat.</span></a>}
+        <a className="level" href="#kezikonyv"><b>Kézikönyv</b><span>Fogalmak, kulcsszavak, játékmenet és szabályváltozások, kereshetően.</span></a>
+      </div>
+      <p className="note" style={{ marginTop: 18 }}>AI által írt, nem hivatalos összefoglaló. A pontos szöveg mindig a hivatkozott szabályszámra kattintva olvasható, versenyen a judge és a Core Rules dönt.</p>
+    </>
+  );
+
+  return (
+    <div className="learn">
+      {side}
+      <main className="panel learn-main">{main}</main>
+    </div>
+  );
+}
