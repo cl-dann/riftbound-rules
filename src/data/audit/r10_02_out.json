@@ -1,0 +1,39 @@
+{
+ "fixes": {
+  "Brynhir Thundersong": {
+   "notes": [
+    [
+     "393,391.4",
+     0,
+     "A tiltás a trigger resolve-jától a kör végéig él, és nem Brynhirhez kötött: akkor is megmarad, ha Brynhir elhagyja a boardot."
+    ],
+    [
+     "383.4.a.2",
+     1,
+     "A tiltás csak a trigger resolve-jával lép életbe. Amíg a trigger a chain-en van, az opponent még kijátszhat [Reaction] lapot válaszul."
+    ],
+    [
+     "052",
+     0,
+     "\"Card\" a Main Deck lapokat jelenti: unit, gear, spell. Az opponent abilityket aktiválhat, rune-okat használhat, a triggerei lefutnak."
+    ],
+    [
+     "422.3,811.6",
+     1,
+     "A facedown lap kijátszása is Play, tehát a már elrejtett lapjaikat sem játszhatják ki ebben a körben."
+    ],
+    [
+     "054.1,358.4,358.5",
+     1,
+     "A \"can't play\" tiltás erősebb minden engedélynél, így a [Reaction] és a Hidden lapokénál is. A tiltott lap a legality checken elbukik, a kijátszás minden lépése visszacsinálódik, a lap visszakerül oda, ahonnan jött."
+    ]
+   ],
+   "why": "A 355.17.b a kijátszás közbeni választásokra vonatkozó megkötésekről szól, nem a kijátszási tiltásról. A tiltás elsőbbségét a 054.1, a meghiúsuló kijátszás visszacsinálását a 358.4 és 358.5 mondja ki; a hivatkozás és a szöveg ehhez igazítva."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Card Sharp: a 182,183 note szerint az opponent Gold tokenjét az opponent kontrollálja. A 182 és 183 alapszabálya szerint a token controllere és ownere a létrehozó ability controllere (te), kivéve, ha az effect mást mond; hogy a \"each opponent may play\" ilyen kivételnek számít-e, a Core Rules kifejezetten nem mondja ki. A note flag 1, a lap szándéka egyértelmű, ezért nem javítottam, de a hivatkozás inkább ellene szól, judge vagy szerkesztői döntés kell."
+ ]
+}

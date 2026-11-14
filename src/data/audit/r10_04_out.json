@@ -1,0 +1,13 @@
+{
+ "fixes": {
+  "Fresh Beans": {
+   "short": "Gear: amikor showdown alatt kijátszol egy unitot, exhaustolhatod, hogy húzz 1 lapot. Ilyenkor Action vagy Reaction időzítésű unit jöhet le (például Ambush kézből, vagy a következő körtől egy elrejtett lap facedown-ból), de egy spell vagy képesség által showdownban kijátszott unit token is beindítja. Exhausted állapotban nem használható, amíg ready nem lesz.",
+   "why": "A short az elrejtett (Hidden) lapot a kézből kijátszható unitok példájaként hozta; a facedown lap nem kézből, hanem a battlefieldről játszható ki (811.1.b, 811.6)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Flurry of Feathers: a notes 5. pontja (flag 0) szerint a négy Bird token egyenként külön locationre is mehet; a 355.2 unitonkénti location-választást ír, de token-csoportra kifejezett szabály nincs, ezért nem módosítottam."
+ ]
+}

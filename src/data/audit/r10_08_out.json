@@ -1,0 +1,35 @@
+{
+ "fixes": {
+  "Petal Pixie": {
+   "short": "+1 Mightot kap minden saját Temporary unitodért, ami vele egy battlefielden áll. Base-ben nem működik. A Temporary unitjaid a Beginning Phase-ed elején meghalnak, ezért ez a bónusz ekkor elvész, a köröd során csak az újonnan érkező Temporary unitok adnak pluszt.",
+   "notes": [
+    [
+     "364.1,198.1",
+     1,
+     "Passive: +1 Might minden [Temporary] unitod után, ami a Pixie-vel azonos battlefielden áll. Base-ben nem működik, és az enemy [Temporary] unitok nem számítanak."
+    ],
+    [
+     "816.3,187.2",
+     0,
+     "A Temporary megléte ellenőrizhető tulajdonság. A Sprite tokenek eleve [Temporary]-vel jönnek létre, egy Sprite a Pixie mellett +1 Mightot jelent."
+    ],
+    [
+     "816.1.b,816.1.c",
+     1,
+     "A [Temporary] unitjaid a Beginning Phase-ed elején meghalnak, a tőlük kapott bónusz ekkor azonnal megszűnik. A Pixie Mightja ekkor a nyomtatott 2 plusz az esetleges egyéb módosítók (buff, Equipment, más passive)."
+    ],
+    [
+     "816.3",
+     1,
+     "A kör közben [Temporary]-t kapó unit is számít, amíg a boardon van, mert a Temporary megléte ellenőrizhető tulajdonság."
+    ]
+   ],
+   "why": "A short és a 816.1.b note azt állította, hogy a Pixie a körödet 2 Mighttal kezdi; ez csak a Temporary bónuszra igaz, buff, Equipment vagy más passive (pl. Rage Amplifier) mellett több (703, 137.3). Pontosítva."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Red Brambleback: a short tényként állítja, hogy a battlefield saját 'When you conquer here' abilityje is 'your conquer effect', így duplázódik. A 190.6.d (a battlefield abilityjének 'you'-ja a controller) és a 383.4.c.2 alapján valószínű, de a Core Rules ezt kifejezetten nem mondja ki; a note flag 1-gyel jelöli, judge megerősítés kellene."
+ ]
+}

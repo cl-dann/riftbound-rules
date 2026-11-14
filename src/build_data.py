@@ -180,7 +180,7 @@ for f in sorted(glob.glob('data/review/rv_*_out.json')):
     REV.update(json.load(open(f,encoding='utf-8')).get('fixes') or {})
 NP=json.load(open('data/audit/notes_patch.json',encoding='utf-8'))
 RF={}
-for f in sorted(glob.glob('data/audit/r*_out.json')):
+for f in sorted(glob.glob('data/audit/r*_out.json'),key=lambda f:[int(x) for x in re.findall(r'\d+',f)]):
     for k,v in (json.load(open(f,encoding='utf-8')).get('fixes') or {}).items(): RF.setdefault(k,{}).update({x:y for x,y in v.items() if x in ('short','notes')})
 SA={}
 for f in sorted(glob.glob('data/audit/[av]*_out.json')):

@@ -1,0 +1,88 @@
+{
+ "fixes": {
+  "Mischievous Marai": {
+   "notes": [
+    [
+     "811.1.b,811.6",
+     0,
+     "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."
+    ],
+    [
+     "383.2.a.1",
+     0,
+     "A \"to a battlefield\" a trigger feltételének része. Base-be kijátszva a trigger nem fut le."
+    ],
+    [
+     "355.10,355.8",
+     0,
+     "Az enemy unit target, és Marai battlefieldjén kell lennie. Ha ott nincs enemy unit, a trigger nem kerül chain-re."
+    ],
+    [
+     "355.2.a,811.6",
+     1,
+     "Unit alapból csak általad kontrollált battlefieldre játszható, ahol enemy unit jellemzően csak combat alatt áll. A sebzés ezért a gyakorlatban facedown-ból, [Reaction]-ként, combat közben használható."
+    ],
+    [
+     "359.3.f.2,811.1.d.3.a",
+     0,
+     "A \"here\" a resolve-kor ellenőrzött hivatkozás. Ha Marai addigra elmozdul arról a battlefieldről, a target már nincs \"here\", a trigger mistargetel."
+    ],
+    [
+     "359.3.f.2",
+     2,
+     "Ha Marai a resolve előtt elhagyja a boardot, a Core Rules nem mondja ki egyértelműen, hogy a \"here\" az utolsó ismert helyére hivatkozik-e, vagy a trigger mistargetel. Judge döntse el."
+    ],
+    [
+     "142.4.b,323.4",
+     0,
+     "A 2 damage a uniton marad: ha eléri a unit Mightját, a következő cleanupnál meghal. Combat közben a combat damage ehhez adódik hozzá."
+    ]
+   ],
+   "why": "A 359.3.f.2 csak az elmozdulás esetét fedi le (Yasuo példa). A board elhagyásakor a \"here\" értelmezése nem szabályból közvetlen, flag 0 helyett külön flag 2 pont."
+  },
+  "On the Hunt": {
+   "short": "Minden unitodat ready-vé teszi, így egy körben újra mozoghatnak, és a mozgás újabb showdownhoz vagy combathoz vezethet. Csak a saját körödben, showdownon kívül játszható ki. Költsége 1 Energy és 2 Power; hogy a Power melyik domainből fizethető, azt a nyomtatott lapon nézd meg.",
+   "why": "A short szerint a 2 Power \"a lap domainjeiből (Body, Chaos)\" fizethető, de a kártyaadat csak a Power számát adja, a nyomtatott szimbólumot nem (135.2.e.6.c), ez nem ellenőrizhető. A notes ezt már flag 2-vel jelöli."
+  },
+  "Obelisk of Power": {
+   "short": "Minden játékos az első köre elején kap egy extra ready rune-t, így az első köre után eggyel több rune-ja van: 1v1-ben a kezdő játékosnak 2 helyett 3, a másodiknak 3 helyett 4. Játékosonként egyszer működik.",
+   "why": "A \"másodiknak 3 helyett 4\" csak a 2 játékosos módokban igaz (487.7, 488.7). Többjátékos módban csak az utolsó játékos kap extra rune-t (489.7 és tovább), ezért a short 1v1-re szűkítve."
+  },
+  "Party Crasher": {
+   "short": "Minden exhausted unitodért 1 Energyvel olcsóbb, ezért a saját Main Phase-edben, a mozgások után éri meg kijátszani. Az 1 Order Power costot ez a kedvezmény nem csökkenti. Tank: combatban rá kell először halálos sebzést osztani.",
+   "notes": [
+    [
+     "356.4.g",
+     0,
+     "Változó kedvezmény: az exhausted unitjaid számát a Determine Total Cost lépésben nézi a játék. A későbbi változás a kiszámolt costot nem módosítja."
+    ],
+    [
+     "143.4,144.2",
+     1,
+     "A unitok exhausted lépnek be, és a Standard Move is exhaustol. A körben korábban kijátszott és elmozgatott unitjaid mind csökkentik az árat."
+    ],
+    [
+     "356.4.c.2,356.6",
+     0,
+     "Csak az Energy cost csökken, legfeljebb 0-ig. Az 1 Order Powert ez a kedvezmény nem csökkenti."
+    ],
+    [
+     "206",
+     0,
+     "Más effectek a nyomtatott 9-es costot látják."
+    ],
+    [
+     "815.1.b",
+     0,
+     "Tank: az opponentnek előbb a Crasherre kell halálos combat damage-et kiosztania."
+    ]
+   ],
+   "why": "\"Az 1 Order Powert mindig ki kell fizetni\" túlzás: más effect (például costot ignoráló vagy \"for [cost]\" kijátszás, 356.1.a) megszüntetheti. A 356.4.c.2 csak azt mondja, hogy ez a kedvezmény a Power részt nem érinti."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Mordekaiser, Twice Slain: a short \"egy másik saját unitot\" ír, a szöveg csak \"kill a friendly unit\". Hogy Mordekaiser saját magát választhatja-e a csere costjaként (és ennek lenne-e értelme), a Core Rules nem mondja ki, ezért nem javítottam; judge vagy hivatalos FAQ döntse el."
+ ]
+}

@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "Allay, Eager Admirer": {
+   "short": "Deflect miatt az ellenfélnek plusz 1 Powert kell fizetnie, ha rá akar mutatni, bárhol áll. Amíg battlefielden áll, az ott lévő többi saját unitod is Deflectet kap, base-ben ezt a többieknek nem adja. Csak a célzás ellen véd, az összes unitra ható effect és a combat damage ellen nem.",
+   "why": "A \"Base-ben nem segít\" mondat úgy is olvasható, hogy Allay saját Deflectje base-ben nem él, pedig a [Deflect] kulcsszava feltétel nélküli (809.1.c), csak a többieknek adott Deflect függ a battlefieldtől (364.3.a)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

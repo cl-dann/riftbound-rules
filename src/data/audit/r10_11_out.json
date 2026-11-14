@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "The Papertree": {
+   "short": "Ha itt tartod a battlefieldet, minden játékos kap egy exhausted rune-t, az opponent is. Energyre az opponent használhatja előbb: az övé az ő következő körében lesz ready, a tiéd csak a te következő körödben. Powerért recycle-ölve viszont mindkét rune azonnal használható.",
+   "why": "A short feltétel nélkül állította, hogy az opponent előbb használja a rune-t. Ez csak Energyre igaz (315.1.b); Powerért az exhausted rune is azonnal recycle-ölhető (164.2.b), ezt a note is így írja."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

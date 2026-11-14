@@ -1,0 +1,42 @@
+{
+ "fixes": {
+  "Karma, Channeler": {
+   "notes": [
+    [
+     "817.1.b,437.1",
+     0,
+     "Vision: amikor kijátszod Karmát, megnézed a Main Deck felső lapját, és recycle-ölheted. Ez play trigger, nem a boardra lépésre fut le."
+    ],
+    [
+     "417.1.a",
+     1,
+     "Bármilyen recycle kiváltja, ami a te Main Deckedbe tesz lapot: Predict és Vision, trashből recycle, önmagát recycle-ölő unit. Karma saját Visionje is, ha recycle-ölöd a lapot."
+    ],
+    [
+     "417.5",
+     1,
+     "\"One or more\": egy recycle action egy triggert ad, akárhány lap megy egyszerre a deck aljára."
+    ],
+    [
+     "052,417.1.b",
+     0,
+     "A rune nem kártya, és a Rune Deckbe megy. Egy rune recycle-ölése Powerért nem váltja ki."
+    ],
+    [
+     "355.10,427.1.c",
+     0,
+     "A friendly unit target, a trigger kötelező. Már buffolt unit is választható, de nem kap második buffot."
+    ],
+    [
+     "417.1.c",
+     1,
+     "Errata: a nyomtatott \"When you recycle one or more cards\" helyett most \"to your Main Deck\". Ha egy opponent lapját recycle-ölöd, az az ő deckjébe megy, és nem triggerel."
+    ]
+   ],
+   "why": "817.1.b: a Vision \"When this is played\" trigger, nem boardra lépésre fut le; a note \"amikor Karma a boardra lép\" megfogalmazása pontatlan volt."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}
