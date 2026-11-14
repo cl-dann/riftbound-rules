@@ -1,0 +1,332 @@
+{
+ "fixes": {
+  "Showstopper, Sett": {
+   "notes": [
+    [
+     "355.9.b,355.4",
+     0,
+     "A target friendly unit a saját base-edben. A cél battlefieldet kijátszáskor választod."
+    ],
+    [
+     "427.1.b.1,427.1.c",
+     0,
+     "Már buffolt unit is választható, de nem kap második buffot. A Move ettől még megtörténik."
+    ],
+    [
+     "144.2",
+     1,
+     "Ez effect általi Move, nem Standard Move: nem kér exhaustot, tehát exhausted unitot is átvisz, és a unit állapota nem változik."
+    ],
+    [
+     "190.3.a.1,466.2.c.1",
+     0,
+     "Ha a cél nem általad kontrollált battlefield, a unit Contested státuszt tesz rá, és a combatban te vagy az attacker."
+    ],
+    [
+     "359.3.e.2,359.3.e.14.a",
+     0,
+     "Ha a unit a resolve előtt elhagyja a base-t, illegális target: a buff és a Move is ignorálódik."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "103.3.d,103.3.d.1,103.3.d.2",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Sett) kell viselnie."
+    ]
+   ],
+   "why": "A Signature pont azt is állítja, hogy minden Signature lapnak a legend Champion tagjét kell viselnie és összesen legfeljebb 3 lehet, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.1 és 103.3.d.2 mondja ki, a hivatkozást kiegészítettem."
+  },
+  "Siphoning Strike": {
+   "notes": [
+    [
+     "355.10,355.9.b",
+     0,
+     "A unit target és battlefielden kell lennie."
+    ],
+    [
+     "158.2",
+     1,
+     "A rune-ok számát a resolve-kor nézi a spell. A boardon lévő összes rune-od számít, ready és exhausted egyaránt. 7 vagy több rune-nál 7 a sebzés a 4 helyett, nem 11."
+    ],
+    [
+     "391.2,393",
+     0,
+     "A \"when it dies this turn\" Delayed Trigger, a spelltől függetlenül él. A unit bármilyen okból bekövetkező halálára lefut, például a későbbi combatban is."
+    ],
+    [
+     "429.5.c,323.4",
+     0,
+     "A halálos sebzést kapott unit a resolve utáni cleanupban hal meg, a channel ezután jön."
+    ],
+    [
+     "359.3.e.14.a",
+     0,
+     "Ha a target illegálissá válik, a sebzés ignorálódik, és a Delayed Trigger sem jön létre."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "103.3.d,103.3.d.1,103.3.d.2",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Nasus) kell viselnie."
+    ]
+   ],
+   "why": "A Signature pont azt is állítja, hogy minden Signature lapnak a legend Champion tagjét kell viselnie és összesen legfeljebb 3 lehet, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.1 és 103.3.d.2 mondja ki, a hivatkozást kiegészítettem."
+  },
+  "Shurelya's Requiem": {
+   "notes": [
+    [
+     "825.3.a,825.3.b",
+     0,
+     "Unique: ebből a névből csak 1 példány lehet a deckben. A 3 Signature hely ettől még kitölthető három különböző nevű Unique Signature lappal."
+    ],
+    [
+     "103.3.d,103.3.d.1,103.3.d.2,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Ornn) kell viselnie. Két domainű, ezért csak olyan legend mellé fér, amelynek mindkét domainje megvan."
+    ],
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 saját domainű Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "718.2,718.3,718.4",
+     0,
+     "Csatolva a unit +2 Mightot kap, az Effect Text a unit Rules Textjéhez fűződik, a gear saját Rules Textje pedig inaktív. Leválasztva mindez azonnal megszűnik."
+    ],
+    [
+     "355.10.d,383.4.a.2",
+     0,
+     "A play effect minden unitodat readyzi, target nélkül, base-ben és battlefielden is. A körben már mozgott unitok így újra mozoghatnak, a frissen kijátszottak is használhatók."
+    ],
+    [
+     "416.1.c,358.4",
+     1,
+     "Már ready unitra nincs hatása. Nincs [Reaction]-je, ezért az opponent körében vagy spellre válaszul nem játszható ki."
+    ]
+   ],
+   "why": "A Signature pont azt is állítja, hogy minden Signature lapnak a legend Champion tagjét kell viselnie és összesen legfeljebb 3 lehet, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.1 és 103.3.d.2 mondja ki, a hivatkozást kiegészítettem."
+  },
+  "Shuriken Flip": {
+   "notes": [
+    [
+     "103.3.d,103.3.d.1,103.3.d.2,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, mindnek a legend Champion tagjét (Akali) kell viselnie, és a legendnek a lap mindkét domainjét tartalmaznia kell."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "355.13,355.9.b",
+     0,
+     "\"Up to one\": az enemy unit választása elhagyható. Ha választasz, battlefielden kell lennie."
+    ],
+    [
+     "355.8,355.4",
+     0,
+     "A friendly unit kötelező target, a Move célját kijátszáskor választod. Mozgatható friendly unit nélkül a spell nem játszható ki."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "A damage és a Move független: ha az egyik target illegális lesz, a másik rész ettől még végrehajtódik."
+    ],
+    [
+     "452,421.1",
+     0,
+     "A Move kiváltja a \"when I move\" triggereket. Ha a cél nem általad kontrollált battlefield, az Contested lesz."
+    ],
+    [
+     "829.1.b,829.1.c.1,829.1.b.2",
+     0,
+     "Flow: a trashből [3] és egy bármilyen domainű Power-ért újra kijátszható, ez a base cost helyére lép, utána a lap banishelődik. Az időzítés nem változik, a trashből is csak a saját körödben megy."
+    ]
+   ],
+   "why": "A Signature pont azt is állítja, hogy minden Signature lapnak a legend Champion tagjét kell viselnie és összesen legfeljebb 3 lehet, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.1 és 103.3.d.2 mondja ki, a hivatkozást kiegészítettem."
+  },
+  "Spinning Axe": {
+   "notes": [
+    [
+     "103.3.d,103.3.d.1,103.3.d.2,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Draven) kell viselnie. Két domainű, ezért csak olyan legend mellé fér, amelynek mindkét domainje megvan."
+    ],
+    [
+     "819.1.b,819.1.d,813.1.c.1",
+     0,
+     "Quick-Draw: a lapnak [Reaction]-je van, Closed State-ben, bárki körében kijátszható, és a play effectje azonnal egy saját unitra csatolja. Showdown közben is adhat Mightot."
+    ],
+    [
+     "355.5.b,355.10,359.3.e.5",
+     1,
+     "A Quick-Draw csatolása play effect: a unitot a trigger chainre kerülésekor választod, és target. Ha a resolve előtt elhagyja a boardot, a gear csatolatlanul a base-ben marad."
+    ],
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 saját domainű Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "718.2,718.3,718.4",
+     0,
+     "Csatolva a unit +3 Mightot kap, az Effect Text a unit Rules Textjéhez fűződik, a gear saját Rules Textje pedig inaktív. Leválasztva mindez azonnal megszűnik."
+    ],
+    [
+     "722.2",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: csatolva a Rules Textje inaktív, ezért a [Temporary] nem triggerel. Egy \"gear with [Temporary]\" szövegű effect viszont csatolva is célozhatja."
+    ],
+    [
+     "816.1.b,436.1.c",
+     1,
+     "Ha a unit meghal és az Axe leválik, a Rules Textje újra aktív: ha a következő Beginning Phase-ed elejéig nem equipeled újra, a [Temporary] megöli."
+    ]
+   ],
+   "why": "A Signature pont azt is állítja, hogy minden Signature lapnak a legend Champion tagjét kell viselnie és összesen legfeljebb 3 lehet, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.1 és 103.3.d.2 mondja ki, a hivatkozást kiegészítettem."
+  },
+  "Siphon Power, Viktor": {
+   "notes": [
+    [
+     "355.10.d",
+     0,
+     "A battlefield a target, a unitok nem (\"units there\"). Deflect és \"can't be chosen\" a unitokon nem számít."
+    ],
+    [
+     "355.5.a",
+     1,
+     "A resolve-kor ott álló unitokra hat. A később érkező unit nem kap módosítót, a távozó unit pedig a kör végéig megtartja."
+    ],
+    [
+     "479.4.b",
+     0,
+     "A \"minimum of 1\" korlát a resolve-kor rögzül: az 1 Mightú enemy unit -0-t kap, és ez a kör végéig így marad, akkor is, ha később nő a Mightja."
+    ],
+    [
+     "740.1.b",
+     0,
+     "\"Enemy units\": minden opponent ott álló unitja. \"Friendly units\": a tieid."
+    ],
+    [
+     "103.3.d,103.3.d.1,103.3.d.2",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Viktor) kell viselnie."
+    ],
+    [
+     "135.2.e.6.c",
+     2,
+     "Hogy az 1 Power cost melyik domainből fizethető, a nyomtatott szimbólumtól függ: ha [C], akkor Mind vagy Order Powerrel is, ha konkrét domain jele, csak azzal. Az adat a szimbólumot nem tartalmazza, a kártyakép alapján ellenőrizendő."
+    ]
+   ],
+   "why": "A note 0-s flaggel állította, hogy a Power cost Mind vagy Order Powerrel fizethető (135.2.e.6.c). Ez csak [C] nyomtatott szimbólumnál igaz, az adat csak a Power számát adja, ezért 2-es flaggel, feltételesen fogalmaztam újra. A Signature ponthoz a 103.3.d.1 és 103.3.d.2 hivatkozást is hozzáadtam."
+  },
+  "Siren's Song": {
+   "notes": [
+    [
+     "355.9.b",
+     0,
+     "A target csak olyan enemy unit lehet, amely ebben a körben már mozgott. Ha nincs ilyen, a lap nem játszható ki."
+    ],
+    [
+     "458.1,421.1",
+     1,
+     "A Recall nem Move, a kijátszás sem: az a unit, amely ebben a körben csak recallal vagy kijátszással került a helyére, nem választható. Ha viszont a körben mozgott is (Standard Move vagy effect általi Move), választható, akkor is, ha utána recallolták."
+    ],
+    [
+     "355.4,355.4.a",
+     0,
+     "A Move célját kijátszáskor választod: a jelenlegitől eltérő location, ahol a unit tartózkodhat, tehát a saját base-e vagy egy battlefield."
+    ],
+    [
+     "813.1.c.1,190.3.b.1",
+     1,
+     "[Reaction]: a battlefieldedre lépő enemy unitot a showdown alatt visszaküldheted. Ha a támadónak nem marad ott unitja és nincs folyamatban showdown vagy combat, a Contested státusz a következő cleanupban megszűnik."
+    ],
+    [
+     "452",
+     0,
+     "Ha olyan battlefieldre mozgatod, amit nem a controllere kontrollál, az Contested lesz."
+    ]
+   ],
+   "short": "Bármikor kijátszható: elmozgat egy enemy unitot, ami ebben a körben már mozgott, például visszaküldi a base-ébe. A Recall és a kijátszás nem számít mozgásnak, az így odakerült, de nem mozgott unit nem választható. Ha nincs ilyen unit, nem játszható ki.",
+   "why": "A short és a note kategorikusan azt állította, hogy recallolt vagy frissen kijátszott unitra nem használható. A feltétel csak a \"moved this turn\" (421.1, 458.1): a körben kijátszott, majd mozgott, vagy mozgott, majd recallolt unit választható. Pontosítottam."
+  },
+  "Stellacorn Herder": {
+   "notes": [
+    [
+     "421.1,144.2",
+     0,
+     "Minden Move-ra triggerel: Standard Move-ra és effect általi mozgatásra is."
+    ],
+    [
+     "458.1,468.1.a.2",
+     0,
+     "Recallra nem triggerel. A combat utáni visszavonulás (az attackerek recallja) nem húz lapot. Az effect általi \"move ... to base\" (például Sinister Poro) viszont Move, arra triggerel."
+    ],
+    [
+     "421.1",
+     1,
+     "A kijátszás nem Move: battlefieldre kijátszva nem triggerel."
+    ],
+    [
+     "414.4",
+     0,
+     "A draw kötelező. Üres deck esetén Burn Out következik."
+    ]
+   ],
+   "short": "Valahányszor mozog, húzol egy lapot, akár saját lépéssel, akár egy lap hatására mozdul, a base-be mozgatás is ide tartozik. A kijátszás és a recall (például a combat utáni visszavonulás) nem számít mozgásnak, ilyenkor nincs húzás.",
+   "why": "A short a \"base-be visszaküldés\"-t általánosan mozgásnak nem számítónak mondta. Csak a Recall nem Move (458); egy effect általi \"move to base\" Move (421.1), arra a trigger lefut. Pontosítottam."
+  },
+  "Shimmering Swimmer": {
+   "notes": [
+    [
+     "356.2.b.1,355.1.a",
+     0,
+     "Optional additional cost: a kijátszás választási lépésében döntesz róla, és a cost fizetésekor ölöd meg a unitot vagy geart."
+    ],
+    [
+     "355.10.c",
+     0,
+     "A feláldozott unit vagy gear a cost része, nem target."
+    ],
+    [
+     "429.1.a.1,429.1.a.1.b",
+     0,
+     "A cost-ként megölt unit Kill Instructionnel hal meg, ezért ha van Deathknell abilityje, az lefut."
+    ],
+    [
+     "383.2.a.1,355.5.b",
+     0,
+     "Az \"if you paid the additional cost\" a trigger feltétel része. A deal 2 targetjét nem kijátszáskor, hanem a trigger chain-re kerülésekor választod."
+    ],
+    [
+     "355.9.b,359.3.e.7",
+     1,
+     "A target bármelyik unit lehet, base-ben lévő és saját is. Ha a resolve előtt elhagyja a boardot, a sebzés elmarad, a feláldozott lap nem jár vissza."
+    ],
+    [
+     "185.2.d,187.5",
+     1,
+     "Gold token is feláldozható gearként, mert a gear token minden szempontból gear."
+    ]
+   ],
+   "short": "Kijátszáskor feláldozhatsz egy saját unitot vagy geart, akár Gold tokent is. Ha megtetted, 2 sebzést adsz egy tetszőleges unitnak. Ha a feláldozott unitnak van Deathknellje, az lefut.",
+   "why": "A short és a note úgy fogalmazott, mintha a feláldozott unitnak mindig lenne Deathknellje (\"A feláldozott unit Deathknellje lefut\"); csak akkor fut le, ha van neki (429.1.a.1.b)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Shen, Leader of the Kinkou Order és Shen, Scourge of Shadows: a 383.2.a.1-re 0-s flaggel hivatkozó pont azt állítja, hogy a trigger feltételhez fűzött \"exactly one other unit\" feltételt resolve-kor nem ellenőrzi újra a játék. A 383.2.a.1 csak azt mondja ki, hogy ez a Trigger Condition része; az újraellenőrzés hiányát a Sona példa (\"it will still resolve\") támasztja alá, de kifejezett szabály nincs. Inkább 1-es flag, de tárgyi hibát nem találtam, ezért nem javítottam."
+ ]
+}

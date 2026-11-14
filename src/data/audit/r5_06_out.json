@@ -1,0 +1,184 @@
+{
+ "fixes": {
+  "Kennen, Keeper of Balance": {
+   "notes": [
+    [
+     "811.1.b,103.3.a.1",
+     0,
+     "Hidden: kézből és a Champion Zone-ból is elrejthető [A]-ért. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható arra a battlefieldre, ahol el volt rejtve."
+    ],
+    [
+     "383.3.a,383.3.b",
+     0,
+     "A \"you may\" után álló \"pay [2]\" a trigger base costja: a 2 Energyt a trigger finalizálásakor fizeted ki. Ha a target a resolve előtt illegálissá válik, a cost nem jár vissza."
+    ],
+    [
+     "355.10,811.1.d.3",
+     0,
+     "A unit target, bármelyik játékosé lehet. Facedown-ból kijátszva a play effect csak az adott battlefielden lévő unitot választhatja. Az attack triggerre ez a megkötés nem vonatkozik."
+    ],
+    [
+     "424.1.b,424.1.a.2",
+     0,
+     "A stunned unit Mightja nem számít bele a combat damage-be. A Stunned állapot a kör végi cleanupig tart."
+    ],
+    [
+     "424.1.a.1",
+     1,
+     "Már stunned unit is választható, de újra nem stunolható, a 2 Energy ilyenkor kárba vész."
+    ],
+    [
+     "364.3.a,359.3.f.2",
+     1,
+     "A +2 Might passive: addig él, amíg Kennen battlefieldjén van stunned enemy unit, bárki stunolta is. Ha a unit elmozdul vagy meghal, a bónusz azonnal megszűnik."
+    ],
+    [
+     "383.4.e.2.a",
+     0,
+     "Az attack trigger combatonként egyszer fut le."
+    ]
+   ],
+   "why": "A 424.1.a.1 csak azt mondja ki, hogy stunned unit nem stunolható újra; hogy targetként választható-e, abból csak levezethető (a buffnál ezt a 427.1.c külön kimondja, a stunnál nincs ilyen szabály), ezért flag 1, nem 0."
+  },
+  "Leona, Determined": {
+   "notes": [
+    [
+     "355.10,355.8",
+     0,
+     "Az enemy unit target, és Leona battlefieldjén kell lennie. A trigger kötelező, nincs \"may\"."
+    ],
+    [
+     "424.1.b",
+     0,
+     "A stunned unit Mightja nem számít bele a combat damage-be, vagyis a kiválasztott defender ebben a combatban nem sebez."
+    ],
+    [
+     "424.1.c,815.1.c.1",
+     0,
+     "A stunned unit megöléséhez továbbra is a teljes Mightjának megfelelő damage kell, és a Tank kiosztási kötelezettsége sem szűnik meg."
+    ],
+    [
+     "424.1.a.1",
+     1,
+     "Már stunned unit is választható, de újra nem stunolható. A \"when you stun\" triggerek ilyenkor nem futnak le."
+    ],
+    [
+     "424.1.a.2",
+     0,
+     "A Stunned állapot a kör végi cleanupig tart."
+    ],
+    [
+     "383.4.e.2.a",
+     0,
+     "Attack trigger, combatonként egyszer fut le."
+    ],
+    [
+     "814.1.c",
+     0,
+     "Shield: csak Defenderként ad +1 Mightot, támadáskor nem."
+    ]
+   ],
+   "why": "A 424.1.a.1 csak az újrastunolást tiltja; a választhatóság és az, hogy a 'when you stun' trigger nem fut le, levezetés, ezért flag 1, nem 0."
+  },
+  "Leona, Radiant Dawn": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Calm és Order domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "424.1.a.1",
+     1,
+     "Már stunned unit nem stunnolható újra. Ha a stun hatásod csak ilyen unitot ér, a trigger nem fut le."
+    ],
+    [
+     "370.1.a.2",
+     1,
+     "\"One or more\": ha egy hatás egyszerre több enemy unitot stunnol, az egy trigger, egy buff. Két külön stun hatás két triggert ad."
+    ],
+    [
+     "355.10,403.4",
+     0,
+     "A buffolandó friendly unit target, a trigger chain-re kerülésekor választod. Ha nincs friendly unit, a trigger lekerül a chainről."
+    ],
+    [
+     "403.4.b",
+     0,
+     "A trigger kötelező, nincs \"may\": ha van választható friendly unit, választanod kell."
+    ],
+    [
+     "427.1.c",
+     0,
+     "Már buffolt unit is választható, de nem kap második buffot."
+    ]
+   ],
+   "why": "A 424.1.a.1 csak az újrastunolást tiltja; hogy ilyenkor a trigger nem fut le, levezetés, ezért flag 1, nem 0."
+  },
+  "Kinkou Initiate": {
+   "notes": [
+    [
+     "383.2.a.1",
+     1,
+     "Az \"if\" nem közvetlenül a trigger feltétel után áll, ezért az effect része. A trigger mindig chain-re kerül, a feltétel a resolve-kor ellenőrződik."
+    ],
+    [
+     "710",
+     0,
+     "A többi unitod aktuális Mightja számít, buffokkal és módosítókkal együtt, bárhol a boardon. Az Initiate saját 3 Mightja nem."
+    ],
+    [
+     "383.2.a.1,710",
+     1,
+     "Az opponent a triggerre reagálva megölheti vagy gyengítheti a unitjaidat. Ha a resolve-kor az összeg 5 alatt van, nem húzol."
+    ]
+   ],
+   "why": "A 383.2.a.1 csak a feltétel után közvetlenül álló 'if'-ről rendelkezik; hogy a hátul álló 'if' az effect része, abból levezetés (a Jinx, Loose Cannon azonos pontja is flag 1), ezért flag 1, nem 0."
+  },
+  "Lilting Lullaby": {
+   "notes": [
+    [
+     "355.9.a.2,355.9.c",
+     0,
+     "A target chainen lévő spell, saját magát nem választhatja."
+    ],
+    [
+     "359.3.e.14.a",
+     0,
+     "Linked instructions (\"Its controller\"): ha a megcélzott spell a resolve előtt lekerül a chainről, a counter ignorálódik, és a tiltás sem jön létre."
+    ],
+    [
+     "359.3.e.14.b",
+     1,
+     "Ha a counter negálódik, a spell controllere ettől még nem játszhat ki spellt a kör végéig, mert a második rész nem a counter megtörténtére hivatkozik."
+    ],
+    [
+     "054.1,154",
+     1,
+     "A tiltás csak spellekre szól: unit, gear kijátszása és ability aktiválása megengedett. A facedown-ból kijátszott spellt is tiltja. A chainen már ott lévő spellek rendben resolve-olnak."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap: a deckben legfeljebb 3 olyan Signature kártya lehet, amely a legend Champion tagjét (Lillia) viseli."
+    ],
+    [
+     "135.2.e.6.c",
+     2,
+     "A 2 Power cost nyomtatott szimbóluma ([C] vagy konkrét domain) az adatból nem derül ki, ezért hogy Calm és Mind Powerrel milyen arányban fizethető, a nyomtatott lapon kell ellenőrizni."
+    ]
+   ],
+   "why": "Több domainű lapnál az adat csak a Power cost számát adja, a nyomtatott szimbólumot nem; a 'Calm és Mind Powerrel tetszőleges arányban fizethető' állítás nem ellenőrizhető (135.2.e.6.c csak [C] esetén igaz), flag 2-re javítva."
+  },
+  "Lightning Rush": {
+   "short": "Megnézed a deck felső 3 lapját, egyet felhúzhatsz, a többi a trashbe kerül. Csak a saját körödben, showdownon kívül játszható ki. Később a trashből is kijátszható 2 Energyért és 1 bármilyen domainű Powerért, utána banisholódik.",
+   "why": "A Flow cost [2][A]: az [A] bármely domain Powerje, a short domain megjelölés nélkül csak '1 Power'-t írt (829.1.b)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Jinx, Loose Cannon: a notes (flag 1) szerint a triggerre válaszul Reaction lap kijátszásával 1 lapra csökkenthető a kéz; a Core Rules nem mondja ki kifejezetten, hogy a Beginning Phase triggerére a játékosok priorityt kapnak, ezt nem tudtam szabályszövegből lezárni.",
+  "Marching Orders: a short és a notes (flag 1) szerint ha az egyik unit illegális target lesz, egyik irányban sem megy damage; a 359.3.e.5 alapján valószínű, de a kétirányú közös instruction esete nincs kifejezetten kimondva."
+ ]
+}

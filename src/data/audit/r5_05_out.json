@@ -1,0 +1,213 @@
+{
+ "fixes": {
+  "Guerilla Warfare, Teemo": {
+   "notes": [
+    [
+     "103.3.d,103.3.d.2",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Teemo) kell viselnie."
+    ],
+    [
+     "355.10.a,355.13",
+     0,
+     "A trash Public zóna, ezért a visszavett lapok targetek. \"Up to two\": 0, 1 vagy 2 lapot választhatsz, a spell target nélkül is kijátszható."
+    ],
+    [
+     "811.5",
+     0,
+     "A [Hidden] a lap tulajdonsága, a trashben is ellenőrizhető. Unit, gear és spell is visszavehető, ha van rajta Hidden."
+    ],
+    [
+     "811.1.b",
+     1,
+     "\"Hide ignoring costs\": a kör végéig az [A] hide cost elmarad. A többi feltétel marad: saját kör, Open State, általad kontrollált battlefield, ahol még nincs facedown lapod. Battlefieldenként továbbra is egy lap rejthető el."
+    ],
+    [
+     "811.1.c.1,811.1.b",
+     0,
+     "A Hide nem Play: nem nyit chaint és nem vált ki \"when you play\" triggereket. Az elrejtett lap legkorábban a következő körben játszható ki."
+    ],
+    [
+     "359.3.e.2,359.3.e.8",
+     0,
+     "Ha az egyik kiválasztott lap a resolve előtt kikerül a trashből, az illegális target lesz. A másik lap ettől még visszajön a kezedbe."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül megy."
+    ],
+    [
+     "135.2.e.6.c",
+     2,
+     "A lap 2 Energy és 1 Power. Hogy a nyomtatott Power szimbólum [C] (ekkor Mind vagy Chaos Powerrel fizethető) vagy egy konkrét domain, az adatból nem ellenőrizhető, a nyomtatott lap dönti el."
+    ]
+   ],
+   "why": "A 135.2.e.6.c note azt állította, hogy a Power Mind vagy Chaos Powerrel fizethető; több domainű lapnál a nyomtatott szimbólum ([C] vagy konkrét domain) az adatból nem ellenőrizhető (brief 26. pont). Flag 2-re téve, a 155 időzítési rész külön pontban maradt."
+  },
+  "Hostile Takeover": {
+   "notes": [
+    [
+     "355.9.b,811.1.d.2",
+     0,
+     "A target enemy unit, amely battlefielden áll, base-ben lévő nem választható. Facedown-ból kijátszva csak azon a battlefielden lévő enemy unit választható, ahol a lap el volt rejtve."
+    ],
+    [
+     "190.3.a.2",
+     0,
+     "Ha a unit olyan battlefielden vált controllert, amit nem te kontrollálsz, a battlefield Contested lesz. Ha maradt ott más enemy unit, combat indul, ha nem, conquerelsz."
+    ],
+    [
+     "359.3.e.16",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: ha az Ending Phase-ben játszod ki, az \"at end of turn\" delayed trigger már nem jön létre, a \"lose control and recall\" rész nem fut le."
+    ],
+    [
+     "359.3.f.4",
+     0,
+     "A szabályzat példája: ha facedown-ból egy enemy unit attack triggerére válaszul elveszed a unitot, a trigger ettől nem változik. Az \"enemy\" a trigger controlleréhez képest értendő, ezért a trigger rendben resolve-ol."
+    ],
+    [
+     "458.1,458.3,460.1",
+     0,
+     "A kör végi visszaküldés Recall, nem Move: \"when I move\" triggereket nem vált ki, mozgást tiltó effect nem állítja meg, a uniton lévő damage és státusz pedig megmarad. A unit a saját base-ébe megy."
+    ],
+    [
+     "393,317.1.a",
+     0,
+     "A delayed trigger a spelltől független, az Ending Stepben kerül a chain-re. Lehet rá reagálni, de a spell counterelése utólag már nem állítja meg."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap (Renata Glasc), legfeljebb 3 Signature lehet a deckben."
+    ],
+    [
+     "135.2.e.6.c",
+     2,
+     "A lap 5 Energy és 2 Power. Hogy a nyomtatott Power szimbólumok [C]-k (ekkor Mind és Order Powerrel tetszőleges arányban fizethető) vagy konkrét domainek, az adatból nem ellenőrizhető, a nyomtatott lap dönti el."
+    ]
+   ],
+   "why": "A note kijelentette, hogy a 2 Power Mind és Order Powerrel tetszőleges arányban fizethető (135.2.e.6.c); több domainű lapnál a nyomtatott szimbólum az adatból nem ellenőrizhető (brief 26. pont). Flag 2-re téve."
+  },
+  "Heisho, Shell of the World": {
+   "notes": [
+    [
+     "766",
+     0,
+     "A szabályzat példája egy hasonló hatást hoz (egy spell, amely a saját costjának fizetésekor ignorálja a Deflectet): az ignorált Deflect a cost kifizetése alatt inaktívnak számít. A Heisho ugyanezt minden itt lévő dologra választó spellre és abilityre kiterjeszti."
+    ],
+    [
+     "809.1.c,356.2.a.2",
+     1,
+     "A Deflect mandatory additional cost lenne az enemy spellre és abilityre. Itt lévő target után ez a felár nem kerül rá a costra."
+    ],
+    [
+     "767",
+     0,
+     "Az ignorálás csak a fizetésre szól. A unitnak ettől még van Deflectje, a Deflectet figyelő effectek látják."
+    ],
+    [
+     "199.1",
+     1,
+     "\"Something here\": az itt lévő unit, a rá csatolt gear és maga a battlefield is. Mindkét játékosra vonatkozik."
+    ],
+    [
+     "809.1.c",
+     1,
+     "Ha a spell több targetet választ, csak az itt lévők után nem kell fizetni. A máshol lévő Deflectes unit után jár a felár."
+    ]
+   ],
+   "why": "A 766 note szerint a szabályzat 'szinte ugyanezt a szöveget' hozza példának; a példa valójában egy spell saját costjára szóló 'Ignore Deflect while paying this spell's costs', nem a Heisho battlefield-szintű szövege. Pontosítva."
+  },
+  "Highlander, Yi": {
+   "notes": [
+    [
+     "355.10.c",
+     0,
+     "A \"Choose a friendly unit\" nem része a replacement effectnek, ezért a unit target."
+    ],
+    [
+     "383.2.c.3.a,808.1.d.1",
+     0,
+     "A halált replacement effect váltja ki: a unit nem hal meg, a Deathknell és más halálra triggerelő abilityk nem futnak le."
+    ],
+    [
+     "419.1,458.1,458.3",
+     0,
+     "A unit healelődik, exhausted lesz és a base-be recallolódik. A Recall nem Move: mozgást tiltó effect nem akadályozza meg, \"when I move\" triggert nem vált ki."
+    ],
+    [
+     "357.2.a",
+     0,
+     "Ha a unitot costként ölnéd meg (például Sacrifice), a cost kifizetettnek számít, a unit pedig megmenekül."
+    ],
+    [
+     "359.3.e.14.b",
+     1,
+     "Ha egy effect későbbi része közvetlenül a kill megtörténtére hivatkozik (\"if you do\"), az nem fut le, mert a kill negálódott."
+    ],
+    [
+     "357.2.a,204.3",
+     2,
+     "A \"Kill a friendly unit to ...\" formájú cost within instructions (például Deathgrip) esetén nyitott, hogy a lecserélt kill kifizetett costnak számít-e: a 357.2.a ezt csak a kijátszás costjaira mondja ki. Judge döntse el."
+    ],
+    [
+     "369.1,460.1",
+     1,
+     "Errata: a régi szöveg (\"The next time it dies this turn, recall it exhausted instead\") is replacement effect volt, de nem healelt, és a Recall a damage-et nem veszi le. Az új szöveg a \"would die\" eseményt cseréli le: a unit healelődik, exhausted lesz és recallolódik."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap (Master Yi), legfeljebb 3 Signature lehet a deckben. Csak a következő egy halált váltja ki, és csak ebben a körben."
+    ]
+   ],
+   "why": "(1) A 359.3.e.14.b note a Deathgripet 'if you do' effectként hozta példának, de a Deathgrip 'Kill a friendly unit to give...' cost within instructions (204.3), nem 'if you do'; hogy a lecserélt kill kifizetett costnak számít-e, nyitott kérdés (357.2.a csak kijátszási costra), ezért flag 2. (2) Az errata note szerint a régi szöveg 'nem volt egyértelmű replacement effect', de az 'instead' miatt az volt (369.1); a valódi különbség a heal (460.1)."
+  },
+  "Hwei, Brooding Painter": {
+   "short": "Minden mozgásakor húzol egy lapot, majd eldobsz egyet, és az eldobott lap típusa szerint kapsz bónuszt: spell esetén még egy húzást, gear esetén legfeljebb 2 rune-t readyzhetsz, unit esetén Hwei +3 Mightot kap. A most húzott lapot is eldobhatod. Recallnál nem működik.",
+   "why": "A short a 'Ready up to 2 runes' feltételt kötelező 2 rune readyzésnek írta; az 'up to' miatt 0, 1 vagy 2 rune választható (355.13)."
+  },
+  "Jayce, Defender of Tomorrow": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Mind és Body domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "827.1.c.1,381.1",
+     0,
+     "Empower [2][A][A]: csak akkor aktiválható, ha a legend még nem Empowered, a saját Main Phase-edben, Open State-ben. Ennek a costjában nincs Exhaust."
+    ],
+    [
+     "828.1.b.1,828.1.c",
+     0,
+     "Az [Empowered] ability csak addig aktív, amíg a legend Empowered. Egyik ability sem disempowerel, az állapot megmarad."
+    ],
+    [
+     "415.4,415.1.b",
+     1,
+     "A két ready ability costja egyaránt 1 Energy és Exhaust, ezért egy körben csak az egyik használható, hacsak egy másik effect közben nem readyzi a legendet. Empowered állapotban a \"Ready 2 gear\" az erősebb választás ugyanazért az árért."
+    ],
+    [
+     "355.10,355.8",
+     0,
+     "A gear target, bármelyik játékosé lehet. A \"Ready 2 gear\" abilityhez két választható gear kell a boardon, különben nem aktiválható."
+    ],
+    [
+     "416.2,415.4",
+     1,
+     "A haszna: az Exhaust costú gear abilityk (például az Iron Ballista vagy a Hextech Anomaly abilityje) ugyanabban a körben újra használhatók."
+    ]
+   ],
+   "why": "A note a Gold Add abilityjét hozta példának a kör közbeni újrahasználatra, de a Gold costja 'Kill this, [T]' (187.5), használat után megszűnik, tehát readyzve sem használható újra. Példa cserélve."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Highlander, Yi: nyitott, hogy egy 'Kill a friendly unit to ...' cost within instructions (pl. Deathgrip) kifizetettnek számít-e, ha a killt a Highlander, Yi lecseréli; a 357.2.a csak a kijátszási costokra mondja ki. Flag 2-vel jelölve."
+ ]
+}

@@ -1,0 +1,97 @@
+{
+ "fixes": {
+  "Rebuttal": {
+   "notes": [
+    [
+     "355.9.a.2,206",
+     0,
+     "A target chainen lévő spell, amelynek nyomtatott Energy costja legfeljebb 4. A Power costja bármennyi lehet, kedvezmény vagy Repeat nem számít."
+    ],
+    [
+     "204.3.a,359.3.d",
+     1,
+     "A \"You may pay [A]. If you do\" a Rebuttal resolve-ja közben történik, nem a kijátszási cost része: akkor döntesz, és akkor kell meglennie a Powernek."
+    ],
+    [
+     "430.3",
+     1,
+     "A resolve közbeni fizetéshez is használhatsz [Reaction] Add abilityt, például rune-t recycle-ölhetsz Powerért."
+    ],
+    [
+     "752.1,753,753.1",
+     0,
+     "Ha fizettél, a spell controllere te leszel, és újraválaszthatod a módjait és targetjeit. Ha újraválasztasz, mindent újra kell választanod, és csak legálisan."
+    ],
+    [
+     "426.1.b,426.1.c",
+     0,
+     "Ha nem fizetsz, a spell counterelődik: a trashbe megy, a costja nem jár vissza."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "Ha a megcélzott spell a resolve előtt lekerül a chainről, a Rebuttal nem csinál semmit, fizetni sem kell."
+    ],
+    [
+     "103.3.d,103.2.b.4",
+     0,
+     "Signature lap (Mel): a deckben összesen legfeljebb 3 Signature kártya lehet, mindnek a legend Champion tagjét kell viselnie, és a legendnek a Mind és a Chaos domaint is tartalmaznia kell."
+    ],
+    [
+     "135.2.e.5.b",
+     0,
+     "Az effectben szereplő [A] bármilyen domainű Powerrel fizethető."
+    ],
+    [
+     "135.2.e.6.c",
+     2,
+     "A lap saját 1 Power costjának nyomtatott szimbóluma ([C] vagy konkrét domain) az adatból nem derül ki, ezért nem ellenőrizhető, hogy Mind vagy Chaos Powerrel, illetve bármelyikkel fizethető-e. A nyomtatott lap dönti el."
+    ]
+   ],
+   "why": "Több domainű lap: a note azt állította, hogy a saját Power cost Mind vagy Chaos Powerrel fizethető, de az adat nem adja meg a nyomtatott szimbólumot (brief szabály, 135.2.e.6.c). Flag 2-re tettem, az [A] állítást külön, 135.2.e.5.b alapján."
+  },
+  "Rell, Magnetic": {
+   "notes": [
+    [
+     "383.3.a,383.4.e.2.a",
+     0,
+     "Attack trigger, combatonként egyszer. A \"you may\" az effect elején áll: a finalizáláskor döntesz, hogy kéred-e."
+    ],
+    [
+     "420.1.a,355.10.a",
+     0,
+     "Az Equipmentet a kezedből játszod ki a resolve-kor. A kéz nem Public zóna, ezért nincs target."
+    ],
+    [
+     "206,356.1.b.1",
+     0,
+     "A \"no more than [2]\" a nyomtatott Energy costot nézi. \"Ignoring its cost\": az Energy és a Power cost is nulla."
+    ],
+    [
+     "388.1,359.3.e.14.b",
+     0,
+     "Az \"If you do, then do this\" reflexive trigger, ami a kijátszásra hivatkozik. Ha az Equipment kijátszása nem történt meg (például nem választottál Equipmentet, vagy a kijátszás visszavonódott), az attach elmarad."
+    ],
+    [
+     "148.1.a.1,389.1",
+     1,
+     "Errata: a csatolás külön chain item lett. Az Equipment előbb csatolatlanul a base-be érkezik, és csak a reflexive trigger resolve-jakor kerül Rellre. A csatolásra lehet reagálni."
+    ],
+    [
+     "818.1.c.2",
+     1,
+     "Ez Attach, nem Equip: az Equip costot nem kell kifizetni. Ha Rell a reflexive trigger resolve-ja előtt elhagyja a boardot, az Equipment a base-ben marad csatolatlanul."
+    ],
+    [
+     "815.1.b",
+     0,
+     "Tank: az opponentnek előbb Rellre kell halálos combat damage-et kiosztania."
+    ]
+   ],
+   "why": "A note példája (\"counterelték\") hibás: a gear a finalizálás után azonnal resolve-ol (337.2), nincs ablak a counterre. A példát kicseréltem."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

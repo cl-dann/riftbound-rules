@@ -1,0 +1,107 @@
+{
+ "fixes": {
+  "Wild Claw": {
+   "notes": [
+    [
+     "355.10.a,432.1.c",
+     0,
+     "A deck nem Public zóna, a kiválasztott lap nem target. 5-nél kevesebb lapnál annyit nézel meg, amennyi van, Burn Out nélkül."
+    ],
+    [
+     "356.4.c.2,356.6",
+     0,
+     "A kedvezmény csak az Energy costot csökkenti, legfeljebb 0-ig. A Power costot ki kell fizetni."
+    ],
+    [
+     "417.4,417.5",
+     0,
+     "A maradékot kötelező recycle-ölni, véletlen sorrendben kerülnek a deck aljára."
+    ],
+    [
+     "388.4",
+     1,
+     "A \"Then you may do this:\" Reflexive Trigger: a spell resolve-ja után kerül a chain-re, és a finalizálásakor döntöd el, élsz-e vele."
+    ],
+    [
+     "442.1.c,442.2,828.1.c",
+     0,
+     "Már Empowered lapon az Empower nem csinál semmit. Az Empowered státusz a lap saját [Empowered] abilityjét aktiválja, de más effectek is hivatkozhatnak rá, ezért [Empowered] ability nélküli lapon sem feltétlenül hatástalan."
+    ],
+    [
+     "389.1,158.3.a",
+     2,
+     "A Core Rules nem mondja ki egyértelműen, hogy a kijátszott permanent már a boardon van-e, amikor az Empower trigger resolve-ol. A sorrendet judge döntse el."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ]
+   ],
+   "why": "A note azt állította, hogy az Empowered státusz csak a saját [Empowered] abilityvel rendelkező lapon ér valamit; a 442.2 szerint az Empowered állapotra és az Empower eseményre más game effectek is hivatkozhatnak."
+  },
+  "Yone, Blademaster": {
+   "short": "Weaponmaster: kijátszáskor ráteheted egy saját Equipmentedet (akár másik unitról áthelyezve) az Equip cost kifizetésével, amely 1 bármely Powerrel ([A]) kevesebb, ha a cost tartalmaz [A]-t, különben teljes áron megy. Ha egy senki által nem kontrollált battlefieldet conquerel, a Mightjával megegyező sebzést okoz egy enemy unitnak, ami a base-ben áll.",
+   "notes": [
+    [
+     "170.11.b,170.11.c",
+     1,
+     "Az errata \"open\" helyett \"uncontrolled\" battlefieldet ír. Az open üres és kontroll nélküli, az uncontrolled csak kontroll nélküli: olyan battlefield elfoglalása is számít, ahol álltak unitok, de senki sem kontrollálta."
+    ],
+    [
+     "383.4.c.2.a",
+     0,
+     "Conquer effect: csak akkor triggerel, ha Yone ott van a battlefielden, amikor conquerelsz."
+    ],
+    [
+     "355.9.b,355.8",
+     0,
+     "A target csak base-ben álló enemy unit lehet. Ha nincs ilyen, a trigger nem kerül chain-re."
+    ],
+    [
+     "710",
+     0,
+     "A sebzés Yone resolve-kori aktuális Mightja, a csatolt Equipment Might bonusával együtt."
+    ],
+    [
+     "359.3.e.12",
+     0,
+     "Ha Yone a resolve előtt elhagyja a boardot, a Mightja null, a sebzés ignorálódik."
+    ],
+    [
+     "821.1.c,821.1.c.3",
+     0,
+     "[Weaponmaster]: kijátszáskor egy általad kontrollált Equipment Equip costját [A]-val olcsóbban kifizetve Yone-ra csatolhatod, akár egy másik unitról áthelyezve is. Ha az Equip costban nincs [A] (például [C]), a cost nem csökken, teljes áron fizeted."
+    ]
+   ],
+   "why": "A short és a note feltétel nélkül 1 Powerrel olcsóbb Equipet ígért; a 821.1.c.3 szerint ha az Equip cost nem tartalmaz [A]-t (például [C]), nem csökken. A short az áthelyezés lehetőségét is kihagyta (821.1.b)."
+  },
+  "Whirling Twirligig": {
+   "short": "Exhaustolva háromból egyet választasz: kapsz egy exhausted Gold tokent, vagy egy saját gear megölésével egy 1 Mightú Recruit tokent, vagy egy saját unit megölésével egy 3 Mightú Mech tokent. Csak a saját Main Phase-edben, showdownon kívül, ready-zó effect nélkül körönként egyszer.",
+   "why": "A Main Phase a showdownokat is magában foglalja (316.8), a keyword nélküli gear/unit/legend activated ability viszont csak Open State-ben, showdownon kívül aktiválható (381.1, 151.2); a short ezt a korlátot elhagyta."
+  },
+  "Warmog's Armor": {
+   "short": "Equipment: 1 Body Power fizetésével egy saját unitodra csatolod (Equip, saját Main Phase, showdownon kívül). A felszerelt unit +1 Mightot kap, és amikor részt vesz egy battlefield conquerében, buffot kap, ha még nincs neki. A buff tartós, a páncél leszedése után is megmarad.",
+   "why": "A Main Phase a showdownokat is magában foglalja (316.8), a keyword nélküli gear/unit/legend activated ability viszont csak Open State-ben, showdownon kívül aktiválható (381.1, 151.2); a short ezt a korlátot elhagyta."
+  },
+  "World Atlas": {
+   "short": "Equipment: 1 Mind Power fizetésével egy saját unitodra csatolod (Equip, saját Main Phase, showdownon kívül). A felszerelt unit +2 Mightot kap, és amikor a köröd elején holdolod a battlefieldjét, két exhausted Gold gear tokent kapsz. Ezek abban a körben jellemzően még nem használhatók.",
+   "why": "A Main Phase a showdownokat is magában foglalja (316.8), a keyword nélküli gear/unit/legend activated ability viszont csak Open State-ben, showdownon kívül aktiválható (381.1, 151.2); a short ezt a korlátot elhagyta."
+  },
+  "Xerath, Freed": {
+   "short": "1 Fury Power fizetésével és exhaustolásával 3 sebzést okoz egy tetszőleges unitnak, akár base-ben állónak is. Csak akkor aktiválható, ha Xerath battlefielden áll, és csak a saját Main Phase-edben, showdownon kívül. Ha Standard Move-val ment oda, exhausted, így abban a körben csak akkor használható, ha valami ready-zi.",
+   "why": "A Main Phase a showdownokat is magában foglalja (316.8), a keyword nélküli gear/unit/legend activated ability viszont csak Open State-ben, showdownon kívül aktiválható (381.1, 151.2); a short ezt a korlátot elhagyta."
+  },
+  "Ziggs, Explosive": {
+   "short": "1 Energy fizetésével és exhaustolásával lerak egy Bomb gear tokent bármelyik battlefieldre (Deploy), a saját Main Phase-edben, showdownon kívül. A Bomb halálakor 2 sebzést okoz egy ott álló enemy unitnak, és a többi ottani Bombod is meghal; ha egy opponent ott holdol, a Bomb meghal. Védekezéskor egy saját gear megölésével +2 Mightot kap a kör végéig, és ha Bombot áldozol, az is robban.",
+   "why": "A Main Phase a showdownokat is magában foglalja (316.8), a keyword nélküli gear/unit/legend activated ability viszont csak Open State-ben, showdownon kívül aktiválható (381.1, 151.2); a short ezt a korlátot elhagyta."
+  },
+  "Ziggs, Hexplosives Expert": {
+   "short": "Legend: 1 Energy és 1 bármely domainű Power fizetésével és exhaustolásával lerakhatsz egy Bomb gear tokent bármelyik battlefieldre, a saját Main Phase-edben, showdownon kívül. A Bomb halálakor 2 sebzést okoz egy ott álló enemy unitnak, és a többi ottani Bombod is meghal. Ha egy opponent ott holdol, a Bomb meghal.",
+   "why": "A Main Phase a showdownokat is magában foglalja (316.8), a keyword nélküli gear/unit/legend activated ability viszont csak Open State-ben, showdownon kívül aktiválható (381.1, 151.2); a short ezt a korlátot elhagyta."
+  }
+ },
+ "checked": 89,
+ "data_issues": [],
+ "open": []
+}

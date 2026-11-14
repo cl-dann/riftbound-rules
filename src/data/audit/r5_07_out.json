@@ -1,0 +1,155 @@
+{
+ "fixes": {
+  "Mel, Newly Awakened": {
+   "short": "Kijátszáskor húzol 1 lapot. Empower: a saját Main Phase-edben, showdownon kívül 3 Energyért Empowered lesz, ha még nem az. Empowered állapotban a te spelljeidet és abilityjeidet nem lehet counterelni, és ha a te spelled vagy abilityd -Mightot ad egy általa kiválasztott unitnak, további -1 Mightot ad. A nem célzó csökkentésekre ez a plusz nem vonatkozik.",
+   "notes": [
+    [
+     "383.4.a.2,414.4",
+     0,
+     "Play effect: a draw kötelező, üres decknél Burn Outot okoz."
+    ],
+    [
+     "827.1.c.1,381.1,145.2",
+     0,
+     "Empower [3]: csak a saját Main Phase-edben, Open State-ben, showdownon kívül, és csak ha még nem Empowered."
+    ],
+    [
+     "054.1,358.3.a",
+     1,
+     "Empowered Mel mellett a spelljeid és abilityjeid nem counterelhetők. Az opponent kijátszhatja a counter spellt, de a counter rész nem történik meg."
+    ],
+    [
+     "369.1,355.5.a",
+     1,
+     "A -1 Might replacement effect csak a kiválasztott (target) unitra adott -Mightra hat. \"All enemy units\" típusú csökkentésre nem."
+    ],
+    [
+     "831.1.d",
+     1,
+     "A unitjaid Disarmja is általad kontrollált, targetelő ability, tehát 1-gyel többet von le."
+    ],
+    [
+     "727.1.b",
+     1,
+     "A counter elleni védelem abban a pillanatban számít, amikor a counter végrehajtódna, a plusz -1 Might pedig akkor, amikor a te spelled vagy abilityd a -Mightot kiosztja. Melnek ekkor kell a boardon és Empowered állapotban lennie."
+    ]
+   ],
+   "why": "Az Empower activated ability keyword nélkül showdown alatt nem aktiválható (145.2), a short és a note ezt kihagyta. A 727.1.b note 'a resolve pillanatában' megfogalmazása a counter-védelemnél félreérthető volt: ott a counter végrehajtásának pillanata számít."
+  },
+  "Nasus, Ascended": {
+   "short": "Deflect 2: az opponent rá célzó spellje vagy abilityje 2 bármilyen Powerrel drágább. Empower: a saját Main Phase-edben, showdownon kívül 8 Energyért Empowered lesz, ha még nem az. Ekkor minden olyan conquerkor, amelyben részt vesz, 1 extra pontot kapsz, ami akár a győztes pont is lehet.",
+   "notes": [
+    [
+     "827.1.c.1,381.1,145.2",
+     0,
+     "Empower [8]: activated ability, csak akkor aktiválható, ha még nem Empowered, a saját Main Phase-edben, Open State-ben, showdownon kívül. Combat közben sem."
+    ],
+    [
+     "727.1.c.1",
+     0,
+     "A conquer trigger csak akkor él, ha Nasus a conquer pillanatában már Empowered, és ott van a battlefielden."
+    ],
+    [
+     "727.1.c.1.b",
+     0,
+     "Ha a trigger már a chainen van, és Nasus közben elveszíti az Empowered állapotot, a trigger ettől még resolve-ol."
+    ],
+    [
+     "470.2,473.1.a.1",
+     0,
+     "A \"score 1 point\" pontszerzés, nem conquer. Erre nem vonatkozik az utolsó pont megkötése, tehát a győztes pontot is megadhatja."
+    ],
+    [
+     "124.1,442.1.a",
+     1,
+     "Az Empowered állapot nem jár le a kör végén. Akkor vész el, ha Nasus elhagyja a boardot vagy disempowerelik."
+    ],
+    [
+     "809.1.b,809.1.c",
+     0,
+     "[Deflect 2]: az opponent őt targetelő spellje vagy abilityje +[A][A]-ba kerül."
+    ]
+   ],
+   "why": "Az Empower activated ability keyword nélkül showdown alatt nem aktiválható (145.2); a short és a note csak a Main Phase-t, illetve a combatot említette, a Non-Combat Showdownt nem zárta ki."
+  },
+  "Noxian Emissary": {
+   "short": "Empower: a saját Main Phase-edben, showdownon kívül 1 Energy és 1 Order Power fizetésével Empowered lesz, ha még nem az. Ha Empowered állapotban hal meg, két 1 Mightú Recruit tokent kapsz a base-edbe. Empower nélkül a halála nem ad semmit.",
+   "why": "A shortból hiányzott, hogy az Empower showdown alatt nem aktiválható (145.2), a notes ezt helyesen tartalmazza."
+  },
+  "Mordekaiser, Iron Revenant": {
+   "short": "Egy unitot vagy geart banishelsz a trashedből és exhaustolod a legendet: kapsz egy bármilyen Powert, amit csak unit vagy gear kijátszására költhetsz. Bármikor használható, akár fizetés közben is. Ha nincs unit vagy gear a trashedben, nem aktiválható.",
+   "why": "A short 'Üres trash mellett nem aktiválható' megfogalmazása azt sugallta, hogy bármilyen lap a trashben elég; a costhoz unit vagy gear kell a trashben (203)."
+  },
+  "On the Hunt": {
+   "short": "Minden unitodat ready-vé teszi, így egy körben újra mozoghatnak, és a mozgás újabb showdownhoz vagy combathoz vezethet. Csak a saját körödben, showdownon kívül játszható ki. Költsége 1 Energy és 2 Power a lap domainjeiből (Body, Chaos).",
+   "notes": [
+    [
+     "355.10.d",
+     0,
+     "Nem targetel: a resolve-kor általad kontrollált összes unitot readyzi, bármelyik locationön."
+    ],
+    [
+     "416.1.c",
+     0,
+     "A már ready unitokon nem történik semmi."
+    ],
+    [
+     "144.2,144.1.c",
+     1,
+     "A ready unitok újra fizethetik a Standard Move exhaust cost-ját, így egy körben másodszor is támadhatnak. Showdown és combat alatt Standard Move nincs."
+    ],
+    [
+     "135.2.e.6.c",
+     2,
+     "Kétdomaines (Body, Chaos) lap. A kártyaadat csak a Power cost számát (2) adja meg, a nyomtatott szimbólumot nem, ezért nem ellenőrizhető, hogy a 2 Power milyen arányban fizethető Body és Chaos Powerből. Nézd meg a nyomtatott lapot."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Sivir) kell viselnie."
+    ]
+   ],
+   "why": "Brief 26. pont: többdomaines lapnál az adat nem adja meg a nyomtatott Power szimbólumot, ezért a 'Body és Chaos Powerből vegyesen, tetszőleges arányban' állítás (short és 135.2.e.6.c note, flag 0) nem ellenőrizhető; a note flag 2-re került."
+  },
+  "Oasis Raider": {
+   "notes": [
+    [
+     "315.2.a.1,315.3",
+     1,
+     "A Beginning Phase elején triggerel, még a Channel Phase előtt. Az abban a körben csatornázott 2 rune tehát még nem számít bele."
+    ],
+    [
+     "383.2.a.1",
+     1,
+     "A rune-ok számát a trigger pillanatában nézi a játék. Ha akkor nincs kevesebb rune-od, mint valamelyik opponentnek, semmi sem történik."
+    ],
+    [
+     "365.1",
+     1,
+     "A Raidernek már a boardon kell lennie a köröd elején. A kijátszás körében nem kap bonust."
+    ],
+    [
+     "810.1.b,317.2.c",
+     0,
+     "A +2 Might és a [Ganking] a kör végén lejár."
+    ],
+    [
+     "164.2.b",
+     1,
+     "A Powerért recycle-ölt rune lekerül a boardról. Ha a köröd kezdete előtt (például az opponent körében egy Reactionhöz) recycle-ölsz, kevesebb rune-nal kezded a köröd, ami segíthet a feltétel teljesítésében."
+    ]
+   ],
+   "why": "A 164.2.b note 'az opponent köre előtti recycle' megfogalmazása félreérthető volt: a köröd kezdete előtti recycle számít, a feltételt a saját Beginning Phase-ed elején nézi a játék (315.2.a.1)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Mordekaiser, Twice Slain: a short 'egy másik saját unitot' ír, a szöveg csak 'a friendly unit'. Hogy a halál lecserélésének costjaként maga Mordekaiser megölhető-e, a Core Rules nem mondja ki; nem javítottam."
+ ]
+}

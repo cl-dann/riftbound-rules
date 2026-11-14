@@ -1,0 +1,141 @@
+{
+ "fixes": {
+  "Swain, Visionary": {
+   "short": "Kijátszáskor megnézed a deck felső lapját, és a deck aljára teheted. Ha conquerel, és abban a körben kijátszottál egy nem token unitot, egy nem token geart és egy spellt, kapsz egy extra pontot, amivel akár nyerni is lehet.",
+   "notes": [
+    [
+     "817.1.b,437.1",
+     0,
+     "Vision: amikor kijátszod Swaint, megnézed a Main Deck felső lapját, és recycle-ölheted (a deck aljára teheted)."
+    ],
+    [
+     "383.2.a.1",
+     0,
+     "A három lapos feltétel a trigger feltételének része: a conquer pillanatában kell teljesülnie, különben a trigger nem kerül chain-re."
+    ],
+    [
+     "420.4.b",
+     0,
+     "Az \"if you've played\" feltétel a finalizálást nézi. Egy counterelt unit, gear vagy spell is beleszámít."
+    ],
+    [
+     "185,811.1.c.1",
+     0,
+     "Token unit és token gear kijátszása nem számít, és a Hide sem Play. A unitnak és a gearnek valódi kártyának kell lennie, a spellre a szöveg nem ír elő non-token megkötést."
+    ],
+    [
+     "143.4",
+     1,
+     "Maga Swain is lehet a non-token unit, ha abban a körben játszottad ki. Exhausted lép be, ezért ehhez egy effectnek kell battlefieldre vinnie vagy readyznie."
+    ],
+    [
+     "470.2,473.1.a.1",
+     0,
+     "A \"score 1 point\" pontszerzés a conquer pontján felül. Nem conquerből származik, ezért az utolsó pontra vonatkozó megkötés nem érinti."
+    ],
+    [
+     "383.4.c.2.a,472",
+     0,
+     "Conquer effect: Swainnek jelen kell lennie a conquerelt battlefielden. Battlefieldenként és körönként egyszer."
+    ]
+   ],
+   "why": "A \"non-token\" megkötés csak a unitra és a gearre vonatkozik, a spellre nem; a short \"(token nem számít)\" és a 185 note \"mindhárom valódi kártya\" állítása túlzás."
+  },
+  "Syndra, Transcendent": {
+   "notes": [
+    [
+     "343.1,316.8.a",
+     1,
+     "A passive csak addig él, amíg Syndra olyan battlefielden áll, ahol showdown zajlik. A combat showdownja is showdown. Base-ben állva nem ad semmit."
+    ],
+    [
+     "308.1.a",
+     0,
+     "Showdown State-ben csak [Action] vagy [Reaction] spell játszható ki, tehát a gyakorlatban csak ezek kapják meg a Repeatet."
+    ],
+    [
+     "820.1.d,820.1.c.1",
+     0,
+     "A kapott Repeat optional additional cost: kijátszáskor fizetve a spell instructionjei a resolve-kor még egyszer végrehajtódnak."
+    ],
+    [
+     "820.2.a,820.3.a",
+     0,
+     "A második végrehajtás választásait is a kijátszáskor teszed meg, és eltérhetnek az elsőtől. A spell így is csak egyszer számít kijátszottnak."
+    ],
+    [
+     "820.1.c.2,820.3",
+     0,
+     "Ha a spellnek saját Repeatje is van, a két Repeat külön fizethető ki, és mindegyik egy további végrehajtást ad."
+    ],
+    [
+     "135.2.e.6,135.2.e.6.c,135.2.e.6.b",
+     2,
+     "Nyitott kérdés, hogy a kapott Repeat [C] része Syndra (Chaos) vagy a Repeatet viselő spell domainjét jelenti. A 135.2.e.6 a \"card's own Domain\"-re utal, kapott kulcsszóra nem mond semmit. Ha a spellé, több domainű spellnél bármelyik domain jó, domain nélkülinél [A]. Judge döntse el."
+    ],
+    [
+     "355.9.b",
+     1,
+     "A spell targetjének nem kell Syndra battlefieldjén lennie: a passive csak azt köti a showdownhoz, hogy a spelljeid Repeatet kapjanak."
+    ],
+    [
+     "365.1,820.1.d",
+     2,
+     "Nyitott kérdés, mi történik, ha Syndra a spell finalizálása után, de a resolve előtt elhagyja a showdownt vagy a boardot: a 365.1 szerint a passive csak a boardon él, a 820.1.d viszont a kifizetett costhoz köti a plusz végrehajtást. Judge döntse el."
+    ]
+   ],
+   "why": "A 365.1 note flag 1-gyel tényként állította, hogy Syndra távozása után a kifizetett Repeat megmarad; a 365.1 (passive csak a boardon él) inkább ellene szól, a szabály nem dönti el, ezért flag 2."
+  },
+  "Thrill of the Hunt": {
+   "notes": [
+    [
+     "355.9.b",
+     0,
+     "A target friendly unit, bárhol a boardon."
+    ],
+    [
+     "355.2.b,190.3.a.1",
+     0,
+     "\"Any battlefield\": a unit olyan battlefieldre is kijátszható, amit nem te kontrollálsz. Az ilyen battlefield Contested lesz, ebből showdown vagy combat következik."
+    ],
+    [
+     "124.1,705,436.4.b",
+     0,
+     "A visszajátszott unit új objektum: a damage, a buff és a \"this turn\" módosítók eltűnnek róla, az Equipment leválik. A rá célzó, chainen lévő enemy spellek mistargetelnek."
+    ],
+    [
+     "420.3.a,143.4",
+     1,
+     "Ez rendes Play: a \"when you play me\" effectek újra triggerelnek, és a unit exhausted lép be."
+    ],
+    [
+     "359.3.e.16",
+     1,
+     "Ha az Ending Phase-ben, az \"end of this turn\" időpont után conquerelsz vele, az \"at the end of this turn\" delayed triggerek (például Targon's Peak) már nem jönnek létre."
+    ],
+    [
+     "186.1,056.2",
+     1,
+     "Token unit a Banishmentben megszűnik, nincs mit visszajátszani. Ha a unit nem a tiéd, a tulajdonosa játssza ki és ő választ battlefieldet."
+    ],
+    [
+     "356.1.b.1,103.3.d,103.3.d.2",
+     0,
+     "A visszajátszott unit base costja nulla, optional additional cost (például Accelerate) ettől még fizethető. Signature lap (Rengar): csak Rengar legend deckjébe tehető."
+    ]
+   ],
+   "why": "A note azt állította, hogy a Power cost Fury vagy Body Powerrel fizethető; több domainű lapnál az adat csak a Power számát adja, a nyomtatott szimbólum nem ellenőrizhető (RBRIEF)."
+  },
+  "Temporal Breach": {
+   "short": "Egy unitot eltávolítasz, majd a tulajdonosa ingyen visszajátssza ugyanoda, mintha új lenne: sebzés, buff és ideiglenes hatások eltűnnek, a kijátszáskori képességei újra lefutnak (enemy unitnál az opponentnek). Token esetén ez végleges eltávolítás. Kézből csak a saját körödben, showdownon kívül megy. Hidden: 1 tetszőleges Powerért elrejtve a következő körtől válaszként, ingyen is.",
+   "why": "Időzítés pontatlan: nincs [Action], kézből csak saját körben, showdownon kívül (155)."
+  },
+  "The Harrowing": {
+   "short": "Kijátszol egy unitot a trashedből, az Energy costját nem kell kifizetni, a Power costját igen. Ha a Powert nem tudod kifizetni, a unit a trashben marad. Nincs unit a trashben, nem játszható ki. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Időzítés pontatlan: nincs [Action], csak saját körben, showdownon kívül (155)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

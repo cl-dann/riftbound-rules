@@ -1,0 +1,39 @@
+{
+ "fixes": {
+  "Riposte": {
+   "notes": [
+    [
+     "355.8",
+     0,
+     "Két target kell: egy friendly unit és egy chainen lévő spell. Ha nincs unitod, a lap nem játszható ki, így counterelni sem tudsz vele."
+    ],
+    [
+     "206",
+     0,
+     "A bónusz a spell nyomtatott Energy costja. Kedvezménnyel vagy ingyen kijátszott spell is a teljes nyomtatott értéket adja, a Power cost és a Repeat nem számít."
+    ],
+    [
+     "359.3.e.12",
+     0,
+     "Ha a spell a resolve előtt lekerül a chainről, a costja \"null\": a counter és a Might bónusz is ignorálódik."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "Ha csak a unit lesz illegális target, a spell ettől még counterelődik."
+    ],
+    [
+     "103.3.d,135.2.e.6.c",
+     2,
+     "Signature lap (Fiora). A kártyaadat csak annyit ad meg, hogy a Power cost 2; hogy a nyomtatott szimbólum [C][C] (ekkor a 135.2.e.6.c szerint Body és Order Powerrel tetszőleges arányban fizethető) vagy konkrét domain jelek, az adatból nem dönthető el, a nyomtatott lapon ellenőrizendő."
+    ]
+   ],
+   "why": "Az utolsó note flag 0-val állította, hogy a 2 Power Body és Order Powerrel tetszőleges arányban fizethető (135.2.e.6.c). Ez csak [C][C] nyomtatott szimbólumnál igaz, a kártyaadat csak a Power számát adja; flag 2-re állítva, feltételesen megfogalmazva."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Repulse: a short és az 5. note (flag 1) szerint ha a védett unit a resolve előtt base-be kerül, a counter elmarad. A unit target valóban illegális lesz (359.3.e.2, nem 'at a battlefield'), de az enemy spell target továbbra is legális lehet (a mistargetelt választás nem board zóna váltásnál beszámít, 359.3.e.9.a). Hogy a counter instruction a 359.3.e.5 szerint 'related to an illegal target'-e, a Core Rules nem mondja ki egyértelműen; judge kérdés, esetleg flag 2."
+ ]
+}

@@ -1,0 +1,296 @@
+{
+ "fixes": {
+  "Block": {
+   "notes": [
+    [
+     "811.1.b,811.6,811.3",
+     0,
+     "Hide: a saját körödben [A]-ért facedown tehető egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható. Kézből, teljes costért csak [Action] időzítéssel megy."
+    ],
+    [
+     "355.10,811.1.d.2",
+     0,
+     "A unit target, bármelyik játékosé lehet. Facedown-ból csak az adott battlefielden lévő unit választható."
+    ],
+    [
+     "814.2",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a Shielddel rendelkező Stalwart Poro a Block után Shield 4-et kap a körre, az értékek összeadódnak."
+    ],
+    [
+     "814.1.c,814.1.d.1",
+     0,
+     "A Shield csak addig ad +3 Mightot, amíg a unit defender. Attackerre játszva a Shield rész nem ér semmit."
+    ],
+    [
+     "815.1.b,815.1.c.2",
+     0,
+     "Tank: az opponentnek először erre a unitra kell lethal damage-et assignolnia, a Tank nélküli unitjaid csak utána kaphatnak. Ha több Tank unitod van, köztük ő választ."
+    ]
+   ],
+   "why": "N2: a facedown kijátszásnál a target battlefieldhez kötését a 355.10 nem mondja ki, ezt a 811.1.d.2 szabályozza; a hivatkozás kiegészítve."
+  },
+  "Boneshiver": {
+   "notes": [
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Energy és 1 Body Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +2 Mightot is kap."
+    ],
+    [
+     "383.4.c,431.2,164.2.a,164.2.b",
+     0,
+     "Conquer trigger: amikor a felszerelt unit conquerel, a Rune Deck tetejéről 1 rune kerül a boardra exhausted. Energyt ebben a körben más effect nélkül nem ad, de recycle-ölve (ehhez nem kell ready) 1 Powert igen."
+    ],
+    [
+     "431.3",
+     0,
+     "Üres Rune Decknél nem kapsz rune-t, és ez nem okoz büntetést."
+    ],
+    [
+     "718.2,721.2,719.5",
+     1,
+     "Csatolva a gear Rules Textje, így az Equip is inaktív és nem aktiválható: a gear a saját Equipjével nem rakható át másik unitra (ezt csak Weaponmaster teheti meg, 821.1.c). Ha a felszerelt unit elhagyja a boardot, a gear leválik és a boardon marad, ekkor az Equip cost ismételt kifizetésével újra felszerelhető."
+    ]
+   ],
+   "why": "Az utolsó note szerint az Equippel másik unitra átrakható, de csatolva a gear Rules Textje (az Equip is) inaktív és nem aktiválható (718.2, 721.2), ez a lap saját 2. note-jának is ellentmondott; a Protector's Shield és Nazuman Ntofo korábbi javításával egyezően."
+  },
+  "Brutalizer": {
+   "short": "Equip: 1 Calm Power, a saját Main Phase-edben egy saját unitodra rakhatod. A felszerelt unit +1 Mightot kap, és abban a körben, amikor rácsatoltad, további +2-t, vagyis összesen +3-at. A következő körtől csak +1 jár, és csatolva az Equip nem használható, így a gear nem rakható át.",
+   "notes": [
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Calm Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +1 Mightot is kap."
+    ],
+    [
+     "136.2.d",
+     0,
+     "A szabályzat név szerint idézi az Effect Textjét: \"If this was attached to me this turn, I have an additional +2 [S].\" A \"this\" a csatolt Brutalizert jelenti, a \"me\" a unitot."
+    ],
+    [
+     "137.3,718.4",
+     1,
+     "A gyakorlatban: az equipelés körében a unit +3 Mightot kap (+1 Might Bonus és +2 az Effect Textből), a következő körtől csak +1-et."
+    ],
+    [
+     "718.2,721.2,821.1.c",
+     1,
+     "A +2 csak a csatolás körében él. Csatolva az Equip inaktív (a gear Rules Textje inaktív), ezért sem másik unitra, sem ugyanarra nem csatolható újra a saját Equipjével. Új +2-höz Weaponmaster kell, vagy az, hogy a unit elhagyja a boardot és a levált gear újra felszerelhető legyen (719.5)."
+    ]
+   ],
+   "why": "Short és utolsó note: az újracsatolás/átrakás állítás hibás, csatolva a gear Rules Textje (az Equip is) inaktív és nem aktiválható (718.2, 721.2), ezt a lap 2. note-ja is kimondja."
+  },
+  "Cloth Armor": {
+   "short": "Quick-Draw: Reactionje van, bármikor kijátszható, és a play effectje egy saját unitodra csatolja. A felszerelt unit Shield 2-t kap: +2 Might, amíg defender. Equip: 1 Mind Powerért a saját Main Phase-edben csatolhatod, ha éppen nincs csatolva; csatolva az Equip inaktív, így nem rakható át.",
+   "notes": [
+    [
+     "819.1.b,819.1.d,813.1.c.1",
+     0,
+     "Quick-Draw: a lapnak [Reaction]-je van, Closed State-ben, bárki körében kijátszható, és a play effectje azonnal egy saját unitra csatolja. Showdown közben is felrakható."
+    ],
+    [
+     "355.5.b,355.10,359.3.e.5",
+     1,
+     "A Quick-Draw csatolása play effect: a unitot a trigger chainre kerülésekor választod, és target. Ha a resolve előtt elhagyja a boardot, a gear csatolatlanul a base-ben marad."
+    ],
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Mind Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. A Might Bonus +0, önmagában nem növeli a unit Mightját."
+    ],
+    [
+     "814.1.c,814.2",
+     0,
+     "A felszerelt unit Shield 2-t kap: amíg defender, +2 Might, meglévő Shielddel összeadódik. Quick-Draw miatt combat showdown közben is felrakható a védekező unitra."
+    ],
+    [
+     "355.8,148.1.a.1",
+     1,
+     "Ha kijátszáskor nincs unitod, a Quick-Draw triggernek nincs érvényes targetje, nem kerül chainre. A gear ettől még bejön a base-be, később Equippel csatolható."
+    ],
+    [
+     "718.2,721.2,719.5",
+     1,
+     "Csatolva a gear Rules Textje, így az Equip is inaktív: a saját Equipjével nem rakható át másik unitra. Az Equip akkor használható, ha a gear nincs csatolva, például mert a Quick-Draw triggernek nem volt targetje, vagy a felszerelt unit elhagyta a boardot és a gear levált."
+    ]
+   ],
+   "why": "Short: \"másik saját unitra is átrakhatod\" hibás, csatolva a gear Rules Textje (az Equip is) inaktív (718.2, 721.2), ezt a lap 4. note-ja is kimondja. Új note a magyarázattal."
+  },
+  "Brush": {
+   "short": "Token battlefield, ami egy meglévő battlefield helyére kerül. Az itt álló Bird, Cat, Dog, Poro és Ivern unitok +1 Mightot kapnak, bárkié is. Amikor itt scorolsz (conquer vagy hold), visszacserélheted az eredeti battlefieldre, a unitok a helyükön maradnak.",
+   "why": "Short: a \"score here\" a Scoring folyamat (470.3), nem pontszerzés; a Final Point szabály miatt scorolás pont nélkül is történhet (473.1.b.1), a \"pontot szerzel\" így pontatlan."
+  },
+  "Bushwhack Trap": {
+   "short": "Deploy: csak battlefieldre játszható ki, és meghal, ha egy ellenfél ott holdol. Amíg te vagy egy szövetségesed kontrollálja azt a battlefieldet, az a játékos egy helyett két lapot rejthet el ott. Ha elveszíted a kontrollt, az ottani rejtett lapjaid elvesznek.",
+   "why": "Short: a szöveg \"you or an ally\" feltétele és az \"that player\" kedvezményezett hiányzott, csak a saját kontrollt említette."
+  },
+  "Brutal Hunter": {
+   "short": "3 Energyért, a saját Main Phase-edben, showdownon kívül Empowered lesz: +2 Mightot kap, és battlefieldről battlefieldre is mozoghat. Az Empower nem exhaustolja, így ugyanabban a körben még léphet. Ha elveszíti az állapotot vagy lekerül, mindkettő megszűnik.",
+   "why": "Short: az Empower activated ability időzítése hiányzott (381.1, 145.2: saját Main Phase, Open State, showdownon kívül)."
+  },
+  "Covert Informant": {
+   "short": "3 Energyért, a saját Main Phase-edben, showdownon kívül Empowered lesz, és utána minden mozgásakor húzol egy lapot, körönkénti korlát nélkül. A Recall nem számít mozgásnak. Üres pakli esetén a húzás büntetést (Burn Out) okoz.",
+   "why": "Short: az Empower activated ability időzítése hiányzott (381.1, 145.2: saját Main Phase, Open State, showdownon kívül)."
+  },
+  "Commander Ledros": {
+   "short": "Kijátszáskor bármennyi saját unitot megölhetsz additional costként, mindegyik 1 Order Powerrel csökkenti a costját, a 6 Energyt ez nem csökkenti. Deflect: az ellenfél spellje vagy abilityje 1 bármilyen Powerrel többe kerül, ha őt választja. Ganking: battlefieldről battlefieldre mozoghat.",
+   "notes": [
+    [
+     "355.1,356.2.b.1",
+     0,
+     "Az \"as you play me\" választást a kijátszás választási lépésében teszed meg: ekkor jelölöd ki, hány friendly unitot ölsz meg additional costként."
+    ],
+    [
+     "356.6",
+     1,
+     "Minden megölt unit 1 Order Powerrel csökkenti a costot. A Power cost 4, tehát az ötödik unit már nem ad semmit, a 6 Energy costot ez a kedvezmény nem csökkenti."
+    ],
+    [
+     "355.10.c",
+     0,
+     "A feláldozott unitok nem targetek, a saját Deflectjük nem számít."
+    ],
+    [
+     "185.2.d",
+     1,
+     "Token unit is feláldozható, így az 1 Mightú tokenek egy-egy Order Powert érnek."
+    ],
+    [
+     "429.1.a.1.b,357.2.a",
+     0,
+     "A megölt unitok Deathknellje chain-re kerül. Ha egy kill-t replacement effect cserél ki, a cost akkor is kifizetettnek számít."
+    ],
+    [
+     "810.1.b,809.1.c",
+     0,
+     "[Ganking]: Standard Move-val battlefieldről battlefieldre léphet. [Deflect]: az opponent targetelése +[A]-ba kerül."
+    ]
+   ],
+   "why": "Short és N2: \"a 6 Energyt mindig fizetni kell\" túlzás, más kedvezmény (például Astral Heron [2] része) az Energyt csökkentheti; csak a saját kedvezménye nem érinti (356.4)."
+  },
+  "Counter Strike": {
+   "notes": [
+    [
+     "355.10.c",
+     0,
+     "A \"Choose a unit\" nem része a replacement effectnek, ezért a unit target. Bármelyik unit választható, enemy is."
+    ],
+    [
+     "438.7,438.4",
+     1,
+     "A következő damage eseményt teljes egészében megelőzi, az értékétől függetlenül, utána az effect elhasználódik. Az így megelőzött damage nem számít dealeltnek, \"when I take damage\" trigger nem fut le rá."
+    ],
+    [
+     "467.2.c.10",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a unit továbbra is kaphat damage-et, ezért combatban nem mentesül a kötelező lethal damage kiosztás alól, az opponent nem ugorhatja át."
+    ],
+    [
+     "438.5.a,467.2.c.10",
+     2,
+     "Nem egyértelmű, mennyi damage-et kell egy így védett unitra kiosztani ahhoz, hogy lethalnak számítson, mert a Prevent értéke itt nem szám. A Core Rules nem dönti el, judge döntése kell."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "A Draw 1 akkor is megtörténik, ha a unit a resolve előtt illegális target lett."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap (Jax), legfeljebb 3 Signature lehet a deckben, mind a legend Champion tagjével."
+    ]
+   ],
+   "why": "N6: kétdomaines lapnál az adat csak a Power cost számát adja, a nyomtatott szimbólumot nem, ezért a \"Calm vagy Body Powerrel fizethető\" állítás nem ellenőrizhető; törölve."
+  },
+  "Daisy!": {
+   "notes": [
+    [
+     "103.3.d,103.3.d.2",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és csak akkor, ha a legended Champion tagje Ivern."
+    ],
+    [
+     "103.2.b.4",
+     0,
+     "Kétdomaines lap: csak olyan deckbe kerülhet, amelynek a Domain Identity-je a Calmot és az Ordert is tartalmazza."
+    ],
+    [
+     "356.4.g,355.9.a.1",
+     1,
+     "A kedvezmény tagenként 1, legfeljebb 4, a Determine Total Cost lépésben számolva. A boardon lévő unitjaid számítanak, a kézben lévők nem. Több azonos tagű unit csak egyszer számít."
+    ],
+    [
+     "369.3",
+     0,
+     "Az \"I enter ready\" replacement effect: Daisy eleve ready lép be, így a kijátszás körében mozoghat és támadhat."
+    ],
+    [
+     "383.4.e.2.b",
+     0,
+     "Az attack trigger feltétele, hogy a unitjaidon mind a 4 tag meglegyen, amikor Daisy megkapja az Attacker designationt. Ha akkor nem teljesül, abban a combatban már nem triggerel."
+    ],
+    [
+     "355.10,424.1.b",
+     0,
+     "Az enemy unit target, Daisy battlefieldjén kell lennie. A stunned unit Mightja nem számít bele a combat damage-be."
+    ],
+    [
+     "206",
+     0,
+     "Más effectek a nyomtatott 9 Energy és 2 Power costot látják."
+    ]
+   ],
+   "why": "N2: kétdomaines lapnál az adat csak a Power cost számát adja, a nyomtatott szimbólumot ([C] vagy konkrét domain) nem, ezért a \"bármelyik domain Poweréből fizethető\" állítás nem ellenőrizhető; törölve."
+  },
+  "Danger Zone": {
+   "notes": [
+    [
+     "355.5.a,355.10.d",
+     1,
+     "Nincs target: minden általad kontrollált, Mech taggel rendelkező unitra hat. Deflect és \"can't be chosen\" nem számít."
+    ],
+    [
+     "187.4",
+     0,
+     "A 3 Mightú Mech token is Mech taggel rendelkezik, rá is hat."
+    ],
+    [
+     "355.5.a",
+     1,
+     "A resolve-kor a boardon lévő Mechjeid kapják a bónuszt. A később kijátszott Mech nem."
+    ],
+    [
+     "820.1.d,135.2.e.6.c",
+     0,
+     "Repeat [1][C]: kifizetve minden Mech +2-t kap. A szövegbeli [C] kétdomaines lapon Fury vagy Mind Power lehet."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap (Rumble): a deckben összesen legfeljebb 3 Signature kártya lehet."
+    ]
+   ],
+   "why": "N4: a \"base cost Power része is\" állítás a nyomtatott költségszimbólumra vonatkozik, ami kétdomaines lapnál az adatból nem ellenőrizhető; törölve (a Repeat szövegbeli [C]-je ellenőrizhető, az maradt)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

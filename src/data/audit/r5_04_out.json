@@ -1,0 +1,19 @@
+{
+ "fixes": {
+  "Evelynn, Agony's Embrace": {
+   "short": "Legend: körönként egyszer, amikor egy lapot facedownból (elrejtve) kijátszol, húzol 1 lapot. Ha ez nem a te körödben történik, utána el kell dobnod 1 lapot. Nem tartogathatod: a kör első facedownból kijátszott és resolve-olt lapja elhasználja; a counterelt lap nem triggerel.",
+   "why": "A short szerint a kör első elrejtett lapja 'mindig' elhasználja a körönkénti alkalmat, de counterelt lapnál a trigger nem fut le (420.4.a.1), így az alkalom megmarad; ezt a notes is kimondja."
+  },
+  "Falling Star": {
+   "short": "Kétszer ad 3 sebzést: ugyanarra a unitra (összesen 6) vagy két különbözőre. Ha az egyik célpont közben eltűnik, a másik sebzés attól még megtörténik. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Keyword nélküli spell csak a saját körödben, Open State-ben, showdownon kívül játszható ki (155); a short a 'showdownon kívül' feltételt elhagyta, így azt sugallta, hogy saját körben showdownban is mehet."
+  },
+  "Gentle Gemdragon": {
+   "short": "8 Mightú Dragon. Amikor kijátszod, vagy amíg a boardon van, egy másik Dragont játszol ki, legfeljebb 2 rune-t ready-vé tesz. A szöveg nem szűkít a sajátjaidra, de a gyakorlatban a saját exhausted rune-jaidat választod. Ez gyakorlatilag 2 Energyt ad vissza minden Dragon után.",
+   "why": "A short 'rune-odat' írt, a lapszöveg ('ready up to 2 runes') nem szűkít friendlyre (355.9.a), ezt a saját notes is kimondja; a short ellentmondott neki."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}
