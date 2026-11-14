@@ -173,11 +173,14 @@
  },
  {
   "title": "5. Hogyan fizetsz?",
-  "rules": "160-168",
+  "rules": "131, 135.2.e, 160-168, 356-357, 430",
   "paras": [
    "Minden Main Deck lap bal felső sarkában ott az ára. A szám az Energy költség, ezt bármilyen rune fizetheti. Alatta a domain szimbólumok a Power költség, ehhez a megfelelő domainű Power kell. Nem minden lapnak van Power költsége.",
    "A rune-ok adják a fizetőeszközt, két módon. Exhaustolod a rune-t (oldalra fordítod), és ez 1 Energyt ad. Vagy recycle-öd (a Rune Deck aljára teszed), és ez 1 Powert ad a rune domainjében. A második drágább döntés: a rune elhagyja a boardot, így a következő körökben eggyel kevesebb rune-od lesz.",
-   "Amit így termelsz, a Rune Poolba kerül, ez a pillanatnyilag elkölthető Energy és Power gyűjtőhelye. A Rune Pool minden Main Phase elején és minden kör végén kiürül, ezért nem érdemes előre termelni."
+   "Amit így termelsz, a Rune Poolba kerül, ez a pillanatnyilag elkölthető Energy és Power gyűjtőhelye. A Rune Pool minden Main Phase elején és minden kör végén kiürül, ezért nem érdemes előre termelni.",
+   "A lapokon a költségek jelekkel szerepelnek. [1], [2] stb.: ennyi Energy. [R], [G], [B], [O], [P], [Y]: 1 Power az adott domainből (Fury, Calm, Mind, Body, Chaos, Order). [C]: 1 Power a lap saját domainjéből, domain nélküli lapon bármelyikből. [A]: 1 Power bármelyik domainből. [E] vagy régebbi jelöléssel [T]: exhaustold a lapot. [S] vagy [M]: Might.",
+   "Az [Add] azt jelenti, hogy a képesség Energyt vagy Powert tesz a Rune Poolodba. Ilyen a rune-ok két képessége, és ilyenek egyes gearek és unitok is (például Seal of Discord, Gold token). Az [Add] képesség nem kerül a chainre, azonnal lefut, és az ellenfél nem válaszolhat rá. Ha [Reaction] is van rajta, bármikor használhatod, amikor fizetned kell, akár egy kijátszás közben is.",
+   "A lap ára nem mindig csak a nyomtatott szám és szimbólum. Kijátszáskor az oldal összeadja a plusz költségeket (például Accelerate: plusz [1][C], hogy a unit ready lépjen be; Equip költség; \"as an additional cost\" szövegek), utána jönnek a drágítások, végül a kedvezmények. Energy és Power költség 0 alá nem csökkenhet."
   ],
   "steps": [
    [
@@ -207,6 +210,34 @@
    [
     "167",
     "A Rune Pool kiürül minden Main Phase elején és minden kör végén, a fel nem használt Energy és Power elvész."
+   ],
+   [
+    "135.2.e.6",
+    "[C]: 1 Power a lap saját domainjéből. Több domainű lapon bármelyik domainje jó, domain nélküli lapon bármely domain."
+   ],
+   [
+    "135.2.e.5",
+    "[A]: 1 Power bármely domainből. Költségként bármilyen Powerrel fizethető, a Rune Poolban bármilyen Power költségre elkölthető."
+   ],
+   [
+    "430.2",
+    "Az [Add] képesség azonnal lefut, nem kerül a chainre, nem lehet rá válaszolni."
+   ],
+   [
+    "430.3",
+    "A [Reaction] [Add] képesség bármikor használható, amikor egy spell vagy ability fizetést kér."
+   ],
+   [
+    "356.2",
+    "A plusz költségek (kötelezők és választhatók, például Accelerate) a nyomtatott árhoz adódnak."
+   ],
+   [
+    "356.6",
+    "Energy és Power költség kedvezménnyel sem mehet 0 alá."
+   ],
+   [
+    "805.1.b",
+    "Accelerate: a unit kijátszásakor plusz [1][C] fizethető, ekkor a unit ready lép be."
    ]
   ]
  },
