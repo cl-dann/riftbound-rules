@@ -159,8 +159,9 @@ import glob
 REV={}
 for f in sorted(glob.glob('data/review/rv_*_out.json')):
     REV.update(json.load(open(f,encoding='utf-8')).get('fixes') or {})
+NP=json.load(open('data/audit/notes_patch.json',encoding='utf-8'))
 SA={}
-for f in sorted(glob.glob('data/audit/a*_out.json')):
+for f in sorted(glob.glob('data/audit/[av]*_out.json')):
     SA.update({k:v['short'] for k,v in (json.load(open(f,encoding='utf-8')).get('fixes') or {}).items()})
 SA.update(json.load(open('data/audit/manual.json',encoding='utf-8')))
 SH={}
@@ -212,6 +213,9 @@ for c in cards:
     if rv and rv.get('short'): SH[c['n']]=rv['short']
     if c['n'] in SA: SH[c['n']]=SA[c['n']]
     if c['n'] in SH: c['sh']=SH[c['n']].replace('\u2014',',').replace('\u2013','-')
+    for o,nw in NP.get(c['n'],[]):
+        for x in c.get('nt',[]):
+            if o in x[2]: x[2]=x[2].replace(o,nw)
     for k in ('_fn','_name'): del c[k]
 for t in T: del t['_t']
 cards.sort(key=lambda c:c['n'].lower())

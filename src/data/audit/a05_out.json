@@ -1,0 +1,118 @@
+{
+ "fixes": {
+  "Invigorating Bloom": {
+   "short": "Kijátszáskor egy saját unitod +3 Mightot kap a kör végéig. A gear és egy ready, Mighty (legalább 5 Mightú) saját unitod exhaustolásával húzol 1 lapot, akár már a kijátszás körében is. Ez csak a saját körödben, showdownon kívül használható, és az exhaustolt unit utána Standard Move-val nem mozoghat abban a körben.",
+   "why": "A \"Később\" azt sugallta, hogy a kijátszás körében nem használható, pedig a gear ready lép be. Az időzítés alanya homályos volt (381, 381.1)."
+  },
+  "Inviolus Vox": {
+   "short": "Amikor ez a unit részt vesz egy battlefield conquerében, egy saját unitod (akár ő maga) +8 Mightot kap a kör végéig, akkor is, ha a pontot nem kapod meg. Mivel a conquer jellemzően combat után jön, a bónusz főleg egy későbbi mozgásnál és harcnál ér sokat.",
+   "why": "\"Amikor ott áll, ahol conquerelsz\" homályos: a unitnak jelen kell lennie a conquernél (383.4.c.2.a), és a pont elmaradása sem akadályozza (383.4.c.2.c)."
+  },
+  "Iridescent Avian": {
+   "short": "Exhaustolva buffol egy unitot (tartós +1 Might). Ha az már buffolt, helyette +2 Mightot kap a kör végéig. Csak a saját körödben, showdownon kívül használható, a kijátszás körében nem, mert exhausted lép be; a Standard Move is exhaustol, ezért egy körben vagy mozog, vagy buffol.",
+   "why": "A \"combaton kívül\" pontatlan: activated ability csak a saját Main Phase-edben, Open State-ben megy, tehát non-combat showdown alatt sem (381.1)."
+  },
+  "Iron Ballista": {
+   "short": "Exhaustolva 2 sebzést oszt egy battlefielden álló unitnak, akár a sajátodnak is. Exhausted lép be, ezért csak a következő körödtől lő. Csak a saját körödben, showdownon kívül használható, így combat közben sem.",
+   "why": "A \"combaton kívül\" pontatlan: az ability showdown alatt sem aktiválható, csak Open State-ben a saját Main Phase-edben (381.1)."
+  },
+  "Ivern, Friend to All": {
+   "short": "Kijátszáskor választasz neki egy taget: Bird, Cat, Dog vagy Poro. Amikor ez a unit részt vesz egy battlefield conquerében, vagy ott áll egy általad holdolt battlefielden, 1 pontot szerzel, ha a boardon lévő unitjaid együtt mind a négy taget lefedik. A feltételt a resolve-kor nézi, és ez a pont a győztes pont is lehet.",
+   "why": "\"Ha ott áll, ahol conquerelsz vagy holdolsz\" homályos: a unitnak jelen kell lennie a conquernél vagy holdnál (383.4.c.2.a, 383.4.d.2.a); a feltétel resolve-kori ellenőrzése sem volt egyértelmű (383.2.a.1)."
+  },
+  "Ivern, Green Father": {
+   "short": "Amikor conquerelsz vagy holdolsz, a legend exhaustolásával azt a battlefieldet Brush battlefield tokenre cserélheted. A Brushban minden játékos Bird, Cat, Dog, Poro és Ivern unitja +1 Mightot kap. Aki később ott conquerel vagy holdol, visszacserélheti az eredeti battlefieldre.",
+   "why": "A \"pontot szerez\" pontatlan: a visszacsere a score-oláshoz (conquer vagy hold) kötött, ami nem azonos a pontszerzéssel (470.1)."
+  },
+  "Jagged Cutlass": {
+   "short": "Equip: 1 Body Powerért egy saját unitodra csatolod, csak a saját körödben, showdownon kívül. A felszerelt unit +2 Mightot kap, és ellenséges spellek és abilityk nem mozgathatják; a saját mozgatásod és a recall működik. Az ellenfél előbb leszedheti vagy megölheti a Cutlasst, utána már mozgathatja a unitot.",
+   "why": "Hiányzott az Equip költsége ([C] = 1 Body Power) és időzítése (818.1.c.2, 381.1); \"az ellenfél lapjai\" helyett a kártya ellenséges spellt és abilityt ír."
+  },
+  "Jarvan IV, Martial Paragon": {
+   "short": "Amíg a boardon van, a Deploy kulcsszavas gearjeidet showdown alatt is kijátszhatod, bárki körében. Amikor ez a unit részt vesz egy battlefield conquerében, és ott van egy saját Deploy geared, channelelsz 1 rune-t exhausted állapotban. A geart a conquer előtt kell odatenni, akár showdown közben.",
+   "why": "\"Ha ott conquerelsz\" homályos: a unitnak jelen kell lennie a conquernél (383.4.c.2.a), a gear feltétele a trigger része (383.2.a.1). Az Action bárki körére is szól (806.1.c.1)."
+  },
+  "Jaull-Fish": {
+   "short": "Minden saját Mighty (legalább 5 Mightú) unitod után 2 Energyvel olcsóbb, négy Mighty unitnál 0 Energy. A 2 Body Powert mindig ki kell fizetni. Kijátszáskor fizethetsz plusz 1 Energy és 1 Body Power költséget: ekkor ready lép be.",
+   "why": "Az Accelerate csak a unit kijátszásakor fizethető plusz költség, ezt ki kell mondani (805.1.b, 805.2.a)."
+  },
+  "Jax, Grandmaster at Arms": {
+   "short": "Exhaustolva egy saját Equipmentet közvetlenül egy saját unitodra teszel, az Equipment saját Equip költségét nem kell kifizetni. Leválasztott Equipmenthez 1 Energy is kell, a már felszerelt átrakása csak exhaust. Mindkettő a legendet exhaustolja, ezért általában körönként csak egyik használható, a saját körödben, showdownon kívül.",
+   "why": "A \"Körönként egyszer\" tényként túlzás: a korlát csak az exhaust költségből adódik, ready effect után újra használható (381.1)."
+  },
+  "Jinx, Demolitionist": {
+   "short": "Támadáskor +2 Mightot kap, így 6 Mightú. Kijátszáskor kötelezően eldobsz 2 lapot, kevesebb lapnál annyit, amennyi van. Kijátszáskor fizethetsz plusz 1 Energy és 1 Fury Power költséget: ekkor ready lép be.",
+   "why": "Az Accelerate csak kijátszáskor fizethető plusz költség, ez hiányzott (805.1.b, 805.2.a)."
+  },
+  "K'Sante, Courageous": {
+   "short": "Védekezéskor +2 Mightot kap, így 6 Mightú. Amikor ott áll egy általad holdolt battlefielden a Beginning Phase-edben, channelelsz 1 ready rune-t a szokásos kettőn felül. Kijátszáskor fizethetsz plusz 1 Energy és 1 Body Power költséget: ekkor ready lép be.",
+   "why": "Az Accelerate kijátszáskori plusz költség jellege hiányzott (805.1.b, 805.2.a); a hold feltétele pontosítva (383.4.d.2.a)."
+  },
+  "Kai'Sa, Evolutionary": {
+   "short": "Battlefieldről battlefieldre is léphet (Ganking). Amikor ez a unit részt vesz egy battlefield conquerében, kijátszhatsz a trashedből egy spellt, amelynek Energy költsége kisebb a pontjaidnál, az Energy kifizetése nélkül; a Power költséget fizetni kell. A most szerzett pont már beleszámít, a spell utána a deck aljára kerül.",
+   "why": "\"Amikor ott áll, ahol conquerelsz\" homályos (383.4.c.2.a); kimaradt, hogy a Power költséget ki kell fizetni."
+  },
+  "Kai'Sa, Survivor": {
+   "short": "Amikor ez a unit részt vesz egy battlefield conquerében, húzol 1 lapot, akkor is, ha a pontot nem kapod meg. Kijátszáskor fizethetsz plusz 1 Energy és 1 Fury Power költséget: ekkor ready lép be, így még abban a körben mozoghat.",
+   "why": "Homályos conquer feltétel (383.4.c.2.a); az Accelerate csak kijátszáskor fizethető (805.1.b, 805.2.a); az \"azonnal támadhat\" túlzás, a ready unit csak mozoghat (421.3)."
+  },
+  "Keeper of Masks": {
+   "short": "Kijátszáskor két Reflection tokent kapsz ugyanoda, amelyek aztán a Keeper másolatai lesznek; a másolatok kijátszáskori hatása nem fut le, így nincs láncreakció. A Keeper és a másolatok is Temporaryk: a következő köröd elején, pontozás előtt meghalnak. Hidden: a saját körödben 1 tetszőleges Powerért elrejtheted egy saját battlefielden, és a következő körtől Reactionként, költség nélkül kijátszhatod.",
+   "why": "Hiányzott a Hidden keyword (811.1.b); a Temporary a scoring előtt öl (816.1.b)."
+  },
+  "Kennen, Keeper of Balance": {
+   "short": "Kijátszáskor és támadáskor 2 Energyért stunolhat egy unitot, ami így nem oszt combat damage-et ebben a körben. Amíg vele egy helyen stunolt ellenséges unit áll, +2 Mightot kap. Hidden: kézből vagy a Champion Zone-ból 1 tetszőleges Powerért elrejtheted egy saját battlefielden, és a következő körtől Reactionként, költség nélkül oda kijátszhatod.",
+   "why": "A Hidden lényege (elrejtés költsége, későbbi Reaction és ingyenes kijátszás ugyanoda) hiányzott (811.1.b, 811.1.d.1)."
+  },
+  "Kennen, Storm of Shuriken": {
+   "short": "Kijátszáskor a deck felső 2 lapja a trashbe kerül. Amikor ez a unit részt vesz egy battlefield conquerében, a trashedben lévő egyik spell ebben a körben Flow-t kap a saját költségével: kijátszhatod onnan, utána banisholódik. Ha nincs spell a trashedben, nem történik semmi.",
+   "why": "\"Amikor ott áll, ahol conquerelsz\" homályos: a unitnak jelen kell lennie a conquernél (383.4.c.2.a). A Flow jellege pontosítva (829.1.b)."
+  },
+  "Kha'Zix, Evolving Hunter": {
+   "short": "Amikor ez a unit részt vesz egy battlefield conquerében, vagy ott áll egy általad holdolt battlefielden, 1 XP-t kapsz (Hunt). Támadáskor 3 XP-ért a saját Mightjával egyenlő sebzést oszthat egy ott álló ellenséges unitnak. Az így megölt unit már nem sebez a harcban, de ha a célpont eltűnik, az XP elveszett.",
+   "why": "\"Amikor ott áll, ahol conquerelsz vagy holdolsz\" homályos (823.1.c.1, 383.4.c.2.a, 383.4.d.2.a)."
+  },
+  "Kha'Zix, Voidreaver": {
+   "short": "Minden megnyert combat után 1 XP-t kapsz. 1 XP-ért és exhaustért buffolhatsz egy unitot, 2 XP-ért és exhaustért egy exhausted saját unitot hazaküldhetsz egy battlefieldről. Mindkettő a legendet exhaustolja, ezért általában körönként csak egyik megy, a saját körödben, showdownon kívül.",
+   "why": "A \"Körönként csak az egyik\" tényként túlzás, a korlát az exhaust költségből adódik; az időzítés (showdownon kívül) hiányzott (381.1)."
+  },
+  "Kraken Hunter": {
+   "short": "Kijátszáskor elkölthetsz buffokat a saját unitjaidról, mindegyik 1 Body Powerrel csökkenti a költségét. Támadáskor +1 Mightot kap, így 6 Mightú. Kijátszáskor fizethetsz plusz 1 Energy és 1 Body Power költséget is: ekkor ready lép be.",
+   "why": "Az Accelerate csak kijátszáskor fizethető plusz költség, ez nem volt kimondva (805.1.b, 805.2.a)."
+  },
+  "Last Rites": {
+   "short": "Equip: 1 Chaos Powerért és 2 lap trashből a deck aljára tételéért (recycle) egy saját unitodra csatolod. A felszerelt unit +2 Mightot kap, és amikor részt vesz egy battlefield conquerében vagy ott áll egy általad holdolt battlefielden, kijátszhatsz egy unitot a trashedből, teljes áron. Ha nincs unit a trashedben, nem történik semmi.",
+   "why": "Hiányzott az Equip költség [C] része (1 Chaos Power) (818.1.c.2, 818.1.c.3); a conquer vagy hold feltétel homályos volt (383.4.c.2.a, 383.4.d.2.a)."
+  },
+  "Lee Sin, Blind Monk": {
+   "short": "1 Energyért és a legend exhaustjáért buffolsz egy saját unitot: ha még nincs buffja, tartós +1 Mightot kap. Csak a saját körödben, showdownon kívül használható. Már buffolt unitra pazarlás, mert második buffot nem kap.",
+   "why": "A \"combaton kívül\" pontatlan: showdown alatt sem aktiválható, csak Open State-ben a saját Main Phase-edben (381.1)."
+  },
+  "Lee Sin, Centered": {
+   "short": "Ugyanazon a battlefielden álló többi buffolt saját unitod +2 Mightot kap, a buffal együtt így +3-at. Base-ben állva nem ad bónuszt, magát sem erősíti, és ha elmegy, a bónusz azonnal megszűnik. Kijátszáskor fizethetsz plusz 1 Energy és 1 Body Power költséget: ekkor ready lép be.",
+   "why": "Hiányzott az Accelerate keyword (805.1.b, 805.2.a)."
+  },
+  "Legion Rearguard": {
+   "short": "2 Mightú unit. Kijátszáskor fizethetsz plusz 1 Energy és 1 Fury Power költséget: ekkor ready lép be, így még abban a körben mozoghat. Ha költség nélkül játszod ki, ezt a plusz költséget akkor is ki kell fizetned, ha ready belépést kérsz.",
+   "why": "Az Accelerate kijátszáskori jellege nem volt kimondva (805.1.b, 805.2.a); az \"azonnal\" pontosítva."
+  },
+  "Lillia, Fae Fawn": {
+   "short": "Valahányszor elmozdul valahonnan, ott hagy egy 3 Mightú, Temporary Sprite tokent, ami a következő köröd elején, pontozás előtt meghal. Ha battlefieldről lép el, a Sprite ott megtartja a kontrollt, de holdolni nem fog. Kijátszáskor fizethetsz plusz 1 Energy és 1 Mind Power költséget: ekkor ready lép be.",
+   "why": "Az Accelerate csak kijátszáskor fizethető plusz költség, ez hiányzott (805.1.b, 805.2.a); a Temporary a scoring előtt öl (816.1.b)."
+  },
+  "Lotus Trap": {
+   "short": "Egy unit minden sebzést duplán kap ebben a körben. Bármikor, válaszként is kijátszható, például egy sebző spellre. Combatban így fele annyi sebzés is elég a megölésére. Hidden: 1 tetszőleges Powerért elrejtheted egy saját battlefielden, és a következő körtől költség nélkül kijátszhatod, ekkor csak az ottani unit választható.",
+   "why": "Hiányzott a Hidden keyword és a facedown kijátszás target korlátja (811.1.b, 811.1.d.2)."
+  },
+  "Lucian, Merciless": {
+   "short": "Kijátszáskor ráteheted az egyik Equipmentedet az Equip költségénél 1 tetszőleges Powerrel olcsóbban, akkor is, ha az már máson van. Körönként az első alkalommal, amikor részt vesz egy battlefield conquerében, ready lesz. Ganking nélkül onnan így csak a base-be léphet.",
+   "why": "A \"conquernél, ahol ott áll\" homályos (383.4.c.2.a, 383.1.b); a Weaponmaster kedvezménye az Equip költségből jár [A]-val (821.1.c)."
+  },
+  "Lulu, Whimsical": {
+   "short": "Amikor mozog, választhatsz egy másik unitot, saját vagy ellenséges: annak alap Mightja 4 lesz a kör végéig. Egy gyenge tokent így megerősíthetsz, egy nagy ellenséget legyengíthetsz. Ha a legyengített uniton legalább 4 sebzés van, meghal.",
+   "why": "Elmaradt a \"you may\": a hatás opcionális (383.3.a)."
+  }
+ },
+ "checked": 111,
+ "conflicts": []
+}

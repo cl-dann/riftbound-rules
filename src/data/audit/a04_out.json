@@ -1,0 +1,138 @@
+{
+ "fixes": {
+  "Forbidding Waste": {
+   "short": "Battlefield: amíg egy unit itt egyedül védekezik (nincs mellette más friendly unit), -2 Mightja van. Így kevesebb sebzés is megöli, és a legfeljebb 2 Mightú magányos védő nem oszt combat damage-et. Ha combat közben egy társa érkezik mellé, a büntetés megszűnik.",
+   "why": "A \"kis védő\" homályos volt: pontosan a legfeljebb 2 Mightú védő oszt 0 damage-et; az \"egyedül\" definíciója hiányzott (kártyaszöveg)."
+  },
+  "Forecaster": {
+   "short": "2 Mightú Mech unit. Amíg a boardon van, minden Mech unitod Visiont kap: amikor egy Mech belép a boardra, megnézed a Main Decked felső lapját, és recycle-ölheted (a deck aljára teheted). Rá magára és a Mech tokenekre is működik.",
+   "why": "Félreérthető alany: nem a Mech néz, hanem te; a Vision a boardra lépéskor triggerel (817.1.b, 817.1.c)."
+  },
+  "Forge of the Fluft": {
+   "short": "Battlefield: amíg te irányítod, a legended képességet kap: exhaustolva egy saját Equipmentet egy saját unitodra csatolhatsz, az Equip cost kifizetése nélkül. Csak a saját Main Phase-edben, showdownon kívül használható, és ugyanazt az exhaustot használja, mint a legend saját [T] képessége.",
+   "why": "Az Equipment szakszó hiányzott (\"felszerelés\"), a \"tartod\" a hold kifejezéssel keverhető, és töltelékmondat volt; activated ability időzítése: 381.1."
+  },
+  "Forgefire Cape": {
+   "short": "Equipment, +3 Might. Equip: 1 bármely domainű Power, saját unitra, a saját Main Phase-edben. A felszerelt unit, amikor támad vagy védekezik, 2 sebzést oszt minden ott álló ellenséges unitnak, combatonként egyszer, még a combat damage előtt. Unique, Ornn Signature lap.",
+   "why": "Hiányzott az Equip [A] költség és időzítése (818.1.c.2, 381.1)."
+  },
+  "Forgotten Monument": {
+   "short": "Battlefield: itt egyik játékos sem score-olhat a saját harmadik köre előtt. Ilyenkor nem jár pont, és az itteni conquer és hold triggerek sem futnak le. A battlefield irányítását ettől még megszerezheted. Hogy az Additional Turn beleszámít-e, judge dönti el.",
+   "why": "A régi szöveg csak a pontot említette: score nélkül conquer/hold triggerek sem futnak le (473.2, 383.4.c); az \"elfoglalhatod és tarthatod\" ellentmond, mert a conquer és hold maga a score (471)."
+  },
+  "Forgotten Signpost": {
+   "short": "Gear, [Action] képesség: exhaustolod a Signpostot és egy ready saját unitodat, majd egy másik, máshol álló saját unitodat annak a helyére mozgatod. Ez nem Standard Move, a mozgatott unit nem exhaustolódik, és showdownban is erősítést hozhat.",
+   "why": "Hiányos, nyelvtanilag zavaros mondat (\"exhaustolod és egy...\"): nem derült ki, hogy a gear is exhaustolódik ([T]); Action: 806.1.c.2."
+  },
+  "Fortified Position": {
+   "short": "Battlefield: amikor itt védekezel (megtámadják az általad irányított battlefieldet), kiválasztasz egy unitot, és az a combat végéig Shield 2-t kap: +2 Might, amíg defender. Bármelyik unit választható, de csak defenderen ér valamit.",
+   "why": "A \"te tartod\" a hold szóval téveszthető össze; a trigger a defend eseményre fut (383.4.f), Shield: 814.1.c."
+  },
+  "Fox-Fire, Ahri": {
+   "short": "[Action] spell: megöl bármennyi unitot egy battlefielden, ha együtt legfeljebb 4 Mightjuk van, a sajátodat is. Ha az összeg a resolve-ig 4 fölé nő, csak egy legális részük hal meg. Hidden: 1 bármely Powerért elrejtheted, és a következő körtől Reactionnel, ingyen játszhatod ki, de csak az ottani unitokra.",
+   "why": "Hiányzott, hogy az elrejtett lap csak a következő körtől játszható ki (811.1.b, 811.6), és az Action időzítés."
+  },
+  "Fresh Beans": {
+   "short": "Gear: amikor showdown alatt kijátszol egy unitot, exhaustolhatod, hogy húzz 1 lapot. Showdownban csak Action vagy Reaction időzítésű unit jöhet le (például Ambush, vagy elrejtett lap a következő körtől). Exhausted állapotban addig nem használható, amíg ready nem lesz.",
+   "why": "Pontatlan: Action unit is kijátszható showdownban, nem csak reakciós vagy elrejtett (806.1.b, 813.1.b)."
+  },
+  "Gardens of Becoming": {
+   "short": "Battlefield: az itt álló unitok képességet kapnak: exhaustolva a unit irányítója 1 XP-t kap, a saját Main Phase-ében, showdownon kívül. Az XP a játékosnál marad. Az így exhaustolt unit abban a körben nem tud Standard Move-ot tenni.",
+   "why": "A \"gazdájuknak\" owner jelentésű, de az ability a controlleré; activated ability időzítése: 381.1."
+  },
+  "Gearhead": {
+   "short": "3 Mightú unit. Accelerate: kijátszáskor fizethetsz plusz 1 Energy és 1 Mind Power költséget, ekkor ready lép be. A rá csatolt Equipmentek a base Might bónuszuk dupláját adják, például egy +2-es +4-et. Más unitra átkerülve az Equipment ismét csak a normál értéket adja.",
+   "why": "Az Accelerate csak kijátszáskor fizethető additional cost, ezt nem mondta ki (805.1.b, 805.2.a)."
+  },
+  "Gemhand Hunter": {
+   "short": "2 Mightú unit. Hunt: ha ott áll azon a battlefielden, amelyet conquerelsz, vagy amelyet a köröd elején holdolsz, 1 XP-t kapsz. Level 6: amíg legalább 6 XP-d van, +1 Mightja van. Ha 6 XP alá esel, a bónusz azonnal elvész.",
+   "why": "A \"ha elfoglalja vagy tartja a battlefieldjét\" homályos: a unitnak jelen kell lennie a conquernél vagy holdnál (823.1.c.1, 383.4.c.2.a, 383.4.d.2.a)."
+  },
+  "Glowstone": {
+   "short": "Gear. Empower: 2 bármely domainű Power. Ha Empowered, disempowerelve és exhaustolva odaadhatod egy választott játékosnak: ő irányítja, és az ő base-ébe kerül. Az irányítója körének végén a gear meghal, és 5 sebzést oszt az irányítója minden unitjára. Ha nem adod tovább, a saját unitjaidat sebzi.",
+   "why": "Hiányzott az Empower [A][A] költség és a disempower cost; a \"gazdája\" owner, de a hatás a controllerre szól (\"your turn\", \"units you control\")."
+  },
+  "Gravity Field": {
+   "short": "Deploy gear: csak battlefieldre játszható ki, bármelyikre, és meghal, ha egy ellenfél itt holdol. Az ellenfélnek mozgásonként 1 Energyt és 1 bármely Powert kell fizetnie, hogy unitokat mozgasson ide. Kijátszás és recall nem mozgás. Deathknell: ha meghal, húzol 1 lapot.",
+   "why": "Hiányzott a Deploy halál-feltétele (830.1.b: \"When an opponent holds here, kill this\")."
+  },
+  "Grumpy Rockbear": {
+   "short": "4 Mightú unit. Empower: 12 Energy, minden rune-od után 1-gyel kevesebb, csak a saját Main Phase-edben. Empowered állapotban Deflectet kap (az ellenfélnek plusz 1 bármely Powert kell fizetnie, ha kiválasztja) és Shield 3-at (+3 Might, amíg defender).",
+   "why": "A \"nehezebb rá mutatni\" homályos; Deflect pontos hatása: 809.1.c, Shield: 814.1.c."
+  },
+  "Guardian Angel": {
+   "short": "Equipment, +1 Might. Equip: 1 Calm Power, saját unitra, a saját Main Phase-edben. Ha a felszerelt unit meghalna, helyette a Guardian Angel hal meg: a unit meggyógyul, exhausted lesz, és a base-be recallolódik. Mivel a unit nem hal meg, a Deathknell és más halál triggerei nem futnak le.",
+   "why": "Hiányzott az Equip [C] költség és időzítése (818.1.c.2, 381.1)."
+  },
+  "Guerilla Warfare, Teemo": {
+   "short": "Legfeljebb két Hidden kulcsszavas lapot visszavehetsz a trashedből a kezedbe, és ebben a körben költség nélkül rejthetsz el lapokat. Az elrejtés többi feltétele marad: saját kör, általad irányított battlefield, ahol még nincs facedown lap. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A \"nyugodt helyzetben\" nem szabálykifejezés; a Hide feltételei 811.1.b szerint."
+  },
+  "Gustwalker": {
+   "short": "Hunt 2: ha ott áll azon a battlefielden, amelyet conquerelsz, vagy amelyet a köröd elején holdolsz, 2 XP-t kapsz. Level 3: amíg legalább 3 XP-d van, +1 Mightja és Gankingje van, így Standard Move-val battlefieldről battlefieldre léphet. 3 XP alá esve a bónusz azonnal elvész.",
+   "why": "Homályos conquer/hold megfogalmazás (383.4.c.2.a, 823.1.c.1); a Ganking a Standard Move-ot bővíti (810.1.b)."
+  },
+  "Hand Hammer": {
+   "short": "Equipment, +1 Might. Equip: 1 Calm Power, saját unitra, a saját Main Phase-edben. A felszerelt unit további +2 Mightot kap, amíg battlefielden áll pontosan egy másik saját unitoddal. Egyedül, base-ben vagy két társsal nem jár, és folyamatosan változik.",
+   "why": "Hiányzott az Equip [C] költség és időzítése (818.1.c.2, 381.1)."
+  },
+  "Hard Bargain": {
+   "short": "Reaction spell: counterel egy spellt, hacsak az irányítója nem fizet 2 Energyt. Unit és gear kijátszását nem állítja meg. Repeat 2: plusz 2 Energyért kétszer fut le, két spellre, vagy ugyanarra kétszer, ekkor kétszer kell fizetni.",
+   "why": "A \"gazdája\" owner jelentésű, a kártya a controllert nevezi meg (\"its controller\")."
+  },
+  "Heimerdinger, Inventor": {
+   "short": "Megkapja az összes saját legended, unitod és geared [T] képességét. Ezekhez mindig Heimerdingert kell exhaustolni, nem az eredeti lapot, így egyszerre csak egyet használhat, amíg újra ready nem lesz. Exhausted lép be, ezért a kijátszás körében alapból nem aktiválhat semmit.",
+   "why": "A \"körönként csak egyet\" túlzás: ha egy hatás readyzi, újra aktiválhat."
+  },
+  "Helm of Suppression": {
+   "short": "Gear: az ellenfelek spelljei 1 Energyvel drágábbak. Empower: 4 Energy és 1 Calm Power, a saját Main Phase-edben. Empowered állapotban a drágítás 1 Energy és 1 bármely Power. Unitokra, gearekre és képességekre nem hat, az elrejtett lapból kijátszott spellre igen.",
+   "why": "Hiányzott az Empower költsége ([4][C], 827.1.c.1)."
+  },
+  "Herald of Spring": {
+   "short": "4 Mightú unit. Kijátszáskor 2 XP-t kapsz, akkor is, ha közben meghal. Hunt: ha ott áll azon a battlefielden, amelyet conquerelsz, vagy amelyet a köröd elején holdolsz, 1 XP-t kapsz.",
+   "why": "Homályos \"ott áll, ahol conquerelsz\" megfogalmazás (383.4.c.2.a, 383.4.d.2.a, 823.1.c.1)."
+  },
+  "Hexdrinker": {
+   "short": "Equipment, +1 Might. Equip: 1 Body Power, saját unitra, a saját Main Phase-edben. A felszerelt unit Deflectet kap: ha az ellenfél spellel vagy képességgel kiválasztja, plusz 1 bármely Powert kell fizetnie. A Hexdrinkernek magának nincs Deflectje, felár nélkül megölhető.",
+   "why": "Hiányzott az Equip [C] költség és időzítése (818.1.c.2, 381.1)."
+  },
+  "Hextech Gauntlets": {
+   "short": "Equipment, +3 Might. Equip: 3 Energy és 1 bármely Power, az Energy rész a választott unit Mightjával csökken. Amikor a felszerelt unit részt vesz egy conquerben, és legalább 3 excess damage-et osztottál ki, húzol 1 lapot. Az excess damage pontos jelentését a Core Rules nem rögzíti, judge dönti el.",
+   "why": "Hiányzott az Equip [A] része, és a \"When I conquer\" pontos jelentése (383.4.c.2.a)."
+  },
+  "Hidden Blade": {
+   "short": "Megöl egy battlefielden álló unitot, és annak irányítója húz 2 lapot. Ha a unit a resolve előtt base-be kerül, se ölés, se húzás; ha valami megmenti a haláltól, a húzás akkor is jár. Action, és elrejthető: a következő körtől Reactionnel ingyen, de csak az ottani unitra.",
+   "why": "A \"gazdája\" owner, a kártya a controllert nevezi; a Hidden időzítése hiányzott (811.1.b)."
+  },
+  "Hostile Takeover": {
+   "short": "Átveszed egy battlefielden álló ellenséges unit irányítását és readyzed: ha ott más ellenséges unit is van, combat indul, ha nincs, conquerelsz. A kör végén elveszíted az irányítását, és a base-ébe recallolódik. Hidden. Ha már az Ending Phase-ben játszod ki, a visszaadás elmarad.",
+   "why": "A \"kör legvégén\" homályos (Ending Phase), és a Hidden kulcsszó hiányzott (811)."
+  },
+  "Hunter's Machete": {
+   "short": "Equipment, +2 Might. Equip: 1 Body Power, saját unitra, a saját Main Phase-edben. A felszerelt unit Huntot kap: ha ott áll azon a battlefielden, amelyet conquerelsz vagy holdolsz, 1 XP-t kapsz. Meglévő Hunttal összeadódik.",
+   "why": "Hiányzott az Equip költség; homályos conquer/hold megfogalmazás (823.1.c.1, 823.2, 383.4.c.2.a)."
+  },
+  "Hunters' Circle": {
+   "short": "Battlefield: minden játékosnál az első unit vagy gear, amit a saját körében ide játszik ki, 1 Energyvel olcsóbb. A Power költséget nem érinti. Unitot csak általad irányított battlefieldre játszhatsz, ezért a kedvezményt főleg a battlefield irányítója kapja.",
+   "why": "A \"gazdája\" pontatlan: a battlefieldnek owner és controller is van, a kedvezményt a controller tudja kihasználni."
+  },
+  "Iascylla": {
+   "short": "Hold effect: ha ott áll azon a battlefielden, amelyet a köröd elején holdolsz, ugyanabban a körben a Main Phase elején odamozgathatsz egy ellenséges unitot bárhonnan. Akkor is lefut, ha Iascylla addig elhagyta a boardot. Ha van ott unitod, combat indul, amelyben te védekezel.",
+   "why": "A \"tartja a battlefieldjét\" homályos (383.4.d.2.a)."
+  },
+  "Illaoi, Prophet of the Great Kraken": {
+   "short": "Kijátszáskor, és amikor ott áll azon a battlefielden, amelyet conquerelsz vagy holdolsz (score), kapsz egy 1 Mightú Tentacle tokent. Minden saját token unitod után +1 Mightja van. Ha a tokenjeid meghalnak, a Mightja azonnal csökken, és a rajta lévő sebzés halálos lehet.",
+   "why": "A \"pontot szerzel\" pontatlan: a score nem azonos a pontszerzéssel, a trigger pont nélkül is fut (470.1, 383.4.c.2.c)."
+  },
+  "Incorrigible Construct": {
+   "short": "4 Mightú unit. Ha kijátszáskor felmutatsz egy Mechet a kezedből, vagy kijelölsz egy másik saját Mechet a boardon, ready lép be, így még abban a körben mozoghat. A felmutatott lap a kezedben marad.",
+   "why": "Az \"támadhat\" túlzás: a ready unit mozoghat, ami vezethet combathoz (421.3, 454)."
+  },
+  "Insightful Investigator": {
+   "short": "Kijátszáskor választott ellenfeled felfedi a kezét. Ezután fizethetsz 2 XP-t: ha így teszel, kiválasztasz egy lapot a kezéből, azt eldobja, majd húz 1 lapot. Az XP-ről a kéz megnézése után döntesz. A kézmérete nem változik.",
+   "why": "Nyelvtanilag hibás és túlzó mondat (\"elveszíted neki a legjobb lapját\"); a választott ellenfél hiányzott."
+  }
+ },
+ "checked": 111,
+ "conflicts": []
+}

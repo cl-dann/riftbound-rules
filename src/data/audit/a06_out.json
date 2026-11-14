@@ -1,0 +1,140 @@
+{
+ "fixes": {
+  "Maduli the Gatekeeper": {
+   "short": "Nem lehet ready-vé tenni: exhausted lép be és úgy is marad, ezért Standard Move-val nem tud mozogni. 1 Chaos Powerért (exhaust nélkül, a saját Main Phase-edben) átmegy egy olyan enemy battlefieldre, ahol áll unit, ha a Mightja nagyobb az ott álló enemy unitok összesített Mightjánál. A feltételt a resolve-kor nézi a játék: ha addigra nem teljesül, nem mozdul, a Power elveszett.",
+   "why": "A \"Soha nem lehet ready\" tényként állította, hogy a ready belépés (Accelerate) sem hat rá, ez a notes szerint judge kérdés; a kártyaszöveg csak a readyzést tiltja. Hiányzott az activated ability időzítése (381.1)."
+  },
+  "Mageseeker Investigator": {
+   "short": "Amíg battlefielden áll, az opponent az egyszerre ide mozgatott unitjai közül az első utáni minden unitért 1 bármilyen domainű Powert fizet. Egyesével, külön mozgatva nincs felár. Base-ben állva nem csinál semmit, és a saját unitjaidra nem vonatkozik.",
+   "why": "Költségjelölés: az [A]-t ki kell írni (1 bármilyen domainű Power)."
+  },
+  "Marching Orders": {
+   "short": "Action spell: a saját körödben vagy showdown alatt játszható ki. Egy saját unitod (akár base-ből) és egy battlefielden álló enemy unit egyszerre megsebzi egymást a saját Mightjával. Repeat: plusz 3 Energy kijátszáskori kifizetésével a hatás még egyszer lefut, akár más párral. Ha valamelyik unit közben illegális target lesz, egyik irányban sem megy sebzés.",
+   "why": "Hiányzott az Action keyword és az időzítés (806.1.c.1); a Repeat lényege (kijátszáskor fizetett plusz cost, 820.1.d) pontosítva, a [3] Energyként kiírva."
+  },
+  "Mask Mother": {
+   "short": "Amikor eldobod (discard), fizethetsz 1 Energyt: ekkor egy saját unitod +2 Mightot kap a kör végéig. Bármikor működik, akár az opponent körében is. Ha megölik, banishelik vagy a deckből kerül a trashbe, nincs hatás.",
+   "why": "Költségjelölés: [1] helyett 1 Energy; a triggered ability bármikor chainre kerülhet (383.3.c), a \"kezedből\" a discard lényege, megmaradt."
+  },
+  "Master Bingwen": {
+   "short": "Weaponmaster: kijátszáskor egy általad kontrollált Equipmentet rácsatolhatsz úgy, hogy az Equip costját 1 bármilyen domainű Powerrel olcsóbban fizeted, akkor is, ha az épp egy másik unitodon van, és az Equip szokásos időzítésétől függetlenül. Ha az Equip costban nincs Power, nem lesz olcsóbb. A boardon később már nem csinál semmit.",
+   "why": "Költségjelölés: [A] kiírva; hiányzott, hogy az Equip időzítése nem számít (821.1.b, 821.1.c.3, 821.2)."
+  },
+  "Master Yi, Tempered": {
+   "short": "Hunt 2: amikor ez a unit részt vesz egy battlefield conquerében vagy holdjában (ott áll, amikor megszerzed, illetve a köröd elején megtartod), 2 XP-t kapsz. Amíg legalább 6 XP-d van, Deflectet kap (az opponent rá célzó spellje vagy abilityje 1 bármilyen Powerrel drágább) és Gankinget (battlefieldről battlefieldre léphet). 6 XP alá esve mindkettő azonnal elvész.",
+   "why": "A \"Ha ott van a battlefielden\" homályos volt (383.4.c.2.a, 383.4.d.2.a, 823.1.c.1); hiányzott a Deflect és a Ganking lényege (809.1.c, 810.1.b)."
+  },
+  "Mel, Defiant Soul": {
+   "short": "Empower: a saját Main Phase-edben, showdownon kívül egy spell eldobásával Empowered állapotba hozhatod, ha még nem az. Amikor Empowered lesz (bármilyen forrásból), kötelezően banishelsz egy battlefielden álló, legfeljebb 3 Mightú enemy unitot. A banish nem halál, a célpont Deathknellje nem fut le.",
+   "why": "Hiányzott az Empower időzítése és a \"Use only if not Empowered\" (827.1.c.1, 381.1); a trigger bármilyen empowerre fut (828.1.d)."
+  },
+  "Mel, Newly Awakened": {
+   "short": "Kijátszáskor húzol 1 lapot. Empower: a saját Main Phase-edben 3 Energyért Empowered lesz, ha még nem az. Empowered állapotban a te spelljeidet és abilityjeidet nem lehet counterelni, és ha a te spelled vagy abilityd -Mightot ad egy általa kiválasztott unitnak, további -1 Mightot ad. A nem célzó csökkentésekre ez a plusz nem vonatkozik.",
+   "why": "Nem derült ki, hogy a -1 csak a te spelljeid és abilityjeid targetjére vonatkozik; hiányzott az Empower időzítése (827.1.c.1, 381.1)."
+  },
+  "Mischievous Marai": {
+   "short": "Ha battlefieldre játszod ki, 2 sebzést oszt egy ott álló enemy unitnak, base-be kijátszva nincs hatás. Hidden: a saját körödben 1 bármilyen domainű Powerért facedown elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionnel, ingyen kijátszhatod oda. Így combat közben is lejöhet, amikor enemy unit áll a battlefielden.",
+   "why": "Hiányzott a Hidden lényege: elrejtés költsége, időzítése, a későbbi ingyenes Reaction kijátszás és hogy facedown-ból csak oda játszható (811.1.b, 811.1.d.1)."
+  },
+  "Miss Fortune, Captain": {
+   "short": "Accelerate: kijátszáskor fizethetsz plusz 1 Energy és 1 Body Power költséget, ekkor ready lép be. Ganking: battlefieldről battlefieldre is léphet. Minden körben az első mozgásakor ready-vé tehetsz egy másik exhausted dolgot (unitot, geart, rune-t vagy legendet), így egy rune felállítása 1 Energyt ad vissza.",
+   "why": "Az Accelerate csak \"plusz költségként\" szerepelt: kijátszáskor fizethető 1 Energy és 1 Body Power additional cost (805.1.b, 805.2.a)."
+  },
+  "Mister Root": {
+   "short": "Minden alkalommal 2 XP-t kapsz, amikor battlefieldre mozog. Accelerate: kijátszáskor fizethetsz plusz 1 Energy és 1 Chaos Power költséget, ekkor ready lép be, így még abban a körben mozoghat. Battlefieldre kijátszva, base-be mozogva vagy recallnál nem kapsz XP-t.",
+   "why": "Az Accelerate lényege hiányzott: kijátszáskor fizethető additional cost, konkrét költséggel (805.1.b, 805.2.a)."
+  },
+  "Momentary Companion": {
+   "short": "4 Mightú unit Hiddennel: a saját körödben 1 bármilyen domainű Powerért facedown elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionnel, ingyen kijátszhatod, akár az opponent körében is. Ha nem a saját körödben játszod ki, Temporaryt kap: a következő Beginning Phase-ed elején, pontozás előtt meghal. A saját körödben kijátszva maradandó.",
+   "why": "Hiányzott a Hidden költsége és időzítése (811.1.b); a Temporary pontos időpontja (816.1.b)."
+  },
+  "Moonfall": {
+   "short": "Action spell: a saját körödben vagy showdown alatt játszható ki. Kiválasztasz egy battlefieldet, ahol van unitod, odamozgathatsz legfeljebb egy enemy unitot, majd minden ott álló enemy unit -2 Mightot kap a kör végéig. A -2 nem célzott, ezért Deflect nem drágítja. Ha addigra nincs ott unitod, a teljes hatás elmarad.",
+   "why": "Hiányzott az Action keyword és az időzítés (806.1.c.1)."
+  },
+  "Moonlight Affliction": {
+   "short": "Reaction spell: bármikor kijátszható, combat közben és válaszként is. Egy unit -10 Mightot kap a kör végéig, így combatban gyakorlatilag nem sebez. Ha már van rajta sebzés, azonnal meghal, sértetlen unitot pedig utána bármilyen 1 sebzés megöl.",
+   "why": "Az \"Önmagában nem öl\" hamis sebzett unitnál: a lethal damage nem nulla és legalább akkora, mint a Might (142.4.b)."
+  },
+  "Morbid Return": {
+   "short": "Action spell: a saját körödben vagy showdown alatt játszható ki. Visszaveszel egy unitot a trashedből a kezedbe. Csak akkor játszható ki, ha van unit a trashedben, és ha a unit közben kikerül onnan, a spell nem csinál semmit.",
+   "why": "Hiányzott az Action keyword és az időzítés (806.1.c.1)."
+  },
+  "Mordekaiser, Twice Slain": {
+   "short": "Accelerate: kijátszáskor fizethetsz plusz 1 Energy és 1 Fury Power költséget, ekkor ready lép be. Assault 3: támadóként +3 Mightot kap. Körönként egyszer, amikor meghalna, megölhetsz helyette egy másik saját unitot: ekkor meggyógyul, exhausted lesz és visszakerül a base-be, a battlefieldet pedig elhagyja.",
+   "why": "Az Accelerate csak \"plusz költségként\" szerepelt, a kijátszáskori additional cost nem derült ki (805.1.b, 805.2.a)."
+  },
+  "Mosstomper": {
+   "short": "Hunt 2: amikor ez a unit részt vesz egy battlefield conquerében vagy holdjában (ott áll, amikor megszerzed, illetve a köröd elején megtartod), 2 XP-t kapsz. Amíg legalább 3 XP-d van, +1 Mightot és Deflectet kap: az opponent rá célzó spellje vagy abilityje 1 bármilyen Powerrel drágább. 3 XP alá esve a bónusz azonnal elvész, ami sebzetten megölheti.",
+   "why": "A \"Ha ott van\" homályos volt (383.4.c.2.a, 823.1.c.1); hiányzott a Deflect lényege (809.1.c)."
+  },
+  "Nami, Headstrong": {
+   "short": "Kijátszáskor fizethetsz plusz 1 Calm Powert: ha megteszed, stunolsz egy enemy unitot, ami ebben a körben nem sebez combatban. Amikor ez a unit részt vesz egy battlefield holdjában (ott áll, amikor a köröd elején megtartod), a következő unitod, amit abban a körben kijátszol, ready lesz és buffot kap, akkor is, ha Nami közben elhagyja a boardot.",
+   "why": "A \"Ha holdol\" homályos volt, a hold a játékosé, a unitnak jelen kell lennie (383.4.d.2.a); az additional cost kijátszáskori jellege pontosítva."
+  },
+  "Nasus, Ascended": {
+   "short": "Deflect 2: az opponent rá célzó spellje vagy abilityje 2 bármilyen Powerrel drágább. Empower: a saját Main Phase-edben 8 Energyért Empowered lesz, ha még nem az. Ekkor minden olyan conquerkor, amelyben részt vesz, 1 extra pontot kapsz, ami akár a győztes pont is lehet.",
+   "why": "Hiányzott az Empower időzítése (827.1.c.1, 381.1); a \"conquerjéért\" homályos volt (383.4.c.2.a)."
+  },
+  "Nasus, Curator of the Sands": {
+   "short": "Amikor 7 vagy több Energy costú unitot, geart vagy activated abilityt játszol ki, a legend exhaustolásával ready-vé tehetsz legfeljebb 2 rune-t. Spellre nem működik. Mivel a legend exhaustolása a költség, csak ready legenddel használható.",
+   "why": "A \"Körönként egyszer\" túlzás: a kártya nem korlátozza, csak az exhaust cost miatt kell ready legend (383.3.b)."
+  },
+  "Nilah, Joyful Ascetic": {
+   "short": "Minden mozgásakor 1 XP-t kapsz, bármerre lép, recallra nem. Ganking: battlefieldről battlefieldre is léphet. Accelerate: kijátszáskor fizethetsz plusz 1 Energy és 1 Body Power költséget, ekkor ready lép be, így még abban a körben mozoghat.",
+   "why": "Az Accelerate csak \"plusz költségként\" szerepelt, a kijátszáskori additional cost hiányzott (805.1.b, 805.2.a)."
+  },
+  "Noxian Demolitionist": {
+   "short": "Amikor ez a unit részt vesz egy battlefield conquerében, megölhetsz egy geart, aminek az Energy costja nem nagyobb a Demolitionist aktuális Mightjánál. Bárki gearje lehet, a 0 costú Gold token mindig jó. Ha a Might a resolve előtt csökken, a célpont illegálissá válhat.",
+   "why": "A \"Ha conquerel\" homályos volt: a conquer a játékosé, a unitnak jelen kell lennie (383.4.c.2.a)."
+  },
+  "Noxian Emissary": {
+   "short": "Empower: a saját Main Phase-edben 1 Energy és 1 Order Power fizetésével Empowered lesz, ha még nem az. Ha Empowered állapotban hal meg, két 1 Mightú Recruit tokent kapsz a base-edbe. Empower nélkül a halála nem ad semmit.",
+   "why": "Hiányzott az Empower időzítése és a \"Use only if not Empowered\" (827.1.c.1, 381.1)."
+  },
+  "Noxian Guillotine, Darius": {
+   "short": "Action spell: a saját körödben vagy showdown alatt játszható ki. Kiválasztasz egy unitot: a következő alkalommal, amikor ebben a körben sebzést kap, meghal. Legion: ha ebben a körben már kijátszottál egy másik lapot, azonnal meghal. A teljesen kivédett sebzés nem számít.",
+   "why": "Hiányzott az Action keyword és az időzítés (806.1.c.1); Legion megnevezve (812.1.b.1)."
+  },
+  "Ntofo Strikes": {
+   "short": "Action spell: a saját körödben vagy showdown alatt játszható ki. Egy saját unitod Shield 2-t kap a kör végéig, majd egy enemy unit annyi sebzést kap, amennyi a saját unitod teljes Shield értéke. Az enemy unit base-ben is lehet, és a sebzés akkor is jár, ha a saját unitod épp nem védekezik.",
+   "why": "Hiányzott az Action keyword és az időzítés (806.1.c.1)."
+  },
+  "On the Hunt": {
+   "short": "Minden unitodat ready-vé teszi, így egy körben újra mozoghatnak, és a mozgás újabb showdownhoz vagy combathoz vezethet. Csak a saját körödben, showdownon kívül játszható ki. A 2 Powert Body és Chaos Powerből vegyesen is fizetheted.",
+   "why": "A \"támadhatnak\" pontatlan: a ready unit mozoghat, a combat a mozgásból következhet (454, 461)."
+  },
+  "One-Two Punch": {
+   "short": "Action spell: a saját körödben vagy showdown alatt játszható ki. Egy saját unitod buffot kap, egy enemy unitot pedig stunolsz, ami ebben a körben nem sebez combatban. Mindkét célpont kell a kijátszáshoz, de ha az egyik közben illegális lesz, a másik rész attól még lefut.",
+   "why": "Hiányzott az Action keyword és az időzítés (806.1.c.1)."
+  },
+  "Onslaught": {
+   "short": "Egy unit +6 Mightot kap a kör végéig. Csak a saját körödben, showdownon kívül játszható ki, ezért a mozgás és a combat előtt kell használni. Flow: később a trashből 4 Energyért még egyszer kijátszható ugyanilyen időzítéssel, utána banishelődik.",
+   "why": "Költségjelölés: [4] helyett 4 Energy; a Flow nem változtat az időzítésen (829.1.b, 829.1.b.2)."
+  },
+  "Ornn, Blacksmith": {
+   "short": "Kijátszáskor, és amikor ez a unit részt vesz egy battlefield holdjában (ott áll, amikor a köröd elején megtartod), megnézed a deck felső 4 lapját. Egy geart felfedve a kezedbe vehetsz, a többi a deck aljára kerül. Ha nem veszel el geart, mind a négy lap lemegy alulra.",
+   "why": "A \"amikor holdol\" homályos volt: a hold a játékosé, a unitnak jelen kell lennie (383.4.d.2.a)."
+  },
+  "Ornn, Forge God": {
+   "short": "Minden saját gearedért +1 Mightot kap, bárhol legyenek. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod 1 bármilyen Powerrel olcsóbb Equip costért, akkor is, ha másik unitodon van. Deflect 2: az opponent rá célzó spellje vagy abilityje 2 bármilyen Powerrel drágább. Ha sebzetten gear vész el, meghalhat.",
+   "why": "A Weaponmaster kedvezménye és a másik unitról átcsatolás hiányzott (821.1.b, 821.1.c); Deflect pontosítva (809.1.c)."
+  },
+  "Pakaa Cub": {
+   "short": "3 Mightú unit Hiddennel: a saját körödben 1 bármilyen domainű Powerért facedown elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reactionnel kijátszhatod oda. Ha ott épp combat van, beszáll. Kézből is kijátszható a szokásos módon.",
+   "why": "Költségjelölés: az [A]-t ki kell írni; az időzítés (saját kör) hiányzott (811.1.b)."
+  },
+  "Party Crasher": {
+   "short": "Minden exhausted unitodért 1 Energyvel olcsóbb, ezért a saját Main Phase-edben, a mozgások után éri meg kijátszani. Az 1 Order Powert mindig ki kell fizetni. Tank: combatban rá kell először halálos sebzést osztani.",
+   "why": "A \"kör végén\" félrevezető: unit csak a Main Phase-ben játszható ki, nem az Ending Phase-ben."
+  },
+  "Pendulum Blade": {
+   "short": "Equipment: a saját Main Phase-edben 1 Fury Powerért egy saját unitodra csatolhatod. Felszerelve a unit +1 Mightot kap, és valahányszor battlefieldre mozog, még +2 Mightot a kör végéig, ami a combat előtt megérkezik. Base-be lépés vagy recall nem ad bónuszt.",
+   "why": "Hiányzott az Equip költsége és időzítése (818.1.c.2, 381.1)."
+  }
+ },
+ "checked": 111,
+ "conflicts": [
+  "Nasus, Curator of the Sands: a notes szerint az exhaust cost miatt \"körönként egyszer használható\", de a kártyaszöveg és a rules_ref (383.3.b, 383.3.e) nem ad ilyen korlátot; ha a legendet más effect ready-vé teszi, újra triggerelhet."
+ ]
+}

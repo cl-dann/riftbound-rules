@@ -1,0 +1,182 @@
+{
+ "fixes": {
+  "Riven, Shattered": {
+   "short": "Amikor Riven támad, választasz egy enemy unitot ugyanazon a battlefielden: 2 sebzést kap minden Rivenre csatolt Equipmentért, egyetlen sebzésként. Kijátszáskor egy Equipmentedet rácsatolhatod az Equip costjánál 1 bármilyen domainű Powerrel olcsóbban, akkor is, ha már máshoz van csatolva. Equipment nélkül a trigger nem sebez, a combat damage ettől még megy.",
+   "why": "A \"rá csatolt\" alanya kétértelmű volt; az \"Equipment nélkül a támadása nem sebez\" hamis, csak az Attack Trigger nem sebez, a combat damage megmarad (383.4.e); hiányzott az \"even if it's already attached\" és [A] = bármely domain Power (821.1.c)."
+  },
+  "Riven, The Exile": {
+   "short": "Calm és Chaos legend. Az általad kontrollált battlefieldre kijátszott unitjaid eleve ready lépnek be, így exhaust költségű képességet használhatnak vagy Standard Move-val mozoghatnak (Ganking nélkül battlefieldről csak a base-be). A base-be kijátszott unitok exhausted lépnek be.",
+   "why": "Az \"azonnal használhatják a képességeiket\" túlzó és homályos: a ready állapot az exhaust költségű abilityt és a mozgást engedi, a többi képességhez nem kell (805.6 analógia, notes)."
+  },
+  "Rocket Barrage": {
+   "short": "Választasz: 4 sebzés egy base-ben álló unitnak, vagy megölsz egy geart. Kijátszáskor fizethetsz plusz 4 Energy és 1 Mind Power Repeat költséget: ekkor a hatás még egyszer lefut, akár másik móddal vagy targettel. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A Repeat költség jelölése hibás volt (\"[4] és egy Power\"): [4][C] = 4 Energy és 1 Mind Power, és kijátszáskor fizetendő additional cost (820.1.c.1, 820.2.a)."
+  },
+  "Rousing Display": {
+   "short": "Két 1 Mightú Recruit unit tokent tesz a base-edbe. Ha kijátszáskor felfedsz a kezedből vagy kijelölsz a boardon egy saját, legalább 7 Energy costú lapot (Show Off), kettő helyett négyet kapsz. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A \"boardról\" feltételből kimaradt, hogy csak saját (friendly) objektum jelölhető ki (832.1.c)."
+  },
+  "Royal Entourage": {
+   "short": "Kijátszáskor egy legendet ready-vé vagy exhausttá teszel, a sajátodat vagy az ellenfélét. A saját exhausted legended ready-zve az exhaust költségű képességét újra használhatod. Az ellenfél legendjét exhaustolva az exhaust költségű képességét addig nem használhatja, amíg újra ready nem lesz.",
+   "why": "Túlzás volt, hogy az ellenfél \"elveszti a képességét\": csak az exhaust költségű abilityt nem tudja aktiválni, a passive képességek működnek (notes, 381)."
+  },
+  "Ruined Monastery": {
+   "short": "Amikor itt conquerelsz, dönthetsz úgy, hogy eldobsz 1 lapot és channelsz 1 rune-t exhausted: a kettő együtt jár, nem választhatod csak a rune-t. Üres kézzel a discard elmarad, de a rune-t megkapod. Körönként legfeljebb egyszer fut le.",
+   "why": "A szöveg úgy szólt, mintha a discard opcionális lenne, a rune pedig mindig járna; a \"you may\" az egész effectre vonatkozik, a döntés finalizáláskor (383.3.a, 383.3.a.1)."
+  },
+  "Rumble, Hotheaded": {
+   "short": "A Mecheid, Rumble is, attackerként +1 Mightot kapnak (Assault). Amikor Rumble részt vesz egy battlefield conquerében, recycle-ölhetsz egy másik saját unitot (a Main Deck aljára kerül), hogy kijátssz egy Mechet a trashedből. Ennek Energy costja a recycle-ölt unit Mightjával csökken, a Power costot ki kell fizetni.",
+   "why": "A \"Conquer után\" homályos: csak akkor triggerel, ha Rumble ott van a conquerelt battlefielden (383.4.c.2.a); a \"feláldozott\" szó kill-t sugall, pedig recycle."
+  },
+  "Runeblade Anvil": {
+   "short": "Kijátszáskor és amikor elhagyja a boardot, banisholod a Main Deck felső lapját, és a következő Ending Phase-edig kijátszhatod, a costját kifizetve. Ha nem játszod ki, a lap banishelve marad. 2 Energy, 1 Chaos Power és exhaust költséggel megölheted, ez a távozás miatt újabb lapot banishol.",
+   "why": "A \"második húzásért\" hamis: nincs húzás, a kill a leave-the-board triggert váltja ki, ami banishol; hiányzott a [T] exhaust költség."
+  },
+  "Ruthless Strike": {
+   "short": "3 sebzést ad egy battlefielden álló unitnak. Kijátszáskor additional costként eldobhatsz 1 lapot: ekkor 3 helyett 5 sebzést ad. Saját körödben és showdown alatt is kijátszható (Action). Ha counterelik, az eldobott lap nem jár vissza.",
+   "why": "Hiányzott az [Action] időzítés (806.1.c.1), és nem volt egyértelmű, hogy a discard kijátszáskor fizetett additional cost (426.1.c.1)."
+  },
+  "Sacred Protector": {
+   "short": "Csak akkor oszt combat sebzést, ha pontosan egy másik általad kontrollált unit áll vele ugyanazon a battlefielden. Egyedül vagy két társsal nem sebez, de sebzést kaphat, és ha túléli, ott maradva ugyanúgy számít a battlefield kontrolljánál.",
+   "why": "A \"megtartja vagy elfoglalja a battlefieldet\" tényként hamis: a kontroll attól függ, kinek maradnak unitjai a combat után, a Protector maga nem garantálja (323.5, notes)."
+  },
+  "Sacred Shears": {
+   "short": "Equipment: 1 Order Power költséggel csatolod egy saját unitodra, a saját Main Phase-edben, showdownon kívül. A felszerelt unit +1 Mightot és Deathknellt kap: amikor meghal és a trashbe kerül, húzol 1 lapot. Ha a halálát replacement effect kiváltja (például Guardian Angel), nincs húzás.",
+   "why": "Hiányzott az Equip költség és időzítés (818.1.c.2, 381.1); az \"Üres paklival a húzás bajt okoz\" homályos volt."
+  },
+  "Satchel Charge": {
+   "short": "Mozgatsz egy saját unitot, majd egy Bomb gear tokent teszel bármelyik battlefieldre. Amikor a Bomb meghal, 2 sebzést ad egy ottani enemy unitnak, és a többi ottani Bombod is meghal. Ha egy ellenfél ott holdol, a Bomb meghal. Saját körödben és showdown alatt is kijátszható (Action).",
+   "why": "Hiányzott a Bomb Deathknelljének második fele (a többi ottani Bomb is meghal) és az [Action] időzítés (806.1.c.1, 830.1.b)."
+  },
+  "Scorchclaw": {
+   "short": "Amikor Scorchclaw részt vesz egy battlefield conquerében, vagy ott áll, ahol holdolsz, 2 XP-t kapsz (Hunt 2). Ha legalább 3 XP-d van, +1 Mightot kap, és ha a kijátszásakor már megvan a 3 XP, ready lép be.",
+   "why": "A \"Conquerkor vagy holdkor\" homályos: a Hunt csak akkor fut, ha ez a unit jelen van a conquerkor vagy holdkor (823.1.c.1, 383.4.c.2.a, 383.4.d.2.a)."
+  },
+  "Scrutinizing Scope": {
+   "short": "1 Energyért és exhaustért választasz egy ellenfelet, aki tippel egy lap típust (unit, gear vagy spell), majd felfeded a Main Decked felső lapját. Ha eltalálta, recycle-ölöd (a deck aljára kerül), ha nem, felhúzod. Csak a saját Main Phase-edben, showdownon kívül használható.",
+   "why": "Költségjelölés: [1] = 1 Energy (BRIEF 6. pont); a showdownon kívüli időzítés hiányzott (381.1)."
+  },
+  "Scryer's Bloom": {
+   "short": "Egyszer használható gear, exhausted lép be. 1 Energy, exhaust és saját maga megölése árán Predict 2: megnézed a Main Deck felső 2 lapját, bármelyiket recycle-ölheted, a többit tetszőleges sorrendben visszateszed, majd húzol 1-et és kapsz 1 XP-t. Csak a saját Main Phase-edben, a kijátszás utáni körtől.",
+   "why": "Költségjelölés: [1] = 1 Energy; a Predict leírásából kimaradt, hogy a maradék tetszőleges sorrendben megy vissza."
+  },
+  "Sea Monkey": {
+   "short": "2 Mightú unit. Kijátszáskor fizethetsz plusz 1 Energy additional costot; ha fizettél, kap egy +1 Mightú buffot, ha még nincs buffja. A buff akkor is jár, ha egy kedvezmény a plusz költséget 0-ra csökkenti.",
+   "why": "Költségjelölés: [1] = 1 Energy; hiányzott, hogy a buff csak akkor ad +1-et, ha még nincs buffja."
+  },
+  "Seal of Discord": {
+   "short": "Gear 0 Energy és 1 Chaos Power áron, ready lép be. Exhaustolva 1 Chaos Powert ad (Reaction): bármikor használható, fizetés közben vagy az ellenfél körében is, és nem lehet rá reagálni. A fel nem használt Power a kör végén elvész.",
+   "why": "A \"0 Energyért kijátszható\" ingyenességet sugallt, pedig a kijátszás 1 Chaos Powerbe kerül ([C])."
+  },
+  "Seal of Focus": {
+   "short": "Gear 0 Energy és 1 Calm Power áron, ready lép be. Exhaustolva 1 Calm Powert ad (Reaction): bármikor használható, fizetés közben vagy az ellenfél körében is, és nem lehet rá reagálni. A fel nem használt Power a kör végén elvész.",
+   "why": "A \"0 Energyért kijátszható\" ingyenességet sugallt, pedig a kijátszás 1 Calm Powerbe kerül ([C])."
+  },
+  "Seal of Insight": {
+   "short": "Gear 0 Energy és 1 Mind Power áron, ready lép be. Exhaustolva 1 Mind Powert ad (Reaction): bármikor használható, fizetés közben vagy az ellenfél körében is, és nem lehet rá reagálni. A fel nem használt Power a kör végén elvész.",
+   "why": "A \"0 Energyért kijátszható\" ingyenességet sugallt, pedig a kijátszás 1 Mind Powerbe kerül ([C])."
+  },
+  "Seal of Rage": {
+   "short": "Gear 0 Energy és 1 Fury Power áron, ready lép be. Exhaustolva 1 Fury Powert ad (Reaction): bármikor használható, fizetés közben vagy az ellenfél körében is, és nem lehet rá reagálni. A fel nem használt Power a kör végén elvész.",
+   "why": "A \"0 Energyért kijátszható\" ingyenességet sugallt, pedig a kijátszás 1 Fury Powerbe kerül ([C])."
+  },
+  "Seal of Strength": {
+   "short": "Gear 0 Energy és 1 Body Power áron, ready lép be. Exhaustolva 1 Body Powert ad (Reaction): bármikor használható, fizetés közben vagy az ellenfél körében is, és nem lehet rá reagálni. A fel nem használt Power a kör végén elvész.",
+   "why": "A \"0 Energyért kijátszható\" ingyenességet sugallt, pedig a kijátszás 1 Body Powerbe kerül ([C])."
+  },
+  "Seal of Unity": {
+   "short": "Gear 0 Energy és 1 Order Power áron, ready lép be. Exhaustolva 1 Order Powert ad (Reaction): bármikor használható, fizetés közben vagy az ellenfél körében is, és nem lehet rá reagálni. A fel nem használt Power a kör végén elvész.",
+   "why": "A \"0 Energyért kijátszható\" ingyenességet sugallt, pedig a kijátszás 1 Order Powerbe kerül ([C])."
+  },
+  "Serene Ascetic": {
+   "short": "3 Energyért Empowered lesz, csak a saját Main Phase-edben, showdownon kívül. Empowered állapotban Deflectet kap: ellenfél spellje vagy abilityje csak plusz 1 bármilyen domainű Powerért választhatja. Shield 3-at is kap: defenderként +3 Might.",
+   "why": "A Deflect leírásából kimaradt, hogy csak az ellenfelek fizetnek felárat (809.1.c); költségjelölés: [3] = 3 Energy."
+  },
+  "Serrated Dirk": {
+   "short": "Equipment: 1 Fury Power költséggel csatolod egy saját unitodra, a saját Main Phase-edben, showdownon kívül. A felszerelt unit Assault 2-t kap: amíg attacker, +2 Might, ami a meglévő Assaulttal összeadódik. Defenderként nem ad semmit. Átrakáskor az Equip costot újra fizeted.",
+   "why": "Hiányzott az Equip költség és időzítés (818.1.c.2, 381.1)."
+  },
+  "Sett, Brawler": {
+   "short": "Kijátszáskor, és amikor Sett részt vesz egy battlefield conquerében, kap egy +1 Mightú buffot, ha még nincs. A buffját elköltve a körre +4 Mightot kap, ez nettó +3. Ezt csak a saját Main Phase-edben, showdownon kívül aktiválhatod, ezért a mozgás előtt kell megtenni.",
+   "why": "A \"conquerkor\" homályos: csak akkor triggerel, ha Sett jelen van a conquerkor (383.4.c.2.a); hiányzott, hogy buffolt Settnél nem jár új buff."
+  },
+  "Sett, The Boss": {
+   "short": "Body és Order legend. Ha egy buffolt unitod meghalna, helyette fizethetsz 1 Body vagy Order Powert, exhaustolhatod a legendet és elköltheted a unit buffját: a unit meggyógyul, exhausted lesz és a base-be kerül (recall, nem mozgás). Így nem hal meg, a Deathknellje nem fut le. Amikor conquerelsz, a legend ready lesz.",
+   "why": "Hiányzott, hogy a megmentett unit exhausted is lesz, és hogy a [C] itt Body vagy Order Power; a Deathknell nem fut le, mert a halál nem történik meg (808.1.d.1)."
+  },
+  "Shadow": {
+   "short": "Vex Signature unitja. Battlefieldre kijátszva ready lép be. 1 Energy, 1 bármilyen domainű Power és exhaust árán stunolhat egy enemy unitot, amely Shadow battlefieldjén támad: az a körben nem oszt combat sebzést. Showdown alatt bárki körében aktiválható (Action).",
+   "why": "Költségjelölés: [1][A] = 1 Energy és 1 bármely domainű Power; az [Action] időzítés hiányzott (806.1.c.2)."
+  },
+  "Shadow Dash": {
+   "short": "Shen Signature lapja: egy enemy unitot átmozgatsz egy battlefieldre, ahol neked is van unitod. Ha ott pontosan két unitod van, mindkettő +1 Mightot kap a körre. Flow: később a trashedből 5 Energy és 2 bármilyen domainű Power áron újra kijátszható, utána banisholódik. Csak a saját körödben, showdownon kívül.",
+   "why": "Költségjelölés: [5][A][A] = 5 Energy és 2 bármely domainű Power; hiányzott az időzítés, amely Flow-val sem változik (829.1.b.2)."
+  },
+  "Shadow Fiend": {
+   "short": "2 Energy és 1 Fury Power áron Empowered lesz, és onnantól Assault 3-at kap: attackerként 5 Mightú. Az Empower nem kér exhaustot, így már a kijátszás körében, a saját Main Phase-edben, showdownon kívül aktiválható, ha még nem Empowered.",
+   "why": "Költségjelölés: [2][C] = 2 Energy és 1 Fury Power; hiányzott a \"csak ha még nem Empowered\" feltétel (827.1.c.1)."
+  },
+  "Shadow's Call": {
+   "short": "Egy Temporary nélküli saját unitodnak Temporary-t ad, és húzol 2 lapot. A unit a következő Beginning Phase-ed elején, a pontozás előtt meghal, így azzal már nem holdolsz. Ebben a körben még mozoghat és harcolhat. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Az \"még támadhat\" pontatlan, a unit mozoghat és ebből lehet combat (BRIEF példa); kimaradt a \"without [Temporary]\" feltétel."
+  },
+  "Shadowblade Lurker": {
+   "short": "A saját trashedben lévő minden Shadowblade Lurker után 2 Energyvel olcsóbb. Két példány után 1 Energybe kerül, a cost 0 alá nem mehet. Más lapok a nyomtatott 5-ös costot látják.",
+   "why": "Költségjelölés: [1] = 1 Energy; hiányzott, hogy csak a saját trash számít."
+  },
+  "Shady Spectacles": {
+   "short": "Equipment: 1 Energy és 1 Order Power költséggel csatolod egy saját unitodra, a saját Main Phase-edben, showdownon kívül. Csatoláskor választasz egy másik saját unitot: a felszerelt unit annak másolata lesz (név, szöveg, Might), amíg a szemüveg rajta van. Ha lekerül, a másolás véget ér.",
+   "why": "Hiányzott az Equip költség és időzítés (818.1.c.2, 381.1)."
+  },
+  "Sharkling": {
+   "short": "1 Mightú unit Assault 4-gyel: attackerként 5 Mightú, védekezve vagy combaton kívül 1. Kijátszáskor fizethetsz plusz 1 Energy és 1 Fury Power költséget (Accelerate): ekkor ready lép be, így még abban a körben mozoghat.",
+   "why": "Az \"így rögtön támadhat\" pontatlan, a ready unit mozoghat (BRIEF példa); az Accelerate csak kijátszáskor fizethető (805.1.b, 805.2.a); [1] = 1 Energy."
+  },
+  "Shurelya's Requiem": {
+   "short": "Ornn Signature Equipmentje, Unique: deckenként csak 1 lehet. Kijátszáskor minden unitodat ready-vé teszi, így a már mozgottak újra mozoghatnak. Equip: 1 Calm vagy Mind Power költséggel csatolod egy saját unitodra a saját Main Phase-edben, showdownon kívül, és az +2 Mightot kap.",
+   "why": "Hiányzott az Equip költség és időzítés (818.1.c.2, 381.1)."
+  },
+  "Shuriken Flip": {
+   "short": "Akali Signature lapja: 2 sebzést adhatsz legfeljebb egy battlefielden álló enemy unitnak, majd mozgatsz egy saját unitot. Flow: később a trashedből 3 Energy és 1 bármilyen domainű Power áron újra kijátszható, utána banisholódik. Csak a saját körödben, showdownon kívül.",
+   "why": "Költségjelölés: [3][A] = 3 Energy és 1 bármely domainű Power (829.1.c.1)."
+  },
+  "Sinister Poro": {
+   "short": "Amikor a Poro támad, fizethetsz 1 Energyt, hogy egy ugyanott álló enemy unitot a base-ébe mozgass. Ha az utolsó defendert küldöd el, nem lesz combat damage. Ha valami tiltja a mozgást, az 1 Energy akkor is elvész.",
+   "why": "Költségjelölés: [1] = 1 Energy; a fizetés a trigger base costja, finalizáláskor (383.3.b)."
+  },
+  "Sivir, Ambitious": {
+   "short": "Deflect 2: ellenfél spellje vagy abilityje csak plusz 2 bármilyen domainű Powerért választhatja. Amikor Sivir egy támadás után részt vesz egy battlefield conquerében, és legalább 5 excess damage-et osztottál ki enemy unitokra, ugyanennyi sebzést adhatsz egy enemy unitnak. Üres battlefield elfoglalása nem elég.",
+   "why": "A \"másik enemy unit\" kitalált megkötés, a szöveg \"an enemy unit\"; a conquer feltételből hiányzott, hogy Sivirnek jelen kell lennie (383.4.c.2.a)."
+  },
+  "Sivir, Battle Mistress": {
+   "short": "Body és Chaos legend. Amikor recycle-ölsz egy rune-t (például Powerért), exhaustolhatod a legendet, hogy egy exhausted Gold gear tokent kapj. Amikor egy vagy több enemy unit meghal, a legend ready lesz, így egy körben többször is használható.",
+   "why": "A \"Powerért recycle-ölsz\" szűkítés nem szerepel a szövegben: bármilyen rune recycle kiváltja (notes)."
+  },
+  "Sivir, Mercenary": {
+   "short": "Ha ebben a körben már legalább 2 Powert elköltöttél, +2 Mightot és Gankinget kap (battlefieldről battlefieldre léphet). Kijátszáskor fizethetsz plusz 1 Energy és 1 Chaos Power költséget (Accelerate): ekkor ready lép be, és ez a Power is beleszámít a kettőbe.",
+   "why": "Az Accelerate csak kijátszáskor fizethető plusz költség, ezt ki kell mondani (805.1.b, 805.2.a); [1] = 1 Energy."
+  },
+  "Sky Cruiser": {
+   "short": "Egy gear lap eldobása a kezedből, 1 Energy és exhaust árán 4 sebzést ad egy battlefielden álló unitnak. Exhausted lép be, ezért a kijátszás körében még nem használható, és csak a saját Main Phase-edben, showdownon kívül megy.",
+   "why": "Költségjelölés: [1] = 1 Energy (BRIEF 6. pont)."
+  },
+  "Skyfall of Areion": {
+   "short": "Equipment: 1 Energy és 1 Fury Power költséggel csatolod egy saját unitodra, a saját Main Phase-edben, showdownon kívül. A felszerelt unit +2 Mightot kap, a hold effectjei conquerkor is lefutnak, a conquer effectjei holdkor is. Battlefieldenként körönként így is csak egyszer.",
+   "why": "Hiányzott az Equip költség és időzítés (818.1.c.2, 381.1)."
+  },
+  "Skyward Strike": {
+   "short": "Elmozgat egy enemy unitot a base-ébe vagy egy másik battlefieldre. Ha legalább 6 XP-d van, ezen felül stunolsz egy enemy unitot is, ez lehet egy másik unit: az a körben nem oszt combat sebzést. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A \"stunolhatsz\" opcionálisnak írta, pedig a Level 6 alatt a Stun kötelező instruction, nincs \"may\" (824.1.b.1)."
+  },
+  "Smoke and Mirrors": {
+   "short": "Kiválasztasz egy saját unitot és egy másik helyen álló saját unitot; ha legalább az egyiknek van Temporary-je, helyet cserélnek. Húzol 1 lapot akkor is, ha nincs csere. Kézből Action időzítéssel megy, vagy a saját körödben 1 bármilyen domainű Powerért elrejtheted, és a következő körtől 0-ért, Reactionként kijátszhatod.",
+   "why": "A \"később bármikor\" pontatlan: a Hide költsége [A], és csak a következő körtől kap Reactiont (811.1.b, 811.6); az [Action] időzítés hiányzott."
+  },
+  "Solari Sunhawk": {
+   "short": "2 Energyért Empowered lesz, ha még nem az: +1 Mightot kap és Deflect 2-t, vagyis ellenfél spellje vagy abilityje csak plusz 2 bármilyen domainű Powerért választhatja. Empowerelni csak a saját Main Phase-edben, showdownon kívül lehet.",
+   "why": "Költségjelölés: [2] = 2 Energy; hiányzott a \"csak ha még nem Empowered\" feltétel (827.1.c.1)."
+  }
+ },
+ "checked": 111,
+ "conflicts": []
+}

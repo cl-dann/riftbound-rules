@@ -1,0 +1,106 @@
+{
+ "fixes": {
+  "Detonation Amplifier": {
+   "short": "Deploy: bármelyik battlefieldre kijátszható, base-be nem, és meghal, ha egy ellenfél holdolja azt a battlefieldet. Kijátszáskor megölhetsz egy másik saját unitot vagy geart, bárhol, hogy húzz 1 lapot. Az ezen a battlefielden meghaló saját lapok Deathknell képessége eggyel többször triggerel.",
+   "why": "Hiányzott a Deploy halálfeltétele és hogy bármely battlefield választható (830.1.b); a feláldozott lap bárhol lehet."
+  },
+  "Direwing": {
+   "short": "7 Mightú unit, ami ready lép be, ha a belépés pillanatában kontrollálsz egy másik Dragont. Az ellenfél Dragonja, illetve a kézben vagy trashben lévő Dragon nem számít. Ha a Dragonod a kijátszás közben meghal, exhausted jön be.",
+   "why": "'you control another Dragon': a régi 'van a boardon' az ellenfél Dragonjára is érthető volt."
+  },
+  "Disciple of Shen": {
+   "short": "1 Mightú unit, ami Shield 3-at kap (védekezéskor +3 Might), amíg pontosan egy másik saját unitoddal áll ugyanazon a battlefielden. Ha egy harmadik unitod érkezik, vagy a társa elmegy, a bónusz azonnal elvész. Hidden: a saját körödben 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől reakcióként ingyen kijátszhatod oda.",
+   "why": "A Hidden lényege (költség, következő körtől, csak arra a battlefieldre) hiányzott, 811.1.b, 811.1.d.1."
+  },
+  "Disintegrate": {
+   "short": "3 sebzést oszt egy battlefielden álló unitnak, és ha ettől meghal, húzol 1 lapot. Action: a saját körödben, vagy showdown alatt bárki körében játszható ki, de egy másik spellre válaszul nem. Base-ben álló unitot nem választhatsz.",
+   "why": "A 'harc közben' szűkebb a showdownnál, nem combat showdownban is kijátszható (806.1.c.1, 358.4)."
+  },
+  "Dominus": {
+   "short": "Action: a saját körödben vagy showdown alatt bárki körében kijátszható. Egy unit Mightja a kör végéig megduplázódik, a lefutáskori értékkel számolva, és a kör végéig kap egy képességet: 2 bármilyen Powerért ready lesz. Ezt a unit irányítója csak a saját Main Phase-ében, showdownon kívül használhatja.",
+   "why": "Hiányzott a spell Action időzítése (806.1.c.1), és hogy a ready képesség is csak a körre szól, bármilyen domainű Powerrel ([A]), 381.1."
+  },
+  "Doran's Ring": {
+   "short": "1 Chaos Powerért saját unitra szerelhető, ekkor +1 Mightot ad. Amikor a felszerelt unit részt vesz egy battlefield conquerében, eldobsz 1 lapot, majd húzol 1-et, akkor is, ha a pontot nem kapod meg. Ez kötelező: üres kézzel csak húzol, üres deckkel a húzás Burn Outot okoz.",
+   "why": "Az 'elfoglal' homályos, a conquer trigger a jelen lévő unitra fut (383.4.c.2.a, 383.4.c.2.c); 'bajt okoz' helyett Burn Out."
+  },
+  "Eager Drakehound": {
+   "short": "3 Mightú Dragon unit, ami eleve ready lép be, így a kijátszás körében már mozoghat, és a mozgás showdownt vagy harcot indíthat. Dragon tagje miatt a Dragonra építő lapok, például a Direwing, számolnak vele.",
+   "why": "A 'támadhat' pontatlan: a ready unit Standard Move-ot tehet, a combat a mozgás következménye (421.3, 454)."
+  },
+  "Eclipse Dragon": {
+   "short": "8 Mightú unit. Accelerate: kijátszáskor fizethetsz plusz 1 Energy és 1 Fury Power költséget, ekkor ready lép be. Minden mozgásakor húzol 1 lapot, ha akkor legfeljebb 4 rune-t kontrollálsz. A recall, például a harc utáni visszakerülés a base-be, nem mozgás, arra nem húz.",
+   "why": "Az Accelerate csak kijátszáskor fizethető, és a Power a unit domainjéből jön (805.1.b, 805.1.b.1, 805.2.a)."
+  },
+  "Edge of Night": {
+   "short": "Felszerelhető gear: +2 Might, Equip 1 Chaos Powerért a saját Main Phase-edben. Hidden: a saját körödben 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden. A következő körtől reakcióként, akár harc közben, ingyen kijátszhatod, és rögtön egy ottani saját unitodra kerül.",
+   "why": "Hiányzott, hogy a facedown lap csak a következő körtől játszható ki, és csak általad kontrollált battlefieldre rejthető (811.1.b), valamint az Equip költsége."
+  },
+  "Ekko, Recurrent": {
+   "short": "5 Mightú champion. Accelerate: kijátszáskor fizethetsz plusz 1 Energy és 1 Mind Power költséget, ekkor ready lép be. Deathknell: amikor meghal, a lap recycle-ölésével (a deck aljára kerül) minden rune-od ready lesz. A lap jelenleg bannolt, versenyen ellenőrizd.",
+   "why": "Az Accelerate csak kijátszáskor fizethető plusz költség (805.1.b, 805.2.a), a Power Mind domainű; a recycle a Deathknell költsége (383.3.b)."
+  },
+  "Ekko, Revolutionary": {
+   "short": "Eleve ready lép be, és Assault: támadóként +1 Mightot kap. Action képesség a saját körödben vagy showdown alatt: 1 lap eldobásáért, 1 Energyért és 1 Fury Powerért banisheli magát, majd ingyen visszajön a base-edbe, sebzés és ideiglenes hatások nélkül. Chainen lévő, rá célzott spellre nem válaszolhatsz vele, mert nincs Reactionje.",
+   "why": "A 'kikerül a rá célzott hatások alól' félrevezető: Action ability Closed State-ben nem aktiválható (806.1.c.2, 358.4); a [C] Fury Power."
+  },
+  "Elnuk Herd": {
+   "short": "Kijátszáskor egy saját unitod, akár maga a Herd, +3 Mightot kap a kör végéig. Hidden: a saját körödben 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől reakcióként ingyen kijátszhatod oda, akár harc közben. Ekkor a +3 csak ottani unitra mehet, és utána a Herd a deck aljára kerül.",
+   "why": "Hiányzott a Hidden időzítése és a battlefieldhez kötött targetmegkötés (811.1.b, 811.1.d.3)."
+  },
+  "Enthralling Protector": {
+   "short": "2 Mightú unit. Hunt: amikor részt vesz egy battlefield conquerében vagy holdjában, 1 XP-t kapsz. 2 XP elköltésével a saját Main Phase-edben buffolhatod (+1 Might), ami nem jár le a kör végén. Ha már van rajta buff, nem kap másodikat, és az XP elveszett.",
+   "why": "Az 'elfoglalja vagy tartja' homályos: a Hunt akkor fut, ha a unit jelen van a conquernél vagy holdnál (823.1.c.1, 383.4.c.2.a, 383.4.d.2.a)."
+  },
+  "Evelynn, Consuming": {
+   "short": "Ambush: reakcióként is kijátszható egy olyan battlefieldre, ahol már van unitod, akár harc közben. Valahányszor egy lapot facedownból kijátszol, Evelynn ready lesz, és a kör végéig +1 Mightot kap. Mivel a facedown lapok reakcióként jönnek, ez az ellenfél körében, harc közben is működik.",
+   "why": "Hiányzott a 'this turn': a +1 Might csak a kör végéig tart."
+  },
+  "Evelynn, Entrancing": {
+   "short": "Olcsó champion. Backline: harcban csak akkor kaphat halálos sebzést, ha a többi, Backline nélküli unitod már kapott. Hidden: a saját körödben 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden. Ha egy későbbi saját körödben facedownból játszod ki, áthúzhatsz egy ellenséges unitot egy másik helyről a battlefieldjére, ami ott harcot indít.",
+   "why": "Hiányzott a Hidden költsége és időzítése (811.1.b); a play effect csak a saját körödben, facedownból kijátszva fut."
+  },
+  "Evelynn, In Control": {
+   "short": "4 Mightú champion. Disarm: támadáskor egy ottani ellenséges unit a kör végéig -1 Mightot kap. Ha a köröd elején holdolod a battlefieldet, ahol áll, és ott van egy facedown lapod, a holdért járó pont mellé még 1 pontot kapsz.",
+   "why": "Hiányzott a Disarm 'this turn' időtartama (831.1.d)."
+  },
+  "Ezreal, Dashing": {
+   "short": "Támadáskor vagy védekezéskor a Mightjával megegyező sebzést ad egy ottani ellenséges unitra, de harci sebzést nem okoz. Action képesség: 1 Mind Powerért a base-be mozog, a saját körödben vagy showdown alatt bárki körében, de spellre válaszul nem. Várd meg a sebzés lefutását, mielőtt elléptetnéd, különben elmarad.",
+   "why": "A 'bármikor' túlzás: Action ability csak a saját körödben vagy showdownban, Closed State-ben nem (806.1.c.2, 358.4)."
+  },
+  "Facebreaker": {
+   "short": "Action: a saját körödben vagy showdown alatt stunnol egy saját és egy ellenséges unitot ugyanazon a battlefielden, így abban a körben egyik sem sebez a harcban. Ilyen pár nélkül nem játszható ki. Hidden: 1 bármilyen Powerért elrejtheted, és a következő körtől reakcióként ingyen kijátszhatod, de akkor csak az ottani unitokra.",
+   "why": "Hiányzott a kézből kijátszás Action időzítése és a Hidden 'következő körtől' feltétele (806.1.c.1, 811.1.b)."
+  },
+  "Factory Recall": {
+   "short": "Action: a saját körödben vagy showdown alatt bárki körében visszaküld egy geart, bárkiét, felszerelt Equipmentet is, a tulajdonosa kezébe. A token gear megszűnik. Harc közben egy Equipment levétele eldöntheti a harcot.",
+   "why": "Hiányzott az Action időzítés (806.1.c.1)."
+  },
+  "Fading Memories": {
+   "short": "Egy battlefielden álló unit vagy bármelyik gear Temporary lesz: az irányítója következő Beginning Phase-ének elején, még a pontozás előtt meghal. Így az ellenfél unitja nem tudja holdolni a helyet a saját körében. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A Temporary a controller Beginning Phase-ére szól (816.1.b), a 'gazdája' tulajdonosként is érthető volt."
+  },
+  "Fight or Flight": {
+   "short": "Action: egy battlefielden álló unitot, bárkiét, az irányítója base-ébe mozgat, így kiveheted a harcból. Hidden: 1 bármilyen Powerért elrejtheted, a következő körtől reakcióként ingyen kijátszhatod, de csak az ottani unitokra. A lap tiltólistán van, versenyen ellenőrizd.",
+   "why": "Kézből Action lap spellre nem válaszolhat (358.4), ez csak facedownból megy; hiányzott a Hidden 'következő körtől' (811.1.b); 'gazdája' helyett irányítója."
+  },
+  "Find Your Center": {
+   "short": "Action: a saját körödben vagy showdown alatt húzol 1 lapot, és kapsz egy exhausted rune-t. Ha valamelyik ellenfelednek legfeljebb 3 pont hiányzik a győzelemhez, 2 Energyvel olcsóbb, vagyis 1 Energy.",
+   "why": "A '3 pontra van' pontatlan: 'within 3 points' azt jelenti, legfeljebb 3 pont hiányzik."
+  },
+  "Fiora, Victorious": {
+   "short": "Amíg Mighty (legalább 5 Might), Deflectet, Gankinget és Shieldet kap: az ellenfél rá célzott spelljei és képességei 1 Powerrel többe kerülnek, battlefieldről battlefieldre mozoghat, és védekezéskor +1 Mightot kap. Alapból 4 Mightú, tehát legalább +1 kell hozzá. Ha elveszíti a Mighty állapotot, mindhárom egyszerre megszűnik.",
+   "why": "A 'védekezéskor erősebb' homályos: Shield érték nélkül 1, vagyis +1 Might defenderként (814.1.b.3, 809.1.c)."
+  },
+  "Firestorm": {
+   "short": "3 sebzést ad minden ellenséges unitra egy kiválasztott battlefielden. A battlefield a target, nem a unitok, ezért Deflect és a 'can't be chosen' nem védi őket. Az ellenfél a lefutás előtt elmozgathatja a unitjait. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A 'védő képességek nem segítenek' túlzás: a sebzésmegelőzés igen, csak a célzás elleni védelem nem (355.7)."
+  },
+  "First Mate": {
+   "short": "3 Mightú unit. Kijátszáskor ready-vé tesz egy másik unitot, akár ellenségeset is, így az újra mozoghat vagy használhatja az exhaust képességét. Ha nincs másik unit a boardon, nem történik semmi.",
+   "why": "A 'ha nincs más' kitalált megkötés: az 'another unit' bármely játékosé lehet (355.9.b)."
+  }
+ },
+ "checked": 111,
+ "conflicts": []
+}

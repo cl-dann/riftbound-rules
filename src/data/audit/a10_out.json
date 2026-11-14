@@ -1,0 +1,136 @@
+{
+ "fixes": {
+  "Twilight Shroud": {
+   "short": "Egy saját unit +1 Mightot kap a kör végéig, és ebben a körben enemy spell és ability nem választhatja. Csak a saját körödben játszható ki, válaszként nem, és a nem célzó, mindenkit érintő hatások ellen nem véd. Flow: a trashedből 2 Energyért újra kijátszható, utána banishelődik.",
+   "why": "A [2] jelölés kezdőnek érthetetlen (2 Energy), és hiányzott, hogy a Flow után a lap banishelődik (829.1.b)."
+  },
+  "Twilight Step": {
+   "short": "Egy legfeljebb 3 Mightú unitot, akár enemy unitot is, bármelyik másik locationre mozgatsz, battlefieldről battlefieldre is. Csak a saját körödben játszható ki. Flow: a trashedből 4 Energy és 1 Chaos Power áron újra kijátszható, utána banishelődik.",
+   "why": "A Flow cost [4][C] = 4 Energy és 1 Chaos Power, nem 'egy Power'; a banish hiányzott (829.1.b, 829.1.c.1)."
+  },
+  "Twisted Fate, Gambler": {
+   "short": "Amikor támad, felfeded a Rune Deck felső rune-ját, majd a deck aljára teszed (recycle). A rune domainje dönt: Fury esetén 2 sebzés egy ott álló enemy unitnak és 1 minden más ott álló enemy unitnak, Mind esetén húzol 1 lapot, Order esetén stunolsz egy enemy unitot. Más domainnél, például Chaosnál, nem történik semmi.",
+   "why": "A Fury mód homályos volt ('sebzés az ott álló enemy unitoknak'): 2 egy unitnak és 1 a többinek; a három mód domainhez kötése nem derült ki (383.4.e)."
+  },
+  "Udyr, Wildman": {
+   "short": "A saját buffja elköltésével választasz egy módot: 2 sebzés egy battlefielden álló unitnak, stun egy battlefielden álló unitnak, Udyr ready lesz, vagy a kör végéig Gankinget kap (battlefieldről battlefieldre léphet). Egy körben minden mód csak egyszer választható. Csak a saját Main Phase-edben aktiválható.",
+   "why": "A Ganking 'this turn' időtartama és a keyword lényege hiányzott (810.1.b); az aktiválás időzítése 381.1 szerint."
+  },
+  "Ultrasoft Poro": {
+   "short": "Exhaustolásával két 1 Mightú Bird unit tokent kapsz Deflecttel: az opponent spellje vagy abilityje, amely egy Birdöt választ, 1 bármely domainű Powerrel többe kerül. Csak akkor aktiválható, ha a Poro battlefielden áll, és csak a saját Main Phase-edben.",
+   "why": "A Deflect lényege hiányzott (809.1.c, 809.1.c.1); az aktiválás időzítése 381.1."
+  },
+  "Unyielding Spirit": {
+   "short": "A kör végéig megelőz minden spellből és abilityből származó sebzést, minden unitnál, az enemy unitoknál is. A combat sebzést nem állítja meg. Reaction, így bármikor kijátszható, akár egy sebző spellre válaszul is, mielőtt az resolve-ol.",
+   "why": "A 'válaszként kell kijátszani' túlzás: Reactionként előre is kijátszható, a kör végéig hat (813.1.c.1, 813.2)."
+  },
+  "Up from the Deep": {
+   "short": "Két 1 Mightú Tentacle unit tokent játszol ki, mindegyiket külön a base-edbe vagy egy általad kontrollált battlefieldre. Csak a saját körödben játszható ki. Flow: a trashedből 3 Energyért újra kijátszható, utána banishelődik.",
+   "why": "A [3] jelölés helyett 3 Energy; a Flow utáni banish hiányzott (829.1.b)."
+  },
+  "Valley of Idols": {
+   "short": "Aki ide kijátszik egy unitot, 1 Energyt fizethet, hogy buffolja: a unit tartós +1 Might buffot kap. Tokenre is működik. Ha a unitnak már van buffja, nem kap másodikat, a kifizetett Energy elveszik.",
+   "why": "A [1] költségjelölés helyett 1 Energy (költségjelölési szabály); tartalmilag 383.3.b."
+  },
+  "Vayne, Hunter": {
+   "short": "Assault 3: amíg támadó, +3 Mightú, így 5. Ha belépésekor bármelyik opponent kontrollál battlefieldet, ready lép be, és még abban a körben mozoghat. Amikor részt vesz egy battlefield conquerében, 1 Energyt fizethetsz, hogy visszavedd a kezedbe, ekkor a damage és a buff elvész.",
+   "why": "'Azonnal támadhat' túlzás, a ready unit mozoghat (421.3, 453-454); a 'When I conquer' jelentése homályos volt (383.4.c.2.a); [1] = 1 Energy."
+  },
+  "Vex, Apathetic": {
+   "short": "Amíg Vex battlefielden áll, amikor egy opponent kijátszik egy unitot, az a kijátszás után stunt kap: abban a körben nem oszt combat sebzést és nem mozgatható. Tokenre is vonatkozik, és mivel nem target, a Deflect nem véd. Vex Deflect: az őt választó opponent spell vagy ability 1 bármely Powerrel drágább.",
+   "why": "Nem 'stunolva lép be': trigger, a kijátszás befejezése után fut (420.4.a, 383.4.a.4); Vex saját Deflectje hiányzott (809.1.c)."
+  },
+  "Vex, Cheerless": {
+   "short": "Amíg Vex combatban van, a te spelljeid 1 Energyvel és 1 bármely domainű Powerrel olcsóbbak (legalább 1 Energy marad), az enemy spellek ugyanennyivel drágábbak. Unitokra, gearekre és abilitykre nem hat.",
+   "why": "A '[1] és egy Power ... legalább [1]' jelölés pontatlan: [1][A] = 1 Energy és 1 bármely Power, a minimum 1 Energy (költségjelölési szabály)."
+  },
+  "Vex, Mocking": {
+   "short": "Ha stunolsz egy battlefielden álló enemy unitot, Vexet odamozgathatod, akár exhausted állapotban is. Már stunned unit újbóli választása nem számít stunnak. Shield: védekezéskor 6 Mightú. Tank: combatban előbb neki kell halálos sebzést kiosztani, csak utána a Tank nélküli társainak.",
+   "why": "A Tank lényege hiányzott (815.1.b); a már stunned unit nem stunolható újra (424.1.a.1)."
+  },
+  "Vi, Hotheaded": {
+   "short": "2 Energy és 1 Fury Power fizetésével a kör végéig megduplázza a Mightját, többször is (3, 6, 12, 24). Csak a saját Main Phase-edben, combaton kívül használható, a később kapott bónusz nem duplázódik. Deflect: az őt választó opponent spell vagy ability 1 bármely Powerrel drágább.",
+   "why": "[2][C] = 2 Energy és 1 Fury Power; a Deflect hiányzott (809.1.c); időzítés 381.1."
+  },
+  "Viktor, Herald of the Arcane": {
+   "short": "Legend: 1 Energy fizetésével és exhaustolásával kijátszol egy 1 Mightú Recruit unit tokent a base-edbe vagy egy általad kontrollált battlefieldre, exhausted állapotban. Csak a saját Main Phase-edben, és mivel exhaustol, jellemzően körönként egyszer.",
+   "why": "A [1] jelölés helyett 1 Energy (költségjelölési szabály); a 'körönként egyszer' az exhaust következménye, nem külön korlát (381.1)."
+  },
+  "Void Drone": {
+   "short": "Ha nem a kezedből játszod ki (például a trashből vagy egy másik lap hatására a deckből), 2 Energyvel kevesebbe kerül, 3 helyett 1 Energy. Ha a hatás eleve figyelmen kívül hagyja a costot, nincs mit csökkenteni.",
+   "why": "A [1] és [3] jelölés helyett Energy (költségjelölési szabály)."
+  },
+  "Volibear, Furious": {
+   "short": "Amikor támad, 5 sebzést oszt szét tetszőleges számú ott álló enemy unit között, mindegyikre legalább 1-et. A targeteket a trigger chainre kerülésekor, az elosztást a resolve-kor választod. Deflect 2: az őt választó opponent spell vagy ability 2 bármely Powerrel drágább.",
+   "why": "A Deflect 2 csak homályosan ('nagyon drága') szerepelt, a pontos plusz költség 2 Power (809.1.c, 809.1.c.1)."
+  },
+  "Volibear, Imposing": {
+   "short": "Valahányszor egy opponent unitja olyan battlefieldre mozog, ahol Volibear nem áll, húzol egy lapot; a recall és a battlefieldre kijátszás nem Move. Shield 3: védekezéskor 13 Mightú. Tank: combatban előbb neki kell halálos sebzést kiosztani. Több unit egyszerre mozgatásánál a húzások száma judge kérdése.",
+   "why": "A Tank lényege hiányzott (815.1.b); a recall nem Move (457, 448.1)."
+  },
+  "Wages of Pain": {
+   "short": "3 sebzés egy battlefielden álló unitnak, és egy exhausted Gold gear tokent kapsz akkor is, ha a sebzés elmarad. Kézből a saját körödben vagy showdownban játszható ki. Hidden: a saját körödben 1 bármely Powerért elrejtheted egy általad kontrollált battlefielden, a következő körtől Reactionnel, ingyen játszhatod ki, és csak az ottani unit választható.",
+   "why": "A Hidden lényege hiányos volt: a hide költsége [A], csak a következő körtől játszható ki, és a target az ottani battlefieldre korlátozódik (811.1.b, 811.1.d.2)."
+  },
+  "Walking Roost": {
+   "short": "Kijátszáskor kötelezően választasz egy opponentet, aki kijátszik egy 1 Mightú Bird unit tokent Deflecttel. Deflect: az opponent spellje vagy abilityje, amely a Deflectes unitot választja, 1 bármely Powerrel drágább; a Roostnál ez téged véd, a Birdnél ellened dolgozik.",
+   "why": "A Deflect lényege csak homályosan ('drágább rámutatni') szerepelt (809.1.c, 809.1.c.1)."
+  },
+  "War Scout": {
+   "short": "Kijátszáskor egy unit, akár maga a Scout, +2 Mightot kap a kör végéig. Accelerate: kijátszáskor fizethetsz plusz 1 Energy és 1 Fury Power költséget, ekkor ready lép be, így még abban a körben mozoghat.",
+   "why": "Az Accelerate csak kijátszáskor fizethető (805.1.b, 805.2.a), a [C] Fury Power; 'azonnal támadhat' túlzás, a ready unit mozoghat (421.3)."
+  },
+  "Warmog's Armor": {
+   "short": "Equipment: 1 Body Power fizetésével egy saját unitodra csatolod (Equip, saját Main Phase). A felszerelt unit +1 Mightot kap, és amikor részt vesz egy battlefield conquerében, buffot kap, ha még nincs neki. A buff tartós, a páncél leszedése után is megmarad.",
+   "why": "Hiányzott az Equip [C] költsége és használata (818.1.c.2); a 'When I conquer' pontosítva (383.4.c.2.a)."
+  },
+  "Warwick, Hunter": {
+   "short": "Mindig ready lép be, így még a kijátszás körében mozoghat. Amikor támad, megöl minden ott álló enemy unitot, amelyen a resolve pillanatában sebzés van. A sebzést ugyanabban a körben kell rájuk tenni, akár válaszként a triggerre.",
+   "why": "'Azonnal támadhat' túlzás, a ready unit mozoghat és ez vezethet combathoz (421.3, 454); a 'damaged' a resolve-kor számít."
+  },
+  "Watchful Curator": {
+   "short": "Amíg a boardon van, minden általad kontrollált gear (Equipment és token is) Deflectet kap: az opponent spellje vagy abilityje, amely ilyen geart választ, 1 bármely domainű Powerrel többe kerül. A nem célzó, minden geart érintő hatások ellen nem véd.",
+   "why": "A Deflect lényege homályos volt ('drágább rámutatni'); pontosan 1 bármely Power választásonként (809.1.c, 809.1.c.1)."
+  },
+  "Windsinger": {
+   "short": "Kijátszáskor visszaküldhetsz a tulajdonosa kezébe egy másik, battlefielden álló, legfeljebb 3 Mightú unitot, akár sajátot is; a token így megszűnik. Hidden: a saját körödben 1 bármely Powerért elrejtheted egy általad kontrollált battlefielden, a következő körtől Reactionnel, ingyen kijátszható oda, és csak az ottani unit választható.",
+   "why": "A Hidden költsége és időzítése hiányzott (811.1.b, 811.1.d.1, 811.1.d.3)."
+  },
+  "World Atlas": {
+   "short": "Equipment: 1 Mind Power fizetésével egy saját unitodra csatolod (Equip, saját Main Phase). A felszerelt unit +2 Mightot kap, és amikor a köröd elején holdolod a battlefieldjét, két exhausted Gold gear tokent kapsz. Ezek abban a körben jellemzően még nem használhatók.",
+   "why": "Hiányzott az Equip [C] költsége (818.1.c.2); a hold a Beginning Phase-ben történik (383.4.d.2.a)."
+  },
+  "Wrath of the Freljord": {
+   "short": "Mindig ready lép be, így még a kijátszás körében mozoghat, és ha enemy unitok közé lép, combat indulhat. Shield 3: védekezéskor 10 Mightú, egyébként 7.",
+   "why": "'Támadhat' túlzás: a ready unit mozoghat, a mozgás vezethet combathoz (421.3, 454); Shield 3 csak defenderként (814.1.c)."
+  },
+  "Xerath, Freed": {
+   "short": "1 Fury Power fizetésével és exhaustolásával 3 sebzést okoz egy tetszőleges unitnak, akár base-ben állónak is. Csak akkor aktiválható, ha Xerath battlefielden áll, és csak a saját Main Phase-edben. Mivel a mozgás is exhaustolja, az odaérkezés körében csak akkor használható, ha valami ready-zi.",
+   "why": "A [C] = 1 Fury Power, nem 'egy Power' (költségjelölési szabály); 381.1."
+  },
+  "Yasuo, Unforgiven": {
+   "short": "Legend: 2 Energy fizetésével és exhaustolásával egy saját unitot a base-éből egy battlefieldre vagy battlefieldről a base-ébe mozgatsz, exhausted unitot is. Így egy már mozgott unit újra léphet. Csak a saját Main Phase-edben, showdown és combat alatt nem.",
+   "why": "A [2] jelölés helyett 2 Energy; az errata szerint 'its base', a unit saját base-e (381.1)."
+  },
+  "Zed, Without a Sound": {
+   "short": "Amikor részt vesz egy battlefield conquerében, kapsz egy 0 Mightú Shadow Clone tokent a base-edbe. Action: 1 Energy és 1 Chaos Power fizetésével Zed és egy saját Clone helyet cserél, exhaust nélkül, showdownban is. A Clone támadáskor banishelhet egy unitot a trashedből, ekkor Assault 4-et kap a kör végéig.",
+   "why": "[1][C] = 1 Energy és 1 Chaos Power; a 'When I conquer' pontosítva (383.4.c.2.a); a Clone bónusza Assault 4 (807.1.c)."
+  },
+  "Zhonya's Hourglass": {
+   "short": "Ha egy saját unitod meghalna, helyette ez a gear hal meg, a unit pedig gyógyul, exhausted lesz és a base-be kerül (recall, nem Move). Kötelező, tokenre is elsül. Hidden: 1 bármely Powerért elrejthető egy általad kontrollált battlefielden, és a következő körtől Reactionnel, ingyen kijátszható, akár egy kill spellre válaszul.",
+   "why": "A Hidden költsége és a 'következő körtől' feltétel hiányzott (811.1.b, 811.6); a deathknell nem fut le (808.1.d.1)."
+  },
+  "Ziggs, Explosive": {
+   "short": "1 Energy fizetésével és exhaustolásával lerak egy Bomb gear tokent bármelyik battlefieldre; a Bomb halálakor 2 sebzést okoz egy ott álló enemy unitnak. Csak a saját Main Phase-edben. Védekezéskor egy saját gear megölésével +2 Mightot kap a kör végéig, és ha Bombot áldozol, az is robban.",
+   "why": "A [1] jelölés helyett 1 Energy; az aktivált ability időzítése 381.1; Deploy 830.1.b."
+  },
+  "Ziggs, Hexplosives Expert": {
+   "short": "Legend: 1 Energy és 1 bármely domainű Power fizetésével és exhaustolásával lerakhatsz egy Bomb gear tokent bármelyik battlefieldre, a saját Main Phase-edben. A Bomb halálakor 2 sebzést okoz egy ott álló enemy unitnak, és a többi ottani Bombod is meghal. Ha egy opponent ott holdol, a Bomb meghal.",
+   "why": "[1][A] = 1 Energy és 1 bármely Power (költségjelölési szabály); Deploy 830.1.b."
+  }
+ },
+ "checked": 102,
+ "conflicts": [
+  "Wraith of Echoes: a kártyaszöveg (errata) 'a friendly unit', a rules_ref 383.1.b példája viszont 'another friendly unit' szöveggel idézi; a notes ezt jelzi és judge-ra bízza, a short ennek megfelelően nyitott kérdésként kezeli."
+ ]
+}

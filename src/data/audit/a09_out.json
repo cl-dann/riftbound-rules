@@ -1,0 +1,132 @@
+{
+ "fixes": {
+  "Soul Sword": {
+   "short": "Equipment: 1 Calm Powerért (Equip) egy saját unitodra csatolod, csak a saját Main Phase-edben, showdownon kívül. Csatolva +1 Mightot ad, és amíg legalább 3 XP-d van, további +1-et, összesen +2-t. Ha az XP-d 3 alá esik, vagy a kardot megölik, a bónusz azonnal elvész.",
+   "why": "Hiányzott az Equip költsége és időzítése (818.1.c.2, 381.1)."
+  },
+  "Spiderling": {
+   "short": "Bármennyi lehet belőle a deckben. Minden más, vele egy helyen álló Spiderlinged után +1 Mightot kap, ami azonnal csökken, ha egy társa elmegy vagy meghal. Hidden: a saját körödben 1 tetszőleges Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionként, ingyen kijátszhatod oda.",
+   "why": "Hiányzott a Hidden keyword (811.1.b, 811.1.d.1)."
+  },
+  "Spinning Axe": {
+   "short": "Bármikor kijátszható (Quick-Draw), és ekkor azonnal rácsatolódik egy saját unitodra, +3 Mightot adva. Ha leválik, a saját Main Phase-edben 1 Fury vagy Chaos Powerért (Equip) újra csatolhatod. Csatolatlanul a következő Beginning Phase-ed elején, a scoring előtt meghal (Temporary).",
+   "why": "Hiányzott az Equip költsége és időzítése (818.1.c.2, 381.1); a Temporary időpontja pontosítva (816.1.b)."
+  },
+  "Spirit Wheel": {
+   "short": "Amikor a saját spelled vagy képességed egy saját unitodat választja célpontnak, fizethetsz 1 Energyt és exhaustolhatod a Wheelt, hogy húzz 1 lapot. A lapot még a spell hatása előtt megkapod. Az ellenfél célzása nem váltja ki.",
+   "why": "A [1] költség nem volt Energyként kiírva (költségjelölés); 383.4.b, 383.3.b."
+  },
+  "Sprite Burst": {
+   "short": "Két ready, 3 Mightú Sprite tokent ad, akár két külön helyre, így még ebben a körben mozoghatnak, és a mozgás showdownhoz vagy combathoz vezethet. A következő Beginning Phase-ed elején, a pontozás előtt meghalnak (Temporary). Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A \"támadhatnak\" pontatlan: a ready unit mozoghat, a combat a mozgásból következik (421.3, 454); 816.1.b."
+  },
+  "Sprite Call": {
+   "short": "Egy ready, 3 Mightú Sprite tokent ad, ami még abban a körben mozoghat, de a következő Beginning Phase-ed elején, a pontozás előtt meghal. Kézből a saját körödben vagy showdownban játszható ki (Action). Hidden: 1 tetszőleges Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionként, ingyen kijátszhatod, ekkor a token oda érkezik.",
+   "why": "Hiányzott az Action időzítése és a Hidden költsége, várakozása (806.1.c.1, 811.1.b, 811.1.d.5)."
+  },
+  "Stand United": {
+   "short": "Buffol egy saját unitot, és a kör végéig minden saját buff +1 helyett +2 Mightot ad, a később buffolt unitoknál is. Kézből a saját körödben vagy showdownban játszható ki (Action). Hidden: 1 tetszőleges Powerért elrejtheted, és a következő körtől Reactionként ingyen kijátszhatod, ekkor a buffolt unitnak azon a battlefielden kell állnia.",
+   "why": "Hiányzott az Action időzítése, a Hidden költsége és a facedown target megkötés (806.1.c.1, 811.1.b, 811.2)."
+  },
+  "Stargazer": {
+   "short": "A trashből Flow-val kijátszott spelljeid 2 Energyvel olcsóbbak, de ettől a cost legfeljebb 1 Energyig csökken. A Power részt ki kell fizetni, és kézből kijátszva nincs kedvezmény.",
+   "why": "A minimum félreérthető volt: nem a kedvezmény, hanem a cost nem megy 1 Energy alá (829.1.c.1)."
+  },
+  "Steel Paws": {
+   "short": "0 Mightú unit, amit 7 Energyért egyszer Empowerelhetsz a saját Main Phase-edben, showdownon kívül: ekkor tartósan 7 Mightú lesz. Deflect: az opponentnek 1 tetszőleges Powerrel többe kerül spellel vagy képességgel választani. Ha sebzetten veszíti el az Empowered állapotot, 0 Mightra esik, és a rajta lévő sebzés megöli.",
+   "why": "Hiányzott a Deflect (809.1.c); 827.1.c.1, 381.1, 142.4.b."
+  },
+  "Storm Raptor": {
+   "short": "Ha egy vele azonos battlefielden álló, stunolt enemy unit meghal, húzol egy lapot. A stun a kör végéig tart, ezért ugyanabban a körben kell meghalnia, és ha a Raptor vele egyszerre hal meg, nincs húzás. Deflect: az opponentnek 1 tetszőleges Powerrel többe kerül spellel vagy képességgel választani.",
+   "why": "Hiányzott a Deflect (809.1.c); 424.1.a.2, 383.2.c.2."
+  },
+  "Svellsongur": {
+   "short": "Equipment: 1 Energy és 1 Calm Powerért (Equip) egy saját unitodra csatolod a saját Main Phase-edben, showdownon kívül. Mightot nem ad, de lemásolja a unit szövegét, így minden képessége kétszer szerepel: a triggerek kétszer futnak le, a Shield vagy Assault értéke összeadódik. Más laptól ideiglenesen kapott képesség nem másolódik.",
+   "why": "Hiányzott az Equip költsége és időzítése (818.1.c.2, 381.1)."
+  },
+  "Switcheroo": {
+   "short": "Egy battlefielden álló két unit Mightját felcseréli a kör végéig, bármelyik játékosét. Kézből a saját körödben vagy showdownban játszható ki (Action), Hidden: 1 tetszőleges Powerért elrejtve a következő körtől Reactionként ingyen kijátszható, ekkor mindkét unitnak azon a battlefielden kell állnia. Ha egy sebzett unit Mightja a rajta lévő sebzésig csökken, meghal.",
+   "why": "Hiányzott a Hidden és a facedown target megkötés (811.1.b, 811.1.d.2); 142.4.b."
+  },
+  "Syndra, Transcendent": {
+   "short": "Amíg Syndra egy showdownban részt vesz, a spelljeid Repeatet kapnak: kijátszáskor plusz 2 Energy és 1 Power költséget fizethetsz, ekkor a spell hatása még egyszer lefut. Showdown alatt csak Action vagy Reaction spell játszható ki, ezért a gyakorlatban ezekre vonatkozik. Base-ben állva nem ad semmit.",
+   "why": "A [2] nem volt Energyként kiírva, és a Repeat kijátszáskori fizetése hiányzott (820.1.d). A [C] domainjére vonatkozó notes-állítás (Tibbers-példa) a rules_ref-ben nem ellenőrizhető, ezért kimaradt."
+  },
+  "Tail-Cloaked Matriarch": {
+   "short": "2 Energy és 1 Chaos Powerért Empowerelheted a saját Main Phase-edben, showdownon kívül, ha még nem Empowered. Amikor Empowered lesz, a trashedből kiválaszthatsz egy legfeljebb 3 Energy és 1 Power costú unitot, és ingyen kijátszod a base-edbe.",
+   "why": "A [2][C] költség nem volt pontosan kiírva (költségjelölés, 827.1.c.1, 381.1, 828.1.d)."
+  },
+  "Taric, Protector": {
+   "short": "Shield: védekezőként +1 Mightot kap, így 5 Mightú. Tank: az opponentnek a combat damage kiosztásakor először rá kell halálos sebzést osztania. A vele egy helyen álló többi saját unitod is Shieldet kap, ami Taric távozásakor vagy halálakor azonnal megszűnik, és a társakon lévő sebzés ekkor megölheti őket.",
+   "why": "A Shield és a Tank lényege hiányzott (814.1.c, 815.1.b)."
+  },
+  "Tasty Faefolk": {
+   "short": "Kijátszáskor fizethetsz plusz 1 Energy és 1 Calm Power költséget (Accelerate): ekkor ready lép be. Deathknell: amikor meghal, kapsz 2 exhausted rune-t és húzol 1 lapot. Ha egy replacement effect a halálát másra cseréli (például gyógyítja és hazaküldi), nem kapsz semmit.",
+   "why": "Az Accelerate kijátszáskori, domainhez kötött költsége nem volt kimondva (805.1.b, 805.1.b.1, 805.2.a); 383.2.c.3.a."
+  },
+  "Teemo, Strategist": {
+   "short": "Amikor védekezik, választasz egy enemy unitot Teemo battlefieldjén, felfeded a deck felső 5 lapját, és minden köztük lévő Hidden lapért 1 sebzést kap a unit, majd a felfedett lapok a deck aljára mennek. Támadáskor nem triggerel. Hidden: 1 tetszőleges Powerért elrejtheted, és a következő körtől Reactionként ingyen kijátszhatod arra a battlefieldre.",
+   "why": "Hiányzott a Hidden (811.1.b); a \"here\" (az ő battlefieldjén) alanya félreérthető volt (383.4.f)."
+  },
+  "Teemo, Swift Scout": {
+   "short": "Legend két képességgel. Az elrejtésért 1 Power helyett 1 Energyt is fizethetsz. 1 Energyért és a legend exhaustolásával a saját Main Phase-edben a kezedbe veheted egy saját Teemo unitodat a boardról vagy a Champion Zone-ból: a buff és a sebzés elvész, az Equipment a boardon marad.",
+   "why": "A [1] nem volt Energyként kiírva, és a második képesség időzítése hiányzott (381.1)."
+  },
+  "Temporal Portal": {
+   "short": "1 tetszőleges Powerért és exhaustolással a körben következő spelled Repeatet kap a nyomtatott costjával megegyező áron: kijátszáskor ezt kifizetve a hatása még egyszer lefut. Csak a saját Main Phase-edben, showdownon kívül aktiválható. Akkor is elhasználódik, ha a Repeatet nem fizeted ki, ezért a megfelelő spellt kell elsőként kijátszani.",
+   "why": "Az [A] költség nem volt kiírva, és az aktiválás időzítése hiányzott (381.1, 820.1.d)."
+  },
+  "Temptation": {
+   "short": "Egy enemy unitot átmozgatsz egy olyan helyre, ahol ugyanannak a játékosnak már áll unitja. Kijátszáskor plusz 2 Energyért (Repeat) a mozgatás még egyszer lefut, akár egy másik enemy unittal. Jó arra, hogy az utolsó védőt elhúzd egy battlefieldről, és csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A [2] nem volt Energyként kiírva, és a Repeat kijátszáskori fizetése hiányzott (820.1.d, 820.2.a)."
+  },
+  "The Ball": {
+   "short": "Gear, ami csak battlefieldre játszható ki (Deploy), és meghal, ha egy opponent ott holdol. Kijátszáskor és minden mozgáskor választasz: húzol 1 lapot, vagy 2 sebzést kap minden ott álló enemy unit, ez nem célzott, Deflect nem véd ellene. A Ganking csak akkor számít, ha egy hatás unittá teszi: ekkor battlefieldről battlefieldre is mozoghat.",
+   "why": "Hiányzott a Ganking (810.1.b); 830.1.b."
+  },
+  "The Ruination": {
+   "short": "Minden unitot megöl, a sajátjaidat is, célzás nélkül, ezért Deflect és \"can't be chosen\" nem véd ellene. A Deathknell képességek lefutnak, de a \"ha egy másik unit meghal\" képességű unitok a többivel együtt halnak meg, így azok nem triggerelnek. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A \"semmi nem védi ki\" túlzás: replacement effect (például heal, exhaust, recall) kiválthatja a halált (383.2.c.3.a); 355.7, 383.2.c.2."
+  },
+  "The Syren": {
+   "short": "1 Energyért és exhaustolással egy saját, battlefielden álló unitodat a base-ébe mozgatod. A unit nem exhaustolódik, és ez Move, ezért a \"when I move\" triggerek lefutnak. Csak a saját Main Phase-edben, showdownon kívül használható, tehát combatból vagy enemy spell elől nem ment ki.",
+   "why": "A [1] nem volt Energyként kiírva; Move jelleg (421, 448.1, 381.1)."
+  },
+  "The Waters' Wage": {
+   "short": "Kézből, a saját körödben kijátszva kapsz egy exhausted Gold tokent. Ha 1 tetszőleges Powerért elrejted, és egy későbbi saját körödben a rejtekből játszod ki, három ready Goldot kapsz, az opponent körében a rejtekből csak egy exhaustedet. A Goldot megölve és exhaustolva 1 tetszőleges Powert kapsz, ezért az exhausted Gold csak ready állapotban használható.",
+   "why": "A Gold költségéből hiányzott az exhaust, így az exhausted Gold használata félreérthető volt; Hidden költség hiányzott (811.1.b)."
+  },
+  "The Zero Drive": {
+   "short": "Equipment: 1 Energy és 1 Mind Powerért (Equip) egy saját unitodra csatolod a saját Main Phase-edben, csatolva +2 Mightot ad, és ha a unit meghal, utána banisholódik. Csatolatlanul 3 Energy és 1 Mind Power fizetésével és a Zero Drive banisholásával ingyen kijátszhatod az összes unitot, amit ez a példány banisholt. Tokenek nem jönnek vissza.",
+   "why": "Hiányzott az Equip és az aktivált képesség pontos költsége, valamint a csatolatlansági feltétel (818.1.c.2, 435.1.e, 808.1.c)."
+  },
+  "Thousand-Tailed Watcher": {
+   "short": "Kijátszáskor minden enemy unit -3 Mightot kap a kör végéig, de 1 alá egyik sem megy, így a sebzett enemy unitok meghalhatnak. Kijátszáskor fizethetsz plusz 1 Energy és 1 Mind Power költséget (Accelerate): ekkor ready lép be.",
+   "why": "Az Accelerate költsége és kijátszáskori jellege nem volt pontos (805.1.b, 805.1.b.1, 805.2.a)."
+  },
+  "Thwonk!": {
+   "short": "Egy támadó unitot stunol, így az nem okoz combat sebzést, ezért gyakorlatilag csak combat közben játszható ki (Action). Kijátszáskor plusz 2 Energyért (Repeat) egy második támadót is stunolhatsz. A stunolt unit a combatban marad és sebezhető.",
+   "why": "A [2] nem volt Energyként kiírva, és a Repeat kijátszáskori fizetése hiányzott (820.1.d); 424.1.b."
+  },
+  "Tools of Empire": {
+   "short": "Exhaustolva egy unit +2 Mightot kap a kör végéig. Ha egyszer kifizetsz rá 2 Energyt (Empower), ettől kezdve +4-et ad. Mindkét képesség csak a saját Main Phase-edben, showdownon kívül használható, ezért a bónuszt a támadó mozgás előtt kell kiosztani.",
+   "why": "A [2] nem volt Energyként kiírva (827.1.c.1, 381.1)."
+  },
+  "Transpositionist": {
+   "short": "1 Chaos Powerért és exhaustolással egy saját unitot visszaküldesz a tulajdonosa kezébe, majd ingyen kijátszhatsz egy kisebb Mightú unitot, ehhez a visszaküldött unit utolsó, buffokkal együtt mért Mightja számít. Csak a saját Main Phase-edben, showdownon kívül használható, és mivel exhausted lép be, a kijátszás körében még nem.",
+   "why": "A [C] nem volt Chaos Powerként kiírva, és a unit a tulajdonosa kezébe megy, nem feltétlenül a tiédbe (381.1, 359.3.e.13)."
+  },
+  "Treasure Trove": {
+   "short": "Amikor elhagyja a boardot (megölik, banisholják vagy kézbe kerül), húzol egy lapot és kapsz egy exhausted rune-t, akkor is, ha az opponent ölte meg. 1 Chaos Powerért és exhaustolással magad is megölheted a saját Main Phase-edben, már a kijátszás körében is.",
+   "why": "A [C] nem volt Chaos Powerként kiírva, és az aktiválás időzítése hiányzott (381.1, 383.2.c.3)."
+  },
+  "Trinity Force": {
+   "short": "Equipment: 1 Body Powerért (Equip) egy saját unitodra csatolod a saját Main Phase-edben, showdownon kívül. Csatolva +2 Mightot ad, és amikor a köröd elején holdolod a unit battlefieldjét, még 1 pontot kapsz, ami a győzelmi pont is lehet. Battlefieldenként körönként egyszer jár.",
+   "why": "Hiányzott az Equip költsége és időzítése (818.1.c.2, 381.1, 383.4.d)."
+  }
+ },
+ "checked": 111,
+ "conflicts": [
+  "Syndra, Transcendent: a notes szerint a kapott Repeat [C] része a spell domainjét követi (Tibbers-példa); ez a rules_ref-ben nem szerepel, nem ellenőrizhető, a short ezért nem nevez meg domaint."
+ ]
+}

@@ -1,0 +1,98 @@
+{
+ "fixes": {
+  "Adaptatron": {
+   "short": "Amikor ez a unit részt vesz egy battlefield conquerében, megölhetsz egy bármelyik játékoshoz tartozó geart, és ha a kill megtörténik, Adaptatron +1 Might buffot kap. Ha a kill elmarad, buff sincs. Ha már van rajta buff, nem kap másodikat, de a gear ettől még meghal.",
+   "why": "A \"When I conquer\" homályos volt (\"ahol áll\"): a unitnak jelen kell lennie a conquerkor (383.4.c.2.a)."
+  },
+  "Ahri, Alluring": {
+   "short": "Amikor a Beginning Phase-ben holdolod azt a battlefieldet, ahol Ahri áll, még 1 pontot szerzel. Körönként legfeljebb egyszer működik, és akkor is lefut, ha a holdért járó pontot nem kapod meg. Ez a plusz pont nem conquerből jön, ezért ezzel a győztes pontot is megszerezheted.",
+   "why": "\"általa tartott\" azt sugallta, hogy Ahri holdol; a hold a játékosé, Ahrinak ott kell állnia (383.4.d.2.a, 383.4.d.2.c, 473.1.a.1)."
+  },
+  "Akshan, Mischievous": {
+   "short": "Weaponmaster: kijátszáskor egy már általad kontrollált Equipmentet rácsatolhatsz az Equip költségénél 1 Powerrel olcsóbban. Ha kijátszáskor plusz 2 Body Powert fizetsz, egy ellenséges geart a base-edbe mozgatsz, és addig a tiéd, amíg Akshan a boardon van. Ha Equipment, ingyen Akshanra csatolódik.",
+   "why": "Hiányzott a Weaponmaster keyword (821.1.c); az ellopott gear erre nem választható, mert a Weaponmaster targetjét korábban választod."
+  },
+  "Ancient Warmonger": {
+   "short": "Annyi Assaultja van, ahány ellenséges unit áll ugyanott: attackerként ennyi plusz Mightot kap, és az érték folyamatosan változik. Kijátszáskor fizethetsz plusz 1 Energy és 1 Chaos Power költséget: ekkor ready lép be. Ha combat közben ellenség távozik, a Mightja csökken, és a rajta lévő damage megölheti.",
+   "why": "Az Accelerate csak kijátszáskor fizethető plusz költség, ez nem derült ki (805.1.b, 805.2.a)."
+  },
+  "Arachnoid Horror": {
+   "short": "Hunt 2: amikor ez a unit részt vesz egy conquerben vagy holdban, 2 XP-t kapsz. Ő és a többi saját unitod kijátszható olyan battlefieldre is, ahol egyetlen ellenséges unit áll egyedül, ebből combat lesz. Ez csak a helyet engedi, a szokásos időzítés ugyanúgy kell hozzá.",
+   "why": "A Hunt a unit saját conquer/hold effectje (823.1.c.1, 383.4.c.2.a); \"conquer vagy hold után\" nem mondta ki, hogy ennek a unitnak ott kell lennie."
+  },
+  "Arena Bar": {
+   "short": "Exhaustolva egy exhausted saját unitod +1 Might buffot kap, ami a kör végén sem jár le. Csak a saját Main Phase-edben, showdownon kívül használható. Már buffolt unitra kár, mert második buffot nem kap.",
+   "why": "\"combaton kívül\" pontatlan: activated ability Action nélkül nem használható semmilyen showdownban (381, 806.1.b)."
+  },
+  "Arena Kingpin": {
+   "short": "Ready lép be, és exhaustolva egy bármelyik unit +3 Mightot kap erre a körre, akár saját maga. Csak a saját Main Phase-edben, showdownon kívül használható, ezért a bónuszt a combat előtt kell kiosztani. Ha már exhausted, például mert mozgott, nem tudja használni.",
+   "why": "\"combaton kívül\" pontatlan: nem combat showdownban sem aktiválható (381, 806.1.b)."
+  },
+  "Aspirant's Climb": {
+   "short": "Eggyel több pont kell a győzelemhez: 8 helyett 9, és ez minden játékosra vonatkozik, attól függetlenül, ki kontrollálja a battlefieldet. A kártyaadat szerint banned, ezért verseny előtt nézd meg az aktuális tiltólistát.",
+   "why": "\"alapból 9\" azt sugallta, hogy az alap Victory Score 9; az alap 8, ezzel lesz 9 (323.1, notes)."
+  },
+  "Assembly Rig": {
+   "short": "Fizetsz 1 Energyt és 1 Fury Powert, egy unitot a trashedből a Main Deck aljára teszel, és exhaustolod a geart: kapsz egy 3 Mightú Mech unit tokent a base-edbe. Csak a saját Main Phase-edben, showdownon kívül használható. Unit nélküli trash esetén nem aktiválható.",
+   "why": "\"combaton kívül\" pontatlan: showdownban sem aktiválható (381, 806.1.b)."
+  },
+  "Armed Assailant": {
+   "short": "Kijátszáskor fizethetsz plusz 1 Energy és 1 Fury Power költséget: ekkor ready lép be. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod az Equip költségénél 1 Powerrel olcsóbban, akár egy másik unitról áthozva. Ha az Equipmentnek nincs Equip költsége, így nem csatolható.",
+   "why": "Az Accelerate kijátszáskor fizethető plusz költség, ezt ki kell mondani (805.1.b, 805.2.a)."
+  },
+  "Azir, Emperor of the Sands": {
+   "short": "Legend: 1 Energyért és exhaustolva kapsz egy 2 Mightú Sand Soldier unit tokent a base-edbe, de csak ha ebben a körben már kijátszottál egy Equipmentet, és csak a saját Main Phase-edben, showdownon kívül. Az általad kijátszott Sand Soldierek Weaponmastert kapnak: kijátszáskor 1 Powerrel olcsóbban felvehetnek egy Equipmentet.",
+   "why": "\"combaton kívül\" pontatlan (381, 806.1.b); a Weaponmaster nevét és lényegét is ki kell mondani (821.1.c)."
+  },
+  "Azir, Sovereign": {
+   "short": "Amikor támad, bármennyi token unitodat ide mozgathatod, base-ből vagy másik battlefieldről, akár exhausted állapotban is. Erről a támadáskor döntesz. Kijátszáskor fizethetsz plusz 1 Energy és 1 Order Power költséget: ekkor ready lép be.",
+   "why": "Az Accelerate kijátszáskor fizethető plusz költség, ez nem derült ki (805.1.b, 805.2.a)."
+  },
+  "B.F. Sword": {
+   "short": "Equipment: 1 Order Powerért egy saját unitodra csatolható, és az +3 Mightot kap. Csak a saját Main Phase-edben, showdownon kívül csatolható. Kijátszva a base-be kerül csatolatlanul, és amíg nincs uniton, nem csinál semmit.",
+   "why": "\"combaton kívül\" pontatlan: az Equip activated ability, showdownban sem aktiválható (818.1.c.2, 381)."
+  },
+  "Baited Hook": {
+   "short": "1 Energy, 1 Order Power és a gear exhaustolása: megölsz egy saját unitot, megnézed a Main Deck felső 5 lapját, és banisholhatsz köztük egy legfeljebb 1-gyel nagyobb Mightú unitot, amit ingyen kijátszol. A többi lap a pakli aljára kerül. Csak a saját Main Phase-edben, showdownon kívül használható.",
+   "why": "Hiányzott az aktiválási költség ([1][C], [E]) és az időzítés (381)."
+  },
+  "Back Off": {
+   "short": "Stunol egy unitot: ebben a körben nem ad combat damage-et. Kézből a saját körödben vagy showdownban játszható, és akkor húzol is egy lapot. Hidden: a saját körödben 1 Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reaction időzítéssel kijátszhatod, de akkor nincs húzás, és csak az ottani unitot választhatod.",
+   "why": "A Hidden lényegéből hiányzott a rejtés ára és helye (811.1.b, 811.1.d.2)."
+  },
+  "Bedeviling Stranger": {
+   "short": "Kijátszáskor választasz egy battlefieldet, és ha ott legalább 4 unit áll, egy ott lévő ellenséges unitot visszaküldhetsz a gazdája kezébe. Hidden: a saját körödben 1 Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reaction időzítéssel kijátszhatod, de csak oda.",
+   "why": "A Hidden lényegéből hiányzott a rejtés ára és helye (811.1.b, 811.1.d.1)."
+  },
+  "Black Market": {
+   "short": "Bármelyik játékos a saját körében egyszer 2 bármilyen Powerért húzhat egy lapot, akkor is, ha nem ő kontrollálja a battlefieldet. Csak a saját Main Phase-edben, showdownon kívül használható, spellre válaszként nem. A Power általában rune recycle-ből jön.",
+   "why": "\"combaton kívül\" pontatlan: Action nélkül showdownban sem aktiválható (381.3, 806.1.b)."
+  },
+  "Blade of the Ruined King": {
+   "short": "Equipment: +4 Mightot ad, de a csatoláshoz 1 Order Power mellett költségként meg kell ölnöd egy másik saját unitot, ezért legalább két unit kell hozzá. Csak a saját Main Phase-edben, showdownon kívül csatolható. A feláldozott unit Deathknellje a csatolás előtt fut le.",
+   "why": "\"combaton kívül\" pontatlan: az Equip showdownban sem aktiválható (381, 818.1.c.2)."
+  },
+  "Blastcone Fae": {
+   "short": "Kijátszáskor egy unit -2 Mightot kap erre a körre, de legfeljebb 1 Mightig. Hidden: a saját körödben 1 Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reaction időzítéssel kijátszhatod, de akkor csak az ottani unitot választhatod. Ha ott nincs más unit, saját magát kell gyengítenie.",
+   "why": "A Hidden lényegéből hiányzott a rejtés ára és helye (811.1.b, 811.1.d.3)."
+  },
+  "Blighted Battleaxe": {
+   "short": "Equipment: 1 Energy és 1 Fury Powerért csatolható, és +4 Mightot ad. Ha a felszerelt unit ebben a körben nem vett részt conquerben, a köröd végén a balta leválik, és a unit 4 damage-et kap. Ezt már a bónusz nélkül kapja, így a 4 vagy kisebb Mightú unit belehal.",
+   "why": "Hiányzott az Equip költség; \"nem foglalt el battlefieldet\" helyett a unit saját conquerje számít (383.4.c.2.a, 136.2.c)."
+  },
+  "Blind Fury": {
+   "short": "Minden ellenfél felfedi a Main Deck felső lapját, te egyet választasz, banisholod, és ingyen kijátszod, te kontrollálod. A többi felfedett lapot recycle-ölöd. A saját körödben vagy showdown alatt bárki körében játszható ki.",
+   "why": "Az Action showdownra ad engedélyt, nem csak combatra (806.1.b); hiányzott a \"recycle the rest\"."
+  },
+  "Blood Rose": {
+   "short": "Valahányszor unitot játszol ki, akár tokent is, 1 Energyért kapsz 1 XP-t. 3 XP-t elköltve és exhaustolva ready állapotba hozhatsz egy unitot, ez csak a saját Main Phase-edben, showdownon kívül megy.",
+   "why": "\"combaton kívül\" pontatlan: az activated ability showdownban sem használható (381, 806.1.b); a trigger nem korlátozott így."
+  },
+  "Block": {
+   "short": "Egy unit erre a körre Shield 3-at kap (defenderként +3 Might) és Tankot, vagyis elsőként rá kell halálos damage-et osztani. Kézből a saját körödben vagy showdownban játszható. Hidden: a saját körödben 1 Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reaction időzítéssel kijátszhatod, de csak az ottani unitot választhatod.",
+   "why": "A Hidden lényegéből hiányzott a rejtés ára és helye (811.1.b, 811.1.d.2)."
+  }
+ },
+ "checked": 111,
+ "conflicts": []
+}

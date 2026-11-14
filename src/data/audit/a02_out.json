@@ -1,0 +1,102 @@
+{
+ "fixes": {
+  "Bone Skewer": {
+   "short": "Választasz egy battlefieldet, az ellenfél felfedi a kezét, és kiválaszthatsz belőle egy unitot. Az ellenfél ezt minden cost nélkül arra a battlefieldre játssza ki, és ha megtette, stunolod: abban a körben nem ad combat damage-et. Kézből csak a saját körödben megy; Hiddenként [A]-ért elrejtve a következő körtől 0 costért, Reactionként játszható, de csak a rejtés helyét választhatod.",
+   "why": "A 'harcot indíthat' állítás nincs a kártyán és a rules_ref sem támasztja alá; hiányzott a kijátszási időzítés és a Hidden cost (811.1.b, 811.1.d.2)."
+  },
+  "Boneshiver": {
+   "short": "Equip: 1 Energy és 1 Body Power, a saját Main Phase-edben egy saját unitodra rakhatod. A felszerelt unit +2 Mightot kap, és amikor részt vesz egy battlefield conquerében, channelölsz 1 rune-t exhausted állapotban, ami ebben a körben még nem ad Energyt.",
+   "why": "Hiányzott az Equip cost és időzítése (818.1.c.2, 381.1); az 'elfoglal' homályos, a conquer a unit jelenlétét jelenti (383.4.c.2.a)."
+  },
+  "Boots of Swiftness": {
+   "short": "Equip: 1 Chaos Power, a saját Main Phase-edben egy saját unitodra rakhatod. A felszerelt unit +2 Mightot és Gankinget kap: Standard Move-val battlefieldről közvetlenül másik battlefieldre léphet, plusz mozgást nem kap.",
+   "why": "Hiányzott az Equip cost és időzítése (818.1.c.2, 381.1); a Ganking csak új célpontot ad a Standard Move-hoz (810.1.c.3)."
+  },
+  "Bottled Constellation": {
+   "short": "A saját Main Phase-ed elején megölhetsz 3 másik saját unitot és/vagy geart (tokent is), és ekkor 1 pontot kapsz. Ez a pont nem conquerből jön, ezért a Final Point megkötése nem vonatkozik rá, akár a győztes pont is lehet.",
+   "why": "A 'your Main Phase' feltétel kimaradt (csak a saját Main Phase-ed elején triggerel), és a 'may' sem látszott; Final Point: 473.1.a.1."
+  },
+  "Breakneck Mech": {
+   "short": "Minden Mech unitod, ő maga is, Deflectet és Gankinget kap: az ellenfél spellje vagy abilityje 1 bármilyen Powerrel többe kerül, ha őket választja, és battlefieldről battlefieldre mozoghatnak. Ha belépéskor már kontrollálsz egy másik Mech-et, ready lép be.",
+   "why": "A Deflect leírása ('plusz Powerbe kerül rájuk mutatni') pontatlan: választásonként 1 bármilyen domainű Power, csak az ellenfél spelljeire és abilityjeire (809.1.c, 809.1.c.1)."
+  },
+  "Brutalizer": {
+   "short": "Equip: 1 Calm Power, a saját Main Phase-edben egy saját unitodra rakhatod. A felszerelt unit +1 Mightot kap, és abban a körben, amikor rácsatoltad, további +2-t, vagyis összesen +3-at. A következő körtől csak +1 jár; ugyanarra a unitra újracsatolni nem csinál semmit.",
+   "why": "Hiányzott az Equip cost és időzítése (818.1.c.2, 381.1); az újracsatolás nem tiltott, hanem hatástalan (435.1.g)."
+  },
+  "Bushwhack": {
+   "short": "Ebben a körben minden ezután belépő saját unitod ready lép be, és kapsz egy exhausted Gold gear tokent. A már kint lévő unitokra nem hat, ezért előbb ezt játszd ki. Kézből csak a saját körödben megy; Hiddenként [A]-ért elrejtheted egy általad kontrollált battlefielden, és a következő körtől 0 costért, Reactionként játszható.",
+   "why": "A Hide [A] costja és a kontrollált battlefield feltétele kimaradt (811.1.b), a 'bármikor' csak a következő körtől igaz (811.6)."
+  },
+  "Bushwhack Trap": {
+   "short": "Deploy: csak battlefieldre játszható ki, és meghal, ha egy ellenfél ott holdol. Amíg te kontrollálod azt a battlefieldet, egy helyett két lapot rejthetsz el ott. Ha elveszíted a kontrollt, az ottani rejtett lapjaid elvesznek.",
+   "why": "A 'tartod' összekeverhető a hold fogalmával; a kártya controlt kér, nem holdot (811.1.b, 830.1.b)."
+  },
+  "Carrion Dredger": {
+   "short": "Deathknell: amikor meghal, kapsz egy 1 Mightú Bird unit tokent Deflecttel a base-edbe. A Deflect miatt az ellenfél spellje vagy abilityje 1 bármilyen Powerrel többe kerül, ha a Birdöt választja. Ha a Dredger nem a trashbe kerül (banish, kézbe vétel), nincs Bird.",
+   "why": "A Deflect leírása homályos volt (809.1.c); Deathknell csak a trashbe kerülő halálra fut (808.1.d.1)."
+  },
+  "Chakram Dancer": {
+   "short": "Ambush: olyan battlefieldre is kijátszható, ahol már van unitod, és ilyenkor Reactionje van, tehát bárki körében, folyó combatba is érkezhet. Kijátszáskor az ott álló többi unitod Shieldet kap erre a körre: +1 Might, amíg defender.",
+   "why": "A 'bármikor ... és beszáll a harcba' túlzás: a Reaction csak ilyen battlefieldre játszva jár, és harc csak akkor van, ha ott combat folyik (822.1.b, 814.1.c)."
+  },
+  "Chemtech Cask": {
+   "short": "Amikor az ellenfél körében kijátszol egy spellt, exhaustolhatod a Caskot, és kapsz egy exhausted Gold gear tokent. Mivel a Cask exhaustolódik, ellenféli körönként legfeljebb egy Goldot ad. Counterelt spell nem számít kijátszottnak, arra nincs Gold.",
+   "why": "Az 'exhaustolva kapsz' alanya nem egyértelmű: a costot a Cask exhaustolásával fizeted; counter: 426.1.b."
+  },
+  "Clocktower Guardian": {
+   "short": "Kijátszáskor, és amikor holdolsz egy battlefieldet, ahol ő áll, Predict 3: megnézed a Main Deck felső 3 lapját, bármennyit recycle-ölsz, a többit tetszőleges sorrendben visszarakod. Deathknell: amikor meghal, banisheled a deck felső lapját, és kijátszhatod Energy cost nélkül, a Power costot fizetve.",
+   "why": "A 'amikor holdol' homályos: a hold effect akkor fut, ha a unit ott áll, amikor a battlefieldet holdolod (383.4.d.2.a)."
+  },
+  "Cloth Armor": {
+   "short": "Quick-Draw: Reactionje van, bármikor kijátszható, és a play effectje egy saját unitodra csatolja. A felszerelt unit Shield 2-t kap: +2 Might, amíg defender. Equip: 1 Mind Powerért a saját Main Phase-edben másik saját unitra is átrakhatod.",
+   "why": "Hiányzott az Equip cost és időzítése (818.1.c.2, 381.1); a csatolás play trigger, nem azonnali (819.1.d)."
+  },
+  "Commander Ledros": {
+   "short": "Kijátszáskor bármennyi saját unitot megölhetsz additional costként, mindegyik 1 Order Powerrel csökkenti a costját, a 6 Energyt mindig fizetni kell. Deflect: az ellenfél spellje vagy abilityje 1 bármilyen Powerrel többe kerül, ha őt választja. Ganking: battlefieldről battlefieldre mozoghat.",
+   "why": "A Deflect leírása ('drágább rá mutatni') pontatlan (809.1.c, 809.1.c.1)."
+  },
+  "Corina Veraza": {
+   "short": "Valahányszor battlefieldre mozog, kapsz oda három 1 Mightú Recruit unit tokent. Kijátszáskor fizethetsz plusz 1 Energy és 1 Order Power költséget: ekkor ready lép be, így még abban a körben mozoghat. A közvetlenül battlefieldre kijátszás nem Move, arra nincs token.",
+   "why": "Az Accelerate kijátszáskori plusz költség jellege nem volt kimondva (805.1.b, 805.2.a)."
+  },
+  "Cosmic Vista": {
+   "short": "Amikor a köröd elején holdolod ezt a battlefieldet, és ekkor üres a Rune Decked, további 1 pontot kapsz. Ez nem conquerből jön, ezért akár a győztes pont is lehet. A hold a Channel Phase előtt van, így a Rune Decknek már a köröd kezdetén üresnek kell lennie.",
+   "why": "Az 'előző kör végén' időzítés pontatlan: a feltételt a holdkor, a saját Beginning Phase-edben nézi (383.4.d.2.a, 473.1.a.1)."
+  },
+  "Crowd Favorite": {
+   "short": "Hunt: amikor ott áll egy battlefielden, amelyet conquerelsz vagy holdolsz, 1 XP-t kapsz. Spend 2 XP: a saját Main Phase-edben, exhausted állapotban is, +1 Might buffot adhatsz neki, ha még nincs rajta buff. Ha már van, az XP elvész.",
+   "why": "A 'conquerel vagy holdol' homályos: a unit jelenléte számít (823.1.c.1, 383.4.c.2.a, 383.4.d.2.a)."
+  },
+  "Cull": {
+   "short": "Equip: 1 Chaos Power, a saját Main Phase-edben egy saját unitodra rakhatod. A felszerelt unit +1 Mightot kap, és amikor részt vesz egy battlefield conquerében, kapsz egy exhausted Gold gear tokent. A Gold később megölve és exhaustolva 1 bármilyen Powert ad.",
+   "why": "Hiányzott az Equip cost (818.1.c.2); az 'elfoglal' homályos (383.4.c.2.a); a Goldhoz exhaust is kell, nem csak feláldozás."
+  },
+  "Curtain Call": {
+   "short": "Egy módot választasz: húzol 1-et, 2 damage egy battlefielden álló unitnak, 3 damage egy base-ben álló unitnak, vagy -4 Might erre a körre egy battlefielden álló unitnak. Kijátszáskor külön fizethetsz plusz 1 Energyt, 1 bármilyen Powert, illetve 1 Energy és 1 Powert: mindegyik egy újabb, eddig nem választott módot ad. Csak a saját körödben.",
+   "why": "A három Repeat cost értéke és a kijátszáskori fizetés nem szerepelt (820.1.c.1, 820.1.c.2)."
+  },
+  "Danger Zone": {
+   "short": "Reaction: bármikor kijátszható, az összes Mech unitod +1 Mightot kap erre a körre. Kijátszáskor plusz 1 Energy és 1 Fury vagy Mind Power fizetésével kétszer hat, így +2-t kapnak. Csak a resolve-kor boardon lévő Mechekre hat.",
+   "why": "A [C] domainje nem volt megnevezve (Fury vagy Mind), és a Repeat kijátszáskori fizetése sem (820.1.c.1)."
+  },
+  "Deadbloom Predator": {
+   "short": "Deflect: az ellenfél spellje vagy abilityje 1 bármilyen Powerrel többe kerül, ha őt választja. Kijátszhatod olyan battlefieldre is, amelyet egy ellenfél kontrollál és ahol unitja áll: ott combat lesz, és te vagy az attacker. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A 'tartja' összekeverhető a holddal: a kártya occupied enemy battlefieldet, vagyis ellenfél által kontrolláltat kér (809.1.c)."
+  },
+  "Call to Battle": {
+   "short": "Egy saját unitodat egy általad kontrollált battlefieldre mozgatod, majd egy ellenfél köteles oda mozgatni egy általa választott saját unitját. Így ott combat lesz, amelyben ő az attacker, te a defender. Csak a saját körödben játszható ki.",
+   "why": "A 'tartott' összekeverhető a hold fogalmával; a kártya controlt kér (452)."
+  },
+  "Demacian Standard": {
+   "short": "Deploy: csak battlefieldre játszható ki, és meghal, ha egy ellenfél ott holdol. Amikor egy vagy több saját unitod ott támad, egyikük +2 Mightot kap erre a körre. Amikor ott holdolsz, visszaveheted a tulajdonosa kezébe.",
+   "why": "A 'tartja' a controlt sugallja, de a kártya holdot kér, ami a Beginning Phase-beli scoring (830.1.b, 383.4.d, 471.2)."
+  },
+  "Demon Shade": {
+   "short": "Egy saját unitodat egy open battlefieldre mozgatod, vagyis ahol nincs unit és senki nem kontrollálja. Ha nincs open battlefield, ehelyett Gankinget adhatsz neki erre a körre. Kézből csak a saját körödben; Hiddenként [A]-ért elrejtve a következő körtől 0 costért, Reactionként jön, de csak az ottani unitodat választhatod.",
+   "why": "A 'nem tartott' összekeverhető a holddal: open = unoccupied és uncontrolled; a kijátszási időzítés is hiányzott (811.1.b, 811.1.d.2)."
+  }
+ },
+ "checked": 111,
+ "conflicts": []
+}
