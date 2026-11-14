@@ -41,15 +41,14 @@ function useGlobalHandlers() {
 }
 
 function Footer() {
+  const col = (t: string, html: string) => <section><h4>{t}</h4><div dangerouslySetInnerHTML={{ __html: html }} /></section>;
   return (
-    <footer id="foot" dangerouslySetInnerHTML={{ __html:
-      '<p><strong>Készítette: Daneehunter.</strong> Nem hivatalos, rajongói segédeszköz, nem kereskedelmi célú.<br>Kérdés vagy hibajelzés esetén Discordon: <strong>daneehunter</strong>, jelölj be bátran.</p>'
-      + '<p>Az oldal kódja, a kártya és szabály megfeleltetés és a magyar magyarázatok AI segítségével készültek: Claude (Anthropic), Claude Fable 5.2 és Claude Opus 5.5 modell. Az AI által írt magyarázat tévedhet, a hivatalos szabályszöveg az irányadó.</p>'
-      + '<p>Riftbound szabálykereső was created under Riot Games\' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.</p>'
-      + '<p>A Riftbound, a League of Legends, a kártyanevek, a kártyaszövegek, a kártyaképek és a Core Rules szövege a Riot Games, Inc. tulajdona, minden jog a Riot Gamest illeti. Hivatalos oldal: <a href="https://playriftbound.com/">playriftbound.com</a>, hivatalos szabályok: <a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a>, hivatalos kártyaadatbázis: <a href="https://playriftbound.com/en-us/card-gallery/">Card Gallery</a>.</p>'
-      + '<p>Források: a szabályszöveg a Riftbound Core Rules (Last Updated ' + META.rules_updated + ') angol eredetije, változtatás nélkül. A ban lista (' + META.ban_updated + ') a Rules Hubról, a ' + BF.from + '-tól érvényes kiegészítés a <a href="' + BF.url + '">' + esc(BF.title) + '</a> cikkből, az errata a Rules Hubról és az onnan hivatkozott cikkekből származik: ' + META.articles.map((a: any) => '<a href="' + a.u + '">' + esc(a.t) + '</a>').join(', ') + '. A kártyaadat a hivatalos Card Galleryből készült közösségi pillanatkép (LouisCourrian/riftbound-cards, ' + META.cards_snapshot + '), a Radiance domainjavítás a nyomtatott lapok sorszámozása alapján, a kártyaképek a Riot hivatalos szerveréről töltődnek be.</p>'
-      + '<p>A kártya és szabály közti megfeleltetés automatikus, a "Hogyan érinti ezt a lapot" magyarázat pedig a készítő levezetése a Core Rules szövegéből. Egyik sem hivatalos ruling: versenyen a judge és a Core Rules teljes szövege dönt.</p>'
-      + '<p><a href="./riftbound-szabalykereso.html" download>Az oldal egyetlen, offline is működő HTML fájlként</a></p>' }} />
+    <footer id="foot">
+      {col('Készítő', '<p><strong>Daneehunter</strong></p><p>Nem hivatalos, rajongói segédeszköz, nem kereskedelmi célú.</p><p>Kérdés vagy hibajelzés: Discordon <strong>daneehunter</strong>, jelölj be bátran.</p>')}
+      {col('AI és pontosság', '<p>Az oldal kódja, a kártya és szabály megfeleltetés és a magyar magyarázatok AI segítségével készültek: Claude (Anthropic), Claude Fable 5.2 és Claude Opus 5.5 modell.</p><p>Az AI által írt magyarázat tévedhet. A megfeleltetés automatikus, a "Hogyan érinti ezt a lapot" a Core Rules szövegéből levezetve készült, egyik sem hivatalos ruling: versenyen a judge és a Core Rules dönt.</p>')}
+      {col('Források', '<p>Szabályszöveg: Riftbound Core Rules (Last Updated ' + META.rules_updated + '), angol eredeti, változtatás nélkül.</p><p>Ban lista (' + META.ban_updated + ') a Rules Hubról, ' + BF.from + '-tól: <a href="' + BF.url + '">' + esc(BF.title) + '</a>.</p><p>Errata: ' + META.articles.map((a: any) => '<a href="' + a.u + '">' + esc(a.t) + '</a>').join(', ') + '.</p><p>Kártyaadat: hivatalos Card Gallery közösségi pillanatkép (LouisCourrian/riftbound-cards, ' + META.cards_snapshot + '), a Radiance javítások a nyomtatott lapok alapján. A kártyaképek a Riot hivatalos szerveréről töltődnek be.</p>')}
+      {col('Jogi', '<p>Riftbound szabálykereső was created under Riot Games\' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.</p><p>A Riftbound, a League of Legends, a kártyanevek, kártyaszövegek, kártyaképek és a Core Rules szövege a Riot Games, Inc. tulajdona.</p><p><a href="https://playriftbound.com/">playriftbound.com</a> · <a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a> · <a href="https://playriftbound.com/en-us/card-gallery/">Card Gallery</a></p>')}
+    </footer>
   );
 }
 

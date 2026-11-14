@@ -6,7 +6,7 @@
   "scripts": {
     "data": "cd ../src && python3 build_data.py && python3 export_web.py && rm -f data.json",
     "dev": "vite",
-    "build": "tsc -b && vite build && SINGLE=1 vite build && cp dist-single/index.html dist/riftbound-szabalykereso.html",
+    "build": "tsc -b && vite build && SINGLE=1 vite build",
     "preview": "vite preview"
   },
   "dependencies": {

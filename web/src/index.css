@@ -393,3 +393,16 @@ table.ltable td { border-bottom: 1px solid var(--line); padding: 6px 10px; verti
 .pm-uinfo img { width: 110px; border-radius: 6px; cursor: zoom-in; }
 .pm-uinfo b { font-family: var(--f-head); font-size: 17px; }
 .pm-uinfo p { margin: 4px 0; } .pm-uinfo ul { margin: 4px 0; padding-left: 18px; }
+
+/* ---------- Széles képernyő: a tartalom kitölti a helyet ---------- */
+.wrap { max-width: min(1840px, 96vw); padding: 0 clamp(14px, 2vw, 36px) 40px; }
+.cols { grid-template-columns: minmax(300px, 440px) 1fr; gap: clamp(16px, 1.6vw, 28px); }
+@media (max-width: 860px) { .cols { grid-template-columns: 1fr; } }
+@media (min-width: 1500px) { .learn { grid-template-columns: 300px minmax(0, 1fr); } .lesson > p, .lesson > div > p, .lesson .callout, .lesson .lsteps, .lesson h3 { max-width: 90ch; } }
+footer#foot { max-width: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 32px; margin-top: 40px; padding-top: 22px; font-size: 13px; line-height: 1.6; }
+@media (max-width: 1100px) { footer#foot { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { footer#foot { grid-template-columns: 1fr; } }
+footer#foot h4 { margin: 0 0 8px; font-family: var(--f-display); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+footer#foot section { padding-top: 10px; border-top: 1px solid var(--gold-line); }
+footer#foot { border-top: 0; }
+.empty p, .empty .note { margin-left: auto; margin-right: auto; }

@@ -185,6 +185,7 @@ export function LearnView({ hash }: { hash: string }) {
   useEffect(() => { if (m) window.scrollTo({ top: 0 }); }, [hash]);
   if (!L) return <div className="panel pad"><p className="note">Betöltés…</p></div>;
   const chs = L.chapters;
+  if (!chs.length) return <div className="panel pad"><h2>Tanulás</h2><p className="lead">A fejezetek és az interaktív szituációk ellenőrzése folyamatban van, hamarosan itt lesznek. Addig a <a href="#kezikonyv">Kézikönyv</a> és a kártyánkénti magyarázatok használhatók.</p></div>;
   const ch = m && !m[1] ? chs.find((c) => c.id === m[2]) : undefined;
   const sc = m && m[1] ? L.scenarios.find((s) => s.id === m[2]) : undefined;
   const total = chs.length + L.scenarios.length;
