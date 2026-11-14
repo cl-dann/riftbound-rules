@@ -1,0 +1,51 @@
+{
+ "fixes": {
+  "Lucian, Merciless": {
+   "short": "Kijátszáskor ráteheted az egyik Equipmentedet az Equip költség kifizetésével, akkor is, ha az már máson van; ha a költségben van [A] (bármely domainű Power), 1-gyel kevesebbet fizetsz. Hogy a lap saját domainjére szóló [C] Equip költség csökken-e, nem eldöntött kérdés. Körönként az első alkalommal, amikor részt vesz egy battlefield conquerében, ready lesz. Ganking nélkül onnan így csak a base-be léphet.",
+   "notes": [
+    [
+     "821.1.c",
+     0,
+     "[Weaponmaster]: play effect. A resolve-kor egy Equipmented Equip costját [A]-val olcsóbban kifizetve Lucianra csatolhatod."
+    ],
+    [
+     "821.1.c.3,821.1.c.5",
+     0,
+     "A kedvezmény csak akkor érvényesül, ha az Equip cost tartalmaz [A]-t; ha nem, a cost teljes áron fizethető. Ha nem fizethető ki, az Equipment a helyén marad."
+    ],
+    [
+     "821.1.c.3,135.2.e.6",
+     2,
+     "Hogy a lap saját domainjére szóló [C] Equip cost (például Jagged Cutlass, Long Sword) [A]-t tartalmazónak számít-e, vagyis csökken-e, a Core Rules nem mondja ki. Judge döntse el."
+    ],
+    [
+     "383.1,383.4.c.2.a",
+     0,
+     "\"The first time\" trigger: körönként az első olyan conquerre fut le, amelynél Lucian ott van a battlefielden."
+    ],
+    [
+     "416.1.c",
+     0,
+     "Ha a resolve-kor már ready, a ready nem csinál semmit."
+    ],
+    [
+     "144.4.b,810.1.b",
+     1,
+     "A ready után újra tehet Standard Move-ot. Ganking nélkül a battlefieldről csak a base-be léphet, onnan abban a körben már nem tud újra támadni."
+    ],
+    [
+     "383.4.c.2.c",
+     0,
+     "Akkor is triggerel, ha a conquer pontja elmarad vagy kicserélődik."
+    ]
+   ],
+   "why": "A short és a 821.1.c.3 note (flag 0) tényként állította, hogy a saját domainű ([C]) Equip cost nem csökken. Ezt a Core Rules nem mondja ki (821.1.c.3 csak [A]-ról szól, 135.2.e.6 a [C]-t definiálja), és a Jax, Unrelenting ugyanerre flag 2-t ad. A short semlegesítve, a [C] kérdés külön flag 2 note."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Kayle, Justified: a 442.1.b note (flag 1) a negyedik Empower aktiválásról azt mondja, nem adna semmit; hogy ilyenkor aktiválható-e egyáltalán, a Core Rules nem rögzíti (442.1.c analógia). Nem javítottam.",
+  "Lucian, Gunslinger: az utolsó note (359.3.f.2, flag 0) szerint ha Lucian elmozdul, a trigger mistargetel; a 'here' target-megkötés resolve-kori újraértékelése levezetés, flag 1 pontosabb lehet."
+ ]
+}

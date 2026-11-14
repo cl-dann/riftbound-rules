@@ -1,0 +1,81 @@
+{
+ "fixes": {
+  "Aphelios, Exalted": {
+   "notes": [
+    [
+     "818.1.b,435.1.a",
+     0,
+     "Akkor triggerel, amikor egy Equipment ténylegesen rácsatolódik: Equip abilityvel vagy bármilyen attach effecttel."
+    ],
+    [
+     "435.1.g",
+     0,
+     "Ha a már rajta lévő Equipmentet csatolnád rá újra, nem történik semmi, trigger sincs. Másik unitról átrakott Equipment viszont számít (435.1.f)."
+    ],
+    [
+     "355.3",
+     0,
+     "A módot a trigger chain-re kerülésekor választod. Egy körben mindhárom mód egyszer választható, tehát legfeljebb három hasznos trigger van körönként."
+    ],
+    [
+     "355.3,403.4",
+     1,
+     "Ha mindhárom módot kiválasztottad már a körben, a negyedik triggernek nincs választható módja: a 403.4 szerint lekerül a chainről, és nem csinál semmit."
+    ],
+    [
+     "431.2,431.3",
+     0,
+     "\"Channel 1 rune exhausted\": a rune exhausted lép be. Üres Rune Decknél nem történik semmi."
+    ],
+    [
+     "355.10,427.1.c",
+     0,
+     "A [Buff] módnál a friendly unit target, Aphelios maga is lehet. Már buffolt unit választható, de nem kap másodikat."
+    ],
+    [
+     "381.1",
+     1,
+     "Az Equip alapból csak a saját Main Phase-edben megy, így a trigger is jellemzően ott keletkezik. A ready-vé tett 2 rune azonnal újra használható."
+    ]
+   ],
+   "why": "A note flag 2-vel azt állította, hogy a Core Rules nem mondja ki, mi történik választható mód nélkül; a 403.4 (403.2 alapján a mode is választás) kimondja: a trigger lekerül a chainről."
+  },
+  "Ambessa, The Wolf": {
+   "notes": [
+    [
+     "827.1.c.1,381.1",
+     0,
+     "Empower [3] és 1 Body Power: csak a saját Main Phase-edben, Open State-ben aktiválható, combat közben nem."
+    ],
+    [
+     "828.1.b.1,740.2.c",
+     1,
+     "Empowered állapotban combaton kívül nem kaphat sebzést, bármi a forrás. Combat közben viszont a spellek és abilityk sebzése is éri, nem csak a combat damage."
+    ],
+    [
+     "358.3.a",
+     0,
+     "Sebző spell combaton kívül is ráolvasható, de a resolve-kor a sebzés nem történik meg."
+    ],
+    [
+     "429.1.a.1",
+     1,
+     "Csak a sebzéstől véd. Kill, banish, kézbe visszavétel, stun és Might csökkentés ugyanúgy hat rá."
+    ],
+    [
+     "443.1,142.4.b",
+     1,
+     "Disempower után elveszíti a +3 Mightot és a védelmet. Ha ekkor sebzés van rajta, a 4-re eső Might miatt meghalhat."
+    ]
+   ],
+   "why": "A 467.2.c.10 a combat damage kiosztásáról szól olyan unitnál, amely nem sebezhető, ezt a note állítását nem támasztja alá; helyette 828.1.b.1 (Empowered ability) és 740.2.c (\"in combat\" definíció)."
+  },
+  "Azir, Ascendant": {
+   "short": "Körönként egyszer 1 Calm Powerért helyet cserél egy saját unitoddal, és ha annak van Equipmentje, egyet áttehetsz Azirra. Exhausted állapotban is működik, a saját Main Phase-edben vagy bárki körében showdown alatt. Mindkét unit mozgásnak számít, ezért a mozgásra figyelő képességeik beindulnak.",
+   "why": "Mindkét unit oda érkezik, ahol egy saját unitod állt, így ellenséges battlefieldre csak ott kerülhet, ahol már showdown vagy combat zajlik (190.4.a, 190.3.a.1, 452: csak uncontested battlefield lesz Contested). A \"harc indulhat\" félrevezető, a short a ténylegesen biztos következményt (Move, 421.1) mondja."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

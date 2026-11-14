@@ -1,0 +1,102 @@
+{
+ "fixes": {
+  "Decree of Focus": {
+   "short": "Reakcióként +4 Mightot ad egy saját unitodnak, ha az éppen ellenséges Fury unittal harcol, vagy egy ellenséges Fury spell célozza. Ilyen unit nélkül nem játszható ki. Ellenséges ability célzása nem teljesíti a feltételt, és a csak token unitok elleni harc sem, mert a tokennek nincs domainje.",
+   "why": "A short általánosan azt állította, hogy 'képességek és tokenek ellen nem működik'. Ez túlzó: ha a unit enemy Fury unittal van combatban, a lap ability vagy token jelenléte mellett is kijátszható; csak az ability célzása és a kizárólag token elleni combat nem teljesíti a feltételt (355.9.b, 355.9.a.2, 185.3.b)."
+  },
+  "Death Mark": {
+   "short": "A decked felső 3 lapját a trashbe teszed, és kapsz egy 0 Mightú Shadow Clone tokent. A clone támadáskor banishelhet egy unitot a trashedből, hogy +4 Mightot kapjon. A lap a trashből is újra kijátszható 1 Energy és 2 bármilyen Powerért, utána banishelődik. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A Flow cost [1][A][A]: a Power domainje hiányzott a shortból, bármilyen domainű Power fizethető (135.2.e.5.a)."
+  },
+  "Death from Below": {
+   "short": "Megöl egy battlefielden álló unitot. Ha annak 3 vagy kevesebb Mightja volt, a lapot 1 bármilyen Powerért újra kijátszhatod a trashből, akár többször egymás után, ha mindig kis unitot ölsz. Az ellenfél az újrajátszási lehetőségre is reagálhat. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Az újrajátszás costja [A]: a Power domainje hiányzott a shortból, bármilyen domainű Power fizethető (135.2.e.5.a, 356.1.a)."
+  },
+  "Darius, Trifarian": {
+   "notes": [
+    [
+     "420.4.a",
+     0,
+     "A trigger akkor fut le, amikor a kör második kártyájának kijátszása resolve-val befejeződött."
+    ],
+    [
+     "416.1.c",
+     0,
+     "Ha Darius már ready, a ready rész nem csinál semmit, a +2 Might így is jár."
+    ],
+    [
+     "384.2",
+     0,
+     "Bárhol működik a boardon, base-ben is. Az opponent körében is triggerel, ha ott játszol ki második kártyát (például két [Reaction] spell)."
+    ],
+    [
+     "420.4.a.1,426.1.b",
+     0,
+     "A counterelt kártya a kijátszásra triggerelő abilityk számára nem számít kijátszottnak. Ha a második lapodat counterelik, a trigger nem fut le rá."
+    ],
+    [
+     "420.4.b,426.1.b",
+     2,
+     "Nyitott kérdés, judge döntse el: a Core Rules nem rögzíti, hogy a counterelt lap beleszámít-e a \"second card in a turn\" számlálásba, vagyis hogy egy counterelt második lap után a következő lapod második vagy harmadik lapnak számít-e. A 426.1.b csak a trigger kiváltását zárja ki, a 420.4.b a nem trigger ellenőrzéseknél a finalizálást nézi."
+    ],
+    [
+     "383.2.c.1,420.4.a",
+     1,
+     "Ha maga Darius a kör második kártyája, a trigger lefut: a feltétel a kijátszás befejeztével teljesül, ugyanakkor, amikor Darius a boardra lép, és az ilyenkor belépő objektum triggere kiértékelődik."
+    ]
+   ],
+   "why": "A 4. note flag 1-gyel tényként állította, hogy counterelt második lap után a következő sikeresen resolve-oló lap számít másodiknak. A 426.1.b csak a trigger kiváltását zárja ki, a számlálást nem rendezi (vö. 420.4.b), ezért ez nyitott kérdés: külön flag 2 pontba került."
+  },
+  "Dazzling Aurora": {
+   "notes": [
+    [
+     "317.1.a",
+     0,
+     "A trigger a saját köröd Ending Stepjében fut le, és kötelező, nincs \"may\"."
+    ],
+    [
+     "355.10.a",
+     0,
+     "A deck nem Public zóna, itt nincs target. Az első felfedett unit jön, nem te választasz."
+    ],
+    [
+     "432.1.c,432.1.c.1",
+     0,
+     "Ha nincs unit a deckben, az egész decket felfeded Burn Out nélkül, a banish és a kijátszás negálódik."
+    ],
+    [
+     "432.1.c.1",
+     2,
+     "Nyitott kérdés, judge döntse el: a 432.1.c.1 szerint a további instructionök negálódnak, ezért nem egyértelmű, hogy a \"recycle the rest\" ilyenkor végrehajtódik-e (a deck véletlen sorrendbe kerül), vagy a lapok érintetlenül a helyükön maradnak."
+    ],
+    [
+     "417.5",
+     0,
+     "A felfedett nem unit lapok véletlen sorrendben a deck aljára kerülnek."
+    ],
+    [
+     "356.1.b.1,356.1.b.3",
+     0,
+     "\"Ignoring its cost\": az Energy és a Power cost is nulla. Optional additional cost (például Accelerate) kifizethető."
+    ],
+    [
+     "428.1,420.4.a",
+     1,
+     "Errata: a unit előbb banishelődik, és a Banishmentből játszod ki. Ha a kijátszás meghiúsul, a unit a Banishmentben marad, nem megy vissza a deck aljára. Nem kézből érkezik."
+    ],
+    [
+     "355.2.a",
+     0,
+     "A unit a base-edbe vagy egy általad kontrollált battlefieldre kerül, exhausted."
+    ]
+   ],
+   "why": "A 3. note flag 0-val állította, hogy unit nélküli decknél az összes lap recycle-ölődik. A 432.1.c.1 a további instructionök negálását írja, így a recycle végrehajtása nem dönthető el egyértelműen: a recycle rész flag 2 pontba került."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Crumbling Sands: az \"another spell\" a megcélzott spellhez viszonyított értelmezése (short, notes flag 1) logikus, de a Core Rules szövege nem rögzíti; nem javítottam.",
+  "Dusk Rose Lab: a short szerint az egyetlen ott álló unit megölése után a battlefieldet abban a körben nem holdolod. A 190.4.c/323.5 Open State-et és cleanupot ír elő; a Beginning Step trigger utáni cleanup ezt adja, de a Beginning Phase állapotát a Core Rules nem mondja ki külön. Nem javítottam."
+ ]
+}

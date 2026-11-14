@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "Platewyrm Egg": {
+   "short": "Exhaustolva 1 Energyt ad, Empowered állapotban 2-t; ez Reaction, bármikor, fizetés közben is lehívható. Empowerhez 1 Energy és exhaust kell, és csak a saját Main Phase-edben, showdownon kívül aktiválható, ezért abban a körben már nem termel. Exhausted lép be.",
+   "why": "A short a Reaction Add ability mellett 'bármikor'-t írt, de az Empower időzítését nem: az Empower keyword nélküli gear activated ability, csak saját Main Phase-ben, showdownon kívül (151.2), így a short félreérthető volt."
+  }
+ },
+ "checked": 89,
+ "data_issues": [],
+ "open": []
+}

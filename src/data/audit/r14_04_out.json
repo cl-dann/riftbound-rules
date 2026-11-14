@@ -1,0 +1,13 @@
+{
+ "fixes": {
+  "Vaults of Helia": {
+   "short": "Hátrány: ha a köröd elején itt tartod a battlefieldet, abban a körben minden nem token unitod 1 Energyvel drágább, az \"ignoring its cost\" módon kijátszottak is (csak az \"ignoring any and all costs\" mentesít). Spellekre és gearekre nem vonatkozik.",
+   "why": "A short szerint 'még az ingyen kijátszottak is' drágábbak, ez ellentmond a saját 356.5.a note-nak: az 'ignoring any and all costs' (pl. Bone Skewer) a teljes costot 0-ra állítja, ott a +1 sem számít. A 356.1.b.3 szerint csak az 'ignoring its cost' esetén jön rá a cost increase."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Ziggs, Short-Fused: a Bomb Deathknellje akkor resolve-ol, amikor a Bomb már a trashben van; hogy ekkor még 'friendly gear' abilityjének számít-e (így 3 sebzés), a Core Rules nem mondja ki egyértelműen (359.3.f.4 csak a trigger saját enemy/friendly hivatkozásairól szól). A note 418.6.b.2,715.1 flag 1-gyel ezt levezetésként állítja; a tervezői szándék valószínűleg 3 sebzés, de hivatalos megerősítés nincs."
+ ]
+}

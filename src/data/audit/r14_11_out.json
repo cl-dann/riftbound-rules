@@ -1,0 +1,87 @@
+{
+ "fixes": {
+  "Mischievous Marai": {
+   "notes": [
+    [
+     "811.1.b,811.6",
+     0,
+     "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."
+    ],
+    [
+     "383.2.a.1",
+     0,
+     "A \"to a battlefield\" a trigger feltételének része. Base-be kijátszva a trigger nem fut le."
+    ],
+    [
+     "355.10,355.8",
+     0,
+     "Az enemy unit target, és Marai battlefieldjén kell lennie. Ha ott nincs enemy unit, a trigger nem kerül chain-re."
+    ],
+    [
+     "355.2.a,811.6",
+     1,
+     "Unit alapból csak általad kontrollált battlefieldre játszható, ahol enemy unit jellemzően csak combat alatt áll. A sebzés ezért a gyakorlatban facedown-ból, [Reaction]-ként, combat közben használható."
+    ],
+    [
+     "359.3.f.2",
+     0,
+     "Kézből kijátszva a \"here\" a resolve-kor ellenőrzött hivatkozás: ha Marai addigra elmozdul arról a battlefieldről, a target már nincs \"here\", a trigger mistargetel."
+    ],
+    [
+     "811.1.d.3.a",
+     0,
+     "Facedown-ból kijátszva a play effect a forrás adataiból határozza meg, melyik battlefieldről játszották ki. Ha Marai a resolve előtt elhagyja a boardot, ez az információ nem érhető el, és a trigger mistargetel (a szabály példája pontosan ezt mondja ki)."
+    ],
+    [
+     "811.1.d.3.a",
+     2,
+     "Facedown-ból kijátszva, ha Marai a resolve előtt a boardon marad, de egy másik battlefieldre mozog, a Core Rules nem mondja ki egyértelműen, hogy a \"here\" a kijátszás helyét vagy Marai új helyét jelenti. Judge döntse el."
+    ],
+    [
+     "359.3.e.12",
+     1,
+     "Kézből kijátszva, ha Marai a resolve előtt elhagyja a boardot, a \"here\" helye null, ezért a damage instruction ignorálódik."
+    ],
+    [
+     "142.4.b,323.4",
+     0,
+     "A 2 damage a uniton marad: ha eléri a unit Mightját, a következő cleanupnál meghal. Combat közben a combat damage ehhez adódik hozzá."
+    ]
+   ],
+   "why": "A korábbi flag 2 pont szerint nyitott, mi történik, ha Marai a resolve előtt elhagyja a boardot; facedown-ból kijátszva a 811.1.d.3.a példája ezt kimondja (mistarget). A flag 0 \"elmozdul, mistargetel\" pont facedown esetre nem igazolt, mert a 811.1.d.3.a szerint a play effect a kijátszás helyét nézi: szétválasztva kézből (359.3.f.2) és facedown (flag 2) esetre."
+  },
+  "Not So Fast": {
+   "notes": [
+    [
+     "355.9.a.2,355.9.b,740.1.a",
+     0,
+     "A target chainen lévő enemy spell vagy ability, amely legalább egy friendly unitot vagy geart targetel: a sajátodat, 2v2-ben a teammate-edét is."
+    ],
+    [
+     "355.10.d,383.4.b.3",
+     1,
+     "\"Chooses\" itt targetelést jelent. Az \"all units\" típusú effect (például Flurry of Blades) nem választ semmit, ezért nem counterelhető vele."
+    ],
+    [
+     "359.3.e.9.a",
+     1,
+     "A mistargetelt, de még boardon lévő unit továbbra is kiválasztottnak számít. Amelyik zónát váltott (meghalt, kézbe került), az már nem. A szabály a targetek számának hivatkozásáról szól, a \"chooses\" feltételre ez levezetés."
+    ],
+    [
+     "426.1.a,426.1.c",
+     0,
+     "A counterelt ability nem csinál semmit, a costja nem jár vissza. A forrása (unit, gear, legend) a boardon marad, később újra aktiválható vagy triggerelhet."
+    ],
+    [
+     "430.2",
+     0,
+     "Add abilityre nem lehet reagálni, mert azonnal resolve-ol."
+    ]
+   ],
+   "why": "A \"friendly\" a 740.1.a szerint a teammate objektumait is jelenti, a note csak az általad kontrolláltakat említette; a 359.3.e.9.a a targetek számának hivatkozásáról szól, a \"chooses\" feltételre alkalmazása levezetés, ezért flag 1."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

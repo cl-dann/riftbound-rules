@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "Cataclysmic Duel": {
+   "short": "Minden játékos megtart egy saját unitot, minden más unit meghal, bárhol is áll. A gearek megmaradnak, a megölt unitokról az Equipmentek leválnak és a helyükön maradnak, a megtartott unit felszerelése rajta marad. Nem mutat rá senkire, így Deflect sem véd. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A short általánosan azt állította, hogy az Equipmentek leválnak; a 719.5 szerint csak a zónát váltó (megölt) unitokról válnak le, a megtartott unit Equipmentje csatolva marad."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

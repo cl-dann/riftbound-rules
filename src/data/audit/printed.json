@@ -409,10 +409,35 @@
   "Elnuk Herd": [
    "give a friendly unit",
    "give another friendly unit"
+  ],
+  "Teemo, Swift Scout": [
+   "instead of [C]",
+   "instead of [A]"
+  ],
+  "Danger Zone": [
+   "[Repeat] [1][C] (",
+   "[Repeat] [1][A] ("
+  ],
+  "Kai'Sa, Daughter of the Void": [
+   "[Add] [C].",
+   "[Add] [A]."
+  ],
+  "Sett, The Boss": [
+   "you may pay [C],",
+   "you may pay [A],"
+  ],
+  "Shurelya's Requiem": [
+   "[Equip] [C] ([C]:",
+   "[Equip] [A] ([A]:"
+  ],
+  "Spinning Axe": [
+   "[Equip] [C] ([C]:",
+   "[Equip] [A] ([A]:"
   ]
  },
  "eff": {
-  "Nazuman Ntofo": "[Shield 2] (+2 [S] while I'm a defender.)"
+  "Nazuman Ntofo": "[Shield 2] (+2 [S] while I'm a defender.)",
+  "Shurelya's Requiem": "Your units here have [Ganking]. (We can move from battlefield to battlefield.)"
  },
  "power_sym": {
   "Blade of the Exile": [

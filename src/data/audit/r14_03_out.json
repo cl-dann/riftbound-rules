@@ -1,0 +1,1 @@
+{"fixes": {}, "checked": 92, "data_issues": ["Teemo, Swift Scout: a szöveg \"instead of [C]\" formát ad, miközben a Hidden alapköltsége [A] (811.1.b). A short és a notes domain nélkül \"1 Power\"-t ír, így nem hibás, de a nyomtatott lapon érdemes ellenőrizni, hogy [C] vagy [A] áll-e."], "open": []}

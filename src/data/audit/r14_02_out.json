@@ -1,0 +1,47 @@
+{
+ "fixes": {
+  "Sett, The Boss": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Body és Order domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "369.1,370.1.c",
+     1,
+     "Az \"if ... would die ... instead\" replacement effect. A halál megtörténte előtt lép közbe, nem megy chain-re, az opponent nem tud rá reagálni."
+    ],
+    [
+     "135.2.e.6.c,415.4,702.2.b.1",
+     0,
+     "A cost: 1 Body vagy Order Power, a legend exhaustolása és a unit buffjának elköltése. Exhausted legenddel vagy buff nélküli unitra nem alkalmazható."
+    ],
+    [
+     "383.2.c.3.a",
+     0,
+     "A szabályzat pont ezt az esetet hozza példának: ha a halált heal, exhaust és recall váltja ki, a unit Deathknell abilityje nem triggerel, mert a halál nem történt meg."
+    ],
+    [
+     "458.1,458.3",
+     0,
+     "A recall nem Move: a \"when I move\" triggerek nem futnak le, és mozgást tiltó effect nem akadályozza meg."
+    ],
+    [
+     "460.1,143.2.b",
+     1,
+     "Errata: a régi szöveg \"when\"-nel kezdődött és nem healelt. Most egyértelműen replacement effect, a buff elköltése a cost része, és a unit healelődik, így a rajta maradó damage nem öli meg újra a recall után."
+    ],
+    [
+     "370.1.a.2,415.4",
+     1,
+     "Ha combatban több buffolt unitod hal meg egyszerre, csak egyet menthetsz meg, mert a legend csak egyszer exhaustolható. Ha utána conquerelsz, a \"When you conquer\" trigger újra readyzi."
+    ]
+   ],
+   "why": "Az utolsó note feltétel nélkül állította, hogy a conquer trigger utána readyzi a legendet; ez csak akkor történik meg, ha conquerelsz (a lap szövege, 383.4.c)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}
