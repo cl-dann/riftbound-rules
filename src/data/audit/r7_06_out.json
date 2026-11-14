@@ -1,0 +1,43 @@
+{
+ "fixes": {
+  "Lucian, Merciless": {
+   "short": "Kijátszáskor ráteheted az egyik Equipmentedet, akkor is, ha az már máson van. Az Equip költségéből 1 tetszőleges Power ([A]) lejön, de csak ha a költségben van [A]; például egy konkrét domain Powerébe kerülő Equip teljes áron megy. Körönként az első alkalommal, amikor részt vesz egy battlefield conquerében, ready lesz. Ganking nélkül onnan így csak a base-be léphet.",
+   "notes": [
+    [
+     "821.1.c",
+     0,
+     "[Weaponmaster]: play effect. A resolve-kor egy Equipmented Equip costját [A]-val olcsóbban kifizetve Lucianra csatolhatod."
+    ],
+    [
+     "821.1.c.3,821.1.c.5",
+     0,
+     "A kedvezmény csak akkor érvényesül, ha az Equip cost tartalmaz [A]-t. Ha nem (például egy [C] Equip cost), a cost teljes áron fizethető. Ha nem fizethető ki, az Equipment a helyén marad."
+    ],
+    [
+     "383.1,383.4.c.2.a",
+     0,
+     "\"The first time\" trigger: körönként az első olyan conquerre fut le, amelynél Lucian ott van a battlefielden."
+    ],
+    [
+     "416.1.c",
+     0,
+     "Ha a resolve-kor már ready, a ready nem csinál semmit."
+    ],
+    [
+     "144.4.b,810.1.b",
+     1,
+     "A ready után újra tehet Standard Move-ot. Ganking nélkül a battlefieldről csak a base-be léphet, onnan abban a körben már nem tud újra támadni."
+    ],
+    [
+     "383.4.c.2.c",
+     0,
+     "Akkor is triggerel, ha a conquer pontja elmarad vagy kicserélődik."
+    ]
+   ],
+   "why": "A short azt állította, hogy az Equip mindig 1 tetszőleges Powerrel olcsóbb; 821.1.c.3 szerint csak akkor csökken, ha az Equip cost tartalmaz [A]-t (pl. [C] Equip costnál nincs kedvezmény). Notes kiegészítve 821.1.c.3/821.1.c.5 ponttal."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

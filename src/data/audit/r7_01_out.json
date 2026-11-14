@@ -1,0 +1,126 @@
+{
+ "fixes": {
+  "Boneshiver": {
+   "short": "Equip: 1 Energy és 1 Body Power, a saját Main Phase-edben, showdownon kívül egy saját unitodra rakhatod. A felszerelt unit +2 Mightot kap, és amikor részt vesz egy battlefield conquerében, channelölsz 1 rune-t exhausted állapotban, ami ebben a körben még nem ad Energyt.",
+   "notes": [
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Energy és 1 Body Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +2 Mightot is kap."
+    ],
+    [
+     "383.4.c,431.2,164.2.a,164.2.b",
+     0,
+     "Conquer trigger: amikor a felszerelt unit conquerel, a Rune Deck tetejéről 1 rune kerül a boardra exhausted. Energyt ebben a körben más effect nélkül nem ad, de recycle-ölve (ehhez nem kell ready) 1 Powert igen."
+    ],
+    [
+     "431.3",
+     0,
+     "Üres Rune Decknél nem kapsz rune-t, és ez nem okoz büntetést."
+    ],
+    [
+     "718.2,721.2,719.5",
+     1,
+     "Csatolva a gear Rules Textje, így az Equip is inaktív és nem aktiválható: a gear a saját Equipjével nem rakható át másik unitra (ez csak más attach effecttel lehetséges, például Weaponmasterrel, 821.1.c). Ha a felszerelt unit elhagyja a boardot, a gear leválik és a boardon marad, ekkor az Equip cost ismételt kifizetésével újra felszerelhető."
+    ]
+   ],
+   "why": "Short: az Equip időzítéséből hiányzott a \"showdownon kívül\" (151.2). Note: a \"csak Weaponmaster teheti meg\" túlzás, más attach effect (például Azir, Ascendant) is átcsatolhatja."
+  },
+  "Boots of Swiftness": {
+   "short": "Equip: 1 Chaos Power, a saját Main Phase-edben, showdownon kívül egy saját unitodra rakhatod. A felszerelt unit +2 Mightot és Gankinget kap: Standard Move-val battlefieldről közvetlenül másik battlefieldre léphet, plusz mozgást nem kap.",
+   "why": "Short: az Equip időzítéséből hiányzott a \"showdownon kívül\" (151.2), combat közben nem csatolható."
+  },
+  "Brutalizer": {
+   "short": "Equip: 1 Calm Power, a saját Main Phase-edben, showdownon kívül egy saját unitodra rakhatod. A felszerelt unit +1 Mightot kap, és abban a körben, amikor rácsatoltad, további +2-t, vagyis összesen +3-at. A következő körtől csak +1 jár, és csatolva a saját Equipje nem használható, így azzal nem rakható át.",
+   "notes": [
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Calm Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +1 Mightot is kap."
+    ],
+    [
+     "136.2.d",
+     0,
+     "A szabályzat név szerint idézi az Effect Textjét: \"If this was attached to me this turn, I have an additional +2 [S].\" A \"this\" a csatolt Brutalizert jelenti, a \"me\" a unitot."
+    ],
+    [
+     "137.3,718.4",
+     1,
+     "A gyakorlatban: az equipelés körében a unit +3 Mightot kap (+1 Might Bonus és +2 az Effect Textből), a következő körtől csak +1-et."
+    ],
+    [
+     "718.2,721.2,821.1.c,719.5",
+     1,
+     "A +2 csak a csatolás körében él. Csatolva az Equip inaktív (a gear Rules Textje inaktív), ezért a saját Equipjével sem másik unitra, sem ugyanarra nem csatolható újra. Új +2-höz más attach effect kell (például Weaponmaster vagy Azir, Ascendant), vagy az, hogy a gear leváljon (például mert a unit elhagyja a boardot, 719.5), és újra felszereld."
+    ]
+   ],
+   "why": "Short: az Equip időzítéséből hiányzott a \"showdownon kívül\" (151.2), és a \"nem rakható át\" abszolút állítás hamis, más attach effect (Weaponmaster, Azir, Ascendant) átcsatolhatja (718.2, 821.1.c). Note: ugyanez, a \"Weaponmaster kell\" kizárólagos megfogalmazás javítva."
+  },
+  "Bone Skewer": {
+   "short": "Választasz egy battlefieldet, az ellenfél felfedi a kezét, és kiválaszthatsz belőle egy unitot. Ezt ő költség nélkül oda kijátssza, és ha megtette, stunolod: abban a körben nem ad combat damage-et. Kézből csak a saját körödben, showdownon kívül megy. Hidden: 1 Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reactionként játszható, de csak a rejtés helyét választhatod.",
+   "why": "Short: a \"csak a saját körödben\" Action nélküli spellnél pontatlan, showdownban nem játszható ki (155)."
+  },
+  "Brittle Steel": {
+   "short": "Megöl egy bárkihez tartozó geart, csatolt Equipmentet vagy tokent is. Csak a saját körödben, showdownon kívül játszható ki. Később a trashből 4 Energy és 1 Fury Powerért még egyszer kijátszhatod, utána végleg félrekerül.",
+   "why": "Short: a \"csak a saját körödben\" Action nélküli spellnél pontatlan, showdownban nem játszható ki (155), és a Flow ezen nem változtat (829.1.b.2)."
+  },
+  "Bullet Time, Miss Fortune": {
+   "short": "Annyi damage-et adsz egy battlefield összes ellenséges unitjának, amennyi Powert fizetsz, és az összeget csak akkor döntöd el, amikor a hatás lefut. Az ellenfél így úgy reagál, hogy nem tudja, mennyit fizetsz. A saját körödben vagy showdownban mehet.",
+   "notes": [
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ],
+    [
+     "204.3,204.3.a",
+     0,
+     "A Power fizetése cost within instructions (\"[do X] to [do Y]\"): a resolve-kor fizeted, és ekkor döntöd el az összeget."
+    ],
+    [
+     "135.2.e.6.c,204.3.a",
+     2,
+     "A lap szövege [C]-t ír, ami kétdomaines lapon Body vagy Chaos Powert jelent, tetszőleges arányban (135.2.e.6.c). A Core Rules 204.3.a példája viszont [A]-val (bármely domain Powere) idézi a lapot. Hogy melyik a helyes, a nyomtatott lap vagy judge dönti el."
+    ],
+    [
+     "445.2.c",
+     0,
+     "A resolve közbeni fizetéskor is használhatod a [Reaction] Add abilityket, vagyis a rune-jaidat akkor is recycle-ölheted Powerért."
+    ],
+    [
+     "355.10.b",
+     0,
+     "A battlefield a target, az ott lévő enemy unitok nem. Deflect és \"can't be chosen\" nem védi őket."
+    ],
+    [
+     "445.2",
+     1,
+     "0 Powert is fizethetsz, ekkor nincs sebzés. Az opponent úgy reagál a spellre, hogy még nem tudja az összeget."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Miss Fortune) kell viselnie."
+    ]
+   ],
+   "why": "A lap szövege [C]-t ír, a 204.3.a példája ugyanezt a lapot [A]-val idézi. A Power domainje így nem ellenőrizhető, a short ne állítsa konkrétan, a note flag 2."
+  }
+ },
+ "checked": 92,
+ "data_issues": [
+  "Bullet Time, Miss Fortune: a kártyaszöveg (és a nyers cards.json) \"Pay any amount of [C]\", a Core Rules 204.3.a példája \"Pay any amount of [A]\" formában idézi. A nyomtatott lapon kell ellenőrizni, melyik a helyes szimbólum."
+ ],
+ "open": [
+  "Bullet Time, Miss Fortune: [C] (Body vagy Chaos) vagy [A] (bármely domain) Powerrel fizethető-e a damage; a kártyaszöveg és a 204.3.a példa ellentmond, hivatalos forrással nem zárható le."
+ ]
+}

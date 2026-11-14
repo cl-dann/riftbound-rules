@@ -1,0 +1,67 @@
+{
+ "fixes": {
+  "Defiant Dance": {
+   "notes": [
+    [
+     "135.2.e.6.c",
+     2,
+     "Két domainű lap (Calm, Chaos): az adat csak az 1 Power számát adja, a nyomtatott szimbólumot nem. Ha az [C], a 135.2.e.6.c szerint Calm vagy Chaos Powerrel is fizethető; ha konkrét domain, csak azzal. A nyomtatott lapon kell ellenőrizni."
+    ],
+    [
+     "355.8,355.9.b",
+     0,
+     "Két különböző unit kell targetnek, enélkül a lap nem játszható ki. Bármelyik játékos unitja választható, bárhol a boardon."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "A +2 és a -2 két külön instruction. Ha az egyik unit illegális target lesz, a másikra vonatkozó rész ettől még végrehajtódik."
+    ],
+    [
+     "142.4.b,143.2.c",
+     0,
+     "A -2-nek nincs alsó korlátja. Sebzett unit meghal, ha a rajta lévő damage eléri az új Mightot. Negatív Might a combatban 0-nak számít."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap (Irelia): a deckben összesen legfeljebb 3 Signature kártya lehet."
+    ]
+   ],
+   "why": "A 135.2.e.6.c-re hivatkozó pont f0-ként állította, hogy a Power cost Calm vagy Chaos Powerrel is fizethető, pedig több domainű lapnál az adat nem mutatja, hogy a nyomtatott szimbólum [C] vagy konkrét domain; nem ellenőrizhető, flag 2-re átírva."
+  },
+  "Decree of Unity": {
+   "notes": [
+    [
+     "355.9.b",
+     0,
+     "A target csak enemy és Chaos domainű unit vagy gear lehet."
+    ],
+    [
+     "185.3.b",
+     0,
+     "A tokeneknek nincs domainje, ezért token (például Gold) nem választható vele."
+    ],
+    [
+     "359.3.e.2",
+     0,
+     "Ha a target a resolve-ra már nem enemy vagy nem Chaos, illegális, a spell nem csinál semmit."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "103.2.b",
+     1,
+     "Sideboard lap Chaos deckek ellen. Order domainű, ezért csak Order Powerből fizethető a Power cost-ja."
+    ]
+   ],
+   "why": "A 155-ös pontból hiányzott a 'showdownon kívül' feltétel; a 155 szerint spell csak showdownon kívüli Open State-ben játszható ki, Showdown Open State-ben (310.3) nem."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

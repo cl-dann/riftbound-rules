@@ -1,0 +1,164 @@
+{
+ "fixes": {
+  "Sky Splitter": {
+   "short": "5 sebzés egy battlefielden álló unitnak. Az Energy costja annyival csökken, amennyi a legnagyobb Mightú unitod Mightja, akár 0-ig, de ez a kedvezmény az 1 Fury Powert nem csökkenti. Saját körödben és showdown alatt is kijátszható.",
+   "notes": [
+    [
+     "356.4.g,710",
+     0,
+     "A kedvezmény a Determine Total Cost lépésben nézi az általad kontrollált unitok közül a legnagyobb aktuális Mightot, buffokkal együtt. Base-ben lévő unit is számít."
+    ],
+    [
+     "356.4.c.2,356.6",
+     0,
+     "A lap saját kedvezménye csak az Energy costot csökkenti, legfeljebb 0-ig. Az 1 Fury Power costot ez a kedvezmény nem érinti."
+    ],
+    [
+     "206",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: más effectek a nyomtatott 8-as costot látják. A Lux, Illuminated \"spell that costs 5 or more\" triggere akkor is lefut, ha 0 Energyt fizettél."
+    ],
+    [
+     "356.4.e",
+     0,
+     "Szintén név szerinti példa: az Eager Apprentice \"minimum [1]\" korlátja csak a saját kedvezményére vonatkozik. Ha előbb azt alkalmazod, utána a Sky Splitterét, a cost 0-ig mehet."
+    ],
+    [
+     "355.9.b,359.3.e.9",
+     0,
+     "Az 5 damage targetje battlefielden lévő unit. Ha a resolve előtt base-be kerül, nincs damage, a cost nem jár vissza."
+    ],
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ]
+   ],
+   "why": "A short és a notes azt állította, hogy az 1 Fury Powert mindig ki kell fizetni; más lap Power-kedvezménye (például Applied Researchers: spells cost [1][A] less) csökkentheti. A saját kedvezmény csak az Energyt érinti (356.4.c.2)."
+  },
+  "Staunch Survivor": {
+   "short": "2 Mightú unit, ami combatban +2 Mightot kap, akár támad (Assault 2), akár védekezik (Shield 2), így más módosító nélkül 4 Mightú. Combaton kívül 2 Mightú, a sebző spellek ellen ezzel számolj.",
+   "notes": [
+    [
+     "807.1.c,814.1.c",
+     0,
+     "Attackerként az [Assault 2], defenderként a [Shield 2] ad +2 Mightot. Egyszerre csak az egyik él, így más módosító nélkül combatban 4 Mightú."
+    ],
+    [
+     "807.2,814.2",
+     0,
+     "Más forrásból kapott Assault vagy Shield a megfelelő értékhez hozzáadódik."
+    ],
+    [
+     "710",
+     1,
+     "Combaton kívül 2 Mightú: spell damage és \"Might X or less\" feltételek ellen ezzel számolj."
+    ]
+   ],
+   "why": "A \"combatban mindig 4 Mightú\" túlzás: buff, debuff vagy más forrásból kapott Assault/Shield (807.2, 814.2) módosítja; a +2 a fix rész."
+  },
+  "Sky Cruiser": {
+   "short": "Egy gear lap eldobása a kezedből, 1 Energy és exhaust árán 4 sebzést ad egy battlefielden álló unitnak. Exhausted lép be, ezért a kijátszás körében csak akkor használható, ha egy hatás readyzi vagy ready lépteti be. Csak a saját Main Phase-edben, showdownon kívül megy.",
+   "notes": [
+    [
+     "423.3,204.1.b",
+     0,
+     "A cost három része: egy gear lap discardolása a kezedből, [1] és a unit exhaustolása. Gear lap nélkül a kézben az ability nem aktiválható."
+    ],
+    [
+     "415.4,143.4",
+     1,
+     "Az Exhaust cost miatt ready kell legyen. Mivel alapból exhausted lép be, a kijátszás körében csak akkor használható, ha egy hatás readyzi (például Shurelya's Requiem) vagy ready lépteti be (például Sun Disc vagy más \"enters ready\" effect)."
+    ],
+    [
+     "381.1,316.8.c",
+     1,
+     "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben megy, showdown és combat alatt nem."
+    ],
+    [
+     "355.9.b,359.3.e.9",
+     0,
+     "A target battlefielden lévő unit. Ha a resolve előtt base-be mozgatják, az ability mistargetel, a sebzés elmarad, a cost nem jár vissza."
+    ],
+    [
+     "423.1",
+     0,
+     "A discardolt gear a trashbe megy, a szövege nem hajtódik végre."
+    ]
+   ],
+   "why": "A \"csak akkor, ha egy hatás readyzi\" kizárta a ready belépést okozó effecteket (Sun Disc delayed replacement, 805.6 mintájára nem readyzés), pedig azokkal is használható a kijátszás körében."
+  },
+  "Sunlit Guardian": {
+   "short": "3 Mightú unit, védekezéskor 4. Tank, ezért az opponentnek először rá kell kiosztania a halálos combat sebzést, csak utána a Tank nélküli unitjaidra.",
+   "why": "A \"csak utána a többi unitodra\" pontatlan: több Tank unit között az opponent szabadon választ, a megkötés csak a Tank nélküli unitokra vonatkozik (815.1.c.2)."
+  },
+  "Siren's Song": {
+   "notes": [
+    [
+     "355.9.b",
+     0,
+     "A target csak olyan enemy unit lehet, amely ebben a körben már mozgott. Ha nincs ilyen, a lap nem játszható ki."
+    ],
+    [
+     "458.1,421.1",
+     1,
+     "A Recall nem Move, a kijátszás sem: az a unit, amely ebben a körben csak recallal vagy kijátszással került a helyére, nem választható. Ha viszont a körben mozgott is (Standard Move vagy effect általi Move), választható, akkor is, ha utána recallolták."
+    ],
+    [
+     "355.4,355.4.a",
+     0,
+     "A Move célját kijátszáskor választod: a jelenlegitől eltérő location, ahol a unit tartózkodhat, tehát a saját base-e vagy egy battlefield."
+    ],
+    [
+     "813.1.c.1,190.3.b.1",
+     1,
+     "[Reaction]: a battlefieldedre lépő enemy unitot a showdown alatt visszaküldheted. Ha a támadónak nem marad ott unitja és nincs folyamatban showdown vagy combat, a Contested státusz a következő cleanupban megszűnik."
+    ],
+    [
+     "452",
+     0,
+     "Ha olyan Uncontested battlefieldre mozgatod, amit nem a unit controllere kontrollál, az Contested lesz."
+    ]
+   ],
+   "why": "A 452 csak Uncontested battlefieldre vonatkozik; a note ezt a feltételt elhagyta."
+  },
+  "Skyward Strike": {
+   "notes": [
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben megy. Showdown vagy combat közben nem játszható ki."
+    ],
+    [
+     "355.4,355.4.a",
+     0,
+     "Az enemy unit target, a Move célját kijátszáskor választod: a jelenlegitől eltérő location, ahol a unit tartózkodhat. Ez a saját base-e vagy egy battlefield, a te base-ed nem."
+    ],
+    [
+     "452,454,466.2.c.1",
+     1,
+     "Ha olyan Uncontested battlefieldre mozgatod, amit nem a controllere kontrollál, az Contested lesz. Ha ott a te unitjaid állnak, combat indul, amelyben az elmozgatott unit controllere az attacker."
+    ],
+    [
+     "421.1,458.1",
+     0,
+     "Ez Move, nem Recall: az enemy unit \"when I move\" triggerei lefutnak."
+    ],
+    [
+     "824.1.b.1,355.7",
+     1,
+     "6 XP-től a Stun külön instruction, külön targettel: nem kell ugyanazt az enemy unitot választani, akit mozgatsz. 6 XP alatt ez a szöveg inaktív, Stun target sem kell."
+    ],
+    [
+     "424.1.b,424.1.a.2",
+     0,
+     "A stunned unit a kör végéig nem ad combat damage-et. A státusz a kör végi cleanupban szűnik meg."
+    ]
+   ],
+   "why": "A 452 csak Uncontested battlefieldre vonatkozik, ez a feltétel hiányzott; az Attacker a játékos, akinek unitja a Contested státuszt alkalmazta (466.2.c.1)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

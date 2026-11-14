@@ -1,0 +1,38 @@
+{
+ "fixes": {
+  "Fresh Beans": {
+   "short": "Gear: amikor showdown alatt kijátszol egy unitot, exhaustolhatod, hogy húzz 1 lapot. Kézből ilyenkor Action vagy Reaction időzítésű unit jöhet le (például Ambush, vagy elrejtett lap a következő körtől), de egy spell vagy képesség által showdownban kijátszott unit token is beindítja. Exhausted állapotban nem használható, amíg ready nem lesz.",
+   "notes": [
+    [
+     "806.1.c.1,813.1.b,350.2",
+     1,
+     "Showdown alatt kézből csak [Action] vagy [Reaction] időzítésű unitot tudsz kijátszani. Emellett a showdown alatt resolve-oló spell vagy ability által kijátszott unit (például egy unit token) is kiváltja, mert a token is kijátszható, és kijátszott unitnak számít. Bármelyik játékos körében lévő showdown számít."
+    ],
+    [
+     "811.6",
+     1,
+     "Facedown-ból kijátszott unit is jó: a Hidden lap a következő körtől [Reaction]-t kap, így showdown alatt is lejöhet."
+    ],
+    [
+     "420.4.a,420.4.a.1",
+     0,
+     "A trigger a unit resolve-ja után fut le. Counterelt unit után nincs húzás."
+    ],
+    [
+     "383.3.a,383.3.b,415.4",
+     0,
+     "Az exhaust a trigger costja, a finalizáláskor fizeted. Exhausted Beans nem fizethet újra, amíg nem lesz ready."
+    ],
+    [
+     "414.4",
+     0,
+     "Üres Main Decknél a húzás Burn Outot okoz."
+    ]
+   ],
+   "why": "A short és az első note azt állította, hogy showdownban csak Action/Reaction időzítésű unit jöhet le, pedig spell vagy ability által kijátszott unit (token is, 350.2, 185.2.a) szintén kijátszott unit, és kiváltja a triggert."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

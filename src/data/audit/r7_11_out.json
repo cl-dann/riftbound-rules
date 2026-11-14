@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "The List": {
+   "short": "Kijátszáskor megnevezel egy taget (például egy champion nevet vagy régiót). A List exhaustolásával egy ilyen tagű unit -2 Mightot kap a kör végéig, bármelyik játékosé. Csak a saját Main Phase-edben, showdownon kívül használható, combat közben nem. A Might 0 alá is mehet, de magában nem öl: 0 Mightú unit 1 sebzéstől hal meg.",
+   "why": "A short nem említette az időzítést: a gear [T] abilityje keyword nélkül csak a saját Main Phase-ben, Open State-ben, showdownon kívül aktiválható (151.2), combat közben nem."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

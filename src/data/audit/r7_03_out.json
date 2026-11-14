@@ -1,0 +1,78 @@
+{
+ "fixes": {
+  "Divine Judgment": {
+   "short": "Minden játékos megtart 2 unitot, 2 gear-t, 2 rune-t és 2 kézben lévő lapot, minden mást a deckje aljára tesz. Ez nem ölés, Deathknell nem fut le, a nem megtartott tokenek megszűnnek. Hogy csak a saját lapjaid közül választhatsz-e, nem tisztázott, judge dönti el.",
+   "why": "A short \"a tokenek eltűnnek\" fordulata azt sugallta, hogy a megtartott tokenek is eltűnnek; csak a recycle-ölt tokenek szűnnek meg (185.2.e, 186.1)."
+  },
+  "Draven, Showboat": {
+   "notes": [
+    [
+     "710,365.1",
+     0,
+     "A boardon a Mightja 3 plusz a pontjaid száma, és azonnal frissül, amikor pontot szerzel."
+    ],
+    [
+     "711",
+     0,
+     "A boardon kívül a nyomtatott 3 Might számít, például trashből visszahozó, Might feltételes effecteknél."
+    ],
+    [
+     "315.2.b.2,473.1",
+     1,
+     "A hold pont a Beginning Phase-ben jön, a combat előtt, így abban a körben már növeli a Mightját."
+    ],
+    [
+     "142.4.b",
+     1,
+     "Ha pontot veszítesz, a Might csökken, és a rajta lévő damage halálossá válhat."
+    ]
+   ],
+   "why": "A 473.1 csak a pontszerzést írja le, azt nem, hogy a hold a Beginning Phase-ben, a combat előtt történik; ezt a 315.2.b.2 mondja ki, hivatkozás kiegészítve."
+  },
+  "Ekko, Recurrent": {
+   "notes": [
+    [
+     "103.3.e",
+     1,
+     "A lap az adatbázis szerint bannolt. A deckbe tehetőség a játszott Format legalitási listájától függ, ezt versenyen ellenőrizni kell."
+    ],
+    [
+     "805.1.b,805.1.b.1",
+     0,
+     "[Accelerate]: kijátszáskor [1] és egy Mind Power additional costért ready lép be. A Power csak a unit saját domainjéből fizethető."
+    ],
+    [
+     "383.3.b",
+     0,
+     "A \"Recycle me\" a Deathknell effect elején álló cost within instructions, ezért a trigger base costja."
+    ],
+    [
+     "383.3.b.1,203.3",
+     1,
+     "A costot a finalizáláskor kell kifizetni. Ha Ekko nem recycle-ölhető (például a trash helyett banishelődött), a trigger nem megy chain-re, a rune-ok nem lesznek ready."
+    ],
+    [
+     "417.1.a,355.5.a",
+     0,
+     "Kifizetve Ekko a Main Deck aljára kerül, nem marad a trashben. A \"ready your runes\" minden rune-odra hat, nincs target."
+    ],
+    [
+     "808.1.d.1",
+     0,
+     "Ha a halálát replacement effect lecseréli (például recall), a Deathknell lekerül a chainről."
+    ],
+    [
+     "405.2,405.2.a",
+     0,
+     "A szövegben nincs \"may\", de a trigger base costját a 405.2 szerint meg lehet tagadni: ekkor a trigger lekerül a chainről, Ekko a trashben marad, és a rune-ok sem lesznek ready. Ez nem counter."
+    ]
+   ],
+   "why": "A flag 2-es nyitott kérdést a 405.2 eldönti: a triggered ability costjának kifizetése megtagadható, a trigger ekkor lekerül a chainről."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Endless Riches: a flag 2-es pont (a saját halálára vonatkozik-e a banish replacement) maradt. A 370.4 szerint egy objektum a zónaelhagyásával egyidejű eseményekre alkalmazhatja a replacementjét, a példa (Soraka) azonban csak más unitokra mutatja, így a saját halálára nem egyértelmű."
+ ]
+}

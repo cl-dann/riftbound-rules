@@ -1,0 +1,33 @@
+{
+ "fixes": {
+  "Volibear, Relentless Storm": {
+   "short": "Legend: ha kijátszol egy unitot, ami belépés után legalább 5 Mightú, exhaustolhatod a legendet, és ekkor kapsz egy exhausted rune-t. Ez nem kötelező. Az új rune azonnal recycle-ölhető Powerért, Energyt viszont csak akkor ad, amikor ready lesz: ready-zó effect nélkül a következő saját Awaken Phase-edben.",
+   "why": "A short elhagyta a \"you may\" feltételt: a legend exhaustolása választható, nem automatikus (383.3.a, 383.3.b)."
+  },
+  "Angler Wyrm": {
+   "short": "Deflect: az ellenfélnek plusz 1 Powert kell fizetnie, ha rá akar mutatni. Exhaustolva, a saját Main Phase-edben, showdownon kívül választasz egy ellenfelet, akinek egy általa választott unitját a Wyrm battlefieldjére kell mozgatnia. Ha a Wyrm a te battlefielded, ebből combat lesz, az ellenfél támad.",
+   "why": "A short nem adta meg a keyword nélküli activated ability időzítését (csak saját Main Phase, Open State, showdownon kívül: 381.1, 145.2), így showdownban vagy az ellenfél körében is használhatónak tűnhetett."
+  },
+  "Ambessa, The Wolf": {
+   "short": "3 Energy és 1 Body Power fizetésével Empowered lesz (csak a saját Main Phase-edben, showdownon és combaton kívül): +3 Mightot kap, és combaton kívül semmilyen damage nem éri. Combatban viszont a spellek is sebzik. Kill, kézbe visszaküldés és stun ellen nem véd, és ha elveszíti az állapotot, a rajta lévő damage megölheti.",
+   "why": "A short nem adta meg az Empower activated ability időzítését (381.1, 145.2): egy sebző spellre válaszul nem aktiválható, ezt a short alapján hihetné a játékos."
+  },
+  "Ambessa, Respected and Feared": {
+   "short": "1 Energy és 2 Order Power fizetésével Empowered lesz (csak a saját Main Phase-edben, showdownon kívül), és akkor támadáskor +2 Mightot kap, valamint megöl egy ott álló, nála kisebb Mightú ellenséges unitot. Az összehasonlítás a támadó bónusszal együtt számol. Ha a boardot elhagyja, az Empowered állapot elvész.",
+   "why": "A short nem adta meg az Empower activated ability időzítését (381.1, 145.2): combat vagy showdown közben nem aktiválható."
+  },
+  "Akali, Deadly Weapon": {
+   "short": "Valahányszor mozog, 1 damage-et adhat egy unitnak azon a battlefielden, ahová ment vagy ahonnan jött, Empowered állapotban 2-t. Saját unitot is választhatsz. 2 Energyért és 1 Fury Powerért Empowered lesz (csak a saját Main Phase-edben, showdownon kívül), és akkor +1 Mightja is van. A Recall nem számít mozgásnak.",
+   "why": "A short nem adta meg az Empower activated ability időzítését (381.1, 145.2, 827.1.c.1)."
+  },
+  "Akali, Rogue Assassin": {
+   "short": "Legend: exhaustolva a saját körödben egy showdownban álló saját unitodat a base-be viszed, és ha a legend Empowered, a unit ready lesz, így újra mozoghat. Az Empowered állapotot 3 Energyért és 1 bármilyen Powerért kapja meg (csak a saját Main Phase-edben, showdownon kívül), és az megmarad. Az ellenfél körében hiába aktiválod, nem csinál semmit.",
+   "why": "A short nem adta meg az Empower activated ability időzítését (381.1, 827.1.c.1): az Empower showdown közben nem aktiválható, csak a második, [Action] ability."
+  }
+ },
+ "checked": 89,
+ "data_issues": [],
+ "open": [
+  "Walking Roost: a notes 183 alapján a Bird token tulajdonosa a Roost controllere, a 182/185.2.a viszont azt mondja, tokent a tulajdonosa játszhat ki, itt pedig az opponent játssza ki. A Core Rules nem dönti el egyértelműen, ki a tulajdonos ebben az esetben; a note flag 1, nem javítottam."
+ ]
+}

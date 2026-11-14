@@ -1,0 +1,84 @@
+{
+ "fixes": {
+  "Illaoi, Prophet of the Great Kraken": {
+   "notes": [
+    [
+     "187.10,185.3.b",
+     0,
+     "A Tentacle token domain nélküli, 1 Mightú unit Bilgewater taggel."
+    ],
+    [
+     "187.10",
+     1,
+     "A \"from Bilgewater\" a Core Rulesban nem definiált kifejezés, valószínűleg a token Bilgewater tagjére utal, játékszabályi hatása nincs."
+    ],
+    [
+     "470.3,471.1,471.2",
+     1,
+     "A \"when I score\" a Scoring folyamatra utal, tehát conquerre és holdra is triggerel, ha Illaoi azon a battlefielden áll."
+    ],
+    [
+     "440.2.c,355.2.a",
+     0,
+     "A token \"play\"-jel érkezik: a base-edbe vagy egy általad kontrollált battlefieldre teheted, és unitként exhausted lép be."
+    ],
+    [
+     "364.1,133.3",
+     1,
+     "A passive minden általad kontrollált token unitot számol, bárhol a boardon: Tentacle, Recruit, Mech, Sand Soldier. Gear token (Gold) nem számít."
+    ],
+    [
+     "142.4.b,479.4.b",
+     1,
+     "A bónusz folyamatosan újraszámolódik. Ha a tokenjeid meghalnak, Illaoi Mightja azonnal csökken, és a rajta lévő damage halálos lehet."
+    ]
+   ],
+   "why": "Az 1. note flag 0-val szabályból közvetlenül következőnek állította, hogy a \"from Bilgewater\" a tagre utal; a 187.10 csak a token Bilgewater tagjét rögzíti, a kifejezés értelmezése levezetés, ezért külön, flag 1-es pontba került."
+  },
+  "Incorrigible Construct": {
+   "notes": [
+    [
+     "832.1.c,832.1.c.2",
+     0,
+     "Show Off a Mech: a kijátszás finalizálása közben felfedhetsz egy Mech lapot a kezedből, vagy kijelölhetsz egy másik friendly Mechet a boardon. A felfedett lap a kezedben marad."
+    ],
+    [
+     "355.7",
+     0,
+     "A Show Off \"pick\", nem \"choose\": a megmutatott Mech nem target."
+    ],
+    [
+     "369.3",
+     0,
+     "Ha megmutattál egy Mechet, a Construct ready lép be. Ez replacement effect: nem exhausted érkezik, majd áll fel, hanem eleve ready."
+    ],
+    [
+     "187.4",
+     1,
+     "A boardon lévő Mech token is megfelel a kijelöléshez."
+    ],
+    [
+     "832.1.c",
+     2,
+     "Hogy a Constructnak magának van-e Mech tagje, az adatból nem ellenőrizhető (a \"pick another friendly Mech\" szöveg arra utal, hogy lehet). Ha van, egy másik Construct is megmutatható, a kijátszott példány viszont saját magát nem jelölheti ki. A nyomtatott lap dönti el."
+    ],
+    [
+     "144.1.a,144.2",
+     1,
+     "Ready belépve még abban a körben mehet Standard Move-val battlefieldre."
+    ],
+    [
+     "832.1.c.4",
+     0,
+     "Ha a megmutatott Mech a finalizálás közben elhagyja a zónáját, a Construct kijátszása ettől még érvényes."
+    ]
+   ],
+   "why": "A 4. note tényként állította, hogy a Constructnak nincs Mech tagje. A Radiance feed ennél a lapnál nem ad tag adatot (a bemenet tags mezője ezért üres), a \"pick another friendly Mech\" szöveg pedig épp arra utal, hogy lehet Mech tagje; az állítás nem ellenőrizhető, flag 2-vel külön pontba került (832.1.c)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [
+  "Radiance (RAD) lapok, ebben a kötegben például Hunting Dog, Incorrigible Construct, Iridescent Avian, Industrious Mechsmith, Herald of the Emperor: a nyers cards.json-ban nincs tags mező, ezért a bemenet tags mezője üres. A Hunting Dog neve alapján valószínűleg Dog taget visel (Ivern, Stalking Wolf szinergia), az Incorrigible Construct szövege (\"another friendly Mech\") alapján Mech taget; a nyomtatott lapról pótolni kellene."
+ ],
+ "open": []
+}

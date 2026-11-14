@@ -1,0 +1,9 @@
+{
+ "fixes": {},
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Retreat: a notes (056.2,183, flag 1) szerint token unitnál a token megszűnik, de a tulajdonosa channelel. A Core Rules nem mondja ki, hogy a megszűnt token \"owner\" adata a linked instructionnél még elérhető-e (359.3.e.6 szerint az elérhetetlen információra épülő instruction ignorálódik); judge megerősítése javasolt, esetleg flag 2.",
+  "Red Brambleback: a short és a notes (383.4.c.2, flag 1) szerint a battlefield saját \"When you conquer here\" abilityje is \"your conquer effect\", ezért kétszer triggerel. A 383.4.c.2 a conquer effectek közé sorolja a conquerelő játékosra hivatkozó abilityket, de azt, hogy a battlefield abilityje \"your\" conquer effectnek számít-e, a Core Rules kifejezetten nem mondja ki (korábbi körben is nyitott)."
+ ]
+}
