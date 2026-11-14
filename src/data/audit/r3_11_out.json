@@ -1,0 +1,21 @@
+{
+ "fixes": {
+  "Treasure Hoard": {
+   "short": "Ha itt conquerelsz, 1 Energy kifizetésével kérhetsz egy exhausted Gold tokent a base-edbe. A Gold megölve és exhaustolva 1 bármilyen domainű Powert ad, de mivel exhausted érkezik, csak a következő saját Awaken Phase-ed után használható, az opponent körében még nem.",
+   "why": "A short szerint a Gold 'a következő körtől' használható, de a következő kör az opponenté, ott a token még exhausted; csak a saját Awaken Phase-edben readyzik (315.1.b, 415.4, 187.5)."
+  },
+  "Treasure Hunter": {
+   "short": "Valahányszor mozog, kapsz egy exhausted Gold tokent a base-edbe. Recallra nem triggerel. A Gold megölve és exhaustolva 1 bármilyen domainű Powert ad, de csak a következő saját Awaken Phase-ed után, amikor ready lesz, az opponent körében még nem.",
+   "why": "'A következő körtől' pontatlan: az opponent következő körében a Gold még exhausted, a cost nem fizethető (415.4), csak a saját Awaken Phase-edben readyzik (315.1.b)."
+  },
+  "Vex, Gloomist": {
+   "short": "Legend: amikor te vagy egy csapattársad megtart egy battlefieldet, exhaustolva húzhatsz egy lapot. Csak a saját Awaken Phase-edben lesz újra ready, ezért 2v2-ben, más readyző hatás nélkül, körfordulónként csak egyszer húzhatsz vele: vagy a saját holdodra, vagy a társadéra.",
+   "why": "A short abszolút 'körfordulónként egyszer használható' állítást tett; az exhaust költségű képesség ready állapotban újra használható, ha egy hatás readyzi (415.4, 315.1.b), a notes is ezt mondja."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Veteran Poro: a Weaponmaster csak akkor csökkent, ha az Equip cost tartalmaz [A]-t (821.1.c.3). Hogy a [C] Power cost [A]-nak számít-e a csökkentéshez, a Core Rules nem mondja ki; a short ezt feltételesen fogalmazza, nem javítottam."
+ ]
+}

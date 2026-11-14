@@ -1,0 +1,48 @@
+{
+ "fixes": {
+  "Battlefield Armorer": {
+   "short": "Amikor egy saját gear egy battlefielden meghal, 1 Energyért visszaveheted a gazdája kezébe. Ez főleg a unitokra csatolt Equipmenteket és a battlefielden álló Deploy geareket (például Banner of Conquest) menti. Ha csak a felszerelt unit hal meg, az Equipment leválik, nem hal meg, így nincs trigger. Base-ben meghaló gearre nem működik, token gear nem jön vissza.",
+   "notes": [
+    [
+     "355.10.c",
+     0,
+     "A gear csak a trigger feltételében szerepel, ezért nem target."
+    ],
+    [
+     "383.3.a,383.3.b",
+     0,
+     "A \"you may\" után álló \"pay [1]\" a trigger base costja. A finalizáláskor fizeted ki. Ha nem fizetsz, a trigger lekerül a chainről."
+    ],
+    [
+     "323.6,830.1.b.3,830.1.b",
+     1,
+     "Battlefielden jellemzően csatolt Equipment vagy Deploy gear van. A csatolatlan, Deploy nélküli gear a cleanupban base-be recallolódik, a Deploy gear viszont ott marad, és meghal, ha az opponent ott holdol: ilyenkor is triggerel. Base-ben meghaló gearre nem."
+    ],
+    [
+     "719.5",
+     0,
+     "Ha a felszerelt unit hal meg, az Equipment nem hal meg, csak leválik és a helyén marad, ezért ilyenkor az Armorer nem triggerel. Az Equipmentnek magának kell meghalnia (például egy gear kill effecttől)."
+    ],
+    [
+     "186.1",
+     0,
+     "Gear token (például Gold) nem jön vissza: a trashbe kerülve megszűnik létezni."
+    ],
+    [
+     "056.2",
+     0,
+     "A gear a tulajdonosa kezébe megy vissza, akkor is, ha te kontrolláltad, de más a tulajdonosa."
+    ],
+    [
+     "428.2.a",
+     0,
+     "A banish nem kill: banishelt gearre az Armorer nem triggerel."
+    ]
+   ],
+   "why": "A short és a 323.6 note szerint gyakorlatilag csak csatolt Equipment hal meg battlefielden, pedig a Deploy gear (830.1.b.3) nem recallolódik, és opponent holdjakor meghal (830.1.b), erre is triggerel. Hiányzott továbbá, hogy a felszerelt unit halálakor az Equipment csak leválik (719.5), így nincs trigger."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

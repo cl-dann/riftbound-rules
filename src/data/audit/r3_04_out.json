@@ -1,0 +1,55 @@
+{
+ "fixes": {
+  "Glasc Mixologist": {
+   "notes": [
+    [
+     "808.1.c,808.1.d.2",
+     0,
+     "[Deathknell]: \"When I die\" trigger. Még azelőtt chain-re kerül, hogy a unit a trashbe menne, lehet rá reagálni, és akkor is resolve-ol, ha a unit már nincs a boardon."
+    ],
+    [
+     "808.1.d.1,428.2.a",
+     0,
+     "Nem triggerel, ha a unit nem a trashbe kerül: banish, kézbe vétel, recycle, vagy ha a halálát replacement effect lecseréli."
+    ],
+    [
+     "383.3.a",
+     0,
+     "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz. Ha nem kéred, lekerül a chainről."
+    ],
+    [
+     "355.10.a,355.8",
+     0,
+     "A trashben lévő unit target. Ha nincs megfelelő unit a trashedben a finalizáláskor, a trigger nem kerül chain-re."
+    ],
+    [
+     "206",
+     0,
+     "A feltétel a nyomtatott costot nézi: legfeljebb 3 Energy és legfeljebb 1 Power. A Mixologist maga (5 Energy) nem felel meg."
+    ],
+    [
+     "356.1.b.1,356.1.b.3",
+     0,
+     "\"Ignoring its cost\": az Energy és a Power cost is nulla. Optional additional cost (például Gust Monk [1]-e) ettől még kifizethető."
+    ],
+    [
+     "359.3.e.2",
+     0,
+     "Ha a kiválasztott unit a resolve előtt kikerül a trashből (például valaki banisheli), a trigger nem csinál semmit."
+    ]
+   ],
+   "why": "356.1.b.3 pont: a Zed, From the Shadows példa hibás, mert 4 Energy costú, így a Mixologist (legfeljebb [3] Energy) nem játszhatja ki; a példát töröltem, a Gust Monk (2 Energy, 0 Power) helyes példa marad."
+  },
+  "Fae Dragon": {
+   "short": "7 Mightú unit. Kijátszáskor legfeljebb négy saját unitod, akár ő maga is, buffot kap (+1 Might), de csak az, amelyiken még nincs buff. Valahányszor elköltesz egy buffot, kapsz egy exhausted Gold tokent. Ha a buff azért tűnik el, mert a unit elhagyja a boardot, az nem költés.",
+   "why": "A short elhagyta a buff feltételét (\"if it doesn't have one\", 427.1.c), és a \"magát is beleértve\" kötelezőnek tűnt, pedig csak választható (355.13)."
+  },
+  "Fury Rune": {
+   "short": "Alap Fury rune a Rune Deckbe, csak Fury domainű legend mellé. Exhaustolva 1 Energyt ad, recycle-ölve (a Rune Deck aljára téve) 1 Fury Powert. A köröd elején újra ready lesz.",
+   "why": "Félreérthető volt: a \"deck aljára\" a Main Deckre is érthető, a rune a Rune Deck aljára kerül (417.1.b)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

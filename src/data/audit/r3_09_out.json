@@ -1,0 +1,37 @@
+{
+ "fixes": {
+  "Rhasa the Sunderer": {
+   "short": "A trashed minden lapja 1-gyel csökkenti az Energy costját, legfeljebb 0-ig. Az 1 Chaos Power costot ez a kedvezmény nem érinti, azt ki kell fizetni. Más lapok továbbra is a nyomtatott 10-es costot látják.",
+   "notes": [
+    [
+     "356.4.g",
+     0,
+     "Változó kedvezmény: a trashben lévő lapok számát a Determine Total Cost lépésben (discountok alkalmazásakor) nézi a játék. Ha a trash mérete ezután változik a kijátszás alatt, a kiszámolt cost már nem módosul."
+    ],
+    [
+     "356.4.c.2, 356.6",
+     0,
+     "A kedvezmény csak az Energy costot csökkenti, legfeljebb 0-ig. Az 1 Chaos Power costot ez a kedvezmény nem érinti, azt ki kell fizetni, hacsak egy másik effect nem csökkenti."
+    ],
+    [
+     "206",
+     0,
+     "Más effectek (például \"Energy cost no more than 3\") a nyomtatott 10-es costot látják, nem a csökkentettet."
+    ],
+    [
+     "441, 423",
+     1,
+     "A Burn, a discard és a kijátszott spellek töltik a trasht. A Last Rites Equip cost-ja és a Flow viszont fogyasztja."
+    ]
+   ],
+   "why": "A short és a 356.4.c.2 note szerint az 1 Chaos Powert 'mindig' ki kell fizetni; ez túlzás, mert más Power kedvezmény (például 'Units you play cost [A] less', 356.4.f.1 példa) csökkentheti. Rhasa saját kedvezménye csak az Energyt érinti (356.4.c, 356.6)."
+  },
+  "Scorched Earth": {
+   "short": "5 sebzést osztasz szét egyetlen battlefield unitjai között, akár a saját unitjaid is. Az elosztást a lap hatásának lefutásakor döntöd el, de minden kiválasztott unitnak legalább 1 jut. Saját körödben és showdown alatt is kijátszható. Költsége 4 Energy és 1 Fury Power.",
+   "why": "A short csak 'Fury Powerbe kerül' formában említette a költséget, a 4 Energy kimaradt; a lap costja [4][C], vagyis 4 Energy és 1 Fury Power (135.2.e.6)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

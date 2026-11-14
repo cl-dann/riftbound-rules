@@ -1,0 +1,66 @@
+{
+ "fixes": {
+  "Kai'Sa, Evolutionary": {
+   "notes": [
+    [
+     "383.3.a,355.10.a",
+     0,
+     "\"You may\" az effect elején: a finalizáláskor döntesz. A trash Public zóna, tehát a spell target, ekkor választod ki."
+    ],
+    [
+     "206",
+     0,
+     "Az \"Energy cost less than your points\" a spell nyomtatott costját nézi."
+    ],
+    [
+     "383.4.c.2.a",
+     1,
+     "A conquer trigger csak azután kerül chain-re, hogy a conquerből járó pontot megszerezted, ezért a resolve-kor ez a pont már beleszámít."
+    ],
+    [
+     "356.1.b.2,356.1.b.3",
+     0,
+     "Csak az Energy cost nullázódik. A Power costot ki kell fizetni, és additional cost rákerülhet."
+    ],
+    [
+     "417.1.a",
+     0,
+     "A kijátszott spell utána recycle-ölődik: a Main Deck aljára megy, nem vissza a trashbe."
+    ],
+    [
+     "383.4.c.2.a",
+     0,
+     "Conquer effect: Kai'Sának ott kell lennie a battlefielden, amikor conquerelsz."
+    ],
+    [
+     "132.4,103.3.b,761.2",
+     0,
+     "A teljes neve \"Kai'Sa, Evolutionary\", ez más név, mint a Kai'Sa, Survivor, ezért a deckben mindkettőből lehet 3. Megnevezéskor elég az egyértelmű azonosítás, például \"a 6 Mightú Kai'Sa\"."
+    ],
+    [
+     "810.1.b",
+     0,
+     "[Ganking]: Standard Move-val battlefieldről battlefieldre léphet."
+    ]
+   ],
+   "why": "A 206-os pont azt is állította, hogy a conquerből szerzett pont már beleszámít; ezt a 206 nem mondja, a 383.4.c.2.a-ból vezethető le. Külön pontba téve, helyes hivatkozással, flag 1."
+  },
+  "King's Edict": {
+   "short": "Kijátszásod után a következő játékostól kezdve minden más játékos kiválaszt egy unitot, amit nem te irányítasz és még senki nem választott, és ezek meghalnak; 1v1-ben az ellenfél a saját unitjai közül választ egyet. Mivel nem te választasz, a Deflect sem véd. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A short \"minden ellenfeled\"-et írt, a lap szövege \"each other player\": csapatos módban a teammate is választ. A sorrend és a \"még nem választott\" megkötés is kimaradt."
+  },
+  "Karma, Channeler": {
+   "short": "Amikor kijátszod, megnézed a paklid felső lapját, és a pakli aljára teheted (recycle). Valahányszor egy vagy több lapot a saját Main Deckedbe recycle-ölsz, egy saját unitod +1 Might buffot kap, ha még nincs buffja. Rune recycle-ölése és az ellenfél paklijába kerülő lap nem számít, ahogy a recycle nélküli, \"put on the bottom\" hatás (például Altar of Memories) sem.",
+   "why": "A short \"valahányszor lapot teszel a saját paklid aljára\" megfogalmazása a recycle-on kívüli bottom-of-deck hatásokat is lefedte (Altar of Memories: put a card from your hand on the top or bottom), a trigger csak recycle-ra fut le (417.1, errata szöveg)."
+  },
+  "Master Bingwen": {
+   "short": "Weaponmaster: kijátszáskor egy általad kontrollált Equipmentet rácsatolhatsz úgy, hogy az Equip costját egy [A]-val (bármilyen domainű Power) olcsóbban fizeted, akkor is, ha az épp egy másik unitodon van, és az Equip szokásos időzítésétől függetlenül. Ha az Equip cost nem tartalmaz [A]-t, nem lesz olcsóbb (821.1.c.3). A boardon később már nem csinál semmit.",
+   "why": "A short szerint csak akkor nincs kedvezmény, ha az Equip costban egyáltalán nincs Power; a 821.1.c.3 szerint akkor nincs, ha nincs benne [A]. Ez ellentmondott a saját notes pontnak is."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Master Bingwen, Lucian, Merciless: a 821.1.c.3 szó szerint csak [A]-t tartalmazó Equip costot csökkent; domainhez kötött ([C]) Equip cost (például Long Sword, Last Rites) a szabály betűje szerint nem lesz olcsóbb. Hogy a Riot szándéka ez-e, vagy az [A] itt bármely Powert jelent, a Core Rules nem tisztázza; a Lucian, Merciless short (\"1 tetszőleges Powerrel olcsóbban\") ezért nem módosítva, judge döntse el."
+ ]
+}

@@ -1,0 +1,196 @@
+{
+ "fixes": {
+  "Hextech Formula": {
+   "short": "Exhaustolva Empowerel egy másik geart, bármelyik játékosét, anélkül hogy annak a saját árát kifizetnéd. Exhausted lép be, ezért alapból csak a következő körödtől használható, hacsak egy hatás nem readyzi. Már Empowered gearen nem csinál semmit.",
+   "notes": [
+    [
+     "369.3,315.1.b",
+     1,
+     "Az \"enters exhausted\" felülírja, hogy a gear ready lép be. A kijátszás körében alapból nem használható, a következő Awaken Phase-edben lesz ready, hacsak egy effect korábban nem readyzi (például Jayce, Defender of Tomorrow)."
+    ],
+    [
+     "355.10,355.9.b",
+     0,
+     "A gear target. \"Another gear\": saját magát nem választhatja, de bármelyik játékos gearjét igen."
+    ],
+    [
+     "442.1.b,442.1.c",
+     0,
+     "Már Empowered gearen nem történik semmi, az aktiválás kárba vész."
+    ],
+    [
+     "442.2.a,828.1.c,828.1.d",
+     0,
+     "A célzott gear [Empowered] abilityje aktív lesz, és a \"when I become Empowered\" triggere lefut."
+    ],
+    [
+     "827.1.c.1",
+     1,
+     "A célzott gear saját Empower costját nem kell kifizetni. Például a Platewyrm Egg így a saját [1] és exhaust költsége nélkül lesz Empowered."
+    ],
+    [
+     "124.1,443.1.a",
+     0,
+     "Az Empowered állapot megmarad, amíg egy Disempower effect le nem veszi, vagy a gear el nem hagyja a boardot. Zónaváltáskor törlődik."
+    ],
+    [
+     "151.2",
+     0,
+     "Csak a saját Main Phase-edben, showdownon kívül aktiválható."
+    ]
+   ],
+   "why": "A short és a 369.3 note abszolút módon állította, hogy a kijátszás körében nem használható, pedig gear ready effect (Jayce, Defender of Tomorrow, Veiled Temple, 416.3.b) ezt lehetővé teszi; a 124.1 note szerint az Empowered csak zónaváltáskor szűnik meg, de Disempower is leveszi (443.1.a)."
+  },
+  "Hextech Disc": {
+   "notes": [
+    [
+     "827.1.c.1,827.1.c.2",
+     0,
+     "Az Empower costja itt maga az exhaust, Energy vagy Power nem kell hozzá. Csak akkor aktiválható, ha a gear ready és még nem Empowered."
+    ],
+    [
+     "443.1.a,415.4",
+     1,
+     "A Mech ability costja disempower, [1] és exhaust. Mivel az Empower is exhaustol, a kettő között a gearnek readyvé kell válnia: alapból két körönként ad egy Mechet."
+    ],
+    [
+     "149.1",
+     0,
+     "Ready lép be, ezért a kijátszás körében már Empowerelhető. A Mech alapból a következő körödben jön, hacsak egy effect közben nem readyzi a geart."
+    ],
+    [
+     "187.4,185.2.d",
+     0,
+     "A Mech 3 Mightú, domain nélküli token, a base-edbe érkezik és exhausted lép be."
+    ],
+    [
+     "151.2",
+     0,
+     "Mindkét ability csak a saját Main Phase-edben, Open State-ben, showdownon kívül megy."
+    ]
+   ],
+   "why": "A 149.1 note szerint a Mech \"legkorábban\" a következő körben jön, pedig gear ready effecttel (416.3.b, például Jayce, Defender of Tomorrow) ugyanabban a körben is jöhet."
+  },
+  "Ivern, Green Father": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Calm és Order domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "383.3.a,383.3.b",
+     1,
+     "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted. Mivel a legend ettől exhausted lesz, körönként jellemzően egy battlefield cserélhető."
+    ],
+    [
+     "355.10.c,439.3.a",
+     2,
+     "A \"that battlefield\" a trigger feltételéből jön, ami a 355.10.c szerint nem target, a 439.3.a viszont a Replace [X] részét targetnek nevezi. Hogy a lecserélt battlefield target-e (például targetelést figyelő effecteknél), judge döntse el."
+    ],
+    [
+     "439.1,439.5",
+     0,
+     "Replace: a Brush token az eredeti battlefield helyére jön létre, és minden rajta lévő hatást, státuszt örököl. Az eredeti battlefield a Banishmentbe kerül, de nem számít banisheltnek."
+    ],
+    [
+     "439.1.a",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a lecserélt battlefield (Navori Fighting Pit) már chainen lévő conquer triggere a csere után is resolve-ol, a \"here\" és a targetje érvényes marad."
+    ],
+    [
+     "187.8",
+     0,
+     "A Brush szövege: Bird, Cat, Dog, Poro és Ivern unitok itt +1 Mightot kapnak, bármelyik játékoséi. Az eredeti battlefield abilityjei a csere idejére megszűnnek."
+    ],
+    [
+     "187.8,439.7.b,190.6.d",
+     1,
+     "A visszacserélés a Brush saját triggere: aki itt score-ol (akár az opponent), eldöntheti, hogy visszahozza-e az eredeti battlefieldet."
+    ]
+   ],
+   "why": "A 355.10.c note 0-s flaggel állította, hogy a battlefield nem target, de a 439.3.a a Replace [X] részét kifejezetten targetnek nevezi; ez nyitott kérdés, flag 2."
+  },
+  "Hextech Gauntlets": {
+   "notes": [
+    [
+     "103.3.d,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Vi) kell viselnie. Két domainű, ezért csak olyan legend mellé fér, amelynek mindkét domainje megvan."
+    ],
+    [
+     "818.1.c.4,356.4.g,356.6",
+     0,
+     "Az Equip [3][A], de az Energy része a választott unit aktuális Mightjával csökken, legfeljebb 0-ig. Normál Equipnél az [A] mindig kell, 3 vagy több Mightú unitra az Equip csak [A]."
+    ],
+    [
+     "821.1.c.2,206.1",
+     0,
+     "Weaponmaster unitnál a kedvezmény a Weaponmaster unit Mightjával számol, és ebből jön le még az [A]. 3 vagy több Mightú Weaponmaster unitra ingyen felkerül."
+    ],
+    [
+     "818.1.b.1,151.2",
+     0,
+     "Az Equip targetje saját unit. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +3 Mightot is kap."
+    ],
+    [
+     "383.4.c,383.2.a.1",
+     0,
+     "Conquer trigger a felszerelt unitra. Az \"if you assigned 3 or more excess damage\" közvetlenül a feltétel után áll, ezért a feltétel része: ha nem teljesül, a trigger chainre sem kerül."
+    ],
+    [
+     "467.2.c.4",
+     2,
+     "Az \"excess damage\" kifejezést a Core Rules nem definiálja. Valószínűleg a lethal fölött kiosztott combat damage, ami csak akkor lehetséges, ha nincs több unit, akinek osztani kell. Judge döntse el."
+    ]
+   ],
+   "why": "A 818.1.c.4 note szerint az [A] \"mindig kell\", ami ellentmond a következő, Weaponmasterről szóló pontnak (821.1.c: a Weaponmaster [A]-val csökkenti, így ingyenes lehet)."
+  },
+  "K'Sante, Dauntless": {
+   "short": "Védekezéskor +1 Mightot kap. Amikor támad vagy védekezik, egy ott álló saját unitod Shield értékét megduplázza a kör végéig, akár a sajátját is. A Shield magában csak védekezéskor ad Mightot, támadásnál a duplázás akkor ér valamit, ha a unit még abban a körben védekezik is, vagy ha egy hatás a Shield értékére épít (például K'Sante, Pride of Nazumah).",
+   "notes": [
+    [
+     "433.1,433.1.a",
+     0,
+     "A Double a unit aktuális Shield értékével megegyező bónuszt ad a kör végéig: Shield 1-ből 2, Shield 3-ból 6 lesz. A bónusz a resolve pillanatában rögzül."
+    ],
+    [
+     "355.10,355.9.b",
+     0,
+     "A unit target: általad kontrollált unit K'Sante battlefieldjén, akár ő maga. A trigger kötelező."
+    ],
+    [
+     "814.1.c,814.3",
+     1,
+     "A Shield magában csak Defenderként ad Mightot. Az attack triggerrel duplázott Shield ezért akkor ér valamit, ha a unit még abban a körben védekezik, vagy ha egy effect a Shield értékére hivatkozik (például K'Sante, Pride of Nazumah: Assault a Shield értékével egyenlő)."
+    ],
+    [
+     "433.1",
+     1,
+     "Shield nélküli uniton nincs mit duplázni, a trigger hatástalan."
+    ],
+    [
+     "814.2",
+     0,
+     "A duplázás a unit összes Shield értékére számol, a máshonnan kapott Shielddel együtt."
+    ],
+    [
+     "383.4.e.2.a,383.4.f.2.a",
+     0,
+     "Combatonként egyszer fut le, amikor K'Sante először kap Attacker vagy Defender designationt."
+    ]
+   ],
+   "why": "A short és a 814.1.c note szerint támadásnál a duplázás \"csak akkor\" ér valamit, ha a unit később védekezik; a K'Sante, Pride of Nazumah legend (Assault = Shield, 814.3) mellett támadáskor is számít."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Ivern, Green Father: a 355.10.c (trigger feltételből jövő objektum nem target) és a 439.3.a (Replace [X] a target) ütközik; a lecserélt battlefield target státusza nem dönthető el a Core Rulesból."
+ ]
+}

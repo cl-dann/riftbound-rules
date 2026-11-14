@@ -1,0 +1,23 @@
+{
+ "fixes": {
+  "Corrupted Dragon": {
+   "short": "Ha a pontszámod legalább 4-gyel elmarad a Victory Score-tól (alap 8 pontos játékban 4 vagy kevesebb pontnál), ready érkezik. Amikor támad, az ott álló bármennyi, legfeljebb 5 Mightú ellenséges unitot a saját base-ébe mozgathatod. Ha így nem marad védő, sebzés nélkül elfoglalja a battlefieldet.",
+   "why": "A short a '4 vagy kevesebb pont' feltételt abszolútként mondta ki, holott a lap a Victory Score-hoz viszonyít ('not within 3 points'), ami csak alapértelmezésben 8 (194.3); más játékmódban más a küszöb."
+  },
+  "Darius, Hand of Noxus": {
+   "short": "Legend: exhausttal 1 Energyt ad, de csak ha az adott körben már kijátszottál egy lapot. A kör első lapjának kifizetésében ezért nem segít. Az ellenfél körében is használható, ha abban a körben már kijátszottál egy lapot. Az Energy a kör végén elvész, ha nem költöd el.",
+   "why": "A short 'utána viszont az ellenfél körében is használható' megfogalmazása azt sugallta, hogy a saját körödben kijátszott lap után az ellenfél körében is aktív; a Legion (812.1.c) az adott kört nézi, az ellenfél körében is kell ott kijátszott lap."
+  },
+  "Deathgrip": {
+   "short": "Reakcióként megölsz egy saját unitot, és egy másik saját unitod annyi Mightot kap erre a körre, amennyi a megölté volt, majd húzol 1 lapot. Két különböző saját unit kell hozzá. Ha a halált egy replacement effect helyettesíti (például Zhonya's Hourglass), a bónusz elmarad, a húzás megmarad.",
+   "why": "A 'kiváltja' szó félreérthető volt (triggerelést is jelenthet), a replacement effectről van szó (359.3.e.14.b); a 'this turn' időtartam is hiányzott a shortból."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Darius, Trifarian: a 4. note (flag 1) szerint counterelt második lap után a következő sikeresen resolve-oló lap számít 'második'-nak; a 426.1.b csak a trigger kiváltását zárja ki, azt nem mondja ki, hogy a számlálásból is kiesik. Judge kérdés lehet.",
+  "Dazzling Aurora: a 3. note szerint unit nélküli decknél az összes felfedett lap recycle-ölődik; a 432.1.c.1 a 'further instructions' negálását írja, nem egyértelmű, hogy a 'recycle the rest' is negálódik-e.",
+  "Crumbling Sands: az 'another spell' a megcélzott spellhez viszonyított értelmezése (notes, short) logikus, de a Core Rules nem rögzíti; nem javítottam."
+ ]
+}

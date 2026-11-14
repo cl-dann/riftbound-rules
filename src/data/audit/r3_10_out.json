@@ -1,0 +1,49 @@
+{
+ "fixes": {
+  "Sprite Mother": {
+   "notes": [
+    [
+     "187.2,184.1",
+     0,
+     "A Sprite domain nélküli, 3 Mightú Fae unit token [Temporary]-vel. Az effect szerint ready lép be, tehát még abban a körben mozoghat."
+    ],
+    [
+     "359.3.f.1,359.3.f.2",
+     0,
+     "A \"here\" a Mother helyére utaló hivatkozás, amelyet a játék a resolve-kor ellenőriz: a Sprite a Mother akkori locationjére érkezik."
+    ],
+    [
+     "359.3.f.2,359.3.f.2.a",
+     2,
+     "Ha a Mother a resolve előtt elhagyja a boardot, a Core Rules nem mondja ki, hova érkezik a token: a 359.3.f.2.a csak a targethez kötött hivatkozásról szól, a Mother pedig nem target. Lehet, hogy a token nem jön létre, de az is, hogy a Mother utolsó helyére érkezik. Judge döntse el."
+    ],
+    [
+     "816.1.b",
+     0,
+     "A Sprite a következő saját Beginning Phase-ed elején, a scoring előtt meghal. Egy környi támadásra vagy védekezésre elég, holdra nem."
+    ],
+    [
+     "186.1",
+     0,
+     "Ha a Sprite kézbe vagy más Non-Board zónába kerülne, megszűnik létezni."
+    ]
+   ],
+   "why": "A \"Ha a Mother addigra elhagyja a boardot, a token nem jön létre\" állítás f0 volt, de a 359.3.f.2.a csak target referentre vonatkozik, a Mother nem target; a forrás távozásának esetét a Core Rules nem rendezi, ezért flag 2-re bontva."
+  },
+  "Stalking Wolf": {
+   "short": "Kijátszáskor kötelezően meg kell ölnöd egy saját Bird, Cat, Dog vagy Poro unitot, ennek Deathknellje lefut. Ambush: Reactionként, akár az ellenfél körében is kijátszható egy olyan battlefieldre, ahol van unitod, vagy a feláldozott unit battlefieldjére, még ha ott már nincs más unitod. Ilyen unit nélkül nem játszható ki.",
+   "why": "A short csak a feláldozott unit battlefieldjére való Ambusht említette (\"Ezután\"), az Ambush alapengedélye (bármely battlefield, ahol van unitod, 822.1.b) hiányzott."
+  },
+  "Super Mega Death Rocket!, Jinx": {
+   "short": "5 sebzés egy tetszőleges unitnak. Ha a lap a trashben van és conquerelsz, egy lap eldobásával visszaveheted a kezedbe. Üres kézzel nem tudod visszahozni. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Időzítés pontatlan: [Action] nélkül nem csak saját kör, hanem showdownon kívül is kell (155)."
+  },
+  "Supernova": {
+   "short": "10 sebzés egy unitnak és 2 húzás. Csak akkor játszható ki, ha van unit, amire rámutathatsz. Ha a unit közben eltűnik, a húzás akkor is megmarad. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Időzítés pontatlan: [Action] nélkül nem csak saját kör, hanem showdownon kívül is kell (155)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

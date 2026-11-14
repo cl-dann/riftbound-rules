@@ -1,0 +1,74 @@
+{
+ "fixes": {
+  "Petal Pixie": {
+   "notes": [
+    [
+     "364.1,198.1",
+     1,
+     "Passive: +1 Might minden [Temporary] unitod után, ami a Pixie-vel azonos battlefielden áll. Base-ben nem működik, és az enemy [Temporary] unitok nem számítanak."
+    ],
+    [
+     "816.3,187.2",
+     0,
+     "A Temporary megléte ellenőrizhető tulajdonság. A Sprite tokenek eleve [Temporary]-vel jönnek létre, egy Sprite a Pixie mellett +1 Mightot jelent."
+    ],
+    [
+     "816.1.b,816.1.c",
+     1,
+     "A [Temporary] unitok a Beginning Phase-ed elején meghalnak, a bónusz ekkor azonnal megszűnik. A körödet a Pixie 2 Mighttal kezdi."
+    ],
+    [
+     "816.3",
+     1,
+     "A kör közben [Temporary]-t kapó unit is számít, amíg a boardon van, mert a Temporary megléte ellenőrizhető tulajdonság."
+    ]
+   ],
+   "why": "A 3. pont a 142.4.b-re hivatkozott (Lethal Damage), ami nem a Temporary halálának időzítéséről szól; helyesen 816.1.c (a trigger feltétele a controller Beginning Phase-ének kezdete)."
+  },
+  "Ravenbloom Conservatory": {
+   "notes": [
+    [
+     "383.4.f,383.4.f.2.a",
+     0,
+     "Defend trigger: akkor fut le, amikor a combat elején megkapod a Defender designationt. Combatonként egyszer nézi a játék."
+    ],
+    [
+     "190.6.d",
+     0,
+     "A \"you\" a battlefield controllere. Ha a védő nem kontrollálja a battlefieldet, nem triggerel."
+    ],
+    [
+     "355.10.a",
+     0,
+     "A Main Deck nem Public zóna, nincs target. Nincs \"may\": a reveal és a folytatás kötelező."
+    ],
+    [
+     "432.1.c,432.1.c.1",
+     0,
+     "Üres Main Decknél nincs mit revealelni, a további instructionök negálódnak, Burn Out nincs."
+    ],
+    [
+     "414.1",
+     1,
+     "A spell kézbe tétele nem Draw action, a \"when you draw\" triggereket nem váltja ki."
+    ],
+    [
+     "417.1.a",
+     0,
+     "Ha nem spell, a lap a Main Deck aljára kerül."
+    ],
+    [
+     "370.1.b.1",
+     0,
+     "A reveal kiváltja az \"as I'm revealed\" típusú replacement effecteket, például az Undertitan vagy a Nocturne, Horrifying ilyen abilityjét."
+    ]
+   ],
+   "why": "Félreérthető felsorolás: \"(Undertitan, Nocturne, Horrifying)\" három lapnak olvasható, de a \"Nocturne, Horrifying\" egyetlen lap neve."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Rebuttal: a 7. pont szerint a lap saját 1 Power costja Mind vagy Chaos Powerrel is fizethető (135.2.e.6.c). Ez csak akkor igaz, ha a nyomtatott Power szimbólum [C]; ha a lapon konkrét domain szimbólum van, csak az a domain fizeti. A bemenet (power: 1) a szimbólumot nem tartalmazza, a nyomtatott lapot ellenőrizni kell."
+ ]
+}

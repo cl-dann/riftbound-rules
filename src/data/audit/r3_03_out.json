@@ -1,0 +1,102 @@
+{
+ "fixes": {
+  "Decree of Rage": {
+   "short": "Action: a saját körödben, vagy showdown alatt bárki körében játszható ki, egy másik spellre válaszul nem. 4 sebzést ad egy ellenséges Calm domainű unitra, és nem lehet counterelni. Ha a célpont a hatás lefutásáig eltűnik vagy már nem felel meg, nem csinál semmit. Tokenre nem használható, mert annak nincs domainje.",
+   "why": "A short kihagyta az [Action] időzítést (806.1.c.1), a lap kijátszhatósága így nem derült ki."
+  },
+  "Doran's Shield": {
+   "short": "Felszerelve +1 Mightot ad, és a unit Tanket kap: harcban az ellenfélnek először őt kell lethal sebzéssel ellátnia. Equip: 1 Calm Powerért, csak a saját Main Phase-edben, harcon kívül. Ha a unitnak már van Tankje, csak a +1 Might számít. Amíg nincs unitra rakva, semmit sem ad.",
+   "why": "Hiányzott az Equip költsége és időzítése (818.1.b.1, 151.2)."
+  },
+  "Experimental Hexplate": {
+   "short": "Equip: 1 Mind Powerért, a saját Main Phase-edben, harcon kívül teheted egy saját unitodra. Felszerelve +1 Mightot ad, és a unit a meglévő tagjei mellé Mech taget kap. Minden Mechre vonatkozó lap látja, például ha Mecheknek adsz képességet. Ha a gear leválik a unitról, a Mech tag is megszűnik.",
+   "why": "Hiányzott az Equip költsége és időzítése (818.1.b.1, 151.2)."
+  },
+  "Eye of the Herald": {
+   "short": "Equip: 1 Order Powerért, a saját Main Phase-edben, harcon kívül teheted egy saját unitodra. Felszerelve, valahányszor a unit mozog, egy 1 Mightú Recruit token érkezik oda, ahová ment. Mightot magától nem ad. Visszahívás nem számít mozgásnak, olyankor nincs token.",
+   "why": "Hiányzott az Equip költsége és időzítése (818.1.b.1, 151.2)."
+  },
+  "Evershade Stalker": {
+   "short": "3 Mightú unit. Kijátszáskor kötelezően eldobsz 1 lapot, majd húzol 1-et. Üres kézzel a dobás elmarad, a húzás így is megtörténik. Ha dobsz, a dobásra triggerelő lapok (például Flame Chompers) beindulnak.",
+   "why": "A régi mondat (\"Üres kézzel a húzás így is megtörténik, és a dobásra ható lapok is beindulnak\") úgy is olvasható volt, hogy üres kézzel is triggerelnek a discard hatások; üres kézzel a discard negálódik (423.4), nincs mire triggerelni (423.1.b)."
+  },
+  "Elnuk Herd": {
+   "notes": [
+    [
+     "811.1.b,811.6",
+     0,
+     "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."
+    ],
+    [
+     "811.1.d.3",
+     0,
+     "Facedown-ból kijátszva a +3 Might targetje csak az adott battlefielden lévő friendly unit lehet. Kézből kijátszva bármelyik friendly unit választható."
+    ],
+    [
+     "417.1.a,135.2.b.7",
+     0,
+     "Facedown-ból kijátszva a resolve végén kötelezően recycle-ölődik, vagyis a Main Deck aljára kerül. Így facedown-ból egyszeri +3 Might, kézből kijátszva viszont a boardon marad."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "Ha a target a resolve előtt illegálissá válik, a +3 Might elmarad, de a recycle ettől még megtörténik, mert az nem a targetre hivatkozik."
+    ],
+    [
+     "811.1.d.3.a,359.3.e.12",
+     1,
+     "Ha a Herd a resolve előtt elhagyja a boardot, a facedown-ból kijátszott play effect nem tudja megállapítani, honnan érkezett, ezért mistargetel."
+    ],
+    [
+     "355.9.c",
+     1,
+     "Errata: korábban \"another friendly unit\" kellett. Most a Herd saját magát is választhatja. Ha facedown-ból kijátszva nincs más friendly unitod a battlefielden, a nem opcionális trigger magát célozza, így chainre kerül, a végén a Herd recycle-ölődik, és a +3 is vele vész. A régi szöveggel ilyenkor target hiányában a trigger chainre sem került, a Herd a boardon maradt."
+    ]
+   ],
+   "why": "A 355.9.c pont azt sugallta, hogy az errata előtt a Herd nem volt kijátszható facedown-ból más unit nélkül; a unit kijátszása sosem függött a play trigger targetjétől, csak a trigger nem került chainre (355.8), így a recycle is elmaradt."
+  },
+  "Explosimian": {
+   "short": "6 Mightú unit. Ha a köröd elején tartja a battlefieldjét, három Bomb tokent teszel egy általad választott battlefieldre. Ha egy Bomb meghal, 2 sebzést ad egy ottani ellenséges unitra, és megöli a többi ottani Bombodat, amelyek szintén robbannak. Ha ott nincs ellenséges unit, a Deathknell nem kerül chainre, a többi Bomb megmarad. Ha az ellenfél ott holdol, mind felrobban az ő unitjaira.",
+   "notes": [
+    [
+     "383.4.d.2.a,472",
+     0,
+     "Hold effect: akkor triggerel, ha a Beginning Phase-edben ott van egy battlefielden, amit holdolsz. Battlefieldenként körönként egyszer."
+    ],
+    [
+     "830.1.b.1",
+     0,
+     "A három Bomb ugyanarra az egy battlefieldre megy, de az bármelyik lehet, nem csak az, ahol az Explosimian áll."
+    ],
+    [
+     "187.12,383.3.d",
+     1,
+     "Ha az egyik Bomb meghal, a Deathknellje megöli a másik kettőt. Mindhárom Deathknell külön triggerel: összesen 3-szor 2 sebzés, akár különböző enemy unitokra."
+    ],
+    [
+     "187.12,355.8",
+     1,
+     "A Bomb Deathknellje targetel (\"an enemy unit here\"). Ha a Bomb battlefieldjén nincs enemy unit, a trigger nem kerülhet chainre, így a többi Bomb sem hal meg."
+    ],
+    [
+     "830.1.b",
+     1,
+     "Ha egy opponent ott holdol, mindhárom Bomb meghal, és a Deathknellek az ő ottani unitjait sebzik."
+    ],
+    [
+     "830.1.b.3",
+     0,
+     "A Bombok a cleanupban nem recallolódnak, a battlefielden maradnak."
+    ]
+   ],
+   "why": "A short feltétel nélkül állította, hogy egy Bomb halálakor a másik kettő is meghal; a Deathknell targetet igényel (187.12), target nélkül nem kerül chainre (355.8), ekkor a láncreakció elmarad."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Dockside Lock-Up: a short szerint a hold triggernél a geart \"feláldozhatod\". A szövegben nincs \"may\", a \"kill this to play\" cost within instructions a trigger elején (383.3.b, 204.1.c); a Core Rules nem mondja ki egyértelműen, hogy may nélkül a base cost kifizetése megtagadható-e. A notes ezt judge-ra bízza (flag 2), a shortot nem módosítottam.",
+  "Diana, Lunari: a 205,204.3 errata pont szerint a régi \"you may pay [1]. If you do\" szövegnél a fizetés a resolve-kor történt. A 383.3.b a \"you may\" utáni costot base costnak tekinti; hogy a régi, \"to\" nélküli forma is ide tartozott-e, a Core Rules nem dönti el. Mivel régi szövegről szól, nem javítottam.",
+  "Explosimian: ha az első Bomb Deathknellje megöli az ott lévő egyetlen enemy unitot, a további Bombok Deathknelljeinek targetválasztása a cleanup sorrendjétől függ; a notes \"3-szor 2 sebzés\" állítását (flag 1) ezért nem tudtam teljesen lezárni."
+ ]
+}

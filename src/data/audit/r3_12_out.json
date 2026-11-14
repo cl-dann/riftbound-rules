@@ -1,0 +1,62 @@
+{
+ "fixes": {
+  "Vilemaw": {
+   "notes": [
+    [
+     "822.1.b,813.1.c.1",
+     0,
+     "[Ambush]: olyan battlefieldre is kijátszható, ahol van unitod, és amíg ilyen helyre játszod, [Reaction]-je van: Closed State-ben, bárki körében, combat közben is lejöhet. Base-be játszva nincs [Reaction]-je."
+    ],
+    [
+     "467.2.a,710",
+     1,
+     "A passzív az ott lévő enemy unitok aktuális Mightját hasonlítja Vilemaw aktuális Mightjához a combat damage pillanatában. Assault, Shield, buff és \"this turn\" bónusz mindkét oldalon számít."
+    ],
+    [
+     "467.2.c,424.1.b",
+     2,
+     "A Core Rules nem írja le, hogyan kell kezelni a \"don't deal combat damage\" unitot. A Stun mintájára a Mightja valószínűleg nem adódik a kiosztható damage-hez, de ezt judge erősítse meg."
+    ],
+    [
+     "384.2",
+     1,
+     "Ha Vilemaw a combat damage előtt elhagyja a battlefieldet, a passzív megszűnik. Az az enemy unit, amelynek Mightja legalább akkora, mint Vilemaw aktuális Mightja, rendesen sebez."
+    ],
+    [
+     "383.4.d.2.a",
+     0,
+     "Hold effect: akkor húzol, ha Vilemaw ott van azon a battlefielden, amelyet a Beginning Phase-edben holdolsz."
+    ],
+    [
+     "758.2.a,359.3.e.6",
+     0,
+     "A 758.2.a példájában ő a Rebuke targetje, akit az Alpha Wildclaw tesz ideiglenesen választhatatlanná. A 359.3.e.6 példája a Vilemaw's Lair battlefieldről szól, nem erről a unitról."
+    ]
+   ],
+   "why": "A 384.2-es pont \"Egyenlő Mightú (8 vagy több) enemy unit rendesen sebez\" mondata pontatlan: a passzív Vilemaw aktuális Mightjához hasonlít (710), buffolt Vilemaw mellett egy 8 Mightú enemy unit sem sebez."
+  },
+  "Volibear, Relentless Storm": {
+   "short": "Legend: ha kijátszol egy unitot, ami belépés után legalább 5 Mightú, exhaustolva kapsz egy exhausted rune-t. Az új rune azonnal recycle-ölhető Powerért, Energyt viszont csak akkor ad, amikor ready lesz: ready-zó effect nélkül a következő saját Awaken Phase-edben.",
+   "why": "A short \"csak a következő saját körödtől\" állítása kizárja a ready-zó effecteket; a rune bármely ready után ad Energyt (164.2.a, 416), a notes 164.2.b pontja is így mondja."
+  },
+  "Whirlwind": {
+   "short": "Az opponenttől kezdve minden játékos visszaküldhet egy tetszőleges unitot a tulajdonosa kezébe, akár enemy unitot is. Te döntesz utoljára, így látod a többiek választását. Token így megszűnik. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Pontatlan időzítés: [Action] nélküli spell csak Open State-ben, showdownon kívül játszható ki (155), a short csak \"a saját körödben\"-t írt."
+  },
+  "Wild Claw": {
+   "short": "Megnézed a deck felső 5 lapját, egy unitot vagy geart eltávolíthatsz közülük és kijátszhatod 5 Energyvel olcsóbban (a Powert ki kell fizetni), utána Empowered állapotba teheted. A többi a deck aljára megy. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Pontatlan időzítés: [Action] nélküli spell csak Open State-ben, showdownon kívül játszható ki (155), a short csak \"a saját körödben\"-t írt."
+  },
+  "Altar of Memories": {
+   "short": "Amikor meghal egy saját unitod, exhaustolhatod a geart: húzol egy lapot, majd egy lapot a kezedből a Main Deck tetejére vagy aljára teszel. Mivel exhaustolni kell, amíg újra ready nem lesz, a további halálokra nem használható. Token unit halála is beindítja.",
+   "why": "A \"Körönként csak egyszer\" téves korlát: az exhaust cost csak ready állapotot kíván (415.1.b, 415.4), ready-zó effect után ugyanabban a körben ismét használható."
+  },
+  "Zed, From the Shadows": {
+   "short": "Kijátszáskor eldobhatsz egy lapot, ekkor kapsz egy 0 Mightú Shadow Clone tokent. A Clone támadáskor eltávolíthat egy unitot a trashedből, és ekkor támadóként +4 Mightot kap. Assault nélkül 0 Mightú, ilyenkor már 1 sebzés megöli.",
+   "why": "Az \"1 sebzés megöli\" feltétel nélkül hamis: Assault 4-gyel támadva a Clone Mightja 4, a lethal damage ehhez igazodik (142.4.b, 807)."
+  }
+ },
+ "checked": 89,
+ "data_issues": [],
+ "open": []
+}
