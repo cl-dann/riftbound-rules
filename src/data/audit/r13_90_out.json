@@ -1,0 +1,85 @@
+{
+ "fixes": {
+  "Deadly Flourish": {
+   "short": "3 sebzést ad egy ellenséges unitra, base-ben állóra is. Ha az a unit a kör végéig bármilyen módon meghal, kapsz egy exhausted Gold tokent. Ha nem hal meg, hanem kézbe kerül vagy banishelődik, nem kapsz semmit. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Death from Below": {
+   "short": "Megöl egy battlefielden álló unitot. Ha annak 3 vagy kevesebb Mightja volt, a lapot 1 Powerért újra kijátszhatod a trashből, akár többször egymás után, ha mindig kis unitot ölsz. Az ellenfél az újrajátszási lehetőségre is reagálhat. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Death Mark": {
+   "short": "A decked felső 3 lapját a trashbe teszed, és kapsz egy 0 Mightú Shadow Clone tokent. A clone támadáskor banishelhet egy unitot a trashedből, hogy +4 Mightot kapjon. A lap a trashből is újra kijátszható 1 Energy és 2 Powerért, utána banishelődik. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Decree of Discord": {
+   "short": "Bármennyi ellenséges, Order domainű unitot visszaküld a gazdája kezébe, ha együtt legfeljebb 5 Mightjuk van. Tokent nem választhatsz, mert annak nincs domainje. Ha a hatás lefutásáig a Might összeg 5 fölé nő, csak egy részük megy vissza. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Detonate": {
+   "short": "Megöl egy gear-t, bárkiét, és a gear controllere húz 2 lapot. Ha a saját gearedre használod, te húzol. Ha a gear a hatás lefutása előtt eltűnik, a húzás is elmarad. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Divine Judgment": {
+   "short": "Minden játékos megtart 2 unitot, 2 gear-t, 2 rune-t és 2 kézben lévő lapot, minden mást a deckje aljára tesz. Ez nem ölés, Deathknell nem fut le, a nem megtartott tokenek megszűnnek. Hogy csak a saját lapjaid közül választhatsz-e, nem tisztázott, judge dönti el. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Downwell": {
+   "short": "Az összes unit és gear visszamegy a gazdája kezébe, a tieid is. Ez nem ölés, Deathknell nem fut le, a tokenek eltűnnek, a sebzés és a bónuszok elvesznek. A rune-ok a boardon maradnak. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Dragon Form": {
+   "short": "Egy unit alap Mightja a kör végéig 5 lesz, és a bónuszok erre jönnek rá. Ellenséges nagy unitot 5-re csökkenthetsz, ami a sebzett unitot meg is ölheti. A trashből 3 Energyért újra kijátszható, utána banishelődik. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Existential Dread": {
+   "short": "Stunnol egy támadó ellenséges unitot, ami így nem sebez a harcban, vagy ha már stunnolt, a tulajdonosa kezébe küldi. Csak védekezőként, harc közben van értelme. Plusz 2 Energyért még egyszer lefut, akár másik targettel: ugyanarra a unitra választva előbb stun, aztán kézbe. A saját körödben vagy showdownban játszható ki.",
+   "why": "806"
+  },
+  "Fanfare": {
+   "short": "Ebben a körben a következő három kijátszott unitod után húzol 1-1 lapot. A Fanfare előtt kijátszott unitok nem számítanak, és counterelt unit után nem húzol. A token unitok kijátszása is számít. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Hexplosive Minefield": {
+   "short": "Megölsz akárhány saját Bomb tokent, és a kör végén ugyanannyi új Bombot teszel le egyetlen battlefieldre. A megölt Bombok halálhatása lefut, így sebzést oszthatnak. A battlefieldet csak a kör végén választod, bármelyik lehet, akár ellenséges is. A saját körödben vagy showdownban játszható ki.",
+   "why": "806"
+  },
+  "Mirror Image": {
+   "short": "Kapsz egy ready Reflection tokent a base-edbe, ami egy általad kiválasztott unit másolata lesz. A buff, a sebzés és az Equipment nem másolódik, és a lemásolt unit kijátszáskori hatása nem indul el. A token a következő köröd elején, pontozás előtt meghal. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Mystic Reversal": {
+   "short": "Átveszed egy kijátszott, még le nem futott spell irányítását, és új célpontokat vagy módot választhatsz neki. A hatás neked jár, de a lap utána a tulajdonosa trashébe megy. A kijátszáskori döntések, például a kifizetett Repeat, nem változtathatók. Bármikor kijátszható, ha nálad a priority.",
+   "why": "813"
+  },
+  "Parallel Convergence": {
+   "short": "Kijátszáskor vissza kell venned egy saját unitot a kezedbe, cserébe 5 sebzést oszt egy battlefielden álló unitnak. Saját unit nélkül nem játszható ki. Ha counterelik, a visszavett unit a kezedben marad, a költség elveszett. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Party Favors": {
+   "short": "Minden másik játékos választ: lapot vagy rune-t. Akik lapot választanak, azokkal együtt te is húzol 1-et, akik rune-t, azokkal együtt te is kapsz 1 exhausted rune-t. 1v1-ben tehát az opponent dönti el, mit kaptok mindketten. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Portal Rescue": {
+   "short": "Egy saját unitod eltűnik, majd azonnal ingyen visszajön a tulajdonosa base-ébe, exhausted állapotban. Új unitnak számít: a sebzés és a stun lekerül róla, a kijátszási hatása újra lefut. Az Equipment leválik, a token nem jön vissza. Egy már kijátszott spellre válaszul nem használható. A saját körödben vagy showdownban játszható ki.",
+   "why": "806"
+  },
+  "Promising Future": {
+   "short": "Mindenki megnézi a deckje felső 5 lapját, egyet nyilvánosan banishel, a többit a deck aljára teszi. Utána a next playertől kezdve mindenki kijátssza a banisht lapot Energy cost nélkül, a Powert ki kell fizetni. Az opponent így a te körödben is lehozhat lapot. A unitok és gearek azonnal belépnek, a spellek közül az utoljára kijátszott resolve-ol először. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Rally for War": {
+   "short": "Három 1 Mightú Recruit tokent teszel egy olyan enemy battlefieldre, ahol áll unit, így combat indul, amiben te támadsz. A tokenek exhausted lépnek be. Ha az opponent közben elviszi onnan a unitjait, a tokenek nem jönnek létre. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Stormbringer, Volibear": {
+   "short": "Választasz egy unitot a base-edből és egy battlefieldet: a unit Mightjával megegyező sebzést kap minden ott álló enemy unit, aztán a unitod odamegy. Exhausted unittal is működik. Ha marad túlélő, combat lesz, és te támadsz. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Strike Down": {
+   "short": "Egy saját, Equipmenttel felszerelt unitod a Mightjával megegyező sebzést okoz egy enemy unitnak, ami nem üt vissza. Utána egy Equipment leválik róla. A sebzés még az Equipment bónuszával számol. Ha a resolve előtt leválik az egyetlen Equipment, nincs sebzés. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  }
+ },
+ "checked": 20
+}
