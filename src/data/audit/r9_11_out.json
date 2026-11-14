@@ -1,0 +1,57 @@
+{
+ "fixes": {
+  "Treasure Hoard": {
+   "short": "Ha itt conquerelsz, 1 Energy kifizetésével kérhetsz egy exhausted Gold tokent a base-edbe. A Gold megölve és exhaustolva 1 bármilyen domainű Powert ad, de mivel exhausted érkezik, ready-zó effect nélkül csak a következő saját Awaken Phase-ed után használható, az opponent körében még nem.",
+   "why": "A short kivétel nélkül állította, hogy a Gold csak a következő Awaken Phase után használható; gear ready-zó effect (például Acceleration Gate, Veiled Temple, Defender of Tomorrow) korábban is használhatóvá teszi (187.5, 415.4, 416)."
+  },
+  "Treasure Hunter": {
+   "short": "Valahányszor mozog, kapsz egy exhausted Gold tokent a base-edbe. Recallra nem triggerel. A Gold megölve és exhaustolva 1 bármilyen domainű Powert ad, de ready-zó effect nélkül csak a következő saját Awaken Phase-ed után, amikor ready lesz, az opponent körében még nem.",
+   "why": "A short kivétel nélkül \"csak\"-kal állította, hogy a Gold a következő Awaken Phase előtt nem használható; gear ready-zó effect (például Acceleration Gate, Veiled Temple) ezt felülírja (187.5, 415.4)."
+  },
+  "Unlicensed Armory": {
+   "notes": [
+    [
+     "423.3,415.4",
+     0,
+     "A cost egy lap discardolása és az exhaust. Üres kézzel az ability nem aktiválható."
+    ],
+    [
+     "355.10.c",
+     0,
+     "A szabályzat éppen ezt a szövegformát hozza példának: a \"Choose a friendly unit\" nem része a replacement effectnek, ezért a unit target."
+    ],
+    [
+     "151.2",
+     0,
+     "Csak a saját Main Phase-edben, showdownon kívül aktiválható. A védelmet előre, a combat előtt kell felrakni, és csak arra a körre szól."
+    ],
+    [
+     "391.3,393",
+     0,
+     "Delayed replacement jön létre: a unit következő halálára vonatkozik abban a körben, egyszer. Akkor is él, ha az Armory közben elhagyja a boardot."
+    ],
+    [
+     "445.2,430.3",
+     0,
+     "A Fury Powert akkor fizeted, amikor a unit meghalna. Ha nem fizetsz, a unit meghal. A fizetéshez [Reaction] Add ability használható."
+    ],
+    [
+     "383.2.c.3.a,808.1.d.1",
+     0,
+     "Ha a halált lecseréled, a unit nem hal meg: a Deathknell és a \"when dies\" triggerek nem futnak le."
+    ],
+    [
+     "419.1,458.1",
+     1,
+     "Errata: \"dies\" helyett \"would die\", és bekerült a heal. Az exhausted recall a régi szövegben is benne volt. A unit damage nélkül, exhausted kerül a base-be, így a következő cleanup nem öli meg újra. A recall nem Move."
+    ]
+   ],
+   "why": "Az errata note szerint a heal és az exhaust is az erratával került be, de a régi szöveg is \"recall it exhausted\" volt; csak a heal és a \"would die\" új."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Void Seeker: a 138.1 note szerint a lapon Kai'Sa idézet a flavor text; a bemenet nem tartalmaz flavor textet, ezt nem tudtam ellenőrizni (a tag hiánya a cards.json szerint stimmel)."
+ ]
+}

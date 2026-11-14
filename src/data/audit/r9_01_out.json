@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "Call to Battle": {
+   "short": "Egy saját unitodat egy általad kontrollált battlefieldre mozgatod, majd egy ellenfél köteles oda mozgatni egy általa választott saját unitját, ha van neki. Ekkor ott combat lesz, amelyben ő az attacker, te a defender. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A short feltétel nélkül állította, hogy combat lesz. Az opponent a resolve-kor a saját unitjai közül választ (355.10.e, 355.18); ha nincs unitja, nincs mit mozgatnia, így combat sem indul (316.7.a: combat csak akkor van, ha ellenfelek unitjai ugyanazon a battlefielden vannak)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

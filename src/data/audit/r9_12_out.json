@@ -1,0 +1,8 @@
+{
+ "fixes": {},
+ "checked": 89,
+ "data_issues": [
+  "Wraith of Echoes: a feed (és a bemenet) szövege \"The first time a friendly unit dies each turn\", a Core Rules 383.1.b példája viszont \"another friendly unit\" szöveggel idézi. A notes ezt flag 2-vel kezeli, de a hatályos (esetleg nyomtatott vagy errata) szöveget érdemes forrásból ellenőrizni."
+ ],
+ "open": []
+}

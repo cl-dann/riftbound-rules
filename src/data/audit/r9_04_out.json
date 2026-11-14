@@ -1,0 +1,49 @@
+{
+ "fixes": {
+  "Flash": {
+   "short": "Reakcióként legfeljebb 2 saját unitodat a base-be mozgatja. Jó mentés az olyan ellenséges spellek ellen, amelyek battlefielden álló unitot céloznak (például \"a unit at a battlefield\"), mert a base-ben lévő unit már nem érvényes célpont; a bárhol álló unitot célzó spell ellen nem véd. Ha valami tiltja a mozgást, kijátszható, de a mozgás elmarad.",
+   "why": "A short általánosan azt sugallta, hogy a base-be mozgatás minden battlefieldre célzott spell ellen véd. A 359.3.e.2 és a 359.3.e.9 példája szerint csak a \"unit at a battlefield\" megkötésű target lesz illegális, a megkötés nélküli \"a unit\" target base-ben is legális marad."
+  },
+  "Frigid Jewel": {
+   "notes": [
+    [
+     "414.2.a",
+     1,
+     "A saját körödben általában a Draw Phase húzása az első lap, a trigger a következő húzásnál jön. Ha már a Beginning Phase-ben húztál (például egy hold trigger miatt), a Draw Phase húzása lehet a második. A \"each turn\" miatt az opponent körében is működik, ha ott két lapot húzol."
+    ],
+    [
+     "414.1",
+     1,
+     "A \"Draw 2\" két külön lap húzása, tehát egyetlen ilyen effect is eléri a második lapot. A harmadik és további húzás már nem triggerel."
+    ],
+    [
+     "355.10,355.5.b",
+     0,
+     "A friendly unit target, a trigger chain-re kerülésekor választod. Nem \"may\": ha van friendly unitod, kötelező választani."
+    ],
+    [
+     "403.4",
+     0,
+     "Ha nincs friendly unitod, a trigger lekerül a chainről."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "Ha a unit a resolve előtt elhagyja a boardot vagy már nem friendly, a +2 Might elvész."
+    ],
+    [
+     "317.2.c",
+     0,
+     "A +2 Might a kör végén, az Expiration Stepben lejár."
+    ]
+   ],
+   "why": "A 414.2.a note kivétel nélkül állította, hogy a saját körben a Draw Phase húzása az első lap. A Draw Phase előtt, a Beginning Phase-ben is lehet húzni (például 473.2.b hold trigger, Grove of the God-Willow), ilyenkor a Draw Phase húzása már a második, és az indítja a triggert."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Forgotten Monument: a short és a notes (473.2, flag 1) tényként állítja, hogy a score tiltása alatt a conquer és hold triggerek sem futnak le. A 471.1 a conquert scoring módként definiálja, ami ezt támogatja, de a 383.4.c.2.c szerint a pont elmaradása nem akadályozza a triggert; hogy a scoring tiltása a conquer eseményt is megszünteti-e, a Core Rules nem mondja ki szó szerint.",
+  "Frisky Hunter: a short tényként állítja, hogy ha a Hunter a resolve előtt elhagyja a boardot, a Bird token elmarad (\"here\" nem határozható meg, 359.3.e.12). A notes ezt flag 1-gyel vezeti le; az is elképzelhető, hogy a játék a Hunter utolsó ismert helyét használja, ezt a Core Rules nem rendezi egyértelműen."
+ ]
+}

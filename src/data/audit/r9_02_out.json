@@ -1,0 +1,72 @@
+{
+ "fixes": {
+  "Decree of Unity": {
+   "notes": [
+    [
+     "355.9.b",
+     0,
+     "A target csak enemy és Chaos domainű unit vagy gear lehet."
+    ],
+    [
+     "185.3.b",
+     0,
+     "A tokeneknek nincs domainje, ezért token (például Gold) nem választható vele."
+    ],
+    [
+     "359.3.e.2",
+     0,
+     "Ha a target a resolve-ra már nem enemy vagy nem Chaos, illegális, a spell nem csinál semmit."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "103.2.b.3",
+     1,
+     "Sideboard lap Chaos deckek ellen. Egydomaines Order lap, ezért csak olyan deckbe tehető, amelynek Domain Identity-je tartalmazza az Ordert."
+    ]
+   ],
+   "why": "A 103.2.b csak azt mondja, hogy a legend adja a Domain Identity-t, a Power fizetési domainjéről nem szól; a nyomtatott Power szimbólum az adatból nem ellenőrizhető. A note a 103.2.b.3 szerinti deckbe tehetőségre javítva."
+  },
+  "Deadbloom Predator": {
+   "notes": [
+    [
+     "809.1.c,809.1.c.1",
+     0,
+     "[Deflect]: az opponent minden spellje és abilityje, amely őt targeteli, választásonként 1 bármilyen domainű Powerrel többe kerül. Mandatory additional cost, a saját lapjaidra nem vonatkozik."
+    ],
+    [
+     "355.2.b",
+     0,
+     "A passzív plusz helyet ad a kijátszáshoz: olyan battlefieldre is lejöhet, amelyet egy opponent kontrollál és ahol unitja van. Üres vagy senki által nem kontrollált battlefieldre ez nem ad engedélyt."
+    ],
+    [
+     "310.1.a",
+     1,
+     "Időzítést nem ad: [Action] és [Reaction] nélkül csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "190.3.a.1,466.2.c.1",
+     0,
+     "Az enemy battlefieldre kijátszva az Contested lesz, combat indul, és te vagy az Attacker."
+    ],
+    [
+     "143.4,467.2.a",
+     1,
+     "Exhausted lép be, de a combat damage minden attacker unit Mightját összeadja, exhausted állapotra nincs kivétel: azonnal 8 Mighttal támad."
+    ],
+    [
+     "468.1.a.2",
+     0,
+     "Ha a combat után defender is maradt, a Predator recallolódik a base-edbe."
+    ]
+   ],
+   "why": "A 813.3.a a [Reaction]-ös unitok kijátszási helyéről szól, nem támasztja alá a timing állítást; a hivatkozás 310.1.a-ra szűkítve."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

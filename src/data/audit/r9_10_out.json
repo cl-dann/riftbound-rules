@@ -1,0 +1,4 @@
+{"fixes": {}, "checked": 92, "data_issues": [], "open": [
+"The Ball, The Good Stuff: a tags mezőben szereplő 'Device' tag nincs a 763.1 tag-listájában; a short/notes nem épít rá, de The List 763.1-re hivatkozó pontja szerint csak a listában szereplő tag nevezhető meg. Nem dönthető el, hogy a feed vagy a Core Rules lista elavult.",
+"Teemo, Swift Scout: a legend szövege 'instead of [C]', míg a Hide költsége a 811.1.b szerint [A]. A short/notes '1 Power helyett 1 Energy' megfogalmazása mindkét olvasattal igaz, de a nyomtatott [C] jelentése (csak Mind/Chaos Power kiváltása?) hivatalos forrással nem zárható le."
+]}

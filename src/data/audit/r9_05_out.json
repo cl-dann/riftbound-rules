@@ -1,0 +1,13 @@
+{
+ "fixes": {
+  "Kennen, Keeper of Balance": {
+   "short": "Kijátszáskor és támadáskor 2 Energyért stunolhat egy unitot, ami így nem oszt combat damage-et ebben a körben. Amíg vele egy helyen stunolt ellenséges unit áll, +2 Mightot kap. Hidden: a saját körödben, kézből vagy a Champion Zone-ból 1 tetszőleges Powerért elrejtheted egy saját battlefielden, és a következő körtől Reactionként, költség nélkül oda kijátszhatod.",
+   "why": "A short Hidden leírásából hiányzott az időzítési feltétel: a 811.1.b szerint elrejteni csak a saját körödben, Open State-ben lehet. A short ezt nem említette, így úgy tűnt, bármikor elrejthető (a Keeper of Masks és a Hostile Takeover shortja ezt helyesen tartalmazza)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Jayce, Brilliant Inventor: a short és a notes szerint ha az első nem token gearnél nemet mondasz, a második gear már nem triggerel. A 383.3.a.2 szerint az elutasított trigger 'considered to have not triggered', ezért vitatható, hogy a 'first time' feltétel újra teljesülhet-e; judge megerősítés kellene (az előző körben is nyitott)."
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "fixes": {
+  "Endless Riches": {
+   "short": "Kijátszáskor banisheled a kezed és a trashed, majd a decked felső 7 lapját a trashbe teszed (Burn 7). Amíg a gear a boardon van, kimarad a Draw Phase-ed, viszont a trashből is játszhatsz ki lapot, és minden lap, ami nem a Main Deckből menne a trashbe, helyette banishelődik. Veszélyes: a deck gyorsan fogy, és minden Burn Out 1 pontot ad egy ellenfélnek.",
+   "why": "A short szerint a Draw Phase kihagyása és a trashből játszás 'ettől kezdve' él, mintha végleges lenne. Ezek passive abilityk, csak addig hatnak, amíg a gear a boardon van (365.1)."
+  },
+  "Evershade Stalker": {
+   "short": "3 Mightú unit. Kijátszáskor kötelezően eldobsz 1 lapot, majd húzol 1-et. Üres kézzel a dobás elmarad, a húzás így is megtörténik. Ha az eldobott lapnak saját eldobásra triggerelő képessége van (például Flame Chompers), az beindul.",
+   "why": "A short úgy fogalmazott, hogy bármely dobás beindítja a Flame Chompershez hasonló lapokat. A Flame Chompers szövege 'When you discard me': csak akkor triggerel, ha magát a Chompers lapot dobod el (423.1.b)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}
