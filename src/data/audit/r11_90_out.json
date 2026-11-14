@@ -1,0 +1,205 @@
+{
+ "fixes": {
+  "Bedeviling Stranger": {
+   "short": "Kijátszáskor választasz egy battlefieldet, és ha ott legalább 4 unit áll, egy ott lévő ellenséges unitot visszaküldhetsz a gazdája kezébe. Hidden: a saját körödben, showdownon kívül 1 Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reaction időzítéssel kijátszhatod, de csak oda.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Blastcone Fae": {
+   "short": "Kijátszáskor egy unit -2 Mightot kap erre a körre, de legfeljebb 1 Mightig. Hidden: a saját körödben, showdownon kívül 1 Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reaction időzítéssel kijátszhatod, de akkor csak az ottani unitot választhatod. Ha ott nincs más unit, saját magát kell gyengítenie.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Burn Away": {
+   "short": "Félretesz (banish) egy legfeljebb 3 Mightú unitot vagy bármilyen geart, majd a Main Deck felső 2 lapod a trashbe kerül. Csak a saját körödben, showdownon kívül játszható ki. Ez nem kill, így a Deathknell nem indul be, és a 2 lapot akkor is elveszíted, ha a célpont közben eltűnik.",
+   "why": "155"
+  },
+  "Bushwhack": {
+   "short": "Ebben a körben minden ezután belépő saját unitod ready lép be, és kapsz egy exhausted Gold gear tokent. A már kint lévő unitokra nem hat, ezért előbb ezt játszd ki. Kézből csak a saját körödben, showdownon kívül megy. Hidden: 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reactionként játszható.",
+   "why": "155"
+  },
+  "Cataclysm": {
+   "short": "Az ellenfelek ebben a körben nem játszhatnak ki spellt, combatban sem, majd egy saját unitodat egy ellenséges unitok által elfoglalt ellenséges battlefieldre mozgatod, ahol te támadsz. Amíg a hatás le nem fut, az ellenfél még válaszolhat. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Cataclysmic Duel": {
+   "short": "Minden játékos megtart egy saját unitot, minden más unit meghal, bárhol is áll. A gearek megmaradnak, az Equipmentek leválnak. Nem mutat rá senkire, így Deflect sem véd. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Catalyst of Aeons": {
+   "short": "Kapsz 2 exhausted rune-t a Rune Deckből. Ha nincs meg a 2, húzol egy lapot is. Az exhausted rune ebben a körben nem ad Energyt, de recycle-ölve Powerre azonnal beváltható. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Charm": {
+   "short": "Egy ellenséges unitot elmozgatsz bárhová, általában a saját base-ébe vagy egy másik battlefieldre, akár a sajátodra. Így kihúzhatsz egy védőt, vagy harcba kényszerítheted, ahol ő lesz a támadó. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Clash of Giants": {
+   "short": "Két tetszőleges unit a Mightjának megfelelő damage-et ad egymásnak, bárkié is. A sebzést a unitok okozzák, nem a spell, ezért spell bónuszsebzés nem jár. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Command: Attack": {
+   "short": "Két lehetőség közül választasz: egy saját Deploy geart (például Bomb tokent) áttolsz egy másik battlefieldre, vagy megnézed a Main Deck felső 5 lapját, és egy geart felhúzhatsz közülük, a többi a pakli aljára megy. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Concentrate": {
+   "short": "Húzol 2 lapot. 6 XP-től 2 Energyvel olcsóbb, 11 XP-től 4-gyel, a kettő nem adódik össze. Csak a saját körödben, showdownon kívül játszható ki, és más effectek a nyomtatott 5-ös költségét látják.",
+   "why": "155"
+  },
+  "Conscription": {
+   "short": "Átveszed egy battlefielden álló, legfeljebb 3 Mightú ellenséges unit irányítását, és exhausted állapotban a base-edbe kerül. Ha kijátszáskor elköltesz 5 XP-t, bármekkora unitot elvihetsz. A unit véglegesen nálad marad. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Curtain Call": {
+   "short": "Egy módot választasz: húzol 1-et, 2 damage egy battlefielden álló unitnak, 3 damage egy base-ben álló unitnak, vagy -4 Might erre a körre egy battlefielden álló unitnak. Kijátszáskor külön fizethetsz plusz 1 Energyt, 1 bármilyen Powert, illetve 1 Energy és 1 Powert: mindegyik egy újabb, eddig nem választott módot ad. Csak a saját körödben, showdownon kívül.",
+   "why": "155"
+  },
+  "Decree of Strength": {
+   "short": "Egy ellenfeled megmutatja a kezét, te kiválasztasz belőle egy Mind domainű lapot, és az a deckje aljára kerül, nem a trashbe. Ha nincs ilyen lap, nem történik semmi, de láttad a kezét. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Decree of Unity": {
+   "short": "Megöl egy ellenséges Chaos domainű unitot vagy gear-t. Tokent, például Goldot, nem választhatsz, mert annak nincs domainje. Csak a saját körödben, showdownon kívül játszható ki, Chaos deckek elleni tartaléklap.",
+   "why": "155"
+  },
+  "Demon Shade": {
+   "short": "Egy saját unitodat egy open battlefieldre mozgatod, vagyis ahol nincs unit és senki nem kontrollálja. Ha nincs open battlefield, ehelyett Gankinget adhatsz neki erre a körre. Kézből csak a saját körödben, showdownon kívül. Hidden: 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reactionként játszható, de csak az ottani unitodat választhatod.",
+   "why": "155"
+  },
+  "Desert's Call": {
+   "short": "Kapsz egy 2 Mightú Sand Soldier tokent. Plusz 2 Energyért kétszer fut le, így 4 Energyért két tokent kapsz. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Disciple of Shen": {
+   "short": "1 Mightú unit, ami Shield 3-at kap (védekezéskor +3 Might), amíg pontosan egy másik saját unitoddal áll ugyanazon a battlefielden. Ha egy harmadik unitod érkezik, vagy a társa elmegy, a bónusz azonnal elvész. Hidden: a saját körödben, showdownon kívül 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől reakcióként ingyen kijátszhatod oda.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Double Trouble": {
+   "short": "Megnézed a decked felső 3 lapját, egy unitot felhúzhatsz közülük, a többi a deck aljára megy. Plusz 2 Energyért megismételheted a következő 3 lappal. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "155"
+  },
+  "Elnuk Herd": {
+   "short": "Kijátszáskor egy saját unitod, akár maga a Herd, +3 Mightot kap a kör végéig. Hidden: a saját körödben, showdownon kívül 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől reakcióként ingyen kijátszhatod oda, akár harc közben. Ekkor a +3 csak ottani unitra mehet, és utána a Herd a deck aljára kerül.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Evelynn, Entrancing": {
+   "short": "Olcsó champion. Backline: harcban csak akkor kaphat halálos sebzést, ha a többi, Backline nélküli unitod már kapott. Hidden: a saját körödben, showdownon kívül 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden. Ha egy későbbi saját körödben facedownból játszod ki, áthúzhatsz egy ellenséges unitot egy másik helyről a battlefieldjére, ami ott harcot indít.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Frostcoat Mother": {
+   "short": "3 Mightú unit. Empowered állapotba hozható 12 Energyért, ami minden rune-od után 1-gyel olcsóbb, sok rune-nál akár ingyenes. Empowered állapotban +3 Mightja van. Csak a saját Main Phase-edben, showdownon kívül aktiválható.",
+   "why": "145.2"
+  },
+  "Gangplank, Naval": {
+   "short": "6 Mightú champion, 2 Body Powerért Empowered lesz a saját Main Phase-edben, showdownon kívül. Ekkor ha egy őt kiválasztó spell vagy képesség stunnolná, gyengítené vagy kézbe küldené, helyette +3 Mightot kap a kör végéig. Ölés, sebzés és a mindenkire ható lapok ellen nem véd.",
+   "why": "145.2"
+  },
+  "Grumpy Rockbear": {
+   "short": "4 Mightú unit. Empower: 12 Energy, minden rune-od után 1-gyel kevesebb, csak a saját Main Phase-edben, showdownon kívül. Empowered állapotban Deflectet kap (az ellenfélnek plusz 1 bármely Powert kell fizetnie, ha kiválasztja) és Shield 3-at (+3 Might, amíg defender).",
+   "why": "145.2"
+  },
+  "Guardian Angel": {
+   "short": "Equipment, +1 Might. Equip: 1 Calm Power, saját unitra, a saját Main Phase-edben, showdownon kívül. Ha a felszerelt unit meghalna, helyette a Guardian Angel hal meg: a unit meggyógyul, exhausted lesz, és a base-be recallolódik. Mivel a unit nem hal meg, a Deathknell és más halál triggerei nem futnak le.",
+   "why": "151.2"
+  },
+  "Hand Hammer": {
+   "short": "Equipment, +1 Might. Equip: 1 Calm Power, saját unitra, a saját Main Phase-edben, showdownon kívül. A felszerelt unit további +2 Mightot kap, amíg battlefielden áll pontosan egy másik saját unitoddal. Egyedül, base-ben vagy két társsal nem jár, és folyamatosan változik.",
+   "why": "151.2"
+  },
+  "Helm of Suppression": {
+   "short": "Gear: az ellenfelek spelljei 1 Energyvel drágábbak. Empower: 4 Energy és 1 Calm Power, a saját Main Phase-edben, showdownon kívül. Empowered állapotban a drágítás 1 Energy és 1 bármely Power. Unitokra, gearekre és képességekre nem hat, az elrejtett lapból kijátszott spellre igen.",
+   "why": "151.2"
+  },
+  "Hexdrinker": {
+   "short": "Equipment, +1 Might. Equip: 1 Body Power, saját unitra, a saját Main Phase-edben, showdownon kívül. A felszerelt unit Deflectet kap: ha az ellenfél spellel vagy képességgel kiválasztja, plusz 1 bármely Powert kell fizetnie. A Hexdrinkernek magának nincs Deflectje, felár nélkül megölhető.",
+   "why": "151.2"
+  },
+  "Hostile Takeover": {
+   "short": "Átveszed egy battlefielden álló ellenséges unit irányítását és readyzed: ha ott más ellenséges unit is van, combat indul, ha nincs, conquerelsz. A kör végén elveszíted, és recallolódik. Hidden: a saját körödben, showdownon kívül 1 bármely Powerért elrejtheted egy saját battlefielden, a következő körtől Reactionként, ingyen kijátszhatod, csak az ottani unitra. Ending Phase-ben kijátszva a visszaadás elmarad.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Keeper of Masks": {
+   "short": "Kijátszáskor két Reflection tokent kapsz ugyanoda, amelyek aztán a Keeper másolatai lesznek; a másolatok kijátszáskori hatása nem fut le, így nincs láncreakció. A Keeper és a másolatok is Temporaryk: a következő köröd elején, pontozás előtt meghalnak. Hidden: a saját körödben, showdownon kívül 1 tetszőleges Powerért elrejtheted egy saját battlefielden, és a következő körtől Reactionként, költség nélkül kijátszhatod.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Kennen, Keeper of Balance": {
+   "short": "Kijátszáskor és támadáskor 2 Energyért stunolhat egy unitot, ami így nem oszt combat damage-et ebben a körben. Amíg vele egy helyen stunolt ellenséges unit áll, +2 Mightot kap. Hidden: a saját körödben, showdownon kívül, kézből vagy a Champion Zone-ból 1 tetszőleges Powerért elrejtheted egy saját battlefielden, és a következő körtől Reactionként, költség nélkül oda kijátszhatod.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Long Sword": {
+   "short": "+2 Mightot adó gear, amit bárki körében, combat közben is kijátszhatsz, és rögtön egy saját unitodra kerül. Ha nincs unitod, a base-be kerül, és később 1 Fury Powerért szerelhető fel a saját Main Phase-edben, showdownon kívül.",
+   "why": "151.2"
+  },
+  "Maduli the Gatekeeper": {
+   "short": "Nem lehet ready-vé tenni: alapból exhausted lép be és úgy is marad, ezért Standard Move-val nem tud mozogni. 1 Chaos Powerért (exhaust nélkül, a saját Main Phase-edben, showdownon kívül) átmegy egy olyan enemy battlefieldre, ahol áll unit, ha a Mightja nagyobb az ott álló enemy unitok összesített Mightjánál. A feltételt a resolve-kor nézi a játék: ha addigra nem teljesül, nem mozdul, a Power elveszett.",
+   "why": "145.2"
+  },
+  "Mischievous Marai": {
+   "short": "Ha battlefieldre játszod ki, 2 sebzést oszt egy ott álló enemy unitnak, base-be kijátszva nincs hatás. Hidden: a saját körödben, showdownon kívül 1 bármilyen domainű Powerért facedown elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionnel, ingyen kijátszhatod oda. Így combat közben is lejöhet, amikor enemy unit áll a battlefielden.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Momentary Companion": {
+   "short": "4 Mightú unit Hiddennel: a saját körödben, showdownon kívül 1 bármilyen domainű Powerért facedown elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionnel, ingyen kijátszhatod, akár az opponent körében is. Ha nem a saját körödben játszod ki, Temporaryt kap: a következő Beginning Phase-ed elején, pontozás előtt meghal. A saját körödben kijátszva maradandó.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Pakaa Cub": {
+   "short": "3 Mightú unit Hiddennel: a saját körödben, showdownon kívül 1 bármilyen domainű Powerért facedown elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reactionnel kijátszhatod oda. Ha ott épp combat van, beszáll. Kézből is kijátszható a szokásos módon.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Pendulum Blade": {
+   "short": "Equipment: a saját Main Phase-edben, showdownon kívül 1 Fury Powerért egy saját unitodra csatolhatod. Felszerelve a unit +1 Mightot kap, és valahányszor battlefieldre mozog, még +2 Mightot a kör végéig, ami a combat előtt megérkezik. Base-be lépés vagy recall nem ad bónuszt.",
+   "why": "151.2"
+  },
+  "Protector's Shield": {
+   "short": "Csatolva +1 Mightot ad, és a unit Tanket kap: combatban neki kell elsőként lethal damage-et kapnia. Quick-Draw: Reactionje van, bármikor kijátszható, és kijátszáskor rácsatolódik egy saját unitodra. Equip: csatolatlanul 1 Energyért a saját Main Phase-edben, showdownon kívül rácsatolható egy saját unitodra; csatolva az Equip inaktív, vele nem rakható át.",
+   "why": "151.2"
+  },
+  "Pyke, Dockside Butcher": {
+   "short": "Kijátszáskor fizethetsz plusz 1 Fury Powert: ekkor ready lesz, és a kör végéig +2 Mightot kap. Ganking: battlefieldről battlefieldre is léphet. Hidden: a saját körödben, showdownon kívül 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionnel, base cost nélkül oda kijátszhatod, a plusz Power ekkor is fizethető.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Rabadon's Deathcrown": {
+   "short": "Csatolva +3 Mightot ad, és amíg rajta van, a unit controllerének minden spellje és abilityje 3 Bonus Damage-et ad minden egyes damage-hez, de csak ha az ténylegesen sebez. Equip: 1 bármilyen Powerért csatolható egy saját unitodra a saját Main Phase-edben, showdownon kívül. Unique: a deckben csak 1 lehet belőle.",
+   "why": "151.2"
+  },
+  "Recurve Bow": {
+   "short": "Csatolva, amikor a unit attackerré vagy defenderré válik, 2 damage-et oszt egy ugyanott álló enemy unitnak, combatonként egyszer, még a combat damage előtt. Ha nincs ott enemy unit, nem történik semmi. Equip: 1 Fury Powerért a saját Main Phase-edben, showdownon kívül csatolható egy saját unitodra.",
+   "why": "151.2"
+  },
+  "Resplendent Rostrum": {
+   "short": "Exhaustolva húzol 1-et és kapsz egy exhausted rune-t, és mivel exhaustolódott, egy friendly unit +3 Mightot is kap a körre. Csak a saját Main Phase-edben, showdownon kívül aktiválható, combat közben nem, ezért mozgás előtt használd.",
+   "why": "151.2"
+  },
+  "Smoke and Mirrors": {
+   "short": "Kiválasztasz egy saját unitot és egy másik helyen álló saját unitot; ha legalább az egyiknek van Temporary-je, helyet cserélnek. Húzol 1 lapot akkor is, ha nincs csere. Kézből Action időzítéssel megy, vagy a saját körödben, showdownon kívül 1 bármilyen domainű Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől 0-ért, Reactionként kijátszhatod.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Soulspinner": {
+   "short": "Bármikor, akár combat közben is beugorhat egy battlefieldre, ahol már van unitod, és rögtön beszáll a harcba. Base-be csak a saját körödben, showdownon kívül, a szokásos módon játszható ki.",
+   "why": "310.1.a"
+  },
+  "Spiderling": {
+   "short": "Bármennyi lehet belőle a deckben. Minden más, vele egy helyen álló Spiderlinged után +1 Mightot kap, ami azonnal csökken, ha egy társa elmegy vagy meghal. Hidden: a saját körödben, showdownon kívül 1 tetszőleges Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionként, ingyen kijátszhatod oda.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Sterak's Gage": {
+   "short": "Equipment, ami +3 Mightot ad. Kijátszva azonnal rácsatolódik egy saját unitra, és bárki körében, akár combat közben is kijátszható meglepetésként. Ha nincs unitod, a base-ben marad, és később 1 Calm Powerért csatolhatod, de csak a saját Main Phase-edben, showdownon kívül.",
+   "why": "151.2"
+  },
+  "Teemo, Scout": {
+   "short": "Kijátszáskor a kör végéig +3 Mightot kap, így 4 Mightú. Hidden: a saját körödben, showdownon kívül 1 tetszőleges Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől bárki körében ingyen kijátszhatod oda. Amíg a +3 hatása nem futott le, 1 sebzés is megöli.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "The Waters' Wage": {
+   "short": "Kézből, a saját körödben, showdownon kívül kijátszva kapsz egy exhausted Gold tokent. Ha 1 tetszőleges Powerért elrejted, és egy későbbi saját körödben a rejtekből játszod ki, három ready Goldot kapsz, az opponent körében a rejtekből csak egy exhaustedet. A Gold Reactionként bármikor megölhető és exhaustolható, ezért 1 tetszőleges Powert ad, de az exhausted Gold csak a következő Awaken Phase-ed után használható.",
+   "why": "155"
+  },
+  "Tornado Warrior": {
+   "short": "Ha a rejtekből játszod ki, Empowered állapotba tehetsz valamit a battlefieldjén, a kör végén pedig ez az állapot lekerül róla. Hidden: a saját körödben, showdownon kívül 1 tetszőleges Powerért elrejtheted, és a következő körtől Reactionként ingyen kijátszhatod. Kézből kijátszva sima 3 Mightú unit. A kör végén akkor is lekerül az Empowered, ha az objektum máshonnan kapta.",
+   "why": "411.1.a, 422.2.a"
+  },
+  "Windsinger": {
+   "short": "Kijátszáskor visszaküldhetsz a tulajdonosa kezébe egy másik, battlefielden álló, legfeljebb 3 Mightú unitot, akár sajátot is; a token így megszűnik. Hidden: a saját körödben, showdownon kívül 1 bármely Powerért elrejtheted egy általad kontrollált battlefielden, a következő körtől Reactionnel, ingyen kijátszható oda, és csak az ottani unit választható.",
+   "why": "411.1.a, 422.2.a"
+  }
+ },
+ "checked": 84
+}

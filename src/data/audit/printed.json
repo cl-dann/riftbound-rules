@@ -1,0 +1,457 @@
+{
+ "source": "Nyomtatott kártyakép (cmsassets.rgpub.io), 2026-11-14 leolvasás",
+ "tags": {
+  "Sanctum Conservator": [
+   "Shurima"
+  ],
+  "Seraphic Wyvern": [
+   "Mount Targon",
+   "Dragon"
+  ],
+  "Seraphine, Inspiring": [
+   "Seraphine",
+   "Piltover"
+  ],
+  "Seraphine, Not Alone": [
+   "Seraphine",
+   "Piltover"
+  ],
+  "Seraphine, Starry-Eyed Songstress": [
+   "Seraphine"
+  ],
+  "Shimmering Swimmer": [
+   "Bilgewater"
+  ],
+  "Siphoning Strike": [
+   "Nasus"
+  ],
+  "Siren of the Shallows": [
+   "Bilgewater"
+  ],
+  "Skystrike Squadron": [
+   "Demacia",
+   "Elite",
+   "Bird"
+  ],
+  "Sneaky Zeebles": [
+   "Mount Targon"
+  ],
+  "Spirit of the Forge": [
+   "Freljord",
+   "Spirit"
+  ],
+  "Stalwart Goatherd": [
+   "Mount Targon"
+  ],
+  "Staunch Survivor": [
+   "Freljord"
+  ],
+  "Steadfast Outrider": [
+   "Demacia"
+  ],
+  "Stoic Ferryman": [
+   "Bilgewater",
+   "Sentinel"
+  ],
+  "Storm Raptor": [
+   "Freljord",
+   "Bird"
+  ],
+  "Strigian Oracle": [
+   "Freljord",
+   "Bird"
+  ],
+  "Ahri, Confident": [
+   "Ahri",
+   "Ionia"
+  ],
+  "Akali, Brash": [
+   "Akali",
+   "Ionia"
+  ],
+  "Amateur Demolitionist": [
+   "Bandle City",
+   "Yordle"
+  ],
+  "Angler Wyrm": [
+   "Bilgewater",
+   "Dragon"
+  ],
+  "Antagonistic Apparatus": [
+   "Bandle City",
+   "Yordle",
+   "Mech"
+  ],
+  "Armored Tusker": [
+   "Noxus"
+  ],
+  "Battlefield Armorer": [
+   "Demacia"
+  ],
+  "Bedeviling Stranger": [
+   "Shadow Isles",
+   "Demon"
+  ],
+  "Bilgewater Tracker": [
+   "Bilgewater"
+  ],
+  "Blade of the Exile": [
+   "Riven",
+   "Equipment"
+  ],
+  "Bloodscent Swarm": [
+   "Shurima"
+  ],
+  "Hunting Dog": [
+   "Demacia",
+   "Dog"
+  ],
+  "Incorrigible Construct": [
+   "Piltover",
+   "Mech"
+  ],
+  "Industrious Mechsmith": [
+   "Zaun"
+  ],
+  "Iridescent Avian": [
+   "Ixtal",
+   "Bird"
+  ],
+  "Jarvan IV, Exemplar of Demacia": [
+   "Jarvan IV"
+  ],
+  "Jarvan IV, Martial Paragon": [
+   "Jarvan IV",
+   "Demacia"
+  ],
+  "Jarvan IV, Royal Heir": [
+   "Jarvan IV",
+   "Demacia"
+  ],
+  "K'Sante, Courageous": [
+   "K'Sante",
+   "Shurima"
+  ],
+  "K'Sante, Dauntless": [
+   "K'Sante",
+   "Shurima"
+  ],
+  "K'Sante, Pride of Nazumah": [
+   "K'Sante"
+  ],
+  "Kai'Sa, Rebel": [
+   "Kai'Sa",
+   "The Void"
+  ],
+  "Last Caress": [
+   "Evelynn"
+  ],
+  "Lingering Animus": [
+   "Shadow Isles",
+   "Spirit"
+  ],
+  "Suave Negotiator": [
+   "Bilgewater",
+   "Demon"
+  ],
+  "The Ball": [
+   "Orianna"
+  ],
+  "The Empyrean": [
+   "Ionia",
+   "Dragon"
+  ],
+  "Thrill of the Hunt": [
+   "Rengar"
+  ],
+  "Transpositionist": [
+   "Bilgewater"
+  ],
+  "Trifarian Captain": [
+   "Noxus",
+   "Trifarian"
+  ],
+  "Trinket Peddler": [
+   "Bandle City",
+   "Yordle"
+  ],
+  "War Scout": [
+   "Demacia",
+   "Yordle"
+  ],
+  "Watchful Curator": [
+   "Piltover"
+  ],
+  "Wraith of Echoes": [
+   "Shadow Isles",
+   "Spirit"
+  ],
+  "Wrath of the Freljord": [
+   "Freljord",
+   "Spirit"
+  ],
+  "Ziggs, Explosive": [
+   "Ziggs",
+   "Zaun",
+   "Yordle"
+  ],
+  "Ziggs, Hexplosives Expert": [
+   "Ziggs"
+  ],
+  "Ziggs, Short-Fused": [
+   "Ziggs",
+   "Zaun",
+   "Yordle"
+  ],
+  "Chronobreak": [
+   "Ekko"
+  ],
+  "Clanging Sentry": [
+   "Piltover",
+   "Mech"
+  ],
+  "Clocktower Guardian": [
+   "Shurima"
+  ],
+  "Coalesced Energy": [
+   "Shurima"
+  ],
+  "Defiant Dance": [
+   "Irelia"
+  ],
+  "Demacian Illuminators": [
+   "Demacia"
+  ],
+  "Demacian Standard": [
+   "Jarvan IV"
+  ],
+  "Disposal Expert": [
+   "Bandle City",
+   "Yordle"
+  ],
+  "Dominus": [
+   "Renekton"
+  ],
+  "Drakehound Packmaster": [
+   "Noxus"
+  ],
+  "Dune Devourer": [
+   "The Void"
+  ],
+  "Ekko, Boy Who Shattered Time": [
+   "Ekko"
+  ],
+  "Party Crasher": [
+   "Zaun"
+  ],
+  "Piltovan Guidebot": [
+   "Piltover",
+   "Mech"
+  ],
+  "Pitiless Stalker": [
+   "Shadow Isles",
+   "Cat"
+  ],
+  "Protector's Shield": [
+   "Equipment"
+  ],
+  "Raving Witness": [
+   "Freljord"
+  ],
+  "Realm of Death": [
+   "Mordekaiser"
+  ],
+  "Rebuttal": [
+   "Mel"
+  ],
+  "Reckless Innovator": [
+   "Piltover"
+  ],
+  "Riposte": [
+   "Fiora"
+  ],
+  "Riptide Mage": [
+   "Bilgewater"
+  ],
+  "Riven, Broken Blade": [
+   "Riven",
+   "Noxus"
+  ],
+  "Riven, Deserter": [
+   "Riven",
+   "Noxus"
+  ],
+  "Riven, The Exile": [
+   "Riven"
+  ],
+  "Lulu, Whimsical": [
+   "Lulu",
+   "Bandle City",
+   "Yordle"
+  ],
+  "Meticulous Restorationist": [
+   "Piltover"
+  ],
+  "Momentary Companion": [
+   "Shadow Isles",
+   "Demon"
+  ],
+  "Mordekaiser, Dominating": [
+   "Mordekaiser",
+   "Noxus",
+   "Spirit"
+  ],
+  "Mordekaiser, Iron Revenant": [
+   "Mordekaiser"
+  ],
+  "Mordekaiser, Twice Slain": [
+   "Mordekaiser",
+   "Noxus",
+   "Spirit"
+  ],
+  "Mournful Spirit": [
+   "Shadow Isles",
+   "Spirit"
+  ],
+  "Mysterious Chronomancer": [
+   "Shurima"
+  ],
+  "Nazuman Ntofo": [
+   "Equipment"
+  ],
+  "Neeko, Blending In": [
+   "Neeko",
+   "Ixtal"
+  ],
+  "Ntofo Strikes": [
+   "K'Sante"
+  ],
+  "On the Hunt": [
+   "Sivir"
+  ],
+  "Orianna, Exquisite": [
+   "Orianna",
+   "Piltover"
+  ],
+  "Orianna, Lady of Clockwork": [
+   "Orianna"
+  ],
+  "Orianna, Mechanical Marvel": [
+   "Orianna",
+   "Piltover"
+  ],
+  "Overloaded Traveler": [
+   "Bandle City",
+   "Yordle"
+  ],
+  "Ekko, Ingenious": [
+   "Ekko",
+   "Zaun"
+  ],
+  "Ekko, Revolutionary": [
+   "Ekko",
+   "Zaun"
+  ],
+  "Elnuk Herd": [
+   "Freljord"
+  ],
+  "Encore": [
+   "Seraphine"
+  ],
+  "Entrenched Boar": [
+   "Freljord"
+  ],
+  "Evelynn, Agony's Embrace": [
+   "Evelynn"
+  ],
+  "Evelynn, Consuming": [
+   "Evelynn",
+   "Demon"
+  ],
+  "Evelynn, In Control": [
+   "Evelynn",
+   "Demon"
+  ],
+  "Explosimian": [
+   "Zaun"
+  ],
+  "Firebrand Raider": [
+   "Freljord"
+  ],
+  "Graves, Blasting Through": [
+   "Graves",
+   "Bilgewater"
+  ],
+  "Gutter Guardian": [
+   "Zaun"
+  ],
+  "Heartening Soul": [
+   "Shadow Isles",
+   "Spirit"
+  ],
+  "Heimerdinger, Academy Instructor": [
+   "Heimerdinger",
+   "Piltover",
+   "Yordle"
+  ],
+  "Herald of the Emperor": [
+   "Shurima"
+  ],
+  "Hexplosive Minefield": [
+   "Ziggs"
+  ]
+ },
+ "txt_replace": {
+  "Bullet Time, Miss Fortune": [
+   "Pay any amount of [C]",
+   "Pay any amount of [A]"
+  ],
+  "Elnuk Herd": [
+   "give a friendly unit",
+   "give another friendly unit"
+  ]
+ },
+ "eff": {
+  "Nazuman Ntofo": "[Shield 2] (+2 [S] while I'm a defender.)"
+ },
+ "power_sym": {
+  "Blade of the Exile": [
+   "C"
+  ],
+  "The Ball": [
+   "C"
+  ],
+  "Thrill of the Hunt": [
+   "C"
+  ],
+  "Defiant Dance": [
+   "C"
+  ],
+  "Demacian Standard": [
+   "C"
+  ],
+  "Realm of Death": [
+   "C"
+  ],
+  "Rebuttal": [
+   "C"
+  ],
+  "Riposte": [
+   "C",
+   "C"
+  ],
+  "Ntofo Strikes": [
+   "Calm/Body"
+  ],
+  "On the Hunt": [
+   "Body/Chaos",
+   "Body/Chaos"
+  ],
+  "Encore": [
+   "C"
+  ],
+  "Hexplosive Minefield": [
+   "C"
+  ]
+ }
+}

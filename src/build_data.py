@@ -106,6 +106,15 @@ for c in cards:
 print('equipment tag added',EQFIX)
 for c in cards:
     if c['_fn']=='Clanging Sentry' and 'Mech' not in c['tg']: c['tg']=sorted(c['tg']+['Mech'])  # 831.2 example: both Sentries get Disarm 2
+# Printed card images (data/audit/printed.json): tags, text and effect text read from the official card art
+PRN=json.load(open('data/audit/printed.json',encoding='utf-8'))
+for c in cards:
+    fn=c['_fn']
+    if fn in PRN['tags']: c['tg']=sorted(set(c['tg'])|set(PRN['tags'][fn]))
+    if fn in PRN['txt_replace'] and c['txt']:
+        a,b=PRN['txt_replace'][fn]
+        if a in c['txt']: c['txt']=c['txt'].replace(a,b,1)
+    if fn in PRN['eff'] and not c.get('eff'): c['eff']=PRN['eff'][fn]; c['effsrc']='nyomtatott lap'
 # ---------- topics
 T=[]
 def topic(k,title,g,refs,test=None,rel=(),why=None): T.append({'k':k,'title':title,'g':g,'refs':list(refs),'rel':list(rel),'why':why,'_t':test})
