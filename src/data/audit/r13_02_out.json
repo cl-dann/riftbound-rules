@@ -1,0 +1,51 @@
+{
+ "fixes": {
+  "Mordekaiser, Twice Slain": {
+   "short": "Accelerate: kijátszáskor fizethetsz plusz 1 Energy és 1 Fury Power költséget, ekkor ready lép be. Assault 3: támadóként +3 Mightot kap. Körönként egyszer, amikor meghalna, megölhetsz helyette egy saját unitot: ekkor meggyógyul, exhausted lesz és visszakerül a base-be.",
+   "why": "A lap szövege \"kill a friendly unit\", nem \"another\": a short \"másik\" megkötést tett hozzá. A \"battlefieldet elhagyja\" rész base-ben bekövetkező halálnál nem igaz (recall a base-be, 457), ezért kivéve."
+  },
+  "Mirror Image": {
+   "notes": [
+    [
+     "155,355.7",
+     0,
+     "Csak a saját körödben, Open State-ben, showdownon kívül megy. A lemásolt unit target, lehet saját vagy enemy, bárhol a boardon."
+    ],
+    [
+     "187.6,184.1,184.2",
+     0,
+     "A Reflection 0 Mightú, domain nélküli unit token. Ready lép be, és csak a base-edbe játszható."
+    ],
+    [
+     "388.1",
+     1,
+     "Errata: a \"Then do this\" miatt a másolás és a Temporary reflexive trigger, külön kerül a chain-re. Amíg nem resolve-ol, a token 0 Mightú Reflection, és az opponent reagálhat."
+    ],
+    [
+     "479.1.b.1,479.1.c",
+     0,
+     "A token a unit másolható tulajdonságait kapja: név, type, tagek, cost, domain, szöveg, nyomtatott Might. A buff, a damage, az Equipment és az ideiglenes módosítók nem másolódnak."
+    ],
+    [
+     "479.1.b",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: ha a target maga is másolat (Reflection, amely Honest Broker másolata), az új token azt kapja, amit a target éppen másol."
+    ],
+    [
+     "383.4.a",
+     1,
+     "A token Reflectionként lép be és csak utána válik másolattá, ezért a lemásolt unit \"when you play me\" effectje nem triggerel."
+    ],
+    [
+     "816.1.b,103.3.d",
+     0,
+     "A token a következő Beginning Phase-ed elején, scoring előtt meghal. Signature lap (LeBlanc), legfeljebb 3 Signature lehet a deckben."
+    ]
+   ],
+   "why": "A 155 szerint a keyword nélküli spell Open State-ben, showdownon kívül játszható ki; a note-ból hiányzott a showdown kizárása."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

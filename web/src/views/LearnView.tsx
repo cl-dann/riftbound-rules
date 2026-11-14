@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { AlertTriangle, BookOpen, Check, ChevronLeft, ChevronRight, Compass, Lightbulb, RotateCcw, Swords } from 'lucide-react';
 import { loadLearn } from '../data';
 import { IMGBASE, esc, glossify, vsCard } from '../legacy/core';
-import { Playmat, DEMO_BOARD } from '../components/Playmat';
+import { Playmat, DEMO_BOARD, diffBoards } from '../components/Playmat';
 
 type Block =
   | { type: 'p'; text: string }
@@ -77,7 +77,7 @@ function Blocks({ blocks }: { blocks: Block[] }) {
             </div>
             {b.caption && <H as="p" t={b.caption} seen={seen} />}
           </div>);
-        if (b.type === 'playmat') return (<div key={i}><Playmat b={DEMO_BOARD} focus="base" />{b.caption && <H as="p" t={b.caption} seen={seen} />}</div>);
+        if (b.type === 'playmat') return (<div key={i}><Playmat b={DEMO_BOARD} />{b.caption && <H as="p" t={b.caption} seen={seen} />}</div>);
         if (b.type === 'table') return (
           <table key={i} className="ltable"><thead><tr>{b.head.map((h, j) => <th key={j}>{h}</th>)}</tr></thead>
             <tbody>{b.rows.map((r, j) => <tr key={j}>{r.map((c, k) => <td key={k}><H t={c} seen={seen} /></td>)}</tr>)}</tbody></table>);
@@ -121,40 +121,58 @@ function QuizBox({ ch, p, setP }: { ch: Chapter; p: Progress; setP: (p: Progress
   );
 }
 
-function ScenarioView({ s, p, setP }: { s: Scenario; p: Progress; setP: (p: Progress) => void }) {
+function ScenarioView({ s, p, setP, all }: { s: Scenario; p: Progress; setP: (p: Progress) => void; all: Scenario[] }) {
   const [i, setI] = useState(0);
   const [pick, setPick] = useState<Record<number, number>>({});
   useEffect(() => { setI(0); setPick({}); }, [s.id]);
   const st = s.steps[i];
   let board: Board | undefined; for (let k = i; k >= 0 && !board; k--) board = s.steps[k].board;
   let prevBoard: Board | undefined; for (let k = i - 1; k >= 0 && !prevBoard; k--) prevBoard = s.steps[k].board;
+  const changes = st.board ? diffBoards(prevBoard, st.board) : [];
   const blocked = !!st.choice && pick[i] == null;
   const last = i === s.steps.length - 1;
-  const next = () => { if (last) { setP({ ...p, scn: { ...p.scn, [s.id]: 1 } }); location.hash = '#tanulas'; } else setI(i + 1); };
+  const idx = all.indexOf(s); const nextS = all[idx + 1];
+  const next = () => { if (blocked) return; if (last) { setP({ ...p, scn: { ...p.scn, [s.id]: 1 } }); location.hash = nextS ? '#tanulas/sz/' + nextS.id : '#tanulas'; } else setI(i + 1); };
+  const back = () => i > 0 && setI(i - 1);
+  useEffect(() => {
+    const k = (e: KeyboardEvent) => { if ((e.target as HTMLElement).closest('input,textarea')) return; if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') back(); };
+    window.addEventListener('keydown', k); return () => window.removeEventListener('keydown', k);
+  });
+  const ok = st.choice?.opts.find((o) => o.ok);
   return (
-    <>
-      <div className="crumb">Tanulás › Szituációk</div>
-      <h2>{s.title}</h2>
-      <H as="p" t={s.intro} />
-      <div className="scn-dots" aria-label="Lépések">{s.steps.map((_, k) => <i key={k} className={k === i ? 'on' : k < i ? 'seen' : ''} />)}</div>
-      {board && <Playmat b={board} prev={prevBoard} />}
-      <H as="div" t={st.say} />
-      {st.choice && (
-        <div className="quiz" style={{ marginTop: 14 }}>
-          <H as="p" t={st.choice.q} />
-          <div className="qopts">{st.choice.opts.map((o, k) => {
-            const cls = pick[i] == null ? '' : o.ok ? 'ok' : k === pick[i] ? 'bad' : '';
-            return <button key={k} className={cls} disabled={pick[i] != null} onClick={() => setPick({ ...pick, [i]: k })}><H t={o.t} /></button>;
-          })}</div>
-          {pick[i] != null && <div className="qwhy"><H t={st.choice.opts[pick[i]].why} /></div>}
-          {pick[i] != null && !st.choice.opts[pick[i]].ok && <div className="qwhy"><H t={'A jó válasz: ' + (st.choice.opts.find((o) => o.ok)?.t || '') + '. ' + (st.choice.opts.find((o) => o.ok)?.why || '')} /></div>}
-        </div>
-      )}
-      <div className="pager">
-        {i > 0 ? <a href="#" onClick={(e) => { e.preventDefault(); setI(i - 1); }}><small>Vissza</small><b>{i}. lépés</b></a> : <span />}
-        <button className="btn hex next" disabled={blocked} onClick={next}>{last ? <><Check size={16} /> Befejezés</> : <>Tovább <ChevronRight size={16} /></>}</button>
+    <div className="scn">
+      <div className="scn-head">
+        <a href="#tanulas" className="crumb">← Tanulás</a>
+        <div><div className="crumb">Szituáció {idx + 1} / {all.length} · {s.level === 'halado' ? 'Haladó' : 'Kezdő'}</div><h2>{s.title}</h2><H as="p" t={s.intro} /></div>
       </div>
-    </>
+      <div className="scn-grid">
+        <div className="scn-boardcol">{board && <Playmat key={s.id} b={board} prev={prevBoard} turn={(board as any).turn || 'me'} />}</div>
+        <aside className="scn-narr">
+          <div className="scn-step"><span>{i + 1}. lépés / {s.steps.length}</span>
+            <div className="scn-dots" aria-hidden>{s.steps.map((_, k) => <i key={k} className={k === i ? 'on' : k < i ? 'seen' : ''} onClick={() => k <= i && setI(k)} />)}</div></div>
+          <H as="div" t={st.say} />
+          {!!changes.length && (
+            <div className="scn-chg"><b>Mi változott?</b><ul>{changes.map((c, k) => <li key={k}>{c}</li>)}</ul></div>
+          )}
+          {st.choice && (
+            <div className="scn-choice">
+              <H as="p" t={st.choice.q} />
+              <div className="qopts">{st.choice.opts.map((o, k) => {
+                const cls = pick[i] == null ? '' : o.ok ? 'ok' : k === pick[i] ? 'bad' : '';
+                return <button key={k} className={cls} disabled={pick[i] != null} onClick={() => setPick({ ...pick, [i]: k })}><H t={o.t} /></button>;
+              })}</div>
+              {pick[i] != null && <div className="qwhy"><H t={(st.choice.opts[pick[i]].ok ? 'Helyes. ' : 'Nem jó. ') + st.choice.opts[pick[i]].why} /></div>}
+              {pick[i] != null && !st.choice.opts[pick[i]].ok && ok && <div className="qwhy"><H t={'A jó válasz: ' + ok.t + '. ' + ok.why} /></div>}
+            </div>
+          )}
+          <div className="scn-ctl">
+            <button className="btn sec" disabled={i === 0} onClick={back}><ChevronLeft size={16} /> Vissza</button>
+            <button className="btn hex" disabled={blocked} onClick={next}>{last ? (nextS ? <>Következő szituáció <ChevronRight size={16} /></> : <><Check size={16} /> Befejezés</>) : <>Tovább <ChevronRight size={16} /></>}</button>
+          </div>
+          <p className="note">Tipp: kattints egy unitra a részletekért, a címkékre (Attacker, Buff, ...) mutatva magyarázatot kapsz. Billentyűzet: ← →</p>
+        </aside>
+      </div>
+    </div>
   );
 }
 
@@ -198,7 +216,7 @@ export function LearnView({ hash }: { hash: string }) {
   );
 
   let main;
-  if (sc) main = <ScenarioView s={sc} p={p} setP={setP} />;
+  if (sc) main = <ScenarioView s={sc} p={p} setP={setP} all={L.scenarios} />;
   else if (ch) {
     const idx = chs.indexOf(ch); const prev = chs[idx - 1], next = chs[idx + 1];
     main = (
@@ -237,8 +255,8 @@ export function LearnView({ hash }: { hash: string }) {
   );
 
   return (
-    <div className="learn">
-      {side}
+    <div className={'learn' + (sc ? ' wide' : '')}>
+      {!sc && side}
       <main className="panel learn-main">{main}</main>
     </div>
   );

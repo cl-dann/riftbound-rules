@@ -1,0 +1,47 @@
+{
+ "fixes": {
+  "Akali, Brash": {
+   "notes": [
+    [
+     "383.1,421.1,458.1",
+     0,
+     "\"The first/second time I move each turn\": triggered ability, a kör első és második Move-jára fut le. Standard Move és effect általi mozgatás is számít, a Recall nem."
+    ],
+    [
+     "144.2",
+     1,
+     "A Standard Move cost-ja az exhaust, ezért a második mozgáshoz ugyanabban a körben ready effect vagy mozgató effect kell (spell, ability)."
+    ],
+    [
+     "430.2,167",
+     0,
+     "Az [Add] trigger azonnal finalizálódik és resolve-ol, nem lehet rá reagálni. A kapott 1 Energy és 1 Power a kör végén, illetve a következő Main Phase elején elvész, ha nem költöd el."
+    ],
+    [
+     "432.1.b",
+     0,
+     "A banish kötelező. Ha a Main Deck üres, Burn Out következik: a trash visszakeveredik, egy opponent 1 pontot kap, utána banishelődik a felső lap."
+    ],
+    [
+     "428.3,428.3.a",
+     0,
+     "Csak az ezzel az abilityvel banishelt lap játszható ki, a teljes costjáért. Ha a következő Ending Phase-edig nem játszod ki, végleg a Banishmentben marad."
+    ],
+    [
+     "155,420.1.a",
+     1,
+     "Az ability csak a zónát engedi meg (Banishment), időzítést nem ad: a banishelt unit, illetve [Action] vagy [Reaction] nélküli spell továbbra is csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "370.1.c.1",
+     1,
+     "A banish nem \"look at\" és nem \"reveal\", ezért a deck tetején lévő lap ilyen replacement effectje (például Undertitan) nem aktiválódik."
+    ]
+   ],
+   "why": "A 155 szerint keyword nélküli spell csak saját körben, Open State-ben, showdownon kívül játszható; a note a showdown kizárását elhagyta (308.1.a: showdownban csak Action/Reaction)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

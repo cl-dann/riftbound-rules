@@ -1,0 +1,40 @@
+{
+ "fixes": {
+  "Heisho, Shell of the World": {
+   "short": "Az itt lévő dolgokra mutató spelleknél és képességeknél senkinek nem kell kifizetnie a Deflect miatti plusz Powert. Mindkét játékosra érvényes. Ha a lap emellett máshol álló Deflectes unitot is választ, nyitott kérdés, hogy azért kell-e fizetni; ezt judge dönti el.",
+   "notes": [
+    [
+     "766",
+     0,
+     "A szabályzat példája egy hasonló hatást hoz (egy spell, amely a saját costjának fizetésekor ignorálja a Deflectet): az ignorált Deflect a cost kifizetése alatt inaktívnak számít. A Heisho ugyanezt minden itt lévő dologra választó spellre és abilityre kiterjeszti."
+    ],
+    [
+     "809.1.c,356.2.a.2",
+     1,
+     "A Deflect mandatory additional cost lenne az enemy spellre és abilityre. Itt lévő target után ez a felár nem kerül rá a costra."
+    ],
+    [
+     "767",
+     0,
+     "Az ignorálás csak a fizetésre szól. A unitnak ettől még van Deflectje, a Deflectet figyelő effectek látják."
+    ],
+    [
+     "199.1",
+     1,
+     "\"Something here\": az itt lévő unit, a rá csatolt gear és maga a battlefield is. Mindkét játékosra vonatkozik."
+    ],
+    [
+     "809.1.c,766",
+     2,
+     "Nyitott: a szöveg szerint a fizetéskor a Deflect ignorált, ha a spell vagy ability bármit választ itt. Hogy ilyenkor a máshol álló Deflectes target felára is elmarad-e, vagy csak az itt lévőké, a szövegből nem dönthető el egyértelműen. Judge döntse el."
+    ]
+   ],
+   "why": "A szöveg ('ignore [Deflect] while paying for spells and abilities choosing something here') szó szerint az egész fizetésre ignorálja a Deflectet, ha a spell bármit választ itt; a 766 példája szerint ilyenkor minden érintett unit Deflectje inaktív. A short és az 5. note (flag 1) tényként állította, hogy a máshol álló Deflectes target után fizetni kell; ez nem levezethető, nyitott kérdés (flag 2)."
+  }
+ },
+ "checked": 89,
+ "data_issues": [],
+ "open": [
+  "Heisho, Shell of the World: nem dönthető el a Core Rules alapján, hogy a Deflect ignorálása csak az itt lévő targetekre vagy a spell összes targetjére vonatkozik; flag 2-re állítva."
+ ]
+}

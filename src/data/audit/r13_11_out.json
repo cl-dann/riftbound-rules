@@ -1,0 +1,37 @@
+{
+ "fixes": {
+  "Facebreaker": {
+   "notes": [
+    [
+     "811.1.b,411.1.a,811.6,811.3",
+     0,
+     "Hide: a saját körödben, Open State-ben, showdownon kívül [A]-ért facedown tehető egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható. Kézből, teljes costért csak [Action] időzítéssel megy."
+    ],
+    [
+     "355.7,355.11",
+     0,
+     "Két target: egy friendly és egy enemy unit, amelyeknek együtt ugyanazon a battlefielden kell lenniük. Ilyen pár nélkül a spell nem játszható ki."
+    ],
+    [
+     "811.1.d.2",
+     0,
+     "Facedown-ból kijátszva mindkét unitot arról a battlefieldről kell választani, ahol a lap el volt rejtve."
+    ],
+    [
+     "355.11.b",
+     0,
+     "Ha a resolve-ra a két unit már nincs ugyanazon a battlefielden, a spell nem érintheti mindkettőt: te választasz legális részhalmazt."
+    ],
+    [
+     "424.1.b",
+     0,
+     "A saját unitod is Stunned lesz, az ő Mightja sem számít bele a combat damage-be ebben a körben."
+    ]
+   ],
+   "why": "Az első note a Hide időzítését \"a saját körödben\" formában adta meg a showdown kizárása nélkül; a Hide Discretionary Action, csak Neutral Open State-ben, showdownon kívül végezhető (811.1.b, 411.1.a). A short már helyes volt, a note most egyezik vele."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

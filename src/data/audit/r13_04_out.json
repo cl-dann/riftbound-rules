@@ -1,0 +1,167 @@
+{
+ "fixes": {
+  "Renekton, Butcher of the Sands": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Fury és Body domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "135.2.e.5.a,164.2.b",
+     1,
+     "A cost 2 bármilyen domainű Power, ami jellemzően 2 rune recycle-ölését jelenti. Az ability Powert vált 2 Energyre."
+    ],
+    [
+     "430.3,430.2",
+     0,
+     "[Reaction] Add ability: cost fizetése közben is aktiválható, bárki körében, és nem lehet rá reagálni."
+    ],
+    [
+     "002",
+     1,
+     "A 2 Energy csak unit kijátszására vagy unit activated abilityjére költhető. Spellre, gearre, legend abilityre nem."
+    ],
+    [
+     "415.4,416.3.a,167",
+     0,
+     "A legend exhaustolása is cost, ezért csak ready legenddel használható. Újra akkor aktiválható, ha ismét ready lesz: a saját Awaken Phase-edben vagy egy readyző effect által. Ha az opponent körében használod, a saját köröd Awaken Phase-éig nem használható újra. Az el nem költött Energy a Rune Pool ürítésekor elvész."
+    ]
+   ],
+   "why": "A note 'körönként egyszer' korlátot állított. Exhaust costú ability nem körönként egyszer, hanem csak ready állapotban használható (415.4); a legend a saját Awaken Phase-edben readyzik (416.3.a), így az opponent körében elhasználva a következő saját körödig nem érhető el."
+  },
+  "Ride the Wind": {
+   "notes": [
+    [
+     "806.1.c.1",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, spellre válaszul nem."
+    ],
+    [
+     "355.4, 355.4.a",
+     0,
+     "A célt kijátszáskor választod: bármely érvényes location a jelenlegin kívül, tehát Ganking nélkül is mehet battlefieldről battlefieldre."
+    ],
+    [
+     "359.3.e.6,359.3.e.14.b",
+     0,
+     "A szabályzat a 359.3.e.6 példájában név szerint ezt a lapot hozza: Vilemaw's Lairnél a base-be mozgatás negálódik. A 359.3.e.14.b szerint a negált Move után a ready ettől még megtörténik."
+    ],
+    [
+     "359.3.e.6",
+     0,
+     "Ha a unit illegális targetté válik (például elhagyja a boardot), mindkét rész ignorálódik."
+    ],
+    [
+     "416.1.c",
+     0,
+     "Már ready uniton a ready rész nem csinál semmit."
+    ],
+    [
+     "452",
+     0,
+     "Ha a cél nem általad kontrollált battlefield, az Contested lesz."
+    ]
+   ],
+   "why": "A Ride the Wind példa a 359.3.e.6 ex mezőjében van, nem a 359.3.e.14.b-ben (annak példái Hidden Blade és Deathgrip); hivatkozás javítva."
+  },
+  "Riptide Rex": {
+   "notes": [
+    [
+     "355.10,355.9.b",
+     0,
+     "Az enemy unit target, és battlefielden kell állnia. Base-ben lévő unit nem választható."
+    ],
+    [
+     "355.8",
+     0,
+     "Kötelező effect. Ha nincs enemy unit battlefielden, a trigger nem kerül chain-re."
+    ],
+    [
+     "359.3.e.9",
+     0,
+     "Ha a target a resolve előtt base-be kerül, a trigger mistargetel, nincs sebzés."
+    ],
+    [
+     "142.4.b,323.4",
+     0,
+     "A 6 damage rákerül a unitra. Ha ez eléri a Mightját, a következő cleanupban meghal."
+    ],
+    [
+     "143.3.b.1,143.3.b.2",
+     0,
+     "Ha a unit túléli, a damage legfeljebb a kör végéig marad rajta, de egy közben lezajló combat Combat Cleanupja is gyógyítja. Addig egy későbbi sebzés vagy Might csökkentés befejezheti."
+    ]
+   ],
+   "why": "A note szerint a damage a kör végéig rajta marad; a 143.3.b.2 és a 468.1.a.1 szerint a Combat Cleanup is minden unitot gyógyít, így csak legfeljebb a kör végéig marad."
+  },
+  "Ruined Monastery": {
+   "notes": [
+    [
+     "383.3.a",
+     0,
+     "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz. A discard és a channel a resolve-kor történik."
+    ],
+    [
+     "204.3",
+     1,
+     "Nincs \"to\" a szövegben, ezért a discard nem cost, hanem az effect része."
+    ],
+    [
+     "423.4",
+     0,
+     "Üres kézzel a discard negálódik, a rune-t ettől még channeled."
+    ],
+    [
+     "431.2,431.3",
+     0,
+     "A rune exhausted érkezik. Üres Rune Decknél nincs mit channelni, de a discard megtörténik."
+    ],
+    [
+     "423.1.b",
+     0,
+     "A discardolt lap \"when I am discarded\" abilityje a discard után lefut."
+    ],
+    [
+     "473.2.a,472,190.6.d",
+     0,
+     "Conquer trigger: annál fut le, aki itt conquerel. A score korlát játékosonként és battlefieldenként körönként egy, ezért játékosonként körönként legfeljebb egyszer fut le."
+    ]
+   ],
+   "why": "A note 'körönként legfeljebb egyszer' formája ellentmondott a shortnak: a 472 a korlátot játékosonként adja, a 190.6.d szerint a 'you' a conquer utáni controller, így egy körben két különböző játékosnál is lefuthat."
+  },
+  "Seat of Power": {
+   "notes": [
+    [
+     "190.2.b",
+     1,
+     "A többi, általad vagy csapattársad által kontrollált battlefieldet számolja. Unit jelenléte nem elég, ha a control még nincs meg."
+    ],
+    [
+     "487.4",
+     1,
+     "1v1-ben 2 battlefield van, tehát legfeljebb 1 lapot húzol: akkor, ha a másikat is kontrollálod."
+    ],
+    [
+     "135.2.b.3",
+     1,
+     "A számot a resolve-kor nézi a játék, mert az instruction ekkor hajtódik végre. Ha a trigger chainen léte alatt elveszítesz egy battlefieldet, kevesebbet húzol."
+    ],
+    [
+     "414.4",
+     0,
+     "Kötelező húzás. Ha a deckben kevesebb lap van, Burn Out következik."
+    ],
+    [
+     "473.2.a,472,190.6.d",
+     0,
+     "Conquer trigger: annál fut le, aki itt conquerel. A score korlát játékosonként és battlefieldenként körönként egy, ezért játékosonként körönként legfeljebb egyszer fut le."
+    ]
+   ],
+   "why": "A 'körönként legfeljebb egyszer' túl erős: a 472 a score korlátot játékosonként adja, a 190.6.d szerint a 'you' a conquer utáni controller, így egy körben két különböző játékosnál is lefuthat (a Ruined Monastery korábbi javításával egyezően)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

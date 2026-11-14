@@ -1,0 +1,15 @@
+{
+ "fixes": {
+  "Sprite Call": {
+   "short": "Egy ready, 3 Mightú Sprite tokent ad, ami még abban a körben mozoghat, de a következő Beginning Phase-ed elején, a pontozás előtt meghal. Kézből a saját körödben vagy showdownban játszható ki (Action). Hidden: a saját körödben, showdownon kívül 1 tetszőleges Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionként, ingyen kijátszhatod, ekkor a token oda érkezik.",
+   "why": "A short a Hide időzítését nem adta meg, így bármikori elrejtést sugallt. A 811.1.b szerint csak a saját körödben, Open State-ben (showdownon kívül) rejthető el."
+  },
+  "Stand United": {
+   "short": "Buffol egy saját unitot, és a kör végéig minden saját buff +1 helyett +2 Mightot ad, a később buffolt unitoknál is. Kézből a saját körödben vagy showdownban játszható ki (Action). Hidden: a saját körödben, showdownon kívül 1 tetszőleges Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionként ingyen kijátszhatod, ekkor a buffolt unitnak azon a battlefielden kell állnia.",
+   "why": "A short a Hide időzítését nem adta meg, így bármikori elrejtést sugallt. A 811.1.b szerint csak a saját körödben, Open State-ben (showdownon kívül) rejthető el."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

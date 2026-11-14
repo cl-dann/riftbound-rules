@@ -1,0 +1,72 @@
+{
+ "fixes": {
+  "Kennen, Storm of Shuriken": {
+   "notes": [
+    [
+     "103.3.a.1,103.3.b.1",
+     0,
+     "Ha ő a Chosen Champion, egy példány a Champion Zone-ból indul, és ez is beleszámít a névenkénti 3 példányos limitbe."
+    ],
+    [
+     "441.3.a, 441.4, 432",
+     0,
+     "A Burn 2 kötelező. Ha kevesebb mint 2 lap van a Main Deckben, Burn Out következik: a trash visszakeveredik, és egy opponent 1 pontot kap."
+    ],
+    [
+     "383.4.c.2.a,383.4.c.2.c,471.1,472",
+     0,
+     "A conquer trigger akkor fut le, ha Kennen ott van, amikor egy ebben a körben még nem score-olt battlefield irányítását megszerzed, akkor is, ha a conquer pontja negálódik vagy lecserélődik. Egy battlefield körönként egyszer score-olható, ugyanott másodszor nem triggerel."
+    ],
+    [
+     "355.10.a, 355.8",
+     0,
+     "A trash Public zóna, ezért a trashben lévő spell target. Ha nincs spell a trashedben, nincs érvényes választás, a trigger nem kerül chain-re."
+    ],
+    [
+     "829.1.b, 829.1.b.2",
+     0,
+     "A kapott Flow-val a spell a trashből játszható ki a saját cost-jáért, utána banishelődik. A Flow nem változtat az időzítésen: [Action] vagy [Reaction] nélküli spell továbbra is csak a saját körödben megy."
+    ],
+    [
+     "829",
+     1,
+     "A Flow csak \"this turn\" él. Ha abban a körben nem tudod kifizetni a spellt, a hatás elveszett."
+    ]
+   ],
+   "why": "A note szerint a trigger 'csak akkor' fut le, ha conquerrel score-olsz; a 383.4.c.2.c szerint a conquer trigger akkor is lefut, ha a pontszerzés negálódik vagy lecserélődik."
+  },
+  "Lulu, Whimsical": {
+   "notes": [
+    [
+     "383.3.a",
+     0,
+     "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz, és ekkor választasz targetet."
+    ],
+    [
+     "355.10,355.9.b",
+     0,
+     "A másik unit target. Lehet saját vagy enemy, bárhol a boardon, de Lulu saját maga nem."
+    ],
+    [
+     "143.2.a.1,479.2.a",
+     0,
+     "A base Might a trait-altering layerben változik 4-re. A buffok, a +X vagy -X effectek és az Equipment bónusz ezután számolódnak rá."
+    ],
+    [
+     "142.4.b,143.2.b",
+     1,
+     "Kétirányú: egy 1 Mightú token base Mightját 4-re emeli, egy nagy enemy unitét 4-re csökkenti, a módosítók ezután még ráadódnak. Ha a uniton lévő damage eléri az így kapott Mightot, a unit meghal."
+    ],
+    [
+     "421.1,458.1,317.2.c",
+     0,
+     "Minden Move-ra triggerel, Recallra nem. A hatás a kör végén lejár."
+    ]
+   ],
+   "why": "A note szerint 'legalább 4 damage' esetén meghal, de a base Might 4 lesz, a buffok és módosítók ráadódnak (143.2.a.1, 479.2.a), így a halál az új effektív Mighthoz mért damage-től függ (142.4.b, 143.2.b)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

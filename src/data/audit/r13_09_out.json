@@ -1,0 +1,27 @@
+{
+ "fixes": {
+  "Blood Money": {
+   "short": "Megöl egy battlefielden álló, legfeljebb 2 Mightú unitot. Ha ellenséges volt, kapsz egy exhausted Gold gear tokent, ha saját, kettőt. Ha a unit Mightja közben 2 fölé nő, se kill, se Gold. A saját körödben vagy showdownban játszható ki.",
+   "why": "A short kihagyta az [Action] keywordöt, vagyis a lap időzítését (806.1.c.1): a saját körödben vagy showdown alatt bárki körében játszható ki."
+  },
+  "Chronobreak": {
+   "short": "Kijátszáskor annyi Powert fizetsz, ahány saját unitodat akarod, ezeket félreteszed, majd ingyen visszajátszod ugyanoda vagy a base-be. Friss lapként érkeznek: damage, buff és Empowered állapot nélkül, a kijátszási képességük pedig újra lefut. Az Equipment a helyén marad. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A short nem írta le az időzítést: keyword nélküli spell, csak a saját körödben, showdownon kívül játszható ki (155, 310.1.a)."
+  },
+  "Cull the Weak": {
+   "short": "Minden játékos, te is, megöl egyet a saját unitjai közül, és mindenki maga választja ki, melyiket. Mivel senki nem jelöl ki célpontot, a védő képességek (Deflect, can't be chosen) nem segítenek. Akinek nincs unitja, annál nem történik semmi. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A short nem írta le az időzítést: keyword nélküli spell, csak a saját körödben, showdownon kívül játszható ki (155, 310.1.a)."
+  },
+  "Dancing Grenade": {
+   "short": "2 sebzést ad egy unitra. A sebzett unit controllere 1 bármilyen Powerért újra kijátszhatja, és minden újabb körön belüli sebzés 1-gyel nő (2, 3, 4). Ha a saját unitodra dobod, te magad játszhatod újra. Hogy pontosan hogyan megy az újrajátszás, nem tisztázott, ezt judge dönti el. Kézből csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A short nem írta le az időzítést: keyword nélküli spell, kézből csak a saját körödben, showdownon kívül játszható ki (155, 310.1.a)."
+  },
+  "Crumbling Sands": {
+   "short": "Reakcióként, bárki körében hatástalanít (counter) egy spellt, de csak akkor, ha egy ellenfél ebben a körben a megcélzott spellen kívül egy másik spellt is kijátszott. A feltételt a hatás lefutásakor nézi a játék: ha az ellenfél addig csak a megcélzott spellt játszotta ki, nem hat, és a lapot elpazaroltad.",
+   "why": "A \"Ha az ellenfél eddig csak a célzott spellt játszotta ki, nem hat\" mondat a kijátszás pillanatára utalt, pedig a feltételt a resolve-kor nézi a játék (135.2.b.3, 420.4.b): ha a resolve előtt az opponent még egy spellt kijátszik, a counter működik. Ez a notes 4. pontjával is ellentétes volt."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

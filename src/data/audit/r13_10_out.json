@@ -1,0 +1,64 @@
+{
+ "fixes": {
+  "Dune Surfer": {
+   "short": "3 Mightú unit. Ahol ő áll, ott a harci sebzés kiosztásakor figyelmen kívül hagyod az ellenfél unitjainak Tankjét, nem kell előbb rájuk osztanod. A többi kiosztási szabály, például a Backline, továbbra is él. Csak rád vonatkozik, és csak ha a Surfer a sebzés kiosztásakor még ott van.",
+   "notes": [
+    [
+     "766",
+     0,
+     "Az ignorált ability inaktívnak számít az adott műveletre: amikor te osztasz combat damage-et a Surfer battlefieldjén, az enemy unitok Tankje nem köt, nem kell előbb a Tank unitokra lethal damage-et osztanod."
+    ],
+    [
+     "767",
+     0,
+     "Csak rád és csak a damage kiosztására vonatkozik. Az opponent a te Tank unitjaidra továbbra is köteles előbb osztani, és a Tank kulcsszó más szempontból megmarad."
+    ],
+    [
+     "467.2.c.3,826.3",
+     0,
+     "A többi kiosztási szabály él: egy unitra előbb teljes lethal damage-et kell osztani, mielőtt a következőre lépsz, és az enemy Backline unitok továbbra is csak a többi, Backline nélküli unit után kaphatnak lethal damage-et."
+    ],
+    [
+     "365.1,467.2",
+     1,
+     "A Surfernek a Combat Damage Stepben azon a battlefielden kell lennie. Ha a showdownban megölik vagy elmozdítják, a Tank újra köt."
+    ]
+   ],
+   "why": "A short és a 766-os note \"tetszőleges/bármilyen sorrendben\" oszthatsz állítása túlzás: csak a Tank korlát esik ki, a Backline (826.3) és a teljes lethal elve (467.2.c.3) továbbra is köt."
+  },
+  "Dr. Mundo, Expert": {
+   "short": "Mightja 6 plusz a trashedben lévő lapok száma, és ez folyamatosan változik. Minden köröd elején legfeljebb 3 lapot (ha kevesebb van, mindet) vissza kell tenned a trashből a deck aljára, így körönként legfeljebb 3 Mightot veszít, ha nem töltöd a trasht. Ha a Mightja lecsökken, a rajta lévő sebzés megölheti.",
+   "notes": [
+    [
+     "710,365.1",
+     0,
+     "A boardon a Mightja 6 plusz a trashed lapszáma, folyamatosan frissül. Ha a trashed fogy, a Might azonnal csökken, a rajta lévő damage halálos lehet."
+    ],
+    [
+     "711",
+     0,
+     "A boardon kívül (kéz, trash, deck) a nyomtatott 6 Might számít."
+    ],
+    [
+     "417.6,417.4",
+     0,
+     "A \"recycle 3 from your trash\" nem targetel, a 3 lapot a resolve-kor választod. Ha kevesebb van, annyit recycle-ölsz, amennyi van."
+    ],
+    [
+     "417.4",
+     0,
+     "A recycle kötelező, vagyis ha a trash nem töltődik, Mundo körönként legfeljebb 3 Mightot veszít (annyit, ahány lapot ténylegesen recycle-ölsz)."
+    ],
+    [
+     "315.2.a.1",
+     0,
+     "A Beginning Step-ben triggerel, a hold scoring előtt, csak a saját körödben."
+    ]
+   ],
+   "why": "A \"3 Mightot veszít\" csak akkor igaz, ha legalább 3 lap van a trashben; kevesebb lapnál annyit recycle-ölsz, amennyi van (417.4, 417.6)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

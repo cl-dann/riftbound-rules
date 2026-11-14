@@ -1,0 +1,15 @@
+{
+ "fixes": {
+  "Plundering Poro": {
+   "short": "Amikor ez a unit ott áll egy battlefielden, amelyet conquerelsz (átveszed az irányítását, és abban a körben még nem score-oltad), kapsz egy exhausted Gold gear tokent a base-edbe. Akkor is jár, ha a conquerért járó pont elmarad vagy lecserélődik. A Gold csak akkor használható, ha újra ready lett.",
+   "why": "A short a conquert puszta irányításátvételként definiálta, és azt állította, pont nélkül is jár a Gold. A 471.1 szerint conquer csak a körben még nem score-olt battlefieldnél történik; pont nélküli trigger csak akkor van, ha a pont elmarad vagy lecserélődik (383.4.c.2.c)."
+  },
+  "Qiyana, Victorious": {
+   "short": "Amikor ez a unit ott áll egy battlefielden, amelyet conquerelsz (átveszed az irányítását, és abban a körben még nem score-oltad), húzol 1 lapot vagy channelsz 1 exhausted rune-t. Akkor is jár, ha a conquerért járó pont elmarad vagy lecserélődik. Deflect: az opponent spellje vagy abilityje 1 bármilyen Powerrel többe kerül, ha őt választja.",
+   "why": "A short a conquert puszta irányításátvételként definiálta, és azt állította, pont nélkül is jár a hatás. A 471.1 szerint conquer csak a körben még nem score-olt battlefieldnél történik; pont nélküli trigger csak akkor van, ha a pont elmarad vagy lecserélődik (383.4.c.2.c)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

@@ -1,0 +1,13 @@
+{
+ "fixes": {
+  "Vex, Gloomist": {
+   "short": "Legend: amikor te vagy egy csapattársad megtart egy battlefieldet, exhaustolva húzhatsz egy lapot. Magától csak a saját Awaken Phase-edben lesz újra ready, ezért 2v2-ben, más readyző hatás (például Heartening Soul) nélkül, körfordulónként csak egyszer húzhatsz vele: vagy a saját holdodra, vagy a társadéra.",
+   "why": "A short abszolút állítása (\"Csak a saját Awaken Phase-edben lesz újra ready\") hamis: legendet readyző lapok léteznek (Heartening Soul, Royal Entourage, Hall of Legends). A 315.1.b csak az Awaken Phase automatikus readyzését írja le; pontosítva \"magától\"-ra, példával."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Ziggs, Short-Fused: a short tényként állítja, hogy a Bomb robbanása Ziggs mellett 3 sebzés. A Bomb Deathknellje akkor resolve-ol, amikor a token már nincs a boardon; a Core Rules (418.6.b.2, 429.1.a.1.b, 715) nem mondja ki, hogy ez még \"friendly gear abilityjének\" számít-e. A kártya nyilvánvaló szándéka szerint igen, ezért nem javítottam, de hivatalos szabályszöveg nem zárja le."
+ ]
+}
