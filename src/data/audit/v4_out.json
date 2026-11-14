@@ -1,0 +1,21 @@
+{
+ "fixes": {
+  "Renata Glasc, Mastermind": {
+   "short": "Két abilityje van: 1 Energy és 1 Mind Powerért húzol 1 lapot, ahányszor ki tudod fizetni; 4 Energy, 4 Mind Power és exhaust árán 1 pontot szerzel. Mindkettő csak akkor használható, ha Renata battlefielden áll, és csak a saját Main Phase-edben, showdownon kívül. A pontszerzéshez ready-nek kell lennie: ha a belépése vagy egy Standard Move exhaustolta, abban a körben nem megy.",
+   "why": "381.1: Open State kell, a showdownon kívüli feltétel hiányzott; a 'belépése vagy mozgása körében nem megy' túlzás: csak exhausted állapotban nem fizethető a [T] (415.4), spell általi mozgás nem exhaustol, és ready belépés is lehetséges."
+  },
+  "Renekton, Brute": {
+   "short": "1 Energyért a kör végéig +1 Mightot kap, ezt a saját Main Phase-edben, showdownon kívül, többször is aktiválhatod. Amikor a Mightja 10 vagy több lesz, Empowered lesz, és amíg az marad, Deflectje van (az ellenfél spellje vagy abilityje csak plusz 1 bármilyen Powerért választhatja) és Ganking (battlefieldről battlefieldre is léphet). Az Empowered a +1-ek lejárta után is megmarad.",
+   "why": "A 'combaton kívül' pontatlan: 381.1 szerint Open State kell, showdown alatt sem aktiválható; hiányzott a Deflect (809.1.c) és a Ganking (810.1.b) lényege; az Empowered állapot csak Disempowerrel szűnik meg (442.1.a, 443.1)."
+  },
+  "Riven, Shattered": {
+   "short": "Amikor Riven attacker lesz, választasz egy ottani enemy unitot: minden rá csatolt Equipmentért 2 damage-et kap, egyetlen sebzésként. Equipment nélkül a trigger nem sebez, a combat damage ettől még megy. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod az Equip cost kifizetésével, akkor is, ha máshoz van csatolva; ha a cost bármilyen domainű Powert tartalmaz, abból 1-gyel kevesebbet fizetsz.",
+   "why": "821.1.c.3: a Weaponmaster kedvezmény csak az [A] (bármely domainű) Power részt csökkenti, [C] Equip costnál nincs kedvezmény; az előző szöveg általános 1 Power kedvezményt sugallt. Attack trigger: attackerré váláskor (383.4.e)."
+  },
+  "Sett, Brawler": {
+   "short": "Kijátszáskor, és amikor Sett részt vesz egy battlefield conquerében, kap egy +1 Mightú buffot, ha még nincs. A buffját elköltve a kör végéig +4 Mightot kap, ez nettó +3. Csak a saját Main Phase-edben, showdownon kívül aktiválható, ezért ha combatban akarod használni, a combatot indító mozgás előtt kell megtenned.",
+   "why": "A 'mozgás előtt kell megtenni' túlzás: az aktiválás csak Open State-ben megy (381.1), ezért csak a combatban való használathoz kell előre aktiválni; combat nélküli mozgás után is aktiválható."
+  }
+ },
+ "checked": 61
+}

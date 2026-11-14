@@ -213,6 +213,7 @@ for c in cards:
     if rv and rv.get('short'): SH[c['n']]=rv['short']
     if c['n'] in SA: SH[c['n']]=SA[c['n']]
     if c['n'] in SH: c['sh']=SH[c['n']].replace('\u2014',',').replace('\u2013','-')
+    if c.get('sh'): c['sh']=' '.join(x for x in re.split(r'(?<=[.!?])\s+',c['sh']) if not re.search(r'tiltott|bannol|banned|tiltólist|Riftlens|ellenőrizd a legalitást',x,re.I)).strip()
     for o,nw in NP.get(c['n'],[]):
         for x in c.get('nt',[]):
             if o in x[2]: x[2]=x[2].replace(o,nw)

@@ -1,0 +1,21 @@
+{
+ "fixes": {
+  "Fox-Fire, Ahri": {
+   "short": "Action: a saját körödben vagy showdown alatt megöl bármennyi unitot egy battlefielden, akár a sajátodat is, ha a kiválasztottak együttes Mightja legfeljebb 4. Hidden: a saját körödben 1 bármely Powerért elrejtheted egy általad irányított battlefielden, és a következő körtől Reactionként, ingyen kijátszhatod, de csak az ottani unitokra.",
+   "why": "A 'ha az összeg a resolve-ig 4 fölé nő, csak egy legális részük hal meg' állítást a Core Rules nem támasztja alá (359.3.e csak a célpontok egyenkénti érvénytelenné válását rendezi), kitalált szabály; kivettem. A Hidden elrejtési feltételei pontosítva (811.1.b)."
+  },
+  "Hostile Takeover": {
+   "short": "Átveszed egy battlefielden álló ellenséges unit irányítását és readyzed: ha ott más ellenséges unit is van, combat indul, ha nincs, conquerelsz. A kör végén elveszíted az irányítását, és recallolódik a base-be. Hidden: 1 bármely Powerért elrejtheted, és a következő körtől Reactionként, ingyen kijátszhatod, de csak az ottani unitra. Ending Phase-ben kijátszva a visszaadás elmarad.",
+   "why": "A Hidden csak névként szerepelt, a lényege (költség, következő körtől Reaction, ingyen, célpont az ottani battlefieldről) hiányzott (811.1.b, 811.1.d.2)."
+  },
+  "Hidden Blade": {
+   "short": "Action: a saját körödben vagy showdown alatt megöl egy battlefielden álló unitot, és annak irányítója húz 2 lapot. Ha a unit a resolve előtt base-be kerül, se ölés, se húzás; ha valami megmenti a haláltól, a húzás akkor is jár. Hidden: 1 bármely Powerért elrejtheted, és a következő körtől Reactionként, ingyen kijátszhatod, de csak az ottani unitra.",
+   "why": "Az Action időzítése nem volt kifejtve (806), és hiányzott a Hidden elrejtési költsége, 1 bármely Power (811.1.b)."
+  },
+  "Fight or Flight": {
+   "short": "Action: a saját körödben vagy showdown alatt egy battlefielden álló unitot, bárkiét, a base-ébe mozgat, így kiveheted a harcból. Hidden: 1 bármely Powerért elrejtheted, a következő körtől Reactionként ingyen kijátszhatod, de csak az ottani unitokra. Standard formátumban 2026.03.31 óta tiltott lap.",
+   "why": "Az Action időzítése nem volt kifejtve (806); a tiltás ténye igaz (2026-03-31 óta tiltott Standard Constructedben), de pontosítva lett."
+  }
+ },
+ "checked": 61
+}
