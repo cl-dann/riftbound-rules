@@ -87,6 +87,18 @@ for c in cards:
         if f.get('old_text') and c.get('err') is not None and not c.get('old'): c['old']=fix(f['old_text'])
         if fn=='Disintegrate' and f.get('text'): c['txt']=fix(f['text'])
         if 'Unit / Gear' in (f.get('type_note') or '') and 'Gear' not in c['st']: c['st']=c['st']+['Gear']
+# Radiance: Riot card-gallery feed has wrong or missing domains on 27 main-set cards.
+# The printed set is numbered by domain in blocks of 23 (Fury 001-023, Calm 024-046, Mind 047-069,
+# Body 070-092, Chaos 093-115, Order 116-138); this matches the image-based corrections
+# in github.com/RubenPeeters/ni-han-bao bot/riftbound-corrections.json for all 27 cards.
+RAD_BLOCK=['Fury','Calm','Mind','Body','Chaos','Order']
+DOMFIX={}
+for c in cards:
+    m=re.match(r'^rad-(\d{3})-167$',c.get('code') or '')
+    if m and 1<=int(m.group(1))<=138:
+        want=[RAD_BLOCK[(int(m.group(1))-1)//23]]
+        if c['d']!=want: DOMFIX[c['_fn']]=(c['d'],want); c['d']=want
+print('radiance domain fixes',len(DOMFIX))
 # ---------- topics
 T=[]
 def topic(k,title,g,refs,test=None,rel=(),why=None): T.append({'k':k,'title':title,'g':g,'refs':list(refs),'rel':list(rel),'why':why,'_t':test})
