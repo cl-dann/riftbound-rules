@@ -1,0 +1,48 @@
+{
+ "fixes": {
+  "Janna, Savior": {
+   "short": "Bárki körében, válaszként is kijátszható a base-edbe vagy egy általad kontrollált battlefieldre. Kijátszáskor meggyógyítja az ott álló unitjaidat, majd legfeljebb egy ugyanott álló ellenséges unitot hazaküldhet a base-ébe. Ha az utolsó támadót küldöd haza, nem lesz combat damage.",
+   "why": "A short kihagyta a \"from here\" feltételt: csak Janna helyén álló enemy unit küldhető haza (359.3.f.2), nem bármelyik."
+  },
+  "Jaull-Fish": {
+   "short": "Minden saját Mighty (legalább 5 Mightú) unitod után 2 Energyvel olcsóbb, négy Mighty unitnál 0 Energy. A 2 Body Power költséget a kedvezmény nem csökkenti. Kijátszáskor fizethetsz plusz 1 Energy és 1 Body Power költséget: ekkor ready lép be.",
+   "notes": [
+    [
+     "805.1.b,805.1.b.1",
+     0,
+     "[Accelerate]: kijátszáskor [1] és egy Body Power additional costért ready lép be. A Power csak a unit saját domainjéből fizethető."
+    ],
+    [
+     "356.4.g",
+     0,
+     "Változó kedvezmény: a Mighty unitjaid számát a Determine Total Cost lépésben nézi a játék. Későbbi változás a már kiszámolt costot nem módosítja."
+    ],
+    [
+     "708,710",
+     0,
+     "Mighty az a unit, amelynek az aktuális Mightja 5 vagy több, buffokkal és bónuszokkal együtt. Csak a boardon lévő saját unitjaid számítanak."
+    ],
+    [
+     "356.4.c.2,356.6,356.1.b.1",
+     1,
+     "Csak az Energy cost csökken, legfeljebb 0-ig. A 2 Body Power costot a kedvezmény nem érinti, azt csak egy \"ignoring its cost\" kijátszás nullázná. Négy Mighty unittal az Energy cost 0."
+    ],
+    [
+     "206",
+     0,
+     "Más effectek a nyomtatott 7-es costot látják, nem a csökkentettet."
+    ]
+   ],
+   "why": "A short és a 356.4.c.2 note szerint a 2 Body Powert \"mindig\" ki kell fizetni, de \"ignoring its cost\" kijátszásnál (356.1.b.1, például Kharox, Tail-Cloaked Matriarch) a Power cost is nulla."
+  },
+  "K'Sante, Pride of Nazumah": {
+   "short": "1 Energyért és exhaustért egy saját unitod a kör végéig annyi Assaultot kap, amennyi Shieldje van, vagyis támadáskor is megkapja a védekező bónuszát. Shield nélküli unitnál nem ad semmit. Csak a saját körödben, showdownon kívül aktiválható, ezért a támadás előtt kell használni.",
+   "why": "A short szerint \"csak a támadás előtt\" használható; valójában a saját Main Phase-edben, Open State-ben, showdownon kívül bármikor (381.1), egy combat után is, csak combat közben nem."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Jax, Unrelenting: a short szerint a Weaponmaster mindig 1 bármilyen Powerrel olcsóbb Equipet ad, de a 821.1.c.3 szerint ha az Equip cost nem tartalmaz [A]-t, nincs csökkentés; hogy a [C] Equip cost (például Jagged Cutlass) ilyennek számít-e, a Core Rules nem dönti el (a Jagged Cutlass notes is flag 2-vel kezeli)."
+ ]
+}

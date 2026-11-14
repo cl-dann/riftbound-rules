@@ -1,0 +1,54 @@
+{
+ "fixes": {
+  "Dockside Lock-Up": {
+   "notes": [
+    [
+     "830.1.b.1,355.10,355.9.b",
+     0,
+     "Deploy: bármelyik battlefieldre kijátszható. A play effect targetje egy itt lévő unit, bárkié lehet."
+    ],
+    [
+     "355.8",
+     1,
+     "A banish kötelező. Ha itt csak saját unitod áll, azt kell választanod. Ha nincs itt unit, a trigger nem kerül chainre."
+    ],
+    [
+     "428.2.a,719.5",
+     0,
+     "A banish nem kill: a Deathknell nem fut le, a unitról az Equipment leválik és a boardon marad."
+    ],
+    [
+     "383.3.b,191.2,356.1.b.1",
+     1,
+     "Hold esetén a \"kill this\" a trigger base costja, és te játszod ki a banishelt lapot ingyen. Enemy unit lapja így a te kontrollod alá kerül, a base-edbe vagy egy battlefieldedre."
+    ],
+    [
+     "186.1",
+     0,
+     "A token a Banishmentben megszűnik, nincs mit kijátszani. Tokent banishelni ettől még jó removal."
+    ],
+    [
+     "830.1.b,428.3",
+     1,
+     "Ha előbb az opponent holdol itt, a Deploy megöli a geart, és a banishelt lap végleg a Banishmentben marad. Ugyanez történik, ha a geart spellel megölik."
+    ],
+    [
+     "405.2,383.3.b",
+     0,
+     "A hold trigger \"kill this\" részét nem kötelező kifizetni: a 405.2 szerint a triggered ability costját a játékos megtagadhatja, ekkor a trigger lekerül a chainről, a gear a helyén marad. Ha nincs kijátszható banishelt lap (token volt, vagy a play effect mistargetelt), így nem kell feláldoznod."
+    ]
+   ],
+   "why": "A flag 2-es note szerint a Core Rules nem mondja ki, hogy a 'kill this' trigger cost megtagadható-e; a 405.2 kifejezetten kimondja, hogy a triggered ability costját a játékos megtagadhatja, és ekkor a trigger lekerül a chainről. Tényállításra (flag 0) javítva."
+  },
+  "Daisy!": {
+   "short": "Nagy unit, ami eleve ready lép be, és 1 Energyvel olcsóbb minden Bird, Cat, Dog és Poro tagért a boardon lévő unitjaid között. Ha támadáskor mind a négy tag megvan, stunnol egy ottani ellenséges unitot, ami így nem sebez abban a harcban. Csak Ivern legenddel használható.",
+   "why": "A short 'olcsóbb 1-gyel' megfogalmazása nem mondta ki, hogy Energy kedvezményről van szó (a szöveg: Reduce my cost by [1]); a kétféle cost (Energy, Power) miatt félreérthető volt."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Counter Strike: a 438.5.b (All Prevent mellett semmi sem lethal) és a 467.2.c.10 Counter Strike példája (nem mentesül a kötelező kiosztás alól) feszül egymásnak; a meglévő flag 2 note ezt jól jelzi, nem javítottam.",
+  "Drakehound Packmaster: a resolve közben kijátszott lap saját időzítési engedélyének érvényesülése (358.4 vs 420.3.b) a Core Rulesból nem dönthető el; a flag 2 note maradt."
+ ]
+}

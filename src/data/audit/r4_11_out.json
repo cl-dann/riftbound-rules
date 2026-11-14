@@ -1,0 +1,75 @@
+{
+ "fixes": {
+  "Vilemaw": {
+   "notes": [
+    [
+     "822.1.b,813.1.c.1",
+     0,
+     "[Ambush]: olyan battlefieldre is kijátszható, ahol van unitod, és amíg ilyen helyre játszod, [Reaction]-je van: Closed State-ben, bárki körében, combat közben is lejöhet. Base-be játszva nincs [Reaction]-je."
+    ],
+    [
+     "467.2.a,710",
+     1,
+     "A passzív az ott lévő enemy unitok aktuális Mightját hasonlítja Vilemaw aktuális Mightjához a combat damage pillanatában. Assault, Shield, buff és \"this turn\" bónusz mindkét oldalon számít."
+    ],
+    [
+     "467.2.c,424.1.b",
+     2,
+     "A Core Rules nem írja le, hogyan kell kezelni a \"don't deal combat damage\" unitot. A Stun mintájára a Mightja valószínűleg nem adódik a kiosztható damage-hez, de ezt judge erősítse meg."
+    ],
+    [
+     "365.1",
+     1,
+     "Ha Vilemaw a combat damage előtt elhagyja a battlefieldet, a passzív megszűnik. Az az enemy unit, amelynek Mightja legalább akkora, mint Vilemaw aktuális Mightja, rendesen sebez."
+    ],
+    [
+     "383.4.d.2.a",
+     0,
+     "Hold effect: akkor húzol, ha Vilemaw ott van azon a battlefielden, amelyet a Beginning Phase-edben holdolsz."
+    ],
+    [
+     "758.2.a,359.3.e.6",
+     0,
+     "A 758.2.a példájában ő a Rebuke targetje, akit az Alpha Wildclaw tesz ideiglenesen választhatatlanná. A 359.3.e.6 példája a Vilemaw's Lair battlefieldről szól, nem erről a unitról."
+    ]
+   ],
+   "why": "A passzív ability megszűnésére hivatkozó pont a 384.2-t idézte, ami triggered abilityről szól; a passive abilityre a 365.1 vonatkozik."
+  },
+  "Turn to Dust": {
+   "notes": [
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "355.7,150.4",
+     0,
+     "A gear target. Bármelyik játékos gearje választható: base-ben lévő, unitra csatolt Equipment és gear token is."
+    ],
+    [
+     "816.1.b",
+     0,
+     "A gear nem azonnal hal meg, hanem a controllere következő Beginning Phase-ének elején, a scoring előtt."
+    ],
+    [
+     "816.1.c",
+     1,
+     "Az enemy gear addig működik: az opponent a köröd hátralévő részében még használhatja (például a Goldot elkölti), a csatolt Equipment pedig a combatban még adja a Might bonust."
+    ],
+    [
+     "816.1,383.3.c",
+     1,
+     "A Temporary triggere a chain-re kerül, a gear controllere reagálhat rá, mielőtt a gear meghal."
+    ]
+   ],
+   "why": "A \"Temporary triggere chain-re kerül\" pont a 816.1.a-ra hivatkozott (\"present on Permanents\"), ami ezt nem mondja; a 816.1 (Triggered Ability keyword) és a 383.3.c (triggered ability Closed/Open State-ben bárki körében chain-re kerül) támasztja alá."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Veteran Poro: a 821.1.c.3 szerint a Weaponmaster csak [A]-t tartalmazó Equip costot csökkent; a Core Rules nem mondja ki, hogy a tipikus [C] (saját domain Power) Equip cost [A]-t tartalmazónak számít-e. A short a szabály szövegét követi, de ha a [C] is csökkenthető, a short félrevezető lehet; judge vagy hivatalos FAQ döntse el.",
+  "Void Seeker: a 138.1-es pont szerint a lapon Kai'Sa idézet flavor text áll; a flavor text a rendelkezésre álló adatokban (cards.json) nem szerepel, ezért nem ellenőrizhető."
+ ]
+}

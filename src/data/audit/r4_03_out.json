@@ -1,0 +1,86 @@
+{
+ "fixes": {
+  "Ezreal, Dashing": {
+   "short": "Támadáskor vagy védekezéskor a Mightjával megegyező sebzést ad egy ottani ellenséges unitra, de harci sebzést nem okoz. Action képesség: 1 Mind Powerért a base-be mozog, a saját körödben vagy showdown alatt bárki körében, de spellre vagy a chainen lévő saját triggerére válaszul nem, így a sebzés lefutása után léphet csak ki.",
+   "notes": [
+    [
+     "383.4.e.2.a,383.4.f.2.a",
+     0,
+     "Attack és defend trigger: combatonként egyszer fut le, amikor megkapja az Attacker vagy Defender designationt."
+    ],
+    [
+     "355.10,359.3.f.2",
+     1,
+     "A target ugyanott lévő enemy unit. A sebzés Ezreal resolve-kori Mightja. Ha válaszul elmozdítják, a \"here\" megváltozik, a trigger mistargetel."
+    ],
+    [
+     "424.1.b",
+     1,
+     "\"I don't deal combat damage\": a Combat Damage Stepben a Mightja nem adódik hozzá a kiosztható sebzéshez, hasonlóan a stunned unithoz. Sebzést ő maga ugyanúgy kaphat."
+    ],
+    [
+     "806.1.c.2",
+     0,
+     "A base-be lépés [Action] ability: showdown alatt is aktiválható, bárki körében. A cost egy Mind Power, exhaust nélkül."
+    ],
+    [
+     "309.1.a,359.3.f.2",
+     1,
+     "Az ability nem [Reaction], ezért amíg az attack vagy defend trigger a chainen van (Closed State), nem aktiválható: a base-be lépés csak a trigger resolve-ja után jöhet, így a saját sebzését nem rontod el vele. Ha viszont az opponent egy [Reaction] hatással elmozdítja Ezrealt a resolve előtt, a sebzés elmarad."
+    ],
+    [
+     "421.1,358.3.a",
+     1,
+     "A base-be lépés Move. Ha egy effect tiltja (például Vilemaw's Lair), az ability aktiválható, de a Move negálódik."
+    ]
+   ],
+   "why": "A short és a notes azt sugallta, hogy Ezreal a saját attack/defend triggerének resolve-ja előtt base-be léptethető, és ezzel elronthatja a sebzést. Az ability [Action], nem [Reaction], ezért Closed State-ben (309.1.a), amíg a trigger a chainen van, nem aktiválható."
+  },
+  "Forgefire Cape": {
+   "notes": [
+    [
+     "825.3.a,825.3.b",
+     0,
+     "Unique: ebből a névből csak 1 példány lehet a deckben. A 3 Signature hely ettől még kitölthető három különböző nevű Unique Signature lappal."
+    ],
+    [
+     "103.3.d,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Ornn) kell viselnie. Két domainű, ezért csak olyan legend mellé fér, amelynek mindkét domainje megvan."
+    ],
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 bármely domainű Power ([A]) costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +3 Mightot is kap."
+    ],
+    [
+     "383.4.e,383.4.f,355.10.d",
+     0,
+     "Attack és defend trigger, combatonként egyszer: a felszerelt unit battlefieldjén minden enemy unit 2 damage-et kap. Nincs target, ezért Deflect nem drágítja, és enemy unit nélkül is lefut."
+    ],
+    [
+     "462,467.2",
+     1,
+     "A 2 damage még a Combat Damage Step előtt resolve-ol, így a legfeljebb 2 Mightú (vagy már sebzett, így lethal damage-et kapó) enemy unitok a következő cleanupban, a combat damage kiosztása előtt meghalnak."
+    ],
+    [
+     "719.5,436.4.a",
+     0,
+     "Ha a unit elhagyja a boardot, a gear leválik és a unit utolsó helyén marad. Battlefieldről a következő cleanup a base-be recallolja, ahonnan újra equipelhető."
+    ]
+   ],
+   "why": "A 462,467.2 pont szerint a unitok \"a combat előtt\" halnak meg; az attack/defend trigger már a combat elején, a designation megszerzésekor fut (383.4.e/f), a kill a combaton belül, a Combat Damage Step előtti cleanupban történik (323.4)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Explosimian: ha az első Bomb Deathknellje megöli az ott lévő egyetlen enemy unitot, a további Bombok Deathknelljeinek targetválasztása attól függ, hogy a lethal damage-es unit a cleanup előtt még választható-e; a notes \"3-szor 2 sebzés, akár különböző enemy unitokra\" állítását (flag 1) ezért nem tudtam teljesen lezárni.",
+  "Flame Chompers: a \"pay [C] to play me\" után a 3 Energy base cost fizetése a Core Rulesból nem dönthető el; a short és a notes ezt helyesen judge-ra bízza, nem módosítottam."
+ ]
+}

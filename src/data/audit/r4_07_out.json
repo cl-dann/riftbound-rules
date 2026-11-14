@@ -1,0 +1,49 @@
+{
+ "fixes": {
+  "Nazuman Ntofo": {
+   "short": "1 Energyért egy saját unitodra csatolható Equipment, ami nem ad Mightot. Az értéke, hogy a unit felszerelt lesz, amire más hatások figyelhetnek. Az Equip a saját Main Phase-edben, showdownon kívül aktiválható, Weaponmaster viszont ettől eltérő időzítéssel is rácsatolhatja.",
+   "notes": [
+    [
+     "818.1.c.2,818.1.b.1",
+     0,
+     "Equip [1]: 1 Energyért egy általad kontrollált unitra csatolod. A unit target."
+    ],
+    [
+     "151.2",
+     0,
+     "Az Equip csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható."
+    ],
+    [
+     "435.1.d,818.3.b",
+     1,
+     "A Might bonus +0, a unit Mightja nem változik. A lap értéke az, hogy a unit Equipped állapotba kerül, amit más effectek figyelhetnek."
+    ],
+    [
+     "821.1.c.3",
+     0,
+     "Weaponmasterrel is csatolható, de az Equip costban nincs Power, ezért a kedvezmény nem csökkenti: az [1]-et ki kell fizetni."
+    ],
+    [
+     "719.5,436.4.a",
+     0,
+     "Ha a unit elhagyja a boardot, a gear leválik és a unit utolsó helyén marad. Ha ez battlefield volt, a következő cleanupban a base-be recallolódik."
+    ],
+    [
+     "718.2,721.2,435.1.f",
+     1,
+     "Csatolva a gear Rules Textje, így az Equip is inaktív: a saját Equipjével nem rakható át másik unitra. Ezt csak külön effect teheti meg (például Weaponmaster, amely újra aktívvá teszi az Equipet, és az Equip costot ki kell fizetni); ekkor az előző unitról leválik."
+    ]
+   ],
+   "why": "A short 'Csak a saját körödben, showdownon kívül csatolható' állítása kizárólagos, de a Weaponmaster az Equip szokásos időzítésétől függetlenül csatol (821.1.b). A 6. note (435.1.f) azt sugallta, hogy a csatolt gear a saját Equipjével átrakható, holott csatolva a Rules Text, így az Equip is inaktív (435.1.e, 718.2, 721.2); ez ellentmondott a Protector's Shield és a Pendulum Blade notes-ának is."
+  },
+  "Needlessly Large Yordle": {
+   "short": "Tank: combatban rá kell először halálos sebzést osztani, védekezőként pedig a Shield 5 miatt 10 Mightú. Minden pontért, amit ebben a körben holdolással szereztél, 2 Energyvel és 1 Calm Powerrel olcsóbb. Mivel a hold a köröd elején történik, a kedvezmény a kijátszáskor már ismert.",
+   "why": "A 'Védekezőként 10 Mightú Tank' megfogalmazás azt sugallta, hogy a Tank csak védekezéskor él. A Tank feltétel nélküli (815.1.b), csak a +5 Might kötött a defender szerephez (814.1.c)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "On the Hunt: a short és a 4. note (135.2.e.6.c, flag 0) szerint a 2 Power cost Body és Chaos Powerből tetszőleges arányban fizethető. Ez csak akkor igaz, ha a nyomtatott Power szimbólumok [C]-k; ha a lapon egy Body és egy Chaos szimbólum áll, akkor 1-1 kötelező. A bemenet (power: 2) a szimbólumot nem tartalmazza, a nyomtatott lapot ellenőrizni kell."
+ ]
+}

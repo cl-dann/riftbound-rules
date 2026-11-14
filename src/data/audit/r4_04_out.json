@@ -1,0 +1,81 @@
+{
+ "fixes": {
+  "Frostcoat Cub": {
+   "notes": [
+    [
+     "356.2.b.1,355.1.a",
+     0,
+     "A [C] itt Mind Power, optional additional cost. A kijátszás 2. lépésében döntesz róla."
+    ],
+    [
+     "383.2.a.1",
+     0,
+     "Az \"if you paid the additional cost\" a trigger feltétel része. Fizetés nélkül a trigger nem kerül chain-re."
+    ],
+    [
+     "355.10,355.5.b",
+     0,
+     "A unit target, bármelyik locationön. A trigger chain-re kerülésekor választod, nem a Cub kijátszásakor."
+    ],
+    [
+     "142.4.b",
+     0,
+     "Sebzett uniton a -2 Might halálos lehet: ha a rajta lévő damage eléri az új Mightját, a cleanupban meghal."
+    ],
+    [
+     "143.2.c,143.2.c.1",
+     0,
+     "Nincs minimum: a Might 0 alá is mehet. Ilyenkor 0-ként kezelik, de a későbbi bónuszok a valódi negatív értékre rakódnak."
+    ]
+   ],
+   "why": "Az utolsó pont második fele (a módosítások a valódi negatív értékre számolnak) a 143.2.c.1-ből jön, a 143.2.c ezt nem mondja; hivatkozás kiegészítve."
+  },
+  "Frozen Fortress": {
+   "short": "Battlefield: minden játékos körének elején, még a pontozás előtt, minden itt álló unit 1 sebzést kap, a tieid is. Az 1 Mightú unitok meghalnak, és ha így minden unitod elfogy innen, a köröd elején nem holdolod ezt a battlefieldet. Később a körben még conquerelheted.",
+   "why": "A short szerint abban a körben nem kapsz pontot a helyért; ez túlzás: a hold elmarad, de mivel a battlefieldet még nem scoreoltad, a körben később conquerrel pontot szerezhetsz rajta (471.1, 472)."
+  },
+  "Heartening Soul": {
+   "short": "Kijátszáskor readyzi a legendedet, és amíg a boardon van, a legended exhaustért +3 Mightot adhat egy unitnak a kör végéig. Ez csak a saját körödben, showdownon kívül megy. A legend exhaustja közös: ha erre használod, a saját képességét csak akkor használhatod, ha a legend újra ready lesz, és fordítva.",
+   "notes": [
+    [
+     "355.10.g",
+     0,
+     "\"A friendly legend\": a legend target, a szabályzat ezt a megfogalmazást hozza példának. A trigger chain-re kerülésekor választod."
+    ],
+    [
+     "416.1.c",
+     0,
+     "Ha a legended már ready, a ready nem csinál semmit."
+    ],
+    [
+     "479.3.a",
+     0,
+     "A passive abilityt ad a friendly legendeknek, amíg a Soul a boardon van. Ha a Soul lekerül, az ability azonnal megszűnik."
+    ],
+    [
+     "381.1,415.4",
+     0,
+     "A kapott ability [Action] nélküli: a saját Main Phase-edben, Open State-ben megy, és ready legend kell hozzá. Showdown alatt nem."
+    ],
+    [
+     "355.10",
+     0,
+     "A +3 Might unitja target, bármelyik unit lehet."
+    ],
+    [
+     "415.5,415.4",
+     1,
+     "Az Exhaust közös erőforrás: ha a legend a saját abilityjére exhaustol, a +3-as ability addig nem megy, amíg a legend újra ready nem lesz, és fordítva. A Soul play effectje éppen ilyen readyzés: előbb a legend saját abilityje, majd a Soul kijátszása után a +3-as is használható."
+    ]
+   ],
+   "why": "A short és a 415.5-ös pont szerint a legend saját képessége a +3 használata után abban a körben már nem megy; ez túlzás: újra readyzve (például éppen a Soul play effectjével) ismét exhaustolható (415.4)."
+  },
+  "Hextech Disc": {
+   "short": "Exhaustolva Empowerelheted, majd miután újra ready lett, 1 Energyért, exhaustért és az Empower levételéért kapsz egy 3 Mightú Mech tokent a base-edbe. Mivel mindkét lépés exhaustol, alapból két körönként ad egy Mechet, ha semmi nem readyzi közben. Csak a saját körödben, showdownon kívül használható.",
+   "why": "A short szerint a Mech csak egy későbbi körben kérhető; ez túlzás: ha egy effect közben readyzi a geart, ugyanabban a körben is (415.4, 149.1; a 149.1-es pont maga is ezt mondja)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

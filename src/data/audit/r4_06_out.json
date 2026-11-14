@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "Meditation": {
+   "short": "Húzol 1 lapot, vagy 2-t, ha kijátszáskor additional costként exhaustolsz hozzá egy saját ready unitot. Bármikor kijátszható, akár válaszként is. Már exhausted unit nem használható a costhoz. Ha a spellt counterelik, az exhaustolt unit exhausted marad.",
+   "why": "A short két külön állítást egy mondatba vont össze (\"Már exhausted unit nem jó, ha a spellt counterelik, a unit exhausted marad\"), ami úgy olvasható, mintha az exhausted unit csak counter esetén lenne rossz. Szétválasztva: 415.4 (exhausted unit nem fizeti a costot) és 426.1.c.1 (counternél a cost nem jár vissza)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

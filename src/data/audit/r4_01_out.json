@@ -1,0 +1,33 @@
+{
+ "fixes": {
+  "Bloodscent Swarm": {
+   "short": "Minden ebben a körben elfoglalt (conquer) battlefield után 2 Energyvel olcsóbb. Ez a kedvezmény a 2 Body Powert nem csökkenti, azt ki kell fizetni. Combat utánra való lap, a hold nem számít bele.",
+   "notes": [
+    [
+     "356.4.g",
+     0,
+     "A kedvezményt a Determine Total Cost lépésben számolja a játék: annyiszor [2], ahány battlefieldet addig conquereltél a körben."
+    ],
+    [
+     "472",
+     1,
+     "Egy battlefield körönként egyszer score-olható, ezért két battlefieldes játékban a kedvezmény legfeljebb [4]: a Swarm 4 Energybe kerül."
+    ],
+    [
+     "356.6",
+     1,
+     "Az Energy cost 0 alá nem mehet. A Swarm saját kedvezménye csak az Energyt csökkenti, a 2 Body Powert nem. Más lap (például Astral Heron \"[2][A][A] less\" hatása) a Powert is csökkentheti."
+    ],
+    [
+     "471.1,356.4.g",
+     1,
+     "Csak a conquer számít, a hold nem. A játékban egyetlen Main Phase van, a combat is azon belül zajlik: a Swarmot ugyanabban a Main Phase-ben, a conquer után érdemes kijátszani, mert a kedvezmény csak a kijátszásig megtörtént conquereket számolja."
+    ]
+   ],
+   "why": "A short és a 356.6 note szerint a 2 Body Powert \"mindig\" ki kell fizetni, de más lap Power costot is csökkenthet (Astral Heron: \"the next card you play this turn costs [2][A][A] less\"; 356.4.b). Csak a Swarm saját kedvezménye nem érinti a Powert."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

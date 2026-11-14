@@ -1,0 +1,263 @@
+{
+ "fixes": {
+  "Sprite Burst": {
+   "notes": [
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "187.2,184.1",
+     0,
+     "A Sprite 3 Mightú, domain nélküli unit token Fae taggel és Temporaryvel. Az effect szerint ready lép be."
+    ],
+    [
+     "185.2.a,355.2.a",
+     1,
+     "Mindkét token a base-edbe vagy egy általad kontrollált battlefieldre kerül. Mivel minden token kijátszása külön Play a saját lépéseivel, a két token mehet külön helyre; ezt kifejezett szabály nem mondja ki."
+    ],
+    [
+     "421.3.a",
+     1,
+     "Mivel ready érkeznek, még ebben a körben Standard Move-val támadhatnak."
+    ],
+    [
+     "816.1.b",
+     0,
+     "A következő Beginning Phase-ed elején, a scoring előtt meghalnak: conquerre jók, de a következő körödben már nem holdolnak."
+    ],
+    [
+     "816.2.a",
+     0,
+     "Ha egy Sprite újabb Temporaryt kap, az nem változtat semmin, a trigger egyszer fut le."
+    ]
+   ],
+   "why": "A \"két token mehet külön helyre\" állítás 0-s flaggel szerepelt, de a Core Rules ezt nem mondja ki közvetlenül, csak a 185.2.a-ból (külön Play) vezethető le: a levezetett részt 1-es flaggel, külön pontba tettem."
+  },
+  "Sprite Queen": {
+   "notes": [
+    [
+     "187.2,184.1",
+     0,
+     "A Sprite 3 Mightú Fae unit token [Temporary]-vel. Ready lép be, de mindig a base-edbe, onnan Standard Move-val mehet battlefieldre."
+    ],
+    [
+     "315.2.a.1,365.1",
+     0,
+     "A második trigger minden saját Beginning Phase-ed elején lefut, ha a Queen akkor a boardon van."
+    ],
+    [
+     "383.3.d",
+     0,
+     "A Beginning Phase elején az előző Sprite Temporary triggere és a Queen új triggere egyszerre keletkezik, a sorrendjüket te döntöd el."
+    ],
+    [
+     "816.1.c",
+     1,
+     "Az új Sprite a Beginning Phase eleje után jön létre, ezért a saját Temporary-je csak a következő körödben fut le. Így mindig van egy Sprite-od a körödre."
+    ],
+    [
+     "359.3.f.1,359.3.f.2",
+     1,
+     "A trigger nem hivatkozik a Queen helyére. Ha a Queen a trigger chainen léte alatt elhagyja a boardot, a Sprite ettől még megérkezik a base-edbe."
+    ]
+   ],
+   "why": "Az utolsó pont a 383.2.a.1-re hivatkozott, ami a trigger feltételhez fűzött feltételről szól, nem erről. A forrásra hivatkozó (\"here\", \"my\") információ szabálya a 359.3.f.1 és 359.3.f.2; a Queen triggere ilyet nem tartalmaz, ezért a Sprite a base-be érkezik."
+  },
+  "Stalking Wolf": {
+   "short": "Kijátszáskor kötelezően meg kell ölnöd egy saját Bird, Cat, Dog vagy Poro unitot, ha van Deathknellje, az lefut. Ambush: Reactionként, akár az ellenfél körében is kijátszható egy olyan battlefieldre, ahol van unitod, vagy a feláldozott unit battlefieldjére, még ha ott már nincs más unitod. Ilyen unit nélkül nem játszható ki.",
+   "why": "A short úgy fogalmazott, mintha a feláldozott unitnak mindig lenne Deathknellje (\"ennek Deathknellje lefut\"); csak akkor fut le, ha van neki (429.1.a.1.b)."
+  },
+  "Stormbringer, Volibear": {
+   "notes": [
+    [
+     "355.9.b,355.10.b",
+     0,
+     "Két target van: a friendly unit a base-edben és a battlefield. Az ott lévő enemy unitok nem targetek, Deflect nem védi őket."
+    ],
+    [
+     "418.6.a",
+     1,
+     "A szöveg nem a unitot nevezi meg forrásnak (nem \"it deals\"), ezért a sebzést a spell okozza. A spellekre vonatkozó Bonus Damage hozzáadódik."
+    ],
+    [
+     "710,359.3.e.12",
+     0,
+     "A unit resolve-kori Mightja a sebzés. Ha a unit illegális targetté válik (például elhagyja a base-t), a Mightja \"null\", a sebzés és a Move is ignorálódik."
+    ],
+    [
+     "323.4,158.3.a",
+     1,
+     "A sebzett unitok csak a resolve utáni cleanupban halnak meg, a unitod tehát még melléjük érkezik. Ha maradt túlélő, combat lesz, és te vagy az attacker."
+    ],
+    [
+     "144.2",
+     1,
+     "A Move nem kér exhaustot, exhausted unitot is átvisz."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "103.3.d,103.3.d.2",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Volibear) kell viselnie."
+    ]
+   ],
+   "why": "A Signature pont állítja, hogy minden Signature lapnak a legend Champion tagjét kell viselnie, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.2 mondja ki, a hivatkozást kiegészítettem."
+  },
+  "Super Mega Death Rocket!, Jinx": {
+   "notes": [
+    [
+     "355.10",
+     0,
+     "A unit target, bármelyik játékosé, base-ben és battlefielden is."
+    ],
+    [
+     "385.2",
+     1,
+     "A trashből működő trigger maga írja le a kontextusát (\"from your trash\"): csak akkor működik, amikor a lap a trashben van."
+    ],
+    [
+     "383.3.a,383.3.b",
+     0,
+     "A \"you may\" után álló \"discard 1\" a trigger base costja. A trigger finalizálásakor kell kifizetni, nem a resolve-kor."
+    ],
+    [
+     "423.3",
+     0,
+     "Üres kézzel a cost nem fizethető ki, a lap a trashben marad."
+    ],
+    [
+     "471.1,472",
+     0,
+     "Minden conquer külön triggerel, de egy battlefield körönként csak egyszer score-olható."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "103.3.d,103.3.d.2",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Jinx) kell viselnie."
+    ]
+   ],
+   "why": "A Signature pont állítja, hogy minden Signature lapnak a legend Champion tagjét kell viselnie, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.2 mondja ki, a hivatkozást kiegészítettem."
+  },
+  "The Ball": {
+   "notes": [
+    [
+     "103.3.d,103.3.d.2,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Orianna) kell viselnie. Két domainű, ezért csak olyan legend mellé fér, amelynek mindkét domainje megvan."
+    ],
+    [
+     "830.1.b.1,830.1.b",
+     0,
+     "Deploy: bármelyik battlefieldre kijátszható, enemy unitok mellé is. Ha egy opponent holdol itt, meghal."
+    ],
+    [
+     "355.3",
+     0,
+     "A módot (draw vagy damage) a trigger chainre kerülésekor választod, nem a resolve-kor."
+    ],
+    [
+     "355.10.d",
+     0,
+     "A \"deal 2 to enemy units here\" nem targetel: minden itt lévő enemy unitot eltalál, Deflect és \"can't be chosen\" nem véd ellene."
+    ],
+    [
+     "830.1.b.2,458.1,448.1",
+     0,
+     "A Deploy gear mozgatható megfelelő effecttel, és minden Move újra triggerel. A Recall nem Move, arra nem fut le."
+    ],
+    [
+     "810.1.a,144",
+     1,
+     "A Ganking unit kulcsszó, a Standard Move-ot bővíti. Amíg a Ball sima gear, nincs Standard Move-ja, a Ganking csak akkor ér valamit, ha egy effect unittá teszi."
+    ],
+    [
+     "414.4",
+     0,
+     "A draw módnál üres deck esetén Burn Out következik."
+    ]
+   ],
+   "why": "A Signature pont állítja, hogy minden Signature lapnak a legend Champion tagjét kell viselnie, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.2 mondja ki, a hivatkozást kiegészítettem."
+  },
+  "Tibbers, Annie": {
+   "notes": [
+    [
+     "103.3.a.2,103.3.d.3",
+     0,
+     "Tibbers Signature unit, nem Champion unit, ezért nem lehet Chosen Champion, és nem kerülhet a Champion Zone-ba."
+    ],
+    [
+     "103.3.d,103.3.d.2,103.2.b.4",
+     0,
+     "Csak Annie legend deckjébe tehető, és a deckben összesen legfeljebb 3 Signature lap lehet. Fury és Chaos domainű, ezért a Domain Identity-nek mindkettőt tartalmaznia kell."
+    ],
+    [
+     "355.10.d",
+     0,
+     "\"All units at battlefields\": nem targetel semmit. Deflect és \"can't be chosen\" nem véd ellene."
+    ],
+    [
+     "355.5.a,418.1.d",
+     1,
+     "Minden battlefielden lévő unitot sebez, a sajátjaidat is, és Tibberst is, ha battlefieldre játszottad ki. A base-ben lévő unitok érintetlenek. Az számít, ki áll battlefielden a resolve-kor."
+    ],
+    [
+     "323.4",
+     0,
+     "A lethal damage-et kapott unitok a resolve utáni cleanupban halnak meg."
+    ]
+   ],
+   "why": "A Signature pont állítja, hogy minden Signature lapnak a legend Champion tagjét kell viselnie, de csak a 103.3.d-re hivatkozott; ezt a 103.3.d.2 mondja ki, a hivatkozást kiegészítettem."
+  },
+  "The Grand Plaza": {
+   "notes": [
+    [
+     "383.2.a.1",
+     0,
+     "Az \"if you have 7+ units here\" a trigger feltételének része: a hold pillanatában kell 7 unitodnak itt lennie, különben a trigger chain-re sem kerül."
+    ],
+    [
+     "383.2.a.1",
+     1,
+     "Mivel a 7 unitos feltétel a trigger condition része, nem az effecté, a resolve nem ellenőrzi újra. Ha a trigger már a chainen van, a unitok megölése nem állítja meg."
+    ],
+    [
+     "383.3.c",
+     1,
+     "A trigger chain-re kerül, az opponent reagálhat rá. Megállítani csak a trigger counterelésével lehet."
+    ],
+    [
+     "185.2.d",
+     1,
+     "A token unitok is unitok, beleszámítanak a 7-be."
+    ],
+    [
+     "195",
+     1,
+     "Ez külön győzelmi feltétel: a pontszámtól függetlenül, a resolve-kor nyersz."
+    ],
+    [
+     "473.2.b,472",
+     0,
+     "Hold trigger: a Beginning Phase-edben, ha kontrollálod a battlefieldet."
+    ]
+   ],
+   "why": "A külön győzelmi feltételről szóló pont a 194.2-re hivatkozott, ami a pontszám alapú, cleanupban ellenőrzött győzelemről szól. Az effect által adott győzelmet a 195 mondja ki."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Thrill of the Hunt: az utolsó note szerint a lap Power costja Fury vagy Body Powerrel fizethető (135.2.e.6.c). Ez csak akkor igaz, ha a nyomtatott Power szimbólum [C]; a bemenet (power: 1) a szimbólumot nem tartalmazza, kártyakép nélkül nem dönthető el."
+ ]
+}

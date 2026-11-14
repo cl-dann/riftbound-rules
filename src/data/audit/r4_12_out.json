@@ -1,0 +1,15 @@
+{
+ "fixes": {
+  "Arachnoid Horror": {
+   "short": "Hunt 2: amikor ez a unit részt vesz egy conquerben vagy holdban, 2 XP-t kapsz. Kijátszható olyan battlefieldre is, ahol egyetlen ellenséges unit áll egyedül, ebből combat lesz. Amíg a Horror a boardon van, a többi saját unitodat is kijátszhatod ilyen battlefieldre. Ez csak a helyet engedi, a szokásos időzítés ugyanúgy kell hozzá.",
+   "why": "A short a többi friendly unit engedélyét feltétel nélkül állította; ez passive ability, csak addig él, amíg a Horror a boardon van (365.1, 355.2.b)."
+  },
+  "Baccai Witherclaw": {
+   "short": "1 Energy és 2 bármilyen domainű Powerért Empowered lesz: +2 Mightot kap, és ha így hal meg, kapsz 2 exhausted rune-t. Ha elveszíti az állapotot, a Might visszaesik, és a rajta lévő damage megölheti. Kézbe visszaküldés vagy banish esetén nincs rune.",
+   "why": "Az Empower cost [1][A][A]: a \"2 Power\" domain megjelölés nélkül félreérthető volt (Body Powernek olvasható), az [A] bármely domain Powere (135.2.e.5.b)."
+  }
+ },
+ "checked": 89,
+ "data_issues": [],
+ "open": []
+}
