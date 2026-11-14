@@ -2,18 +2,18 @@ import { useEffect, useMemo, useState } from 'react';
 import { AlertTriangle, BookOpen, Check, ChevronLeft, ChevronRight, Compass, Lightbulb, RotateCcw, Swords } from 'lucide-react';
 import { loadLearn } from '../data';
 import { IMGBASE, esc, glossify, vsCard } from '../legacy/core';
+import { Playmat, DEMO_BOARD } from '../components/Playmat';
 
 type Block =
   | { type: 'p'; text: string }
   | { type: 'callout'; kind: 'tip' | 'warn' | 'rule' | 'strategy'; title?: string; text: string }
   | { type: 'steps'; title?: string; items: { title: string; text: string }[] }
   | { type: 'cards'; names: string[]; caption?: string }
-  | { type: 'table'; head: string[]; rows: string[][] };
+  | { type: 'table'; head: string[]; rows: string[][] }
+  | { type: 'playmat'; caption?: string };
 type Quiz = { q: string; options: string[]; correct: number; why: string };
 type Chapter = { id: string; level: 'kezdo' | 'halado'; title: string; lead?: string; rules?: string; blocks: Block[]; quiz?: Quiz[] };
-type Unit = { n: string; m: number; ex?: boolean; dmg?: number; tag?: string };
-type Side = { base?: Unit[]; runes?: { ready: number; exhausted: number }; hand?: string[]; score?: number };
-type Board = { me: Side; opp: Side; bfs: { name: string; ctrl?: string | null; me?: Unit[]; opp?: Unit[] }[]; chain?: string[]; note?: string };
+type Board = any;
 type Step = { say: string; board?: Board; choice?: { q: string; opts: { t: string; ok?: boolean; why: string }[] } };
 type Scenario = { id: string; title: string; level: string; intro: string; rules?: string; steps: Step[] };
 type Learn = { chapters: Chapter[]; scenarios: Scenario[] };
@@ -77,6 +77,7 @@ function Blocks({ blocks }: { blocks: Block[] }) {
             </div>
             {b.caption && <H as="p" t={b.caption} seen={seen} />}
           </div>);
+        if (b.type === 'playmat') return (<div key={i}><Playmat b={DEMO_BOARD} focus="base" />{b.caption && <H as="p" t={b.caption} seen={seen} />}</div>);
         if (b.type === 'table') return (
           <table key={i} className="ltable"><thead><tr>{b.head.map((h, j) => <th key={j}>{h}</th>)}</tr></thead>
             <tbody>{b.rows.map((r, j) => <tr key={j}>{r.map((c, k) => <td key={k}><H t={c} seen={seen} /></td>)}</tr>)}</tbody></table>);
@@ -120,51 +121,13 @@ function QuizBox({ ch, p, setP }: { ch: Chapter; p: Progress; setP: (p: Progress
   );
 }
 
-function UnitChip({ u, side }: { u: Unit; side: 'me' | 'opp' }) {
-  const c: any = vsCard(u.n);
-  return (
-    <span className={'scn-u ' + side + (u.ex ? ' ex' : '')}>
-      <i title="Might">{u.m}</i>
-      {c ? <span className="cl" data-card={c.n}>{u.n}</span> : <span>{u.n}</span>}
-      {!!u.dmg && <em>{u.dmg} dmg</em>}
-      {u.tag && <small>{u.tag}</small>}
-    </span>
-  );
-}
-function Runes({ r }: { r?: { ready: number; exhausted: number } }) {
-  if (!r) return null;
-  return <span className="scn-runes">{Array.from({ length: r.ready }, (_, i) => <span key={'r' + i} className="r" />)}{Array.from({ length: r.exhausted }, (_, i) => <span key={'x' + i} className="r x" />)} {r.ready} ready, {r.exhausted} exhausted</span>;
-}
-function BoardView({ b }: { b: Board }) {
-  const side = (s: Side, who: 'me' | 'opp', label: string) => (
-    <div className="scn-row"><b>{label}{s.score != null ? ' · ' + s.score + ' pont' : ''}</b>
-      <div className="scn-side">{(s.base || []).map((u, i) => <UnitChip key={i} u={u} side={who} />)}{!(s.base || []).length && <span className="note">üres base</span>}
-        <Runes r={s.runes} />{s.hand?.length ? <span className="note">Kéz: {s.hand.map((h, i) => <span key={i}>{i ? ', ' : ''}<span className="cl" data-card={h}>{h}</span></span>)}</span> : null}</div></div>
-  );
-  return (
-    <div className="scn-board">
-      {side(b.opp, 'opp', 'Ellenfél base')}
-      <div className="scn-bfs">
-        {b.bfs.map((f, i) => (
-          <div key={i} className={'scn-bf ' + (f.ctrl || '')}>
-            <h5><span className="cl" data-card={f.name}>{f.name}</span><small>{f.ctrl === 'me' ? 'te kontrollálod' : f.ctrl === 'opp' ? 'ellenfél kontrollálja' : 'senkié'}</small></h5>
-            <div className="scn-side">{(f.opp || []).map((u, j) => <UnitChip key={j} u={u} side="opp" />)}</div>
-            <div className="scn-side">{(f.me || []).map((u, j) => <UnitChip key={j} u={u} side="me" />)}</div>
-          </div>))}
-      </div>
-      {side(b.me, 'me', 'Te base')}
-      {!!b.chain?.length && <div className="scn-row"><b>Chain</b><div className="scn-chain">{b.chain.map((c, i) => <span key={i}>{i === 0 ? 'Felül: ' : ''}<H t={c} /></span>)}</div></div>}
-      {b.note && <div className="scn-row"><b>Állapot</b><span className="note">{b.note}</span></div>}
-    </div>
-  );
-}
-
 function ScenarioView({ s, p, setP }: { s: Scenario; p: Progress; setP: (p: Progress) => void }) {
   const [i, setI] = useState(0);
   const [pick, setPick] = useState<Record<number, number>>({});
   useEffect(() => { setI(0); setPick({}); }, [s.id]);
   const st = s.steps[i];
   let board: Board | undefined; for (let k = i; k >= 0 && !board; k--) board = s.steps[k].board;
+  let prevBoard: Board | undefined; for (let k = i - 1; k >= 0 && !prevBoard; k--) prevBoard = s.steps[k].board;
   const blocked = !!st.choice && pick[i] == null;
   const last = i === s.steps.length - 1;
   const next = () => { if (last) { setP({ ...p, scn: { ...p.scn, [s.id]: 1 } }); location.hash = '#tanulas'; } else setI(i + 1); };
@@ -174,7 +137,7 @@ function ScenarioView({ s, p, setP }: { s: Scenario; p: Progress; setP: (p: Prog
       <h2>{s.title}</h2>
       <H as="p" t={s.intro} />
       <div className="scn-dots" aria-label="Lépések">{s.steps.map((_, k) => <i key={k} className={k === i ? 'on' : k < i ? 'seen' : ''} />)}</div>
-      {board && <BoardView b={board} />}
+      {board && <Playmat b={board} prev={prevBoard} />}
       <H as="div" t={st.say} />
       {st.choice && (
         <div className="quiz" style={{ marginTop: 14 }}>
