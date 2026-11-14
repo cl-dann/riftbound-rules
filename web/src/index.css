@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@import "./legacy/legacy.css";
+
+/* Riftbound hangulatú sötét téma: mély éjkék háttér, arany kiemelés, domain színek.
+   A régi oldal elrendezése marad, csak a tokenek és néhány komponens kap új stílust. */
+:root, :root[data-theme="dark"], :root:not([data-theme="light"]) {
+  color-scheme: dark;
+  --bg: #0a111d; --panel: #111b2b; --panel2: #172438; --ink: #ece5d3; --muted: #9ba6b9; --line: #253650;
+  --accent: #d4ab55; --accent-bg: #2e2412; --link: #8fbaff; --gold-line: rgba(212, 171, 85, .35);
+  --warn: #ff9f7f; --warn-bg: #3a1d14; --ok: #7fd6a7; --ok-bg: #12301f;
+  --fury: #ff6f5e; --calm: #5fd394; --mind: #6fa8ff; --body: #f5a35a; --chaos: #b78cf5; --order: #ecd05a;
+}
+body {
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(64, 120, 200, .16), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(212, 171, 85, .10), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+}
+::selection { background: rgba(212, 171, 85, .35); }
+
+/* Fejléc és navigáció */
+h1 { display: flex; align-items: center; gap: 12px; letter-spacing: .02em; }
+.brand-mark { display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 9px; font-family: var(--f-display); font-weight: 700; font-size: 24px;
+  color: #10161f; background: linear-gradient(145deg, #f0cf7f, #b8862f); box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 6px 18px rgba(212,171,85,.25); }
+nav.tabs { border-bottom: 1px solid var(--gold-line); gap: 4px; }
+nav.tabs a { border-radius: 8px 8px 0 0; transition: color .15s, background .15s; }
+nav.tabs a:hover { color: var(--ink); background: rgba(255,255,255,.03); }
+nav.tabs a[aria-current="page"] { background: transparent; color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent); }
+
+/* Panelek, gombok */
+.panel { border-color: var(--line); border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,.02), transparent 120px), var(--panel); box-shadow: 0 1px 0 rgba(255,255,255,.03) inset, 0 10px 30px rgba(0,0,0,.25); }
+.btn { display: inline-flex; align-items: center; gap: 7px; background: linear-gradient(180deg, #e3bd6b, #c19340); color: #141a24; border: 1px solid #c79a46; border-radius: 8px; transition: filter .15s, transform .05s; }
+.btn:hover { filter: brightness(1.07); }
+.btn:active { transform: translateY(1px); }
+.btn.sec { background: var(--panel2); color: var(--ink); border-color: var(--line); }
+.btn.sec:hover { border-color: var(--accent); }
+.btn.sm { padding: 4px 10px; font-size: 13px; }
+.linkbtn { display: inline-flex; align-items: center; gap: 5px; }
+.seg { border-radius: 8px; }
+.seg button { display: inline-flex; align-items: center; gap: 5px; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: #141a24; }
+input[type=search], input[type=text], select, textarea { border-radius: 8px; transition: border-color .15s, box-shadow .15s; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(212,171,85,.18); }
+.search { position: relative; display: flex; align-items: center; }
+.search > svg { position: absolute; left: 11px; color: var(--muted); pointer-events: none; }
+.search input { padding-left: 34px; padding-right: 60px; }
+.search kbd { position: absolute; right: 9px; font-family: var(--f-mono); font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; background: var(--panel); }
+.chip { border-radius: 6px; }
+.chip.mini { font-size: 10px; padding: 0 4px; }
+.mono { font-family: var(--f-mono); }
+.list button[aria-selected="true"] { background: var(--accent-bg); box-shadow: inset 3px 0 0 var(--accent); }
+.tile { border-radius: 10px; transition: transform .15s, border-color .15s, box-shadow .15s; }
+.tile:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.35); }
+.rb-sep { margin-top: 26px; border-top: 1px solid var(--gold-line); padding-top: 14px; }
+.empty { padding: 30px 6px; text-align: center; }
+.empty h2 { font-family: var(--f-display); }
+#tip { background: #0d1522; color: var(--ink); border: 1px solid var(--gold-line); }
+.loading { min-height: 70vh; display: grid; place-content: center; justify-items: center; gap: 14px; color: var(--muted); }
+.loading .brand-mark { animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 50% { transform: scale(1.08); filter: brightness(1.15); } }
+@keyframes fade { from { opacity: 0; } }
+.rb-modal { animation: fade .18s ease-out; }
+footer#foot { border-top: 1px solid var(--gold-line); }

@@ -1,0 +1,160 @@
+import { LayoutGrid, List, Search, X } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { CARDS, META, cardHeadHTML, cardRulesHTML, domDots, esc, norm, typeLine, IMGBASE } from '../legacy/core';
+import { Html } from '../components/Html';
+
+const SETS = ['Origins', 'Proving Grounds', 'Spiritforged', 'Unleashed', 'Vendetta', 'Radiance'];
+const DOMAINS = ['Fury', 'Calm', 'Mind', 'Body', 'Chaos', 'Order'];
+type F = { q: string; type: string; dom: string; cost: string; might: string; set: string; kw: string; inText: boolean; onlyErr: boolean; showBan: boolean };
+const EMPTY: F = { q: '', type: '', dom: '', cost: '', might: '', set: '', kw: '', inText: false, onlyErr: false, showBan: false };
+
+function filterCards(f: F) {
+  const q = norm(f.q), words = q ? q.split(' ') : [];
+  const res = CARDS.filter((c: any) => {
+    if (c.ban === 1 && !f.showBan) return false;
+    if (f.type && c.t !== f.type) return false;
+    if (f.dom && !(f.dom === 'none' ? !(c.d && c.d.length) : (c.d || []).includes(f.dom))) return false;
+    if (f.onlyErr && c.err == null) return false;
+    if (f.cost !== '' && !(f.cost === '7' ? c.e != null && c.e >= 7 : c.e === +f.cost)) return false;
+    if (f.might !== '' && !(f.might === '6' ? c.m != null && c.m >= 6 : c.m === +f.might)) return false;
+    if (f.set && !c.sets.includes(f.set)) return false;
+    if (f.kw && !c._kw.includes(f.kw)) return false;
+    return words.every((w: string) => c._s.includes(w) || (f.inText && c._t.includes(w)));
+  });
+  if (q) res.sort((a: any, b: any) => (b._n.startsWith(q) - a._n.startsWith(q)) || (b._n.includes(q) - a._n.includes(q)) || a._n.localeCompare(b._n));
+  return res;
+}
+
+function Badges({ c }: { c: any }) {
+  return (
+    <>
+      {c.err != null && <span className="chip err mini">errata</span>}
+      {c.ban ? <span className="chip ban mini">ban</span> : c.banf ? <span className="chip ban mini">ban {c.banf.slice(5)}</span> : null}
+    </>
+  );
+}
+
+export function CardsView({ active }: { active: boolean }) {
+  const [f, setF] = useState<F>(EMPTY);
+  const [mode, setMode] = useState<'list' | 'grid'>(() => { try { return (localStorage.getItem('rb-view') as any) || 'list'; } catch { return 'list'; } });
+  const [limit, setLimit] = useState(80);
+  const [sel, setSel] = useState<any>(null);
+  const detailRef = useRef<HTMLDivElement>(null);
+  const qRef = useRef<HTMLInputElement>(null);
+  const res = useMemo(() => filterCards(f), [f]);
+  const total = useMemo(() => CARDS.filter((c: any) => c.ban !== 1).length, []);
+  const types = useMemo(() => [...new Set(CARDS.map((c: any) => c.t))].sort() as string[], []);
+  const kws = useMemo(() => [...new Set(CARDS.flatMap((c: any) => c._kw))].sort() as string[], []);
+  const dirty = JSON.stringify(f) !== JSON.stringify(EMPTY);
+  const up = (p: Partial<F>) => { setF((o) => ({ ...o, ...p })); setLimit(mode === 'grid' ? 60 : 80); };
+  useEffect(() => { try { localStorage.setItem('rb-view', mode); } catch { /* */ } }, [mode]);
+  // A Tudástár kulcsszó gombja ide küld keresést.
+  useEffect(() => {
+    const on = (e: Event) => { up({ ...EMPTY, q: (e as CustomEvent).detail, inText: true }); location.hash = '#kartyak'; };
+    window.addEventListener('rb:card-search', on);
+    return () => window.removeEventListener('rb:card-search', on);
+  }, []);
+  // Ctrl+K vagy / fókuszálja a keresőt.
+  useEffect(() => {
+    if (!active) return;
+    const on = (e: KeyboardEvent) => {
+      const typing = /INPUT|TEXTAREA|SELECT/.test((e.target as HTMLElement).tagName);
+      if ((e.key === 'k' && (e.ctrlKey || e.metaKey)) || (e.key === '/' && !typing)) { e.preventDefault(); qRef.current?.focus(); }
+    };
+    window.addEventListener('keydown', on);
+    return () => window.removeEventListener('keydown', on);
+  }, [active]);
+
+  const pick = (c: any) => {
+    if (mode === 'grid') { window.dispatchEvent(new CustomEvent('rb:open-card', { detail: c.n })); return; }
+    setSel(c);
+    if (window.innerWidth < 860) detailRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  const shown = res.slice(0, limit);
+  const sel2 = (k: keyof F, label: string, opts: [string, string][]) => (
+    <select value={f[k] as string} onChange={(e) => up({ [k]: e.target.value } as any)} aria-label={label}>
+      <option value="">{label}</option>
+      {opts.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+    </select>
+  );
+
+  return (
+    <div className={'cols' + (mode === 'grid' ? ' gridmode' : '')}>
+      <div className="panel">
+        <div className="pad filters">
+          <div className="search">
+            <Search size={16} aria-hidden />
+            <input ref={qRef} type="search" value={f.q} onChange={(e) => up({ q: e.target.value })} placeholder="Kártyanév, tag vagy kulcsszó" autoComplete="off" aria-label="Kártya keresése" />
+            <kbd>Ctrl K</kbd>
+          </div>
+          <div className="row">
+            {sel2('type', 'Minden típus', types.map((t) => [t, t]))}
+            {sel2('dom', 'Minden domain', [...DOMAINS.map((d) => [d, d] as [string, string]), ['none', 'Domain nélkül']])}
+          </div>
+          <div className="row">
+            {sel2('cost', 'Minden Energy', Array.from({ length: 8 }, (_, i) => [String(i), 'Energy ' + (i === 7 ? '7+' : i)]))}
+            {sel2('might', 'Minden Might', Array.from({ length: 7 }, (_, i) => [String(i), 'Might ' + (i === 6 ? '6+' : i)]))}
+          </div>
+          <div className="row">
+            {sel2('set', 'Minden set', SETS.filter((s) => CARDS.some((c: any) => c.sets.includes(s))).map((s) => [s, s]))}
+            {sel2('kw', 'Minden kulcsszó', kws.map((k) => [k, k]))}
+          </div>
+          <div className="row">
+            <label className="chk"><input type="checkbox" checked={f.inText} onChange={(e) => up({ inText: e.target.checked })} /> keresés a kártyaszövegben is</label>
+            <label className="chk"><input type="checkbox" checked={f.onlyErr} onChange={(e) => up({ onlyErr: e.target.checked })} /> csak errata</label>
+            <label className="chk"><input type="checkbox" checked={f.showBan} onChange={(e) => up({ showBan: e.target.checked })} /> banned kártyák is</label>
+          </div>
+          <div className="row" style={{ justifyContent: 'space-between' }}>
+            <div className="count">{res.length} találat, {total} nem banned egyedi kártya</div>
+            <div className="seg" role="group" aria-label="Nézet">
+              <button aria-pressed={mode === 'list'} onClick={() => { setMode('list'); setLimit(80); }}><List size={14} /> Lista</button>
+              <button aria-pressed={mode === 'grid'} onClick={() => { setMode('grid'); setLimit(60); }}><LayoutGrid size={14} /> Rács</button>
+            </div>
+          </div>
+          {dirty && <button className="linkbtn" onClick={() => up(EMPTY)}><X size={13} /> Szűrők törlése</button>}
+        </div>
+        <ul className="list" role="listbox" aria-label="Találatok">
+          {!res.length && <li className="pad note">Nincs találat. A banned kártyák alapból rejtve vannak.</li>}
+          {mode === 'grid'
+            ? shown.map((c: any) => {
+                const stats = [c.e != null ? 'Energy ' + c.e : '', c.m != null ? 'Might ' + c.m : ''].filter(Boolean).join(' · ');
+                return (
+                  <li key={c.n}>
+                    <button className="tile" onClick={() => pick(c)}>
+                      <span className={'im' + (c.img ? '' : ' noimg')}>
+                        {c.img && <img loading="lazy" alt="" src={IMGBASE + c.img + '?w=300'} onError={(e) => { (e.currentTarget.parentNode as HTMLElement).classList.add('noimg'); e.currentTarget.remove(); }} />}
+                        <span className="ph"><b>{c.n}</b><span dangerouslySetInnerHTML={{ __html: domDots(c) + ' ' + esc(typeLine(c)) }} /><span>{stats}</span></span>
+                        <span className="bdg"><Badges c={c} /></span>
+                      </span>
+                      <span className="cap"><b>{c.n}</b><span>{typeLine(c)}{stats ? ' · ' + stats : ''}</span></span>
+                    </button>
+                  </li>
+                );
+              })
+            : shown.map((c: any) => (
+                <li key={c.n}>
+                  <button role="option" aria-selected={sel === c} onClick={() => pick(c)}>
+                    <span className="nm"><span dangerouslySetInnerHTML={{ __html: domDots(c) }} /> {c.n} <Badges c={c} /></span>
+                    <span className="ty">{typeLine(c)}</span>
+                  </button>
+                </li>
+              ))}
+          {res.length > limit && (
+            <li className={mode === 'grid' ? 'more-li' : ''}>
+              <button className="more" onClick={() => setLimit(limit + (mode === 'grid' ? 120 : 200))}>További {res.length - limit} találat megjelenítése</button>
+            </li>
+          )}
+        </ul>
+      </div>
+      <div className="panel pad detail" ref={detailRef} aria-live="polite"
+        onClick={(e) => {
+          const s = (e.target as HTMLElement).closest('button[data-sim]') as HTMLElement | null;
+          if (s) { const c = CARDS.find((x: any) => x.n === s.dataset.sim); if (c) { setSel(c); detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }
+        }}>
+        {sel
+          ? <Html key={sel.n} html={cardHeadHTML(sel, 'h2') + '<h3 class="rb-sep">Erre a kártyára érvényes szabályok</h3><p class="note">A szakaszok a Core Rules (' + META.rules_updated + ') eredeti angol szövegét mutatják. Kattintásra nyílnak.</p>' + cardRulesHTML(sel)} />
+          : <div className="empty"><h2>Válassz egy lapot</h2><p className="note">Keress rá a kártya nevére, vagy kattints egy lapra a listában. Itt jelenik meg a lap szövege, az errata, a Röviden összefoglaló és a rá vonatkozó szabályok.</p></div>}
+      </div>
+    </div>
+  );
+}
