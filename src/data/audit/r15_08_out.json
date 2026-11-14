@@ -1,0 +1,48 @@
+{
+ "fixes": {
+  "Tomb-Raider Barbara": {
+   "notes": [
+    [
+     "383.2.a.1",
+     0,
+     "A \"7 or more runes\" közvetlenül a trigger condition után álló feltétel, tehát a trigger condition része. A kijátszás befejezésekor nézi a játék: ha akkor nincs legalább 7 rune-od, a play effect nem triggerel, chainre sem kerül."
+    ],
+    [
+     "164.2.b,417.1.b",
+     1,
+     "Az exhausted rune számít, a recycle-ölt nem, mert az visszakerül a Rune Deckbe. Barbarának nincs Power costja, de ha a körben korábban más lap Power costjára recycle-öltél és 7 alá estél, a play effect elmarad."
+    ],
+    [
+     "355.7,355.8,403.4",
+     0,
+     "Az enemy gear target. Ha az opponentnek nincs választható gearje, a trigger chainre kerülve rögtön le is kerül róla, így nem fut le."
+    ],
+    [
+     "718.5.b,150.4",
+     0,
+     "Unitra csatolt Equipment és gear token (Gold, Bomb) is választható."
+    ],
+    [
+     "443.1.b",
+     1,
+     "Az Empowered állapotot a resolve-kor nézi. Empowered gear csak disempowerelődik, többszörösen Empowered gearről egy státusz kerül le."
+    ],
+    [
+     "809.1.c",
+     1,
+     "Deflectes gear (például Watchful Curator mellett) választása neked +[A]-ba kerül."
+    ]
+   ],
+   "why": "Az 1. note szerint a 7 rune-os feltétel hiányában a trigger chainre kerül és a 403.4 szerint lekerül. A feltétel intervening if (383.2.a.1), ilyenkor a trigger nem triggerel; a 403.4 a célpont hiányára vonatkozik, nem erre."
+  },
+  "Vex, Cheerless": {
+   "short": "Amíg Vex combatban van, a friendly spellek (a tieid, 2v2-ben a csapattársadé is) 1 Energyvel és 1 bármely domainű Powerrel olcsóbbak (legalább 1 Energy marad), az enemy spellek ugyanennyivel drágábbak. Unitokra, gearekre és abilitykre nem hat.",
+   "why": "A lap \"friendly spells\"-t ír; a short csak a saját spelleket említette, pedig a 740.1.a szerint a csapattárs spellje is friendly."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Vanguard Captain: a short és a 359.3.f.2.a note szerint ha a Captain a play effect resolve-ja előtt elhagyja a boardot, a tokenek nem jönnek létre. A 359.3.f.2.a targetre vonatkozik, a Captain nem target; a Core Rules nem mondja ki egyértelműen, hogy a \"here\" ilyenkor null vagy az utolsó ismert location (look-back). Judge kérdés, a short tényállítása ezért nem zárható le."
+ ]
+}

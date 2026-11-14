@@ -1,0 +1,43 @@
+{
+ "fixes": {
+  "Kai'Sa, Daughter of the Void": {
+   "short": "Exhaustolva 1 bármilyen domainű Powert ad, de csak spell kijátszására. Bárki körében, fizetés közben is használható, nem lehet rá reagálni. Unitra, gearre vagy képességre nem költhető, és ha nem költöd el, elvész.",
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Fury és Mind domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "135.2.e.5.a,135.2.e.5.b",
+     0,
+     "Az [A] bármilyen domainű Power: a Rune Poolba kerülve bármely domain Power costjára elkölthető, de ennél a legendnél csak spell kijátszására."
+    ],
+    [
+     "430.3,430.2",
+     0,
+     "[Reaction] Add ability: a spell costjának fizetése közben is aktiválható, bárki körében. Nem lehet rá reagálni."
+    ],
+    [
+     "002",
+     1,
+     "Csak spell kijátszására költhető. Unit, gear, activated ability, Hide vagy trigger costja nem fizethető belőle."
+    ],
+    [
+     "356.2,820.1.c.1",
+     1,
+     "A spell additional costja (például Repeat) a spell Total Costjának része, ezért a Power része ebből is fizethető."
+    ],
+    [
+     "167",
+     0,
+     "Ha a Powert nem költöd el spellre abban a körben, a Rune Pool ürítésekor elvész."
+    ]
+   ],
+   "why": "A nyomtatott lapon [A] áll, nem [C] (a bemenet szövege is [A]). A short és a notes a legend saját domainjeit (Fury vagy Mind) írta; az [A] bármilyen Power (135.2.e.5.a, 135.2.e.5.b)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

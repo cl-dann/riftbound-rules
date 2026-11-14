@@ -1,0 +1,153 @@
+{
+ "fixes": {
+  "Draven, Glorious Executioner": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Fury és Chaos domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "468.3.a",
+     0,
+     "Combatot az nyer, aki Attacker vagy Defender volt, és a Resolution Stepben egyedül neki maradt unitja a battlefielden. Támadóként és védőként is jár a draw."
+    ],
+    [
+     "468.3.d",
+     0,
+     "\"No Result\" esetén nincs draw: ha mindkét félnek maradt unitja, ha senkinek sem maradt, vagy ha az attackereket recallolták, mert a defender túlélte."
+    ],
+    [
+     "316.8.b.1",
+     0,
+     "Üres battlefield elfoglalása Non-Combat Showdown, nem combat. Ilyenkor conquerelsz, de combatot nem nyertél, a trigger nem fut le."
+    ],
+    [
+     "468.3,468.5",
+     1,
+     "A combat eredménye (468.3) a kontroll megállapítása (468.5) előtti lépés, ezért Draven triggere a conquer triggerek előtt kerül a chain-re. Ez a lépéssorrendből levezetett következtetés."
+    ],
+    [
+     "414.4",
+     0,
+     "A draw kötelező. Üres Main Deck esetén Burn Outot okoz."
+    ]
+   ],
+   "why": "Az utolsó előtti note flag 0 volt, pedig a 468.3/468.5 csak a lépéssorrendet adja, a trigger chain-sorrend ebből levezetés: flag 1."
+  },
+  "Ekko, Recurrent": {
+   "notes": [
+    [
+     "103.3.e",
+     1,
+     "A lap az adatbázis szerint bannolt. A deckbe tehetőség a játszott Format legalitási listájától függ, ezt versenyen ellenőrizni kell."
+    ],
+    [
+     "805.1.b,805.1.b.1",
+     0,
+     "[Accelerate]: kijátszáskor [1] és egy Mind Power additional costért ready lép be. A Power csak a unit saját domainjéből fizethető."
+    ],
+    [
+     "383.3.b",
+     0,
+     "A \"Recycle me\" a Deathknell effect elején álló cost within instructions, ezért a trigger base costja."
+    ],
+    [
+     "808.1.d.1,383.3.b.1,203.3",
+     1,
+     "Ha Ekko nem a trashbe kerül (például banishelődik, vagy a halálát replacement effect cseréli le), a trigger a 808.1.d.1 szerint lekerül a chainről. Ha a recycle más okból nem hajtható végre, a cost nem fizethető ki, a trigger nem finalizálódik. Egyik esetben sem lesznek ready a rune-ok."
+    ],
+    [
+     "417.1.a,355.5.a",
+     0,
+     "Kifizetve Ekko a Main Deck aljára kerül, nem marad a trashben. A \"ready your runes\" minden rune-odra hat, nincs target."
+    ],
+    [
+     "808.1.d.1",
+     0,
+     "Ha a halálát replacement effect lecseréli (például recall), a Deathknell lekerül a chainről."
+    ],
+    [
+     "405.2,405.2.a",
+     0,
+     "A szövegben nincs \"may\", de a trigger base costját a 405.2 szerint meg lehet tagadni: ekkor a trigger lekerül a chainről, Ekko a trashben marad, és a rune-ok sem lesznek ready. Ez nem counter."
+    ]
+   ],
+   "why": "A note szerint a trigger 'nem megy chain-re'; a Deathknell a 808.1.d.2 szerint a trashbe kerülés előtt chainre kerül, és a 808.1.d.1 szerint onnan kerül le, ha a lap nem a trashbe megy."
+  },
+  "Elnuk Herd": {
+   "notes": [
+    [
+     "811.1.b,811.6",
+     0,
+     "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."
+    ],
+    [
+     "811.1.d.3",
+     0,
+     "Facedown-ból kijátszva a +3 Might targetje csak az adott battlefielden lévő másik friendly unit lehet. Kézből kijátszva bármelyik másik friendly unit választható."
+    ],
+    [
+     "417.1.a,135.2.b.7",
+     0,
+     "Facedown-ból kijátszva a resolve végén kötelezően recycle-ölődik, vagyis a Main Deck aljára kerül. Így facedown-ból egyszeri +3 Might, kézből kijátszva viszont a boardon marad."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "Ha a target a resolve előtt illegálissá válik, a +3 Might elmarad, de a recycle ettől még megtörténik, mert az nem a targetre hivatkozik."
+    ],
+    [
+     "811.1.d.3.a,359.3.e.12",
+     1,
+     "Ha a Herd a resolve előtt elhagyja a boardot, a facedown-ból kijátszott play effect nem tudja megállapítani, honnan érkezett, ezért mistargetel."
+    ],
+    [
+     "355.9.b,403.4",
+     1,
+     "A szöveg \"another friendly unit\": a Herd saját magát nem választhatja. Ha nincs másik friendly unitod (facedown-ból kijátszva az adott battlefielden), a play effect chainre kerül, de legális target hiányában a 403.4 szerint rögtön lekerül róla. Így a recycle is elmarad, és a Herd a boardon marad."
+    ]
+   ],
+   "why": "A note szerint target hiányában a play effect 'nem kerül chainre'; a 403.4 szerint chainre kerül, majd lekerül róla."
+  },
+  "Explosimian": {
+   "short": "6 Mightú unit. Ha a köröd elején tartja a battlefieldjét, három Bomb tokent teszel egy általad választott battlefieldre. Ha egy Bomb meghal, 2 sebzést ad egy ottani ellenséges unitra, és megöli a többi ottani Bombodat, amelyek szintén robbannak. Ha ott nincs ellenséges unit, a Deathknell célpont híján lekerül a chainről, így a többi Bomb megmarad. Ha az ellenfél ott holdol, mind felrobban az ő unitjaira.",
+   "notes": [
+    [
+     "383.4.d.2.a,472",
+     0,
+     "Hold effect: akkor triggerel, ha a Beginning Phase-edben ott van egy battlefielden, amit holdolsz. Battlefieldenként körönként egyszer."
+    ],
+    [
+     "830.1.b.1",
+     0,
+     "A három Bomb ugyanarra az egy battlefieldre megy, de az bármelyik lehet, nem csak az, ahol az Explosimian áll."
+    ],
+    [
+     "187.12,383.3.d",
+     1,
+     "Ha az egyik Bomb meghal, a Deathknellje megöli a másik kettőt. Mindhárom Deathknell külön triggerel: összesen 3-szor 2 sebzés, akár különböző enemy unitokra."
+    ],
+    [
+     "187.12,355.8,403.4",
+     1,
+     "A Bomb Deathknellje targetel (\"an enemy unit here\"). Ha a Bomb battlefieldjén nincs enemy unit, a trigger chainre kerül, de a 403.4 szerint rögtön lekerül róla, így a többi Bomb sem hal meg."
+    ],
+    [
+     "830.1.b",
+     1,
+     "Ha egy opponent ott holdol, mindhárom Bomb meghal, és a Deathknellek az ő ottani unitjait sebzik."
+    ],
+    [
+     "830.1.b.3",
+     0,
+     "A Bombok a cleanupban nem recallolódnak, a battlefielden maradnak."
+    ]
+   ],
+   "why": "A short és a 4. note szerint target hiányában a Deathknell 'nem kerül chainre'; a 403.4 szerint chainre kerül, majd lekerül róla (a következmény, hogy a többi Bomb megmarad, helyes)."
+  }
+ },
+ "checked": 89,
+ "data_issues": [],
+ "open": []
+}

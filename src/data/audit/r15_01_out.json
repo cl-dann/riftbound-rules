@@ -1,0 +1,90 @@
+{
+ "fixes": {
+  "Gust Monk": {
+   "notes": [
+    [
+     "356.2.b.1,355.1.a",
+     0,
+     "Optional additional cost: a kijátszáskor döntesz, hogy fizetsz-e +1 Energyt. Utólag, a boardon már nem fizethető ki."
+    ],
+    [
+     "383.2.a.1,356.4.f.1",
+     0,
+     "Az \"if you paid the additional cost\" a trigger condition része. Akkor is kifizetettnek számít, ha egy discount 0-ra csökkentette."
+    ],
+    [
+     "383.3.b,383.3.b.1,403.4",
+     0,
+     "A \"banish a card from any trash\" cost within instructions az effect elején, vagyis a trigger base costja. A finalizáláskor fizeted ki. Ha minden trash üres, a cost nem fizethető: a trigger chainre kerül, de nem finalizálható, és lekerül róla."
+    ],
+    [
+     "355.10.c.1,056.2",
+     0,
+     "A banishelt lap a cost része, nem target. Az opponent trashéből is választhatsz, a lap a tulajdonosa Banishmentjébe megy."
+    ],
+    [
+     "355.10,359.3.e.7",
+     0,
+     "A unit target, saját vagy enemy is lehet. Ha a resolve előtt illegálissá válik, az [Assault 2] elvész, a banish viszont már megtörtént."
+    ],
+    [
+     "807.1.c,807.2",
+     0,
+     "Az [Assault 2] a kör végéig tart, csak attackerként ad +2 Mightot, és meglévő Assaulttal összeadódik."
+    ],
+    [
+     "355.10.c.1",
+     1,
+     "Trash elleni eszköznek is jó: kiveheted vele az opponent trashéből azt a lapot, amit vissza akarna játszani."
+    ]
+   ],
+   "why": "A note szerint üres trash mellett a trigger \"nem kerülhet chain-re\". Ez pontatlan: a trigger chainre kerül, de a cost kifizetése nélkül nem finalizálható, ezért lekerül (383.3.b.1, 403.4)."
+  },
+  "Hall of Legends": {
+   "notes": [
+    [
+     "383.3.b,383.3.b.1,383.3.a.2",
+     0,
+     "A \"you may\" után álló \"pay [1]\" a trigger base costja, a finalizáláskor kell kifizetni. Ha nem fizetsz, a trigger lekerül a chainről, és úgy számít, mintha nem triggerelt volna."
+    ],
+    [
+     "355.10.g",
+     0,
+     "A \"your legend\" nem target. Ha több legendet kontrollálsz, a resolve-kor választasz egyet."
+    ],
+    [
+     "416.1.c",
+     1,
+     "Ha a legend már ready, a ready nem csinál semmit, az Energy elveszett."
+    ],
+    [
+     "473.2.a,472",
+     0,
+     "Conquer trigger: annál fut le, aki itt conquerel, körönként legfeljebb egyszer."
+    ],
+    [
+     "445.2.c",
+     0,
+     "A fizetéshez ilyenkor is exhaustolhatsz rune-t, mert a [Reaction] Add ability bármikor használható, amikor fizetni kell."
+    ],
+    [
+     "315.1.b",
+     1,
+     "Így a legend Exhaust költségű abilityje ugyanabban a körben kétszer használható: egyszer a conquer előtt, egyszer utána."
+    ]
+   ],
+   "why": "A note szerint fizetés nélkül a trigger \"nem kerül chain-re\". Pontatlan: a trigger chainre kerül, és ha nem élsz vele, lekerül róla, nem triggereltnek számít (383.3.a.2, 383.3.b.1)."
+  },
+  "Guards!": {
+   "short": "Lerak egy 2 Mightú Sand Soldier tokent (exhausted lép be), majd 1 Order Powerért readyzheted; ez külön hatás, közben az ellenfél reagálhat, például megölheti a tokent. Kézből csak a saját körödben, showdownon kívül játszható ki. Hidden: a saját körödben, showdownon kívül 1 bármely Powerért elrejtheted egy általad irányított battlefielden, a következő körtől ingyen, Reactionként is kijátszhatod, és a token ott jön le.",
+   "why": "A short Hidden része kihagyta az elrejtés feltételeit: csak saját körben, showdownon kívül, és csak általad kontrollált battlefieldre rejthető (811.1.b, 411.1.a)."
+  },
+  "Gutter Guardian": {
+   "short": "Kijátszáskor felmutathatsz a kezedből egy Hidden lapot, vagy kijelölhetsz egy másik saját, felfordított Hidden lapot a boardon; ekkor kapsz 1 bármely Powert. Saját elrejtett lap erre nem jó. Hidden: a saját körödben, showdownon kívül 1 bármely Powerért elrejtheted egy általad irányított battlefielden, és a következő körtől ingyen, akár az ellenfél körében is kijátszhatod, a Powert pedig rögtön elköltheted.",
+   "why": "A short Hidden része kihagyta az elrejtés feltételeit: csak saját körben, showdownon kívül, és csak általad kontrollált battlefieldre rejthető (811.1.b, 411.1.a)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

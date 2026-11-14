@@ -1,0 +1,162 @@
+{
+ "fixes": {
+  "Shurelya's Requiem": {
+   "short": "Ornn Signature Equipmentje, Unique: deckenként csak 1 lehet. Kijátszáskor minden unitodat ready-vé teszi, így a már mozgottak újra mozoghatnak. Equip: 1 bármilyen Power költséggel csatolod egy saját unitodra a saját Main Phase-edben, showdownon kívül. Csatolva a unit +2 Mightot kap, és a vele egy helyen álló saját unitjaid Gankinget kapnak (battlefieldről battlefieldre léphetnek).",
+   "notes": [
+    [
+     "825.3.a,825.3.b",
+     0,
+     "Unique: ebből a névből csak 1 példány lehet a deckben. A 3 Signature hely ettől még kitölthető három különböző nevű Unique Signature lappal."
+    ],
+    [
+     "103.3.d,103.3.d.1,103.3.d.2,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Ornn) kell viselnie. Két domainű, ezért csak olyan legend mellé fér, amelynek mindkét domainje megvan."
+    ],
+    [
+     "818.1.b.1,151.2,381.1,135.2.e.5.a",
+     0,
+     "Equip: [A] costú activated ability, bármilyen domainű 1 Powerrel fizethető, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "718.2,718.3,718.4",
+     0,
+     "Csatolva a unit +2 Mightot kap, az Effect Text a unit Rules Textjéhez fűződik, a gear saját Rules Textje pedig inaktív. Leválasztva mindez azonnal megszűnik."
+    ],
+    [
+     "718.3,719.3,810.1.b,810.1.c.3",
+     1,
+     "Csatolva az Effect Text a unitra kerül: a felszerelt unittal azonos helyen (\"here\") álló összes saját unitod, a felszerelt unit is, Gankinget kap, így Standard Move-val battlefieldről battlefieldre léphet. A Ganking plusz mozgást nem ad, csak új célpontot a Standard Move-nak."
+    ],
+    [
+     "355.10.d,383.4.a.2",
+     0,
+     "A play effect minden unitodat readyzi, target nélkül, base-ben és battlefielden is. A körben már mozgott unitok így újra mozoghatnak, a frissen kijátszottak is használhatók."
+    ],
+    [
+     "416.1.c,358.4",
+     1,
+     "Már ready unitra nincs hatása. Nincs [Reaction]-je, ezért az opponent körében vagy spellre válaszul nem játszható ki."
+    ]
+   ],
+   "why": "Az Equip költség nyomtatva [A], nem [C], ezért bármilyen domainű Power (135.2.e.5.a); a short és a notes Calm vagy Mind Powert írt. Az Equipment Effect Textje (Your units here have Ganking) sem a shortban, sem a notesban nem szerepelt (718.3, 810.1.b)."
+  },
+  "Spinning Axe": {
+   "short": "Bármikor kijátszható (Quick-Draw), és ekkor azonnal rácsatolódik egy saját unitodra, +3 Mightot adva. Ha leválik, a saját Main Phase-edben, showdownon kívül 1 bármilyen Powerért (Equip) újra csatolhatod. Csatolatlanul a következő Beginning Phase-ed elején, a scoring előtt meghal (Temporary).",
+   "notes": [
+    [
+     "103.3.d,103.3.d.1,103.3.d.2,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Draven) kell viselnie. Két domainű, ezért csak olyan legend mellé fér, amelynek mindkét domainje megvan."
+    ],
+    [
+     "819.1.b,819.1.d,813.1.c.1",
+     0,
+     "Quick-Draw: a lapnak [Reaction]-je van, Closed State-ben, bárki körében kijátszható, és a play effectje azonnal egy saját unitra csatolja. Showdown közben is adhat Mightot."
+    ],
+    [
+     "355.5.b,355.10,359.3.e.5",
+     1,
+     "A Quick-Draw csatolása play effect: a unitot a trigger chainre kerülésekor választod, és target. Ha a resolve előtt elhagyja a boardot, a gear csatolatlanul a base-ben marad."
+    ],
+    [
+     "818.1.b.1,151.2,381.1,135.2.e.5.a",
+     0,
+     "Equip: [A] costú activated ability, bármilyen domainű 1 Powerrel fizethető, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "718.2,718.3,718.4",
+     0,
+     "Csatolva a unit +3 Mightot kap, az Effect Text a unit Rules Textjéhez fűződik, a gear saját Rules Textje pedig inaktív. Leválasztva mindez azonnal megszűnik."
+    ],
+    [
+     "722.2",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: csatolva a Rules Textje inaktív, ezért a [Temporary] nem triggerel. Egy \"gear with [Temporary]\" szövegű effect viszont csatolva is célozhatja."
+    ],
+    [
+     "816.1.b,436.1.c",
+     1,
+     "Ha a unit meghal és az Axe leválik, a Rules Textje újra aktív: ha a következő Beginning Phase-ed elejéig nem equipeled újra, a [Temporary] megöli."
+    ]
+   ],
+   "why": "Az Equip költség nyomtatva [A], ezért bármilyen domainű Powerrel fizethető (135.2.e.5.a); a short Fury vagy Chaos Powert, a note saját domainű Powert írt."
+  },
+  "Star Spring": {
+   "notes": [
+    [
+     "383.1,190.6.c",
+     1,
+     "A \"first time\" triggered ability. A \"they may\" miatt az kontrollálja, aki a unitot kijátszotta."
+    ],
+    [
+     "420.4.a",
+     0,
+     "A unit kijátszásának befejezése után triggerel, amikor a unit már a boardon van."
+    ],
+    [
+     "383.3.a",
+     0,
+     "A \"they may\" az effect elején áll, a trigger finalizálásakor döntesz róla."
+    ],
+    [
+     "355.10,355.9.b,355.8,403.4",
+     1,
+     "A mozgatott unit target: másik, itt lévő, általad kontrollált unit kell. Ha a frissen kijátszott unit az egyetlen itt, nincs érvényes target: a trigger chainre kerül, majd azonnal lekerül róla, így nem fut le."
+    ],
+    [
+     "421.1,144.2",
+     1,
+     "Ez effect általi Move, nem Standard Move: a unit nem exhaustolódik tőle, a \"when I move\" triggerek lefutnak."
+    ],
+    [
+     "185.1,811.1.d.1",
+     1,
+     "Token unit nem váltja ki. Facedown-ból ide kijátszott unit igen."
+    ]
+   ],
+   "why": "Target hiányában a trigger a 403.4 szerint chainre kerül, majd lekerül; a \"nem kerül chain-re\" pontatlan."
+  },
+  "Sterak's Gage": {
+   "notes": [
+    [
+     "819.1.b,819.1.d,813.1.c.1",
+     0,
+     "Quick-Draw: a lapnak [Reaction]-je van, Closed State-ben, bárki körében kijátszható, és a play effectje azonnal egy saját unitra csatolja. Showdown közben is adhat Mightot."
+    ],
+    [
+     "355.5.b,355.10,359.3.e.5",
+     1,
+     "A Quick-Draw csatolása play effect: a unitot a trigger chainre kerülésekor választod, és target. Ha a resolve előtt elhagyja a boardot, a gear csatolatlanul a base-ben marad."
+    ],
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Calm Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "718.2,718.3,718.4",
+     0,
+     "Csatolva a unit +3 Mightot kap, az Effect Text a unit Rules Textjéhez fűződik, a gear saját Rules Textje pedig inaktív. Leválasztva mindez azonnal megszűnik."
+    ],
+    [
+     "355.8,403.4,148.1.a.1",
+     1,
+     "Ha kijátszáskor nincs unitod, a Quick-Draw triggernek nincs érvényes targetje: chainre kerül, majd azonnal lekerül róla. A gear ettől még bejön a base-be, később Equippel csatolható."
+    ]
+   ],
+   "why": "Target hiányában a trigger a 403.4 szerint chainre kerül, majd lekerül; a \"nem kerül chainre\" pontatlan."
+  },
+  "Sona, Harmonious": {
+   "short": "A köröd végén, ha battlefielden áll, legfeljebb 4 saját rune-odat ready állapotba hozza. Így az ellenfél körében is lesz Energyd válaszlapokra. Base-ben állva nem működik.",
+   "why": "A rune readyzése csak az Energy abilityt (164.2.a, [E]: Add [1]) teszi újra használhatóvá; Powert a rune recycle-ölésével exhausted állapotban is kapsz (164.2.b), ezt a ready nem befolyásolja."
+  },
+  "Switcheroo": {
+   "short": "Egy battlefielden álló két unit Mightját felcseréli a kör végéig, bármelyik játékosét. Kézből saját körödben vagy showdownban megy (Action). Hidden: saját körödben, showdownon kívül 1 tetszőleges Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionként ingyen kijátszhatod, ekkor mindkét unit onnan kell legyen. Ha egy sebzett unit Mightja a rajta lévő sebzésig csökken, meghal.",
+   "why": "A Hide feltételei hiányoztak: csak a saját körödben, Open State-ben, showdownon kívül, egy általad kontrollált battlefieldre (811.1.b)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

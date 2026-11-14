@@ -252,11 +252,6 @@ for c in cards:
     for o,nw in NP.get(c['n'],[]):
         for x in c.get('nt',[]):
             if o in x[2]: x[2]=x[2].replace(o,nw)
-    # 403.4: célpont vagy választás hiányában a triggered ability chainre kerül, majd azonnal lekerül (nem "nem kerül chainre")
-    for x in c.get('nt',[]):
-        if re.search(r'nincs|nem választható|nincs érvényes',x[2]) and re.search(r'(trigger|play effect|képesség)\w* nem kerül (a )?chain-?re',x[2]):
-            x[2]=re.sub(r'nem kerül (a )?chain-?re',"chainre kerülve rögtön le is kerül róla, így nem fut le",x[2])
-            if '403.4' not in x[0]: x[0]=x[0]+',403.4'
     for k in ('_fn','_name'): del c[k]
 for t in T: del t['_t']
 cards.sort(key=lambda c:c['n'].lower())

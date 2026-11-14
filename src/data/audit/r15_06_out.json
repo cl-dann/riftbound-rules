@@ -1,0 +1,88 @@
+{
+ "fixes": {
+  "Sett, The Boss": {
+   "short": "Body és Order legend. Ha egy buffolt unitod meghalna, helyette fizethetsz 1 bármilyen domainű Powert, exhaustolhatod a legendet és elköltheted a unit buffját: a unit meggyógyul, exhausted lesz és a base-be kerül (recall, nem mozgás). Így nem hal meg, a Deathknellje nem fut le. Amikor conquerelsz, a legend ready lesz.",
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Body és Order domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "369.1,370.1.c",
+     1,
+     "Az \"if ... would die ... instead\" replacement effect. A halál megtörténte előtt lép közbe, nem megy chain-re, az opponent nem tud rá reagálni."
+    ],
+    [
+     "135.2.e.5.a,415.4,702.2.b.1",
+     0,
+     "A cost: 1 bármilyen domainű Power ([A]), a legend exhaustolása és a unit buffjának elköltése. Exhausted legenddel vagy buff nélküli unitra nem alkalmazható."
+    ],
+    [
+     "383.2.c.3.a",
+     0,
+     "A szabályzat pont ezt az esetet hozza példának: ha a halált heal, exhaust és recall váltja ki, a unit Deathknell abilityje nem triggerel, mert a halál nem történt meg."
+    ],
+    [
+     "458.1,458.3",
+     0,
+     "A recall nem Move: a \"when I move\" triggerek nem futnak le, és mozgást tiltó effect nem akadályozza meg."
+    ],
+    [
+     "460.1,143.2.b",
+     1,
+     "Errata: a régi szöveg \"when\"-nel kezdődött és nem healelt. Most egyértelműen replacement effect, a buff elköltése a cost része, és a unit healelődik, így a rajta maradó damage nem öli meg újra a recall után."
+    ],
+    [
+     "370.1.a.2,415.4",
+     1,
+     "Ha combatban több buffolt unitod hal meg egyszerre, csak egyet menthetsz meg, mert a legend csak egyszer exhaustolható. Ha utána conquerelsz, a \"When you conquer\" trigger újra readyzi."
+    ]
+   ],
+   "why": "A nyomtatott és a bemeneti szöveg szerint a cost [A], nem [C]: bármely domain Powerével fizethető (135.2.e.5.a); a short és a 3. note \"Body vagy Order Power\"-t írt."
+  },
+  "Rumble, Hotheaded": {
+   "notes": [
+    [
+     "364.1,187.4",
+     1,
+     "\"Your Mechs each have [Assault]\": Rumble maga is Mech, tehát ő is megkapja, ahogy a 3 Mightú Mech tokenek és minden Mech tagű unitod. Csak amíg Rumble a boardon van."
+    ],
+    [
+     "383.3.a,383.3.b",
+     0,
+     "A \"you may recycle another friendly unit\" a conquer trigger base costja. A finalizáláskor fizeted ki, a unit ekkor a Main Deck aljára megy. Rumble magát nem recycle-ölheti."
+    ],
+    [
+     "355.10.c.1,186.1",
+     0,
+     "A recycle-ölt unit a cost része, nem target. Token is lehet, az a deckbe kerülve megszűnik."
+    ],
+    [
+     "355.10.a,403.4",
+     1,
+     "A trashben lévő Mech target, mert a trash Public zóna. Ha nincs Mech a trashedben, a trigger chainre kerülve rögtön lekerül róla, így nem fut le, és a recycle costot sem fizeted ki."
+    ],
+    [
+     "359.3.e.13",
+     0,
+     "A discount a recycle-ölt unit Mightját nézi úgy, ahogy a boardon volt, mielőtt zónát váltott (buffokkal együtt)."
+    ],
+    [
+     "356.4.c.2,356.6",
+     0,
+     "Csak az Energy cost csökken, legfeljebb 0-ig. A Mech Power costját ki kell fizetned."
+    ],
+    [
+     "383.4.c.2.a,472",
+     0,
+     "Csak akkor triggerel, ha Rumble ott van a conquerelt battlefielden, battlefieldenként körönként egyszer."
+    ]
+   ],
+   "why": "A \"nem kerülhet chain-re\" pontatlan: választható target hiányában a trigger a 403.4 szerint chainre kerül, majd finalizálás előtt lekerül."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

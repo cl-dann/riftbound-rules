@@ -1,0 +1,78 @@
+{
+ "fixes": {
+  "Cloth Armor": {
+   "notes": [
+    [
+     "819.1.b,819.1.d,813.1.c.1",
+     0,
+     "Quick-Draw: a lapnak [Reaction]-je van, Closed State-ben, bárki körében kijátszható, és a play effectje azonnal egy saját unitra csatolja. Showdown közben is felrakható."
+    ],
+    [
+     "355.5.b,355.10,359.3.e.5",
+     1,
+     "A Quick-Draw csatolása play effect: a unitot a trigger chainre kerülésekor választod, és target. Ha a resolve előtt elhagyja a boardot, a gear csatolatlanul a base-ben marad."
+    ],
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Mind Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. A Might Bonus +0, önmagában nem növeli a unit Mightját."
+    ],
+    [
+     "814.1.c,814.2",
+     0,
+     "A felszerelt unit Shield 2-t kap: amíg defender, +2 Might, meglévő Shielddel összeadódik. Quick-Draw miatt combat showdown közben is felrakható a védekező unitra."
+    ],
+    [
+     "355.8,403.4,148.1.a.1",
+     1,
+     "Ha kijátszáskor nincs unitod, a Quick-Draw trigger chainre kerül, de érvényes target hiányában rögtön le is kerül róla, így nem csatol semmit. A gear ettől még bejön a base-be, később Equippel csatolható."
+    ],
+    [
+     "718.2,721.2,719.5",
+     1,
+     "Csatolva a gear Rules Textje, így az Equip is inaktív: a saját Equipjével nem rakható át másik unitra. Az Equip akkor használható, ha a gear nincs csatolva, például mert a Quick-Draw triggernek nem volt targetje, vagy a felszerelt unit elhagyta a boardot és a gear levált."
+    ]
+   ],
+   "why": "A note szerint target hiányában a trigger \"nem kerül chainre\"; a 403.4 szerint chainre kerül, majd lekerül róla."
+  },
+  "Danger Zone": {
+   "short": "Reaction: bármikor kijátszható, az összes Mech unitod +1 Mightot kap erre a körre. Kijátszáskor plusz 1 Energy és 1 bármilyen Power fizetésével (Repeat) kétszer hat, így +2-t kapnak. Csak a resolve-kor boardon lévő Mechekre hat.",
+   "notes": [
+    [
+     "355.5.a,355.10.d",
+     1,
+     "Nincs target: minden általad kontrollált, Mech taggel rendelkező unitra hat. Deflect és \"can't be chosen\" nem számít."
+    ],
+    [
+     "187.4",
+     0,
+     "A 3 Mightú Mech token is Mech taggel rendelkezik, rá is hat."
+    ],
+    [
+     "355.5.a",
+     1,
+     "A resolve-kor a boardon lévő Mechjeid kapják a bónuszt. A később kijátszott Mech nem."
+    ],
+    [
+     "820.1.d,135.2.e.5.a",
+     0,
+     "Repeat [1][A]: kifizetve minden Mech +2-t kap. Az [A] bármely domain Powerével fizethető, nem csak Fury vagy Mind Powerrel."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap (Rumble): a deckben összesen legfeljebb 3 Signature kártya lehet."
+    ]
+   ],
+   "why": "A nyomtatott Repeat költség [1][A] (nem [C]), így a Power bármely domainből fizethető (135.2.e.5.a); a short és a note \"Fury vagy Mind Power\"-t írt."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

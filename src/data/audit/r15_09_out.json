@@ -1,0 +1,112 @@
+{
+ "fixes": {
+  "Zaun Punk": {
+   "notes": [
+    [
+     "356.2.b.1,355.10.c",
+     0,
+     "Optional additional cost: egy friendly gear megölése. Ez a gear a cost része, nem target."
+    ],
+    [
+     "383.2.a.1",
+     0,
+     "Az \"if you paid the additional cost\" a trigger feltétel része: fizetés nélkül nincs trigger."
+    ],
+    [
+     "355.10,150.4",
+     0,
+     "A play effect gearje target. Bármelyik játékosé lehet, csatolt Equipment és token is."
+    ],
+    [
+     "355.8,403.4",
+     1,
+     "A kill kötelező. Ha a trigger chain-re kerülésekor csak saját geared van a boardon, azt kell választanod. Ha egy gear sincs, a trigger chainre kerül, de érvényes target híján rögtön le is kerül róla, így nem fut le."
+    ],
+    [
+     "187.5",
+     1,
+     "Gold token is feláldozható a costhoz, így egy token egy enemy gearre cserélhető."
+    ]
+   ],
+   "why": "403.4: target hiányában a trigger chainre kerül, majd lekerül; a \"nem kerül chain-re\" pontatlan."
+  },
+  "Zed, From the Shadows": {
+   "notes": [
+    [
+     "356.2.b.1,423.3,354",
+     0,
+     "Optional additional cost: a kijátszáskor döntesz, hogy dobsz-e 1 lapot. Ehhez kell lennie másik lapnak a kezedben, Zed ekkor már a chainen van."
+    ],
+    [
+     "383.2.a.1",
+     0,
+     "Az \"if you paid the additional cost\" a trigger condition része. Discard nélkül nincs play effect."
+    ],
+    [
+     "187.11,185.2.d",
+     0,
+     "A Shadow Clone 0 Mightú, domain nélküli unit token. A tokent play-eled: base-be vagy általad kontrollált battlefieldre kerül, exhausted."
+    ],
+    [
+     "142.4.b",
+     0,
+     "A 0 Mightú unit magától nem hal meg, de már 1 damage is lethal rajta."
+    ],
+    [
+     "383.3.a,205",
+     0,
+     "A Clone attack triggerénél a \"you may\" az effect elején áll, a finalizáláskor döntesz. A banish itt nem cost, hanem game action: ha nem történik meg, nincs [Assault 4]."
+    ],
+    [
+     "355.10.a,403.4",
+     1,
+     "A trashedben lévő unit target, mert a trash Public zóna. Ha nincs unit a trashedben, a Clone triggere chainre kerül, de érvényes target híján rögtön le is kerül róla, így nem fut le."
+    ],
+    [
+     "186.1",
+     0,
+     "Ha a Clone kézbe, deckbe vagy trashbe kerülne, megszűnik létezni."
+    ]
+   ],
+   "why": "403.4: target hiányában a trigger chainre kerül, majd lekerül; a \"nem kerülhet chain-re\" pontatlan."
+  },
+  "Adaptatron": {
+   "notes": [
+    [
+     "383.3.a",
+     0,
+     "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz, hogy végrehajtod-e. Ha nem, lekerül a chainről, mintha nem is triggerelt volna."
+    ],
+    [
+     "355.10,355.8,403.4",
+     0,
+     "A gear target, bármelyik játékosé lehet. Ha nincs választható gear a boardon, a trigger chainre kerül, de rögtön le is kerül róla, így nem fut le, buff sem jár."
+    ],
+    [
+     "359.3.e.14.a",
+     0,
+     "Linked instructions: ha a gear a resolve előtt illegális target lesz, a kill ignorálódik, és az \"if you do\" miatt a buff is elmarad."
+    ],
+    [
+     "359.3.e.14.b",
+     0,
+     "Az \"if you do\" közvetlenül a kill actionre hivatkozik. Ha a kill negálódik (például replacement effect megmenti a geart), nincs buff."
+    ],
+    [
+     "427.1.b.1",
+     0,
+     "Ha az Adaptatronon már van buff, nem kap másodikat. A gear ettől még meghal."
+    ],
+    [
+     "383.4.c.2.a",
+     0,
+     "Csak akkor triggerel, ha ő maga ott van a battlefielden, amikor conquerelsz. Másik battlefielden lévő unitod conquerje nem váltja ki."
+    ]
+   ],
+   "why": "403.4: target hiányában a trigger chainre kerül, majd lekerül; a \"nem tehető chain-re\" pontatlan."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

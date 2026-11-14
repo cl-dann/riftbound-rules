@@ -1,0 +1,142 @@
+{
+ "fixes": {
+  "Katarina, Reckless": {
+   "notes": [
+    [
+     "811.1.b,811.1.c.2",
+     0,
+     "A Hide a saját körödben, Neutral Open State-ben (showdownon kívül, 411.1.a) végezhető, [A]-ért. Maga a Hide nem nyit chaint, Katarina triggere viszont chain-re kerül, lehet rá reagálni."
+    ],
+    [
+     "811.1.c.1",
+     0,
+     "A Hide nem Play. Az elrejtés csak az első abilityt váltja ki, a \"when you play a card\" típusú triggereket nem."
+    ],
+    [
+     "420.4.a,420.4.a.1",
+     0,
+     "A második trigger akkor fut le, amikor a facedown-ból kijátszott lap kijátszása befejeződött. Ha a lapot counterelik, nincs sebzés."
+    ],
+    [
+     "355.10,355.8,403.4",
+     0,
+     "Az enemy unit target, és kötelező választani, ha van. Enemy unit nélkül a trigger chainre kerül, de érvényes target hiányában rögtön lekerül róla, így nem fut le."
+    ],
+    [
+     "811.1.d.3",
+     1,
+     "A 2 sebzés Katarina abilityje, nem a rejtett lap play effectje. Ezért a target bárhol állhat, nem csak azon a battlefielden, ahol a lap el volt rejtve."
+    ],
+    [
+     "416.1.c",
+     0,
+     "Ha Katarina már ready, az első trigger nem csinál semmit."
+    ]
+   ],
+   "why": "A note szerint enemy unit nélkül a trigger 'nem kerül chain-re'. A 403.4 szerint chainre kerül, és választható target hiányában onnan lekerül; a megfogalmazás pontatlan volt."
+  },
+  "Kha'Zix, Evolving Hunter": {
+   "notes": [
+    [
+     "823.1.c.1",
+     0,
+     "Hunt: amikor Kha'Zix conquerel vagy holdol, 1 XP-t kapsz."
+    ],
+    [
+     "383.3.a,383.3.b,203.3,405.2",
+     0,
+     "A \"spend 3 XP\" a trigger base costja, a finalizáláskor fizeted ki. 3-nál kevesebb XP-vel a cost nem fizethető ki: a trigger chainre kerül, de lekerül róla, és nem fut le."
+    ],
+    [
+     "355.10,355.8",
+     0,
+     "Az enemy unit target, és Kha'Zix battlefieldjén kell lennie. Ha a resolve előtt illegálissá válik, az XP nem jár vissza."
+    ],
+    [
+     "359.3.f.2",
+     0,
+     "A sebzés Kha'Zix resolve-kori Mightjával egyenlő, buffokkal és levonásokkal együtt. Ha Kha'Zix addigra elhagyja a boardot, a Might null, a trigger nem sebez."
+    ],
+    [
+     "323.4,467.1",
+     1,
+     "A trigger a combat showdown elején resolve-ol. Az így megölt unit a cleanupnál a trashbe megy, a Combat Damage Stepben már nem sebez."
+    ],
+    [
+     "824.1.d",
+     1,
+     "Az elköltött 3 XP csökkenti az XP-det: ha emiatt egy [Level] küszöb alá esel, az érintett lapok Level abilityje azonnal inaktív lesz."
+    ],
+    [
+     "383.4.e.2.a",
+     0,
+     "Attack trigger, combatonként egyszer fut le."
+    ]
+   ],
+   "why": "A note szerint 3-nál kevesebb XP-vel 'a trigger nem tehető chain-re'. Az attack trigger ilyenkor is chainre kerül, csak a cost nem fizethető ki, ezért lekerül róla (402.1, 203.3, 405.2)."
+  },
+  "Long Sword": {
+   "notes": [
+    [
+     "819.1.b,819.1.d,813.1.c.1",
+     0,
+     "Quick-Draw: a lapnak [Reaction]-je van, Closed State-ben, bárki körében kijátszható, és a play effectje azonnal egy saját unitra csatolja. Showdown közben is adhat Mightot."
+    ],
+    [
+     "355.5.b,355.10,359.3.e.5",
+     1,
+     "A Quick-Draw csatolása play effect: a unitot a trigger chainre kerülésekor választod, és target. Ha a resolve előtt elhagyja a boardot, a gear csatolatlanul a base-ben marad."
+    ],
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Fury Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "718.2,718.3,718.4",
+     0,
+     "Csatolva a unit +2 Mightot kap, az Effect Text a unit Rules Textjéhez fűződik, a gear saját Rules Textje pedig inaktív. Leválasztva mindez azonnal megszűnik."
+    ],
+    [
+     "355.8,403.4,148.1.a.1",
+     1,
+     "Ha kijátszáskor nincs unitod, a Quick-Draw trigger chainre kerül, de érvényes target hiányában rögtön lekerül róla. A gear ettől még bejön a base-be, később Equippel csatolható."
+    ]
+   ],
+   "why": "A note szerint target nélkül a Quick-Draw trigger 'nem kerül chainre'. A 403.4 szerint chainre kerül és onnan kerül le; pontatlan megfogalmazás."
+  },
+  "Mask Mother": {
+   "notes": [
+    [
+     "385.2,423.1.b",
+     0,
+     "A trigger a trashből működik, azután, hogy a discard megtörtént."
+    ],
+    [
+     "423.1,428.2.b",
+     0,
+     "Csak a kézből történő discard váltja ki. Ha megölik, banishelik, vagy a deckből kerül a trashbe, nincs trigger."
+    ],
+    [
+     "383.3.b,383.3.a.2",
+     0,
+     "A \"you may pay [1] to\" a trigger base costja, a finalizáláskor fizeted. Ha nem fizetsz, a trigger lekerül a chainről."
+    ],
+    [
+     "355.10,355.8,403.4",
+     0,
+     "A friendly unit target. Friendly unit nélkül a trigger chainre kerül, de érvényes target hiányában rögtön lekerül róla, így nem fut le."
+    ],
+    [
+     "383.3.c",
+     1,
+     "A trigger bármikor chain-re kerülhet, az opponent körében és Closed State-ben is. Ha egy combat közbeni effect costjaként dobod el, a +2 Might még a harc előtt megérkezik."
+    ]
+   ],
+   "why": "A note szerint friendly unit nélkül a trigger 'nem kerül chain-re'. A 403.4 szerint chainre kerül, és target hiányában lekerül róla; pontatlan megfogalmazás."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

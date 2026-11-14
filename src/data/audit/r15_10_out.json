@@ -1,0 +1,67 @@
+{
+ "fixes": {
+  "Beast Below": {
+   "notes": [
+    [
+     "355.10,355.8,403.4",
+     0,
+     "Két target: egy másik friendly unit és egy enemy unit. Ha bármelyikre nincs érvényes választás, a trigger chainre kerül, majd a 403.4 szerint rögtön lekerül róla, így a Beast effect nélkül marad a boardon."
+    ],
+    [
+     "355.8",
+     1,
+     "Nincs \"may\": ha van másik unitod és választható enemy unit, kötelező a sajátodat is visszavenni."
+    ],
+    [
+     "359.3.e.8",
+     0,
+     "Ha az egyik target a resolve előtt illegálissá válik, a másik ettől még visszamegy a kezébe."
+    ],
+    [
+     "757.1,355.9.b",
+     0,
+     "\"Can't be chosen by enemy spells and abilities\" szövegű enemy unit nem választható."
+    ],
+    [
+     "056.2,186.1",
+     0,
+     "A lapok a tulajdonosuk kezébe mennek. Token unit a kézbe kerülve megszűnik, ezért saját tokent visszavenni olcsó ár."
+    ]
+   ],
+   "why": "Az első note szerint a trigger target hiányában chain-re sem kerül; a 403.4 szerint chainre kerül, majd lekerül róla (nem intervening if feltétel)."
+  },
+  "Blossoming Dreamroot": {
+   "notes": [
+    [
+     "830.1.b.1,830.1.b.3",
+     0,
+     "Deploy: csak battlefieldre játszható, bármelyikre, enemy által elfoglaltra is. A cleanup nem recallolja a base-be."
+    ],
+    [
+     "830.1.b,471.2",
+     0,
+     "Ha egy opponent holdol itt (a Beginning Phase-ében még ő kontrollálja a battlefieldet), a gear meghal. Egy sima conquer még nem öli meg."
+    ],
+    [
+     "468.3.a",
+     0,
+     "Combatot az nyer, akinek a Resolution Stepben egyedül maradt unitja a battlefielden. Attackerként és defenderként is számít."
+    ],
+    [
+     "468.3.d",
+     0,
+     "\"No Result\" esetén (mindkét félnek maradt unitja, egyik félnek sem maradt unitja, vagy az attackereket recallolták) nincs győztes, nincs húzás."
+    ],
+    [
+     "414.4",
+     0,
+     "A draw kötelező. Üres Main Deck esetén Burn Outot okoz."
+    ]
+   ],
+   "why": "A 468.3.d note a No Result eseteiből kihagyta, amikor egyik félnek sem marad unitja."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

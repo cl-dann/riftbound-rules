@@ -1,0 +1,42 @@
+{
+ "fixes": {
+  "Patched Porobot": {
+   "notes": [
+    [
+     "178.1.a.1,178.3",
+     0,
+     "A lap Unit és Gear egyszerre: unitként viselkedik (Might, damage, exhausted belépés), de minden geart érintő effect is eléri, például \"Kill a gear\" vagy \"Kill all gear\"."
+    ],
+    [
+     "178.1.a.1.a,178.2.a",
+     0,
+     "Unitként mozoghat és battlefielden maradhat: a cleanup nem recallolja base-be, mint a sima geart."
+    ],
+    [
+     "383.2.a.1",
+     0,
+     "Az \"if\" közvetlenül a trigger feltétel után áll, ezért a feltétel része. Ha kijátszáskor nincs 3 másik geared, a trigger nem triggerel, chainre sem kerül."
+    ],
+    [
+     "383.2.a.1",
+     1,
+     "Ha a trigger már a chainen van, és az opponent reakcióként megöl egy geart, a húzás akkor is megtörténik."
+    ],
+    [
+     "148.1.a.3,185.2.d,178.3",
+     1,
+     "Az \"other gear\" miatt önmagát nem számolja, de minden más általad kontrollált gear igen: csatolt Equipment, Gold token és egy másik Patched Porobot is."
+    ],
+    [
+     "718.6",
+     0,
+     "Unit nem csatolható, így gear volta ellenére sem kerülhet Attached állapotba."
+    ]
+   ],
+   "why": "A 3. note intervening \"if\" feltételnél a 403.4-es \"chainre kerül, majd lekerül\" mechanizmust írta; a 383.2.a.1 szerint a feltétel a trigger condition része, így nem teljesülésekor a trigger nem is triggerel (403.4 csak célpont/választás hiányára vonatkozik)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

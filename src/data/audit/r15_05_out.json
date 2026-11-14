@@ -1,0 +1,81 @@
+{
+ "fixes": {
+  "Petal Pixie": {
+   "short": "+1 Mightot kap minden saját Temporary unitodért, ami vele egy battlefielden áll. Base-ben nem működik. A Temporary unitjaid a Beginning Phase-ed elején meghalnak, ezért az addigi bónusz ekkor elvész; a köröd során az újonnan érkező vagy Temporaryt kapó unitok adnak ismét pluszt.",
+   "why": "A short szerint a köröd során 'csak' az újonnan érkező Temporary unitok adnak pluszt, de a már boardon lévő unit is kaphat Temporaryt (Shadow's Call, Last Stand, Fading Memories), és a 816.3 szerint az ilyen unit is számít; a note 4 is ezt mondja."
+  },
+  "Protector's Shield": {
+   "notes": [
+    [
+     "819.1.b,819.1.d,813.1.c.1",
+     0,
+     "Quick-Draw: a lapnak [Reaction]-je van, Closed State-ben, bárki körében kijátszható, és a play effectje azonnal egy saját unitra csatolja. Showdown közben is felrakható."
+    ],
+    [
+     "355.5.b,355.10,359.3.e.5",
+     1,
+     "A Quick-Draw csatolása play effect: a unitot a trigger chainre kerülésekor választod, és target. Ha a resolve előtt elhagyja a boardot, a gear csatolatlanul a base-ben marad."
+    ],
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Energy costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "718.2,721.2,821.1.c",
+     1,
+     "Csatolva a gear Rules Textje inaktív, és inaktív ability nem aktiválható, így az Equip sem. Az Equip csak csatolatlan Shielden használható (például ha a unitja meghalt, vagy a Quick-Draw triggernek nem volt targetje). Másik unitra csak külön effect tudja átrakni, például Weaponmaster, amely kifejezetten újra aktívvá teszi az Equipet."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +1 Mightot is kap."
+    ],
+    [
+     "815.1.b,815.1.c.2",
+     0,
+     "A felszerelt unit Tanket kap: combat damage kiosztásakor előbb neki kell lethal damage-et kapnia, csak utána a kontrollere Tank nélküli unitjainak. Több Tank unit között az osztó szabadon választ."
+    ],
+    [
+     "815.2",
+     0,
+     "Ha a unitnak már van Tankje, a Shield Tankje redundáns, ilyenkor csak a +1 Might számít."
+    ],
+    [
+     "355.8,403.4",
+     0,
+     "Ha kijátszáskor nincs unitod, a Quick-Draw triggernek nincs érvényes targetje: chainre kerül, majd a 403.4 szerint lekerül róla, és nem fut le. A gear ettől még bejön a base-be, később Equippel csatolható."
+    ]
+   ],
+   "why": "Az utolsó note szerint target hiányában a trigger 'nem kerül chainre'; a 403.4 szerint chainre kerül, majd lekerül. A hivatkozás 403.4-re javítva."
+  },
+  "Poro Herder": {
+   "notes": [
+    [
+     "383.2.a.1",
+     0,
+     "Az \"if\" közvetlenül a trigger feltétel után áll, ezért a feltétel része. Ha kijátszáskor nincs Porod, a trigger nem triggerel, chainre sem kerül."
+    ],
+    [
+     "383.2.a.1",
+     1,
+     "Ha a trigger már a chainen van, és a Porót reakcióként megölik, a buff és a húzás akkor is megtörténik."
+    ],
+    [
+     "133.3.a",
+     0,
+     "\"A Poro\": Poro taggel rendelkező objektum a boardon, a te kontrollod alatt. A Herdernek nincs Poro tagje, saját maga nem teljesíti a feltételt."
+    ],
+    [
+     "427.1.b",
+     0,
+     "A buff +1 Might, ha még nincs rajta buff. A húzás ettől független."
+    ]
+   ],
+   "why": "Intervening if (383.2.a.1): feltétel hiányában a trigger nem triggerel, nem 'chainre kerül és lekerül' (403.4 a target hiányára vonatkozik)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}
