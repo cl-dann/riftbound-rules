@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "Riven, Shattered": {
+   "short": "Amikor Riven attacker lesz, választasz egy ottani enemy unitot: a Rivenre csatolt minden Equipmentért 2 damage-et kap, egyetlen sebzésként. Equipment nélkül a trigger nem sebez. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod az Equip cost kifizetésével, akkor is, ha máshoz van csatolva; ha az Equip cost [A]-t tartalmaz, 1 Powerrel kevesebbet fizetsz, különben nincs kedvezmény.",
+   "why": "A short 'minden rá csatolt Equipmentért' megfogalmazása az enemy unitra csatolt Equipmentként olvasható; a szöveg (és a 418.8 példája) szerint a Rivenre csatolt Equipmentek számítanak."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

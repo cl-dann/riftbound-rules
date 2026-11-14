@@ -1,0 +1,68 @@
+{
+ "fixes": {
+  "Bandle Soldier": {
+   "short": "Ha a belépésének pillanatában (amikor a kijátszása resolve-ol) legalább 3 XP-d van, ready érkezik, és még abban a körben mozoghat. Ha a 3 XP-t csak később éred el, a már kint lévő Soldier nem lesz tőle ready.",
+   "notes": [
+    [
+     "824.1.b.1,369.3",
+     0,
+     "Level 3: legalább 3 XP mellett ready lép be. Ez replacement effect: a unit nem exhausted érkezik, majd áll fel, hanem eleve ready."
+    ],
+    [
+     "824.1.c,369.3",
+     1,
+     "A 3 XP-nek akkor kell meglennie, amikor a unit belép a boardra (a kijátszás resolve-jakor), nem a kijátszás megkezdésekor. Ha a küszöböt csak a belépés után éred el, a már boardon lévő Soldier nem lesz ready."
+    ],
+    [
+     "144.1.a,144.2",
+     1,
+     "Ready belépve még abban a körben mehet Standard Move-val battlefieldre."
+    ],
+    [
+     "805.6.a",
+     1,
+     "Mivel eleve ready érkezik, a \"becomes ready\" típusú triggereket nem váltja ki."
+    ]
+   ],
+   "why": "A Level feltételét a játék a belépéskor nézi, mert az \"I enter ready\" a belépésre ható replacement effect (369.3), és a dependent ability addig aktív, amíg az XP megvan (824.1.c, 824.1.d). A \"kijátszás pillanatában\" pontatlan: ha a unit a chainen van és közben változik az XP, a belépéskori állapot dönt."
+  },
+  "Challenge": {
+   "notes": [
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ],
+    [
+     "355.7,355.8",
+     0,
+     "A friendly és az enemy unit is target, bármelyik locationön. Bármelyik hiányában a spell nem játszható ki."
+    ],
+    [
+     "418.6.b.3",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a sebzést a kiválasztott unitok okozzák, nem a Challenge. A spellekre vonatkozó Bonus Damage nem adódik hozzá."
+    ],
+    [
+     "418.6.b.4",
+     0,
+     "Szintén a szabályzat példája: az enemy unit által okozott sebzésért az ő controllere felelős, a \"when you deal damage\" triggerei lefutnak."
+    ],
+    [
+     "710,359.3.e.5,359.3.e.12",
+     1,
+     "A resolve-kori Mightok számítanak. Ha az egyik unit illegális targetté válik, a hozzá kapcsolódó instruction nem hajtható végre, így sebzés egyik irányban sem történik. Ha a unit a boardot is elhagyta, a Mightja null."
+    ],
+    [
+     "323.4",
+     0,
+     "A halálos sebzést kapott unitok a resolve utáni cleanupban halnak meg, akár mindkettő egyszerre."
+    ]
+   ],
+   "why": "A note szerint illegális targetnél a unit Mightja null. Ez csak akkor igaz, ha a unit elhagyta a boardot (359.3.e.12). A boardon maradó, de illegálissá vált targetnél (például kontrollt váltott) a sebzés azért marad el, mert illegális targethez kötött instruction nem hajtható végre (359.3.e.5)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

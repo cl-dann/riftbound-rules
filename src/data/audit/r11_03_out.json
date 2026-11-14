@@ -1,0 +1,49 @@
+{
+ "fixes": {
+  "Dragon's Rage, Lee Sin": {
+   "short": "Mozgatsz egy ellenséges unitot, majd ott kiválasztasz egy másik ellenséges unitot, és a kettő a Mightjával sebzi egymást. A második unitot csak a mozgatás után választod, és az ellenfél közben reagálhat. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Időzítés pontatlan: [Action]/[Reaction] nélküli spell csak a saját körödben, Open State-ben, showdownon kívül játszható ki (155); a short a showdown kizárását elhagyta."
+  },
+  "Dredge Up": {
+   "short": "Húzol 1 lapot. A trashből 2 Energyért még egyszer kijátszható, utána banishelődik, akkor is, ha counterelik. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Időzítés pontatlan: [Action]/[Reaction] nélküli spell csak a saját körödben, Open State-ben, showdownon kívül játszható ki (155); a short a showdown kizárását elhagyta."
+  },
+  "Encore": {
+   "short": "Kettőt választasz: 2 sebzés egy unitra, két 1 Mightú Recruit token, legfeljebb két unit ebben a körben +1 Mightot kap, vagy a felső 2 lapból egyet felhúzol, a másik a deck aljára megy. Hogy ugyanazt a módot kétszer választhatod-e, nem tisztázott, judge dönti el. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "Időzítés pontatlan: [Action]/[Reaction] nélküli spell csak a saját körödben, Open State-ben, showdownon kívül játszható ki (155); a short a showdown kizárását elhagyta."
+  },
+  "Enthralling Protector": {
+   "short": "2 Mightú unit. Hunt: amikor részt vesz egy battlefield conquerében vagy holdjában, 1 XP-t kapsz. 2 XP elköltésével a saját Main Phase-edben, showdownon kívül buffolhatod (+1 Might), ami nem jár le a kör végén. Ha már van rajta buff, nem kap másodikat, és az XP elveszett.",
+   "why": "Időzítés pontatlan: keyword nélküli activated ability csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható (381.1, 145.2, 151.2); a short a showdown kizárását elhagyta."
+  },
+  "Escaped Grayback": {
+   "short": "3 Mightú unit. A saját Main Phase-edben, showdownon kívül egy saját unitod feláldozásával Empowered állapotba hozhatod, ekkor tartósan +2 Mightja lesz. Token is feláldozható, és az áldozat Deathknell képessége lefut.",
+   "why": "Időzítés pontatlan: keyword nélküli activated ability csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható (381.1, 145.2, 151.2); a short a showdown kizárását elhagyta."
+  },
+  "Forgefire Cape": {
+   "short": "Equipment, +3 Might. Equip: 1 bármely domainű Power, saját unitra, a saját Main Phase-edben, showdownon kívül. A felszerelt unit, amikor támad vagy védekezik, 2 sebzést oszt minden ott álló ellenséges unitnak, combatonként egyszer, még a combat damage előtt. Unique, Ornn Signature lap.",
+   "why": "Időzítés pontatlan: keyword nélküli activated ability csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható (381.1, 145.2, 151.2); a short a showdown kizárását elhagyta."
+  },
+  "Experimental Hexplate": {
+   "short": "Equip: 1 Mind Powerért, a saját Main Phase-edben, showdownon kívül teheted egy saját unitodra. Felszerelve +1 Mightot ad, és a unit a meglévő tagjei mellé Mech taget kap. Minden Mechre vonatkozó lap látja, például ha Mecheknek adsz képességet. Ha a gear leválik a unitról, a Mech tag is megszűnik.",
+   "why": "Időzítés pontatlan: az Equip csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható (151.2, 381.1); a \"harcon kívül\" kihagyja a nem combat showdownt."
+  },
+  "Eye of the Herald": {
+   "short": "Equip: 1 Order Powerért, a saját Main Phase-edben, showdownon kívül teheted egy saját unitodra. Felszerelve, valahányszor a unit mozog, egy 1 Mightú Recruit token érkezik oda, ahová ment. Mightot magától nem ad. Visszahívás nem számít mozgásnak, olyankor nincs token.",
+   "why": "Időzítés pontatlan: az Equip csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható (151.2, 381.1); a \"harcon kívül\" kihagyja a nem combat showdownt."
+  },
+  "Edge of Night": {
+   "short": "Felszerelhető gear: +2 Might, Equip 1 Chaos Powerért a saját Main Phase-edben, showdownon kívül. Hidden: a saját körödben 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden. A következő körtől reakcióként, akár harc közben, ingyen kijátszhatod, és rögtön egy ottani saját unitodra kerül, ha van ott unitod.",
+   "why": "Az Equip időzítéséből hiányzott a showdown kizárása (151.2, 381.1). A facedown kijátszásnál a csatolás feltétel nélküli állításként szerepelt, pedig unit nélkül a gear csatolatlan marad és cleanupkor recallolódik (811.1.d.3, 149.3)."
+  },
+  "Emperor's Divide": {
+   "short": "Bármennyi saját unitodat egy battlefieldről a base-be mozgatja. Kézből a saját körödben vagy showdownban játszható ki, egy másik spellre válaszul nem. Ha 1 bármilyen Powerért elrejted egy általad kontrollált battlefielden, a következő körtől reakcióként, ingyen jön, de csak az ottani unitokra: kimentheted őket a harcból és a battlefielden álló unitot célzó spellek elől. A bárhol álló unitot célzó spell ellen nem véd.",
+   "why": "Túlzás: a short szerint a unitok \"a célzott spellek elől\" kimenthetők, de a base és a battlefield is Board zóna, így a mozgatás csak a \"unit at a battlefield\" jellegű targetet teszi illegálissá; a bármely unitot célzó spell ugyanúgy hat (359.3.e.2, 359.3.e.5)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Endless Riches: a note (370.4, flag 2) nyitott kérdésként kezeli, hogy a gear saját replacement effectje rá magára is vonatkozik-e, amikor meghal. A 370.4 szövege (\"A Game Object can apply its Replacement Effects to any qualifying events that occur simultaneously with it leaving the zone\") inkább arra utal, hogy igen, vagyis Banishmentbe kerül, de a \"can\" miatt nem zártam le biztosan; a flag 2-t meghagytam."
+ ]
+}

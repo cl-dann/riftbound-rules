@@ -1,0 +1,18 @@
+{
+ "fixes": {
+  "Viktor, Innovator": {
+   "short": "Valahányszor az opponent körében kijátszol egy lapot, kapsz egy 1 Mightú Recruit tokent a base-edbe. Ehhez jellemzően Reaction lapok (Ambush unit is), showdown alatt Action lapok, facedown-ból kijátszott Hidden lapok, vagy lapot kijátszó triggerek (például a Rift Herald Deathknellje) kellenek. Ha a lapodat semlegesítik (counter), nincs token.",
+   "why": "A short a 'kellenek' szóval kizárólagos listát adott, pedig az opponent körében triggerelt, lapot kijátszó ability (például Rift Herald Deathknell: 'Play a unit from your hand') is kártya kijátszás (420.4.a), és kiváltja Viktort. A note 813.1.c.1 is csak 'jellemzően'-t mond."
+  },
+  "Void Rush": {
+   "short": "Felfeded a deck felső 2 lapját. Egyet eltávolíthatsz (banish), és ekkor rögtön kijátszod 2 Energyvel olcsóbban, a Power costot ki kell fizetni. A többit felhúzod. Ha az eltávolított lapot nem tudod kijátszani, elveszik. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A szöveg 'You may banish one, then play it': csak a banish opcionális, utána a kijátszás az instruction része, nem külön döntés. A régi short ('kijátszhatod') azt sugallta, hogy banish után a kijátszás elhagyható."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Void Seeker: a 138.1 note flavor textre vonatkozó állítását a 138.1 példája igazolja, de a nyomtatott flavor text nincs a bemenetben, közvetlenül nem ellenőrizhető.",
+  "Vex, Cheerless / Wielder of Water: a short a 'friendly' feltételt 'a te spelljeid' / 'saját unit' formában adja vissza; 2v2-ben a csapattárs spellje és unitja is friendly (740.1.a, 491.8.e). 1v1-ben pontos, a projekt egységes szóhasználata miatt nem javítottam."
+ ]
+}

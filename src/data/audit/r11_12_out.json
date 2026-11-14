@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "Aspirant's Climb": {
+   "short": "Eggyel több pont kell a győzelemhez: alapból 8 helyett 9 (2v2-ben 11 helyett 12), és ez minden játékosra vonatkozik, attól függetlenül, ki kontrollálja a battlefieldet.",
+   "why": "A short általánosan '8 helyett 9'-et írt, de a Victory Score játékmódfüggő (194.3, 194.3.a, 491.3: 2v2-ben 11), a notes is 11 helyett 12-t ír; pontosítva."
+  }
+ },
+ "checked": 89,
+ "data_issues": [],
+ "open": []
+}

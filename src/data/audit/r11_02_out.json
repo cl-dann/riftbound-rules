@@ -1,0 +1,77 @@
+{
+ "fixes": {
+  "Defiant Dance": {
+   "notes": [
+    [
+     "135.2.e.6.c",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a costja [1][C], a Power rész Calm vagy Chaos Powerrel is fizethető."
+    ],
+    [
+     "355.8,355.9.b",
+     0,
+     "Két különböző unit kell targetnek, enélkül a lap nem játszható ki. Bármelyik játékos unitja választható, bárhol a boardon."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "A +2 és a -2 két külön instruction. Ha az egyik unit illegális target lesz, a másikra vonatkozó rész ettől még végrehajtódik."
+    ],
+    [
+     "142.4.b,143.2.c",
+     0,
+     "A -2-nek nincs alsó korlátja. Sebzett unit meghal, ha a rajta lévő damage eléri az új Mightot. Negatív Might a combatban 0-nak számít."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap (Irelia): a deckben összesen legfeljebb 3 Signature kártya lehet."
+    ]
+   ],
+   "why": "A 135.2.e.6.c példája név szerint kimondja, hogy a Defiant Dance costja [1][C], és a Power Calm vagy Chaos Powerrel fizethető. A note ezt ellenőrizhetetlennek (flag 2, \"a nyomtatott lapon kell ellenőrizni\") jelölte, holott a szabályzat példája lezárja."
+  },
+  "Coalesced Energy": {
+   "short": "A köröd végén az összes rune-odat visszateszed a Rune Deck aljára, majd 4 újat kapsz exhausted állapotban. A hatás után így pontosan 4 rune-od lesz, ha a Rune Deckben van legalább 4. Kevés rune mellett gyorsít, 4 fölött veszteség, és a visszatett rune-okért nem kapsz Powert.",
+   "notes": [
+    [
+     "317.1.a",
+     0,
+     "A saját köröd Ending Stepjében triggerel, az opponent körében nem. A Coalesced Energynek ekkor a boardon kell lennie."
+    ],
+    [
+     "355.10.d",
+     0,
+     "\"All your runes\": nincs target, az összes rune-od megy, a ready és az exhausted is."
+    ],
+    [
+     "417.5.a",
+     0,
+     "A rune-ok a Rune Deck aljára kerülnek, a sorrendet te választod."
+    ],
+    [
+     "164.2.b",
+     1,
+     "Ez a recycle effect, nem a rune saját abilityjének costja, ezért nem ad Powert."
+    ],
+    [
+     "431.2,431.3",
+     0,
+     "A 4 új rune exhausted lép be. Ha a Rune Deckben kevesebb van, annyit channelolsz, amennyi van."
+    ],
+    [
+     "431.3,315.1.b",
+     1,
+     "Következmény: a trigger resolve-ja után pontosan 4 rune-od lesz, ha a Rune Deckben van legalább 4. 4-nél kevesebb rune-nál ez gyorsítás, 4 fölött veszteség. A következő Awaken Phase-edben readyre állnak."
+    ]
+   ],
+   "why": "A short és a 315.1.b note \"mindig pontosan 4 rune-od lesz\" állítása túl abszolút: a 431.3 szerint kevesebb rune a Rune Deckben kevesebb channelt jelent, és egy később resolve-oló end of turn effect is módosíthatja a számot. A kijelentés a trigger utáni állapotra szűkítve, a 431.3 feltétellel."
+  },
+  "Dockside Lock-Up": {
+   "short": "Csak battlefieldre játszható ki, és kijátszáskor kötelezően banishel egy ottani unitot, bárkiét, akár a sajátodat is. Ha később tartod a helyet, feláldozhatod, és a banishelt lapot ingyen kijátszod a saját oldaladra. Ha előbb az ellenfél tartja, a lap végleg eltűnik.",
+   "why": "A short \"akár a sajátodat is, ha csak az van ott\" megfogalmazása azt sugallta, hogy saját unit csak akkor választható, ha más nincs ott. A play effect targetje bármelyik ottani unit lehet (355.10, 355.9.b), a banish kötelező."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

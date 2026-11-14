@@ -1,0 +1,46 @@
+{
+ "fixes": {
+  "Sun Disc": {
+   "short": "Exhaustolva a körben kijátszott következő unitod ready lép be, de csak ha ebben a körben már kijátszottál egy másik lapot (Legion), ezért előbb játssz ki egy másik lapot. Csak a saját Main Phase-edben, showdownon kívül használható.",
+   "notes": [
+    [
+     "812.1.b.1,812.1.c",
+     0,
+     "Legion: az effect csak akkor jön létre, ha ebben a körben már kijátszottál egy másik kártyát. A Sun Disc saját kijátszása nem számít."
+    ],
+    [
+     "420.4.b",
+     0,
+     "A Legion a finalizálást nézi: counterelt lap is számít korábban kijátszott kártyának."
+    ],
+    [
+     "727.1.b,812.1.b,727.1.c.3",
+     2,
+     "Nyitott kérdés: itt a Legion az activated ability effectjén belül áll. Nem egyértelmű, hogy Legion teljesülése nélkül az ability aktiválható-e (és ekkor csak a gear exhaustolódik, hatás nélkül), vagy aktiválni sem lehet. A Core Rules ezt a szerkezetet nem rendezi, judge döntse el."
+    ],
+    [
+     "391.3,369.3",
+     0,
+     "Az effect delayed replacement: a következő unitod exhausted helyett ready lép be. Ez nem \"becomes ready\" esemény, olyan triggert nem vált ki."
+    ],
+    [
+     "151.2,149.1",
+     0,
+     "Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható. Ready lép be, a kijátszás körében már használható."
+    ],
+    [
+     "185.2.a,440.2.c",
+     1,
+     "A token unitot is a tulajdonosa játssza ki, a \"play a token\" effect rendes Play. Ezért a körben következő token unit is elhasználja a \"next unit you play\" effectet, és az lép be ready."
+    ]
+   ],
+   "why": "A short és a 727.1.b note tényként állította, hogy Legion nélkül aktiválható és a gear hatás nélkül exhaustolódik. A 727.1.b/812.1.b alapján nem dönthető el, hogy a [T]: [Legion] szerkezetnél Legion nélkül egyáltalán aktiválható-e; a short ezt már nem állítja, a note flag 2."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Star Spring: a \"The first time a player plays a non-token unit here each turn\" értelmezhető összesen körönként egyszer (a short ezt írja) vagy játékosonként egyszer; a Core Rules (386.1) nem dönti el. A The Dreaming Tree hasonló kérdését a notes flag 2-vel jelöli, itt nincs ilyen jelölés.",
+  "Sun Disc: Legion nélkül aktiválható-e a [T]: [Legion] ability (727.1.b, 812.1.b); a javításban flag 2-re tettem, judge döntés kell."
+ ]
+}

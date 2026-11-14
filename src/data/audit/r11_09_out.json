@@ -1,0 +1,13 @@
+{
+ "fixes": {
+  "Shakedown": {
+   "short": "Bármikor kijátszható: egy enemy unit 6 sebzést kap, hacsak a unit controllere nem enged húzni neked 2 lapot. A döntés az övé, nem a tiéd.",
+   "why": "A short a döntést a unit \"gazdájára\" (owner) bízta, de a szöveg \"its controller\": controller csere esetén (például kontrollt átvevő lap) nem az owner dönt. A notes 355.18 pontja is a controllert nevezi meg."
+  }
+ },
+ "checked": 92,
+ "data_issues": [
+  "Siphoning Strike: power null, pedig kétdomainű (Calm, Mind) Signature spell; a batch többi Signature spelljének (Shadow Dash, Showstopper, Siphon Power, Shuriken Flip) van Power costja. A cards.json is null-t ad, a nyomtatott lapon ellenőrizendő, van-e Power cost."
+ ],
+ "open": []
+}
