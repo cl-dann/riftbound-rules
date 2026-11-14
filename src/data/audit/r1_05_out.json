@@ -1,0 +1,221 @@
+{
+ "fixes": {
+  "Grim Apothecary": {
+   "short": "Kijátszáskor visszaküldhetsz egy battlefielden álló saját unitot a tulajdonosa kezébe (ez általában a te kezed). Ambush: olyan battlefieldre, ahol van unitod, bárki körében, válaszként is lejöhet. Jó mentésre: a kézbe vett unitra az ellenfél rá irányuló hatása már nem hat, de a buffjai és sebzése is eltűnnek.",
+   "why": "A short szerint a unit a te kezedbe kerül, a szöveg szerint a tulajdonosa kezébe (056.2); más tulajdonában lévő, általad kontrollált unitnál ez eltér."
+  },
+  "Guards!": {
+   "short": "Lerak egy 2 Mightú Sand Soldier unit tokent, ami exhausted lép be, utána 1 Order Powerért readyzheted. A readyzés külön lefutó hatás, közben az ellenfél reagálhat, például megölheti a tokent. Kézből csak a saját körödben, showdownon kívül játszható ki. Hidden: 1 bármely Powerért elrejtheted, és a következő körtől ingyen, Reactionként is kijátszhatod; ekkor a token annál a battlefieldnél jön le.",
+   "why": "A short nem írta ki a Hidden költségét ([A], 811.1.b), és hiányzott a kézből kijátszás időzítése (155: Action nélkül csak saját kör, Open State, showdownon kívül)."
+  },
+  "Gutter Guardian": {
+   "short": "Kijátszáskor felmutathatsz a kezedből egy Hidden lapot, vagy kijelölhetsz egy másik saját, felfordított Hidden lapot a boardon; ha így teszel, kapsz 1 bármely domainű Powert. A saját elrejtett, lefordított lapod erre nem jó. Hidden: 1 bármely Powerért elrejtheted, és a következő körtől ingyen, akár az ellenfél körében is kijátszhatod; a Power rögtön elkölthető egy válaszlapra.",
+   "why": "A short nem írta ki a Hidden költségét és a következő körös feltételt (811.1.b, 811.6), és a kapott [A] domainjét sem."
+  },
+  "Gutter Palace": {
+   "notes": [
+    [
+     "195,315.2.a.1",
+     0,
+     "A győzelmi trigger a Beginning Step elején fut, a scoring és a Draw Phase előtt. A 4 lapnak tehát a körödbe lépéskor, húzás előtt kell a kezedben lennie."
+    ],
+    [
+     "383.2.a.1",
+     0,
+     "Az \"if\" feltétel közvetlenül a trigger feltétel után áll, ezért annak része: ha a Beginning Phase kezdetén nem pontosan 4 lap és pontosan 4 battlefielden lévő unit van, a trigger chainre sem kerül."
+    ],
+    [
+     "383.2.a.1",
+     1,
+     "A feltétel a trigger condition része, ezért csak a triggereléskor számít, a resolve-kor nem ellenőrződik újra. Ha a trigger már a chainen van, az opponent hiába változtat a kezed vagy a unitjaid számán: a trigger resolve-ol, és nyersz. A szabályzat Sona példája ugyanezt mondja ki."
+    ],
+    [
+     "816.1.c,383.3.d",
+     1,
+     "A base-ben lévő unit nem számít, 5 unit pedig már sok. A [Temporary] unitok ugyanekkor triggerelnek, de a feltétel vizsgálatakor még a boardon vannak, tehát beleszámítanak."
+    ],
+    [
+     "423.3,415.4",
+     0,
+     "A Bird ability costja 1 lap discardja és a gear exhaustolása. Üres kézzel vagy exhausted gearrel nem aktiválható."
+    ],
+    [
+     "187.7,185.2.a,355.2.a",
+     1,
+     "A Bird 1 Mightú, [Deflect] token. Az ability nem ad meg helyet, a tokent a unit kijátszás szabályai szerint a base-be vagy egy általad kontrollált battlefieldre teheted, exhausted."
+    ],
+    [
+     "151.2",
+     0,
+     "A Bird ability csak a saját Main Phase-edben, Open State-ben, showdownon kívül megy. A feltételnek a következő Beginning Phase-ed kezdetén kell teljesülnie, az opponent köre alatt a lapok és unitok száma még változhat."
+    ]
+   ],
+   "why": "A 7. pont azt állította, hogy a kéz és a unitok számát az előző köröd végéig kell beállítani; a trigger a Beginning Phase elején nézi (315.2.a.1, 383.2.a.1), közben az opponent köre alatt ez még változhat."
+  },
+  "Guardian Angel": {
+   "notes": [
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Calm Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +1 Mightot is kap."
+    ],
+    [
+     "136.2.d",
+     0,
+     "A szabályzat név szerint idézi az Effect Textjét: \"If I would die, kill Guardian Angel instead. Heal me, exhaust me, and recall me.\" A név a csatolt gearre utal, akkor is, ha a unitot ugyanígy hívnák."
+    ],
+    [
+     "383.2.c.3.a,458.1",
+     0,
+     "Ez replacement effect: a unit nem hal meg, ezért a Deathknell és más halál triggerei nem futnak le. Gyógyulva, exhausted állapotban a base-be kerül, ami Recall, nem Move."
+    ],
+    [
+     "429,436.1.e",
+     1,
+     "A mentés ára maga a gear: a Guardian Angel a trashbe kerül, a unit pedig elveszti a +1 Mightot és a további védelmet."
+    ],
+    [
+     "373.2",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: ha több unit egyszerre halna meg és több replacement effect is él, az alkalmazás sorrendje dönti el, kit ment meg melyik. Egy replacement effect egyidejű eseményeknél csak egyetlen sorozatban alkalmazható."
+    ]
+   ],
+   "why": "A 6. pont szerint egy replacement effect csak egy eseményre alkalmazható; a 373.2 szerint egy sorozatban akárhány jogosult eseményre alkalmazható (a példában Soraka két Recruitot ment egyszerre)."
+  },
+  "Harnessed Dragon": {
+   "notes": [
+    [
+     "355.10,355.8",
+     0,
+     "Az enemy unit target, bármelyik locationön. Ha nincs választható enemy unit, a trigger nem kerül chain-re."
+    ],
+    [
+     "757.1",
+     0,
+     "\"Can't be chosen by enemy spells and abilities\" szövegű unit nem választható."
+    ],
+    [
+     "359.3.e.2",
+     0,
+     "Ha a target a resolve előtt elhagyja a boardot vagy már nem enemy, a kill elmarad."
+    ],
+    [
+     "429.1.a.1.b",
+     0,
+     "Kill Instruction: a megölt unit Deathknell abilityje chain-re kerül, mielőtt a unit a trashbe megy."
+    ],
+    [
+     "429.1",
+     1,
+     "Ez kill, nem damage: Prevent nem állítja meg, a Might nem számít."
+    ]
+   ],
+   "why": "Az 5. pont hivatkozása (428.2.a, Banish nem Kill) nem támasztja alá az állítást; a kill definíciója a 429.1."
+  },
+  "Hexplosive Minefield": {
+   "notes": [
+    [
+     "103.3.d,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, mindnek a legend Champion tagjét (Ziggs) kell viselnie, és a legendnek a lap mindkét domainjét tartalmaznia kell."
+    ],
+    [
+     "355.13,355.10",
+     0,
+     "\"Any number\": 0 vagy több friendly Bomb token választható, mind target. Bomb nélkül is kijátszható, akkor nem történik semmi."
+    ],
+    [
+     "187.12,808.1.d.2",
+     0,
+     "A megölt Bombok Deathknellje lefut: 2 damage egy ott lévő enemy unitnak, és a többi Bombod is meghal azon a battlefielden. A triggerek a chain-re kerülnek, mielőtt a Bomb a trashbe megy."
+    ],
+    [
+     "391.2,355.5.b",
+     0,
+     "Az \"at end of turn\" delayed trigger. A battlefieldet nem a spell kijátszásakor, hanem a delayed trigger finalizálásakor választod ki."
+    ],
+    [
+     "830.1.b.1,355.10.b",
+     0,
+     "Az új Bombok Deploy miatt bármelyik battlefieldre mehetnek, enemy által elfoglaltra is, de mind ugyanarra. A battlefield nem target."
+    ],
+    [
+     "359.3.e.14.a",
+     1,
+     "A \"that many\" a ténylegesen megölt Bombokat számolja. Ha egy kiválasztott Bomb a resolve előtt illegális target lett, az nem számít bele."
+    ],
+    [
+     "359.3.e.16",
+     0,
+     "Ha az Ending Phase-ben, az ending step kezdete után játszod ki, a delayed trigger már nem jön létre, új Bombot nem kapsz."
+    ]
+   ],
+   "why": "A 3. pont a 429.1.a.1.b-re hivatkozott, ami unitokról szól; a Bomb gear token, a saját halálra triggerelő abilityk általános szabálya a 808.1.d.2."
+  },
+  "Here to Help": {
+   "short": "Kijátszhatsz a kezedből egy unitot 3 Energyvel olcsóbban egy általad kontrollált battlefieldre, base-be nem. A saját körödben vagy showdown alatt mehet. Hidden: 1 bármely Powerért elrejtheted, és a következő körtől ingyen, válaszként is kijátszhatod; ekkor a unit oda kerül, ahol a lap el volt rejtve.",
+   "why": "A short nem írta ki a Hidden költségét ([A]) és azt, hogy elrejtve csak a következő körtől játszható ki (811.1.b, 811.6)."
+  },
+  "Immortal Phoenix": {
+   "short": "Támadáskor +2 Mightot kap. Ha egy spelleddel unitot ölsz meg, 1 Energy és 1 Fury Power megfizetésével kijátszhatod a trashből; akkor is működik, ha a spell épp magát a Phoenixet ölte meg. Combatban vagy unit, gear képességével megölt unit nem számít, a spell saját \"do this\" képességével megölt viszont igen.",
+   "why": "A short szerint képességgel ölt unit nem számít, de a 429.5.d (név szerinti példa) szerint a spell reflexive abilityje által ölt unit spell általi killnek számít; ez ellentmondott a 4. pontnak."
+  },
+  "Ivern, Nurturer": {
+   "notes": [
+    [
+     "383.4.a.2,383.4.d.2.a",
+     0,
+     "Két külön trigger feltétel: amikor kijátszod, és amikor ott van egy általad holdolt battlefielden a Beginning Phase-edben."
+    ],
+    [
+     "355.10.a,383.3.a.3",
+     0,
+     "A deck nem Public zóna, itt nincs target. A \"you may reveal\" a resolve közben dől el, miután megnézted a lapokat."
+    ],
+    [
+     "432.1.c",
+     0,
+     "3-nál kevesebb lapnál annyit nézel meg, amennyi van, Burn Out nélkül."
+    ],
+    [
+     "417.4,417.5",
+     0,
+     "A maradékot kötelező recycle-ölni, több lap véletlen sorrendben kerül a deck aljára."
+    ],
+    [
+     "388.1,389.1",
+     0,
+     "A \"do this\" reflexive trigger: ha Bird, Cat, Dog vagy Poro unitot reveal-eltél, a buff új chain itemként kerül fel, a targetet ekkor választod, és külön lehet rá reagálni."
+    ],
+    [
+     "143.1.b,133.3",
+     1,
+     "A feltétel a felmutatott unit lap tagjét nézi. Például Daring Poro, Lonely Poro, Loyal Poro, Soaring Scout (Bird), Stalking Wolf (Dog), Nidalee, Cat Form és a Rengar unitok (Cat) váltják ki."
+    ],
+    [
+     "370.1.c.1",
+     1,
+     "A \"reveal\" kiváltja a deckben lévő lap \"as I'm revealed\" replacement effectjét: ha az Undertitant reveal-eled, 2 Energyt kapsz. A puszta \"look at\" nem reveal, az ezt nem váltja ki."
+    ]
+   ],
+   "why": "A 7. pont szerint a \"look at\" is kiváltja az Undertitan effectjét, de az Undertitan szövege \"As I'm revealed\", a megnézés nem felfedés."
+  }
+ },
+ "checked": 92,
+ "data_issues": [
+  "Gravity Field: a kötegben domain Mind, a cards.json-ban Calm. Melyik a helyes, ellenőrizni kell.",
+  "Hush: a kötegben domain Calm, a cards.json-ban nincs domain. A short és a notes (103.2.b.5, 135.2.e.6.b) domain nélküli lapként kezeli, ez ütközik a köteg domain mezőjével.",
+  "Industrious Mechsmith: a kötegben domain Mind, a cards.json-ban nincs domain. A short és a notes (103.2.b.5) domain nélküli lapként kezeli, ez ütközik a köteg domain mezőjével.",
+  "Irelia, Blade Dancer és Ivern, Green Father: a cards.json-ban nem található, a kártyaadat nem volt keresztellenőrizhető.",
+  "Hextech Anomaly és Honeyfruit: a text szokatlanul formázott ([T]: [Reaction] sorrend, illetve [Level 6][>] [>>][Reaction][>]), de egyezik a cards.json-nal."
+ ],
+ "open": [
+  "Hush: ha a lap valóban Calm, a short \"domain nélküli, bármelyik deckbe mehet\" állítása és a notes 1. és 2. pontja hibás; a domain tisztázása után javítandó.",
+  "Industrious Mechsmith: ha a lap valóban Mind, a short \"domain nélküli\" állítása és a notes 1. pontja hibás; a domain tisztázása után javítandó."
+ ]
+}

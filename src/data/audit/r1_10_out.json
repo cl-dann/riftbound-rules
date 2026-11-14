@@ -1,0 +1,108 @@
+{
+ "fixes": {
+  "Shadow Order Disciple": {
+   "notes": [
+    [
+     "421.1,458.1",
+     0,
+     "Minden Move-ra triggerel, Standard Move-ra és effect általi mozgatásra is. Recallra nem."
+    ],
+    [
+     "383.3.a,383.3.b",
+     0,
+     "A \"you may\" után álló \"[Burn 1]\" a trigger base costja. A finalizáláskor fizeted: a saját Main Decked felső lapja a trashbe megy. Ha nem kéred, a trigger lekerül a chainről."
+    ],
+    [
+     "203",
+     1,
+     "Mivel a cost a finalizáláskor elmegy, ha a Disciple a resolve előtt elhagyja a boardot, a lapot ettől még elburnölted."
+    ],
+    [
+     "432.1.b",
+     2,
+     "Üres Main Decknél a Burn mint cost Burn Outot okozna. Hogy ilyenkor a cost kifizethető-e, azt a Core Rules nem mondja ki külön, judge döntse el."
+    ],
+    [
+     "441.1",
+     1,
+     "A Burn tölti a trashedet, ami a trashből játszó lapoknak (például Glasc Mixologist, Rumble, Hotheaded) és a trashből banisholó Shadow Clone tokennek alapanyag."
+    ]
+   ],
+   "why": "Shadow Clone nem lap, hanem token (187.11), és nem játszik ki a trashből, hanem banishol onnan; a Rumble a Hotheaded verzióra pontosítva."
+  },
+  "Sivir, Mercenary": {
+   "notes": [
+    [
+     "805.1.b,805.1.b.1",
+     0,
+     "[Accelerate]: kijátszáskor [1] és egy Chaos Power additional costért ready lép be. A Power csak a unit saját domainjéből fizethető."
+    ],
+    [
+     "364.3.a",
+     0,
+     "Feltételes passzív ability: a játék folyamatosan ellenőrzi. Amint a körben elköltötted a második Powert, Sivir azonnal +2 Mightot és Gankinget kap."
+    ],
+    [
+     "445.1",
+     1,
+     "Elköltött Power az, amit a Rune Poolodból kifizettél, bármilyen domainből. A megtermelt, de el nem költött Power nem számít. A számlálás minden körben újraindul."
+    ],
+    [
+     "805.1.b",
+     1,
+     "A saját Accelerate cost-jára fizetett Power is beleszámít."
+    ],
+    [
+     "810.1.b,144.1.a,144.1.c",
+     0,
+     "[Ganking] mellett Standard Move-val battlefieldről battlefieldre is léphet. A Standard Move csak a saját Main Phase-edben, showdownon és combaton kívül lehetséges, ezért a Ganking az opponent körében nem használható ki, még ha ott költesz is 2 Powert. A +2 Might viszont ilyenkor is él."
+    ]
+   ],
+   "why": "144.1.a, 144.1.c: Standard Move csak a saját Main Phase-ben, showdownon és combaton kívül; a note azt sugallta, hogy a Ganking az opponent körében is hasznos lehet."
+  },
+  "Smoke and Mirrors": {
+   "short": "Kiválasztasz egy saját unitot és egy másik helyen álló saját unitot; ha legalább az egyiknek van Temporary-je, helyet cserélnek. Húzol 1 lapot akkor is, ha nincs csere. Kézből Action időzítéssel megy, vagy a saját körödben 1 bármilyen domainű Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől 0-ért, Reactionként kijátszhatod.",
+   "why": "811.1.b: a Hide csak általad kontrollált battlefieldre történhet; ez a feltétel kimaradt a shortból."
+  },
+  "Stand United": {
+   "short": "Buffol egy saját unitot, és a kör végéig minden saját buff +1 helyett +2 Mightot ad, a később buffolt unitoknál is. Kézből a saját körödben vagy showdownban játszható ki (Action). Hidden: 1 tetszőleges Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől Reactionként ingyen kijátszhatod, ekkor a buffolt unitnak azon a battlefielden kell állnia.",
+   "why": "811.1.b: a Hide csak általad kontrollált battlefieldre történhet; a short nem mondta meg, hová kerül a lap, így az \"azon a battlefielden\" hivatkozás értelmezhetetlen volt."
+  },
+  "Steadfast Outrider": {
+   "notes": [
+    [
+     "364.3.a",
+     0,
+     "Feltételes passive: a +2 Might addig él, amíg legalább 2 másik friendly unit vagy gear van az Outrider battlefieldjén. Base-ben nem működik."
+    ],
+    [
+     "719.3,718.5.a",
+     1,
+     "A unitra csatolt Equipment gearnek számít, és ott van, ahol a unitja. Egy társ a rá csatolt Equipmenttel együtt már kettőnek számít."
+    ],
+    [
+     "149.3,830.1.b.3",
+     0,
+     "Csatolatlan gear a cleanupban általában visszakerül a base-be, kivéve a [Deploy] geart (például Bomb token), amely battlefielden maradhat. A feltételhez ezért jellemzően unitok, csatolt Equipmentek vagy Deploy gearek számítanak."
+    ],
+    [
+     "142.4.b",
+     1,
+     "Ha combat közben a társak száma 2 alá esik, a +2 azonnal megszűnik, és az Outrideren lévő damage halálossá válhat."
+    ],
+    [
+     "815.1.b",
+     0,
+     "Tank: az opponentnek előbb az Outriderre kell halálos combat damage-et kiosztania."
+    ]
+   ],
+   "why": "830.1.b.3: a Deploy gear nem kerül vissza a cleanupban, a note abszolút állítása (csatolatlan gear nem marad battlefielden) ezért hibás volt."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Sett, Kingpin: a note flag 2-vel nyitva hagyja, hogy Sett saját magát is számolja-e \"buffed friendly unit\"-ként. A 491.8.e (friendly = a játékos által kontrollált) és a 740.2.a (\"no other friendly units\") inkább az önszámolás felé mutat, de kifejezett szabály nincs, ezért nem javítottam.",
+  "Sprite Burst: a note 0-s flaggel állítja, hogy a két token külön helyre mehet. Ez a 185.2.a alapján (minden token külön kijátszás) valószínű, de kifejezett szabályt nem találtam rá."
+ ]
+}

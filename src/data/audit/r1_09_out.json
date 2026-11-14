@@ -1,0 +1,396 @@
+{
+ "fixes": {
+  "Rek'Sai, Swarm Queen": {
+   "notes": [
+    [
+     "383.3.a,383.4.e.2.a",
+     0,
+     "Attack trigger, combatonként egyszer. Az első \"you may\" az effect elején áll: a finalizáláskor döntesz, hogy felfeded-e a lapokat."
+    ],
+    [
+     "383.3.a.3",
+     0,
+     "A banish és a kijátszás későbbi \"you may\", ezekről a resolve közben döntesz, a lapok ismeretében."
+    ],
+    [
+     "420.3.b",
+     1,
+     "A lapot a costjáért játszod ki, az effect nem ignorálja. A resolve részeként megy, ezért spell is lehet, [Action] nélkül is."
+    ],
+    [
+     "355.17",
+     1,
+     "A \"you may play it here\" nem kötelező előírás, csak plusz lehetőség: a unit más érvényes locationre (base-ed vagy általad kontrollált battlefield) is mehet."
+    ],
+    [
+     "355.2.b,420.3.b.2",
+     1,
+     "A \"here\" plusz érvényes locationt ad: a unit arra a battlefieldre is mehet, ahol Rek'Sai támad, pedig azt nem te kontrollálod. A board-állapotra épülő ilyen választást a 420.3.b.2 szerint a kijátszott lap finalizálásakor ellenőrzik."
+    ],
+    [
+     "428.1",
+     1,
+     "Errata: előbb banisheled a lapot, utána játszod ki. Ha végül nem tudod kijátszani, a Banishmentben marad. A régi szöveggel a deckből ment, a ki nem játszott lap recycle-ölődött."
+    ],
+    [
+     "432.1.c,417.4",
+     0,
+     "2-nél kevesebb lapnál annyit fedsz fel, amennyi van, Burn Out nélkül. A maradékot kötelező recycle-ölni."
+    ]
+   ],
+   "why": "Két note azt állította, hogy a szabályzat (355.17, 420.3.b.2) név szerint ezt a lapot hozza példának, ami nem igaz; a 420.3.b.2-es note ráadásul a szabállyal ellentétesen a resolve-ot nevezte meg ellenőrzési időpontnak, a szabály szerint a finalizálás az."
+  },
+  "Rek'Sai, Void Burrower": {
+   "short": "Amikor conquerelsz, exhaustolhatod a legendet, hogy felfedd a Main Decked 2 felső lapját; az egyiket banisholhatod, majd teljes costjáért kijátszod. Ha a banisholt lapot nem játszod ki, a Banishmentben marad. A maradék lap a deck aljára kerül (recycle).",
+   "why": "A short \"félreteszed\" kifejezése pontatlan: a lap banisholódik (428.1), és ha nem játszod ki, a Banishmentben marad, nem ideiglenes félretétel."
+  },
+  "Renekton, Butcher of the Sands": {
+   "short": "Fury és Body legend. 2 bármilyen Powerért és exhaustért 2 Energyt ad, amit csak unit kijátszására vagy unit activated abilityjére költhetsz. Bárki körében, akár fizetés közben is használható; az exhaust miatt csak akkor újra, ha valami ready-zi. Az el nem költött Energy elvész.",
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Fury és Body domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "135.2.e.5.a,164.2.b",
+     1,
+     "A cost 2 bármilyen domainű Power, ami jellemzően 2 rune recycle-ölését jelenti. Az ability Powert vált 2 Energyre."
+    ],
+    [
+     "430.3,430.2",
+     0,
+     "[Reaction] Add ability: cost fizetése közben is aktiválható, bárki körében, és nem lehet rá reagálni."
+    ],
+    [
+     "002",
+     1,
+     "A 2 Energy csak unit kijátszására vagy unit activated abilityjére költhető. Spellre, gearre, legend abilityre nem."
+    ],
+    [
+     "415.4,167",
+     0,
+     "A legend exhaustolása is cost, ezért csak ready legenddel használható; körönként egyszer, hacsak egy effect újra ready-vé nem teszi. Az el nem költött Energy a Rune Pool ürítésekor elvész."
+    ]
+   ],
+   "why": "A \"körönként csak egyszer\" túlzás: az exhaust cost (415.4) csak annyit jelent, hogy ready legend kell, egy ready effect után újra használható."
+  },
+  "Rengar, Pouncing": {
+   "notes": [
+    [
+     "813.1.c.1,813.3.a",
+     0,
+     "[Reaction] uniton: Closed State-ben, bárki körében kijátszható, de alapból csak a base-edbe vagy általad kontrollált battlefieldre."
+    ],
+    [
+     "355.2.b",
+     0,
+     "Az \"I can be played to a battlefield you're attacking\" plusz helyet ad: olyan battlefieldre is mehet, ahol éppen te vagy az Attacker, akkor is, ha nem te kontrollálod."
+    ],
+    [
+     "466.2.c.3.a,807.1.c",
+     0,
+     "Folyó combatba érkezve a következő cleanupban Attacker designationt kap, így az [Assault 2] azonnal él: 5 Mightot ad a támadáshoz."
+    ],
+    [
+     "143.4,467.2.a",
+     1,
+     "Exhausted lép be, de a combat damage minden attacker unit Mightját összeadja, exhausted állapotra nincs kivétel."
+    ],
+    [
+     "143.1.b",
+     1,
+     "A Cat tag miatt használható a Stalking Wolf additional costjához (megölendő Cat), és ha Ivern, Nurturer a deckből Catként reveal-eli, kiváltja Ivern buffját."
+    ]
+   ],
+   "why": "Pontatlan volt: Ivern, Nurturer buffját nem Rengar kijátszása váltja ki, hanem az, hogy Ivern a deck felső lapjai közül Bird, Cat, Dog vagy Poro unitot reveal-el."
+  },
+  "Resonating Strike": {
+   "notes": [
+    [
+     "355.7,355.8",
+     0,
+     "Két target van: egy általad kontrollált battlefield és egy általad kontrollált unit egy másik locationön. Ha nincs kontrollált battlefielded, a lap nem játszható ki."
+    ],
+    [
+     "811.1.d.2,811.1.d.4",
+     1,
+     "Facedown-ból a targetek külön számítanak: a battlefield csak az lehet, ahol a lap el volt rejtve. A unitnak a szöveg szerint eleve máshol kell lennie, ez a megkötés lehetetlenné teszi az ottani választást, ezért a unit szabadon választható."
+    ],
+    [
+     "421.1,452",
+     0,
+     "Ez Move: a \"when I move\" triggerek lefutnak. A cél a saját battlefielded, ezért a mozgás önmagában nem teszi Contesteddé."
+    ],
+    [
+     "466.2.c.3.a",
+     0,
+     "Combat közben erősítésnek használható: a megérkező unit a következő cleanupban megkapja a Defender (vagy Attacker) jelölést, és a +2 Mighttal együtt beleszámít a combat damage-be."
+    ],
+    [
+     "359.3.e.2,359.3.e.5",
+     0,
+     "Ha a unit a resolve előtt elhagyja a boardot vagy már nem te kontrollálod, illegális target: se nem mozog, se Mightot nem kap."
+    ],
+    [
+     "359.3.e.14.b",
+     1,
+     "Ha a Move negálódik (például egy effect tiltja a unit mozgását), a +2 Mightot a unit ettől még megkapja."
+    ],
+    [
+     "813.1.c.1",
+     1,
+     "Errata: csak a reminder text változott. A régi zárójeles szöveg [Action] időzítést írt le, de a lap [Reaction]: Closed State-ben, bárki körében kijátszható."
+    ]
+   ],
+   "why": "A note a szabályzat Smoke and Mirrors példájára hivatkozott, ilyen példa nincs a Core Rulesban; a kivételt a 811.1.d.2 \"unless it explicitly restricts targeting\" része adja."
+  },
+  "Rhasa the Sunderer": {
+   "notes": [
+    [
+     "356.4.g",
+     0,
+     "Változó kedvezmény: a trashben lévő lapok számát a Determine Total Cost lépésben (discountok alkalmazásakor) nézi a játék. Ha a trash mérete ezután változik a kijátszás alatt, a kiszámolt cost már nem módosul."
+    ],
+    [
+     "356.4.c.2, 356.6",
+     0,
+     "A kedvezmény csak az Energy costot csökkenti, legfeljebb 0-ig. Az 1 Chaos Powert mindig ki kell fizetni."
+    ],
+    [
+     "206",
+     0,
+     "Más effectek (például \"Energy cost no more than 3\") a nyomtatott 10-es costot látják, nem a csökkentettet."
+    ],
+    [
+     "441, 423",
+     1,
+     "A Burn, a discard és a kijátszott spellek töltik a trasht. A Last Rites Equip cost-ja és a Flow viszont fogyasztja."
+    ]
+   ],
+   "why": "A 356.4.g nem hozza név szerint példának a Rhasát; a szabály tartalma helyes, csak a hivatkozás állítása volt hamis."
+  },
+  "Riven, Deserter": {
+   "short": "Minden alkalommal +1 Mightot kap a körre, amikor egy másik saját unitod exhaustolódik. Körönként egyszer, a saját Main Phase-edben, showdownon kívül exhaustolhatsz egy ready saját unitot, hogy ready-vé tegyél egy unitot. Ha erre egy másik unitot exhaustolsz, Riven a +1 Mightot is megkapja.",
+   "why": "A short nem írta ki az activated ability időzítését (381.1: csak a saját Main Phase-ben, Open State-ben, showdownon kívül), így combat közbeni használatra is lehetett érteni; a +1 Might körre szól (\"this turn\")."
+  },
+  "Riven, Shattered": {
+   "short": "Amikor Riven attacker lesz, választasz egy ottani enemy unitot: minden rá csatolt Equipmentért 2 damage-et kap, egyetlen sebzésként. Equipment nélkül a trigger nem sebez. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod az Equip cost kifizetésével, akkor is, ha máshoz van csatolva; ha az Equip cost [A]-t tartalmaz, 1 Powerrel kevesebbet fizetsz, különben nincs kedvezmény.",
+   "why": "A 418.8 nem hozza név szerint példának ezt a lapot. A Weaponmaster kedvezmény csak akkor jár, ha az Equip cost [A]-t tartalmaz (821.1.c.3); a short \"bármilyen domainű Powert\" megfogalmazása [C]-re vagy domain Powerre is érthető volt."
+  },
+  "Rockfall Path": {
+   "notes": [
+    [
+     "355.17.b",
+     0,
+     "A kijátszási korlátozást be kell tartani. Ha egy unitot ide próbálsz kijátszani, a lap nem finalizálódik."
+    ],
+    [
+     "421.1",
+     1,
+     "A Move nem play: unitok Standard Move-val vagy effecttel ide léphetnek, conquerelni lehet itt."
+    ],
+    [
+     "811.1.d.1",
+     1,
+     "Az ide elrejtett unit csak erre a battlefieldre lenne kijátszható, ezért facedown-ból itt nem játszható ki. Spell és gear elrejtése működik."
+    ],
+    [
+     "185.2.a",
+     1,
+     "A tokent is \"play\"-eled, ezért \"play a unit token here\" effect ide nem tud unitot tenni."
+    ],
+    [
+     "358.3.a",
+     1,
+     "A tiltott play-t tartalmazó spell vagy ability maga kijátszható, de a resolve-kor az ide szóló play instruction negálódik."
+    ]
+   ],
+   "why": "A 355.17.b nem hoz Mageseeker Warden példát, a hivatkozás hamis volt."
+  },
+  "Rumble, Scrapper": {
+   "notes": [
+    [
+     "133.3.a",
+     0,
+     "\"Your Mechs\": Mech taggel rendelkező, általad kontrollált objektumok a boardon. A Mech tokenek is, és maga Rumble is, aki így 5 Mightú."
+    ],
+    [
+     "365.1,142.4.b",
+     1,
+     "Passive bónusz, csak addig él, amíg Rumble a boardon van. Ha lekerül, a sebzett Mechek Mightja csökken, és a rajtuk lévő damage halálos lehet."
+    ],
+    [
+     "383.4.d.2.a",
+     0,
+     "Hold effect: akkor triggerel, ha Rumble azon a battlefielden áll, amit a Beginning Phase-edben megtartasz."
+    ],
+    [
+     "187.4,184.2",
+     0,
+     "A Mech token 3 Mightú, a base-edbe kerül, nem Rumble mellé. Rumble bónuszával 4 Mightú."
+    ]
+   ],
+   "why": "A 479.4.b a nem passive forrású aritmetikai effectek snapshotolásáról szól, nem támasztja alá, hogy a passive bónusz csak a boardon él; a megfelelő szabály a 365.1."
+  },
+  "Rune Prison": {
+   "notes": [
+    [
+     "355.10",
+     0,
+     "A unit target, bármelyik játékosé lehet, base-ben is."
+    ],
+    [
+     "424.1.b",
+     0,
+     "A Stunned unit Mightja nem számít bele a combat damage-be, de a unit továbbra is részt vesz a combatban és damage-et kaphat."
+    ],
+    [
+     "424.1.c",
+     0,
+     "A Stunned unit megöléséhez továbbra is a teljes Mightjának megfelelő damage kell."
+    ],
+    [
+     "424.1.a.2",
+     0,
+     "A Stunned állapot a kör végi cleanupban szűnik meg. A saját körödben stunolt unit a controllere következő körére már nem Stunned."
+    ],
+    [
+     "424.1.a.1",
+     1,
+     "Már Stunned unit is választható, de nem lesz újra stunolva, ezért a stunra figyelő triggerek nem futnak le."
+    ],
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ]
+   ],
+   "why": "A 424.1.a.1 csak azt mondja, hogy Stunned unit nem stunolható újra; a triggerek elmaradása ebből levezetés, ezért flag 1, nem 0."
+  },
+  "Runeblade Anvil": {
+   "short": "Kijátszáskor és amikor elhagyja a boardot, banisholod a Main Deck felső lapját, és a következő Ending Phase-edig kijátszhatod, a costját kifizetve. Ha nem játszod ki, a lap banishelve marad. A saját Main Phase-edben, showdownon kívül 2 Energy, 1 Fury Power és exhaust költséggel megölheted, ez a távozás miatt újabb lapot banishol.",
+   "why": "A short nem írta ki a \"[2][C], [T]: Kill this\" activated ability időzítését (151.2: csak a saját Main Phase-ben, Open State-ben, showdownon kívül), így combat közbeni használatra is lehetett érteni."
+  },
+  "Sandshifter": {
+   "notes": [
+    [
+     "355.10,355.9.b",
+     0,
+     "Az enemy unit target, legfeljebb 3 Mighttal. Bárhol állhat, base-ben is."
+    ],
+    [
+     "355.8",
+     0,
+     "Kötelező effect. Ha nincs megfelelő enemy unit, a trigger nem kerül chain-re."
+    ],
+    [
+     "710,359.3.e.2",
+     0,
+     "Az aktuális Might számít. Ha a resolve előtt a target Mightja 3 fölé nő, már nem felel meg a targeting feltételnek, illegális target, nem hal meg."
+    ],
+    [
+     "429.1.a.1.b",
+     0,
+     "Kill instruction: a megölt unit Deathknell abilityje chain-re kerül."
+    ]
+   ],
+   "why": "A 359.3.e.4 a zónaváltás utáni visszatérésről szól, nem a Might változásáról; a megfelelő szabály a 359.3.e.2 (a target már nem felel meg a targeting requirementnek)."
+  },
+  "Sandstone Chimera": {
+   "notes": [
+    [
+     "315.3.b,365.1",
+     0,
+     "A Channel Phase-ben alapból 2 rune érkezik. Amíg a Chimera battlefielden áll, csak 1. Base-ben állva nem hat."
+    ],
+    [
+     "315.3.b",
+     1,
+     "\"Players\": a 315.3.b szerinti Channel Phase-t minden játékosnál módosítja, rád is vonatkozik, nem csak az opponentre."
+    ],
+    [
+     "431.4.b",
+     1,
+     "Csak a Channel Phase channeljét korlátozza. Az effectek által adott channel (például Nasus, Guardian of Knowledge) nem tartozik ide."
+    ],
+    [
+     "369.1",
+     2,
+     "A Seraphic Wyvern replacement effectjével együtt valószínűleg 1 plusz 1 exhausted rune érkezik, de a két effect viszonyát a Core Rules nem mondja ki, judge döntse el."
+    ]
+   ],
+   "why": "A 054.2 az \"only\" szóval megfogalmazott tiltásokról szól, nem támasztja alá, hogy a \"players\" a lap controllerére is vonatkozik."
+  },
+  "Scrapyard Champion": {
+   "notes": [
+    [
+     "812.1.b.1,420.4.b",
+     0,
+     "Legion: a play effect csak akkor aktív, ha ebben a körben már finalizáltál egy másik kártyát. Counterelt lap is számít."
+    ],
+    [
+     "423.2.a,423.4",
+     0,
+     "A discard kötelező, nincs \"may\". Ha 2-nél kevesebb lap van a kezedben, annyit dobsz, amennyi van, a maradék negálódik."
+    ],
+    [
+     "359.3.e.11",
+     1,
+     "Részben végrehajtható instruction: üres kézzel a discard negálódik, de a draw 2 ettől még megtörténik."
+    ],
+    [
+     "414.4",
+     0,
+     "Ha 2-nél kevesebb lap van a Main Deckben, a húzás Burn Outot okoz."
+    ],
+    [
+     "423.1",
+     0,
+     "A discardolt lap közvetlenül a trashbe megy, a szövege nem hajtódik végre."
+    ]
+   ],
+   "why": "A 359.3.e.11 nem hozza példának ezt a lapszöveget, csak az általános elvet mondja ki; a konkrét alkalmazás levezetés (flag 1)."
+  },
+  "Seat of Power": {
+   "notes": [
+    [
+     "190.2.b",
+     1,
+     "A többi, általad vagy csapattársad által kontrollált battlefieldet számolja. Unit jelenléte nem elég, ha a control még nincs meg."
+    ],
+    [
+     "487.4",
+     1,
+     "1v1-ben 2 battlefield van, tehát legfeljebb 1 lapot húzol: akkor, ha a másikat is kontrollálod."
+    ],
+    [
+     "135.2.b.3",
+     1,
+     "A számot a resolve-kor nézi a játék, mert az instruction ekkor hajtódik végre. Ha a trigger chainen léte alatt elveszítesz egy battlefieldet, kevesebbet húzol."
+    ],
+    [
+     "414.4",
+     0,
+     "Kötelező húzás. Ha a deckben kevesebb lap van, Burn Out következik."
+    ],
+    [
+     "473.2.a,472",
+     0,
+     "Conquer trigger: annál fut le, aki itt conquerel, körönként legfeljebb egyszer."
+    ]
+   ],
+   "why": "A 359.3.e.12.a az információ elérhetőségéről szól, nem mondja ki, mikor számolódik a battlefieldek száma; a végrehajtás idejét a 135.2.b.3 adja."
+  },
+  "Sentinel Adept": {
+   "short": "Weaponmaster: kijátszáskor egy saját Equipmentedet az Equip cost kifizetésével rácsatolhatod, akár egy másik unitról átrakva is, az Equip szokásos időzítésétől függetlenül. Ha az Equip cost [A]-t (bármely domain 1 Powere) tartalmaz, 1 Powerrel olcsóbb; ha nincs benne [A] (például [C]), nincs kedvezmény.",
+   "why": "A short szerint csak Power nélküli Equip costnál marad el a kedvezmény, de a 821.1.c.3 szerint minden olyan Equip costnál elmarad, amely nem tartalmaz [A]-t, így [C] vagy domain Power esetén is."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Riposte: a kártyaadat csak P 2-t ad meg, a Power szimbólumok nincsenek a szövegben; ha a nyomtatott cost [O][Y] és nem [C][C], a 135.2.e.6.c-re épülő \"tetszőleges arányban fizethető\" note hibás. A nyomtatott lapon ellenőrizendő.",
+  "Rek'Sai, Swarm Queen: a note (420.3.b, flag 1) szerint a resolve közben [Action] nélküli spell is kijátszható; a 420.3.b szerint a Play minden lépése a szokásos (a 358.4 timing ellenőrzés is), a 312.1.b.1 csak a priorityt oldja fel. A Core Rules nem mondja ki egyértelműen, hogy a Limited Play felülírja a timing engedélyt, judge vagy hivatalos FAQ döntse el."
+ ]
+}

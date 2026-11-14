@@ -1,0 +1,297 @@
+{
+ "fixes": {
+  "Maduli the Gatekeeper": {
+   "short": "Nem lehet ready-vé tenni: alapból exhausted lép be és úgy is marad, ezért Standard Move-val nem tud mozogni. 1 Chaos Powerért (exhaust nélkül, a saját Main Phase-edben) átmegy egy olyan enemy battlefieldre, ahol áll unit, ha a Mightja nagyobb az ott álló enemy unitok összesített Mightjánál. A feltételt a resolve-kor nézi a játék: ha addigra nem teljesül, nem mozdul, a Power elveszett.",
+   "notes": [
+    [
+     "143.4,315.1.b,054.1",
+     1,
+     "Alapból exhausted lép be, és semmi nem teheti ready-vé: az Awaken Phase csak a ready-zhető objektumokat állítja fel, a ready effectek rajta nem csinálnak semmit. Az \"enter ready\" hatásokat lásd az utolsó pontban."
+    ],
+    [
+     "144.2,415.1.b",
+     0,
+     "Exhausted unit nem tudja kifizetni a Standard Move costját. Maduli ezért gyakorlatilag csak a saját abilityjével mozog."
+    ],
+    [
+     "381.1,377.1",
+     0,
+     "Az ability costja egy Chaos Power, exhaust nélkül. Csak a saját Main Phase-edben, Open State-ben aktiválható, de körönként többször is."
+    ],
+    [
+     "355.4,170.11.a",
+     0,
+     "A célt aktiváláskor választod: olyan enemy battlefield, ahol áll unit."
+    ],
+    [
+     "710,359.3.f.2",
+     1,
+     "A Might feltétel a resolve-kor ellenőrződik, aktuális értékekkel. Ha addigra Maduli Mightja nem nagyobb az ott álló enemy unitok összegénél, nem mozdul, a Power elveszett."
+    ],
+    [
+     "369.3,805.6",
+     2,
+     "Nem egyértelmű, hogy egy \"enter ready\" effect (Accelerate, Magma Wurm) hat-e rá. A ready belépés replacement effect, nem \"readying\", de a Core Rules ezt az esetet nem mondja ki, judge döntse el."
+    ]
+   ],
+   "why": "A short és az 1. note feltétel nélkül állította, hogy exhausted lép be, miközben az utolsó (flag 2) note nyitott kérdésnek jelöli az \"enter ready\" hatásokat (369.3, 805.6). Ellentmondás megszüntetve."
+  },
+  "Marching Orders": {
+   "notes": [
+    [
+     "355.7,355.8",
+     0,
+     "Két target: egy friendly unit bárhol (base-ben is) és egy battlefielden lévő enemy unit. Mindkettő kell a kijátszáshoz."
+    ],
+    [
+     "418.6.b.3",
+     0,
+     "A damage forrása a két unit, nem a spell. Hasonló szövegű példa a szabályzatban a Challenge."
+    ],
+    [
+     "418.6.b.4",
+     0,
+     "Az enemy unit által osztott damage-ért az ő controllere felel, a \"when you deal damage\" triggerei lefutnak."
+    ],
+    [
+     "359.3.f.2,418.1.d",
+     0,
+     "A Mightokat a végrehajtáskor nézi a játék, a két damage egyszerre megy ki. A base-ben lévő unitod így combat nélkül üthet."
+    ],
+    [
+     "359.3.e.12",
+     1,
+     "Ha az egyik unit illegális target lesz, a Mightja \"null\", és nincs kinek ütnie: egyik irányban sem megy damage."
+    ],
+    [
+     "820.1.d,820.2.a",
+     0,
+     "Repeat [3]: az effect kétszer hajtódik végre, a második körre más pár is választható, vagy ugyanaz a pár üt kétszer."
+    ],
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ]
+   ],
+   "why": "418.6.b.3: a Challenge példaszövege (\"Choose a friendly unit and an enemy unit...\") nem azonos a lapéval, csak hasonló."
+  },
+  "Megatusk": {
+   "short": "3 XP elköltésével a vele egy helyen álló összes unitod (ő is) Gankinget kap a kör végéig. Csak a saját Main Phase-edben, showdownon kívül használható, exhausted Megatusk is aktiválhatja. A Ganking nem ad plusz mozgást, a unitoknak ready-nek kell lenniük.",
+   "why": "381.1, 145.2: keyword nélküli activated ability csak a saját Main Phase-ben, Open State-ben, showdownon kívül aktiválható; a \"saját körödben\" pontatlan volt (showdown is lehet a saját körödben)."
+  },
+  "Mesmerize": {
+   "short": "Két mód közül választasz: egy saját unitot visszaküldesz a tulajdonosa kezébe, vagy egy enemy unit -2 Mightot kap a kör végéig. Bármikor kijátszható, akár válaszként is, így a saját unitodat megmentheted egy rá célzó hatás elől. Kézbe küldött token megszűnik, az Equipment a boardon marad.",
+   "why": "A szöveg \"its owner's hand\" (056.2): ha a friendly unitot nem te birtoklod, nem a te kezedbe megy."
+  },
+  "Monch": {
+   "short": "Ha valamelyik opponentnek van stunned unitja, 2 Energyvel olcsóbb, és ready lép be. A stun a kör végén lejár, ezért ugyanabban a körben kell stunolni, amikor Monchot kijátszod.",
+   "why": "A kedvezmény [2], vagyis Energy (356.4.b); a \"2-vel olcsóbb\" nem írta ki a cost típusát."
+  },
+  "Miss Fortune, Captain": {
+   "notes": [
+    [
+     "805.1.b,810.1.b",
+     0,
+     "[Accelerate]: [1] és egy Body Power additional costért ready lép be. [Ganking]: Standard Move-val battlefieldről battlefieldre is léphet."
+    ],
+    [
+     "383.1,383.3.a",
+     0,
+     "A szabályzat ezt a szöveget hozza példának az \"Nth time\" triggerre. A \"you may\" az effect elején áll: a finalizáláskor döntesz róla."
+    ],
+    [
+     "359.3.e.2",
+     1,
+     "A \"something else that's exhausted\" target bármilyen exhausted objektum lehet Miss Fortune-ön kívül: unit, gear, rune vagy legend. Ha a resolve-ra már nem exhausted, illegális target."
+    ],
+    [
+     "421.1,458.1",
+     1,
+     "Minden körben az első Move-ja triggerel, az opponent körében is, effect általi mozgatásnál is. Recallra nem."
+    ],
+    [
+     "144.2",
+     1,
+     "Standard Move után ő maga exhausted marad. Egy rune-t readyzve a mozgás gyakorlatilag 1 Energyt ad vissza."
+    ]
+   ],
+   "why": "A \"ha a resolve-ra már nem exhausted, illegális target\" állítást a 359.3.e.2 mondja ki; a hivatkozott 359.3.e.4 a zónaváltásról szól."
+  },
+  "Mordekaiser, Iron Revenant": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Fury és Order domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "355.10.c",
+     0,
+     "A trashből banishelt unit vagy gear a cost része, ezért nem target. A cost fizetésére nem lehet reagálni."
+    ],
+    [
+     "203,428.1",
+     1,
+     "Ha nincs unit vagy gear a trashedben, a cost nem fizethető ki, az ability nem aktiválható. A banishelt lap végleg kikerül a trashből."
+    ],
+    [
+     "135.2.e.5.b",
+     0,
+     "Az [A] bármilyen domainű Power costra elkölthető."
+    ],
+    [
+     "002",
+     1,
+     "Csak unit vagy gear kijátszására költhető. Spellre, activated abilityre (például Equip costra) vagy Hide-ra nem."
+    ],
+    [
+     "430.3,430.2",
+     0,
+     "[Reaction] Add ability: a unit vagy gear costjának fizetése közben is aktiválható, nem lehet rá reagálni."
+    ]
+   ],
+   "why": "A 417.3 a recycle costról szól, itt a cost banish; a helyes hivatkozás 203 (cost nélkül nincs effect) és 428.1 (banish)."
+  },
+  "Nazuman Ntofo": {
+   "notes": [
+    [
+     "818.1.c.2,818.1.b.1",
+     0,
+     "Equip [1]: 1 Energyért egy általad kontrollált unitra csatolod. A unit target."
+    ],
+    [
+     "151.2",
+     0,
+     "Az Equip csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható."
+    ],
+    [
+     "435.1.d,818.3.b",
+     1,
+     "A Might bonus +0, a unit Mightja nem változik. A lap értéke az, hogy a unit Equipped állapotba kerül, amit más effectek figyelhetnek."
+    ],
+    [
+     "821.1.c.3",
+     0,
+     "Weaponmasterrel is csatolható, de az Equip costban nincs Power, ezért a kedvezmény nem csökkenti: az [1]-et ki kell fizetni."
+    ],
+    [
+     "719.5,436.4.a",
+     0,
+     "Ha a unit elhagyja a boardot, a gear leválik és a unit utolsó helyén marad. Ha ez battlefield volt, a következő cleanupban a base-be recallolódik."
+    ],
+    [
+     "435.1.f",
+     0,
+     "Másik unitra átrakva az előzőről leválik, a costot újra ki kell fizetni."
+    ]
+   ],
+   "why": "719.5, 436.4.b, 436.4.a: a recall csak akkor történik, ha a leválás után a gear battlefielden van; base-ben álló unitnál a gear egyszerűen a base-ben marad."
+  },
+  "Nasus, Curator of the Sands": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Calm és Mind domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "206",
+     0,
+     "Unitnál és gearnél a nyomtatott Energy cost számít. Kedvezménnyel olcsóbban kijátszott 7+ costú lap is triggerel."
+    ],
+    [
+     "420.4.a,377.2.a",
+     0,
+     "A trigger akkor fut le, amikor a unit vagy gear kijátszása, illetve az activated ability resolve-olt. Spell kijátszására nem triggerel."
+    ],
+    [
+     "206.1",
+     0,
+     "Activated abilitynél a base cost számít, a rá ható kedvezmények és drágítások nélkül. A szabályzat példája ennek a lapnak az activated abilityre vonatkozó részét idézi: egy [12] base costú ability akkor is triggerel, ha a saját kedvezménye miatt 7-nél kevesebb Energyt fizettél érte."
+    ],
+    [
+     "383.3.a,383.3.b,415.4",
+     0,
+     "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted. Exhausted legenddel nem megy. Külön körönkénti korlát nincs: ha valami újra readyzi a legendet, ugyanabban a körben ismét használható."
+    ],
+    [
+     "355.9.a,355.13",
+     0,
+     "A rune-ok targetek, \"up to 2\": 0, 1 vagy 2 választható. Már ready rune-on a ready nem csinál semmit."
+    ]
+   ],
+   "why": "206.1 példája csak az \"activated ability\" részt idézi (\"When you play an activated ability with Energy cost [7] or more...\"), nem a lap teljes szövegét."
+  },
+  "One-Two Punch": {
+   "notes": [
+    [
+     "355.7,355.8",
+     0,
+     "Két target: egy friendly unit és egy enemy unit, bárhol a boardon. Ha valamelyikből nincs választható, a spell nem játszható ki."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "A buff és a stun egymástól független. Ha az egyik target illegális lesz, a másikra vonatkozó rész ettől még végrehajtódik."
+    ],
+    [
+     "427.1.c",
+     0,
+     "Már buffolt friendly unit is választható, de nem kap második buffot."
+    ],
+    [
+     "424.1.b,424.1.a.2",
+     0,
+     "A Stunned enemy unit Mightja nem számít bele a combat damage-be. Az állapot a kör végi cleanupban szűnik meg."
+    ],
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ]
+   ],
+   "why": "A 103.2.b.5 note domain nélküli lapnak írta, a kártyaadat viszont Order domaint ad; a domain nem ellenőrizhető (lásd data_issues), ezért az állítás törölve."
+  },
+  "Order Rune": {
+   "notes": [
+    [
+     "103.4.a",
+     0,
+     "A Rune Deck pontosan 12 rune, és mind a legend Domain Identity-jén belül kell legyen."
+    ],
+    [
+     "164.2.a",
+     0,
+     "Exhaustolva 1 Energyt ad, domaintől függetlenül."
+    ],
+    [
+     "164.2.b, 417.1.b",
+     0,
+     "Recycle-ölve 1 Order Powert ad, és a Rune Deck aljára kerül."
+    ],
+    [
+     "164.2.b.1,163.2.b",
+     1,
+     "Az Order Power costú lapok (például Hidden Blade, Lacerate, Decree of Unity) Power részét Order rune recycle-je adja, vagy bármely domainre költhető univerzális Power ([A]). A Lacerate Flow costja ([4][C][C]) 2 Order Powert kér."
+    ]
+   ],
+   "why": "A note egy konkrét, meg nem nevezett deck rune-összetételét (\"a 12 rune-ból 3 Order\") állította, és azt, hogy az Order Power \"csak\" Order rune-ból fizethető; ez téves, mert univerzális Power ([A]) is fizetheti (163.2.b, 135.2.e.5.b)."
+  },
+  "Obelisk of Power": {
+   "short": "Minden játékos az első köre elején kap egy extra ready rune-t, így az első köre után eggyel több rune-ja van: a kezdő játékosnak 2 helyett 3, a másodiknak 3 helyett 4. Játékosonként egyszer működik.",
+   "why": "A short szerint mindenki \"2 helyett 3 rune-nal indul\", de a második játékos 487.7 miatt eleve 3-at kap, vele 4-et (a note is ezt mondja)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [
+  "Mechanical Bandit: a kártyaadat domainje Chaos, a cards.json (rad-111-167) szerint Fury.",
+  "Nazuman Ntofo: a kártyaadat domainje Body, a cards.json (rad-071-167) szerint Order. Az Equipment tag is hiányzik a tags mezőből, pedig a lapnak Equip abilityje van (a Weaponmaster \"Equipment tag\"-es lapot választ, 821.1.c).",
+  "One-Two Punch: a kártyaadat Order domaint ad, a cards.json-ban nincs domain, a fix/fixes.json szerint a domain egyik elérhető forrásból sem igazolható."
+ ],
+ "open": [
+  "Master Bingwen: a 821.1.c.3 szó szerint \"[A]\"-t említ; a short \"ha nincs Power\" értelmezése a 356.4.f.1 példája alapján ([A] kedvezmény [C] costot is csökkent) valószínű, de ha a 821.1.c.3 szó szerinti [A]-t jelent, akkor a csak [C]-t tartalmazó Equip costok (a legtöbb Equipment) nem csökkennek. Judge vagy hivatalos FAQ kell.",
+  "Master Yi, Wuju Bladesman (Starter) és Obelisk of Power: a \"banned\" állítás a build_data.py BAN/BAN2 listájából jön, a Core Rules ezt nem tartalmazza; a hivatalos tiltólistát nem tudtam ellenőrizni.",
+  "Mordekaiser, Twice Slain: a short \"egy másik saját unitot\" ír, a szöveg csak \"a friendly unit\"; hogy saját magát megölheti-e a csere costjaként, a Core Rules nem mondja ki."
+ ]
+}

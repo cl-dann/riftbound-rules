@@ -1,0 +1,345 @@
+{
+ "fixes": {
+  "Emperor's Dais": {
+   "short": "Battlefield: amikor itt conquerelsz, fizethetsz 1 Energyt és visszavehetsz kézbe egy itt álló saját unitot, hogy ide kapj egy 2 Mightú Sand Soldier tokent. Az árat előre fizeted, ezért ha a triggert counterelik, a token elmarad. Ha a trigger lefut, akkor sem veszíted el a helyet, ha az egyetlen unitodat vetted vissza.",
+   "why": "A short feltétel nélkül állította, hogy a hely nem vész el; counterelt triggernél (token nélkül) elveszhet (383.3.b.1, 323.5). A 'may' is hiányzott."
+  },
+  "Emperor's Divide": {
+   "short": "Bármennyi saját unitodat egy battlefieldről a base-be mozgatja. Kézből a saját körödben vagy showdownban játszható ki, egy másik spellre válaszul nem. Ha 1 tetszőleges domainű Powerért elrejted egy általad kontrollált battlefielden, a következő körtől reakcióként, ingyen jön: így kimentheted a unitokat a célzott spellek elől, de csak az ottaniakat.",
+   "why": "A Hide költsége [A], azaz bármely domain 1 Powere, és csak általad kontrollált battlefieldre rejthető, a következő körtől játszható ki (811.1.b)."
+  },
+  "En Garde": {
+   "short": "Reakcióként egy saját unitod ebben a körben +1 Mightot kap, és még +1-et, ha a resolve-kor a helyén nincs másik saját unitod. Az ellenséges unitok nem számítanak. Vigyázz, ha közben másik saját unit kerül oda, a második +1 elmarad.",
+   "why": "A short-ból hiányzott a 'this turn'. A 813.1.c.1 note tévesen állította, hogy az opponent nem tudja elrontani a feltételt; Reactionnel mozgathat unitot (359.3.f.2).",
+   "notes": [
+    [
+     "355.9.b",
+     0,
+     "A target általad kontrollált unit, bárhol a boardon, base-ben is."
+    ],
+    [
+     "359.3.f.2,740.2.a",
+     1,
+     "A második +1 feltételét a resolve-kor nézi a játék: akkor jár, ha a unit locationjén nincs másik általad kontrollált unit. Enemy unitok nem számítanak, és base-ben egyedül álló unitra is teljesül."
+    ],
+    [
+     "359.3.f.2",
+     1,
+     "A megkapott bónusz a kör végéig marad, akkor is, ha később másik unitod érkezik oda."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "Ha a unit illegális target lesz, mindkét bónusz elmarad."
+    ],
+    [
+     "813.1.c.1,359.3.f.2",
+     1,
+     "[Reaction]: a feltételt a resolve-kor nézi a játék. Elrontja, ha a resolve előtt másik saját unitod kerül oda: ezt te okozhatod, de az opponent is, például egy enemy unitot mozgató spellel (Charm) a te unitodat odamozgatva vagy a targetet elmozgatva."
+    ]
+   ]
+  },
+  "Encore": {
+   "short": "Kettőt választasz: 2 sebzés egy unitra, két 1 Mightú Recruit token, legfeljebb két unit ebben a körben +1 Mightot kap, vagy a felső 2 lapból egyet felhúzol, a másik a deck aljára megy. Hogy ugyanazt a módot kétszer választhatod-e, nem tisztázott, judge dönti el. Csak a saját körödben játszható ki.",
+   "why": "A +1 Might módból hiányzott a 'this turn' (lejár a kör végén)."
+  },
+  "Endless Riches": {
+   "short": "Kijátszáskor banisheled a kezed és a trashed, majd a decked felső 7 lapját a trashbe teszed (Burn 7). Ettől kezdve kimarad a Draw Phase-ed, viszont a trashből is játszhatsz ki lapot, és minden lap, ami nem a Main Deckből menne a trashbe, helyette banishelődik. Veszélyes: a deck gyorsan fogy, és minden Burn Out 1 pontot ad egy ellenfélnek.",
+   "why": "A 'minden más, ami a trashbe menne' félreérthető volt: csak a Main Decken kívülről érkező lapokat cseréli banishre (szöveg, 369.1). Burn Out: az opponent 1 pontot kap (432.2.c)."
+  },
+  "Evelynn, In Control": {
+   "why": "A 383.2.a.1 nem mondja ki közvetlenül, hogy resolve-kor nincs újraellenőrzés, ez levezetés, flag 0 helyett 1.",
+   "notes": [
+    [
+     "383.4.d.2.a,472",
+     0,
+     "Hold effect: akkor triggerel, ha Evelynn ott van a battlefielden, amikor a Beginning Phase-edben holdolsz. Battlefieldenként körönként egyszer."
+    ],
+    [
+     "383.2.a.1",
+     1,
+     "A facedown lap megléte a trigger condition része, a hold pillanatában nézi a játék. Mivel nem az Effect része, ha utána a lapot kijátszod, a trigger ettől még resolve-ol (levezetés: a szabály csak azt mondja ki, hogy a feltétel a Condition része)."
+    ],
+    [
+     "811.1.b",
+     0,
+     "Facedown lapot a Hidden kulcsszóval tehetsz le [A]-ért, battlefieldenként egyet, és csak általad kontrollált battlefieldre."
+    ],
+    [
+     "470.2,473.1.a.1",
+     0,
+     "A \"score 1 point\" pontszerzés, nem hold vagy conquer. Nem vonatkozik rá az utolsó pont megkötése, a hold pontján felül jár."
+    ],
+    [
+     "831.1.d",
+     0,
+     "[Disarm]: amikor támad, egy ottani enemy unit -1 Mightot kap a kör végéig."
+    ]
+   ]
+  },
+  "Existential Dread": {
+   "short": "Stunnol egy támadó ellenséges unitot, ami így nem sebez a harcban, vagy ha már stunnolt, a tulajdonosa kezébe küldi. Csak védekezőként, harc közben van értelme. Plusz 2 Energyért még egyszer lefut, akár másik targettel: ugyanarra a unitra választva előbb stun, aztán kézbe.",
+   "why": "A short szerint a Repeat mindig ugyanarra a unitra hat; a második végrehajtás targetje eltérhet (820.2.a)."
+  },
+  "Experimental Hexplate": {
+   "short": "Felszerelve +1 Mightot ad, és a unit a meglévő tagjei mellé Mech taget kap. Minden Mechre vonatkozó lap látja, például ha Mecheknek adsz képességet. Ha a gear leválik a unitról, a Mech tag is megszűnik.",
+   "why": "A Mech tag (Tag), nem típus (133.8); a short 'típus'-t írt."
+  },
+  "Ezreal, Prodigal Explorer": {
+   "why": "A 'körönként egyszer megy' abszolút állítás volt; egy legendet effect readyzhet (355.10.a példa: 'Ready a legend'), a cost exhaust (415.4).",
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Mind és Chaos domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "377.2.b",
+     0,
+     "A \"use only if\" feltételnek az aktiválás pillanatában igaznak kell lennie, különben az ability nem aktiválható."
+    ],
+    [
+     "383.4.b.3,355.7",
+     1,
+     "A \"chosen\" a targetelést jelenti. \"All enemy units\" jellegű, target nélküli hatások és a \"pick\" nem számítanak bele."
+    ],
+    [
+     "355.10",
+     2,
+     "Nem egyértelmű, hogy egy spell, amely egyszerre két enemy unitot targetel, egy vagy két \"választásnak\" számít-e. A Core Rules ezt nem mondja ki, judge döntse el."
+    ],
+    [
+     "002",
+     1,
+     "Csak spell és unit ability választása számít. Legend, gear vagy battlefield abilityvel targetelt enemy unit nem növeli a számlálót."
+    ],
+    [
+     "813.1.c.2,430.2",
+     1,
+     "[Reaction]: Closed State-ben, bárki körében aktiválható, ha a feltétel abban a körben teljesült. Ez nem Add ability, chain-re kerül és lehet rá reagálni."
+    ],
+    [
+     "415.4,414.4",
+     0,
+     "A cost a legend exhaustolása: exhausted legenddel nem aktiválható, így ha más effect nem readyzi, körönként egyszer megy. Üres Main Deck esetén a draw Burn Outot okoz."
+    ]
+   ]
+  },
+  "Fading Memories": {
+   "short": "Egy battlefielden álló unit vagy bármelyik gear Temporary lesz: az irányítója következő Beginning Phase-ének elején, még a pontozás előtt meghal. Így egy enemy unit már nem lesz ott, amikor az ellenfél a saját körében holdolna, és a hold effectje sem fut le. Csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A short és a note szerint az ellenfél nem tudja holdolni a helyet; csak az adott unit hiányzik a scoringnál, más unitjaival még holdolhat (816.1.b, 315.2.b.2).",
+   "notes": [
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "355.9.b",
+     0,
+     "A target battlefielden álló unit (base-ben lévő nem), vagy bármelyik gear, akár base-ben, akár unitra csatolva."
+    ],
+    [
+     "816.1.b,315.2.a.1",
+     0,
+     "A Temporary a permanent controllerének következő Beginning Phase-e elején, a scoring előtt öli meg a célt. Az enemy unit így a holdnál már nincs ott; ha más unitja is áll ott, az opponent ettől még holdolhatja a battlefieldet."
+    ],
+    [
+     "816.1.c",
+     1,
+     "A hatás nem \"this turn\": a Temporary a permanenten marad. Saját permanentre téve a te következő köröd elején hal meg."
+    ],
+    [
+     "816.1.a,429.1.a.1.b",
+     1,
+     "A Temporary triggered ability, a chain-re kerül: lehet rá reagálni, a Deathknell lefut, és a halált kiváltó replacement effect megmentheti a permanentet."
+    ],
+    [
+     "359.3.e.2",
+     0,
+     "Ha a megcélzott unit a resolve előtt base-be kerül, illegális target, a spell nem csinál semmit."
+    ]
+   ]
+  },
+  "Falling Star": {
+   "why": "A 143.2.b nem mondja ki, meddig marad a damage; a 143.3.b szerint a kör végén és combat cleanupban is gyógyul.",
+   "notes": [
+    [
+     "355.10, 758.2",
+     0,
+     "Két külön \"Deal 3 to a unit\" instruction, mindkettő unitja target. Választhatod kétszer ugyanazt a unitot (a szabályzat példájában így 6 damage kerül rá) vagy két különbözőt."
+    ],
+    [
+     "355.8",
+     0,
+     "Chain-re csak úgy tehető, ha mindkét targetre van érvényes választás. Egyetlen unit is elég, mert kétszer választható."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "Ha az egyik target a resolve előtt illegálissá válik, csak a rá vonatkozó instruction marad el, a másik 3 damage megtörténik."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "143.3.b,143.2.b",
+     0,
+     "A damage a kör végéig, illetve egy combat cleanupig marad a uniton. A unit akkor hal meg, ha a rajta lévő damage eléri a Mightját."
+    ],
+    [
+     "388.1",
+     1,
+     "Errata: a régi \"Do this twice:\" forma reflexive triggerként működött volna. Az új szöveg két sima instruction, a targeteket kijátszáskor választod, és a spell egy chain itemként resolve-ol."
+    ]
+   ]
+  },
+  "Fanfare": {
+   "why": "A note domain nélkülinek nevezte a lapot (103.2.b.5), a kártyaadat szerint viszont Mind domainű; a pont törölve, az eltérés a data_issues-ban.",
+   "notes": [
+    [
+     "391.2,393",
+     0,
+     "A resolve egy Delayed Triggert hoz létre, ami a spelltől függetlenül él a kör végéig."
+    ],
+    [
+     "420.4.a,420.4.a.1",
+     0,
+     "A draw akkor jön, amikor a unit kijátszása a resolve-val befejeződött. Counterelt unit után nem húzol."
+    ],
+    [
+     "317.2.c",
+     1,
+     "Legfeljebb három unit után húzol, a fel nem használt alkalmak a kör végén elvesznek. A Fanfare előtt kijátszott unitok nem számítanak."
+    ],
+    [
+     "185.2.a,185.2.d",
+     1,
+     "Unit token kijátszása is beleszámít: a token unit, és a tulajdonosa a kártyakijátszás lépései szerint \"play\"-eli. Két tokent hozó effect két alkalmat használ el."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ]
+   ]
+  },
+  "Forbidden Technique": {
+   "short": "Ready-vé tesz egy unitot. Ha a trashedben van, és kijátszol egy legalább 7 Energy nyomtatott árú lapot, 1 Energy és 2 Fury Powerért onnan újra kijátszhatod, utána banishelődik. Kézből csak a saját körödben, showdownon kívül játszható ki.",
+   "why": "A 'Csak a saját körödben játszható ki' a trashből, trigger útján történő kijátszásra is vonatkozónak tűnt; a 155-ös időzítés a normál, kézből kijátszásra igaz."
+  },
+  "Forge of the Fluft": {
+   "why": "A 'Körönként egyszer megy' abszolút állítás volt; a legendet effect readyzheti (355.10.a példa), a 415.1.b csak azt mondja, hogy exhausted objektum nem exhaustolható újra.",
+   "notes": [
+    [
+     "174.8,381.1",
+     0,
+     "A legend activated abilityt kap. [Action] és [Reaction] nélkül csak a saját Main Phase-edben, Open State-ben aktiválható."
+    ],
+    [
+     "415.1.b",
+     1,
+     "A cost a legend exhaustolása: exhausted legenddel nem aktiválható, így ha más effect nem readyzi, körönként egyszer megy, és ütközik a legend saját Exhaust költségű abilityjével."
+    ],
+    [
+     "818.1.c.2",
+     1,
+     "Ugyanazt csinálja, mint az Equip, de az Equip cost kifizetése nélkül. Drága Equip costú Equipmentnél ez a nyereség."
+    ],
+    [
+     "355.10",
+     1,
+     "Az Equipment és a unit is target, mindkettőnek a tiédnek kell lennie. Ha a resolve előtt bármelyik illegális lesz, az attach nem történik meg."
+    ],
+    [
+     "435.1.f,435.4.a",
+     0,
+     "Ha az Equipment már egy másik uniton van, onnan leválik. Az átkerülés nem Move."
+    ],
+    [
+     "190.4.c",
+     1,
+     "Az ability csak addig van a legenden, amíg kontrollálod a battlefieldet. Ha az utolsó unitod elmegy innen, a következő cleanup után már nem használható."
+    ]
+   ]
+  },
+  "Frigid Jewel": {
+   "short": "Gear: amikor egy körben a második lapodat húzod, egy saját unitod +2 Mightot kap a kör végéig. A saját körödben általában a Draw Phase húzása az első, így a következő húzásod indítja be; a harmadik és további húzás már nem. Az ellenfél körében is működik, ha ott kétszer húzol.",
+   "why": "A short szerint 'bármelyik további húzás beindítja'; csak a körönkénti második húzás triggerel (szöveg: 'your second card each turn', 414.1)."
+  },
+  "Garbage Grabber": {
+   "short": "Gear: 3 lap trashből a deck aljára tétele, 1 Energy és exhaust árán húzol 1 lapot. Legalább 3 lap kell a trashben. Csak a saját Main Phase-edben, showdownon kívül használható, és mivel exhaust a költsége, ready-zés nélkül körönként egyszer.",
+   "why": "A 'körönként egyszer' abszolút állítás volt; a korlát csak az Exhaust costból jön (415.1.b), egy readyző effect után újra aktiválható. A 151.2 ezt nem mondja ki.",
+   "notes": [
+    [
+     "417.3",
+     0,
+     "A \"Recycle 3 from your trash\" cost: ha nincs legalább 3 lap a trashedben, az ability nem aktiválható."
+    ],
+    [
+     "417.5",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a 3 lapot te választod ki, és véletlen sorrendben kerülnek a Main Deck aljára."
+    ],
+    [
+     "417.6,355.10.c",
+     0,
+     "A recycle-ölt lapok nem targetek, mert a cost részei. Bármilyen típusú lap lehet."
+    ],
+    [
+     "151.2,415.1.b",
+     0,
+     "Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható. Az Exhaust cost miatt exhausted Grabberrel nem megy, így ha más effect nem readyzi, körönként egyszer."
+    ],
+    [
+     "414.4",
+     1,
+     "Üres decknél a recycle-ölt 3 lap közül húzol, így a Grabber a Burn Out ellen is véd."
+    ]
+   ]
+  },
+  "Gem Jammer": {
+   "short": "2 Mightú unit. Kijátszáskor egy általad kiválasztott unit a kör végéig battlefieldről battlefieldre mozoghat. Ehhez a unitnak ready-nek kell lennie, ezért magára adva abban a körben általában nem ér semmit, mert exhausted lép be, hacsak egy effect nem readyzi.",
+   "why": "Abszolút állítás volt, hogy magára adva nem ér semmit; ready belépés vagy readyző effect mellett Standard Move-val kihasználható (144.2, 416.3.b).",
+   "notes": [
+    [
+     "355.10,355.5.b",
+     0,
+     "A \"give a unit\" unitja target, a trigger chain-re kerülésekor választod. Bármelyik játékos unitja lehet, bárhol."
+    ],
+    [
+     "810.1.c.3,144.2",
+     0,
+     "A Ganking nem ad plusz mozgást. A kiválasztott unitnak readynek kell lennie a Standard Move-hoz."
+    ],
+    [
+     "143.4,144.2",
+     1,
+     "A Jammer exhausted lép be, ezért saját magára adva a Ganking abban a körben csak akkor használható ki, ha egy effect readyzi vagy ready lép be (például Firebrand Raider mellett)."
+    ],
+    [
+     "810.2",
+     0,
+     "Ha a unitnak már van Gankingje, a második redundáns."
+    ],
+    [
+     "317.2.c",
+     0,
+     "A Ganking a kör végén lejár."
+    ]
+   ]
+  }
+ },
+ "checked": 92,
+ "data_issues": [
+  "Fanfare: a kártyaadat domainje Mind, a cards.json forrásrekordban (rad-047-167) nincs domain mező; a régi note domain nélkülinek írta. Ellenőrizni kell a hivatalos domaint."
+ ],
+ "open": [
+  "Forgotten Monument: a short és a 473.2-es note szerint 'can't score' mellett a conquer és hold triggerek sem futnak le. A 383.4.c.2.c és 383.4.d.2.c szerint a pont elmaradása nem akadályozza a triggert; hogy a 'can't score' a Scoring actiont (és így a conquert/holdot) tiltja-e, vagy csak a pontot, a Core Rules nem mondja ki egyértelműen. Nem javítottam, judge vagy hivatalos FAQ kell.",
+  "Flame Chompers: a 'pay [C] to play me' mellett a 3 Energy base cost fizetése nyitott (a note flag 2-vel jelöli); hivatalos forrással nem tudtam lezárni.",
+  "Encore: az azonos mód kétszeri választása ('Choose two') nyitott, a Core Rules 355.3 nem rendezi; a note flag 2 megfelelő.",
+  "Fight or Flight: a 'tiltólistán van' állítás csak a projekt build_data.py BAN listájából (ban_updated 2026-09-18) igazolható, a Core Rules-ból nem."
+ ]
+}

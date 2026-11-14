@@ -44,7 +44,7 @@ for (fn,ty),vs in groups.items():
         err=ART_OVERRIDE.get(fn,[a['k'] for a in ARTICLES].index(k))
     if fn in MANUAL: err,txt=MANUAL[fn][0],fix(MANUAL[fn][1])
     labels=[l for l in base['cardTypeLabels'] if l!=ty and not (ty=='Legend' and l=='Champion')]
-    tags=base.get('tags') or []
+    tags=sorted({tg for v in vs for tg in (v.get('tags') or [])})
     disp=fn; al=[fn]; chtag=None
     if ty=='Legend':
         ct=[t for t in tags if t in champs]
@@ -172,6 +172,9 @@ REV={}
 for f in sorted(glob.glob('data/review/rv_*_out.json')):
     REV.update(json.load(open(f,encoding='utf-8')).get('fixes') or {})
 NP=json.load(open('data/audit/notes_patch.json',encoding='utf-8'))
+RF={}
+for f in sorted(glob.glob('data/audit/r*_out.json')):
+    for k,v in (json.load(open(f,encoding='utf-8')).get('fixes') or {}).items(): RF.setdefault(k,{}).update({x:y for x,y in v.items() if x in ('short','notes')})
 SA={}
 for f in sorted(glob.glob('data/audit/[av]*_out.json')):
     SA.update({k:v['short'] for k,v in (json.load(open(f,encoding='utf-8')).get('fixes') or {}).items()})
@@ -226,6 +229,10 @@ for c in cards:
     if c['n'] in SA: SH[c['n']]=SA[c['n']]
     if c['n'] in SH: c['sh']=SH[c['n']].replace('\u2014',',').replace('\u2013','-')
     if c.get('sh'): c['sh']=' '.join(x for x in re.split(r'(?<=[.!?])\s+',c['sh']) if not re.search(r'tiltott|bannol|banned|tiltólist|Riftlens|ellenőrizd a legalitást',x,re.I)).strip()
+    rf=RF.get(c['n'])
+    if rf:
+        if rf.get('notes'): c['nt']=[[str(r),int(f),x.replace('\u2014',',').replace('\u2013','-')] for r,f,x in rf['notes']]
+        if rf.get('short'): c['sh']=rf['short'].replace('\u2014',',').replace('\u2013','-')
     for o,nw in NP.get(c['n'],[]):
         for x in c.get('nt',[]):
             if o in x[2]: x[2]=x[2].replace(o,nw)

@@ -1,0 +1,759 @@
+{
+ "fixes": {
+  "Cruel Patron": {
+   "notes": [
+    [
+     "356.2.a.1",
+     0,
+     "Mandatory additional cost: nincs \"may\". Ha nincs friendly unitod a boardon, a Patron nem játszható ki."
+    ],
+    [
+     "355.10.c",
+     0,
+     "A szabályzat ezt a szöveget hozza példának: a megölt unit nem target. \"Can't be chosen\" saját unit is feláldozható."
+    ],
+    [
+     "357.2.a",
+     0,
+     "Ha a unit halálát replacement effect cseréli le (például Zhonya's Hourglass recallja), a cost akkor is kifizetettnek számít, a Patron bejön."
+    ],
+    [
+     "429.1.a.1.b",
+     0,
+     "A kill cost Kill Instruction: a feláldozott unit Deathknell abilityje chain-re kerül."
+    ],
+    [
+     "185.2.d",
+     1,
+     "Token unit (például Recruit) is feláldozható, mert a token a típusa minden szabályát követi; ez a legolcsóbb fizetési mód."
+    ]
+   ],
+   "why": "357.2.a nem hozza példának a lapot, csak az általános szabályt mondja ki. A 186.1 a token zónaváltásáról szól, nem arról, hogy feláldozható; a helyes hivatkozás 185.2.d."
+  },
+  "Crumbling Sands": {
+   "short": "Reakcióként, bárki körében hatástalanít egy spellt, de csak akkor, ha egy ellenfél ebben a körben a megcélzott spellen kívül már kijátszott egy másik spellt is. Ha az ellenfél eddig csak a célzott spellt játszotta ki, nem hat. A feltételt a hatás lefutásakor nézi a játék: ha akkor nem teljesül, a lapot elpazaroltad.",
+   "why": "A short azt állította, hogy az ellenfél kör első spelljét soha nem állítja meg; ha az ellenfél a Sands resolve-ja előtt még egy spellt kijátszik, a feltétel teljesül (135.2.b.3, 420.4.b). Túlzó állítás: az első spell is counterelhető, ha resolve-ig újabb opponent spell érkezik.",
+   "notes": [
+    [
+     "355.9.a.2,355.9.c",
+     1,
+     "A target egy chainen lévő, finalizált spell, saját magát nem választhatja. A feltétel nem targeting restriction, a spell teljesületlen feltétellel is kijátszható."
+    ],
+    [
+     "420.4.b",
+     1,
+     "A feltétel azt nézi, hogy egy opponent finalizált-e másik spellt ebben a körben. A counterelt és a még chainen lévő spell is számít. A megcélzott spell önmagát nem számolja."
+    ],
+    [
+     "135.2.b.3,135.2.b.5.a",
+     1,
+     "A feltételt a resolve-kor nézi a játék. Ha nem teljesül, a spell hatás nélkül resolve-ol, a costja elveszett."
+    ],
+    [
+     "420.4.b",
+     1,
+     "A \"másik spell\" bármelyik opponentedé lehet, nem kell a megcélzott spell controllerétől származnia. Ha a megcélzott spell az egyetlen, amit opponent ebben a körben kijátszott, nem counterel; ha viszont resolve előtt még egy spellt kijátszanak, a feltétel teljesül."
+    ],
+    [
+     "426.1.b,426.1.c",
+     0,
+     "A counterelt spell a trashbe megy, a costja nem jár vissza, és nem számít kijátszottnak a \"when you play\" triggerekhez."
+    ]
+   ]
+  },
+  "Dancing Grenade": {
+   "short": "2 sebzést ad egy unitra. A sebzett unit controllere 1 bármilyen Powerért újra kijátszhatja, és minden újabb körön belüli sebzés 1-gyel nő (2, 3, 4). Ha a saját unitodra dobod, te magad játszhatod újra. Hogy pontosan hogyan megy az újrajátszás, nem tisztázott, ezt judge dönti el.",
+   "why": "A kártya \"its controller\"-t ír, a short \"gazdája\" (owner) szót használt (156, 191.3)."
+  },
+  "Death from Below": {
+   "notes": [
+    [
+     "355.9.b",
+     0,
+     "A unit target és battlefielden kell lennie. Kijátszáskor nincs Might korlát, bármelyik játékos unitja választható."
+    ],
+    [
+     "388.1,388.4",
+     0,
+     "A \"do this:\" Reflexive Trigger a resolve közben kerül a chainre, és a \"you may\" miatt a finalizálásakor döntöd el, élsz-e vele."
+    ],
+    [
+     "359.3.e.14.a",
+     0,
+     "Ha a unit a resolve előtt base-be kerül vagy elhagyja a boardot, a kill ignorálódik, és az újrajátszás trigger sem jön létre."
+    ],
+    [
+     "356.1.a,355.8",
+     0,
+     "A trashből [A]-ért megy ki, ez a base cost helyére lép. Új érvényes target kell hozzá. Amíg 3 vagy kevesebb Mightú unitot öl, újra és újra kijátszható."
+    ],
+    [
+     "388.1,389.1",
+     1,
+     "Errata: a \"do this:\" miatt az újrajátszás külön chain item, amire az opponent reagálhat. A gyakorlati hatás ugyanaz maradt."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Pyke) kell viselnie."
+    ]
+   ],
+   "why": "A 388.4 nem hozza példának a lapot; a \"lekerül a chainről\" állítást a szabály nem mondja ki."
+  },
+  "Dazzling Aurora": {
+   "short": "A köröd végén felfeded a Main Deck felső lapjait, amíg unit nem jön, azt banisheled, majd a Banishmentből ingyen kijátszod. Nem te választasz, az első felfedett unit jön, a többi lap a deck aljára kerül. Ha nincs unit a deckben, nem történik kijátszás.",
+   "why": "Az errata szerinti banish lépés hiányzott a shortból (428.1)."
+  },
+  "Deathgrip": {
+   "notes": [
+    [
+     "355.7,355.8",
+     1,
+     "Errata: a kill már nem cost (\"kill to give\"), hanem instruction. A megölendő unit és a bónuszt kapó unit is target, kijátszáskor választod őket. Két különböző friendly unit kell hozzá."
+    ],
+    [
+     "359.3.e.14.b",
+     0,
+     "Az \"if you do\" közvetlenül a kill megtörténtére hivatkozik. Ha a unit halálát egy replacement effect kiváltja (Negated), a másik unit nem kap Mightot."
+    ],
+    [
+     "359.3.e.14.a",
+     0,
+     "Ha a megölendő unit a resolve előtt illegális target lesz, a kill ignorálódik, és vele a Might bónusz is."
+    ],
+    [
+     "359.3.e.13",
+     0,
+     "A bónusz a megölt unit utolsó, boardon érvényes Mightja, buffokkal és módosítókkal együtt."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "Ha csak a bónuszt kapó unit lesz illegális target, az első unit ettől még meghal."
+    ],
+    [
+     "429.1.a.1.b",
+     0,
+     "Kill instruction: a megölt unit Deathknell abilityje a chain-re kerül."
+    ],
+    [
+     "359.3.e.1,359.3.e.5",
+     0,
+     "A Draw 1 nem kapcsolódik a targetekhez, ezért akkor is megtörténik, ha a targetek illegálisak lettek: a spell ilyenkor is resolve-ol."
+    ]
+   ],
+   "why": "A 359.3.e.14.b nem hozza példának a lapot, csak az általános linked instruction szabályt mondja ki. A Draw 1 állításhoz a 359.3.e.1 a releváns szabály (a spell illegális targetekkel is resolve-ol)."
+  },
+  "Decisive Strike, Garen": {
+   "short": "Az összes saját unitod +2 Mightot kap a kör végéig, bárhol állnak. A saját körödben, vagy bárki körében showdown alatt (például harc közben) játszható ki; combat showdownban azonnal beleszámít a harcba. Egy másik spellre válaszul nem használható.",
+   "why": "A short csak a harc közbeni showdownt említette, az [Action] minden showdownban játszható, bárki körében (806.1.c.1)."
+  },
+  "Decree of Strength": {
+   "notes": [
+    [
+     "355.7",
+     1,
+     "A választott opponent játékosként target. 1v1-ben csak egy választható."
+    ],
+    [
+     "355.10.a,355.18",
+     0,
+     "A kéz nem Public zóna, ezért a kiválasztott lap nem target. A lapot a resolve közben választod, miután láttad a kezet."
+    ],
+    [
+     "425.3.a,425.1.a.3",
+     0,
+     "Az opponent a teljes kezét megmutatja minden játékosnak. A Revealed állapot a spell resolve-jának végéig tart."
+    ],
+    [
+     "055",
+     1,
+     "Ha a kézben nincs Mind domainű lap, nincs mit recycle-ölni, de a kezet így is láttad. Ha van, választanod kell, nincs \"may\"."
+    ],
+    [
+     "417.1.a,417.1.c",
+     0,
+     "A lap a tulajdonosa Main Deckjének aljára kerül, nem a trashbe."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "417.1",
+     1,
+     "A recycle nem discard, ezért a discardra triggerelő abilityk nem futnak le."
+    ]
+   ],
+   "why": "A 417.1.c nem mond semmit a discard triggerekről; ez levezetés, külön pontba került flag 1-gyel."
+  },
+  "Defiant Dance": {
+   "notes": [
+    [
+     "135.2.e.6.c",
+     0,
+     "Calm és Chaos lap: a Power cost Calm vagy Chaos Powerrel is fizethető."
+    ],
+    [
+     "355.8,355.9.b",
+     0,
+     "Két különböző unit kell targetnek, enélkül a lap nem játszható ki. Bármelyik játékos unitja választható, bárhol a boardon."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "A +2 és a -2 két külön instruction. Ha az egyik unit illegális target lesz, a másikra vonatkozó rész ettől még végrehajtódik."
+    ],
+    [
+     "142.4.b,143.2.c",
+     0,
+     "A -2-nek nincs alsó korlátja. Sebzett unit meghal, ha a rajta lévő damage eléri az új Mightot. Negatív Might a combatban 0-nak számít."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap (Irelia): a deckben összesen legfeljebb 3 Signature kártya lehet."
+    ]
+   ],
+   "why": "A 135.2.e.6.c nem hozza példának a lapot, csak a többdomaines [C] szabályt mondja ki."
+  },
+  "Defy": {
+   "notes": [
+    [
+     "355.9.a.2,355.9.b",
+     0,
+     "A target chainen lévő spell, amelynek Energy costja legfeljebb 4 ÉS Power costja legfeljebb 1. Unit, gear és ability nem választható."
+    ],
+    [
+     "206",
+     0,
+     "A nyomtatott costot nézi. A nyomtatva 4 Energy és 1 Mind Power costú Rocket Barrage akkor is legális target, ha a Repeat costját is kifizették."
+    ],
+    [
+     "206",
+     1,
+     "Fordítva is igaz: kedvezménnyel vagy ingyen kijátszott, de nyomtatva drágább spell (például 5 Energy costú Concentrate) nem választható."
+    ],
+    [
+     "420.4.b",
+     0,
+     "A Defy által counterelt spell a nem trigger típusú ellenőrzésekben (Legion, \"ha játszottál már lapot ebben a körben\") kijátszottnak számít, mert finalizálták."
+    ],
+    [
+     "426.1.b,426.1.c",
+     0,
+     "A \"when you play a spell\" triggerek viszont nem futnak le a counterelt spellre, és a kifizetett cost nem jár vissza."
+    ]
+   ],
+   "why": "A 206 nem hozza példának a lapot vagy a Rocket Barrage-t, ez a szabály alkalmazása. A 420.4.b nem tartalmaz Defy példát, a \"szabályzat példája\" állítás téves volt."
+  },
+  "Desert's Call": {
+   "notes": [
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "820.1.d.1",
+     0,
+     "Repeat [2] kifizetésével az instruction még egyszer végrehajtódik, vagyis két Sand Soldier jön 4 Energyért."
+    ],
+    [
+     "187.3,355.2.a,143.4",
+     0,
+     "A Sand Soldier 2 Mightú, domain nélküli unit token. A base-be vagy egy kontrollált battlefieldre játszod ki, exhausted lép be. A két token mehet külön helyre."
+    ]
+   ],
+   "why": "A 820.1.d.1 nem hozza példának a lapot."
+  },
+  "Determined Sentry": {
+   "short": "Olcsó 1 Mightú unit, ami nem tud a base-be mozogni, így battlefieldről nem léphet haza (Gankinggel legfeljebb másik battlefieldre). Harc után ettől még visszakerülhet a base-be, mert a recall nem mozgás. A base-be mozgató spell (például Flash) kijátszható rá, de a mozgás elmarad, a helyén marad.",
+   "why": "A \"magától nem lép el\" túlzás: Gankinggel battlefieldről battlefieldre mozoghat (810.1.b), csak a base-be nem. A Core Rules nem említi a Vilemaw's Lairt, a hivatkozott példa kitalált volt.",
+   "notes": [
+    [
+     "144.4.b",
+     1,
+     "Standard Move-val nem mehet battlefieldről base-be. Ganking nélkül így a battlefieldről nem tud elmozdulni."
+    ],
+    [
+     "458.3,468.1.a.2",
+     0,
+     "A Recall nem Move, és a mozgást tiltó effectek nem akadályozzák. Döntetlen combat után attackerként a Sentry is recallolódik a base-be."
+    ],
+    [
+     "358.3.a,359.3.e.6",
+     1,
+     "Base-be mozgató spell (például Flash) kijátszható rá, mert a tiltó effect nem akadályozza a kijátszást, de a resolve-kor a Move negálódik, a Sentry a helyén marad. A spell többi része végrehajtódik."
+    ]
+   ]
+  },
+  "Detonate": {
+   "short": "Megöl egy gear-t, bárkiét, és a gear controllere húz 2 lapot. Ha a saját gearedre használod, te húzol. Ha a gear a hatás lefutása előtt eltűnik, a húzás is elmarad.",
+   "why": "A kártya \"its controller\"-t ír, a short \"gazdája\" (owner) szót használt (355.10.d)."
+  },
+  "Discipline": {
+   "notes": [
+    [
+     "355.7,813.1.c.1",
+     0,
+     "A unit target, lehet saját vagy enemy. [Reaction]: Closed State-ben, combat közben is kijátszható."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "A Draw 1 külön instruction: akkor is húzol, ha a unit a resolve előtt illegális target lett."
+    ],
+    [
+     "480.1.c,481.2",
+     1,
+     "Ha a uniton \"Might increased to 5\" jellegű passzív ability van, annak eredménye a Discipline +2-jétől függ, ezért előbb a +2 érvényesül, a passzív utána +0-t ad. Egy 4 Mightú unit így 6 Mightú lesz, nem 7."
+    ],
+    [
+     "758.1",
+     1,
+     "Ha egy unit a +2 Might miatt untargetable lesz egy már chainen lévő enemy spell számára (például olyan effect miatt, amely a Mightjánál olcsóbb enemy spellekkel nem választható), az a spell a resolve-kor mistargetel."
+    ]
+   ],
+   "why": "A 481/481.2 nem hozza példának a lapot; az eredmény levezetés, flag 1. A 758.2 a fordított esetről szól (a target újra legálissá válik), és nem tartalmaz ilyen példát; a helyes szabály 758.1. A 758.2.a-ra hivatkozó \"szabályzat példája\" pont nem létező példát idézett; a tartalom a 758.1 alá tartozik, ezért a pont törölve."
+  },
+  "Dr. Mundo, Expert": {
+   "notes": [
+    [
+     "710,365.1",
+     0,
+     "A boardon a Mightja 6 plusz a trashed lapszáma, folyamatosan frissül. Ha a trashed fogy, a Might azonnal csökken, a rajta lévő damage halálos lehet."
+    ],
+    [
+     "711",
+     0,
+     "A boardon kívül (kéz, trash, deck) a nyomtatott 6 Might számít."
+    ],
+    [
+     "417.6,417.4",
+     0,
+     "A \"recycle 3 from your trash\" nem targetel, a 3 lapot a resolve-kor választod. Ha kevesebb van, annyit recycle-ölsz, amennyi van."
+    ],
+    [
+     "417.4",
+     0,
+     "A recycle kötelező, vagyis Mundo körönként 3 Mightot veszít, ha a trash nem töltődik."
+    ],
+    [
+     "315.2.a.1",
+     0,
+     "A Beginning Step-ben triggerel, a hold scoring előtt, csak a saját körödben."
+    ]
+   ],
+   "why": "A 417.6 nem hozza példának a lapot; a \"ha kevesebb van\" rész a 417.4-ből jön."
+  },
+  "Dragon Form": {
+   "notes": [
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "355.7",
+     0,
+     "\"Choose a unit\": a unit target, bármelyik játékosé lehet, base-ben is."
+    ],
+    [
+     "143.2.a,479.2.a",
+     0,
+     "A base Might átírása a Trait-Altering layerben történik, nem sima Might bónusz: a lap a Base Mightot módosítja, nem az Effective Mightot."
+    ],
+    [
+     "479.4,703",
+     1,
+     "A buff, a +X és -X effectek, az Equipment Might bónusza, az Assault és a Shield az 5-ös base Mightra rakódnak rá."
+    ],
+    [
+     "143.2.b",
+     1,
+     "Enemy unitra is jó: egy 5-nél nagyobb base Mightú unit 5-re csökken. Ha a rajta lévő damage eléri az új Mightot, meghal."
+    ],
+    [
+     "317.2.b,317.2.c",
+     0,
+     "A hatás a kör végi cleanupban jár le, a damage heal után."
+    ],
+    [
+     "829.1.b,829.1.c.1,829.1.b.2",
+     0,
+     "Flow: a trashből [3]-ért újra kijátszható, ez a base cost helyére lép, utána a lap banishelődik. Az időzítés nem változik, a trashből is csak a saját körödben megy."
+    ]
+   ],
+   "why": "A 143.2.a.1/479.2.a nem hozza példának a lap szövegét; a Base Might definíciója a 143.2.a-ban van."
+  },
+  "Dragon Roost": {
+   "notes": [
+    [
+     "356.2.b.1,355.1.a",
+     0,
+     "Optional additional cost: a kijátszás választási lépésében döntesz róla, a 2 Power bármely domainből fizethető a Dragon saját cost-ján felül."
+    ],
+    [
+     "355.2.b",
+     0,
+     "Az effect engedélyt ad olyan locationre játszani, ami alapból nem érvényes. Akkor is ide teheted a Dragont, ha nem te kontrollálod a battlefieldet."
+    ],
+    [
+     "355.17",
+     0,
+     "Ha kifizetted, a Dragont kötelező ide kijátszani, a base és más battlefield nem választható."
+    ],
+    [
+     "355.17.a",
+     1,
+     "Ha egy másik effect (például a Here to Help: \"a battlefield you control\") máshová kötelezné a unitot, és a kettő ellentmond, az egyik követelményt választod. Ha egy választás mindkettőt teljesíti, azt kell választani."
+    ],
+    [
+     "190.3.a.1",
+     0,
+     "Ha nem te kontrollálod a battlefieldet, a megérkező Dragon Contested státuszt tesz rá: showdown, enemy unitok mellett combat lesz."
+    ],
+    [
+     "355.17.b",
+     0,
+     "A kijátszást korlátozó effect erősebb: ha valami tiltja, hogy ide unitot játssz, a Dragon nem finalizálódik."
+    ]
+   ],
+   "why": "A 355.17.a nem hozza példának sem a Dragon Roostot, sem a Here to Helpet; ez a szabály alkalmazása, flag 1."
+  },
+  "Drakehound Packmaster": {
+   "notes": [
+    [
+     "355.10.a,355.18",
+     0,
+     "A deck nem Public zóna, itt nincs target. A lapot a resolve közben választod a felfedettek közül."
+    ],
+    [
+     "432.1.c,432.1.c.1",
+     0,
+     "Ha egy opponent Main Deckje üres, nála nincs mit felfedni. Ez nem okoz Burn Outot."
+    ],
+    [
+     "356.1.b.1,356.1.b.3",
+     0,
+     "\"Ignoring its cost\": az Energy és a Power cost nulla. Additional costok ettől még rákerülhetnek."
+    ],
+    [
+     "420.3.a,420.3.b",
+     0,
+     "Limited Play: az effect resolve-ja közben játszod ki; a kijátszás lépései a szokásosak, kivéve amit az effect módosít (itt: a cost figyelmen kívül hagyása)."
+    ],
+    [
+     "191.2,056.2",
+     0,
+     "A lapot te játszod ki, te kontrollálod, a tulajdonosa az opponent marad. Ha később elhagyja a boardot, az ő zónájába megy."
+    ],
+    [
+     "420.3.c",
+     1,
+     "Ha a lap nem játszható ki (például targetes spell érvényes target nélkül), a Banishmentben marad. 1v1-ben nincs \"rest\", nincs mit recycle-ölni."
+    ],
+    [
+     "358.4,420.3.b",
+     2,
+     "A Core Rules nem mondja ki külön, hogy a resolve közben kijátszott lap saját időzítési megkötése (például [Action] nélküli spell, miközben a chain nem üres) hogyan érvényesül. Vitás esetben judge döntse el."
+    ]
+   ],
+   "why": "A 420.3.b szerint a Play minden lépése a szokásos, a \"saját időzítési megkötései nélkül\" állítást a szabály nem mondja ki."
+  },
+  "Draven, Audacious": {
+   "notes": [
+    [
+     "809.1.c,809.1.c.1",
+     0,
+     "[Deflect]: az opponent minden spellje és abilityje, amely őt targeteli, választásonként 1 bármilyen domainű Powerrel többe kerül. Mandatory additional cost, a saját lapjaidra nem vonatkozik."
+    ],
+    [
+     "468.3.a,468.3.c",
+     0,
+     "Akkor nyer combatot, ha a controllere az egyetlen játékos, akinek unitja maradt ott, és Draven is köztük van. Attackerként és defenderként is számít."
+    ],
+    [
+     "383.1,473.1.a.1",
+     0,
+     "Körönként csak az első megnyert combat ad pontot. Ez nem conquer pont, ezért az utolsó pontra vonatkozó megkötés nem érinti: ezzel is megnyerhető a játék."
+    ],
+    [
+     "468.5.d",
+     1,
+     "A pont a conquer pontján felül jár. Attackerként nyerve a battlefield conquerje külön pontot adhat."
+    ],
+    [
+     "740.2.c,429.1.a.1.b",
+     0,
+     "\"Die in combat\": designationnel, folyó combat battlefieldjén hal meg, akár combat damage-től, akár egy közben kijátszott kill spelltől. A saját halálára triggerelő ability a trashbe kerülés előtt megy chain-re."
+    ],
+    [
+     "808.1.d.1",
+     0,
+     "Ha a halálát replacement effect lecseréli (például Zhonya's Hourglass recallja), és nem kerül a trashbe, a trigger lekerül a chainről, az opponent nem kap pontot."
+    ],
+    [
+     "355.7,194.1.c",
+     0,
+     "A halál triggere kötelező, a választott opponent target. A pont nem conquer pont, az opponent ezzel is elérheti a Victory Score-t."
+    ]
+   ],
+   "why": "A 429.1.a.1.b nem hozza példának Dravent. A 808.1.d.1 nem hozza példának a lapot, csak az általános szabályt (recall példával)."
+  },
+  "Dune Drake": {
+   "notes": [
+    [
+     "383.2.a.1",
+     0,
+     "Az \"if there is a ready enemy unit here\" nem közvetlenül a trigger feltétel után áll, ezért az effect része: a trigger mindig chainre kerül, a feltételt a resolve-kor nézi."
+    ],
+    [
+     "359.3.f.2",
+     1,
+     "Az opponent válaszul elronthatja: ha a resolve-ra minden ottani unitja exhausted vagy elment, nincs +2. Fordítva is igaz, a válaszul readyvé tett enemy unit bekapcsolja."
+    ],
+    [
+     "355.10.d",
+     1,
+     "A ready enemy unitot nem te választod, ezért nincs target. \"Can't be chosen\" unit is teljesíti a feltételt."
+    ],
+    [
+     "383.4.e.2.a",
+     0,
+     "Attack trigger: combatonként egyszer fut le, amikor a Drake megkapja az Attacker jelölést."
+    ],
+    [
+     "383.2.b",
+     1,
+     "Errata: a nyomtatott \"give me +2 [S] if...\" szövegből hiányzott a \"this turn\". Most egyértelmű, hogy a +2 Might csak a kör végéig tart, nem marad tartósan."
+    ]
+   ],
+   "why": "A 355.17.a nem említi a Dune Drake-et, a Here to Helpet vagy a Dragon Roostot; a pont kitalált hivatkozás volt, ezért törölve."
+  },
+  "Eager Apprentice": {
+   "notes": [
+    [
+     "356.4.e",
+     0,
+     "Az \"[1] minimum\" csak erre a kedvezményre vonatkozik. Ha ezt alkalmazod előbb, egy másik kedvezmény utána 0-ra viheti a costot."
+    ],
+    [
+     "356.4.c.1",
+     0,
+     "Az Energy komponens kedvezményei tetszőleges sorrendben alkalmazhatók, a sorrendet te választod."
+    ],
+    [
+     "364.3.a",
+     0,
+     "Csak akkor él, ha az Apprentice battlefielden áll. Base-ben nincs kedvezmény."
+    ],
+    [
+     "154",
+     1,
+     "Csak spellekre vonatkozik, unitra és gearre nem. A Power costot nem csökkenti."
+    ],
+    [
+     "356.4.c.2",
+     1,
+     "Az 1 Energy costú spell nem lesz olcsóbb, a 0 costú pedig nem lesz drágább a minimum miatt."
+    ]
+   ],
+   "why": "A 356.4.e nem hozza példának a lapot, csak az általános szabályt mondja ki."
+  },
+  "Eclipse": {
+   "notes": [
+    [
+     "355.7",
+     0,
+     "A unit target, lehet saját vagy enemy. Nincs \"to a minimum of 1\": a Might 0 alá is mehet."
+    ],
+    [
+     "143.2.c,143.2.c.1",
+     0,
+     "A negatív Might a combat damage számolásakor és más effectek számára 0-nak számít, de a további módosítók a valódi értékkel számolnak. Egy -1 Mightú unit +2-vel 1 Mightú lesz."
+    ],
+    [
+     "142.4.b",
+     0,
+     "Önmagában nem öl: 0 vagy kisebb Mightú unit is csak akkor hal meg, ha legalább 1 damage van rajta. Sebzett unitot viszont megöl, ha a rajta lévő damage eléri az új Mightot."
+    ],
+    [
+     "433.1,479.4.c",
+     1,
+     "Ha egy -2 Mightú unit Mightját egy effect megduplázná, a növelés értéke -2 lenne; negatív értékkel növelni nem lehet, ezért a növelés 0."
+    ],
+    [
+     "758.2.a",
+     1,
+     "Ha egy unit egy Mightjától függő untargetable effect miatt egy chainen lévő enemy spell számára illegális target lett, a -4 Might után újra legális targetté válhat, és a spell hat rá."
+    ],
+    [
+     "437.1,359.3.e.5",
+     1,
+     "A Predict külön instruction: megnézed a deck felső lapját és recycle-ölheted, akkor is, ha a unit közben illegális target lett."
+    ]
+   ],
+   "why": "A 479.4.c nem hozza példának a lapot vagy a duplázást; ez levezetés a 433.1 és 479.4.c alapján, flag 1. A 758.2 nem tartalmaz ilyen példát; a Might változása miatti újra-legalizálódás a 758.2.a esete, és levezetés (flag 1)."
+  },
+  "Eclipse Herald": {
+   "notes": [
+    [
+     "424.1.a.1",
+     0,
+     "Már Stunned unit nem stunolható újra. Ha ilyet választasz, a stun nem történik meg, a Herald nem triggerel."
+    ],
+    [
+     "412.4,412.1",
+     1,
+     "\"You stun\": a te spelled vagy abilityd stunol. Az opponent által stunolt unitra nem triggerel, és a saját unitod stunolására sem."
+    ],
+    [
+     "416.1.c",
+     0,
+     "Ha a Herald már ready, a ready rész nem csinál semmit, a +1 Might így is jár."
+    ],
+    [
+     "370.1.a.2,383.3.d",
+     2,
+     "Ha egy effect egyszerre több enemy unitot stunol, a Core Rules nem mondja ki, hogy a Herald unitonként külön vagy összesen egyszer triggerel. Ezt judge döntse el."
+    ],
+    [
+     "384.2",
+     0,
+     "A Heraldnak a boardon kell lennie a stun pillanatában, base-ben is működik."
+    ]
+   ],
+   "why": "A 424.1.a.1 nem hozza példának a lapot, csak az általános szabályt mondja ki."
+  },
+  "Ekko, Recurrent": {
+   "notes": [
+    [
+     "103.3.e",
+     1,
+     "A lap az adatbázis szerint bannolt. A deckbe tehetőség a játszott Format legalitási listájától függ, ezt versenyen ellenőrizni kell."
+    ],
+    [
+     "805.1.b,805.1.b.1",
+     0,
+     "[Accelerate]: kijátszáskor [1] és egy Mind Power additional costért ready lép be. A Power csak a unit saját domainjéből fizethető."
+    ],
+    [
+     "383.3.b",
+     0,
+     "A \"Recycle me\" a Deathknell effect elején álló cost within instructions, ezért a trigger base costja."
+    ],
+    [
+     "383.3.b.1,203.3",
+     1,
+     "A costot a finalizáláskor kell kifizetni. Ha Ekko nem recycle-ölhető (például a trash helyett banishelődött), a trigger nem megy chain-re, a rune-ok nem lesznek ready."
+    ],
+    [
+     "417.1.a,355.5.a",
+     0,
+     "Kifizetve Ekko a Main Deck aljára kerül, nem marad a trashben. A \"ready your runes\" minden rune-odra hat, nincs target."
+    ],
+    [
+     "808.1.d.1",
+     0,
+     "Ha a halálát replacement effect lecseréli (például recall), a Deathknell lekerül a chainről."
+    ],
+    [
+     "383.3.b.1",
+     2,
+     "A szövegben nincs \"may\". Nem egyértelmű, hogy a cost kifizetése megtagadható-e, vagyis hogy Ekko a trashben hagyható-e. Judge döntse el."
+    ]
+   ],
+   "why": "A 383.3.b nem hozza példának a lapot, csak az általános szabályt mondja ki."
+  },
+  "Elder Dragon": {
+   "notes": [
+    [
+     "142.4.c",
+     0,
+     "Az Elder Dragon a lethal damage mértékét módosítja: az általad jelölt damage-ből már 1 is lethal az enemy unitoknak."
+    ],
+    [
+     "142.3.a,142.3.b",
+     0,
+     "\"Your damage\": minden damage, amelyért te felelsz. A unitjaid combat damage-e és a spelljeid, abilityjeid damage-e is."
+    ],
+    [
+     "323.4",
+     1,
+     "A kill a cleanupban történik. Ha az Elder Dragon a cleanup előtt elhagyja a boardot, az 1 damage már nem lethal."
+    ],
+    [
+     "355.13,355.10",
+     0,
+     "\"Up to one at each location\": locationönként legfeljebb egy enemy unit, mind target, base-ben is. Nulla is választható."
+    ],
+    [
+     "438.4",
+     0,
+     "A teljesen megelőzött damage nem számít kiosztottnak, az ilyen unit nem hal meg."
+    ],
+    [
+     "467.2.c.3",
+     1,
+     "Combatban is hat: mivel 1 damage már lethal, a combat damage-edet unitonként 1-esével oszthatod szét az enemy unitokra."
+    ]
+   ],
+   "why": "A 142.4.c nem hozza példának a lapot, csak azt mondja ki, hogy egyes effectek módosíthatják a lethal damage mértékét."
+  },
+  "Elnuk Herd": {
+   "notes": [
+    [
+     "811.1.b,811.6",
+     0,
+     "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."
+    ],
+    [
+     "811.1.d.3",
+     0,
+     "Facedown-ból kijátszva a +3 Might targetje csak az adott battlefielden lévő friendly unit lehet. Kézből kijátszva bármelyik friendly unit választható."
+    ],
+    [
+     "417.1.a,135.2.b.7",
+     0,
+     "Facedown-ból kijátszva a resolve végén kötelezően recycle-ölődik, vagyis a Main Deck aljára kerül. Így facedown-ból egyszeri +3 Might, kézből kijátszva viszont a boardon marad."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "Ha a target a resolve előtt illegálissá válik, a +3 Might elmarad, de a recycle ettől még megtörténik, mert az nem a targetre hivatkozik."
+    ],
+    [
+     "811.1.d.3.a,359.3.e.12",
+     1,
+     "Ha a Herd a resolve előtt elhagyja a boardot, a facedown-ból kijátszott play effect nem tudja megállapítani, honnan érkezett, ezért mistargetel."
+    ],
+    [
+     "355.9.c",
+     1,
+     "Errata: korábban \"another friendly unit\" kellett. Most a Herd saját magát is választhatja, így facedown-ból akkor is kijátszható, ha nincs más unitod a battlefielden. Ekkor viszont a +3 a recycle miatt elvész."
+    ]
+   ],
+   "why": "Ez levezetés a 811.1.d.3.a és 359.3.e.12 alapján, nem közvetlen szabály, ezért flag 1."
+  }
+ },
+ "checked": 92,
+ "data_issues": [
+  "Demon Shade: a köteg domainje Chaos, a riftbound-rules/src/data/cards.json (rad set, egyetlen printing) szerint Fury. Az egyik adatforrás hibás, hivatalos kártyaképpel ellenőrizni kell; a short és a notes a domaint nem említi, így szövegjavítás nem kellett.",
+  "Detonation Amplifier: a köteg domainje Fury, a riftbound-rules/src/data/cards.json (rad set, egyetlen printing) szerint Chaos. Az egyik adatforrás hibás, hivatalos kártyaképpel ellenőrizni kell; a short és a notes a domaint nem említi, így szövegjavítás nem kellett.",
+  "Disposal Expert: a köteg domainje Chaos, a riftbound-rules/src/data/cards.json (rad set, egyetlen printing) szerint Fury. Az egyik adatforrás hibás, hivatalos kártyaképpel ellenőrizni kell; a short és a notes a domaint nem említi, így szövegjavítás nem kellett.",
+  "Elnuk Herd: a köteg domainje Body, a riftbound-rules/src/data/cards.json (rad set, egyetlen printing) szerint Fury. Az egyik adatforrás hibás, hivatalos kártyaképpel ellenőrizni kell; a short és a notes a domaint nem említi, így szövegjavítás nem kellett."
+ ],
+ "open": [
+  "Demacian Illuminators: a 383.2.c a forrás boardról távozását vizsgáló triggereknél kivételt tesz (look back), a 383.2.c.2 szerint viszont az együtt távozó objektum nem értékeli a triggerét. Nem egyértelmű, hogy az Illuminators triggerel-e, ha más friendly unitokkal együtt (vagy egyedül) hal meg; a short és a 2. note ezt flag 0 tényként állítja. Judge döntés javasolt.",
+  "Draven, Vanquisher: az 1. note (103.3.e, flag 1) szerint \"a kártyaadat szerint\" a lap banned. A kapott kártyaadatban és a riftbound-rules adatfájljaiban (cards.json, patchnotes.json) nincs legalitási mező vagy ban említés, így nem tudtam ellenőrizni; hivatalos ban listával egyeztetni kell.",
+  "Ekko, Recurrent: az 1. note (103.3.e, flag 1) szerint \"az adatbázis szerint\" a lap bannolt. A kapott kártyaadatban és a riftbound-rules adatfájljaiban nincs legalitási információ, nem tudtam ellenőrizni; hivatalos ban listával egyeztetni kell."
+ ]
+}

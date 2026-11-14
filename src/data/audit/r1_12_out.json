@@ -1,0 +1,388 @@
+{
+ "fixes": {
+  "Undying Loyalty": {
+   "notes": [
+    [
+     "355.10.a,355.8",
+     0,
+     "A trashedben lévő unit target. Ha nincs megfelelő unit a trashedben, a spell nem játszható ki."
+    ],
+    [
+     "206",
+     0,
+     "A feltétel a nyomtatott costot nézi: legfeljebb 2 Energy és legfeljebb 1 Power."
+    ],
+    [
+     "355.5,356.4,143.1.b",
+     1,
+     "A target kiválasztása megelőzi a Determine Total Cost lépést. Ha a választott unit Bird, Cat, Dog vagy Poro tagű, az Energy cost 2-ről 0-ra csökken, az 1 Order Power marad."
+    ],
+    [
+     "356.1.b.1,356.1.b.3",
+     0,
+     "\"Ignoring its cost\": a unit Energy és Power cost-ja is nulla. Optional additional cost ettől még kifizethető."
+    ],
+    [
+     "359.3.e.2",
+     0,
+     "Ha a unit a resolve előtt kikerül a trashből, illegális target, a spell nem csinál semmit."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ]
+   ],
+   "why": "Notes: a 356.4.g a változó mértékű kedvezményről szól, nem a target-választás és a costszámítás sorrendjéről; a sorrendet a 355 (Make relevant choices, 355.5) és a 356 (Determine Total Cost, 356.4 discount) lépés adja."
+  },
+  "Vanguard Armory": {
+   "notes": [
+    [
+     "187.1,185.2.d",
+     0,
+     "Három domain nélküli, 1 Mightú Recruit unit token jön, mind exhausted."
+    ],
+    [
+     "355.2.a",
+     0,
+     "Mindegyik token külön kerülhet a base-edbe vagy egy általad kontrollált battlefieldre."
+    ],
+    [
+     "151.2,415.4",
+     0,
+     "Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható. A [T] cost miatt ready-zó effect nélkül körönként egyszer; ready-zó effecttel (például Veiled Temple) újra használható."
+    ],
+    [
+     "185.2.a",
+     1,
+     "A tokeneket \"play\"-eled, ezért a \"when you play a unit\" triggerek mind a háromra lefutnak (például Blood Rose). Az Ephemeral Wardot is megölik."
+    ],
+    [
+     "186.1",
+     0,
+     "A token kézbe, deckbe vagy trashbe kerülve megszűnik létezni."
+    ]
+   ],
+   "why": "Notes: a \"körönként egyszer\" nem a 151.2-ből jön és nem abszolút: a korlát az exhaust costból adódik (415.4), gear ready-zó effecttel többször is aktiválható."
+  },
+  "Vault Breaker": {
+   "short": "Egy unit a kör végéig Assault 2-t (támadóként +2 Might) és Ganking-et kap (battlefieldről battlefieldre léphet). Plusz lépést nem ad, exhausted unit a Ganking miatt nem mozoghat, de az Assault a már támadó, exhausted unitnak is jár, például a combat showdownban. A saját körödben vagy showdownban játszható ki.",
+   "why": "Short: az \"exhausted unitnak nem segít\" hamis, az Assault 2 a Standard Move-tól exhausted attackernek is +2 Mightot ad, ha a combat showdownban kapja (807.1.c, 466.2.c.3, 806.1.c.1). Csak a Ganking haszontalan exhausted unitnak (144.2, 810.1.c.3)."
+  },
+  "Vex, Apathetic": {
+   "short": "Amíg Vex battlefielden áll, amikor egy opponent kijátszik egy unitot, az a kijátszás után stunt kap: abban a körben nem oszt combat sebzést, és az opponent nem mozgathatja. Tokenre is vonatkozik, és mivel nem target, a Deflect nem véd. Vex Deflect: az őt választó opponent spell vagy ability 1 bármely Powerrel drágább.",
+   "notes": [
+    [
+     "420.4.a,383.2.a.1",
+     0,
+     "Akkor triggerel, amikor az opponent unitjának kijátszása befejeződött, és Vex abban a pillanatban battlefielden van. Base-ből nem működik."
+    ],
+    [
+     "355.10.c",
+     0,
+     "A kijátszott unit csak a trigger feltételében szerepel, ezért nem target. Deflect és \"can't be chosen\" nem védi meg a stuntól."
+    ],
+    [
+     "424.1.b,424.1.a.2",
+     0,
+     "A stunned unit abban a körben nem ad Mightot a combat damage-hez. Az állapot a kör végi cleanupban szűnik meg."
+    ],
+    [
+     "054.1,358.3.a",
+     1,
+     "A \"They can't move it\" a unitot kijátszó opponentet tiltja: a kör végéig sem Standard Move-val, sem a saját mozgató effectjével nem mozgathatja. Mozgató spell ráolvasható, de a Move a resolve-kor negálódik."
+    ],
+    [
+     "458.3",
+     0,
+     "A Recall nem Move, azt a tiltás nem akadályozza meg."
+    ],
+    [
+     "185.2.a,185.2.d",
+     1,
+     "Az opponent által kijátszott unit tokenre is triggerel: a token unit is unit, és a tokent a játékos ugyanúgy \"play\"-eli, a kártya kijátszásának lépéseit követve."
+    ],
+    [
+     "809.1.c",
+     0,
+     "[Deflect]: az opponent Vexet targetelő spellje vagy abilityje +[A]-ba kerül."
+    ]
+   ],
+   "why": "Short és notes: a szöveg \"They can't move it\", vagyis a tiltás a kijátszó opponentre vonatkozik, nem általános \"nem mozgatható\" (412.1 felelősség, 054.1)."
+  },
+  "Vex, Cheerless": {
+   "notes": [
+    [
+     "740.2.c",
+     0,
+     "\"In combat\": Vex olyan battlefielden áll, ahol combat zajlik, és van Attacker vagy Defender designationje. Combaton kívül az ability nem él."
+    ],
+    [
+     "356.3,356.4",
+     0,
+     "Az enemy spellek drágítása cost increase, a sajátjaid olcsóbbítása discount. Mindkettő a spell kijátszásakor, a Determine Total Cost lépésben érvényesül."
+    ],
+    [
+     "356.4.e",
+     0,
+     "A minimum csak erre a kedvezményre vonatkozik. Egy másik kedvezmény ezután tovább csökkentheti a costot."
+    ],
+    [
+     "356.6",
+     1,
+     "Ha a saját spellednek nincs Power cost-ja, a kedvezmény Power része elvész, mert a cost nem mehet 0 alá."
+    ],
+    [
+     "154",
+     1,
+     "Csak spellekre hat. Unit, gear és ability cost-ja nem változik."
+    ],
+    [
+     "356,357",
+     1,
+     "A cost a kijátszáskor dől el. Ha Vex később kikerül a combatból, a már kifizetett cost nem változik."
+    ]
+   ],
+   "why": "Notes: a 356.4.g a változó kedvezményről szól; hogy a cost a kijátszáskor rögzül és kifizetődik, a 356 (Determine Total Cost) és 357 (Pay) lépésből következik."
+  },
+  "Viktor, Herald of the Arcane": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Mind és Order domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "381.1,415.4",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható. A [T] cost miatt ready-zó effect nélkül körönként egyszer."
+    ],
+    [
+     "187.1",
+     0,
+     "A Recruit token domain nélküli, 1 Mightú unit token Recruit taggel."
+    ],
+    [
+     "185.2.a,355.2.a",
+     0,
+     "A tokent kijátszod, a unitokra vonatkozó szabályok szerint: base-be vagy általad kontrollált battlefieldre kerülhet. Az abilitynek nincs targetje."
+    ],
+    [
+     "185.2.d",
+     0,
+     "A token unit exhausted lép be, a kijátszás körében nem mozoghat."
+    ],
+    [
+     "186.1",
+     0,
+     "Ha a token kézbe, trashbe vagy más nem board zónába kerül, megszűnik létezni."
+    ]
+   ],
+   "why": "Notes: a \"körönként egyszer\" flag 0-s abszolút állításként hibás, a korlátot az exhaust cost adja (415.4), legend ready-zó effecttel többször is használható. A short \"jellemzően\" szava ezt helyesen kezeli."
+  },
+  "Viktor, Innovator": {
+   "short": "Valahányszor az opponent körében kijátszol egy lapot, kapsz egy 1 Mightú Recruit tokent a base-edbe. Ehhez Reaction lapok (Ambush unit is), showdown alatt Action lapok, vagy facedown-ból kijátszott Hidden lapok kellenek. Ha a lapodat semlegesítik (counter), nincs token.",
+   "why": "Short: hiányzott, hogy az opponent körében showdown alatt az [Action] lapok is kijátszhatók (806.1.c.1), a \"válaszként kijátszható vagy elrejtett lapok kellenek\" szűkebb a valóságnál."
+  },
+  "Vilemaw's Lair": {
+   "short": "Innen egyik játékos unitja sem mozoghat a base-be, sem saját lépéssel, sem lap hatására. Innen csak másik battlefieldre lehet mozogni: Standard Move-val csak Gankinggel, vagy mozgató effecttel. A recall (például a támadók combat utáni hazaküldése) és a kézbe visszavétel nem mozgás, ezek működnek.",
+   "why": "Short: a \"Ganking nélkül a unit itt ragad\" túlzás, mozgató effect (421.1, 355.4.a) Ganking nélkül is átviheti egy másik battlefieldre, csak a base a tiltott cél."
+  },
+  "Volibear, Imposing": {
+   "short": "Valahányszor egy opponent mozgat (Standard Move-val vagy a saját effectjével) olyan battlefieldre, ahol Volibear nem áll, húzol egy lapot; a recall és a battlefieldre kijátszás nem Move. Shield 3: védekezéskor 13 Mightú. Tank: combatban előbb neki kell halálos sebzést kiosztani. Több unit egyszerre mozgatásánál a húzások száma judge kérdése.",
+   "notes": [
+    [
+     "412.1,412.4,421.1,458.1",
+     1,
+     "A trigger akkor fut le, ha a Move-ért az opponent a felelős: az ő Standard Move-ja vagy az ő effectje általi mozgatás. Ha te mozgatod az enemy unitot, nem az opponent mozog, nem triggerel. Recall és unit kijátszása battlefieldre nem Move."
+    ],
+    [
+     "198.1",
+     1,
+     "\"Other than mine\": a cél battlefield nem lehet az, ahol Volibear áll. Ha Volibear a base-ben van, bármelyik battlefieldre mozgás kiváltja."
+    ],
+    [
+     "144.3",
+     2,
+     "Ha az opponent több unitot mozgat egyszerre ugyanarra a battlefieldre, az egy game action. Nem egyértelmű, hogy ez egy vagy unitonként egy triggert jelent, judge döntse el."
+    ],
+    [
+     "414.4",
+     0,
+     "A húzás kötelező, nincs \"may\". Üres Main Deck esetén Burn Outot okoz."
+    ],
+    [
+     "814.1.c,815.1.b",
+     0,
+     "Shield 3 és Tank: Defenderként 13 Mightú, és neki kell először halálos combat damage-et kiosztani."
+    ]
+   ],
+   "why": "Short és notes: \"When an opponent moves\" a játékos által végrehajtott Move-ra szól (412.1, 412.4 analógia), nem minden enemy unit mozgására; a saját effecteddel mozgatott enemy unit nem váltja ki. Ezért a pont flag 1."
+  },
+  "Volibear, Relentless Storm": {
+   "short": "Legend: ha kijátszol egy unitot, ami belépés után legalább 5 Mightú, exhaustolva kapsz egy exhausted rune-t. Az új rune azonnal recycle-ölhető Powerért, Energyt viszont csak a következő saját körödtől ad, amikor az Awaken Phase-ben ready lesz.",
+   "why": "Short: a \"következő körtől\" félreérthető, az opponent következő körében a rune még exhausted; csak a saját Awaken Phase-edben lesz ready (315.1.b)."
+  },
+  "Warwick, Hunter": {
+   "short": "Mindig ready lép be, így még a kijátszás körében mozoghat. Amikor támad, megöl minden ott álló enemy unitot, amelyen a trigger resolve-jakor sebzés van. A sebzés a kör végén és minden combat végén gyógyul, ezért közvetlenül előtte vagy a triggerre válaszul kell sebezni.",
+   "why": "Short: az \"ugyanabban a körben\" nem elég, a Combat Cleanup minden unitot gyógyít (468.1.a.1), így egy korábbi combat sebzése már nem számít."
+  },
+  "Whirling Twirligig": {
+   "short": "Exhaustolva háromból egyet választasz: kapsz egy exhausted Gold tokent, vagy egy saját gear megölésével egy 1 Mightú Recruit tokent, vagy egy saját unit megölésével egy 3 Mightú Mech tokent. A saját Main Phase-edben, ready-zó effect nélkül körönként egyszer.",
+   "notes": [
+    [
+     "415.4",
+     1,
+     "Mindhárom ability costjában ott az exhaust, ezért ready-zó effect nélkül körönként csak az egyik használható."
+    ],
+    [
+     "151.2",
+     0,
+     "Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható."
+    ],
+    [
+     "355.10.c,429.1.a.1.b",
+     0,
+     "A megölt friendly gear vagy unit a cost része, nem target. A costként megölt unit Deathknell abilityje chain-re kerül."
+    ],
+    [
+     "185.2.d",
+     1,
+     "Token is feláldozható: az előző körben kapott Goldból Recruit, egy Recruitból 3 Mightú Mech lehet."
+    ],
+    [
+     "357.2",
+     2,
+     "A \"Kill a friendly gear\" nem mondja, hogy \"another\". Nem egyértelmű, hogy a Twirligig saját magát megölheti-e a cost részeként, judge döntse el."
+    ],
+    [
+     "355.2.a,149.2",
+     1,
+     "A unit tokenek a base-edbe vagy egy általad kontrollált battlefieldre érkeznek exhausted. A Gold a base-be jön exhausted, abban a körben nem használható."
+    ]
+   ],
+   "why": "Short és notes: a \"körönként egyszer\" abszolút állítás hibás, gear ready-zó effecttel (például Veiled Temple) többször is aktiválható; a korlát csak az exhaust costból jön (415.4)."
+  },
+  "Wily Newtfish": {
+   "notes": [
+    [
+     "364.3.a,730.1",
+     1,
+     "Conditional passive: attól a pillanattól él, hogy abban a körben XP-t szereztél, bármilyen forrásból (például Hunt), és a kör végéig tart."
+    ],
+    [
+     "730.2",
+     1,
+     "Az XP megszerzése számít, nem az, hogy megvan-e még. Ha azonnal elköltöd, a bonus akkor is él."
+    ],
+    [
+     "810.1.b,810.1.c.3",
+     0,
+     "A [Ganking] a Standard Move-ot bővíti battlefieldről battlefieldre lépéssel. Readynek kell lennie hozzá."
+    ],
+    [
+     "364.3.a",
+     1,
+     "A kör végén a +1 Might megszűnik. Ha az opponent körében szerzel XP-t, a bonus abban a körben él."
+    ]
+   ],
+   "why": "Notes: a 142.4.b a lethal damage definíciója, nem kapcsolódik; a bónusz megszűnése a feltételes passzívból (364.3.a) következik, mert a következő körben a \"this turn\" feltétel már nem teljesül."
+  },
+  "Xerath, Freed": {
+   "short": "1 Fury Power fizetésével és exhaustolásával 3 sebzést okoz egy tetszőleges unitnak, akár base-ben állónak is. Csak akkor aktiválható, ha Xerath battlefielden áll, és csak a saját Main Phase-edben. Ha Standard Move-val ment oda, exhausted, így abban a körben csak akkor használható, ha valami ready-zi.",
+   "why": "Short: \"mivel a mozgás is exhaustolja\" túláltalánosítás, csak a Standard Move exhaustol (144.2); effecttel odamozgatott ready Xerath azonnal használhatja."
+  },
+  "Zenith Blade, Leona": {
+   "short": "Stunol egy battlefielden álló enemy unitot, így az nem okoz combat sebzést, és egy saját unitodat odamozgathatod hozzá. Ha az a battlefield nem a tiéd és még nem Contested, a mozgás combatot indít, amelyben te vagy az attacker. A saját körödben vagy showdownban játszható ki.",
+   "notes": [
+    [
+     "103.3.d,103.2.b.4",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, mindnek a legend Champion tagjét (Leona) kell viselnie, és a legendnek a lap mindkét domainjét tartalmaznia kell."
+    ],
+    [
+     "355.10,355.9.b",
+     0,
+     "Az enemy unit target, és battlefielden kell lennie."
+    ],
+    [
+     "355.12",
+     0,
+     "A friendly unit is target, és kijátszáskor választod, attól függetlenül, hogy a resolve-kor mozgatod-e."
+    ],
+    [
+     "355.8,355.4.a",
+     2,
+     "Nem egyértelmű, hogy kijátszható-e a lap, ha nincs másik locationön lévő friendly unitod, mert a szöveg nem \"up to one\". A Core Rules ezt nem dönti el, judge döntse el."
+    ],
+    [
+     "359.3.f.2,359.3.f.2.a",
+     0,
+     "A cél az enemy unit battlefieldje a végrehajtás pillanatában. Ha az enemy unit illegális target lett, a hivatkozás \"null\", a Move is ignorálódik."
+    ],
+    [
+     "452,466.2.c.1,466.2.c.3.a,424.1.b",
+     1,
+     "Ha a cél battlefield nem általad kontrollált és még nem Contested, a Move Contested-dé teszi, combat indul, és te vagy az attacker. Ha már Contested (például showdown közben játszod ki), a unitod a következő cleanupban a controllere szerinti designationt kapja. A Stunned enemy unit nem oszt combat damage-et."
+    ],
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ]
+   ],
+   "why": "Short és notes: nem mindig indul combat és nem mindig te vagy az attacker; a 452 csak Uncontested, nem általad kontrollált battlefieldre ad Contested státuszt. Showdown közben (Action) vagy saját battlefieldre mozogva más a helyzet (466.2.c.3.a)."
+  },
+  "Ziggs, Hexplosives Expert": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Fury és Chaos domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "381.1,415.4",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható. A [T] cost miatt ready-zó effect nélkül körönként egyszer."
+    ],
+    [
+     "187.12",
+     0,
+     "A Bomb domain nélküli gear token: [Deploy], és Deathknell: 2 damage egy ott lévő enemy unitnak, majd a többi ottani Bombod is meghal."
+    ],
+    [
+     "830.1.b.1,355.10.b",
+     0,
+     "A Bomb bármelyik battlefieldre lerakható, enemy és üres battlefieldre is. A battlefield nem target."
+    ],
+    [
+     "830.1.b.3",
+     0,
+     "A Deploy miatt a cleanup nem recallolja a base-be, a battlefielden marad."
+    ],
+    [
+     "830.1.b",
+     0,
+     "A Deploy része: amikor egy opponent holdol ott, a Bomb meghal. Ez kiváltja a Deathknelljét."
+    ],
+    [
+     "808.1.b,187.12",
+     1,
+     "Több Bomb egy helyen: az első halála megöli a többit, és azok Deathknellje is triggerel, tehát minden Bomb külön 2 damage-et oszt."
+    ]
+   ],
+   "why": "Notes: a \"körönként egyszer\" flag 0-s abszolút állításként hibás, a korlátot az exhaust cost adja (415.4), legend ready-zó effecttel többször is használható."
+  }
+ },
+ "checked": 89,
+ "data_issues": [
+  "Vayne, Hunter: a cards.json SFD nyomatain (sfd-223-221) a tags között Sentinel is szerepel, az OGN nyomaton nem; a kártyaadatban csak Vayne, Demacia van. Ellenőrizni, melyik a hatályos.",
+  "Whirling Twirligig: a cards.json rekordjában (rad-022-167) domain és tags üres (None), a kártyaadat Fury domaint ad 1 Power costtal. A forrásrekord hiányos, a Fury domain nem ellenőrizhető belőle."
+ ],
+ "open": [
+  "Vanguard Captain: a short és a 359.3.f.2.a-ra épülő pont állítja, hogy ha a Captain a resolve előtt elhagyja a boardot, nem jönnek tokenek. A 359.3.f.2.a targetről szól, a forrás (\"here\") eltűnésére nincs kifejezett szabály; nem tudtam biztosan lezárni.",
+  "Vex, Apathetic: hogy egy másik játékos (például Vex controllere) effecttel mozgathatja-e a stunolt unitot, a \"They can't move it\" szöveg alapján valószínűleg igen, de a Core Rules ezt nem mondja ki.",
+  "Volibear, Imposing: nem egyértelmű, hogy \"an opponent moves\" kiváltódik-e, ha az opponent a TE unitodat mozgatja egy effecttel (például Void Assault). A javított szöveg ezt nem állítja egyik irányba sem.",
+  "Vex, Cheerless / Wielder of Water / Wraith of Echoes: a \"friendly\" 2v2-ben a teammate objektumait is jelenti (491.8.e), a shortok \"saját\" szóval írják; 1v1-ben pontos, csapatmódban szűkebb. Nem javítottam, mert a lapok nem csapatspecifikusak."
+ ]
+}

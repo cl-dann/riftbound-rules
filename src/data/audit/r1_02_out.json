@@ -1,0 +1,354 @@
+{
+ "fixes": {
+  "Blast Cone": {
+   "notes": [
+    [
+     "383.3.a,355.10,355.4",
+     0,
+     "A play effect \"you may\"-jel kezdődik: a finalizáláskor döntesz, ekkor választod az enemy unit targetet és a Move célját is."
+    ],
+    [
+     "355.4.a",
+     0,
+     "A cél bármely érvényes location lehet a jelenlegin kívül: a unit base-e vagy egy másik battlefield. Így egy védőt ki lehet húzni a battlefieldről."
+    ],
+    [
+     "383.3.b,415.4",
+     0,
+     "A második abilityben a \"you may\" utáni \"exhaust this\" a trigger base costja: a finalizáláskor fizeted, és csak ready gearrel megy."
+    ],
+    [
+     "149.1",
+     1,
+     "A gear ready lép be, a saját play effectje pedig enemy unitot mozgat, ezért a kijátszás körében rögtön stunolhatja az elmozdított unitot."
+    ],
+    [
+     "355.10.c",
+     0,
+     "A stunolt unit csak a trigger feltételében szerepel, ezért nem target: Deflect és \"can't be chosen\" nem védi a stun ellen."
+    ],
+    [
+     "424.1.b,424.1.c,424.1.a.2",
+     0,
+     "A stunolt unit nem adja hozzá a Mightját a combat damage-hez, de megölni a teljes Mightja kell. A stun a kör végén lekerül."
+    ],
+    [
+     "421.1,809.1.c",
+     1,
+     "A stun trigger minden általad okozott enemy Move-ra fut (például Hunting Blind), körönként annyiszor, ahányszor a gear ready. A play effectnél a Deflect felárat ki kell fizetni."
+    ]
+   ],
+   "why": "A 'teljes Mightja kell a megöléshez' állítást a 424.1.c mondja ki, nem a hivatkozott 424.1.b vagy 424.1.a.2; a hivatkozás kiegészítve."
+  },
+  "Blue Sentinel": {
+   "why": "A 383.4.g.2 note nyitott kérdést 1-es flaggel, 'valószínűleg' fogalmazással közölt, és tévesen állította, hogy a szabály ezt conquer effectre (Red Brambleback) kimondja; a 383.4.g egyik lapot sem említi.",
+   "notes": [
+    [
+     "814.1.c,814.1.d.1",
+     0,
+     "[Shield 2]: csak addig ad +2 Mightot, amíg Defender designationje van. Attackerként nem ér semmit."
+    ],
+    [
+     "383.4.d.2.a,383.4.d.2.b",
+     1,
+     "A passzív minden olyan hold effectedet megduplázza, amely az ő battlefieldjének holdjára triggerel: az ottani unitjaid \"When I hold\" abilityjét, a battlefield \"When you hold here\" abilityjét és a saját triggerét is."
+    ],
+    [
+     "391.2,393",
+     0,
+     "A saját hold triggere delayed abilityt hoz létre. Ez akkor is lefut a Main Phase elején, ha a Sentinel közben elhagyta a boardot."
+    ],
+    [
+     "315.2.b,316.3,316.4",
+     0,
+     "A hold a Beginning Phase-ben történik, a \"next Main Phase\" ugyanannak a körnek a Main Phase-e. A Rune Pool előbb ürül ki, utána jön az [Add], tehát a Power megmarad a körre."
+    ],
+    [
+     "383.4.g,383.4.g.2",
+     2,
+     "Ha egy effect csak \"aktiválja\" a hold effecteket, tényleges hold nélkül, a 383.4.g.2 szerint hold esemény nem történik. Hogy a Sentinel duplázása ilyenkor él-e, a szabály nem mondja ki, judge dönt."
+    ],
+    [
+     "472",
+     0,
+     "Egy battlefield körönként egyszer score-olható, a hold triggerek körönként egyszer indulnak (duplázva kétszer)."
+    ]
+   ]
+  },
+  "Boneshiver": {
+   "why": "Az exhausted rune recycle-ölhető (164.2.b nem kér exhaustot), ezért a note 'nem ad Energyt vagy Powert' állítása téves: Powert ugyanabban a körben is adhat.",
+   "notes": [
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Energy és 1 Body Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +2 Mightot is kap."
+    ],
+    [
+     "383.4.c,431.2,164.2.a,164.2.b",
+     0,
+     "Conquer trigger: amikor a felszerelt unit conquerel, a Rune Deck tetejéről 1 rune kerül a boardra exhausted. Energyt ebben a körben más effect nélkül nem ad, de recycle-ölve (ehhez nem kell ready) 1 Powert igen."
+    ],
+    [
+     "431.3",
+     0,
+     "Üres Rune Decknél nem kapsz rune-t, és ez nem okoz büntetést."
+    ],
+    [
+     "435.1.f,818.1.c.2",
+     0,
+     "Másik unitra átrakva a korábbiról leválik, és az a unit a bónuszt és a képességet is elveszíti. Az Equip costot minden áthelyezésnél újra ki kell fizetni."
+    ]
+   ]
+  },
+  "Brazen Buccaneer": {
+   "why": "A 356.2.b.1 note szerint a szabályzat ezt a szöveget hozza példának; a 356.2.b.1-ben nincs ilyen példa.",
+   "notes": [
+    [
+     "356.2.b.1,356.4.b",
+     0,
+     "Optional additional cost: a discardról a kijátszás döntési lépésében határozol, a 2 Energy kedvezményt a költség meghatározásakor számolja a játék, a tényleges discard a costok kifizetésekor történik."
+    ],
+    [
+     "423.3",
+     0,
+     "A discard itt cost: kell hozzá egy másik lap a kezedben. A Buccaneer ekkor már a chain-en van, önmagát nem dobhatod el."
+    ],
+    [
+     "356.4.b",
+     0,
+     "A kedvezménnyel 4 Energybe kerül. Ha nem discardolsz, a teljes 6-ot fizeted."
+    ],
+    [
+     "423.1.b",
+     1,
+     "A costként eldobott lap is discardnak számít, a \"when you discard me\" abilityk (például Flame Chompers) triggerelnek."
+    ],
+    [
+     "358.5",
+     0,
+     "Ha a kijátszás valamiért meghiúsul a legality checknél, minden lépés visszacsinálódik, a discard is."
+    ]
+   ]
+  },
+  "Buhru Captain": {
+   "why": "A 355.3/355.18 note 'valószínűleg' fogalmazással közölt egy olyan levezetést, amelyet a 355.18 egyértelműen eldönt (nem bulleted mód, tehát resolve-kor választasz).",
+   "notes": [
+    [
+     "383.3.a",
+     0,
+     "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz, hogy végrehajtod-e. Ha nem, lekerül a chainről."
+    ],
+    [
+     "355.3,355.18",
+     1,
+     "A draw és a buff közti választás nem bulleted mód lista, ezért a 355.18 szerint a resolve-kor döntesz róla, nem a chain-re kerüléskor."
+    ],
+    [
+     "427.1.b.1",
+     0,
+     "Ha a Captainen már van buff, a buff opció nem csinál semmit. Ilyenkor a draw a jó választás."
+    ],
+    [
+     "703,705",
+     0,
+     "A buff +1 Mightot ad, amíg rajta van, kör végén nem jár le. Ha a Captain elhagyja a boardot, a buff lekerül."
+    ],
+    [
+     "355.10",
+     1,
+     "Nincs target: a buff a forrásra (\"me\") megy, a draw pedig rád. Mistargetelni nem lehet."
+    ]
+   ]
+  },
+  "Bullet Time, Miss Fortune": {
+   "why": "A 204.3.a note szerint a szabályzat név szerint ezt a lapot hozza példának, és egy másik note szerint a szabályzat példája [A]-val idézi a szöveget; a 204.3 és 204.3.a semmilyen lapot nem idéz.",
+   "notes": [
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ],
+    [
+     "204.3,204.3.a",
+     0,
+     "A Power fizetése cost within instructions (\"[do X] to [do Y]\"): a resolve-kor fizeted, és ekkor döntöd el az összeget."
+    ],
+    [
+     "135.2.e.6.c",
+     0,
+     "A [C] kétdomaines lapon a lap bármelyik domainjének Powere lehet, vagyis Body vagy Chaos Power, tetszőleges arányban."
+    ],
+    [
+     "445.2.c",
+     0,
+     "A resolve közbeni fizetéskor is használhatod a [Reaction] Add abilityket, vagyis a rune-jaidat akkor is recycle-ölheted Powerért."
+    ],
+    [
+     "355.10.b",
+     0,
+     "A battlefield a target, az ott lévő enemy unitok nem. Deflect és \"can't be chosen\" nem védi őket."
+    ],
+    [
+     "445.2",
+     1,
+     "0 Powert is fizethetsz, ekkor nincs sebzés. Az opponent úgy reagál a spellre, hogy még nem tudja az összeget."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Miss Fortune) kell viselnie."
+    ]
+   ]
+  },
+  "Burn Away": {
+   "why": "A 'Might 3 fölé nő, illegális target' állítást a 359.3.e.2 mondja ki; a hivatkozott 359.3.e.4 a zónaváltásról szól.",
+   "notes": [
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ],
+    [
+     "355.10,355.9.b",
+     0,
+     "Egy target: legfeljebb 3 Mightú unit vagy bármilyen gear, bármelyik játékosé, bárhol a boardon."
+    ],
+    [
+     "359.3.e.2,710",
+     0,
+     "A unit aktuális Mightja számít. Ha a resolve-ra 3 fölé nő, illegális target, a banish elmarad."
+    ],
+    [
+     "428.2.a,808.1.d",
+     0,
+     "A banish nem kill: nincs Deathknell (a Bomb sem robban), és a lap nem kerül a trashbe."
+    ],
+    [
+     "441.4,359.3.e.5",
+     0,
+     "A Burn 2 kötelező és a targettől független: mistarget esetén is a trashbe megy a decked felső 2 lapja, kevés lapnál Burn Outtal."
+    ],
+    [
+     "719.5,186.1",
+     0,
+     "A banishelt unitról az Equipment leválik és a boardon marad. Token megszűnik."
+    ]
+   ]
+  },
+  "Called Shot": {
+   "why": "A short nem írta le az [Action] időzítést (saját kör vagy showdown, 806.1.c.1), és a 'megismétled' helyett pontosabb, hogy az effect még egyszer végrehajtódik (820.1.d).",
+   "short": "Megnézed a Main Deck felső 2 lapját, az egyiket felhúzod, a másikat recycle-ölöd (a Main Deck aljára kerül). 1 Chaos Power ráfizetéssel (Repeat) az egész még egyszer lefut. A saját körödben vagy showdown alatt bárki körében kijátszható."
+  },
+  "Chaos Rune": {
+   "why": "A 'mind a legend Domain Identity-jén belül' állítást a 103.4.a.1 mondja ki, a hivatkozott 103.4.a csak a 12 lapot.",
+   "notes": [
+    [
+     "103.4.a,103.4.a.1",
+     0,
+     "A Rune Deck pontosan 12 rune, és mind a legend Domain Identity-jén belül kell legyen."
+    ],
+    [
+     "164.2.a",
+     0,
+     "Exhaustolva 1 Energyt ad. Ez [Reaction] ability, cost fizetése közben is használható."
+    ],
+    [
+     "164.2.b, 417.1.b",
+     0,
+     "Recycle-ölve 1 Chaos Powert ad. A rune ilyenkor a Rune Deck aljára kerül, vagyis a boardról elveszíted."
+    ],
+    [
+     "430.2",
+     0,
+     "Az Add abilityre nem lehet reagálni."
+    ],
+    [
+     "315.3.b",
+     0,
+     "A Channel Phase-ben körönként 2 rune kerül a Rune Deckről a boardra."
+    ]
+   ]
+  },
+  "Clanging Sentry": {
+   "why": "A short és a 831.2 note a Sentryt Mech-ként kezelte ('a Sentry is'), és azt állította, hogy a szabályzat név szerint ezt a lapot hozza példának. A 831.2 nem idéz lapot, a kártyaadatokban a Sentrynek nincs Mech tagje, így a saját Disarmja nem igazolt.",
+   "short": "Minden Mech unitod Disarmot kap: amikor támad, egy ott álló ellenséges unit -1 Mightot kap erre a körre. Két Sentry esetén a Mech-ek Disarm 2-t kapnak, ez -2. Ha a Sentry lekerül, a Mech-ek elveszítik a képességet."
+  },
+  "Blast Corps Cadet": {
+   "why": "Az Ezreal, Prodigy példa pontatlan: Ezreal az optional additional costot csak [1]-gyel vagy [A]-val csökkenti, így a Cadet [1][C] ráfizetése nem megy le 0-ra. A 356.4.f.1 szerint a kedvezmény mértékétől függetlenül 'paid'.",
+   "notes": [
+    [
+     "356.2.b.1,355.1.a",
+     0,
+     "Az [1] és 1 Fury Power optional additional cost. A kijátszás 2. lépésében döntesz róla, a unit costjával együtt fizeted."
+    ],
+    [
+     "383.2.a.1",
+     0,
+     "Az \"if you paid the additional cost\" a trigger feltétel része. Fizetés nélkül a trigger nem kerül chain-re."
+    ],
+    [
+     "355.5.b",
+     0,
+     "A targetet nem a unit kijátszásakor, hanem a trigger chain-re kerülésekor választod, amikor a Cadet már a boardon van."
+    ],
+    [
+     "355.8",
+     1,
+     "Ha a trigger chain-re kerülésekor nincs választható unit battlefielden, a trigger elvész, a kifizetett additional cost nem jár vissza."
+    ],
+    [
+     "355.8,355.9.c",
+     1,
+     "A trigger kötelező, és a Cadet a saját abilityjének is lehet targetje. Ha battlefieldre játszod ki, és nincs más unit battlefielden, a 2 damage-et saját magára kell kiosztania, vagyis meghal."
+    ],
+    [
+     "359.3.e.9",
+     0,
+     "Ha a target a resolve előtt base-be kerül, a trigger mistargetel, a 2 damage elmarad."
+    ],
+    [
+     "356.4.f.1",
+     0,
+     "Az additional cost akkor is \"paid\", ha egy kedvezmény csökkenti, akár 0-ra. Például Ezreal, Prodigy mellett a ráfizetés [1]-gyel vagy [A]-val olcsóbb, a 2 damage ettől még jár."
+    ]
+   ]
+  },
+  "Crimson Pigeons": {
+   "why": "A 478.4 (egy effect eltávolítása és alkalmazása külön esemény) nem támasztja alá, hogy a feltételes bónusz azonnal megszűnik és a damage halálos lehet; ezt a 364.3.a (feltételes passive) és a 143.2.b (lethal damage) mondja.",
+   "notes": [
+    [
+     "364.3.a",
+     0,
+     "Feltételes passive ability: a +2 Might csak addig él, amíg a feltétel igaz, nem a kör végéig."
+    ],
+    [
+     "466.2.c.3",
+     1,
+     "Kell hozzá, hogy a Pigeons Attacker jelölést viseljen, és legyen mellette másik friendly attacker. Defenderként vagy egyedül támadva nincs bónusz."
+    ],
+    [
+     "364.3.a,143.2.b",
+     1,
+     "Ha a másik attacker a Combat Showdown alatt meghal vagy elhagyja a battlefieldet, a feltétel megszűnik, a bónusz azonnal elvész. Ha a rajta lévő damage eléri az új Mightját, meghal."
+    ],
+    [
+     "466.2.c.3.a",
+     0,
+     "A combat közben odaérkező friendly unit a következő cleanupban kap Attacker jelölést, onnantól a bónusz él."
+    ]
+   ]
+  }
+ },
+ "checked": 92,
+ "data_issues": [
+  "Clanging Sentry: a tags mező üres, a forrás cards.json-ban nincs tags kulcs; ellenőrizni kell, hogy a lap Mech tagű-e (ettől függ, hogy saját magának is ad-e Disarmot)."
+ ],
+ "open": [
+  "Clanging Sentry: nem dönthető el a rendelkezésre álló adatokból, hogy maga a Sentry Mech-e; a shortból ezért kivettem az 'a Sentry is' állítást."
+ ]
+}

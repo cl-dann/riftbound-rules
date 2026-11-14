@@ -1,0 +1,423 @@
+{
+ "fixes": {
+  "Acceleration Gate": {
+   "short": "Legfeljebb 4 unitot, geart vagy rune-t ready állapotba hoz, bárkiét és bármilyen arányban. Csak a saját körödben, showdownon kívül játszható ki, amikor semmi más nem vár a hatására. A ready rune újra ad Energyt, a ready unit újra mozoghat, de már ready lapra kár választani.",
+   "why": "A short időzítéséből hiányzott a showdownon kívül feltétel (155: Open State, outside of Showdowns)."
+  },
+  "Akali, Rogue Assassin": {
+   "why": "A note szerint a 135.2.b.5.b név szerint ezt a lapot hozza példának; a szabályban nincs kártyanév.",
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Fury és Calm domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "827.1.c.1,381.1",
+     0,
+     "Empower [3][A]: activated ability, csak akkor aktiválható, ha a legend még nem Empowered, a saját Main Phase-edben, Open State-ben."
+    ],
+    [
+     "135.2.b.5.b",
+     0,
+     "Az elöl álló feltétel (\"if it's your turn\") a mondat minden későbbi utasítására vonatkozik (move és ready), az \"if I'm Empowered\" csak a ready-re."
+    ],
+    [
+     "806.1.c.2,135.2.b.5.b",
+     1,
+     "[Action] miatt az opponent körében, showdown alatt is aktiválható lenne, de ott az \"if it's your turn\" feltétel nem teljesül, az ability nem csinál semmit."
+    ],
+    [
+     "355.9.b,359.3.e.2",
+     0,
+     "A target showdownban lévő friendly unit. Ha a resolve előtt elhagyja a showdown battlefieldjét, illegális target."
+    ],
+    [
+     "443.2.a,442.1.a",
+     1,
+     "A ready nem disempowereli a legendet: a második ability costja csak az Exhaust. Disempower csak akkor történik, ha egy effect utasít rá, ezért az Empowered állapot megmarad, az Empower costot nem kell körönként újra kifizetni."
+    ],
+    [
+     "421.1,416.1.c",
+     1,
+     "A base-be vitel Move, nem Recall. Az Empowered állapotot a resolve-kor nézi, a ready pedig lehetővé teszi, hogy a unit még abban a körben újra mozogjon."
+    ]
+   ]
+  },
+  "Akali, Silent": {
+   "why": "A note szerint a szabályzat ezt a szöveget hozza példának; a 359.3.e.5-ben nincs ilyen példa, az állítás levezetés (flag 1).",
+   "notes": [
+    [
+     "757.1,355.9.b",
+     0,
+     "Combaton kívül enemy spell és ability nem választhatja targetnek. Saját spelljeid és abilityjeid bármikor választhatják."
+    ],
+    [
+     "740.2.c",
+     0,
+     "\"In combat\": olyan battlefielden áll, ahol combat zajlik, és van Attacker vagy Defender jelölése. Ekkor az enemy is célozhatja."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "Ha combatban megcélozzák, majd válaszul base-be mozgatod (például Flash), már nincs combatban, illegális target lesz, a spell nem hat rá."
+    ],
+    [
+     "355.5.a",
+     0,
+     "A védelem csak a választás ellen szól. A kritérium alapján ható effectek (\"all units\", \"all enemy units here\") combaton kívül is érintik."
+    ],
+    [
+     "421.1,458.1",
+     0,
+     "A +2 Might csak Move-ra jár, amikor battlefieldre érkezik (Standard Move vagy effect). Recall nem Move, és a base-be mozgás sem váltja ki."
+    ],
+    [
+     "420.1",
+     1,
+     "Ha közvetlenül battlefieldre játszod ki, az Play, nem Move, ezért a +2 Might trigger nem fut le."
+    ]
+   ]
+  },
+  "Altar of Blood": {
+   "short": "Ha combat közben itt meghalna egy unit, a controllere 3 bármilyen Powerért megmentheti: a unit meggyógyul, exhausted lesz és a base-be kerül. Mivel nem hal meg, a Deathknell képessége sem indul be. A battlefieldet ettől még elveszítheted, mert a unit elhagyja.",
+   "why": "Short: a lap \"its controller\"-t ír, a \"gazdája\" az ownerre utal (190.6.c szerint a controller dönt). Note: a 383.2.c.3.a nem hozza példának ezt az esetet, nincs benne kártyanév.",
+   "notes": [
+    [
+     "369.1,370.1.c",
+     0,
+     "A \"would die ... instead\" replacement effect: a halál előtt lép közbe, a unit nem kerül a trashbe."
+    ],
+    [
+     "383.2.c.3.a",
+     0,
+     "Ha a halált heal, exhaust és recall váltja fel, a unit nem hagyja el a boardot halállal, ezért a Deathknell abilityje nem triggerel."
+    ],
+    [
+     "445.2.b,445.2.c",
+     0,
+     "A 3 Power bármely domainből fizethető. Ha nem fizeted ki, nincs csere, a unit meghal. Fizetés közben [Reaction] Add ability (rune recycle) használható."
+    ],
+    [
+     "190.6.c,374",
+     1,
+     "A lap megnevezi, ki dönt: a meghaló unit controllere. A battlefield abilityjét az a játékos kontrollálja, akit az ability választásra kijelöl, ezért ő dönt és ő fizet, attól függetlenül, hogy ki kontrollálja a battlefieldet."
+    ],
+    [
+     "458.1,458.3",
+     0,
+     "A recall nem Move: \"when I move\" triggerek nem futnak le, és mozgást tiltó effect (például Vilemaw's Lair) nem akadályozza meg."
+    ],
+    [
+     "466.1,468.3.a",
+     1,
+     "Csak combat közbeni halálra él, de a Combat Showdown alatti spell általi kill is ide esik. A megmentett unit a base-be kerül, vagyis a battlefieldet ettől még elveszítheted."
+    ]
+   ]
+  },
+  "Ambessa, Matriarch of War": {
+   "short": "Legend: amikor valami mást Empowered állapotba hozol, ő is Empowered lesz. Ezt elhasználva, 1 bármilyen Powerért és exhaustolva ready állapotba hozhatsz egy unitot, bárkiét. Csak a saját Main Phase-edben használható, showdownon kívül. A deck Body és Order lapokból állhat.",
+   "why": "Short: keyword nélküli activated ability csak a saját Main Phase-ben használható (381.1), nem az egész körben. Note: a szabály stunra és buffra nem mondja ki, hogy nincs trigger, csak hogy nem kerül fel újra (424.1.a.1, 702.3.a).",
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Body és Order domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "442.1.c",
+     0,
+     "Az Empowered bináris állapot. Ha a legend már Empowered, az újabb empower nem csinál semmit."
+    ],
+    [
+     "442.2.a,442.1.c,424.1.a.1,702.3.a",
+     2,
+     "Nem egyértelmű, hogy triggerel-e, ha olyan objektumot \"empowerelsz\", ami már Empowered volt (ilyenkor nem történik semmi). A 442.2.a csak az Empowered állapot megszerzését nevezi hivatkozható eseménynek, ami a nem-trigger felé mutat. Stunnál és buffnál a szabály csak annyit mond, hogy nem kerül fel újra (424.1.a.1, 702.3.a), triggerről nem szól. Judge döntse el."
+    ],
+    [
+     "443.1.a,415.4",
+     1,
+     "A \"Disempower me\" és az Exhaust cost: az ability csak Empowered és ready legenddel aktiválható, plusz 1 bármilyen domainű Power kell hozzá."
+    ],
+    [
+     "381.1",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható. Showdown alatt és az opponent körében nem."
+    ],
+    [
+     "355.10,416.1.c",
+     0,
+     "A \"ready a unit\" unitja target, bármelyik játékos unitja lehet. Már ready uniton nem történik semmi, a cost nem jár vissza."
+    ]
+   ]
+  },
+  "An Offer You Can't Refuse": {
+   "short": "Megöl egy bárkihez tartozó geart, a gear controllere pedig kap helyette egy exhausted Gold gear tokent, ami később Powerré váltható. A saját körödben vagy showdownban játszható ki. Ha a gear közben eltűnik, Gold sem jár.",
+   "why": "Short: a lap \"Its controller\"-t ír, a \"gazdája\" ownerre utal. Note: a 185.3.a (tokeneknek nincs costjuk) nem az ability Exhaust costjáról szól, a helyes alap 415.1.b, 415.4; az \"abban a körben\" pontatlan, a ready-ig tart.",
+   "notes": [
+    [
+     "355.10, 150.4",
+     0,
+     "A gear target. Bármelyik játékos gearje választható, csatolt Equipment és Gold token is."
+    ],
+    [
+     "359.3.e.14.a",
+     0,
+     "Ha a gear illegális targetté válik, a kill ignorálódik, és Gold token sem jön létre."
+    ],
+    [
+     "359.3.e.14.b",
+     1,
+     "Ha a kill negálódik, a gear controllere ettől még megkapja a Gold tokent, mert a második rész nem a kill megtörténtére hivatkozik."
+    ],
+    [
+     "415.1.b,415.4",
+     1,
+     "A Gold exhausted lép be, ezért a saját Exhaust költségű abilityje addig nem használható, amíg újra ready nem lesz."
+    ],
+    [
+     "806.1.c.1",
+     0,
+     "[Action]: a saját körödben és showdown alatt játszható, spellre válaszul nem."
+    ]
+   ]
+  },
+  "Angler Beast": {
+   "why": "A note \"3 Might fölé\" emelést írt, de a 3 Mightú unit is marad (a feltétel 2 vagy kevesebb, 710).",
+   "notes": [
+    [
+     "355.5.a,355.10.d",
+     0,
+     "\"All units\": nincs választás, nincs target. A \"can't be chosen\" unitokat is visszaküldi, és Deflect cost sem merül fel."
+    ],
+    [
+     "710",
+     0,
+     "A resolve pillanatában érvényes Might számít. Akit válaszul legalább 3 Mightra emelnek, marad. Akit 2-re vagy alá csökkentenek, megy."
+    ],
+    [
+     "355.5.a",
+     1,
+     "Nincs \"enemy\" megkötés: a saját, legfeljebb 2 Mightú unitjaid is visszamennek a kezedbe, base-ből és battlefieldről egyaránt."
+    ],
+    [
+     "056.2,186.1",
+     0,
+     "Minden lap a tulajdonosa kezébe megy. A token unitok a kézbe kerülve megszűnnek létezni."
+    ],
+    [
+     "124.1,719.5",
+     0,
+     "A visszavett unitokról lekerül a damage és a buff, a rájuk csatolt Equipment leválik és a boardon marad."
+    ]
+   ]
+  },
+  "Antagonistic Apparatus": {
+   "short": "Eleve ready érkezik, és kijátszáskor kapsz mellé ugyanoda egy ready, 3 Mightú Mech unit tokent. Mindkettő már abban a körben mozoghat. A token kijátszott unitnak számít, ezért a unit kijátszására figyelő képességeket is beindítja.",
+   "why": "A short és a note szerint a lapnak nincs domainje és bármelyik deckbe betehető; a lap domainje Fury és 1 Power costja van, ezért a 103.3.c (Domain Identity) korlátozza.",
+   "notes": [
+    [
+     "103.3.c",
+     0,
+     "Fury domainű lap (1 Fury Power cost): csak olyan deckbe tehető, amelynek Domain Identity-je tartalmazza a Fury domaint."
+    ],
+    [
+     "369.3",
+     0,
+     "Az \"I enter ready\" replacement effect: a unit eleve ready érkezik, nem exhausted lép be és utána lesz ready. A kijátszás körében már mozoghat."
+    ],
+    [
+     "187.4,184.1",
+     0,
+     "A token domain nélküli, 3 Mightú, Mech tages unit, és az effect szerint ready lép be."
+    ],
+    [
+     "359.3.f.2",
+     0,
+     "A \"here\" a resolve-kor ellenőrződik: a token oda érkezik, ahol az Apparatus akkor éppen áll."
+    ],
+    [
+     "359.3.e.12",
+     1,
+     "Ha az Apparatus a trigger resolve-ja előtt elhagyja a boardot, a \"here\" nem állapítható meg, a token valószínűleg nem jön létre."
+    ],
+    [
+     "185.2.a",
+     1,
+     "A tokent kijátszod (play), ezért a \"when you play a unit\" triggerek (például Cithria of Cloudfield) lefutnak rá."
+    ]
+   ]
+  },
+  "Arcane Shift": {
+   "short": "Egy saját unitodat félreteszed (banish), majd a tulajdonosa (általában te) ingyen újra kijátssza, közben 3 damage-et adsz egy battlefielden álló ellenségnek. A visszatérő unit friss lap: damage és buff nélkül, de a kijátszási képessége újra lefut. A saját körödben vagy showdownban játszható, utána a spell is félrekerül.",
+   "why": "A lap szerint a unit tulajdonosa (\"its owner\") játssza ki, nem feltétlenül te: egy általad kontrollált, de más tulajdonában lévő unitot a tulajdonosa játszik ki (056.2, 356.1.b.1)."
+  },
+  "Arise!": {
+   "short": "Minden Equipmentedért kapsz egy 2 Mightú Sand Soldier unit tokent, utána közülük legfeljebb kettőt ready állapotba hozol. Az ellenfél a ready rész előtt még reagálhat. Csak a saját körödben, showdownon kívül játszható ki, amikor semmi más nem vár a hatására.",
+   "why": "A short időzítéséből hiányzott a showdownon kívül feltétel (155)."
+  },
+  "Aurok General": {
+   "why": "A note \"a szabályzat példájaként\" hivatkozott a 719.4.a-ra; a szabály csak annyit mond, hogy a státuszok (a location, Attached, Top-Most kivételével) nem hatnak át, csatolt Empowered lapról nem hoz példát. Levezetés, flag 1.",
+   "notes": [
+    [
+     "827.1.c.1,381.1",
+     0,
+     "Empower [3] és 1 Order Power: csak a saját Main Phase-edben, Open State-ben aktiválható."
+    ],
+    [
+     "828.1.c",
+     0,
+     "A passive csak addig él, amíg maga a General Empowered. Ilyenkor ő is megkapja a +2 Mightot."
+    ],
+    [
+     "442.2",
+     1,
+     "Csak az Empowered állapotú unitjaid kapják a bonust. Egy Empower abilityvel rendelkező, de nem Empowered unit nem."
+    ],
+    [
+     "828.1.c",
+     1,
+     "Két Empowered General esetén a bonusok összeadódnak: minden Empowered unitod +4 Mightot kap."
+    ],
+    [
+     "719.4,719.4.a",
+     1,
+     "A státuszok (például az Empowered) nem öröklődnek a csatolt lap és a unit között: ha egy csatolt lap Empowered, attól a unit, amelyen van, még nem az, és nem kapja a +2 Mightot."
+    ],
+    [
+     "142.4.b",
+     1,
+     "Ha a General elhagyja a boardot vagy disempowerelik, a többi unit +2-je azonnal megszűnik, a sebzett unitok meghalhatnak."
+    ]
+   ]
+  },
+  "Avalanche": {
+   "short": "Minden base-ben álló unitnak 3 damage-et ad, a sajátjaidnak is. A battlefielden állók kimaradnak, így az ellenfél válaszként kimenekítheti oda a unitjait. Csak a saját körödben, showdownon kívül játszható ki, amikor semmi más nem vár a hatására.",
+   "why": "A short időzítéséből hiányzott a showdownon kívül feltétel (155)."
+  },
+  "Azir, Ascendant": {
+   "short": "Körönként egyszer 1 Calm Powerért helyet cserél egy saját unitoddal, és ha annak van Equipmentje, egyet áttehetsz Azirra. Exhausted állapotban is működik, a saját Main Phase-edben vagy bárki körében showdown alatt. Mindkét unit mozgásnak számít, így ha valamelyik ellenséges battlefieldre kerül, harc indulhat.",
+   "why": "A short \"a saját körödben vagy showdownban\" időzítést írt; [Action] activated ability a saját Main Phase-ben (381.1) és showdown alatt bárki körében (806.1.c.2) aktiválható, nem a saját kör bármely pontján."
+  },
+  "Baron Pit": {
+   "why": "A 187.9 nem nevezi meg Baron Nashort, ezt a kártya szövege mondja. A \"token battlefield nem recycle-ölhető\" állítást a 185.2.e nem támasztja alá (csak azt mondja, hogy a token a típusa recycle célját örökli); a tokenre vonatkozó tényleges szabály a 186.1. A tulajdonjogot a 440.4 adja, nem a 440.4.b.",
+   "notes": [
+    [
+     "187.9",
+     0,
+     "Battlefield token. A Baron Nashor szövege hozza létre kijátszáskor, ha még nincs a boardon, és Baron ide lép be."
+    ],
+    [
+     "440.4,440.4.b",
+     0,
+     "A létrehozott battlefield uncontrolled állapotban jön létre, a tulajdonosa az, aki létrehozta."
+    ],
+    [
+     "810.1.b,144.4.b",
+     1,
+     "\"From anywhere\": Standard Move-val másik battlefieldről is ide lehet lépni Ganking nélkül. Innen tovább viszont a szokásos szabályok élnek."
+    ],
+    [
+     "421.1",
+     1,
+     "A Move csak a board két locationje között értelmezett. A szöveg nem enged kézből, trashből vagy más zónából ide mozgatni."
+    ],
+    [
+     "190.3.a.1,452",
+     0,
+     "Ha olyan unit lép ide, amelynek a controllere nem kontrollálja, a battlefield Contested lesz, ebből showdown vagy combat következik."
+    ],
+    [
+     "170.2.b,186.1",
+     1,
+     "Nem lehet vele kezdeni, csak játék közben jön létre. Tokenként, ha bármilyen nem-board zónába (a chain kivételével) kerülne, azonnal megszűnik létezni."
+    ]
+   ]
+  },
+  "Bellows Breath": {
+   "why": "A 355.11.b.1 és a 359.3.e.5 nem hoz név szerinti kártyapéldát; a note-ok ezt állították. A combatos példa nem erre a lapra vonatkozott.",
+   "notes": [
+    [
+     "355.13,355.11",
+     0,
+     "\"Up to three\": 0 és 3 közötti unit választható, mind target. Együtt ugyanazon a locationön kell lenniük, ami base is lehet."
+    ],
+    [
+     "355.11.b,355.11.b.1",
+     1,
+     "Ha a három targetből kettőt base-be mozgatnak, a csoport már nem felel meg az \"ugyanazon a locationön\" feltételnek: egy legal részhalmazt kell választanod, és az adott részhalmazba minden lehetséges legal targetet bele kell venned. Vagy a battlefielden maradt egyet, vagy a base-ben lévő kettőt sebzed, a kettőből csak egyet nem választhatsz."
+    ],
+    [
+     "359.3.e.2,359.3.e.5",
+     0,
+     "Ha egy target a resolve előtt illegálissá válik (például elhagyja a boardot), az nem kap damage-et."
+    ],
+    [
+     "820.1.d,820.2.a",
+     0,
+     "Repeat [1] és egy Mind Power: az effect kétszer hajtódik végre, a második körre más unitok is választhatók. Ugyanarra a unitra kétszer 1 damage megy."
+    ],
+    [
+     "809.1.c",
+     0,
+     "Deflect unitnál a többletköltséget minden választásért külön kell fizetni, Repeattel ugyanarra a unitra kétszer."
+    ],
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ]
+   ]
+  },
+  "Black Flame Altar": {
+   "short": "Az itt álló Temporary unitok védekezéskor +1 Mightot kapnak, bármelyik játékoséi. Mivel a Temporary unit a controllere következő körének elején (Beginning Phase, scoring előtt) meghal, ez főleg az ellenfél körében, védekezéskor hasznos. A kapott Temporary is számít, nem csak a nyomtatott.",
+   "why": "A 816.1.b szerint a Temporary a controller Beginning Phase-ében öl, a short \"gazdája\" (owner) szót használt."
+  },
+  "Black Rose Sanctum": {
+   "why": "A 190.6.c csak arra az esetre szól, amikor a battlefield abilityje egy játékos döntését írja elő; itt nincs döntés, az eltérő controllert a 190.6.a \"unless that ability indicates another player does\" része adja, és ez levezetés (flag 1).",
+   "notes": [
+    [
+     "383.1,190.6.a",
+     1,
+     "A \"first time each turn\" triggered ability. Mivel az ability megnevezi a játékost (\"they play\"), azt a játékos kezeli, akinek a unitja meghalt, nem a battlefield controllere."
+    ],
+    [
+     "383.1.b",
+     0,
+     "Ha több non-token unitod egyszerre hal meg itt (például combat damage-től), a trigger csak egyszer fut le, 1 Recruit jár."
+    ],
+    [
+     "185.1",
+     1,
+     "Token unit halála nem váltja ki, és nem is használja el az \"első alkalmat\". Utána az első non-token unit halála még triggerel."
+    ],
+    [
+     "429.2,428.2.a",
+     0,
+     "Csak a halál számít, vagyis ha a unit a boardról a trashbe kerül. Banish vagy kézbe visszavétel nem váltja ki."
+    ],
+    [
+     "370.1.a.1",
+     1,
+     "Ha a halált replacement effect felváltja (Altar of Blood, Zhonya's Hourglass), a unit nem halt meg, nincs Recruit."
+    ],
+    [
+     "187.1,440.2.c",
+     0,
+     "A Recruit 1 Mightú, domain nélküli token, a játékos saját base-ébe érkezik, kijátszott unitnak számít."
+    ],
+    [
+     "386.1",
+     1,
+     "Játékosonként és körönként egyszer, bárki körében. Combatban mindkét fél kaphat egy-egy Recruitot."
+    ]
+   ]
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Aspirant's Climb: a note szerint a lap a kártyaadat alapján banned, de a kapott kártyaadatban nincs legalitás mező, és a Core Rules nem tartalmaz tiltólistát, ezért nem ellenőrizhető.",
+  "Antagonistic Apparatus: az eredeti short és note domain nélküli lapként írta le, a kártyaadat viszont Fury domaint és 1 Power costot ad. A javítás a kártyaadatot követi; érdemes a hivatalos kártyaadatbázisban megerősíteni, melyik a helyes."
+ ]
+}
