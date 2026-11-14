@@ -1,0 +1,37 @@
+{
+ "fixes": {
+  "Trinity Force": {
+   "notes": [
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Body Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +2 Mightot is kap."
+    ],
+    [
+     "383.4.d,194.1.c",
+     0,
+     "Hold trigger: amikor holdolod a felszerelt unit battlefieldjét, a hold pontja mellé még 1 pontot kapsz, így az a battlefield 2 pontot ér."
+    ],
+    [
+     "473.1.a.1",
+     1,
+     "Ez a pont nem conquerből jön, ezért a Final Point megkötései nem vonatkoznak rá: a győzelemhez hiányzó pontot is megadhatja."
+    ],
+    [
+     "472",
+     1,
+     "Egy battlefield körönként egyszer holdolható, ezért egy Trinity Force körönként legfeljebb 1 extra pontot ad. Ha ugyanazon a uniton két Trinity Force van, mindkét Effect Text hozzáfűződik, és mindkettő külön triggerel."
+    ]
+   ],
+   "why": "A 472-es pont szerint 'unitonként körönként legfeljebb 1 extra pont' jár, de egy unitra több Equipment is csatolható, és a 136.2.c szerint mindegyik Effect Textje hozzáfűződik, így két Trinity Force két külön hold triggert és 2 pontot ad. A korlát Trinity Force-onként áll, és ez levezetés (flag 1)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

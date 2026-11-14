@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "Durand Memorial": {
+   "short": "Battlefield: ha itt védekezel, egy itt álló saját unitod Tank lesz a harc végéig. Az ellenfélnek ilyenkor először erre kell halálos sebzést osztania, csak utána a többi, Tank nélküli unitodra. Ha több Tank unitod van, köztük az ellenfél választ.",
+   "why": "A short szerint a Tank unit után 'csak utána a többi unitodra' lehet sebzést osztani, de a 815.1.b csak a Tank nélküli unitokat zárja ki, a 815.1.c.2 szerint több Tank unit között az osztó szabadon választ. A 'csak' miatt túlzó volt, pontosítva."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

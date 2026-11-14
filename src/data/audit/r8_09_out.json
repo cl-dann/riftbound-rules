@@ -1,0 +1,51 @@
+{
+ "fixes": {
+  "Spirit's Refuge": {
+   "short": "Kijátszáskor buffol egy saját unitot. Amíg a boardon van, a buffolt saját unitjaid Deflectet kapnak, ha még nincs nekik: ellenséges spellnek vagy képességnek plusz 1 bármilyen domainű Powerbe kerül választani őket. Ha a unit elkölti a buffját, ezt a védelmet is elveszti.",
+   "why": "A short elhagyta az \"if they didn't already\" feltételt: a már Deflecttel rendelkező buffolt unit nem kap plusz Deflectet (809.2 helyett a kártyaszöveg, 002)."
+  },
+  "Spinning Axe": {
+   "short": "Bármikor kijátszható (Quick-Draw), és ekkor azonnal rácsatolódik egy saját unitodra, +3 Mightot adva. Ha leválik, a saját Main Phase-edben, showdownon kívül 1 Fury vagy Chaos Powerért (Equip) újra csatolhatod. Csatolatlanul a következő Beginning Phase-ed elején, a scoring előtt meghal (Temporary).",
+   "why": "Az Equip időzítéséből hiányzott a showdownon kívüli megkötés (151.2, 381.1)."
+  },
+  "Solari Shrine": {
+   "short": "Amikor megölsz egy stunolt enemy unitot spellel, képességgel vagy combatban, exhaustolhatod, hogy húzz 1 lapot. Több egyszerre megölt unitért általában egy lap jár, mert exhausted Shrine-nal a cost nem fizethető.",
+   "notes": [
+    [
+     "429.5.b",
+     0,
+     "\"You kill\": a te spelled vagy abilityd kill instructionje öli meg a unitot."
+    ],
+    [
+     "429.5.c,429.5.c.1",
+     0,
+     "Az is a te killed, ha a spelled vagy abilityd damage-e miatt hal meg a unit a cleanupban."
+    ],
+    [
+     "429.5.c.2",
+     0,
+     "Combatban megölt stunned unit is számít: a kill a combat damage forrásainak controllerét illeti."
+    ],
+    [
+     "424.1.a.2,424.1.b",
+     0,
+     "A unitnak a halálakor stunnednek kell lennie. A stun a kör végi cleanupig tart, és a stunned unit nem sebez combatban."
+    ],
+    [
+     "383.3.a,383.3.b,415.4",
+     0,
+     "Az exhaust a trigger costja, a finalizáláskor fizeted. Több stunned unit egyszerre megölésekor általában csak egy lapot húzol, mert exhausted Shrine-nal a cost nem fizethető, hacsak közben valami újra ready-vé nem teszi."
+    ],
+    [
+     "414.4",
+     0,
+     "Üres Main Decknél a húzás Burn Outot okoz."
+    ]
+   ],
+   "why": "A short és a notes kategorikusan állította, hogy csak egy lap jár; ha egy hatás közben readyzi a Shrine-t, újra fizethető (415.4, exhaust cost csak ready állapotot kíván)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

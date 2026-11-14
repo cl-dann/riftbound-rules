@@ -1,0 +1,47 @@
+{
+ "fixes": {
+  "Forbidden Technique": {
+   "notes": [
+    [
+     "355.10,416.1.c",
+     0,
+     "A unit target, bármelyik játékosé. Már ready uniton a spell nem csinál semmit."
+    ],
+    [
+     "385.2",
+     0,
+     "A \"when you play a card\" trigger csak akkor működik, amikor a Forbidden Technique a trashedben van."
+    ],
+    [
+     "420.4.a,206",
+     0,
+     "A trigger akkor fut le, amikor a 7 vagy több Energy costú kártya kijátszása a resolve-val befejeződött. A nyomtatott cost számít, kedvezménnyel vagy \"ignoring cost\" mellett is."
+    ],
+    [
+     "383.3.a",
+     0,
+     "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz. Ha nem élsz vele, lekerül a chainről."
+    ],
+    [
+     "356.1.a,355.8",
+     0,
+     "A trashből [1] és 2 Fury Power a cost, ez a base cost helyére lép. Kell hozzá egy választható unit."
+    ],
+    [
+     "391.3.a,359.3.d",
+     1,
+     "A \"Then banish this\" Delayed Replacement csak a trigger által a trashből kijátszott példányra szól: az a chainről a trash helyett a Banishmentbe megy. Kézből kijátszva a lap a resolve után a trashbe kerül, és onnan a triggerrel még egyszer használható."
+    ],
+    [
+     "155",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+    ]
+   ],
+   "why": "A 391.3.a-s note azt sugallta, hogy a kézből kijátszott lap csak az errata óta kerül a trashbe; ez a régi szöveggel is így volt (359.3.d), az errata a trashből kijátszott példány banisholását érinti (391.3.a). A pontatlan errata-hivatkozás kikerült."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

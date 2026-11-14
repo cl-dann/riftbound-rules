@@ -1,0 +1,71 @@
+{
+ "fixes": {
+  "Applied Researchers": {
+   "short": "3 Energyért Empowered lesz (csak a saját Main Phase-edben, showdownon kívül), és akkor a spelljeid 1 Energyvel és 1 Powerrel olcsóbbak, de az Energy költség ettől nem megy 1 alá. Több kedvezménynél te döntöd el a sorrendet, ezt érdemes előre venni. Unitra, gearre és képességre nem hat.",
+   "why": "A short nem adta meg az Empower activated ability időzítését (827.1.c.1, 381.1, 145.2): csak a saját Main Phase-ben, Open State-ben, showdownon kívül aktiválható, ezt a short alapján nem tudhatta a játékos."
+  },
+  "Apprentice Mage": {
+   "short": "2 Energyért Empowered lesz (csak a saját Main Phase-edben, showdownon kívül): ekkor +1 Mightot kap, és megnézed a Main Deck felső 2 lapját, amiket a pakli aljára tehetsz vagy tetszőleges sorrendben visszarakhatsz. Ez egyszeri, amíg Empowered marad, nem ismételhető.",
+   "why": "A short nem adta meg az Empower activated ability időzítését (827.1.c.1, 381.1, 145.2): csak a saját Main Phase-ben, Open State-ben, showdownon kívül aktiválható, ezt a short alapján nem tudhatta a játékos."
+  },
+  "Aurok General": {
+   "short": "3 Energy és 1 Order Power fizetésével Empowered lesz (csak a saját Main Phase-edben, showdownon kívül), és akkor minden Empowered unitod, ő maga is, +2 Mightot kap. Két ilyen General esetén a bónusz összeadódik. Ha a General lekerül vagy elveszíti az állapotot, a bónusz azonnal megszűnik, és a sebzett unitok meghalhatnak.",
+   "why": "A short nem adta meg az Empower activated ability időzítését (827.1.c.1, 381.1, 145.2): csak a saját Main Phase-ben, Open State-ben, showdownon kívül aktiválható, ezt a short alapján nem tudhatta a játékos."
+  },
+  "Baccai Sandspinner": {
+   "short": "5 Energyért Empowered lesz (csak a saját Main Phase-edben, showdownon kívül), ami csak 2 Energy, ha legfeljebb 4 rune-od van. Empowered állapotban Deflectje van, vagyis az ellenfélnek plusz Powerbe kerül rámutatni, és támadáskor +2 Mightot kap. Ha lekerül a boardról, az állapot elvész.",
+   "why": "A short nem adta meg az Empower activated ability időzítését (827.1.c.1, 381.1, 145.2): csak a saját Main Phase-ben, Open State-ben, showdownon kívül aktiválható, ezt a short alapján nem tudhatta a játékos."
+  },
+  "Baccai Witherclaw": {
+   "short": "1 Energy és 2 bármilyen domainű Powerért Empowered lesz (csak a saját Main Phase-edben, showdownon kívül): +2 Mightot kap, és ha így hal meg, kapsz 2 exhausted rune-t. Ha elveszíti az állapotot, a Might visszaesik, és a rajta lévő damage megölheti. Kézbe visszaküldés vagy banish esetén nincs rune.",
+   "why": "A short nem adta meg az Empower activated ability időzítését (827.1.c.1, 381.1, 145.2): csak a saját Main Phase-ben, Open State-ben, showdownon kívül aktiválható, ezt a short alapján nem tudhatta a játékos."
+  },
+  "Affectionate Poro": {
+   "short": "Amikor véget ér egy combat, amelyben részt vett, és ebben a körben egyáltalán nem kapott damage-et, húzol egy lapot. A combat előtt kapott spell damage is elrontja, és a gyógyítás nem segít. A teljesen kivédett (Prevent) damage nem számít, ilyenkor jár a húzás.",
+   "why": "A \"végigcsinált egy combatot\" szűkebb a lap szövegénél: a \"When a combat that I was in ends\" arra a combatra is vonatkozik, amelyből a Poro közben kikerült, de a boardon maradt (740.2.c, 468.7.b)."
+  },
+  "Zero Point Inflection": {
+   "notes": [
+    [
+     "420.4.a,052",
+     0,
+     "Az első trigger minden általad kijátszott Main Deck lap resolve-ja után húz 2-t. Counterelt lap nem váltja ki."
+    ],
+    [
+     "185",
+     0,
+     "A tokenek nem kártyák, ezért token kijátszása nem ad húzást."
+    ],
+    [
+     "414.4",
+     0,
+     "A húzás kötelező. Ha kevesebb mint 2 lap van a deckben, Burn Out következik."
+    ],
+    [
+     "383.3",
+     1,
+     "A második trigger kötelező, és bármilyen húzásra lefut, a Draw Phase húzására is, ha a húzott lapokon kívül legalább 9 másik lap van a kezedben."
+    ],
+    [
+     "355.7,423.4",
+     0,
+     "A \"choose an opponent\" játékost targetel. A resolve-kor a teljes kezedet discardolod, a gear meghal, az opponent pedig 1 pontot kap."
+    ],
+    [
+     "473.1.a.1",
+     1,
+     "Az opponent pontja nem conquerből jön, ezért a Final Point megkötései nem vonatkoznak rá: ezzel a játékot is megnyerheti."
+    ],
+    [
+     "355.9.c,055",
+     1,
+     "A húzás és a büntetés külön trigger. Ha a Zero Point a büntetés resolve-ja előtt elhagyja a boardot, a már chain-en lévő trigger ettől még resolve-ol: discardolsz, és az opponent megkapja a pontot."
+    ]
+   ],
+   "why": "A 7. note a 383.2.a.1-re hivatkozott (a trigger feltételhez fűzött feltételes mondat), ami nem azt mondja, hogy a chainen lévő trigger a forrás távozása után is resolve-ol. A helyes alap a 355.9.c (az ability és a forrása külön objektum) és a 055."
+  }
+ },
+ "checked": 89,
+ "data_issues": [],
+ "open": []
+}

@@ -1,0 +1,37 @@
+{
+ "fixes": {
+  "Momentary Companion": {
+   "notes": [
+    [
+     "811.1.b,811.6",
+     0,
+     "Hidden: a saját körödben, Open State-ben [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."
+    ],
+    [
+     "383.2.a.1",
+     0,
+     "Az \"if it's not your turn\" közvetlenül a trigger feltétele után áll, ezért a feltétel része. A saját körödben kijátszva a trigger egyáltalán nem kerül chain-re."
+    ],
+    [
+     "811.6,310.1.a",
+     1,
+     "Az opponent körében csak facedown-ból, a kapott [Reaction]-nel játszható ki. Kézből vagy a saját körödben facedown-ból kijátszva sima 4 Mightú unit marad."
+    ],
+    [
+     "816.1.b",
+     0,
+     "A kapott [Temporary] miatt a következő saját Beginning Phase-ed elején, a scoring előtt meghal. Azt a battlefieldet vele nem tudod holdolni."
+    ],
+    [
+     "124.1",
+     0,
+     "A kapott kulcsszó megszűnik, ha a unit elhagyja a boardot. Kézbe visszavéve és újra kijátszva tiszta lappal indul."
+    ]
+   ],
+   "why": "Note hivatkozás: a 155 csak spellek időzítéséről szól, unitra nem; a kézből, saját körben való kijátszás alapidőzítését a 310.1.a mondja ki (Neutral Open State, saját kör). A pont szövege változatlan."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

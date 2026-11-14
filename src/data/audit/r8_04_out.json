@@ -1,0 +1,52 @@
+{
+ "fixes": {
+  "Highlander, Yi": {
+   "notes": [
+    [
+     "355.10.c",
+     0,
+     "A \"Choose a friendly unit\" nem része a replacement effectnek, ezért a unit target."
+    ],
+    [
+     "383.2.c.3.a,808.1.d.1",
+     0,
+     "A halált replacement effect váltja ki: a unit nem hal meg, a Deathknell és más halálra triggerelő abilityk nem futnak le."
+    ],
+    [
+     "419.1,458.1,458.3",
+     0,
+     "A unit healelődik, exhausted lesz és a base-be recallolódik. A Recall nem Move: mozgást tiltó effect nem akadályozza meg, \"when I move\" triggert nem vált ki."
+    ],
+    [
+     "357.2.a",
+     0,
+     "Ha a unitot costként ölnéd meg (például Sacrifice), a cost kifizetettnek számít, a unit pedig megmenekül."
+    ],
+    [
+     "359.3.e.14.b",
+     1,
+     "Ha egy effect későbbi része közvetlenül a kill megtörténtére hivatkozik (\"if you do\"), az nem fut le, mert a kill negálódott."
+    ],
+    [
+     "357.2.a,204.3",
+     2,
+     "Ha egy kill a resolve közbeni \"kill a friendly unit to ...\" formájú cost within instructions része, nyitott, hogy a lecserélt kill kifizetett costnak számít-e: a 357.2.a ezt csak a kijátszás costjaira mondja ki. Judge döntse el."
+    ],
+    [
+     "369.1,460.1",
+     1,
+     "Errata: a régi szöveg (\"The next time it dies this turn, recall it exhausted instead\") is replacement effect volt, de nem healelt, és a Recall a damage-et nem veszi le. Az új szöveg a \"would die\" eseményt cseréli le: a unit healelődik, exhausted lesz és recallolódik."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap (Master Yi), legfeljebb 3 Signature lehet a deckben. Csak a következő egy halált váltja ki, és csak ebben a körben."
+    ]
+   ],
+   "why": "A flag 2-es note a Deathgrip-et hozta a 'Kill a friendly unit to ...' cost within instructions példájaként, de a Deathgrip szövege 'Kill a friendly unit. If you do, ...', ami nem cost (204.3), hanem linked instruction (359.3.e.14.b). A hibás példa törölve."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}
