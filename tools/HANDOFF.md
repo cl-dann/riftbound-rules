@@ -28,3 +28,10 @@
 - Lapnál új "Gyakori kérdések" blokk, 2-4 rövid kérdés-válasz a tipikus félreértésekre: kit célozhat (bármelyik unit, csak itt, csak saját), mikor játszható, mi van ha a célpont elmozdul vagy meghal, költség vagy célpont (pl. Sacrifice ölése cost, kijátszáskor), Hidden/facedown megkötések (811.1.d.3), passzív bónusz hatóköre ("here"). Forrás: a meglévő notes (már ellenőrzött) átfogalmazva, szabályszámmal. Ellenőrzés ugyanazzal a körös módszerrel.
 - Chain elemző: "Mi történik?" magyarázat lépésenként, szabályszámmal: priority sorrend (337.4), költségként megölt unit azonnal (355.10.c), mistarget és linked instructions (359.3.e.14.a, Hidden Blade példa), LIFO feloldás, delayed kontroll vége (391.5.b), leváló Equipment (719.5). Példa a felhasználótól: ellenfél Akshan, Hidden Blade rá, válaszul Sacrifice (csak ha Akshan Mighty, 5+).
 - Döntés (2026-11-15): a lapnál a közérthető "Gyakori kérdések" (kérdés-válasz) látszik elöl; a mostani technikus "Hogyan érinti ezt a lapot" jegyzetek egy lenyitható "Szabályi részletek" alá kerülnek, nem törlődnek. Ok: a technikus szöveg többféleképpen érthető a felhasználó szerint.
+
+## Kérés (2026-11-15): interaktív Chain építő a pályával
+- Bal oldal: űrlap (legendek, championök, rune-ok ready/exhausted, battlefieldek, unitok helye, Equipment, kéz, kijátszandó lapok és célpontjaik).
+- Jobb oldal: a meglévő Playmat komponens kirajzolja a valódi pályát (lapképek, címkék).
+- Léptetés: Tovább/Vissza a chain minden lépésén (kijátszás, költség, priority, válasz, feloldás LIFO), lépésenként "Mi változott?" lista és szabályszám.
+- Számolás: Might (alap + buff, Assault/Shield csak támadó/védő szerepben, Equipment), damage, "még ennyi kell a halálhoz" = aktuális Might minus damage (Riftboundban nincs külön HP), lethal és combat damage kiosztás (467.2.c, Tank, Backline), halál (143.2.b), stun (nem oszt combat damage-et), mistarget (359.3.e.12), linked instructions (359.3.e.14.a).
+- Első tesztesetek: Akshan + Hidden Blade + Sacrifice; Kennen, Keeper of Balance stun + "here" bónusz.
