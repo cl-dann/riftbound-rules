@@ -406,3 +406,6 @@ footer#foot h4 { margin: 0 0 8px; font-family: var(--f-display); font-size: 12px
 footer#foot section { padding-top: 10px; border-top: 1px solid var(--gold-line); }
 footer#foot { border-top: 0; }
 .empty p, .empty .note { margin-left: auto; margin-right: auto; }
+.zoom-pop { position: fixed; z-index: 60; width: 370px; aspect-ratio: 744/1039; border-radius: 14px; border: 1px solid var(--accent); box-shadow: 0 24px 60px rgba(0,0,0,.75), 0 0 24px rgba(200,170,110,.25); pointer-events: none; animation: zin .14s ease-out; background: #06101a; }
+@keyframes zin { from { opacity: 0; transform: scale(.96); } }
+.zoom-pop.land { width: 530px; aspect-ratio: 1039/744; }

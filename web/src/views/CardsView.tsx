@@ -36,7 +36,16 @@ function Badges({ c }: { c: any }) {
 
 export function CardsView({ active }: { active: boolean }) {
   const [f, setF] = useState<F>(EMPTY);
-  const [mode, setMode] = useState<'list' | 'grid'>(() => { try { return (localStorage.getItem('rb-view') as any) || 'list'; } catch { return 'list'; } });
+  const [mode, setMode] = useState<'list' | 'grid'>(() => { try { return (localStorage.getItem('rb-view2') as any) || 'grid'; } catch { return 'grid'; } });
+  const [zoom, setZoom] = useState<{ src: string; x: number; y: number; right: boolean; land: boolean } | null>(null);
+  const hoverOn = (e: React.MouseEvent, c: any) => {
+    if (!c.img || !window.matchMedia('(hover: hover) and (min-width: 900px)').matches) return;
+    const r = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    const m = /-(\d+)x(\d+)\./.exec(c.img); const land = !!m && +m[1] > +m[2];
+    const w = land ? 530 : 370, h = land ? 380 : 518;
+    const right = r.right + w + 20 < window.innerWidth;
+    setZoom({ src: IMGBASE + c.img, x: right ? r.right + 12 : r.left - 12, y: Math.max(10, Math.min(r.top + r.height / 2 - h / 2, window.innerHeight - h - 10)), right, land });
+  };
   const [limit, setLimit] = useState(80);
   const [sel, setSel] = useState<any>(null);
   const detailRef = useRef<HTMLDivElement>(null);
@@ -47,7 +56,7 @@ export function CardsView({ active }: { active: boolean }) {
   const kws = useMemo(() => [...new Set(CARDS.flatMap((c: any) => c._kw))].sort() as string[], []);
   const dirty = JSON.stringify(f) !== JSON.stringify(EMPTY);
   const up = (p: Partial<F>) => { setF((o) => ({ ...o, ...p })); setLimit(mode === 'grid' ? 60 : 80); };
-  useEffect(() => { try { localStorage.setItem('rb-view', mode); } catch { /* */ } }, [mode]);
+  useEffect(() => { try { localStorage.setItem('rb-view2', mode); } catch { /* */ } }, [mode]);
   // A Tudástár kulcsszó gombja ide küld keresést.
   useEffect(() => {
     const on = (e: Event) => { up({ ...EMPTY, q: (e as CustomEvent).detail, inText: true }); location.hash = '#kartyak'; };
@@ -120,7 +129,7 @@ export function CardsView({ active }: { active: boolean }) {
                 const stats = [c.e != null ? 'Energy ' + c.e : '', c.m != null ? 'Might ' + c.m : ''].filter(Boolean).join(' · ');
                 return (
                   <li key={c.n}>
-                    <button className="tile" onClick={() => pick(c)}>
+                    <button className="tile" onClick={() => { setZoom(null); pick(c); }} onMouseEnter={(e) => hoverOn(e, c)} onMouseLeave={() => setZoom(null)}>
                       <span className={'im' + (c.img ? '' : ' noimg')}>
                         {c.img && <img loading="lazy" alt="" src={IMGBASE + c.img + '?w=300'} onError={(e) => { (e.currentTarget.parentNode as HTMLElement).classList.add('noimg'); e.currentTarget.remove(); }} />}
                         <span className="ph"><b>{c.n}</b><span dangerouslySetInnerHTML={{ __html: domDots(c) + ' ' + esc(typeLine(c)) }} /><span>{stats}</span></span>
@@ -155,6 +164,7 @@ export function CardsView({ active }: { active: boolean }) {
           ? <Html key={sel.n} html={cardHeadHTML(sel, 'h2') + '<h3 class="rb-sep">Erre a kártyára érvényes szabályok</h3><p class="note">A szakaszok a Core Rules (' + META.rules_updated + ') eredeti angol szövegét mutatják. Kattintásra nyílnak.</p>' + cardRulesHTML(sel)} />
           : <div className="empty"><h2>Válassz egy lapot</h2><p className="note">Keress rá a kártya nevére, vagy kattints egy lapra a listában. Itt jelenik meg a lap szövege, az errata, a Röviden összefoglaló és a rá vonatkozó szabályok.</p></div>}
       </div>
+      {zoom && <img className={'zoom-pop' + (zoom.land ? ' land' : '')} src={zoom.src} alt="" style={{ top: zoom.y, left: zoom.right ? zoom.x : undefined, right: zoom.right ? undefined : window.innerWidth - zoom.x }} />}
     </div>
   );
 }
