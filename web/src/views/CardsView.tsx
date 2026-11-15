@@ -57,7 +57,7 @@ export function CardsView({ active }: { active: boolean }) {
   const dirty = JSON.stringify(f) !== JSON.stringify(EMPTY);
   const up = (p: Partial<F>) => { setF((o) => ({ ...o, ...p })); setLimit(mode === 'grid' ? 60 : 80); };
   useEffect(() => { try { localStorage.setItem('rb-view2', mode); } catch { /* */ } }, [mode]);
-  // A Tudástár kulcsszó gombja ide küld keresést.
+  // A Kézikönyv kulcsszó gombja ide küld keresést.
   useEffect(() => {
     const on = (e: Event) => { up({ ...EMPTY, q: (e as CustomEvent).detail, inText: true }); location.hash = '#kartyak'; };
     window.addEventListener('rb:card-search', on);

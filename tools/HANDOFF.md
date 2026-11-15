@@ -18,3 +18,8 @@
 - Új kör batch: `python3 gen.py K offset` (a web/src/generated/cards.json-ból).
 - Tartalom élesítése: `python3 tools/learn/merge.py` (útvonalakat igazítani), majd src/build.sh és web build.
 - Képek: a cmsassets.rgpub.io a környezet Custom network allowlistjén van.
+
+## Döntés: menüszerepek (2026-11-15)
+- How to Play (#hogyan): végigolvasós, sorrendben haladó 10 fejezet, fejezetvégi kvíz, haladásjelző, interaktív pálya a 2. fejezetben.
+- Tanulás (#tanulas): gyakorlás: szituációk, haladó leckék (Tempo, Decképítés, Showdown); később kártyakvíz (Rift Recall mintára) és napi feladvány.
+- Kézikönyv (#kezikonyv): kereshető referencia: Fogalmak (a tooltipek forrása), Kulcsszavak, Játékmenet ábrák, Szabályváltozások és errata összefoglaló. A "Tudástár" név megszűnt.
