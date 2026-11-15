@@ -44,5 +44,5 @@
 - Célzó nyilak: SVG réteg a forrás és a célpont között.
 - Teljesítmény: TanStack Virtual a 1100 lapos rácshoz; fuzzy keresés (Fuse.js) magyar és angol kulcsszavakra.
 - Routing: TanStack Router típusos URL-ekkel (a régi #hash linkek átirányítva).
-- PWA (vite-plugin-pwa): telepíthető, offline.
 - Minőség: Playwright e2e (a /home/claude/test/tweb.py mintájára), Storybook a pálya komponenseihez.
+- Döntés: nincs PWA, nincs telepíthető vagy offline változat; a projekt csak böngészőben, a GitHub Pages oldalon fut.
