@@ -1,0 +1,53 @@
+{
+ "fixes": {
+  "Akshan, Mischievous": {
+   "short": "Weaponmaster: kijátszáskor egy már általad kontrollált Equipmentet (akár másik unitról) rácsatolhatsz az Equip költség kifizetésével, ami 1 bármilyen domainű Powerrel kevesebb, ha a költségben van ilyen, különben teljes áron megy. Ha kijátszáskor plusz 2 Body Powert fizetsz, egy ellenséges geart a base-edbe mozgatsz, és addig a tiéd, amíg Akshan a boardon van. Ha Equipment, ingyen Akshanra csatolódik.",
+   "why": "érthetőség"
+  },
+  "Armed Assailant": {
+   "short": "Kijátszáskor fizethetsz plusz 1 Energy és 1 Fury Power költséget: ekkor ready lép be. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod, akár egy másik unitról áthozva, és az Equip költségéből egy bármilyen domainű Powert elengedhetsz, ha van benne ilyen. Ha az Equipmentnek nincs Equip költsége, így nem csatolható.",
+   "why": "érthetőség"
+  },
+  "Combat Chef": {
+   "short": "Weaponmaster: kijátszáskor egy saját Equipmentedet rácsatolhatod, akár egy másik unitról áthozva is, az Equip costját 1 bármilyen domainű Powerrel olcsóbban fizetve. Ha az Equip costban nincs bármilyen domainű Power, nincs kedvezmény; ha nincs Equip costja, nem rakható rá. Ha nem tudod kifizetni, az Equipment ott marad, ahol volt.",
+   "why": "érthetőség"
+  },
+  "Forge of the Fluft": {
+   "short": "Battlefield: amíg te irányítod, a legended képességet kap: exhaustolva egy saját Equipmentet egy saját unitodra csatolhatsz, az Equip cost kifizetése nélkül. Csak a saját Main Phase-edben, showdownon kívül használható, és ugyanazt az exhaustot használja, mint a legend saját exhaust képessége.",
+   "why": "érthetőség"
+  },
+  "Heimerdinger, Inventor": {
+   "short": "Megkapja az összes saját legended, unitod és geared exhaust képességét. Ezekhez mindig Heimerdingert kell exhaustolni, nem az eredeti lapot, így egyszerre csak egyet használhat, amíg újra ready nem lesz. Exhausted lép be, ezért a kijátszás körében alapból nem aktiválhat semmit.",
+   "why": "érthetőség"
+  },
+  "Jax, Unrelenting": {
+   "short": "Kijátszáskor ráteheted egy Equipmentedet az Equip költség kifizetésével, akkor is, ha az már máson van. Ha a költségben bármilyen domainű Power van, abból 1-gyel kevesebbet fizetsz, ha nincs, nincs kedvezmény; hogy a lap saját domainjéhez kötött Power is csökken-e, judge dönti el. Valahányszor te csatolsz rá Equipmentet, 1 Energyért húzhatsz. A már rajta lévő Equipment újbóli felszerelése nem ad húzást.",
+   "why": "érthetőség"
+  },
+  "Lucian, Merciless": {
+   "short": "Kijátszáskor ráteheted az egyik Equipmentedet az Equip költség kifizetésével, akkor is, ha az már máson van; ha a költségben van bármilyen domainű Power, 1-gyel kevesebbet fizetsz. Hogy az Equipment saját domainjének Powere az Equip költségben csökken-e, nem eldöntött kérdés. Körönként az első alkalommal, amikor részt vesz egy battlefield conquerében, ready lesz. Ganking nélkül onnan így csak a base-be léphet.",
+   "why": "érthetőség"
+  },
+  "Master Bingwen": {
+   "short": "Weaponmaster: kijátszáskor egy általad kontrollált Equipmentet rácsatolhatsz úgy, hogy az Equip costját 1 bármilyen domainű Powerrel olcsóbban fizeted, akkor is, ha az épp egy másik unitodon van, és az Equip szokásos időzítésétől függetlenül. Ha az Equip cost nem tartalmaz bármilyen domainű Powert, nem lesz olcsóbb (821.1.c.3). A boardon később már nem csinál semmit.",
+   "why": "érthetőség"
+  },
+  "Riven, Shattered": {
+   "short": "Amikor Riven attacker lesz, választasz egy ottani enemy unitot: minden rá csatolt Equipmentért 2 damage-et kap, egyetlen sebzésként. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod az Equip cost kifizetésével, akkor is, ha máshoz van csatolva; ha az Equip costban van bármilyen domainű Power, 1 Powerrel kevesebbet fizetsz, különben (például az Equipment saját domainjének Powere) nincs kedvezmény.",
+   "why": "érthetőség"
+  },
+  "Sentinel Adept": {
+   "short": "Weaponmaster: kijátszáskor egy saját Equipmentedet az Equip cost kifizetésével rácsatolhatod, akár egy másik unitról átrakva is, az Equip szokásos időzítésétől függetlenül. Ha az Equip cost bármilyen domainű Powert tartalmaz, 1 Powerrel olcsóbb; ha nincs benne ilyen (például csak az Equipment saját domainjének Powere), nincs kedvezmény.",
+   "why": "érthetőség"
+  },
+  "Veteran Poro": {
+   "short": "Kijátszáskor ráteheted egy saját Equipmentedet, akár egy másik unitról áthelyezve is, az Equip cost kifizetésével, amely 1 bármilyen domainű Powerrel kevesebb, ha a cost tartalmaz bármilyen domainű Powert; különben teljes áron megy. Ilyenkor az Equip szokásos időzítési korlátja nem számít.",
+   "why": "érthetőség"
+  },
+  "Yone, Blademaster": {
+   "short": "Weaponmaster: kijátszáskor ráteheted egy saját Equipmentedet (akár másik unitról áthelyezve) az Equip cost kifizetésével, amely 1 bármilyen domainű Powerrel kevesebb, ha a cost tartalmaz bármilyen domainű Powert, különben teljes áron megy. Ha egy senki által nem kontrollált battlefieldet conquerel, a Mightjával megegyező sebzést okoz egy enemy unitnak, ami a base-ben áll.",
+   "why": "érthetőség"
+  }
+ },
+ "checked": 12
+}
