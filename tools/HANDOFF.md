@@ -23,3 +23,7 @@
 - How to Play (#hogyan): végigolvasós, sorrendben haladó 10 fejezet, fejezetvégi kvíz, haladásjelző, interaktív pálya a 2. fejezetben.
 - Tanulás (#tanulas): gyakorlás: szituációk, haladó leckék (Tempo, Decképítés, Showdown); később kártyakvíz (Rift Recall mintára) és napi feladvány.
 - Kézikönyv (#kezikonyv): kereshető referencia: Fogalmak (a tooltipek forrása), Kulcsszavak, Játékmenet ábrák, Szabályváltozások és errata összefoglaló. A "Tudástár" név megszűnt.
+
+## Kérés (2026-11-15): kérdés-válasz magyarázat minden lapnál, és logika a Chainben
+- Lapnál új "Gyakori kérdések" blokk, 2-4 rövid kérdés-válasz a tipikus félreértésekre: kit célozhat (bármelyik unit, csak itt, csak saját), mikor játszható, mi van ha a célpont elmozdul vagy meghal, költség vagy célpont (pl. Sacrifice ölése cost, kijátszáskor), Hidden/facedown megkötések (811.1.d.3), passzív bónusz hatóköre ("here"). Forrás: a meglévő notes (már ellenőrzött) átfogalmazva, szabályszámmal. Ellenőrzés ugyanazzal a körös módszerrel.
+- Chain elemző: "Mi történik?" magyarázat lépésenként, szabályszámmal: priority sorrend (337.4), költségként megölt unit azonnal (355.10.c), mistarget és linked instructions (359.3.e.14.a, Hidden Blade példa), LIFO feloldás, delayed kontroll vége (391.5.b), leváló Equipment (719.5). Példa a felhasználótól: ellenfél Akshan, Hidden Blade rá, válaszul Sacrifice (csak ha Akshan Mighty, 5+).
