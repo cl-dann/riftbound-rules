@@ -35,3 +35,14 @@
 - Léptetés: Tovább/Vissza a chain minden lépésén (kijátszás, költség, priority, válasz, feloldás LIFO), lépésenként "Mi változott?" lista és szabályszám.
 - Számolás: Might (alap + buff, Assault/Shield csak támadó/védő szerepben, Equipment), damage, "még ennyi kell a halálhoz" = aktuális Might minus damage (Riftboundban nincs külön HP), lethal és combat damage kiosztás (467.2.c, Tank, Backline), halál (143.2.b), stun (nem oszt combat damage-et), mistarget (359.3.e.12), linked instructions (359.3.e.14.a).
 - Első tesztesetek: Akshan + Hidden Blade + Sacrifice; Kennen, Keeper of Balance stun + "here" bónusz.
+
+## Technikai irány (2026-11-15, javaslat, még nincs jóváhagyva lib szinten)
+- Szabálymotor külön, tiszta TypeScript modulban (UI nélkül): állapot + akciók reducerrel, undo/redo; Vitest tesztek, a rules.json "ex" példáiból és a felhasználói esetekből (Akshan/Hidden Blade/Sacrifice, Kennen).
+- Állapotkezelés: Zustand (időutazás a lépések között).
+- Animáció: Motion (framer-motion): lap mozgás, exhaust forgatás, damage és +Might felugrás, halál.
+- Drag and drop pályaépítés: dnd-kit (unit húzása battlefieldre, Equipment rádobása).
+- Célzó nyilak: SVG réteg a forrás és a célpont között.
+- Teljesítmény: TanStack Virtual a 1100 lapos rácshoz; fuzzy keresés (Fuse.js) magyar és angol kulcsszavakra.
+- Routing: TanStack Router típusos URL-ekkel (a régi #hash linkek átirányítva).
+- PWA (vite-plugin-pwa): telepíthető, offline.
+- Minőség: Playwright e2e (a /home/claude/test/tweb.py mintájára), Storybook a pálya komponenseihez.
