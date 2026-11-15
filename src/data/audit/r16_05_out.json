@@ -1,0 +1,77 @@
+{
+ "fixes": {
+  "Vanguard Captain": {
+   "notes": [
+    [
+     "812.1.b.1,420.4.b",
+     0,
+     "Legion: a play effect csak akkor aktív, ha ebben a körben már finalizáltál egy másik kártyát. Counterelt lap is számít."
+    ],
+    [
+     "187.1,185.2.d",
+     0,
+     "A Recruit domain nélküli, 1 Mightú unit token. A tokenek exhausted lépnek be, mint bármely unit."
+    ],
+    [
+     "359.3.f.2",
+     0,
+     "A \"here\" a resolve-kor ellenőrzött hivatkozás: a tokenek oda érkeznek, ahol a Captain akkor áll."
+    ],
+    [
+     "359.3.f.1,359.3.e.12",
+     1,
+     "A \"here\" a Captain locationjére hivatkozik. Ha a Captain a resolve előtt elhagyja a boardot, nincs locationje, a hivatkozás null értéket ad, a tokenek nem jönnek létre."
+    ],
+    [
+     "185.2.a,420.4.a",
+     1,
+     "A tokeneket \"play\"-eled, ezért a \"when you play a unit\" és a \"when you play a token unit\" triggerek (például Lillia, Protector of Dreams) tokenenként lefutnak."
+    ]
+   ],
+   "why": "A 359.3.f.2.a targetre vonatkozó referentről szól, a Captain nem target. A boardot elhagyó forrás null locationjét a 359.3.f.1 (referent a forrásból) és a 359.3.e.12 (a boardon kívüli unitnak nincs locationje) támasztja alá."
+  },
+  "Vex, Mocking": {
+   "notes": [
+    [
+     "424.1.a.1",
+     0,
+     "A trigger csak tényleges stunra fut le. Ha a kiválasztott enemy unit már stunned volt, nem stunolod újra, Vex nem triggerel."
+    ],
+    [
+     "412.4,383.2.a.1",
+     1,
+     "Csak a te spelljeid és abilityjeid stunja számít (\"you stun\": olyan game action, amiért te felelsz), és csak battlefielden álló enemy uniton. Base-ben álló unit stunolása nem váltja ki."
+    ],
+    [
+     "383.3.a,355.10.c",
+     0,
+     "A \"you may\" az effect elején áll, a finalizáláskor döntesz. A battlefield a trigger feltételéből jön, ezért nincs target."
+    ],
+    [
+     "421.1,144.2",
+     1,
+     "Effect általi Move: nem kell hozzá ready állapot vagy Ganking, Vex base-ből és másik battlefieldről is átmehet, exhausted állapotban is."
+    ],
+    [
+     "190.3.a.1,323.2.a",
+     0,
+     "Ha a cél battlefieldet nem te kontrollálod, Vex Contested státuszt tesz rá. Folyamatban lévő combatba érkezve a cleanupnál megkapja a controllere szerinti designationt."
+    ],
+    [
+     "355.4.a",
+     0,
+     "Ha Vex már azon a battlefielden áll, nincs érvényes Move, a trigger nem csinál semmit."
+    ],
+    [
+     "815.1.b,814.1.c",
+     0,
+     "Tank és Shield: beérkezve neki kell először halálos damage-et kiosztani, Defenderként 6 Mightú."
+    ]
+   ],
+   "why": "A \"csak a te stunod számít\" állítást a 383.2.a.1 nem mondja ki, ezt a 412.4 szabályozza (\"when you do something\" = általad végrehajtott game action). Hivatkozás pótolva."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

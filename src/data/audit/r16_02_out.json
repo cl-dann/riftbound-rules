@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "Rengar, Trophy Hunter": {
+   "short": "Ambush: Reactionnel, akár az opponent körében is kijátszható egy battlefieldre, ahol van unitod, és olyanra is, ahol enemy unit áll, még ha neked ott nincs is unitod. Ha enemy unitos battlefieldre érkezik, ahol még nem folyik harc, ott combat indul, amint a folyamatban lévő spellek és képességek lefutottak, és ebben te vagy az attacker.",
+   "why": "Érthetőség (brief 38): a short magyarázat nélkül használta a 'Contested' és a 'combat stagelődik' belső kifejezést. Pontosítás is: a 323.8 szerint combat csak akkor stagelődik, ha ellenfél unitja is ott van; a régi feltétel ('nem te kontrollálod') enemy unit nélküli esetet is lefedett, ahol showdown lesz, nem combat."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

@@ -1,0 +1,188 @@
+{
+ "fixes": {
+  "Ekko, Boy Who Shattered Time": {
+   "short": "Legend: a saját Main Phase-edben, showdownon kívül 1 Energyért és exhausttal Empowered lesz. Később, szintén a saját Main Phase-edben, showdownon kívül, exhausttal levéve az Empowered állapotot, a kör következő unitja 2 Energy és 1 bármilyen Power kedvezményt kap, de a kör végén meghal. Mivel mindkét képesség exhaustol, a kedvezmény általában csak a következő körödben használható.",
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Fury és Mind domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "827.1.c.1,827.1.c.2",
+     0,
+     "Az Empower costja 1 Energy és a legend exhaustolása. Csak akkor aktiválható, ha a legend még nem Empowered."
+    ],
+    [
+     "415.4,315.1.b",
+     1,
+     "A második ability costja is Exhaust. Mivel az Empower exhaustolja a legendet, a kedvezmény leghamarabb a következő körödben használható, hacsak valami nem readyzi."
+    ],
+    [
+     "392,356.4",
+     0,
+     "A kedvezmény Delayed Passive Ability: az adott körben következő kijátszott unitra érvényes, 2 Energy és 1 bármilyen Power erejéig. Ha abban a körben nem játszol unitot, elvész."
+    ],
+    [
+     "356.6",
+     0,
+     "A cost 0 alá nem csökken, az olcsóbb unitnál a kedvezmény fölös része elvész."
+    ],
+    [
+     "317.1.a,429.1.a.1.b",
+     1,
+     "A unit megkapja a \"Kill me at end of turn\" triggert: az Ending Stepben meghal. Ez kill, tehát a Deathknell abilityje lefut."
+    ],
+    [
+     "381.1,310.1.a",
+     0,
+     "Egyik abilityn sincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválhatók."
+    ]
+   ],
+   "why": "A short nem írta ki a keyword nélküli activated abilityk időzítését, a 381.1 note pedig csak Open State-et írt; showdown alatt nem aktiválhatók (310.1.a: Neutral Open State)."
+  },
+  "Edge of Night": {
+   "notes": [
+    [
+     "811.1.d.1.a",
+     0,
+     "Facedown-ból a battlefieldre érkezik, ez felülírja azt, hogy gear csak base-be játszható."
+    ],
+    [
+     "811.6",
+     0,
+     "Facedown-ból [Reaction]-nel játszható ki, tehát combat közben is rákerülhet egy unitra a +2 Might."
+    ],
+    [
+     "811.1.d.3",
+     0,
+     "A play effect targetje csak az adott battlefielden lévő, általad kontrollált unit lehet."
+    ],
+    [
+     "149.3",
+     0,
+     "Ha nincs ott unitod, a gear csatolatlanul marad a battlefielden, és a következő cleanupnál recallolódik a base-be."
+    ],
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Az Equip activated ability targettel. [Action] és [Reaction] nélkül csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható."
+    ],
+    [
+     "435.1.d,435.1.e",
+     0,
+     "Csatolva a unit megkapja a Might bonust, a gear saját Rules Textje pedig inaktív."
+    ],
+    [
+     "719.5,436.4.a",
+     0,
+     "Ha a unit elhagyja a boardot, a gear leválik és a unit utolsó helyén marad. Ha ez battlefield volt, a következő cleanup a base-be recallolja; base-ben a helyén marad."
+    ]
+   ],
+   "why": "Az Equip note-ból hiányzott a showdown kizárása (151.2). A leválás utáni recall csak battlefielden lévő gearre igaz (436.4.a, 149.3), base-ben nincs recall."
+  },
+  "Escaped Grayback": {
+   "notes": [
+    [
+     "827.1.c.2,355.10.c",
+     0,
+     "Az Empower cost itt nem erőforrás, hanem egy friendly unit megölése. A feláldozott unit cost, nem target."
+    ],
+    [
+     "203.3",
+     0,
+     "Ha a cost nem teljesíthető, az ability nem aktiválható. Token unit is feláldozható."
+    ],
+    [
+     "429.1.a.1.b,203.2",
+     0,
+     "A feláldozott unit Deathknellje lefut. Ha a kill-t replacement effect cseréli ki, a cost akkor is kifizetettnek számít."
+    ],
+    [
+     "381.1,145.2",
+     0,
+     "Csak a saját Main Phase-edben, Open State-ben, showdownon kívül, és csak ha még nem Empowered."
+    ],
+    [
+     "426.1.c",
+     0,
+     "Ha az Empower abilityt counterelik, a feláldozott unit nem jön vissza."
+    ]
+   ],
+   "why": "A 381.1 note-ból hiányzott a showdown kizárása; unit activated abilityje showdown alatt nem használható (145.2). A short ezt helyesen írta, a note ellentmondott neki."
+  },
+  "Disciple of Shen": {
+   "notes": [
+    [
+     "811.1.b,411.1.a,811.6",
+     0,
+     "Hidden: a saját körödben, Open State-ben, showdownon kívül [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."
+    ],
+    [
+     "814.1.c,814.1.d.1",
+     0,
+     "A Shield 3 csak addig ad +3 Mightot, amíg a Disciple Defender. Támadóként a feltétel teljesülése mellett is 1 Mightú."
+    ],
+    [
+     "364.3.a",
+     1,
+     "A feltétel folyamatos: pontosan egy másik, általad kontrollált unit kell ugyanarra a battlefieldre. Base-ben nem él. A tokenek is unitnak számítanak, az enemy unitok nem."
+    ],
+    [
+     "142.4.b",
+     1,
+     "Ha combat közben egy harmadik unitod érkezik, vagy a társa meghal vagy elmozdul, a Shield azonnal megszűnik. A Might 1-re esik, és a rajta lévő damage halálos lehet."
+    ],
+    [
+     "811.1.d.1,466.2.c.3.a",
+     1,
+     "Facedown-ból, [Reaction]-ként egy egyedül védekező unitod mellé játszva a következő cleanupnál Defender lesz, és 4 Mighttal számol."
+    ],
+    [
+     "814.2",
+     0,
+     "Más forrásból kapott Shield értéke összeadódik a sajátjával."
+    ]
+   ],
+   "why": "A Hide note-ból hiányzott a showdown kizárása: a Hide Discretionary Action, csak Neutral Open State-ben (411.1.a). A short helyesen írta, a note ennél tágabbat sugallt."
+  },
+  "Elnuk Herd": {
+   "notes": [
+    [
+     "811.1.b,411.1.a,811.6",
+     0,
+     "Hidden: a saját körödben, Open State-ben, showdownon kívül [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."
+    ],
+    [
+     "811.1.d.3",
+     0,
+     "Facedown-ból kijátszva a +3 Might targetje csak az adott battlefielden lévő másik friendly unit lehet. Kézből kijátszva bármelyik másik friendly unit választható."
+    ],
+    [
+     "417.1.a,135.2.b.7",
+     0,
+     "Facedown-ból kijátszva a resolve végén kötelezően recycle-ölődik, vagyis a Main Deck aljára kerül. Így facedown-ból egyszeri +3 Might, kézből kijátszva viszont a boardon marad."
+    ],
+    [
+     "359.3.e.5",
+     1,
+     "Ha a target a resolve előtt illegálissá válik, a +3 Might elmarad, de a recycle ettől még megtörténik, mert az nem a targetre hivatkozik."
+    ],
+    [
+     "811.1.d.3.a,359.3.e.12",
+     1,
+     "Ha a Herd a resolve előtt elhagyja a boardot, a facedown-ból kijátszott play effect nem tudja megállapítani, honnan érkezett, ezért mistargetel."
+    ],
+    [
+     "355.9.b,403.4",
+     1,
+     "A szöveg \"another friendly unit\": a Herd saját magát nem választhatja. Ha nincs másik friendly unitod (facedown-ból kijátszva az adott battlefielden), a play effect chainre kerül, de legális target hiányában a 403.4 szerint rögtön lekerül róla. Így a recycle is elmarad, és a Herd a boardon marad."
+    ]
+   ],
+   "why": "A Hide note-ból hiányzott a showdown kizárása: a Hide Discretionary Action, csak Neutral Open State-ben (411.1.a). A short helyesen írta, a note ennél tágabbat sugallt."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

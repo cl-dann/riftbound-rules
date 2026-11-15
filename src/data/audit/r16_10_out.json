@@ -1,0 +1,17 @@
+{
+ "fixes": {
+  "Glowstone": {
+   "short": "Gear. Empower: 2 bármely domainű Power. Ha Empowered, disempowerelve és exhaustolva odaadhatod egy választott játékosnak: ő irányítja, és az ő base-ébe kerül. Mindkét képesség csak a saját Main Phase-edben, showdownon kívül használható. Az irányítója körének végén a gear meghal, és 5 sebzést oszt az irányítója minden unitjára. Ha nem adod tovább, a saját unitjaidat sebzi.",
+   "why": "Hiányzó időzítés: a két keyword nélküli activated ability (Empower és az átadás) csak a saját Main Phase-ben, showdownon kívül használható (151.2, 381.1); a notes is ezt írja, a shortból kimaradt."
+  },
+  "Gutter Palace": {
+   "short": "Ha a köröd elején, húzás előtt pontosan 4 lap van a kezedben és pontosan 4 unitod áll battlefieldeken, megnyered a játékot. A base-ben lévő unit nem számít. Ezenkívül egy lap eldobásáért és exhaustért kapsz egy 1 Mightú, Deflect kulcsszavas Bird tokent; ezt csak a saját Main Phase-edben, showdownon kívül teheted meg.",
+   "why": "Hiányzó időzítés: a Bird token activated abilityje keyword nélküli gear ability, csak a saját Main Phase-ben, showdownon kívül használható (151.2); a notes is ezt írja, a shortból kimaradt."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Forgotten Monument: a short és a 473.2 note (flag 1) azt állítja, hogy a harmadik kör előtt az itteni conquer és hold triggerek sem futnak le. A 473 szerint a Score része a trigger, ami ezt alátámasztja, viszont a 383.4.c.2.c és a 383.4.d.2.c szerint a conquer és hold effect akkor is triggerel, ha a pontszerzés negálódik vagy helyettesítődik. Nem dönthető el biztosan, hogy a \"can't score here\" a teljes Score-t tiltja vagy csak a pontot; judge kérdés, esetleg flag 2."
+ ]
+}

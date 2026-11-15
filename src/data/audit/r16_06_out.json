@@ -1,0 +1,104 @@
+{
+ "fixes": {
+  "Warmog's Armor": {
+   "notes": [
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Body Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e,137.3",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +1 Mightot is kap."
+    ],
+    [
+     "383.4.c,427.1.b,427.1.b.1",
+     0,
+     "Conquer trigger: amikor a felszerelt unit conquerel, buffot kap. Ha már van buffja, nem kap másodikat, a trigger ilyenkor nem ad semmit."
+    ],
+    [
+     "703,705,702.2.b",
+     1,
+     "A buff tartós +1 Might: a uniton marad akkor is, ha a Warmog's később leválik vagy átkerül. Csak akkor tűnik el, ha elköltik, vagy ha a unit elhagyja a boardot."
+    ],
+    [
+     "359.3.e.5,818.1.b.1",
+     1,
+     "Az Equip a chainre kerül, lehet rá reagálni. Ha a megcélzott unit a resolve előtt elhagyja a boardot, az Equip nem csatol semmit, a gear a helyén marad, a kifizetett cost elveszett."
+    ]
+   ],
+   "why": "A '+1 Might csatolva' állítást a hivatkozott 136.2.b/136.2.c/435.1.e nem mondja ki; a Might Bonus szabálya a 137.3, hivatkozás pótolva."
+  },
+  "World Atlas": {
+   "notes": [
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Mind Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e,137.3",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +2 Mightot is kap."
+    ],
+    [
+     "383.4.d,473.2.b",
+     0,
+     "Hold trigger: a saját Beginning Phase-edben fut le, ha a felszerelt unit olyan battlefielden áll, amelyet holdolsz."
+    ],
+    [
+     "187.5,315.1.b",
+     1,
+     "Két Gold gear token jön a base-edbe exhausted. A holdolás az Awaken Phase után van, ezért a tokenek ebben a körben nem adnak [A]-t, csak a következő körödtől."
+    ],
+    [
+     "472",
+     0,
+     "Egy battlefield körönként egyszer score-olható, így körönként legfeljebb egyszer kapsz tokent unitonként."
+    ]
+   ],
+   "why": "A '+2 Might csatolva' állítást a hivatkozott 136.2.b/136.2.c/435.1.e nem mondja ki; a Might Bonus szabálya a 137.3, hivatkozás pótolva."
+  },
+  "Ambessa, Matriarch of War": {
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Body és Order domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "442.1.c",
+     0,
+     "Az Empowered bináris állapot. Ha a legend már Empowered, az újabb empower nem csinál semmit."
+    ],
+    [
+     "442.2.a,442.1.c,424.1.a.1,702.3.a",
+     2,
+     "Nem egyértelmű, hogy triggerel-e, ha olyan objektumot \"empowerelsz\", ami már Empowered volt (ilyenkor nem történik semmi, 442.1.c). A 442.2.a csak az Empowered állapot megszerzését nevezi hivatkozható eseménynek, és a 424.1.a.1 példája szerint a már stunolt unit stunolása nem triggereli az Eclipse Herald \"When you stun\" abilityjét; ez a nem-trigger felé mutat, de Empowerre a Core Rules ezt nem mondja ki. Judge döntse el."
+    ],
+    [
+     "443.1.a,415.4",
+     1,
+     "A \"Disempower me\" és az Exhaust cost: az ability csak Empowered és ready legenddel aktiválható, plusz 1 bármilyen domainű Power kell hozzá."
+    ],
+    [
+     "381.1",
+     0,
+     "Nincs [Action] vagy [Reaction]: csak a saját Main Phase-edben, Open State-ben aktiválható. Showdown alatt és az opponent körében nem."
+    ],
+    [
+     "355.10,416.1.c",
+     0,
+     "A \"ready a unit\" unitja target, bármelyik játékos unitja lehet. Már ready uniton nem történik semmi, a cost nem jár vissza."
+    ]
+   ],
+   "why": "A note tévesen állította, hogy a 424.1.a.1 triggerről nem szól; a példája kifejezetten kimondja, hogy a már stunolt unit stunolása nem triggerel (Eclipse Herald)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Volibear, Imposing: a \"When an opponent moves to a battlefield\" értelmezése (az opponent által felelősen végrehajtott Move, akár a te unitodé is, vagy csak az opponent unitjainak mozgása) a Core Rulesból nem zárható le egyértelműen; a short és a note flag 1 levezetése elfogadható, de judge megerősítés javasolt."
+ ]
+}

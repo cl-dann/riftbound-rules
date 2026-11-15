@@ -1,0 +1,11 @@
+{
+ "fixes": {
+  "Ornn, Forge God": {
+   "short": "Minden saját gearedért +1 Mightot kap, bárhol legyenek. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod az Equip costjáért, akkor is, ha másik unitodon van. Ha az Equip costban bármilyen domainű Power is van, abból 1-gyel kevesebbet fizetsz, a domainhez kötött Power nem csökken. Deflect 2: az opponent rá célzó spellje vagy abilityje 2 bármilyen Powerrel drágább. Ha sebzetten gear vész el, meghalhat.",
+   "why": "Érthetőség: a short magyarázat nélkül használta az [A] szimbólumot. Átírva közérthetőre; a 821.1.c és 821.1.c.3 szerint a kedvezmény csak az Equip cost [A] (bármilyen domainű Power) részét csökkenti, a domainhez kötött Powert nem."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

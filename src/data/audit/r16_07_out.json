@@ -1,0 +1,18 @@
+{
+ "fixes": {
+  "Azir, Emperor of the Sands": {
+   "short": "Legend: 1 Energyért és exhaustolva kapsz egy 2 Mightú Sand Soldier unit tokent a base-edbe, de csak ha ebben a körben már kijátszottál egy Equipmentet, és csak a saját Main Phase-edben, showdownon kívül. Az általad kijátszott Sand Soldierek Weaponmastert kapnak: kijátszáskor felvehetnek egy Equipmentet, az Equip költségéből egy bármilyen domainű Powert elengedve, ha van benne ilyen.",
+   "why": "A short magyarázat nélkül használta az [A] szimbólumot; közérthetően: bármilyen domainű Power (135.2.e.5.b, 821.1.c)."
+  },
+  "Bandle Tree": {
+   "short": "Itt egy helyett 2 rejtett lapod lehet egyszerre. Mindkettőt külön, a szokásos módon rejted el: a saját körödben, showdownon kívül, lapként 1 Powerért. Ha elveszíted a battlefieldet, mindkét rejtett lapod a trashbe kerül.",
+   "why": "Az 'egyszerre 2 lapot rejthetsz el ... 1 Powerért' úgy volt olvasható, hogy egy rejtés 1 Powerért két lapot tesz le; valójában csak a férőhely nő (107.3.b.1), minden Hide külön [A] (811.1.b)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": [
+  "Blind Fury: a short feltétel nélkül azt írja, hogy a lapot ingyen kijátszod, a notes flag 2 pontja viszont nyitva hagyja, hogy showdown alatt unit vagy [Action] nélküli spell így kijátszható-e (420.3.b, 358.4). A Core Rules nem dönti el, ezért nem írtam át.",
+  "Back-Alley Bar: a short szerint minden innen elmozgó unit +1 Mightot kap, a notes flag 2 pontja szerint uncontrolled battlefieldnél a 190.6.b és a 190.6.d ütközik. Ritka helyzet, abszolút állítás nincs a shortban, ezért nem javítottam."
+ ]
+}

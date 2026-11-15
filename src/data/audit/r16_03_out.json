@@ -1,0 +1,89 @@
+{
+ "fixes": {
+  "Riven, Broken Blade": {
+   "short": "Minden alkalommal, amikor exhaustolódik (például mozgáskor), választasz egy ebben a körben még nem választott módot: buffot kap, a buffját elköltve stunol egy enemy unitot, vagy a buffját elköltve újra ready lesz. A második és harmadik mód buff nélkül nem ad semmit.",
+   "why": "A short kihagyta a \"this turn\" feltételt: a mód csak az adott körben nem választható újra, a következő körben ismét elérhető (kártyaszöveg: \"hasn't been chosen this turn\")."
+  },
+  "Riven, Shattered": {
+   "short": "Amikor Riven attacker lesz, választasz egy ottani enemy unitot: minden rá csatolt Equipmentért 2 damage-et kap, egyetlen sebzésként. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod az Equip cost kifizetésével, akkor is, ha máshoz van csatolva; ha az Equip costban van bármilyen domainű Power ([A]), 1 Powerrel kevesebbet fizetsz, különben (például saját domainű Power, [C]) nincs kedvezmény.",
+   "why": "Érthetőség: a short magyarázat nélkül használta az [A] szimbólumot; a 821.1.c, 821.1.c.3 szerinti tartalom változatlan."
+  },
+  "Sentinel Adept": {
+   "short": "Weaponmaster: kijátszáskor egy saját Equipmentedet az Equip cost kifizetésével rácsatolhatod, akár egy másik unitról átrakva is, az Equip szokásos időzítésétől függetlenül. Ha az Equip cost [A]-t (bármely domain 1 Powere) tartalmaz, 1 Powerrel olcsóbb; ha nincs benne [A] (például csak saját domainű Power, [C]), nincs kedvezmény.",
+   "why": "Érthetőség: a [C] szimbólum magyarázat nélkül szerepelt a shortban (135.2.e.6, 821.1.c.3)."
+  },
+  "Sacred Shears": {
+   "short": "Equipment: 1 Order Power költséggel csatolod egy saját unitodra, a saját Main Phase-edben, showdownon kívül. A felszerelt unit +1 Mightot és Deathknellt kap: amikor meghal és a trashbe kerül, húzol 1 lapot. Ha egy replacement effect (például Guardian Angel) a halált másra cseréli, nincs húzás.",
+   "notes": [
+    [
+     "818.1.b.1,151.2,381.1",
+     0,
+     "Equip: 1 Order Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+    ],
+    [
+     "136.2.b,136.2.c,435.1.e",
+     0,
+     "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +1 Mightot is kap."
+    ],
+    [
+     "808.1.c,808.1.d.1",
+     0,
+     "A felszerelt unit Deathknellt kap: amikor meghal és a trashbe kerül, húzol 1-et. Ha a halált egy replacement effect (például Guardian Angel) másra cseréli, nincs húzás."
+    ],
+    [
+     "808.2",
+     0,
+     "A unit saját Deathknelljeivel külön-külön triggerel, a sorrendet a kontroller választja."
+    ],
+    [
+     "414.4",
+     0,
+     "Üres Main Decknél a húzás Burn Outot okoz."
+    ],
+    [
+     "719.5,436.4.a",
+     0,
+     "Ha a unit elhagyja a boardot, a gear leválik és a unit utolsó helyén marad. Battlefieldről a következő cleanup a base-be recallolja, ahonnan újra equipelhető."
+    ]
+   ],
+   "why": "Félreérthetőség: a \"kiváltja\" a lap többi szövegében triggerelést jelent, itt viszont helyettesítést (replacement); a 808.1.d.1 szerint a lecserélt halál nem triggerel."
+  },
+  "Shepherd's Heirloom": {
+   "short": "Kijátszáskor 1 XP-t ad. Az Equip costja 1 XP elköltése, Energy vagy Power nem kell hozzá: így csatolhatod egy saját unitodra a saját Main Phase-edben, showdownon kívül, és az +2 Mightot kap. Az elköltött XP miatt egy Level képesség kikapcsolhat.",
+   "why": "Pontatlanság: az \"Energy helyett\" azt sugallta, hogy az Equip cost egyébként Energy lenne; a cost kizárólag 1 XP elköltése (818.1.c.3, 730.2). Kiegészítve az Equip időzítésével (151.2)."
+  },
+  "Salvage": {
+   "notes": [
+    [
+     "355.13,355.12",
+     0,
+     "A gear target, kijátszáskor választod, a \"may\" döntéstől függetlenül. \"Up to one\": nullát is választhatsz."
+    ],
+    [
+     "355.8,355.12",
+     1,
+     "Errata: a régi \"You may kill a gear. Draw 1.\" szöveggel a \"may\" ellenére is érvényes gear target kellett a kijátszáshoz. Az \"up to one\" miatt most gear nélkül is kijátszható, csak a húzásért."
+    ],
+    [
+     "148.1.a.4,355.9.a.1",
+     0,
+     "Bármelyik játékos boardon lévő gearje választható, csatolt Equipment és token is. Saját Gold vagy Bomb is megölhető vele."
+    ],
+    [
+     "359.3.e.5",
+     0,
+     "A Draw 1 nem függ a geartől: akkor is húzol, ha a gear illegális target lett vagy nem ölted meg."
+    ],
+    [
+     "806.1.c.1,358.4",
+     0,
+     "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+    ]
+   ],
+   "why": "A note hibásan idézte a régi szöveget (\"kill a gear\"); a régi szöveg \"You may kill a gear\" volt, a target a 355.12 szerint a may ellenére is kötelező volt (355.8)."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}

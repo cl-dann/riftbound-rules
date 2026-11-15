@@ -51,6 +51,10 @@
   [
    "saját kör, Open State,",
    "saját kör, Neutral Open State (showdownon kívül, 411.1.a),"
+  ],
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
   ]
  ],
  "Abandoned Hall": [
@@ -165,6 +169,10 @@
   [
    "a trigger nem kerül chainre",
    "a trigger chainre kerülve rögtön le is kerül róla (403.4), így nem fut le"
+  ],
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
   ]
  ],
  "Maddened Marauder": [
@@ -183,6 +191,10 @@
   [
    "a trigger nem kerül chain-re",
    "a trigger chainre kerülve rögtön le is kerül róla (403.4), így nem fut le"
+  ],
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
   ]
  ],
  "Pit Rookie": [
@@ -267,6 +279,264 @@
   [
    "a trigger nem kerül chain-re",
    "a trigger chainre kerülve rögtön le is kerül róla (403.4), így nem fut le"
+  ]
+ ],
+ "Akali, Deadly Weapon": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Akali, Rogue Assassin": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Ambessa, The Wolf": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Applied Researchers": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Apprentice Mage": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Aurok General": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Black Market": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Blastcone Fae": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Brutal Hunter": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Covert Informant": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Forge of the Fluft": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Frostcoat Mother": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Helm of Suppression": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Jax, Unmatched": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Jayce, Defender of Tomorrow": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Kayle, Justified": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Keeper of Masks": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Kha'Zix, Voidreaver": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Kinkou Lifeblade": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Lee Sin, Blind Monk": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Legion Marauder": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Lillia, Bashful Bloom": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Maduli the Gatekeeper": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Megatusk": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Miss Fortune, Bounty Hunter": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Momentary Companion": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Pakaa Cub": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Poppy, Keeper of the Hammer": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Punching Poro": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Pyke, Bloodharbor Ripper": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Renekton, Brute": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Risen Altar": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Riven, Deserter": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Serene Ascetic": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Soulspinner": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Steel Paws": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Tail-Cloaked Matriarch": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Tornado Warrior": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Udyr, Wildman": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Vi, Destructive": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Viktor, Herald of the Arcane": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Ziggs, Explosive": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
+  ]
+ ],
+ "Ziggs, Hexplosives Expert": [
+  [
+   "Open State-ben",
+   "Neutral Open State-ben (showdownon kívül)"
   ]
  ]
 }

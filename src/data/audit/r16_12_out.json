@@ -1,0 +1,23 @@
+{
+ "fixes": {
+  "Kennen, Heart of the Tempest": {
+   "short": "Amikor nem a kezedből játszol ki lapot (például elrejtett lapot, a trashből vagy a Champion Zone-ból), a legend Empowered lesz; ha már az, az újabb töltés kárba vész. Az Empower levételéért és a legend exhaustjáért egy unit Assault 2-t kap a kör végéig: amíg támad, +2 Mightja van. Ez a saját körödben vagy showdown alatt aktiválható.",
+   "why": "A short 'egy unit támadáskor +2 Mightot kap a kör végéig, showdown alatt is' megfogalmazása félreérthető volt (a showdown az aktiválás időzítésére vonatkozik, nem a bónuszra), és hiányzott belőle a saját kör mint aktiválási időpont ([Action], 806.1.c.2, 381)."
+  },
+  "Maduli the Gatekeeper": {
+   "short": "Nem lehet ready-vé tenni: exhausted lép be és úgy is marad (hogy egy eleve ready belépést adó hatás működik-e rá, judge dönti el), ezért Standard Move-val nem tud mozogni. 1 Chaos Powerért (exhaust nélkül, a saját Main Phase-edben, showdownon kívül) átmegy egy olyan enemy battlefieldre, ahol áll unit, ha a Mightja nagyobb az ott álló enemy unitok összesített Mightjánál. A feltételt a resolve-kor nézi a játék.",
+   "why": "A short tényként állította, hogy Maduli mindig exhausted marad, miközben a notes utolsó pontja (369.3, 805.6) flag 2-vel nyitott kérdésnek jelöli, hogy az 'enter ready' hatás működik-e rá: ellentmondás a short és a notes között."
+  },
+  "Master Yi, Unstoppable": {
+   "short": "Alapára 12 Energy és 3 Calm Power, de XP-vel olcsóbb: 3 XP-től 10 Energy és 2 Power, 6 XP-től 8 és 1, 11 XP-től 6 Energy, Power nélkül. Mindig csak a legmagasabb elért szint számít. 16 XP-től enemy spell vagy ability nem választhatja ki, de a mindenkit érintő hatások és a combat sebzés ekkor is elérik.",
+   "why": "A shortból hiányoztak a költségek (alapár és a szintenkénti tényleges ár), pedig a lap lényege a költségcsökkentés; a 356.6 szerinti értékek a notes-ban szerepeltek."
+  },
+  "Kinkou Lifeblade": {
+   "short": "2 Energyért Empowerelhető, ha még nem Empowered: ekkor +1 Mightot és Gankinget kap, vagyis battlefieldről battlefieldre léphet. Az Empower nem exhaustolja, így ha ready, utána még abban a körben mozoghat. Csak a saját Main Phase-edben, showdownon kívül aktiválható.",
+   "why": "A short feltétel nélkül állította, hogy Empower után még abban a körben mozoghat; ehhez ready állapot kell (144.2, a unit exhausted lép be, 143.4), ahogy a notes is írja."
+  }
+ },
+ "checked": 89,
+ "data_issues": [],
+ "open": []
+}

@@ -1,0 +1,53 @@
+{
+ "fixes": {
+  "Hostile Takeover": {
+   "short": "Kézből a saját körödben, showdownon kívül: átveszed egy battlefielden álló ellenséges unitot és readyzed; ha ott más ellenséges unit is van, combat indul, ha nincs, conquerelsz. A kör végén elveszíted, és a base-ébe kerül. Hidden: ugyanekkor 1 bármely Powerért elrejtheted egy saját battlefielden, a következő körtől bármikor, ingyen kijátszhatod, csak az ottani unitra. Ending Phase-ben kijátszva a visszaadás elmarad.",
+   "why": "A short nem írta ki a kézből kijátszás időzítését: keyword nélküli spell, csak saját körben, showdownon kívül (155, 308.1.a)."
+  },
+  "Hextech Formula": {
+   "short": "Exhaustolva Empowerel egy másik geart, bármelyik játékosét, anélkül hogy annak a saját árát kifizetnéd. Csak a saját körödben, showdownon kívül használható. Exhausted lép be, ezért alapból csak a következő körödtől, hacsak egy hatás nem readyzi. Már Empowered gearen nem csinál semmit.",
+   "why": "A short nem írta ki az activated ability időzítését: gear abilityje keyword nélkül csak a saját Main Phase-ben, showdownon kívül (151.2)."
+  },
+  "Hextech Gauntlets": {
+   "short": "Equipment, +3 Might. Equip: 3 Energy és 1 bármely Power, az Energy rész a választott unit Mightjával csökken; csak a saját körödben, showdownon kívül. Amikor a felszerelt unit részt vesz egy conquerben, és legalább 3 excess damage-et osztottál ki, húzol 1 lapot. Az excess damage pontos jelentését a Core Rules nem rögzíti, judge dönti el.",
+   "why": "A short nem írta ki az Equip időzítését: saját Main Phase, showdownon kívül (151.2, 818.1.c.2)."
+  },
+  "Jax, Unrelenting": {
+   "short": "Kijátszáskor ráteheted egy Equipmentedet az Equip költség kifizetésével, akkor is, ha az már máson van. Ha a költségben bármely domainű Power ([A]) van, abból 1-gyel kevesebbet fizetsz, ha nincs, nincs kedvezmény; hogy a lap saját domainjéhez kötött Power is csökken-e, judge dönti el. Valahányszor te csatolsz rá Equipmentet, 1 Energyért húzhatsz. A már rajta lévő Equipment újbóli felszerelése nem ad húzást.",
+   "why": "A short azt sugallta, hogy a [C] Equip costú Equipment (például Jagged Cutlass) nem kap kedvezményt, holott ez a notes szerint is nyitott kérdés (821.1.c.3, flag 2); a short és a notes ellentmondott."
+  },
+  "High Note": {
+   "notes": [
+    [
+     "355.7",
+     0,
+     "A unit target, lehet saját vagy enemy."
+    ],
+    [
+     "359.3.f.2,415.2",
+     1,
+     "A csökkentés mértéke az általad kontrollált exhausted unitok száma a resolve-kor, bárhol a boardon. Ha nincs exhausted unitod, a spell nem csinál semmit."
+    ],
+    [
+     "359.3.f.2",
+     1,
+     "Az érték a resolve-kor rögzül. Ha a unitjaid később ready lesznek, a csökkentés a kör végéig ugyanannyi marad."
+    ],
+    [
+     "143.2.c,142.4.b",
+     0,
+     "Nincs alsó korlát: a Might 0 alá is mehet, a combatban 0-nak számít. Sebzett unit meghal, ha a rajta lévő damage eléri az új Mightot."
+    ],
+    [
+     "813.1.c.1,144.2",
+     1,
+     "[Reaction]: a saját körödben a Standard Move-ok után a legerősebb, mert a mozgás exhaustolja a unitjaidat."
+    ]
+   ],
+   "why": "Az utolsó pont a 813.1.c.1-re hivatkozott azért az állításért, hogy a mozgás exhaustol; ezt a 144.2 mondja ki (a Standard Move costja az exhaust), hozzáadva."
+  }
+ },
+ "checked": 92,
+ "data_issues": [],
+ "open": []
+}
