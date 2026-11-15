@@ -1,0 +1,3 @@
+# Nyers szimbólumok a shortban (egyszeri)
+Bemenet: /home/claude/build/r/t3_cards.json (name, domain, text, short). Kimenet: /home/claude/build/r/t3_out.json: {"fixes": {"<name>": {"short": "<teljes új short>", "why": "érthetőség"}}, "checked": N}.
+A shortban nem maradhat nyers jel: [A] = "bármilyen domainű Power", [C] = "a lap domainjének Powere" (konkrét domainnévvel, ha egy domain van; több domainnél "a lap bármelyik domainjének Powere"), [1], [2] stb. = "1 Energy", "2 Energy" (költségben), [T] = "exhaust", [S] = "Might". A tartalom ne változzon, csak a jelek legyenek kiírva. Legfeljebb 420 karakter, gondolatjel tilos. Pythonnal ellenőrizd. Szabályok: /home/claude/riftbound-rules/web/src/generated/rules.json (135.2.e.5, 135.2.e.6).

@@ -1,0 +1,846 @@
+[
+ {
+  "kw": "Accelerate",
+  "rule": "805",
+  "kind": "Optional Additional Cost keyword",
+  "on": "Units",
+  "short": "A unit kijátszásakor fizethetsz plusz [1][C]-t (1 Energy és 1, a unit domainjének megfelelő Power), és akkor a unit ready állapotban lép a boardra, nem exhausted.",
+  "points": [
+   [
+    "805.1.b.1",
+    "Ha a unitnak van domainje, a plusz cost Power részét csak a unit valamelyik domainjének megfelelő Powerrel fizetheted."
+   ],
+   [
+    "805.1.b.2",
+    "Ha a unitnak nincs domainje, a Power rész bármely domain Powerével fizethető ([A])."
+   ],
+   [
+    "805.2.a",
+    "A plusz cost csak a kijátszás lépései közben fizethető. Ha a unit már a boardon van, utólag nem teheted ready-vé vele."
+   ],
+   [
+    "805.2.b",
+    "Ha kifizetted, a unit akkor is ready lép be, ha a finalization (a kijátszás lezárása, amikor a unit a chainről a boardra kerül) közben elveszíti az Accelerate-et."
+   ],
+   [
+    "805.6.a",
+    "A unit nem exhausted lép be, hogy aztán ready legyen, hanem eleve ready. Ezért a \"becomes ready\" (ready-vé válásra figyelő) abilityk nem triggerelnek rá."
+   ],
+   [
+    "356.1.b.3",
+    "Ha egy effect a unit costját \"ignore\"-olja, az csak a base costot (a kártya bal felső sarkába nyomtatott árat) nullázza. A később hozzáadott additional costok, például az Accelerate [1][C]-je, továbbra is fizetendők."
+   ]
+  ],
+  "stack": "Redundáns (805.4): több példány mellett is csak egyszer fizethető, és a hatás ugyanaz."
+ },
+ {
+  "kw": "Action",
+  "rule": "806",
+  "kind": "Permissive keyword",
+  "on": "Cards, Rune Abilities, Legend Abilities, Permanent Abilities",
+  "short": "Időzítési engedély: a kártya vagy ability showdown (vitatott battlefieldnél nyíló időablak, amikor a játékosok felváltva játszhatnak ki lapot) alatt is kijátszható vagy aktiválható, bármelyik játékos körében.",
+  "points": [
+   [
+    "806.1.b",
+    "Showdown alatt az [Action] kártya az opponent körében is kijátszható."
+   ],
+   [
+    "308.1.a",
+    "Showdown State-ben (amíg showdown vagy combat zajlik) csak [Action] vagy [Reaction] kártya és ability használható. Ha egyik sincs rajta, showdown alatt nem játszható ki."
+   ],
+   [
+    "309.1.a",
+    "Closed State-ben (amíg van tétel a chainen) az [Action] nem elég, ahhoz [Reaction] kell. Az [Action] spell ezért nem játszható ki válaszként egy chainen lévő spellre."
+   ],
+   [
+    "806.2",
+    "Az [Action] nem szűkít: a kártya a saját körödben, Neutral Open State-ben (nincs showdown vagy combat, és üres a chain) továbbra is kijátszható."
+   ],
+   [
+    "806.3",
+    "Csak időzítési engedély, a kártya utasításain nem változtat. Az [Action] unit is csak a base-edre vagy egy általad controllált battlefieldre játszható (355.2.a)."
+   ],
+   [
+    "806.4.b",
+    "Ha a kártya csak feltétellel kap [Action]-t, és a feltétel a Check Legality lépésig (a kijátszás 5. lépése, a szabályossági ellenőrzés) nem teljesül, a kijátszás visszacsinálódik, és a kártya visszakerül oda, ahonnan kijátszottad."
+   ]
+  ],
+  "stack": "A 806 nem rendelkezik több példányról. Mivel az [Action] csak engedély (806.3), a második példány nem ad újabb lehetőséget (levezetés)."
+ },
+ {
+  "kw": "Assault",
+  "rule": "807",
+  "kind": "Passive Ability keyword",
+  "on": "Units",
+  "short": "Amíg a unit attacker (a támadó fél unitja combatban), +X Mightot kap. Az X a kulcsszó melletti szám (Assault 2 esetén 2).",
+  "points": [
+   [
+    "807.1.c",
+    "Assault X: amíg a unit attacker, +X Mightja van ([M] a Might jele). Defenderként vagy combaton kívül nem ad semmit."
+   ],
+   [
+    "807.1.b.3",
+    "Ha a kulcsszó mellől hiányzik a szám, X értéke 1."
+   ],
+   [
+    "807.1.d.1",
+    "A bónusz addig él, amíg a unit Attacker designationnel (combatban kapott támadó jelöléssel) rendelkezik. Ha a unit elhagyja a battlefieldet, vagy a combat véget ér, elveszíti a jelölést, és a bónusz megszűnik."
+   ],
+   [
+    "466.2.c.1",
+    "Attacker az a játékos, akinek a unitjai a battlefieldet Contested (vitatott) státuszba tették, vagyis odaléptek, amikor az még nem az övé volt. Ha te védekezel, az Assault unitod nem kap bónuszt."
+   ],
+   [
+    "467.2",
+    "A combat damage a unitok aktuális Mightjával számol, ezért az Assault bónusz beleszámít az általad kiosztható damage-be."
+   ]
+  ],
+  "stack": "Összeadódik (807.2): ha a unit több forrásból kap Assaultot, az Assault Value-k összege érvényes."
+ },
+ {
+  "kw": "Deathknell",
+  "rule": "808",
+  "kind": "Triggered Ability keyword",
+  "on": "Permanents",
+  "short": "Amikor ez a lap (unit vagy gear) meghal, vagyis a boardról a trashbe kerül, lefut a kulcsszó után írt hatás.",
+  "points": [
+   [
+    "808.1.c",
+    "Rövidítés: \"When I die, [Effect].\" Az [Effect] a kulcsszó után a kártyára írt hatás. Ha a lap más módon hagyja el a boardot (például banish vagy recall), nem triggerel."
+   ],
+   [
+    "808.1.d",
+    "A trigger feltétele, hogy a lapot megöljék (Killed), és a trashbe kerüljön."
+   ],
+   [
+    "808.1.d.1",
+    "Ha a halált egy replacement effect (olyan hatás, amely az eseményt egy másikkal helyettesíti) például recallra cseréli, a lap nem kerül a trashbe, és a trigger lekerül a chainről."
+   ],
+   [
+    "808.1.d.2",
+    "A trigger Pending itemként (még le nem zárt tételként) kerül a chainre, mielőtt a kártya a trashbe kerülne."
+   ],
+   [
+    "808.1.d.3",
+    "Mielőtt a kártya a trashbe kerül, fel kell jegyezni a helyét (melyik base vagy battlefield) és a tulajdonságait. A hatás ezekkel a feljegyzett adatokkal fut le, nem a trashben lévő kártyáéval."
+   ],
+   [
+    "808.1.c.2",
+    "Ha a hatás múlt időben fogalmaz, az a trigger chainre kerülésének pillanatára utal, nem korábbi állapotra."
+   ]
+  ],
+  "stack": "Külön triggerel (808.2): ha egy lapon több Deathknell van, mindegyik önálló trigger, a chainre tételük sorrendjét a lap controllere (aki irányítja) választja (808.2.a)."
+ },
+ {
+  "kw": "Deflect",
+  "rule": "809",
+  "kind": "Passive Ability keyword",
+  "on": "Permanents",
+  "short": "Ha az opponent egy spellje vagy abilityje targetként (célpontként kiválasztva) ezt a lapot (általában unit vagy gear) választja, X Powerrel többe kerül. Az X a kulcsszó melletti szám.",
+  "points": [
+   [
+    "809.1.c",
+    "A felár minden egyes választásért jár. Ha egy spell kétszer választja ugyanazt a Deflect lapot, kétszer kell fizetni."
+   ],
+   [
+    "809.1.b.3",
+    "Ha a kulcsszó mellől hiányzik a szám, X értéke 1."
+   ],
+   [
+    "809.1.c.1",
+    "A felár bármely domain Powerével fizethető, nem kell egyeznie a spell vagy a target domainjével."
+   ],
+   [
+    "809.1.d",
+    "Ez Mandatory Additional Cost (kötelező plusz ár). Ha az opponent nem tudja kifizetni, a spellt vagy abilityt nem játszhatja ki erre a targetre."
+   ],
+   [
+    "355.10.d",
+    "Csak targetelésre hat. Ha a hatás nem választ ki konkrét lapot, hanem tulajdonság alapján érint (például \"Kill all units at battlefields\"), a Deflect lap nem target, és nincs felár (levezetés)."
+   ]
+  ],
+  "stack": "Összeadódik (809.2): több forrásból kapott Deflect esetén a Deflect Value-k összege a felár."
+ },
+ {
+  "kw": "Ganking",
+  "rule": "810",
+  "kind": "Passive Ability keyword",
+  "on": "Units",
+  "short": "A unit a Standard Move-jával (a unit saját, exhausttal fizetett mozgásával) battlefieldről közvetlenül másik battlefieldre is léphet.",
+  "points": [
+   [
+    "810.1.b",
+    "Ganking nélkül a Standard Move csak base és battlefield között működik. Gankinggel a unitnak nem kell előbb visszamennie a base-re."
+   ],
+   [
+    "810.1.c.1",
+    "Csak bővít: a base és battlefield közötti mozgás továbbra is elérhető."
+   ],
+   [
+    "810.1.c.2",
+    "Nincs külön aktiválási costja."
+   ],
+   [
+    "144.2",
+    "A Standard Move costja továbbra is a unit exhaustolása (oldalra fordítása). Ha a unit már exhausted, Gankinggel sem tud mozogni."
+   ],
+   [
+    "810.1.c.3",
+    "Nem ad plusz mozgást, csak új úti célt a meglévő Standard Move-hoz."
+   ],
+   [
+    "144.1.c",
+    "A Standard Move showdown vagy combat alatt nem végezhető. A Ganking ezen nem változtat."
+   ]
+  ],
+  "stack": "Redundáns (810.2)."
+ },
+ {
+  "kw": "Hidden",
+  "rule": "811",
+  "kind": "Prerequisite keyword for the Hide Discretionary Action",
+  "on": "Spells, Units, Gear",
+  "short": "A kártyát a kezedből vagy a Champion Zone-ból [A]-ért (1 bármilyen domainű Powerért) facedown (lefordítva) elrejtheted egy általad controllált battlefielden. A következő körtől [Reaction] időzítéssel kijátszhatod onnan, és a nyomtatott árát (base cost) nem kell kifizetned.",
+  "points": [
+   [
+    "811.1.b",
+    "Elrejteni csak a saját körödben, Open State-ben (üres chain mellett) lehet, kézből vagy a Champion Zone-ból, és egy battlefielden egyszerre csak egy facedown kártya lehet."
+   ],
+   [
+    "811.1.c.2",
+    "Az elrejtés (Hide) nem kijátszás (Play), és nem nyit chaint, így az opponent nem tud rá reagálni. A facedown kártya kijátszása viszont már chaint nyit (811.1.c.3)."
+   ],
+   [
+    "811.6",
+    "A kártya az elrejtést követő körtől kap [Reaction]-t. Abban a körben, amikor elrejtetted, nem játszhatod ki facedownból."
+   ],
+   [
+    "811.1.d.1",
+    "A rejtett unit vagy gear csak arra a battlefieldre játszható ki, ahol rejtve volt. Ez a gearre is igaz, felülírva azt a szabályt, hogy gear csak a base-re játszható ki."
+   ],
+   [
+    "811.1.d.2",
+    "A rejtett spell targetjeit az adott battlefielden lévő lehetőségek közül kell választani. Ha ott nincs érvényes target, a spell nem játszható ki facedownból (811.1.d)."
+   ],
+   [
+    "323.6.a",
+    "Ha elveszíted a battlefield controlját, a következő cleanup (a játék automatikus rendrakása) a facedown kártyát az owner (a kártyát a játékba hozó játékos) trashébe teszi."
+   ]
+  ],
+  "stack": "Redundáns (811.4). A facedown kártya nem számít Hidden kulcsszavas kártyának (811.5.a)."
+ },
+ {
+  "kw": "Legion",
+  "rule": "812",
+  "kind": "Dependent Keyword",
+  "on": "Cards",
+  "short": "Ha ebben a körben már kijátszottál egy másik kártyát, ez a kártya megkapja a Legion kulcsszó után írt szöveget.",
+  "points": [
+   [
+    "812.1.b.1",
+    "Rövidítés: \"If you have played another card this turn, this card gains [Text].\" A [Text] a kulcsszó után álló szöveg. Ha ez az első kártyád a körben, a [Text] nem működik."
+   ],
+   [
+    "812.1.c",
+    "A feltételhez egy másik kártya kell, amelyet ugyanebben a körben te játszottál ki, és a kijátszása eljutott a Finalize lépésig (a kijátszás lezárásáig). A Legion kártya maga nem számít bele."
+   ],
+   [
+    "812.1.c",
+    "A szabály a Finalized (lezárt) állapotot nézi (420.4.b). Ha a korábbi spelledet counterelték, a Finalize már előtte megtörtént, így a Legion működik (levezetés)."
+   ],
+   [
+    "812.2",
+    "Egyetlen korábban kijátszott kártya az összes általad controllált Legion feltételét teljesíti."
+   ]
+  ],
+  "stack": "Nem kell Legionönként külön kártya: egy kijátszott kártya az összes Legion abilityt működésbe hozza, és mindegyik [Text] külön érvényes (812.2)."
+ },
+ {
+  "kw": "Reaction",
+  "rule": "813",
+  "kind": "Permissive keyword",
+  "on": "Cards, Rune Abilities, Legend Abilities, Permanent Abilities",
+  "short": "Időzítési engedély: mindent megenged, amit az [Action], és ezen felül Closed State-ben (amikor van tétel a chainen) is kijátszható vagy aktiválható, bármelyik játékos körében. Ezzel lehet válaszolni egy chainen lévő spellre.",
+  "points": [
+   [
+    "813.1.c.1",
+    "Ha már van chain, a [Reaction] kártya válaszként kijátszható, az opponent körében is."
+   ],
+   [
+    "813.1.b",
+    "A [Reaction] magában foglalja az [Action] engedélyeit: showdown alatt is kijátszható."
+   ],
+   [
+    "813.2",
+    "Nem szűkít: a kártya a saját körödben, Open State-ben (üres chain mellett) is kijátszható."
+   ],
+   [
+    "813.3.a",
+    "Csak időzítési engedély. A [Reaction] unit is csak a base-edre vagy egy általad controllált battlefieldre játszható."
+   ],
+   [
+    "357.1.a",
+    "A cost fizetése közben használhatod a [Reaction] jelölésű, resource-t Add-oló (Energyt vagy Powert a Rune Poolodba tevő) abilityket az ár előteremtésére."
+   ],
+   [
+    "813.4.b",
+    "Ha a kártya csak feltétellel kap [Reaction]-t, és a feltétel a Check Legality lépésig (a kijátszás 5. lépése, a szabályossági ellenőrzés) nem teljesül, a kijátszás visszacsinálódik."
+   ]
+  ],
+  "stack": "A 813 nem rendelkezik több példányról. Mivel csak engedély (813.3), a második példány nem ad újabb lehetőséget (levezetés)."
+ },
+ {
+  "kw": "Shield",
+  "rule": "814",
+  "kind": "Passive Ability keyword",
+  "on": "Units",
+  "short": "Amíg a unit defender (a védekező fél unitja combatban), +X Mightot kap. Az X a kulcsszó melletti szám.",
+  "points": [
+   [
+    "814.1.c",
+    "Shield X: amíg a unit defender, +X Mightja van. Attackerként vagy combaton kívül nem ad semmit."
+   ],
+   [
+    "814.1.b.3",
+    "Ha a kulcsszó mellől hiányzik a szám, X értéke 1."
+   ],
+   [
+    "814.1.d.1",
+    "A bónusz addig él, amíg a unit Defender designationnel (combatban kapott védő jelöléssel) rendelkezik."
+   ],
+   [
+    "466.2.c.2",
+    "Defender az a játékos, aki nem tette Contested (vitatott) státuszba a battlefieldet, vagyis akit megtámadtak. Ha te támadsz, a Shield nem számít."
+   ],
+   [
+    "467.2",
+    "A combat damage az aktuális Mighttal számol. A Shield bónusz növeli a unit által kiosztott damage-et, és azt is, mennyi damage kell a megöléséhez (lethal damage, 142.4.b)."
+   ]
+  ],
+  "stack": "Összeadódik (814.2): több forrásból kapott Shield esetén a Shield Value-k összege érvényes."
+ },
+ {
+  "kw": "Tank",
+  "rule": "815",
+  "kind": "Passive Ability keyword",
+  "on": "Units",
+  "short": "Combat damage kiosztásakor a Tank unitra kell előbb lethal damage-et (a megöléséhez elég, a Mightjával legalább egyenlő damage-et) osztani, és csak utána az ugyanahhoz a játékoshoz tartozó, Tank nélküli unitokra.",
+  "points": [
+   [
+    "815.1.b",
+    "Amíg a Tank unit nem kapott lethal damage-et, a controllere Tank nélküli unitjaira nem osztható damage."
+   ],
+   [
+    "815.1.c.1",
+    "Az általános szabály marad: egy unitra a teljes lethal damage-et ki kell osztani, mielőtt a következőre lépsz."
+   ],
+   [
+    "815.1.c.2",
+    "Ha több Tank unit van, köztük a kiosztó játékos szabadon választ sorrendet."
+   ],
+   [
+    "467.2.c.8",
+    "Ha egy unitnak Tank és Backline is van, a kiosztó játékos választja ki, a kettő közül melyiket alkalmazza rá."
+   ],
+   [
+    "467.2.c.10",
+    "Ha a Tank unit nem kaphat damage-et, semmilyen mennyiség nem számít rá lethalnak, ezért kimarad a kötelező sorrendből."
+   ]
+  ],
+  "stack": "Redundáns (815.2)."
+ },
+ {
+  "kw": "Temporary",
+  "rule": "816",
+  "kind": "Triggered Ability keyword",
+  "on": "Permanents",
+  "short": "A lap (unit vagy gear) controllerének (aki irányítja) Beginning Phase-e elején, még a pontszerzés (scoring) előtt a lap meghal.",
+  "points": [
+   [
+    "816.1.b",
+    "Rövidítés: \"At the start of this permanent's controller's Beginning Phase, before scoring, kill this.\" A permanent itt magát a lapot (unit vagy gear) jelenti."
+   ],
+   [
+    "816.1.c",
+    "A trigger a controller saját Beginning Phase-ének kezdetére figyel. Az opponent körében a lap megmarad."
+   ],
+   [
+    "315.2.a.1",
+    "A trigger a Beginning Stepben fut, a Scoring Step előtt. Ha a Temporary unit volt az egyetlen unitod egy battlefielden, a Hold (megtartásért járó pontszerzés) előtt meghal, így azt a battlefieldet nem tudod holdolni (levezetés, 323.5)."
+   ],
+   [
+    "808.1.c",
+    "A Temporary megöli (kill) a lapot, ezért a lap Deathknell abilityje triggerel rá (levezetés)."
+   ]
+  ],
+  "stack": "Redundáns (816.2). Akárhány példány van, az ability csak egyszer triggerel (816.2.a)."
+ },
+ {
+  "kw": "Vision",
+  "rule": "817",
+  "kind": "Triggered Ability keyword",
+  "on": "Permanents",
+  "short": "Amikor kijátszod ezt a lapot (unit vagy gear), Predict: megnézed a Main Deck felső lapját, és eldöntöd, a pakli aljára teszed-e.",
+  "points": [
+   [
+    "817.1.b",
+    "Rövidítés: \"When this is played, [Predict].\""
+   ],
+   [
+    "817.1.c",
+    "A trigger az, hogy a lap a boardra lép. Ha nem jut a boardra, nincs Predict."
+   ],
+   [
+    "437.1",
+    "Predict: megnézed a Main Deck felső lapját, és eldöntöd, recycle-ölöd-e (a pakli aljára teszed). Ha nem, a lap felül marad."
+   ],
+   [
+    "817.2.b",
+    "Ha több Vision van, az elsőnél nem recycle-ölsz, és a triggerek között más nem történik, a következő példány ugyanazt a lapot mutatja."
+   ]
+  ],
+  "stack": "Külön triggerel (817.2): minden példány önálló Predict, és mindegyiknél külön döntesz a recycle-ről (817.2.a)."
+ },
+ {
+  "kw": "Equip",
+  "rule": "818",
+  "kind": "Activated Ability keyword",
+  "on": "Gear with the Equipment tag",
+  "short": "Az Equip után megadott ár (cost) kifizetésével ezt a geart egy általad controllált unithoz csatolod (attach).",
+  "points": [
+   [
+    "818.1.c.2",
+    "Rövidítés: \"[Cost]: Attach this gear to a unit you control.\" A [Cost] az Equip kulcsszó után megadott ár. Enemy (opponent által controllált) unitra nem csatolható."
+   ],
+   [
+    "818.1.b.1",
+    "A választott unit target. Ha a resolve (a hatás tényleges lefutása) előtt illegálissá válik, a csatolás nem történik meg (levezetés)."
+   ],
+   [
+    "818.1.c.1",
+    "Ha a cost fizetése vagy a választás egy abilityt triggerel, az a chainen az Equip fölé kerül, ezért előbb resolve-ol."
+   ],
+   [
+    "818.2",
+    "A csatolás befejezésekor a unit Equipped lesz. Erre az eseményre más hatások és triggerek hivatkozhatnak."
+   ],
+   [
+    "818.3.b",
+    "A unit addig Equipped, amíg legalább egy Equipment (unitra csatolható gear) van rá csatolva."
+   ],
+   [
+    "818.1.c.4",
+    "Ha az Equip ability szövege módosítja az Equip costot, a módosított értéket kell kifizetni."
+   ]
+  ],
+  "stack": "Több Equip több önálló activated ability, mindegyik külön aktiválható a saját costjáért (818.4)."
+ },
+ {
+  "kw": "Quick-Draw",
+  "rule": "819",
+  "kind": "Triggered Ability keyword and Permissive keyword",
+  "on": "Gear with Equip abilities",
+  "short": "A gear [Reaction] időzítéssel is kijátszható (akár válaszként, az opponent körében is), és kijátszásakor automatikusan egy általad controllált unithoz csatolódik.",
+  "points": [
+   [
+    "819.1.d",
+    "Rövidítés: [Reaction] és \"When you play this, attach it to a Unit you control.\""
+   ],
+   [
+    "819.1.b",
+    "A kártyának eleve van [Reaction]-je, ezért Closed State-ben (amikor van tétel a chainen), showdown alatt és az opponent körében is kijátszható."
+   ],
+   [
+    "819.1.c",
+    "A csatolás a kijátszáskor induló triggerből jön, nem az Equip aktiválásából. Az Equip costot ezért nem kell kifizetned hozzá (levezetés)."
+   ],
+   [
+    "813.3",
+    "A [Reaction] csak időzítést ad, a kártya árát ugyanúgy ki kell fizetni."
+   ]
+  ],
+  "stack": "Több példány nem triggerel külön, az elsőn túl nincs hatásuk (819.2)."
+ },
+ {
+  "kw": "Repeat",
+  "rule": "820",
+  "kind": "Optional Additional Cost keyword",
+  "on": "Spells, Abilities",
+  "short": "Ha kijátszáskor kifizeted a Repeat után megadott plusz árat, a spell vagy ability utasításai resolve-kor (amikor a hatás lefut) még egyszer végrehajtódnak.",
+  "points": [
+   [
+    "820.1.d",
+    "A Repeat cost additional cost (a normál ár fölötti plusz ár), a kijátszás lépései közben fizeted. Resolve közben már nem dönthetsz róla."
+   ],
+   [
+    "820.1.c.3",
+    "Egy Repeat cost csak egyszer fizethető, tehát egy példány legfeljebb egy plusz végrehajtást ad."
+   ],
+   [
+    "820.2",
+    "A plusz végrehajtás választásait (például a targeteket) is a Make Relevant Choices lépésben (a kijátszás 2. lépése, ahol minden választást meghozol) kell meghozni, a chainre tételkor."
+   ],
+   [
+    "820.2.a",
+    "A plusz végrehajtás választásai eltérhetnek az elsőétől, például más mode-ot (a lapon felsorolt választható hatások egyikét) vagy más targetet választhatsz."
+   ],
+   [
+    "820.3.a",
+    "Akárhányszor hajtódnak végre az utasítások, a spell vagy ability csak egyszer számít kijátszottnak (Played). A \"when you play a spell\" triggerek ezért egyszer futnak."
+   ],
+   [
+    "820.1.d.2",
+    "Ha egy utasítás resolve-kor nem hajtódik végre, az kimarad."
+   ]
+  ],
+  "stack": "Minden példány külön fizethető, és minden kifizetett példány egy további végrehajtást ad (820.3, 820.1.c.2)."
+ },
+ {
+  "kw": "Weaponmaster",
+  "rule": "821",
+  "kind": "Triggered Ability keyword",
+  "on": "Units",
+  "short": "Amikor kijátszod ezt a unitot, választhatsz egy általad controllált Equipmentet (unitra csatolható geart), és ha kifizeted az Equip árát [A]-val (1 bármilyen domainű Powerrel) csökkentve, erre a unitra csatolod.",
+  "points": [
+   [
+    "821.1.c",
+    "\"You may\": nem kötelező. Az Equip szokásos időzítési korlátai nem számítanak, a csatolás a kijátszáskor induló trigger (Play Effect) resolve-jakor történik."
+   ],
+   [
+    "821.1.c.3",
+    "Ha az Equip costban nincs [A], a cost kifizethető, de nem csökken."
+   ],
+   [
+    "821.1.c.4",
+    "Ha a választott kártyának nincs Equip costja, nem fizethető ki, ezért nem csatolódik."
+   ],
+   [
+    "821.1.c.5",
+    "Ha a cost nem fizethető ki, ha a gear nem választható le a jelenlegi unitjáról, vagy nem csatolható erre a unitra, a gear ott marad, ahol volt."
+   ],
+   [
+    "821.1.c.6",
+    "Az Equip ability nem aktiválódik, és a Weaponmaster unit nem számít kiválasztottnak (targetnek). Az Equip aktiválására figyelő hatások ezért nem futnak (levezetés)."
+   ],
+   [
+    "821.1.c.2.a",
+    "Az a kedvezmény, amely egy activated ability (\"cost: hatás\" formájú képesség) kijátszásához kötött, itt nem érvényes, mert az Equip ténylegesen nincs kijátszva."
+   ]
+  ],
+  "stack": "Külön triggerel, és példányonként más Equipment választható (821.1.c.7). Ha ugyanazt választod, mindegyik külön resolve-ol (821.1.d)."
+ },
+ {
+  "kw": "Ambush",
+  "rule": "822",
+  "kind": "Passive Ability keyword",
+  "on": "Units",
+  "short": "A unit olyan battlefieldre is kijátszható, ahol van általad controllált unit, és ilyenkor [Reaction]-je van, tehát válaszként vagy az opponent körében is kijátszható.",
+  "points": [
+   [
+    "822.1.b",
+    "A helyszínhez elég, ha a battlefielden van általad controllált unit. Magát a battlefieldet nem kell controllálnod."
+   ],
+   [
+    "822.1.b",
+    "A [Reaction] csak akkor él, ha a unitot olyan battlefieldre játszod, ahol van unitod. Base-re játszva nincs [Reaction]-je."
+   ],
+   [
+    "822.3",
+    "Ha a finalization (a kijátszás lezárása) vége előtt bármiért nem marad unit a választott battlefielden, a hely az Ambush alapján már nem érvényes, a unit nem játszható oda."
+   ],
+   [
+    "822.3.a",
+    "Ha más hatás vagy engedély érvényessé teszi a helyet, a unit oda játszható, de nem az Ambush jogán."
+   ],
+   [
+    "822.1.d",
+    "Igeként (\"can [Ambush] to...\") azt jelenti: kijátszás az Ambush engedélyeivel."
+   ]
+  ],
+  "stack": "Redundáns (822.2)."
+ },
+ {
+  "kw": "Hunt",
+  "rule": "823",
+  "kind": "Triggered Ability keyword",
+  "on": "Units",
+  "short": "Amikor ez a unit conquerel (a jelenlétében szerzed meg egy battlefield controlját) vagy holdol (a Beginning Phase-edben megtartod a battlefieldet), a controllere X XP-t kap. Az X a kulcsszó melletti szám.",
+  "points": [
+   [
+    "823.1.c.1",
+    "Rövidítés: \"When I Conquer or Hold, my controller gains X XP.\""
+   ],
+   [
+    "823.1.b",
+    "Conquer és Hold effect is egyben, tehát a saját Beginning Phase-edben Holdra, a körödben Conquerre is triggerel."
+   ],
+   [
+    "823.1.c.2",
+    "Ha a kulcsszó mellől hiányzik a szám, X értéke 1."
+   ],
+   [
+    "472",
+    "Egy battlefield körönként egyszer score-olható (pontszerzésre használható), és a Conquer és Hold triggerek csak scoringkor indulnak (473.2.c). Ezért ugyanazon a battlefielden a Hunt körönként legfeljebb egyszer ad XP-t."
+   ]
+  ],
+  "stack": "Összeadódik (823.2): több forrásból kapott Hunt esetén a Hunt Value-k összege jár."
+ },
+ {
+  "kw": "Level",
+  "rule": "824",
+  "kind": "Dependent Keyword",
+  "on": "Cards",
+  "short": "Amíg legalább N XP-d van (N a kulcsszó melletti szám), a kártya megkapja a Level kulcsszó után írt szöveget.",
+  "points": [
+   [
+    "824.1.b.1",
+    "Rövidítés: \"While you have [N] or more XP, this card gains '[Text]'.\" Az [N] a küszöbszám, a [Text] a kulcsszó után álló szöveg."
+   ],
+   [
+    "824.1.d",
+    "Ha az XP-d N alá esik, ez a szöveg (Dependent Ability, vagyis feltételtől függő ability) azonnal Inactive (hatástalan) lesz."
+   ],
+   [
+    "824.1.c.1",
+    "Ha a kártya controllere megváltozik, az új controller XP-je dönti el, hogy a szöveg működik-e."
+   ],
+   [
+    "824.2",
+    "A Level megléte a kártya tulajdonsága. Más hatás akkor is hivatkozhat rá, ha a szöveg éppen Inactive (levezetés)."
+   ]
+  ],
+  "stack": "A 824 nem rendelkezik több példányról. Minden Level ability a saját N küszöbét nézi (levezetés)."
+ },
+ {
+  "kw": "Unique",
+  "rule": "825",
+  "kind": "Deck Constraint Permission",
+  "on": "Main Deck cards",
+  "short": "Deck építési korlát: egy adott nevű Unique kártyából csak egy lehet a deckben.",
+  "points": [
+   [
+    "825.3.a",
+    "Ha egy kártya Unique, a szokásos legfeljebb 3 példány (103.3.b) helyett csak 1 tehető belőle a deckbe."
+   ],
+   [
+    "825.3.b",
+    "Ha a kártya Signature és Unique is, a deckben összesen három Signature kártya lehet bármilyen kombinációban, de egy Unique névből továbbra is csak egy."
+   ],
+   [
+    "825.4",
+    "Játék közben nincs hatása."
+   ],
+   [
+    "825.5",
+    "A Unique megléte a kártya tulajdonsága, amelyre más hatás hivatkozhat."
+   ]
+  ],
+  "stack": "A 825 nem rendelkezik több példányról. Játék közben nincs hatása (825.4), ezért több példány sem változtat semmin (levezetés)."
+ },
+ {
+  "kw": "Backline",
+  "rule": "826",
+  "kind": "Passive Ability keyword",
+  "on": "Units",
+  "short": "Combat damage kiosztásakor a Backline unitra csak akkor osztható damage, ha a controllere összes Backline nélküli unitja már megkapta a lethal damage-et (a megöléséhez elég, a Mightjával legalább egyenlő damage-et).",
+  "points": [
+   [
+    "826.3",
+    "Amíg a controllernek van olyan Backline nélküli unitja, amely még nem kapott lethal damage-et, a Backline unitra nem osztható damage."
+   ],
+   [
+    "826.4.a",
+    "Az általános szabály marad: egy unitra a teljes lethal damage-et ki kell osztani, mielőtt a következőre lépsz."
+   ],
+   [
+    "826.4.b",
+    "Ha több Backline unit van, köztük a kiosztó játékos szabadon választ sorrendet."
+   ],
+   [
+    "467.2.c.6",
+    "Ha Tank, sima és Backline unit is van, a kiosztás sorrendje: Tank, utána a sima unitok, végül a Backline (levezetés: minden sorrendi korlátot be kell tartani)."
+   ],
+   [
+    "467.2.c.8",
+    "Ha egy unitnak Backline és Tank is van, a kiosztó játékos választja ki, a kettő közül melyiket alkalmazza rá."
+   ]
+  ],
+  "stack": "Redundáns (826.5)."
+ },
+ {
+  "kw": "Empower",
+  "rule": "827",
+  "kind": "Activated Ability keyword",
+  "on": "Permanents, Legends",
+  "short": "Az Empower után megadott ár (cost) kifizetésével az ability forrása, vagyis az a lap vagy legend, amelyen az ability van, Empowered állapotba kerül.",
+  "points": [
+   [
+    "827.1.c.1",
+    "Rövidítés: \"[Cost]: Empower this. Play only if not Empowered.\" A [Cost] a kulcsszó után megadott ár. Ha a forrás már Empowered, az ability nem aktiválható."
+   ],
+   [
+    "827.1.b.1",
+    "A forrás nem target, ezért a \"can't be chosen\" és a Deflect nem érinti."
+   ],
+   [
+    "827.2.a",
+    "Az Empowered állapotba kerülés esemény, amelyre más hatások és triggerek figyelhetnek."
+   ],
+   [
+    "827.1.c.5",
+    "Ha a lap engedélyt kap a többszöri Empowerre, a \"Play only if not Empowered\" korlát nem vonatkozik rá."
+   ],
+   [
+    "442.1.c",
+    "Alapesetben az Empowered igen/nem állapot. Ha egy már Empowered lapot ismét empowerelni kellene, nem történik semmi."
+   ]
+  ],
+  "stack": "Több Empower több önálló activated ability, mindegyik külön aktiválható a saját costjáért (827.3)."
+ },
+ {
+  "kw": "Empowered",
+  "rule": "828",
+  "kind": "Dependent Keyword",
+  "on": "Cards",
+  "short": "Amíg a kártya Empowered állapotban van, megkapja az Empowered kulcsszó után írt szöveget.",
+  "points": [
+   [
+    "828.1.b.1",
+    "Rövidítés: \"While I have the Empowered status, this card gains '[Text]'.\" A [Text] a kulcsszó után álló szöveg."
+   ],
+   [
+    "828.1.c",
+    "Ha a kártya elveszíti az Empowered állapotot, ez a szöveg (Dependent Ability, vagyis feltételtől függő ability) nem működik."
+   ],
+   [
+    "828.1.d",
+    "Ha a szöveg egy \"When I become Empowered\" feltételű trigger, az Empowered állapot beálltakor már működik, és triggerel."
+   ],
+   [
+    "442.1.a",
+    "Az Empowered igen/nem állapot: a lap vagy Empowered, vagy nem."
+   ]
+  ],
+  "stack": "A 828 nem rendelkezik több példányról. Minden Empowered szöveg ugyanazt az állapotot nézi, így egyszerre működnek (levezetés)."
+ },
+ {
+  "kw": "Flow",
+  "rule": "829",
+  "kind": "Passive Ability keyword",
+  "on": "Spells",
+  "short": "A spell a trashedből is kijátszható a Flow után megadott árért, utána pedig banish, vagyis a Banishment zónába kerül, nem vissza a trashbe.",
+  "points": [
+   [
+    "829.1.b",
+    "Rövidítés: \"You may play this from your trash for its flow cost. Then banish it.\""
+   ],
+   [
+    "829.1.c.1",
+    "A Flow cost alternate cost (helyettesítő ár): a nyomtatott ár (base cost) helyébe lép, azt nem kell mellé kifizetni."
+   ],
+   [
+    "829.1.b.2",
+    "Az időzítés nem változik. [Action] vagy [Reaction] nélküli spell a trashből is csak a saját körödben, Neutral Open State-ben (nincs showdown vagy combat, és üres a chain) játszható ki."
+   ],
+   [
+    "829.1.b.1",
+    "A banish delayed replacement effect (később érvényesülő, eseményt helyettesítő hatás). Ha a spell a kijátszás lezárása (finalization) után bármi miatt elhagyja a chaint, és ezt nem a saját utasítása írta elő, a trash helyett a Banishmentbe kerül."
+   ],
+   [
+    "829.1.c.2",
+    "A Flow cost nem resource jellegű (nem Energy vagy Power) részt is tartalmazhat."
+   ]
+  ],
+  "stack": "A 829 nem mond halmozódást. Ha a spellnek több, eltérő costú Flow-ja van, kijátszáskor te választod, melyik costot alkalmazod (829.1.c.3)."
+ },
+ {
+  "kw": "Deploy",
+  "rule": "830",
+  "kind": "Passive Ability and Triggered Ability keyword",
+  "on": "Gear",
+  "short": "A gear bármelyik battlefieldre kijátszható, de csak battlefieldre. A cleanup (a játék automatikus rendrakása) nem küldi vissza a base-re, és meghal, ha egy opponent holdolja (a Beginning Phase-ében megtartja) azt a battlefieldet.",
+  "points": [
+   [
+    "830.1.b",
+    "Négy hatás egyben: bármely battlefieldre mehet, csak battlefieldre mehet, ha nem unit, a cleanup nem recallolja (nem küldi vissza a base-re), és \"When an opponent holds here, kill this.\""
+   ],
+   [
+    "830.1.b.1",
+    "Enemy unitokkal elfoglalt és üres battlefieldre is kijátszható, nem kell controllálnod."
+   ],
+   [
+    "830.1.b.3",
+    "A cleanup 5. lépése a battlefielden lévő, unithoz nem csatolt, nem unit geart visszaküldi a base-re (recall). A Deploy gear ez alól kivétel, a battlefielden marad."
+   ],
+   [
+    "830.1.b.2",
+    "A Deploy gear erre alkalmas hatással mozgatható (Move)."
+   ]
+  ],
+  "stack": "Redundáns (830.2)."
+ },
+ {
+  "kw": "Disarm",
+  "rule": "831",
+  "kind": "Triggered Ability keyword",
+  "on": "Units",
+  "short": "Amikor ez a unit támad (Attacker jelölést kap), egy ott lévő enemy unit -X Mightot kap a kör végéig. Az X a kulcsszó melletti szám.",
+  "points": [
+   [
+    "831.1.d",
+    "Rövidítés: \"When I attack, give an enemy unit here -X [M] this turn.\" ([M] a Might jele.) A hatás a kör végéig tart, nem csak a combat idejére."
+   ],
+   [
+    "831.1.b",
+    "Attack Trigger: akkor fut, amikor a unit a combatban először kap Attacker jelölést (383.4.e). Defenderként nem triggerel."
+   ],
+   [
+    "831.1.c.3",
+    "Ha a kulcsszó mellől hiányzik a szám, X értéke 1."
+   ],
+   [
+    "831.1.d.1",
+    "Akárhány Disarm példány van a uniton, egyetlen trigger fut az összesített Disarm Value-val (az X értékek összegével)."
+   ],
+   [
+    "355.7",
+    "Az enemy unitot a hatás kiválasztja (choose), ezért target. Ha a resolve előtt elhagyja a battlefieldet, a hatás nem érinti (levezetés)."
+   ]
+  ],
+  "stack": "Összeadódik (831.2), és egy triggerben fut (831.1.d.1). Ha a unit két forrásból kap Disarm 1-et, egyszer triggerel, Disarm 2 értékkel."
+ },
+ {
+  "kw": "Show Off",
+  "rule": "832",
+  "kind": "Passive Ability keyword",
+  "on": "Cards",
+  "short": "Kijátszáskor megmutathatod (reveal) a kulcsszó után megnevezett lapot a kezedből, vagy kiválaszthatod (pick) a boardon lévő friendly (általad controllált) lapjaid közül. A kártya más szövegei erre hivatkozhatnak.",
+  "points": [
+   [
+    "832.1.c",
+    "Rövidítés: \"As you play [me/this], you may reveal [Object] from your hand and/or pick [Object] from among friendly game objects on the board.\" Az [Object] a kulcsszó után megnevezett lap vagy lapok."
+   ],
+   [
+    "832.1.c.2",
+    "A döntés a kijátszás lezárása (finalization) közben, a Make Relevant Choices lépésben (a kijátszás 2. lépése, ahol a választásokat meghozod) születik. Resolve-kor már nem pótolható."
+   ],
+   [
+    "832.1.c.3",
+    "Ha az [Object] több lap, vegyesen állhat kézben lévő kártyákból és a boardon lévő lapokból."
+   ],
+   [
+    "832.1.c.4",
+    "Ha a megmutatott lap a kijátszás lezárása közben elhagyja a zónáját (például additional costként eldobod), a kártya kijátszása ettől még lezárul."
+   ],
+   [
+    "832.1.d.1",
+    "A hivatkozott adat a megmutatás pillanatában rögzül. Ha a unit Mightja később változik, a rá hivatkozó (linked) hatás a rögzített értékkel számol."
+   ],
+   [
+    "355.7",
+    "A Show Off pickel (célzás nélkül választ), nem choose-ol, ezért a megmutatott lap nem target."
+   ]
+  ],
+  "stack": "Külön kezelendő (832.2). A rá hivatkozó (linked) hatás az ugyanabból a forrásból származó Show Off példányra vonatkozik (832.2.a)."
+ }
+]

@@ -142,7 +142,7 @@ function ScenarioView({ s, p, setP, all }: { s: Scenario; p: Progress; setP: (p:
   return (
     <div className="scn">
       <div className="scn-head">
-        <a href="#tanulas" className="crumb">← Útmutató</a>
+        <a href="#tanulas" className="crumb">← Tanulás</a>
         <div><div className="crumb">Szituáció {idx + 1} / {all.length} · {s.level === 'halado' ? 'Haladó' : 'Kezdő'}</div><h2>{s.title}</h2><H as="p" t={s.intro} /></div>
       </div>
       <div className="scn-grid">
@@ -176,16 +176,19 @@ function ScenarioView({ s, p, setP, all }: { s: Scenario; p: Progress; setP: (p:
   );
 }
 
-export function LearnView({ hash }: { hash: string }) {
-  const [L, setL] = useState<Learn | null>(null);
+export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'tanulas' | 'hogyan' }) {
+  const B = '#' + base;
+  const [L0, setL] = useState<Learn | null>(null);
+  let L = L0;
   const [p, setP0] = useState<Progress>(loadP);
   const setP = (np: Progress) => { setP0(np); saveP(np); };
   useEffect(() => { loadLearn().then(setL); }, []);
-  const m = /^#tanulas\/(sz\/)?([\w-]+)/.exec(hash);
+  const m = new RegExp('^' + B + '\\/(sz\\/)?([\\w-]+)').exec(hash);
   useEffect(() => { if (m) window.scrollTo({ top: 0 }); }, [hash]);
   if (!L) return <div className="panel pad"><p className="note">Betöltés…</p></div>;
-  const chs = L.chapters;
-  if (!chs.length) return <div className="panel pad"><h2>Útmutató</h2><p className="lead">A fejezetek és az interaktív szituációk ellenőrzése folyamatban van, hamarosan itt lesznek. Addig a <a href="#kezikonyv">Kézikönyv</a> és a kártyánkénti magyarázatok használhatók.</p></div>;
+  const chs = L.chapters.filter((c) => (base === 'hogyan' ? c.level === 'kezdo' : c.level !== 'kezdo'));
+  if (base === 'hogyan') L = { ...L, scenarios: [] };
+  if (!chs.length && !L.scenarios.length) return <div className="panel pad"><h2>{base === 'hogyan' ? 'How to Play' : 'Tanulás'}</h2><p className="lead">A fejezetek és az interaktív szituációk ellenőrzése folyamatban van, hamarosan itt lesznek. Addig a <a href="#kezikonyv">Kézikönyv</a> és a kártyánkénti magyarázatok használhatók.</p></div>;
   const ch = m && !m[1] ? chs.find((c) => c.id === m[2]) : undefined;
   const sc = m && m[1] ? L.scenarios.find((s) => s.id === m[2]) : undefined;
   const total = chs.length + L.scenarios.length;
@@ -202,7 +205,7 @@ export function LearnView({ hash }: { hash: string }) {
         return (<div key={lv}><h4>{name} <small>{list.filter((c) => p.done[c.id]).length} / {list.length}</small></h4>
           <ol>{list.map((c) => (
             <li key={c.id} className={p.done[c.id] ? 'done' : ''}>
-              <a href={'#tanulas/' + c.id} aria-current={ch?.id === c.id ? 'page' : undefined}>
+              <a href={B + '/' + c.id} aria-current={ch?.id === c.id ? 'page' : undefined}>
                 <span className="num">{p.done[c.id] ? <Check size={13} /> : chs.indexOf(c) + 1}</span>{c.title}</a></li>))}</ol></div>);
       })}
       {!!L.scenarios.length && (<><h4>Szituációk <small>{L.scenarios.filter((s) => p.scn[s.id]).length} / {L.scenarios.length}</small></h4>
@@ -222,7 +225,7 @@ export function LearnView({ hash }: { hash: string }) {
     const idx = chs.indexOf(ch); const prev = chs[idx - 1], next = chs[idx + 1];
     main = (
       <>
-        <div className="crumb">Útmutató › {LEVELS.find((l) => l[0] === ch.level)?.[1]} › {idx + 1} / {chs.length}</div>
+        <div className="crumb">{base === 'hogyan' ? 'How to Play' : 'Tanulás'} › {LEVELS.find((l) => l[0] === ch.level)?.[1]} › {idx + 1} / {chs.length}</div>
         <h2>{ch.title}</h2>
         {ch.lead && <p className="lead">{ch.lead}</p>}
         {ch.rules && <p className="note">Core Rules: <span dangerouslySetInnerHTML={{ __html: inline('{{' + ch.rules + '}}') }} /></p>}
@@ -231,8 +234,8 @@ export function LearnView({ hash }: { hash: string }) {
         <QuizBox ch={ch} p={p} setP={setP} />
         {!(ch.quiz || []).length && !p.done[ch.id] && <button className="btn sm" style={{ marginTop: 20 }} onClick={() => setP({ ...p, done: { ...p.done, [ch.id]: 1 } })}><Check size={14} /> Elolvastam</button>}
         <div className="pager">
-          {prev ? <a href={'#tanulas/' + prev.id}><small><ChevronLeft size={11} /> Előző</small><b>{prev.title}</b></a> : <span />}
-          {next ? <a className="next" href={'#tanulas/' + next.id}><small>Következő <ChevronRight size={11} /></small><b>{next.title}</b></a>
+          {prev ? <a href={B + '/' + prev.id}><small><ChevronLeft size={11} /> Előző</small><b>{prev.title}</b></a> : <span />}
+          {next ? <a className="next" href={B + '/' + next.id}><small>Következő <ChevronRight size={11} /></small><b>{next.title}</b></a>
             : L.scenarios[0] && <a className="next" href={'#tanulas/sz/' + L.scenarios[0].id}><small>Gyakorlás <ChevronRight size={11} /></small><b>Szituációk</b></a>}
         </div>
       </>
@@ -240,14 +243,14 @@ export function LearnView({ hash }: { hash: string }) {
   } else main = (
     <>
       <div className="hero" style={{ margin: '-26px calc(-1 * clamp(16px, 4vw, 42px)) 18px' }}>
-        <div className="crumb">Útmutató</div>
-        <h2>Tanuld meg a Riftboundot</h2>
+        <div className="crumb">{base === 'hogyan' ? 'How to Play' : 'Tanulás'}</div>
+        <h2>{base === 'hogyan' ? 'Tanuld meg a Riftboundot' : 'Gyakorolj és mélyülj el'}</h2>
         <p>Fejezetekre bontott útmutató a Core Rules alapján: rövid leckék valódi lapokkal, minden fejezet végén néhány kérdéssel. Utána interaktív szituációkban gyakorolhatod a harcot és a chaint. A haladásod ebben a böngészőben mentődik.</p>
-        <a className="btn hex" href={'#tanulas/' + (firstOpen?.id || '')}>{doneN ? 'Folytatás' : 'Kezdés'}: {firstOpen?.title} <ChevronRight size={16} /></a>
+        <a className="btn hex" href={B + '/' + (firstOpen?.id || '')}>{doneN ? 'Folytatás' : 'Kezdés'}: {firstOpen?.title} <ChevronRight size={16} /></a>
       </div>
       <div className="levels">
         {LEVELS.map(([lv, name, d]) => { const list = chs.filter((c) => c.level === lv); return list.length ? (
-          <a key={lv} className="level" href={'#tanulas/' + list[0].id}><b>{name}</b><span>{d} {list.length} fejezet.</span></a>) : null; })}
+          <a key={lv} className="level" href={B + '/' + list[0].id}><b>{name}</b><span>{d} {list.length} fejezet.</span></a>) : null; })}
         {!!L.scenarios.length && <a className="level" href={'#tanulas/sz/' + L.scenarios[0].id}><b>Szituációk</b><span>Valódi board state-ek lépésenként, döntési pontokkal. {L.scenarios.length} gyakorlat.</span></a>}
         <a className="level" href="#kezikonyv"><b>Kézikönyv</b><span>Fogalmak, kulcsszavak, játékmenet és szabályváltozások, kereshetően.</span></a>
       </div>

@@ -1,0 +1,4349 @@
+[
+ {
+  "name": "Evelynn, In Control",
+  "type": "Unit",
+  "supertypes": [
+   "Champion"
+  ],
+  "domain": [
+   "Chaos"
+  ],
+  "tags": [
+   "Demon",
+   "Evelynn"
+  ],
+  "energy": 4,
+  "power": 1,
+  "might": 4,
+  "text": "[Disarm] (When I attack, give an enemy unit here -1 [S] this turn.)\nWhen I hold, if you control a facedown card here, score 1 point.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "4 Mightú champion. Disarm: támadáskor egy ottani ellenséges unit a kör végéig -1 Mightot kap. Ha a köröd elején holdolod a battlefieldet, ahol áll, és ott van egy facedown lapod, a holdért járó pont mellé még 1 pontot kapsz.",
+  "notes": [
+   [
+    "383.4.d.2.a,472",
+    0,
+    "Hold effect: akkor triggerel, ha Evelynn ott van a battlefielden, amikor a Beginning Phase-edben holdolsz. Battlefieldenként körönként egyszer."
+   ],
+   [
+    "383.2.a.1",
+    1,
+    "A facedown lap megléte a trigger condition része, a hold pillanatában nézi a játék. Mivel nem az Effect része, ha utána a lapot kijátszod, a trigger ettől még resolve-ol (levezetés: a szabály csak azt mondja ki, hogy a feltétel a Condition része)."
+   ],
+   [
+    "811.1.b",
+    0,
+    "Facedown lapot a Hidden kulcsszóval tehetsz le [A]-ért, battlefieldenként egyet, és csak általad kontrollált battlefieldre."
+   ],
+   [
+    "470.2,473.1.a.1",
+    0,
+    "A \"score 1 point\" pontszerzés, nem hold vagy conquer. Nem vonatkozik rá az utolsó pont megkötése, a hold pontján felül jár."
+   ],
+   [
+    "831.1.d",
+    0,
+    "[Disarm]: amikor támad, egy ottani enemy unit -1 Mightot kap a kör végéig."
+   ]
+  ]
+ },
+ {
+  "name": "Evershade Stalker",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Chaos"
+  ],
+  "tags": [
+   "Shadow Isles"
+  ],
+  "energy": 3,
+  "power": null,
+  "might": 3,
+  "text": "When you play me, discard 1, then draw 1.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "3 Mightú unit. Kijátszáskor kötelezően eldobsz 1 lapot, majd húzol 1-et. Üres kézzel a dobás elmarad, a húzás így is megtörténik. Ha az eldobott lapnak saját eldobásra triggerelő képessége van (például Flame Chompers), az beindul.",
+  "notes": [
+   [
+    "423.2.a,423.4",
+    0,
+    "A discard kötelező, nincs \"may\". Üres kézzel a discard negálódik, a draw ettől még megtörténik."
+   ],
+   [
+    "423.1.a",
+    0,
+    "A discardolt lapot te választod. A Stalker ekkor már a boardon van, nem a kezedben."
+   ],
+   [
+    "414.4",
+    0,
+    "Ha a Main Deck üres, a draw Burn Outot okoz."
+   ],
+   [
+    "423.1.b",
+    1,
+    "A \"when you discard me\" lapok (például Flame Chompers) triggerelnek az eldobásra."
+   ]
+  ]
+ },
+ {
+  "name": "Existential Dread",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Chaos"
+  ],
+  "tags": [],
+  "energy": 1,
+  "power": 1,
+  "might": null,
+  "text": "[Action] (Play on your turn or in showdowns.)\n[Repeat] [2] (You may pay the additional cost to repeat this spell's effect.)\n[Stun] an attacking enemy unit. If it's already stunned, return it to its owner's hand instead. (A stunned unit doesn't deal combat damage this turn.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Stunnol egy támadó ellenséges unitot, ami így nem sebez a harcban, vagy ha már stunnolt, a tulajdonosa kezébe küldi. Csak védekezőként, harc közben van értelme. Plusz 2 Energyért még egyszer lefut, akár másik targettel: ugyanarra a unitra választva előbb stun, aztán kézbe. A saját körödben vagy showdownban játszható ki.",
+  "notes": [
+   [
+    "355.9.b,466.2.c.3",
+    1,
+    "A target csak támadó enemy unit lehet, ezért a spell csak combat alatt játszható ki. Kétjátékos játékban ez azt jelenti, hogy te vagy a defender."
+   ],
+   [
+    "359.3.f.2,424.1.a",
+    0,
+    "A Stunned állapotot a resolve-kor nézi a játék. Ha a unit már Stunned, a stun helyett a tulajdonosa kezébe megy."
+   ],
+   [
+    "820.1.d.1,820.2.a",
+    1,
+    "Repeat [2]: ugyanarra a nem Stunned unitra kétszer választva az első végrehajtás stunolja, a második már Stunned unitot talál és kézbe küldi."
+   ],
+   [
+    "056.2,186.1",
+    0,
+    "A unit a tulajdonosa kezébe megy. Token unit megszűnik."
+   ],
+   [
+    "359.3.e.2,323.2.c",
+    0,
+    "Ha a unit a resolve előtt elhagyja a combat battlefieldjét, már nem attacker, illegális target."
+   ],
+   [
+    "806.1.c.1,358.4",
+    0,
+    "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+   ]
+  ]
+ },
+ {
+  "name": "Experimental Hexplate",
+  "type": "Gear",
+  "supertypes": [],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [
+   "Equipment"
+  ],
+  "energy": 1,
+  "power": null,
+  "might": 1,
+  "text": "[Equip] [C] ([C]: Attach this to a unit you control.)",
+  "equip_effect_text": "I am a Mech.",
+  "old_text_before_errata": null,
+  "short": "Equip: 1 Mind Powerért, a saját Main Phase-edben, showdownon kívül teheted egy saját unitodra. Felszerelve +1 Mightot ad, és a unit a meglévő tagjei mellé Mech taget kap. Minden Mechre vonatkozó lap látja, például ha Mecheknek adsz képességet. Ha a gear leválik a unitról, a Mech tag is megszűnik.",
+  "notes": [
+   [
+    "818.1.b.1,151.2,381.1",
+    0,
+    "Equip: 1 Mind Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+   ],
+   [
+    "136.2.b,136.2.c,435.1.e",
+    0,
+    "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +1 Mightot is kap."
+   ],
+   [
+    "479.2.a,479.2.b,831.2",
+    1,
+    "A felszerelt unit a meglévő tagjei mellé Mech taget kap, amíg a Hexplate rajta van. Minden Mechre hivatkozó effect látja, például Clanging Sentry Disarmja."
+   ],
+   [
+    "719.5,436.4.a",
+    0,
+    "Ha a unit elhagyja a boardot, a gear leválik és a unit utolsó helyén marad. Battlefieldről a következő cleanup a base-be recallolja, ahonnan újra equipelhető."
+   ]
+  ]
+ },
+ {
+  "name": "Explosimian",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Chaos"
+  ],
+  "tags": [
+   "Zaun"
+  ],
+  "energy": 6,
+  "power": null,
+  "might": 6,
+  "text": "When I hold, play three Bomb gear tokens to a single battlefield. (They have [Deploy]. When each dies, deal 2 to an enemy there and kill your other Bombs there.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "6 Mightú unit. Ha a köröd elején tartja a battlefieldjét, három Bomb tokent teszel egy általad választott battlefieldre. Ha egy Bomb meghal, 2 sebzést ad egy ottani ellenséges unitra, és megöli a többi ottani Bombodat, amelyek szintén robbannak. Ha ott nincs ellenséges unit, a Deathknell célpont híján lekerül a chainről, így a többi Bomb megmarad. Ha az ellenfél ott holdol, mind felrobban az ő unitjaira.",
+  "notes": [
+   [
+    "383.4.d.2.a,472",
+    0,
+    "Hold effect: akkor triggerel, ha a Beginning Phase-edben ott van egy battlefielden, amit holdolsz. Battlefieldenként körönként egyszer."
+   ],
+   [
+    "830.1.b.1",
+    0,
+    "A három Bomb ugyanarra az egy battlefieldre megy, de az bármelyik lehet, nem csak az, ahol az Explosimian áll."
+   ],
+   [
+    "187.12,383.3.d",
+    1,
+    "Ha az egyik Bomb meghal, a Deathknellje megöli a másik kettőt. Mindhárom Deathknell külön triggerel: összesen 3-szor 2 sebzés, akár különböző enemy unitokra."
+   ],
+   [
+    "187.12,355.8,403.4",
+    1,
+    "A Bomb Deathknellje targetel (\"an enemy unit here\"). Ha a Bomb battlefieldjén nincs enemy unit, a trigger chainre kerül, de a 403.4 szerint rögtön lekerül róla, így a többi Bomb sem hal meg."
+   ],
+   [
+    "830.1.b",
+    1,
+    "Ha egy opponent ott holdol, mindhárom Bomb meghal, és a Deathknellek az ő ottani unitjait sebzik."
+   ],
+   [
+    "830.1.b.3",
+    0,
+    "A Bombok a cleanupban nem recallolódnak, a battlefielden maradnak."
+   ]
+  ]
+ },
+ {
+  "name": "Eye of the Herald",
+  "type": "Gear",
+  "supertypes": [],
+  "domain": [
+   "Order"
+  ],
+  "tags": [
+   "Equipment"
+  ],
+  "energy": 1,
+  "power": null,
+  "might": 0,
+  "text": "[Equip] [C] ([C]: Attach this to a unit you control.)",
+  "equip_effect_text": "When I move, play a 1 [S] Recruit unit token here.",
+  "old_text_before_errata": null,
+  "short": "Equip: 1 Order Powerért, a saját Main Phase-edben, showdownon kívül teheted egy saját unitodra. Felszerelve, valahányszor a unit mozog, egy 1 Mightú Recruit token érkezik oda, ahová ment. Mightot magától nem ad. Visszahívás nem számít mozgásnak, olyankor nincs token.",
+  "notes": [
+   [
+    "818.1.b.1,151.2,381.1",
+    0,
+    "Equip: 1 Order Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+   ],
+   [
+    "136.2.b,136.2.c,435.1.e",
+    0,
+    "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. A Might Bonus +0, önmagában nem növeli a unit Mightját."
+   ],
+   [
+    "421.1,187.1,458.1",
+    1,
+    "Minden Move-nál, Standard Move-nál és effect általi mozgatásnál is, egy 1 Mightú Recruit token jön oda, ahová a felszerelt unit érkezett, base-be lépésnél a base-be. A Recall nem Move, nem triggerel."
+   ],
+   [
+    "435.1.f,818.1.c.2",
+    0,
+    "Másik unitra átrakva a korábbiról leválik, és az a unit a bónuszt és a képességet is elveszíti. Az Equip costot minden áthelyezésnél újra ki kell fizetni."
+   ]
+  ]
+ },
+ {
+  "name": "Ezreal, Dashing",
+  "type": "Unit",
+  "supertypes": [
+   "Champion"
+  ],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [
+   "Ezreal",
+   "Piltover"
+  ],
+  "energy": 4,
+  "power": 1,
+  "might": 3,
+  "text": "When I attack or defend, deal damage equal to my Might to an enemy unit here.\nI don't deal combat damage.\n[C]: [Action] — Move me to your base.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Támadáskor vagy védekezéskor a Mightjával megegyező sebzést ad egy ottani ellenséges unitra, de harci sebzést nem okoz. Action képesség: 1 Mind Powerért a base-be mozog, a saját körödben vagy showdown alatt bárki körében, de spellre vagy a chainen lévő saját triggerére válaszul nem, így a sebzés lefutása után léphet csak ki.",
+  "notes": [
+   [
+    "383.4.e.2.a,383.4.f.2.a",
+    0,
+    "Attack és defend trigger: combatonként egyszer fut le, amikor megkapja az Attacker vagy Defender designationt."
+   ],
+   [
+    "355.10,359.3.f.2",
+    1,
+    "A target ugyanott lévő enemy unit. A sebzés Ezreal resolve-kori Mightja. Ha válaszul elmozdítják, a \"here\" megváltozik, a trigger mistargetel."
+   ],
+   [
+    "424.1.b",
+    1,
+    "\"I don't deal combat damage\": a Combat Damage Stepben a Mightja nem adódik hozzá a kiosztható sebzéshez, hasonlóan a stunned unithoz. Sebzést ő maga ugyanúgy kaphat."
+   ],
+   [
+    "806.1.c.2",
+    0,
+    "A base-be lépés [Action] ability: showdown alatt is aktiválható, bárki körében. A cost egy Mind Power, exhaust nélkül."
+   ],
+   [
+    "309.1.a,359.3.f.2",
+    1,
+    "Az ability nem [Reaction], ezért amíg az attack vagy defend trigger a chainen van (Closed State), nem aktiválható: a base-be lépés csak a trigger resolve-ja után jöhet, így a saját sebzését nem rontod el vele. Ha viszont az opponent egy [Reaction] hatással elmozdítja Ezrealt a resolve előtt, a sebzés elmarad."
+   ],
+   [
+    "421.1,358.3.a",
+    1,
+    "A base-be lépés Move. Ha egy effect tiltja (például Vilemaw's Lair), az ability aktiválható, de a Move negálódik."
+   ]
+  ]
+ },
+ {
+  "name": "Ezreal, Prodigal Explorer",
+  "type": "Legend",
+  "supertypes": [],
+  "domain": [
+   "Mind",
+   "Chaos"
+  ],
+  "tags": [
+   "Ezreal"
+  ],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": "[T]: [Reaction] — Draw 1. Use only if you've chosen enemy units and/or gear twice this turn with spells or unit abilities.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Legend: exhausttal húzol 1 lapot, akár az ellenfél körében is, de csak ha ebben a körben már kétszer kiválasztottál ellenséges unitot vagy geart spellel vagy unit képességgel. A célpont nélküli, mindenkire ható lapok nem számítanak. Hogy egy kétcélpontos spell egynek vagy kettőnek számít, judge dönti el.",
+  "notes": [
+   [
+    "103.2.b",
+    0,
+    "A legend Mind és Chaos domainje adja a deck Domain Identity-jét."
+   ],
+   [
+    "377.2.b",
+    0,
+    "A \"use only if\" feltételnek az aktiválás pillanatában igaznak kell lennie, különben az ability nem aktiválható."
+   ],
+   [
+    "383.4.b.3,355.7",
+    1,
+    "A \"chosen\" a targetelést jelenti. \"All enemy units\" jellegű, target nélküli hatások és a \"pick\" nem számítanak bele."
+   ],
+   [
+    "355.10",
+    2,
+    "Nem egyértelmű, hogy egy spell, amely egyszerre két enemy unitot targetel, egy vagy két \"választásnak\" számít-e. A Core Rules ezt nem mondja ki, judge döntse el."
+   ],
+   [
+    "002",
+    1,
+    "Csak spell és unit ability választása számít. Legend, gear vagy battlefield abilityvel targetelt enemy unit nem növeli a számlálót."
+   ],
+   [
+    "813.1.c.2,430.2",
+    1,
+    "[Reaction]: Closed State-ben, bárki körében aktiválható, ha a feltétel abban a körben teljesült. Ez nem Add ability, chain-re kerül és lehet rá reagálni."
+   ],
+   [
+    "415.4,414.4",
+    0,
+    "A cost a legend exhaustolása: exhausted legenddel nem aktiválható, így ha más effect nem readyzi, körönként egyszer megy. Üres Main Deck esetén a draw Burn Outot okoz."
+   ]
+  ]
+ },
+ {
+  "name": "Ezreal, Prodigy",
+  "type": "Unit",
+  "supertypes": [
+   "Champion"
+  ],
+  "domain": [
+   "Chaos"
+  ],
+  "tags": [
+   "Ezreal",
+   "Piltover"
+  ],
+  "energy": 3,
+  "power": 1,
+  "might": 3,
+  "text": "When you play me, discard 1, then draw 2.\nOptional additional costs you pay cost [1] or [A] less.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "3 Mightú champion. Kijátszáskor eldobsz 1 lapot, majd húzol 2-t. Amíg a boardon van, a választható plusz költségeid (például Accelerate) 1 Energyvel vagy 1 bármilyen Powerrel olcsóbbak. A lap alapárát és a kötelező plusz költségeket nem csökkenti.",
+  "notes": [
+   [
+    "356.4.c",
+    0,
+    "A szabályzat név szerint ezt a lapot hozza példának: a kedvezmény azonnal ráül az optional additional costra, amint az a costhoz adódik, minden más kedvezmény előtt."
+   ],
+   [
+    "356.4.c.1,356.4.c.2",
+    0,
+    "Csak az adott additional cost komponenst csökkenti, 0 alá nem viszi. A lap base costjából nem vesz le."
+   ],
+   [
+    "356.4.f.1",
+    0,
+    "A 0-ra csökkentett optional additional cost is kifizetettnek számít: a Clockwork Keeper Calm Powere ingyenes, a draw jár."
+   ],
+   [
+    "805.1",
+    1,
+    "Az Accelerate optional additional cost, ezért [1] vagy 1 Power kedvezményt kap. Unitonként egyszer választasz a kettő közül."
+   ],
+   [
+    "356.2.a.1",
+    1,
+    "Mandatory additional costra (nincs \"may\", például Deflect) nem vonatkozik. Nem erőforrás jellegű costot (discard, exhaust) nem tud csökkenteni."
+   ],
+   [
+    "423.4,414.4",
+    0,
+    "A play effect kötelező: üres kéznél a discard negálódik, a draw 2 megtörténik. Kevés lapnál a deckben Burn Out jön."
+   ]
+  ]
+ },
+ {
+  "name": "Facebreaker",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Order"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": null,
+  "might": null,
+  "text": "[Hidden] (Hide now for [A] to react with later for [0].)\n[Action] (Play on your turn or in showdowns.)\nStun a friendly unit and an enemy unit at the same battlefield. (They don't deal combat damage this turn.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Action: a saját körödben vagy showdown alatt stunnol egy saját és egy ellenséges unitot ugyanazon a battlefielden, így abban a körben egyik sem sebez a harcban. Ilyen pár nélkül nem játszható ki. Hidden: a saját körödben, showdownon kívül 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől reakcióként ingyen kijátszhatod, de akkor csak az ottani unitokra.",
+  "notes": [
+   [
+    "811.1.b,411.1.a,811.6,811.3",
+    0,
+    "Hide: a saját körödben, Open State-ben, showdownon kívül [A]-ért facedown tehető egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható. Kézből, teljes costért csak [Action] időzítéssel megy."
+   ],
+   [
+    "355.7,355.11",
+    0,
+    "Két target: egy friendly és egy enemy unit, amelyeknek együtt ugyanazon a battlefielden kell lenniük. Ilyen pár nélkül a spell nem játszható ki."
+   ],
+   [
+    "811.1.d.2",
+    0,
+    "Facedown-ból kijátszva mindkét unitot arról a battlefieldről kell választani, ahol a lap el volt rejtve."
+   ],
+   [
+    "355.11.b",
+    0,
+    "Ha a resolve-ra a két unit már nincs ugyanazon a battlefielden, a spell nem érintheti mindkettőt: te választasz legális részhalmazt."
+   ],
+   [
+    "424.1.b",
+    0,
+    "A saját unitod is Stunned lesz, az ő Mightja sem számít bele a combat damage-be ebben a körben."
+   ]
+  ]
+ },
+ {
+  "name": "Factory Recall",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Chaos"
+  ],
+  "tags": [],
+  "energy": 1,
+  "power": null,
+  "might": null,
+  "text": "[Action] (Play on your turn or in showdowns.)\nReturn a gear to its owner's hand.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Action: a saját körödben vagy showdown alatt bárki körében visszaküld egy geart, bárkiét, felszerelt Equipmentet is, a tulajdonosa kezébe. A token gear megszűnik. Harc közben egy Equipment levétele eldöntheti a harcot.",
+  "notes": [
+   [
+    "806.1.c.1,358.4",
+    0,
+    "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+   ],
+   [
+    "355.10,150.4",
+    0,
+    "A gear target. Bármelyik játékos gearje választható, csatolt Equipment is."
+   ],
+   [
+    "056.2",
+    0,
+    "A gear a tulajdonosa kezébe megy, akkor is, ha más kontrollálja."
+   ],
+   [
+    "186.1",
+    0,
+    "Gear token (például Gold) a kézbe kerülve megszűnik létezni."
+   ],
+   [
+    "436.1.e",
+    1,
+    "Csatolt Equipmentet visszavéve a unit azonnal elveszíti a Might bonust. Combat showdownban ez eldöntheti a harcot."
+   ],
+   [
+    "148.1.a.1",
+    1,
+    "A saját geared visszavéve újra kijátszhatod, a play effectje ismét lefut."
+   ]
+  ]
+ },
+ {
+  "name": "Fading Memories",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Chaos"
+  ],
+  "tags": [],
+  "energy": 4,
+  "power": 1,
+  "might": null,
+  "text": "Give a unit at a battlefield or a gear [Temporary]. (Kill it at the start of its controller's Beginning Phase, before scoring.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Egy battlefielden álló unit vagy bármelyik gear Temporary lesz: az irányítója következő Beginning Phase-ének elején, még a pontozás előtt meghal. Így egy enemy unit már nem lesz ott, amikor az ellenfél a saját körében holdolna, és a hold effectje sem fut le. Csak a saját körödben, showdownon kívül játszható ki.",
+  "notes": [
+   [
+    "155",
+    0,
+    "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+   ],
+   [
+    "355.9.b",
+    0,
+    "A target battlefielden álló unit (base-ben lévő nem), vagy bármelyik gear, akár base-ben, akár unitra csatolva."
+   ],
+   [
+    "816.1.b,315.2.a.1",
+    0,
+    "A Temporary a permanent controllerének következő Beginning Phase-e elején, a scoring előtt öli meg a célt. Az enemy unit így a holdnál már nincs ott; ha más unitja is áll ott, az opponent ettől még holdolhatja a battlefieldet."
+   ],
+   [
+    "816.1.c",
+    1,
+    "A hatás nem \"this turn\": a Temporary a permanenten marad. Saját permanentre téve a te következő köröd elején hal meg."
+   ],
+   [
+    "816.1.a,429.1.a.1.b",
+    1,
+    "A Temporary triggered ability, a chain-re kerül: lehet rá reagálni, a Deathknell lefut, és a halált kiváltó replacement effect megmentheti a permanentet."
+   ],
+   [
+    "359.3.e.2",
+    0,
+    "Ha a megcélzott unit a resolve előtt base-be kerül, illegális target, a spell nem csinál semmit."
+   ]
+  ]
+ },
+ {
+  "name": "Fae Dragon",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Body"
+  ],
+  "tags": [
+   "Bandle City",
+   "Dragon",
+   "Fae"
+  ],
+  "energy": 7,
+  "power": 1,
+  "might": 7,
+  "text": "When you play me, buff up to four friendly units. (Give each a +1 [S] buff if it doesn't have one.)\nWhen you spend a buff, play a Gold gear token exhausted.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "7 Mightú unit. Kijátszáskor legfeljebb négy saját unitod, akár ő maga is, buffot kap (+1 Might), de csak az, amelyiken még nincs buff. Valahányszor elköltesz egy buffot, kapsz egy exhausted Gold tokent. Ha a buff azért tűnik el, mert a unit elhagyja a boardot, az nem költés.",
+  "notes": [
+   [
+    "355.13,355.10",
+    0,
+    "\"Up to four\": 0 és 4 közötti friendly unit választható, mind target. A Fae Dragon is lehet köztük."
+   ],
+   [
+    "427.1.c",
+    0,
+    "Már buffolt unit is választható, de nem kap második buffot."
+   ],
+   [
+    "702.2.b",
+    0,
+    "\"Spend a buff\": egy buff counter levétele egy általad kontrollált unitról, jellemzően egy másik lap costjaként."
+   ],
+   [
+    "705",
+    1,
+    "Ha a buff azért tűnik el, mert a unit elhagyja a boardot, az nem spend, nincs Gold."
+   ],
+   [
+    "702.2.b",
+    2,
+    "Ha egy effect egyszerre több buffot költ el (például Albus Ferros), valószínűleg buffonként külön triggerel. A Core Rules ezt nem mondja ki, judge döntse el."
+   ],
+   [
+    "187.5,184.1",
+    1,
+    "A Gold exhausted lép be a base-edbe, az abilityje Exhaust costot kér: abban a körben csak akkor ad Powert, ha egy hatás readyzi."
+   ]
+  ]
+ },
+ {
+  "name": "Fae Porter",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Chaos"
+  ],
+  "tags": [
+   "Fae",
+   "Ionia"
+  ],
+  "energy": 4,
+  "power": null,
+  "might": 4,
+  "text": "When I move to a battlefield, you may pay [C] to move a unit you control to the same battlefield.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "4 Mightú unit. Amikor battlefieldre mozog, 1 Chaos Powerért egy másik saját unitodat is odahozhatja, exhaust nélkül. A Powert előre kell kifizetned, és ha a másik unit közben eltűnik, a pénz elveszett. Kijátszás vagy visszavonulás a base-be nem indítja el.",
+  "notes": [
+   [
+    "421.1,458.1",
+    0,
+    "Csak Move-ra triggerel, amikor battlefieldre érkezik. Recall és a közvetlenül battlefieldre kijátszás nem váltja ki."
+   ],
+   [
+    "383.3.a,383.3.b",
+    0,
+    "A \"you may\" után álló \"pay [C]\" a trigger base costja: a Chaos Powert a finalizáláskor fizeted. Ha nem fizetsz, a trigger lekerül a chainről."
+   ],
+   [
+    "355.10.c.1",
+    0,
+    "A mozgatott unit target, a cost nem. Általad kontrollált unit kell, base-ből vagy másik battlefieldről."
+   ],
+   [
+    "359.3.f.3",
+    0,
+    "A \"same battlefield\" a trigger feltételből jön: az a battlefield, ahová a Porter érkezett. Akkor is oda megy a unit, ha a Porter közben elment onnan."
+   ],
+   [
+    "421.1",
+    1,
+    "A második unit is Move-ol, exhaust nélkül, a saját \"when I move\" triggerei lefutnak. Ha combat indul, a következő cleanupban ő is attacker lesz."
+   ],
+   [
+    "359.3.e.2",
+    0,
+    "Ha a kiválasztott unit a resolve előtt elhagyja a boardot vagy kontrollert vált, a Move elmarad, a kifizetett Power nem jár vissza."
+   ]
+  ]
+ },
+ {
+  "name": "Faithful Manufactor",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Order"
+  ],
+  "tags": [
+   "Piltover"
+  ],
+  "energy": 3,
+  "power": null,
+  "might": 2,
+  "text": "When you play me, play a 1 [S] Recruit unit token here.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "2 Mightú unit, kijátszáskor kapsz mellé egy 1 Mightú Recruit tokent ugyanoda, ahol áll. A token exhausted lép be, és unit kijátszásának számít.",
+  "notes": [
+   [
+    "187.1",
+    0,
+    "A Recruit domain nélküli, 1 Mightú unit token Recruit taggel."
+   ],
+   [
+    "359.3.f.2",
+    0,
+    "A \"here\" a resolve-kor ellenőrződik: a token oda érkezik, ahol a Manufactor akkor áll, base-be vagy battlefieldre."
+   ],
+   [
+    "185.2.a,185.2.d",
+    1,
+    "A token unitként viselkedik: exhausted lép be, és kijátszottnak számít a \"when you play a unit\" triggerekhez."
+   ],
+   [
+    "186.1",
+    0,
+    "Ha a token elhagyja a boardot (kéz, trash, deck), megszűnik létezni."
+   ]
+  ]
+ },
+ {
+  "name": "Fallen Feline",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Order"
+  ],
+  "tags": [
+   "Cat",
+   "Piltover"
+  ],
+  "energy": 2,
+  "power": 1,
+  "might": 3,
+  "text": "When you play me, name a spell.\nWhile I'm at a battlefield, opponents can't play spells with that name.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "3 Mightú unit. Kijátszáskor megnevezel egy spellt, és amíg a Feline battlefielden áll, az ellenfelek nem játszhatják ki. Rád nem vonatkozik, a már kijátszott példányt nem állítja meg, és base-ben nem működik.",
+  "notes": [
+   [
+    "761.1,761.2",
+    0,
+    "Megnevezni pontos névvel lehet, vagy olyan leírással, amely egyértelműen azonosítja a lapot."
+   ],
+   [
+    "762,762.2",
+    0,
+    "Csak a formátumban legális, létező kártya nevezhető meg, token neve nem."
+   ],
+   [
+    "355.18",
+    1,
+    "A nevet a trigger resolve-jakor mondod ki, nem a chain-re kerüléskor. Az opponent a triggerre reagálva még kijátszhatja a spellt, ha van [Reaction]-je."
+   ],
+   [
+    "364.3.a",
+    0,
+    "A tiltás csak addig él, amíg a Feline battlefielden áll. Base-ben vagy a boardról lekerülve megszűnik."
+   ],
+   [
+    "355.17.b",
+    1,
+    "A megnevezett spell kijátszási kísérlete nem finalizálódik. A már chain-en lévő példányt nem countereli, és rád nem vonatkozik."
+   ],
+   [
+    "132.4",
+    0,
+    "A név a teljes kártyanév alcímmel együtt. Azonos nevű példányok mind tiltottak, bármelyik zónából játszanák ki."
+   ]
+  ]
+ },
+ {
+  "name": "Falling Comet",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [],
+  "energy": 5,
+  "power": null,
+  "might": null,
+  "text": "[Action] (Play on your turn or in showdowns.)\nDeal 6 to a unit at a battlefield.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "6 sebzést ad egy battlefielden álló unitra. A saját körödben vagy showdownban játszható ki, de egy másik spellre válaszul nem. Base-ben álló unitot nem választhatsz.",
+  "notes": [
+   [
+    "806.1.c.1,358.4",
+    0,
+    "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+   ],
+   [
+    "355.10,355.9.b",
+    0,
+    "A unit target és battlefielden kell lennie. Base-ben lévő unit nem választható."
+   ],
+   [
+    "359.3.e.7",
+    0,
+    "Ha a unit a resolve előtt base-be kerül vagy elhagyja a boardot, nincs sebzés."
+   ],
+   [
+    "142.4.b,323.4",
+    0,
+    "A 6 damage hozzáadódik a uniton lévő sebzéshez. A unit a resolve utáni cleanupban hal meg, ha a damage eléri a Mightját."
+   ]
+  ]
+ },
+ {
+  "name": "Falling Star",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Fury"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": 2,
+  "might": null,
+  "text": "Deal 3 to a unit.\nDeal 3 to a unit.",
+  "equip_effect_text": null,
+  "old_text_before_errata": "Do this twice:\nDeal 3 to a unit. (You can choose different units.)",
+  "short": "Kétszer ad 3 sebzést: ugyanarra a unitra (összesen 6) vagy két különbözőre. Ha az egyik célpont közben eltűnik, a másik sebzés attól még megtörténik. Csak a saját körödben, showdownon kívül játszható ki.",
+  "notes": [
+   [
+    "355.10, 758.2",
+    0,
+    "Két külön \"Deal 3 to a unit\" instruction, mindkettő unitja target. Választhatod kétszer ugyanazt a unitot (a szabályzat példájában így 6 damage kerül rá) vagy két különbözőt."
+   ],
+   [
+    "355.8",
+    0,
+    "Chain-re csak úgy tehető, ha mindkét targetre van érvényes választás. Egyetlen unit is elég, mert kétszer választható."
+   ],
+   [
+    "359.3.e.5",
+    0,
+    "Ha az egyik target a resolve előtt illegálissá válik, csak a rá vonatkozó instruction marad el, a másik 3 damage megtörténik."
+   ],
+   [
+    "155",
+    0,
+    "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+   ],
+   [
+    "143.3.b,143.2.b",
+    0,
+    "A damage a kör végéig, illetve egy combat cleanupig marad a uniton. A unit akkor hal meg, ha a rajta lévő damage eléri a Mightját."
+   ],
+   [
+    "388.1",
+    1,
+    "Errata: a régi \"Do this twice:\" forma reflexive triggerként működött volna. Az új szöveg két sima instruction, a targeteket kijátszáskor választod, és a spell egy chain itemként resolve-ol."
+   ]
+  ]
+ },
+ {
+  "name": "Fanfare",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [],
+  "energy": 3,
+  "power": null,
+  "might": null,
+  "text": "The next three times you play a unit this turn, draw 1.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Ebben a körben a következő három kijátszott unitod után húzol 1-1 lapot. A Fanfare előtt kijátszott unitok nem számítanak, és counterelt unit után nem húzol. A token unitok kijátszása is számít. Csak a saját körödben, showdownon kívül játszható ki.",
+  "notes": [
+   [
+    "391.2,393",
+    0,
+    "A resolve egy Delayed Triggert hoz létre, ami a spelltől függetlenül él a kör végéig."
+   ],
+   [
+    "420.4.a,420.4.a.1",
+    0,
+    "A draw akkor jön, amikor a unit kijátszása a resolve-val befejeződött. Counterelt unit után nem húzol."
+   ],
+   [
+    "317.2.c",
+    1,
+    "Legfeljebb három unit után húzol, a fel nem használt alkalmak a kör végén elvesznek. A Fanfare előtt kijátszott unitok nem számítanak."
+   ],
+   [
+    "185.2.a,185.2.d",
+    1,
+    "Unit token kijátszása is beleszámít: a token unit, és a tulajdonosa a kártyakijátszás lépései szerint \"play\"-eli. Két tokent hozó effect két alkalmat használ el."
+   ],
+   [
+    "155",
+    0,
+    "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+   ]
+  ]
+ },
+ {
+  "name": "Fate Weaver",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [
+   "Ionia"
+  ],
+  "energy": 5,
+  "power": null,
+  "might": 4,
+  "text": "When you play me, look at the top 4 cards of your Main Deck. You may reveal a spell with Energy cost [4] or more from among them and draw it. Recycle the rest.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "4 Mightú unit. Kijátszáskor megnézed a decked felső 4 lapját, és felhúzhatsz közülük egy legalább 4 Energy nyomtatott árú spellt, amit megmutatsz. A többi lap a deck aljára kerül.",
+  "notes": [
+   [
+    "355.10.a",
+    0,
+    "A Main Deck nem Public zóna, a kiválasztott lap nem target. A választás a resolve-kor történik."
+   ],
+   [
+    "383.3.a.3",
+    0,
+    "A \"you may\" nem az effect elején áll, ezért a resolve közben döntesz, miután megnézted a lapokat."
+   ],
+   [
+    "206",
+    0,
+    "Az \"Energy cost [4] or more\" a spell nyomtatott costját nézi, kedvezmények nélkül."
+   ],
+   [
+    "432.1.c",
+    0,
+    "Ha 4-nél kevesebb lap van a deckben, annyit nézel meg, amennyi van. Ez nem okoz Burn Outot."
+   ],
+   [
+    "417.4,417.5",
+    0,
+    "A maradékot kötelező recycle-ölni, a deck aljára véletlen sorrendben kerülnek."
+   ],
+   [
+    "425.1",
+    0,
+    "A felhúzott spellt fel kell fedni, az opponent látja, mit vettél fel."
+   ]
+  ]
+ },
+ {
+  "name": "Feral Strength",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Calm"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": null,
+  "might": null,
+  "text": "[Reaction] (Play any time, even before spells and abilities resolve.)\n[Repeat] [2] (You may pay the additional cost to repeat this spell's effect.)\nGive a unit +2 [S] this turn.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Reakcióként egy unit +2 Mightot kap a kör végéig. Plusz 2 Energyért kétszer fut le: ugyanarra a unitra +4, vagy két unitra +2 és +2. Sebzést szétosztó spellek ellen jó válasz.",
+  "notes": [
+   [
+    "355.7",
+    0,
+    "A unit target, lehet saját vagy enemy."
+   ],
+   [
+    "820.1.d,820.2.a",
+    0,
+    "Repeat [2]: kifizetve az effect kétszer megy. Választhatod kétszer ugyanazt a unitot (+4), vagy két különböző unitot (+2 és +2)."
+   ],
+   [
+    "355.14.h.1",
+    0,
+    "A szabályzat név szerint ezt a lapot hozza példának: egy damage-et szétosztó spellre (Alpha Strike) válaszul megnövelt unit miatt az opponentnek kevesebb targetre jut lethal damage, és nem ejthet el tetszőlegesen sok targetet."
+   ],
+   [
+    "359.3.e.7",
+    0,
+    "Ha a unit a resolve előtt illegális target lesz, a rá vonatkozó végrehajtás elmarad."
+   ]
+  ]
+ },
+ {
+  "name": "Ferrous Forerunner",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Fury"
+  ],
+  "tags": [
+   "Bandle City",
+   "Mech",
+   "Yordle"
+  ],
+  "energy": 6,
+  "power": 1,
+  "might": 6,
+  "text": "[Deathknell] — Play two 3 [S] Mech unit tokens to your base. (When I die, get the effect.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "6 Mightú unit. Amikor meghal, két 3 Mightú Mech tokent kapsz a base-edbe. Csak valódi halálra működik, banishre vagy kézbe vételre nem.",
+  "notes": [
+   [
+    "808.1.c,808.1.d.2",
+    0,
+    "[Deathknell]: \"When I die\" trigger. Még azelőtt chain-re kerül, hogy a unit a trashbe menne, lehet rá reagálni, és akkor is resolve-ol, ha a unit már nincs a boardon."
+   ],
+   [
+    "808.1.d.1,428.2.a",
+    0,
+    "Nem triggerel, ha a unit nem a trashbe kerül: banish, kézbe vétel, recycle, vagy ha a halálát replacement effect lecseréli."
+   ],
+   [
+    "187.4,185.2.d",
+    0,
+    "A két Mech token 3 Mightú, domain nélküli unit, a base-edbe érkezik, exhausted."
+   ],
+   [
+    "186.1,185.3.a.1",
+    0,
+    "A token costja 0-nak számít, és megszűnik, ha kézbe, deckbe vagy trashbe kerülne."
+   ],
+   [
+    "143.1.b",
+    1,
+    "A Forerunner és a tokenek is Mech tagűek, tehát Rumble, Hotheaded mellett Assaultot kapnak. Karthus, Eternal mellett a Deathknell kétszer fut le, négy Mechet ad."
+   ]
+  ]
+ },
+ {
+  "name": "Field Musicians",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Calm"
+  ],
+  "tags": [
+   "Ionia"
+  ],
+  "energy": 4,
+  "power": null,
+  "might": 3,
+  "text": "When you play me, give a unit +3 [S] this turn.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "3 Mightú unit. Kijátszáskor egy általad kiválasztott unit +3 Mightot kap a kör végéig, akár maga a Musicians is.",
+  "notes": [
+   [
+    "355.10,355.9.b",
+    0,
+    "A unit target, bármelyik játékosé és bármelyik locationön lehet, a Musicians maga is."
+   ],
+   [
+    "355.5.b",
+    0,
+    "A targetet a trigger chain-re kerülésekor választod, amikor a Musicians már a boardon van."
+   ],
+   [
+    "317.2.c",
+    0,
+    "A +3 Might a kör végéig tart, az Expiration Stepben jár le."
+   ],
+   [
+    "359.3.e.2",
+    0,
+    "Ha a target a resolve előtt elhagyja a boardot, a trigger nem csinál semmit."
+   ]
+  ]
+ },
+ {
+  "name": "Fight or Flight",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Chaos"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": null,
+  "might": null,
+  "text": "[Hidden] (Hide now for [A] to react with later for [0].)\n[Action] (Play on your turn or in showdowns.)\nMove a unit from a battlefield to its base.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Action: a saját körödben vagy showdown alatt egy battlefielden álló unitot, bárkiét, a base-ébe mozgat, így kiveheted a harcból. Hidden: a saját körödben, showdownon kívül 1 bármely Powerért elrejtheted egy általad kontrollált battlefielden, a következő körtől Reactionként ingyen kijátszhatod, de csak az ottani unitokra.",
+  "notes": [
+   [
+    "103.3.e",
+    1,
+    "A lap az adatok szerint tiltólistán van. A deck minden lapjának legálisnak kell lennie az adott formátumban, ezért sanctioned játék előtt ellenőrizd az aktuális listát."
+   ],
+   [
+    "811.1.b,411.1.a,811.6,811.3",
+    0,
+    "Hide: a saját körödben, Open State-ben, showdownon kívül [A]-ért facedown tehető egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható. Kézből, teljes costért csak [Action] időzítéssel megy."
+   ],
+   [
+    "355.10,355.9.b",
+    0,
+    "A unit target, battlefielden kell lennie, és bármelyik játékosé lehet. A unit a saját controllere base-ébe megy."
+   ],
+   [
+    "811.1.d.2",
+    0,
+    "Facedown-ból kijátszva csak azon a battlefielden lévő unit választható, ahol a lap el volt rejtve."
+   ],
+   [
+    "359.3.f.2",
+    0,
+    "A szabályzat név szerint ezt a lapot hozza példának: ha a támadó Yasuo, Remorsefult az attack triggerére válaszul base-be mozgatod, a trigger \"here\" hivatkozása már nem a combat battlefieldje, a trigger mistargetel."
+   ],
+   [
+    "421.1,458",
+    0,
+    "Ez Move, nem Recall, ezért a \"when I move\" triggerek lefutnak, és mozgást tiltó effect negálhatja."
+   ]
+  ]
+ },
+ {
+  "name": "Final Spark, Lux",
+  "type": "Spell",
+  "supertypes": [
+   "Signature"
+  ],
+  "domain": [
+   "Mind",
+   "Order"
+  ],
+  "tags": [
+   "Lux"
+  ],
+  "energy": 8,
+  "power": null,
+  "might": null,
+  "text": "[Action] (Play on your turn or in showdowns.)\nDeal 8 to a unit.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "8 sebzést ad egy unitra, akár base-ben állóra is. A saját körödben vagy showdownban játszható ki, de egy másik spellre válaszul nem.",
+  "notes": [
+   [
+    "806.1.c.1,358.4",
+    0,
+    "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+   ],
+   [
+    "355.10",
+    0,
+    "A unit target, megkötés nélkül: base-ben lévő unitot is elér."
+   ],
+   [
+    "142.4.b,323.4",
+    0,
+    "A 8 damage hozzáadódik a uniton lévő sebzéshez. A unit a resolve utáni cleanupban hal meg, ha a damage eléri a Mightját."
+   ],
+   [
+    "359.3.e.7",
+    0,
+    "Ha a unit a resolve előtt elhagyja a boardot, a spell hatás nélkül resolve-ol."
+   ],
+   [
+    "103.3.d",
+    0,
+    "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Lux) kell viselnie."
+   ]
+  ]
+ },
+ {
+  "name": "Find Your Center",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Calm"
+  ],
+  "tags": [],
+  "energy": 3,
+  "power": null,
+  "might": null,
+  "text": "[Action] (Play on your turn or in showdowns.)\nIf an opponent's score is within 3 points of the Victory Score, this costs [2] less.\nDraw 1 and channel 1 rune exhausted.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Action: a saját körödben vagy showdown alatt húzol 1 lapot, és kapsz egy exhausted rune-t. Ha valamelyik ellenfelednek legfeljebb 3 pont hiányzik a győzelemhez, 2 Energyvel olcsóbb, vagyis 1 Energy.",
+  "notes": [
+   [
+    "806.1.c.1,358.4",
+    0,
+    "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+   ],
+   [
+    "194.3,356.4.g",
+    1,
+    "A kedvezmény feltételét a Determine Total Cost lépésben nézi a játék. Az alap 8-as Victory Score mellett akkor él, ha valamelyik opponentnek legalább 5 pontja van."
+   ],
+   [
+    "356.6",
+    1,
+    "Kedvezménnyel az Energy cost 3 helyett 1."
+   ],
+   [
+    "431.2,431.3",
+    0,
+    "A rune exhausted lép be. Üres Rune Decknél a channel elmarad, a draw megtörténik."
+   ],
+   [
+    "414.4",
+    0,
+    "Üres Main Decknél a draw Burn Outot okoz."
+   ]
+  ]
+ },
+ {
+  "name": "Fiora, Grand Duelist",
+  "type": "Legend",
+  "supertypes": [],
+  "domain": [
+   "Body",
+   "Order"
+  ],
+  "tags": [
+   "Fiora"
+  ],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": "When one of your units becomes [Mighty], you may exhaust me to channel 1 rune exhausted. (A unit is Mighty while it has 5+ [S].)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Legend: amikor egy unitod Mightja 5 alól 5-re vagy fölé nő, exhaustolhatod, hogy kapj egy exhausted rune-t. Ideiglenes bónusz is beindítja, de a már 5+ Mightú unit további erősítése nem. Hogy az eleve 5+ Mighttal érkező unit számít-e, judge dönti el.",
+  "notes": [
+   [
+    "103.2.b",
+    0,
+    "A legend Body és Order domainje adja a deck Domain Identity-jét."
+   ],
+   [
+    "709",
+    0,
+    "\"Becomes Mighty\": az a pillanat, amikor a unit Mightja 5 alattiról 5-re vagy fölé változik. Már 5+ Mightú unit további erősítése nem triggerel."
+   ],
+   [
+    "710",
+    1,
+    "A boardon az aktuális Might számít, ezért ideiglenes bónusz (buff, \"+X this turn\", attackerként az Assault) is kiváltja. Ugyanaz a unit körön belül többször is Mighty-vé válhat."
+   ],
+   [
+    "709",
+    2,
+    "Nem egyértelmű, hogy az eleve 5+ Mighttal a boardra lépő unit \"becomes Mighty\"-nek számít-e, mert a szabály csak a Might változásáról beszél. Judge döntse el."
+   ],
+   [
+    "383.3.a,383.3.b,415.4",
+    0,
+    "Az \"exhaust me\" a trigger base costja, a finalizáláskor fizeted. Exhausted legenddel nem megy, vagyis körönként jellemzően egy rune jön."
+   ],
+   [
+    "431.2,431.3",
+    0,
+    "A rune exhausted érkezik a Rune Deck tetejéről. Ha a Rune Deck üres, nem történik semmi."
+   ],
+   [
+    "164.2.b",
+    1,
+    "Az exhausted rune abban a körben csak akkor ad Energyt, ha egy hatás readyzi, Powerért viszont azonnal recycle-ölhető, mert annak a costja nem Exhaust."
+   ]
+  ]
+ },
+ {
+  "name": "Fiora, Peerless",
+  "type": "Unit",
+  "supertypes": [
+   "Champion"
+  ],
+  "domain": [
+   "Body"
+  ],
+  "tags": [
+   "Demacia",
+   "Fiora"
+  ],
+  "energy": 3,
+  "power": 1,
+  "might": 3,
+  "text": "When I attack or defend one on one, double my Might this combat.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Ha egy az egy ellen támad vagy védekezik, vagyis mindkét oldalon csak egy unit áll, a harc végéig duplázza a Mightját. A feltételt a harc kezdetén nézi a játék. A duplázás után kapott bónuszok már nem duplázódnak.",
+  "notes": [
+   [
+    "740.2.b",
+    0,
+    "\"One on one\": Fiora egyedül áll a saját oldalán, és vele szemben is pontosan egy, egyedül álló enemy unit van a battlefielden."
+   ],
+   [
+    "383.4.e.2.b,383.4.f.2.b",
+    0,
+    "A feltételt akkor nézi a játék, amikor Fiora megkapja az Attacker vagy Defender jelölést. Ha akkor nem one on one, abban a combatban már nem triggerel."
+   ],
+   [
+    "433.1.a",
+    0,
+    "A Double a resolve-kori Mightjával megegyező fix bónuszt ad. A korábbi buffok és bónuszok is duplázódnak, a később kapottak nem."
+   ],
+   [
+    "468.7.c",
+    0,
+    "\"This combat\": a bónusz a combat végén jár le, nem a kör végén."
+   ],
+   [
+    "433.1.a",
+    1,
+    "Ha a trigger resolve-ja után újabb unit érkezik a battlefieldre, a már megkapott bónusz megmarad."
+   ]
+  ]
+ },
+ {
+  "name": "Fiora, Victorious",
+  "type": "Unit",
+  "supertypes": [
+   "Champion"
+  ],
+  "domain": [
+   "Order"
+  ],
+  "tags": [
+   "Demacia",
+   "Fiora"
+  ],
+  "energy": 4,
+  "power": null,
+  "might": 4,
+  "text": "While I'm [Mighty], I have [Deflect], [Ganking], and [Shield]. (I'm Mighty while I have 5+ [S].)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Amíg Mighty (legalább 5 Might), Deflectet, Gankinget és Shieldet kap: az ellenfél rá célzott spelljei és képességei 1 bármilyen Powerrel többe kerülnek, battlefieldről battlefieldre mozoghat, és védekezéskor +1 Mightot kap. Alapból 4 Mightú, tehát legalább +1 kell hozzá. Ha elveszíti a Mighty állapotot, mindhárom egyszerre megszűnik.",
+  "notes": [
+   [
+    "708",
+    0,
+    "Mighty: legalább 5 Might. A nyomtatott Mightja 4, tehát legalább +1 kell (buff, Equipment, spell), hogy a három keyword éljen."
+   ],
+   [
+    "478.4",
+    0,
+    "A szabályzat név szerint ezt a lapot hozza példának: bufftól 5 Might és [Deflect], [Ganking], [Shield]. Defenderként a Shield miatt 6 Might."
+   ],
+   [
+    "478.4",
+    0,
+    "Ugyanott: ha combat közben elveszíti a buffot, egyszerre veszti el a Shieldet is, 6 Mightról közvetlenül 4-re esik keywordök nélkül."
+   ],
+   [
+    "142.4.b",
+    1,
+    "Ez a kettős esés sebzett Fiorát megölhet: 4 vagy 5 sebzés 6 Mightnál még nem lethal, 4 Mightnál már az."
+   ],
+   [
+    "809.1.c",
+    1,
+    "Az opponent előbb egy nem targetelő Might csökkentéssel leveheti a Mighty állapotot, utána a Deflect cost nélkül targetelheti."
+   ],
+   [
+    "317.2.c",
+    1,
+    "\"This turn\" Might bonusszal csak a kör végéig Mighty, utána a keywordök megszűnnek."
+   ]
+  ]
+ },
+ {
+  "name": "Fiora, Worthy",
+  "type": "Unit",
+  "supertypes": [
+   "Champion"
+  ],
+  "domain": [
+   "Order"
+  ],
+  "tags": [
+   "Demacia",
+   "Fiora"
+  ],
+  "energy": 3,
+  "power": null,
+  "might": 3,
+  "text": "When a unit you control becomes [Mighty], you may pay [C] to ready it. (A unit is Mighty while it has 5+ [S].)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Amikor egy unitod Mightja 5 alól 5-re vagy fölé nő, 1 Order Powerért ready lehet. Ideiglenes bónusz és védekezéskori Shield is beindítja. Ha a unit már ready, a Power elveszett. Hogy az eleve 5+ Mighttal érkező unit számít-e, judge dönti el.",
+  "notes": [
+   [
+    "709",
+    0,
+    "\"Becomes Mighty\": a trigger abban a pillanatban fut le, amikor egy unitod Mightja 5 alól 5-re vagy fölé változik. Már Mighty unit további erősítése nem váltja ki."
+   ],
+   [
+    "383.3.a,383.3.b",
+    0,
+    "A \"you may\" után álló \"pay [C]\" a trigger base costja: az Order Powert a finalizáláskor fizeted ki. Ha nem fizetsz, a trigger lekerül a chainről."
+   ],
+   [
+    "355.10.c",
+    0,
+    "A unit csak a trigger feltételében szerepel, ezért nem target. \"Can't be chosen\" védelem nem akadályozza a readyt."
+   ],
+   [
+    "814.1.c,710",
+    1,
+    "Minden Might változás számít, ami 5-re vagy fölé visz: buff, \"this turn\" bónusz, Equipment, vagy a Shield, amikor a unit Defender lesz. Fiora saját magára is triggerel."
+   ],
+   [
+    "416.1.c",
+    0,
+    "Ha a unit a resolve-kor már ready, nem történik semmi, a kifizetett Power elveszett."
+   ],
+   [
+    "709,711",
+    2,
+    "Nem egyértelmű, hogy egy eleve 5 vagy több Mighttal a boardra lépő unit \"becomes Mighty\" eseménynek számít-e. A szabály csak a Might változását írja le, judge döntse el."
+   ]
+  ]
+ },
+ {
+  "name": "Firebrand Raider",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Fury"
+  ],
+  "tags": [
+   "Freljord"
+  ],
+  "energy": 6,
+  "power": 1,
+  "might": 6,
+  "text": "I enter ready.\nWhen you play me, ready all enemy units.\nOther units enter ready.\nUnits don't ready during the Awaken Phase.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Ready lép be, és kijátszáskor minden ellenséges unitot ready-vé tesz. Amíg a boardon van, minden más unit is ready lép be, az ellenfeleké is, viszont a körök elején senkinek a unitjai nem lesznek ready. Rune, gear és legend ettől még rendesen ready lesz.",
+  "notes": [
+   [
+    "369.3",
+    0,
+    "A Raider és minden utána belépő unit ready érkezik. Ez replacement effect, nem \"becomes ready\" esemény."
+   ],
+   [
+    "365.1",
+    1,
+    "Az \"Other units enter ready\" nincs friendlyre szűkítve: az opponent unitjai is ready lépnek be, amíg a Raider a boardon van. Tokenekre is igaz."
+   ],
+   [
+    "355.5.a",
+    0,
+    "A \"ready all enemy units\" nem targetel, minden enemy unitot érint, a \"can't be chosen\" unitokat is. Kötelező."
+   ],
+   [
+    "315.1.b",
+    1,
+    "Az Awaken Phase-ben a unitok nem lesznek ready, sem a tieid, sem az opponenté. Rune, gear és legend továbbra is ready lesz."
+   ],
+   [
+    "416.3.b",
+    1,
+    "Effect általi ready (például First Mate) továbbra is működik, csak az Awaken Phase-es ready marad el."
+   ],
+   [
+    "365.1",
+    0,
+    "A két passive csak addig él, amíg a Raider a boardon van."
+   ]
+  ]
+ },
+ {
+  "name": "Firelights' Hideout",
+  "type": "Battlefield",
+  "supertypes": [],
+  "domain": [],
+  "tags": [],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": "When you conquer here, the next unit you play this turn has [Accelerate]. (You may pay [1] and a Power of its Domain as an additional cost to have it enter ready.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Battlefield: ha itt elfoglalod a helyet, a kör következő kijátszott unitod 1 Energy és 1 megfelelő Power plusz költségért ready léphet be. Token is lehet ez a unit. Ha abban a körben már nem játszol ki unitot, a lehetőség elvész.",
+  "notes": [
+   [
+    "391.4,393",
+    0,
+    "Delayed passive ability: a conquer után a körben következő unitodra vonatkozik, akkor is, ha a battlefieldet közben elveszíted."
+   ],
+   [
+    "805.1.b,805.2",
+    0,
+    "Accelerate: optional additional cost a kijátszáskor, 1 Energy és 1 Power. Ha kifizeted, a unit ready lép be."
+   ],
+   [
+    "805.1.b.1,805.1.b.2",
+    0,
+    "A Powernek a unit valamelyik domainjével kell egyeznie. Domain nélküli unitnál bármilyen Power jó."
+   ],
+   [
+    "805.4",
+    0,
+    "Ha a unitnak eleve van Accelerate-je, a második példány nem ad semmit, a lehetőség elhasználódott."
+   ],
+   [
+    "805.6,805.6.a",
+    0,
+    "Replacement effect: a unit nem exhausted lép be és utána lesz ready, ezért a \"becomes ready\" triggereket nem váltja ki."
+   ],
+   [
+    "185.2.a",
+    1,
+    "A token unitot is kijátszod. Ha a conquer után token az első unitod, ő kapja az Accelerate-et."
+   ],
+   [
+    "317.2.c",
+    1,
+    "Csak \"this turn\": ha a conquer után már nem játszol ki unitot, a hatás elveszett."
+   ]
+  ]
+ },
+ {
+  "name": "Firestorm",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Fury"
+  ],
+  "tags": [],
+  "energy": 6,
+  "power": 1,
+  "might": null,
+  "text": "Deal 3 to all enemy units at a battlefield.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "3 sebzést ad minden ellenséges unitra egy kiválasztott battlefielden. A battlefield a target, nem a unitok, ezért Deflect és a 'can't be chosen' nem védi őket. Az ellenfél a lefutás előtt elmozgathatja a unitjait. Csak a saját körödben, showdownon kívül játszható ki.",
+  "notes": [
+   [
+    "355.10.b,355.10.d",
+    0,
+    "A battlefield a target, az ott lévő unitok nem. Deflect és \"can't be chosen\" nem védi az enemy unitokat."
+   ],
+   [
+    "355.5.a",
+    1,
+    "A resolve pillanatában ott álló enemy unitokat sebzi. A reakcióban elmozgatott unit megmenekül, az odaérkező megkapja a 3-at."
+   ],
+   [
+    "418.1.d,323.4",
+    0,
+    "A damage egyszerre éri a unitokat, a halálos sebzést kapottak a resolve utáni cleanupban halnak meg."
+   ],
+   [
+    "715.2",
+    1,
+    "Bonus Damage esetén minden érintett unit külön megkapja a többletet. A 715.2 a több targetes Deal actionről szól, itt a unitok nem targetek, ezért ez levezetés."
+   ],
+   [
+    "155",
+    0,
+    "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+   ]
+  ]
+ },
+ {
+  "name": "First Mate",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Body"
+  ],
+  "tags": [
+   "Bilgewater",
+   "Pirate"
+  ],
+  "energy": 3,
+  "power": null,
+  "might": 3,
+  "text": "When you play me, ready another unit.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "3 Mightú unit. Kijátszáskor ready-vé tesz egy másik unitot, akár ellenségeset is, így az újra mozoghat vagy használhatja az exhaust képességét. Ha nincs másik unit a boardon, nem történik semmi.",
+  "notes": [
+   [
+    "355.10,355.9.b",
+    0,
+    "A másik unit target. Nincs \"friendly\" megkötés, enemy unit is választható, a First Mate maga nem."
+   ],
+   [
+    "355.8",
+    0,
+    "Ha nincs másik választható unit a boardon, a trigger chainre kerülve rögtön le is kerül róla (403.4), így nem fut le."
+   ],
+   [
+    "416.1.c",
+    0,
+    "Már ready unit is választható, de rajta a ready nem csinál semmit."
+   ],
+   [
+    "144.2",
+    1,
+    "A ready unit újra fizetheti az exhaust costot: még egyszer mozoghat Standard Move-val vagy újra használhatja az Exhaust költségű abilityjét."
+   ]
+  ]
+ },
+ {
+  "name": "Fizz, Trickster",
+  "type": "Unit",
+  "supertypes": [
+   "Champion"
+  ],
+  "domain": [
+   "Chaos"
+  ],
+  "tags": [
+   "Bilgewater",
+   "Fizz",
+   "Yordle"
+  ],
+  "energy": 3,
+  "power": 1,
+  "might": 3,
+  "text": "When you play me, you may play a spell from your trash with Energy cost no more than [3], ignoring its Energy cost. Then recycle it. (You must still pay its Power cost.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": "When you play me, you may play a spell from your trash with Energy cost no more than [3], ignoring its Energy cost. Recycle that spell after you play it. (You must still pay its Power cost.)",
+  "short": "3 Mightú champion. Kijátszáskor kijátszhatsz a trashedből egy legfeljebb 3 Energy nyomtatott árú spellt Energy fizetése nélkül, csak a Power árát kell kifizetned. A spell utána a deck aljára kerül, nem vissza a trashbe.",
+  "notes": [
+   [
+    "383.3.a",
+    0,
+    "A \"you may\" az effect elején áll, a trigger finalizálásakor döntesz róla."
+   ],
+   [
+    "355.10.a",
+    0,
+    "A trash Public zóna, ezért a kiválasztott spell target. Ha a resolve előtt kikerül a trashből, Fizz effectje nem csinál semmit."
+   ],
+   [
+    "206",
+    0,
+    "Az \"Energy cost no more than 3\" a spell nyomtatott cost-ját nézi."
+   ],
+   [
+    "356.1.b.2, 356.1.b.3",
+    0,
+    "Csak az Energy cost nullázódik. A Power costot ki kell fizetni, és additional cost (például Repeat) rákerülhet."
+   ],
+   [
+    "417.1.a",
+    0,
+    "Az errata szerint a spell kijátszás után recycle-ölődik, vagyis a Main Deck aljára megy, nem vissza a trashbe."
+   ],
+   [
+    "420.4.a",
+    1,
+    "Deck interakció: a spell a trashből, nem kézből megy ki, ezért a Kennen legend empower triggerét is kiváltja."
+   ]
+  ]
+ },
+ {
+  "name": "Flame Chompers",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Fury"
+  ],
+  "tags": [
+   "Zaun"
+  ],
+  "energy": 3,
+  "power": null,
+  "might": 3,
+  "text": "When you discard me, you may pay [C] to play me.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "3 Mightú unit. Ha a kezedből eldobod, akár egy költség részeként, 1 Fury Powerért rögtön kijátszhatod a trashből. Ha a deckből kerül a trashbe vagy meghal, nem működik. Hogy a 3 Energyt is ki kell-e fizetni, nem tisztázott, judge dönti el.",
+  "notes": [
+   [
+    "423.1.b,385.2",
+    0,
+    "A trigger a discard megtörténte után fut le, amikor a Chompers már a trashben van. Csak discardra, kézből."
+   ],
+   [
+    "441.1,429.1",
+    1,
+    "Burn (deckből trashbe) és a boardon meghalás nem discard, ezekre nem triggerel."
+   ],
+   [
+    "383.3.a,383.3.b",
+    0,
+    "A \"you may\" után álló \"pay [C]\" a trigger base costja: a Fury Powert a finalizáláskor fizeted. Ha nem fizetsz, a trigger lekerül a chainről."
+   ],
+   [
+    "423.3",
+    1,
+    "A costként történő discard is számít (például Brazen Buccaneer additional costja)."
+   ],
+   [
+    "356.1.a",
+    2,
+    "Nem egyértelmű, hogy a [C] kifizetése után a 3 Energy base costot is ki kell-e fizetni, mert a szöveg nem mondja, hogy \"ignoring its cost\". Judge döntse el."
+   ],
+   [
+    "359.3.e.2",
+    1,
+    "Ha a Chompers a trigger resolve-ja előtt elhagyja a trasht, nem játszható ki, a kifizetett Power elvész."
+   ]
+  ]
+ },
+ {
+  "name": "Flash",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Chaos"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": null,
+  "might": null,
+  "text": "[Reaction] (Play any time, even before spells and abilities resolve.)\nMove up to 2 friendly units to base.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Reakcióként legfeljebb 2 saját unitodat a base-be mozgatja. Jó mentés az olyan ellenséges spellek ellen, amelyek battlefielden álló unitot céloznak (például \"a unit at a battlefield\"), mert a base-ben lévő unit már nem érvényes célpont; a bárhol álló unitot célzó spell ellen nem véd. Ha valami tiltja a mozgást, kijátszható, de a mozgás elmarad.",
+  "notes": [
+   [
+    "355.4",
+    0,
+    "A mozgatott unitokat és a célt kijátszáskor választod. A cél itt mindig a unit saját base-e."
+   ],
+   [
+    "355.10",
+    1,
+    "\"Up to 2\": 0, 1 vagy 2 friendly unit választható, a spell target nélkül is kijátszható."
+   ],
+   [
+    "358.3.a",
+    0,
+    "A szabályzat név szerint ezt a lapot hozza példának: akkor is kijátszható, ha egy effect tiltja a mozgást (Vilemaw's Lair), de a resolve-kor az a Move negálódik."
+   ],
+   [
+    "359.3.e.6",
+    0,
+    "Védekezésre: ha egy enemy spell \"unit at a battlefield\"-et céloz, a base-be mozgatott unit illegális target lesz, a spell rá vonatkozó része ignorálódik."
+   ],
+   [
+    "421.1",
+    0,
+    "Ez Move, nem Recall, ezért a \"when I move\" triggerek lefutnak."
+   ],
+   [
+    "813.1.c.1",
+    0,
+    "[Reaction]: Closed State-ben, spellre vagy abilityre válaszul is kijátszható."
+   ]
+  ]
+ },
+ {
+  "name": "Flurry of Blades",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Body"
+  ],
+  "tags": [],
+  "energy": 1,
+  "power": null,
+  "might": null,
+  "text": "[Reaction] (Play any time, even before spells and abilities resolve.)\nDeal 1 to all units at battlefields.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Reakcióként 1 sebzést ad minden battlefielden álló unitra, a sajátjaidra is. A base-ben lévőket nem éri. Az 1 Mightú és a már sebzett unitokat megölheti, harc közben is.",
+  "notes": [
+   [
+    "355.10.d",
+    0,
+    "Nincs target (\"all units at battlefields\"). Deflect és \"can't be chosen\" nem véd ellene."
+   ],
+   [
+    "355.5.a,418.1.d",
+    0,
+    "Minden battlefielden álló unitot sebez egyszerre, a sajátjaidat is. A base-ben lévő unitokat nem éri."
+   ],
+   [
+    "143.2.b,143.3.b",
+    0,
+    "Az 1 Mightú unitokat megöli, a már sebzetteket akkor, ha a rajtuk lévő damage így eléri a Mightjukat. A damage a kör végéig vagy a Combat Cleanupig a unitokon marad, a combat damage hozzáadódik."
+   ],
+   [
+    "429.5.c",
+    0,
+    "A következő cleanupban meghaló unitok megölése a spellnek és neked számít be."
+   ],
+   [
+    "813.1.c.1",
+    0,
+    "[Reaction]: combat showdown közben is kijátszható, a resolve-kor a battlefielden álló unitokra hat."
+   ]
+  ]
+ },
+ {
+  "name": "Flurry of Feathers",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Calm"
+  ],
+  "tags": [],
+  "energy": 4,
+  "power": 2,
+  "might": null,
+  "text": "[Reaction] (Play any time, even before spells and abilities resolve.)\nChoose one —\n- Counter a spell.\n- Play four 1 [S] Bird unit tokens with [Deflect]. (Opponents must pay [A] to choose them with a spell or ability.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Reakcióként választasz: vagy hatástalanítasz egy spellt, vagy kapsz négy 1 Mightú Bird tokent, amiket az ellenfél csak plusz Powerért választhat ki. A counterhez kell egy már kijátszott spell, amire válaszolsz. Képességet nem tud counterelni.",
+  "notes": [
+   [
+    "355.3,355.15",
+    0,
+    "A módot kijátszáskor választod, utána nem változtatható."
+   ],
+   [
+    "355.9.a.2,355.9.c",
+    0,
+    "Counter mód: csak a chainen lévő, finalizált spell lehet target. Önmagát nem counterelheti, ability nem spell, unit és gear kijátszása sem."
+   ],
+   [
+    "426.1.a,426.1.b,426.1.c",
+    0,
+    "A counterelt spell nem csinál semmit, a trashbe megy, nem számít kijátszottnak a \"when you play\" triggerekhez, és a kifizetett cost nem jár vissza."
+   ],
+   [
+    "813.1.c.1,355.8",
+    1,
+    "A counter módhoz kell egy spell a chainen, tehát csak Closed State-ben választható. A Bird mód bármikor megy, amikor [Reaction] játszható."
+   ],
+   [
+    "187.7,355.2.a",
+    0,
+    "Bird mód: négy 1 Mightú, domain nélküli Bird token Deflecttel. Egyenként a base-edbe vagy általad kontrollált battlefieldre mennek, exhausted."
+   ],
+   [
+    "809.1.c",
+    0,
+    "A Birdöket célzó enemy spell vagy ability minden választásért 1 bármilyen domainű Powerrel többe kerül."
+   ]
+  ]
+ },
+ {
+  "name": "For Demacia!",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Order"
+  ],
+  "tags": [],
+  "energy": 3,
+  "power": null,
+  "might": null,
+  "text": "[Reaction] (Play any time, even before spells and abilities resolve.)\nChoose a battlefield. Give friendly units there [Shield 2] this turn. (+2 [S] while they're defenders.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Reakcióként egy battlefielden minden saját unitod a kör végéig +2 Mightot kap, de csak védekezés közben. A később odaérkező unit nem kapja meg. Ha te támadsz, nem ér semmit.",
+  "notes": [
+   [
+    "355.10.d",
+    0,
+    "A battlefield a target, a unitok nem. Bármelyik battlefield választható, ahol unitjaid állnak vagy állni fognak."
+   ],
+   [
+    "355.5.a",
+    1,
+    "A resolve-kor ott álló friendly unitok kapják a Shield 2-t. A később érkező unit nem."
+   ],
+   [
+    "814.1.c,814.1.d.1",
+    0,
+    "A Shield 2 csak addig ad +2 Mightot, amíg a unit Defender. Ha te vagy az attacker, a lap nem ér semmit."
+   ],
+   [
+    "814.2",
+    0,
+    "Meglévő Shield értékkel összeadódik. Minden ott álló unit külön megkapja, három defender összesen +6 Mightot jelent."
+   ]
+  ]
+ },
+ {
+  "name": "Forbidden Technique",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Fury"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": null,
+  "might": null,
+  "text": "Ready a unit.\nWhen you play a card with Energy cost [7] or more, you may play this from your trash for [1][C][C]. Then banish this.",
+  "equip_effect_text": null,
+  "old_text_before_errata": "Ready a unit.\nWhen you play a card with Energy cost [7] or more, you may play this from your trash for [1][C][C]. Banish this.",
+  "short": "Ready-vé tesz egy unitot. Ha a trashedben van, és kijátszol egy legalább 7 Energy nyomtatott árú lapot, 1 Energy és 2 Fury Powerért onnan újra kijátszhatod, utána banishelődik. Kézből csak a saját körödben, showdownon kívül játszható ki.",
+  "notes": [
+   [
+    "355.10,416.1.c",
+    0,
+    "A unit target, bármelyik játékosé. Már ready uniton a spell nem csinál semmit."
+   ],
+   [
+    "385.2",
+    0,
+    "A \"when you play a card\" trigger csak akkor működik, amikor a Forbidden Technique a trashedben van."
+   ],
+   [
+    "420.4.a,206",
+    0,
+    "A trigger akkor fut le, amikor a 7 vagy több Energy costú kártya kijátszása a resolve-val befejeződött. A nyomtatott cost számít, kedvezménnyel vagy \"ignoring cost\" mellett is."
+   ],
+   [
+    "383.3.a",
+    0,
+    "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz. Ha nem élsz vele, lekerül a chainről."
+   ],
+   [
+    "356.1.a,355.8",
+    0,
+    "A trashből [1] és 2 Fury Power a cost, ez a base cost helyére lép. Kell hozzá egy választható unit."
+   ],
+   [
+    "391.3.a,359.3.d",
+    1,
+    "A \"Then banish this\" Delayed Replacement csak a trigger által a trashből kijátszott példányra szól: az a chainről a trash helyett a Banishmentbe megy. Kézből kijátszva a lap a resolve után a trashbe kerül, és onnan a triggerrel még egyszer használható."
+   ],
+   [
+    "155",
+    0,
+    "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül játszható ki."
+   ]
+  ]
+ },
+ {
+  "name": "Forbidding Waste",
+  "type": "Battlefield",
+  "supertypes": [],
+  "domain": [],
+  "tags": [],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": "While a unit here is defending alone, it has -2 [S]. (It's alone if there are no other friendly units here.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Battlefield: amíg egy unit itt egyedül védekezik (nincs mellette más friendly unit), -2 Mightja van. Így kevesebb sebzés is megöli, és a legfeljebb 2 Mightú magányos védő nem oszt combat damage-et. Ha combat közben egy társa érkezik mellé, a büntetés megszűnik.",
+  "notes": [
+   [
+    "740.2.a",
+    0,
+    "Egy unit akkor van egyedül, ha nincs más friendly unit ugyanazon a locationön. A facedown lap és a gear nem számít."
+   ],
+   [
+    "466.2.c.3",
+    1,
+    "A Defender designation csak combat alatt létezik. Combaton kívül az itt álló magányos unit Mightja nem csökken."
+   ],
+   [
+    "143.2.c",
+    0,
+    "Ha a Might így 0 alá megy, a combat damage számításánál 0-nak számít: a legfeljebb 2 Mightú magányos védő nem oszt sebzést."
+   ],
+   [
+    "143.2.b",
+    1,
+    "A csökkentett Might a halálos sebzést is lejjebb viszi: 4 Mightú magányos védő megöléséhez 2 damage elég."
+   ],
+   [
+    "466.2.c.3.a,740.2.a",
+    1,
+    "Ha combat közben még egy unitod érkezik ide, a magányos unit már nem egyedül van, ezért a -2 azonnal megszűnik, nem csak a cleanupnál; az érkező unit a következő cleanupban kapja meg a Defender jelölést. Ha a társ kiesik, a büntetés azonnal újra él."
+   ],
+   [
+    "364.3.a",
+    1,
+    "Mindig a védőt sújtja, bárki is az. A támadó magányos unitra nem vonatkozik."
+   ]
+  ]
+ },
+ {
+  "name": "Forecaster",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [
+   "Bandle City",
+   "Mech",
+   "Yordle"
+  ],
+  "energy": 2,
+  "power": null,
+  "might": 2,
+  "text": "Your Mechs have [Vision]. (When you play us, look at the top card of your Main Deck. You may recycle it.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "2 Mightú Mech unit. Amíg a boardon van, minden Mech unitod Visiont kap: amikor egy Mech belép a boardra, megnézed a Main Decked felső lapját, és recycle-ölheted (a deck aljára teheted). Rá magára és a Mech tokenekre is működik.",
+  "notes": [
+   [
+    "479.3.b,365.1",
+    0,
+    "Passive: amíg a Forecaster a boardon van, minden Mech tagű lapod megkapja a Vision kulcsszót."
+   ],
+   [
+    "383.2.c,817.1.c",
+    1,
+    "A Vision triggere a boardra lépés. A feltétel az esemény után értékelődik ki, amikor a Forecaster már a boardon van, és maga is Mech. A saját kijátszása ezért Predictet ad."
+   ],
+   [
+    "187.4,185.2.a",
+    1,
+    "A Mech tokenek is Mechek, és a tokent is \"play\"-eled, tehát minden kijátszott Mech token Predictet ad."
+   ],
+   [
+    "817.2,817.2.a",
+    0,
+    "Ha egy Mechnek saját Visionje is van, vagy más forrásból is kapja, a példányok külön triggerelnek, és külön döntesz a recycle-ről."
+   ],
+   [
+    "437.1,437.4.a",
+    0,
+    "Predict: megnézed a Main Deck felső lapját, és recycle-ölheted. Üres deck mellett nem történik semmi, Burn Out nélkül."
+   ]
+  ]
+ },
+ {
+  "name": "Forge of the Fluft",
+  "type": "Battlefield",
+  "supertypes": [],
+  "domain": [],
+  "tags": [],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": "While you control this battlefield, friendly legends have \"[T]: Attach an Equipment you control to a unit you control.\"",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Battlefield: amíg te irányítod, a legended képességet kap: exhaustolva egy saját Equipmentet egy saját unitodra csatolhatsz, az Equip cost kifizetése nélkül. Csak a saját Main Phase-edben, showdownon kívül használható, és ugyanazt az exhaustot használja, mint a legend saját exhaust képessége.",
+  "notes": [
+   [
+    "174.8,381.1",
+    0,
+    "A legend activated abilityt kap. [Action] és [Reaction] nélkül csak a saját Main Phase-edben, Neutral Open State-ben (showdownon kívül) aktiválható."
+   ],
+   [
+    "415.1.b",
+    1,
+    "A cost a legend exhaustolása: exhausted legenddel nem aktiválható, így ha más effect nem readyzi, körönként egyszer megy, és ütközik a legend saját Exhaust költségű abilityjével."
+   ],
+   [
+    "818.1.c.2",
+    1,
+    "Ugyanazt csinálja, mint az Equip, de az Equip cost kifizetése nélkül. Drága Equip costú Equipmentnél ez a nyereség."
+   ],
+   [
+    "355.10",
+    1,
+    "Az Equipment és a unit is target, mindkettőnek a tiédnek kell lennie. Ha a resolve előtt bármelyik illegális lesz, az attach nem történik meg."
+   ],
+   [
+    "435.1.f,435.4.a",
+    0,
+    "Ha az Equipment már egy másik uniton van, onnan leválik. Az átkerülés nem Move."
+   ],
+   [
+    "190.4.c",
+    1,
+    "Az ability csak addig van a legenden, amíg kontrollálod a battlefieldet. Ha az utolsó unitod elmegy innen, a következő cleanup után már nem használható."
+   ]
+  ]
+ },
+ {
+  "name": "Forge of the Future",
+  "type": "Gear",
+  "supertypes": [],
+  "domain": [
+   "Order"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": null,
+  "might": null,
+  "text": "When you play this, play a 1 [S] Recruit unit token at your base.\nKill this: Recycle up to 4 cards from trashes.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Kijátszáskor kapsz egy 1 Mightú Recruit tokent a base-edbe. Később feláldozhatod, hogy legfeljebb 4 lapot visszatégy bármelyik trashből a gazdája deckjének aljára. Ezt csak a saját Main Phase-edben, showdownon kívül teheted meg.",
+  "notes": [
+   [
+    "383.4.a.2,187.1",
+    0,
+    "A play effect a gear belépése után kerül chain-re. A Recruit domain nélküli, 1 Mightú unit token, a base-edbe érkezik exhausted."
+   ],
+   [
+    "420.4.a.1",
+    0,
+    "Ha a Forge-ot counterelik, nem jön Recruit."
+   ],
+   [
+    "429.1.a.1,151.2",
+    0,
+    "A \"Kill this\" az ability costja, exhaust nem kell hozzá. A kijátszás körében is aktiválható, de csak a saját Main Phase-edben, showdownon kívül."
+   ],
+   [
+    "355.13,417.1.c",
+    0,
+    "\"Up to 4\": 0 és 4 között bármennyi lap, bármelyik játékos trashéből. Minden lap a saját tulajdonosa Main Deckjének aljára megy."
+   ],
+   [
+    "355.9.a,417.6",
+    2,
+    "Nem egyértelmű, hogy a recycle-ölt lapok targetek-e. A 355.9.a szerint a trashben lévő választott lap target, a 417.6 szerint a \"Recycle X from [Zone]\" forma nem targetel. Judge döntse el."
+   ],
+   [
+    "417.5",
+    0,
+    "Ha egy deck aljára egyszerre több lap kerül, a sorrendjük véletlen."
+   ]
+  ]
+ },
+ {
+  "name": "Forgefire Cape",
+  "type": "Gear",
+  "supertypes": [
+   "Signature"
+  ],
+  "domain": [
+   "Calm",
+   "Mind"
+  ],
+  "tags": [
+   "Equipment",
+   "Ornn"
+  ],
+  "energy": 4,
+  "power": 2,
+  "might": 3,
+  "text": "[Unique] (Your deck can have only 1 card with this name.)\n[Equip] [A] ([A]: Attach this to a unit you control.)",
+  "equip_effect_text": "When I attack or defend, deal 2 to all enemy units here.",
+  "old_text_before_errata": null,
+  "short": "Equipment, +3 Might. Equip: 1 bármely domainű Power, saját unitra, a saját Main Phase-edben, showdownon kívül. A felszerelt unit, amikor támad vagy védekezik, 2 sebzést oszt minden ott álló ellenséges unitnak, combatonként egyszer, még a combat damage előtt. Unique, Ornn Signature lap.",
+  "notes": [
+   [
+    "825.3.a,825.3.b",
+    0,
+    "Unique: ebből a névből csak 1 példány lehet a deckben. A 3 Signature hely ettől még kitölthető három különböző nevű Unique Signature lappal."
+   ],
+   [
+    "103.3.d,103.2.b.4",
+    0,
+    "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Ornn) kell viselnie. Két domainű, ezért csak olyan legend mellé fér, amelynek mindkét domainje megvan."
+   ],
+   [
+    "818.1.b.1,151.2,381.1",
+    0,
+    "Equip: 1 bármely domainű Power ([A]) costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+   ],
+   [
+    "136.2.b,136.2.c,435.1.e",
+    0,
+    "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +3 Mightot is kap."
+   ],
+   [
+    "383.4.e,383.4.f,355.10.d",
+    0,
+    "Attack és defend trigger, combatonként egyszer: a felszerelt unit battlefieldjén minden enemy unit 2 damage-et kap. Nincs target, ezért Deflect nem drágítja, és enemy unit nélkül is lefut."
+   ],
+   [
+    "462,467.2",
+    1,
+    "A 2 damage még a Combat Damage Step előtt resolve-ol, így a legfeljebb 2 Mightú (vagy már sebzett, így lethal damage-et kapó) enemy unitok a következő cleanupban, a combat damage kiosztása előtt meghalnak."
+   ],
+   [
+    "719.5,436.4.a",
+    0,
+    "Ha a unit elhagyja a boardot, a gear leválik és a unit utolsó helyén marad. Battlefieldről a következő cleanup a base-be recallolja, ahonnan újra equipelhető."
+   ]
+  ]
+ },
+ {
+  "name": "Forgotten Library",
+  "type": "Battlefield",
+  "supertypes": [],
+  "domain": [],
+  "tags": [],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": "While you control this battlefield, when you play a spell, if you spent [4] or more, [Predict]. (Look at the top card of your Main Deck. You may recycle it.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Battlefield: amíg te tartod, valahányszor egy spellre legalább 4 Energyt költesz, megnézheted a decked felső lapját, és a deck aljára teheted. A ténylegesen kifizetett Energy számít, nem a nyomtatott ár. Counterelt spell nem számít.",
+  "notes": [
+   [
+    "420.4.a,420.4.a.1",
+    0,
+    "A trigger a spell resolve-jakor fut le. Counterelt spell után nincs Predict."
+   ],
+   [
+    "383.2.a.1",
+    0,
+    "Az \"if you spent [4] or more\" a trigger feltételének része."
+   ],
+   [
+    "356.4,356.1.b",
+    1,
+    "A ténylegesen kifizetett Energy számít, nem a nyomtatott cost. Kedvezménnyel 4 alá vitt vagy ingyen kijátszott spell nem váltja ki, additional costtal (Repeat) 4 fölé vitt igen."
+   ],
+   [
+    "430.5",
+    1,
+    "A [4] Energyt jelent, a spellre költött Power nem számít bele."
+   ],
+   [
+    "437.1,437.4.a",
+    0,
+    "Predict: megnézed a Main Deck felső lapját, és recycle-ölheted. Üres decknél nem történik semmi, Burn Out nincs."
+   ],
+   [
+    "370.1.c.1",
+    1,
+    "A Predict \"look at\", ezért kiváltja a Nocturne, Horrifying replacement effectjét."
+   ],
+   [
+    "190.4.c",
+    1,
+    "Csak amíg kontrollálod a battlefieldet. Bárhol, bármire kijátszott spelled számít, az opponent körében is."
+   ]
+  ]
+ },
+ {
+  "name": "Forgotten Monument",
+  "type": "Battlefield",
+  "supertypes": [],
+  "domain": [],
+  "tags": [],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": "Players can't score here until their third turn.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Battlefield: itt egyik játékos sem score-olhat a saját harmadik köre előtt. Ilyenkor nem jár pont, és az itteni conquer és hold triggerek sem futnak le. A battlefield irányítását ettől még megszerezheted. Hogy az Additional Turn beleszámít-e, judge dönti el.",
+  "notes": [
+   [
+    "470,471",
+    1,
+    "A tiltás mindkét Scoring módra vonatkozik: a harmadik saját körödig itt sem conquerrel, sem holddal nem szerzel pontot."
+   ],
+   [
+    "473.2",
+    1,
+    "Scoring nélkül a conquer és hold triggerek sem futnak le, sem a unitokon, sem a legenden."
+   ],
+   [
+    "190.4,468.5",
+    1,
+    "Controlt ettől még szerezhetsz itt: a battlefieldet elfoglalhatod és tarthatod, facedown lapot is rejthetsz ide, csak pont nem jár érte."
+   ],
+   [
+    "473.1.b.1",
+    1,
+    "A Final Pointhoz a kör összes battlefieldjét score-olnod kell. Amíg itt nem score-olhatsz, conquerrel nem szerezhető meg az utolsó pont."
+   ],
+   [
+    "736,735",
+    2,
+    "A \"third turn\" játékosonként, a saját körökkel számol. Hogy az Additional Turn beleszámít-e, azt a Core Rules nem mondja ki, judge döntse el."
+   ]
+  ]
+ },
+ {
+  "name": "Forgotten Relic",
+  "type": "Gear",
+  "supertypes": [],
+  "domain": [
+   "Chaos"
+  ],
+  "tags": [],
+  "energy": 5,
+  "power": null,
+  "might": null,
+  "text": "When you play this or at the start of your Beginning Phase, [Burn 1]. When you burn a unit this way, do this: Give a friendly unit +[S] equal to the burned card's Might this turn. (To Burn 1, put the top card of your Main Deck into your trash.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Kijátszáskor és minden köröd elején a decked felső lapját a trashbe teszed. Ha az unit volt, egy saját unitod a kör végéig annyi Mightot kap, amennyi a kidobott unité. Vigyázz: üres deck esetén ez pontot ad az ellenfélnek.",
+  "notes": [
+   [
+    "383.4.a.2,315.2.a.1",
+    0,
+    "Kijátszáskor és minden saját Beginning Stepedben triggerel. A Burn 1 kötelező."
+   ],
+   [
+    "441.1,441.4",
+    0,
+    "A Main Deck felső lapja a trashbe megy. Üres decknél Burn Out következik, és egy opponent 1 pontot kap."
+   ],
+   [
+    "388.1,389.1",
+    0,
+    "A \"do this\" reflexive trigger: ha a burnölt lap unit, új ability kerül a chain-re, amelyre külön lehet reagálni."
+   ],
+   [
+    "355.10,403.4",
+    0,
+    "A reflexive trigger friendly unitja target, az új ability chain-re kerülésekor választod. Ha nincs friendly unitod, lekerül a chainről."
+   ],
+   [
+    "711",
+    0,
+    "A trashben lévő unit a nyomtatott Mightjával számít, ennyi Mightot kap a választott unit a kör végéig."
+   ],
+   [
+    "441.1.a",
+    1,
+    "Ha a burnölt lap gear vagy spell, nincs bonus, a lap ettől még a trashben marad."
+   ]
+  ]
+ },
+ {
+  "name": "Forgotten Signpost",
+  "type": "Gear",
+  "supertypes": [],
+  "domain": [
+   "Calm"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": null,
+  "might": null,
+  "text": "[Action][>] Exhaust a unit you control, [T]: Move a different unit you control to the location of the unit you exhausted to pay for this ability.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Gear, [Action] képesség: exhaustolod a Signpostot és egy ready saját unitodat, majd egy másik, máshol álló saját unitodat annak a helyére mozgatod. Ez nem Standard Move, a mozgatott unit nem exhaustolódik, és showdownban is erősítést hozhat.",
+  "notes": [
+   [
+    "806.1.c.2",
+    0,
+    "[Action] ability: a saját Main Phase-edben és showdown alatt bárki körében aktiválható. Closed State-ben, spellre válaszul nem."
+   ],
+   [
+    "415.4,355.10.c",
+    0,
+    "A cost egy általad kontrollált unit és a Signpost exhaustolása. Az exhaustolt unit a cost része, nem target, és readynek kell lennie, hogy fizethess vele."
+   ],
+   [
+    "355.10,355.4.a",
+    0,
+    "A mozgatott \"different unit\" target. A célhely az exhaustolt unit helye, ezért csak máshol lévő unit választható: azonos helyen álló két unittal az ability nem működik."
+   ],
+   [
+    "421.3.a",
+    1,
+    "Nem Standard Move: a mozgatott unit nem exhaustolódik, és Ganking nélkül is mehet battlefieldről battlefieldre."
+   ],
+   [
+    "466.2.c.3.a",
+    1,
+    "Showdown alatt erősítést hozhatsz a combatba: az érkező unit a következő cleanupban megkapja az Attacker vagy Defender jelölést."
+   ],
+   [
+    "359.3.e.12",
+    1,
+    "Ha az exhaustolt unit a resolve előtt elhagyja a boardot, a helye már nem állapítható meg, a Move ignorálódik."
+   ],
+   [
+    "421.1",
+    0,
+    "Ez Move, ezért a \"when I move\" triggerek lefutnak a mozgatott unitnál."
+   ]
+  ]
+ },
+ {
+  "name": "Forsaken Baccai",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Fury"
+  ],
+  "tags": [
+   "Shurima"
+  ],
+  "energy": 2,
+  "power": null,
+  "might": 2,
+  "text": "If you control fewer runes than an opponent at the start of your Beginning Phase, give me +1 [S] this turn.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "2 Mightú unit. Ha a köröd elején kevesebb rune-od van, mint egy ellenfelednek, abban a körben +1 Mightot kap. Az összevetés még az új rune-ok érkezése előtt történik.",
+  "notes": [
+   [
+    "383.1.a",
+    0,
+    "Ez triggered ability, bár a mondat \"if\"-fel kezdődik: a saját köröd Beginning Phase-ének elején fut le."
+   ],
+   [
+    "315.2.a.1,315.3",
+    0,
+    "A rune-okat a Channel Phase előtt hasonlítja össze, vagyis a körödben channelolt 2 rune még nem számít."
+   ],
+   [
+    "384.2",
+    0,
+    "A Baccainak a boardon kell lennie a Beginning Phase elején. A kijátszás körében nem ad bónuszt."
+   ],
+   [
+    "317.2.c",
+    0,
+    "A +1 Might csak arra a körre szól."
+   ],
+   [
+    "164.2.b",
+    1,
+    "A boardon lévő rune-ok száma számít, exhausted is. Ha Powerért recycle-öltél rune-okat, könnyebben teljesül. Többjátékos módban elég egy opponentnél kevesebb."
+   ]
+  ]
+ },
+ {
+  "name": "Fortified Position",
+  "type": "Battlefield",
+  "supertypes": [],
+  "domain": [],
+  "tags": [],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": "When you defend here, choose a unit. It gains [Shield 2] this combat. (+2 [S] while it's a defender.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Battlefield: amikor itt védekezel (megtámadják az általad irányított battlefieldet), kiválasztasz egy unitot, és az a combat végéig Shield 2-t kap: +2 Might, amíg defender. Bármelyik unit választható, de csak defenderen ér valamit.",
+  "notes": [
+   [
+    "383.4.f,383.4.f.2.a",
+    0,
+    "Defend trigger: akkor triggerel, amikor a combat elején megkapod a Defender designationt. Combatonként egyszer nézi a feltételt."
+   ],
+   [
+    "190.6.d,466.2.c.2",
+    1,
+    "A \"you\" a battlefield controllere. Csak akkor triggerel, ha a battlefieldet kontrolláló játékos a Defender, vagyis ha valaki megtámadja az általad kontrollált battlefieldet."
+   ],
+   [
+    "355.7,355.9.b",
+    0,
+    "A \"choose a unit\" unitja target, megkötés nélkül. Bármelyik unit választható, de a Shield csak defender unitnak ér valamit."
+   ],
+   [
+    "814.1.c,814.2",
+    0,
+    "A Shield 2 csak addig ad +2 Mightot, amíg a unit defender. Meglévő Shield értékkel összeadódik."
+   ],
+   [
+    "468.7.c",
+    0,
+    "A \"this combat\" hatás a combat végén lejár. Ha ugyanabban a körben új combat indul itt, a trigger újra lefut."
+   ],
+   [
+    "359.3.e.7",
+    0,
+    "Ha a target a resolve előtt elhagyja a boardot, az ability hatás nélkül resolve-ol, új targetet nem választhatsz."
+   ]
+  ]
+ },
+ {
+  "name": "Fox-Fire, Ahri",
+  "type": "Spell",
+  "supertypes": [
+   "Signature"
+  ],
+  "domain": [
+   "Calm",
+   "Mind"
+  ],
+  "tags": [
+   "Ahri"
+  ],
+  "energy": 3,
+  "power": null,
+  "might": null,
+  "text": "[Hidden] (Hide now for [A] to react with later for [0].)\n[Action] (Play on your turn or in showdowns.)\nKill any number of units at a battlefield with total Might 4 or less.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Action: a saját körödben vagy showdown alatt megöl bármennyi unitot egy battlefielden, akár a sajátodat is, ha a kiválasztottak együttes Mightja legfeljebb 4. Hidden: a saját körödben, showdownon kívül 1 bármely Powerért elrejtheted egy általad irányított battlefielden, és a következő körtől Reactionként, ingyen kijátszhatod, de csak az ottani unitokra.",
+  "notes": [
+   [
+    "103.3.d,103.2.b.4",
+    0,
+    "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, mindnek a legend Champion tagjét (Ahri) kell viselnie, és a legendnek a lap mindkét domainjét tartalmaznia kell."
+   ],
+   [
+    "811.1.b,411.1.a,811.6,811.3",
+    0,
+    "Hide: a saját körödben, Open State-ben, showdownon kívül [A]-ért facedown tehető egy általad kontrollált battlefieldre. A következő körtől [Reaction]-t kap és base cost nélkül kijátszható. Kézből, teljes costért csak [Action] időzítéssel megy."
+   ],
+   [
+    "355.11,355.13",
+    0,
+    "A targetek csoportos feltétele: egy battlefielden vannak, és az összesített Mightjuk legfeljebb 4. Nullát is választhatsz, saját és enemy unit vegyesen is mehet."
+   ],
+   [
+    "355.11.b",
+    0,
+    "A szabályzat név szerint ezt a lapot hozza példának: ha a resolve-ra az összeg 4 fölé nő, az eredeti targetek közül kell legális részhalmazt választanod. Új unit nem vehető be."
+   ],
+   [
+    "355.11.b.1,355.11.b",
+    0,
+    "A választott részhalmazt nem lehet tovább bővíteni: nem hagyhatsz ki olyan eredeti targetet, amely még beleférne a 4-es összegbe. Ez nem a legnagyobb darabszámot jelenti: a 355.11.b példájában 1, 1, 2, 2 Mightnál a két 2-es vagy a két 1-es plusz egy 2-es is választható."
+   ],
+   [
+    "811.1.d.2",
+    0,
+    "Facedown-ból kijátszva csak azon a battlefielden lévő unitok választhatók, ahol a lap el volt rejtve."
+   ],
+   [
+    "429.1.a.1.b",
+    0,
+    "Kill instruction: a megölt unitok Deathknellje a chain-re kerül."
+   ]
+  ]
+ },
+ {
+  "name": "Fresh Beans",
+  "type": "Gear",
+  "supertypes": [],
+  "domain": [
+   "Fury"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": null,
+  "might": null,
+  "text": "When you play a unit during a showdown, you may exhaust this to draw 1.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Gear: amikor showdown alatt kijátszol egy unitot, exhaustolhatod, hogy húzz 1 lapot. Ilyenkor Action vagy Reaction időzítésű unit jöhet le (például Ambush kézből, vagy a következő körtől egy elrejtett lap facedown-ból), de egy spell vagy képesség által showdownban kijátszott unit token is beindítja. Exhausted állapotban nem használható, amíg ready nem lesz.",
+  "notes": [
+   [
+    "806.1.c.1,813.1.b,350.2",
+    1,
+    "Showdown alatt kézből csak [Action] vagy [Reaction] időzítésű unitot tudsz kijátszani. Emellett a showdown alatt resolve-oló spell vagy ability által kijátszott unit (például egy unit token) is kiváltja, mert a token is kijátszható, és kijátszott unitnak számít. Bármelyik játékos körében lévő showdown számít."
+   ],
+   [
+    "811.6",
+    1,
+    "Facedown-ból kijátszott unit is jó: a Hidden lap a következő körtől [Reaction]-t kap, így showdown alatt is lejöhet."
+   ],
+   [
+    "420.4.a,420.4.a.1",
+    0,
+    "A trigger a unit resolve-ja után fut le. Counterelt unit után nincs húzás."
+   ],
+   [
+    "383.3.a,383.3.b,415.4",
+    0,
+    "Az exhaust a trigger costja, a finalizáláskor fizeted. Exhausted Beans nem fizethet újra, amíg nem lesz ready."
+   ],
+   [
+    "414.4",
+    0,
+    "Üres Main Decknél a húzás Burn Outot okoz."
+   ]
+  ]
+ },
+ {
+  "name": "Fretful Feline",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Body"
+  ],
+  "tags": [
+   "Cat",
+   "Piltover"
+  ],
+  "energy": 6,
+  "power": null,
+  "might": 5,
+  "text": "When I become ready, give me +2 [S] this turn.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "5 Mightú unit, ami +2 Mightot kap a kör végéig, valahányszor exhaustedből ready lesz, például a köröd elején. Ha eleve ready lép be, vagy már ready volt, nem kap bónuszt.",
+  "notes": [
+   [
+    "416.3.a",
+    0,
+    "A saját Awaken Phase-edben, ha exhausted volt, ready lesz, és a trigger lefut."
+   ],
+   [
+    "416.1.b,416.1.c",
+    0,
+    "Már ready unit nem readyzhető újra. Ha ready állapotban kap ready utasítást, a trigger nem fut le."
+   ],
+   [
+    "805.6.a",
+    1,
+    "Ha egy effect miatt eleve ready lép be (\"enter ready\"), az nem \"becomes ready\" esemény, nincs +2."
+   ],
+   [
+    "317.2.c",
+    0,
+    "A +2 Might a kör végéig tart. Egy körön belül többször is triggerelhet, ha újra exhausted, majd ready lesz, a bónuszok összeadódnak."
+   ]
+  ]
+ },
+ {
+  "name": "Friendship",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Calm"
+  ],
+  "tags": [],
+  "energy": 1,
+  "power": null,
+  "might": null,
+  "text": "[Reaction] (Play any time, even before spells and abilities resolve.)\nChoose a unit. Give it +1 [S] this turn for each of the following tags among your units — Bird, Cat, Dog, and Poro.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Reakcióként egy unit +1 Mightot kap minden Bird, Cat, Dog és Poro tag után, ami a saját unitjaid között megvan, legfeljebb +4-et. A tageket számolja, nem a unitokat: két Poro csak +1. A token unitok tagjei is számítanak.",
+  "notes": [
+   [
+    "355.7",
+    0,
+    "A unit target, bármelyik unit választható, enemy is."
+   ],
+   [
+    "143.1.b",
+    1,
+    "Tageket számol, nem unitokat: Bird, Cat, Dog és Poro, mindegyik legfeljebb egyszer. A maximum +4. Két Poro unit csak +1-et ér."
+   ],
+   [
+    "359.3.f.2",
+    1,
+    "Az általad kontrollált unitok tagjeit a resolve-kor nézi, a board bármely pontján. A megerősített unit saját tagje csak akkor számít, ha te kontrollálod."
+   ],
+   [
+    "185.2.c",
+    0,
+    "Token unitok tagjei is számítanak, például a Bird token."
+   ],
+   [
+    "359.3.e.7",
+    0,
+    "Ha a unit a resolve előtt illegális target lesz, a spell hatás nélkül resolve-ol."
+   ]
+  ]
+ },
+ {
+  "name": "Frigid Jewel",
+  "type": "Gear",
+  "supertypes": [],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": null,
+  "might": null,
+  "text": "When you draw your second card each turn, give a friendly unit +2 [S] this turn.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Gear: amikor egy körben a második lapodat húzod, egy saját unitod +2 Mightot kap a kör végéig. A saját körödben általában a Draw Phase húzása az első, így a következő húzásod indítja be; a harmadik és további húzás már nem. Az ellenfél körében is működik, ha ott kétszer húzol.",
+  "notes": [
+   [
+    "414.2.a",
+    1,
+    "A saját körödben általában a Draw Phase húzása az első lap, a trigger a következő húzásnál jön. Ha már a Beginning Phase-ben húztál (például egy hold trigger miatt), a Draw Phase húzása lehet a második. A \"each turn\" miatt az opponent körében is működik, ha ott két lapot húzol."
+   ],
+   [
+    "414.1",
+    1,
+    "A \"Draw 2\" két külön lap húzása, tehát egyetlen ilyen effect is eléri a második lapot. A harmadik és további húzás már nem triggerel."
+   ],
+   [
+    "355.10,355.5.b",
+    0,
+    "A friendly unit target, a trigger chain-re kerülésekor választod. Nem \"may\": ha van friendly unitod, kötelező választani."
+   ],
+   [
+    "403.4",
+    0,
+    "Ha nincs friendly unitod, a trigger lekerül a chainről."
+   ],
+   [
+    "359.3.e.5",
+    0,
+    "Ha a unit a resolve előtt elhagyja a boardot vagy már nem friendly, a +2 Might elvész."
+   ],
+   [
+    "317.2.c",
+    0,
+    "A +2 Might a kör végén, az Expiration Stepben lejár."
+   ]
+  ]
+ },
+ {
+  "name": "Frigid Touch",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": null,
+  "might": null,
+  "text": "[Reaction] (Play any time, even before spells and abilities resolve.)\n[Repeat] [2] (You may pay the additional cost to repeat this spell's effect.)\nGive a unit -2 [S] this turn.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Reakcióként egy unit -2 Mightot kap a kör végéig. Plusz 2 Energyért kétszer fut le: egy unitra -4, vagy két unitra -2 és -2. A sebzett unitot megöli, ha a rajta lévő sebzés eléri az új Mightját.",
+  "notes": [
+   [
+    "355.7,820.2.a",
+    0,
+    "A unit target. Repeat [2]: kétszer ugyanarra a unitra -4, vagy két különböző unitra -2 és -2. Alsó korlát nincs."
+   ],
+   [
+    "142.4.b",
+    0,
+    "A szabályzat név szerint ezt a lapot hozza példának: 5 Mightú, 3 damage-et viselő uniton a Might 3-ra csökken, a rajta lévő damage lethal lesz, a unit meghal."
+   ],
+   [
+    "355.14.h.1",
+    0,
+    "A szabályzat példája: ha egy unit a Mightjával egyenlő damage-et oszt szét (Alpha Strike), a rá válaszul kijátszott Frigid Touch csökkenti a szétosztható damage-et."
+   ],
+   [
+    "832.1.d.1",
+    0,
+    "A szabályzat példája: a Primordial Roar a Show Off pillanatában rögzíti a unit Mightját. Az utána kijátszott Frigid Touch már nem csökkenti a damage-et."
+   ],
+   [
+    "356.4.c",
+    0,
+    "A szabályzat példája: az optional additional costra szóló kedvezmény (Ezreal, Prodigy) a Repeat costra azonnal érvényesül, amint az a spell costjához adódik."
+   ]
+  ]
+ },
+ {
+  "name": "Frisky Hunter",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Calm"
+  ],
+  "tags": [
+   "Cat",
+   "Zaun"
+  ],
+  "energy": 4,
+  "power": null,
+  "might": 3,
+  "text": "When you play me, play a 1 [S] Bird unit token with [Deflect] here. (Opponents must pay [A] to choose it with a spell or ability.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "3 Mightú unit, kijátszáskor kapsz mellé ugyanoda egy 1 Mightú Bird tokent, amit az ellenfél csak plusz Powerért választhat ki. Ha a Hunter közben eltűnik, a token elmarad.",
+  "notes": [
+   [
+    "383.4.a.2",
+    0,
+    "Play effect: a trigger azután kerül chain-re, hogy a Hunter belépett a boardra. Az opponent reagálhat rá, mielőtt a Bird token megjelenik."
+   ],
+   [
+    "187.7",
+    0,
+    "A Bird token domain nélküli, 1 Mightú unit token Bird taggel és [Deflect]-tel."
+   ],
+   [
+    "420.3.b.2,359.3.e.12",
+    1,
+    "A \"here\" a Hunter resolve-kori helyét jelenti. Ha a Hunter a resolve előtt elhagyja a boardot, nincs helye, a token kijátszása ignorálódik."
+   ],
+   [
+    "185.2.d",
+    0,
+    "A token unit ugyanúgy exhausted lép be, mint bármely unit, abban a körben Standard Move-ot nem tud tenni."
+   ],
+   [
+    "186.1",
+    0,
+    "Ha a Bird token kézbe, trashbe vagy deckbe kerülne, megszűnik létezni."
+   ]
+  ]
+ },
+ {
+  "name": "Frostcoat Cub",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [
+   "Dog",
+   "Freljord"
+  ],
+  "energy": 3,
+  "power": null,
+  "might": 3,
+  "text": "You may pay [C] as an additional cost to play me.\nWhen you play me, if you paid the additional cost, give a unit -2 [S] this turn.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "3 Mightú unit. Ha kijátszáskor plusz 1 Mind Powert fizetsz, egy általad kiválasztott unit -2 Mightot kap a kör végéig. Ez a sebzett unitot meg is ölheti.",
+  "notes": [
+   [
+    "356.2.b.1,355.1.a",
+    0,
+    "A [C] itt Mind Power, optional additional cost. A kijátszás 2. lépésében döntesz róla."
+   ],
+   [
+    "383.2.a.1",
+    0,
+    "Az \"if you paid the additional cost\" a trigger feltétel része. Fizetés nélkül a trigger nem kerül chain-re."
+   ],
+   [
+    "355.10,355.5.b",
+    0,
+    "A unit target, bármelyik locationön. A trigger chain-re kerülésekor választod, nem a Cub kijátszásakor."
+   ],
+   [
+    "142.4.b",
+    0,
+    "Sebzett uniton a -2 Might halálos lehet: ha a rajta lévő damage eléri az új Mightját, a cleanupban meghal."
+   ],
+   [
+    "143.2.c,143.2.c.1",
+    0,
+    "Nincs minimum: a Might 0 alá is mehet. Ilyenkor 0-ként kezelik, de a későbbi bónuszok a valódi negatív értékre rakódnak."
+   ]
+  ]
+ },
+ {
+  "name": "Frostcoat Mother",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Calm"
+  ],
+  "tags": [
+   "Dog",
+   "Freljord"
+  ],
+  "energy": 3,
+  "power": null,
+  "might": 3,
+  "text": "[Empower] [12]. This ability costs [1] less for each rune you control. (Pay the cost: Empower me. Use only if not Empowered.)\n[Empowered][>] I have +3 [S].",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "3 Mightú unit. Empowered állapotba hozható 12 Energyért, ami minden rune-od után 1-gyel olcsóbb, sok rune-nál akár ingyenes. Empowered állapotban +3 Mightja van. Csak a saját Main Phase-edben, showdownon kívül aktiválható.",
+  "notes": [
+   [
+    "827.1.c.3,356.4.g",
+    0,
+    "Az Empower cost kedvezményét az ability Determine Total Cost lépésében nézi a játék, az akkor kontrollált rune-ok száma alapján. Az exhausted rune is számít."
+   ],
+   [
+    "356.6",
+    0,
+    "12 rune-nál az Empower ingyenes, 0 alá nem mehet."
+   ],
+   [
+    "827.1.c.3,206.1",
+    1,
+    "A rune-onkénti csökkentés az Empower ability saját szövege, ezért a 827.1.c.3 szerint bármilyen célú Empower cost vizsgálatnál beleszámít. Ez a 206.1 általános (base cost) szabálya alól kivétel, tehát a costot vizsgáló effectek a csökkentett értéket látják, nem a puszta 12-t."
+   ],
+   [
+    "381.1",
+    0,
+    "Csak a saját Main Phase-edben, Neutral Open State-ben (showdownon kívül) aktiválható, és csak ha még nem Empowered."
+   ],
+   [
+    "828.1.c,443.1",
+    0,
+    "A +3 Might addig tart, amíg Empowered. Sebzett állapotban a disempower megölheti."
+   ]
+  ]
+ },
+ {
+  "name": "Frozen Fortress",
+  "type": "Battlefield",
+  "supertypes": [],
+  "domain": [],
+  "tags": [],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": "At the start of each player's Beginning Phase, deal 1 to each unit here. (This happens before scoring.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Battlefield: minden játékos körének elején, még a pontozás előtt, minden itt álló unit 1 sebzést kap, a tieid is. Az 1 Mightú unitok meghalnak, és ha így minden unitod elfogy innen, a köröd elején nem holdolod ezt a battlefieldet. Később a körben még conquerelheted.",
+  "notes": [
+   [
+    "315.2.a.1,315.2.b",
+    0,
+    "A Beginning Step effectjei a Scoring Step előtt futnak le: a sebzés a hold előtt érkezik, minden játékos körének elején."
+   ],
+   [
+    "355.5.a,355.10.d",
+    0,
+    "\"Each unit here\": nincs választás és nincs target. Minden itt lévő unit kap 1 damage-et, a sajátod is, Deflect nem számít."
+   ],
+   [
+    "143.2.b,323.4",
+    0,
+    "Az 1 Mightú unit (például Recruit token) a következő cleanupnál meghal."
+   ],
+   [
+    "190.4.c,323.5",
+    1,
+    "Ha ettől az összes itt lévő unitod meghal, elveszíted a controlt, és abban a körben nem holdolsz itt."
+   ],
+   [
+    "143.3.b.1",
+    0,
+    "A damage minden kör végén gyógyul, tehát a körönkénti 1 sebzés nem gyűlik össze."
+   ],
+   [
+    "190.6.b",
+    0,
+    "Ha a battlefield uncontrolled, a triggert a Turn Player teszi chain-re."
+   ]
+  ]
+ },
+ {
+  "name": "Fury Rune",
+  "type": "Rune",
+  "supertypes": [
+   "Basic"
+  ],
+  "domain": [
+   "Fury"
+  ],
+  "tags": [],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": null,
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Alap Fury rune a Rune Deckbe, csak Fury domainű legend mellé. Exhaustolva 1 Energyt ad, recycle-ölve (a Rune Deck aljára téve) 1 Fury Powert. A köröd elején újra ready lesz.",
+  "notes": [
+   [
+    "103.4.a,103.4.a.1",
+    0,
+    "A Rune Deck pontosan 12 rune, és mind a legend Domain Identity-jén belül kell legyen. Fury Rune csak Fury domainű legend mellé tehető."
+   ],
+   [
+    "164.2.a",
+    0,
+    "Exhaustolva 1 Energyt ad, domaintől függetlenül."
+   ],
+   [
+    "164.2.b,164.2.b.1,417.1.b",
+    0,
+    "Recycle-ölve 1 Fury Powert ad, és a Rune Deck aljára kerül."
+   ],
+   [
+    "161.1,161.1.a",
+    0,
+    "A rune nem Main Deck lap (161.1) és nem Permanent (161.1.a), ezért a Main Deck lapokra vagy permanentekre ható effectek nem érintik."
+   ],
+   [
+    "315.1.b",
+    0,
+    "Az exhausted rune a saját Awaken Phase-edben lesz újra ready."
+   ]
+  ]
+ },
+ {
+  "name": "Galio, Indefatigable",
+  "type": "Unit",
+  "supertypes": [
+   "Champion"
+  ],
+  "domain": [
+   "Order"
+  ],
+  "tags": [
+   "Demacia",
+   "Galio"
+  ],
+  "energy": 3,
+  "power": 1,
+  "might": 6,
+  "text": "[Deflect] (Opponents must pay [A] to choose me with a spell or ability.)\n[Tank] (I must be assigned combat damage first.)\nI don't deal combat damage.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "6 Mightú champion, akit az ellenfél csak plusz Powerért választhat ki, és harcban először rá kell halálos sebzést osztani. Ő maga nem okoz harci sebzést, tehát egyedül támadva semmit nem öl meg. Remek védőpajzs a többi unitod előtt.",
+  "notes": [
+   [
+    "815.1.b,815.1.c.1",
+    0,
+    "[Tank]: az opponentnek előbb rá kell kiosztania a lethal damage-et, csak utána oszthat a többi, Tank nélküli unitodra."
+   ],
+   [
+    "467.2.a,467.2.b",
+    1,
+    "Mivel nem oszt combat damage-et, a 6 Mightja nem számít bele a kiosztható sebzésbe. A Mightja csak azt határozza meg, mennyi sebzés kell a megöléséhez."
+   ],
+   [
+    "468.1.a.2,468.3.d",
+    1,
+    "Egyedül támadva nem öl meg semmit: ha a defender megmarad, Galio recallolódik a base-be, nincs conquer."
+   ],
+   [
+    "418.6.b.3",
+    1,
+    "A tiltás csak a combat damage-re szól. Ha egy spell őt jelöli meg a sebzés forrásának, az nem combat damage, azt kiosztja."
+   ],
+   [
+    "809.1.c",
+    0,
+    "[Deflect]: az opponent őt targetelő spellje vagy abilityje +[A]-ba kerül."
+   ]
+  ]
+ },
+ {
+  "name": "Gangplank, Naval",
+  "type": "Unit",
+  "supertypes": [
+   "Champion"
+  ],
+  "domain": [
+   "Body"
+  ],
+  "tags": [
+   "Bilgewater",
+   "Gangplank"
+  ],
+  "energy": 6,
+  "power": null,
+  "might": 6,
+  "text": "[Empower] [C][C] ([C][C]: Empower me. Use only if not Empowered.)\n[Empowered][>] If a spell or ability that chooses me would stun me, give me -[S], or return me to hand, give me +3 [S] this turn instead.",
+  "equip_effect_text": null,
+  "old_text_before_errata": "[Empower] [C][C] ([C][C]: Empower me. Use only if not Empowered.)\n[Empowered][>] If a spell or ability that chooses me would stun me, give me -[S], or return me to hand, give me +3 [S] instead.",
+  "short": "6 Mightú champion, 2 Body Powerért Empowered lesz a saját Main Phase-edben, showdownon kívül. Ekkor ha egy őt kiválasztó spell vagy képesség stunnolná, gyengítené vagy kézbe küldené, helyette +3 Mightot kap a kör végéig. Ölés, sebzés és a mindenkire ható lapok ellen nem véd.",
+  "notes": [
+   [
+    "369.1,827.1.c.1",
+    0,
+    "Az Empowered ability replacement effect, csak Empowered állapotban él. Az Empower 2 Body Powerbe kerül, és csak a saját Main Phase-edben aktiválható."
+   ],
+   [
+    "355.5.a",
+    1,
+    "Csak az őt targetelő spellre és abilityre hat, a sajátodra is. \"All units\" típusú, nem választó effect ugyanúgy stunolja, gyengíti vagy visszaveszi."
+   ],
+   [
+    "370.1.a.1",
+    0,
+    "A kicserélt esemény nem történik meg: nem lesz stunned, nem kap -Mightot, nem megy kézbe. Az ezekre triggerelő abilityk sem futnak le."
+   ],
+   [
+    "359.3.e.14.b",
+    0,
+    "A spell többi része lefut. Ha egy későbbi instruction nem magára a kicserélt actionre hivatkozik, az megtörténik."
+   ],
+   [
+    "429.1.a.1",
+    1,
+    "Kill, banish, sebzés és Move ellen nem véd, csak a felsorolt három hatás ellen."
+   ],
+   [
+    "317.2.c",
+    1,
+    "Az errata \"this turn\"-t tett a +3 Might mögé: a bonus a kör végén lejár. A korábbi szöveg szerint nem volt időkorlátja."
+   ]
+  ]
+ },
+ {
+  "name": "Garbage Grabber",
+  "type": "Gear",
+  "supertypes": [],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": null,
+  "might": null,
+  "text": "Recycle 3 from your trash, [1], [T]: Draw 1.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Gear: 3 lap trashből a deck aljára tétele, 1 Energy és exhaust árán húzol 1 lapot. Legalább 3 lap kell a trashben. Csak a saját Main Phase-edben, showdownon kívül használható, és mivel exhaust a költsége, ready-zés nélkül körönként egyszer.",
+  "notes": [
+   [
+    "417.3",
+    0,
+    "A \"Recycle 3 from your trash\" cost: ha nincs legalább 3 lap a trashedben, az ability nem aktiválható."
+   ],
+   [
+    "417.5",
+    0,
+    "A szabályzat név szerint ezt a lapot hozza példának: a 3 lapot te választod ki, és véletlen sorrendben kerülnek a Main Deck aljára."
+   ],
+   [
+    "417.6,355.10.c",
+    0,
+    "A recycle-ölt lapok nem targetek, mert a cost részei. Bármilyen típusú lap lehet."
+   ],
+   [
+    "151.2,415.1.b",
+    0,
+    "Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható. Az Exhaust cost miatt exhausted Grabberrel nem megy, így ha más effect nem readyzi, körönként egyszer."
+   ],
+   [
+    "414.4",
+    1,
+    "Üres decknél a recycle-ölt 3 lap közül húzol, így a Grabber a Burn Out ellen is véd."
+   ]
+  ]
+ },
+ {
+  "name": "Gardens of Becoming",
+  "type": "Battlefield",
+  "supertypes": [],
+  "domain": [],
+  "tags": [],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": "Units here have \"[T]: Gain 1 XP.\"",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Battlefield: az itt álló unitok képességet kapnak: exhaustolva a unit irányítója 1 XP-t kap, a saját Main Phase-ében, showdownon kívül. Az XP a játékosnál marad. Az így exhaustolt unit abban a körben nem tud Standard Move-ot tenni.",
+  "notes": [
+   [
+    "145.2",
+    0,
+    "Az itt lévő unit activated abilityt kap. A controllere a saját Main Phase-ében, Open State-ben használhatja, showdown alatt nem."
+   ],
+   [
+    "143.4,144.2",
+    1,
+    "A cost a unit exhaustolása: frissen kijátszott (exhausted) unit nem használhatja, és aki XP-t gyűjt, abban a körben nem tud Standard Move-ot tenni."
+   ],
+   [
+    "730.1,729.2",
+    0,
+    "Az XP a játékosé, nem a unité, és Public Information. Megmarad akkor is, ha a unit meghal vagy elmegy innen."
+   ],
+   [
+    "377.3.b.2",
+    1,
+    "Ez nem Add ability, ezért chain-re kerül, és az opponent reagálhat rá."
+   ],
+   [
+    "364.2",
+    1,
+    "Mindkét játékos itt lévő unitjaira vonatkozik. Amint a unit elhagyja a battlefieldet, elveszíti az abilityt."
+   ]
+  ]
+ },
+ {
+  "name": "Garen, Commander",
+  "type": "Unit",
+  "supertypes": [
+   "Champion"
+  ],
+  "domain": [
+   "Order"
+  ],
+  "tags": [
+   "Demacia",
+   "Elite",
+   "Garen"
+  ],
+  "energy": 6,
+  "power": 1,
+  "might": 5,
+  "text": "Other friendly units have +1 [S] here.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "5 Mightú champion: a vele egy helyen álló többi saját unitod +1 Mightot kap, base-ben is. Ha Garen harc közben meghal vagy elmegy, a bónusz azonnal megszűnik, és a sebzett társak meghalhatnak.",
+  "notes": [
+   [
+    "365.1",
+    0,
+    "Passive ability: csak addig él, amíg Garen a boardon van, és azonnal megszűnik, ha elhagyja."
+   ],
+   [
+    "146.1",
+    1,
+    "A \"here\" Garen aktuális locationje. Base-ben állva a base-ben lévő többi unitod kap +1-et."
+   ],
+   [
+    "478.4",
+    1,
+    "Ha Garen combat közben meghal vagy elmozdul, a többiek azonnal elveszítik a +1-et. A rajtuk lévő damage ekkor halálossá válhat."
+   ],
+   [
+    "740.1.a",
+    0,
+    "Csak friendly unitokra hat, Garenre magára nem. Több Garen bónusza összeadódik."
+   ]
+  ]
+ },
+ {
+  "name": "Garen, Might of Demacia (Starter)",
+  "type": "Legend",
+  "supertypes": [],
+  "domain": [
+   "Body",
+   "Order"
+  ],
+  "tags": [
+   "Garen"
+  ],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": "When you conquer, if you have 4+ units at that battlefield, draw 2.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Legend: ha elfoglalsz egy battlefieldet, és ott legalább 4 unitod áll, húzol 2 lapot. A tokenek is számítanak. A feltételt az elfoglalás pillanatában nézi a játék, utána az ellenfél már nem tudja elrontani.",
+  "notes": [
+   [
+    "103.2.b",
+    0,
+    "A legend Body és Order domainje adja a deck Domain Identity-jét."
+   ],
+   [
+    "383.2.a.1",
+    0,
+    "Az \"if you have 4+ units\" közvetlenül a feltétel után áll, ezért a trigger feltételének része. Ha a conquer pillanatában nincs ott 4 unitod, a trigger fel sem kerül a chain-re."
+   ],
+   [
+    "383.2.a.1",
+    0,
+    "Ha a trigger már a chainen van, és az opponent reakcióként elvesz onnan egy unitot, az ability ettől még resolve-ol, húzol 2-t."
+   ],
+   [
+    "185.2.d",
+    0,
+    "A token unitok is unitok, beleszámítanak a 4-be."
+   ],
+   [
+    "472,383.4.c.2.b",
+    0,
+    "Battlefieldenként és körönként egyszer conquerelhetsz. Két battlefield elfoglalásakor két külön trigger megy, mindkettő a saját battlefieldjén számolja a unitokat."
+   ],
+   [
+    "383.4.c.2.c,473.1.b.1",
+    0,
+    "Akkor is triggerel, ha a conquerért járó pont elmarad vagy helyettesítődik, például a Final Point helyett csak lapot húzol."
+   ],
+   [
+    "414.4",
+    0,
+    "A draw 2 kötelező. Ha nincs elég lap a Main Deckben, Burn Out következik."
+   ]
+  ]
+ },
+ {
+  "name": "Garen, Rugged",
+  "type": "Unit",
+  "supertypes": [
+   "Champion"
+  ],
+  "domain": [
+   "Body"
+  ],
+  "tags": [
+   "Demacia",
+   "Elite",
+   "Garen"
+  ],
+  "energy": 6,
+  "power": 1,
+  "might": 5,
+  "text": "[Assault 2], [Shield 2] (+2 [S] while I'm an attacker or defender.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "5 Mightú champion, ami harcban mindig +2 Mightot kap, akár támad, akár védekezik, így ott 7 Mightú. Harcon kívül csak 5, a spellek és Might feltételek ezzel számolnak.",
+  "notes": [
+   [
+    "807.1.c,814.1.c",
+    0,
+    "Attackerként az [Assault 2], defenderként a [Shield 2] ad +2 Mightot. Egyszerre csak az egyik él, combatban mindig 7 Might."
+   ],
+   [
+    "807.2,814.2",
+    0,
+    "Más forrásból kapott Assault vagy Shield a megfelelő értékhez hozzáadódik."
+   ],
+   [
+    "710",
+    1,
+    "Combaton kívül 5 Mightú: spell damage és \"Might X or less\" feltételek ellen ezzel számolj."
+   ]
+  ]
+ },
+ {
+  "name": "Gearhead",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [
+   "Zaun"
+  ],
+  "energy": 5,
+  "power": null,
+  "might": 3,
+  "text": "[Accelerate] (You may pay [1][C] as an additional cost to have me enter ready.)\nEach Equipment attached to me gives double its base Might bonus.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "3 Mightú unit. Accelerate: kijátszáskor fizethetsz plusz 1 Energy és 1 Mind Power költséget, ekkor ready lép be. A rá csatolt Equipmentek a base Might bónuszuk dupláját adják, például egy +2-es +4-et. Más unitra átkerülve az Equipment ismét csak a normál értéket adja.",
+  "notes": [
+   [
+    "805.1.b,805.1.b.1",
+    0,
+    "[Accelerate]: kijátszáskor [1] és egy Mind Power additional costért ready lép be. A Power csak a unit saját domainjéből fizethető."
+   ],
+   [
+    "137.3,435.1.d",
+    0,
+    "Az Equipment Might Bonusa annak a unitnak a Mightját módosítja, amelyre csatolva van."
+   ],
+   [
+    "479.2.a",
+    1,
+    "A \"base Might bonus\" az Equipment alapértéke, a rá ható külön módosítók nélkül. Ezt duplázza: egy +2-es Equipment Gearheaden +4-et ad."
+   ],
+   [
+    "364,365.1",
+    1,
+    "Passzív ability, minden rá csatolt Equipmentre külön hat. Ha az Equipment másik unitra kerül át, ott már csak az alapértékét adja."
+   ],
+   [
+    "719.5",
+    0,
+    "Ha Gearhead elhagyja a boardot, az Equipment leválik és a boardon marad."
+   ]
+  ]
+ },
+ {
+  "name": "Gem Jammer",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Fury"
+  ],
+  "tags": [
+   "Bandle City",
+   "Mech"
+  ],
+  "energy": 2,
+  "power": null,
+  "might": 2,
+  "text": "When you play me, give a unit [Ganking] this turn. (It can move from battlefield to battlefield.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "2 Mightú unit. Kijátszáskor egy általad kiválasztott unit a kör végéig battlefieldről battlefieldre mozoghat. Ehhez a unitnak ready-nek kell lennie, ezért magára adva abban a körben általában nem ér semmit, mert exhausted lép be, hacsak egy effect nem readyzi.",
+  "notes": [
+   [
+    "355.10,355.5.b",
+    0,
+    "A \"give a unit\" unitja target, a trigger chain-re kerülésekor választod. Bármelyik játékos unitja lehet, bárhol."
+   ],
+   [
+    "810.1.c.3,144.2",
+    0,
+    "A Ganking nem ad plusz mozgást. A kiválasztott unitnak readynek kell lennie a Standard Move-hoz."
+   ],
+   [
+    "143.4,144.2",
+    1,
+    "A Jammer exhausted lép be, ezért saját magára adva a Ganking abban a körben csak akkor használható ki, ha egy effect readyzi vagy ready lép be (például Firebrand Raider mellett)."
+   ],
+   [
+    "810.2",
+    0,
+    "Ha a unitnak már van Gankingje, a második redundáns."
+   ],
+   [
+    "317.2.c",
+    0,
+    "A Ganking a kör végén lejár."
+   ]
+  ]
+ },
+ {
+  "name": "Gemcraft Seer",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [
+   "Mount Targon"
+  ],
+  "energy": 3,
+  "power": 1,
+  "might": 3,
+  "text": "[Vision] (When you play me, look at the top card of your Main Deck. You may recycle it.)\nOther friendly units have [Vision].",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "3 Mightú unit. Kijátszáskor megnézed a decked felső lapját, és a deck aljára teheted. Amíg a boardon van, minden később kijátszott saját unitod, a tokenek is, ugyanezt adja. A már boardon lévő unitok nem.",
+  "notes": [
+   [
+    "817.1.b,437.1",
+    0,
+    "Vision: amikor a Seer a boardra lép, megnézed a Main Deck felső lapját, és recycle-ölheted."
+   ],
+   [
+    "479.3.b,365.1",
+    0,
+    "Passive: amíg a Seer a boardon van, minden más friendly unit megkapja a Visiont. A később kijátszott unitjaid, tokenek is, Predictet adnak."
+   ],
+   [
+    "817.2,817.2.a",
+    0,
+    "Saját Visionnel rendelkező unit így két példányt kap: külön triggerelnek, és külön döntesz a recycle-ről."
+   ],
+   [
+    "817.2.b",
+    0,
+    "Ha az első Predictnél nem recycle-ölsz, a második ugyanazt a lapot mutatja."
+   ],
+   [
+    "817.1.c",
+    1,
+    "A már boardon lévő unitok a Seer érkezésekor nem triggerelnek, mert a Vision a boardra lépésre fut le."
+   ]
+  ]
+ },
+ {
+  "name": "Gemhand Hunter",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Body"
+  ],
+  "tags": [
+   "Mount Targon",
+   "Yordle"
+  ],
+  "energy": 2,
+  "power": null,
+  "might": 2,
+  "text": "[Hunt] (When I conquer or hold, gain 1 XP.)\n[Level 6][>] I have +1 [S]. (While you have 6+ XP, get the effect.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "2 Mightú unit. Hunt: ha ott áll azon a battlefielden, amelyet conquerelsz, vagy amelyet a köröd elején holdolsz, 1 XP-t kapsz. Level 6: amíg legalább 6 XP-d van, +1 Mightja van. Ha 6 XP alá esel, a bónusz azonnal elvész.",
+  "notes": [
+   [
+    "823.1.c.1",
+    0,
+    "Hunt: amikor a Hunter conquerel vagy holdol, 1 XP-t kapsz."
+   ],
+   [
+    "824.1.b.1,824.1.c",
+    0,
+    "Level 6: amíg legalább 6 XP-d van, a Hunter +1 Mightot kap. A feltétel folyamatosan ellenőrzött, nem kell hozzá semmit aktiválni."
+   ],
+   [
+    "824.1.d,142.4.b",
+    1,
+    "Ha XP-t költesz és 6 alá esel, a +1 azonnal megszűnik. Combat közben ez azt jelentheti, hogy a rajta lévő damage halálossá válik."
+   ],
+   [
+    "824.1.c.1",
+    0,
+    "Ha a Hunter controllert vált, az új controller XP-je számít."
+   ]
+  ]
+ },
+ {
+  "name": "Gentle Gemdragon",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Body"
+  ],
+  "tags": [
+   "Dragon",
+   "Mount Targon"
+  ],
+  "energy": 8,
+  "power": null,
+  "might": 8,
+  "text": "When you play me or another Dragon, ready up to 2 runes.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "8 Mightú Dragon. Amikor kijátszod, vagy amíg a boardon van, egy másik Dragont játszol ki, legfeljebb 2 rune-t ready-vé tesz. A szöveg nem szűkít a sajátjaidra, de a gyakorlatban a saját exhausted rune-jaidat választod. Ez gyakorlatilag 2 Energyt ad vissza minden Dragon után.",
+  "notes": [
+   [
+    "420.4.a",
+    0,
+    "Másik Dragon kijátszásakor akkor triggerel, amikor az a unit már belépett a boardra. A Gemdragonnak ekkor a boardon kell lennie."
+   ],
+   [
+    "355.13",
+    0,
+    "\"Up to 2\": 0, 1 vagy 2 rune választható, target nélkül is chain-re kerül."
+   ],
+   [
+    "355.9.a",
+    1,
+    "A boardon lévő rune-ok targetek, és a szöveg nem szűkít friendlyre. A gyakorlatban a saját exhausted rune-jaidat választod."
+   ],
+   [
+    "416.1.c",
+    0,
+    "Már ready rune-on a ready nem csinál semmit."
+   ],
+   [
+    "164.2.a",
+    1,
+    "A ready rune újra exhaustolható Energyért, vagyis a 8-as costból gyakorlatilag 2 Energy visszajön, és minden további Dragon 2-vel olcsóbb."
+   ]
+  ]
+ },
+ {
+  "name": "Gentlemen's Duel",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Body"
+  ],
+  "tags": [],
+  "energy": 6,
+  "power": 1,
+  "might": null,
+  "text": "[Action] (Play on your turn or in showdowns.)\nGive a friendly unit +3 [S] this turn. Then choose an enemy unit. They deal damage equal to their Mights to each other.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Egy saját unitod +3 Mightot kap a kör végéig, majd egy ellenséges unittal a Mightjukkal sebzik egymást. A te unitod már a +3-mal sebez. Ha az ellenséges unit közben eltűnik, a +3 akkor is megmarad. A saját körödben vagy showdownban játszható ki.",
+  "notes": [
+   [
+    "806.1.c.1,358.4",
+    0,
+    "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+   ],
+   [
+    "355.5,355.8",
+    1,
+    "A friendly és az enemy unit is target, mindkettőt a finalizáláskor választod. A \"Then choose\" itt nem \"do this\", tehát nem külön chain item."
+   ],
+   [
+    "418.6.b.3",
+    0,
+    "A sebzést a unitok osztják ki egymásnak, nem a spell. A friendly unit már a +3 Mighttal sebez."
+   ],
+   [
+    "359.3.e.12",
+    1,
+    "Ha az enemy unit illegális targetté válik, sebzés nincs, de a friendly unit megkapja a +3-at. Ha a friendly unit lesz illegális, semmi sem történik."
+   ],
+   [
+    "317.2.c",
+    0,
+    "A +3 a kör végéig megmarad, a spell utáni combat sebzésbe is beleszámít."
+   ]
+  ]
+ },
+ {
+  "name": "Get Excited!",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Fury"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": 1,
+  "might": null,
+  "text": "[Action] (Play on your turn or in showdowns.)\nDiscard 1. Deal its Energy cost as damage to a unit at a battlefield. (Ignore its Power cost.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Eldobsz egy lapot a kezedből, és annyi sebzést kap egy battlefielden álló unit, amennyi az eldobott lap Energy költsége. A saját körödben vagy showdown alatt játszható ki. Te választod, mit dobsz el, de 0 költségű lappal vagy üres kézzel nincs sebzés.",
+  "notes": [
+   [
+    "806.1.c.1,358.4",
+    0,
+    "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+   ],
+   [
+    "355.10,355.9.b",
+    0,
+    "A unit target és battlefielden kell lennie. A targetet kijátszáskor választod, a discardolt lapot csak a resolve-kor."
+   ],
+   [
+    "423.2.a,423.1.a",
+    0,
+    "A discard a resolve része, nem cost, és kötelező. Te választod ki, melyik lapot dobod."
+   ],
+   [
+    "206,418.1.e",
+    0,
+    "A sebzés a discardolt lap nyomtatott Energy cost-ja. 0 costú lap után nincs sebzés."
+   ],
+   [
+    "423.4,359.3.e.6",
+    1,
+    "Üres kéznél a discard negálódik, nincs lap, amire a sebzés hivatkozhatna, ezért a spell nem sebez."
+   ],
+   [
+    "359.3.e.5",
+    1,
+    "Ha a target illegálissá válik, a sebzés elmarad, de a discard ettől még megtörténik."
+   ],
+   [
+    "423.1.b",
+    0,
+    "A \"when I am discarded\" típusú triggerek a discard után lefutnak."
+   ]
+  ]
+ },
+ {
+  "name": "Glasc Mixologist",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Order"
+  ],
+  "tags": [
+   "Zaun"
+  ],
+  "energy": 5,
+  "power": 1,
+  "might": 5,
+  "text": "[Deathknell] — You may play a unit with cost no more than [3] and no more than [A] from your trash, ignoring its cost. (When I die, get the effect.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Amikor meghal, ingyen kijátszhatsz a trashedből egy legfeljebb 3 Energy és legfeljebb 1 Power költségű unitot. Ez nem kötelező. Csak akkor jár, ha tényleg meghal és a trashbe kerül: banish vagy kézbe visszavétel esetén nem.",
+  "notes": [
+   [
+    "808.1.c,808.1.d.2",
+    0,
+    "[Deathknell]: \"When I die\" trigger. Még azelőtt chain-re kerül, hogy a unit a trashbe menne, lehet rá reagálni, és akkor is resolve-ol, ha a unit már nincs a boardon."
+   ],
+   [
+    "808.1.d.1,428.2.a",
+    0,
+    "Nem triggerel, ha a unit nem a trashbe kerül: banish, kézbe vétel, recycle, vagy ha a halálát replacement effect lecseréli."
+   ],
+   [
+    "383.3.a",
+    0,
+    "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz. Ha nem kéred, lekerül a chainről."
+   ],
+   [
+    "355.10.a,355.8",
+    0,
+    "A trashben lévő unit target. Ha nincs megfelelő unit a trashedben a finalizáláskor, a trigger chainre kerülve rögtön le is kerül róla (403.4), így nem fut le."
+   ],
+   [
+    "206",
+    0,
+    "A feltétel a nyomtatott costot nézi: legfeljebb 3 Energy és legfeljebb 1 Power. A Mixologist maga (5 Energy) nem felel meg."
+   ],
+   [
+    "356.1.b.1,356.1.b.3",
+    0,
+    "\"Ignoring its cost\": az Energy és a Power cost is nulla. Optional additional cost (például Gust Monk [1]-e) ettől még kifizethető."
+   ],
+   [
+    "359.3.e.2",
+    0,
+    "Ha a kiválasztott unit a resolve előtt kikerül a trashből (például valaki banisheli), a trigger nem csinál semmit."
+   ]
+  ]
+ },
+ {
+  "name": "Glowstone",
+  "type": "Gear",
+  "supertypes": [],
+  "domain": [
+   "Order"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": null,
+  "might": null,
+  "text": "[Empower] [A][A] ([A][A]: Empower me. Use only if not Empowered.)\nDisempower this, [T]: Choose a player. They gain control of this and recall it. (Send it to their base.)\nAt the end of your turn, kill this and deal 5 to all units you control.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Gear. Empower: 2 bármely domainű Power. Ha Empowered, disempowerelve és exhaustolva odaadhatod egy választott játékosnak: ő irányítja, és az ő base-ébe kerül. Mindkét képesség csak a saját Main Phase-edben, showdownon kívül használható. Az irányítója körének végén a gear meghal, és 5 sebzést oszt az irányítója minden unitjára. Ha nem adod tovább, a saját unitjaidat sebzi.",
+  "notes": [
+   [
+    "827.1.c.1,151.2",
+    0,
+    "Empower: [A][A] (2 Power bármely domainből), csak ha még nem Empowered. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható."
+   ],
+   [
+    "443.1.a,415.4",
+    1,
+    "Az átadó ability costja a disempower és az exhaust, tehát Empowered és ready gear kell hozzá. A gear ready lép be, így kijátszás, Empower és átadás egy körben is megy."
+   ],
+   [
+    "355.7",
+    0,
+    "A választott player target. Ő lesz a gear controllere, és a gear az ő base-ébe recallolódik."
+   ],
+   [
+    "317.1.a,191.5.a",
+    1,
+    "Az end of turn trigger mindig az aktuális controller körének végén fut: megöli a geart, és 5 damage-et oszt a controller minden unitjára. Ha nem adod át, a saját unitjaidat sebzi."
+   ],
+   [
+    "355.10.d,317.2.b",
+    0,
+    "A damage nem targetel, Deflect nem véd ellene. Az Ending Stepben érkezik, a kör végi heal előtt, tehát az 5 vagy kisebb Mightú unitok meghalnak."
+   ],
+   [
+    "460.1,315.1.b",
+    1,
+    "Az átadott gear exhausted marad. Az új controller a saját Awaken Phase-ében readyzi, és ha kifizeti az [A][A]-t, visszaadhatja neked a köre vége előtt."
+   ]
+  ]
+ },
+ {
+  "name": "Gold",
+  "type": "Gear",
+  "supertypes": [
+   "Token"
+  ],
+  "domain": [],
+  "tags": [],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": "[Reaction][>] Kill this, [T]: [Add] [A]. (Abilities that add resources can't be reacted to.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Egyszer használható token: megölöd és exhaustolod, cserébe kapsz 1 bármilyen domainű Powert. Bárki körében, fizetés közben is használható, nem lehet rá reagálni. Csak ready állapotban működik, és a Power a kör végén elvész, ezért akkor használd, amikor el is költöd.",
+  "notes": [
+   [
+    "187.5,185.3.b",
+    0,
+    "Domain nélküli gear token. A kapott [A] bármilyen domain Power costjára elkölthető."
+   ],
+   [
+    "415.4,429.1.a.1",
+    0,
+    "A cost az exhaust és a token megölése: egyszer használható, és csak ready állapotban. Az exhausted érkező Gold csak azután ad Powert, hogy ready lett."
+   ],
+   [
+    "430.2,430.3",
+    0,
+    "[Reaction] Add ability: cost kifizetése közben is aktiválható, bárki körében, azonnal resolve-ol, és nem lehet rá reagálni."
+   ],
+   [
+    "375",
+    0,
+    "A szabályzat példája: ha egy replacement effect az \"exhausted\" Gold mellé még egy példányt ad, az is exhausted lép be, mert örökli a módosítást."
+   ],
+   [
+    "186.1,185.3.a.1",
+    0,
+    "Megölve, kézbe vagy deckbe kerülve megszűnik létezni. A costja minden szempontból 0-nak számít."
+   ],
+   [
+    "148.1.a.3,185.2.d",
+    0,
+    "Gearként célozható, megölhető, és beleszámít a \"friendly gear\" costokba (például Whirling Twirligig, Bottled Constellation)."
+   ],
+   [
+    "167",
+    0,
+    "A kapott Power a Main Phase elején és a kör végén elvész, ezért a Goldot csak akkor érdemes megölni, amikor el is költöd."
+   ]
+  ]
+ },
+ {
+  "name": "Grand Strategem",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Order"
+  ],
+  "tags": [],
+  "energy": 6,
+  "power": 3,
+  "might": null,
+  "text": "[Action] (Play on your turn or in showdowns.)\nGive friendly units +5 [S] this turn.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Minden saját unitod +5 Mightot kap a kör végéig, a base-ben és a battlefieldeken is. A saját körödben vagy showdown alatt játszható ki, nem kell semmire rámutatni. A bónusz lejárta nem öli meg a sebzett unitot, mert a sebzés előbb gyógyul.",
+  "notes": [
+   [
+    "355.5.a,355.10.d",
+    0,
+    "Nincs target: a spell feltétel alapján minden friendly unitot érint, base-ben és battlefielden is. Unit nélkül is kijátszható, és mistargetelni sem lehet."
+   ],
+   [
+    "806.1.c.1,358.4",
+    0,
+    "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+   ],
+   [
+    "317.2.b,317.2.c",
+    0,
+    "A +5 Might a kör végi cleanupban jár le, de a unitok damage-e előbb healelődik. A bónusz lejárta ezért nem öli meg a sebzett unitot."
+   ],
+   [
+    "355.5.a",
+    2,
+    "A Core Rules nem mondja ki, hogy a resolve után, de még ebben a körben kijátszott friendly unit megkapja-e a +5-öt. Ezt judge döntse el."
+   ]
+  ]
+ },
+ {
+  "name": "Graves, Blasting Through",
+  "type": "Unit",
+  "supertypes": [
+   "Champion"
+  ],
+  "domain": [
+   "Body"
+  ],
+  "tags": [
+   "Bilgewater",
+   "Graves"
+  ],
+  "energy": 5,
+  "power": 1,
+  "might": 4,
+  "text": "When I attack or defend, deal damage equal to my Might to all enemy units here.\nI don't deal combat damage.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Amikor támad vagy védekezik, a saját Mightjával megegyező sebzést oszt az ott lévő összes ellenséges unitnak. Combat damage-et viszont nem oszt, a Mightja nem számít bele az oldalad erejébe. Ha a hatás előtt csökkentik a Mightját, kevesebbet sebez.",
+  "notes": [
+   [
+    "383.4.e.2.a,383.4.f.2.a",
+    0,
+    "Combatonként egyszer triggerel, amikor Graves megkapja az Attacker vagy Defender jelölést. A Combat Showdown elején resolve-ol."
+   ],
+   [
+    "355.5.a",
+    0,
+    "\"All enemy units here\": nincs target, a \"can't be chosen\" unitokat is sebzi."
+   ],
+   [
+    "359.3.f.2",
+    1,
+    "A damage mértéke Graves resolve-kori Mightja, és a \"here\" is a resolve-kori helyét jelenti. Ha válaszul csökkentik a Mightját, kevesebbet oszt; ha elmozdítják (például base-be), az új helyén lévő enemy unitokat sebzi, ott jellemzően senkit. Targetje nincs, így mistargetelni sem tud."
+   ],
+   [
+    "467.2.a",
+    1,
+    "\"I don't deal combat damage\": Graves Mightja nem járul hozzá az oldalad combat damage-éhez. Damage-et viszont ugyanúgy kaphat."
+   ],
+   [
+    "418.6.b.2",
+    1,
+    "A trigger ability damage: a Bonus Damage (Annie, Fiery) növeli, és az enemy abilityk elleni Prevent (Esteemed Hierophant) megfogja."
+   ]
+  ]
+ },
+ {
+  "name": "Gravity Field",
+  "type": "Gear",
+  "supertypes": [],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [
+   "Device"
+  ],
+  "energy": 5,
+  "power": 1,
+  "might": null,
+  "text": "[Deploy] (Play this only to a battlefield. When an opponent holds here, kill this.)\nOpponents must pay [1][A] to move one or more units to this battlefield.\n[Deathknell][>] Draw 1. (When I die, get the effect.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Deploy gear: csak battlefieldre játszható ki, bármelyikre, és meghal, ha egy ellenfél itt holdol. Az ellenfélnek mozgásonként 1 Energyt és 1 bármely Powert kell fizetnie, hogy unitokat mozgasson ide. Kijátszás és recall nem mozgás. Deathknell: ha meghal, húzol 1 lapot.",
+  "notes": [
+   [
+    "830.1.b,830.1.b.1",
+    0,
+    "Deploy: csak battlefieldre játszható ki, de bármelyikre. A cleanup nem recallolja a base-be."
+   ],
+   [
+    "204.4,204.4.b",
+    0,
+    "Applied cost: az opponent a mozgás végrehajtásakor fizet [1]-et és egy bármilyen domain Powert. Ez nem használ chaint, nem lehet rá reagálni."
+   ],
+   [
+    "204.4.c",
+    0,
+    "Ha az opponent nem tud vagy nem akar fizetni, a mozgást nem hajthatja végre."
+   ],
+   [
+    "204.4.b.1,430.3",
+    0,
+    "A fizetéshez az opponent [Reaction] Add abilityket (rune, Seal, Gold) aktiválhat."
+   ],
+   [
+    "204.4",
+    1,
+    "A cost mozgásonként jár, nem unitonként: \"one or more units\", tehát több unit együtt mozgatva is csak egyszer fizet."
+   ],
+   [
+    "458.1,355.2",
+    1,
+    "Csak a Move-ra vonatkozik. Unit közvetlen kijátszása a battlefieldre és a Recall nem Move, ezekért nem kell fizetni."
+   ],
+   [
+    "808.1.c,830.1.b",
+    1,
+    "Deathknell: ha meghal, húzol 1-et. Ez akkor is jár, ha a Deploy miatt hal meg, mert egy opponent holdol ott."
+   ]
+  ]
+ },
+ {
+  "name": "Grim Apothecary",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Fury"
+  ],
+  "tags": [
+   "Noxus"
+  ],
+  "energy": 3,
+  "power": null,
+  "might": 3,
+  "text": "[Ambush] (You may play me as a [Reaction] to a battlefield where you have units.)\nWhen you play me, you may return a friendly unit at a battlefield to its owner's hand.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Kijátszáskor visszaküldhetsz egy battlefielden álló saját unitot a tulajdonosa kezébe (ez általában a te kezed). Ambush: olyan battlefieldre, ahol van unitod, bárki körében, válaszként is lejöhet. Jó mentésre: a kézbe vett unitra az ellenfél rá irányuló hatása már nem hat, de a buffjai és sebzése is eltűnnek.",
+  "notes": [
+   [
+    "822.1.b,813.1.c.1",
+    0,
+    "[Ambush]: olyan battlefieldre is kijátszható, ahol van unitod, és amíg ilyen helyre játszod, [Reaction]-je van: Closed State-ben, bárki körében, combat közben is lejöhet. Base-be játszva nincs [Reaction]-je."
+   ],
+   [
+    "383.3.a,383.3.a.2",
+    0,
+    "A \"you may\" az effect elején áll: a trigger finalizálásakor döntesz. Ha nem kéred, lekerül a chainről, mintha nem is triggerelt volna."
+   ],
+   [
+    "355.10,355.9.b",
+    0,
+    "A unit target: friendly és battlefielden kell lennie, base-ben lévő nem választható. Saját magát is visszaveheti, ha battlefieldre játszottad (355.9.c)."
+   ],
+   [
+    "359.3.e.2",
+    1,
+    "Reakcióként mentésre jó: a kézbe vett unit zónát vált, így az őt célzó enemy spell vagy ability rá vonatkozó része ignorálódik."
+   ],
+   [
+    "124.1,186.1",
+    0,
+    "A kézbe kerülő unitról lekerül a damage, a buff és minden ideiglenes módosítás. Token unit megszűnik létezni."
+   ],
+   [
+    "056.2",
+    0,
+    "A lap a tulajdonosa kezébe megy, akkor is, ha te kontrollálod, de nem a tiéd."
+   ],
+   [
+    "359.3.e.7",
+    0,
+    "Ha a target a resolve előtt base-be kerül vagy elhagyja a boardot, az ability nem csinál semmit."
+   ]
+  ]
+ },
+ {
+  "name": "Grim Resolve",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Body"
+  ],
+  "tags": [],
+  "energy": 2,
+  "power": null,
+  "might": null,
+  "text": "[Action] (Play on your turn or in showdowns.)\nGive a friendly unit +3 [S] this turn. When it wins a combat this turn, gain 2 XP.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Egy saját unitod +3 Mightot kap a kör végéig, és ha ebben a körben combatot nyer, 2 XP-t kapsz. A saját körödben vagy showdown alatt játszható ki. Csak akkor nyer, ha a combat végén csak neki maradt unitja ott; döntetlenért nincs XP.",
+  "notes": [
+   [
+    "355.10,355.9.b",
+    0,
+    "A friendly unit target, base-ben lévő is választható. Friendly unit nélkül a spell nem játszható ki."
+   ],
+   [
+    "391.2,393",
+    0,
+    "A \"when it wins a combat this turn\" delayed trigger. A spell resolve-ja után önállóan él a kör végéig, a spell forrásától függetlenül."
+   ],
+   [
+    "468.3.a,468.3.c",
+    0,
+    "A unit akkor nyer combatot, ha a controllere attacker vagy defender volt, és a Resolution Stepben csak neki maradt unitja a battlefielden. Ha mindkét félnek marad unitja, nincs eredmény, nincs XP."
+   ],
+   [
+    "359.3.e.14.a",
+    0,
+    "Linked instructions: ha a target a resolve előtt illegális lesz (például kézbe kerül), a +3 és az XP trigger is ignorálódik."
+   ],
+   [
+    "730.1,391.2",
+    1,
+    "A szöveg nem \"the next time\", ezért ha a unit ugyanabban a körben több combatot nyer, mindegyikért jár 2 XP."
+   ],
+   [
+    "806.1.c.1,358.4",
+    0,
+    "[Action]: a saját körödben és showdown alatt bárki körében kijátszható. Closed State-ben, egy másik spellre válaszul nem."
+   ]
+  ]
+ },
+ {
+  "name": "Grove of the God-Willow",
+  "type": "Battlefield",
+  "supertypes": [],
+  "domain": [],
+  "tags": [],
+  "energy": null,
+  "power": null,
+  "might": null,
+  "text": "When you hold here, draw 1.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Ha a köröd elején te tartod (hold) ezt a battlefieldet, húzol egy lapot a pont mellé. A húzás kötelező. Üres deckkel ez Burn Outot okoz, és az ellenfél kap egy pontot.",
+  "notes": [
+   [
+    "473.2.b,472,190.6.d",
+    0,
+    "Annál triggerel, aki a Beginning Phase-ében holdol itt, körönként egyszer. Ez a hold pontján felül jár."
+   ],
+   [
+    "383.4.d.2.c",
+    0,
+    "Akkor is triggerel, ha a holdért járó pontot valami negálja vagy felváltja."
+   ],
+   [
+    "414.4",
+    0,
+    "Kötelező húzás, nincs \"may\". Üres Main Decknél Burn Outot okoz, és egy opponent 1 pontot kap."
+   ]
+  ]
+ },
+ {
+  "name": "Grumpy Rockbear",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Mind"
+  ],
+  "tags": [
+   "Shurima"
+  ],
+  "energy": 4,
+  "power": null,
+  "might": 4,
+  "text": "[Empower] [12]. This ability costs [1] less for each rune you control. (Pay the cost: Empower me. Use only if not Empowered.)\n[Empowered][>] I have [Deflect] and [Shield 3]. (Opponents must pay [A] to choose me with a spell or ability.+3 [S] while I'm a defender.)",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "4 Mightú unit. Empower: 12 Energy, minden rune-od után 1-gyel kevesebb, csak a saját Main Phase-edben, showdownon kívül. Empowered állapotban Deflectet kap (az ellenfélnek plusz 1 bármely Powert kell fizetnie, ha kiválasztja) és Shield 3-at (+3 Might, amíg defender).",
+  "notes": [
+   [
+    "827.1.c.3,356.4.g",
+    0,
+    "Az Empower cost kedvezményét az ability Determine Total Cost lépésében nézi a játék, az akkor kontrollált rune-ok száma alapján."
+   ],
+   [
+    "356.4.g",
+    1,
+    "Az exhausted rune is számít. Ha a cost kiszámítása után rune-t recycle-ölsz a fizetéshez, a cost már nem változik."
+   ],
+   [
+    "356.6",
+    0,
+    "12 rune-nál az Empower ingyenes, 0 alá nem mehet."
+   ],
+   [
+    "827.1.c.3,206.1",
+    1,
+    "A rune-onkénti csökkentés az Empower ability saját szövege, ezért a 827.1.c.3 szerint bármilyen célú Empower cost vizsgálatnál beleszámít. Ez a 206.1 általános (base cost) szabálya alól kivétel, tehát a costot vizsgáló effectek a csökkentett értéket látják, nem a puszta 12-t."
+   ],
+   [
+    "814.1.c,814.1.d.1",
+    0,
+    "A [Shield 3] csak addig ad +3 Mightot, amíg Defender jelölése van. Attackerként nem ér semmit."
+   ],
+   [
+    "381.1",
+    0,
+    "Az Empower csak a saját Main Phase-edben megy, tehát a védekezés előtti körödben kell aktiválni."
+   ]
+  ]
+ },
+ {
+  "name": "Guardian Angel",
+  "type": "Gear",
+  "supertypes": [],
+  "domain": [
+   "Calm"
+  ],
+  "tags": [
+   "Equipment"
+  ],
+  "energy": 2,
+  "power": null,
+  "might": 1,
+  "text": "[Equip] [C] ([C]: Attach this to a unit you control.)",
+  "equip_effect_text": "If I would die, kill Guardian Angel instead. Heal me, exhaust me, and recall me.",
+  "old_text_before_errata": null,
+  "short": "Equipment, +1 Might. Equip: 1 Calm Power, saját unitra, a saját Main Phase-edben, showdownon kívül. Ha a felszerelt unit meghalna, helyette a Guardian Angel hal meg: a unit meggyógyul, exhausted lesz, és a base-be recallolódik. Mivel a unit nem hal meg, a Deathknell és más halál triggerei nem futnak le.",
+  "notes": [
+   [
+    "818.1.b.1,151.2,381.1",
+    0,
+    "Equip: 1 Calm Power costú activated ability, a választott saját unit target. Csak a saját Main Phase-edben, Open State-ben, showdownon kívül aktiválható, combat közben nem."
+   ],
+   [
+    "136.2.b,136.2.c,435.1.e",
+    0,
+    "Az Effect Text csak csatolva aktív: ekkor a felszerelt unit Rules Textjéhez fűződik, mintha a unit saját szövege lenne, a gear saját Rules Textje (például az Equip) pedig inaktív. Csatolva a unit +1 Mightot is kap."
+   ],
+   [
+    "136.2.d",
+    0,
+    "A szabályzat név szerint idézi az Effect Textjét: \"If I would die, kill Guardian Angel instead. Heal me, exhaust me, and recall me.\" A név a csatolt gearre utal, akkor is, ha a unitot ugyanígy hívnák."
+   ],
+   [
+    "383.2.c.3.a,458.1",
+    0,
+    "Ez replacement effect: a unit nem hal meg, ezért a Deathknell és más halál triggerei nem futnak le. Gyógyulva, exhausted állapotban a base-be kerül, ami Recall, nem Move."
+   ],
+   [
+    "429,436.1.e",
+    1,
+    "A mentés ára maga a gear: a Guardian Angel a trashbe kerül, a unit pedig elveszti a +1 Mightot és a további védelmet."
+   ],
+   [
+    "373.2",
+    0,
+    "A szabályzat név szerint ezt a lapot hozza példának: ha több unit egyszerre halna meg és több replacement effect is él, az alkalmazás sorrendje dönti el, kit ment meg melyik. Egy replacement effect egyidejű eseményeknél csak egyetlen sorozatban alkalmazható."
+   ]
+  ]
+ },
+ {
+  "name": "Guardian of the Passage",
+  "type": "Unit",
+  "supertypes": [],
+  "domain": [
+   "Calm"
+  ],
+  "tags": [
+   "Shadow Isles",
+   "Spirit"
+  ],
+  "energy": 6,
+  "power": null,
+  "might": 6,
+  "text": "When I hold, you may return a unit or gear from your trash to your hand.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Ha a köröd elején azon a battlefielden áll, amit tartasz, visszavehetsz a kezedbe egy unitot vagy geart a trashedből. Spell nem vehető vissza, és token sem, mert az a trashben megszűnik.",
+  "notes": [
+   [
+    "383.4.d.2.a",
+    0,
+    "Hold effect: akkor triggerel, ha a Guardian azon a battlefielden áll, amelyet a Beginning Phase-edben holdolsz."
+   ],
+   [
+    "383.3.a",
+    0,
+    "A \"you may\" az effect elején áll: a finalizáláskor döntesz. Ha nem élsz vele, lekerül a chainről."
+   ],
+   [
+    "355.10.a",
+    0,
+    "A trashedben lévő unit vagy gear target, mert a trash Public zóna. Spell nem választható."
+   ],
+   [
+    "186.1",
+    0,
+    "Token nem vehető vissza, mert a trashbe kerülve megszűnik."
+   ],
+   [
+    "359.3.e.2",
+    0,
+    "Ha a kiválasztott lap a resolve előtt elhagyja a trasht, a trigger nem csinál semmit."
+   ]
+  ]
+ },
+ {
+  "name": "Guards!",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Order"
+  ],
+  "tags": [],
+  "energy": 3,
+  "power": null,
+  "might": null,
+  "text": "[Hidden] (Hide now for [A] to react with later for [0].)\nPlay a 2 [S] Sand Soldier unit token. Then do this: You may pay [C] to ready it.",
+  "equip_effect_text": null,
+  "old_text_before_errata": "[Hidden] (Hide now for [A] to react with later for [0].)\nPlay a 2 [S] Sand Soldier unit token. You may pay [C] to ready it.",
+  "short": "Lerak egy 2 Mightú Sand Soldier tokent (exhausted lép be), majd 1 Order Powerért readyzheted; ez külön hatás, közben az ellenfél reagálhat, például megölheti a tokent. Kézből csak a saját körödben, showdownon kívül játszható ki. Hidden: a saját körödben, showdownon kívül 1 bármely Powerért elrejtheted egy általad irányított battlefielden, a következő körtől ingyen, Reactionként is kijátszhatod, és a token ott jön le.",
+  "notes": [
+   [
+    "187.3,355.2.a,143.4",
+    0,
+    "A Sand Soldier 2 Mightú, domain nélküli unit token. A base-be vagy egy általad kontrollált battlefieldre játszod ki, és exhausted lép be."
+   ],
+   [
+    "811.1.d.5",
+    0,
+    "Facedown-ból kijátszva a tokent kötelező arra a battlefieldre tenni, ahol a lap el volt rejtve."
+   ],
+   [
+    "388.1,388.4,383.3.b",
+    1,
+    "A \"Then do this\" reflexive trigger: a spell resolve-ja után külön kerül a chain-re. A \"you may pay [C]\" az elején áll, ezért a trigger finalizálásakor döntesz és fizetsz. Ha nem fizetsz, a trigger lekerül a chainről."
+   ],
+   [
+    "135.2.e.6",
+    0,
+    "A [C] itt 1 Order Power. Energyvel vagy más domain Powerével nem fizethető."
+   ],
+   [
+    "388.1,204.3.a",
+    1,
+    "Errata: korábban a fizetés a spell resolve-ja közben történt, megszakítás nélkül. Most a ready külön chain item, az opponent reagálhat rá, például megölheti a tokent, mielőtt ready lesz."
+   ],
+   [
+    "811.6",
+    0,
+    "Facedown-ból [Reaction]-nel megy: showdown közben is letehetsz vele egy ready defendert a battlefieldedre, ha a Powert kifizeted."
+   ]
+  ]
+ },
+ {
+  "name": "Guerilla Warfare, Teemo",
+  "type": "Spell",
+  "supertypes": [
+   "Signature"
+  ],
+  "domain": [
+   "Mind",
+   "Chaos"
+  ],
+  "tags": [
+   "Teemo"
+  ],
+  "energy": 2,
+  "power": 1,
+  "might": null,
+  "text": "Return up to two cards with [Hidden] from your trash to your hand. You can hide ignoring costs this turn.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Legfeljebb két Hidden kulcsszavas lapot visszavehetsz a trashedből a kezedbe, és ebben a körben költség nélkül rejthetsz el lapokat. Az elrejtés többi feltétele marad: saját kör showdownon kívül, általad irányított battlefield, ahol még nincs facedown lap. Csak a saját körödben, showdownon kívül játszható ki.",
+  "notes": [
+   [
+    "103.3.d,103.3.d.2",
+    0,
+    "Signature lap: a deckben összesen legfeljebb 3 Signature kártya lehet, és mindnek a legend Champion tagjét (Teemo) kell viselnie."
+   ],
+   [
+    "355.10.a,355.13",
+    0,
+    "A trash Public zóna, ezért a visszavett lapok targetek. \"Up to two\": 0, 1 vagy 2 lapot választhatsz, a spell target nélkül is kijátszható."
+   ],
+   [
+    "811.5",
+    0,
+    "A [Hidden] a lap tulajdonsága, a trashben is ellenőrizhető. Unit, gear és spell is visszavehető, ha van rajta Hidden."
+   ],
+   [
+    "811.1.b,411.1.a",
+    1,
+    "\"Hide ignoring costs\": a kör végéig az [A] hide cost elmarad. A többi feltétel marad: saját kör, Open State, showdownon kívül, általad kontrollált battlefield, ahol még nincs facedown lapod. Battlefieldenként továbbra is egy lap rejthető el."
+   ],
+   [
+    "811.1.c.1,811.1.b",
+    0,
+    "A Hide nem Play: nem nyit chaint és nem vált ki \"when you play\" triggereket. Az elrejtett lap legkorábban a következő körben játszható ki."
+   ],
+   [
+    "359.3.e.2,359.3.e.8",
+    0,
+    "Ha az egyik kiválasztott lap a resolve előtt kikerül a trashből, az illegális target lesz. A másik lap ettől még visszajön a kezedbe."
+   ],
+   [
+    "155",
+    0,
+    "Nincs [Action] vagy [Reaction]: csak a saját körödben, Open State-ben, showdownon kívül megy."
+   ],
+   [
+    "135.2.e.6.c",
+    0,
+    "A lap 2 Energy és 1 Power. A nyomtatott Power szimbólum [C], amely több domainű lapon a lap bármelyik domainjének Powerével fizethető, tehát Mind vagy Chaos Powerrel."
+   ]
+  ]
+ },
+ {
+  "name": "Gust",
+  "type": "Spell",
+  "supertypes": [],
+  "domain": [
+   "Chaos"
+  ],
+  "tags": [],
+  "energy": 1,
+  "power": null,
+  "might": null,
+  "text": "[Reaction] (Play any time, even before spells and abilities resolve.)\nReturn a unit at a battlefield with 3 [S] or less to its owner's hand.",
+  "equip_effect_text": null,
+  "old_text_before_errata": null,
+  "short": "Visszaküld egy battlefielden álló, legfeljebb 3 Mightú unitot a tulajdonosa kezébe. Bármikor, bárki körében, más lapra válaszul is kijátszható. Ha a hatás előtt a unit Mightja 3 fölé nő, nem történik semmi; saját unitot is visszavehetsz vele.",
+  "notes": [
+   [
+    "355.10, 355.9.b",
+    0,
+    "A unit target. Csak battlefielden lévő, legfeljebb 3 Mightú unit választható, base-ben lévő nem."
+   ],
+   [
+    "710",
+    0,
+    "A boardon lévő unit aktuális Mightja számít, buffokkal és módosítókkal együtt."
+   ],
+   [
+    "359.3.e.2, 359.3.e.7",
+    0,
+    "Ha a resolve előtt a target Mightja 3 fölé nő vagy a unit base-be kerül, a target illegális, a Gust nem csinál semmit."
+   ],
+   [
+    "813.1.c.1",
+    0,
+    "[Reaction]: Closed State-ben, más spellre válaszul is kijátszható, bárki körében."
+   ],
+   [
+    "719.5, 186.1",
+    0,
+    "A kézbe kerülő unitról az Equipment leválik és a boardon marad. Token unit megszűnik."
+   ],
+   [
+    "355.9.b",
+    1,
+    "Nincs \"enemy\" megkötés, saját unitot is visszavehetsz vele."
+   ]
+  ]
+ }
+]

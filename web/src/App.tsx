@@ -79,7 +79,8 @@ function Shell() {
       <section className={'view' + (view === 'deck' ? ' on' : '')}>{seen.has('deck') && <DeckView />}</section>
       <section className={'view' + (view === 'szabalyok' ? ' on' : '')}>{seen.has('szabalyok') && <RulesView hash={hash} />}</section>
       <section className={'view' + (view === 'chain' ? ' on' : '')}>{seen.has('chain') && <ChainView />}</section>
-      <section className={'view' + (view === 'tanulas' ? ' on' : '')}>{seen.has('tanulas') && <LearnView hash={hash} />}</section>
+      <section className={'view' + (view === 'hogyan' ? ' on' : '')}>{seen.has('hogyan') && <LearnView hash={hash} base="hogyan" />}</section>
+      <section className={'view' + (view === 'tanulas' ? ' on' : '')}>{seen.has('tanulas') && <LearnView hash={hash} base="tanulas" />}</section>
       <section className={'view' + (view === 'kezikonyv' ? ' on' : '')}>{seen.has('kezikonyv') && <KnowledgeView hash={hash} />}</section>
       <Footer />
       <datalist id="cardnames">{CARDS.filter((c: any) => c.t !== 'Legend' && c.t !== 'Battlefield').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
