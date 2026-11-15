@@ -46,3 +46,4 @@
 - Routing: TanStack Router típusos URL-ekkel (a régi #hash linkek átirányítva).
 - Minőség: Playwright e2e (a /home/claude/test/tweb.py mintájára), Storybook a pálya komponenseihez.
 - Döntés: nincs PWA, nincs telepíthető vagy offline változat; a projekt csak böngészőben, a GitHub Pages oldalon fut.
+- Elfogadott bónuszok (2026-11-15): megosztható szituáció-link (pálya és chain a linkben, Discordra); gyors rács (TanStack Virtual); hibatűrő magyar és angol keresés. A PWA továbbra sincs a tervben (előző döntés).
