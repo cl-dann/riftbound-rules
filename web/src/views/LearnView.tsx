@@ -142,7 +142,7 @@ function ScenarioView({ s, p, setP, all }: { s: Scenario; p: Progress; setP: (p:
   return (
     <div className="scn">
       <div className="scn-head">
-        <a href="#tanulas" className="crumb">← Tanulás</a>
+        <a href="#tanulas" className="crumb">← Útmutató</a>
         <div><div className="crumb">Szituáció {idx + 1} / {all.length} · {s.level === 'halado' ? 'Haladó' : 'Kezdő'}</div><h2>{s.title}</h2><H as="p" t={s.intro} /></div>
       </div>
       <div className="scn-grid">
@@ -185,7 +185,7 @@ export function LearnView({ hash }: { hash: string }) {
   useEffect(() => { if (m) window.scrollTo({ top: 0 }); }, [hash]);
   if (!L) return <div className="panel pad"><p className="note">Betöltés…</p></div>;
   const chs = L.chapters;
-  if (!chs.length) return <div className="panel pad"><h2>Tanulás</h2><p className="lead">A fejezetek és az interaktív szituációk ellenőrzése folyamatban van, hamarosan itt lesznek. Addig a <a href="#kezikonyv">Kézikönyv</a> és a kártyánkénti magyarázatok használhatók.</p></div>;
+  if (!chs.length) return <div className="panel pad"><h2>Útmutató</h2><p className="lead">A fejezetek és az interaktív szituációk ellenőrzése folyamatban van, hamarosan itt lesznek. Addig a <a href="#kezikonyv">Kézikönyv</a> és a kártyánkénti magyarázatok használhatók.</p></div>;
   const ch = m && !m[1] ? chs.find((c) => c.id === m[2]) : undefined;
   const sc = m && m[1] ? L.scenarios.find((s) => s.id === m[2]) : undefined;
   const total = chs.length + L.scenarios.length;
@@ -222,7 +222,7 @@ export function LearnView({ hash }: { hash: string }) {
     const idx = chs.indexOf(ch); const prev = chs[idx - 1], next = chs[idx + 1];
     main = (
       <>
-        <div className="crumb">Tanulás › {LEVELS.find((l) => l[0] === ch.level)?.[1]} › {idx + 1} / {chs.length}</div>
+        <div className="crumb">Útmutató › {LEVELS.find((l) => l[0] === ch.level)?.[1]} › {idx + 1} / {chs.length}</div>
         <h2>{ch.title}</h2>
         {ch.lead && <p className="lead">{ch.lead}</p>}
         {ch.rules && <p className="note">Core Rules: <span dangerouslySetInnerHTML={{ __html: inline('{{' + ch.rules + '}}') }} /></p>}
@@ -240,7 +240,7 @@ export function LearnView({ hash }: { hash: string }) {
   } else main = (
     <>
       <div className="hero" style={{ margin: '-26px calc(-1 * clamp(16px, 4vw, 42px)) 18px' }}>
-        <div className="crumb">Tanulás</div>
+        <div className="crumb">Útmutató</div>
         <h2>Tanuld meg a Riftboundot</h2>
         <p>Fejezetekre bontott útmutató a Core Rules alapján: rövid leckék valódi lapokkal, minden fejezet végén néhány kérdéssel. Utána interaktív szituációkban gyakorolhatod a harcot és a chaint. A haladásod ebben a böngészőben mentődik.</p>
         <a className="btn hex" href={'#tanulas/' + (firstOpen?.id || '')}>{doneN ? 'Folytatás' : 'Kezdés'}: {firstOpen?.title} <ChevronRight size={16} /></a>

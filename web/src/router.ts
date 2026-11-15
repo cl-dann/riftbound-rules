@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 export type View = 'kartyak' | 'deck' | 'szabalyok' | 'chain' | 'tanulas' | 'kezikonyv';
 export const VIEWS: [View, string][] = [
-  ['kartyak', 'Kártyák'], ['deck', 'Deck'], ['szabalyok', 'Szabályzat'], ['chain', 'Chain'], ['tanulas', 'Tanulás'], ['kezikonyv', 'Kézikönyv'],
+  ['kartyak', 'Kártyák'], ['deck', 'Deck'], ['szabalyok', 'Szabályzat'], ['chain', 'Chain'], ['tanulas', 'Útmutató'], ['kezikonyv', 'Kézikönyv'],
 ];
 
 /** A régi hash linkek (#d=, #c=, #r-..., #tud-...) változatlanul működnek. */
