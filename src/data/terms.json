@@ -3,25 +3,25 @@
   "t": "Closed State",
   "m": "Closed State",
   "r": "309",
-  "d": "Amikor van valami a chainen. Ilyenkor csak [Reaction] lap vagy ability játszható ki."
+  "d": "Amikor van legalább egy tétel (kijátszott lap vagy ability) a chainen. Ilyenkor csak [Reaction] kártya vagy ability játszható ki."
  },
  {
   "t": "Open State",
   "m": "Open State",
   "r": "309",
-  "d": "Amikor üres a chain. Ilyenkor a saját körödben bármit kijátszhatsz, aminek megvan az ideje."
+  "d": "Amikor üres a chain. Ilyenkor a priorityvel (cselekvési joggal) rendelkező játékos a kártya időzítése szerint játszhat ki lapot. Kulcsszó nélküli lapot csak a saját körödben, showdownon és combaton kívül."
  },
  {
   "t": "Domain Identity",
   "m": "Domain Identity",
   "r": "103.2.b",
-  "d": "A legend domainjei. Csak ezekbe a domainekbe tartozó lap és rune kerülhet a deckbe."
+  "d": "A legend domainjei. A deckbe csak olyan lap kerülhet, amelynek minden domainje ezek közé tartozik, vagy amelynek nincs domainje. A rune-oknak is ezekből a domainekből kell lenniük."
  },
  {
   "t": "Chosen Champion",
   "m": "Chosen Champion",
   "r": "103.3.a",
-  "d": "A legendhez illő champion unit, ami a Champion Zone-ból indul. Az azonos nevű példányai is Chosen Championnek számítanak."
+  "d": "Az a champion unit, amelynek champion tagja egyezik a legendével, és amely a játékot a Champion Zone-ban kezdi. Az azonos nevű további példányai is Chosen Championnek számítanak."
  },
  {
   "t": "Champion Zone",
@@ -33,43 +33,43 @@
   "t": "Burn Out",
   "m": "Burn Out",
   "r": "432",
-  "d": "Ha üres Main Deckből kellene húzni vagy lapot eltenni: a trash visszakeveredik a deckbe, és egy opponent 1 pontot kap."
+  "d": "Ha a Main Deckből több lapot kellene elvenned (húzás, trashbe tevés), mint amennyi benne van: a trashedet visszakevered a Main Deckbe, egy általad választott opponent 1 pontot kap, majd folytatod a műveletet."
  },
  {
   "t": "replacement effect",
   "m": "replacement effect",
   "r": "367",
-  "d": "Olyan hatás, ami egy esemény helyett mást hajt végre. Felismerhető az \"instead\", \"would\" vagy \"as\" szóról."
+  "d": "Olyan hatás, amely egy eseményt még a megtörténte előtt egy másikkal helyettesít. Felismerhető az \"instead\", \"would\" vagy \"as\" szóról."
  },
  {
   "t": "reflexive trigger",
   "m": "reflexive trigger",
   "r": "387",
-  "d": "\"Do this:\" kezdetű rész, ami a lap futása közben új tételként kerül a chainre."
+  "d": "\"Do this:\" vagy \"Do one of the following:\" kezdetű rész, amely a lap futása közben új tételként kerül a chainre."
  },
  {
   "t": "linked instruction",
   "m": "linked instruction",
   "r": "359.3.e.14",
-  "d": "Két mondat a lapon, ahol a második az elsőre hivatkozik (\"its\", \"if you do\"). Ha az első elmarad, a második is."
+  "d": "Két utasítás a lapon, ahol a második az elsőre hivatkozik (\"its\", \"if you do\"). Ha az első azért marad el, mert a targetje illegális lett, a második is elmarad."
  },
  {
   "t": "additional cost",
   "m": "additional cost",
   "r": "204.2",
-  "d": "A lap ára fölött fizetendő plusz költség, például egy unit megölése. Kijátszáskor kell kifizetni."
+  "d": "A lap ára fölött fizetendő plusz ár (a kártyán \"as an additional cost\" jelöli), például egy unit megölése. A kijátszáskor kell kifizetni."
  },
  {
   "t": "activated ability",
   "m": "activated ability",
   "r": "376",
-  "d": "\"Költség: hatás\" formájú képesség, amit te indítasz el a költség kifizetésével."
+  "d": "\"Cost: hatás\" formájú képesség (a kettőspont előtt az ár, utána a hatás), amelyet te indítasz el az ár kifizetésével."
  },
  {
   "t": "triggered ability",
   "m": "triggered ability",
   "r": "382",
-  "d": "\"When\" vagy \"At\" kezdetű képesség, ami magától elindul, amikor a feltétele teljesül."
+  "d": "\"When\" vagy \"At\" kezdetű képesség, amely magától elindul, amikor a feltétele teljesül."
  },
  {
   "t": "Beginning Phase",
@@ -117,13 +117,13 @@
   "t": "target",
   "m": "target\\w*",
   "r": "355.7",
-  "d": "Amit a lap szövege megnevez, és te választasz ki. Rá hat a \"can't be chosen\" és a Deflect, és ha a hatás előtt eltűnik, a lap rá nem hat."
+  "d": "Amit a lap szövege kiválasztásra (choose) ír elő, és te választasz ki. Rá hat a \"can't be chosen\" és a Deflect, és ha a hatás lefutása előtt illegálissá válik, a lap rá nem hat. Ami pick szóval választ, az nem target."
  },
  {
   "t": "chain",
   "m": "chain\\w*",
   "r": "108.1",
-  "d": "A sor, ahova minden kijátszott lap és ability kerül. A legutóbb felrakott fut le először, és amíg van rajta valami, csak [Reaction] játszható."
+  "d": "A sor, ahova minden kijátszott lap és ability kerül. A legutóbb lezárt (Finalized) tétel fut le először, és amíg van rajta valami, csak [Reaction] játszható ki."
  },
  {
   "t": "resolve",
@@ -135,13 +135,13 @@
   "t": "finalize",
   "m": "finaliz\\w*",
   "r": "337",
-  "d": "A kijátszás lezárása: a választások és a költség megvannak, a tétel a chainre került, és válaszolni lehet rá."
+  "d": "A kijátszás lezárása: a választások és az ár kifizetése megvan, a tétel érvényesen a chainen van. Spell esetén ezután válaszolni lehet rá, a unit és a gear viszont azonnal a boardra kerül, rájuk nem lehet a chainen reagálni."
  },
  {
   "t": "showdown",
   "m": "showdown\\w*",
   "r": "342",
-  "d": "Időablak egy vitatott battlefieldnél vagy combat előtt, amikor a játékosok felváltva játszhatnak ki [Action] és [Reaction] lapot."
+  "d": "Időablak egy Contested (vitatott) battlefieldnél, combat esetén annak első lépéseként, amikor a játékosok felváltva játszhatnak ki [Action] és [Reaction] lapot."
  },
  {
   "t": "combat",
@@ -159,13 +159,13 @@
   "t": "exhaust",
   "m": "exhaust\\w*",
   "r": "415",
-  "d": "A kártya oldalra fordítása, jelezve, hogy elhasználták. Exhausted unit nem tud Standard Move-ot csinálni."
+  "d": "A lap oldalra fordítása, jelezve, hogy elhasználták. Exhausted unit nem tud Standard Move-ot csinálni, mert annak ára éppen az exhaust."
  },
  {
   "t": "ready",
   "m": "ready",
   "r": "416",
-  "d": "A kártya visszafordítása álló helyzetbe, újra használható. A saját köröd elején minden lapod ready lesz."
+  "d": "A lap visszafordítása álló helyzetbe, újra használható. A saját köröd elején minden általad controllált, exhausted lap ready lesz."
  },
  {
   "t": "recycle",
@@ -201,7 +201,7 @@
   "t": "kill",
   "m": "kill\\w*",
   "r": "429",
-  "d": "Unit vagy gear a boardról a trashbe kerül. Ez indítja a [Deathknell] és a \"when it dies\" képességeket."
+  "d": "Unit vagy gear a boardról a trashbe kerül, akár hatás utasítására, akár mert lethal damage-et kapott. Ez indítja a [Deathknell] és a \"when I die\" képességeket."
  },
  {
   "t": "Might",
@@ -219,7 +219,7 @@
   "t": "Power",
   "m": "Power",
   "r": "131.3",
-  "d": "A lap árának domain szimbólum része. Csak a megfelelő domainű rune fizetheti, az [A] bármelyik."
+  "d": "A lap árának domain szimbólum része. Egy domain szimbóluma csak az adott domain Powerével fizethető, az [A] jelű Power viszont bármely domain Powerével."
  },
  {
   "t": "domain",
@@ -243,31 +243,31 @@
   "t": "conquer",
   "m": "conquer\\w*",
   "r": "471.1",
-  "d": "Pontszerzés: egy battlefield irányítását megszerzed, amit ebben a körben még nem pontoztál."
+  "d": "Pontszerzés (scoring): megszerzed egy olyan battlefield controlját, amelyet ebben a körben még nem score-oltál."
  },
  {
   "t": "hold",
   "m": "hold\\w*",
   "r": "471.2",
-  "d": "Pontszerzés: a köröd elején még te irányítod a battlefieldet."
+  "d": "Pontszerzés: a saját Beginning Phase-edben még te controllálod a battlefieldet, és ebben a körben még nem score-oltad."
  },
  {
   "t": "token",
   "m": "token\\w*",
   "r": "185",
-  "d": "Nem kártya, csak hatás hozza létre. Ha elhagyja a boardot (kézbe, trashbe), megszűnik."
+  "d": "Nem kártya, csak hatás hozza létre. Ha a boardról a chainen kívül bármely más zónába kerül (például kézbe vagy trashbe), megszűnik."
  },
  {
   "t": "buff",
   "m": "buff\\w*",
   "r": "701",
-  "d": "+1 Might jelző egy uniton. Egy unitra alapból csak egy kerülhet, és nem jár le a kör végén."
+  "d": "+1 Might jelző (counter) egy uniton. Egy unitra egyszerre csak egy kerülhet, és nem jár le a kör végén."
  },
  {
   "t": "facedown",
   "m": "face ?down",
   "r": "129.4",
-  "d": "Lefordított lap a battlefielden, a [Hidden] kulcsszóval kerül oda. Az opponent nem látja, mi az."
+  "d": "Lefordított (hátoldalával felfelé fordított) lap a battlefielden, általában a [Hidden] kulcsszóval kerül oda. Az opponent nem látja, mi az."
  },
  {
   "t": "controller",
@@ -279,7 +279,7 @@
   "t": "owner",
   "m": "owner\\w*",
   "r": "127",
-  "d": "Aki a lapot a játékba hozta, a saját deckjében. A kézbe vagy trashbe kerülő lap mindig az owneréhez megy."
+  "d": "Aki a lapot a játékba hozta (a deckjében, legendként, battlefieldként, vagy hatással létrehozva). A trashbe kerülő lap az owner trashébe, a recycle-ölt lap az owner deckjébe megy."
  },
  {
   "t": "cleanup",
@@ -303,13 +303,13 @@
   "t": "unit",
   "m": "unit\\w*",
   "r": "140",
-  "d": "Lény a boardon, ami harcol és battlefieldet foglal. A szabály szerint a \"unit\" mindig a boardon lévőt jelenti, a kézben lévőt nem."
+  "d": "Lény a boardon, amely harcol és battlefieldet foglal. Ha a kártyaszöveg zóna megnevezése nélkül ír \"unit\"-ot, a boardon lévő unitot érti alatta, a kézben lévőt nem."
  },
  {
   "t": "gear",
   "m": "gear\\w*",
   "r": "147",
-  "d": "Tárgy a boardon. Alapból a base-be kerül, az Equipment fajtája unitra csatolható."
+  "d": "Tárgy a boardon. Alapból a base-be kerül, az Equipment tagú gear unitra csatolható."
  },
  {
   "t": "spell",
@@ -327,31 +327,31 @@
   "t": "Effect Text",
   "m": "Effect Text",
   "r": "136",
-  "d": "Az Equipment alsó szövege, amit a felszerelt unit kap meg. Csatolás nélkül nem hat."
+  "d": "Az Equipment külön, alsó szövegrésze, amelyet az a unit kap meg, amelyhez csatolják. Csatolás nélkül nem hat."
  },
  {
   "t": "stun",
   "m": "stun\\w*",
   "r": "424",
-  "d": "A unit Stunned állapotba kerül: combatban nem oszt sebzést a Mightja alapján, de a halálához továbbra is a teljes Mightjával egyenlő damage kell. A kör végén lekerül róla."
+  "d": "A unit Stunned állapotba kerül: combatban nem adja hozzá a Mightját a kiosztott damage-hez, de a megöléséhez továbbra is a teljes Mightjával egyenlő damage kell. A kör végén lekerül róla."
  },
  {
   "t": "heal",
   "m": "heal\\w*|gyógy\\w*",
   "r": "419",
-  "d": "A unitról lekerül a rajta lévő damage. Csak hatás utasítására, vagy a kör végén történik."
+  "d": "A unitról lekerül a rajta lévő damage. Hatás utasítására történik, továbbá automatikusan a combat végén és a kör végén."
  },
  {
   "t": "damage",
   "m": "damage\\w*",
   "r": "142.4",
-  "d": "Sebzés jelölve a uniton. Ha eléri a unit Mightját, a unit meghal. A kör végén lekerül."
+  "d": "Sebzés jelölve a uniton. Ha eléri a unit Mightját, a unit meghal. A combat végén és a kör végén lekerül."
  },
  {
   "t": "Move",
   "m": "Move|mozg\\w*",
   "r": "421",
-  "d": "Unit áthelyezése két hely (base, battlefield) között a boardon. A \"when I move\" képességek erre indulnak."
+  "d": "Egy lap (általában unit) áthelyezése két hely (base, battlefield) között a boardon. A \"when I move\" képességek erre indulnak."
  },
  {
   "t": "Standard Move",
@@ -363,7 +363,7 @@
   "t": "recall",
   "m": "recall\\w*",
   "r": "457",
-  "d": "A lap visszakerül a base-be, de ez nem Move, ezért a mozgásra figyelő képességek nem indulnak."
+  "d": "A lap (unit vagy gear) visszakerül a base-be, de ez nem Move, ezért a mozgásra figyelő képességek nem indulnak."
  },
  {
   "t": "Empowered",
@@ -393,31 +393,31 @@
   "t": "Attacker",
   "m": "Attacker\\w*|attack\\w*|támad\\w*",
   "r": "323.2",
-  "d": "Combatban a támadó oldal unitjainak jelölése. A \"when I attack\" képességek akkor indulnak, amikor a unit ezt megkapja."
+  "d": "Combatban a támadó fél és unitjai jelölése (designation): az a játékos, akinek unitjai a battlefieldet Contested (vitatott) státuszba tették. A \"when I attack\" képességek akkor indulnak, amikor a unit ezt megkapja."
  },
  {
   "t": "Defender",
   "m": "Defender\\w*|defend\\w*|véded\\w*|védekez\\w*",
   "r": "323.2",
-  "d": "Combatban a védekező oldal unitjainak jelölése."
+  "d": "Combatban a védekező fél és unitjai jelölése (designation): az a játékos, aki nem tette Contested státuszba a battlefieldet."
  },
  {
   "t": "Gold",
   "m": "Gold",
   "r": "187.5",
-  "d": "Domain nélküli gear token. Feláldozva (kill és exhaust) egy bármilyen domainű Powert ad."
+  "d": "Domain nélküli gear token. Feláldozva (\"Kill this, [E]\": megölöd és exhaustolod) 1 bármilyen domainű Powert ([A]) ad, [Reaction] időzítéssel is."
  },
  {
   "t": "enemy",
   "m": "enemy|ellenséges",
-  "r": "135.2.b",
-  "d": "Az ellenfél által irányított lap vagy unit."
+  "r": "740.1.b",
+  "d": "Az a lap, amelynek controllere a te opponented."
  },
  {
   "t": "friendly",
   "m": "friendly|saját unit\\w*",
-  "r": "135.2.b",
-  "d": "Az általad irányított lap vagy unit."
+  "r": "740.1.a",
+  "d": "Az a lap, amelynek ugyanaz a controllere, mint a tiédnek (csapatjátékban a csapattársé is). Neked az általad controllált lapok friendlyk."
  },
  {
   "t": "opponent",
@@ -434,26 +434,26 @@
  {
   "t": "instruction",
   "m": "instruction\\w*",
-  "r": "359.3",
-  "d": "Egy lap szövegének egy utasítása. A lap hatása utasításonként fut le, ha egy utasítás elmarad, a többi attól még lefuthat."
+  "r": "135.2.b",
+  "d": "Egy lap szövegének egy felszólító módú utasítása (például \"Draw 1\"). A spell utasításonként fut le: ha egy utasítás elmarad, a többi attól még lefuthat."
  },
  {
   "t": "Signature",
   "m": "Signature",
   "r": "133.7.b",
-  "d": "Lapfajta, ami a legend championjához tartozik. Egy deckben összesen legfeljebb 3 Signature lap lehet."
+  "d": "Supertype (lapfajta feletti jelölés), amely a legend championjához tartozik: a champion tagja egyezik a legendével. Egy deckben összesen legfeljebb 3 Signature lap lehet."
  },
  {
   "t": "Hide",
   "m": "hide|hidden|rejt\\w*",
   "r": "422",
-  "d": "Lap lefordítva battlefieldre helyezése egy általad irányított battlefielden. Később onnan kijátszható."
+  "d": "Lap facedown (lefordítva) elhelyezése egy általad controllált battlefielden. Később onnan kijátszható."
  },
  {
   "t": "Channel",
   "m": "channel\\w*",
   "r": "431",
-  "d": "Rune-ok áthelyezése a Rune Deck tetejéről a boardra. Alapból körönként 2 rune jön így."
+  "d": "Rune-ok áthelyezése a Rune Deck tetejéről a boardra. A Channel Phase-ben körönként 2 rune jön így."
  },
  {
   "t": "Predict",
@@ -465,7 +465,7 @@
   "t": "Prevent",
   "m": "prevent\\w*",
   "r": "438",
-  "d": "Csökkenti a sebzést, amit egy unit kapna. Általában a következő X sebzésre vonatkozik."
+  "d": "Csökkenti a damage-et, amelyet egy unit kapna, a hatásban megadott mennyiséggel és ideig."
  },
  {
   "t": "Swap",
@@ -507,121 +507,121 @@
   "t": "Accelerate",
   "m": "\\[?Accelerate\\]?",
   "r": "805",
-  "d": "A unit kijátszásakor fizethetsz plusz [1][C]-t, és ekkor a unit ready lép be."
+  "d": "A unit kijátszásakor fizethetsz plusz [1][C]-t (1 Energy és 1, a unit domainjének megfelelő Power), és akkor a unit ready állapotban lép a boardra, nem exhausted."
  },
  {
   "t": "Action",
   "m": "\\[?Action\\]?",
   "r": "806",
-  "d": "Engedélyt ad arra, hogy a kártyát vagy abilityt showdown alatt, bármelyik játékos körében kijátszd vagy aktiváld."
+  "d": "Időzítési engedély: a kártya vagy ability showdown (vitatott battlefieldnél nyíló időablak, amikor a játékosok felváltva játszhatnak ki lapot) alatt is kijátszható vagy aktiválható, bármelyik játékos körében."
  },
  {
   "t": "Assault",
   "m": "\\[?Assault\\]?",
   "r": "807",
-  "d": "Amíg a unit attacker, +X Mightot kap."
+  "d": "Amíg a unit attacker (a támadó fél unitja combatban), +X Mightot kap. Az X a kulcsszó melletti szám (Assault 2 esetén 2)."
  },
  {
   "t": "Deathknell",
   "m": "\\[?Deathknell\\]?",
   "r": "808",
-  "d": "Amikor a permanent meghal, az [Effect] triggerel."
+  "d": "Amikor ez a lap (unit vagy gear) meghal, vagyis a boardról a trashbe kerül, lefut a kulcsszó után írt hatás."
  },
  {
   "t": "Deflect",
   "m": "\\[?Deflect\\]?",
   "r": "809",
-  "d": "Az opponent spelljei és abilityjei X Powerrel többe kerülnek, ha ezt az objektumot targetelik."
+  "d": "Ha az opponent egy spellje vagy abilityje targetként (célpontként kiválasztva) ezt a lapot (általában unit vagy gear) választja, X Powerrel többe kerül. Az X a kulcsszó melletti szám."
  },
  {
   "t": "Ganking",
   "m": "\\[?Ganking\\]?",
   "r": "810",
-  "d": "A unit Standard Move-val battlefieldről közvetlenül másik battlefieldre is mozoghat."
+  "d": "A unit a Standard Move-jával (a unit saját, exhausttal fizetett mozgásával) battlefieldről közvetlenül másik battlefieldre is léphet."
  },
  {
   "t": "Hidden",
   "m": "\\[?Hidden\\]?",
   "r": "811",
-  "d": "A kártyát [A]-ért facedown elrejtheted egy általad controllált battlefieldnél, és a következő körtől [Reaction]-nel, a base costját ignorálva kijátszhatod."
+  "d": "A kártyát a kezedből vagy a Champion Zone-ból [A]-ért (1 bármilyen domainű Powerért) facedown (lefordítva) elrejtheted egy általad controllált battlefielden. A következő körtől [Reaction] időzítéssel kijátszhatod onnan, és a nyomtatott árát (base cost) nem kell kifizetned."
  },
  {
   "t": "Legion",
   "m": "\\[?Legion\\]?",
   "r": "812",
-  "d": "Ha ebben a körben már kijátszottál egy másik kártyát, a kártya megkapja a Legion szövegét."
+  "d": "Ha ebben a körben már kijátszottál egy másik kártyát, ez a kártya megkapja a Legion kulcsszó után írt szöveget."
  },
  {
   "t": "Reaction",
   "m": "\\[?Reaction\\]?",
   "r": "813",
-  "d": "Az [Action] minden engedélyét megadja, és ezen felül Closed State-ben, bármelyik játékos körében is használható."
+  "d": "Időzítési engedély: mindent megenged, amit az [Action], és ezen felül Closed State-ben (amikor van tétel a chainen) is kijátszható vagy aktiválható, bármelyik játékos körében. Ezzel lehet válaszolni egy chainen lévő spellre."
  },
  {
   "t": "Shield",
   "m": "\\[?Shield\\]?",
   "r": "814",
-  "d": "Amíg a unit defender, +X Mightot kap."
+  "d": "Amíg a unit defender (a védekező fél unitja combatban), +X Mightot kap. Az X a kulcsszó melletti szám."
  },
  {
   "t": "Tank",
   "m": "\\[?Tank\\]?",
   "r": "815",
-  "d": "Combat damage kiosztásakor a Tank unit kapja a lethal damage-et előbb, mint ugyanannak a controllernek a Tank nélküli unitjai."
+  "d": "Combat damage kiosztásakor a Tank unitra kell előbb lethal damage-et (a megöléséhez elég, a Mightjával legalább egyenlő damage-et) osztani, és csak utána az ugyanahhoz a játékoshoz tartozó, Tank nélküli unitokra."
  },
  {
   "t": "Temporary",
   "m": "\\[?Temporary\\]?",
   "r": "816",
-  "d": "A controller Beginning Phase-ének elején, a scoring előtt a permanent meghal."
+  "d": "A lap (unit vagy gear) controllerének (aki irányítja) Beginning Phase-e elején, még a pontszerzés (scoring) előtt a lap meghal."
  },
  {
   "t": "Vision",
   "m": "\\[?Vision\\]?",
   "r": "817",
-  "d": "Amikor a permanenst kijátszod, Predict."
+  "d": "Amikor kijátszod ezt a lapot (unit vagy gear), Predict: megnézed a Main Deck felső lapját, és eldöntöd, a pakli aljára teszed-e."
  },
  {
   "t": "Equip",
   "m": "\\[?Equip\\]?",
   "r": "818",
-  "d": "A cost kifizetésével a geart egy általad controllált unithoz attacholod."
+  "d": "Az Equip után megadott ár (cost) kifizetésével ezt a geart egy általad controllált unithoz csatolod (attach)."
  },
  {
   "t": "Quick-Draw",
   "m": "\\[?Quick-Draw\\]?",
   "r": "819",
-  "d": "A gear [Reaction] időzítéssel játszható ki, és kijátszáskor egy általad controllált unithoz attacholódik."
+  "d": "A gear [Reaction] időzítéssel is kijátszható (akár válaszként, az opponent körében is), és kijátszásakor automatikusan egy általad controllált unithoz csatolódik."
  },
  {
   "t": "Repeat",
   "m": "\\[?Repeat\\]?",
   "r": "820",
-  "d": "Ha kijátszáskor kifizeted a Repeat costot, a chain item utasításai resolve-kor még egyszer végrehajtódnak."
+  "d": "Ha kijátszáskor kifizeted a Repeat után megadott plusz árat, a spell vagy ability utasításai resolve-kor (amikor a hatás lefut) még egyszer végrehajtódnak."
  },
  {
   "t": "Weaponmaster",
   "m": "\\[?Weaponmaster\\]?",
   "r": "821",
-  "d": "Kijátszáskor választhatsz egy általad controllált Equipmentet, és annak Equip costját [A]-val csökkentve kifizetve erre a unitra attacholhatod."
+  "d": "Amikor kijátszod ezt a unitot, választhatsz egy általad controllált Equipmentet (unitra csatolható geart), és ha kifizeted az Equip árát [A]-val (1 bármilyen domainű Powerrel) csökkentve, erre a unitra csatolod."
  },
  {
   "t": "Ambush",
   "m": "\\[?Ambush\\]?",
   "r": "822",
-  "d": "A unit olyan battlefieldre is kijátszható, ahol vannak unitjaid, és ilyenkor [Reaction]-je van."
+  "d": "A unit olyan battlefieldre is kijátszható, ahol van általad controllált unit, és ilyenkor [Reaction]-je van, tehát válaszként vagy az opponent körében is kijátszható."
  },
  {
   "t": "Hunt",
   "m": "\\[?Hunt\\]?",
   "r": "823",
-  "d": "Amikor a unit conquerel vagy holdol, a controllere X XP-t kap."
+  "d": "Amikor ez a unit conquerel (a jelenlétében szerzed meg egy battlefield controlját) vagy holdol (a Beginning Phase-edben megtartod a battlefieldet), a controllere X XP-t kap. Az X a kulcsszó melletti szám."
  },
  {
   "t": "Level",
   "m": "\\[?Level\\]?",
   "r": "824",
-  "d": "Amíg legalább N XP-d van, a kártya megkapja a Level szövegét."
+  "d": "Amíg legalább N XP-d van (N a kulcsszó melletti szám), a kártya megkapja a Level kulcsszó után írt szöveget."
  },
  {
   "t": "Unique",
@@ -633,36 +633,36 @@
   "t": "Backline",
   "m": "\\[?Backline\\]?",
   "r": "826",
-  "d": "Combat damage kiosztásakor a Backline unit csak azután kaphat lethal damage-et, hogy a controllere Backline nélküli unitjai megkapták."
+  "d": "Combat damage kiosztásakor a Backline unitra csak akkor osztható damage, ha a controllere összes Backline nélküli unitja már megkapta a lethal damage-et (a megöléséhez elég, a Mightjával legalább egyenlő damage-et)."
  },
  {
   "t": "Empower",
   "m": "\\[?Empower\\]?",
   "r": "827",
-  "d": "A cost kifizetésével az ability forrása Empowered lesz."
+  "d": "Az Empower után megadott ár (cost) kifizetésével az ability forrása, vagyis az a lap vagy legend, amelyen az ability van, Empowered állapotba kerül."
  },
  {
   "t": "Flow",
   "m": "\\[?Flow\\]?",
   "r": "829",
-  "d": "A spell a trashedből is kijátszható a Flow costjáért, utána banishelődik."
+  "d": "A spell a trashedből is kijátszható a Flow után megadott árért, utána pedig banish, vagyis a Banishment zónába kerül, nem vissza a trashbe."
  },
  {
   "t": "Deploy",
   "m": "\\[?Deploy\\]?",
   "r": "830",
-  "d": "A gear bármelyik battlefieldre kijátszható, csak battlefieldre, cleanupban nem recallolódik, és meghal, ha egy opponent ott holdol."
+  "d": "A gear bármelyik battlefieldre kijátszható, de csak battlefieldre. A cleanup (a játék automatikus rendrakása) nem küldi vissza a base-re, és meghal, ha egy opponent holdolja (a Beginning Phase-ében megtartja) azt a battlefieldet."
  },
  {
   "t": "Disarm",
   "m": "\\[?Disarm\\]?",
   "r": "831",
-  "d": "Amikor a unit támad, egy ott lévő enemy unit -X Mightot kap erre a körre."
+  "d": "Amikor ez a unit támad (Attacker jelölést kap), egy ott lévő enemy unit -X Mightot kap a kör végéig. Az X a kulcsszó melletti szám."
  },
  {
   "t": "Show Off",
   "m": "\\[?Show\\sOff\\]?",
   "r": "832",
-  "d": "Kijátszáskor felfedheted az [Object]-et a kezedből, vagy pickelheted a boardon lévő friendly objektumok közül, és erre más utasítások hivatkozhatnak."
+  "d": "Kijátszáskor megmutathatod (reveal) a kulcsszó után megnevezett lapot a kezedből, vagy kiválaszthatod (pick) a boardon lévő friendly (általad controllált) lapjaid közül. A kártya más szövegei erre hivatkozhatnak."
  }
 ]

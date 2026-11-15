@@ -9,7 +9,7 @@
 1. Kártya ellenőrzés: 17. kör (tools/audit/r17_*_cards.json kész, agentek nem futottak le). Cél: egy teljes kör 0 javítással. Az utolsó körök: 15, 34, 31 javítás; a szempontlista lezárva (RBRIEF.md vége).
 2. How to Play tartalom (tools/learn/beginner.json, 10 fejezet, 45 kvíz): 8 ellenőrző kör, az utolsó kettő 1-1 apró javítás. Kell még 1 hibátlan kör.
 3. Tanulás tartalom (tools/learn/advanced.json, 3 haladó fejezet, 8 szituáció): 3 ellenőrző kör (18, 3, 7 javítás). Nyitott: a 0,1,2,3,5,7 indexű szituációk lapszámai (deck, kéz, trash) legyenek levezethetők a körszámból.
-4. Fogalomtár érthetőségi átírás (tools/gloss_wip): félbemaradt, NEM validált változat. Újra kell futtatni a GBRIEF.md szerint az src/data/{glossary,terms,flow}.json eredetijéből ("permanent", "[Effect]" magyarázat).
+4. Fogalomtár érthetőségi átírás: KÉSZ, élesítve (glossary, terms, flow: 271 szöveg átírva, a permanent és a placeholderek magyarázva).
 5. Opcionális: teljes nyomtatott-szöveg ellenőrzés a maradék kb. 650 lapra (eddig 446 lapot néztünk képről).
 
 ## Indítás
