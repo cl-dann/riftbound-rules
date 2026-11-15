@@ -47,3 +47,14 @@
 - Minőség: Playwright e2e (a /home/claude/test/tweb.py mintájára), Storybook a pálya komponenseihez.
 - Döntés: nincs PWA, nincs telepíthető vagy offline változat; a projekt csak böngészőben, a GitHub Pages oldalon fut.
 - Elfogadott bónuszok (2026-11-15): megosztható szituáció-link (pálya és chain a linkben, Discordra); gyors rács (TanStack Virtual); hibatűrő magyar és angol keresés. A PWA továbbra sincs a tervben (előző döntés).
+
+## Összesített ütemterv fülenként (2026-11-15), alapelv: interaktív, vizuális, automatikus magyarázat
+0. Befejezendő: kártya ellenőrzés 17. kör-tól 0 javításig; How to Play tartalom 1 hibátlan kör; Tanulás tartalom (szituációk lapszámai) ellenőrzés; utána élesítés.
+1. Kártyák: Gyakori kérdések (Q&A) elöl, technikus jegyzetek lenyithatóan; gyors rács (TanStack Virtual); hibatűrő HU/EN keresés; (megvan: rács alapból, hover nagyítás, tooltip).
+2. Deck: húzási valószínűség (hány %, hogy a lap a kézben van az N. körre), mintakéz-húzás mulligannel, rune-arány javaslat a lapok domainköltségéből, deck összehasonlítás. (ötlet, nincs jóváhagyva)
+3. Szabályzat: verziók közti különbség, könyvjelzők, magyar kulcsszavas keresés. (ötlet, nincs jóváhagyva)
+4. Chain: interaktív építő (bal űrlap, jobb Playmat), drag and drop, célzó nyilak, léptetés Mi változott listával és szabályszámmal, Might/damage/hátralévő számolás, combat kiosztás, mistarget és linked instructions, animációk, megosztható link; szabálymotor külön TS modul tesztekkel.
+5. How to Play: 10 fejezet + kvíz + interaktív pálya (tartalom ellenőrzés után élesít).
+6. Tanulás: szituációk a Playmaton (nagy nézet, Mi változott, unit részletek), haladó leckék; később kártyakvíz (Rift Recall minta), napi feladvány, Chain építőből szituáció.
+7. Kézikönyv: Fogalmak (tooltip forrás, közérthetőre átírva, kész), Kulcsszavak, Játékmenet ábrák interaktívvá (kör, chain, combat folyamat kattintható lépésekkel), Szabályváltozások és errata összefoglaló előtte/utána nézettel.
+8. Közös: Playwright e2e tesztek élesítés előtt; nincs PWA.
