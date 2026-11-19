@@ -59,13 +59,41 @@ test('Chain: példa lejátszása lépésenként', async ({ page }) => {
   await expect(page.getByText(/Mi változott/i).first()).toBeVisible();
 });
 
-test('How to Play és Practice: nincs kvíz, nincs Elolvastam gomb', async ({ page }) => {
+test('How to Play: 10 fejezet, ABCD, Try It, régi linkek', async ({ page }) => {
   await open(page, '#hogyan');
-  await page.locator('a.btn.hex').first().click();
-  await expect(page.locator('.quiz')).toHaveCount(0);
-  await expect(page.getByRole('button', { name: 'Elolvastam' })).toHaveCount(0);
-  await page.goto('/#tanulas');
-  await expect(page.locator('.quiz')).toHaveCount(0);
+  await expect(page.locator('.view.on .learn-side li')).toHaveCount(10);
+  await expect(page.locator('.view.on .chhead .pos')).toHaveText('1 / 10');
+  await expect(page.locator('.view.on h1.chtitle')).toHaveText('Overview');
+  await page.locator('.view.on .learn-side a', { hasText: 'Turn Structure' }).click();
+  await expect(page.locator('.view.on .chhead .pos')).toHaveText('4 / 10');
+  await expect(page.locator('.view.on .labcd .lab')).toHaveCount(6);
+  await page.goto('/#hogyan/resource-system');
+  const t = page.locator('.view.on .tryit').first();
+  for (let i = 0; i < 9; i++) await t.locator('.ti-rune > button:first-child').nth(i).click();
+  await t.getByRole('button', { name: 'Ellenőrzés' }).click();
+  await expect(t.locator('.ti-fb.ok')).toBeVisible();
+  await t.getByRole('button', { name: 'Újra' }).click();
+  await expect(t.locator('.ti-fb')).toHaveCount(0);
+  await page.goto('/#hogyan/mi-a-cel');
+  await expect(page).toHaveURL(/#hogyan\/win-conditions$/);
+  await page.goto('/#tanulas/tempo-es-ertek');
+  await expect(page).toHaveURL(/#tanulas\/lecke\/tempo-es-ertek$/);
+});
+
+test('How to Play és Practice: nincs kvíz, nincs Elolvastam gomb, nincs haladásmérő', async ({ page }) => {
+  for (const h of ['#hogyan', '#hogyan/spell-speeds', '#tanulas', '#tanulas/lecke', '#tanulas/lecke/tempo-es-ertek']) {
+    await open(page, h);
+    await expect(page.locator('.view.on main.learn-main')).toBeVisible();
+    await expect(page.locator('.quiz')).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Elolvastam' })).toHaveCount(0);
+    await expect(page.locator('.view.on main.learn-main')).not.toContainText(/completed|teljesítve|elvégezve/i);
+  }
+  await page.goto('/#tanulas/sz');
+  await expect(page.locator('.view.on .scnlist li')).toHaveCount(10);
+  await page.locator('.view.on .scnlist a').first().click();
+  await expect(page.locator('.view.on .chhead .pos')).toHaveText('1 / 10');
+  await page.getByRole('button', { name: 'Szituáció indítása' }).click();
+  await expect(page.locator('.view.on .scn-choice')).toBeVisible();
 });
 
 test('Fogalomtár: játékmenet lépésábra és errata szűrés', async ({ page }) => {
@@ -80,7 +108,7 @@ test('Fogalomtár: játékmenet lépésábra és errata szűrés', async ({ page
 test('Mobil (390 px): egyik fül sem lóg ki vízszintesen', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await open(page, '#kartyak');
-  for (const t of ['kartyak', 'deck', 'szabalyok', 'chain', 'hogyan', 'tanulas', 'kezikonyv']) {
+  for (const t of ['kartyak', 'deck', 'szabalyok', 'chain', 'hogyan', 'hogyan/turn-structure', 'hogyan/resource-system', 'hogyan/spell-speeds', 'hogyan/chain', 'tanulas', 'tanulas/sz/abcd-kor-eleje', 'tanulas/lecke', 'kezikonyv']) {
     await page.goto('/#' + t);
     if (t === 'chain') { await page.locator('#cb-ex').click(); await page.locator('#cb-run').click(); }
     await page.waitForTimeout(400);

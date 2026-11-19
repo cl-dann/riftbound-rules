@@ -88,7 +88,7 @@ function RuneStacks({ r, onZone, sel }: { r?: PSide['runes']; onZone: (z: string
   const groups: Record<string, { ready: number; ex: number }> = {};
   for (let i = 0; i < total; i++) { const d = doms[i] || '?'; groups[d] ||= { ready: 0, ex: 0 }; if (i < r.ready) groups[d].ready++; else groups[d].ex++; }
   return (
-    <button type="button" className={'pm2-runes' + (sel === 'runes' ? ' on' : '')} onClick={() => onZone('runes')} title="Rune-ok">
+    <button type="button" data-zone="runes" className={'pm2-runes' + (sel === 'runes' ? ' on' : '')} onClick={() => onZone('runes')} title="Rune-ok">
       <span className="pm2-stacks">
         {Object.entries(groups).map(([d, g]) => (
           <span key={d} className="pm2-stack">
@@ -106,7 +106,7 @@ function RuneStacks({ r, onZone, sel }: { r?: PSide['runes']; onZone: (z: string
 
 function Piles({ s, onZone, sel, known }: { s: PSide; onZone: (z: string) => void; sel: string; known?: boolean }) {
   const P = ({ z, l, n, top }: { z: string; l: string; n?: number; top?: string | null }) => (
-    <button type="button" className={'pm2-pile' + (sel === z ? ' on' : '')} onClick={() => onZone(z)} title={ZONES[z]?.t}>
+    <button type="button" data-zone={z} className={'pm2-pile' + (sel === z ? ' on' : '')} onClick={() => onZone(z)} title={ZONES[z]?.t}>
       <Card n={top} small /><span>{l}<b>{n ?? 0}</b></span>
     </button>
   );
@@ -124,7 +124,7 @@ function Hand({ s, onZone, sel, known }: { s: PSide; onZone: (z: string) => void
   const n = s.hand ? s.hand.length : s.handCount ?? 0;
   if (known && !n) return null;
   return (
-    <button type="button" className={'pm2-hand' + (sel === 'hand' ? ' on' : '')} onClick={() => onZone('hand')}>
+    <button type="button" data-zone="hand" className={'pm2-hand' + (sel === 'hand' ? ' on' : '')} onClick={() => onZone('hand')}>
       <span className="pm2-cards">
         {s.hand ? s.hand.map((h, i) => <span key={i} className="cl" data-card={h}><Card n={h} /></span>)
           : Array.from({ length: n }, (_, i) => <Card key={i} />)}
@@ -138,11 +138,11 @@ function Hand({ s, onZone, sel, known }: { s: PSide; onZone: (z: string) => void
 function LegendChamp({ s, onZone, sel }: { s: PSide; onZone: (z: string) => void; sel: string }) {
   return (
     <div className="pm2-lc">
-      <button type="button" className={'pm2-slot' + (sel === 'champion' ? ' on' : '')} onClick={() => onZone('champion')}>
+      <button type="button" data-zone="champion" className={'pm2-slot' + (sel === 'champion' ? ' on' : '')} onClick={() => onZone('champion')}>
         {s.champion ? <span className="cl" data-card={s.champion}><Card n={s.champion} /></span> : <span className="pm2-ghost" />}
         <span className="pm2-badge ch">Champion</span>
       </button>
-      <button type="button" className={'pm2-slot' + (sel === 'legend' ? ' on' : '')} onClick={() => onZone('legend')}>
+      <button type="button" data-zone="legend" className={'pm2-slot' + (sel === 'legend' ? ' on' : '')} onClick={() => onZone('legend')}>
         {s.legend ? <span className="cl" data-card={s.legend}><Card n={s.legend} /></span> : <span className="pm2-ghost" />}
         <span className="pm2-badge lg">Legend</span>
       </button>
@@ -153,7 +153,7 @@ function LegendChamp({ s, onZone, sel }: { s: PSide; onZone: (z: string) => void
 function Base({ s, who, prev, onZone, sel }: { s: PSide; who: 'me' | 'opp'; prev?: PSide; onZone: (z: string) => void; sel: string }) {
   const pk = new Set((prev?.base || []).map(key));
   return (
-    <div className={'pm2-base ' + who + (sel === 'base' ? ' on' : '')} onClick={(e) => { if (!(e.target as HTMLElement).closest('.cl,button')) onZone('base'); }}>
+    <div data-zone="base" className={'pm2-base ' + who + (sel === 'base' ? ' on' : '')} onClick={(e) => { if (!(e.target as HTMLElement).closest('.cl,button')) onZone('base'); }}>
       <span className="pm2-wm" aria-hidden>BASE</span>
       <div className="pm2-units">{(s.base || []).map((u, i) => <Unit key={i} u={u} side={who} where={(who === 'me' ? 'Saját' : 'Ellenfél') + ' base'} changed={!!prev && !pk.has(key(u))} />)}</div>
     </div>
@@ -219,16 +219,20 @@ export function diffBoards(a: PBoard | undefined, b: PBoard): string[] {
 }
 
 /** onlyKnown: csak az ismert zónák látszanak (a Chain elemzőnél nincs deck, rune és teljes kéz adat). */
-export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown = false }: { b: PBoard; prev?: PBoard; explain?: boolean; focus?: string; turn?: 'me' | 'opp' | null; onlyKnown?: boolean }) {
+/** hover: egérrel rávive is megjelenik a zóna leírása (How to Play felfedező). infoTop: a leírás a pálya fölött. */
+export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown = false, hover = false, infoTop = false }: { b: PBoard; prev?: PBoard; explain?: boolean; focus?: string; turn?: 'me' | 'opp' | null; onlyKnown?: boolean; hover?: boolean; infoTop?: boolean }) {
   const [sel, setSel] = useState(focus || '');
   const [pu, setPu] = useState<{ u: PUnit; side: 'me' | 'opp'; where: string } | null>(null);
   const onZone = (z: string) => { setPu(null); setSel(sel === z ? '' : z); };
   const info = sel ? ZONES[sel] : null;
   const pick = (u: PUnit, side: 'me' | 'opp', where: string) => { setSel(''); setPu(pu && pu.u === u ? null : { u, side, where }); };
-  const score = (who: 'me' | 'opp') => { const v = b[who].score; return v == null ? null : <button type="button" className={'pm2-pts ' + who} onClick={() => onZone('score')}>{v}<small>pts</small></button>; };
+  const score = (who: 'me' | 'opp') => { const v = b[who].score; return v == null ? null : <button type="button" data-zone="score" className={'pm2-pts ' + who} onClick={() => onZone('score')}>{v}<small>pts</small></button>; };
   return (
     <PickCtx.Provider value={pick}>
-    <div className={'pm2' + (onlyKnown ? ' known' : '')}>
+    <div className={'pm2' + (onlyKnown ? ' known' : '') + (infoTop ? ' infotop' : '')} onMouseOver={hover ? (e) => {
+      const t = e.target as HTMLElement; if (t.closest('.pm-unit')) return;
+      const z = t.closest('[data-zone]')?.getAttribute('data-zone'); if (z && z !== sel) { setPu(null); setSel(z); }
+    } : undefined}>
       <div className="pm2-table">
         <div className="pm2-bar opp"><span>Opponent</span>{turn === 'opp' && <span className="pm2-turn">Turn</span>}</div>
         <div className="pm2-band opp-top">
@@ -242,18 +246,18 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
         </div>
         <div className={'pm2-field' + (sel === 'bfs' ? ' on' : '')}>
           {score('opp')}
-          <button type="button" className="pm2-ftitle" onClick={() => onZone('bfs')}>Battlefield{b.bfs.length > 1 ? 's' : ''}</button>
+          <button type="button" data-zone="bfs" className="pm2-ftitle" onClick={() => onZone('bfs')}>Battlefield{b.bfs.length > 1 ? 's' : ''}</button>
           {b.bfs.map((f, i) => {
             const pf = prev?.bfs?.[i];
             const pko = new Set((pf?.opp || []).map(key)), pkm = new Set((pf?.me || []).map(key));
             return (
-              <div key={i} className="pm2-bf">
+              <div key={i} className="pm2-bf" data-zone="bfs">
                 <div className="pm2-ubox opp"><span className="pm2-uh">Opponent units{!!f.opp?.length && <b>{f.opp.length}</b>}</span>
                   <div className="pm2-units">{(f.opp || []).map((u, j) => <Unit key={j} u={u} side="opp" where={f.name} changed={!!prev && !pko.has(key(u))} />)}</div></div>
                 <div className={'pm2-bfc ' + (f.ctrl || 'none')} data-bfi={i}>
                   <span className="cl" data-card={f.name}>{img(f.name) ? <img src={img(f.name)} alt={f.name} loading="lazy" /> : <span className="pm-tok">{f.name}</span>}</span>
                   <span className="pm2-ctrl">{f.ctrl === 'me' ? 'Te kontrollálod' : f.ctrl === 'opp' ? 'Ellenfél kontrollálja' : 'Senkié'}</span>
-                  <button type="button" className={'pm2-fd' + (f.facedown ? ' has ' + f.facedown : '') + (sel === 'facedown' ? ' on' : '')} onClick={() => onZone('facedown')} title="Facedown Zone">
+                  <button type="button" data-zone="facedown" className={'pm2-fd' + (f.facedown ? ' has ' + f.facedown : '') + (sel === 'facedown' ? ' on' : '')} onClick={() => onZone('facedown')} title="Facedown Zone">
                     {f.facedown ? <Card small /> : <span className="pm2-ghost sm" />}<span>Facedown</span>
                   </button>
                 </div>
@@ -262,7 +266,7 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
               </div>
             );
           })}
-          <button type="button" className={'pm2-chain' + (sel === 'chain' ? ' on' : '')} onClick={() => onZone('chain')}>
+          <button type="button" data-zone="chain" className={'pm2-chain' + (sel === 'chain' ? ' on' : '')} onClick={() => onZone('chain')}>
             <span className="pm2-uh">Chain</span>
             {!b.chain?.length ? <span className="pm-empty">üres</span> : b.chain.map((c, i) => <span key={i} className="pm2-ci" data-ci={i}>{i === 0 ? <b>Felül: </b> : null}{c.replace(/\[\[([^\]]+)\]\]/g, '$1')}</span>)}
           </button>
