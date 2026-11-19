@@ -1,10 +1,10 @@
-# Riftbound szabálykereső: áttekintés AI reviewernek
+# Riftbound HU: áttekintés AI reviewernek
 
 Ez a fájl annak szól, aki (ember vagy AI) először nézi át a projektet. Leírja, mi az oldal, hogyan épül fel, honnan jön az adat, milyen döntések kötik, és hogyan lehet ellenőrizni. A folyamatban lévő munka állapota a `tools/HANDOFF.md`-ben van.
 
 ## Mi ez
 
-Nem hivatalos, rajongói, magyar nyelvű szabálykereső a Riftbound (League of Legends TCG) kártyajátékhoz. Készítő: Daneehunter. Élesben: GitHub Pages, repó: `cl-dann/riftbound-rules`, a `main` ág minden pushra deployol. Csak böngészős oldal: nincs backend, nincs PWA, nincs offline változat (döntés).
+Riftbound HU: nem hivatalos, rajongói, magyar nyelvű kártya- és szabálykereső a Riftbound (League of Legends TCG) kártyajátékhoz. Készítő: Daneehunter. Élesben: GitHub Pages, repó: `cl-dann/riftbound-rules`, a `main` ág minden pushra deployol. Csak böngészős oldal: nincs backend, nincs PWA, nincs offline változat (döntés).
 
 Célközönség: magyar játékosok, kezdőtől a versenyjátékosig. A felület magyar, a játék szakszavai angolul maradnak (unit, chain, resolve, Might, battlefield; a Hunglish szándékos).
 

@@ -47,7 +47,7 @@ function Footer() {
       {col('Készítő', '<p><strong>Daneehunter</strong></p><p>Nem hivatalos, rajongói segédeszköz, nem kereskedelmi célú.</p><p>Kérdés vagy hibajelzés: Discordon <strong>daneehunter</strong>, jelölj be bátran.</p>')}
       {col('AI és pontosság', '<p>Az oldal kódja, a kártya és szabály megfeleltetés és a magyar magyarázatok AI segítségével készültek: Claude (Anthropic), Claude Fable 5.2 és Claude Opus 5.5 modell.</p><p>Az AI által írt magyarázat tévedhet. A megfeleltetés automatikus, a "Hogyan érinti ezt a lapot" a Core Rules szövegéből levezetve készült, egyik sem hivatalos ruling: versenyen a judge és a Core Rules dönt.</p>')}
       {col('Források', '<p>Szabályszöveg: Riftbound Core Rules (Last Updated ' + META.rules_updated + '), angol eredeti, változtatás nélkül.</p><p>Ban lista (' + META.ban_updated + ') a Rules Hubról, ' + BF.from + '-tól: <a href="' + BF.url + '">' + esc(BF.title) + '</a>.</p><p>Errata: ' + META.articles.map((a: any) => '<a href="' + a.u + '">' + esc(a.t) + '</a>').join(', ') + '.</p><p>Kártyaadat: hivatalos Card Gallery közösségi pillanatkép (LouisCourrian/riftbound-cards, ' + META.cards_snapshot + '), a Radiance javítások a nyomtatott lapok alapján. A kártyaképek a Riot hivatalos szerveréről töltődnek be.</p>')}
-      {col('Jogi', '<p>Riftbound szabálykereső was created under Riot Games\' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.</p><p>A Riftbound, a League of Legends, a kártyanevek, kártyaszövegek, kártyaképek és a Core Rules szövege a Riot Games, Inc. tulajdona.</p><p><a href="https://playriftbound.com/">playriftbound.com</a> · <a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a> · <a href="https://playriftbound.com/en-us/card-gallery/">Card Gallery</a></p>')}
+      {col('Jogi', '<p>Riftbound HU was created under Riot Games\' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.</p><p>A Riftbound, a League of Legends, a kártyanevek, kártyaszövegek, kártyaképek és a Core Rules szövege a Riot Games, Inc. tulajdona.</p><p><a href="https://playriftbound.com/">playriftbound.com</a> · <a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a> · <a href="https://playriftbound.com/en-us/card-gallery/">Card Gallery</a></p>')}
     </footer>
   );
 }
@@ -64,7 +64,7 @@ function Shell() {
   return (
     <div className="wrap">
       <header className="top">
-        <h1><span className="brand-mark" aria-hidden>R</span>Riftbound szabálykereső</h1>
+        <h1><span className="brand-mark" aria-hidden>R</span>Riftbound HU</h1>
         <div className="src">
           <span>Core Rules <b>{META.rules_updated}</b></span>
           <span>Ban lista <b>{META.ban_updated}</b>{BF && (BAN_ACTIVE ? <> + <b>{BF.from}</b></> : <>, új: <b>{BF.from}</b></>)}</span>
