@@ -76,7 +76,8 @@
 - Kártyák: Gyakori kérdések mind az 1101 lapnál (3940 pár, src/data/audit/qa_NN.json, generálás és egy ellenőrző kör sonnet agentekkel, /home/claude/build/qa/QBRIEF.md és VBRIEF.md). UI: Q&A elöl, a notes lenyitható "Szabályi részletek" blokkban.
 - Deck: builder (web/src/views/deckEdit.ts, a decklista szöveg marad az egyetlen forrás), élő legalitás, Cardmarket ár: tools/prices/fetch.py a deploy workflow-ban naponta 04:17 UTC, Riftbound idGame = 22 (autodetect), web/public/prices.json a buildben. Signature lapok fallback a vessző előtti névre. Az új kiadás lapjainak egy része még nincs a Cardmarket árlistájában.
 - Szabályzat: versenyformátum oldalak (#fmt-<id>), src/data/formats.json, ellenőrizve.
-- Chain: léptethető lejátszás Playmattal, Mi változott?, célzó nyilak, damage és Cleanup kill. 2. kör (mistarget, linked, combat panel, drag and drop) folyamatban.
+- Chain: léptethető lejátszás Playmattal, Mi változott?, célzó nyilak (760 px alatt rejtve), damage és Cleanup kill, mistarget és linked instructions (359.3.e.6: illegális célpont = Ignored, más ok = Negated; 359.3.e.14.a/b), combat damage kiosztó panel (web/src/components/CombatPanel.tsx), drag and drop (a Playmaton érintőképernyőn nem működik).
+- Végső ellenőrzés 2026-11-19: minden fül 390 és 1300 px szélességen, minden szabályhivatkozás (Q&A, notes, learn, formats) létező szabályra mutat, e2e 8/8.
 - Fogalomtár: interaktív játékmenet lépésábrák, errata előtte/utána szószintű diffel és szűréssel.
 - E2E: web/e2e/app.spec.ts (7 teszt), .github/workflows/e2e.yml. Helyben: PW_CHROME=/usr/bin/google-chrome npm run test:e2e (a cdn.playwright.dev innen nem érhető el).
 - Figyelem: a lokális `npx tsc --noEmit -p .` nem azonos a CI-vel, mindig `npm run build`-del ellenőrizz (tsc -b).
