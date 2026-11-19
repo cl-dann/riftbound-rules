@@ -18,7 +18,7 @@
    ],
    [
     "Mehet a két token két külön helyre?",
-    "Valószínűleg igen, mert minden token külön Play. Lehet a base-ed vagy egy általad kontrollált battlefield, de ezt kifejezett szabály nem mondja ki.",
+    "Igen, mert minden token külön Play, a base-edbe vagy egy általad kontrollált battlefieldre mehet. Ezt kifejezett szabály nem mondja ki.",
     "185.2.a,355.2.a"
    ]
   ],
@@ -30,7 +30,7 @@
    ],
    [
     "Hogyan működik a Hidden ezen a lapon?",
-    "A saját körödben, showdownon kívül 1 tetszőleges Powerért facedown elrejtheted egy általad kontrollált battlefielden. A következő körtől Reactionként, base cost nélkül kijátszható.",
+    "A saját körödben, showdownon kívül 1 tetszőleges Powerért elrejtheted egy általad kontrollált battlefielden (facedown). A következő körtől Reactionként, base cost nélkül kijátszható.",
     "811.1.b,811.6,811.3"
    ],
    [
@@ -169,7 +169,7 @@
   "Stalwart Goatherd": [
    [
     "Milyen geart ölhetek meg vele?",
-    "Bármelyik játékos geart, akár unitra csatoltat is, ha a nyomtatott Energy costja legfeljebb 4. A gear target.",
+    "Bármelyik játékos gearjét, akár unitra csatoltat is, ha a nyomtatott Energy costja legfeljebb 4. A gear target.",
     "355.10,718.5.b,206"
    ],
    [
@@ -207,12 +207,12 @@
     "811.1.b,811.6,811.3"
    ],
    [
-    "Kit buffolhatok vele?",
+    "Mit buffolhatok vele?",
     "Egy saját unitot. Már buffolt unit is jó, az nem kap második buffot.",
     "355.10,427.1.c"
    ],
    [
-    "Hol hat a +1 Might bónusz a buffokra?",
+    "Mely buffokra hat a plusz +1 Might, és hol?",
     "A kör végéig minden saját buff +2 Mightot ad, bárhol, a később buffolt unitokra is. Facedown-ból a buff targetje csak az adott battlefielden álló unit lehet.",
     "811.2,703,391.4"
    ],
@@ -396,7 +396,7 @@
   "Stealthy Pursuer": [
    [
     "Milyen mozgásnál mehet a Pursuer a társával?",
-    "Bármilyen Move-nál, Standard Move-nál és effect általinál is. Ez effect általi Move, ezért exhausted állapotban is megy. Recallra nem triggerel.",
+    "Bármilyen Move-nál: Standard Move-nál és effect általinál is. A követése effect általi Move, ezért exhausted állapotban is megy. Recallra nem triggerel.",
     "421.1,144.2,458.1"
    ],
    [
@@ -433,7 +433,7 @@
    ],
    [
     "Mit jelent rajta a Deflect?",
-    "Az opponent spellje vagy abilityje 1 tetszőleges Powerrel többe kerül, ha őt targeteli, a disempower is, ha targetel.",
+    "Az opponent spellje vagy abilityje 1 tetszőleges Powerrel többe kerül, ha őt targeteli (a disempower is, ha targetel).",
     "809.1.c"
    ]
   ],
@@ -488,7 +488,7 @@
     "383.2.a.1"
    ],
    [
-    "Kit küldhetek haza vele?",
+    "Mit küldhetek haza vele?",
     "Egy másik, általad kontrollált unitot a Ferryman battlefieldjén. Magát nem választhatja.",
     "355.10,355.9.b"
    ],
@@ -527,7 +527,7 @@
   ],
   "Stormbringer, Volibear": [
    [
-    "Kit és mit választhatok a Stormbringer, Volibearrel?",
+    "Mit választhatok a Stormbringer, Volibearrel?",
     "Egy saját unitot a base-edből és egy battlefieldet. Az ott álló enemy unitok nem targetek, a Deflect nem védi őket.",
     "355.9.b,355.10.b"
    ],
@@ -588,7 +588,7 @@
   ],
   "Strike Down": [
    [
-    "Kiket választhatok a Strike Downhoz?",
+    "Mit választhatok a Strike Downhoz?",
     "Egy saját, csatolt Equipmenttel felszerelt unitot és egy enemy unitot. Equipped unit nélkül a spell nem játszható ki.",
     "355.9.b,355.8"
    ],
@@ -610,7 +610,7 @@
   ],
   "Stupefy": [
    [
-    "Kit célozhatok a Stupefyjal?",
+    "Mit célozhatok a Stupefyjal?",
     "Bármelyik unitot, saját vagy enemy. Reaction, ezért Closed State-ben is kijátszható.",
     "355.7,813.1.c.1"
    ],
@@ -649,7 +649,7 @@
     "811.1.b,811.6,811.3"
    ],
    [
-    "Kit célozhatok vele?",
+    "Mit célozhatok vele?",
     "Egy battlefielden álló unitot. Facedown-ból kijátszva csak az ott álló unitot, jellemzően a rád támadót.",
     "355.10,355.9.b,811.1.d.2"
    ],
@@ -693,7 +693,7 @@
     "151.2,149.1"
    ],
    [
-    "Mit számít bele a Legion feltételébe?",
+    "Mi számít bele a Legion feltételébe?",
     "Ebben a körben már kijátszott másik kártyát, a Sun Disc saját kijátszása nem számít. A counterelt lap is számít.",
     "812.1.b.1,812.1.c,420.4.b"
    ],
@@ -749,7 +749,7 @@
   ],
   "Super Mega Death Rocket!, Jinx": [
    [
-    "Kit célozhatok a Super Mega Death Rocket!, Jinxszel?",
+    "Mit célozhatok a Super Mega Death Rocket!, Jinxszel?",
     "Bármelyik játékos unitját, base-ben és battlefielden is.",
     "355.10"
    ],
@@ -903,7 +903,7 @@
   ],
   "Tactical Retreat": [
    [
-    "Kit választhatok a Tactical Retreattel?",
+    "Mit választhatok a Tactical Retreattel?",
     "Csak általad kontrollált unitot, az a target.",
     "355.10.c"
    ],
@@ -1040,7 +1040,7 @@
     "383.4.a.2"
    ],
    [
-    "Hogyan működik a Hidden Teemón?",
+    "Hogyan működik a Hidden ennél a lapnál?",
     "Kézből és a Champion Zone-ból is elrejthető 1 tetszőleges Powerért egy általad kontrollált battlefieldre. A következő körtől Reaction, base cost nélkül kijátszható.",
     "811.1.b,103.3.a.1"
    ],
@@ -1057,7 +1057,7 @@
     "383.4.f.2.a,466.2.c.3.a"
    ],
    [
-    "Kit sebezhet a trigger?",
+    "Mit sebezhet a trigger?",
     "Egy enemy unitot Teemo battlefieldjén, ő target. A trigger chainre kerülésekor választod.",
     "135.2.b.5.a,355.10"
    ],
@@ -1084,19 +1084,19 @@
     "381.1"
    ],
    [
-    "Kit vehetek kézbe vele?",
+    "Mit vehetek kézbe vele?",
     "Egy saját Teemo unitot a boardról vagy a Champion Zone-ból, akkor is, ha éppen más kontrollálja.",
     "355.10.a.1,355.9.a.5"
    ],
    [
-    "Mi vész el a boardról kézbe vett Teemón?",
+    "Mi vész el a Teemóból, ha a boardról kézbe veszem?",
     "A buff és a rajta lévő damage elvész, a csatolt Equipment leválik, és a boardon marad.",
     "124,705,719.5"
    ]
   ],
   "Temporal Breach": [
    [
-    "Kit választhatok a Temporal Breachcsel?",
+    "Mit választhatok a Temporal Breachcsel?",
     "Egy unitot, saját vagy enemy, base-ben is. Facedown-ból kijátszva csak azon a battlefielden lévőt, ahol a lap el volt rejtve.",
     "355.7,811.1.d.2"
    ],

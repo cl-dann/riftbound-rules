@@ -384,7 +384,7 @@
    ],
    [
     "Hányszor triggerel egy körben?",
-    "Annál fut le, aki itt conquerel, körönként legfeljebb egyszer.",
+    "Körönként legfeljebb egyszer, és annál fut le, aki itt conquerel.",
     "473.2.a,472"
    ]
   ],
@@ -495,7 +495,7 @@
   ],
   "Siren of the Shallows": [
    [
-    "Kire hat a Disarm?",
+    "Mire hat a Disarm?",
     "Támadáskor egy ottani enemy unitra, -1 Might a kör végéig. A unit target.",
     "831.1.b,831.1.d"
    ],
@@ -732,7 +732,7 @@
   ],
   "Smoke Screen": [
    [
-    "Kire játszhatom ki?",
+    "Mire játszhatom ki?",
     "Bármelyik unitra, saját vagy enemy. Reaction, ezért combat showdown közben is.",
     "355.7,813.1.c.1"
    ],
@@ -1049,8 +1049,8 @@
     "370.1.a.2,383.3.d"
    ],
    [
-    "Triggerel, ha a halált replacement effect váltja ki?",
-    "Nem, ha például heal és recall történik, nincs trigger.",
+    "Triggerel, ha a halált replacement effect helyettesíti?",
+    "Nem, például heal és recall esetén a unit nem hal meg, ezért nincs trigger.",
     "383.2.c.3.a"
    ]
   ],
@@ -1198,8 +1198,8 @@
     "429.2.a,428.2.a,186.1"
    ],
    [
-    "Számít, ha replacement effect miatt nem halt meg?",
-    "Nem, ilyenkor a unit nem halt meg.",
+    "Számít halálnak, ha egy replacement effect helyettesítette?",
+    "Nem, ilyenkor a unit nem halt meg, így a kedvezmény sem jár.",
     "383.2.c.3.a"
    ],
    [

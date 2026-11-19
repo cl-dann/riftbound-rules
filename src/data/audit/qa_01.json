@@ -62,7 +62,7 @@
    ],
    [
     "Van értelme már ready lapot választani?",
-    "Nincs, az a választás kárba vész. A ready rune viszont újra ad Energyt, a ready unit pedig újra mozoghat.",
+    "Nincs, már ready lapon a ready nem csinál semmit. Az exhaustolt rune ready-vé téve viszont újra ad Energyt, az exhaustolt unit pedig újra mozoghat.",
     "416.1.c,144.2"
    ]
   ],
@@ -647,7 +647,7 @@
     "807.1.b.2"
    ],
    [
-    "Mire fizethetem az Accelerate költségét?",
+    "Mit fizetek az Accelerate költségeként?",
     "1 Energy és 1 Chaos Power, a Power csak a unit saját domainjéből.",
     "805.1.b,805.1.b.1"
    ],
@@ -714,7 +714,7 @@
    ],
    [
     "Mi történik, ha a Wyrm az én battlefieldemen áll?",
-    "A odamozgatott unit Contested státuszt okoz, combat indul, és az ellenfél az Attacker.",
+    "Az odamozgatott unit Contested státuszt okoz, combat indul, és az ellenfél az Attacker.",
     "190.3.a.1,466.2.c.1"
    ],
    [
@@ -836,7 +836,7 @@
   "Aphelios, Exalted": [
    [
     "Hányszor választhatom ugyanazt a módot egy körben?",
-    "Egyszer, mindhárom mód egyszer jön. Ha mind elfogyott, a negyedik trigger nem csinál semmit.",
+    "Egyszer. Egy körben mind a három mód egyszer választható, a negyedik trigger már nem csinál semmit.",
     "355.3,403.4"
    ],
    [
@@ -1028,7 +1028,7 @@
   ],
   "Armed Assailant": [
    [
-    "Mire fizethetem az Accelerate költségét?",
+    "Mit fizetek az Accelerate költségeként?",
     "1 Energy és 1 Fury Power, a Power csak a unit saját domainjéből.",
     "805.1.b,805.1.b.1"
    ],
@@ -1188,7 +1188,7 @@
    ],
    [
     "Mekkora lehet a kedvezmény?",
-    "Az Energy rész legfeljebb 10, a Power rész legfeljebb 3 Order Power.",
+    "Az Energy rész legfeljebb 10-zel, a Power rész legfeljebb 3 Order Powerrel csökkenhet. A feláldozott unit bármely domainű Powere számít.",
     "356.6"
    ]
   ],
@@ -1248,8 +1248,8 @@
     "355.10.d,355.5.a"
    ],
    [
-    "Kimenekíthetik a unitjaikat?",
-    "Igen, a battlefielden álló unitok kimaradnak.",
+    "Megmenekülhetnek az ellenfél unitjai?",
+    "Igen, a battlefielden álló unitok kimaradnak, ezért a válaszban battlefieldre mozgatott unit megmenekül.",
     "355.5.a"
    ],
    [

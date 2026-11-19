@@ -2,7 +2,7 @@
  "qa": {
   "Yasuo, Remorseful": [
    [
-    "Kit sebez Yasuo triggere, és mikor számolódik a Might?",
+    "Melyik unitot sebzi Yasuo triggere, és mikor számolódik a Might?",
     "Egy enemy unitot ugyanazon a battlefielden, ahol Yasuo támad. A 'here' és a Might a resolve-kor értékelődik ki, ezért ha válaszul csökkentik a Mightját, kevesebbet sebez.",
     "355.10,355.9.b,359.3.f.2"
    ],
@@ -90,7 +90,7 @@
     "383.4.c.2.a,170.11.b,170.11.c"
    ],
    [
-    "Kit sebezhet meg?",
+    "Melyik unitot sebezheti meg?",
     "Csak base-ben álló enemy unitot. Ha nincs ilyen, a trigger chainre kerülve rögtön lekerül róla, így nem fut le.",
     "355.9.b,355.8,403.4"
    ],
@@ -101,7 +101,7 @@
    ],
    [
     "Csökken a Weaponmaster kedvezménnyel a domainhez kötött Power is?",
-    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. Az Equip costban lévő, Chaoshoz kötött Power csökkenése nem tisztázott.",
+    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. Az Equip costban lévő, a lap saját domainjére szóló Power csökkenése nem tisztázott.",
     "821.1.c.3,135.2.e.6"
    ]
   ],
@@ -129,7 +129,7 @@
   ],
   "Yuumi, Magical Cat": [
    [
-    "Kit kaphat a bónuszt Yuumi triggere?",
+    "Melyik unit kaphat bónuszt Yuumi triggerétől?",
     "Egy másik, általad kontrollált unitot Yuumi battlefieldjén. Yuumi saját magát nem választhatja.",
     "355.10,355.9.b"
    ],
@@ -185,7 +185,7 @@
   ],
   "Zaunite Bouncer": [
    [
-    "Kit vehet vissza a kezébe a trigger?",
+    "Melyik unitot veheti vissza a kezébe a trigger?",
     "Egy másik, battlefielden álló unitot, bármelyik játékosét. Base-ben lévő unit nem választható.",
     "355.10,355.9.b"
    ],
@@ -278,7 +278,7 @@
     "806.1.c.1,358.4"
    ],
    [
-    "Kit célozhat a spell?",
+    "Milyen unitokat célozhat a spell?",
     "Egy battlefielden álló enemy unitot, és kijátszáskor egy friendly unitot is választasz, attól függetlenül, hogy a resolve-kor mozgatod-e.",
     "355.10,355.9.b,355.12"
    ],
@@ -313,8 +313,8 @@
    ],
    [
     "Mikor dobom el a kezem, és mikor kapja az opponent a pontot?",
-    "Bármilyen húzásra, a Draw Phase húzására is, ha a húzott lapokon kívül legalább 9 másik lap van a kezedben.",
-    "383.3"
+    "Bármilyen húzásra, a Draw Phase húzására is, ha a húzott lapokon kívül legalább 9 másik lap van a kezedben. A resolve-kor a teljes kezed eldobod, és az opponent 1 pontot kap.",
+    "383.3,355.7,423.4"
    ],
    [
     "Megnyerheti ezzel a játékot az opponent?",

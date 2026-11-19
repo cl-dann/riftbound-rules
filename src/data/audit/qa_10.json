@@ -7,7 +7,7 @@
     "822.1.b,813.1.c.1"
    ],
    [
-    "Kit kap meg az Assault, és célzom őket?",
+    "Kik kapják meg az Assaultot, és célzom őket?",
     "Nem célzol: az ott álló összes többi unitod megkapja. A 'here' a resolve-kor számít, ha Broadmane addigra elhagyta a boardot, az instruction elmarad.",
     "355.5.a,359.3.f.2,359.3.e.12"
    ],
@@ -30,7 +30,7 @@
    ],
    [
     "Mi történik, ha a célpont eltűnik a resolve előtt?",
-    "A módot kijátszáskor választod, nem válthatsz a másikra. Ha az unit addigra base-be kerül, nincs damage.",
+    "A módot kijátszáskor választod, utána nem válthatsz a másikra. Ha a unit addigra base-be kerül, nincs damage.",
     "355.3,355.15,359.3.e.9"
    ]
   ],
@@ -330,7 +330,7 @@
   ],
   "Malzahar, Fanatic": [
    [
-    "Melyik unitot vagy geart ölhetem meg costként, és célzom?",
+    "Melyik unitot vagy geart ölhetem meg costként, és target-e?",
     "Egy saját unitot vagy geart, nem target, a cost része. Kill instructionnek számít, a megölt unit Deathknellje lefut.",
     "355.10.c,429.1.a.1"
    ],
@@ -375,7 +375,7 @@
    ],
    [
     "Mikor játszható ki?",
-    "Action: a saját körödben és showdown alatt, Closed State-ben, vagyis másik spellre válaszul nem.",
+    "Action: a saját körödben és showdown alatt játszható ki, de Closed State-ben, vagyis másik spellre válaszul nem.",
     "806.1.c.1,358.4"
    ],
    [
@@ -392,7 +392,7 @@
   "Masa, Crashing Thunder": [
    [
     "Mikor fizethetem a plusz Order Powert?",
-    "Csak kijátszáskor, a 2. lépésben. Utólag, a boardon már nem pótolható.",
+    "Csak kijátszáskor, a kijátszás 2. lépésében. Utólag, a boardon már nem pótolható.",
     "356.2.b.1,355.1.a"
    ],
    [
@@ -594,7 +594,7 @@
    ],
    [
     "Mikor döntök az exhaustról, és target-e a unit?",
-    "Kijátszáskor, a 2. lépésben, optional additional costként. Az exhaustolt unit cost, nem target.",
+    "Kijátszáskor, a kijátszás 2. lépésében, optional additional costként. Az exhaustolt unit cost, nem target.",
     "356.2.b.1,355.1.a,355.10.c"
    ],
    [
@@ -847,12 +847,12 @@
    ],
    [
     "Hogyan sebezhet combat közben?",
-    "Facedown elrejtve, Reactionként játszva egy általad kontrollált battlefielden, a következő körtől. Ott enemy unit jellemzően csak combat alatt áll.",
+    "Elrejted facedown egy általad kontrollált battlefielden, és a következő körtől Reactionként játszod ki. Ott enemy unit jellemzően csak combat alatt áll.",
     "811.1.b,811.6,355.2.a"
    ],
    [
-    "Mi van, ha Marai elmozdul a resolve előtt?",
-    "Kézből kijátszva, ha elhagyta a boardot, a trigger mistargetel. Facedown-ból kijátszva is mistargetel, ha elhagyja a boardot.",
+    "Mi van, ha Marai a resolve előtt elhagyja a boardot?",
+    "Kézből kijátszva a here helye null, ezért a damage elmarad. Facedown-ból kijátszva a trigger mistargetel.",
     "359.3.e.12,811.1.d.3.a"
    ],
    [
@@ -1002,7 +1002,7 @@
     "383.3.b,383.3.b.1,702.2.b.1"
    ],
    [
-    "Mit veszít a unit a buffal?",
+    "Mit veszít a unit a buff levételével?",
     "1 Mightot.",
     "703"
    ]

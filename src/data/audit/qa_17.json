@@ -64,7 +64,7 @@
   "The Harrowing": [
    [
     "Milyen unitot játszhatok ki vele?",
-    "Bármelyik unitot a saját trashedből, az target. Ha nincs unit a trashben, a spell nem játszható ki.",
+    "Bármelyik unitot a saját trashedből, ez a unit target, mert a trash Public zóna. Ha nincs unit a trashben, a spell nem játszható ki.",
     "355.10.a,355.8"
    ],
    [
@@ -90,7 +90,7 @@
     "355.1,763,763.1"
    ],
    [
-    "Kit célozhat?",
+    "Milyen unitot célozhat?",
     "Bármelyik játékos unitját, base-ben is, ha rajta van a megnevezett tag.",
     "355.9.b,143.1"
    ],
@@ -151,7 +151,7 @@
   ],
   "The Syren": [
    [
-    "Kit mozgathat a base-ébe?",
+    "Melyik unitot mozgathatja a base-ébe?",
     "Csak saját, battlefielden álló unitot. Base-ben lévő unit nem választható.",
     "355.10,355.9.b"
    ],
@@ -283,7 +283,7 @@
   ],
   "Thrill of the Hunt": [
    [
-    "Kit célozhat, és hova játszhatom vissza?",
+    "Melyik unitot célozhat, és hova játszhatom vissza?",
     "Egy saját unitot bárhol a boardon, és bármelyik battlefieldre, az opponentére is. Utóbbi Contested lesz, showdown vagy combat következik.",
     "355.9.b,355.2.b,190.3.a.1"
    ],
@@ -310,7 +310,7 @@
     "355.9.b,466.2.c.3,806.1.c.1,358.4"
    ],
    [
-    "Kit stunolhatok?",
+    "Melyik unitot stunolhatok?",
     "Bármelyik játékos támadó unitját, a sajátodat is, nincs enemy megkötés.",
     "355.9.b"
    ],
@@ -349,7 +349,7 @@
   ],
   "Tibbers, Annie": [
    [
-    "Kit sebez?",
+    "Melyik unitokat sebzi?",
     "Minden battlefielden álló unitot, a sajátjaidat is, és Tibberst is, ha battlefieldre játszottad. A base-ben lévők érintetlenek.",
     "355.5.a,418.1.d"
    ],
@@ -382,12 +382,12 @@
    ],
    [
     "Menthet meg unitot egy spelltől facedownból kijátszva?",
-    "Csak ha a célzási feltétel a csere után már nem teljesül. A sima unit at a battlefield targetet nem teszi illegálissá, mert a társ a Tideturner battlefieldjére kerül.",
+    "Csak akkor, ha a spell célzási feltétele a csere után már nem teljesül. A sima unit at a battlefield targetet a csere nem teszi illegálissá, mert a társ a Tideturner battlefieldjére kerül.",
     "359.3.e.5,355.9.b"
    ],
    [
     "Mi van, ha a csere nem általam kontrollált battlefieldre visz?",
-    "Az Contested lesz, showdown vagy combat következhet.",
+    "Az a battlefield Contested lesz, showdown vagy combat következhet.",
     "452"
    ]
   ],
@@ -420,7 +420,7 @@
     "710"
    ],
    [
-    "Mikor nézi a feltételt?",
+    "Mikor ellenőrzi a játék a feltételt?",
     "A unit resolve-ja után, amikor már a boardon van, az aktuális Mighttal, buffokkal és módosítókkal.",
     "420.4.a,710"
    ],
@@ -459,7 +459,7 @@
   ],
   "Tools of Empire": [
    [
-    "Kit célozhat?",
+    "Melyik unitot célozhat?",
     "Bármelyik unitot, bárkiét, base-ben is.",
     "355.10,355.9.b"
    ],
@@ -532,7 +532,7 @@
   ],
   "Transpositionist": [
    [
-    "Kit küldhetek vissza a kezembe?",
+    "Melyik unitot küldhetem vissza a kezembe?",
     "Egy saját unitot, akár magát a Transpositionistet is. A unit a tulajdonosa kezébe megy.",
     "355.10,355.9.c,056.2"
    ],
@@ -776,7 +776,7 @@
   ],
   "Trinket Peddler": [
    [
-    "Kit célozhat a Disarm?",
+    "Melyik unitot célozhatja a Disarm?",
     "Egy ott álló enemy unitot. A -1 Might a kör végéig tart, nem csak a combat idejére.",
     "831.1.d,355.8"
    ],
@@ -866,7 +866,7 @@
   ],
   "Twilight Reveler": [
    [
-    "Kit readyzhat?",
+    "Melyik unitot readyzhatja?",
     "Egy másik saját unitot, bárhol. Kötelező, és ha nincs másik unitod, a trigger nem fut le.",
     "355.10,355.8"
    ],
@@ -888,7 +888,7 @@
     "155"
    ],
    [
-    "Kit véd meg?",
+    "Melyik unitot véd meg?",
     "Egy saját unitot, base-ben is: a kör végéig enemy spell és ability nem választhatja. A saját spelljeid továbbra is választhatják.",
     "757,355.9.b,355.10"
    ],
@@ -905,7 +905,7 @@
   ],
   "Twilight Step": [
    [
-    "Kit mozgathatok?",
+    "Melyik unitot mozgathatok?",
     "Legfeljebb 3 Mightú unitot, bárkiét, enemy unitot is.",
     "355.10,355.9.b"
    ],
@@ -920,7 +920,7 @@
     "359.3.e.2,710"
    ],
    [
-    "Mi történik, ha nem a controllere kontrollálta battlefieldre érkezik?",
+    "Mi történik, ha a unit olyan battlefieldre érkezik, amit a controllere nem kontrollál?",
     "Contested lesz, és a when I move triggerek lefutnak.",
     "190.3.a.1,421.1"
    ]
@@ -933,11 +933,11 @@
    ],
    [
     "Mi történik Chaos rune-nál?",
-    "Semmi. A Rune Deckben csak a legended Domain Identity-jébe tartozó rune lehet, ez a lap Chaos, ezért Chaos rune-nál nincs mód.",
+    "Semmi, Chaos rune-hoz nincs mód. A Rune Deckben csak a legended Domain Identity-jébe tartozó rune lehet, és ez a lap Chaos, ezért csak a legend másik domainje adhat módot.",
     "103.4.a.1,103.2.b.3"
    ],
    [
-    "Kit érint a Fury és az Order mód?",
+    "Melyik enemy unitokat érinti a Fury és az Order mód?",
     "A Fury csak az ott lévő enemy unitokat. Az Order stunja bármelyik enemy unitra mehet, base-ben lévőre is.",
     "355.9.b"
    ],
@@ -959,7 +959,7 @@
     "355.3"
    ],
    [
-    "Kit célozhat a sebző és a stunoló mód?",
+    "Melyik unitot célozhatja a sebző és a stunoló mód?",
     "Battlefielden lévő unitot, bárkiét. Base-ben álló unit nem választható.",
     "355.9.b"
    ],
@@ -988,12 +988,12 @@
   ],
   "Unchecked Power": [
    [
-    "Kit exhaustol?",
+    "Melyik unitokat exhaustolja?",
     "Minden friendly unitodat, a csapattársaidét is, bárhol. Az enemy unitokat nem.",
     "740.1.a,355.5.a"
    ],
    [
-    "Kit sebez a 12 damage?",
+    "Melyik unitokat sebzi a 12 damage?",
     "Minden battlefielden álló unitot, a sajátjaidat is. A base-ben lévők megmenekülnek.",
     "355.5.a"
    ],
@@ -1032,7 +1032,7 @@
   ],
   "Undertitan": [
    [
-    "Kit erősít a play effect?",
+    "Melyik unitokat erősíti a play effect?",
     "Minden másik unitodat +2 Mighttal, bárhol vannak. Nincs target, Deflect és can't be chosen nem számít.",
     "355.5.a,355.10.d"
    ],
@@ -1175,7 +1175,7 @@
    ],
    [
     "Mit jelent a from Bilgewater?",
-    "A tokenen lévő taget, nem zónát jelöl.",
+    "A Tentacle token Bilgewater taggel rendelkezik: a szöveg a taget jelöli, nem zónát.",
     "187.10"
    ],
    [
@@ -1186,7 +1186,7 @@
   ],
   "Upstage Comedy": [
    [
-    "Kit readyzhatok?",
+    "Melyik unitot readyzhatom?",
     "Bármelyik unitot, sajátot vagy enemyt. Már ready uniton nem csinál semmit.",
     "355.7,416.1.c"
    ],

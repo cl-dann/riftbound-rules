@@ -60,7 +60,7 @@
   ],
   "Vault Breaker": [
    [
-    "Kit célozhatok vele?",
+    "Melyik unitot célozhatok vele?",
     "Bármelyik unitot, bármelyik játékosét.",
     "355.10"
    ],
@@ -148,7 +148,7 @@
   ],
   "Vengeance": [
    [
-    "Kit ölhetek meg vele?",
+    "Melyik unitot ölhetem meg vele?",
     "Bármelyik játékos unitját, base-ben és battlefielden is, Might korlát nélkül.",
     "355.10"
    ],
@@ -232,7 +232,7 @@
   "Vex, Gloomist": [
    [
     "Mikor húzhatok vele?",
-    "Ha te vagy egy ally megtart egy battlefieldet. A saját holdod a saját körödben, az allyé az ő körében triggerel.",
+    "Ha te, vagy egy csapattársad (ally) megtart egy battlefieldet. A saját holdod a saját körödben, az allyé az ő körében triggerel.",
     "471.2,315.2.b.2"
    ],
    [
@@ -319,7 +319,7 @@
     "822.1.b,813.1.c.1"
    ],
    [
-    "Kit stunol, és kötelező?",
+    "Melyik unitot stunolja, és kötelező?",
     "Egy ott álló enemy unitot, kötelező, ha van érvényes target. Deflectes unitnál ki kell fizetned a felárat.",
     "355.10,355.8"
    ],
@@ -351,7 +351,7 @@
     "316.8.b.1"
    ],
    [
-    "Kit ready-zhatok, és mire jó?",
+    "Melyik unitot readyzhatok, és mire jó?",
     "Bármelyik unitot, target. Haszna: a Standard Move-tól exhausted attacker újra ready lesz, és ugyanabban a körben tovább mozoghat.",
     "355.10,416.1.c,144.2"
    ]
@@ -397,7 +397,7 @@
     "420.4.a,420.4.a.1"
    ],
    [
-    "Milyen lapokkal tudok az opponent körében kijátszani?",
+    "Milyen lapokkal tudok kijátszani az opponent körében?",
     "Jellemzően Action és Reaction lapokkal, illetve facedown-ból kijátszott Hidden lapokkal.",
     "813.1.c.1,811.6"
    ],
@@ -465,7 +465,7 @@
   ],
   "Void Assault": [
    [
-    "Kiket célzok vele?",
+    "Milyen unitokat célozhatok vele?",
     "Egy saját és egy enemy unitot, mindkettő target, és mindkét Move célját kijátszáskor választod.",
     "355.7,355.4"
    ],
@@ -548,7 +548,7 @@
   ],
   "Void Rush": [
    [
-    "Milyen lapot banisheltethetek?",
+    "Milyen lapot banishelhetek?",
     "Bármilyen típusút, unitot, geart vagy spellt a felfedett 2-ből. A választott lap nem target.",
     "355.10.a"
    ],
@@ -680,7 +680,7 @@
     "811.1.b,811.6,811.3"
    ],
    [
-    "Kit célozhatok facedown-ból?",
+    "Melyik unitot célozhatom facedownból?",
     "Csak az adott battlefielden lévő unitot.",
     "355.10,355.9.b"
    ],
@@ -729,14 +729,14 @@
     "426.1.c.1"
    ],
    [
-    "Kit ready-zhatok vele?",
+    "Melyik unitot readyzhatom vele?",
     "Bármelyik unitot, akár azt is, amelyiknek a buffját elköltötted. Már ready uniton nem történik semmi.",
     "355.10,416.1.c"
    ]
   ],
   "War Scout": [
    [
-    "Kit buffolhat a trigger?",
+    "Melyik unitot erősítheti a trigger?",
     "Bármelyik unitot, a Scoutot is. A targetet a trigger chain-re kerülésekor választod.",
     "355.10,355.5.b"
    ],
@@ -880,7 +880,7 @@
   ],
   "Whiteflame Protector": [
    [
-    "Kit választhatok?",
+    "Melyik unitot választhatom?",
     "Bármelyik unitot, bárhol, a Protectort is. A targetet a trigger chain-re kerülésekor választod.",
     "355.10,355.9.b,355.5.b"
    ],
@@ -1009,7 +1009,7 @@
   ],
   "Windsinger": [
    [
-    "Kit küldhetek vissza a kezébe?",
+    "Melyik unitot küldhetem vissza a kezébe?",
     "Egy másik, battlefielden álló, legfeljebb 3 Mightú unitot, akár sajátot is. Az aktuális Might számít.",
     "355.9.b,710"
    ],
@@ -1148,7 +1148,7 @@
     "204.1.b,144.2"
    ],
    [
-    "Kit célozhat?",
+    "Melyik unitot célozhatja?",
     "Bármelyik unitot, bárhol, a base-ben lévőt is. Ha a target a resolve előtt eltűnik, a sebzés elmarad, a cost nem jár vissza.",
     "355.10,355.9.b,359.3.e.7"
    ],

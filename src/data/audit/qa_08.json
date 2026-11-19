@@ -42,7 +42,7 @@
    ],
    [
     "Mit jelent az, hogy már választottam ellenséges unitot?",
-    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. A chosen jelentése nincs definiálva, valószínűleg az számít, hogy spelled vagy abilityd enemy unitot targetelt, az all enemy units nem elég.",
+    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. A chosen jelentése nincs definiálva, ezért nem egyértelmű, hogy a nem targetelő effect (például all enemy units) elég-e.",
     "383.4.b.3"
    ],
    [
@@ -95,7 +95,7 @@
     "823.2"
    ],
    [
-    "Mikor él a Machete szövege a unit alatt?",
+    "Mikor aktív a Machete szövege?",
     "Csak csatolva: ekkor a unit Rules Textjéhez fűződik, a gear saját Equip képessége pedig inaktív. A unit +2 Mightot is kap.",
     "136.2.b,136.2.c,435.1.e"
    ]
@@ -318,7 +318,7 @@
   "Imperial Decree": [
    [
     "Kire hat az Imperial Decree?",
-    "Minden unitra, a sajátjaidra is, amelyik a kör végéig sebzést kap. Nincs target, ezért Deflect és can't be chosen sem véd ellene.",
+    "Minden unitra, amelyik a kör végéig sebzést kap, a sajátjaidra is. Nincs target, ezért Deflect és can't be chosen sem véd ellene.",
     "355.10.c,391.2"
    ],
    [
@@ -406,7 +406,7 @@
   "Incorrigible Construct": [
    [
     "Mit mutathatok fel a Show Offhoz?",
-    "Egy Mech lapot a kezedből, vagy kijelölhetsz egy másik saját Mechet a boardon (a Mech token is jó). A felfedett lap a kezedben marad.",
+    "Felmutathatsz egy Mech lapot a kezedből, vagy kijelölhetsz egy másik saját Mechet a boardon (a Mech token is jó). A felfedett lap a kezedben marad.",
     "832.1.c,832.1.c.2,187.4"
    ],
    [
@@ -445,7 +445,7 @@
   "Inferna": [
    [
     "Hová és mikor játszható ki Inferna?",
-    "Ambush: olyan battlefieldre, ahol van unitod, Reactionként, bárki körében, combat közben is. Base-be játszva nincs Reaction. Ha finalizálás végére nincs ott unitod, oda nem játszható.",
+    "Ambush: olyan battlefieldre, ahol van unitod, Reactionként, bárki körében, combat közben is. Base-be játszva nincs Reaction. Ha a finalizálás végére nincs ott unitod, oda nem játszható.",
     "822.1.b,813.1.c.1,822.3"
    ],
    [
@@ -515,7 +515,7 @@
     "355.10,355.8"
    ],
    [
-    "Tehet a +3 Might Mightyvá egy unitot?",
+    "Lehet Mighty egy unit a +3 Might miatt?",
     "Igen: a +3 a kör végéig tart, ezért egy 2 vagy több Mightú unit abban a körben Mighty lesz.",
     "317.2.c,709"
    ],
@@ -721,7 +721,7 @@
   "Ivern, Friend to All": [
    [
     "Mikor választom ki a tagot, és meddig él?",
-    "Kijátszás finalizálásának 2. lépésében, nem a chainen, ezért nem lehet rá reagálni. Addig él, amíg Ivern a boardon van, újrajátszáskor újra választasz.",
+    "A kijátszás finalizálásának 2. lépésében, nem a chainen, ezért nem lehet rá reagálni. Addig él, amíg Ivern a boardon van, újrajátszáskor újra választasz.",
     "355.1,479.2.a,124.1"
    ],
    [
@@ -814,7 +814,7 @@
    ],
    [
     "Védi a unitot, ha a Cutlasst leszedik?",
-    "Nem, a védelem csak a unitra vonatkozik amíg rajta van: az opponent előbb leszedheti vagy megölheti a Cutlasst, utána már mozgathatja a unitot.",
+    "Nem, a védelem csak addig él, amíg a Cutlass rajta van: az opponent előbb leszedheti vagy megölheti, utána már mozgathatja a unitot.",
     "718.5.b,148.1.a.4"
    ],
    [
@@ -1051,7 +1051,7 @@
    ],
    [
     "Összeadódnak a bónuszok, ha többször lesz ready?",
-    "Igen: két Assault 2 Assault 4, két Deflect 2 Deflect 4 lesz.",
+    "Igen: két Assault 2 együtt Assault 4, két Deflect 2 együtt Deflect 4. A Ganking többszörözése felesleges.",
     "807.2,809.2"
    ],
    [
@@ -1095,7 +1095,7 @@
    ],
    [
     "Kétszer triggerel a Vision?",
-    "Ha más forrásból (Gemcraft Seer) még egy Visiont kap, a két példány külön triggerel.",
+    "Csak ha más forrásból (például Gemcraft Seer) még egy Visiont kap: ilyenkor a két példány külön triggerel.",
     "817.2"
    ]
   ],
@@ -1212,7 +1212,7 @@
   "Jinx, Rebel": [
    [
     "Milyen discard váltja ki a triggert?",
-    "Costként és effectként történő is, bárki körében, akkor is, ha az ellenfél effectje kényszerít dobásra.",
+    "Mind a costként, mind az effectként történő discard kiváltja, bárki körében, akkor is, ha az ellenfél effectje kényszerít dobásra.",
     "423.3,383.3.c"
    ],
    [

@@ -7,8 +7,8 @@
     "381.1,308.1.a,377.2.b"
    ],
    [
-    "Számít, ha az Equipmentemet counterelték?",
-    "Számít: a feltételt az aktiváláskor nézi a játék, és a counterelt Equipment is kijátszottnak számít, így utána is aktiválhatod.",
+    "Aktiválhatom, ha az Equipmentemet counterelték?",
+    "Igen: a feltételt az aktiváláskor nézi a játék, és counterelt Equipment után is aktiválhatod.",
     "377.2.b,420.4.b"
    ],
    [
@@ -188,7 +188,7 @@
   "Bandle Scouts' Academy": [
    [
     "Kinek jár a Gold, és reagálhat rá az ellenfél?",
-    "Annak a battlefield controllerének, aki hide-ol. Maga a Hide nem nyit chaint, de a trigger igen, ezért az ellenfél reagálhat.",
+    "Annak, aki elrejti a lapot, mert csak általa kontrollált battlefielden lehet. A Hide nem nyit chaint, de a trigger igen, ezért az ellenfél reagálhat.",
     "422.1,107.3.c,811.1.c.2"
    ],
    [
@@ -338,8 +338,8 @@
     "355.13,355.9.a.1"
    ],
    [
-    "Ha a unit célpont illegális lesz, ready lesznek a rune-ok?",
-    "A rune-ok ettől még ready lesznek.",
+    "Ha a unit célpontja illegális lesz, ready lesznek a rune-ok?",
+    "Igen, a rune-ok ettől még ready lesznek.",
     "359.3.e.5"
    ]
   ],
@@ -614,7 +614,7 @@
    ],
    [
     "Mely deckbe tehető?",
-    "Signature lap: a legend Champion tagjének Riven-nek kell lennie, és a legendnek mindkét domainje meg kell legyen.",
+    "Signature lap: a legend Champion tagja Riven kell legyen, és csak olyan legend mellé fér, amelynek megvan mindkét domainje, mert a lap két domainű.",
     "103.3.d,103.2.b.4"
    ],
    [
@@ -653,7 +653,7 @@
    ],
    [
     "Mit kell a stunhoz fizetni?",
-    "A you may utáni exhaust this a trigger base costja: finalizáláskor fizeted, és csak ready gearrel megy.",
+    "A gear exhaustolását, ez a trigger base costja, és finalizáláskor fizeted. Csak ready gearrel megy.",
     "383.3.b,415.4"
    ],
    [
@@ -709,7 +709,7 @@
   "Blastcone Fae": [
    [
     "Célozhatom saját unitomat?",
-    "Célozhatod, nincs enemy megkötés. A kötelező trigger miatt egyedül a Fae is magát kényszerül választani.",
+    "Igen, nincs enemy megkötés. A trigger kötelező: ha facedown-ból játszod ki, és a battlefielden nincs más unit, a Fae saját magát választja.",
     "355.10,355.8,355.9.c"
    ],
    [
@@ -987,7 +987,7 @@
    ],
    [
     "Mit kell az ellenfélnek fizetnie?",
-    "Semmit, a teljes cost 0, az additional cost sem kell kifizetni.",
+    "Semmit: a unit teljes costja 0, a kötelező additional costot sem kell kifizetni.",
     "356.5.a"
    ],
    [

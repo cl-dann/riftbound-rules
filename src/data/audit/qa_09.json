@@ -222,7 +222,7 @@
     "443.1.b"
    ],
    [
-    "Mennyibe kerül ellenfélnek megcélozni a Deflect 3 miatt?",
+    "Mennyibe kerül az ellenfélnek megcélozni a Deflect 3 miatt?",
     "Az őt targetelő spell vagy ability 3 bármilyen domainű Powerrel többe kerül.",
     "809.1.b,809.1.c"
    ]
@@ -362,7 +362,7 @@
    ],
    [
     "Melyik spellt választhatom a conquer triggerrel?",
-    "A trashedben lévő spellt, az target, mert a trash Public zóna. Ha nincs spell a trashedben, a trigger nem fut le.",
+    "A trashedben lévő spellt. Ez target, mert a trash Public zóna. Ha nincs spell a trashedben, a trigger nem fut le.",
     "355.10.a,355.8"
    ],
    [
@@ -584,7 +584,7 @@
   "Kinkou Temple": [
    [
     "Kinek a Tank unitjai kapják a +1 Mightot?",
-    "Mindenkiének, aki itt áll, mert nincs benne you vagy friendly. A battlefield kontrolljától sem függ.",
+    "Bármelyik játékos itt álló Tank unitja megkapja, mert nincs benne you vagy friendly. A battlefield kontrolljától sem függ.",
     "190.6.d"
    ],
    [
@@ -828,11 +828,11 @@
   "LeBlanc, Fragmented": [
    [
     "Mikor húzok 2 lapot 1 helyett?",
-    "Ha a saját köröd Beginning Phase-ében haltál meg. A feltételt a resolve-kor nézi a játék.",
+    "Ha LeBlanc a saját köröd Beginning Phase-ében hal meg. A feltételt a resolve-kor nézi a játék.",
     "359.3.f.2"
    ],
    [
-    "Mikor hal meg a saját Beginning Phase-emben?",
+    "Mikor hal meg LeBlanc a saját Beginning Phase-emben?",
     "Jellemzően ha Temporary van rajta (például Temporary copy token), vagy ha ott ölöd meg egy effecttel.",
     "816.1.b"
    ],
@@ -1083,7 +1083,7 @@
     "381.1,415.4,415.1.b"
    ],
    [
-    "Mennyivel lesz olcsóbb a Temporary unitjaim miatt?",
+    "Mennyivel lesz olcsóbb az ability a Temporary unitjaim miatt?",
     "Minden friendly Temporary unit 1 Energyvel, legfeljebb 0-ig. 2v2-ben a teammate Temporary unitjai is számítanak.",
     "356.4.g,356.6,491.8.e"
    ],
@@ -1122,12 +1122,12 @@
     "185.2.a,420.4.a,383.3.d"
    ],
    [
-    "Hol áll Tank a tokenem?",
+    "Hol számít Tanknek a tokenem?",
     "Bárhol, amíg Lillia a boardon van. Az ellenfélnek előbb az összes ott álló Tank tokenre kell halálos damage-et osztania.",
     "479.3.b,365.1,815.1.c.2"
    ],
    [
-    "Magát is védi a Tankkal?",
+    "Lillia maga is Tank lesz?",
     "Nem, Lillia nem token. Ha elhagyja a boardot, a tokenek azonnal elveszítik a Tanket.",
     "365.1"
    ]
