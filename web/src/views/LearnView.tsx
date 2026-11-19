@@ -245,7 +245,7 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
       <div className="hero" style={{ margin: '-26px calc(-1 * clamp(16px, 4vw, 42px)) 18px' }}>
         <div className="crumb">{base === 'hogyan' ? 'How to Play' : 'Tanulás'}</div>
         <h2>{base === 'hogyan' ? 'Tanuld meg a Riftboundot' : 'Gyakorolj és mélyülj el'}</h2>
-        <p>Fejezetekre bontott útmutató a Core Rules alapján: rövid leckék valódi lapokkal, minden fejezet végén néhány kérdéssel. Utána interaktív szituációkban gyakorolhatod a harcot és a chaint. A haladásod ebben a böngészőben mentődik.</p>
+        <p>{base === 'hogyan' ? 'Fejezetekre bontott útmutató a Core Rules alapján: rövid leckék valódi lapokkal, minden fejezet végén néhány kérdéssel. A haladásod ebben a böngészőben mentődik.' : 'Valódi pályán, lépésenként gyakorolhatod a harcot, a chaint és a pontszerzést, döntési pontokkal. Mellette haladó leckék a tempóról, a decképítésről és a showdown trükkökről. A haladásod ebben a böngészőben mentődik.'}</p>
         <a className="btn hex" href={B + '/' + (firstOpen?.id || '')}>{doneN ? 'Folytatás' : 'Kezdés'}: {firstOpen?.title} <ChevronRight size={16} /></a>
       </div>
       <div className="levels">

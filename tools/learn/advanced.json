@@ -3029,7 +3029,7 @@
      }
     },
     {
-     "say": "Az [[Abandon]] a Wind Wallt célozza. Az ellenfél passzol, te is passzolsz.",
+     "say": "Az [[Abandon]] a Wind Wallt célozza. Te kapod a priorityt {{337.4}}, és passzolsz, utána az ellenfél is passzol {{339.1}}.",
      "board": {
       "me": {
        "legend": "Jinx, Loose Cannon",
@@ -3467,7 +3467,8 @@
          {
           "n": "Void Hatchling",
           "m": 2,
-          "base": 2
+          "base": 2,
+          "ex": true
          }
         ],
         "facedown": null
@@ -3585,7 +3586,8 @@
          {
           "n": "Void Hatchling",
           "m": 2,
-          "base": 2
+          "base": 2,
+          "ex": true
          }
         ],
         "facedown": null
@@ -4263,7 +4265,7 @@
      }
     },
     {
-     "say": "A Sentry 1 damage-et kap és a cleanupban meghal. A Deathknell triggere a halála előtt kerül a chainre {{808.1.d.2}}, feloldódik, az ellenfél húz 1 lapot. Ezt a chaint triggered ability nyitotta, ezért a Focus nem adódik tovább {{346.1}}: továbbra is nálad van. Te passzolsz, az ellenfél is, a showdown véget ér {{347.2.a}}.",
+     "say": "A Sentry 1 damage-et kap és a cleanupban meghal. A Deathknell triggere a halála előtt kerül a chainre {{808.1.d.2}}, feloldódik, az ellenfél húz 1 lapot. Ezt a chaint triggered ability nyitotta, ezért a Focus nem adódik tovább {{346.1}}: továbbra is nálad van. Te passzolsz, az ellenfél is, a showdown véget ér {{347.2.a}}. A damage kiosztását te kezded, mint Attacker {{467.2.c}}: a 6 damage-edet a Sergeantre osztod, mert csak ő maradt a Defenderek között.",
      "board": {
       "me": {
        "legend": "Lee Sin, Blind Monk",

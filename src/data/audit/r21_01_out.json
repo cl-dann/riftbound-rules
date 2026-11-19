@@ -1,0 +1,89 @@
+{
+ "fixes": {
+  "Combat Chef": {
+   "notes": [
+    [
+     "821.1.c",
+     0,
+     "[Weaponmaster]: play effect, \"you may\" kezdettel. A resolve-kor egy általad kontrollált Equipment Equip costját fizeted ki [A]-val olcsóbban, és a Chefre csatolod."
+    ],
+    [
+     "821.1.b,435.1.f",
+     0,
+     "Az Equip szokásos időzítése nem számít. Másik unitra csatolt Equipment is választható, arról leválik."
+    ],
+    [
+     "821.1.c.3,821.1.c.4",
+     0,
+     "Ha az Equip costban nincs [A], nem lesz olcsóbb. Equip cost nélküli Equipment így nem csatolható."
+    ],
+    [
+     "821.1.c.6",
+     0,
+     "Az Equip ability nem aktiválódik, és a Chef nem chosen."
+    ],
+    [
+     "821.1.c.2",
+     0,
+     "Az Equip cost úgy számolódik, mintha a Chefet választva aktiválnád az Equip abilityt, vagyis az Equip costot módosító abilityk hatása is érvényesül."
+    ],
+    [
+     "821.1.c.5",
+     0,
+     "Ha a costot nem tudod kifizetni, az Equipment ott marad, ahol volt."
+    ],
+    [
+     "821.1.c.3,135.2.e.6",
+     2,
+     "Hogy a lap saját domainjére szóló [C] Equip cost [A]-t tartalmazónak számít-e, vagyis csökken-e, a Core Rules nem mondja ki (821.1.c.3). Judge döntse el. Az [A]-t tartalmazó Equip cost csökken, a csak Energy költség nem."
+    ]
+   ],
+   "why": "A 821.1.c.6 pont második fele (\"kedvezmény itt nem jár\") ellentmond a 821.1.c.2-nek: az Equip cost úgy számolódik, mintha aktiválnád, az Equip costot módosító abilityk hatásával együtt."
+  },
+  "Blastcone Fae": {
+   "notes": [
+    [
+     "811.1.b,811.6",
+     0,
+     "Hidden: a saját körödben, Neutral Open State-ben (showdownon kívül) [A]-ért facedown tehető egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől [Reaction]-t kap, és a base cost nélkül kijátszható."
+    ],
+    [
+     "811.1.d.3",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: facedown-ból kijátszva a play effect targetje csak azon a battlefielden lévő unit lehet, ahová a Fae érkezett. Ha egy másik effect miatt máshová érkezik, akkor is az érkezési battlefield számít."
+    ],
+    [
+     "355.10,355.5.b",
+     0,
+     "A unit target, és a trigger chain-re kerülésekor választod, nem a Fae kijátszásakor. Nincs \"enemy\" megkötés, saját unit is választható."
+    ],
+    [
+     "355.8,355.9.c",
+     1,
+     "A trigger kötelező. Facedown-ból kijátszva, ha a battlefielden nincs más unit, a Fae saját magát kell hogy válassza, és 1 Mightra csökken."
+    ],
+    [
+     "479.4.b",
+     0,
+     "A \"to a minimum of 1\" korlát a resolve pillanatában rögzül: 2 Mightú unit -1-et kap a kör végéig. A később érkező buffok erre rakódnak rá, a levonás nem nő utólag -2-re."
+    ],
+    [
+     "359.3.e.2.a",
+     1,
+     "A 359.3.e.2.a a spellekre mondja ki, hogy a game effect által adott megkötés is targeting restriction (példa: Temporal Breach); a Fae triggerére ez levezetés. Eszerint, ha facedown-ból kijátszva a target a resolve előtt elmozdul arról a battlefieldről, illegális lesz, és a trigger nem csinál semmit."
+    ],
+    [
+     "811.3",
+     0,
+     "Kézből, teljes costért is kijátszható, ilyenkor bármelyik locationön lévő unit választható."
+    ]
+   ],
+   "why": "A 359.3.e.2.a a spellek resolve-járól szól (Temporal Breach példa), a Fae triggerére nem közvetlenül vonatkozik, ezért flag 1 (levezetés), nem 0."
+  }
+ },
+ "checked": 9,
+ "data_issues": [],
+ "open": [
+  "Akshan, Mischievous; Armed Assailant; Azir, Emperor of the Sands; Combat Chef; Master Bingwen; Veteran Poro; Yone, Blademaster: a Weaponmaster [A] kedvezménye a lap saját domainjére szóló [C] Equip costra (821.1.c.3), a Core Rules nem mondja ki; a short és a flag 2 note ezt nyitottként kezeli, a megbízás szerint nem módosítva."
+ ]
+}

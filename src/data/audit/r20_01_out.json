@@ -1,0 +1,156 @@
+{
+ "fixes": {
+  "Combat Chef": {
+   "short": "Weaponmaster: kijátszáskor egy saját Equipmentedet rácsatolhatod, akár egy másik unitról áthozva is, az Equip costját 1 bármilyen domainű Powerrel olcsóbban fizetve. Ha az Equip cost csak Energyből áll, nincs kedvezmény; hogy a domainhez kötött Power is csökken-e, nem eldöntött. Ha nincs Equip costja, nem rakható rá. Ha nem tudod kifizetni, az Equipment ott marad, ahol volt.",
+   "notes": [
+    [
+     "821.1.c",
+     0,
+     "[Weaponmaster]: play effect, \"you may\" kezdettel. A resolve-kor egy általad kontrollált Equipment Equip costját fizeted ki [A]-val olcsóbban, és a Chefre csatolod."
+    ],
+    [
+     "821.1.b,435.1.f",
+     0,
+     "Az Equip szokásos időzítése nem számít. Másik unitra csatolt Equipment is választható, arról leválik."
+    ],
+    [
+     "821.1.c.3,821.1.c.4",
+     0,
+     "Ha az Equip costban nincs [A], nem lesz olcsóbb. Equip cost nélküli Equipment így nem csatolható."
+    ],
+    [
+     "821.1.c.6",
+     1,
+     "Az Equip ability nem aktiválódik, és a Chef nem target. \"Amikor Equip abilityt játszol\" típusú kedvezmény itt nem jár."
+    ],
+    [
+     "821.1.c.5",
+     0,
+     "Ha a costot nem tudod kifizetni, az Equipment ott marad, ahol volt."
+    ],
+    [
+     "821.1.c.3,135.2.e.6",
+     2,
+     "Hogy a lap saját domainjére szóló [C] Equip cost [A]-t tartalmazónak számít-e, vagyis csökken-e, a Core Rules nem mondja ki (821.1.c.3). Judge döntse el. Az [A]-t tartalmazó Equip cost csökken, a csak Energy költség nem."
+    ]
+   ],
+   "why": "Weaponmaster: a short tényként állította, hogy a [C] Equip cost nem csökken (\"nincs bennük bármilyen domainű Power\"), ami nyitott kérdés (821.1.c.3); flag 2 note hiányzott. Egy note flagje 0 helyett 1 (a kedvezmény hiánya levezetés a 821.1.c.6-ból)."
+  },
+  "Master Bingwen": {
+   "short": "Weaponmaster: kijátszáskor egy általad kontrollált Equipmentet rácsatolhatsz úgy, hogy az Equip costját 1 bármilyen domainű Powerrel olcsóbban fizeted, akkor is, ha az épp egy másik unitodon van, és az Equip szokásos időzítésétől függetlenül. Ha az Equip cost csak Energyből áll, nincs kedvezmény; a domainhez kötött Power csökkenése nem eldöntött. A boardon később már nem csinál semmit.",
+   "notes": [
+    [
+     "821.1.c",
+     0,
+     "[Weaponmaster]: play effect, \"you may\" kezdettel. A resolve-kor egy általad kontrollált Equipment Equip costját fizeted ki [A]-val olcsóbban, és Bingwenre csatolod."
+    ],
+    [
+     "821.1.b,435.1.f",
+     0,
+     "Az Equip szokásos időzítése nem számít. Másik unitra csatolt Equipment is választható, arról leválik."
+    ],
+    [
+     "821.1.c.3,821.1.c.4",
+     0,
+     "Ha az Equip costban nincs [A], nem lesz olcsóbb. Equip cost nélküli Equipment így nem csatolható."
+    ],
+    [
+     "821.2",
+     0,
+     "A Weaponmaster a boardon már nem csinál semmit, csak a kijátszáskor."
+    ],
+    [
+     "821.1.c.3,135.2.e.6",
+     2,
+     "Hogy a lap saját domainjére szóló [C] Equip cost [A]-t tartalmazónak számít-e, vagyis csökken-e, a Core Rules nem mondja ki (821.1.c.3). Judge döntse el. Az [A]-t tartalmazó Equip cost csökken, a csak Energy költség nem."
+    ]
+   ],
+   "why": "Weaponmaster: a short tényként állította, hogy a [C] Equip cost nem csökken (\"nincs bennük bármilyen domainű Power\"), ami nyitott kérdés (821.1.c.3); flag 2 note hiányzott."
+  },
+  "Veteran Poro": {
+   "short": "Kijátszáskor ráteheted egy saját Equipmentedet, akár egy másik unitról áthelyezve is, az Equip cost kifizetésével, 1 bármilyen domainű Powerrel olcsóbban. Ha az Equip cost csak Energyből áll, nincs kedvezmény; a domainhez kötött Power csökkenése nem eldöntött. Equip cost nélküli Equipment nem csatolható. Az Equip szokásos időzítési korlátja nem számít.",
+   "notes": [
+    [
+     "821.1.c",
+     0,
+     "[Weaponmaster]: play effect, \"you may\" kezdettel. A resolve-kor egy általad kontrollált Equipment Equip costját fizeted ki [A]-val olcsóbban, és a Poróra csatolod."
+    ],
+    [
+     "821.1.b,435.1.f",
+     0,
+     "Az Equip szokásos időzítése nem számít. Másik unitra csatolt Equipment is választható, arról leválik."
+    ],
+    [
+     "821.1.c.3,821.1.c.4",
+     0,
+     "Ha az Equip costban nincs [A], nem lesz olcsóbb. Equip cost nélküli Equipment így nem csatolható."
+    ],
+    [
+     "187.8",
+     0,
+     "Poro tag: a Brush battlefield tokenen +1 Mightot kap."
+    ],
+    [
+     "821.1.c.3,135.2.e.6",
+     2,
+     "Hogy a lap saját domainjére szóló [C] Equip cost [A]-t tartalmazónak számít-e, vagyis csökken-e, a Core Rules nem mondja ki (821.1.c.3). Judge döntse el. Az [A]-t tartalmazó Equip cost csökken, a csak Energy költség nem."
+    ]
+   ],
+   "why": "Weaponmaster: a short tényként állította, hogy a [C] Equip cost nem csökken (\"nincs bennük bármilyen domainű Power\"), ami nyitott kérdés (821.1.c.3); flag 2 note hiányzott."
+  },
+  "Azir, Emperor of the Sands": {
+   "short": "Legend: 1 Energyért és exhaustolva kapsz egy 2 Mightú Sand Soldier tokent a base-edbe, ha ebben a körben már kijátszottál Equipmentet; csak saját Main Phase-ben, showdownon kívül. Az általad kijátszott Sand Soldierek Weaponmastert kapnak: kijátszáskor Equipmentet csatolhatnak magukra 1 bármilyen Powerrel olcsóbb Equip costtal. Csak Energy costnál nincs kedvezmény; a domainhez kötött Power csökkenése nem eldöntött.",
+   "notes": [
+    [
+     "103.2.b",
+     0,
+     "A legend Calm és Order domainje adja a deck Domain Identity-jét."
+    ],
+    [
+     "187.3,185.2.d",
+     0,
+     "A Sand Soldier domain nélküli, 2 Mightú unit token Shurima taggel. Az ability csak a base-be teszi, és exhausted lép be."
+    ],
+    [
+     "377.2.b,420.4.b",
+     0,
+     "A \"use only if you've played an Equipment this turn\" feltételnek aktiváláskor igaznak kell lennie. A finalizálást nézi, tehát counterelt Equipment után is aktiválható."
+    ],
+    [
+     "821.1.c",
+     0,
+     "Weaponmaster: a Sand Soldier kijátszásakor választhatsz egy Equipmentedet, és az Equip costját [A]-val olcsóbban kifizetve rácsatolod, az Equip szokásos időzítésétől függetlenül."
+    ],
+    [
+     "821.1.c.3,821.1.c.4",
+     0,
+     "Ha az Equip costban nincs [A], kifizethető, de nem lesz olcsóbb. Equip cost nélküli Equipment így nem csatolható."
+    ],
+    [
+     "821.1.c.6",
+     0,
+     "A Weaponmaster nem aktiválja az Equip abilityt, és a Sand Soldier nem \"chosen\", tehát a targetelésre figyelő triggerek nem futnak le rá."
+    ],
+    [
+     "364.2",
+     1,
+     "A passive ability minden általad kijátszott Sand Soldierre vonatkozik, a más lapokból érkezőkre is, nem csak a legend abilityjéből jövőre."
+    ],
+    [
+     "381.1,308.1.a",
+     0,
+     "A token ability [Action] és [Reaction] nélküli: csak a saját Main Phase-edben, Open State-ben aktiválható. Showdown és combat alatt, illetve az opponent körében nem."
+    ],
+    [
+     "821.1.c.3,135.2.e.6",
+     2,
+     "Hogy a lap saját domainjére szóló [C] Equip cost [A]-t tartalmazónak számít-e, vagyis csökken-e, a Core Rules nem mondja ki (821.1.c.3). Judge döntse el. Az [A]-t tartalmazó Equip cost csökken, a csak Energy költség nem."
+    ]
+   ],
+   "why": "Weaponmaster: a short tényként állította, hogy a [C] Equip cost nem csökken (\"nincs bennük bármilyen domainű Power\"), ami nyitott kérdés (821.1.c.3); flag 2 note hiányzott."
+  }
+ },
+ "checked": 9,
+ "data_issues": [],
+ "open": []
+}
