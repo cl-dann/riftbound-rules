@@ -66,7 +66,12 @@ def audit(ours, byname, main, emap, pr, byid):
                 continue
             theirs = sorted([p for p in plist if p['idExpansion'] == e], key=lambda p: p['idProduct'])
             other = [p for p in plist if p['idExpansion'] in inv.get(s, []) and p['idExpansion'] != e]
-            if len(mine) != len(theirs):
+            def pp(p):
+                r = byid.get(p['idProduct']) or {}
+                return f"{p['idProduct']}:e{p['idExpansion']}:n{r.get('avg7')}:f{r.get('avg7-foil')}"
+            if k.startswith(('jayce defender', 'k sante dauntless')):
+                print('AUD-DETAIL', k, s, [c['cardCode'] + '/' + c['rarity'] for c in mine], [pp(p) for p in theirs])
+            if len(mine) > len(theirs):
                 def pp(p):
                     r = byid.get(p['idProduct']) or {}
                     return f"{p['idProduct']}:e{p['idExpansion']}:n{r.get('avg7')}:f{r.get('avg7-foil')}"
@@ -141,7 +146,9 @@ def printings(prods, byid):
         for s, e in main.items():
             mine = sorted([c for c in ours[k] if c['setCode'] == s], key=lambda c: numkey(c['cardCode']))
             theirs = sorted([p for p in plist if p['idExpansion'] == e], key=lambda p: p['idProduct'])
-            if mine and len(mine) == len(theirs):
+            # Ha a Cardmarketen több termék van (pl. a mi adatunkból hiányzó csillagos vagy
+            # később felvett változat), az első N termék a mi N nyomatunk, a többlet az 'ex' alá kerül.
+            if mine and len(theirs) >= len(mine):
                 for c, p in zip(mine, theirs):
                     r = byid.get(p['idProduct'])
                     if r:
