@@ -63,12 +63,21 @@ def printings(prods, byid):
     Cardmarket termékeket idProduct szerint rendezzük, és csak akkor párosítunk, ha a darabszám
     egyezik. Ami nem párosítható, az 'ex' alá kerül kiadás szerint, típuscímke nélkül.
     """
-    raw = json.load(open(RAW, encoding='utf-8'))
+    raw = {c['cardCode']: c for c in json.load(open(RAW, encoding='utf-8')) if c.get('cardType') != 'Token'}
+    # A legendek nyers neve champion nélküli ("Rogue Assassin"), a Cardmarket viszont a teljes
+    # nevet használja ("Akali, Rogue Assassin"). Ezért a generált kártyaadat megjelenített nevével
+    # és álneveivel is kulcsolunk; a nyomatok listája ott a 'pr' mezőben van.
     ours = {}
-    for c in raw:
-        if c.get('cardType') == 'Token':
+    gen = os.path.join(os.path.dirname(OUT), '..', 'src', 'generated', 'cards.json')
+    cj = json.load(open(gen, encoding='utf-8'))
+    cj = cj if isinstance(cj, list) else cj['cards']
+    for card in cj:
+        prs = [raw[x[0]] for x in card.get('pr', []) if x[0] in raw]
+        if not prs:
             continue
-        ours.setdefault(pn(c['fullName']), []).append(c)
+        for key in {pn(card['n'])} | {pn(a) for a in card.get('a', []) if ',' in a}:
+            if key and key not in ours:
+                ours[key] = prs
     votes = {}
     for p in prods['products']:
         cs = ours.get(pn(p.get('name', '')))
@@ -154,7 +163,7 @@ def main():
     pr, ex, emap = printings(prods, byid)
     doc = {'updated': pg.get('createdAt') or datetime.datetime.utcnow().isoformat() + 'Z', 'game': g, 'cards': out, 'pr': pr, 'ex': ex}
     print('printings', len(pr), 'extra names', len(ex), 'expansion map', emap)
-    for code in ('ogn-119-298', 'ogn-119a-298', 'sfd-227-221', 'sfd-227-star-221', 'ven-sp3-006', 'ogn-007-298', 'ogn-007a-298'):
+    for code in ('ogn-119-298', 'ven-139-166', 'ven-189-166', 'ven-189-star-166'):
         print('PR', code, pr.get(code))
     print('EX ahri', ex.get('ahri inquisitive'))
     os.makedirs(os.path.dirname(OUT), exist_ok=True)

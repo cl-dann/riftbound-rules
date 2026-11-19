@@ -44,7 +44,7 @@ export function Printings({ card }: { card: any }) {
   const P = usePrices() as (Prices & { pr?: Record<string, Row>; ex?: Record<string, Row[]> }) | null;
   const [big, setBig] = useState<string | null>(null);
   const pr: any[] = card.pr || [];
-  const ex: Row[] = (P?.ex && P.ex[pn(card.fk || card.n)]) || [];
+  const ex: Row[] = (P?.ex && (P.ex[pn(card.n)] || P.ex[pn(card.fk || '')])) || [];
   if (!pr.length) return null;
   return (
     <section className="prints">
