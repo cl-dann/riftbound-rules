@@ -51,10 +51,10 @@
 ## Összesített ütemterv fülenként (2026-11-15), alapelv: interaktív, vizuális, automatikus magyarázat
 0. Befejezendő: kártya ellenőrzés 17. kör-tól 0 javításig; How to Play tartalom 1 hibátlan kör; Tanulás tartalom (szituációk lapszámai) ellenőrzés; utána élesítés.
 1. Kártyák: Gyakori kérdések (Q&A) elöl, technikus jegyzetek lenyithatóan; gyors rács (TanStack Virtual); hibatűrő HU/EN keresés; (megvan: rács alapból, hover nagyítás, tooltip).
-2. Deck: húzási valószínűség (hány %, hogy a lap a kézben van az N. körre), mintakéz-húzás mulligannel, rune-arány javaslat a lapok domainköltségéből, deck összehasonlítás. (ötlet, nincs jóváhagyva)
-3. Szabályzat: verziók közti különbség, könyvjelzők, magyar kulcsszavas keresés. (ötlet, nincs jóváhagyva)
+2. Deck: saját deck építő (lapok hozzáadása a rácsból, élő legalitás-ellenőrzés a deckszabályokkal, a deck lapjaira vonatkozó szabályok és Gyakori kérdések egy helyen); Cardmarket árak: lapnként és deckre összesítve az utolsó 1 napos és 7 napos átlagár (avg1, avg7) EUR-ban, a forrás és a frissítés dátuma kiírva. Adat: a Cardmarket nyilvános price guide és product catalog letöltése (minden felhasználónak elérhető), napi GitHub Actions job süti bele a site adatába; a sandbox proxy a downloads.s3.cardmarket.com-ot blokkolja, ezt az environment allowlistjére kell tenni vagy csak Actionsben futtatni. A Riftbound idGame és a pontos URL még ellenőrizendő.
+3. Szabályzat: külön formátum-oldalak a versenyformátumokhoz: 1v1 (Duel és Match), 2v2, 1v1v1 (több játékos), mindegyikhez a rá vonatkozó Core Rules szakaszok (pl. 487 Duel, 488 Match, 491 2v2, a több játékos szabályai) összefoglalva, Victory Score, setup, battlefieldek, első kör kiegyenlítés. A korábbi ötletek (verziódiff, könyvjelzők) NEM kellenek.
 4. Chain: interaktív építő (bal űrlap, jobb Playmat), drag and drop, célzó nyilak, léptetés Mi változott listával és szabályszámmal, Might/damage/hátralévő számolás, combat kiosztás, mistarget és linked instructions, animációk, megosztható link; szabálymotor külön TS modul tesztekkel.
 5. How to Play: 10 fejezet + kvíz + interaktív pálya (tartalom ellenőrzés után élesít).
-6. Tanulás: szituációk a Playmaton (nagy nézet, Mi változott, unit részletek), haladó leckék; később kártyakvíz (Rift Recall minta), napi feladvány, Chain építőből szituáció.
+6. Tanulás: szituációk a Playmaton (nagy nézet, Mi változott, unit részletek), haladó leckék. Kártyakvíz, napi feladvány és Chain építőből szituáció NEM kell.
 7. Kézikönyv: Fogalmak (tooltip forrás, közérthetőre átírva, kész), Kulcsszavak, Játékmenet ábrák interaktívvá (kör, chain, combat folyamat kattintható lépésekkel), Szabályváltozások és errata összefoglaló előtte/utána nézettel.
 8. Közös: Playwright e2e tesztek élesítés előtt; nincs PWA.
