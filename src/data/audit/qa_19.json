@@ -1,0 +1,442 @@
+{
+ "qa": {
+  "Yasuo, Remorseful": [
+   [
+    "Kit sebez Yasuo triggere, és mikor számolódik a Might?",
+    "Egy enemy unitot ugyanazon a battlefielden, ahol Yasuo támad. A 'here' és a Might a resolve-kor értékelődik ki, ezért ha válaszul csökkentik a Mightját, kevesebbet sebez.",
+    "355.10,355.9.b,359.3.f.2"
+   ],
+   [
+    "Ez combat damage-nek számít?",
+    "Nem. A trigger a showdown alatt sebez, és Yasuo ezután a Combat Damage Stepben a Mightját ugyanúgy kiosztja.",
+    "467.2.c.1"
+   ],
+   [
+    "Mi történik, ha az opponent válaszul átveszi Yasuo controlját?",
+    "A trigger ettől még rendben resolve-ol, mert az 'enemy' a triggerhez képest értendő.",
+    "359.3.f.4"
+   ]
+  ],
+  "Yasuo, Unforgiven": [
+   [
+    "Mikor aktiválhatom a legend képességét?",
+    "Csak a saját Main Phase-edben, Open State-ben, mert nincs rajta Action vagy Reaction. Showdown vagy combat alatt nem lehet vele unitot behozni vagy kimenteni.",
+    "381.1"
+   ],
+   [
+    "Hova mozgathatok vele unitot?",
+    "Base-ből bármely érvényes battlefieldre, vagy battlefieldről a base-be. Battlefieldről battlefieldre nem. A célt aktiváláskor választod.",
+    "355.4,355.4.a"
+   ],
+   [
+    "Kell hozzá ready unit, és újra léphet egy már mozgott unit?",
+    "Nem kell ready: ez nem Standard Move, exhausted unit is mozgatható vele. Így egy már mozgott unit ugyanabban a körben újra léphet.",
+    "421.2.a,144.2"
+   ],
+   [
+    "2v2-ben kinek a base-ébe megy a teammate unitja?",
+    "A saját controllere base-ébe megy, illetve onnan indul, nem a tiédbe. Az errata miatt 'its base' áll a 'your base' helyett.",
+    "491.8.e"
+   ]
+  ],
+  "Yasuo, Windrider": [
+   [
+    "Milyen mozgások számítanak a harmadik mozgásba?",
+    "A Standard Move és az effect általi Move is számít. A Recall nem.",
+    "421.1,458.1"
+   ],
+   [
+    "Miért nehéz a körben háromszor mozogni?",
+    "A Standard Move exhaustolja Yasuót, ezért a három mozgáshoz ready effectek vagy mozgató spellek kellenek.",
+    "144.2"
+   ],
+   [
+    "Meg lehet nyerni a játékot a Yasuo által adott ponttal?",
+    "Igen. Ez score, nem conquer, ezért nem vonatkozik rá az utolsó pont megkötése.",
+    "470.2,473.1.a.1"
+   ],
+   [
+    "Ha Yasuo elhagyja a boardot és visszatér, folytatódik a számlálás?",
+    "Nem. Visszatérve új objektum, a mozgások számlálása elölről indul.",
+    "124"
+   ]
+  ],
+  "Yeti Brawler": [
+   [
+    "Mikor kapom meg a két Gold tokent?",
+    "Conquerkor, ha a conquer pillanatában legalább 3 excess damage-et osztottál ki. Ha nem teljesül, a trigger nem kerül chainre.",
+    "383.2.a.1,383.4.c.2.a"
+   ],
+   [
+    "Kapok Goldot, ha üres battlefieldet foglalok el?",
+    "Nem. Combat nélküli conquer nem oszt ki damage-et. A feltétel a te összes kiosztott damage-edet nézi, nem csak a Yetiét.",
+    "467.2.c,468.5.d"
+   ],
+   [
+    "Mi számít excess damage-nek?",
+    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. A szabályzat nem definiálja, valószínűleg a lethal fölött kiosztott combat damage.",
+    "467.2.c"
+   ],
+   [
+    "Hova kerülnek a Gold tokenek, és mire jók?",
+    "Exhausted állapotban a base-edbe, és csak ready állapotban adnak Powert.",
+    "187.5,184.1"
+   ]
+  ],
+  "Yone, Blademaster": [
+   [
+    "Mikor triggerel Yone conquer képessége?",
+    "Ha Yone ott van a battlefielden, és az senki által nem kontrollált volt. Olyan is számít, ahol álltak unitok, de senki sem kontrollálta.",
+    "383.4.c.2.a,170.11.b,170.11.c"
+   ],
+   [
+    "Kit sebezhet meg?",
+    "Csak base-ben álló enemy unitot. Ha nincs ilyen, a trigger chainre kerülve rögtön lekerül róla, így nem fut le.",
+    "355.9.b,355.8,403.4"
+   ],
+   [
+    "Mennyit sebez, és mi van, ha Yone közben elhagyja a boardot?",
+    "Yone resolve-kori Mightját, a csatolt Equipment bónuszával együtt. Ha a resolve előtt elhagyja a boardot, a sebzés ignorálódik.",
+    "710,359.3.e.12"
+   ],
+   [
+    "Csökken a Weaponmaster kedvezménnyel a domainhez kötött Power is?",
+    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. Az Equip costban lévő, Chaoshoz kötött Power csökkenése nem tisztázott.",
+    "821.1.c.3,135.2.e.6"
+   ]
+  ],
+  "Yordle Explorer": [
+   [
+    "Mely lapok kijátszásakor húzok?",
+    "Amelyeknek a nyomtatott Power costja legalább 2. Kedvezmény nem változtat rajta, az additional cost Powerje pedig nem számít bele.",
+    "206"
+   ],
+   [
+    "Húzok, ha a lapomat counterelik?",
+    "Nem. A trigger a kijátszás resolve-val való befejezésekor fut le, counterelt spell után nincs draw.",
+    "420.4.a,420.4.a.1"
+   ],
+   [
+    "Token kijátszása után húzok?",
+    "Nem, a token nem kártya, és nincs cost-ja.",
+    "052,185.3.a"
+   ],
+   [
+    "Dönthetek úgy, hogy nem húzok?",
+    "Nem, a draw kötelező. Üres deck esetén Burn Out következik.",
+    "414.4"
+   ]
+  ],
+  "Yuumi, Magical Cat": [
+   [
+    "Kit kaphat a bónuszt Yuumi triggere?",
+    "Egy másik, általad kontrollált unitot Yuumi battlefieldjén. Yuumi saját magát nem választhatja.",
+    "355.10,355.9.b"
+   ],
+   [
+    "Mi történik, ha Yuumi egyedül áll ott?",
+    "Nincs érvényes target, ezért a trigger chainre kerülve rögtön lekerül róla, és nem fut le.",
+    "355.8"
+   ],
+   [
+    "Meddig tart a +3 Might és a Tank, és mit jelent a Tank?",
+    "A kör végéig, nem csak a combat végéig. Az opponentnek előbb a Tankot kell lesebeznie, Yuumi és a többi Tank nélküli unit csak utána jöhet.",
+    "317.2.c,815.1.b"
+   ],
+   [
+    "Mi van, ha a target elhagyja a battlefieldet a resolve előtt?",
+    "Illegális target lesz, a trigger nem csinál semmit.",
+    "359.3.e.2"
+   ]
+  ],
+  "Zaun Punk": [
+   [
+    "Mit áldozhatok fel additional costként, és ez target?",
+    "Egy saját geart, akár Gold tokent is. Ez a cost része, nem target.",
+    "356.2.b.1,355.10.c,187.5"
+   ],
+   [
+    "Kinek a gearjét ölhetem meg a play effecttel?",
+    "Bárkiét, csatolt Equipmentet és tokent is. A kill kötelező: ha csak saját geared van a boardon, azt kell választanod.",
+    "355.10,150.4,355.8,403.4"
+   ],
+   [
+    "Muszáj az additional costot fizetni?",
+    "Nem. De ha nem fizeted, a trigger feltétele nem teljesül, és nincs kill.",
+    "356.2.b.1,383.2.a.1"
+   ]
+  ],
+  "Zaun Warrens": [
+   [
+    "Mi történik, ha üres a kezem, amikor itt conquerelek?",
+    "A discard negálódik, a draw ettől még megtörténik.",
+    "423.2.a,423.4"
+   ],
+   [
+    "Kinél és hányszor triggerel?",
+    "Annál a játékosnál, aki itt conquerel, körönként legfeljebb egyszer.",
+    "473.2.a,472"
+   ],
+   [
+    "Mi van, ha üres a deckem?",
+    "A draw Burn Outot okoz.",
+    "414.4"
+   ]
+  ],
+  "Zaunite Bouncer": [
+   [
+    "Kit vehet vissza a kezébe a trigger?",
+    "Egy másik, battlefielden álló unitot, bármelyik játékosét. Base-ben lévő unit nem választható.",
+    "355.10,355.9.b"
+   ],
+   [
+    "Muszáj visszavennem a saját unitomat?",
+    "Ha csak a tiéd áll battlefielden, igen, mert nincs 'may'. Ha másik unit sincs ott, a trigger rögtön lekerül a chainről.",
+    "355.8"
+   ],
+   [
+    "Mi történik a tokennel és a rácsatolt Equipmenttel?",
+    "A token megszűnik, az Equipment leválik és a boardon marad.",
+    "056.2,186.1,719.5"
+   ],
+   [
+    "Mi van, ha a target a resolve előtt base-be kerül?",
+    "A trigger hatás nélkül resolve-ol.",
+    "359.3.e.7"
+   ]
+  ],
+  "Zed, From the Shadows": [
+   [
+    "Mikor kapok Shadow Clone tokent?",
+    "Csak ha kijátszáskor eldobtál 1 lapot additional costként, ehhez kell másik lap a kezedben. Discard nélkül nincs play effect.",
+    "356.2.b.1,423.3,354,383.2.a.1"
+   ],
+   [
+    "Hova kerül a Shadow Clone?",
+    "Exhausted állapotban a base-edbe vagy egy általad kontrollált battlefieldre.",
+    "187.11,185.2.d"
+   ],
+   [
+    "Mikor kap Assault 4-et a Clone?",
+    "Támadáskor, ha a banish sikerül: a trashedből egy unitot kell eltávolítanod. Ha nincs ott unit vagy nem történik meg, nincs Assault 4.",
+    "383.3.a,205,355.10.a,403.4"
+   ],
+   [
+    "Egy 0 Mightú Clone magától meghal?",
+    "Nem, de már 1 damage lethal rajta.",
+    "142.4.b"
+   ]
+  ],
+  "Zed, Master of Shadows": [
+   [
+    "Mi számít banishnek, ami Empowered-dé tesz?",
+    "Bármely zónából a saját lapod: kézből, trashből, deckből vagy a boardról. A kill és a discard nem banish.",
+    "428.1,428.2.a"
+   ],
+   [
+    "Empowerel, ha tokent vagy rune-t banishelek?",
+    "Nem, a token nem kártya, a card pedig Main Deck lapot jelent.",
+    "185,052"
+   ],
+   [
+    "Banish-nek számít a Replace?",
+    "Nem. A lecserélt lap a Banishmentbe kerül, de nem számít banisheltnek.",
+    "439.4,439.5.a"
+   ],
+   [
+    "Mikor használhatom a discard-draw képességet?",
+    "A saját Main Phase-edben és showdown alatt bárki körében, Closed State-ben nem. Csak Empowered és ready legenddel megy.",
+    "806.1.c.2,443.1.a"
+   ]
+  ],
+  "Zed, Without a Sound": [
+   [
+    "Mikor kapok Shadow Clone tokent?",
+    "Ha Zed jelen van a battlefielden, amit conquerelsz. A Clone exhausted állapotban a base-edbe érkezik.",
+    "383.4.c.2.a"
+   ],
+   [
+    "Mikor használhatom a helycserét?",
+    "A saját körödben és showdown alatt bárki körében. Exhaust nincs a costban, exhausted Zed is használhatja.",
+    "806.1.c.2"
+   ],
+   [
+    "Kell hozzá Shadow Clone?",
+    "Igen, egy általad kontrollált Clone a target. Nélküle az ability nem aktiválható.",
+    "355.10,355.8"
+   ],
+   [
+    "Mi van, ha a Clone nem általad kontrollált battlefieldre érkezik?",
+    "Az Contested lesz, és a Clone attack triggere lefuthat. Mindkét unitnál Move történik.",
+    "421.1,452"
+   ]
+  ],
+  "Zenith Blade, Leona": [
+   [
+    "Mikor játszható ki a spell?",
+    "A saját körödben és showdown alatt bárki körében. Closed State-ben, egy másik spellre válaszul nem.",
+    "806.1.c.1,358.4"
+   ],
+   [
+    "Kit célozhat a spell?",
+    "Egy battlefielden álló enemy unitot, és kijátszáskor egy friendly unitot is választasz, attól függetlenül, hogy a resolve-kor mozgatod-e.",
+    "355.10,355.9.b,355.12"
+   ],
+   [
+    "Mi történik, ha a mozgatott unitom nem a tiéd battlefieldre érkezik?",
+    "Ha az a battlefield még nem Contested, combat indul, és te vagy az attacker. A Stunned enemy unit nem oszt combat damage-et.",
+    "452,466.2.c.1,466.2.c.3.a,424.1.b"
+   ],
+   [
+    "Kijátszható, ha nincs másik helyen friendly unitom?",
+    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. A szöveg nem 'up to one', ezért nem világos, kell-e friendly target.",
+    "355.8,355.4.a"
+   ]
+  ],
+  "Zephyr Sage": [
+   [
+    "Mekkora a Might védekezéskor és támadáskor?",
+    "Defenderként 7, támadóként 6, mert a Shield érték nélkül Shield 1-et jelent.",
+    "814.1.c,814.1.b.3"
+   ],
+   [
+    "Számít a +1 Might combaton kívül?",
+    "Nem, a bónusz csak a Defender designation alatt él. Combaton kívül kapott damage-nél a 6-os Might számít.",
+    "814.1.d.1"
+   ]
+  ],
+  "Zero Point Inflection": [
+   [
+    "Mikor húzok 2 lapot?",
+    "Minden általad kijátszott Main Deck lap resolve-ja után. Counterelt lap és token nem váltja ki.",
+    "420.4.a,052,185"
+   ],
+   [
+    "Mikor dobom el a kezem, és mikor kapja az opponent a pontot?",
+    "Bármilyen húzásra, a Draw Phase húzására is, ha a húzott lapokon kívül legalább 9 másik lap van a kezedben.",
+    "383.3"
+   ],
+   [
+    "Megnyerheti ezzel a játékot az opponent?",
+    "Igen. A pont nem conquerből jön, ezért a Final Point megkötései nem vonatkoznak rá.",
+    "473.1.a.1"
+   ],
+   [
+    "Mi van, ha a gear elhagyja a boardot a büntetés resolve-ja előtt?",
+    "A chainen lévő trigger ettől még resolve-ol: eldobod a kezed, és az opponent megkapja a pontot.",
+    "355.9.c,055"
+   ]
+  ],
+  "Zhonya's Hourglass": [
+   [
+    "Muszáj aktiválnom, ha egy unitom meghalna?",
+    "Igen, nincs 'may': az első friendly unit halálára kötelezően aktiválódik, tokenre is. Nem tartogathatod értékesebb unitnak.",
+    "370.1"
+   ],
+   [
+    "Mi történik a megmentett unittal és a death triggerekkel?",
+    "A unit healelve, exhausted állapotban a base-be kerül, ez Recall, nem Move. Deathknell és 'when I die' triggerek lekerülnek a chainről.",
+    "458.1,460.1,808.1.d.1,383.2.c.3.a"
+   ],
+   [
+    "Hogyan működik a Hidden?",
+    "1 bármely Powerért facedown tehető, a következő körtől Reactionnel, a base cost nélkül játszható, akár kill spellre válaszul. A következő cleanup recallolja.",
+    "811.1.b,811.1.d.1.a,149.3"
+   ],
+   [
+    "Hány unitot ment meg, ha többen halnának meg egyszerre?",
+    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. A gear csak egyszer tud meghalni, de a replacement több eseményre is alkalmazható.",
+    "373.2,370.2"
+   ]
+  ],
+  "Ziggs, Explosive": [
+   [
+    "Mikor rakhatok le Bombot?",
+    "Csak a saját Main Phase-edben, showdownon kívül, ha Ziggs ready. A cost 1 Energy és Ziggs exhaustolása.",
+    "381.1,415.4"
+   ],
+   [
+    "Melyik battlefieldre kerülhet a Bomb?",
+    "Bármelyikre, a battlefield nem target.",
+    "830.1.b.1,355.10.b"
+   ],
+   [
+    "Mit áldozhatok fel védekezéskor a +2 Mightért?",
+    "Egy saját geart, bárhol lehet, nem csak Ziggs battlefieldjén, és nem target. Ha nem ölsz geart, a trigger lekerül a chainről.",
+    "383.3.a,383.3.b,355.10.c.1"
+   ],
+   [
+    "Mi történik, ha Bombot áldozok fel?",
+    "A Deathknellje is lefut: 2 sebzés egy enemy unitra a Bomb battlefieldjén, a +2 Might mellé.",
+    "429.1.a.1.b,187.12"
+   ]
+  ],
+  "Ziggs, Hexplosives Expert": [
+   [
+    "Mikor aktiválhatom a legend képességét?",
+    "Csak a saját Main Phase-edben, showdownon kívül, mert nincs rajta Action vagy Reaction. Az exhaust cost miatt ready effect nélkül körönként egyszer.",
+    "381.1,415.4"
+   ],
+   [
+    "Melyik battlefieldre rakhatok Bombot?",
+    "Bármelyikre, enemy és üres battlefieldre is. A battlefield nem target.",
+    "830.1.b.1,355.10.b"
+   ],
+   [
+    "Mi történik, ha egy opponent a Bomb battlefieldjén holdol?",
+    "A Bomb meghal, és ez kiváltja a Deathknelljét.",
+    "830.1.b"
+   ],
+   [
+    "Mi van, ha több Bombom van egy helyen?",
+    "Az első halála megöli a többit, azok Deathknellje is triggerel, tehát minden Bomb külön 2 damage-et oszt.",
+    "808.1.b,187.12"
+   ]
+  ],
+  "Ziggs, Short-Fused": [
+   [
+    "Melyik battlefieldre kerül a Bomb?",
+    "Bármelyikre, enemy által elfoglaltra is.",
+    "383.4.a.2,830.1.b.1"
+   ],
+   [
+    "Mennyit sebez a Bomb Ziggs mellett?",
+    "3 sebzést 2 helyett, mert a Deathknell gear ability, és Ziggs 1 Bonus Damage-et ad hozzá.",
+    "418.6.b.2,715.1"
+   ],
+   [
+    "Mi van, ha Ziggs elhagyja a boardot a Deathknell resolve-ja előtt?",
+    "A passive csak addig él, amíg Ziggs a boardon van, ezért a sebzés 2 marad.",
+    "365.1"
+   ],
+   [
+    "Számít friendly gear abilitynek a csatolt Equipment képessége?",
+    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. Nem egyértelmű, hogy a unit Rules Textjéhez adódó Equipment ability ide tartozik-e.",
+    "719.1"
+   ]
+  ],
+  "Zilean, Time Mage": [
+   [
+    "Milyen tokenekre vonatkozik Zilean képessége?",
+    "Csak token unitra. Gear tokenre, például Goldra, nem.",
+    "185.2.d"
+   ],
+   [
+    "Hányszor használhatom, és kötelező?",
+    "Körönként egyszer, és választható. Ha egy tokennél nem kéred, később ugyanabban a körben még felhasználhatod.",
+    "371.1,371.2"
+   ],
+   [
+    "Lehet reagálni a plusz tokenre?",
+    "Nem. Replacement effect, nem trigger: nem megy chainre. Csak akkor él, amíg Zilean battlefielden van.",
+    "369.1"
+   ],
+   [
+    "Copy Effectnek számít a plusz példány?",
+    "Nem. A nyomtatott tulajdonságai azonosak, és örökli az eredeti effect módosításait, például az exhausted vagy ready belépést.",
+    "446.3,375"
+   ]
+  ]
+ },
+ "checked": 21
+}

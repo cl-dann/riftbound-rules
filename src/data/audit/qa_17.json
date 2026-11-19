@@ -1,0 +1,1255 @@
+{
+ "qa": {
+  "The Empyrean": [
+   [
+    "Mi történik, ha nem mutatok meg lapot?",
+    "A play effect nem kerül chainre, ezért nem nézel meg lapot, és a 2 lap húzás is elmarad.",
+    "383.2.a.1"
+   ],
+   [
+    "Milyen lapot mutathatok meg?",
+    "Egy lapot a kezedből, vagy egy másik saját lapot a boardon, a kijátszás finalizálása közben döntesz. Token nem mutatható meg, mert nem kártya.",
+    "832.1.c,832.1.c.2,185"
+   ],
+   [
+    "Véd ellene a Deflect, ha a megmutatott lapra mutatok?",
+    "Nem, a Show Off pick, nem choose: a lap nem target, Deflect és can't be chosen nem érinti.",
+    "355.7"
+   ],
+   [
+    "Hány lapot nézek meg a Predicttel?",
+    "Annyit, amennyi a megmutatott lap nyomtatott Power costja, a megmutatáskor rögzítve. 0 Power costnál nulla lapot, de a 2 húzás megtörténik.",
+    "832.1.d.1,206,185,437.3"
+   ]
+  ],
+  "The Good Stuff": [
+   [
+    "Hova játszható ki?",
+    "Csak battlefieldre, bármelyikre. Ha egy opponent holdol ott, a gear meghal.",
+    "830.1.b.1,830.1.b"
+   ],
+   [
+    "Mi történik, ha én holdolom a battlefieldet?",
+    "A hold trigger kötelező: a gear visszamegy a kezedbe, és újra kijátszható a play effectért.",
+    "383.4.d.2.b,056.2"
+   ],
+   [
+    "Mi van, ha üres a kezem kijátszáskor?",
+    "A discard negálódik, a draw 3 ettől még megtörténik.",
+    "423.2.a,423.4"
+   ],
+   [
+    "Mikor jön vissza a kezembe?",
+    "Ahhoz a következő Beginning Phase-edig tartanod kell a battlefieldet, ezért olyanra érdemes tenni, amit már kontrollálsz.",
+    "472,471.2"
+   ]
+  ],
+  "The Grand Plaza": [
+   [
+    "Mikor nyerek vele?",
+    "Ha a Beginning Phase-edben holdolod, és legalább 7 unitod van itt. Ez külön győzelmi feltétel, a pontszámtól függetlenül.",
+    "473.2.b,472,195"
+   ],
+   [
+    "Számítanak a tokenek a 7 unitba?",
+    "Igen, a token unitok is unitok.",
+    "185.2.d"
+   ],
+   [
+    "Megállítható, ha a triggerre válaszul megölik a unitjaimat?",
+    "Nem, a 7 unit a trigger feltétele, a resolve nem ellenőrzi újra. Csak a trigger counterelésével állítható meg, az opponent reagálhat rá.",
+    "383.2.a.1,383.3.c"
+   ]
+  ],
+  "The Harrowing": [
+   [
+    "Milyen unitot játszhatok ki vele?",
+    "Bármelyik unitot a saját trashedből, az target. Ha nincs unit a trashben, a spell nem játszható ki.",
+    "355.10.a,355.8"
+   ],
+   [
+    "Mikor játszható ki?",
+    "Csak a saját körödben, showdownon kívül, mert nincs rajta Action vagy Reaction.",
+    "155"
+   ],
+   [
+    "Mit kell fizetni a unitért?",
+    "Csak az Energy cost nullázódik. A Power costot ki kell fizetni, és additional cost (például Accelerate) is rákerülhet. Ha resolve-kor nem tudod, a unit a trashben marad.",
+    "356.1.b.2,356.1.b.3,445.2.a"
+   ],
+   [
+    "Mi van, ha a unit kikerül a trashből a resolve előtt?",
+    "Illegális target lesz, a spell nem csinál semmit.",
+    "359.3.e.2"
+   ]
+  ],
+  "The List": [
+   [
+    "Mikor nevezem meg a taget?",
+    "Kijátszáskor, a finalizálás közben, nem resolve-kor, ezért az opponent a tag ismeretében reagálhat. Csak létező tag nevezhető meg.",
+    "355.1,763,763.1"
+   ],
+   [
+    "Kit célozhat?",
+    "Bármelyik játékos unitját, base-ben is, ha rajta van a megnevezett tag.",
+    "355.9.b,143.1"
+   ],
+   [
+    "Mikor használható?",
+    "Csak a saját Main Phase-edben, showdownon kívül, mert nincs rajta Action vagy Reaction.",
+    "151.2"
+   ],
+   [
+    "Mi van, ha a Might 0 alá megy?",
+    "Nincs minimum 1, a Might 0 alá is mehet. Magában nem öl, de a 0 Mightú unit 1 damage-től meghal.",
+    "143.2.c,142.4.b"
+   ]
+  ],
+  "The Papertree": [
+   [
+    "Kinek jár a rune?",
+    "Minden játékosnak, az opponentnek is, nincs target és nincs may. Akinek üres a Rune Deckje, az nem channel.",
+    "355.10.e,431.2,431.3"
+   ],
+   [
+    "Ki használhatja előbb Energyre?",
+    "Az opponent: az ő rune-ja a következő köre elején lesz ready, a tiéd csak a következő Awaken Phase-edben.",
+    "315.1.b"
+   ],
+   [
+    "Használható az exhausted rune Powerért?",
+    "Igen, recycle-ölhető Powerért, mindkét félnél azonnal.",
+    "164.2.b"
+   ],
+   [
+    "Kinél triggerel?",
+    "Annál, aki itt holdol, körönként egyszer.",
+    "473.2.b,472"
+   ]
+  ],
+  "The Ruination": [
+   [
+    "Véd ellene a Deflect?",
+    "Nem, nincs target. Minden unitot megöl, a sajátjaidat is, Deflect és can't be chosen nem véd.",
+    "355.10.d"
+   ],
+   [
+    "Mikor játszható ki?",
+    "Csak a saját körödben, showdownon kívül, mert nincs rajta Action vagy Reaction.",
+    "155"
+   ],
+   [
+    "Mi lesz a unitokra csatolt Equipmentekkel?",
+    "Leválnak és megmaradnak. Ha battlefielden voltak, a következő cleanupban a base-be recallolódnak.",
+    "719.5,436.4.a"
+   ],
+   [
+    "Triggerel a másik unit halálára figyelő unit?",
+    "Nem, a unitok egyszerre halnak meg, ezért az ilyen unit triggere nem fut le. A Deathknell abilityk viszont chainre kerülnek.",
+    "370.1.a.2,383.2.c.2,429.1.a.1.b"
+   ]
+  ],
+  "The Syren": [
+   [
+    "Kit mozgathat a base-ébe?",
+    "Csak saját, battlefielden álló unitot. Base-ben lévő unit nem választható.",
+    "355.10,355.9.b"
+   ],
+   [
+    "Kimenekít combatból vagy enemy spell elől?",
+    "Nem, csak a saját Main Phase-edben, showdownon kívül aktiválható.",
+    "151.2"
+   ],
+   [
+    "Exhaustolódik a unit, és triggerelnek a Move-ra figyelő hatások?",
+    "A unit nem exhaustolódik, megtartja az állapotát. Ez Move, ezért a when I move triggerek lefutnak.",
+    "421.3.a,421.1"
+   ],
+   [
+    "Mi van, ha a unit a resolve előtt lekerül a battlefieldről?",
+    "Az ability mistargetel.",
+    "359.3.e.9"
+   ]
+  ],
+  "The Waters' Wage": [
+   [
+    "Hány Goldot kapok?",
+    "Kézből kijátszva egy exhaustedet. Három ready Gold csak akkor jár, ha a te köröd van, és facedownból játszod ki.",
+    "135.2.b.7,155,811.3"
+   ],
+   [
+    "Mikor játszhatom ki facedownból?",
+    "Legkorábban a következő körtől, Reactionként, base cost nélkül, bárki körében. Az opponent körében csak egy exhausted Gold jár.",
+    "811.1.b,811.6,135.2.b.7"
+   ],
+   [
+    "Mire jó a Gold?",
+    "Megölve és exhaustolva 1 bármilyen domainű Powert ad, a ready példányokkal azonnal. A Goldok a base-edbe kerülnek.",
+    "187.5,148.1.a.1"
+   ],
+   [
+    "Mi lesz a facedown lappal, ha elveszítem a battlefieldet?",
+    "A következő cleanupban a trashbe kerül.",
+    "107.3.d"
+   ]
+  ],
+  "The Zero Drive": [
+   [
+    "Mikor és mennyiért csatolhatom?",
+    "1 Energy és 1 Mind Power, saját Main Phase-edben, showdownon kívül, egy saját unitra. Combat közben nem megy.",
+    "818.1.b.1,151.2,381.1"
+   ],
+   [
+    "Mi történik, amikor a csatolt unit meghal?",
+    "A unit ténylegesen meghal és a trashbe kerül, a halálra figyelő triggerek lefutnak. Utána a Deathknell a Banishmentbe teszi.",
+    "396,808.1.c,808.1.d.2"
+   ],
+   [
+    "Mely unitokat hozza vissza?",
+    "Csak azokat, amelyeket ennek a Zero Drive-nak a Deathknellje banishelt. Token unit nem tér vissza, mert a Banishmentben megszűnik.",
+    "398,428.3.a,186.1"
+   ],
+   [
+    "Használható az ability csatolva?",
+    "Nem, csatolva a gear Rules Textje inaktív, ezért csak csatolatlanul megy.",
+    "718.2"
+   ]
+  ],
+  "Thermo Beam": [
+   [
+    "Kinek a gearjét öli meg?",
+    "Minden játékos minden boardon lévő gearjét, a sajátjaidat is: csatolt Equipmentet, Gold és Bomb tokent egyaránt.",
+    "148.1.a.4"
+   ],
+   [
+    "Véd ellene a Deflect?",
+    "Nem, nincs target. A Deflect nem drágítja, a can't be chosen nem véd.",
+    "355.5.a,355.10.d"
+   ],
+   [
+    "Mikor játszható ki?",
+    "A saját körödben, vagy showdown alatt bárki körében. Másik spellre válaszul nem.",
+    "806.1.c.1,358.4"
+   ],
+   [
+    "Mi lesz a unitokkal, amikről Equipment esik le?",
+    "Az Equipment Might bónusza azonnal megszűnik, a sebzett unit meghalhat a következő cleanupban.",
+    "435.1.d"
+   ]
+  ],
+  "Thousand-Tailed Watcher": [
+   [
+    "Választhatok célpontot, és véd ellene a Deflect?",
+    "Nem, minden enemy unitra hat, nincs target. Deflect és can't be chosen nem véd.",
+    "355.5.a"
+   ],
+   [
+    "Meddig csökkenhet a Might?",
+    "Legfeljebb 1-ig. A már sebzett unit meghalhat, ha a rajta lévő damage eléri az új Mightját.",
+    "142.4.b,143.2.b,479.4.b"
+   ],
+   [
+    "Megkapja a -3-at a körben később érkező enemy unit?",
+    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. Az effect a resolve-kor boardon lévő enemy unitokra hat, a később érkezőkről a szabályzat nem szól.",
+    "355.5.a"
+   ],
+   [
+    "Mit ad az Accelerate?",
+    "Kijátszáskor 1 Energy és egy Mind Power additional costért ready lép be.",
+    "805.1.b,805.1.b.1"
+   ]
+  ],
+  "Threshold of the Gray": [
+   [
+    "Triggerel üres battlefieldre lépéskor?",
+    "Nem, csak combatnál. Az üres battlefieldre lépéskor nyíló Non-Combat Showdownnál nem.",
+    "316.8.b.1"
+   ],
+   [
+    "Ki kap Energyt?",
+    "Mindkét fél, a támadó és a védekező is, a saját Rune Pooljába. Nem a battlefield controllere.",
+    "166.1"
+   ],
+   [
+    "Reagálhatok rá?",
+    "Nem, azonnal finalizálódik és resolve-ol, priority nem megy át.",
+    "430.2,430.2.a"
+   ],
+   [
+    "Mire költhető az Energy?",
+    "A showdown Action és Reaction lapjaira. A kör végéig, vagy a következő Main Phase kezdetéig marad a poolban.",
+    "167,317.2.d"
+   ]
+  ],
+  "Thrill of the Hunt": [
+   [
+    "Kit célozhat, és hova játszhatom vissza?",
+    "Egy saját unitot bárhol a boardon, és bármelyik battlefieldre, az opponentére is. Utóbbi Contested lesz, showdown vagy combat következik.",
+    "355.9.b,355.2.b,190.3.a.1"
+   ],
+   [
+    "Mi marad meg a unitból?",
+    "Semmi: új objektum lesz, a damage, a buff és a this turn módosítók eltűnnek, az Equipment leválik. A rá célzó enemy spellek mistargetelnek.",
+    "124.1,705,436.4.b"
+   ],
+   [
+    "Triggerelnek a play effectek?",
+    "Igen, ez rendes Play: a when you play me effectek újra triggerelnek, és a unit exhausted lép be.",
+    "420.3.a,143.4"
+   ],
+   [
+    "Mi van, ha tokent választok?",
+    "A token a Banishmentben megszűnik, nincs mit visszajátszani.",
+    "186.1"
+   ]
+  ],
+  "Thwonk!": [
+   [
+    "Mikor játszható ki?",
+    "Csak folyamatban lévő combat alatt, mert a target Attacker designationnel rendelkező unit lehet. Action, de másik spellre válaszul nem.",
+    "355.9.b,466.2.c.3,806.1.c.1,358.4"
+   ],
+   [
+    "Kit stunolhatok?",
+    "Bármelyik játékos támadó unitját, a sajátodat is, nincs enemy megkötés.",
+    "355.9.b"
+   ],
+   [
+    "Mi van, ha a unit elhagyja a combatot a resolve előtt?",
+    "Elveszíti az Attacker designationt, illegális target lesz, a stun elmarad.",
+    "359.3.e.2,323.2.c"
+   ],
+   [
+    "Mit ad a Repeat?",
+    "2 Energyért két támadó unitot is stunolhatsz. Ugyanazt kétszer választani felesleges.",
+    "820.1.d,820.2.a"
+   ]
+  ],
+  "Tianna Crownguard": [
+   [
+    "Mit akadályoz meg?",
+    "Amíg battlefielden áll, az opponent nem kap pontot holdból, conquerből, pontot adó effectből, sem a te első Burn Outodból.",
+    "194.1,054.1"
+   ],
+   [
+    "Van kivétel?",
+    "Igen, az ismétlődő Burn Out utáni pontokat semmi nem akadályozza meg, Tianna sem.",
+    "432.3.b"
+   ],
+   [
+    "Lefutnak az opponent conquer és hold effectjei?",
+    "Igen, ezek ettől még triggerelnek, csak a pont marad el.",
+    "383.4.c.2.c,383.4.d.2.c"
+   ],
+   [
+    "Működik base-ben?",
+    "Nem, a passive ability csak battlefielden él. Ha a resolve előtt lekerül onnan, a pont megjár.",
+    "365.1"
+   ]
+  ],
+  "Tibbers, Annie": [
+   [
+    "Kit sebez?",
+    "Minden battlefielden álló unitot, a sajátjaidat is, és Tibberst is, ha battlefieldre játszottad. A base-ben lévők érintetlenek.",
+    "355.5.a,418.1.d"
+   ],
+   [
+    "Véd ellene a Deflect?",
+    "Nem, nincs target. Deflect és can't be chosen nem véd.",
+    "355.10.d"
+   ],
+   [
+    "Mikor halnak meg a sebzett unitok?",
+    "A resolve utáni cleanupban.",
+    "323.4"
+   ],
+   [
+    "Melyik deckbe tehető?",
+    "Csak Annie legend deckjébe. Signature unit, nem Champion, ezért nem lehet Chosen Champion.",
+    "103.3.d,103.3.d.2,103.3.a.2,103.3.d.3"
+   ]
+  ],
+  "Tideturner": [
+   [
+    "Kivel cserélhet helyet?",
+    "Csak egy másik helyen álló, általad kontrollált unittal. Mindkét unit Move-ot hajt végre, a when I move triggerek lefutnak.",
+    "355.9.b,421.1"
+   ],
+   [
+    "Kötelező a csere?",
+    "Nem, a may az effect elején áll: a trigger finalizálásakor döntesz, és ha nem kéred, lekerül a chainről.",
+    "383.3.a"
+   ],
+   [
+    "Menthet meg unitot egy spelltől facedownból kijátszva?",
+    "Csak ha a célzási feltétel a csere után már nem teljesül. A sima unit at a battlefield targetet nem teszi illegálissá, mert a társ a Tideturner battlefieldjére kerül.",
+    "359.3.e.5,355.9.b"
+   ],
+   [
+    "Mi van, ha a csere nem általam kontrollált battlefieldre visz?",
+    "Az Contested lesz, showdown vagy combat következhet.",
+    "452"
+   ]
+  ],
+  "Time Warp": [
+   [
+    "Mikor kapom a plusz kört?",
+    "Közvetlenül a mostani után, Additional Turnként. A Turn Order nem változik.",
+    "735,737"
+   ],
+   [
+    "Mikor játszható ki?",
+    "Csak a saját körödben, showdownon kívül, mert nincs rajta Action vagy Reaction.",
+    "155"
+   ],
+   [
+    "Újra használható trashből visszahozó effekttel?",
+    "Nem, a Banish this miatt a Banishmentbe megy. Ha counterelik, a trashbe kerül.",
+    "428.1,426.1.a.1"
+   ],
+   [
+    "Mi van, ha több Additional Turn van?",
+    "Abban a sorrendben jönnek, ahogy az őket létrehozó effectek létrejöttek.",
+    "738"
+   ]
+  ],
+  "Titanic Shrine": [
+   [
+    "Mikor húzhatok vele?",
+    "Ha olyan unitot játszol ki, amelynek Mightja szigorúan nagyobb minden más unitnál a boardon, az enemyknél is. Egyenlőség nem elég.",
+    "710"
+   ],
+   [
+    "Mikor nézi a feltételt?",
+    "A unit resolve-ja után, amikor már a boardon van, az aktuális Mighttal, buffokkal és módosítókkal.",
+    "420.4.a,710"
+   ],
+   [
+    "Kötelező exhaustolni a Shrine-t?",
+    "Nem, a cost kifizetését megtagadhatod, ekkor a trigger lekerül a chainről. Exhausted Shrine-nál a cost nem fizethető, nincs húzás.",
+    "405.2,415.4"
+   ],
+   [
+    "Számít a token unit kijátszása?",
+    "Igen, ha a token Mightja a legnagyobb a boardon.",
+    "185.2.a"
+   ]
+  ],
+  "Tomb-Raider Barbara": [
+   [
+    "Mikor működik a play effect?",
+    "Csak ha a kijátszás befejezésekor legalább 7 rune-od van. Különben a trigger chainre sem kerül.",
+    "383.2.a.1"
+   ],
+   [
+    "Számít a Powerért recycle-ölt rune?",
+    "Nem, az visszakerül a Rune Deckbe. Az exhausted rune számít. Ha emiatt 7 alá estél, az effect elmarad.",
+    "164.2.b,417.1.b"
+   ],
+   [
+    "Milyen geart célozhat?",
+    "Bármelyik enemy geart, a unitra csatolt Equipmentet és a Gold vagy Bomb tokent is. Ha nincs választható gear, a trigger nem fut le.",
+    "718.5.b,150.4,355.7,355.8,403.4"
+   ],
+   [
+    "Mit csinál Empowered gearrel?",
+    "Csak leveszi róla az Empowered állapotot, nem öli meg. Az állapotot a resolve-kor nézi.",
+    "443.1.b"
+   ]
+  ],
+  "Tools of Empire": [
+   [
+    "Kit célozhat?",
+    "Bármelyik unitot, bárkiét, base-ben is.",
+    "355.10,355.9.b"
+   ],
+   [
+    "Mikor használható?",
+    "Csak a saját Main Phase-edben, showdownon kívül, ezért a bónuszt a támadó mozgás előtt kell kiosztani.",
+    "151.2,381.1"
+   ],
+   [
+    "Hogyan működik az Empower?",
+    "Egyszer kell kifizetni, az Empowered állapot megmarad. Utána minden exhaust +4 Mightot ad +2 helyett.",
+    "827.1.c.1,442.1.a"
+   ],
+   [
+    "Használható a kijátszás körében?",
+    "Igen, ready lép be.",
+    "149.1"
+   ]
+  ],
+  "Tornado Warrior": [
+   [
+    "Mikor empowerelhetek vele?",
+    "Csak ha facedownból játszod ki. Kézből kijátszva sima 3 Mightú unit, az empower nem fut le.",
+    "383.2.a.1"
+   ],
+   [
+    "Mit empowerelhetek?",
+    "Bármit a Warrior battlefieldjén, nincs friendly megkötés.",
+    "355.10,811.1.d.3"
+   ],
+   [
+    "Mikor kerül le az Empowered állapot?",
+    "A kör végén, akkor is, ha a Warrior közben elhagyta a boardot, és akkor is, ha az objektum máshonnan kapta.",
+    "393,443.1"
+   ],
+   [
+    "Hogyan rejthetem el?",
+    "Saját körödben, showdownon kívül, 1 tetszőleges Powerért, egy általad kontrollált battlefieldre, ahol még nincs facedown lapod. A következő körtől Reaction.",
+    "811.1.b,811.6"
+   ]
+  ],
+  "Towering Combatant": [
+   [
+    "Mekkora a Mightja?",
+    "Támadóként 3, védekezőként 5. Védekezőként így Mighty unitnak számít.",
+    "814.1.c,708"
+   ],
+   [
+    "Mit jelent a Tank?",
+    "Az opponentnek előbb rá kell halálos combat damage-et osztania, csak utána jöhet a Tank nélküli unitod.",
+    "815.1.b,815.1.c.1"
+   ]
+  ],
+  "Towering Pairofant": [
+   [
+    "Mikor lép be ready?",
+    "Ha ebben a körben már meghalt bármelyik unit, bárkié, token is. Banishelt vagy kézbe vett unit nem számít.",
+    "429.2.a,428.2.a"
+   ],
+   [
+    "Mozoghat még abban a körben?",
+    "Igen, Standard Move-val. A feltétel az egész körre szól, akár korábban, combatban halt meg a unit.",
+    "144.1.a"
+   ],
+   [
+    "Mikor kap +1 Mightot?",
+    "Csak addig, amíg Attacker designationnel combatban van. Védekezéskor nem.",
+    "807.1.c,807.1.d.1"
+   ]
+  ],
+  "Transpositionist": [
+   [
+    "Kit küldhetek vissza a kezembe?",
+    "Egy saját unitot, akár magát a Transpositionistet is. A unit a tulajdonosa kezébe megy.",
+    "355.10,355.9.c,056.2"
+   ],
+   [
+    "Mekkora unitot játszhatok ki?",
+    "Kisebb Mightút, mint a visszavett unit a boardon utoljára volt, buffokkal együtt. A kijátszandónál a nyomtatott Might számít.",
+    "359.3.e.13,711"
+   ],
+   [
+    "Honnan játszhatom ki a unitot?",
+    "Alapból a kezedből vagy a Champion Zone-odból (Chosen Champion). Kézből választva nem target.",
+    "420.1.a,355.10.a"
+   ],
+   [
+    "Mikor használható?",
+    "Csak a saját Main Phase-edben, showdownon kívül. Exhausted lép be, ezért a kijátszás körében nem.",
+    "381.1,316.8.c,204.1.b,415.4,143.4"
+   ]
+  ],
+  "Trapping Grounds": [
+   [
+    "Mikor kapom a Bird tokent?",
+    "Ha itt conquerelsz combatban, és legalább 3 excess damage-et osztottál ki. Combat nélküli conquernél nem.",
+    "383.2.a.1,467.2.c"
+   ],
+   [
+    "Mi számít excess damage-nek?",
+    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. A fogalmat a Core Rules nem definiálja, valószínűleg a halálos sebzésen felül kiosztott damage.",
+    "467.2.c.4"
+   ],
+   [
+    "Hova kerül a Bird?",
+    "A base-edbe vagy egy általad kontrollált battlefieldre, exhausted.",
+    "355.2.a,187.7"
+   ]
+  ],
+  "Traveling Merchant": [
+   [
+    "Mikor triggerel?",
+    "Minden Move-ra: Standard Move-ra és effect általi mozgatásra is. Recall nem Move, arra nem.",
+    "421,144.2,458.1"
+   ],
+   [
+    "Kötelező a discard?",
+    "Igen, nincs may. Üres kézzel a discard negálódik, a draw ettől még megtörténik.",
+    "423.2.a,423.4"
+   ],
+   [
+    "Mi lesz a dobott lappal?",
+    "Közvetlenül a trashbe megy, a szövege nem hajtódik végre.",
+    "423.1"
+   ]
+  ],
+  "Treasure Hoard": [
+   [
+    "Mennyibe kerül a Gold, és kötelező?",
+    "1 Energy, amit a trigger finalizálásakor fizetsz. A may miatt te döntöd el, kéred-e.",
+    "383.3.b,383.3.b.1"
+   ],
+   [
+    "Használható a Gold még ebben a körben?",
+    "Nem, exhausted érkezik, a cost-jához pedig exhaustolni kell.",
+    "184.1,149.1"
+   ],
+   [
+    "Hova kerül a Gold?",
+    "A base-edbe, nem a battlefieldre.",
+    "148.1.a.1"
+   ],
+   [
+    "Kiváltja a when you play a gear triggereket?",
+    "Igen, mert a tokent kijátszod.",
+    "440.2.c,185.2.a"
+   ]
+  ],
+  "Treasure Hunter": [
+   [
+    "Mikor triggerel?",
+    "Minden Move-ra, Standard Move-ra és effect általi mozgatásra is, Recallra nem.",
+    "421.1,458.1"
+   ],
+   [
+    "Hova kerül a Gold?",
+    "A base-edbe, akkor is, ha a Hunter battlefieldre mozgott.",
+    "148.1.a.1"
+   ],
+   [
+    "Használható a Gold azonnal?",
+    "Nem, exhausted érkezik, a Gold cost-ja pedig a megölés és az exhaust.",
+    "187.5,415.4"
+   ]
+  ],
+  "Treasure Trove": [
+   [
+    "Mikor húzok és channelek?",
+    "Amikor elhagyja a boardot: kill, banish és kézbe vétel is kiváltja. Akkor is te kapod, ha az opponent ölte meg.",
+    "383.2.c.3,148.1.a.4"
+   ],
+   [
+    "Megölhetem magam?",
+    "Igen, 1 Chaos Powerért és exhaust-tal, a saját Main Phase-edben, showdownon kívül. Ready lép be, a kijátszás körében is.",
+    "149.1,151.2"
+   ],
+   [
+    "Mi van, ha a gear banishelve hagyja el a boardot?",
+    "A trigger így is lefut.",
+    "383.2.c.3.a"
+   ],
+   [
+    "Mi van üres decknél?",
+    "Üres Rune Decknél nem channelsz, a húzás megtörténik. Üres Main Decknél a húzás Burn Outot okoz.",
+    "431.2,431.3,414.4"
+   ]
+  ],
+  "Trevor Snoozebottom": [
+   [
+    "Mikor triggerel?",
+    "Csak ha Trevor ott van a battlefielden, amikor a Beginning Phase-edben holdolod.",
+    "383.4.d.2.a"
+   ],
+   [
+    "Mozoghat a Sprite még abban a körben?",
+    "Igen, ready érkezik, tehát még abban a körben mozoghat.",
+    "187.2,184.1"
+   ],
+   [
+    "Mikor hal meg a Sprite?",
+    "A következő saját Beginning Phase-ed elején, a scoring előtt.",
+    "816.1.b,315.2.a.1"
+   ],
+   [
+    "Hova érkezik a Sprite, ha Trevor elmozdul?",
+    "Oda, ahol Trevor a resolve-kor áll.",
+    "359.3.f.2"
+   ]
+  ],
+  "Tricksy Tentacles": [
+   [
+    "Kinek a unitjait mozgathatom?",
+    "Csak ugyanannak az opponentnek a unitjait, összesen legfeljebb 8 Mighttal. Nulla target is választható.",
+    "355.11.a,355.13"
+   ],
+   [
+    "Hova mozgathatom őket?",
+    "Egyetlen locationre, amit kijátszáskor választasz, és ami eltér a unit jelenlegi helyétől.",
+    "355.4,355.4.a"
+   ],
+   [
+    "Mi van, ha az összeg a resolve-ra 8 fölé nő?",
+    "Az eredeti targetekből kell érvényes részhalmazt választanod, a lehető legtöbb targettel.",
+    "355.11.b,355.11.b.1"
+   ],
+   [
+    "Mi történik, ha a saját battlefieldemre húzom őket?",
+    "Az opponent unitjai teszik Contestedre, ő lesz az attacker. A base-ükbe küldve kiüríted a battlefieldjüket.",
+    "190.3.a.1,466.2.c.1"
+   ]
+  ],
+  "Trifarian Captain": [
+   [
+    "Target a kiválasztott lap, és véd ellene a Deflect?",
+    "Nem, a Main Deck nem Public zóna, a választás resolve-kor történik. Deflect és can't be chosen nem érinti.",
+    "355.10.a"
+   ],
+   [
+    "Mikor döntök a felfedésről?",
+    "Resolve közben, miután megnézted a lapokat.",
+    "383.3.a.3"
+   ],
+   [
+    "Melyik costot nézi a feltétel?",
+    "A nyomtatott costot, kedvezmények nélkül.",
+    "206"
+   ],
+   [
+    "Mi van, ha 4-nél kevesebb lap van a deckben?",
+    "Annyit nézel meg, amennyi van, ez nem okoz Burn Outot.",
+    "432.1.c"
+   ]
+  ],
+  "Trifarian Gloryseeker": [
+   [
+    "Mikor kap buffot?",
+    "Csak ha ebben a körben már finalizáltál egy másik kártyát. A counterelt lap is számít.",
+    "812.1.b.1,420.4.b"
+   ],
+   [
+    "Meddig tart a buff?",
+    "Tartós +1 Might, nem this turn hatás: addig marad, amíg a unit a boardon van.",
+    "427.1.b,703,705"
+   ],
+   [
+    "Kaphat több buffot?",
+    "Nem, egy uniton egyszerre csak egy buff lehet.",
+    "702.3,427.1.b.1"
+   ]
+  ],
+  "Trifarian War Camp": [
+   [
+    "Kinek a unitjait erősíti?",
+    "Mindkét játékosét, a támadókat is, amint megérkeznek.",
+    "364.2"
+   ],
+   [
+    "Mi történik, ha egy sebzett unit elmegy innen?",
+    "Elveszíti a +1 Mightot, és ha a damage eléri az új Mightját, meghal.",
+    "143.2.b"
+   ],
+   [
+    "Számít a bónusz a Mighty küszöbbe?",
+    "Igen, egy 4 Mightú unit itt Mighty.",
+    "708,709"
+   ],
+   [
+    "Kinek kedvez a combatban?",
+    "Mindkét oldal minden unitja 1-gyel többet sebez és 1-gyel több damage kell a megöléséhez, ezért a több unitot hozó fél jár jobban.",
+    "467.2.a,467.2.b"
+   ]
+  ],
+  "Trinity Force": [
+   [
+    "Hogyan és mikor csatolhatom?",
+    "1 Body Power ellenében, a saját Main Phase-edben, showdownon kívül, egy saját unitra. Combat közben nem megy.",
+    "818.1.b.1,151.2,381.1"
+   ],
+   [
+    "Mikor kapok pontot?",
+    "Ha a felszerelt unit battlefieldjét holdolod: a hold pontja mellé még 1 pontot kapsz.",
+    "383.4.d,194.1.c"
+   ],
+   [
+    "Nyerhetek vele?",
+    "Igen, a pont nem conquerből jön, ezért a Final Point megkötései nem vonatkoznak rá.",
+    "473.1.a.1"
+   ],
+   [
+    "Mi lesz a gear saját szövegével csatolás után?",
+    "Az Effect Text a unit szövegévé válik, a gear Rules Textje (az Equip) inaktív. A unit +2 Mightot is kap.",
+    "136.2.b,136.2.c,435.1.e"
+   ]
+  ],
+  "Trinket Peddler": [
+   [
+    "Kit célozhat a Disarm?",
+    "Egy ott álló enemy unitot. A -1 Might a kör végéig tart, nem csak a combat idejére.",
+    "831.1.d,355.8"
+   ],
+   [
+    "Mikor triggerel?",
+    "Amikor megkapja az Attacker jelölést, combatonként egyszer.",
+    "831.1.b,383.4.e.2.a"
+   ],
+   [
+    "Mi van, ha Deflectes unitot választok?",
+    "Neked kell kifizetned a plusz Powert, különben másik targetet kell választanod.",
+    "809.1.c"
+   ]
+  ],
+  "Trove Golem": [
+   [
+    "Hova kerülnek a Goldok?",
+    "A base-edbe, akkor is, ha a Golemet battlefieldre játszottad.",
+    "148.1.a.1"
+   ],
+   [
+    "Mikor használhatom a Goldokat?",
+    "Exhausted érkeznek, ezért a kijátszás körében nem adnak Powert. A következő Awaken Phase-edben lesznek ready.",
+    "415.4,315.1.b"
+   ],
+   [
+    "Mit lehet még velük kezdeni?",
+    "Gearként célozhatók és megölhetők, más lapok cost-jaként is feláldozhatók.",
+    "148.1.a.3,148.1.a.4"
+   ]
+  ],
+  "Trusty Ramhound": [
+   [
+    "Számít a token társ, és működik base-ben?",
+    "Igen, a token unit is másik unitnak számít, és a here a Ramhound aktuális locationje, base-ben is.",
+    "146.1"
+   ],
+   [
+    "Mi történik, ha a társ combat közben meghal vagy elmozdul?",
+    "A bónusz megszűnik, a Mightja 2-re esik vissza, és a rajta lévő damage megölheti.",
+    "364.3.a,143.2.b"
+   ]
+  ],
+  "Tryndamere, Barbarian": [
+   [
+    "Mikor triggerel?",
+    "Ha Tryndamere ott van a battlefielden, amikor combat után conquerelsz. Üres battlefieldre besétálva nem.",
+    "383.4.c.2.a,468.5.d"
+   ],
+   [
+    "Mikor számít valami excess damage-nek?",
+    "Csak akkor oszthatsz ki többletet, ha már minden enemy unit megkapta a lethal damage-et. Ami ezen felül marad, az az excess.",
+    "467.2.c.4"
+   ],
+   [
+    "A prevent által elnyelt damage beleszámít az 5-be?",
+    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. A Core Rules nem definiálja az excess damage fogalmát, ezért nem egyértelmű a prevent esete.",
+    "467.2.c.5"
+   ],
+   [
+    "Nyerhetek ezzel a ponttal?",
+    "Igen, nem conquerből származik, ezért a Final Point megkötései nem vonatkoznak rá.",
+    "473.1.a.1"
+   ]
+  ],
+  "Turn to Dust": [
+   [
+    "Kinek a gearjét célozhatom?",
+    "Bármelyik játékosét: base-ben lévő geart, unitra csatolt Equipmentet és gear tokent is.",
+    "355.7,150.4"
+   ],
+   [
+    "Mikor hal meg a gear?",
+    "A controllere következő Beginning Phase-ének elején, a scoring előtt. Addig működik, az opponent a köröd hátralévő részében még használhatja.",
+    "816.1.b,816.1.c"
+   ],
+   [
+    "Reagálhat rá a gear controllere?",
+    "Igen, a Temporary trigger chainre kerül, mielőtt a gear meghalna.",
+    "816.1,383.3.c"
+   ],
+   [
+    "Mikor játszható ki?",
+    "Csak a saját körödben, showdownon kívül, mert nincs rajta Action vagy Reaction.",
+    "155"
+   ]
+  ],
+  "Twilight Reveler": [
+   [
+    "Kit readyzhat?",
+    "Egy másik saját unitot, bárhol. Kötelező, és ha nincs másik unitod, a trigger nem fut le.",
+    "355.10,355.8"
+   ],
+   [
+    "Csatlakozhat a readyzett unit a combathoz?",
+    "Nem, mert a Standard Move showdown és combat közben tilos. A combat után viszont újra mozoghat.",
+    "144.1.c"
+   ],
+   [
+    "Mikor triggerel?",
+    "Amikor megkapja az Attacker designationt, combatonként egyszer.",
+    "383.4.e.2,383.4.e.2.a"
+   ]
+  ],
+  "Twilight Shroud": [
+   [
+    "Mikor játszható ki?",
+    "Csak a saját körödben, showdownon kívül. Enemy spellre válaszul nem, a védelmet előre kell felrakni.",
+    "155"
+   ],
+   [
+    "Kit véd meg?",
+    "Egy saját unitot, base-ben is: a kör végéig enemy spell és ability nem választhatja. A saját spelljeid továbbra is választhatják.",
+    "757,355.9.b,355.10"
+   ],
+   [
+    "Mi ellen nem véd?",
+    "A nem célzó effectek ellen, például a kill all units spellek ugyanúgy érik.",
+    "355.5.a"
+   ],
+   [
+    "Hogyan működik a Flow?",
+    "A trashből 2 Energyért játszható ki, ez a base cost helyére lép, utána banishelődik. Az időzítés ugyanaz.",
+    "829.1.b,829.1.c.1,829.1.b.2"
+   ]
+  ],
+  "Twilight Step": [
+   [
+    "Kit mozgathatok?",
+    "Legfeljebb 3 Mightú unitot, bárkiét, enemy unitot is.",
+    "355.10,355.9.b"
+   ],
+   [
+    "Hova mozgathatom?",
+    "Bármely másik locationre, ahol a unit jelen lehet. Battlefieldről battlefieldre is mehet, Ganking nélkül.",
+    "355.4,355.4.a"
+   ],
+   [
+    "Mi van, ha a Might a resolve-ra 3 fölé nő?",
+    "A target illegális lesz, a Move elmarad.",
+    "359.3.e.2,710"
+   ],
+   [
+    "Mi történik, ha nem a controllere kontrollálta battlefieldre érkezik?",
+    "Contested lesz, és a when I move triggerek lefutnak.",
+    "190.3.a.1,421.1"
+   ]
+  ],
+  "Twisted Fate, Gambler": [
+   [
+    "Ki választja a módot, és mikor nevezem meg a targetet?",
+    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. A módot a rune domainje dönti el, de hogy a targetet előre meg kell-e nevezni, nem tisztázott.",
+    "355.3"
+   ],
+   [
+    "Mi történik Chaos rune-nál?",
+    "Semmi. A Rune Deckben csak a legended Domain Identity-jébe tartozó rune lehet, ez a lap Chaos, ezért Chaos rune-nál nincs mód.",
+    "103.4.a.1,103.2.b.3"
+   ],
+   [
+    "Kit érint a Fury és az Order mód?",
+    "A Fury csak az ott lévő enemy unitokat. Az Order stunja bármelyik enemy unitra mehet, base-ben lévőre is.",
+    "355.9.b"
+   ],
+   [
+    "Mi van, ha üres a Rune Deck?",
+    "Nincs mit felfedni, az effect nem csinál semmit.",
+    "055"
+   ]
+  ],
+  "Udyr, Wildman": [
+   [
+    "Mikor használható, és mi a cost?",
+    "Csak a saját Main Phase-edben, showdownon kívül. A cost Udyr saját buffjának elköltése, buff nélkül nem aktiválható.",
+    "381.1,702.2.b,702.2.b.1"
+   ],
+   [
+    "Mikor választom a módot?",
+    "Aktiváláskor, nem resolve-kor. Egy körben minden mód csak egyszer választható.",
+    "355.3"
+   ],
+   [
+    "Kit célozhat a sebző és a stunoló mód?",
+    "Battlefielden lévő unitot, bárkiét. Base-ben álló unit nem választható.",
+    "355.9.b"
+   ],
+   [
+    "Mi van, ha counterelik az abilityt?",
+    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. A buff elveszett, de hogy a mód chosen this turn-nek számít-e, nem tisztázott.",
+    "426.1.c"
+   ]
+  ],
+  "Ultrasoft Poro": [
+   [
+    "Mikor használható?",
+    "Csak ha a Poro battlefielden áll, és csak a saját Main Phase-edben, showdownon kívül.",
+    "377.2.b,381.1"
+   ],
+   [
+    "Hova kerülnek a Bird tokenek?",
+    "A base-edbe vagy általad kontrollált battlefieldre, külön-külön is, exhausted.",
+    "355.2.a,187.7"
+   ],
+   [
+    "Használható a battlefieldre lépés körében?",
+    "Csak ha valami readyvé teszi, mert a Standard Move is exhaustolja a unitot.",
+    "415.4,144.2"
+   ]
+  ],
+  "Unchecked Power": [
+   [
+    "Kit exhaustol?",
+    "Minden friendly unitodat, a csapattársaidét is, bárhol. Az enemy unitokat nem.",
+    "740.1.a,355.5.a"
+   ],
+   [
+    "Kit sebez a 12 damage?",
+    "Minden battlefielden álló unitot, a sajátjaidat is. A base-ben lévők megmenekülnek.",
+    "355.5.a"
+   ],
+   [
+    "Véd ellene a Deflect?",
+    "Nem, nincs target. Deflect és can't be chosen nem véd.",
+    "355.10.d"
+   ],
+   [
+    "Mi lesz a battlefielddel, ha minden unit meghal rajta?",
+    "A controllere a cleanupban elveszíti azt.",
+    "190.4.c"
+   ]
+  ],
+  "Undercover Agent": [
+   [
+    "Mikor triggerel?",
+    "Amikor meghal. Nem triggerel, ha banish, kézbe vétel, recycle vagy replacement effect miatt nem a trashbe kerül.",
+    "808.1.d.1,428.2.a"
+   ],
+   [
+    "Mennyit dobok?",
+    "2-t. Egy lappal azt az egyet, üres kézzel semmit, a 2 húzás mindenképp megtörténik.",
+    "423.4"
+   ],
+   [
+    "Eldobhatom a most húzott lapokat?",
+    "Nem, a discard a húzás előtt történik, és te választod, mit dobsz.",
+    "423.1.a"
+   ],
+   [
+    "Reagálhatok a triggerre?",
+    "Igen, chainre kerül, mielőtt a unit a trashbe menne, és akkor is resolve-ol, ha a unit már nincs a boardon.",
+    "808.1.c,808.1.d.2"
+   ]
+  ],
+  "Undertitan": [
+   [
+    "Kit erősít a play effect?",
+    "Minden másik unitodat +2 Mighttal, bárhol vannak. Nincs target, Deflect és can't be chosen nem számít.",
+    "355.5.a,355.10.d"
+   ],
+   [
+    "Mikor kapok 2 Energyt?",
+    "Ha egy hatás felfedi a deckből. Csak a reveal váltja ki, a look at, a Predict, a draw, a Burn és a banish nem.",
+    "425.1,437.1,441.1"
+   ],
+   [
+    "Meddig használhatom az Energyt?",
+    "A Rune Poolba megy, és a következő Main Phase elején vagy a kör végén elvész. Beginning Phase-ben Reaction lap nélkül nem tudod elkölteni.",
+    "316.3,167"
+   ],
+   [
+    "Megállítja a triggert az Undertitan eltávolítása?",
+    "Nem, a trigger a chainen van, reagálni lehet rá, de az eltávolítás nem állítja meg.",
+    "383.4.a.2,355.5.b"
+   ]
+  ],
+  "Undying Legion": [
+   [
+    "Mikor játszhatom ki a trashből?",
+    "Ha ebben a körben már finalizáltál egy másik kártyát. A counterelt lap is számít.",
+    "812.1.c,420.4.b"
+   ],
+   [
+    "Mennyibe kerül a trashből?",
+    "3 Energy és 1 Fury Power, kézből továbbra is 3 Energy.",
+    "356.1.a"
+   ],
+   [
+    "Változik az időzítés?",
+    "Nem: a saját körödben, showdownon kívül, base-be vagy általad kontrollált battlefieldre játszható.",
+    "420.1.a,308.1.a"
+   ],
+   [
+    "Hányszor jöhet vissza?",
+    "Korlátlanul: minden halála után újra kijátszható, ha a Legion feltétel teljesül és ki tudod fizetni.",
+    "429.2"
+   ]
+  ],
+  "Undying Loyalty": [
+   [
+    "Milyen unitot játszhatok ki vele?",
+    "A trashedből egyet, amelynek nyomtatott costja legfeljebb 2 Energy és 1 Power. A unit target.",
+    "355.10.a,355.8,206"
+   ],
+   [
+    "Mikor lesz olcsóbb a spell?",
+    "Ha a választott unit Bird, Cat, Dog vagy Poro tagű: az Energy cost 2-ről 0-ra csökken, az 1 Order Power marad.",
+    "355.5,356.4,143.1.b"
+   ],
+   [
+    "Mit kell fizetni a unitért?",
+    "Semmit, az Energy és a Power cost is nulla. Optional additional cost ettől még kifizethető.",
+    "356.1.b.1,356.1.b.3"
+   ],
+   [
+    "Mikor játszható ki?",
+    "Csak a saját körödben, showdownon kívül, mert nincs rajta Action vagy Reaction.",
+    "155"
+   ]
+  ],
+  "Unlicensed Armory": [
+   [
+    "Mikor kell felrakni a védelmet?",
+    "Előre: az ability csak a saját Main Phase-edben, showdownon kívül aktiválható, és csak arra a körre szól.",
+    "151.2"
+   ],
+   [
+    "Mit kell fizetni?",
+    "Cost egy lap discardolása és exhaust, üres kézzel nem aktiválható. A Fury Powert akkor fizeted, amikor a unit meghalna, ha nem fizetsz, meghal.",
+    "423.3,415.4,445.2"
+   ],
+   [
+    "Meddig él a védelem?",
+    "A unit következő halálára abban a körben, egyszer. Akkor is él, ha az Armory közben elhagyja a boardot.",
+    "391.3,393"
+   ],
+   [
+    "Mi lesz a megmentett unittal?",
+    "Nem hal meg, ezért Deathknell és when dies triggerek nem futnak le. Damage nélkül, exhausted kerül a base-be, ez nem Move.",
+    "383.2.c.3.a,808.1.d.1,419.1,458.1"
+   ]
+  ],
+  "Unsung Hero": [
+   [
+    "Mikor húzok 2 lapot?",
+    "Ha a halálakor legalább 5 Mightja volt.",
+    "808.1.c.2,708"
+   ],
+   [
+    "Mi számít bele a Mightba?",
+    "Az aktuális Might: buff, Equipment, this turn bónusz, Assault, Shield. A nyomtatott 2 Mighthoz legalább +3 kell.",
+    "710,703"
+   ],
+   [
+    "Számít, ha combatban ölik meg?",
+    "Igen, a damage nem csökkenti a Mightot, így a felhúzott Hero Mighty-ként hal meg.",
+    "142.4.b"
+   ],
+   [
+    "Mikor nem triggerel?",
+    "Ha nem a trashbe kerül: banish, kézbe vétel, recycle, vagy ha a halálát replacement effect lecseréli.",
+    "808.1.d.1,428.2.a"
+   ]
+  ],
+  "Unyielding Spirit": [
+   [
+    "Mit előz meg?",
+    "A kör végéig minden spell és ability damage-et, minden játékos unitjain. A combat damage-et nem, mert annak forrása a unit.",
+    "355.5.a,438.1.b.1.b,438.3.c,418.6.c"
+   ],
+   [
+    "Mikor játszom ki?",
+    "Reactionként, a damage spellre válaszul, hogy előbb resolve-oljon. Csak a resolve utáni damage-re hat.",
+    "813.1.c.1"
+   ],
+   [
+    "Megelőzi azt a damage-et, amit egy spell egy unit nevében oszt?",
+    "Nyitott kérdés, a Core Rules nem dönti el, versenyen a judge dönt. Ha a spell egy unitot nevez meg a damage forrásának, nem tisztázott, hogy ez spell damage-nek számít-e.",
+    "418.6.b.3"
+   ],
+   [
+    "Triggerel a megelőzött damage?",
+    "Nem, a megelőzött damage nem számít dealeltnek, a when I take damage triggerek nem futnak le.",
+    "438.4"
+   ]
+  ],
+  "Up from the Deep": [
+   [
+    "Hova kerülnek a tokenek?",
+    "Külön-külön a base-edbe vagy egy általad kontrollált battlefieldre, exhausted. Nincs target.",
+    "185.2.a,355.2.a,143.4"
+   ],
+   [
+    "Hányszor triggerelnek a play hatások?",
+    "Kétszer, mert két külön unit kijátszás történik.",
+    "420.4.a"
+   ],
+   [
+    "Mit jelent a from Bilgewater?",
+    "A tokenen lévő taget, nem zónát jelöl.",
+    "187.10"
+   ],
+   [
+    "Hogyan működik a Flow?",
+    "A trashből 3 Energyért játszható ki, ez a base cost helyére lép, utána banishelődik. Az időzítés ugyanaz.",
+    "829.1.b,829.1.c.1,829.1.b.2"
+   ]
+  ],
+  "Upstage Comedy": [
+   [
+    "Kit readyzhatok?",
+    "Bármelyik unitot, sajátot vagy enemyt. Már ready uniton nem csinál semmit.",
+    "355.7,416.1.c"
+   ],
+   [
+    "Mikor játszható ki?",
+    "Csak a saját körödben, Open State-ben, showdown és combat közben nem.",
+    "155"
+   ],
+   [
+    "Mit ad a Repeat?",
+    "2 Energyért két különböző unitot readyzhatsz, ugyanarra kétszer nincs értelme.",
+    "820.2.a"
+   ],
+   [
+    "Mozoghat újra a readyzett unit?",
+    "Igen, a Standard Move costja az exhaust, ezért még egyszer mozoghat.",
+    "421.3.a"
+   ]
+  ],
+  "Valley of Idols": [
+   [
+    "Ki dönt a buffról?",
+    "Az, aki a unitot ide kijátszotta, a they may miatt ő kontrollálja a triggert.",
+    "190.6.c"
+   ],
+   [
+    "Mikor triggerel, és mikor fizetek?",
+    "A kijátszás befejezése után, amikor a unit már a boardon van. Az 1 Energy a trigger base costja, finalizáláskor fizeted.",
+    "420.4.a,383.3.b,383.3.b.1"
+   ],
+   [
+    "Mi van, ha a unitnak már van buffja?",
+    "Nem kap másodikat, a kifizetett Energy elveszik.",
+    "427.1.b.1"
+   ],
+   [
+    "Működik tokenre?",
+    "Igen, nincs non-token megkötés.",
+    "185.2.a"
+   ]
+  ],
+  "Vanguard Armory": [
+   [
+    "Hova kerülnek a Recruitok?",
+    "Külön-külön a base-edbe vagy általad kontrollált battlefieldre, exhausted.",
+    "355.2.a,187.1,185.2.d"
+   ],
+   [
+    "Hányszor használható egy körben?",
+    "Ready-zó effekt nélkül egyszer, mert exhaust a cost. Ready-zó effekttel (például Veiled Temple) újra.",
+    "151.2,415.4"
+   ],
+   [
+    "Triggerelnek a when you play a unit hatások?",
+    "Igen, mind a háromra lefutnak, mert a tokeneket kijátszod.",
+    "185.2.a"
+   ],
+   [
+    "Mikor használható?",
+    "Csak a saját Main Phase-edben, showdownon kívül.",
+    "151.2"
+   ]
+  ]
+ },
+ "checked": 60
+}
