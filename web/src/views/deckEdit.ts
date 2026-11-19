@@ -11,7 +11,9 @@ const secKey = (s: string) => s.toLowerCase().replace(/[^a-z]/g, '').replace(/s$
 export const pn = (s: string) => s.toLowerCase().replace(/\([^)]*\)/g, ' ').replace(/[^a-z0-9]+/g, ' ').trim();
 export function priceOf(c: any, P: Prices | null) {
   if (!P || !c) return null;
-  return P.cards[pn(c.n)] || P.cards[pn((c.a || []).find((a: string) => a.includes(',')) || '')] || null;
+  // A Signature lapokat a Cardmarket a champion neve nélkül listázza (Bullet Time, Miss Fortune -> Bullet Time).
+  return P.cards[pn(c.n)] || P.cards[pn((c.a || []).find((a: string) => a.includes(',')) || '')]
+    || (c.t !== 'Unit' && c.t !== 'Legend' && c.n.includes(',') ? P.cards[pn(c.n.split(',')[0])] : null) || null;
 }
 
 export function listName(c: any) {
