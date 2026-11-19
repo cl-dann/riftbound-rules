@@ -85,10 +85,18 @@ export function glossify(html,seen){
   if(!TRE)return html;seen=seen||new Set();
   return html.replace(/(<[^>]+>)|([^<]+)/g,(m,tag,txt)=>tag?tag:txt.replace(TRE,w=>{const x=termOf(w);if(!x||NOHL.has(x.t)||seen.has(x.t))return w;seen.add(x.t);return '<span class="gl" tabindex="0" data-t="'+TERMS.indexOf(x)+'">'+w+'</span>';}));
 }
+const refLinks=r=>r.split(',').map(x=>x.trim()).filter(Boolean).map(x=>'<a href="#szabalyok" data-ref="'+x+'">'+x+'</a>').join('');
+export function qaHTML(c){
+  if(!c.qa||!c.qa.length)return '';
+  const seen=new Set();
+  return '<h3>Gyakori kérdések<span class="n">'+c.qa.length+' kérdés, nem hivatalos ruling</span></h3><dl class="qa">'+c.qa.map(x=>'<dt>'+esc(x[0])+'</dt><dd>'+glossify(esc(x[1]),seen)+(x[2]?'<span class="r">'+refLinks(x[2])+'</span>':'')+'</dd>').join('')+'</dl>';
+}
 export function notesHTML(c){
   if(!c.nt)return '<h3>Hogyan érinti ezt a lapot</h3><p class="note">Ehhez a laphoz még nincs kézzel írt, lap-specifikus magyarázat. Lent a rá vonatkozó szabályszakaszok teljes szövege olvasható.</p>';
   const seen=new Set();
-  return '<h3>Hogyan érinti ezt a lapot<span class="n">'+c.nt.length+' pont, nem hivatalos ruling</span></h3><div class="ntwrap"><table class="nt">'+c.nt.map(n=>'<tr><td class="r">'+n[0].split(',').map(r=>'<a href="#szabalyok" data-ref="'+r.trim()+'">'+r.trim()+'</a>').join('')+'</td><td>'+glossify(esc(n[2]),seen)+'</td><td class="f"><span class="fl f'+n[1]+'" title="'+FLT[n[1]]+'">'+FL[n[1]]+'</span></td></tr>').join('')+'</table></div>';
+  const body='<div class="ntwrap"><table class="nt">'+c.nt.map(n=>'<tr><td class="r">'+n[0].split(',').map(r=>'<a href="#szabalyok" data-ref="'+r.trim()+'">'+r.trim()+'</a>').join('')+'</td><td>'+glossify(esc(n[2]),seen)+'</td><td class="f"><span class="fl f'+n[1]+'" title="'+FLT[n[1]]+'">'+FL[n[1]]+'</span></td></tr>').join('')+'</table></div>';
+  if(c.qa&&c.qa.length)return '<details class="tp ntd"><summary><span class="tt">Szabályi részletek</span><span class="why">'+c.nt.length+' pont szabályszámmal, judge szintű pontosítások</span></summary>'+body+'</details>';
+  return '<h3>Hogyan érinti ezt a lapot<span class="n">'+c.nt.length+' pont, nem hivatalos ruling</span></h3>'+body;
 }
 export const GENERIC_TAGS=new Set(['Equipment']);
 export function similar(c,n){
@@ -110,7 +118,7 @@ export function similarHTML(c){
   return '<h3>Hasonló lapok<span class="n">közös kulcsszó, tag, típus és hatás alapján</span></h3><div class="simgrid">'+L.map(([s,o,w])=>'<button class="simc" data-sim="'+esc(o.n)+'"><b>'+domDots(o)+' '+esc(o.n)+'</b><span>'+esc(typeLine(o))+(o.e!=null?' · Energy '+o.e:'')+'</span>'+(w.length?'<span class="w">'+w.map(esc).join(', ')+'</span>':'')+'</button>').join('')+'</div>';
 }
 export function cardRulesHTML(c){
-  let h=notesHTML(c)+similarHTML(c);
+  let h=qaHTML(c)+notesHTML(c)+similarHTML(c);
   if(c.ex&&c.ex.length){
     h+='<h3>A szabályzat név szerint említi<span class="n">'+c.ex.length+' példa</span></h3>';
     h+='<details class="tp"><summary><span class="rn">'+c.ex.slice(0,3).join(', ')+(c.ex.length>3?', ...':'')+'</span><span class="tt">Példák ezzel a kártyával</span><span class="why">a Core Rules példaszövegében szerepel a kártya neve</span></summary><div class="rules" data-ids="'+c.ex.join('|')+'" data-hl="'+esc(c.a[0])+'"></div></details>';

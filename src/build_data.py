@@ -189,6 +189,8 @@ for f in sorted(glob.glob('data/review/rv_*_out.json')):
     REV.update(json.load(open(f,encoding='utf-8')).get('fixes') or {})
 NP=json.load(open('data/audit/notes_patch.json',encoding='utf-8'))
 RF={}
+QA={}
+for f in sorted(glob.glob('data/audit/qa_*.json')): QA.update(json.load(open(f,encoding='utf-8')).get('qa') or {})
 for f in sorted(glob.glob('data/audit/r*_out.json'),key=lambda f:[int(x) for x in re.findall(r'\d+',f)]):
     for k,v in (json.load(open(f,encoding='utf-8')).get('fixes') or {}).items(): RF.setdefault(k,{}).update({x:y for x,y in v.items() if x in ('short','notes')})
 SA={}
@@ -252,6 +254,7 @@ for c in cards:
     for o,nw in NP.get(c['n'],[]):
         for x in c.get('nt',[]):
             if o in x[2] and nw not in x[2]: x[2]=x[2].replace(o,nw)
+    if c['n'] in QA and QA[c['n']]: c['qa']=[[q,a,str(r)] for q,a,r in QA[c['n']]]
     for k in ('_fn','_name'): del c[k]
 for t in T: del t['_t']
 cards.sort(key=lambda c:c['n'].lower())
@@ -289,7 +292,7 @@ def ok(ref):
     return ref in ids
 bad=[(n,r) for n,v in NOTES.items() for r,f,t in v for x in r.split(',') if not ok(x)]
 print('bad refs',bad)
-print('review fixes',len(REV)); print('short',sum('sh' in c for c in cards)); print('notes cards',sum('nt' in c for c in cards),'batch notes',len(BN),'of',len(NOTES),'unmatched',[n for n in NOTES if not any(c['n']==n for c in cards)])
+print('qa cards',sum('qa' in c for c in cards),'of',len(QA),'unmatched',[n for n in QA if not any(c['n']==n for c in cards)][:5]); print('review fixes',len(REV)); print('short',sum('sh' in c for c in cards)); print('notes cards',sum('nt' in c for c in cards),'batch notes',len(BN),'of',len(NOTES),'unmatched',[n for n in NOTES if not any(c['n']==n for c in cards)])
 import itertools
 alltxt=' '.join(t for v in NOTES.values() for r,f,t in v)
 print('dash check',[ch for ch in '\u2013\u2014' if ch in alltxt])

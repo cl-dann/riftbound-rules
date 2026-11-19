@@ -87,40 +87,6 @@ export function Blocks({ blocks }: { blocks: Block[] }) {
   );
 }
 
-function QuizBox({ ch, p, setP }: { ch: Chapter; p: Progress; setP: (p: Progress) => void }) {
-  const qs = ch.quiz || [];
-  const [ans, setAns] = useState<number[]>(() => p.quiz[ch.id] || []);
-  useEffect(() => setAns(p.quiz[ch.id] || []), [ch.id]);
-  if (!qs.length) return null;
-  const pick = (qi: number, oi: number) => {
-    if (ans[qi] != null) return;
-    const a = [...ans]; a[qi] = oi; setAns(a);
-    const np = { ...p, quiz: { ...p.quiz, [ch.id]: a } };
-    if (qs.every((_, k) => a[k] != null)) np.done = { ...np.done, [ch.id]: 1 };
-    setP(np);
-  };
-  const right = qs.filter((q, i) => ans[i] === q.correct).length;
-  const all = qs.every((_, i) => ans[i] != null);
-  return (
-    <div className="quiz">
-      <h3>Ellenőrizd magad <small>{all ? right + ' / ' + qs.length + ' helyes' : Object.keys(ans).length + ' / ' + qs.length}</small></h3>
-      {qs.map((q, qi) => (
-        <div key={qi} style={{ marginBottom: 14 }}>
-          <H as="p" t={(qi + 1) + '. ' + q.q} />
-          <div className="qopts">
-            {q.options.map((o, oi) => {
-              const st = ans[qi] == null ? '' : oi === q.correct ? 'ok' : oi === ans[qi] ? 'bad' : '';
-              return <button key={oi} className={st} disabled={ans[qi] != null} onClick={() => pick(qi, oi)}><H t={o} /></button>;
-            })}
-          </div>
-          {ans[qi] != null && <div className="qwhy"><H t={(ans[qi] === q.correct ? 'Helyes. ' : 'Nem egészen. ') + q.why} /></div>}
-        </div>
-      ))}
-      {all && <button className="btn sec sm" onClick={() => { setAns([]); const q = { ...p.quiz }; delete q[ch.id]; setP({ ...p, quiz: q }); }}><RotateCcw size={14} /> Újra</button>}
-    </div>
-  );
-}
-
 function ScenarioView({ s, p, setP, all }: { s: Scenario; p: Progress; setP: (p: Progress) => void; all: Scenario[] }) {
   const [i, setI] = useState(0);
   const [pick, setPick] = useState<Record<number, number>>({});
@@ -192,8 +158,7 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
   const ch = m && !m[1] ? chs.find((c) => c.id === m[2]) : undefined;
   const sc = m && m[1] ? L.scenarios.find((s) => s.id === m[2]) : undefined;
   const total = chs.length + L.scenarios.length;
-  const doneN = chs.filter((c) => p.done[c.id]).length + L.scenarios.filter((s) => p.scn[s.id]).length;
-  const firstOpen = chs.find((c) => !p.done[c.id]) || chs[0];
+    const firstOpen = chs[0];
 
   const side = (
     <aside className="panel learn-side">
@@ -202,11 +167,11 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
       {LEVELS.map(([lv, name]) => {
         const list = chs.filter((c) => c.level === lv);
         if (!list.length) return null;
-        return (<div key={lv}><h4>{name} <small>{list.filter((c) => p.done[c.id]).length} / {list.length}</small></h4>
+        return (<div key={lv}><h4>{name} <small>{list.length}</small></h4>
           <ol>{list.map((c) => (
-            <li key={c.id} className={p.done[c.id] ? 'done' : ''}>
+            <li key={c.id}>
               <a href={B + '/' + c.id} aria-current={ch?.id === c.id ? 'page' : undefined}>
-                <span className="num">{p.done[c.id] ? <Check size={13} /> : chs.indexOf(c) + 1}</span>{c.title}</a></li>))}</ol></div>);
+                <span className="num">{chs.indexOf(c) + 1}</span>{c.title}</a></li>))}</ol></div>);
       })}
       {!!L.scenarios.length && (<><h4>Szituációk <small>{L.scenarios.filter((s) => p.scn[s.id]).length} / {L.scenarios.length}</small></h4>
         <ol>{L.scenarios.map((s) => (
@@ -231,8 +196,6 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
         {ch.rules && <p className="note">Core Rules: <span dangerouslySetInnerHTML={{ __html: inline('{{' + ch.rules + '}}') }} /></p>}
         <div className="orn"><i /></div>
         <Blocks blocks={ch.blocks} />
-        {ch.level === 'halado' && <QuizBox ch={ch} p={p} setP={setP} />}
-        {(ch.level !== 'halado' || !(ch.quiz || []).length) && !p.done[ch.id] && <button className="btn sm" style={{ marginTop: 20 }} onClick={() => setP({ ...p, done: { ...p.done, [ch.id]: 1 } })}><Check size={14} /> Elolvastam</button>}
         <div className="pager">
           {prev ? <a href={B + '/' + prev.id}><small><ChevronLeft size={11} /> Előző</small><b>{prev.title}</b></a> : <span />}
           {next ? <a className="next" href={B + '/' + next.id}><small>Következő <ChevronRight size={11} /></small><b>{next.title}</b></a>
@@ -245,8 +208,8 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
       <div className="hero" style={{ margin: '-26px calc(-1 * clamp(16px, 4vw, 42px)) 18px' }}>
         <div className="crumb">{base === 'hogyan' ? 'How to Play' : 'Practice'}</div>
         <h2>{base === 'hogyan' ? 'How to Play' : 'Practice'}</h2>
-        <p>{base === 'hogyan' ? '10 fejezet a Core Rules alapján. A haladás ebben a böngészőben mentődik.' : 'Szituációk a pályán lépésenként, döntésekkel, plusz haladó leckék. A haladás ebben a böngészőben mentődik.'}</p>
-        <a className="btn hex" href={B + '/' + (firstOpen?.id || '')}>{doneN ? 'Folytatás' : 'Kezdés'}: {firstOpen?.title} <ChevronRight size={16} /></a>
+        <p>{base === 'hogyan' ? '10 fejezet a Core Rules alapján, tetszőleges sorrendben olvasható.' : 'Szituációk a pályán lépésenként, döntésekkel, plusz haladó leckék.'}</p>
+        <a className="btn hex" href={B + '/' + (firstOpen?.id || '')}>Kezdés: {firstOpen?.title} <ChevronRight size={16} /></a>
       </div>
       <div className="levels">
         {LEVELS.map(([lv, name, d]) => { const list = chs.filter((c) => c.level === lv); return list.length ? (
