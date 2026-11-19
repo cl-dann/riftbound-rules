@@ -76,3 +76,15 @@ test('Fogalomtár: játékmenet lépésábra és errata szűrés', async ({ page
   await page.fill('.errq', 'annie');
   await expect(page.locator('.errc:not([hidden])')).toHaveCount(1);
 });
+
+test('Mobil (390 px): egyik fül sem lóg ki vízszintesen', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await open(page, '#kartyak');
+  for (const t of ['kartyak', 'deck', 'szabalyok', 'chain', 'hogyan', 'tanulas', 'kezikonyv']) {
+    await page.goto('/#' + t);
+    if (t === 'chain') { await page.locator('#cb-ex').click(); await page.locator('#cb-run').click(); }
+    await page.waitForTimeout(400);
+    const ov = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    expect(ov, t).toBeLessThanOrEqual(1);
+  }
+});

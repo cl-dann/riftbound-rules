@@ -511,3 +511,9 @@ footer#foot { border-top: 0; }
 .cbc-res { margin-top: 14px; padding: 10px 12px; border-left: 3px solid var(--accent); background: rgba(200,170,110,.07); }
 .cbc-res > b { font-family: var(--f-head); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
 .cbc-foot { margin-top: 12px; font-size: 12.5px; }
+@media (max-width: 700px) {
+  nav.tabs { flex-wrap: wrap; row-gap: 0; }
+  nav.tabs a { font-size: 12px; letter-spacing: .06em; padding: 8px 9px 7px; }
+}
+.cols > * { min-width: 0; }
+@media (max-width: 700px) { #cb-steps input, #cb-steps select { min-width: 0; max-width: 100%; } #cb-steps .row2 { flex-wrap: wrap; } }
