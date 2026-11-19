@@ -21,7 +21,7 @@
 
 ## Döntés: menüszerepek (2026-11-15)
 - How to Play (#hogyan): végigolvasós, sorrendben haladó 10 fejezet, fejezetvégi kvíz, haladásjelző, interaktív pálya a 2. fejezetben.
-- Tanulás (#tanulas): gyakorlás: szituációk, haladó leckék (Tempo, Decképítés, Showdown); később kártyakvíz (Rift Recall mintára) és napi feladvány.
+- Tanulás (#tanulas): gyakorlás: szituációk, haladó leckék (Tempo, Decképítés, Showdown).
 - Kézikönyv (#kezikonyv): kereshető referencia: Fogalmak (a tooltipek forrása), Kulcsszavak, Játékmenet ábrák, Szabályváltozások és errata összefoglaló. A "Tudástár" név megszűnt.
 
 ## Kérés (2026-11-15): kérdés-válasz magyarázat minden lapnál, és logika a Chainben
