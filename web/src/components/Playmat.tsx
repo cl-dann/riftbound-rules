@@ -34,6 +34,7 @@ const STATUS: Record<string, [string, string, string]> = {
   temporary: ['Temporary', 'tmp', 'Temporary: a köröd elején megsemmisül (Temporary keyword).'],
   equipped: ['Equipped', 'eq', 'Equipped: Equipment van rajta csatolva, a gear bónusza a unitra hat.'],
   new: ['Új', 'new', 'Ebben a lépésben került ide.'],
+  mistarget: ['Mistarget', 'mt', 'Mistarget: a resolve-oló chain elem célpontja volt, de már nem legális célpont, ezért rá a hatás elmarad (359.3.e.9).'],
   dying: ['Meghal', 'die', 'Ebben a lépésben meghal: a damage elérte a Mightját (143.2.b), a trashbe kerül.'],
 };
 export const PickCtx = createContext<(u: PUnit, side: 'me' | 'opp', where: string) => void>(() => {});
