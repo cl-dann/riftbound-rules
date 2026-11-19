@@ -820,3 +820,4 @@ h2.psec small { font-family: var(--f-mono); font-size: 13px; color: var(--muted)
   .scn .pm2-slot .pm-card, .scn .pm2-ghost { width: 56px; }
   .scn .pm2-field { padding: 26px 6px 30px; }
 }
+.sum .chip.price { border-color: var(--accent); font-size: 15px; } .sum .chip.price b { font-family: var(--f-mono); }

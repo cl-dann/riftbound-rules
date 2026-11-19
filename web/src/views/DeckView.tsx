@@ -8,10 +8,15 @@ import { Html } from '../components/Html';
 import { loadFonts } from '../data';
 import { editDeck, eur, legendOf, priceOf, searchCards, targetSec, type Prices } from './deckEdit';
 
+function deckTotals(P: Prices | null) {
+  let a1 = 0, a7 = 0, n = 0; const miss: string[] = [];
+  if (P) DECK.forEach((s: any) => { if (/side/i.test(s.name)) return; s.rows.forEach((r: any) => { if (!r.card) return; const p = priceOf(r.card, P); n += r.qty; if (!p) { miss.push(r.card.n); return; } a1 += r.qty * (p.a1 ?? p.a7 ?? 0); a7 += r.qty * (p.a7 ?? p.a1 ?? 0); }); });
+  return { a1, a7, n, miss };
+}
+
 function priceHTML(P: Prices | null): string {
-  if (!P) return '<div class="prices"><h3>Cardmarket ár</h3><p class="note">Az árak még nem érhetők el. A napi frissítés a Cardmarket publikus price guide letöltéséből tölti be őket.</p></div>';
-  let a1 = 0, a7 = 0, miss: string[] = [], n = 0;
-  DECK.forEach((s: any) => { if (/side/i.test(s.name)) return; s.rows.forEach((r: any) => { if (!r.card) return; const p = priceOf(r.card, P); n += r.qty; if (!p) { miss.push(r.card.n); return; } a1 += r.qty * (p.a1 ?? p.a7 ?? 0); a7 += r.qty * (p.a7 ?? p.a1 ?? 0); }); });
+  if (!P) return '<div class="prices"><h3>Cardmarket ár</h3><p class="note">Az árak még nem érhetők el. A Cardmarket publikus árlistájából töltődnek be, a frissítés dátuma a fejlécben látszik.</p></div>';
+  const { a1, a7, n, miss } = deckTotals(P);
   return '<div class="prices"><h3>Cardmarket ár<span class="n">' + n + ' lap, sideboard nélkül, névenként a legolcsóbb nyomat</span></h3><div class="ptot"><div><span>1 napos átlag</span><b>' + eur(a1) + '</b></div><div><span>7 napos átlag</span><b>' + eur(a7) + '</b></div></div><p class="note">Frissítve: ' + esc(P.updated.slice(0, 10)) + '. A listaár naponta változik, a pontos ár a Cardmarket termékoldalán ellenőrizhető.' + (miss.length ? ' Ár nélkül: ' + [...new Set(miss)].map(esc).join(', ') + '.' : '') + '</p></div>';
 }
 
@@ -28,7 +33,8 @@ function deckHTML(P: Prices | null): string {
   Object.keys(tot).forEach((n) => { if (tot[n] > 3) warns.push('<b>' + esc(n) + '</b>: ' + tot[n] + ' példány a Main Deckben (Champion zónával együtt). A 103.3.b szabály névenként legfeljebb 3 példányt enged.'); });
   const uniq = new Set<any>(); DECK.forEach((s: any) => s.rows.forEach((r: any) => r.card && uniq.add(r.card)));
   const ec = [...uniq].filter((c) => c.err != null).length;
-  let h = '<div class="panel pad"><div class="sum">' + DECK.map((s: any) => '<span class="chip">' + esc(s.name) + ' <b>' + s.rows.reduce((a: number, r: any) => a + r.qty, 0) + '</b></span>').join('')
+  const T = deckTotals(P);
+  let h = '<div class="panel pad"><div class="sum">' + (P && T.n ? '<span class="chip price" title="Cardmarket, névenként a legolcsóbb nyomat, sideboard nélkül. 1 napos átlag: ' + eur(T.a1) + '">Deck ár <b>' + eur(T.a7) + '</b> <small>7 napos átlag' + (T.miss.length ? ', ' + new Set(T.miss).size + ' lap ár nélkül' : '') + '</small></span>' : '') + DECK.map((s: any) => '<span class="chip">' + esc(s.name) + ' <b>' + s.rows.reduce((a: number, r: any) => a + r.qty, 0) + '</b></span>').join('')
     + '<span class="chip okc">' + uniq.size + ' egyedi kártya</span>' + (ec ? '<span class="chip err">' + ec + ' kártyán errata</span>' : '') + '</div>';
   if (warns.length) h += '<ul class="warns">' + warns.map((w) => '<li>' + w + '</li>').join('') + '</ul>';
   h += legalityHTML() + priceHTML(P) + curveHTML() + interactionHTML();
