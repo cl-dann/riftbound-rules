@@ -1,0 +1,72 @@
+{
+ "fixes": {
+  "Applied Researchers": {
+   "notes": [
+    [
+     "827.1.c.1,381.1",
+     0,
+     "Empower [3]: csak a saját Main Phase-edben, Neutral Open State-ben (showdownon kívül), és csak ha még nem Empowered."
+    ],
+    [
+     "356.4.e",
+     0,
+     "A \"minimum of [1]\" csak erre a kedvezményre vonatkozik. Más kedvezménnyel a spell Energy cost-ja 1 alá is mehet, ha azt alkalmazod később."
+    ],
+    [
+     "356.4.d.1",
+     1,
+     "A kedvezmények sorrendjét te választod. Előbb a Researchers kedvezményét érdemes alkalmazni, utána a minimum nélkülit."
+    ],
+    [
+     "356.6",
+     1,
+     "Az [A] rész a spell Power costját csökkenti 1-gyel, 0 alá nem. Power cost nélküli spellnél csak az Energy rész számít."
+    ],
+    [
+     "365.1",
+     1,
+     "Minden spelledre hat, amíg a Researchers Empowered és a boardon van. Unitra, gearre és abilityre nem."
+    ],
+    [
+     "206",
+     0,
+     "Más effectek a spell nyomtatott costját látják, nem a csökkentettet."
+    ]
+   ],
+   "why": "A note 1 szövege elírt volt (duplán szerepelt a 'Neutral' és a '(showdownon kívül)'); a 827.1.c.1 és 381.1 szerinti tartalom változatlan."
+  },
+  "Frostcoat Mother": {
+   "notes": [
+    [
+     "827.1.c.3,356.4.g",
+     0,
+     "Az Empower cost kedvezményét az ability Determine Total Cost lépésében nézi a játék, az akkor kontrollált rune-ok száma alapján. Az exhausted rune is számít."
+    ],
+    [
+     "356.6",
+     0,
+     "12 rune-nál az Empower ingyenes, 0 alá nem mehet."
+    ],
+    [
+     "827.1.c.3,206.1",
+     1,
+     "A rune-onkénti csökkentés az Empower ability saját szövege, ezért a 827.1.c.3 szerint bármilyen célú Empower cost vizsgálatnál beleszámít. Ez a 206.1 általános (base cost) szabálya alól kivétel, tehát a costot vizsgáló effectek a csökkentett értéket látják, nem a puszta 12-t."
+    ],
+    [
+     "381.1",
+     0,
+     "Csak a saját Main Phase-edben, Neutral Open State-ben (showdownon kívül) aktiválható, és csak ha még nem Empowered."
+    ],
+    [
+     "828.1.c,443.1,142.4.b",
+     1,
+     "A +3 Might addig tart, amíg Empowered. Ha disempowerelik, a Might visszaesik, és egy sebzett unit meghal, ha a rajta lévő damage eléri az új Mightot."
+    ]
+   ],
+   "why": "A note 4 szövege elírt volt (duplán szerepelt a 'Neutral' és a '(showdownon kívül)'); a 381.1 szerinti tartalom változatlan."
+  }
+ },
+ "checked": 29,
+ "data_issues": [],
+ "open": []
+}

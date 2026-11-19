@@ -251,7 +251,7 @@ for c in cards:
         if rf.get('short'): c['sh']=rf['short'].replace('\u2014',',').replace('\u2013','-')
     for o,nw in NP.get(c['n'],[]):
         for x in c.get('nt',[]):
-            if o in x[2]: x[2]=x[2].replace(o,nw)
+            if o in x[2] and nw not in x[2]: x[2]=x[2].replace(o,nw)
     for k in ('_fn','_name'): del c[k]
 for t in T: del t['_t']
 cards.sort(key=lambda c:c['n'].lower())

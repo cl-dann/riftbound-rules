@@ -1,0 +1,80 @@
+{
+ "fixes": {
+  "Risen Altar": {
+   "notes": [
+    [
+     "827.1.c.3",
+     0,
+     "Az Empower costot módosító szöveget figyelembe kell venni, amikor a cost bármilyen okból számít."
+    ],
+    [
+     "356.4.c",
+     1,
+     "A kedvezmény a cost egy összetevőjére szól: választhatsz, hogy 1 Energyt vagy 1 Powert engedsz el, ha az Empower costban mindkettő van."
+    ],
+    [
+     "356.6",
+     0,
+     "A cost 0 alá nem csökkenhet."
+    ],
+    [
+     "356.4.f.1",
+     1,
+     "Egy \"[A] less\" csökkentés a domainhez kötött [C] Power costot is csökkenti: a 356.4.f.1 példájában a \"cost [A] less\" hatás a Clockwork Keeper [C] additional costját 0-ra viszi. Így az \"Empower [1] or [C]\" típusú costnál a [C] rész is ingyenes lehet."
+    ],
+    [
+     "190.6.d,827.1.a",
+     1,
+     "Csak a battlefield controllerének itt lévő unitjaira vonatkozik. A legend Empowerje és a máshol álló unitok nem kapják."
+    ],
+    [
+     "827.1.c.1,381",
+     0,
+     "Az időzítés nem változik: az Empower csak nem Empowered uniton, a saját Main Phase-edben, Neutral Open State-ben (showdownon kívül) aktiválható."
+    ]
+   ],
+   "why": "A 3. pont tényként állította, hogy az \"Empower [1] or [C]\" costnál bármelyik opció ingyenes lesz, de azt, hogy a [C] (domainhez kötött) Power cost csökken-e [A]-val, a Core Rules nem mondja ki (lásd 821.1.c.3 és a Riven, Shattered / Sentinel Adept nyitott kérdése). Szétbontva: 356.6 (0 alá nem megy, flag 0) és nyitott kérdés (flag 2)."
+  },
+  "Yone, Blademaster": {
+   "notes": [
+    [
+     "170.11.b,170.11.c",
+     1,
+     "Az errata \"open\" helyett \"uncontrolled\" battlefieldet ír. Az open üres és kontroll nélküli, az uncontrolled csak kontroll nélküli: olyan battlefield elfoglalása is számít, ahol álltak unitok, de senki sem kontrollálta."
+    ],
+    [
+     "383.4.c.2.a",
+     0,
+     "Conquer effect: csak akkor triggerel, ha Yone ott van a battlefielden, amikor conquerelsz."
+    ],
+    [
+     "355.9.b,355.8",
+     0,
+     "A target csak base-ben álló enemy unit lehet. Ha nincs ilyen, a trigger chainre kerülve rögtön le is kerül róla (403.4), így nem fut le."
+    ],
+    [
+     "710",
+     0,
+     "A sebzés Yone resolve-kori aktuális Mightja, a csatolt Equipment Might bonusával együtt."
+    ],
+    [
+     "359.3.e.12",
+     0,
+     "Ha Yone a resolve előtt elhagyja a boardot, a Mightja null, a sebzés ignorálódik."
+    ],
+    [
+     "821.1.c,821.1.c.3",
+     0,
+     "[Weaponmaster]: kijátszáskor egy általad kontrollált Equipment Equip costját [A]-val olcsóbban kifizetve Yone-ra csatolhatod, akár egy másik unitról áthelyezve is. Ha az Equip costban nincs [A], a cost nem csökken, teljes áron fizeted (821.1.c.3). Hogy a domainhez kötött [C] Power cost [A]-t tartalmazónak számít-e, a Core Rules nem mondja ki."
+    ]
+   ],
+   "why": "A Weaponmaster pont tényként állította, hogy a [C] Equip cost nem csökken (\"például [C]\"), de a Core Rules (821.1.c.3, 135.2.e.6) ezt nem mondja ki; a testvérlapoknál ez nyitott kérdés. A példát kivettem, és jeleztem, hogy ez nem eldöntött."
+  }
+ },
+ "checked": 27,
+ "data_issues": [],
+ "open": [
+  "Risen Altar: a [C] Power cost csökkenthető-e az [A] kedvezménnyel (nem eldöntött, flag 2 note-ban jelölve).",
+  "Yone, Blademaster / Veteran Poro: a shortban az Equip cost [A]-csökkentése ugyanezen okból nem teljesen egyértelmű ([C] esete); a short nem állít konkrétumot, nem módosítottam."
+ ]
+}
