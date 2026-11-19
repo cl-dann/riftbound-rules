@@ -36,6 +36,91 @@ def find_game():
             return g, p
     return None, None
 
+RAW = os.path.join(os.path.dirname(__file__), '..', '..', 'src', 'data', 'cards.json')
+
+
+def prow(r, pid):
+    """Egy Cardmarket termék árai: normál és foil, 1 és 7 napos átlag."""
+    return {'a1': r.get('avg1'), 'a7': r.get('avg7'), 'f1': r.get('avg1-foil'), 'f7': r.get('avg7-foil'), 'id': pid}
+
+
+def numkey(code):
+    """Nyomatok sorrendje egy szetten belül: alapszám, majd betűs (alt art), majd egyéb (overnumber, signature)."""
+    m = re.match(r'^[a-z]+-(?:([a-z]+)(\d+)|(\d+))([a-z]*)(.*)$', code)
+    if not m:
+        return (9, code)
+    pre = m.group(1) or ''
+    num = int(m.group(2) or m.group(3))
+    return (1 if pre else 0, num, len(m.group(4)) + (2 if m.group(5).count('-') > 1 else 0), code)
+
+
+def printings(prods, byid):
+    """A Cardmarket termékek párosítása a saját nyomatainkkal.
+
+    A Cardmarket adatban a nyomat típusa (alap, Showcase, overnumber) nem szerepel, csak a
+    kiadás azonosítója. Ezért: 1) a Cardmarket kiadásokat szavazással a szettjeinkhez rendeljük
+    (azonos nevű lapok alapján); 2) szetten belül a saját nyomatainkat gyűjtői szám szerint, a
+    Cardmarket termékeket idProduct szerint rendezzük, és csak akkor párosítunk, ha a darabszám
+    egyezik. Ami nem párosítható, az 'ex' alá kerül kiadás szerint, típuscímke nélkül.
+    """
+    raw = json.load(open(RAW, encoding='utf-8'))
+    ours = {}
+    for c in raw:
+        if c.get('cardType') == 'Token':
+            continue
+        ours.setdefault(pn(c['fullName']), []).append(c)
+    votes = {}
+    for p in prods['products']:
+        cs = ours.get(pn(p.get('name', '')))
+        if not cs:
+            continue
+        sets = {c['setCode'] for c in cs}
+        if len(sets) == 1:
+            v = votes.setdefault(p['idExpansion'], {})
+            s = next(iter(sets))
+            v[s] = v.get(s, 0) + 1
+    emap = {}
+    for e, v in votes.items():
+        s, n = max(v.items(), key=lambda x: x[1])
+        if n >= 3 and n >= 0.8 * sum(v.values()):
+            emap[e] = s
+    # szettenként a fő kiadás: amelyikben a legtöbb termék van
+    cnt = {}
+    for p in prods['products']:
+        cnt[p['idExpansion']] = cnt.get(p['idExpansion'], 0) + 1
+    main = {}
+    for e, s in emap.items():
+        if s not in main or cnt[e] > cnt[main[s]]:
+            main[s] = e
+    pr, ex = {}, {}
+    byname = {}
+    for p in prods['products']:
+        k = pn(p.get('name', ''))
+        if k in ours:
+            byname.setdefault(k, []).append(p)
+    for k, plist in byname.items():
+        used = set()
+        for s, e in main.items():
+            mine = sorted([c for c in ours[k] if c['setCode'] == s], key=lambda c: numkey(c['cardCode']))
+            theirs = sorted([p for p in plist if p['idExpansion'] == e], key=lambda p: p['idProduct'])
+            if mine and len(mine) == len(theirs):
+                for c, p in zip(mine, theirs):
+                    r = byid.get(p['idProduct'])
+                    if r:
+                        pr[c['cardCode']] = prow(r, p['idProduct'])
+                    used.add(p['idProduct'])
+        for p in plist:
+            if p['idProduct'] in used:
+                continue
+            r = byid.get(p['idProduct'])
+            if not r or not any(r.get(x) for x in ('avg1', 'avg7', 'avg1-foil', 'avg7-foil')):
+                continue
+            row = prow(r, p['idProduct'])
+            row['s'] = emap.get(p['idExpansion'])
+            ex.setdefault(k, []).append(row)
+    return pr, ex, {str(e): s for e, s in emap.items()}
+
+
 def main():
     g, prods = find_game()
     if not g:
@@ -66,7 +151,12 @@ def main():
         key = a7 or a1
         if cur is None or key < (cur['a7'] or cur['a1']):
             out[k] = {'a1': a1, 'a7': a7, 'id': p['idProduct']}
-    doc = {'updated': pg.get('createdAt') or datetime.datetime.utcnow().isoformat() + 'Z', 'game': g, 'cards': out}
+    pr, ex, emap = printings(prods, byid)
+    doc = {'updated': pg.get('createdAt') or datetime.datetime.utcnow().isoformat() + 'Z', 'game': g, 'cards': out, 'pr': pr, 'ex': ex}
+    print('printings', len(pr), 'extra names', len(ex), 'expansion map', emap)
+    for code in ('ogn-119-298', 'ogn-119a-298', 'sfd-227-221', 'sfd-227-star-221', 'ven-sp3-006', 'ogn-007-298', 'ogn-007a-298'):
+        print('PR', code, pr.get(code))
+    print('EX ahri', ex.get('ahri inquisitive'))
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump(doc, open(OUT, 'w'), separators=(',', ':'))
     print('prices', len(out))
