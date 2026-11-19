@@ -54,6 +54,35 @@ def numkey(code):
     return (1 if pre else 0, num, len(m.group(4)) + (2 if m.group(5).count('-') > 1 else 0), code)
 
 
+def audit(ours, byname, main, emap, pr, byid):
+    """Diagnosztika: párosítatlan szettek és gyanús párosítások listája a naplóba."""
+    inv = {}
+    for e, s in emap.items():
+        inv.setdefault(s, []).append(e)
+    for k, plist in sorted(byname.items()):
+        for s, e in main.items():
+            mine = sorted([c for c in ours[k] if c['setCode'] == s], key=lambda c: numkey(c['cardCode']))
+            if not mine:
+                continue
+            theirs = sorted([p for p in plist if p['idExpansion'] == e], key=lambda p: p['idProduct'])
+            other = [p for p in plist if p['idExpansion'] in inv.get(s, []) and p['idExpansion'] != e]
+            if len(mine) != len(theirs):
+                def pp(p):
+                    r = byid.get(p['idProduct']) or {}
+                    return f"{p['idProduct']}:e{p['idExpansion']}:n{r.get('avg7')}:f{r.get('avg7-foil')}"
+                print('AUD-MISMATCH', k, s, [c['cardCode'] + '/' + c['rarity'] for c in mine], [pp(p) for p in theirs], 'other', [pp(p) for p in other])
+            else:
+                vals = [(c, pr.get(c['cardCode'])) for c in mine]
+                base = [v for c, v in vals if v and c['rarity'] != 'Showcase']
+                for c, v in vals:
+                    if c['rarity'] == 'Showcase' and v and base:
+                        b = base[0]
+                        bn = b['a7'] or b['f7'] or 0
+                        vn = v['a7'] or v['f7'] or 0
+                        if vn and bn and vn < bn:
+                            print('AUD-SUSPECT', k, c['cardCode'], 'showcase olcsobb mint alap', vn, bn)
+
+
 def printings(prods, byid):
     """A Cardmarket termékek párosítása a saját nyomatainkkal.
 
@@ -127,6 +156,8 @@ def printings(prods, byid):
             row = prow(r, p['idProduct'])
             row['s'] = emap.get(p['idExpansion'])
             ex.setdefault(k, []).append(row)
+    if os.environ.get('CM_DEBUG'):
+        audit(ours, byname, main, emap, pr, byid)
     return pr, ex, {str(e): s for e, s in emap.items()}
 
 
