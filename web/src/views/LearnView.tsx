@@ -142,7 +142,7 @@ function ScenarioView({ s, p, setP, all }: { s: Scenario; p: Progress; setP: (p:
   return (
     <div className="scn">
       <div className="scn-head">
-        <a href="#tanulas" className="crumb">← Tanulás</a>
+        <a href="#tanulas" className="crumb">← Practice</a>
         <div><div className="crumb">Szituáció {idx + 1} / {all.length} · {s.level === 'halado' ? 'Haladó' : 'Kezdő'}</div><h2>{s.title}</h2><H as="p" t={s.intro} /></div>
       </div>
       <div className="scn-grid">
@@ -188,7 +188,7 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
   if (!L) return <div className="panel pad"><p className="note">Betöltés…</p></div>;
   const chs = L.chapters.filter((c) => (base === 'hogyan' ? c.level === 'kezdo' : c.level !== 'kezdo'));
   if (base === 'hogyan') L = { ...L, scenarios: [] };
-  if (!chs.length && !L.scenarios.length) return <div className="panel pad"><h2>{base === 'hogyan' ? 'How to Play' : 'Tanulás'}</h2><p className="lead">A fejezetek és az interaktív szituációk ellenőrzése folyamatban van, hamarosan itt lesznek. Addig a <a href="#kezikonyv">Kézikönyv</a> és a kártyánkénti magyarázatok használhatók.</p></div>;
+  if (!chs.length && !L.scenarios.length) return <div className="panel pad"><h2>{base === 'hogyan' ? 'How to Play' : 'Practice'}</h2><p className="lead">A fejezetek és az interaktív szituációk ellenőrzése folyamatban van, hamarosan itt lesznek. Addig a <a href="#kezikonyv">Fogalomtár</a> és a kártyánkénti magyarázatok használhatók.</p></div>;
   const ch = m && !m[1] ? chs.find((c) => c.id === m[2]) : undefined;
   const sc = m && m[1] ? L.scenarios.find((s) => s.id === m[2]) : undefined;
   const total = chs.length + L.scenarios.length;
@@ -214,7 +214,7 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
             <a href={'#tanulas/sz/' + s.id} aria-current={sc?.id === s.id ? 'page' : undefined}>
               <span className="num">{p.scn[s.id] ? <Check size={13} /> : <Swords size={12} />}</span>{s.title}</a></li>))}</ol></>)}
       <h4>Tovább</h4>
-      <ol><li><a href="#kezikonyv"><span className="num"><BookOpen size={12} /></span>Kézikönyv: fogalmak, kulcsszavak</a></li>
+      <ol><li><a href="#kezikonyv"><span className="num"><BookOpen size={12} /></span>Fogalomtár</a></li>
         <li><a href="#chain"><span className="num"><Swords size={12} /></span>Chain elemző</a></li></ol>
     </aside>
   );
@@ -225,7 +225,7 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
     const idx = chs.indexOf(ch); const prev = chs[idx - 1], next = chs[idx + 1];
     main = (
       <>
-        <div className="crumb">{base === 'hogyan' ? 'How to Play' : 'Tanulás'} › {LEVELS.find((l) => l[0] === ch.level)?.[1]} › {idx + 1} / {chs.length}</div>
+        <div className="crumb">{base === 'hogyan' ? 'How to Play' : 'Practice'} › {LEVELS.find((l) => l[0] === ch.level)?.[1]} › {idx + 1} / {chs.length}</div>
         <h2>{ch.title}</h2>
         {ch.lead && <p className="lead">{ch.lead}</p>}
         {ch.rules && <p className="note">Core Rules: <span dangerouslySetInnerHTML={{ __html: inline('{{' + ch.rules + '}}') }} /></p>}
@@ -243,8 +243,8 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
   } else main = (
     <>
       <div className="hero" style={{ margin: '-26px calc(-1 * clamp(16px, 4vw, 42px)) 18px' }}>
-        <div className="crumb">{base === 'hogyan' ? 'How to Play' : 'Tanulás'}</div>
-        <h2>{base === 'hogyan' ? 'How to Play' : 'Tanulás'}</h2>
+        <div className="crumb">{base === 'hogyan' ? 'How to Play' : 'Practice'}</div>
+        <h2>{base === 'hogyan' ? 'How to Play' : 'Practice'}</h2>
         <p>{base === 'hogyan' ? '10 fejezet a Core Rules alapján, a végén kvíz. A haladás ebben a böngészőben mentődik.' : 'Szituációk a pályán lépésenként, döntésekkel, plusz haladó leckék. A haladás ebben a böngészőben mentődik.'}</p>
         <a className="btn hex" href={B + '/' + (firstOpen?.id || '')}>{doneN ? 'Folytatás' : 'Kezdés'}: {firstOpen?.title} <ChevronRight size={16} /></a>
       </div>
@@ -252,7 +252,7 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
         {LEVELS.map(([lv, name, d]) => { const list = chs.filter((c) => c.level === lv); return list.length ? (
           <a key={lv} className="level" href={B + '/' + list[0].id}><b>{name}</b><span>{d} {list.length} fejezet.</span></a>) : null; })}
         {!!L.scenarios.length && <a className="level" href={'#tanulas/sz/' + L.scenarios[0].id}><b>Szituációk</b><span>Board state-ek lépésenként, döntésekkel. {L.scenarios.length} gyakorlat.</span></a>}
-        <a className="level" href="#kezikonyv"><b>Kézikönyv</b><span>Fogalmak, kulcsszavak, játékmenet, szabályváltozások.</span></a>
+        <a className="level" href="#kezikonyv"><b>Fogalomtár</b><span>Fogalmak, kulcsszavak, játékmenet, szabályváltozások.</span></a>
       </div>
       <p className="note" style={{ marginTop: 18 }}>AI által írt, nem hivatalos összefoglaló. A pontos szöveg mindig a hivatkozott szabályszámra kattintva olvasható, versenyen a judge és a Core Rules dönt.</p>
     </>
