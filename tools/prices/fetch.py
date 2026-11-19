@@ -59,6 +59,15 @@ def main():
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump(doc, open(OUT, 'w'), separators=(',', ':'))
     print('prices', len(out))
+    try:
+        cj = json.load(open(os.path.join(os.path.dirname(OUT), '..', 'src', 'generated', 'cards.json')))
+        cj = cj if isinstance(cj, list) else cj['cards']
+        ours = {c['n'] for c in cj if c.get('t') not in ('Token',)}
+        miss = sorted(n for n in ours if pn(n) not in out)
+        print('matched', len(ours) - len(miss), 'of', len(ours), 'missing sample', miss[:25])
+        print('cm sample', sorted(out)[:15])
+    except Exception as e:
+        print('match check skipped', e)
     return 0
 
 if __name__ == '__main__':
