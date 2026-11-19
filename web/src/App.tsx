@@ -59,6 +59,8 @@ function Shell() {
   const [seen, setSeen] = useState(() => new Set([view]));
   useEffect(() => { setSeen((s) => (s.has(view) ? s : new Set(s).add(view))); }, [view]);
   const errata = CARDS.filter((c: any) => c.err != null).length;
+  const [pricesAt, setPricesAt] = useState('');
+  useEffect(() => { fetch('./prices.json').then((r) => (r.ok ? r.json() : null)).then((j) => j?.updated && setPricesAt(String(j.updated).slice(0, 10))).catch(() => { /* nincs ár */ }); }, []);
   return (
     <div className="wrap">
       <header className="top">
@@ -68,6 +70,7 @@ function Shell() {
           <span>Ban lista <b>{META.ban_updated}</b>{BF && (BAN_ACTIVE ? <> + <b>{BF.from}</b></> : <>, új: <b>{BF.from}</b></>)}</span>
           <span>Kártyaadat <b>{META.cards_snapshot}</b></span>
           <span>Errata <b>{errata} kártya</b></span>
+          <a href="#deck" title="Cardmarket 1 és 7 napos átlagár, hetente frissül">Cardmarket ár <b>{pricesAt || 'nincs adat'}</b></a>
           <a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a>
         </div>
       </header>

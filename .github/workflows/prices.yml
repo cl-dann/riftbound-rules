@@ -1,0 +1,41 @@
+name: Cardmarket árak (heti)
+
+# Hetente egyszer letölti a Cardmarket publikus árlistáját, a web/public/prices.json-t
+# commitolja, majd elindítja a deployt. A deploy maga nem tölt le árat, a commitolt fájlt használja.
+on:
+  schedule:
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  prices:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Kártyaadat az illesztés ellenőrzéséhez
+        working-directory: src
+        run: |
+          python3 build_data.py
+          python3 export_web.py
+          rm -f data.json
+      - name: Árak letöltése
+        run: python3 tools/prices/fetch.py
+      - name: Commit és deploy indítása
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ ! -f web/public/prices.json ]; then echo "Nincs árfájl, nincs teendő"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add web/public/prices.json
+          if git diff --cached --quiet; then echo "Nincs változás"; exit 0; fi
+          git commit -m "Cardmarket árak heti frissítése"
+          git push
+          gh workflow run deploy.yml --ref main
