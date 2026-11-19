@@ -1,0 +1,182 @@
+{
+ "fixes": {
+  "Applied Researchers": {
+   "notes": [
+    [
+     "827.1.c.1,381.1",
+     0,
+     "Empower [3]: csak a saját Main Phase-edben, Neutral Open State-ben (showdownon kívül), és csak ha még nem Empowered."
+    ],
+    [
+     "356.4.e",
+     0,
+     "A \"minimum of [1]\" csak erre a kedvezményre vonatkozik. Más kedvezménnyel a spell Energy cost-ja 1 alá is mehet, ha azt alkalmazod később."
+    ],
+    [
+     "356.4.d.1",
+     1,
+     "A kedvezmények sorrendjét te választod. Előbb a Researchers kedvezményét érdemes alkalmazni, utána a minimum nélkülit."
+    ],
+    [
+     "356.6",
+     1,
+     "Az [A] rész a spell Power costját csökkenti 1-gyel, 0 alá nem. Power cost nélküli spellnél csak az Energy rész számít."
+    ],
+    [
+     "365.1",
+     1,
+     "Minden spelledre hat, amíg a Researchers Empowered és a boardon van. Unitra, gearre és abilityre nem."
+    ],
+    [
+     "206",
+     0,
+     "Más effectek a spell nyomtatott costját látják, nem a csökkentettet."
+    ]
+   ],
+   "why": "A note 5 azt állította, hogy a kedvezmény a kéz, trash és facedown kijátszásra is hat; ezt a 365.1 nem mondja ki (a facedown kijátszás base costját amúgy is figyelmen kívül hagyja a 811.1.b), ezért kikerült."
+  },
+  "Armed Assailant": {
+   "notes": [
+    [
+     "805.1.b,805.1.b.1",
+     0,
+     "[Accelerate]: kijátszáskor [1] és egy Fury Power additional costért ready lép be. A Power csak a unit saját domainjéből fizethető."
+    ],
+    [
+     "821.1.c,383.3.a",
+     0,
+     "[Weaponmaster]: play effect, a \"you may\" az elején áll. Kiválasztasz egy általad kontrollált Equipmentet, és az Equip costját [A]-val (egy bármely domainű Powerrel) csökkentve kifizetve rácsatolod."
+    ],
+    [
+     "821.1.b,821.1.c.6",
+     0,
+     "Az Equip ability szokásos időzítése nem számít, és az ability nem aktiválódik. Az Equip aktiválására figyelő effectek nem futnak le."
+    ],
+    [
+     "821.1.c.3,821.1.c.4",
+     0,
+     "Ha az Equip cost nem tartalmaz [A]-t, kifizethető, de nem lesz olcsóbb. Equip cost nélküli Equipment így nem csatolható."
+    ],
+    [
+     "435.1.f",
+     0,
+     "Már másik unitra csatolt Equipment is választható: onnan leválik."
+    ],
+    [
+     "821.1.c.5",
+     0,
+     "Ha a cost nem fizethető ki, az Equipment a helyén marad, ahhoz csatolva, amihez addig volt."
+    ]
+   ],
+   "why": "A note 4 szerint a csak [C]-t tartalmazó Equip cost nem lesz olcsóbb; ez ellentmond a 356.4.f.1 példájának, ahol az [A] kedvezmény a [C] additional costot is csökkenti. A 821.1.c.3 szövege szerint járunk el, a [C] példa törölve."
+  },
+  "Bandle Tree": {
+   "short": "Itt egy helyett 2 rejtett lapod lehet egyszerre. Mindkettőt külön, a szokásos Hide-dal rejted el: Hidden kulcsszavas lapot, a saját körödben, showdownon kívül, 1 bármilyen Powerért, olyan battlefielden, amit kontrollálsz. Ha elveszíted a battlefieldet, mindkét rejtett lapod a trashbe kerül.",
+   "notes": [
+    [
+     "107.3.b,107.3.b.1",
+     0,
+     "Egy Facedown Zone alapból 1 lapot bír el, de ez a szám növelhető. Itt 2 facedown lapod lehet egyszerre."
+    ],
+    [
+     "811.1.b,411.1.a",
+     1,
+     "A második lap elrejtése is a szokásos Hide: [A] a cost, a saját körödben, showdownon kívül (Neutral Open State), és kontrollálnod kell a battlefieldet."
+    ],
+    [
+     "811.1.d.1,811.1.d.2",
+     0,
+     "A rejtett permanent csak erre a battlefieldre játszható ki, a rejtett spell targetjeit pedig erről a battlefieldről kell választani."
+    ],
+    [
+     "107.3.d,323.6.a",
+     0,
+     "Ha elveszíted a controlt, a következő cleanupnál mindkét facedown lapod a trashbe kerül."
+    ],
+    [
+     "107.3.b.2",
+     1,
+     "Ha a férőhely 2-ről 1-re csökken, a controllernek a többletet a trashbe kell tennie."
+    ]
+   ],
+   "why": "A short \"lapként 1 Powerért\" félreérthető volt, és kihagyta, hogy csak Hidden kulcsszavas lap rejthető el (811.1.b, 811.1.a) egy általad kontrollált battlefielden; a note 3 a spellre is \"kijátszást ide\" állított (811.1.d.1 csak permanentre, 811.1.d.2 a spell targetjére vonatkozik); a note 5 kitalált példát (\"battlefield lecserélése\") tartalmazott."
+  },
+  "Blastcone Fae": {
+   "short": "Kijátszáskor egy unit -2 Mightot kap erre a körre, de legfeljebb 1 Mightig. Hidden: a saját körödben, showdownon kívül 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reaction időzítéssel kijátszhatod, de akkor csak az ottani unitot választhatod. Ha ott nincs más unit, saját magát kell gyengítenie.",
+   "why": "A Hidden költsége [A] (811.1.b), a short csak \"1 Powerért\"-t írt, a domain nélkül; kiírva: bármilyen Power (135.2.e.5.a)."
+  },
+  "Danger Zone": {
+   "notes": [
+    [
+     "355.5.a,355.10.d",
+     1,
+     "Nincs target: minden általad kontrollált, Mech taggel rendelkező unitra hat. Deflect és \"can't be chosen\" nem számít."
+    ],
+    [
+     "187.4",
+     0,
+     "A 3 Mightú Mech token is Mech taggel rendelkezik, rá is hat."
+    ],
+    [
+     "355.5.a",
+     1,
+     "A resolve-kor a boardon lévő Mechjeid kapják a bónuszt. A később kijátszott Mech nem."
+    ],
+    [
+     "820.1.d,135.2.e.5.a",
+     0,
+     "Repeat [1][A]: kifizetve minden Mech +2-t kap. Az [A] bármely domain Powerével fizethető, nem csak Fury vagy Mind Powerrel."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap (Rumble tag): a deckben összesen legfeljebb 3 olyan Signature kártya lehet, amelynek Champion tagje megegyezik a Champion Legended tagjével."
+    ]
+   ],
+   "why": "A 103.3.d szerint a 3 darabos korlát a Champion Legenddel azonos Champion tagű Signature lapokra vonatkozik; a note ezt elhagyta."
+  },
+  "Akshan, Mischievous": {
+   "notes": [
+    [
+     "356.2.b.1,383.2.a.1",
+     0,
+     "A 2 Body Power optional additional cost, a kijátszás 2. lépésében döntesz róla. Ha nem fizeted ki, a play effect nem kerül chain-re."
+    ],
+    [
+     "355.10,718.5.b",
+     1,
+     "Az enemy gear target. Unitra csatolt Equipment is választható (718.5.b); ilyenkor levezetés szerint leválik a korábbi unitjáról, mert a base-be kerül."
+    ],
+    [
+     "391.5.b",
+     0,
+     "A \"You control it until I leave the board\" delayed ability: a kontroll addig tart, amíg Akshan a boardon van. Utána a gear visszakerül az eredeti controlleréhez."
+    ],
+    [
+     "359.3.e.16",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: ha Akshan a play effect resolve-ja előtt elhagyja a boardot, a kontrollt adó ability létre sem jön, a geart egy pillanatra sem kontrollálod."
+    ],
+    [
+     "435.1.f,435.4",
+     0,
+     "Ha a gear Equipment, Akshanra csatolódik, Equip cost nélkül. Az Equipment locationje ettől kezdve Akshané."
+    ],
+    [
+     "821.1.c,383.3.d",
+     1,
+     "A Weaponmaster külön play effect, a targetjét a chain-re kerüléskor választod. Az ellopott Equipment akkor még nem a tiéd, ezért a Weaponmaster csak egy már általad kontrollált Equipmentet választhat."
+    ],
+    [
+     "719.5,323.6",
+     1,
+     "Ha Akshan elhagyja a boardot, a rá csatolt Equipment leválik és a helyén marad. A következő cleanup a controllere base-ébe recallolja."
+    ]
+   ],
+   "why": "A note 2 a leválást flag 0-val állította, de a 718.5.b csak a választhatóságot mondja ki; a leválás levezetés (flag 1)."
+  }
+ },
+ "checked": 29,
+ "data_issues": [],
+ "open": []
+}

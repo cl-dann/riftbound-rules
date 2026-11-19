@@ -1,0 +1,76 @@
+{
+ "fixes": {
+  "Frostcoat Mother": {
+   "notes": [
+    [
+     "827.1.c.3,356.4.g",
+     0,
+     "Az Empower cost kedvezményét az ability Determine Total Cost lépésében nézi a játék, az akkor kontrollált rune-ok száma alapján. Az exhausted rune is számít."
+    ],
+    [
+     "356.6",
+     0,
+     "12 rune-nál az Empower ingyenes, 0 alá nem mehet."
+    ],
+    [
+     "827.1.c.3,206.1",
+     1,
+     "A rune-onkénti csökkentés az Empower ability saját szövege, ezért a 827.1.c.3 szerint bármilyen célú Empower cost vizsgálatnál beleszámít. Ez a 206.1 általános (base cost) szabálya alól kivétel, tehát a costot vizsgáló effectek a csökkentett értéket látják, nem a puszta 12-t."
+    ],
+    [
+     "381.1",
+     0,
+     "Csak a saját Main Phase-edben, Neutral Open State-ben (showdownon kívül) aktiválható, és csak ha még nem Empowered."
+    ],
+    [
+     "828.1.c,443.1,142.4.b",
+     1,
+     "A +3 Might addig tart, amíg Empowered. Ha disempowerelik, a Might visszaesik, és egy sebzett unit meghal, ha a rajta lévő damage eléri az új Mightot."
+    ]
+   ],
+   "why": "A disempower utáni halál (sebzett unit, alacsonyabb Might) levezetés a 142.4.b lethal damage szabályból, nem közvetlen szabályszöveg: flag 0 helyett 1, a 142.4.b hivatkozás hiányzott."
+  },
+  "Guards!": {
+   "notes": [
+    [
+     "187.3,355.2.a,143.4",
+     0,
+     "A Sand Soldier 2 Mightú, domain nélküli unit token. A base-be vagy egy általad kontrollált battlefieldre játszod ki, és exhausted lép be."
+    ],
+    [
+     "811.1.d.5",
+     0,
+     "Facedown-ból kijátszva a tokent kötelező arra a battlefieldre tenni, ahol a lap el volt rejtve."
+    ],
+    [
+     "388.1,388.4,383.3.b",
+     1,
+     "A \"Then do this\" reflexive trigger: a spell resolve-ja után külön kerül a chain-re. A \"you may pay [C]\" az elején áll, ezért a trigger finalizálásakor döntesz és fizetsz. Ha nem fizetsz, a trigger lekerül a chainről."
+    ],
+    [
+     "135.2.e.6",
+     0,
+     "A [C] itt 1 Order Power. Energyvel vagy más domain Powerével nem fizethető."
+    ],
+    [
+     "388.1,204.3.a",
+     1,
+     "Errata: korábban a fizetés a spell resolve-ja közben történt, megszakítás nélkül. Most a ready külön chain item, az opponent reagálhat rá, például megölheti a tokent, mielőtt ready lesz."
+    ],
+    [
+     "811.6",
+     1,
+     "Facedown-ból [Reaction]-nel megy: showdown közben is letehetsz vele egy ready defendert a battlefieldedre, ha a Powert kifizeted."
+    ]
+   ],
+   "why": "A 811.6 közvetlenül csak a Reaction időzítést adja; a 'ready defender letehető showdownban' a [C] ready triggerrel és a token exhausted belépésével (143.4) együtt levezetés: flag 0 helyett 1."
+  },
+  "Lillia, Bashful Bloom": {
+   "short": "4 Energyért és a legend exhaustjáért kapsz egy ready, 3 Mightú Sprite tokent, ami a következő köröd elején, pontozás előtt meghal. Az ability minden saját Temporary unitod után 1 Energyvel olcsóbb. Csak a saját körödben, showdownon kívül használható.",
+   "why": "A 'Minden saját Temporary unitod 1 Energyvel olcsóbbá teszi' mondatból nem derült ki, hogy az ability (nem a unitok) költsége csökken; a kártyaszöveg: 'This ability costs [1] less for each friendly unit with [Temporary]' (356.4.g)."
+  }
+ },
+ "checked": 29,
+ "data_issues": [],
+ "open": []
+}

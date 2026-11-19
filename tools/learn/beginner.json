@@ -25,7 +25,7 @@
     },
     {
      "type": "p",
-     "text": "Két további pontforrás van. Egyes spellek és abilityk közvetlenül pontot adnak {{194.1.c}}. Ha pedig az ellenfelednek több lapot kellene a Main Deckjéből máshová mozgatnia, mint amennyi benne van, Burn Outot szenved {{432.1}}: a trash-ét visszakeveri a deckjébe, és egy ellenfele, 1v1-ben te, kap 1 pontot {{432.2}} {{194.1.d}}."
+     "text": "Két további pontforrás van. Egyes spellek és abilityk közvetlenül pontot adnak {{194.1.c}}. Ha pedig az ellenfelednek több lapot kellene a Main Deckjéből máshová mozgatnia, mint amennyi benne van, Burn Outot szenved {{432.1}}: a trash-ét véletlen sorrendben a Main Deckje aljára recycle-öli {{432.2.b}}, és egy ellenfele, 1v1-ben te, kap 1 pontot {{432.2}} {{194.1.d}}."
     },
     {
      "type": "callout",
@@ -328,7 +328,7 @@
     },
     {
      "type": "p",
-     "text": "Matchben (best of 3) nem sorsoltok, hanem mindenki maga választja ki a battlefieldjét. Egy megnyert játék után az abban használt battlefieldek a meccs hátralévő részében nem választhatók újra {{488.5}}."
+     "text": "Matchben (best of 3) nem sorsoltok, hanem mindenki maga választja ki a battlefieldjét. Egy megnyert játék után az abban használt battlefieldek a meccs hátralévő részében nem választhatók újra {{488.5}}; best of 5 esetén a 4. és 5. játékban a kivett battlefield is újra választható {{488.6.a}}."
     },
     {
      "type": "callout",
@@ -454,7 +454,7 @@
       ],
       [
        "Main",
-       "Kiürül a Rune Pool, majd szabadon cselekszel",
+       "Kiürül a Rune Pool (az elkölthető Energy és Power gyűjtőhelye, részletesen az 5. fejezetben), majd szabadon cselekszel",
        "Te",
        "{{316.3}} {{316.5.a}}"
       ],

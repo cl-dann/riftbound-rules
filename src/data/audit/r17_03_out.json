@@ -1,0 +1,158 @@
+{
+ "fixes": {
+  "Megatusk": {
+   "short": "3 XP elköltésével a vele egy helyen álló összes unitod (ő is) Gankinget kap a kör végéig, vagyis battlefieldről battlefieldre is léphetnek. Csak a saját Main Phase-edben, showdownon kívül használható, exhausted Megatusk is aktiválhatja. A Ganking nem ad plusz mozgást, a unitoknak ready-nek kell lenniük.",
+   "why": "A Ganking lényege (battlefieldről battlefieldre léphet, 810.1.b) hiányzott a shortból, kezdőnek nem érthető."
+  },
+  "Ornn, Forge God": {
+   "short": "Minden saját gearedért +1 Mightot kap, bárhol legyenek. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod az Equip costjáért, akkor is, ha másik unitodon van. Az Equip cost bármilyen domainű Powerjéből 1-gyel kevesebbet fizetsz; hogy a domainhez kötött Power is csökken-e, nem eldöntött. Deflect 2: az opponent rá célzó spellje vagy abilityje 2 bármilyen Powerrel drágább.",
+   "notes": [
+    [
+     "821.1.c",
+     0,
+     "[Weaponmaster]: play effect, \"you may\" kezdettel. A resolve-kor egy általad kontrollált Equipment Equip costját fizeted ki [A]-val olcsóbban, és Ornnra csatolod."
+    ],
+    [
+     "821.1.b,435.1.f",
+     0,
+     "Az Equip szokásos időzítése nem számít, és már másik unitra csatolt Equipment is választható: arról leválik."
+    ],
+    [
+     "821.1.c.3,821.1.c.4",
+     0,
+     "Ha az Equip costban nincs [A], nem lesz olcsóbb. Ha az Equipmentnek nincs Equip costja, nem csatolható így."
+    ],
+    [
+     "150.4,718.5",
+     1,
+     "A \"friendly gear\" minden általad kontrollált gear, bárhol: a rá vagy másra csatolt Equipment és a gear token is +1 Might."
+    ],
+    [
+     "479.4.b,142.4.b",
+     1,
+     "Ez passive ability, folyamatosan újraszámolódik. Ha sebzett állapotban gear vész el, a csökkenő Might megölheti."
+    ],
+    [
+     "809.1.b,809.1.c",
+     0,
+     "[Deflect 2]: az opponent őt targetelő spellje vagy abilityje +[A][A]-ba kerül."
+    ],
+    [
+     "821.1.c.3,135.2.e.6",
+     2,
+     "Hogy a lap saját domainjére szóló [C] Equip cost [A]-t tartalmazónak számít-e, vagyis csökken-e, a Core Rules nem mondja ki. Judge döntse el."
+    ]
+   ],
+   "why": "A short tényként állította, hogy a domainhez kötött ([C]) Equip Power nem csökken; a 821.1.c.3 csak az [A]-ról szól, a [C] kérdés nem ellenőrizhető (Lucian, Merciless notes-szal egyezően nyitott, flag 2). Az utolsó mondat (sebzett Ornn gear elvesztésekor) a hely miatt kikerült, a notes tartalmazza."
+  },
+  "Riven, Shattered": {
+   "short": "Amikor Riven attacker lesz, választasz egy ottani enemy unitot: minden rá csatolt Equipmentért 2 damage-et kap, egyetlen sebzésként. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod az Equip cost kifizetésével, akkor is, ha máshoz van csatolva. Az Equip cost bármilyen domainű Powerjéből 1-gyel kevesebbet fizetsz; hogy a domainhez kötött Power is csökken-e, nem eldöntött.",
+   "notes": [
+    [
+     "418.8",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: a \"for each\" egyetlen sebzést jelent. Három Equipmenttel egyszer 6-ot oszt, nem háromszor 2-t."
+    ],
+    [
+     "715.1",
+     1,
+     "Emiatt a Bonus Damage csak egyszer adódik hozzá, nem Equipmentenként."
+    ],
+    [
+     "383.4.e.2.a,355.7",
+     0,
+     "Attack Trigger, combatonként egyszer. Az enemy unit target."
+    ],
+    [
+     "809.1.c,809.1.d",
+     1,
+     "Ha a célpont Deflectes, a rá célzó enemy spellekre és abilitykre vonatkozó plusz Power cost ezt az attack triggert is terheli, a Powert te fizeted."
+    ],
+    [
+     "418.1.e,715.4",
+     1,
+     "A csatolt Equipmentek számát a resolve-kor nézi. Equipment nélkül 0 sebzés lenne, ami nem érvényes sebzés, így semmi sem történik."
+    ],
+    [
+     "819.1.c",
+     1,
+     "A triggerre válaszul Quick-Draw-val kijátszott Equipment már beleszámít a sebzésbe."
+    ],
+    [
+     "821.1.c",
+     0,
+     "[Weaponmaster]: kijátszáskor egy Equipmented Equip costját [A]-val olcsóbban kifizetve Rivenre csatolhatod."
+    ],
+    [
+     "821.1.c.3,135.2.e.6",
+     2,
+     "Hogy a lap saját domainjére szóló [C] Equip cost [A]-t tartalmazónak számít-e, vagyis csökken-e, a Core Rules nem mondja ki. Judge döntse el."
+    ]
+   ],
+   "why": "A short tényként állította, hogy az Equipment saját domainjének ([C]) Powere nem csökken; ez nem ellenőrizhető (821.1.c.3 csak [A]-t említ), ezért nyitott, flag 2. A Deflect állítás hivatkozása (383.4.e.2.a,355.7) nem fedte, 809.1.c,809.1.d-re cserélve, flag 1."
+  },
+  "Sentinel Adept": {
+   "short": "Weaponmaster: kijátszáskor egy saját Equipmentedet az Equip cost kifizetésével rácsatolhatod, akár egy másik unitról átrakva is, az Equip szokásos időzítésétől függetlenül. Az Equip cost bármilyen domainű Powerjéből 1-gyel kevesebbet fizetsz; hogy a domainhez kötött Power is csökken-e, nem eldöntött.",
+   "notes": [
+    [
+     "821.1.c",
+     0,
+     "[Weaponmaster]: play effect, \"you may\" kezdettel. A resolve-kor egy általad kontrollált Equipment Equip costját fizeted ki [A]-val olcsóbban, és az Adeptre csatolod."
+    ],
+    [
+     "821.1.b,435.1.f",
+     0,
+     "Az Equip szokásos időzítése nem számít. Másik unitra csatolt Equipment is választható, arról leválik."
+    ],
+    [
+     "821.1.c.3,821.1.c.4",
+     0,
+     "Ha az Equip costban nincs [A], nem lesz olcsóbb. Equip cost nélküli Equipment így nem csatolható."
+    ],
+    [
+     "821.1.c.3,135.2.e.6",
+     2,
+     "Hogy a lap saját domainjére szóló [C] Equip cost [A]-t tartalmazónak számít-e, vagyis csökken-e, a Core Rules nem mondja ki. Judge döntse el."
+    ]
+   ],
+   "why": "A short tényként állította, hogy az Equipment saját domainjének ([C]) Powere nem csökken; ez nem ellenőrizhető (821.1.c.3 csak [A]-t említ), ezért nyitott, flag 2."
+  },
+  "Rengar, Trophy Hunter": {
+   "notes": [
+    [
+     "822.1.d",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: az [Ambush] igeként azt jelenti, hogy az Ambush kulcsszó engedélyeivel játszod ki. Az ability ezt kiterjeszti az olyan battlefieldekre, ahol enemy unit van."
+    ],
+    [
+     "822.1.b,813.1.c.1",
+     1,
+     "Gyakorlati különbség az errata óta: enemy unitos battlefieldre is [Reaction]-nel mehet ki, akkor is, ha ott nincs unitod. A régi szöveg csak a helyet engedte meg, az időzítést nem."
+    ],
+    [
+     "190.3.a.1,323.8,462,323.12",
+     0,
+     "Ha nem általad kontrollált és még nem Contested battlefieldre játszod, az Contested lesz, és combat stagelődik. Folyamatban lévő combatba beugorva új combat nem jön létre, Rengar a meglévőhöz csatlakozik. Combat csak akkor indul, amikor a chain kiürült és Neutral Open State van."
+    ],
+    [
+     "466.2.c.1",
+     0,
+     "Ha az ő érkezése teszi Contesteddé a battlefieldet, te leszel az Attacker, tehát az opponent körében beugorva is te támadsz."
+    ],
+    [
+     "143.1.b",
+     1,
+     "A Cat tag miatt jó cost a Stalking Wolfhoz, és kiváltja Ivern, Nurturer buffját."
+    ]
+   ],
+   "why": "A \"combat csak chain kiürülése után, Neutral Open State-ben indul\" állítást a hivatkozott 190.3.a.1,323.8 nem fedte, hozzáadva: 462, 323.12."
+  }
+ },
+ "checked": 29,
+ "data_issues": [],
+ "open": [
+  "Master Bingwen: a Weaponmaster [A] kedvezmény érvényes-e [C] (saját domain) Equip costra, nem mondja ki a Core Rules; a 356.4.f.1 példa ([A] discount csökkenti a [C] költséget) arra utal, hogy igen, de Weaponmasterre nem mondja ki. A short a 821.1.c.3 szövegét követi, ezért nem javítva.",
+  "Lucian, Merciless, Ornn, Riven Shattered, Sentinel Adept: ugyanez a [C] Equip cost kérdés, egységesen nyitottként (flag 2) kezelve.",
+  "Maduli the Gatekeeper: az \"occupied enemy battlefield\" pontos jelentése (enemy unitos battlefield vs enemy kontrollálta) és hogy az effect-mozgás combatot indít-e, a Core Rules szövegéből nem egyértelmű; a short nem állít többet a szövegnél."
+ ]
+}
