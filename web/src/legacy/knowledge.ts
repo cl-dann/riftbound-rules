@@ -1,8 +1,18 @@
 // @ts-nocheck
-import {D,CARDS,esc,glossify} from './core';
+import {D,CARDS,META,esc,glossify} from './core';
+/* Szószintű diff (LCS) az errata előtte/utána nézethez. */
+function wdiff(a,b){
+  const A=String(a).split(/(\s+)/),B=String(b).split(/(\s+)/),n=A.length,m=B.length;
+  const L=Array.from({length:n+1},()=>new Int32Array(m+1));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)L[i][j]=A[i]===B[j]?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+  let i=0,j=0,o='',nw='';
+  while(i<n&&j<m){if(A[i]===B[j]){o+=esc(A[i]);nw+=esc(B[j]);i++;j++;}else if(L[i+1][j]>=L[i][j+1]){o+='<del>'+esc(A[i])+'</del>';i++;}else{nw+='<ins>'+esc(B[j])+'</ins>';j++;}}
+  while(i<n)o+='<del>'+esc(A[i++])+'</del>';while(j<m)nw+='<ins>'+esc(B[j++])+'</ins>';
+  return [o.replace(/<\/del><del>/g,''),nw.replace(/<\/ins><ins>/g,'')];
+}
 export function renderTud(){
   const X=D.extra||{};
-  let h='<div class="subnav">'+'<a class="chip" href="#hogyan">How to Play</a>'+'<a class="chip" href="#tud-olvas" data-scroll="tud-olvas">A magyarázatok olvasása</a>'+(X.terms?'<a class="chip" href="#tud-fog" data-scroll="tud-fog">Fogalmak</a>':'')+(X.glossary?'<a class="chip" href="#tud-kw" data-scroll="tud-kw">Kulcsszavak</a>':'')+(X.flow?'<a class="chip" href="#tud-flow" data-scroll="tud-flow">Játékmenet</a>':'')+(X.patchnotes?'<a class="chip" href="#tud-pn" data-scroll="tud-pn">Szabályváltozások</a>':'')+'</div>';
+  let h='<div class="subnav">'+'<a class="chip" href="#hogyan">How to Play</a>'+'<a class="chip" href="#tud-olvas" data-scroll="tud-olvas">A magyarázatok olvasása</a>'+(X.terms?'<a class="chip" href="#tud-fog" data-scroll="tud-fog">Fogalmak</a>':'')+(X.glossary?'<a class="chip" href="#tud-kw" data-scroll="tud-kw">Kulcsszavak</a>':'')+(X.flow?'<a class="chip" href="#tud-flow" data-scroll="tud-flow">Játékmenet</a>':'')+(X.patchnotes?'<a class="chip" href="#tud-pn" data-scroll="tud-pn">Szabályváltozások</a>':'')+'<a class="chip" href="#tud-err" data-scroll="tud-err">Errata</a>'+'</div>';
   const rl=r=>'<a href="#szabalyok" data-ref="'+esc(r)+'">'+esc(r)+'</a>';
   if(false&&X.guide){
     h+='<h2 id="tud-guide" style="margin-top:14px">Kezdő útmutató</h2><p class="note" style="margin:6px 0 12px">Az első játék lépésről lépésre, a Core Rules alapján. AI által írt összefoglaló, nem hivatalos.</p>';
@@ -22,8 +32,24 @@ export function renderTud(){
     h+='</div>';
   }
   if(X.flow){
-    h+='<h2 id="tud-flow" style="margin-top:28px">Játékmenet</h2><p class="note" style="margin:6px 0 12px">A kör, a chain, a kártyakijátszás és a combat lépései a Core Rules szerint. AI által írt összefoglaló, nem hivatalos.</p>';
-    X.flow.forEach(b=>{h+='<h3>'+esc(b.title)+'<span class="n">'+esc(b.rules||'')+'</span></h3><ol class="flow">'+(b.steps||[]).map(s=>'<li><span><b>'+esc(s.name)+'</b>'+rl(s.rule)+'<br>'+esc(s.text)+'</span></li>').join('')+'</ol>';});
+    h+='<h2 id="tud-flow" style="margin-top:28px">Játékmenet</h2><p class="note" style="margin:6px 0 12px">A kör, a chain, a kártyakijátszás és a combat lépései a Core Rules szerint. Kattints egy lépésre, vagy lépkedj a nyilakkal. AI által írt összefoglaló, nem hivatalos.</p>';
+    X.flow.forEach((b,bi)=>{const st=b.steps||[];
+      h+='<div class="fdia" data-fb="'+bi+'"><h3>'+esc(b.title)+'<span class="n">'+esc(b.rules||'')+'</span></h3><div class="ftrack" role="tablist">'
+        +st.map((x,i)=>'<button role="tab" class="fnode'+(i?'':' on')+'" data-fs="'+bi+':'+i+'" aria-selected="'+(i?'false':'true')+'"><span class="fi">'+(i+1)+'</span><span class="fn">'+esc(x.name)+'</span></button>').join('')+'</div>'
+        +st.map((x,i)=>'<div class="fpane"'+(i?' hidden':'')+' data-fp="'+bi+':'+i+'"><div class="fhead"><b>'+(i+1)+'. '+esc(x.name)+'</b>'+rl(x.rule)+'</div><p>'+glossify(esc(x.text))+'</p><div class="fnav">'+(i?'<button class="btn sec sm" data-fs="'+bi+':'+(i-1)+'">Előző: '+esc(st[i-1].name)+'</button>':'')+(i<st.length-1?'<button class="btn sm" data-fs="'+bi+':'+(i+1)+'">Következő: '+esc(st[i+1].name)+'</button>':'')+'</div></div>').join('')
+        +'</div>';});
+  }
+  {
+    const E=CARDS.filter(c=>c.err!=null&&c.old&&c.old!==c.txt);const seen=new Set();const L=E.filter(c=>!seen.has(c.txt)&&seen.add(c.txt));
+    if(L.length){
+      const by={};L.forEach(c=>(by[c.err]=by[c.err]||[]).push(c));
+      h+='<h2 id="tud-err" style="margin-top:28px">Errata: előtte és utána</h2><p class="note" style="margin:6px 0 12px">'+L.length+' lap nyomtatott és hatályos szövege egymás mellett. Pirossal a kikerült, zölddel a bekerült szavak. Versenyen mindig a hatályos szöveg érvényes.</p><input type="search" class="errq" placeholder="Szűrés kártyanévre" aria-label="Errata szűrés">';
+      Object.keys(by).forEach(k=>{const a=META.articles[k]||{};
+        h+='<div class="errgrp"><h3><a href="'+esc(a.u||'#')+'">'+esc(a.t||'Errata')+'</a><span class="n">'+by[k].length+' lap</span></h3>';
+        by[k].sort((x,y)=>x.n.localeCompare(y.n)).forEach(c=>{const [o,nw]=wdiff(c.old,c.txt);
+          h+='<div class="errc" data-n="'+esc(c.n.toLowerCase())+'"><button class="errn" data-card="'+esc(c.n)+'">'+esc(c.n)+'</button><div class="errcols"><div><span class="lbl">Nyomtatott</span><p>'+o.replace(/\n/g,'<br>')+'</p></div><div><span class="lbl">Hatályos</span><p>'+nw.replace(/\n/g,'<br>')+'</p></div></div></div>';});
+        h+='</div>';});
+    }
   }
   if(X.patchnotes){
     h+='<h2 id="tud-pn" style="margin-top:28px">Szabályváltozások</h2><p class="note" style="margin:6px 0 12px">A hivatalos patch notes cikkek rövid, saját szavas kivonata. A teljes szöveg a cikkekben olvasható.</p>';
