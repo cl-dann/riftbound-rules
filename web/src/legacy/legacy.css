@@ -163,7 +163,7 @@ table.im td:first-child{font-weight:600;white-space:nowrap}
 .warns li button{background:none;border:0;color:var(--link);text-decoration:underline;cursor:pointer;padding:0 4px}
 .sec-title{font-family:var(--f-display);font-weight:600;font-size:18px;margin:16px 0 4px;display:flex;gap:8px;align-items:baseline}
 .drow{border:1px solid var(--line);border-radius:4px;margin:4px 0;background:var(--panel)}
-.drow>summary{cursor:pointer;list-style:none;padding:7px 12px;display:grid;grid-template-columns:2.2em minmax(140px,1.1fr) minmax(90px,.6fr) 2fr;gap:4px 10px;align-items:baseline}
+.drow>summary{cursor:pointer;list-style:none;padding:7px 12px;display:grid;grid-template-columns:2.2em minmax(140px,1.1fr) minmax(90px,.6fr) 1.6fr auto;gap:4px 10px;align-items:baseline}
 .drow>summary::-webkit-details-marker{display:none}
 .drow>summary:hover{background:var(--panel2)}
 .drow .q{font-family:var(--f-mono);color:var(--muted)}
@@ -277,3 +277,23 @@ dl.qa dd .r{display:inline-flex;gap:6px;margin-left:8px;font-family:var(--f-mono
 dl.qa dd .r a{color:var(--muted)}
 details.ntd{margin:4px 0 16px}
 details.ntd .ntwrap{padding:0 8px 8px}
+.drow .ctl{display:inline-flex;gap:4px;align-items:center;justify-self:end}
+.drow .ctl .pr{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-right:6px;white-space:nowrap}
+.qb{width:24px;height:24px;border:1px solid var(--line);background:var(--panel2);color:inherit;border-radius:4px;cursor:pointer;line-height:1;font-size:15px}
+.qb:hover{border-color:var(--gold,#c8aa6e)}
+.builder{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.builder .bq{display:flex;gap:6px;margin:8px 0 6px}
+.builder .bq input{flex:1 1 auto;min-width:0}
+.builder .bq select{flex:0 0 150px}
+.bres{list-style:none;margin:8px 0 0;padding:0;max-height:340px;overflow:auto;border:1px solid var(--line);border-radius:4px}
+.bres li+li{border-top:1px solid var(--line)}
+.bres button{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:16px 1fr auto;gap:2px 8px;padding:6px 10px;align-items:center}
+.bres button:hover,.bres button:focus-visible{background:var(--panel2)}
+.bres .nm{font-weight:600}
+.bres .ty{grid-column:2;font-size:12px;color:var(--muted)}
+.bres .pr{grid-column:3;grid-row:1/3;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.prices{margin:14px 0}
+.prices .ptot{display:flex;gap:12px;flex-wrap:wrap;margin:6px 0}
+.prices .ptot div{border:1px solid var(--line);border-radius:4px;padding:8px 14px;background:var(--panel2);display:flex;flex-direction:column}
+.prices .ptot span{font-size:12px;color:var(--muted)}
+.prices .ptot b{font-family:var(--f-mono);font-size:20px}

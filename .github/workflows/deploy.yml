@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '17 4 * * *'
 
 permissions:
   contents: read
@@ -28,6 +30,9 @@ jobs:
           python3 build_data.py
           python3 export_web.py
           rm -f data.json
+      - name: Cardmarket árak (napi)
+        continue-on-error: true
+        run: python3 tools/prices/fetch.py
       - uses: actions/setup-node@v4
         with:
           node-version: 22

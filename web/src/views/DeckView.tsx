@@ -1,4 +1,4 @@
-import { FileDown, Link2, Play, RotateCcw, Trash2 } from 'lucide-react';
+import { FileDown, Link2, Plus, RotateCcw, Trash2 } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   BF, DECK, FORMAT, META, TOPICS, b64d, b64e, buildPDF, cardHeadHTML, cardRulesHTML, curveHTML, domDots, esc,
@@ -6,8 +6,16 @@ import {
 } from '../legacy/core';
 import { Html } from '../components/Html';
 import { loadFonts } from '../data';
+import { editDeck, eur, legendOf, priceOf, searchCards, targetSec, type Prices } from './deckEdit';
 
-function deckHTML(): string {
+function priceHTML(P: Prices | null): string {
+  if (!P) return '<div class="prices"><h3>Cardmarket ár</h3><p class="note">Az árak még nem érhetők el. A napi frissítés a Cardmarket publikus price guide letöltéséből tölti be őket.</p></div>';
+  let a1 = 0, a7 = 0, miss: string[] = [], n = 0;
+  DECK.forEach((s: any) => { if (/side/i.test(s.name)) return; s.rows.forEach((r: any) => { if (!r.card) return; const p = priceOf(r.card, P); n += r.qty; if (!p) { miss.push(r.card.n); return; } a1 += r.qty * (p.a1 ?? p.a7 ?? 0); a7 += r.qty * (p.a7 ?? p.a1 ?? 0); }); });
+  return '<div class="prices"><h3>Cardmarket ár<span class="n">' + n + ' lap, sideboard nélkül, névenként a legolcsóbb nyomat</span></h3><div class="ptot"><div><span>1 napos átlag</span><b>' + eur(a1) + '</b></div><div><span>7 napos átlag</span><b>' + eur(a7) + '</b></div></div><p class="note">Frissítve: ' + esc(P.updated.slice(0, 10)) + '. A listaár naponta változik, a pontos ár a Cardmarket termékoldalán ellenőrizhető.' + (miss.length ? ' Ár nélkül: ' + [...new Set(miss)].map(esc).join(', ') + '.' : '') + '</p></div>';
+}
+
+function deckHTML(P: Prices | null): string {
   if (!DECK.length) return '<div class="panel pad"><h2>Decklista formátum</h2><p class="note" style="margin:8px 0">Illeszd be a decket a bal oldali mezőbe ebben a formában, aztán nyomd meg a Deck feldolgozása gombot. Szekciónként fejléc kettősponttal, alatta soronként darabszám és pontos angol kártyanév. A legend neve Champion, Legend cím alakban szerepel.</p><pre class="fmt">' + esc(FORMAT) + '</pre></div>';
   const warns: string[] = [], tot: Record<string, number> = {};
   DECK.forEach((s: any) => s.rows.forEach((r: any) => {
@@ -23,7 +31,7 @@ function deckHTML(): string {
   let h = '<div class="panel pad"><div class="sum">' + DECK.map((s: any) => '<span class="chip">' + esc(s.name) + ' <b>' + s.rows.reduce((a: number, r: any) => a + r.qty, 0) + '</b></span>').join('')
     + '<span class="chip okc">' + uniq.size + ' egyedi kártya</span>' + (ec ? '<span class="chip err">' + ec + ' kártyán errata</span>' : '') + '</div>';
   if (warns.length) h += '<ul class="warns">' + warns.map((w) => '<li>' + w + '</li>').join('') + '</ul>';
-  h += curveHTML() + legalityHTML() + interactionHTML();
+  h += legalityHTML() + priceHTML(P) + curveHTML() + interactionHTML();
   DECK.forEach((s: any, si: number) => {
     h += '<div class="sec-title">' + esc(s.name) + '<span class="count">' + s.rows.reduce((a: number, r: any) => a + r.qty, 0) + ' lap</span></div>';
     s.rows.forEach((r: any, ri: number) => {
@@ -32,7 +40,8 @@ function deckHTML(): string {
       const rs = c.tp.map((p: any) => '<span title="' + esc(TOPICS[p[0]].title) + '">' + TOPICS[p[0]].refs[0] + '</span>').join('');
       h += '<details class="drow" data-s="' + si + '" data-r="' + ri + '"><summary><span class="q">' + r.qty + '</span><span class="nm">' + domDots(c) + ' ' + esc(c.n)
         + (c.err != null ? ' <span class="chip err mini">errata</span>' : '') + (c.ban ? ' <span class="chip ban mini">ban</span>' : c.banf ? ' <span class="chip ban mini">ban ' + c.banf.slice(5) + '</span>' : '')
-        + '</span><span class="ty">' + esc(typeLine(c)) + '</span><span class="rs">' + rs + '</span></summary><div class="body"></div></details>';
+        + '</span><span class="ty">' + esc(typeLine(c)) + '</span><span class="rs">' + rs + '</span><span class="ctl">' + (() => { const p = priceOf(c, P); return p ? '<span class="pr" title="7 napos átlag, darabár ' + eur(p.a7 ?? p.a1) + '">' + eur(r.qty * (p.a7 ?? p.a1 ?? 0)) + '</span>' : ''; })()
+        + '<button class="qb" data-inc="-1" data-sec="' + esc(s.name) + '" data-card="' + esc(c.n) + '" aria-label="Egy példánnyal kevesebb">\u2212</button><button class="qb" data-inc="1" data-sec="' + esc(s.name) + '" data-card="' + esc(c.n) + '" aria-label="Egy példánnyal több">+</button></span></summary><div class="body"></div></details>';
     });
   });
   return h + '</div>';
@@ -46,6 +55,16 @@ export function DeckView() {
   const [rel, setRel] = useState(false);
   const [gen, setGen] = useState(false);
   const hasLast = useMemo(() => { try { return !!localStorage.getItem('rb-deck'); } catch { return false; } }, []);
+  const [P, setP] = useState<Prices | null>(null);
+  useEffect(() => { fetch('./prices.json').then((r) => r.ok ? r.json() : null).then((j) => j && j.cards && setP(j)).catch(() => { /* nincs ár */ }); }, []);
+  const [q, setQ] = useState('');
+  const [ty, setTy] = useState('');
+  const [legalOnly, setLegalOnly] = useState(true);
+  const tmr = useRef<number>(0);
+  const change = (t: string) => { setText(t); clearTimeout(tmr.current); tmr.current = window.setTimeout(() => run(t), 250); };
+  const legend = useMemo(() => legendOf(text), [text]);
+  const hits = useMemo(() => (q.trim() || ty ? searchCards(q, legend, legalOnly, ty) : []), [q, ty, legend, legalOnly]);
+  const add = (c: any) => change(editDeck(text, targetSec(c, text), c, 1));
   const run = (t = text) => { setDeck(parseDeck(t)); if (t.trim()) { try { localStorage.setItem('rb-deck', t); } catch { /* */ } } setVer((v) => v + 1); };
   useEffect(() => { run(); }, []);
   useEffect(() => {
@@ -53,7 +72,7 @@ export function DeckView() {
     window.addEventListener('hashchange', on);
     return () => window.removeEventListener('hashchange', on);
   }, []);
-  const html = useMemo(() => deckHTML(), [ver]);
+  const html = useMemo(() => deckHTML(P), [ver, P]);
   const outRef = useRef<HTMLDivElement>(null);
   // A deck sorai lenyitáskor töltik be a kártya teljes adatlapját.
   useEffect(() => {
@@ -98,10 +117,21 @@ export function DeckView() {
   return (
     <div className="cols">
       <div className="panel pad">
+        <div className="builder">
+          <label htmlFor="dq" className="note">Lap hozzáadása. A lap a típusa szerinti szekcióba kerül, a legalitás és az ár azonnal frissül.</label>
+          <div className="bq">
+            <input id="dq" type="search" placeholder="Kártyanév, pl. Jinx" value={q} onChange={(e) => setQ(e.target.value)} />
+            <select value={ty} onChange={(e) => setTy(e.target.value)} aria-label="Típus">
+              <option value="">Minden típus</option>{['Legend', 'Unit', 'Spell', 'Gear', 'Battlefield', 'Rune'].map((t) => <option key={t}>{t}</option>)}
+            </select>
+          </div>
+          <label className="chk"><input type="checkbox" checked={legalOnly} onChange={(e) => setLegalOnly(e.target.checked)} /> csak a legend Domain Identity-jébe illő és nem tiltott lapok{legend ? ' (' + (legend.d || []).join(' + ') + ')' : ''}</label>
+          {!!hits.length && <ul className="bres">{hits.map((c: any) => { const p = priceOf(c, P); return (
+            <li key={c.n}><button onClick={() => add(c)} title="Hozzáadás a deckhez"><Plus size={13} /><span className="nm" dangerouslySetInnerHTML={{ __html: domDots(c) + ' ' + esc(c.n) }} /><span className="ty">{typeLine(c)}{c.e != null ? ' · ' + c.e : ''}</span><span className="pr">{p ? eur(p.a7 ?? p.a1) : ''}</span></button></li>); })}</ul>}
+        </div>
         <label htmlFor="deckin" className="note">Decklista. Szekciófejléc (<code>Legend:</code>, <code>Champion:</code>, <code>MainDeck:</code>, <code>Battlefields:</code>, <code>Rune Pool:</code>, <code>Sideboard:</code>), alatta soronként darabszám és kártyanév.</label>
-        <textarea id="deckin" spellCheck={false} style={{ marginTop: 8 }} value={text} placeholder={FORMAT} onChange={(e) => setText(e.target.value)} />
+        <textarea id="deckin" spellCheck={false} style={{ marginTop: 8 }} value={text} placeholder={FORMAT} onChange={(e) => change(e.target.value)} />
         <div className="btnrow">
-          <button className="btn" onClick={() => run()}><Play size={15} /> Deck feldolgozása</button>
           <button className="btn sec" onClick={pdf}><FileDown size={15} /> PDF letöltése</button>
           <button className="btn sec" onClick={share}><Link2 size={15} /> Megosztható link</button>
         </div>
@@ -121,6 +151,8 @@ export function DeckView() {
         onClick={(e) => {
           const t = e.target as HTMLElement;
           const sm = t.closest('button[data-sim]') as HTMLElement | null;
+          const qb = t.closest('button[data-inc]') as HTMLElement | null;
+          if (qb) { e.preventDefault(); e.stopPropagation(); const c = DECK.flatMap((s: any) => s.rows).find((r: any) => r.card && r.card.n === qb.dataset.card)?.card; if (c) change(editDeck(text, qb.dataset.sec!, c, +qb.dataset.inc!)); return; }
           if (sm) { window.dispatchEvent(new CustomEvent('rb:open-card', { detail: sm.dataset.sim })); return; }
           const b = t.closest('button[data-fix]') as HTMLElement | null;
           if (b) { const nt = text.split(b.dataset.fix!).join(b.dataset.to!); setText(nt); run(nt); }
