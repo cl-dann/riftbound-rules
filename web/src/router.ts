@@ -9,7 +9,7 @@ export const VIEWS: [View, string][] = [
 export function viewOf(h: string): View {
   if (/^#d=/.test(h)) return 'deck';
   if (/^#c=/.test(h)) return 'chain';
-  if (/^#r-/.test(h)) return 'szabalyok';
+  if (/^#r-/.test(h) || /^#fmt-/.test(h)) return 'szabalyok';
   if (/^#tud-guide/.test(h) || /^#hogyan/.test(h)) return 'hogyan';
   if (/^#tanulas/.test(h)) return 'tanulas';
   if (/^#tud-/.test(h) || h === '#tudastar') return 'kezikonyv';

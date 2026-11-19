@@ -412,3 +412,7 @@ footer#foot { border-top: 0; }
 #tip { z-index: 80; }
 .tile, .list li { content-visibility: auto; contain-intrinsic-size: auto 260px; }
 .list li { contain-intrinsic-size: auto 40px; }
+.toc-group { font-family: var(--f-display); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); padding: 10px 12px 4px; }
+.toc button.fmt.on { background: linear-gradient(90deg, rgba(200,170,110,.16), transparent); box-shadow: inset 3px 0 0 var(--accent); }
+.fmt-facts th { width: 200px; white-space: nowrap; }
+.fmt-cmp { margin-top: 26px; overflow-x: auto; }

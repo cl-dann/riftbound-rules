@@ -30,7 +30,7 @@ const loadP = (): Progress => {
 const saveP = (p: Progress) => { try { localStorage.setItem(KEY, JSON.stringify(p)); } catch { /* privát mód */ } };
 
 /** [[Kártya]] kártyalink, {{123.4}} szabálylink, plusz fogalom-tooltip. */
-function inline(text: string, seen?: Set<string>) {
+export function inline(text: string, seen?: Set<string>) {
   let h = esc(text)
     .replace(/\[\[([^\]]+)\]\]/g, (_, n) => '<span class="cl" data-card="' + n + '">' + n + '</span>')
     .replace(/\{\{([\d.a-z\-, ]+)\}\}/gi, (_, r) => String(r).split(/\s*,\s*/).map((x: string) => '<a class="rref" href="#szabalyok" data-ref="' + x + '">' + x + '</a>').join(' '));
@@ -55,7 +55,7 @@ function Callout({ b, seen }: { b: Extract<Block, { type: 'callout' }>; seen: Se
   );
 }
 
-function Blocks({ blocks }: { blocks: Block[] }) {
+export function Blocks({ blocks }: { blocks: Block[] }) {
   const seen = useMemo(() => new Set<string>(), [blocks]);
   return (
     <div className="lesson">

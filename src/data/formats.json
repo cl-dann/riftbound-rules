@@ -1,0 +1,413 @@
+{
+ "intro": "A Mode of Play határozza meg a játék változóit: játékosszám, csapatok, Victory Score, Battlefield count, setup, formátum és első kör módosítások {{483}} {{485}}. A Sanctioned Modes fejezet alatt következő ötféle formátum van leírva {{486}}.",
+ "formats": [
+  {
+   "id": "duel",
+   "title": "1v1 Duel",
+   "players": "2",
+   "rules": "487",
+   "facts": [
+    [
+     "Victory Score",
+     "8 {{487.3}}"
+    ],
+    [
+     "Battlefieldek",
+     "Count: 2. Minden játékos 3-at ad a deckbe, de csak 1-et használ {{487.4}} {{487.4.a}}"
+    ],
+    [
+     "Battlefield kiválasztás",
+     "Véletlenszerűen választ, a másik kettő kikerül a játékból, a kiválasztottak egyszerre kerülnek a Battlefield Zone-ba {{487.5}}"
+    ],
+    [
+     "Kezdőjátékos",
+     "A Mode of Play határozza meg, hogyan dől el {{115.1.a}}. A 487 nem ír elő külön módszert, ezért az általános Turn Order szabály él: bármely fair random módszer {{115}}"
+    ],
+    [
+     "Első kör kiegyenlítés",
+     "A második játékos az első Channel Phase-ben 1 extra Rune-t channel-el a Rune Deckjéből {{487.7}}"
+    ],
+    [
+     "Csapat / teammate",
+     "Nincs csapat, 1 ellenfél {{487.2}}"
+    ],
+    [
+     "Egyéb",
+     "Best of 1 {{487.6}}"
+    ]
+   ],
+   "blocks": [
+    {
+     "type": "p",
+     "text": "A Duel a legegyszerűbb forma: két játékos, egy játék, a Battlefield kiválasztása véletlenszerű {{487.5}}."
+    },
+    {
+     "type": "callout",
+     "kind": "rule",
+     "title": "Győzelem",
+     "text": "Az első játékos, aki eléri a Victory Score-t Pointban, megnyeri a Matchet {{487.6}}. Az általános feltétel: cleanupban legalább a Victory Score és több pont, mint bárki másnak {{194.2}}."
+    },
+    {
+     "type": "steps",
+     "title": "Setup",
+     "items": [
+      {
+       "title": "Alap setup",
+       "text": "Legend a Legend Zone-ba, Chosen Champion a Champion Zone-ba, Battlefieldek félretéve {{111}} {{112}} {{113}}"
+      },
+      {
+       "title": "Battlefield",
+       "text": "Mindenki véletlenszerűen választ 1-et a 3-ból, a többi kikerül, a kiválasztottak egyszerre kerülnek a Battlefield Zone-ba {{487.5}}"
+      },
+      {
+       "title": "Deckek, Turn Order, kezdőkéz",
+       "text": "Main és Rune Deck külön megkeverve, Turn Order fair random módszerrel, mindenki 4 lapot húz, majd Mulligan {{114}} {{115}} {{116}} {{117}}"
+      },
+      {
+       "title": "Első kör",
+       "text": "A második játékos az első Channel Phase-ben 1 extra Rune-t channel-el {{487.7}}"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "match",
+   "title": "1v1 Match",
+   "players": "2",
+   "rules": "488",
+   "facts": [
+    [
+     "Victory Score",
+     "8 {{488.3}}"
+    ],
+    [
+     "Battlefieldek",
+     "Count: 2. Minden játékos 3-at ad a deckbe, játékonként 1-et használ {{488.4}} {{488.4.a}}"
+    ],
+    [
+     "Battlefield kiválasztás",
+     "Itt a játékos választ (a Duelben sorsolás van). A nem használt kettő félretéve marad {{488.5}}. Ha valaki nyert egy játékot, a használt Battlefieldek nem választhatók újra a Matchben, a félretettekből kell választani. Ha nem volt nyertes, újrahasználhatók {{488.5}} {{488.5.a}}"
+    ],
+    [
+     "Kezdőjátékos",
+     "A 488 nem ír elő külön módszert, az általános Turn Order szabály él {{115.1.a}} {{115}}"
+    ],
+    [
+     "Első kör kiegyenlítés",
+     "A második játékos az első Channel Phase-ben 1 extra Rune-t channel-el {{488.7}}"
+    ],
+    [
+     "Csapat / teammate",
+     "Nincs csapat, 1 ellenfél {{488.2}}"
+    ],
+    [
+     "Egyéb",
+     "Best of 3, opcionálisan best of 5 {{488.6}} {{488.6.a}}"
+    ]
+   ],
+   "blocks": [
+    {
+     "type": "p",
+     "text": "A Match több játékból áll: minden játék után reset, új Battlefieldek, és az nyer, aki először szerez Two Game Wint {{488.6}}."
+    },
+    {
+     "type": "callout",
+     "kind": "rule",
+     "title": "Győzelem",
+     "text": "Egy játékot az nyer, aki először eléri a Victory Score-t Pointban, és ezzel One Game Wint kap. A Matchet az nyeri, aki először ér el Two Game Wint {{488.6}}."
+    },
+    {
+     "type": "callout",
+     "kind": "rule",
+     "title": "Battlefield újrahasználat best of 5-nél",
+     "text": "A 4. és 5. játékban lehet olyan Battlefieldet mutatni, ami már kikerült a játékból {{488.6.a}}. Csak akkor, ha mindegyik Battlefieldedet már legalább egyszer bemutattad a Matchben {{488.6.a.1}}. Egy Battlefield legfeljebb kétszer mutatható be ilyen újrahasználattal {{488.6.a.2}}."
+    },
+    {
+     "type": "callout",
+     "kind": "warn",
+     "title": "Döntetlen játék",
+     "text": "Ha egy játékot senki sem nyer meg, az abban használt Battlefieldek újra használhatók {{488.5.a}}. Ha a Battlefieldeket nyertes játék után mégis újra előveszed, szabálytalan a setup {{488.5}}."
+    },
+    {
+     "type": "steps",
+     "title": "Setup (játékonként)",
+     "items": [
+      {
+       "title": "Alap setup",
+       "text": "Legend, Chosen Champion, Battlefieldek félretéve {{111}} {{112}} {{113}}"
+      },
+      {
+       "title": "Battlefield",
+       "text": "Mindenki kiválaszt 1-et a 3-ból, a többi félretéve marad, a kiválasztottak egyszerre kerülnek a Battlefield Zone-ba {{488.5}}"
+      },
+      {
+       "title": "Deckek, Turn Order, kezdőkéz",
+       "text": "{{114}} {{115}} {{116}} {{117}}"
+      },
+      {
+       "title": "Első kör",
+       "text": "A második játékos az első Channel Phase-ben 1 extra Rune-t channel-el {{488.7}}"
+      },
+      {
+       "title": "Következő játék",
+       "text": "Game state reset, a használt Battlefieldek kikerülnek, újak jönnek a félretettekből {{488.6}}"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ffa3",
+   "title": "FFA3 Skirmish",
+   "players": "3",
+   "rules": "489",
+   "facts": [
+    [
+     "Victory Score",
+     "8 {{489.3}}"
+    ],
+    [
+     "Battlefieldek",
+     "Count: 3. Minden játékos 3-at ad a deckbe, de csak 1-et használ {{489.4}} {{489.4.a}}"
+    ],
+    [
+     "Battlefield kiválasztás",
+     "Mindenki véletlenszerűen választ 1-et, a másik kettő kikerül. A kiválasztottak egyszerre kerülnek a három játékos közé {{489.5}}"
+    ],
+    [
+     "Kezdőjátékos",
+     "A 489 nem ír elő külön módszert, az általános Turn Order szabály él {{115.1.a}} {{115}}"
+    ],
+    [
+     "Első kör kiegyenlítés",
+     "Az első játékos az első Draw Phase-ben nem húz lapot. Az utolsó játékos az első Channel Phase-ben 1 extra Rune-t channel-el {{489.7}}"
+    ],
+    [
+     "Csapat / teammate",
+     "Nincs csapat, mindenki FFA, 2 ellenfél {{489.2}}"
+    ],
+    [
+     "Egyéb",
+     "Best of 1 {{489.6}}"
+    ]
+   ],
+   "blocks": [
+    {
+     "type": "p",
+     "text": "Három játékos, nincs csapat, mindenki mindenki ellen. Három Battlefield van játékban, mindegyik játékostól egy {{489.4}} {{489.5}}."
+    },
+    {
+     "type": "callout",
+     "kind": "rule",
+     "title": "Győzelem",
+     "text": "Az első játékos, aki eléri a Victory Score-t Pointban, nyer {{489.6}}. Több játékosnál az általános feltétel: cleanupban legalább a Victory Score és több pont, mint bármelyik másik játékosnak {{194.2}}. Ha többen elérték, a több pontos nyer, egyenlőségnél a játék folytatódik {{194.2.a}} {{194.2.b}}."
+    },
+    {
+     "type": "steps",
+     "title": "Setup",
+     "items": [
+      {
+       "title": "Alap setup",
+       "text": "{{111}} {{112}} {{113}}"
+      },
+      {
+       "title": "Battlefield",
+       "text": "Mindenki véletlenszerűen választ 1-et a 3-ból, a többi kikerül, a kiválasztottak egyszerre kerülnek a három játékos közé {{489.5}}"
+      },
+      {
+       "title": "Deckek, Turn Order, kezdőkéz",
+       "text": "{{114}} {{115}} {{116}} {{117}}"
+      },
+      {
+       "title": "Első kör",
+       "text": "Az első játékos nem húz az első Draw Phase-ben, az utolsó játékos 1 extra Rune-t channel-el az első Channel Phase-ben {{489.7}}"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ffa4",
+   "title": "FFA4 War",
+   "players": "4",
+   "rules": "490",
+   "facts": [
+    [
+     "Victory Score",
+     "8 {{490.3}}"
+    ],
+    [
+     "Battlefieldek",
+     "Count: 3. Minden játékos 3-at ad a deckbe {{490.4}} {{490.4.a}}. Az első játékos Battlefieldjei kikerülnek, ezért csak a másik 3 játékostól kerül 1-1 Battlefield játékba {{490.4.b}} {{490.5}}"
+    ],
+    [
+     "Battlefield kiválasztás",
+     "Aki nem az első, véletlenszerűen választ 1-et a 3-ból, a többi kikerül. A kiválasztottak egyszerre kerülnek a játékosok közé {{490.5}}"
+    ],
+    [
+     "Kezdőjátékos",
+     "A 490 nem ír elő külön módszert, az általános Turn Order szabály él {{115.1.a}} {{115}}"
+    ],
+    [
+     "Első kör kiegyenlítés",
+     "Az első játékos az első Draw Phase-ben nem húz lapot. Az utolsó játékos az első Channel Phase-ben 1 extra Rune-t channel-el {{490.7}}"
+    ],
+    [
+     "Csapat / teammate",
+     "Nincs csapat, mindenki FFA, 3 ellenfél {{490.2}}"
+    ],
+    [
+     "Egyéb",
+     "Best of 1 {{490.6}}"
+    ]
+   ],
+   "blocks": [
+    {
+     "type": "p",
+     "text": "Négy játékos, három Battlefield. Az első játékos Battlefieldjei nem kerülnek játékba {{490.4.b}}."
+    },
+    {
+     "type": "callout",
+     "kind": "warn",
+     "title": "Kinek a Battlefieldje van játékban",
+     "text": "Az első játékos eltávolítja a saját Battlefieldjeit, azok nem lesznek használva {{490.4.b}}. Ha ezt kihagyod, 4 Battlefield kerülne játékba a szabály szerinti 3 helyett {{490.4}}."
+    },
+    {
+     "type": "callout",
+     "kind": "rule",
+     "title": "Győzelem",
+     "text": "Az első játékos, aki eléri a Victory Score-t Pointban, nyer {{490.6}}. Az általános feltétel: cleanupban legalább a Victory Score és több pont, mint bárki másnak {{194.2}}."
+    },
+    {
+     "type": "steps",
+     "title": "Setup",
+     "items": [
+      {
+       "title": "Alap setup és Turn Order",
+       "text": "{{111}} {{112}} {{113}} {{115}}. Az első játékos ismerete kell a Battlefield választáshoz {{490.5}}"
+      },
+      {
+       "title": "Battlefield",
+       "text": "Az első játékos eltávolítja a Battlefieldjeit {{490.4.b}}. A többiek véletlenszerűen választanak 1-et a 3-ból, a másik kettő kikerül, a kiválasztottak egyszerre kerülnek játékba {{490.5}}"
+      },
+      {
+       "title": "Deckek, kezdőkéz",
+       "text": "{{114}} {{116}} {{117}}"
+      },
+      {
+       "title": "Első kör",
+       "text": "Az első játékos nem húz az első Draw Phase-ben, az utolsó játékos 1 extra Rune-t channel-el az első Channel Phase-ben {{490.7}}"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2v2",
+   "title": "2v2 Magma Chamber",
+   "players": "4",
+   "rules": "491",
+   "facts": [
+    [
+     "Victory Score",
+     "11 {{491.3}}"
+    ],
+    [
+     "Battlefieldek",
+     "Count: 3. Minden játékos 3-at ad a deckbe {{491.4}} {{491.4.a}}. Az első játékos Battlefieldjei kikerülnek {{491.5.b}}. Teammate-ek nem használhatják ugyanazt a Battlefieldet {{491.8.i}}"
+    ],
+    [
+     "Battlefield kiválasztás",
+     "Aki nem az első, véletlenszerűen választ 1-et a 3-ból, a többi kikerül, a kiválasztottak egyszerre kerülnek játékba {{491.5.a}}"
+    ],
+    [
+     "Kezdőjátékos",
+     "A 491 nem ír elő külön módszert, az általános Turn Order szabály él {{115.1.a}} {{115}}. A sorrend csapatok között váltakozik: első játékos, ellenfél, első játékos teammate-je, ellenfél teammate-je {{491.5.c}} {{491.5.c.1}}"
+    ],
+    [
+     "Első kör kiegyenlítés",
+     "Az első játékos az első Draw Phase-ben nem húz lapot. Az utolsó játékos az első Channel Phase-ben 1 extra Rune-t channel-el {{491.7}}"
+    ],
+    [
+     "Csapat / teammate",
+     "2 ellenfél, 1 teammate {{491.2}}. Közös pontszám {{491.8.d}}, friendly = saját vagy teammate objektuma {{491.8.e}} {{740.1.a}}, közös győzelem/vereség {{491.6.a}}"
+    ],
+    [
+     "Egyéb",
+     "Best of 1 {{491.6}}. Ülésrend: szemben ülő szövetségeseknél a sorrend az óramutató szerint halad, egymás mellett ülőknél átível az asztalon {{491.5.c.2}} {{491.5.c.3}}"
+    ]
+   ],
+   "blocks": [
+    {
+     "type": "p",
+     "text": "Két kétfős csapat. A legtöbb különbség a Unique Rules alatt van {{491.8}}: közös pont, Battlefield scoring korlát, nincs közös control."
+    },
+    {
+     "type": "callout",
+     "kind": "rule",
+     "title": "Győzelem",
+     "text": "A csapat nyer, amelyik először eléri a Victory Score-t Pointban {{491.6}}. A teammate-ek együtt nyernek vagy veszítenek: ha egyikük Concede-el vagy Lose-ol, az egész csapat veszít, ha egyikük Win-el, az egész csapat nyer {{491.6.a}} {{491.6.a.1}} {{491.6.a.2}} {{491.6.a.3}}."
+    },
+    {
+     "type": "callout",
+     "kind": "rule",
+     "title": "Közös pontszám",
+     "text": "Mindkét csapattag Victory Pointja azonos {{491.8.d.1}}. Ha egy játékos pontot nyer vagy veszít, a csapata nyeri vagy veszti {{491.8.d.2}}. Ha egy spell vagy ability a játékos pontszerzését vizsgálja, az a csapat pontszerzését ellenőrzi {{491.8.d.3}}."
+    },
+    {
+     "type": "callout",
+     "kind": "rule",
+     "title": "Battlefield scoring csapatonként",
+     "text": "Egy Battlefield körönként csapatonként csak egyszer Scoreolható, Conquer vagy Hold útján {{491.8.b}}. Ha a teammate contrololta a Battlefieldet a játékos körének Beginning Phase Scoring Step-jében, azt a csapat azon a körön nem Scoreolhatja {{491.8.b.1}} {{315.2.b.3}}. Ha ezt kihagyod, a teammate-et visszavonultatva és utána Conquerelve duplán pontoznál, amit a szabály kifejezetten tilt {{491.8.b.1}}."
+    },
+    {
+     "type": "callout",
+     "kind": "rule",
+     "title": "Final Point",
+     "text": "Ha a Final Pointot Conquerrel szerzi a játékos a saját vagy teammate-je körében, minden Battlefieldet Scoreolnia kell ugyanabban a körben, kivéve azokat, amiket a szövetségese foglalt a Beginning Phase Scoring Step-jében {{491.8.g.1}}. Más Final Point korlát nem változik {{491.8.g.2}}. Az alapszabály: ha nem Scoreolt minden Battlefieldet, lapot húz pont helyett {{473.1.b.1}}."
+    },
+    {
+     "type": "callout",
+     "kind": "rule",
+     "title": "Control nem közös",
+     "text": "A control nem közös {{491.8.c}}. Nem Hide-olhatsz lapot a teammate által contrololt Battlefieldnél {{491.8.c.1}}, és nem adhatsz Standard Movementet a teammate Unitjainak {{491.8.c.2}}."
+    },
+    {
+     "type": "callout",
+     "kind": "tip",
+     "title": "Teammate körében játszás",
+     "text": "A játékos spellt játszhat vagy abilityt aktiválhat a teammate körében, ha a teammate meghívja a saját Priorityjével {{491.8.a}}. A kéz Private Information, a teammate-nek bármikor megmutatható {{491.8.f}}, de a Reveal attól még game action és csak utasításra végezhető {{491.8.f.1}} {{425.2.a}}."
+    },
+    {
+     "type": "callout",
+     "kind": "warn",
+     "title": "Deck building megkötések",
+     "text": "Teammate-ek nem használhatják ugyanazt a Champion Legendet {{491.8.h}} és ugyanazokat a Battlefieldeket {{491.8.i}}."
+    },
+    {
+     "type": "steps",
+     "title": "Setup",
+     "items": [
+      {
+       "title": "Alap setup és Turn Order",
+       "text": "{{111}} {{112}} {{113}} {{115}}. A Turn Order csapatok között váltakozik {{491.5.c}} {{491.5.c.1}}"
+      },
+      {
+       "title": "Battlefield",
+       "text": "Az első játékos eltávolítja a Battlefieldjeit {{491.5.b}}. A többiek véletlenszerűen választanak 1-et a 3-ból, a másik kettő kikerül, a kiválasztottak egyszerre kerülnek játékba {{491.5.a}}"
+      },
+      {
+       "title": "Deckek, kezdőkéz",
+       "text": "{{114}} {{116}} {{117}}"
+      },
+      {
+       "title": "Első kör",
+       "text": "Az első játékos nem húz az első Draw Phase-ben, az utolsó játékos 1 extra Rune-t channel-el az első Channel Phase-ben {{491.7}}"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

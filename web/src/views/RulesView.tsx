@@ -2,14 +2,17 @@ import { Link2, Search } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { RULES, esc, expand, hashRef, headExtent, heads, refHash, ruleHTML } from '../legacy/core';
 import { Html } from '../components/Html';
+import { Blocks, inline } from './LearnView';
+import FMT from '../generated/formats.json';
 
-type Shown = { kind: 'head'; i: number } | { kind: 'ref'; ref: string } | { kind: 'search' };
+type Shown = { kind: 'head'; i: number } | { kind: 'ref'; ref: string } | { kind: 'search' } | { kind: 'fmt'; id: string };
+const F: any = FMT;
 
 export function RulesView({ hash }: { hash: string }) {
   const [q, setQ] = useState('');
   const [shown, setShown] = useState<Shown>(() => ({ kind: 'head', i: heads.find((i) => RULES[i][0] === '800')! }));
   const [copied, setCopied] = useState('');
-  useEffect(() => { if (/^#r-/.test(hash)) { setQ(''); setShown({ kind: 'ref', ref: hashRef(hash) }); window.scrollTo({ top: 0 }); } }, [hash]);
+  useEffect(() => { const fm = /^#fmt-([\w-]+)/.exec(hash); if (fm) { setQ(''); setShown({ kind: 'fmt', id: fm[1] }); window.scrollTo({ top: 0 }); return; } if (/^#r-/.test(hash)) { setQ(''); setShown({ kind: 'ref', ref: hashRef(hash) }); window.scrollTo({ top: 0 }); } }, [hash]);
   const toc = useMemo(() => heads.map((i) => ({ i, id: RULES[i][0], t: RULES[i][1], major: /00$/.test(RULES[i][0]) || RULES[i][0] === '483' })), []);
 
   const search = useMemo(() => {
@@ -40,6 +43,13 @@ export function RulesView({ hash }: { hash: string }) {
           <div className="count">{search ? search.idx.length + ' találat' + (search.idx.length > 200 ? ', az első 200 látszik' : '') : RULES.length + ' szabálypont. Válassz szakaszt a listából, vagy keress.'}</div>
         </div>
         <div className="toc">
+          <div className="toc-group">Versenyformátumok</div>
+          {F.formats.map((x: any) => (
+            <button key={x.id} className={'fmt' + (shown.kind === 'fmt' && shown.id === x.id ? ' on' : '')} onClick={() => { setQ(''); location.hash = '#fmt-' + x.id; }}>
+              <span className="id">{x.rules}</span>{x.title}
+            </button>
+          ))}
+          <div className="toc-group">Core Rules</div>
           {toc.map((h) => (
             <button key={h.i} className={h.major ? 'major' : ''} onClick={() => { setQ(''); setShown({ kind: 'head', i: h.i }); }}>
               <span className="id">{h.id}</span>{h.t}
@@ -54,7 +64,17 @@ export function RulesView({ hash }: { hash: string }) {
             <span className="status">{copied}</span>
           </div>
         )}
-        <Html html={body} />
+        {shown.kind === 'fmt' && !search ? (() => { const x = F.formats.find((y: any) => y.id === shown.id) || F.formats[0]; return (
+          <div className="fmt-page">
+            <div className="crumb">Szabályzat › Versenyformátumok</div>
+            <h2>{x.title}</h2>
+            <p className="note" dangerouslySetInnerHTML={{ __html: inline(F.intro) }} />
+            <table className="ltable fmt-facts"><tbody>{x.facts.map((r: string[], i: number) => <tr key={i}><th>{r[0]}</th><td dangerouslySetInnerHTML={{ __html: inline(r[1]) }} /></tr>)}</tbody></table>
+            <Blocks blocks={x.blocks} />
+            <div className="fmt-cmp"><h3>Összehasonlítás</h3>
+              <table className="ltable"><thead><tr><th>Formátum</th>{F.formats.map((y: any) => <th key={y.id}>{y.title}</th>)}</tr></thead>
+                <tbody>{['Victory Score', 'Battlefieldek'].map((k) => <tr key={k}><th>{k}</th>{F.formats.map((y: any) => { const f = y.facts.find((r: string[]) => r[0] === k); return <td key={y.id} dangerouslySetInnerHTML={{ __html: inline(f ? f[1] : '') }} />; })}</tr>)}</tbody></table></div>
+          </div>); })() : <Html html={body} />}
       </div>
     </div>
   );

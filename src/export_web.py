@@ -11,3 +11,5 @@ w('fonts.json',{k:base64.b64encode(open('font_%s.ttf'%k,'rb').read()).decode() f
 # Tanulás modul: fejezetek, kvízek, szituációk (src/data/learn.json)
 L=json.load(open('data/learn.json',encoding='utf-8')) if os.path.exists('data/learn.json') else {'chapters':[],'scenarios':[]}
 w('learn.json',L)
+# Versenyformátumok (Szabályzat fül)
+w('formats.json',json.load(open('data/formats.json',encoding='utf-8')) if os.path.exists('data/formats.json') else {'intro':'','formats':[]})
