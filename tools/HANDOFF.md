@@ -58,3 +58,9 @@
 6. Tanulás: szituációk a Playmaton (nagy nézet, Mi változott, unit részletek), haladó leckék. Kártyakvíz, napi feladvány és Chain építőből szituáció NEM kell.
 7. Kézikönyv: Fogalmak (tooltip forrás, közérthetőre átírva, kész), Kulcsszavak, Játékmenet ábrák interaktívvá (kör, chain, combat folyamat kattintható lépésekkel), Szabályváltozások és errata összefoglaló előtte/utána nézettel.
 8. Közös: Playwright e2e tesztek élesítés előtt; nincs PWA.
+
+## Takarékos módszer (2026-11-19-től)
+- Lapállapot: egy lap kész, ha két egymást követő ellenőrzés hibátlannak találta. Csak a javított vagy még nem kész lapok mennek újra (tools/audit/need17.json: 116 lap a 17. körre).
+- Kompakt köteg: tools/audit/gen2.py K lista.json kötegszám; a köteg tartalmazza a hivatkozott szabályok szövegét és példáit.
+- Szkriptes előszűrés: tools/audit/lint.py az agent-körök előtt.
+- Ellenőrző agentek kisebb modellen (sonnet), egyszerre legfeljebb 4-6.

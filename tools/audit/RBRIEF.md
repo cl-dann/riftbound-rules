@@ -39,6 +39,8 @@ A felhasználó 100%-os pontosságot kér. Te független ellenőr vagy. Minden l
 
 - A szempontlista lezárva: csak a fenti szempontok szerint javíts. Ne javíts olyat, ami helyes és érthető, csak mert máshogy is meg lehetne fogalmazni; a shortban a [A], [C], [n] jelek ki vannak írva, a notes-ban maradhatnak.
 
+- Kompakt köteg (17. körtől): minden lapnál a "rules" mező tartalmazza a notes által hivatkozott szabályok szövegét (t) és példáit (ex). Elsőként ezt használd. A teljes rules.json-hoz és cards.json-hoz csak akkor nyúlj, ha egy szükséges szabály vagy másik lap nincs benne, és akkor is csak célzott pythonos kereséssel, ne olvasd be egészben.
+
 ## Mit ellenőrizz
 1. `short`: minden állítás igaz, nincs túlzás, kitalált vagy elhagyott feltétel (may, up to, this turn, friendly/enemy, here, another, controller/owner), időzítés pontos (Action: saját kör vagy showdown; Reaction: bármikor; activated ability keyword nélkül csak saját Main Phase-ben, showdownon kívül), keywordök lényege pontos, költségek kiírva (Energy; Power a domain nevével), minden képesség lényege szerepel, érthető.
 2. `notes`: minden pont igaz a szabályszöveg szerint, a hivatkozott szabályszám létezik és azt mondja, a flag megfelelő (ami nyitott kérdés, ne legyen 0 vagy 1-es tényállítás; ami szabályból közvetlenül jön, lehet 0). Nincs ellentmondás a pontok és a short között.
