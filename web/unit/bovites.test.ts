@@ -39,12 +39,16 @@ describe('2. "for each" szorzó a frame boardjáról', () => {
     expect(x.ev('might')).toEqual([{ k: 'might', id: 'b0', name: 'Shipyard Skulker', from: 3, to: 7 }]);
     expect(x.text).toMatch(/Szorzó: 2/);
   });
-  it('nem követett adat (trash): bizonytalan, megnevezi a hiányzó adatot', () => {
+  it('Consuming Curse: a trashben lévő azonos nevű lapok Bonus Damage-et adnak (lapnál megadott korábbi + az elemzésben odakerült)', () => {
     const s = { k: 'card', n: 'Consuming Curse', pl: 'A', tg: [] };
     const I = (stepInfo(cs({ steps: [s] }), s) as any);
     expect(I.eff).toMatch(/for each card with this name/);
-    const x = run(cs({ bd: [{ n: 'Mega-Mech', pl: 'B', loc: 'bf0' }], steps: [{ k: 'card', n: 'Consuming Curse', pl: 'A', tg: ['b0'] }] }));
-    expect(x.r.html).toMatch(/hiányzó adat: a trash tartalma/);
+    const bd = [{ n: 'Mega-Mech', pl: 'B', loc: 'bf0' }];
+    const a = run(cs({ bd, steps: [{ k: 'card', n: 'Consuming Curse', pl: 'A', tg: ['b0'] }] }));
+    const n0 = a.ev('dmg')[0].n;
+    const b = run(cs({ bd, steps: [{ k: 'card', n: 'Consuming Curse', pl: 'A', tg: ['b0'], hv: { 1: 2 } }] }));
+    expect(b.ev('dmg')[0].n).toBe(n0 + 2);
+    expect(b.text).toMatch(/Bonus Damage: 2/);
   });
 });
 
@@ -82,10 +86,10 @@ describe('3. Replacement és Prevent (367-375, 438)', () => {
     expect(run(cs({ bd, steps: [{ k: 'card', n: 'Ruthless Strike', pl: 'A', addc: true, tg: ['b0'] }] })).ev('dmg')[0].n).toBe(5);
     expect(run(cs({ bd, steps: [{ k: 'card', n: 'Ruthless Strike', pl: 'A', tg: ['b0'] }] })).ev('dmg')[0].n).toBe(3);
   });
-  it('Sudden Storm: nem követett feltétel ("attacking"), a builderben állítható', () => {
+  it('Sudden Storm: az "attacking" feltétel a board attacker jelöléséből számolva', () => {
     const bd = [{ n: 'Mountain Drake', pl: 'B', loc: 'bf0' }];
     expect(run(cs({ bd, steps: [{ k: 'card', n: 'Sudden Storm', pl: 'A', tg: ['b0'] }] })).ev('dmg')[0].n).toBe(2);
-    expect(run(cs({ bd, steps: [{ k: 'card', n: 'Sudden Storm', pl: 'A', tg: ['b0'], cnd: { 1: '1' } }] })).ev('dmg')[0].n).toBe(4);
+    expect(run(cs({ bd: [{ ...bd[0], atk: 'a' }], steps: [{ k: 'card', n: 'Sudden Storm', pl: 'A', tg: ['b0'] }] })).ev('dmg')[0].n).toBe(4);
   });
 });
 

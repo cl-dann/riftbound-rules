@@ -3,7 +3,7 @@ import { expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import RULES from '../src/generated/rules.json';
 
-const FILES = ['src/legacy/chainCore.ts', 'src/legacy/chain.ts', 'src/components/combatCore.ts', 'src/components/CombatPanel.tsx', 'src/views/ChainView.tsx', 'src/components/Playmat.tsx'];
+const FILES = ['src/legacy/chainCore.ts', 'src/legacy/cardRules.ts', 'src/legacy/chain.ts', 'src/components/combatCore.ts', 'src/components/CombatPanel.tsx', 'src/views/ChainView.tsx', 'src/components/Playmat.tsx'];
 const ids = new Set((RULES as any[]).map((r) => r[0]));
 it('a hivatkozott szabályszámok léteznek', () => {
   const missing: string[] = [];
@@ -21,5 +21,5 @@ it('a hivatkozott szabályszámok léteznek', () => {
   expect(missing).toEqual([]);
 });
 it('nincs em-dash és en-dash', () => {
-  for (const f of FILES.concat(['unit/hivatalos.test.ts', 'unit/esetek.test.ts', 'unit/felismeres.test.ts', 'unit/combat.test.ts', 'unit/javitasok.test.ts', 'unit/javitasok2.test.ts', 'unit/javitasok3.test.ts', 'unit/javitasok4.test.ts', 'unit/bovites.test.ts'])) expect(readFileSync(f, 'utf8')).not.toMatch(/[\u2013\u2014]/);
+  for (const f of FILES.concat(['unit/hivatalos.test.ts', 'unit/esetek.test.ts', 'unit/felismeres.test.ts', 'unit/combat.test.ts', 'unit/javitasok.test.ts', 'unit/javitasok2.test.ts', 'unit/javitasok3.test.ts', 'unit/javitasok4.test.ts', 'unit/bovites.test.ts', 'unit/kezi.test.ts', 'unit/korvege.test.ts', 'unit/lefedettseg.test.ts', 'unit/lefedettseg.ts', 'unit/util.ts'])) expect(readFileSync(f, 'utf8')).not.toMatch(/[\u2013\u2014]/);
 });

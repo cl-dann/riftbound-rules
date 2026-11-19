@@ -51,13 +51,15 @@ describe('actOf: gyakori minták', () => {
     expect(actOf('If you paid the additional cost, deal 5 to it instead.')).toMatchObject({ k: 'dmg', n: 5, alt: true });
     expect(actOf('Return it to its owner\'s hand instead of putting it in their trash.').unsure).toMatch(/replacement/);
   });
-  it('feltételek: boardról kiértékelhető, kézi (builderben állítandó), ismert', () => {
-    expect(actOf('If you control 4 or fewer runes, draw 1.').cond).toMatchObject({ how: 'user' });
-    expect(classOf('If you control 4 or fewer runes, draw 1.')).toBe('user');
+  it('feltételek: boardról, játékállapotból, rejtett adatból (mező), ismert', () => {
+    expect(actOf('If you control 4 or fewer runes, draw 1.').cond).toMatchObject({ how: 'state', key: 'runes' });
+    expect(classOf('If you control 4 or fewer runes, draw 1.')).toBe('known');
+    expect(actOf('If you have 7 or more cards in hand, draw 1.').cond).toMatchObject({ how: 'hidden', why: 'a kéz mérete (rejtett)' });
+    expect(classOf('If you have 7 or more cards in hand, draw 1.')).toBe('hidden');
     expect(actOf('if you control two or more gear, ready me.').cond).toMatchObject({ how: 'board' });
     expect(actOf('If you played this from your hand, draw 1.').cond).toMatchObject({ how: 'known' });
   });
-  it('Choose one: módválasztás, a builderben választható', () => { expect(k('Choose one \u2014')).toBe('modal'); expect(classOf('Choose one \u2014')).toBe('user'); });
+  it('Choose one: módválasztás, a builderben választható', () => { expect(k('Choose one \u2014')).toBe('modal'); expect(classOf('Choose one \u2014')).toBe('known'); });
   it('"Then do this:" reflexív trigger, "Prevent", "Double all damage", "The next time it would die"', () => {
     expect(actOf('Then do this: Choose another enemy unit at its destination.')).toMatchObject({ k: 'reflex', inner: 'choose' });
     expect(actOf('Prevent the next 7 damage that would be dealt to it this turn.')).toMatchObject({ k: 'prevent', n: 7 });

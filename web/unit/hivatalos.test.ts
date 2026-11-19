@@ -5,6 +5,7 @@
 import { describe, expect, it } from 'vitest';
 import { cs, run, exampleOf } from './util';
 import { interp, stepInfo } from '../src/legacy/chainCore';
+import { CARDS } from '../src/legacy/core';
 
 const insts = (x: ReturnType<typeof run>, re: RegExp) => x.item(re)!.instr.map((i: any) => i.st);
 
@@ -340,12 +341,125 @@ describe('Equip és attach', () => {
   });
 });
 
-describe('Nem modellezett hivatalos példák (a felület ezeket nem számolja ki, csak megnevezi)', () => {
-  it.todo('355.11.b Fox-Fire: összesített Might megkötés részhalmaza');
-  it.todo('359.3.e.9.a Volibear és Repulse: mistargetelt célpontok számolása');
-  it.todo('758.2, 758.2.a Falling Star, Rebuke, Alpha Wildclaw: célozhatatlanság megszűnése a chain alatt');
-  it.todo('359.3.f.3 Lillia: a trigger feltételéből feljegyzett location');
-  it.todo('383.2.a.1 Sona: kör végi trigger feltétele');
-  it.todo('467.2.c.5 Lotus Trap és duplázás a kiosztásban');
-  it.todo('820.2.a Rocket Barrage Repeat (a módválasztást a bovites.test.ts teszteli, az ismételt végrehajtást nem modellezzük), 832.1.d Primordial Roar Show Off');
+describe('Korábban nem modellezett hivatalos példák', () => {
+  it('355.11.b Fox-Fire: az együttes Might túllépi a 4-et, legális részhalmaz az eredeti célpontokból', () => {
+    exampleOf('355.11.b', 'Fox-Fire');
+    const R = { n: 'Recruit', pl: 'B', loc: 'bf0' };
+    const bd = [R, R, R, R];
+    const steps = (sub?: number[]) => [
+      { k: 'card', n: 'Fox-Fire', pl: 'A', tg: ['b0', 'b1', 'b2', 'b3'], ...(sub ? { sub } : {}) },
+      { k: 'card', n: 'Combat Experience', pl: 'B', tg: ['b2'] }, { k: 'card', n: 'Combat Experience', pl: 'B', tg: ['b3'] }];
+    // alapfeltételezés: a lehető legtöbb célpont (1, 1, 2 Might), a negyedik kimarad
+    const a = run(cs({ bd, steps: steps() }));
+    expect(['b0', 'b1', 'b2', 'b3'].map((i) => a.zone(i))).toEqual(['trash', 'trash', 'trash', 'board']);
+    expect(a.text).toMatch(/együttes Mightja \(6\) már nagyobb, mint 4/);
+    expect(a.text).toMatch(/355\.11\.b/);
+    // a játékos a két 2 Mightú Recruitot választja
+    const b = run(cs({ bd, steps: steps([2, 3]) }));
+    expect(['b0', 'b1', 'b2', 'b3'].map((i) => b.zone(i))).toEqual(['board', 'board', 'trash', 'trash']);
+    // illegális választás (1 + 2 + 2 = 5): a felület jelzi, és a legtöbb célpontos részhalmazt számolja
+    const c = run(cs({ bd, steps: steps([0, 2, 3]) }));
+    expect(c.text).toMatch(/A lapnál megadott részhalmaz nem legális/);
+    // a 4-en belül maradó célpontok nem esnek ki
+    const d = run(cs({ bd, steps: [{ k: 'card', n: 'Fox-Fire', pl: 'A', tg: ['b0', 'b1', 'b2', 'b3'] }] }));
+    expect(['b0', 'b1', 'b2', 'b3'].map((i) => d.zone(i))).toEqual(['trash', 'trash', 'trash', 'trash']);
+  });
+  it('359.3.e.9.a Volibear és Repulse: a base-be mozgott célpontok számítanak, a trashbe kerültek nem', () => {
+    exampleOf('359.3.e.9.a', 'Volibear');
+    const U = { n: 'Shipyard Skulker', pl: 'B', loc: 'bf0' };
+    const bd = [{ n: 'Volibear, Furious', pl: 'A', loc: 'bf0' }, U, U, U];
+    const vt = { k: 'tg', src: 'b0', ti: 0, n: 'Volibear, Furious', pl: 'A', tg: ['b1', 'b2', 'b3'], split: { 0: 2, 1: 2, 2: 1 } };
+    const a = run(cs({ bd, steps: [vt, { k: 'card', n: 'Flash', pl: 'B', tg: ['b1', 'b2'] }, { k: 'res' }, { k: 'card', n: 'Repulse', pl: 'B', tg: ['b3', 's0'] }] }));
+    expect(a.text).toMatch(/Nem szabályos:[^\n]*Repulse[^\n]*3 friendly unitot választott[^\n]*359\.3\.e\.9\.a/);
+    expect(a.zone('s0')).not.toBe('countered');
+    const b = run(cs({ bd, steps: [vt, { k: 'card', n: 'Heedless Resurrection', pl: 'B', costTg: 'b1' }, { k: 'res' },
+      { k: 'card', n: 'Heedless Resurrection', pl: 'B', costTg: 'b2' }, { k: 'res' }, { k: 'card', n: 'Repulse', pl: 'B', tg: ['b3', 's0'] }] }));
+    expect(b.zone('s0')).toBe('countered');
+    expect(b.ev('dmg')).toHaveLength(0);
+    expect(b.text).toMatch(/Counterelték: nem csinál semmit, lekerül a chainről és megszűnik/);
+  });
+  it('758.2 Falling Star, Discipline, Eclipse: a célozhatatlanság a resolve-kor számít', () => {
+    exampleOf('758.2', 'Falling Star');
+    (CARDS as any[]).push({ n: 'Teszt Védett Unit', a: ['Teszt Védett Unit'], t: 'Unit', st: [], d: ['Calm'], tg: [], e: 1, p: null, m: 1, txt: "I can't be chosen by enemy spells or abilities with Energy cost less than my Might." });
+    const bd = [{ n: 'Teszt Védett Unit', pl: 'A', loc: 'bf0' }];
+    const fs = { k: 'card', n: 'Falling Star', pl: 'B', tg: ['b0', 'b0'] };
+    const prot = run(cs({ bd, steps: [fs, { k: 'card', n: 'Discipline', pl: 'A', tg: ['b0'] }] }));
+    expect(prot.ev('dmg')).toHaveLength(0);
+    expect(prot.text).toMatch(/Mightja \(3\) nagyobb, mint a forrás Energy költsége \(2\)/);
+    const x = run(cs({ bd, steps: [fs, { k: 'card', n: 'Discipline', pl: 'A', tg: ['b0'] }, { k: 'res' }, { k: 'card', n: 'Eclipse', pl: 'B', tg: ['b0'] }] }));
+    expect(x.ev('dmg').map((e: any) => e.n)).toEqual([3, 3]);
+    expect(x.text).toMatch(/újra legális célpont \(758\.2\)/);
+    expect(x.zone('b0')).toBe('trash');
+    // a kitalált tesztlapot a teszt végén kivesszük, hogy más tesztet ne befolyásoljon
+    const ix = (CARDS as any[]).findIndex((c) => c.n === 'Teszt Védett Unit');
+    (CARDS as any[]).splice(ix, 1);
+    expect((CARDS as any[]).some((c) => c.n === 'Teszt Védett Unit')).toBe(false);
+  });
+  it('758.2.a Alpha Wildclaw, Vilemaw, Rebuke, Star-Crossed: a passzív védelem megszűnése után Vilemaw legális célpont', () => {
+    exampleOf('758.2.a', 'Alpha Wildclaw');
+    const bd = [{ n: 'Alpha Wildclaw', pl: 'A', loc: 'bf0' }, { n: 'Vilemaw', pl: 'A', loc: 'bf0' }, { n: 'Shipyard Skulker', pl: 'B', loc: 'bf0' }];
+    const x = run(cs({ bd, steps: [{ k: 'card', n: 'Rebuke', pl: 'B', tg: ['b1'] }, { k: 'card', n: 'Discipline', pl: 'A', tg: ['b0'] }, { k: 'res' },
+      { k: 'card', n: 'Star-Crossed', pl: 'B', tg: ['b2', 'b0'] }] }));
+    expect(x.zone('b0')).toBe('hand');
+    expect(x.zone('b1')).toBe('hand');
+    expect(x.text).toMatch(/758\.2\.a/);
+    // Star-Crossed nélkül Vilemaw a resolve-kor illegális célpont
+    const y = run(cs({ bd, steps: [{ k: 'card', n: 'Rebuke', pl: 'B', tg: ['b1'] }, { k: 'card', n: 'Discipline', pl: 'A', tg: ['b0'] }] }));
+    expect(y.zone('b1')).toBe('board');
+    expect(y.text).toMatch(/Alpha Wildclaw passzív képessége miatt/);
+  });
+  it('359.3.f.3 Lillia: a trigger a feltételből feljegyzett locationre teszi a Sprite tokent, akkor is, ha Lillia közben elhagyja a boardot', () => {
+    exampleOf('359.3.f.3', 'Lillia');
+    const x = run(cs({ bd: [{ n: 'Lillia, Fae Fawn', pl: 'A', loc: 'bf1' }, { n: 'Shipyard Skulker', pl: 'B', loc: 'bf1' }],
+      steps: [{ k: 'tg', src: 'b0', ti: 0, n: 'Lillia, Fae Fawn', pl: 'A', mfrom: 'bf0' }, { k: 'card', n: 'Star-Crossed', pl: 'B', tg: ['b1', 'b0'] }] }));
+    expect(x.zone('b0')).toBe('hand');
+    expect(x.o('k1')).toMatchObject({ name: 'Sprite token', loc: 'bf0', zone: 'board', m: 3 });
+    expect(x.text).toMatch(/359\.3\.f\.3/);
+  });
+  it('383.2.a.1 Sona: a kör végi trigger csak battlefielden triggerel, és lefut, ha Sona közben eltűnik', () => {
+    exampleOf('383.2.a.1', 'Sona');
+    const a = run(cs({ turn: 'A', bd: [{ n: 'Sona, Harmonious', pl: 'A', loc: 'bf0' }, { n: 'Shipyard Skulker', pl: 'B', loc: 'bf0' }],
+      steps: [{ k: 'end' }, { k: 'card', n: 'Star-Crossed', pl: 'B', tg: ['b1', 'b0'] }] }));
+    expect(a.r.items.map((i: any) => i.name)).toEqual(['Star-Crossed', 'Sona, Harmonious triggere (kör vége)']);
+    expect(a.text).toMatch(/A forrás már nincs a boardon, de a trigger feltétele a triggereléskor teljesült, ezért a trigger lefut \(383\.2\.a\.1\)/);
+    const b = run(cs({ turn: 'A', bd: [{ n: 'Sona, Harmonious', pl: 'A', loc: 'base' }], steps: [{ k: 'end' }] }));
+    expect(b.r.items).toHaveLength(0);
+    expect(b.text).toMatch(/a kör végén nem teljesül, ezért nem triggerel/);
+    // az ellenfél körének végén nem triggerel ("At the end of your turn")
+    const c = run(cs({ turn: 'B', bd: [{ n: 'Sona, Harmonious', pl: 'A', loc: 'bf0' }], steps: [{ k: 'end' }] }));
+    expect(c.r.items).toHaveLength(0);
+  });
+  it('820.2.a Rocket Barrage Repeat: két különböző gear a választott sorrendben, vagy más mód a második végrehajtásra', () => {
+    exampleOf('820.2.a', 'Rocket Barrage');
+    const bd = [{ n: 'Sun Disc', pl: 'B', loc: 'base' }, { n: 'Long Sword', pl: 'B', loc: 'base' }];
+    const a = run(cs({ bd, steps: [{ k: 'card', n: 'Rocket Barrage', pl: 'A', mode: 1, rep: true, mode2: 1, tg: ['b1', 'b0'] }] }));
+    expect(a.ev('zone').map((e: any) => e.id)).toEqual(['b1', 'b0']);
+    expect(a.text).toMatch(/820\.1\.d\.1, 820\.2, 820\.2\.a/);
+    const b = run(cs({ bd: [{ n: 'Shipyard Skulker', pl: 'B', loc: 'base' }, bd[0]], steps: [{ k: 'card', n: 'Rocket Barrage', pl: 'A', mode: 0, rep: true, mode2: 1, tg: ['b0', 'b1'] }] }));
+    expect(b.ev('dmg')).toEqual([expect.objectContaining({ id: 'b0', n: 4 })]);
+    expect(b.zone('b1')).toBe('trash');
+    // Repeat nélkül csak egyszer
+    const c = run(cs({ bd, steps: [{ k: 'card', n: 'Rocket Barrage', pl: 'A', mode: 1, tg: ['b1'] }] }));
+    expect(c.zone('b0')).toBe('board');
+  });
+  it("820.1.d.1 Desert's Call Repeat: két Sand Soldier token", () => {
+    exampleOf('820.1.d.1', 'Sand Soldier');
+    const x = run(cs({ steps: [{ k: 'card', n: "Desert's Call", pl: 'A', rep: true }] }));
+    expect(x.ev('token')).toHaveLength(2);
+    expect(run(cs({ steps: [{ k: 'card', n: "Desert's Call", pl: 'A' }] })).ev('token')).toHaveLength(1);
+  });
+  it('832.1.d.1 Primordial Roar: a Show Off-olt unit Mightja a finalizáláskor rögzül', () => {
+    exampleOf('832.1.d.1', 'Primordial Roar');
+    const x = run(cs({ bd: [{ n: 'Sona, Harmonious', pl: 'A', loc: 'base' }, { n: 'Shipyard Skulker', pl: 'B', loc: 'bf0' }],
+      steps: [{ k: 'card', n: 'Primordial Roar', pl: 'A', so: 'b0', tg: ['b1'] }, { k: 'card', n: 'Frigid Touch', pl: 'B', tg: ['b0'] }] }));
+    expect(x.ev('dmg')).toEqual([expect.objectContaining({ id: 'b1', n: 4 })]);
+    expect(x.zone('b1')).toBe('trash');
+    expect(x.text).toMatch(/832\.1\.d\.1/);
+    // kézből felfedett unit: a lap nyomtatott Mightja
+    const h = run(cs({ bd: [{ n: 'Shipyard Skulker', pl: 'B', loc: 'bf0' }], steps: [{ k: 'card', n: 'Primordial Roar', pl: 'A', so: 'h:Mega-Mech', tg: ['b0'] }] }));
+    expect(h.ev('dmg')[0].n).toBe(8);
+    // Show Off nélkül nincs damage
+    const n = run(cs({ bd: [{ n: 'Shipyard Skulker', pl: 'B', loc: 'bf0' }], steps: [{ k: 'card', n: 'Primordial Roar', pl: 'A', tg: ['b0'] }] }));
+    expect(n.ev('dmg')).toHaveLength(0);
+  });
 });

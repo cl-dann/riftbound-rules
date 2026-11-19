@@ -21,12 +21,26 @@ describe('1. A lap saját, feltételes "enter ready" sora', () => {
     expect(run(cs({ steps: [play('Shadow')] })).o('s0').ex).toBe(true);
     expect(run(cs({ bf: [{ n: 'Zaun Warrens', c: 'B' }], steps: [play('Vayne, Hunter')] })).o('s0').ex).toBe(false);
   });
-  it('nem követett adattól függő feltétel (Bandle Soldier [Level 3]): bizonytalan, alapból exhausted, a builderben állítható', () => {
-    expect(enterReadyCond(vsCard('Bandle Soldier'))).toMatchObject({ how: 'user' });
+  it('játékállapotból számolt feltétel (Bandle Soldier [Level 3]): kezdő XP alapból 0, így exhausted; 6 XP-vel ready', () => {
+    expect(enterReadyCond(vsCard('Bandle Soldier'))).toMatchObject({ how: 'state' });
     const a = run(cs({ steps: [play('Bandle Soldier')] }));
     expect(a.o('s0').ex).toBe(true);
-    expect(a.r.html).toMatch(/bizonytalan<\/span> "\[Level 3\]\[&gt;\] I enter ready\."/);
-    expect(run(cs({ steps: [play('Bandle Soldier', { erd: '1' })] })).o('s0').ex).toBe(false);
+    expect(a.r.html).toMatch(/"\[Level 3\]\[&gt;\] I enter ready\.": a feltétel nem teljesül \(a játékállapotból számolva\)/);
+    const b = run({ ...cs({ steps: [play('Bandle Soldier')] }), ps: { A: { xp: 6 } } } as any);
+    expect(b.o('s0').ex).toBe(false);
+  });
+  it('rejtett adat (Dunebreaker, kéz mérete): alapból nem teljesül, a lapnál megadható', () => {
+    expect(enterReadyCond(vsCard('Dunebreaker'))).toMatchObject({ how: 'hidden' });
+    const a = run(cs({ steps: [play('Dunebreaker')] }));
+    expect(a.o('s0').ex).toBe(true);
+    expect(a.r.html).toMatch(/feltételezés: nem teljesül/);
+    expect(run(cs({ steps: [play('Dunebreaker', { erd: '1' })] })).o('s0').ex).toBe(false);
+  });
+  it('Towering Pairofant: "If a unit died this turn" a lépésekből számolva', () => {
+    const a = run(cs({ bd: [{ n: 'Shipyard Skulker', pl: 'B', loc: 'bf0' }], steps: [{ k: 'card', n: 'Vengeance', pl: 'A', tg: ['b0'] }, play('Towering Pairofant')] }));
+    expect(a.zone('b0')).toBe('trash');
+    expect(a.o('s1').ex).toBe(false);
+    expect(run(cs({ steps: [play('Towering Pairofant')] })).o('s0').ex).toBe(true);
   });
 });
 
@@ -49,7 +63,7 @@ describe('2. Más lapok által adott ready belépés', () => {
   });
   it('Bushwhack és Sun Disc felismerése', () => {
     expect(actOf('Friendly units enter ready this turn.').k).toBe('enterReady');
-    expect(actOf('[Legion] \u2014 The next unit you play this turn enters ready.')).toMatchObject({ k: 'nextReady', cond: { how: 'user' } });
+    expect(actOf('[Legion] \u2014 The next unit you play this turn enters ready.')).toMatchObject({ k: 'nextReady', cond: { how: 'state', key: 'played' } });
   });
 });
 

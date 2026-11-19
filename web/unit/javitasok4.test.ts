@@ -15,19 +15,22 @@ describe('Ready belépés finomítások', () => {
     expect(run(cs({ bd: [{ n: 'Recruit', pl: 'A', loc: 'base' }, { n: 'Recruit', pl: 'A', loc: 'base' }], steps: [play('Xin Zhao, Vigilant')] })).o('s0').ex).toBe(false);
     expect(run(cs({ bd: [{ n: 'Recruit', pl: 'A', loc: 'base' }, { n: 'Recruit', pl: 'B', loc: 'base' }, { n: 'Recruit', pl: 'A', loc: 'bf0' }], steps: [play('Xin Zhao, Vigilant')] })).o('s0').ex).toBe(true);
   });
-  it('Sun Disc [Legion]: a korábbi lépésből kiszámolva teljesül; előzmény nélkül nem követett, a builderben felülírható', () => {
+  it('Sun Disc [Legion]: a korábbi lépésből kiszámolva teljesül; előzmény nélkül nem, a kezdőérték (korábban kijátszott lap) a builderben megadható', () => {
     const sd = { n: 'Sun Disc', pl: 'A', loc: 'base' };
     const yes = run(cs({ bd: [sd], steps: [play('Shipyard Skulker'), { k: 'ab', src: 'b0', ai: 0, n: 'Sun Disc', pl: 'A' }] }));
-    expect(yes.text).toMatch(/korábbi lépésekből/);
+    expect(yes.text).toMatch(/a feltétel \("Legion"\) teljesül \(játékállapotból: korábban kijátszott lap: van/);
     const no = run(cs({ bd: [sd], steps: [{ k: 'ab', src: 'b0', ai: 0, n: 'Sun Disc', pl: 'A' }] }));
-    expect(no.text).toMatch(/nem követett adattól függ/);
-    const ov = run(cs({ bd: [sd], steps: [play('Shipyard Skulker'), { k: 'ab', src: 'b0', ai: 0, n: 'Sun Disc', pl: 'A', cnd: { 0: '0' } }] }));
-    expect(ov.text).toMatch(/nem teljesül \(a builderben így állítva\)/);
+    expect(no.text).toMatch(/nem teljesül \(játékállapotból: korábban kijátszott lap: nincs/);
+    const st = run({ ...cs({ bd: [sd], steps: [{ k: 'ab', src: 'b0', ai: 0, n: 'Sun Disc', pl: 'A' }] }), ps: { A: { played: 1 } } } as any);
+    expect(st.text).toMatch(/teljesül \(játékállapotból: korábban kijátszott lap: van/);
   });
-  it('Renata a boardon és token létrehozás: a felület jelzi, hogy nem követett', () => {
+  it('Renata a boardon: a token létrejön és ready lép be (143.4.a); nélküle exhausted (143.4)', () => {
     const x = run(cs({ bd: [{ n: 'Renata Glasc, Industrialist', pl: 'A', loc: 'base' }], steps: [{ k: 'card', n: "Desert's Call", pl: 'A' }] }));
-    expect(x.text).toMatch(/nem követett: token létrehozás Renata Glasc, Industrialist a boardon van/);
+    expect(x.ev('token')).toHaveLength(1);
+    expect(x.o('k1')).toMatchObject({ name: 'Sand Soldier token', zone: 'board', loc: 'base', ex: false, m: 2 });
+    expect(x.text).toMatch(/Renata Glasc, Industrialist: "Your tokens enter ready\.", 143\.4\.a/);
     const y = run(cs({ steps: [{ k: 'card', n: "Desert's Call", pl: 'A' }] }));
-    expect(y.text).not.toMatch(/nem követett: token létrehozás/);
+    expect(y.o('k1')).toMatchObject({ ex: true, m: 2 });
+    expect(y.text).toMatch(/exhausted \(143\.4\)/);
   });
 });
