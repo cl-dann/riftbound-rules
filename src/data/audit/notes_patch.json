@@ -538,5 +538,69 @@
    "Open State-ben",
    "Neutral Open State-ben (showdownon kívül)"
   ]
+ ],
+ "Gemcraft Seer": [
+  [
+   "tokenek is, Predictet adnak.",
+   "tokenek is, Visiont kapnak."
+  ],
+  [
+   "Ha az első Predictnél",
+   "Ha az első Visionnél"
+  ]
+ ],
+ "Skystrike Squadron": [
+  [
+   "Ha nincs friendly geared,",
+   "Ha nincs friendly gear,"
+  ]
+ ],
+ "Temporal Portal": [
+  [
+   "A teljes costra ható kedvezmény viszont az additional costot, így a Repeatet is csökkentheti.",
+   "A teljes costra ható kedvezmény viszont csökkentheti az additional costot, így a Repeatet is."
+  ]
+ ],
+ "Legion Quartermaster": [
+  [
+   "Ha nincs friendly geared,",
+   "Ha nincs friendly gear,"
+  ]
+ ],
+ "Armed Assailant": [
+  [
+   "Equip cost nélküli Equipment így nem csatolható.",
+   "Equip cost nélküli Equipment pedig nem csatolható, mert nincs kifizethető Equip cost (821.1.c.4)."
+  ]
+ ],
+ "Azir, Emperor of the Sands": [
+  [
+   "Equip cost nélküli Equipment így nem csatolható.",
+   "Equip cost nélküli Equipment pedig nem csatolható, mert nincs kifizethető Equip cost (821.1.c.4)."
+  ]
+ ],
+ "Combat Chef": [
+  [
+   "Equip cost nélküli Equipment így nem csatolható.",
+   "Equip cost nélküli Equipment pedig nem csatolható, mert nincs kifizethető Equip cost (821.1.c.4)."
+  ]
+ ],
+ "Master Bingwen": [
+  [
+   "Equip cost nélküli Equipment így nem csatolható.",
+   "Equip cost nélküli Equipment pedig nem csatolható, mert nincs kifizethető Equip cost (821.1.c.4)."
+  ]
+ ],
+ "Sentinel Adept": [
+  [
+   "Equip cost nélküli Equipment így nem csatolható.",
+   "Equip cost nélküli Equipment pedig nem csatolható, mert nincs kifizethető Equip cost (821.1.c.4)."
+  ]
+ ],
+ "Veteran Poro": [
+  [
+   "Equip cost nélküli Equipment így nem csatolható.",
+   "Equip cost nélküli Equipment pedig nem csatolható, mert nincs kifizethető Equip cost (821.1.c.4)."
+  ]
  ]
 }

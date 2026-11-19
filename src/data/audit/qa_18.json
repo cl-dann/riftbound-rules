@@ -176,7 +176,7 @@
    ],
    [
     "Mi van, ha az Equip cost csak Energy?",
-    "Akkor nincs kedvezmény. Equip cost nélküli Equipment így nem csatolható.",
+    "Akkor nincs kedvezmény. Equip cost nélküli Equipment pedig nem csatolható.",
     "821.1.c.3,821.1.c.4"
    ],
    [
@@ -949,7 +949,7 @@
   "Wily Newtfish": [
    [
     "Mikor kapja a bónuszt?",
-    "Ha ebben a körben XP-t szereztél, bármilyen forrásból, például Hunttal. A kör végéig tart, az opponent körében is.",
+    "Ha ebben a körben XP-t szereztél, bármilyen forrásból, például Hunttal. A kör végéig tart, az opponent körében szerzett XP-nél is csak abban a körben.",
     "364.3.a,730.1"
    ],
    [
@@ -958,8 +958,8 @@
     "730.2"
    ],
    [
-    "Ad plusz mozgást a Ganking?",
-    "Nem, csak a Standard Move-ot bővíti battlefieldről battlefieldre lépéssel. Readynek kell lennie hozzá.",
+    "Mit ad a Ganking?",
+    "Standard Move közben battlefieldről battlefieldre is léphet, nem csak base és battlefield között. Readynek kell lennie hozzá.",
     "810.1.b,810.1.c.3"
    ]
   ],

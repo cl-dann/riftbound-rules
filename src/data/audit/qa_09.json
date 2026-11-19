@@ -571,7 +571,7 @@
     "355.10,355.5.b"
    ],
    [
-    "Mi van az már buffolt unittal?",
+    "Mi van a már buffolt unittal?",
     "Választható, de nem kap második buffot.",
     "427.1.b.1,427.1.c"
    ],
@@ -1179,7 +1179,7 @@
    ],
    [
     "Mi van, ha a base-ben hal meg?",
-    "A base is location, az ott lévő többi unitod miatt nem volt egyedül, így nem húzol.",
+    "A base is location: ha ott van más saját unitod, nem volt egyedül, így nem húzol. Ha egyedül állt a base-ben, húzol.",
     "198.1"
    ],
    [
