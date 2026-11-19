@@ -231,8 +231,8 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
         {ch.rules && <p className="note">Core Rules: <span dangerouslySetInnerHTML={{ __html: inline('{{' + ch.rules + '}}') }} /></p>}
         <div className="orn"><i /></div>
         <Blocks blocks={ch.blocks} />
-        <QuizBox ch={ch} p={p} setP={setP} />
-        {!(ch.quiz || []).length && !p.done[ch.id] && <button className="btn sm" style={{ marginTop: 20 }} onClick={() => setP({ ...p, done: { ...p.done, [ch.id]: 1 } })}><Check size={14} /> Elolvastam</button>}
+        {ch.level === 'halado' && <QuizBox ch={ch} p={p} setP={setP} />}
+        {(ch.level !== 'halado' || !(ch.quiz || []).length) && !p.done[ch.id] && <button className="btn sm" style={{ marginTop: 20 }} onClick={() => setP({ ...p, done: { ...p.done, [ch.id]: 1 } })}><Check size={14} /> Elolvastam</button>}
         <div className="pager">
           {prev ? <a href={B + '/' + prev.id}><small><ChevronLeft size={11} /> Előző</small><b>{prev.title}</b></a> : <span />}
           {next ? <a className="next" href={B + '/' + next.id}><small>Következő <ChevronRight size={11} /></small><b>{next.title}</b></a>
@@ -245,7 +245,7 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
       <div className="hero" style={{ margin: '-26px calc(-1 * clamp(16px, 4vw, 42px)) 18px' }}>
         <div className="crumb">{base === 'hogyan' ? 'How to Play' : 'Practice'}</div>
         <h2>{base === 'hogyan' ? 'How to Play' : 'Practice'}</h2>
-        <p>{base === 'hogyan' ? '10 fejezet a Core Rules alapján, a végén kvíz. A haladás ebben a böngészőben mentődik.' : 'Szituációk a pályán lépésenként, döntésekkel, plusz haladó leckék. A haladás ebben a böngészőben mentődik.'}</p>
+        <p>{base === 'hogyan' ? '10 fejezet a Core Rules alapján. A haladás ebben a böngészőben mentődik.' : 'Szituációk a pályán lépésenként, döntésekkel, plusz haladó leckék. A haladás ebben a böngészőben mentődik.'}</p>
         <a className="btn hex" href={B + '/' + (firstOpen?.id || '')}>{doneN ? 'Folytatás' : 'Kezdés'}: {firstOpen?.title} <ChevronRight size={16} /></a>
       </div>
       <div className="levels">
