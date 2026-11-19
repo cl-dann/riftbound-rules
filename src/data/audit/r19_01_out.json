@@ -1,0 +1,169 @@
+{
+ "fixes": {
+  "Akshan, Mischievous": {
+   "short": "Weaponmaster: kijátszáskor egy már általad kontrollált Equipmentet (akár másik unitról) rácsatolhatsz az Equip cost kifizetésével; az Equip cost bármilyen domainű Powerjéből 1-gyel kevesebbet fizetsz, de a domainhez kötött Power csökkenése nem eldöntött. Ha plusz 2 Body Powert fizetsz, egy ellenséges geart a base-edbe mozgatsz, és addig a tiéd, amíg Akshan a boardon van. Ha Equipment, ingyen Akshanra csatolódik.",
+   "notes": [
+    [
+     "356.2.b.1,383.2.a.1",
+     0,
+     "A 2 Body Power optional additional cost, a kijátszás 2. lépésében döntesz róla. Ha nem fizeted ki, a play effect nem kerül chain-re."
+    ],
+    [
+     "355.10,718.5.b",
+     1,
+     "Az enemy gear target. Unitra csatolt Equipment is választható (718.5.b); ilyenkor levezetés szerint leválik a korábbi unitjáról, mert a base-be kerül."
+    ],
+    [
+     "391.5.b",
+     0,
+     "A \"You control it until I leave the board\" delayed ability: a kontroll addig tart, amíg Akshan a boardon van. Utána a gear visszakerül az eredeti controlleréhez."
+    ],
+    [
+     "359.3.e.16",
+     0,
+     "A szabályzat név szerint ezt a lapot hozza példának: ha Akshan a play effect resolve-ja előtt elhagyja a boardot, a kontrollt adó ability létre sem jön, a geart egy pillanatra sem kontrollálod."
+    ],
+    [
+     "435.1.f,435.4",
+     0,
+     "Ha a gear Equipment, Akshanra csatolódik, Equip cost nélkül. Az Equipment locationje ettől kezdve Akshané."
+    ],
+    [
+     "821.1.c,383.3.d",
+     1,
+     "A Weaponmaster külön play effect, a targetjét a chain-re kerüléskor választod. Az ellopott Equipment akkor még nem a tiéd, ezért a Weaponmaster csak egy már általad kontrollált Equipmentet választhat."
+    ],
+    [
+     "719.5,323.6",
+     1,
+     "Ha Akshan elhagyja a boardot, a rá csatolt Equipment leválik és a helyén marad. A következő cleanup a controllere base-ébe recallolja."
+    ],
+    [
+     "821.1.c.3,135.2.e.6",
+     2,
+     "Hogy a lap saját domainjére szóló [C] Equip cost [A]-t tartalmazónak számít-e, vagyis csökken-e, a Core Rules nem mondja ki. Judge döntse el."
+    ]
+   ],
+   "why": "A Weaponmaster [C] Equip costra vonatkozó nyitott kérdés (821.1.c.3) hiányzott: a short 'ha a költségben van ilyen' megfogalmazása eldöntöttnek tüntette fel, a notesból pedig hiányzott a flag 2 pont (a többi Weaponmaster lappal egységesen)."
+  },
+  "Armed Assailant": {
+   "short": "Kijátszáskor fizethetsz plusz 1 Energy és 1 Fury Power költséget: ekkor ready lép be. Weaponmaster: kijátszáskor egy Equipmentedet rácsatolhatod, akár egy másik unitról áthozva; az Equip cost bármilyen domainű Powerjéből 1-gyel kevesebbet fizetsz, de hogy a domainhez kötött Power is csökken-e, nem eldöntött. Ha az Equipmentnek nincs Equip költsége, így nem csatolható.",
+   "notes": [
+    [
+     "805.1.b,805.1.b.1",
+     0,
+     "[Accelerate]: kijátszáskor [1] és egy Fury Power additional costért ready lép be. A Power csak a unit saját domainjéből fizethető."
+    ],
+    [
+     "821.1.c,383.3.a",
+     0,
+     "[Weaponmaster]: play effect, a \"you may\" az elején áll. Kiválasztasz egy általad kontrollált Equipmentet, és az Equip costját [A]-val (egy bármely domainű Powerrel) csökkentve kifizetve rácsatolod."
+    ],
+    [
+     "821.1.b,821.1.c.6",
+     0,
+     "Az Equip ability szokásos időzítése nem számít, és az ability nem aktiválódik. Az Equip aktiválására figyelő effectek nem futnak le."
+    ],
+    [
+     "821.1.c.3,821.1.c.4",
+     0,
+     "Ha az Equip cost nem tartalmaz [A]-t, kifizethető, de nem lesz olcsóbb. Equip cost nélküli Equipment így nem csatolható."
+    ],
+    [
+     "435.1.f",
+     0,
+     "Már másik unitra csatolt Equipment is választható: onnan leválik."
+    ],
+    [
+     "821.1.c.5",
+     0,
+     "Ha a cost nem fizethető ki, az Equipment a helyén marad, ahhoz csatolva, amihez addig volt."
+    ],
+    [
+     "821.1.c.3,135.2.e.6",
+     2,
+     "Hogy a lap saját domainjére szóló [C] Equip cost [A]-t tartalmazónak számít-e, vagyis csökken-e, a Core Rules nem mondja ki. Judge döntse el."
+    ]
+   ],
+   "why": "Weaponmaster [C] Equip cost nyitott kérdés (821.1.c.3): a short 'ha van benne ilyen' eldöntöttként kezelte, a flag 2 pont hiányzott."
+  },
+  "Blastcone Fae": {
+   "short": "Kijátszáskor egy unit -2 Mightot kap erre a körre, de 1 Might alá nem csökken. Hidden: a saját körödben, showdownon kívül 1 bármilyen Powerért elrejtheted egy általad kontrollált battlefielden, és a következő körtől ingyen, Reaction időzítéssel kijátszhatod, de akkor csak az ottani unitot választhatod. Ha ott nincs más unit, saját magát kell gyengítenie.",
+   "why": "A 'legfeljebb 1 Mightig' félreérthető, a 'to a minimum of 1' (479.4.b) azt jelenti, hogy a Might 1 alá nem csökken."
+  },
+  "Danger Zone": {
+   "notes": [
+    [
+     "355.5.a,355.10.d",
+     1,
+     "Nincs target: minden általad kontrollált, Mech taggel rendelkező unitra hat. Deflect és \"can't be chosen\" nem számít."
+    ],
+    [
+     "187.4",
+     0,
+     "A 3 Mightú Mech token is Mech taggel rendelkezik, rá is hat."
+    ],
+    [
+     "355.5.a",
+     1,
+     "A resolve-kor a boardon lévő Mechjeid kapják a bónuszt. A később kijátszott Mech nem."
+    ],
+    [
+     "820.1.d,135.2.e.5.a",
+     0,
+     "Repeat [1][A]: kifizetve minden Mech +2-t kap. Az [A] bármely domain Powerével fizethető, nem csak Fury vagy Mind Powerrel."
+    ],
+    [
+     "103.3.d",
+     0,
+     "Signature lap (Rumble tag): a deckben összesen legfeljebb 3 olyan Signature kártya lehet, amelynek Champion tagje megegyezik a Champion Legend Champion tagjével."
+    ]
+   ],
+   "why": "103.3.d: elírás, a 'Champion Legended' nem létező kifejezés (Champion Legend)."
+  },
+  "Yone, Blademaster": {
+   "short": "Weaponmaster: kijátszáskor ráteheted egy saját Equipmentedet (akár másik unitról áthelyezve) az Equip cost kifizetésével; az Equip cost bármilyen domainű Powerjéből 1-gyel kevesebbet fizetsz, de hogy a domainhez kötött Power is csökken-e, nem eldöntött. Ha egy senki által nem kontrollált battlefieldet conquerel, a Mightjával megegyező sebzést okoz egy enemy unitnak, ami a base-ben áll.",
+   "notes": [
+    [
+     "170.11.b,170.11.c",
+     1,
+     "Az errata \"open\" helyett \"uncontrolled\" battlefieldet ír. Az open üres és kontroll nélküli, az uncontrolled csak kontroll nélküli: olyan battlefield elfoglalása is számít, ahol álltak unitok, de senki sem kontrollálta."
+    ],
+    [
+     "383.4.c.2.a",
+     0,
+     "Conquer effect: csak akkor triggerel, ha Yone ott van a battlefielden, amikor conquerelsz."
+    ],
+    [
+     "355.9.b,355.8,403.4",
+     0,
+     "A target csak base-ben álló enemy unit lehet. Ha nincs ilyen, a trigger chainre kerülve rögtön le is kerül róla (403.4), így nem fut le."
+    ],
+    [
+     "710",
+     0,
+     "A sebzés Yone resolve-kori aktuális Mightja, a csatolt Equipment Might bonusával együtt."
+    ],
+    [
+     "359.3.e.12",
+     0,
+     "Ha Yone a resolve előtt elhagyja a boardot, a Mightja null, a sebzés ignorálódik."
+    ],
+    [
+     "821.1.c,821.1.c.3",
+     0,
+     "[Weaponmaster]: kijátszáskor egy általad kontrollált Equipment Equip costját [A]-val olcsóbban kifizetve Yone-ra csatolhatod, akár egy másik unitról áthelyezve is. Ha az Equip costban nincs [A], a cost nem csökken, teljes áron fizeted (821.1.c.3)."
+    ],
+    [
+     "821.1.c.3,135.2.e.6",
+     2,
+     "Hogy a lap saját domainjére szóló [C] Equip cost [A]-t tartalmazónak számít-e, vagyis csökken-e, a Core Rules nem mondja ki. Judge döntse el."
+    ]
+   ],
+   "why": "Weaponmaster [C] Equip cost nyitott kérdés (821.1.c.3): a note-ban flag 0 alatt szerepelt a nyitott rész (flag 2 kell), a short 'ha a cost tartalmaz bármilyen domainű Powert' eldöntöttnek tüntette fel; a 403.4 hivatkozás hiányzott a refs-ből."
+  }
+ },
+ "checked": 16,
+ "data_issues": [],
+ "open": []
+}
