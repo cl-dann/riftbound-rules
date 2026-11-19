@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import { IMGBASE, vsCard } from '../legacy/core';
 
-export type PUnit = { n: string; m: number; base?: number; ex?: boolean; dmg?: number; tag?: string; status?: string[]; mods?: string[]; gear?: string[]; token?: boolean };
+export type PUnit = { n: string; m: number; base?: number; ex?: boolean; dmg?: number; tag?: string; status?: string[]; mods?: string[]; gear?: string[]; token?: boolean; id?: string; kind?: 'gear' };
 export type PSide = {
   legend?: string; champion?: string | null; base?: PUnit[]; runes?: { ready: number; exhausted: number; domains?: string[] };
   hand?: string[]; handCount?: number; score?: number; deck?: number; runeDeck?: number; trash?: string[]; banish?: string[];
@@ -58,13 +58,13 @@ function Unit({ u, side, changed, where = '' }: { u: PUnit; side: 'me' | 'opp'; 
   const diff = u.m - base;
   const st = u.status || [];
   return (
-    <div className={'pm-unit ' + side + (u.ex ? ' ex' : '') + (changed ? ' chg' : '') + (st.includes('dying') ? ' dying' : '')} onClick={(e) => { e.stopPropagation(); pick(u, side, where); }} role="button" tabIndex={0}>
-      <div className="pm-labels">{st.map((s) => STATUS[s] ? <span key={s} className={'pm-lab ' + STATUS[s][1]} data-tt={STATUS[s][2]}>{STATUS[s][0]}</span> : null)}{u.token && <span className="pm-lab tmp">Token</span>}</div>
+    <div className={'pm-unit ' + side + (u.ex ? ' ex' : '') + (changed ? ' chg' : '') + (st.includes('dying') ? ' dying' : '') + (u.kind === 'gear' ? ' gear' : '')} data-uid={u.id} onClick={(e) => { e.stopPropagation(); pick(u, side, where); }} role="button" tabIndex={0}>
+      <div className="pm-labels">{st.map((s) => STATUS[s] ? <span key={s} className={'pm-lab ' + STATUS[s][1]} data-tt={STATUS[s][2]}>{STATUS[s][0]}</span> : null)}{u.token && <span className="pm-lab tmp">Token</span>}{u.kind === 'gear' && <span className="pm-lab eq">Gear</span>}</div>
       <span className={c ? 'cl' : ''} data-card={c?.n}>
         {c?.img ? <img src={IMGBASE + c.img} alt={u.n} loading="lazy" /> : <span className="pm-tok">{u.n}</span>}
       </span>
-      <span className={'pm-might' + (diff > 0 ? ' up' : diff < 0 ? ' down' : '')} title={'Might ' + u.m + (diff ? ' (nyomtatva ' + base + ')' : '')}>{u.m}</span>
-      {diff !== 0 && <span className={'pm-delta' + (diff > 0 ? ' up' : ' down')}>{diff > 0 ? '+' : ''}{diff}</span>}
+      {u.kind !== 'gear' && <span className={'pm-might' + (diff > 0 ? ' up' : diff < 0 ? ' down' : '')} title={'Might ' + u.m + (diff ? ' (nyomtatva ' + base + ')' : '')}>{u.m}</span>}
+      {u.kind !== 'gear' && diff !== 0 && <span className={'pm-delta' + (diff > 0 ? ' up' : ' down')}>{diff > 0 ? '+' : ''}{diff}</span>}
       {!!u.dmg && <span className="pm-dmg" title="Damage">{u.dmg}</span>}
       <div className="pm-name">{u.n}</div>
       {!!((u.mods || []).some((m) => !labNames.has(m.toLowerCase())) || u.gear?.length || u.tag) && (
@@ -103,7 +103,7 @@ function RuneStacks({ r, onZone, sel }: { r?: PSide['runes']; onZone: (z: string
   );
 }
 
-function Piles({ s, onZone, sel }: { s: PSide; onZone: (z: string) => void; sel: string }) {
+function Piles({ s, onZone, sel, known }: { s: PSide; onZone: (z: string) => void; sel: string; known?: boolean }) {
   const P = ({ z, l, n, top }: { z: string; l: string; n?: number; top?: string | null }) => (
     <button type="button" className={'pm2-pile' + (sel === z ? ' on' : '')} onClick={() => onZone(z)} title={ZONES[z]?.t}>
       <Card n={top} small /><span>{l}<b>{n ?? 0}</b></span>
@@ -111,16 +111,17 @@ function Piles({ s, onZone, sel }: { s: PSide; onZone: (z: string) => void; sel:
   );
   return (
     <div className="pm2-piles">
-      <P z="deck" l="Deck" n={s.deck} />
-      <P z="runeDeck" l="Rune Deck" n={s.runeDeck} />
+      {!(known && s.deck == null) && <P z="deck" l="Deck" n={s.deck} />}
+      {!(known && s.runeDeck == null) && <P z="runeDeck" l="Rune Deck" n={s.runeDeck} />}
       <P z="trash" l="Trash" n={(s.trash || []).length} top={(s.trash || []).slice(-1)[0] || null} />
       <P z="banish" l="Banish" n={(s.banish || []).length} top={(s.banish || []).slice(-1)[0] || null} />
     </div>
   );
 }
 
-function Hand({ s, onZone, sel }: { s: PSide; onZone: (z: string) => void; sel: string }) {
+function Hand({ s, onZone, sel, known }: { s: PSide; onZone: (z: string) => void; sel: string; known?: boolean }) {
   const n = s.hand ? s.hand.length : s.handCount ?? 0;
+  if (known && !n) return null;
   return (
     <button type="button" className={'pm2-hand' + (sel === 'hand' ? ' on' : '')} onClick={() => onZone('hand')}>
       <span className="pm2-cards">
@@ -216,7 +217,8 @@ export function diffBoards(a: PBoard | undefined, b: PBoard): string[] {
   return out;
 }
 
-export function Playmat({ b, prev, explain = true, focus, turn = 'me' }: { b: PBoard; prev?: PBoard; explain?: boolean; focus?: string; turn?: 'me' | 'opp' }) {
+/** onlyKnown: csak az ismert zónák látszanak (a Chain elemzőnél nincs deck, rune és teljes kéz adat). */
+export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown = false }: { b: PBoard; prev?: PBoard; explain?: boolean; focus?: string; turn?: 'me' | 'opp' | null; onlyKnown?: boolean }) {
   const [sel, setSel] = useState(focus || '');
   const [pu, setPu] = useState<{ u: PUnit; side: 'me' | 'opp'; where: string } | null>(null);
   const onZone = (z: string) => { setPu(null); setSel(sel === z ? '' : z); };
@@ -225,12 +227,12 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me' }: { b: PB
   const score = (who: 'me' | 'opp') => { const v = b[who].score; return v == null ? null : <button type="button" className={'pm2-pts ' + who} onClick={() => onZone('score')}>{v}<small>pts</small></button>; };
   return (
     <PickCtx.Provider value={pick}>
-    <div className="pm2">
+    <div className={'pm2' + (onlyKnown ? ' known' : '')}>
       <div className="pm2-table">
         <div className="pm2-bar opp"><span>Opponent</span>{turn === 'opp' && <span className="pm2-turn">Turn</span>}</div>
         <div className="pm2-band opp-top">
-          <Piles s={b.opp} onZone={onZone} sel={sel} />
-          <Hand s={b.opp} onZone={onZone} sel={sel} />
+          <Piles s={b.opp} onZone={onZone} sel={sel} known={onlyKnown} />
+          <Hand s={b.opp} onZone={onZone} sel={sel} known={onlyKnown} />
           <RuneStacks r={b.opp.runes} onZone={onZone} sel={sel} />
         </div>
         <div className="pm2-band opp-base">
@@ -247,7 +249,7 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me' }: { b: PB
               <div key={i} className="pm2-bf">
                 <div className="pm2-ubox opp"><span className="pm2-uh">Opponent units{!!f.opp?.length && <b>{f.opp.length}</b>}</span>
                   <div className="pm2-units">{(f.opp || []).map((u, j) => <Unit key={j} u={u} side="opp" where={f.name} changed={!!prev && !pko.has(key(u))} />)}</div></div>
-                <div className={'pm2-bfc ' + (f.ctrl || 'none')}>
+                <div className={'pm2-bfc ' + (f.ctrl || 'none')} data-bfi={i}>
                   <span className="cl" data-card={f.name}>{img(f.name) ? <img src={img(f.name)} alt={f.name} loading="lazy" /> : <span className="pm-tok">{f.name}</span>}</span>
                   <span className="pm2-ctrl">{f.ctrl === 'me' ? 'Te kontrollálod' : f.ctrl === 'opp' ? 'Ellenfél kontrollálja' : 'Senkié'}</span>
                   <button type="button" className={'pm2-fd' + (f.facedown ? ' has ' + f.facedown : '') + (sel === 'facedown' ? ' on' : '')} onClick={() => onZone('facedown')} title="Facedown Zone">
@@ -261,7 +263,7 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me' }: { b: PB
           })}
           <button type="button" className={'pm2-chain' + (sel === 'chain' ? ' on' : '')} onClick={() => onZone('chain')}>
             <span className="pm2-uh">Chain</span>
-            {!b.chain?.length ? <span className="pm-empty">üres</span> : b.chain.map((c, i) => <span key={i} className="pm2-ci">{i === 0 ? <b>Felül: </b> : null}{c.replace(/\[\[([^\]]+)\]\]/g, '$1')}</span>)}
+            {!b.chain?.length ? <span className="pm-empty">üres</span> : b.chain.map((c, i) => <span key={i} className="pm2-ci" data-ci={i}>{i === 0 ? <b>Felül: </b> : null}{c.replace(/\[\[([^\]]+)\]\]/g, '$1')}</span>)}
           </button>
           {score('me')}
         </div>
@@ -271,8 +273,8 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me' }: { b: PB
         </div>
         <div className="pm2-band me-bottom">
           <RuneStacks r={b.me.runes} onZone={onZone} sel={sel} />
-          <Hand s={b.me} onZone={onZone} sel={sel} />
-          <Piles s={b.me} onZone={onZone} sel={sel} />
+          <Hand s={b.me} onZone={onZone} sel={sel} known={onlyKnown} />
+          <Piles s={b.me} onZone={onZone} sel={sel} known={onlyKnown} />
         </div>
         <div className="pm2-bar me"><span>You</span>{turn === 'me' && <span className="pm2-turn">Turn</span>}</div>
       </div>
