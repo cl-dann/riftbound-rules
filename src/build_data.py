@@ -58,6 +58,8 @@ for (fn,ty),vs in groups.items():
       'sets':sorted({v['cardSet'] for v in vs},key=SETORDER.index),'code':base['cardCode'],'rar':base['rarity'],
       'txt':txt,'old':printed if (err is not None and printed!=txt) else None,'err':err,
       'img':(base.get('imageUrl') or '').rsplit('/',1)[-1],
+      'pr':[[v['cardCode'],v['setCode'],v['cardSet'],v['cardNumber'],v['rarity'],(v.get('imageUrl') or '').rsplit('/',1)[-1]] for v in sorted(vs,key=lambda v:(SETORDER.index(v['cardSet']),v['cardCode']))],
+      'fk':fn,
       'ch':chtag,
       'banf':BAN_FUT['from'] if fn in BAN_FUT['cards'] else None,
       'ban':1 if fn in BAN else (2 if base['name'] in BAN2 and ty=='Legend' else 0),'_fn':fn,'_name':base['name']})

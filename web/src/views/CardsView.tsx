@@ -1,5 +1,6 @@
 import { LayoutGrid, List, Search, X } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { Printings } from '../components/Printings';
 import { CARDS, META, cardHeadHTML, cardRulesHTML, domDots, esc, norm, typeLine, IMGBASE } from '../legacy/core';
 import { Html } from '../components/Html';
 
@@ -198,7 +199,7 @@ export function CardsView({ active }: { active: boolean }) {
           if (s) { const c = CARDS.find((x: any) => x.n === s.dataset.sim); if (c) { setSel(c); detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }
         }}>
         {sel
-          ? <Html key={sel.n} html={cardHeadHTML(sel, 'h2') + '<h3 class="rb-sep">Erre a kártyára érvényes szabályok</h3><p class="note">A szakaszok a Core Rules (' + META.rules_updated + ') eredeti angol szövegét mutatják. Kattintásra nyílnak.</p>' + cardRulesHTML(sel)} />
+          ? <><Html key={sel.n} html={cardHeadHTML(sel, 'h2')} /><Printings key={'p' + sel.n} card={sel} /><Html key={'r' + sel.n} html={'<h3 class="rb-sep">Erre a kártyára érvényes szabályok</h3><p class="note">A szakaszok a Core Rules (' + META.rules_updated + ') eredeti angol szövegét mutatják. Kattintásra nyílnak.</p>' + cardRulesHTML(sel)} /></>
           : <div className="empty"><h2>Válassz egy lapot</h2><p className="note">Keress rá a kártya nevére, vagy kattints egy lapra a listában. Itt jelenik meg a lap szövege, az errata, a Röviden összefoglaló és a rá vonatkozó szabályok.</p></div>}
       </div>
       {zoom && <img className={'zoom-pop' + (zoom.land ? ' land' : '')} src={zoom.src} alt="" style={{ top: zoom.y, left: zoom.right ? zoom.x : undefined, right: zoom.right ? undefined : window.innerWidth - zoom.x }} />}

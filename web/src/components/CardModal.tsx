@@ -3,6 +3,7 @@ import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { cardHeadHTML, cardRulesHTML, CARDS } from '../legacy/core';
 import { Html } from './Html';
+import { Printings } from './Printings';
 
 /** Kártyalap felugró ablakban. Bármelyik nézet megnyithatja: window 'rb:open-card' esemény, detail = kártyanév. */
 export function CardModal() {
@@ -32,11 +33,11 @@ export function CardModal() {
           <Dialog.Close className="absolute right-4 top-4 rounded-md p-1.5 text-[var(--muted)] hover:bg-[var(--panel2)] hover:text-[var(--ink)]" aria-label="Bezárás">
             <X size={20} />
           </Dialog.Close>
-          {card && (
-            <Html
-              html={cardHeadHTML(card, 'h2') + '<h3 class="rb-sep">Erre a kártyára érvényes szabályok</h3>' + cardRulesHTML(card)}
-            />
-          )}
+          {card && (<>
+            <Html html={cardHeadHTML(card, 'h2')} />
+            <Printings card={card} />
+            <Html html={'<h3 class="rb-sep">Erre a kártyára érvényes szabályok</h3>' + cardRulesHTML(card)} />
+          </>)}
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
