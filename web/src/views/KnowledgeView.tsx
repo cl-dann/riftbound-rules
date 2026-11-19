@@ -13,6 +13,7 @@ export function KnowledgeView({ hash }: { hash: string }) {
         const t = e.target as HTMLInputElement; if (!t.classList.contains('errq')) return;
         const q = t.value.trim().toLowerCase();
         (e.currentTarget as HTMLElement).querySelectorAll('.errc').forEach((c) => { (c as HTMLElement).hidden = !!q && !(c as HTMLElement).dataset.n!.includes(q); });
+        (e.currentTarget as HTMLElement).querySelectorAll('.errgrp').forEach((g) => { (g as HTMLElement).hidden = !g.querySelector('.errc:not([hidden])'); });
       }}
       onClick={(e) => {
         const t = e.target as HTMLElement;

@@ -36,7 +36,7 @@ export function renderTud(){
     X.flow.forEach((b,bi)=>{const st=b.steps||[];
       h+='<div class="fdia" data-fb="'+bi+'"><h3>'+esc(b.title)+'<span class="n">'+esc(b.rules||'')+'</span></h3><div class="ftrack" role="tablist">'
         +st.map((x,i)=>'<button role="tab" class="fnode'+(i?'':' on')+'" data-fs="'+bi+':'+i+'" aria-selected="'+(i?'false':'true')+'"><span class="fi">'+(i+1)+'</span><span class="fn">'+esc(x.name)+'</span></button>').join('')+'</div>'
-        +st.map((x,i)=>'<div class="fpane"'+(i?' hidden':'')+' data-fp="'+bi+':'+i+'"><div class="fhead"><b>'+(i+1)+'. '+esc(x.name)+'</b>'+rl(x.rule)+'</div><p>'+glossify(esc(x.text))+'</p><div class="fnav">'+(i?'<button class="btn sec sm" data-fs="'+bi+':'+(i-1)+'">Előző: '+esc(st[i-1].name)+'</button>':'')+(i<st.length-1?'<button class="btn sm" data-fs="'+bi+':'+(i+1)+'">Következő: '+esc(st[i+1].name)+'</button>':'')+'</div></div>').join('')
+        +st.map((x,i)=>'<div class="fpane"'+(i?' hidden':'')+' data-fp="'+bi+':'+i+'"><div class="fhead"><b>'+(/^\d+\./.test(x.name)?'':(i+1)+'. ')+esc(x.name)+'</b>'+rl(x.rule)+'</div><p>'+glossify(esc(x.text))+'</p><div class="fnav">'+(i?'<button class="btn sec sm" data-fs="'+bi+':'+(i-1)+'">Előző: '+esc(st[i-1].name)+'</button>':'')+(i<st.length-1?'<button class="btn sm" data-fs="'+bi+':'+(i+1)+'">Következő: '+esc(st[i+1].name)+'</button>':'')+'</div></div>').join('')
         +'</div>';});
   }
   {
