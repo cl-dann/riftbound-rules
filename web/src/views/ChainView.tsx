@@ -5,10 +5,10 @@ import { Playmat, type PBoard } from '../components/Playmat';
 import { CombatPanel } from '../components/CombatPanel';
 
 type Arrow = { from: number; to: string };
-type MtInstr = { t: string; st: 'executed' | 'partial' | 'ignored' | 'negated' | 'skipped'; ref: string; why: string };
+type MtInstr = { t: string; st: 'executed' | 'partial' | 'ignored' | 'negated' | 'skipped'; ref: string; why: string; man?: boolean };
 /** Mistarget adat egy resolve frame-hez (359.3.e.9): a célpontok legalitása és az utasítások sorsa. */
 type MtInfo = { item: string; kind: 'full' | 'partial' | 'none'; targets: { n: string; ok: boolean; skip?: boolean; why?: string }[]; instr: MtInstr[] };
-export type ChainFrame = { label: string; board: PBoard; changes: [string, string][]; arrows: Arrow[]; bfi?: number[]; mt?: MtInfo | null };
+export type ChainFrame = { label: string; board: PBoard; changes: [string, string, number?][]; arrows: Arrow[]; bfi?: number[]; mt?: MtInfo | null };
 
 const ST_TXT: Record<MtInstr['st'], [string, string]> = {
   executed: ['Végrehajtódik', 'ok'], partial: ['Részben', 'part'], ignored: ['Ignored', 'ign'], negated: ['Negated', 'neg'], skipped: ['Nem hajtódik végre', 'ign'],
@@ -26,7 +26,7 @@ function MistargetBox({ mt }: { mt: MtInfo }) {
       ))}</ul>
       {mt.instr.length > 0 && (
         <table className="cbv-mt-in"><tbody>{mt.instr.map((x, k) => (
-          <tr key={k}><td className="q">"{x.t}"</td><td><span className={'cbv-st ' + ST_TXT[x.st][1]}>{ST_TXT[x.st][0]}</span></td><td>{x.ref && <Refs r={x.ref} />}{x.why}</td></tr>
+          <tr key={k}><td className="q">"{x.t}"</td><td><span className={'cbv-st ' + ST_TXT[x.st][1]}>{ST_TXT[x.st][0]}</span></td><td>{x.ref && <Refs r={x.ref} />}{x.why}{x.man && <span className="cbman">kézzel beállítva</span>}</td></tr>
         ))}</tbody></table>
       )}
     </div>
@@ -146,6 +146,7 @@ function ChainPlayback({ frames }: { frames: ChainFrame[] }) {
   const clearHi = () => host.current?.querySelectorAll('.dropok,.dropno').forEach((x) => x.classList.remove('dropok', 'dropno'));
   const onDragStart = (e: React.DragEvent) => {
     const u = (e.target as HTMLElement).closest<HTMLElement>('.pm-unit.dnd'); if (!u) return;
+    setMv(null);
     drag.current = { uid: u.dataset.uid!, side: u.classList.contains('opp') ? 'opp' : 'me' };
     e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', 'unit:' + u.dataset.uid);
     setPlay(false);
@@ -164,15 +165,93 @@ function ChainPlayback({ frames }: { frames: ChainFrame[] }) {
     if (err) { keep.current = false; setDropMsg(err); } else setDropMsg('Áthelyezve a kiinduló helyzetben, az elemzés újrafutott.');
   };
   const onDragEnd = () => { drag.current = null; clearHi(); };
+
+  /* Koppintásos (és billentyűzetes) mozgatás: lap kijelölése, majd a kiemelt célzóna kiválasztása. Ugyanazt csinálja, mint a drop. */
+  const [mv, setMv] = useState<{ uid: string; side: string; n: string } | null>(null);
+  const focusAfter = useRef<string | null>(null);
+  useEffect(() => { setMv(null); }, [ci]);
+  const zoneName = (z: { loc: string; side?: string }) => z.loc === 'base' ? 'saját base' : (f.board.bfs[(f.bfi || []).indexOf(+z.loc.slice(2))]?.name || z.loc);
+  const legalZones = (): { el: HTMLElement; loc: string; side?: string }[] => {
+    const h = host.current; if (!h || !mv) return [];
+    const cur = zoneOf(h.querySelector('.pm-unit[data-uid="' + mv.uid + '"]'));
+    const out: { el: HTMLElement; loc: string; side?: string }[] = [];
+    h.querySelectorAll<HTMLElement>('.pm2-base, .pm2-bf').forEach((el) => {
+      const z = zoneOf(el.firstElementChild || el); if (!z || z.el !== el) return;
+      if (z.side != null && z.side !== mv.side) return;
+      if (cur && cur.el === el) return;
+      out.push(z);
+    });
+    return out;
+  };
+  useLayoutEffect(() => {
+    const h = host.current; if (!h) return;
+    h.querySelectorAll<HTMLElement>('.mvok').forEach((el) => { el.classList.remove('mvok'); el.removeAttribute('tabindex'); el.removeAttribute('role'); el.removeAttribute('aria-label'); });
+    h.querySelectorAll('.mvsel').forEach((el) => el.classList.remove('mvsel'));
+    h.classList.toggle('mvmode', !!mv);
+    if (mv) {
+      h.querySelector('.pm-unit[data-uid="' + mv.uid + '"]')?.classList.add('mvsel');
+      legalZones().forEach((z) => { z.el.classList.add('mvok'); z.el.tabIndex = 0; z.el.setAttribute('role', 'button'); z.el.setAttribute('aria-label', mv.n + ' ide: ' + zoneName(z)); });
+    }
+    if (focusAfter.current) { const el = h.querySelector<HTMLElement>('.pm-unit[data-uid="' + focusAfter.current + '"]'); if (el) { el.focus(); focusAfter.current = null; } }
+  });
+  // mozgatási módban ne jelenjen meg kártya tooltip (a TipLayer a documenten figyel)
+  useEffect(() => {
+    const h = host.current; if (!h || !mv) return;
+    const stop = (e: Event) => e.stopPropagation();
+    const esc = (e: KeyboardEvent) => { if (e.key === 'Escape') cancelMv(); };
+    h.addEventListener('mouseover', stop); h.addEventListener('focusin', stop); window.addEventListener('keydown', esc);
+    window.dispatchEvent(new Event('rb:hide-tip'));
+    return () => { h.removeEventListener('mouseover', stop); h.removeEventListener('focusin', stop); window.removeEventListener('keydown', esc); };
+  });
+  const cancelMv = () => { const u = mv?.uid; setMv(null); if (u) focusAfter.current = u; };
+  const startMv = (u: HTMLElement) => {
+    setPlay(false);
+    setMv({ uid: u.dataset.uid!, side: u.classList.contains('opp') ? 'opp' : 'me', n: u.querySelector('.pm-name')?.textContent || 'a lap' });
+  };
+  const doMove = (z: { loc: string }) => {
+    if (!mv) return; const uid = mv.uid; setMv(null); keep.current = true; focusAfter.current = uid;
+    const err = chainApi.moveUnit?.(uid, z.loc) ?? null;
+    if (err) { keep.current = false; setDropMsg(err); } else setDropMsg(mv.n + ' áthelyezve (' + zoneName(z) + ') a kiinduló helyzetben, az elemzés újrafutott.');
+  };
+  const onClickCap = (e: React.MouseEvent) => {
+    const t = e.target as HTMLElement;
+    if (!mv) {
+      const u = t.closest<HTMLElement>('.pm-unit.dnd'); if (!u) return;
+      e.stopPropagation(); e.preventDefault(); startMv(u); return;
+    }
+    e.stopPropagation(); e.preventDefault();
+    if (t.closest('.pm-unit[data-uid="' + mv.uid + '"]')) { cancelMv(); return; }
+    const z = legalZones().find((x) => x.el.contains(t)); if (z) doMove(z);
+  };
+  const onKeyCap = (e: React.KeyboardEvent) => {
+    const t = e.target as HTMLElement;
+    const act = e.key === 'Enter' || e.key === ' ';
+    if (!mv) {
+      if (act && t.matches('.pm-unit.dnd')) { e.preventDefault(); e.stopPropagation(); startMv(t); window.setTimeout(() => host.current?.querySelector<HTMLElement>('.mvok')?.focus(), 0); }
+      return;
+    }
+    const zs = legalZones();
+    if (act) { const z = zs.find((x) => x.el === t); if (z) { e.preventDefault(); e.stopPropagation(); doMove(z); } return; }
+    if (['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'].includes(e.key) && zs.length) {
+      e.preventDefault(); const k = zs.findIndex((x) => x.el === t); const d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : -1;
+      zs[(k < 0 ? 0 : k + d + zs.length) % zs.length].el.focus();
+    }
+  };
   return (
     <>
     <div className="panel pad cbv">
       <h2>Lejátszás</h2>
-      <div className="cbv-mat" ref={host} onDragStart={onDragStart} onDragOver={onDragOver} onDrop={onDrop} onDragEnd={onDragEnd}>
+      {mv && (
+        <div className="cbv-mvbar" role="status">
+          <span>Hova kerüljön <b>{mv.n}</b>? Koppints egy kiemelt zónára (saját base vagy battlefield).</span>
+          <button type="button" className="btn sec" onClick={cancelMv}>Mégse</button>
+        </div>
+      )}
+      <div className="cbv-mat" ref={host} onDragStart={onDragStart} onDragOver={onDragOver} onDrop={onDrop} onDragEnd={onDragEnd} onClickCapture={onClickCap} onKeyDownCapture={onKeyCap}>
         <Playmat key={ci} b={f.board} prev={prev} turn={null} onlyKnown />
         <Arrows host={hostEl} arrows={f.arrows} tick={ci} />
       </div>
-      <p className="note cbv-dndn" role="status">{dropMsg || 'A builder board lapjait és a kijátszott unitokat másik zónára (base, battlefield) húzhatod: ez a kiinduló helyzetben helyezi át őket, majd újrafuttatja az elemzést.'}</p>
+      <p className="note cbv-dndn" role="status">{dropMsg || 'A builder board lapjait és a kijátszott unitokat áthelyezheted: koppints vagy kattints a lapra (billentyűzettel Enter), majd egy kiemelt zónára, vagy húzd át egérrel. Ez a kiinduló helyzetben helyezi át őket, és újrafuttatja az elemzést.'}</p>
       <div className="cbv-ctl">
         <button className="btn sec" disabled={ci === 0} onClick={() => { setPlay(false); setI(ci - 1); }}>Előző</button>
         <button className="btn sec" disabled={ci >= frames.length - 1} onClick={() => { setPlay(false); setI(ci + 1); }}>Következő</button>
@@ -183,17 +262,17 @@ function ChainPlayback({ frames }: { frames: ChainFrame[] }) {
       <div className="cbv-chg">
         <b>Mi változott?</b>
         {f.changes.length ? (
-          <ul>{f.changes.map(([ref, txt], k) => (
+          <ul>{f.changes.map(([ref, txt, man], k) => (
             <li key={k}>
               {ref && <span className="cbv-refs">{ref.split(',').map((r) => r.trim()).filter(Boolean).map((r) => <a key={r} className="rref" href="#szabalyok" data-ref={r}>{r}</a>)}</span>}
-              <span>{txt}</span>
+              <span>{man ? <span className="cbman" title="A builder Így értelmezem a lapot blokkjában kézzel beállított értelmezés alapján">kézzel beállítva</span> : null}{txt}</span>
             </li>
           ))}</ul>
         ) : <p className="note">Ebben a lépésben nincs külön szabálysor.</p>}
         {f.mt && <MistargetBox mt={f.mt} />}
       </div>
     </div>
-    <CombatPanel board={f.board} frameLabel={(ci + 1) + '. lépés: ' + f.label} />
+    <CombatPanel board={f.board} bfi={f.bfi} isLast={ci === frames.length - 1} frameLabel={(ci + 1) + '. lépés: ' + f.label} />
     </>
   );
 }

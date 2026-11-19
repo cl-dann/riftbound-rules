@@ -81,3 +81,6 @@
 - Fogalomtár: interaktív játékmenet lépésábrák, errata előtte/utána szószintű diffel és szűréssel.
 - E2E: web/e2e/app.spec.ts (7 teszt), .github/workflows/e2e.yml. Helyben: PW_CHROME=/usr/bin/google-chrome npm run test:e2e (a cdn.playwright.dev innen nem érhető el).
 - Figyelem: a lokális `npx tsc --noEmit -p .` nem azonos a CI-vel, mindig `npm run build`-del ellenőrizz (tsc -b).
+
+- Chain 3. kör (2026-11-19): koppintásos mozgatás (érintő, egér, billentyű), "Így értelmezem a lapot" javítható értelmezés (lépés ov mező, linkben is), combat panel javaslatok (feltételes keyword, prevent, instead, nem sebezhető 467.2.c.10), Ezután triggerel lista, Hozzáadás a Chainhez.
+- Cardmarket ár: kézi frissítés (.github/workflows/prices.yml, Run workflow), prices.json commitolva, fejléc 7 nap után "frissítés esedékes". Heti időzítés a fájlban kikommentezve.

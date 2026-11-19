@@ -19,7 +19,9 @@ export const CHAIN_MARKUP=`<div class="cols">
   `;
 let started=false;
 /* A React rész (Playmat drag and drop) ezen keresztül írja a builder állapotát. */
-export const chainApi:{moveUnit?:(uid:string,loc:string)=>string|null}={};
+export type TrigAdd={n:string;src:string;pl:'A'|'B';eff:string;why:string;loc?:string};
+export type CombatOut={bf:string;dead:string[];recall:string[];ctrl:''|'A'|'B';label:string};
+export const chainApi:{moveUnit?:(uid:string,loc:string)=>string|null;addTriggers?:(list:TrigAdd[],cb:CombatOut)=>void}={};
 /* Lejátszási frame-ek: a runCB minden lépés után pillanatképet készít a boardról, a React rész (ChainView) jeleníti meg. */
 let LAST_FRAMES:any[]=[];
 export const getChainFrames=()=>LAST_FRAMES;
@@ -54,6 +56,7 @@ function phrasesTxt(e){
   return out;
 }
 function stepInfo(s){
+  if(s.k==='tr'){const c=vsCard(s.n)||{n:s.n||'?',t:'',txt:''};return {c,eff:stripRem(s.eff||''),list:[],trig:false,isTr:true};}
   const c=vsCard(s.n);if(!c)return null;
   if(s.k==='ab'){const ab=abilitiesOf(srcCard(s.src))[s.ai||0];if(!ab)return {c,ab:null,eff:'',list:[],trig:false,isAb:true};
     return {c:srcCard(s.src),ab,eff:ab.eff,list:ab.add?[]:ab.equip?[{type:'unit',rel:'friendly',max:null,bf:false,opt:false}]:phrasesTxt(ab.eff),trig:false,isAb:true,may:/^you may\b/i.test(ab.eff)};}
@@ -98,6 +101,30 @@ function tgOptions(j,p){
   else for(let k=0;k<j;k++){const s=CS.steps[k];const c=vsCard(s.n);if(s.k==='card'&&c&&c.t==='Spell')o.push(['s'+k,(k+1)+'. lépés: '+c.n]);}
   return o;
 }
+/* "Így értelmezem a lapot": utasításonként felismert művelet és linked kapcsolat; a felhasználó felülírhatja (s.ov), ez a CS része, így a linkbe is bekerül. */
+const OV_ACTS=[['kill','kill'],['dmg','damage N'],['base','move to base'],['hand','return to hand'],['banish','banish'],['recall','recall'],['stun','stun'],['buff','buff'],['draw','draw N'],['counter','counter'],['none','semmi'],['other','nem követett hatás']];
+const OV_LBL=Object.fromEntries(OV_ACTS);
+function detAct(t){const a=actOf(t);if(a.k==='other'){const d=/\bdraws? (\d+)/i.exec(t);if(d)return {k:'draw',n:+d[1]};}return a;}
+function interp(s,inf){const eff=inf.eff||'';const list=inf.list||[];
+  let INS=splitInstr(eff).map(t=>({t,n:phrasesTxt(t).length}));
+  if(INS.reduce((x,y)=>x+y.n,0)!==list.length)INS=[{t:eff,n:list.length}];
+  let k=0;return INS.map((x,xi)=>{const tis=[];for(let q=0;q<x.n;q++)tis.push(k++);
+    const det=detAct(x.t);const dir=DIRECT_RE.test(x.t);const detLk=xi>0&&(dir||LINK_RE.test(x.t));
+    const ov=(s.ov&&s.ov[xi])||null;const act=ov&&ov.k?{k:ov.k,n:ov.n!=null?ov.n:(det.n||1),unless:det.unless}:det;
+    const lk=xi>0&&(ov&&ov.lk!=null?!!ov.lk:detLk);
+    const unsure=[];if(!(ov&&ov.k)&&det.k==='other')unsure.push('a műveletet nem ismerem fel, az elemzés nem követi');
+    if(!(ov&&ov.lk!=null)&&detLk&&!dir)unsure.push('a linked kapcsolatot csak névmásból ("it", "its") következtetem');
+    return {t:x.t,n:x.n,tis,det,act,lk,detLk,dir,manual:!!(ov&&(ov.k||ov.lk!=null)),unsure,st:'',ref:'',why:''};});}
+const OVOPEN=new WeakSet();
+function interpHtml(s,j,inf){if(!inf||!inf.eff||s.k==='tr')return '';const INS=interp(s,inf);const man=INS.some(x=>x.manual);const uns=INS.some(x=>x.unsure.length);
+  return '<details class="cbint" data-ovj="'+j+'"'+(OVOPEN.has(s)?' open':'')+'><summary>Így értelmezem a lapot <span class="note">('+INS.length+' utasítás)</span>'+(man?' <span class="cbman">kézzel módosítva</span>':'')+(uns?' <span class="cbuns">bizonytalan</span>':'')+'</summary><ol class="cbint-l">'
+    +INS.map((x,xi)=>{const id=j+'_'+xi;const opts=OV_ACTS.some(o=>o[0]===x.act.k)?OV_ACTS:OV_ACTS.concat([[x.act.k,x.act.k]]);
+      return '<li><q>'+esc(x.t)+'</q><div class="row2">'+cbSel('data-ovk="'+id+'" aria-label="'+(xi+1)+'. utasítás művelete"',opts.map(o=>[o[0],o[1]+(o[0]===x.det.k?' (felismert)':'')]),x.act.k)
+        +(x.act.k==='dmg'||x.act.k==='draw'?'<label class="cbint-n">N <input type="number" min="0" max="30" data-ovn="'+id+'" value="'+(x.act.n!=null?x.act.n:1)+'"></label>':'')
+        +'<label class="chk"><input type="checkbox" data-ovl="'+id+'"'+(x.lk?' checked':'')+(xi?'':' disabled')+'> az előző utasításra hivatkozik (linked)</label>'
+        +(x.manual?'<span class="cbman">kézzel</span>':'')+'</div>'
+        +(x.unsure.length?'<div class="tl"><span class="cbuns">bizonytalan</span> '+esc(x.unsure.join('; '))+'.</div>':'')+'</li>';}).join('')
+    +'</ol>'+(s.ov?'<button type="button" class="linkbtn" data-ovr="'+j+'">Visszaállítás a felismert értelmezésre</button>':'')+'</details>';}
 function renderCB(){
   if(!CS.steps.length)CS.steps=[{k:'card',n:'',pl:'A',tg:[],ext:{}}];
   const L=LOCS();
@@ -108,7 +135,9 @@ function renderCB(){
     return '<div class="bdrow"><div class="row2"><input type="text" list="cardnames" data-bn="'+i+'" value="'+esc(b.n)+'" placeholder="Lap neve">'+cbSel('data-bpl="'+i+'"',PLO,b.pl)+cbSel('data-bloc="'+i+'"',L,b.loc)+'<button class="linkbtn" data-bdel="'+i+'">törlés</button></div>'
      +(isU?'<div class="row2 sm"><label>Might <input type="number" min="0" max="30" data-bm="'+i+'" value="'+(b.m!=null?b.m:'')+'" placeholder="'+(c.m!=null?c.m:'')+'"></label><label>Damage <input type="number" min="0" max="30" data-bd="'+i+'" value="'+(b.d||0)+'"></label><label class="chk"><input type="checkbox" data-bex="'+i+'"'+(b.ex?' checked':'')+'> exhausted</label><label class="chk"><input type="checkbox" data-bst="'+i+'"'+(b.st?' checked':'')+'> stunned</label><label class="chk"><input type="checkbox" data-bbu="'+i+'"'+(b.bu?' checked':'')+'> buff (+1)</label></div>':'')
      +(isG?'<div class="row2 sm">'+cbSel('data-bon="'+i+'"',eqs,b.on==null?'':b.on)+'<label class="chk"><input type="checkbox" data-bex="'+i+'"'+(b.ex?' checked':'')+'> exhausted</label></div>':'')+'</div>';}).join('')+'<button class="btn sec" id="cb-badd" style="margin-top:4px">+ Lap a boardra</button></details>';
+  const mvBtns=j=>'<span class="cbmv"><button type="button" class="linkbtn" data-up="'+j+'" aria-label="'+(j+1)+'. lépés feljebb"'+(j?'':' disabled')+'>Fel</button><button type="button" class="linkbtn" data-dn="'+j+'" aria-label="'+(j+1)+'. lépés lejjebb"'+(j<CS.steps.length-1?'':' disabled')+'>Le</button></span>';
   h+='<div class="cbsec2">4. A chain lépései</div>'+CS.steps.map((s,j)=>{const inf=stepInfo(s)||{list:[]};const c=inf.c;s.ext=s.ext||{};
+    if(s.k==='tr')return '<div class="cbstep tr" data-sj="'+j+'"><div class="hd"><span class="cbdrag" draggable="true" data-drag="'+j+'" title="Húzd a sorrend módosításához" aria-hidden="true"><i></i><i></i><i></i></span><span class="no">'+(j+1)+'.</span>trigger a combat után'+mvBtns(j)+'<button class="linkbtn" data-del="'+j+'">törlés</button></div><div class="cbtr"><b>'+esc(s.n)+'</b> ('+esc(s.why||'trigger')+', '+(s.pl==='A'?'te':'ellenfél')+'): '+esc(s.eff||'')+'</div><div class="tl">A Combat panelről került ide. A chain lefutása után a panel kiosztása szerinti combat eredmény jön, majd ezek a triggerek egy új chainen; a legutóbb felvett resolve-ol először.</div></div>';
     let x=cbSel('data-k="'+j+'"',[['card','Lap kijátszása'],['ab','Ability aktiválása']],s.k)+cbSel('data-pl="'+j+'"',[['A','Te'],['B','Az ellenfél']],s.pl);
     if(s.k==='ab'){const srcs=[['','Ability forrása']].concat(['A','B'].filter(p=>CS.lg[p]).map(p=>['L'+p,(p==='A'?'Saját':'Ellenfél')+' legend: '+CS.lg[p]])).concat(CS.bd.map((b,i)=>['b'+i,bdLabel(i)]));
       x+=cbSel('data-src="'+j+'"',srcs,s.src||'');const abs=abilitiesOf(srcCard(s.src));if(abs.length)x+=cbSel('data-ai="'+j+'"',abs.map((a,i)=>[i,a.label]),s.ai||0);else if(s.src)x+='<span class="tl">Ennek a forrásnak nincs aktiválható abilityje.</span>';}
@@ -117,10 +146,10 @@ function renderCB(){
     (inf.list||[]).forEach((p,ti)=>{const v=(s.tg||[])[ti]||'';x+=cbSel('data-j="'+j+'" data-ti="'+ti+'" aria-label="Célpont"',[['',(ti+1)+'. célpont'+(p.opt?' (nem kötelező)':'')+': '+(p.rel!=='any'?p.rel+' ':'')+p.type+(p.bf?', battlefielden':'')+(p.max!=null?', max '+p.max+' Might':'')]].concat(tgOptions(j,p).slice(1)),v);
       if(v==='x'){const e=s.ext[ti]||{};x+='<span class="tl">'+(ti+1)+'. célpont: '+cbSel('data-eloc="'+j+'_'+ti+'"',L,e.loc||'bf0')+' Might <input type="number" min="0" max="30" style="width:5em;padding:4px 6px" data-em="'+j+'_'+ti+'" value="'+(e.m!=null?e.m:'')+'" placeholder="?"> '+cbSel('data-epl="'+j+'_'+ti+'"',[['','gazdája?'],['A','a te lapod'],['B','az ellenfélé']],e.pl||'')+'</span>';}});
     if(inf.eff&&actOf(inf.eff).unless)x+=cbSel('data-pay="'+j+'"',[['0','A célzott spell gazdája nem fizet'],['1','A célzott spell gazdája kifizeti']],s.pays?'1':'0');
-    return '<div class="cbstep" data-sj="'+j+'"><div class="hd"><span class="cbdrag" draggable="true" data-drag="'+j+'" title="Húzd a sorrend módosításához" aria-hidden="true"><i></i><i></i><i></i></span><span class="no">'+(j+1)+'.</span>'+(j?'válasz':'első lépés')+'<span class="cbmv"><button type="button" class="linkbtn" data-up="'+j+'" aria-label="'+(j+1)+'. lépés feljebb"'+(j?'':' disabled')+'>Fel</button><button type="button" class="linkbtn" data-dn="'+j+'" aria-label="'+(j+1)+'. lépés lejjebb"'+(j<CS.steps.length-1?'':' disabled')+'>Le</button></span><button class="linkbtn" data-del="'+j+'">törlés</button></div>'+(s.k==='card'?'<input type="text" list="cardnames" data-name="'+j+'" value="'+esc(s.n)+'" placeholder="Kártya neve" aria-label="Kártya">':'')+'<div class="row2">'+x+'</div>'+(c&&s.k==='card'&&!inf.list.length?'<div class="tl">Ennek a lapnak nincs választandó célpontja.</div>':'')+'</div>';}).join('');
+    return '<div class="cbstep" data-sj="'+j+'"><div class="hd"><span class="cbdrag" draggable="true" data-drag="'+j+'" title="Húzd a sorrend módosításához" aria-hidden="true"><i></i><i></i><i></i></span><span class="no">'+(j+1)+'.</span>'+(j?'válasz':'első lépés')+mvBtns(j)+'<button class="linkbtn" data-del="'+j+'">törlés</button></div>'+(s.k==='card'?'<input type="text" list="cardnames" data-name="'+j+'" value="'+esc(s.n)+'" placeholder="Kártya neve" aria-label="Kártya">':'')+'<div class="row2">'+x+'</div>'+(c&&s.k==='card'&&!inf.list.length?'<div class="tl">Ennek a lapnak nincs választandó célpontja.</div>':'')+interpHtml(s,j,inf)+'</div>';}).join('');
   $('cb-steps').innerHTML=h;
 }
-function cbSetStep(j){const s=CS.steps[j];s.tg=[];s.ext={};}
+function cbSetStep(j){const s=CS.steps[j];s.tg=[];s.ext={};delete s.ov;}
 $('cb-steps').addEventListener('change',e=>{const el=e.target,d=el.dataset;const sp=v=>v.split('_').map(Number);let re=true;
   if(d.lg)CS.lg[d.lg]=el.value;
   else if(d.bfn!=null)CS.bf[+d.bfn].n=el.value;
@@ -146,8 +175,14 @@ $('cb-steps').addEventListener('change',e=>{const el=e.target,d=el.dataset;const
   else if(d.em!=null){const [j,ti]=sp(d.em);CS.steps[j].ext[ti]=Object.assign(CS.steps[j].ext[ti]||{},{m:el.value===''?null:+el.value});re=false;}
   else if(d.epl!=null){const [j,ti]=sp(d.epl);CS.steps[j].ext[ti]=Object.assign(CS.steps[j].ext[ti]||{},{pl:el.value});re=false;}
   else if(d.j!=null){const s=CS.steps[+d.j];s.tg=s.tg||[];s.tg[+d.ti]=el.value;}
+  else if(d.ovk!=null||d.ovn!=null||d.ovl!=null){const [j,xi]=sp(d.ovk??d.ovn??d.ovl);const s=CS.steps[j];s.ov=s.ov||{};const o=s.ov[xi]=s.ov[xi]||{};
+    if(d.ovk!=null){o.k=el.value;if((o.k==='dmg'||o.k==='draw')&&o.n==null){const x=interp(s,stepInfo(s))[xi];o.n=x&&x.det.n||1;}}
+    else if(d.ovn!=null){o.n=Math.max(0,+el.value||0);if(!o.k){const x=interp(s,stepInfo(s))[xi];o.k=x?x.act.k:'dmg';}}
+    else o.lk=el.checked;
+    OVOPEN.add(s);renderCB();runCB();const f=$('cb-steps').querySelector('[data-'+(d.ovk!=null?'ovk':d.ovn!=null?'ovn':'ovl')+'="'+j+'_'+xi+'"]');if(f)f.focus();return;}
   if(re)renderCB();});
 $('cb-steps').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.ovr!=null){const s=CS.steps[+b.dataset.ovr];delete s.ov;OVOPEN.add(s);renderCB();runCB();const f=$('cb-steps').querySelector('[data-ovj="'+b.dataset.ovr+'"] summary');if(f)f.focus();return;}
   if(b.dataset.up!=null||b.dataset.dn!=null){const j=+(b.dataset.up??b.dataset.dn);const t=b.dataset.up!=null?j-1:j+1;if(moveStep(j,t)){const f=$('cb-steps').querySelector('[data-'+(b.dataset.up!=null?'up':'dn')+'="'+t+'"]:not([disabled])')||$('cb-steps').querySelector('[data-sj="'+t+'"] .cbmv button:not([disabled])');if(f)f.focus();}}
   else if(b.dataset.del!=null){CS.steps.splice(+b.dataset.del,1);CS.steps.forEach(s=>s.tg=[]);renderCB();}
   else if(b.dataset.bdel!=null){CS.bd.splice(+b.dataset.bdel,1);CS.steps.forEach(s=>s.tg=[]);CS.bd.forEach(x=>x.on=null);renderCB();}
@@ -158,6 +193,7 @@ function moveStep(from,to){const n=CS.steps.length;if(to<0||to>=n||from===to)ret
   const steps=order.map(o=>CS.steps[o]);
   steps.forEach((s,ni)=>{s.tg=(s.tg||[]).map(v=>{const m=/^s(\d+)$/.exec(v||'');if(!m)return v;const t=newOf[+m[1]];return t<ni?'s'+t:'';});});
   CS.steps=steps;renderCB();if(LAST_FRAMES.length)runCB();return true;}
+$('cb-steps').addEventListener('toggle',e=>{const d=e.target;if(!d.dataset||d.dataset.ovj==null)return;const s=CS.steps[+d.dataset.ovj];if(!s)return;if(d.open)OVOPEN.add(s);else OVOPEN.delete(s);},true);
 let dragJ=-1;
 const clearDrop=()=>$('cb-steps').querySelectorAll('.cbstep.dropb,.cbstep.dropa').forEach(x=>x.classList.remove('dropb','dropa'));
 $('cb-steps').addEventListener('dragstart',e=>{const h=e.target.closest&&e.target.closest('[data-drag]');if(!h)return;dragJ=+h.dataset.drag;e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain','step:'+dragJ);
@@ -172,6 +208,9 @@ chainApi.moveUnit=(uid,loc)=>{let m;
   else if((m=/^s(\d+)$/.exec(uid))&&CS.steps[+m[1]]){const st=CS.steps[+m[1]];if((st.loc||'base')===loc)return null;st.loc=loc;}
   else return 'Ez a lap nem a builder board listájából vagy a chain lépéseiből jön, ezért nem helyezhető át.';
   renderCB();runCB();return null;};
+/* Combat panel: Deathknell és Conquer triggerek felvétele. A combat eredményét (cb) minden trigger lépés ugyanazzal az értékkel hordozza. */
+chainApi.addTriggers=(list,cb)=>{if(!list.length)return;list.forEach(t=>CS.steps.push({k:'tr',n:t.n,src:t.src,pl:t.pl,eff:t.eff,why:t.why,loc:t.loc,tg:[],ext:{}}));
+  CS.steps.forEach(s=>{if(s.k==='tr')s.cb=cb;});renderCB();runCB();};
 $('cb-add').addEventListener('click',()=>{const l=CS.steps[CS.steps.length-1];CS.steps.push({k:'card',n:'',pl:l&&l.pl==='A'?'B':'A',tg:[],ext:{}});renderCB();});
 $('cb-clear').addEventListener('click',()=>{CS={lg:{A:'',B:''},bf:[{n:'',c:''},{n:'',c:''}],bd:[],steps:[]};renderCB();emitFrames([]);$('cb-out').innerHTML='<h2>Chain elemzés</h2><p class="note">Adj meg legalább egy lapot.</p>';});
 $('cb-ex').addEventListener('click',()=>{CS={lg:{A:'Kennen, Heart of the Tempest',B:''},bf:[{n:"Vilemaw's Lair",c:'B'},{n:'Zaun Warrens',c:'A'}],
@@ -193,11 +232,12 @@ let MT=null;const MTIDS=new Set();
 function runCB(){
   const o=$('cb-out');MT=null;MTIDS.clear();
   const S=CS.steps.map((s,j)=>{const inf=stepInfo(s);return inf&&inf.c?Object.assign({},s,inf,{j,tg:(s.tg||[]).slice(),ext:s.ext||{}}):null;}).filter(Boolean);
+  const POST=S.filter(s=>s.k==='tr');const MAIN=S.filter(s=>s.k!=='tr');
   if(!S.length){emitFrames([]);o.innerHTML='<h2>Chain elemzés</h2><p class="note">Nem találok felismert kártyát vagy abilityt. Válassz a listából.</p>';return;}
   const art=x=>(/^[aáeéiíoóöőuúüű]/i.test(x)?'az ':'a ')+x;const Art=x=>{const s=art(x);return s[0].toUpperCase()+s.slice(1);};
   const other=p=>p==='A'?'B':'A';const WHO={A:'te',B:'az ellenfél'};
-  let REC=null;
-  const line=(ref,txt,fl)=>{if(REC)REC.push([[...new Set(String(ref).split(',').map(r=>r.trim()).filter(Boolean))].join(', '),plainOf(txt)]);return lineH(ref,txt,fl);};
+  let REC=null;let MAN=false;
+  const line=(ref,txt,fl)=>{if(REC)REC.push([[...new Set(String(ref).split(',').map(r=>r.trim()).filter(Boolean))].join(', '),plainOf(txt)].concat(MAN?[1]:[]));return lineH(ref,txt,fl);};
   const lineH=(ref,txt,fl)=>'<tr><td class="r">'+String(ref).split(',').filter(r=>r.trim()).map(r=>'<a href="#szabalyok" data-ref="'+r.trim()+'">'+r.trim()+'</a>').join('')+'</td><td>'+txt+'</td><td class="f">'+(fl!=null?'<span class="fl f'+fl+'" title="'+FLT[fl]+'">'+FL[fl]+'</span>':'')+'</td></tr>';
   const story=[];let rows='';const notes=[];
   // ---- objects ----
@@ -207,7 +247,7 @@ function runCB(){
   CS.bd.forEach((b,i)=>{if(O['b'+i]&&b.on!=null&&O['b'+b.on])O['b'+i].on='b'+b.on;});
   ['A','B'].forEach(p=>{const c=vsCard(CS.lg[p]);if(c)O['L'+p]={name:c.n,card:c,ctrl:p,zone:'legend',type:'legend'};});
   const cnt={};S.forEach(s=>cnt[s.c.n]=(cnt[s.c.n]||0)+1);
-  S.forEach(s=>{const j=s.j;const c=s.c;if(s.k==='ab')return;
+  MAIN.forEach(s=>{const j=s.j;const c=s.c;if(s.k==='ab')return;
     if(isPermC(c))O['s'+j]={name:c.n+(cnt[c.n]>1?' ('+(j+1)+'.)':''),card:c,ctrl:s.pl,loc:s.loc||(s.from==='facedown'?'bf0':'base'),m:c.m,dmg:0,zone:'pending',type:c.t.toLowerCase()};
     else O['s'+j]={name:c.n+(cnt[c.n]>1?' ('+(j+1)+'.)':''),card:c,ctrl:s.pl,zone:'pending',type:'spell'};
     s.tg=s.tg.map((v,ti)=>{if(v!=='x')return v;const p=s.list[ti];const e=s.ext[ti]||{};const id='t'+j+'_'+ti;
@@ -282,7 +322,7 @@ function runCB(){
     if(ob.card&&ob.ctrl&&ob.ctrl!==s.pl&&/\[Deflect/.test(ob.card.txt||''))s.defl=(s.defl||[]).concat(ob.name);
     return why;};
   snap('Kiinduló helyzet',[]);
-  S.forEach((s,ix)=>{try{const c=s.c;const tm=s.k==='ab'?(s.ab?s.ab.tm:'none'):timingOf(c);const perm=s.k==='card'&&isPermC(c);const empty=!chain.length;
+  MAIN.forEach((s,ix)=>{try{const c=s.c;const tm=s.k==='ab'?(s.ab?s.ab.tm:'none'):timingOf(c);const perm=s.k==='card'&&isPermC(c);const empty=!chain.length;
     const verb=s.pl==='A'?(ix?'Válaszként ':'')+(s.k==='ab'?'aktiválod':'kijátszod'):'Az ellenfél '+(ix?'válaszként ':'')+(s.k==='ab'?'aktiválja':'kijátssza');
     const what=s.k==='ab'?art(c.n)+' abilityjét ('+esc(s.ab?s.ab.label:'?')+')':art(c.n)+' lapot';
     let illegal=null;
@@ -336,12 +376,11 @@ function runCB(){
     if(act.k==='buff'){if(ob.bu){parts.push(esc(ob.name)+' már buffolt, nem kap újabbat (701).');story.push(Art(ob.name)+' már buffolt, így nem történik semmi.');refs.push('701');return 'neg';}else{ob.bu=true;parts.push(esc(ob.name)+' +1 Might buffot kap (701).');story.push(Art(srcName)+' lefut: '+ob.name+' +1 Might buffot kap.');}refs.push('701');return;}
     if(act.k==='attach'){parts.push('Felcsatolva: '+esc(ob.name)+'.');refs.push('435');story.push(Art(srcName)+' felcsatolódik '+art(ob.name)+' lapra.');return;}
     parts.push(esc(ob.name)+': a hatás lefut, ezt az elemzés nem követi részletesen.');story.push(Art(srcName)+' lefut '+art(ob.name)+' lapra (részletesen nem követett hatás).');};
-  let guard=0;
-  while(stack.length&&guard++<60){const it=stack.pop();const itN=itemName(it);const d0=done.length;try{
+  let guard=0;const resolveAll=()=>{while(stack.length&&guard++<60){const it=stack.pop();const itN=itemName(it);const d0=done.length;try{
     if(it.kind==='trig'){const src=O[it.src];const eff=it.eff;const act=actOf(eff);const sc=allScope(eff);const parts=[];const refs=['383'];
       let t='<b>'+esc(src.name)+'</b> triggere ('+esc(it.why)+') resolve-ol. ';
       if(sc&&['dmg','kill','stun','hand','banish'].includes(act.k)){const hereLoc=src.loc;Object.keys(O).forEach(v=>{const ob=O[v];if(ob.zone!=='board'||ob.type!==sc.type)return;if(sc.rel==='enemy'&&ob.ctrl===it.pl)return;if(sc.rel==='friendly'&&ob.ctrl!==it.pl)return;if(sc.here&&ob.loc!==hereLoc)return;applyTo(v,act,src.name,false,parts,refs);});if(!parts.length)parts.push('Nincs olyan lap, amire hatna.');}
-      else if(/^empower me\b/i.test(eff)){parts.push(esc(src.name)+' Empowered lesz.');refs.push('442');story.push(Art(src.name)+' triggere lefut: '+src.name+' Empowered lesz.');}else{parts.push('Hatás: '+esc(eff)+'. Ezt az elemzés nem követi tovább.');story.push(Art(src.name)+' triggere lefut: '+eff);}
+      else if(/^empower me\b/i.test(eff)){parts.push(esc(src.name)+' Empowered lesz.');refs.push('442');story.push(Art(src.name)+' triggere lefut: '+src.name+' Empowered lesz.');}else{parts.push('Hatás: '+esc(eff.replace(/\.\s*$/,''))+'. Ezt az elemzés nem követi tovább.');story.push(Art(src.name)+' triggere lefut: '+eff);}
       rr+=line(refs.join(','),t+parts.join(' '),1);done.push({name:src.name+' triggere',pl:it.pl,res:'ok'});continue;}
     const s=it.s;const c=s.c;const perm=s.k==='card'&&isPermC(c);const self=O['s'+s.j];const srcName=s.k==='ab'?c.n+' abilityje':c.n;
     const head='<b>'+esc(srcName)+'</b>'+(perm?' play triggere':'')+' resolve-ol. ';
@@ -354,11 +393,9 @@ function runCB(){
     if(act.k==='attach'&&s.k==='ab'){const v=s.tg[0];if(v&&O[v]&&O[v].zone==='board'){O[s.src].on=v;O[s.src].loc=O[v].loc;}}
     /* Instruction szintű végrehajtás (359.3.e.5-359.3.e.14): a szöveget utasításokra bontjuk, mindegyik a saját célpontjaira hat.
        Illegális célpont miatt elmaradó utasítás: Ignored; más okból elmaradó: Negated (359.3.e.6). */
-    let INS=splitInstr(s.eff).map(t=>({t,n:phrasesTxt(t).length,tis:[],st:'',ref:'',why:''}));
-    if(INS.reduce((x,y)=>x+y.n,0)!==s.list.length)INS=[{t:s.eff,n:s.list.length,tis:[],st:'',ref:'',why:''}];
-    {let k=0;INS.forEach(x=>{for(let q=0;q<x.n;q++)x.tis.push(k++);});}
+    const INS=interp(s,s);MAN=INS.some(x=>x.manual);
     const tgOut=[];const mtT=[];let lastT=null;
-    const runTarget=(x,ti)=>{const p=s.list[ti];const v=s.tg[ti];if(!v)return;tot++;if(v==='F0'||v==='F1'){legal++;tgOut[ti]='ok';return;}const ob=O[v];const wS=[];const xa=actOf(x.t);
+    const runTarget=(x,ti)=>{const p=s.list[ti];const v=s.tg[ti];if(!v)return;tot++;if(v==='F0'||v==='F1'){legal++;tgOut[ti]='ok';return;}const ob=O[v];const wS=[];const xa=x.act;
       if(p.type==='spell'){if(ob.zone!=='chain')wS.push('már nincs a chainen');}
       else{if(ob.zone!=='board')wS.push('már '+(ob.zone==='hand'?'kézben van':ob.zone==='trash'?'a trashben van':ob.zone==='banish'?'banishelve van':'nincs a boardon'));
         else if(p.bf&&ob.loc==='base')wS.push('már a base-ben áll, a lap pedig battlefielden álló célpontot kér');
@@ -368,9 +405,11 @@ function runCB(){
       legal++;mtT.push({n:ob.name,ok:true});
       if(xa.k==='counter'&&ob.type==='spell'&&xa.unless&&s.pays){tgOut[ti]='neg';parts.push(esc(ob.name)+' irányítója kifizeti a kért költséget, ezért a counter nem történik meg.');story.push(Art(srcName)+' lefut, de '+art(ob.name)+' gazdája kifizeti a kért költséget, így a spell marad.');return;}
       if(xa.k==='attach'&&s.k==='ab'){tgOut[ti]='ok';parts.push('Felcsatolva: '+esc(ob.name)+' megkapja '+art(c.n)+' Might bónuszát'+(c.eff?' és Effect Textjét':'')+'.');refs.push('435','136.2.c');story.push(Art(c.n)+' felcsatolódik '+art(ob.name)+' lapra.');return;}
+      if(xa.k==='none'){tgOut[ti]='ok';parts.push(esc(ob.name)+': a kézi értelmezés szerint ez az utasítás nem csinál semmit.');return;}
+      if(xa.k==='draw'){tgOut[ti]='ok';return;}
       tgOut[ti]=applyTo(v,xa,srcName,perm,parts,refs)==='neg'?'neg':'ok';};
     INS.forEach((x,xi)=>{
-      const dir=DIRECT_RE.test(x.t);const lk=xi>0&&(dir||LINK_RE.test(x.t));const prev=lk?lastT:null;
+      const dir=x.dir;const lk=x.lk;const prev=lk?lastT:null;
       if(prev&&(prev.st==='ignored')){x.st='ignored';x.ref='359.3.e.14.a';x.why='linked instruction, a korábbi utasítás Ignored lett, ezért ez is Ignored';
         x.tis.forEach(ti=>{const v=s.tg[ti];if(v){tot++;tgOut[ti]='ign';mtT.push({n:nm(v),ok:false,skip:true,why:'a linked instruction Ignored, ezért rá sem hat'});}});}
       else if(prev&&prev.st==='negated'&&dir){x.st='skipped';x.ref='359.3.e.14.b';x.why='közvetlenül a korábbi game actionre hivatkozik ("if you do"), az pedig Negated lett, ezért nem hajtódik végre';}
@@ -384,26 +423,44 @@ function runCB(){
         if(prev&&prev.st==='negated'){x.ref='359.3.e.14.b';x.why='linked instruction, a korábbi Negated lett, de erre nem hat (nem hivatkozik közvetlenül a game actionre)';}
         else if(prev&&prev.st==='partial'){x.ref='359.3.e.14.a';x.why='linked instruction: csak a legális célpontokra vonatkozik';}
         else if(!lk&&INS.some((y,yi)=>yi<xi&&y.st==='ignored')){x.ref='359.3.e.5';x.why='nem linked, ezért a korábbi mistarget ellenére végrehajtódik';}
-        const dm=/its controller draws (\d+)/i.exec(x.t);
-        if(dm&&lk){const ok=prev?prev.tis.filter(ti=>tgOut[ti]&&tgOut[ti]!=='ign').length:1;if(ok){parts.push('A célpont irányítója húz '+dm[1]+' lapot.');story.push('A célpont irányítója húz '+dm[1]+' lapot.');}}}
+        const live=prev?prev.tis.filter(ti=>s.tg[ti]&&tgOut[ti]&&tgOut[ti]!=='ign'&&O[s.tg[ti]]):[];
+        if(x.act.k==='draw'){const n=x.act.n!=null?x.act.n:1;
+          if(/\b(its|their) (controller|owner)s?\b/i.test(x.t)&&prev){if(live.length){const who='A célpont '+(/owner/i.test(x.t)?'tulajdonosa':'irányítója');parts.push(who+' húz '+n+' lapot.');story.push(who+' húz '+n+' lapot.');}}
+          else if(/\b(its|their) (controller|owner)s?\b/i.test(x.t)){parts.push('A szöveg a célpont '+(/owner/i.test(x.t)?'tulajdonosára':'irányítójára')+' hivatkozik, de nem linked utasításként szerepel, így az elemzés nem tudja, ki húz '+n+' lapot.');}
+          else{const w=s.pl==='A'?'Húzol':'Az ellenfél húz';parts.push(w+' '+n+' lapot.');story.push(w+' '+n+' lapot.');}}
+        else if(x.act.k==='none'){if(x.manual)parts.push('"'+esc(x.t)+'": a kézi értelmezés szerint nem csinál semmit.');}
+        else if(lk&&live.length&&['kill','dmg','base','hand','banish','recall','stun','buff','counter'].includes(x.act.k)){live.forEach(ti=>applyTo(s.tg[ti],x.act,srcName,perm,parts,refs));}
+        else if(x.manual&&x.act.k!=='other')parts.push('"'+esc(x.t)+'": kézzel '+OV_LBL[x.act.k]+' műveletre állítva, de nincs mire hatnia (nincs célpontja, és nem linked).');}
       if(x.tis.length)lastT=x;});
     const insShown=INS.length>1||INS.some(x=>x.st!=='executed');
-    if(insShown&&tot){parts.push('Utasítások: '+INS.map(x=>'"'+esc(x.t)+'": '+INS_ST[x.st]+(x.ref?' ('+x.ref+')':'')).join('; ')+'.');
+    if(MAN)parts.push('<b>Kézzel beállított értelmezés:</b> '+INS.filter(x=>x.manual).map(x=>'"'+esc(x.t)+'" = '+esc((OV_LBL[x.act.k]||x.act.k).replace(/ N$/,''))+(x.act.k==='dmg'||x.act.k==='draw'?' '+x.act.n:'')+(x.lk?', linked':'')).join('; ')+'.');
+    if(insShown&&tot){parts.push('Utasítások: '+INS.map(x=>'"'+esc(x.t)+'": '+INS_ST[x.st]+(x.ref?' ('+x.ref+')':'')+(x.manual?' [kézi]':'')).join('; ')+'.');
       INS.forEach(x=>{if(x.ref)x.ref.split(/,\s*/).forEach(r=>refs.push(r));});
       INS.forEach((x,xi)=>{if(xi&&(x.st==='ignored'||x.st==='skipped'))story.push('"'+x.t+'": '+INS_ST[x.st]+', mert '+x.why+'.');});}
     if(tot&&(mtT.some(t=>!t.ok)||INS.some(x=>x.st==='negated'||x.st==='skipped')))
-      MT={item:srcName+(perm?' (play trigger)':''),kind:!legal?'full':mtT.some(t=>!t.ok)?'partial':'none',targets:mtT,instr:INS.map(x=>({t:x.t,st:x.st,ref:x.ref,why:x.why}))};
-    const sc=allScope(s.eff);
-    if(!tot&&sc&&['dmg','kill','stun','hand','banish'].includes(act.k)){const hereLoc=sc.there?(s.tg.find(v=>v==='F0'||v==='F1')==='F1'?'bf1':'bf0'):(perm?self.loc:(s.src&&O[s.src]?O[s.src].loc:null));
-      Object.keys(O).forEach(v=>{const ob=O[v];if(ob.zone!=='board'||ob.type!==sc.type)return;if(sc.rel==='enemy'&&ob.ctrl===s.pl)return;if(sc.rel==='friendly'&&ob.ctrl!==s.pl)return;if((sc.here||sc.there)&&ob.loc!==hereLoc)return;if(sc.atbf&&ob.loc==='base')return;applyTo(v,act,srcName,perm,parts,refs);});
+      MT={item:srcName+(perm?' (play trigger)':''),kind:!legal?'full':mtT.some(t=>!t.ok)?'partial':'none',targets:mtT,instr:INS.map(x=>({t:x.t,st:x.st,ref:x.ref,why:x.why,man:x.manual}))};
+    const sc=allScope(s.eff);const act0=INS[0]&&INS[0].manual?INS[0].act:act;
+    if(!tot&&sc&&['dmg','kill','stun','hand','banish'].includes(act0.k)){const hereLoc=sc.there?(s.tg.find(v=>v==='F0'||v==='F1')==='F1'?'bf1':'bf0'):(perm?self.loc:(s.src&&O[s.src]?O[s.src].loc:null));
+      Object.keys(O).forEach(v=>{const ob=O[v];if(ob.zone!=='board'||ob.type!==sc.type)return;if(sc.rel==='enemy'&&ob.ctrl===s.pl)return;if(sc.rel==='friendly'&&ob.ctrl!==s.pl)return;if((sc.here||sc.there)&&ob.loc!==hereLoc)return;if(sc.atbf&&ob.loc==='base')return;applyTo(v,act0,srcName,perm,parts,refs);});
       if(!parts.length)parts.push('Nincs olyan lap a boardon, amire hatna.');}
-    else if(!tot){parts.push(c.sh&&s.k==='card'?'Hatás: '+esc(c.sh):'Hatás: '+esc(s.eff||''));fl=Math.max(fl,1);story.push(Art(srcName)+' lefut'+(s.k==='card'&&c.sh?': '+c.sh:': '+s.eff));}
+    else if(!tot&&!MAN){parts.push(c.sh&&s.k==='card'?'Hatás: '+esc(c.sh):'Hatás: '+esc(s.eff||''));fl=Math.max(fl,1);story.push(Art(srcName)+' lefut'+(s.k==='card'&&c.sh?': '+c.sh:': '+s.eff));}
     if(tot&&!legal){const rest=INS.some(x=>x.st==='executed'&&!x.tis.length);if(rest){parts.push('Teljes mistarget: minden célpontja illegális lett, a célponthoz nem kötött utasítás viszont végrehajtódik.');refs.push('359.3.e.7');}else{parts.push('Teljes mistarget: minden célpontja illegális lett, ezért hatás nélkül resolve-ol'+(perm||s.k==='ab'?'':', de kijátszottnak számít (359.3.e.10)')+'.');refs.push('359.3.e.7');story.push(Art(srcName)+' így hatás nélkül fejeződik be.');}}
     else if(tot&&legal<tot&&tot>1)refs.push('359.3.e.8');
     if(self&&self.type==='spell')self.zone='trash';
     done.push({name:srcName+(perm?' (play trigger)':''),pl:s.pl,res:(tot&&!legal)?'fizzle':(tot&&legal<tot)?'partial':'ok'});
-    rr+=line(refs.join(','),t+parts.join(' '),fl);
-  }finally{const dn=done.length>d0?done[done.length-1]:null;snap('Resolve: '+itN+(dn?', '+(RES[dn.res]||dn.res):''),stack);cleanupSnap();}}
+    rr+=line(refs.join(','),t+parts.join(' '),fl);MAN=false;
+  }finally{MAN=false;const dn=done.length>d0?done[done.length-1]:null;snap('Resolve: '+itN+(dn?', '+(RES[dn.res]||dn.res):''),stack);cleanupSnap();}}};resolveAll();
+  /* Combat utáni triggerek: a Combat panel kiosztása szerinti eredmény (halál, recall, gyógyulás, kontroll), majd új chain a felvett triggerekkel. */
+  if(POST.length){const cb=POST[0].cb||{bf:'bf0',dead:[],recall:[],ctrl:'',label:''};const bl=cb.bf==='bf1'?'bf1':'bf0';
+    story.push('A chain kiürült. Ezután jön a combat '+locLabel(bl)+' battlefielden, a Combat panel kiosztása szerint.');
+    (cb.dead||[]).forEach(id=>{const ob=O[id];if(ob&&ob.zone==='board'){ob.zone='trash';ob.on=null;REC.push(['467.2.d, 323.4',ob.name+': a combat damage-től meghal, a trashbe kerül.']);story.push(Art(ob.name)+' meghal a combatban.');}});
+    (cb.recall||[]).forEach(id=>{const ob=O[id];if(ob&&ob.zone==='board'){ob.loc='base';REC.push(['468.1.a.2',ob.name+': attackerként recall-olódik a base-be.']);}});
+    Object.keys(O).forEach(id=>{const ob=O[id];if(ob.zone==='board'&&ob.type==='unit'&&(ob.loc===bl||(cb.recall||[]).includes(id))&&ob.dmg){ob.dmg=0;}});REC.push(['468.1.a.1','A túlélők damage-e a Combat Cleanupban gyógyul.']);
+    if(cb.ctrl&&BF[bl].ctrl!==cb.ctrl){BF[bl].ctrl=cb.ctrl;REC.push(['468.5',(cb.ctrl==='A'?'Te':'Az ellenfél')+' Establishes Control: '+locLabel(bl)+'.']);}
+    snap('Combat: '+(cb.label||locLabel(bl)),[]);
+    POST.forEach(s=>{let id=s.src;if(!id||!O[id]){id='X'+s.j;O[id]={name:s.c.n,card:s.c.t?s.c:null,ctrl:s.pl,loc:s.loc||bl,zone:'legend',type:'trigsrc'};}
+      stack.push({kind:'trig',src:id,pl:s.pl,eff:s.eff,why:s.why||'trigger'});REC.push([s.why==='Deathknell'?'808.1.c, 808.1.d.2':'383.4.c.2',O[id].name+' triggere ('+(s.why||'trigger')+') a chainre kerül: '+s.eff]);story.push(Art(O[id].name)+' triggere ('+(s.why||'trigger')+') a chainre kerül.');});
+    snap('Combat utáni triggerek a chainen',stack);resolveAll();}
   story.push('A chain kiürült.');
   REC.push(['','A chain kiürült.']);snap('Végállapot: a chain üres',[]);REC=null;emitFrames(FR);
   // ---- 3. output ----
