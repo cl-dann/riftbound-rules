@@ -41,6 +41,17 @@ def main():
     if not g:
         print('Riftbound idGame nem található, prices.json nem készül'); return 0
     pg = get(f'{BASE}/priceGuide/price_guide_{g}.json')
+    if os.environ.get('CM_DEBUG'):
+        print('PRODKEYS', sorted(prods['products'][0].keys()), 'TOP', sorted(k for k in prods if k != 'products'))
+        print('PGKEYS', sorted(pg['priceGuides'][0].keys()))
+        bid = {x['idProduct']: x for x in pg.get('priceGuides', [])}
+        for p in prods['products']:
+            if pn(p.get('name', '')).startswith(('fury rune', 'annie stubborn', 'jinx loose cannon', 'ahri inquisitive', 'bullet time')):
+                print('DBG', json.dumps(p, ensure_ascii=False), json.dumps(bid.get(p['idProduct']), ensure_ascii=False))
+        exps = {}
+        for p in prods['products']:
+            exps[p.get('idExpansion')] = exps.get(p.get('idExpansion'), 0) + 1
+        print('EXPANSIONS', exps)
     byid = {x['idProduct']: x for x in pg.get('priceGuides', [])}
     out = {}
     for p in prods['products']:

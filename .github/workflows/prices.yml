@@ -7,6 +7,11 @@ name: Cardmarket árak
 #     - cron: '17 4 * * 1'
 on:
   workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Diagnosztika (nem commitol)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -27,8 +32,11 @@ jobs:
           python3 export_web.py
           rm -f data.json
       - name: Árak letöltése
+        env:
+          CM_DEBUG: ${{ inputs.debug && '1' || '' }}
         run: python3 tools/prices/fetch.py
       - name: Commit és deploy indítása
+        if: ${{ !inputs.debug }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
