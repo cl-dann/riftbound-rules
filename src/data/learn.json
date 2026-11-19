@@ -2557,8 +2557,18 @@
           }
         },
         {
-          "say": "A Sergeant exhaustolva átlép. A battlefield Contested lesz, mert nem te kontrollálod {{452}}, és mivel két játékos unitja áll ott, combat kezdődik {{463}}. Te vagy az Attacker, mert te tetted Contesteddé {{466.2.c.1}}, és a combat showdownban nálad a Focus {{466.2.c.1.a}}. Senki nem játszik ki lapot, mindketten passzoltok, a showdown véget ér {{347.2.a}}.",
-          "board": {
+          "type": "act",
+          "prompt": "Mozgasd a [[Vanguard Sergeant]] unitot Standard Move-val a Packed Amphitheaterre: kattints a unitra, majd a battlefieldre.",
+          "expect": {
+            "kind": "move",
+            "unit": "Vanguard Sergeant",
+            "to": "bf0"
+          },
+          "ok": "A Sergeant exhaustolva átlépett a base-edből a battlefieldre {{144.2}} {{144.4.a}}.",
+          "wrong": {
+            "to:bf1": "A Grove of the God-Willow-ra is szabályosan léphetnél {{144.4.a}}, de ebben a szituációban az ellenfél Amphitheaterét foglalod el."
+          },
+          "after": {
             "me": {
               "legend": "Garen, Might of Demacia (Starter)",
               "champion": "Garen, Rugged",
@@ -2652,7 +2662,10 @@
               }
             ],
             "chain": []
-          },
+          }
+        },
+        {
+          "say": "A battlefield Contested lesz, mert nem te kontrollálod {{452}}, és mivel két játékos unitja áll ott, combat kezdődik {{463}}. Te vagy az Attacker, mert te tetted Contesteddé {{466.2.c.1}}, és a combat showdownban nálad a Focus {{466.2.c.1.a}}. Senki nem játszik ki lapot, mindketten passzoltok, a showdown véget ér {{347.2.a}}.",
           "choice": {
             "q": "Ki osztja ki előbb a damage-et, és mennyit?",
             "opts": [
@@ -3159,8 +3172,21 @@
           }
         },
         {
-          "say": "Combat kezdődik, te vagy az Attacker {{466.2.c.1}}. Egyik fél sem játszik ki lapot, a showdown véget ér {{347.2.a}}. Az összesített Mightod 11, az ellenfélé 9 {{467.2.a}} {{467.2.b}}. Te kezded a kiosztást {{467.2.c}}.",
-          "board": {
+          "type": "act",
+          "prompt": "Mozgasd mindkét unitodat egyetlen Standard Move-val a Grove of the God-Willow-ra: jelöld ki a [[Petty Officer]] és a [[Laurent Duelist]] unitot, majd kattints a battlefieldre.",
+          "expect": {
+            "kind": "move",
+            "units": [
+              "Petty Officer",
+              "Laurent Duelist"
+            ],
+            "to": "bf0"
+          },
+          "ok": "Több unit egyetlen Standard Move-val léphet, ha a céljuk közös {{144.3}} {{144.3.a}}, és az exhaust költségüket egyszerre fizeted {{144.3.c}}.",
+          "wrong": {
+            "unit:Vanguard Sergeant": "A Vanguard Sergeant a Black Marketet tartja. Ha elhagyná, a Black Market kontroll nélkül maradna {{190.4.c}}. Most a két base-ben álló unitod támad."
+          },
+          "after": {
             "me": {
               "legend": "Garen, Might of Demacia (Starter)",
               "champion": "Garen, Commander",
@@ -3303,7 +3329,10 @@
               }
             ],
             "chain": []
-          },
+          }
+        },
+        {
+          "say": "Combat kezdődik, te vagy az Attacker {{466.2.c.1}}. Egyik fél sem játszik ki lapot, a showdown véget ér {{347.2.a}}. Az összesített Mightod 11, az ellenfélé 9 {{467.2.a}} {{467.2.b}}. Te kezded a kiosztást {{467.2.c}}.",
           "choice": {
             "q": "Hogyan osztod ki a 11 damage-et?",
             "opts": [
@@ -3800,6 +3829,7 @@
       "rules": "355.9.b, 164.2, 328.1, 337.4, 339.1, 309.1.a, 323.4, 323.5, 344.2, 348.2.a.1",
       "steps": [
         {
+          "type": "act",
           "say": "A Main Phase-edben vagy. A kezedben a [[Hextech Ray]]: 1 Energy és 1 Fury Power, [Action], 3 damage egy battlefielden álló unitnak. A Grove-on az ellenfél [[Shipyard Skulker]]-je áll (3 Might), a base-ében a [[Bewitching Spirit]].",
           "board": {
             "me": {
@@ -3893,28 +3923,20 @@
             "chain": [],
             "note": "A Main Phase-ed, Neutral Open állapot. Az ellenfél minden rune-ja exhausted."
           },
-          "choice": {
-            "q": "Melyik ellenséges unit lehet a Hextech Ray targetje?",
-            "opts": [
-              {
-                "t": "A Shipyard Skulker a Grove-on",
-                "ok": true,
-                "why": "A spell battlefielden álló unitot kér, a target ennek megfelel {{355.9.b}}."
-              },
-              {
-                "t": "A Bewitching Spirit a base-ben",
-                "why": "A base nem battlefield, ezért a Spirit nem legális target {{355.9.b}}."
-              },
-              {
-                "t": "Bármelyik, a spell választ",
-                "why": "A targetet te választod a kijátszáskor, és meg kell felelnie a spell feltételének {{355.9.b}}."
-              }
-            ]
-          }
-        },
-        {
-          "say": "A Skulkert választod. Fizetés: exhaustolsz egy Chaos rune-t (1 Energy) {{164.2.a}}, és recycle-ölsz egy Fury rune-t (1 Fury Power) {{164.2.b}} {{164.2.b.1}}. A Fury rune a Rune Deck aljára kerül {{161.2.b}}. A spell a chainre került {{328.1}}.",
-          "board": {
+          "prompt": "Játszd ki a [[Hextech Ray]] lapot egy legális targetre: kattints a lapra a kezedben, válaszd ki a targetet, majd fizesd ki a rune-okkal.",
+          "expect": {
+            "kind": "play",
+            "card": "Hextech Ray",
+            "target": "Shipyard Skulker"
+          },
+          "ok": "A Skulker legális target: a spell battlefielden álló unitot kér {{355.9.b}}. Kijátszáskor előbb a targetet választod {{355.5}}, utána fizetsz {{357}}: egy rune exhaustolása 1 Energy {{164.2.a}}, egy Fury rune recycle-je 1 Fury Power {{164.2.b}} {{164.2.b.1}}. A recycle-ölt rune a Rune Deck aljára kerül {{161.2.b}}. A spell a chainre került {{328.1}}.",
+          "wrong": {
+            "target:Bewitching Spirit": "A Bewitching Spirit a base-ben áll. A base nem battlefield, ezért nem legális target {{355.9.b}}.",
+            "target:Legion Rearguard": "A Legion Rearguard a base-edben áll, nem battlefielden, ezért nem legális target {{355.9.b}}.",
+            "target:Eager Drakehound": "Szabályos target lenne, mert battlefielden áll {{355.9.b}}, de a saját unitodat sebeznéd. Az ellenfél unitját célozd.",
+            "card:Incinerate": "Az [[Incinerate]] csak 2 damage-et ad, a 3 Mightú Skulkerhez ez nem lethal {{143.2.b}}. Most a Hextech Ray a feladat."
+          },
+          "after": {
             "me": {
               "legend": "Jinx, Loose Cannon",
               "champion": "Jinx, Rebel",
@@ -4005,7 +4027,10 @@
               "[[Hextech Ray]] → Shipyard Skulker (te)"
             ],
             "note": "Neutral Closed: a chainen ott a Hextech Ray."
-          },
+          }
+        },
+        {
+          "say": "A [[Hextech Ray]] a chainen van, a targetje a Skulker.",
           "choice": {
             "q": "Ki kapja most a priorityt?",
             "opts": [
@@ -4026,8 +4051,14 @@
           }
         },
         {
-          "say": "Passzolsz, az ellenfél is passzol, hiszen nincs ready rune-ja. Mindenki passzolt, a Hextech Ray resolve-ol {{339.1}}: a Skulker 3 damage-et kap, ez lethal, meghal {{323.4}}. A Grove-on nem maradt ellenséges unit, az ellenfél elveszti az irányítást {{323.5}}.",
-          "board": {
+          "type": "act",
+          "prompt": "Te kapod a priorityt. Passzolj a pálya fölötti sáv Passz gombjával.",
+          "expect": {
+            "kind": "pass"
+          },
+          "state": "closed",
+          "ok": "Passzolsz, az ellenfél is passzol, hiszen nincs ready rune-ja. Mindenki passzolt, a Hextech Ray resolve-ol {{339.1}}: a Skulker 3 damage-et kap, ez lethal, meghal {{323.4}}. A Grove-on nem maradt ellenséges unit, az ellenfél elveszti az irányítást {{323.5}}.",
+          "after": {
             "me": {
               "legend": "Jinx, Loose Cannon",
               "champion": "Jinx, Rebel",
@@ -4112,7 +4143,9 @@
             ],
             "chain": [],
             "note": "A chain kiürült, a Grove senkié."
-          },
+          }
+        },
+        {
           "choice": {
             "q": "Ha az ellenfélnek lett volna ready rune-ja és egy [Action] lapja, válaszolhatott volna vele a Hextech Rayre?",
             "opts": [
@@ -4133,8 +4166,18 @@
           }
         },
         {
-          "say": "A [[Legion Rearguard]] a base-edben ready, Standard Move-val a Grove-ra lép {{144.2}} {{144.4.a}}. A Grove Contested lesz, ellenséges unit nincs ott, így showdown indul {{344.2}}. Senki nem játszik ki semmit, csak a te unitod marad: conquer, 1 pont {{348.2.a}} {{348.2.a.1}}.",
-          "board": {
+          "type": "act",
+          "prompt": "Foglald el a Grove of the God-Willow-t: mozgasd oda a [[Legion Rearguard]] unitot.",
+          "expect": {
+            "kind": "move",
+            "unit": "Legion Rearguard",
+            "to": "bf0"
+          },
+          "ok": "A [[Legion Rearguard]] a base-edben ready, Standard Move-val a Grove-ra lép {{144.2}} {{144.4.a}}. A Grove Contested lesz, ellenséges unit nincs ott, így showdown indul {{344.2}}. Senki nem játszik ki semmit, csak a te unitod marad: conquer, 1 pont {{348.2.a}} {{348.2.a.1}}.",
+          "wrong": {
+            "unit:Eager Drakehound": "Az Eager Drakehound a Kinkou Temple-ön áll: Standard Move-val csak a base-be léphetne vissza {{144.4.b}}, battlefieldről battlefieldre nem {{144.4.c.1}}."
+          },
+          "after": {
             "me": {
               "legend": "Jinx, Loose Cannon",
               "champion": "Jinx, Rebel",
@@ -4356,8 +4399,128 @@
           }
         },
         {
-          "say": "A [[Hextech Ray]] a Wielderre célozva a chainre kerül. Finalizálás után te kapod a priorityt {{337.4}}, és passzolsz {{338.1.b}}. Az ellenfél válaszul kijátssza a [[Wind Wall]] lapot a Hextech Ray-re: 3 runet exhaustol, kettőt recycle-öl a Calm Powerért.",
-          "board": {
+          "type": "act",
+          "prompt": "Játszd ki a [[Hextech Ray]] lapot a Wielderre úgy, hogy az [[Abandon]]ra is maradjon rune.",
+          "expect": {
+            "kind": "play",
+            "card": "Hextech Ray",
+            "target": "Wielder of Water"
+          },
+          "ok": "A [[Hextech Ray]] a Wielderre célozva a chainre került {{328.1}}. Egy rune exhaustolása adta az 1 Energyt {{164.2.a}}, a Fury Powert egy exhausted Fury rune recycle-je {{164.2.b}} {{164.2.b.1}}: exhaustolt rune is recycle-ölhető, így 3 ready rune maradt az Abandonra.",
+          "wrong": {
+            "target:Shadowblade Lurker": "A Shadowblade Lurker a base-edben áll, nem battlefielden, ezért nem legális target {{355.9.b}}.",
+            "card:Abandon": "Az [[Abandon]] spellt counterel, most még nincs a chainen mit counterelni."
+          },
+          "after": {
+            "me": {
+              "legend": "Jinx, Loose Cannon",
+              "champion": "Jinx, Demolitionist",
+              "base": [
+                {
+                  "n": "Shadowblade Lurker",
+                  "m": 5,
+                  "base": 5,
+                  "ex": true,
+                  "status": [
+                    "new"
+                  ]
+                }
+              ],
+              "runes": {
+                "ready": 3,
+                "exhausted": 5,
+                "domains": [
+                  "Fury",
+                  "Chaos",
+                  "Chaos",
+                  "Fury",
+                  "Chaos",
+                  "Fury",
+                  "Chaos",
+                  "Fury"
+                ]
+              },
+              "deck": 31,
+              "runeDeck": 3,
+              "score": 3,
+              "trash": [
+                "Eager Drakehound",
+                "Shipyard Skulker",
+                "Incinerate",
+                "Falling Star",
+                "Incinerate"
+              ],
+              "banish": [],
+              "hand": [
+                "Abandon"
+              ]
+            },
+            "opp": {
+              "legend": "Ahri, Nine-Tailed Fox",
+              "champion": "Ahri, Inquisitive",
+              "base": [],
+              "runes": {
+                "ready": 5,
+                "exhausted": 3,
+                "domains": [
+                  "Calm",
+                  "Calm",
+                  "Calm",
+                  "Mind",
+                  "Calm",
+                  "Mind",
+                  "Mind",
+                  "Calm"
+                ]
+              },
+              "deck": 30,
+              "runeDeck": 4,
+              "score": 4,
+              "trash": [
+                "Stalwart Poro",
+                "Ravenbloom Student",
+                "Wielder of Water",
+                "Charm"
+              ],
+              "banish": [],
+              "handCount": 4
+            },
+            "bfs": [
+              {
+                "name": "Grove of the God-Willow",
+                "ctrl": "opp",
+                "me": [],
+                "opp": [
+                  {
+                    "n": "Wielder of Water",
+                    "m": 2,
+                    "base": 2
+                  }
+                ],
+                "facedown": null
+              },
+              {
+                "name": "Kinkou Temple",
+                "ctrl": null,
+                "me": [],
+                "opp": [],
+                "facedown": null
+              }
+            ],
+            "chain": [
+              "[[Hextech Ray]] → Wielder of Water (te)"
+            ]
+          }
+        },
+        {
+          "type": "act",
+          "prompt": "Finalizálás után te kapod a priorityt {{337.4}}. Passzolj.",
+          "expect": {
+            "kind": "pass"
+          },
+          "state": "closed",
+          "ok": "Passzoltál {{338.1.b}}. Az ellenfél válaszul kijátssza a [[Wind Wall]] lapot a Hextech Ray-re: 3 rune-t exhaustol, kettőt recycle-öl a Calm Powerért.",
+          "after": {
             "me": {
               "legend": "Jinx, Loose Cannon",
               "champion": "Jinx, Demolitionist",
@@ -4455,31 +4618,24 @@
               "Wind Wall (ellenfél)",
               "Hextech Ray (te)"
             ]
-          },
-          "choice": {
-            "q": "Mit tehetsz most?",
-            "opts": [
-              {
-                "t": "Kijátszod az Abandont a Wind Wallra",
-                "ok": true,
-                "why": "Létezik chain, ez Closed State, itt Reaction játszható ki {{309.1.a}}, és az Abandon Reaction {{813.1.c.1}}."
-              },
-              {
-                "t": "Kijátszol egy unitot a base-edbe",
-                "ok": false,
-                "why": "Closed Stateben csak Reaction játszható ki {{309.1.a}}."
-              },
-              {
-                "t": "Semmit, a Wind Wall automatikusan feloldódik",
-                "ok": false,
-                "why": "Új chain elem után a priority körbejár {{338}}, és csak akkor jön a Resolve, ha mindenki passzolt {{339.1}}."
-              }
-            ]
           }
         },
         {
-          "say": "Az [[Abandon]] a Wind Wallt célozza. Te kapod a priorityt {{337.4}}, és passzolsz, utána az ellenfél is passzol {{339.1}}.",
-          "board": {
+          "type": "act",
+          "prompt": "Válaszolj a [[Wind Wall]] lapra: kattints a kezedben lévő lapra, majd a chainen a targetre.",
+          "expect": {
+            "kind": "play",
+            "card": "Abandon",
+            "target": "Wind Wall"
+          },
+          "state": "closed",
+          "ok": "Létezik chain, ez Closed State, itt Reaction játszható ki {{309.1.a}}, és az [[Abandon]] Reaction {{813.1.c.1}}. Az Abandon a Wind Wallt célozza.",
+          "wrong": {
+            "pass": "Ha most passzolsz, mindenki passzolt, és a Wind Wall feloldódik {{339.1}} {{340.1}}: counterli a Hextech Ray-t.",
+            "target:Hextech Ray": "A saját spelledet counterelnéd. Az Abandon targetje a Wind Wall legyen.",
+            "target:Wielder of Water": "Az Abandon spellt counterel, unit nem lehet a targetje {{355.9.b}}."
+          },
+          "after": {
             "me": {
               "legend": "Jinx, Loose Cannon",
               "champion": "Jinx, Demolitionist",
@@ -4576,7 +4732,10 @@
               "Wind Wall (ellenfél)",
               "Hextech Ray (te)"
             ]
-          },
+          }
+        },
+        {
+          "say": "Te kapod a priorityt {{337.4}}, és passzolsz, utána az ellenfél is passzol {{339.1}}.",
           "choice": {
             "q": "Melyik oldódik fel először?",
             "opts": [
@@ -4955,8 +5114,26 @@
           }
         },
         {
-          "say": "Négy runet exhaustolsz egyszerre: 4 Energy kerül a Rune Poolba {{166.1}}. 3 Energyt elköltesz, a Fury Powerért recycle-ölsz egy exhaustolt Fury runet. A Drakehound a szövege miatt ready lép be. A poolban 1 Energy maradt.",
-          "board": {
+          "type": "act",
+          "prompt": "Játszd ki az [[Eager Drakehound]] lapot a base-edbe. Exhaustolj egyszerre 4 rune-t: 3 Energy a Drakehoundé, 1 a poolban marad a [[Hextech Ray]] számára. A Fury Powerhez recycle-ölj egy Fury rune-t.",
+          "expect": {
+            "kind": "play",
+            "card": "Eager Drakehound",
+            "to": "base",
+            "pay": {
+              "e": 4,
+              "p": {
+                "Fury": 1
+              }
+            },
+            "payNote": "3 Energy a lapra, 1 Energy a poolban marad."
+          },
+          "ok": "Négy rune exhaustolása 4 Energyt tett a Rune Poolba {{166.1}}. 3 Energyt elköltöttél, a Fury Powerért egy Fury rune-t recycle-öltél: exhaustolt rune is recycle-ölhető {{164.2.b}}. A Drakehound a szövege miatt ready lép be. A poolban 1 Energy maradt.",
+          "wrong": {
+            "card:Hextech Ray": "A Hextech Ray is kifizethető lenne, de előbb a Drakehound jön, a maradék Energy a Ray-re vár.",
+            "card:Incinerate": "Az Incinerate 2 Energy: a Drakehounddal és a Hextech Ray-jel együtt már nem fér bele az 5 rune-ba {{164.2.a}}."
+          },
+          "after": {
             "me": {
               "legend": "Jinx, Loose Cannon",
               "champion": "Jinx, Rebel",
@@ -5051,7 +5228,9 @@
             ],
             "chain": [],
             "note": "Rune Pool: 1 Energy"
-          },
+          }
+        },
+        {
           "choice": {
             "q": "Mi lesz a maradék 1 Energyvel?",
             "opts": [
@@ -5074,8 +5253,20 @@
           }
         },
         {
-          "say": "A [[Hextech Ray]] árát a poolban maradt 1 Energy és egy újabb exhaustolt Fury rune recycle-je fedezi. Az ellenfél nem válaszol, a Hatchling 3 damage-et kap és meghal {{323.4}}. A Grove-on nem maradt unit, az ellenfél elveszíti a kontrollt {{323.5}}.",
-          "board": {
+          "type": "act",
+          "prompt": "Játszd ki a [[Hextech Ray]] lapot a [[Void Hatchling]]re. Az 1 Energy a poolból jön, a Fury Powerhez recycle-ölj egy exhaustolt Fury rune-t.",
+          "expect": {
+            "kind": "play",
+            "card": "Hextech Ray",
+            "target": "Void Hatchling",
+            "pool": 1
+          },
+          "ok": "A [[Hextech Ray]] árát a poolban maradt 1 Energy és egy újabb exhaustolt Fury rune recycle-je fedezi. Az ellenfél nem válaszol, a Hatchling 3 damage-et kap és meghal {{323.4}}. A Grove-on nem maradt unit, az ellenfél elveszíti a kontrollt {{323.5}}.",
+          "wrong": {
+            "target:Bewitching Spirit": "A Bewitching Spirit a base-ben áll. A base nem battlefield, ezért nem legális target {{355.9.b}}.",
+            "energy": "Az 1 Energy már a poolban van, nem kell újabb rune-t exhaustolni {{167}}."
+          },
+          "after": {
             "me": {
               "legend": "Jinx, Loose Cannon",
               "champion": "Jinx, Rebel",
@@ -5164,31 +5355,21 @@
             ],
             "chain": [],
             "note": "Rune Pool: 0"
-          },
-          "choice": {
-            "q": "Mit kezdesz a Drakehounddal?",
-            "opts": [
-              {
-                "t": "Standard Move-val a Grove-ra lépsz",
-                "ok": true,
-                "why": "Ready lépett be, így exhaustolva mozoghat {{144.2}}. Az üres, nem általad kontrollált battlefield Contested lesz {{452}}."
-              },
-              {
-                "t": "Nem mozoghat, mert ebben a körben játszottad ki",
-                "ok": false,
-                "why": "A unit azért nem mozog általában a kijátszás körében, mert exhaustolva lép be {{143.4}}. A Drakehound ready, így mozoghat {{144.2}}."
-              },
-              {
-                "t": "Nem kell mozognod, a Grove automatikusan a tiéd lesz",
-                "ok": false,
-                "why": "Kontrollt csak unittal lehet alapítani {{190.4}}."
-              }
-            ]
           }
         },
         {
-          "say": "A Grove Contested lesz, és mivel nincs ott ellenséges unit, non-combat showdown nyílik {{344.2}}, a Focus nálad {{345}}. Mindketten passzoltok, egyedül neked van unitod ott, így megszerzed a kontrollt, ez conquer {{348.2.a}} {{348.2.a.1}}: 1 pont.",
-          "board": {
+          "type": "act",
+          "prompt": "Foglald el a Grove of the God-Willow-t az [[Eager Drakehound]] unittal.",
+          "expect": {
+            "kind": "move",
+            "unit": "Eager Drakehound",
+            "to": "bf0"
+          },
+          "ok": "A Drakehound ready lépett be, így exhaustolva mozoghat {{144.2}}, pedig ebben a körben játszottad ki. A unitok általában azért nem mozognak a kijátszás körében, mert exhaustolva lépnek be {{143.4}}.",
+          "wrong": {
+            "unit:Chemtech Enforcer": "A Chemtech Enforcer is léphetne, de ebben a feladatban a Drakehound foglal."
+          },
+          "after": {
             "me": {
               "legend": "Jinx, Loose Cannon",
               "champion": "Jinx, Rebel",
@@ -5278,7 +5459,10 @@
               }
             ],
             "chain": []
-          },
+          }
+        },
+        {
+          "say": "A Grove Contested lesz, és mivel nincs ott ellenséges unit, non-combat showdown nyílik {{344.2}}, a Focus nálad {{345}}. Mindketten passzoltok, egyedül neked van unitod ott, így megszerzed a kontrollt, ez conquer {{348.2.a}} {{348.2.a.1}}: 1 pont.",
           "choice": {
             "q": "Hová került a két recycle-ölt Fury rune?",
             "opts": [
@@ -5435,8 +5619,18 @@
           }
         },
         {
-          "say": "A Kinkou Temple Contested lett {{452}}, a combat staged, de a chainen ott a Herder triggere, ezért még várni kell {{462}}.",
-          "board": {
+          "type": "act",
+          "prompt": "Mozgasd mindkét unitodat egyetlen Standard Move-val a Kinkou Temple-re: jelöld ki a [[Stellacorn Herder]] és a [[Crackshot Corsair]] unitot, majd kattints a battlefieldre.",
+          "expect": {
+            "kind": "move",
+            "units": [
+              "Stellacorn Herder",
+              "Crackshot Corsair"
+            ],
+            "to": "bf0"
+          },
+          "ok": "Egyetlen Standard Move, közös célba {{144.3}} {{144.3.a}}. A mozgás nem használja a chaint, és nem lehet rá reagálni {{448.3.c}}, a Herder triggere viszont a chainre kerül {{383.3}}.",
+          "after": {
             "me": {
               "legend": "Lee Sin, Blind Monk",
               "champion": "Lee Sin, Centered",
@@ -5546,7 +5740,10 @@
             "chain": [
               "Stellacorn Herder: húzz 1-et (te)"
             ]
-          },
+          }
+        },
+        {
+          "say": "A Kinkou Temple Contested lett {{452}}, a combat staged, de a chainen ott a Herder triggere, ezért még várni kell {{462}}.",
           "choice": {
             "q": "Válaszolhat az ellenfél erre a triggerre?",
             "opts": [
@@ -5952,6 +6149,7 @@
       "rules": "811.1.b, 811.1.d.1, 811.6, 315.1.b, 347, 467.3, 468.5",
       "steps": [
         {
+          "type": "act",
           "say": "A te köröd vége felé jársz. A Grove-ot egy [[Stalwart Poro]] tartja. Az ellenfél base-ében áll egy [[Petty Officer]], ami a következő körében várhatóan rátámad a Grove-ra. A kezedben van egy [[Pakaa Cub]] (Hidden) és egy [[Discipline]] (Reaction). 5 ready és 4 exhaustolt runed van.",
           "board": {
             "me": {
@@ -6057,28 +6255,122 @@
             "chain": [],
             "note": "A játék 8. köre, te vagy a második játékos, ez a 4. köröd (9 rune). Eddig 4+4 lapot húztál, és 1-et a Grove of the God-Willow e köri holdjáért: 2 a kezedben, a Stalwart Poro a Grove-on, 6 a trashben. Az ellenfél 4 körén túl van (8 rune): 4+4 lapot húzott, 3 a kezében, 2 unit a boardon, 3 a trashben."
           },
-          "choice": {
-            "q": "Hogyan rejted el a Pakaa Cub lapot?",
-            "opts": [
+          "prompt": "Rejtsd el a [[Pakaa Cub]] lapot: kattints rá a kezedben, majd egy kiemelt facedown helyre, és fizesd ki.",
+          "expect": {
+            "kind": "hide",
+            "card": "Pakaa Cub",
+            "to": "fd0"
+          },
+          "ok": "A Hidden költsége 1 tetszőleges domainű Power, és egy általad kontrollált battlefieldre rejthetsz {{811.1.b}}. A recycle exhaustolt runeról is Powert ad {{164.2.b}}.",
+          "wrong": {
+            "energy": "A Hidden ára Power {{811.1.b}}, és Energyvel Power költség nem fizethető {{163.1}} {{163.2}}. Recycle-ölj egy rune-t.",
+            "card:Discipline": "A Discipline-t most nem kell kijátszanod. A Cub legyen rejtve, mire az ellenfél támad."
+          },
+          "after": {
+            "me": {
+              "legend": "Lee Sin, Blind Monk",
+              "champion": "Lee Sin, Ascetic",
+              "base": [],
+              "runes": {
+                "ready": 5,
+                "exhausted": 3,
+                "domains": [
+                  "Calm",
+                  "Calm",
+                  "Body",
+                  "Body",
+                  "Calm",
+                  "Calm",
+                  "Body",
+                  "Calm"
+                ]
+              },
+              "deck": 30,
+              "runeDeck": 3,
+              "score": 5,
+              "trash": [
+                "Determined Sentry",
+                "Determined Sentry",
+                "Stalwart Poro",
+                "Wielder of Water",
+                "Field Musicians",
+                "Entrenched Boar"
+              ],
+              "banish": [],
+              "hand": [
+                "Discipline"
+              ]
+            },
+            "opp": {
+              "legend": "Darius, Hand of Noxus",
+              "champion": "Darius, Trifarian",
+              "base": [
+                {
+                  "n": "Petty Officer",
+                  "m": 5,
+                  "base": 5,
+                  "ex": true
+                }
+              ],
+              "runes": {
+                "ready": 0,
+                "exhausted": 8,
+                "domains": [
+                  "Fury",
+                  "Fury",
+                  "Order",
+                  "Order",
+                  "Fury",
+                  "Order",
+                  "Order",
+                  "Fury"
+                ]
+              },
+              "deck": 31,
+              "runeDeck": 4,
+              "score": 5,
+              "trash": [
+                "Daring Poro",
+                "Eager Drakehound",
+                "Incinerate"
+              ],
+              "banish": [],
+              "handCount": 3
+            },
+            "bfs": [
               {
-                "t": "A Grove-on, 1 Powerért: recycle-ölsz érte egy exhaustolt runet",
-                "ok": true,
-                "why": "A Hidden költsége 1 tetszőleges domainű Power, és egy általad kontrollált battlefieldre rejthetsz {{811.1.b}}. A recycle exhaustolt runeról is Powert ad {{164.2.b}}."
+                "name": "Grove of the God-Willow",
+                "ctrl": "me",
+                "me": [
+                  {
+                    "n": "Stalwart Poro",
+                    "m": 2,
+                    "base": 2
+                  }
+                ],
+                "opp": [],
+                "facedown": "me"
               },
               {
-                "t": "A Kinkou Temple-ön, hogy ott lepd meg az ellenfelet",
-                "ok": false,
-                "why": "Csak olyan battlefieldre rejthetsz, amit te kontrollálsz {{811.1.b}} {{107.3.c}}."
-              },
-              {
-                "t": "A Grove-on, 1 Energyért: exhaustolsz érte egy ready runet",
-                "ok": false,
-                "why": "A Hidden ára Power {{811.1.b}}, és Energyvel Power költség nem fizethető {{163.1}} {{163.2}}."
+                "name": "Kinkou Temple",
+                "ctrl": "opp",
+                "me": [],
+                "opp": [
+                  {
+                    "n": "Vanguard Sergeant",
+                    "m": 4,
+                    "base": 4
+                  }
+                ],
+                "facedown": null
               }
-            ]
+            ],
+            "chain": [],
+            "note": "A játék 8. köre, te vagy a második játékos, ez a 4. köröd (9 rune). Eddig 4+4 lapot húztál, és 1-et a Grove of the God-Willow e köri holdjáért: 2 a kezedben, a Stalwart Poro a Grove-on, 6 a trashben. Az ellenfél 4 körén túl van (8 rune): 4+4 lapot húzott, 3 a kezében, 2 unit a boardon, 3 a trashben."
           }
         },
         {
+          "type": "act",
           "say": "Az elrejtés nem nyitott chaint {{811.1.c.2}}. Az ellenfél köre: holdolja a Kinkou Temple-t, majd a Petty Officerrel a Grove-ra lép. Combat indul, ő az Attacker, nála a Focus {{466.2.c.1.a}}. A runejaid nem readyztek, mert az csak a saját Awaken Phase-edben történik {{315.1.b}}. A Poro a Shield miatt 3 Mighttal védekezik a 6 ellen {{814.1.c}}. A facedown Cub mostantól Reactiont kapott {{811.6}}. Az ellenfél passzol, így a Focus hozzád kerül {{347.2.b}}.",
           "board": {
             "me": {
@@ -6198,30 +6490,20 @@
             ],
             "chain": []
           },
-          "choice": {
-            "q": "Nálad a Focus. Mit teszel?",
-            "opts": [
-              {
-                "t": "Kijátszod a Pakaa Cubot a facedown helyéről, a Grove-ra, 0 költségért",
-                "ok": true,
-                "why": "A Hidden lap a következő körtől Reactionnel, a költsége figyelmen kívül hagyásával kijátszható {{811.1.b}}, és arra a battlefieldre kell kerülnie, ahol rejtve volt {{811.1.d.1}}."
-              },
-              {
-                "t": "Kijátszod a Pakaa Cubot a base-edbe",
-                "ok": false,
-                "why": "Elrejtett permanentet arra a battlefieldre kell kijátszani, ahol rejtve volt {{811.1.d.1}}."
-              },
-              {
-                "t": "A Stalwart Porót Standard Move-val a base-be mented",
-                "ok": false,
-                "why": "Standard Move showdown vagy combat alatt nem végezhető {{144.1.c}}."
-              }
-            ]
-          }
-        },
-        {
-          "say": "A Cub unitként azonnal feloldódik {{337.2}}, exhaustolva lép be {{143.4}}, és a következő cleanupban Defender lesz {{466.2.c.3.a}}. A chain lezárult, a Focus az ellenfélhez került {{347.1.b}}. Ő passzol, a Focus újra nálad van {{347.2.b}}. Most 6 Might áll 6 ellen.",
-          "board": {
+          "prompt": "Nálad a Focus. Játszd ki a rejtett [[Pakaa Cub]] lapot: kattints a facedown lapra a Grove-nál, majd a helyére.",
+          "expect": {
+            "kind": "play",
+            "card": "Pakaa Cub",
+            "from": "fd0",
+            "to": "bf0"
+          },
+          "state": "showdown",
+          "ok": "A Hidden lap a következő körtől Reactionnel, a költsége figyelmen kívül hagyásával kijátszható {{811.1.b}}, és arra a battlefieldre kell kerülnie, ahol rejtve volt {{811.1.d.1}}.",
+          "wrong": {
+            "card:Discipline": "A Discipline-t is kijátszhatnád, Reaction {{813.1.b}}, de előbb a Cub kerüljön a Grove-ra.",
+            "pass": "Ha passzolsz, és az ellenfél is passzol, a showdown véget ér {{347.2.a}}, és a 3 Mightú Poro egyedül védekezik a 6 Mightú Officer ellen."
+          },
+          "after": {
             "me": {
               "legend": "Lee Sin, Blind Monk",
               "champion": "Lee Sin, Ascetic",
@@ -6349,31 +6631,25 @@
               }
             ],
             "chain": []
-          },
-          "choice": {
-            "q": "Mit teszel a Discipline lappal?",
-            "opts": [
-              {
-                "t": "Most kijátszod egy saját defenderre, amíg nálad a Focus",
-                "ok": true,
-                "why": "Showdownban a Focusos játékos játszhat ki Action vagy Reaction lapot {{347.1}} {{308.1.a}}. Ha passzolsz és az ellenfél is, a showdown véget ér {{347.2.a}}, a combat damage step pedig nem nyit ablakot {{467.3}}."
-              },
-              {
-                "t": "Megvárod a combat damage stepet, és ott játszod ki",
-                "ok": false,
-                "why": "A damage stepben a FEPR kimarad {{467.3}}, ott már nincs lehetőség lapot kijátszani."
-              },
-              {
-                "t": "Nem kell: 6 a 6 ellen, ezt megnyered",
-                "ok": false,
-                "why": "Ha mindhárom unit meghal, a Grove kontroll nélkül marad {{468.5.b}}, vagyis elveszíted."
-              }
-            ]
           }
         },
         {
-          "say": "A [[Discipline]] a Cubra kerül: +2 Might a kör végéig, és húzol 1 lapot. A Focus az ellenfélhez kerül, ő passzol, te is passzolsz: mindenki egymás után passzolt, a showdown véget ér {{347.2.a}}. Az ellenfél, az Attacker kezdi a kiosztást {{467.2.c}}: 6 damage-et oszt ki.",
-          "board": {
+          "type": "act",
+          "say": "A Cub unitként azonnal feloldódik {{337.2}}, exhaustolva lép be {{143.4}}, és a következő cleanupban Defender lesz {{466.2.c.3.a}}. A chain lezárult, a Focus az ellenfélhez került {{347.1.b}}. Ő passzol, a Focus újra nálad van {{347.2.b}}. Most 6 Might áll 6 ellen.",
+          "prompt": "Erősítsd meg a védekezést: játszd ki a [[Discipline]] lapot a [[Pakaa Cub]]ra.",
+          "expect": {
+            "kind": "play",
+            "card": "Discipline",
+            "target": "Pakaa Cub"
+          },
+          "state": "showdown",
+          "ok": "Showdownban a Focusos játékos játszhat ki Action vagy Reaction lapot {{347.1}} {{308.1.a}}. A [[Discipline]] a Cubra kerül: +2 Might a kör végéig, és húzol 1 lapot.",
+          "wrong": {
+            "pass": "Ha passzolsz, és az ellenfél is, a showdown véget ér {{347.2.a}}, a combat damage step pedig nem nyit ablakot {{467.3}}: a Discipline-t később már nem játszhatod ki.",
+            "target:Stalwart Poro": "A Porón is szabályos lenne, de ebben a szituációban a Cubot erősíted.",
+            "target:Petty Officer": "Az ellenfél attackerét erősítenéd."
+          },
+          "after": {
             "me": {
               "legend": "Lee Sin, Blind Monk",
               "champion": "Lee Sin, Ascetic",
@@ -6505,7 +6781,10 @@
             ],
             "chain": [],
             "note": "Damage kiosztás folyamatban"
-          },
+          }
+        },
+        {
+          "say": "A Focus az ellenfélhez kerül, ő passzol, te is passzolsz: mindenki egymás után passzolt, a showdown véget ér {{347.2.a}}. Az ellenfél, az Attacker kezdi a kiosztást {{467.2.c}}: 6 damage-et oszt ki.",
           "choice": {
             "q": "Melyik kiosztás szabályos az ellenfél részéről?",
             "opts": [
@@ -6802,6 +7081,7 @@
       "rules": "308.1.a, 309.1.a, 310, 312.2.d, 343.1.a, 346, 347, 467.1, 468.3",
       "steps": [
         {
+          "type": "act",
           "say": "A te köröd. A [[Shadowblade Lurker]] (5 Might) a Grove-ra lépett, ahol az ellenfél [[Profiteer]] unitja (4 Might) áll. Combat showdown indult, te vagy az Attacker, nálad a Focus {{466.2.c.1.a}}. A kezedben: [[Incinerate]] (Action), [[Falling Star]] (nincs kulcsszava), [[Flash]] (Reaction).",
           "board": {
             "me": {
@@ -6909,30 +7189,19 @@
             "chain": [],
             "note": "A játék 7. köre, te vagy a kezdőjátékos, ez a 4. köröd (8 rune). Eddig 4+4 lapot húztál: 3 a kezedben, a Shadowblade Lurker a Grove-on, 4 a trashben. Az ellenfél 3 körén túl van (7 rune): 4+3 lapot húzott, és 1-et a Grove of the God-Willow holdjáért; 2 a kezében, a Profiteer a Grove-on, 5 a trashben."
           },
-          "choice": {
-            "q": "Mit játszhatsz ki most?",
-            "opts": [
-              {
-                "t": "Az Incinerate-et vagy a Flash-t",
-                "ok": true,
-                "why": "Showdownban Action vagy Reaction lap játszható ki {{308.1.a}}, a Flash Reaction {{813.1.b}}, és a Focusos játékos cselekedhet {{347.1}}."
-              },
-              {
-                "t": "A Falling Start",
-                "ok": false,
-                "why": "Kulcsszó nélküli spell showdownban nem játszható ki {{343.1.a}} {{155}}."
-              },
-              {
-                "t": "Bármelyiket, mert a te köröd van",
-                "ok": false,
-                "why": "Showdown State-ben csak Action vagy Reaction játszható ki {{308.1.a}}."
-              }
-            ]
-          }
-        },
-        {
-          "say": "Az [[Incinerate]] a Profiteerre célozva a chainre kerül. Te passzolsz, az ellenfél kapja a priorityt {{338.1.b.1}}. Az ellenfél kezében [[Discipline]] (Reaction) és [[Punch First]] (Action) van.",
-          "board": {
+          "prompt": "Sebezd a Profiteert: játszd ki az egyik lapodat, ami showdownban kijátszható.",
+          "expect": {
+            "kind": "play",
+            "card": "Incinerate",
+            "target": "Profiteer"
+          },
+          "state": "showdown",
+          "ok": "Showdownban Action vagy Reaction lap játszható ki {{308.1.a}}, és a Focusos játékos cselekedhet {{347.1}}. Az [[Incinerate]] a Profiteerre célozva a chainre került.",
+          "wrong": {
+            "card:Flash": "A Flash is kijátszható lenne, mert Reaction {{813.1.b}}, de az nem sebez. Most az Incinerate a jó választás.",
+            "target:Shadowblade Lurker": "Szabályos target lenne, de a saját Lurkeredet sebeznéd."
+          },
+          "after": {
             "me": {
               "legend": "Jinx, Loose Cannon",
               "champion": "Jinx, Demolitionist",
@@ -7037,7 +7306,10 @@
             "chain": [
               "Incinerate (te)"
             ]
-          },
+          }
+        },
+        {
+          "say": "Te passzolsz, az ellenfél kapja a priorityt {{338.1.b.1}}. Az ellenfél kezében [[Discipline]] (Reaction) és [[Punch First]] (Action) van.",
           "choice": {
             "q": "Melyik lapját játszhatja ki most az ellenfél?",
             "opts": [
@@ -7173,6 +7445,7 @@
           }
         },
         {
+          "type": "act",
           "say": "Az ellenfél a Focusszal kijátssza a [[Punch First]] lapot a Profiteerre: +5 Might a kör végéig, ami 11 Mightot jelentene. A Lurker így biztosan meghalna. A chainen a Punch First vár. Előbb az ellenfél kapja a priorityt {{337.4}}, ő passzol, így te kapod {{312.2.d}}.",
           "board": {
             "me": {
@@ -7284,30 +7557,19 @@
               "Punch First (ellenfél)"
             ]
           },
-          "choice": {
-            "q": "Mit teszel?",
-            "opts": [
-              {
-                "t": "Kijátszod a Flash lapot, és a Lurkert a base-be mozgatod",
-                "ok": true,
-                "why": "Closed Stateben Reaction játszható ki, akkor is, ha a Focus nem nálad van {{309.1.a}} {{813.1.c.1}}, és a hatás általi mozgás showdownban is megtörténhet {{451}}."
-              },
-              {
-                "t": "Kijátszod a Falling Start",
-                "ok": false,
-                "why": "Closed Stateben csak Reaction játszható ki {{309.1.a}}, és showdownban kulcsszó nélküli spell egyáltalán nem {{343.1.a}}."
-              },
-              {
-                "t": "Semmit, a Focus az ellenfélnél van",
-                "ok": false,
-                "why": "A chain alatt a priority dönt {{312.2.d}}, és Reactiont kijátszhatsz {{813.1.c.1}}."
-              }
-            ]
-          }
-        },
-        {
-          "say": "A [[Flash]] oldódik fel elsőként: a Lurker a base-be kerül, és a cleanupban elveszíti az Attacker designationt {{323.2.c}}. Utána a Punch First: a Profiteer 11 Might. A Focus hozzád kerül, passzolsz, az ellenfél is passzol, a showdown véget ér {{347.2.a}}.",
-          "board": {
+          "prompt": "Mentsd meg a Lurkert: játszd ki a [[Flash]] lapot, és mozgasd vele a [[Shadowblade Lurker]] unitot a base-be.",
+          "expect": {
+            "kind": "play",
+            "card": "Flash",
+            "target": "Shadowblade Lurker"
+          },
+          "state": "closed",
+          "ok": "Closed Stateben Reaction játszható ki, akkor is, ha a Focus nem nálad van {{309.1.a}} {{813.1.c.1}}, és a hatás általi mozgás showdownban is megtörténhet {{451}}. A [[Flash]] a chainre került, a Lurkert célozza.",
+          "wrong": {
+            "pass": "Ha passzolsz, a Punch First feloldódik, a Profiteer 11 Might lesz, és a Lurker a combatban meghal. Closed Stateben a priority számít {{312.2.d}}, és Reactiont kijátszhatsz {{813.1.c.1}}.",
+            "target:Profiteer": "A Flash saját (friendly) unitot mozgat a base-be, az ellenfél unitja nem lehet a targetje {{355.9.b}}."
+          },
+          "after": {
             "me": {
               "legend": "Jinx, Loose Cannon",
               "champion": "Jinx, Demolitionist",
@@ -7414,7 +7676,10 @@
               }
             ],
             "chain": []
-          },
+          }
+        },
+        {
+          "say": "A [[Flash]] oldódik fel elsőként: a Lurker a base-be kerül, és a cleanupban elveszíti az Attacker designationt {{323.2.c}}. Utána a Punch First: a Profiteer 11 Might. A Focus hozzád kerül, passzolsz, az ellenfél is passzol, a showdown véget ér {{347.2.a}}.",
           "choice": {
             "q": "Hogyan ér véget a combat?",
             "opts": [
@@ -7724,8 +7989,18 @@
           }
         },
         {
-          "say": "A Phantom a Kinkou Temple-re lép, combat indul, te vagy az Attacker {{466.2.c.1}}. A showdownban mindketten passzoltok. A damage egyszerre érkezik {{467.2.c.1.a}}: a Skulker 5-öt, a Phantom 3-at kap.",
-          "board": {
+          "type": "act",
+          "prompt": "Foglald el a Kinkou Temple-t: mozgasd oda a [[Playful Phantom]] unitot.",
+          "expect": {
+            "kind": "move",
+            "unit": "Playful Phantom",
+            "to": "bf1"
+          },
+          "ok": "A Phantom exhaustolva átlépett a Kinkou Temple-re {{144.2}} {{144.4.a}}.",
+          "wrong": {
+            "unit:Wizened Elder": "A Wizened Elder a Grove-on áll: Standard Move-val csak a base-be léphetne vissza {{144.4.b}}. Ha a Grove-on nem maradna unitod, a következő cleanupban elveszítenéd {{190.4.c}}."
+          },
+          "after": {
             "me": {
               "legend": "Lee Sin, Blind Monk",
               "champion": "Lee Sin, Centered",
@@ -7855,6 +8130,9 @@
             ],
             "chain": []
           }
+        },
+        {
+          "say": "Combat indul, te vagy az Attacker {{466.2.c.1}}. A showdownban mindketten passzoltok. A damage egyszerre érkezik {{467.2.c.1.a}}: a Skulker 5-öt, a Phantom 3-at kap."
         },
         {
           "say": "A Skulker meghal, a Phantom gyógyul {{468.1.a.1}}. Conquer {{468.5.d}}: mivel a Grove-ot már pontoztad, megkapod a 8. pontot {{473.1.b.1}}. A következő cleanup ellenőrzi: legalább 8 pontod van, és több, mint az ellenfélnek, tehát nyertél {{323.1}} {{194.2}}.",

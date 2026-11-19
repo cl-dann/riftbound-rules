@@ -96,6 +96,39 @@ test('How to Play és Practice: nincs kvíz, nincs Elolvastam gomb, nincs halad�
   await expect(page.locator('.view.on .scn-choice')).toBeVisible();
 });
 
+test('Practice: szituációban kattintással mozgatás, rossz kattintásra hibaüzenet, billentyűzettel is', async ({ page }) => {
+  await open(page, '#tanulas/sz/egyszeru-combat-conquer');
+  const v = page.locator('.view.on');
+  await v.getByRole('button', { name: 'Szituáció indítása' }).click();
+  await v.locator('.scn-choice button').first().click();
+  await v.locator('.scn-ctl .btn.hex').click();
+  await expect(v.locator('.scn-actbar')).toBeVisible();
+  await expect(v.locator('.scn-ctl .btn.hex')).toBeDisabled();
+  // rossz kattintás: az ellenfél unitja
+  await v.locator('.pm-unit.opp').first().click();
+  await expect(v.locator('.scn-msg.bad')).toContainText('ellenfél unitja');
+  // kijelölés, a legális célzónák kiemelve
+  const sgt = v.locator('.pm-unit.me', { hasText: 'Vanguard Sergeant' });
+  await expect(sgt).toHaveClass(/g-act/);
+  await sgt.click();
+  await expect(sgt).toHaveClass(/g-sel/);
+  await expect(v.locator('.pm2-bf.g-dest')).toHaveCount(2);
+  // szabályos, de nem a feladat szerinti cél: konkrét üzenet szabályszámmal
+  await v.locator('.pm2-bf[data-bfi="1"]').click({ position: { x: 4, y: 4 } });
+  await expect(v.locator('.scn-msg.bad')).toContainText('144.4.a');
+  // Mégse, majd a jó lépés billentyűzettel
+  await v.getByRole('button', { name: 'Mégse' }).click();
+  await sgt.focus();
+  await page.keyboard.press('Enter');
+  const bf0 = v.locator('.pm2-bf[data-bfi="0"]');
+  await expect(bf0).toHaveClass(/g-dest/);
+  await bf0.focus();
+  await page.keyboard.press('Enter');
+  await expect(v.locator('.scn-actbar.ok')).toBeVisible();
+  await expect(bf0.locator('.pm2-ubox.me .pm-unit')).toHaveCount(1);
+  await expect(v.locator('.scn-ctl .btn.hex')).toBeEnabled();
+});
+
 test('Fogalomtár: játékmenet lépésábra és errata szűrés', async ({ page }) => {
   await open(page, '#kezikonyv');
   await page.locator('[data-fs="0:3"]').first().click();

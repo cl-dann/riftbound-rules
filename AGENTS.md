@@ -93,7 +93,7 @@ Frissítés kézzel: GitHub, Actions, "Cardmarket árak", Run workflow. Ez commi
 cd src && python3 build_data.py && python3 export_web.py; rm -f data.json
 cd ../web && npm ci && npm run build          # tsc -b szigorú: a nem használt változó is hiba
 npx vite preview --port 4173                  # előnézet
-npm run test:e2e                              # Playwright, 9 teszt
+npm run test:e2e                              # Playwright, 10 teszt
 ```
 
 Megjegyzés: `npx tsc --noEmit -p .` nem azonos a CI-vel, mindig `npm run build`-del ellenőrizz. Ahol a Playwright saját böngészője nem tölthető le, a rendszer Chrome-ja megadható: `PW_CHROME=/usr/bin/google-chrome npm run test:e2e`.

@@ -3,6 +3,7 @@ import { AlertTriangle, BookOpen, Check, ChevronLeft, ChevronRight, Clock, Compa
 import { loadLearn } from '../data';
 import { IMGBASE, esc, glossify, vsCard } from '../legacy/core';
 import { Playmat, DEMO_BOARD, diffBoards } from '../components/Playmat';
+import { autoAfter, useAct, type ActStep, type Runes } from './scenarioAct';
 
 type Cell = [number, string];
 type Block =
@@ -23,7 +24,7 @@ type Block =
   | { type: 'links'; items: { href: string; title: string; text?: string }[] };
 type Chapter = { id: string; section: 'hogyan' | 'lecke'; level?: string; title: string; sub?: string; rules?: string; old?: string[]; blocks: Block[] };
 type Board = any;
-type Step = { say: string; board?: Board; choice?: { q: string; opts: { t: string; ok?: boolean; why: string }[] } };
+type Step = ActStep & { say?: string; board?: Board; choice?: { q: string; opts: { t: string; ok?: boolean; why: string }[] } };
 type Scenario = { id: string; title: string; level: string; intro: string; rules?: string; steps: Step[] };
 type Learn = { chapters: Chapter[]; scenarios: Scenario[] };
 
@@ -277,16 +278,41 @@ function ScenarioView({ s, all }: { s: Scenario; all: Scenario[] }) {
   const [started, setStarted] = useState(false);
   const [i, setI] = useState(0);
   const [pick, setPick] = useState<Record<number, number>>({});
-  useEffect(() => { setI(0); setPick({}); setStarted(false); }, [s.id]);
+  const [done, setDone] = useState<Record<number, boolean>>({});
+  const [liveR, setLiveR] = useState<Record<number, Runes>>({});
+  useEffect(() => { setI(0); setPick({}); setDone({}); setLiveR({}); setStarted(false); }, [s.id]);
+  // Állások lépésenként: pre = a lépés eleje, post = a lépés vége (act lépésnél a jó mozdulat utáni állás).
+  // Ha a játékos más domainű rune-okkal fizetett, mint az adatban, a saját rune-jai maradnak a következő lépésekben is, amíg az adat nem változtat rajtuk.
+  const { pre, post } = useMemo(() => {
+    const pre: Board[] = [], post: Board[] = [];
+    const J = (x: unknown) => JSON.stringify(x);
+    const withR = (b: Board, r: Runes) => ({ ...b, me: { ...b.me, runes: r } });
+    let sub: { from: string; to: Runes } | null = null;
+    s.steps.forEach((x, k) => {
+      let p: Board = x.board ?? post[k - 1];
+      if (x.board && sub) { if (J(x.board.me.runes) === sub.from) p = withR(p, sub.to); else sub = null; }
+      pre[k] = p;
+      let q: Board = x.type === 'act' ? autoAfter(p, x) : p;
+      if (x.type === 'act' && x.after && sub) { if (J(x.after.me.runes) === sub.from) q = withR(q, sub.to); else sub = null; }
+      const lr = liveR[k]; const qr = q.me.runes;
+      if (x.type === 'act' && lr && qr && lr.ready === qr.ready && lr.exhausted === qr.exhausted && J(lr) !== J(qr)) { sub = { from: J(qr), to: lr }; q = withR(q, lr); }
+      post[k] = q;
+    });
+    return { pre, post };
+  }, [s, liveR]);
   const st = s.steps[i];
-  let board: Board | undefined; for (let k = i; k >= 0 && !board; k--) board = s.steps[k].board;
-  let prevBoard: Board | undefined; for (let k = i - 1; k >= 0 && !prevBoard; k--) prevBoard = s.steps[k].board;
-  const changes = st.board ? diffBoards(prevBoard, st.board) : [];
-  const blocked = !!st.choice && pick[i] == null;
+  const isAct = st.type === 'act';
+  const dn = !!done[i];
+  const board: Board = isAct && dn ? post[i] : pre[i];
+  const prevBoard: Board | undefined = isAct ? (dn ? pre[i] : undefined) : (i > 0 && st.board ? post[i - 1] : undefined);
+  const changes = prevBoard ? diffBoards(prevBoard, board) : [];
+  const blocked = (!!st.choice && pick[i] == null) || (isAct && !dn);
   const last = i === s.steps.length - 1;
   const idx = all.indexOf(s); const nextS = all[idx + 1];
   const next = () => { if (!started) { setStarted(true); return; } if (blocked) return; if (last) location.hash = nextS ? '#tanulas/sz/' + nextS.id : '#tanulas/sz'; else setI(i + 1); };
   const back = () => started && i > 0 && setI(i - 1);
+  const nextLabel = last ? (nextS ? <>Következő szituáció <ChevronRight size={16} /></> : <><Check size={16} /> Vissza a listához</>) : <>Tovább <ChevronRight size={16} /></>;
+  const act = useAct({ st, pre: pre[i], k: s.id + ':' + i, done: dn || !started, onDone: (r) => { setDone((d) => ({ ...d, [i]: true })); if (r) setLiveR((m) => ({ ...m, [i]: r })); }, onNext: next, nextLabel, render: (t) => <H t={t} /> });
   useEffect(() => {
     const k = (e: KeyboardEvent) => { if ((e.target as HTMLElement).closest('input,textarea')) return; if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') back(); };
     window.addEventListener('keydown', k); return () => window.removeEventListener('keydown', k);
@@ -301,14 +327,18 @@ function ScenarioView({ s, all }: { s: Scenario; all: Scenario[] }) {
       <h1 className="chtitle">{s.title}</h1>
       <H as="p" className="chsub" t={s.intro} />
       <div className="scn-grid">
-        <div className="scn-boardcol">{board && <Playmat key={s.id} b={board} prev={started ? prevBoard : undefined} turn={(board as any).turn || 'me'} />}</div>
+        <div className="scn-boardcol">
+          {started && act.bar}
+          {board && <Playmat key={s.id} b={act.board || board} prev={started ? prevBoard : undefined} turn={(board as any).turn || 'me'} scn ctl={started ? act.ctl : null} />}
+        </div>
         <aside className={'scn-narr' + (started ? '' : ' pre')}>
           {!started ? (
             <>
               <div className="scn-step"><span>{lvName(s.level) || 'Kezdő'} · {s.steps.length} lépés</span></div>
               <H as="div" t={s.intro} />
               {s.rules && <p className="note">Core Rules: <span dangerouslySetInnerHTML={{ __html: inline('{{' + s.rules + '}}') }} /></p>}
-              <p className="note">A pálya a kiinduló állást mutatja. A döntéseknél válassz, utána jön a magyarázat.</p>
+              {pre[0]?.note && <p className="scn-note">{pre[0].note}</p>}
+              <p className="note">A pálya a kiinduló állást mutatja. A kérdéseknél válassz, a pályán végzett lépéseknél kattints a sárgán kiemelt lapokra.</p>
               <div className="scn-ctl"><span />
                 <button className="btn hex" onClick={() => setStarted(true)}><Play size={16} /> Szituáció indítása</button></div>
             </>
@@ -316,10 +346,13 @@ function ScenarioView({ s, all }: { s: Scenario; all: Scenario[] }) {
             <>
               <div className="scn-step"><span>{i + 1}. lépés / {s.steps.length}</span>
                 <div className="scn-dots" aria-hidden>{s.steps.map((_, k) => <i key={k} className={k === i ? 'on' : k < i ? 'seen' : ''} onClick={() => k <= i && setI(k)} />)}</div></div>
-              <H as="div" t={st.say} />
+              {st.say && <H as="div" t={st.say} />}
+              {isAct && <div className="scn-task"><b>Feladat</b><H t={st.prompt || ''} /></div>}
+              {isAct && dn && <div className="scn-msg ok scn-okx"><Check size={16} aria-hidden /><H t={st.ok || ''} /></div>}
               {!!changes.length && (
                 <div className="scn-chg"><b>Mi változott?</b><ul>{changes.map((c, k) => <li key={k}>{c}</li>)}</ul></div>
               )}
+              {st.board?.note && i > 0 && <p className="scn-note">{st.board.note}</p>}
               {st.choice && (
                 <div className="scn-choice">
                   <H as="p" t={st.choice.q} />
@@ -333,9 +366,9 @@ function ScenarioView({ s, all }: { s: Scenario; all: Scenario[] }) {
               )}
               <div className="scn-ctl">
                 <button className="btn sec" disabled={i === 0} onClick={back}><ChevronLeft size={16} /> Vissza</button>
-                <button className="btn hex" disabled={blocked} onClick={next}>{last ? (nextS ? <>Következő szituáció <ChevronRight size={16} /></> : <><Check size={16} /> Vissza a listához</>) : <>Tovább <ChevronRight size={16} /></>}</button>
+                <button className="btn hex" disabled={blocked} onClick={next}>{nextLabel}</button>
               </div>
-              <p className="note">Kattints egy unitra a részletekért, a címkékre (Attacker, Buff, ...) mutatva magyarázatot kapsz. Billentyűzet: ← →</p>
+              <p className="note">{isAct ? 'A sárgán kiemelt lapokkal most lehet valamit csinálni. Billentyűzet: Tab a kiemelt lapokon, Enter kiválaszt, Esc mégse, ← → lépések.' : 'Kattints egy unitra a részletekért, a címkékre (Attacker, Buff, ...) mutatva magyarázatot kapsz. Billentyűzet: ← →'}</p>
             </>
           )}
         </aside>
@@ -458,7 +491,7 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
   let main: ReactNode;
   if (route.k === 'scn') {
     const s = scs.find((x) => x.id === route.id);
-    if (s) return <div className="learn wide"><main className="panel learn-main"><ScenarioView s={s} all={scs} /></main></div>;
+    if (s) return <div className="learn wide"><main className="panel learn-main"><ScenarioView key={s.id} s={s} all={scs} /></main></div>;
     main = <><h1 className="chtitle">Nincs ilyen szituáció</h1>{scnList}</>;
   } else if (route.k === 'lesson') {
     const ch = lessons.find((c) => c.id === route.id);
