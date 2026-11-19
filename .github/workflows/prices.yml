@@ -1,10 +1,11 @@
-name: Cardmarket árak (heti)
+name: Cardmarket árak
 
-# Hetente egyszer letölti a Cardmarket publikus árlistáját, a web/public/prices.json-t
-# commitolja, majd elindítja a deployt. A deploy maga nem tölt le árat, a commitolt fájlt használja.
+# Kézzel indítható (GitHub, Actions fül, Cardmarket árak, Run workflow). Letölti a Cardmarket
+# publikus árlistáját, a web/public/prices.json-t commitolja, majd elindítja a deployt.
+# A deploy maga nem tölt le árat. Heti időzítéshez a schedule blokkot kell visszatenni:
+#   schedule:
+#     - cron: '17 4 * * 1'
 on:
-  schedule:
-    - cron: '17 4 * * 1'
   workflow_dispatch:
 
 permissions:

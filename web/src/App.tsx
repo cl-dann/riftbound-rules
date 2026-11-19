@@ -70,7 +70,8 @@ function Shell() {
           <span>Ban lista <b>{META.ban_updated}</b>{BF && (BAN_ACTIVE ? <> + <b>{BF.from}</b></> : <>, új: <b>{BF.from}</b></>)}</span>
           <span>Kártyaadat <b>{META.cards_snapshot}</b></span>
           <span>Errata <b>{errata} kártya</b></span>
-          <a href="#deck" title="Cardmarket 1 és 7 napos átlagár, hetente frissül">Cardmarket ár <b>{pricesAt || 'nincs adat'}</b></a>
+          {(() => { const age = pricesAt ? Math.floor((Date.now() - Date.parse(pricesAt)) / 864e5) : null; const due = age == null || age > 7;
+            return <a href="#deck" className={due ? 'stale' : undefined} title={'Cardmarket 1 és 7 napos átlagár, heti frissítés' + (age != null ? ', ' + age + ' napja frissült' : '')}>Cardmarket ár <b>{pricesAt || 'nincs adat'}</b>{due && pricesAt ? ', frissítés esedékes' : ''}</a>; })()}
           <a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a>
         </div>
       </header>
