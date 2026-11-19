@@ -64,8 +64,10 @@ def main():
         cj = cj if isinstance(cj, list) else cj['cards']
         ours = {c['n'] for c in cj if c.get('t') not in ('Token',)}
         miss = sorted(n for n in ours if pn(n) not in out)
-        print('matched', len(ours) - len(miss), 'of', len(ours), 'missing sample', miss[:25])
-        print('cm sample', sorted(out)[:15])
+        print('matched', len(ours) - len(miss), 'of', len(ours))
+        print('MISSING', ' | '.join(miss))
+        po = {pn(n) for n in ours}
+        print('CMONLY', ' | '.join(sorted(k for k in out if k not in po)))
     except Exception as e:
         print('match check skipped', e)
     return 0
