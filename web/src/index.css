@@ -410,3 +410,5 @@ footer#foot { border-top: 0; }
 @keyframes zin { from { opacity: 0; transform: scale(.96); } }
 .zoom-pop.land { width: 530px; aspect-ratio: 1039/744; }
 #tip { z-index: 80; }
+.tile, .list li { content-visibility: auto; contain-intrinsic-size: auto 260px; }
+.list li { contain-intrinsic-size: auto 40px; }

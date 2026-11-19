@@ -8,9 +8,31 @@ const DOMAINS = ['Fury', 'Calm', 'Mind', 'Body', 'Chaos', 'Order'];
 type F = { q: string; type: string; dom: string; cost: string; might: string; set: string; kw: string; inText: boolean; onlyErr: boolean; showBan: boolean };
 const EMPTY: F = { q: '', type: '', dom: '', cost: '', might: '', set: '', kw: '', inText: false, onlyErr: false, showBan: false };
 
+/** Magyar keresőszavak angol megfelelői (a kártyaszövegben keresünk velük). */
+const SYN: Record<string, string[]> = {
+  sebzes: ['deal', 'damage'], sebez: ['deal', 'damage'], seb: ['damage'], olés: ['kill'], oles: ['kill'], megol: ['kill'], hal: ['die', 'dies', 'deathknell'],
+  huz: ['draw'], huzas: ['draw'], kijatsz: ['play'], kijatszas: ['play'], mozog: ['move'], mozgas: ['move'], pont: ['point', 'score'],
+  gyogyit: ['heal'], gyogyitas: ['heal'], stun: ['stun'], kabit: ['stun'], buff: ['buff'], elrejt: ['hidden', 'hide'], rejtett: ['hidden'],
+  eldob: ['discard'], dobas: ['discard'], visszavesz: ['recall', 'return'], lap: ['card'], egyseg: ['unit'], targy: ['gear'], felszereles: ['equipment', 'equip'],
+  varazslat: ['spell'], csatater: ['battlefield'], harc: ['combat', 'attack', 'defend'], tamad: ['attack', 'attacker'], vedekez: ['defend', 'defender'],
+  token: ['token'], tisztit: ['cleanse'], banish: ['banish'], szamuz: ['banish'], ready: ['ready'], kimerit: ['exhaust'],
+};
+const lev1 = (a: string, b: string) => {
+  if (Math.abs(a.length - b.length) > 1) return false;
+  let i = 0, j = 0, e = 0;
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) { i++; j++; continue; }
+    if (++e > 1) return false;
+    if (a.length === b.length && a[i] === b[j + 1] && a[i + 1] === b[j]) { i += 2; j += 2; continue; }
+    if (a.length > b.length) i++; else if (a.length < b.length) j++; else { i++; j++; }
+  }
+  return e + (a.length - i) + (b.length - j) <= 1;
+};
+const fuzzyName = (n: string, w: string) => w.length >= 4 && n.split(/[^a-z0-9']+/).some((t) => t.length >= 4 && lev1(t, w));
+
 function filterCards(f: F) {
-  const q = norm(f.q), words = q ? q.split(' ') : [];
-  const res = CARDS.filter((c: any) => {
+  const q = norm(f.q), words = q ? q.split(' ').filter(Boolean) : [];
+  const base = (c: any) => {
     if (c.ban === 1 && !f.showBan) return false;
     if (f.type && c.t !== f.type) return false;
     if (f.dom && !(f.dom === 'none' ? !(c.d && c.d.length) : (c.d || []).includes(f.dom))) return false;
@@ -19,8 +41,16 @@ function filterCards(f: F) {
     if (f.might !== '' && !(f.might === '6' ? c.m != null && c.m >= 6 : c.m === +f.might)) return false;
     if (f.set && !c.sets.includes(f.set)) return false;
     if (f.kw && !c._kw.includes(f.kw)) return false;
-    return words.every((w: string) => c._s.includes(w) || (f.inText && c._t.includes(w)));
-  });
+    return true;
+  };
+  const hit = (c: any, w: string) => {
+    if (c._s.includes(w) || (f.inText && c._t.includes(w))) return true;
+    const syn = SYN[w] || Object.entries(SYN).find(([k]) => w.length >= 4 && (w.startsWith(k) || k.startsWith(w)))?.[1];
+    return !!syn && syn.some((x) => c._s.includes(x) || c._t.includes(x));
+  };
+  let res = CARDS.filter((c: any) => base(c) && words.every((w: string) => hit(c, w)));
+  // Elgépelés: ha nincs találat, egy betű eltéréssel a lapnevekben keresünk.
+  if (!res.length && words.length) res = CARDS.filter((c: any) => base(c) && words.every((w: string) => hit(c, w) || fuzzyName(c._n, w)));
   if (q) res.sort((a: any, b: any) => (b._n.startsWith(q) - a._n.startsWith(q)) || (b._n.includes(q) - a._n.includes(q)) || a._n.localeCompare(b._n));
   return res;
 }
@@ -47,6 +77,13 @@ export function CardsView({ active }: { active: boolean }) {
     setZoom({ src: IMGBASE + c.img, x: right ? r.right + 12 : r.left - 12, y: Math.max(10, Math.min(r.top + r.height / 2 - h / 2, window.innerHeight - h - 10)), right, land });
   };
   const [limit, setLimit] = useState(80);
+  const moreRef = useRef<HTMLLIElement>(null);
+  // Automatikus továbbtöltés görgetéskor: a "további" sor láthatóvá válásakor bővül a lista.
+  useEffect(() => {
+    const el = moreRef.current; if (!el) return;
+    const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) setLimit((l) => l + (mode === 'grid' ? 120 : 200)); }, { rootMargin: '600px' });
+    io.observe(el); return () => io.disconnect();
+  });
   const [sel, setSel] = useState<any>(null);
   const detailRef = useRef<HTMLDivElement>(null);
   const qRef = useRef<HTMLInputElement>(null);
@@ -149,7 +186,7 @@ export function CardsView({ active }: { active: boolean }) {
                 </li>
               ))}
           {res.length > limit && (
-            <li className={mode === 'grid' ? 'more-li' : ''}>
+            <li className={mode === 'grid' ? 'more-li' : ''} ref={moreRef}>
               <button className="more" onClick={() => setLimit(limit + (mode === 'grid' ? 120 : 200))}>További {res.length - limit} találat megjelenítése</button>
             </li>
           )}
