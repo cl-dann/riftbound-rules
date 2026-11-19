@@ -19,8 +19,8 @@ type Scenario = { id: string; title: string; level: string; intro: string; rules
 type Learn = { chapters: Chapter[]; scenarios: Scenario[] };
 
 const LEVELS: [string, string, string][] = [
-  ['kezdo', 'Kezdő', 'Az első játékhoz szükséges minden: cél, kör, fizetés, harc és a chain.'],
-  ['halado', 'Haladó', 'Tempo, decképítés és a showdown finomságai.'],
+  ['kezdo', 'Kezdő', 'Cél, kör, fizetés, combat, chain.'],
+  ['halado', 'Haladó', 'Tempo, decképítés, showdown.'],
 ];
 const KEY = 'rb-learn-v1';
 type Progress = { done: Record<string, 1>; quiz: Record<string, number[]>; scn: Record<string, 1> };
@@ -244,15 +244,15 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
     <>
       <div className="hero" style={{ margin: '-26px calc(-1 * clamp(16px, 4vw, 42px)) 18px' }}>
         <div className="crumb">{base === 'hogyan' ? 'How to Play' : 'Tanulás'}</div>
-        <h2>{base === 'hogyan' ? 'Tanuld meg a Riftboundot' : 'Gyakorolj és mélyülj el'}</h2>
-        <p>{base === 'hogyan' ? 'Fejezetekre bontott útmutató a Core Rules alapján: rövid leckék valódi lapokkal, minden fejezet végén néhány kérdéssel. A haladásod ebben a böngészőben mentődik.' : 'Valódi pályán, lépésenként gyakorolhatod a harcot, a chaint és a pontszerzést, döntési pontokkal. Mellette haladó leckék a tempóról, a decképítésről és a showdown trükkökről. A haladásod ebben a böngészőben mentődik.'}</p>
+        <h2>{base === 'hogyan' ? 'How to Play' : 'Tanulás'}</h2>
+        <p>{base === 'hogyan' ? '10 fejezet a Core Rules alapján, a végén kvíz. A haladás ebben a böngészőben mentődik.' : 'Szituációk a pályán lépésenként, döntésekkel, plusz haladó leckék. A haladás ebben a böngészőben mentődik.'}</p>
         <a className="btn hex" href={B + '/' + (firstOpen?.id || '')}>{doneN ? 'Folytatás' : 'Kezdés'}: {firstOpen?.title} <ChevronRight size={16} /></a>
       </div>
       <div className="levels">
         {LEVELS.map(([lv, name, d]) => { const list = chs.filter((c) => c.level === lv); return list.length ? (
           <a key={lv} className="level" href={B + '/' + list[0].id}><b>{name}</b><span>{d} {list.length} fejezet.</span></a>) : null; })}
-        {!!L.scenarios.length && <a className="level" href={'#tanulas/sz/' + L.scenarios[0].id}><b>Szituációk</b><span>Valódi board state-ek lépésenként, döntési pontokkal. {L.scenarios.length} gyakorlat.</span></a>}
-        <a className="level" href="#kezikonyv"><b>Kézikönyv</b><span>Fogalmak, kulcsszavak, játékmenet és szabályváltozások, kereshetően.</span></a>
+        {!!L.scenarios.length && <a className="level" href={'#tanulas/sz/' + L.scenarios[0].id}><b>Szituációk</b><span>Board state-ek lépésenként, döntésekkel. {L.scenarios.length} gyakorlat.</span></a>}
+        <a className="level" href="#kezikonyv"><b>Kézikönyv</b><span>Fogalmak, kulcsszavak, játékmenet, szabályváltozások.</span></a>
       </div>
       <p className="note" style={{ marginTop: 18 }}>AI által írt, nem hivatalos összefoglaló. A pontos szöveg mindig a hivatkozott szabályszámra kattintva olvasható, versenyen a judge és a Core Rules dönt.</p>
     </>

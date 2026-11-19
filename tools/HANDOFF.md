@@ -69,3 +69,4 @@
 - KÉSZ: kártya ellenőrzés (mind az 1101 lap két egymást követő hibátlan ellenőrzésen átment, 22. kör: 0 javítás).
 - KÉSZ és élesben: How to Play (10 fejezet, 45 kvíz), Tanulás (3 haladó lecke, 8 szituáció).
 - Következő: deck építő + Cardmarket árak (allowlist: www.cardmarket.com, downloads.s3.cardmarket.com kell, vagy Actions autodetect), Chain szabálymotor.
+- Stílus (2026-11-19): nincs marketinges cím vagy szöveg ("Tanuld meg...", "Gyakorolj és mélyülj el"); címek egyszerűek, a Hunglish rendben (How to Play, Tanulás).
