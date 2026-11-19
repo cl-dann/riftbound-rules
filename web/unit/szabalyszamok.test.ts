@@ -21,5 +21,5 @@ it('a hivatkozott szabályszámok léteznek', () => {
   expect(missing).toEqual([]);
 });
 it('nincs em-dash és en-dash', () => {
-  for (const f of FILES.concat(['unit/hivatalos.test.ts', 'unit/esetek.test.ts', 'unit/felismeres.test.ts', 'unit/combat.test.ts', 'unit/javitasok.test.ts'])) expect(readFileSync(f, 'utf8')).not.toMatch(/[\u2013\u2014]/);
+  for (const f of FILES.concat(['unit/hivatalos.test.ts', 'unit/esetek.test.ts', 'unit/felismeres.test.ts', 'unit/combat.test.ts', 'unit/javitasok.test.ts', 'unit/javitasok2.test.ts', 'unit/javitasok3.test.ts', 'unit/javitasok4.test.ts', 'unit/bovites.test.ts'])) expect(readFileSync(f, 'utf8')).not.toMatch(/[\u2013\u2014]/);
 });

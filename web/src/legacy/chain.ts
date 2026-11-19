@@ -3,7 +3,7 @@
    Az elemzés maga a DOM nélküli chainCore.ts-ben van (analyze), ezt hívják a unit tesztek is.
    A kártyalap megnyitása és a tooltip eseményekkel megy a React felé. */
 import {esc,vsCard,b64e,b64d} from './core';
-import {analyze,stepInfo,srcCard,abilitiesOf,triggersOf,interp,timingOf,isPermC,actOf,OV_ACTS,OV_N} from './chainCore';
+import {analyze,stepInfo,srcCard,abilitiesOf,triggersOf,interp,timingOf,isPermC,actOf,OV_ACTS,OV_N,enterReadyCond} from './chainCore';
 const $=(id:string)=>document.getElementById(id) as any;
 const openModal=(c:any)=>window.dispatchEvent(new CustomEvent('rb:open-card',{detail:c.n}));
 const hideTip=()=>window.dispatchEvent(new Event('rb:hide-tip'));
@@ -69,12 +69,17 @@ function interpHtml(s,j,inf){if(!inf||!inf.eff)return '';const INS=interp(s,inf)
         +(OV_N.has(x.act.k)?'<label class="cbint-n">N <input type="number" min="-30" max="30" data-ovn="'+id+'" value="'+(x.act.n!=null?x.act.n:1)+'"></label>':'')
         +'<label class="chk"><input type="checkbox" data-ovl="'+id+'"'+(x.lk?' checked':'')+(xi?'':' disabled')+'> az előző utasításra hivatkozik (linked)</label>'
         +(x.manual?'<span class="cbman">kézzel</span>':'')+'</div>'
+        +(x.det.cond&&x.det.cond.how==='user'?'<div class="row2 sm">'+cbSel('data-cnd="'+id+'" aria-label="'+(xi+1)+'. utasítás feltétele"',[['','feltétel: "'+x.det.cond.t+'" (nincs megadva)'],['1','teljesül: "'+x.det.cond.t+'"'],['0','nem teljesül: "'+x.det.cond.t+'"']],s.cnd&&s.cnd[xi]!=null?s.cnd[xi]:'')+'</div>':'')
+        +(x.act.k==='playcard'&&!x.act.self?'<div class="row2 sm"><input type="text" list="cardnames" data-plc="'+id+'" value="'+esc((s.plc&&s.plc[xi])||'')+'" placeholder="Melyik lapot játssza ki?" aria-label="'+(xi+1)+'. utasítás: kijátszott lap">'+cbSel('data-pll="'+id+'" aria-label="Hova kerül"',LOCS(),(s.pll&&s.pll[xi])||'base')+'</div>':'')
         +(x.unsure.length?'<div class="tl"><span class="cbuns">bizonytalan</span> '+esc(x.unsure.join('; '))+'.</div>':'')+'</li>';}).join('')
     +'</ol>'+(s.ov?'<button type="button" class="linkbtn" data-ovr="'+j+'">Visszaállítás a felismert értelmezésre</button>':'')+'</details>';}
 /** Célpont választók (kijátszott lap, ability, trigger és combat utáni trigger egyaránt). */
-function targetSel(s,j,inf){let x='';(inf.list||[]).forEach((p,ti)=>{const v=(s.tg||[])[ti]||'';x+=cbSel('data-j="'+j+'" data-ti="'+ti+'" aria-label="'+(ti+1)+'. célpont"',[['',(ti+1)+'. célpont'+(p.opt?' (nem kötelező)':'')+': '+(p.rel!=='any'?p.rel+' ':'')+(p.equipOnly?'Equipment':p.type)+(p.bf?', battlefielden':'')+(p.here?', "here"':'')+(p.free?', másik locationön':'')+(p.max!=null?', max '+p.max+' Might':'')+(p.mighty?', Mighty':'')]].concat(tgOptions(j,p).slice(1)),v);
+function targetSel(s,j,inf){let x='';
+  if(inf.modes&&inf.modes.length)x+=cbSel('data-mode="'+j+'" aria-label="Választott mód (Choose one)"',inf.modes.map((m,i)=>[i,'mód: '+m]),s.mode||0);
+  (inf.list||[]).forEach((p,ti)=>{const v=(s.tg||[])[ti]||'';x+=cbSel('data-j="'+j+'" data-ti="'+ti+'" aria-label="'+(ti+1)+'. célpont"',[['',(ti+1)+'. célpont'+(p.opt?' (nem kötelező)':'')+': '+(p.rel!=='any'?p.rel+' ':'')+(p.equipOnly?'Equipment':p.type)+(p.bf?', battlefielden':'')+(p.here?', "here"':'')+(p.free?', másik locationön':'')+(p.max!=null?', max '+p.max+' Might':'')+(p.mighty?', Mighty':'')]].concat(tgOptions(j,p).slice(1)),v);
+    if(p.split&&v)x+='<label class="cbint-n">'+(ti+1)+'. célpont damage <input type="number" min="0" max="30" data-spl="'+j+'_'+ti+'" value="'+((s.split&&s.split[ti])||'')+'" placeholder="?"></label>';
     if(v==='x'){const e=s.ext[ti]||{};x+='<span class="tl">'+(ti+1)+'. célpont: '+cbSel('data-eloc="'+j+'_'+ti+'"',LOCS(),e.loc||'bf0')+' Might <input type="number" min="0" max="30" style="width:5em;padding:4px 6px" data-em="'+j+'_'+ti+'" value="'+(e.m!=null?e.m:'')+'" placeholder="?"> '+cbSel('data-epl="'+j+'_'+ti+'"',[['','gazdája?'],['A','a te lapod'],['B','az ellenfélé']],e.pl||'')+'</span>';}});
-  if(inf.eff&&interp(s,inf).some(y=>y.act.k==='move'))x+=cbSel('data-dest="'+j+'" aria-label="A mozgás célja"',[['base','mozgás célja: base']].concat([['bf0','mozgás célja: '+locLabel('bf0')],['bf1','mozgás célja: '+locLabel('bf1')]]),s.dest||'base');
+  if(inf.eff&&interp(s,inf).some(y=>y.act.k==='move'||y.act.k==='replay'&&!['same','base'].includes(y.act.to)))x+=cbSel('data-dest="'+j+'" aria-label="A mozgás célja"',[['base','cél: base']].concat([['bf0','cél: '+locLabel('bf0')],['bf1','cél: '+locLabel('bf1')]]),s.dest||'base');
   if(inf.eff&&actOf(inf.eff).unless)x+=cbSel('data-pay="'+j+'"',[['0','A célzott spell gazdája nem fizet'],['1','A célzott spell gazdája kifizeti']],s.pays?'1':'0');
   return x;}
 function renderCB(){
@@ -97,6 +102,8 @@ function renderCB(){
     else if(s.k==='tg'){x+=cbSel('data-src="'+j+'" aria-label="Trigger forrása"',srcOptions(j,'Trigger forrása'),s.src||'');const sc=srcCard(CS,s.src);const trs=triggersOf(sc,s.src&&s.src[0]==='b'?CS.bd.filter(g=>g.on===+s.src.slice(1)).map(g=>(vsCard(g.n)||{}).eff||'').join('\n'):'');if(trs.length)x+=cbSel('data-ti2="'+j+'" aria-label="Trigger"',trs.map((a,i)=>[i,a.label]),s.ti||0);else if(s.src)x+='<span class="tl">Ennek a forrásnak nincs triggered abilityje.</span>';}
     else{x+=cbSel('data-from="'+j+'" aria-label="Honnan"',[['hand','kézből'],['facedown','facedown-ból (Hidden)'],['trash','trashből'],['champ','Champion Zone-ból'],['other','máshonnan']],s.from||(c&&timingOf(c)==='hidden'?'facedown':'hand'));
       if(isPermC(c)||s.from==='facedown')x+=cbSel('data-loc="'+j+'" aria-label="Hova"',L,s.loc||(s.from==='facedown'?'bf0':'base'));
+      const erc=enterReadyCond(c);if(erc&&erc.how==='user')x+=cbSel('data-erd="'+j+'" aria-label="Ready belépés feltétele"',[['','belépés: "'+erc.t+'" (nincs megadva, exhausted)'],['1','teljesül: ready lép be'],['0','nem teljesül: exhausted lép be']],s.erd||'');
+      if(c&&c.t==='Unit'&&/^\[Accelerate\]/m.test(c.txt||''))x+='<label class="chk"><input type="checkbox" data-accel="'+j+'"'+(s.accel?' checked':'')+'> Accelerate kifizetve (ready lép be, 143.4.a)</label>';
       const ck=inf.cost;if(ck&&(ck.opt||ck.kill&&ck.kill.opt))x+='<label class="chk"><input type="checkbox" data-addc="'+j+'"'+(s.addc?' checked':'')+'> kifizetem az additional costot</label>';
       if(ck&&ck.kill&&(!ck.kill.opt||s.addc)){const opts=[['','költség: megölt friendly '+(ck.kill.mighty?'Mighty ':'')+'unit']].concat(CS.bd.map((b,i)=>[b,i]).filter(([b])=>{const cc=vsCard(b.n);return cc&&cc.t==='Unit';}).map(([,i])=>['b'+i,'költség: '+bdLabel(i)])).concat(CS.steps.slice(0,j).map((t,k)=>[t,k]).filter(([t])=>t.k==='card'&&(vsCard(t.n)||{}).t==='Unit').map(([t,k])=>['s'+k,'költség: '+(k+1)+'. lépés: '+vsCard(t.n).n]));x+=cbSel('data-cost="'+j+'" aria-label="Additional cost: megölt unit"',opts,s.costTg||'');}}
     x+=targetSel(s,j,inf);
@@ -104,7 +111,7 @@ function renderCB(){
     return '<div class="cbstep" data-sj="'+j+'">'+hd(j,head)+(s.k==='card'?'<input type="text" list="cardnames" data-name="'+j+'" value="'+esc(s.n)+'" placeholder="Kártya neve" aria-label="Kártya">':'')+'<div class="row2">'+x+'</div>'+(c&&s.k==='card'&&!inf.list.length?'<div class="tl">Ennek a lapnak nincs választandó célpontja.</div>':'')+(s.k==='tg'?'<div class="tl">A triggert a játék teszi a chainre (priority nélkül). Ide azt a pontot állítsd, ahol triggerelt; a célpontját itt választod.</div>':'')+interpHtml(s,j,inf)+'</div>';}).join('');
   $('cb-steps').innerHTML=h;
 }
-function cbSetStep(j){const s=CS.steps[j];s.tg=[];s.ext={};delete s.ov;delete s.costTg;}
+function cbSetStep(j){const s=CS.steps[j];s.tg=[];s.ext={};delete s.ov;delete s.costTg;delete s.split;delete s.cnd;delete s.plc;delete s.pll;}
 $('cb-steps').addEventListener('change',e=>{const el=e.target,d=el.dataset;const sp=v=>v.split('_').map(Number);let re=true;
   if(d.lg)CS.lg[d.lg]=el.value;
   else if(d.turn!=null){CS.turn=el.value;re=false;}
@@ -129,7 +136,12 @@ $('cb-steps').addEventListener('change',e=>{const el=e.target,d=el.dataset;const
   else if(d.loc!=null){CS.steps[+d.loc].loc=el.value;re=false;}
   else if(d.pay!=null){CS.steps[+d.pay].pays=el.value==='1';re=false;}
   else if(d.dest!=null){CS.steps[+d.dest].dest=el.value;re=false;}
+  else if(d.mode!=null){const st=CS.steps[+d.mode];st.mode=+el.value;cbSetStep(+d.mode);}
+  else if(d.spl!=null){const [j,ti]=sp(d.spl);const st=CS.steps[j];st.split=st.split||{};st.split[ti]=el.value===''?null:+el.value;re=false;}
+  else if(d.cnd!=null||d.plc!=null||d.pll!=null){const [j,xi]=sp(d.cnd??d.plc??d.pll);const st=CS.steps[j];const key=d.cnd!=null?'cnd':d.plc!=null?'plc':'pll';st[key]=st[key]||{};st[key][xi]=el.value===''?null:el.value;OVOPEN.add(st);renderCB();runCB();return;}
   else if(d.addc!=null){CS.steps[+d.addc].addc=el.checked;}
+  else if(d.accel!=null){CS.steps[+d.accel].accel=el.checked;re=false;}
+  else if(d.erd!=null){CS.steps[+d.erd].erd=el.value;re=false;}
   else if(d.cost!=null){CS.steps[+d.cost].costTg=el.value;re=false;}
   else if(d.eloc!=null){const [j,ti]=sp(d.eloc);CS.steps[j].ext[ti]=Object.assign(CS.steps[j].ext[ti]||{},{loc:el.value});re=false;}
   else if(d.em!=null){const [j,ti]=sp(d.em);CS.steps[j].ext[ti]=Object.assign(CS.steps[j].ext[ti]||{},{m:el.value===''?null:+el.value});re=false;}

@@ -73,6 +73,18 @@ test('Chain: kontrollváltás és csatolatlan gear a Playmaton', async ({ page }
   await expect(page.locator('.cbv-chg')).toContainText('719.5');
 });
 
+test('Chain: Choose one mód a builderben és a megosztott linkben', async ({ page }) => {
+  await open(page, '#chain');
+  const cs = { lg: { A: '', B: '' }, bf: [{ n: '', c: '' }, { n: '', c: '' }], bd: [{ n: 'Long Sword', pl: 'B', loc: 'base', d: 0 }], steps: [{ k: 'card', n: 'Rocket Barrage', pl: 'A', tg: ['b0'], ext: {}, mode: 1 }] };
+  const enc = await page.evaluate((t) => btoa(unescape(encodeURIComponent(t))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''), JSON.stringify(cs));
+  await page.goto('/#c=' + enc);
+  await page.reload();
+  await expect(page.locator('select[data-mode="0"]')).toHaveValue('1');
+  await expect(page.locator('#cb-out')).toContainText('Long Sword meghal');
+  await page.selectOption('select[data-mode="0"]', '0');
+  expect(await page.evaluate(() => (window as any).__getCS().steps[0].mode)).toBe(0);
+});
+
 test('How to Play: 10 fejezet, ABCD, Try It, régi linkek', async ({ page }) => {
   await open(page, '#hogyan');
   await expect(page.locator('.view.on .learn-side li')).toHaveCount(10);

@@ -1,6 +1,6 @@
 /* Műveletfelismerés és utasításokra bontás: a gyakori minták, valódi lapszövegekkel. */
 import { describe, expect, it } from 'vitest';
-import { actOf, splitInstr, phrasesTxt, DIRECT_RE, LINK_RE, allScope, instrSources } from '../src/legacy/chainCore';
+import { actOf, splitInstr, phrasesTxt, DIRECT_RE, LINK_RE, allScope, instrSources, classOf } from '../src/legacy/chainCore';
 import { vsCard } from '../src/legacy/core';
 import { cs, run } from './util';
 
@@ -43,13 +43,32 @@ describe('actOf: gyakori minták', () => {
     expect(actOf('Lose control of that unit and recall it at end of turn.')).toMatchObject({ k: 'delayed' });
   });
   it('counter ... unless', () => expect(actOf('Counter a spell unless its controller pays [2].')).toMatchObject({ k: 'counter', unless: true }));
-  it('for each: bizonytalan (a szorzót nem számolja)', () => expect(actOf('Give a friendly unit at a battlefield +2 [S] this turn for each enemy unit there.').unsure).toMatch(/for each/));
-  it('instead: replacement, bizonytalan', () => expect(actOf('recall it instead.').unsure).toMatch(/replacement/));
-  it('ismeretlen feltétel: bizonytalan, ismert feltétel nem', () => {
-    expect(actOf('If you control 4 or fewer runes, draw 1.').unsure).toMatch(/feltételes/);
-    expect(actOf('If you played this from your hand, draw 1.').unsure).toBeUndefined();
+  it('for each: a boardról számolható szorzó felismerve, a nem követett adat bizonytalan és megnevezi a hiányt', () => {
+    expect(actOf('Give a friendly unit at a battlefield +2 [S] this turn for each enemy unit there.').each.cnt).toMatchObject({ rel: 'enemy', where: 'there', type: 'unit' });
+    expect(actOf('This deals 1 Bonus Damage for each card with this name in your trash.').unsure).toMatch(/hiányzó adat: a trash tartalma/);
   });
-  it('Choose one: választható mód, bizonytalan', () => expect(actOf('Choose one \u2014').unsure).toMatch(/Choose one/));
+  it('instead: feltételes változat (alt), feltétel nélküli replacement bizonytalan', () => {
+    expect(actOf('If you paid the additional cost, deal 5 to it instead.')).toMatchObject({ k: 'dmg', n: 5, alt: true });
+    expect(actOf('Return it to its owner\'s hand instead of putting it in their trash.').unsure).toMatch(/replacement/);
+  });
+  it('feltételek: boardról kiértékelhető, kézi (builderben állítandó), ismert', () => {
+    expect(actOf('If you control 4 or fewer runes, draw 1.').cond).toMatchObject({ how: 'user' });
+    expect(classOf('If you control 4 or fewer runes, draw 1.')).toBe('user');
+    expect(actOf('if you control two or more gear, ready me.').cond).toMatchObject({ how: 'board' });
+    expect(actOf('If you played this from your hand, draw 1.').cond).toMatchObject({ how: 'known' });
+  });
+  it('Choose one: módválasztás, a builderben választható', () => { expect(k('Choose one \u2014')).toBe('modal'); expect(classOf('Choose one \u2014')).toBe('user'); });
+  it('"Then do this:" reflexív trigger, "Prevent", "Double all damage", "The next time it would die"', () => {
+    expect(actOf('Then do this: Choose another enemy unit at its destination.')).toMatchObject({ k: 'reflex', inner: 'choose' });
+    expect(actOf('Prevent the next 7 damage that would be dealt to it this turn.')).toMatchObject({ k: 'prevent', n: 7 });
+    expect(actOf('The next time that unit would be dealt damage this turn, prevent it.')).toMatchObject({ k: 'prevent', n: 99, next: true });
+    expect(k('Double all damage that would be dealt to it this turn.')).toBe('dbldmg');
+    expect(k('The next time it would die this turn, heal it, exhaust it, and recall it instead.')).toBe('saveNext');
+  });
+  it('kijátszás hatásból és újrakijátszás', () => {
+    expect(actOf('play it, ignoring its cost.')).toMatchObject({ k: 'playcard', free: true });
+    expect(actOf('its owner plays it to the same location, ignoring its cost.')).toMatchObject({ k: 'replay', to: 'same' });
+  });
   it('"They deal damage equal to their Mights to each other"', () => expect(k('They deal damage equal to their Mights to each other.')).toBe('fight'));
   it('ismeretlen szöveg: other (nem találgat)', () => expect(k('Gutter Palace wins the game.')).toBe('other'));
 });

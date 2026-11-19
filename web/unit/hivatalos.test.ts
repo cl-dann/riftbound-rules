@@ -342,11 +342,10 @@ describe('Equip és attach', () => {
 
 describe('Nem modellezett hivatalos példák (a felület ezeket nem számolja ki, csak megnevezi)', () => {
   it.todo('355.11.b Fox-Fire: összesített Might megkötés részhalmaza');
-  it.todo('355.14.h.1 Alpha Strike: split damage célpontjainak elhagyása');
   it.todo('359.3.e.9.a Volibear és Repulse: mistargetelt célpontok számolása');
   it.todo('758.2, 758.2.a Falling Star, Rebuke, Alpha Wildclaw: célozhatatlanság megszűnése a chain alatt');
   it.todo('359.3.f.3 Lillia: a trigger feltételéből feljegyzett location');
   it.todo('383.2.a.1 Sona: kör végi trigger feltétele');
   it.todo('467.2.c.5 Lotus Trap és duplázás a kiosztásban');
-  it.todo('820.2.a Rocket Barrage Repeat, 832.1.d Primordial Roar Show Off');
+  it.todo('820.2.a Rocket Barrage Repeat (a módválasztást a bovites.test.ts teszteli, az ismételt végrehajtást nem modellezzük), 832.1.d Primordial Roar Show Off');
 });
