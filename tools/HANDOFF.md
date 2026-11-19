@@ -64,3 +64,8 @@
 - Kompakt köteg: tools/audit/gen2.py K lista.json kötegszám; a köteg tartalmazza a hivatkozott szabályok szövegét és példáit.
 - Szkriptes előszűrés: tools/audit/lint.py az agent-körök előtt.
 - Ellenőrző agentek kisebb modellen (sonnet), egyszerre legfeljebb 4-6.
+
+## Állapot 2026-11-19 délután
+- KÉSZ: kártya ellenőrzés (mind az 1101 lap két egymást követő hibátlan ellenőrzésen átment, 22. kör: 0 javítás).
+- KÉSZ és élesben: How to Play (10 fejezet, 45 kvíz), Tanulás (3 haladó lecke, 8 szituáció).
+- Következő: deck építő + Cardmarket árak (allowlist: www.cardmarket.com, downloads.s3.cardmarket.com kell, vagy Actions autodetect), Chain szabálymotor.
