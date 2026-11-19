@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { AlertTriangle, BookOpen, Check, ChevronLeft, ChevronRight, Compass, Lightbulb, RotateCcw, Swords } from 'lucide-react';
+import { AlertTriangle, BookOpen, Check, ChevronLeft, ChevronRight, Compass, Lightbulb, Swords } from 'lucide-react';
 import { loadLearn } from '../data';
 import { IMGBASE, esc, glossify, vsCard } from '../legacy/core';
 import { Playmat, DEMO_BOARD, diffBoards } from '../components/Playmat';
@@ -157,13 +157,10 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
   if (!chs.length && !L.scenarios.length) return <div className="panel pad"><h2>{base === 'hogyan' ? 'How to Play' : 'Practice'}</h2><p className="lead">A fejezetek és az interaktív szituációk ellenőrzése folyamatban van, hamarosan itt lesznek. Addig a <a href="#kezikonyv">Fogalomtár</a> és a kártyánkénti magyarázatok használhatók.</p></div>;
   const ch = m && !m[1] ? chs.find((c) => c.id === m[2]) : undefined;
   const sc = m && m[1] ? L.scenarios.find((s) => s.id === m[2]) : undefined;
-  const total = chs.length + L.scenarios.length;
     const firstOpen = chs[0];
 
   const side = (
     <aside className="panel learn-side">
-      <h4>Haladás <small>{doneN} / {total}</small></h4>
-      <div className="progress"><i style={{ width: (total ? (100 * doneN) / total : 0) + '%' }} /></div>
       {LEVELS.map(([lv, name]) => {
         const list = chs.filter((c) => c.level === lv);
         if (!list.length) return null;
