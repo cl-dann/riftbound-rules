@@ -170,11 +170,11 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
               <a href={B + '/' + c.id} aria-current={ch?.id === c.id ? 'page' : undefined}>
                 <span className="num">{chs.indexOf(c) + 1}</span>{c.title}</a></li>))}</ol></div>);
       })}
-      {!!L.scenarios.length && (<><h4>Szituációk <small>{L.scenarios.filter((s) => p.scn[s.id]).length} / {L.scenarios.length}</small></h4>
+      {!!L.scenarios.length && (<><h4>Szituációk <small>{L.scenarios.length}</small></h4>
         <ol>{L.scenarios.map((s) => (
-          <li key={s.id} className={p.scn[s.id] ? 'done' : ''}>
+          <li key={s.id}>
             <a href={'#tanulas/sz/' + s.id} aria-current={sc?.id === s.id ? 'page' : undefined}>
-              <span className="num">{p.scn[s.id] ? <Check size={13} /> : <Swords size={12} />}</span>{s.title}</a></li>))}</ol></>)}
+              <span className="num"><Swords size={12} /></span>{s.title}</a></li>))}</ol></>)}
       <h4>Tovább</h4>
       <ol><li><a href="#kezikonyv"><span className="num"><BookOpen size={12} /></span>Fogalomtár</a></li>
         <li><a href="#chain"><span className="num"><Swords size={12} /></span>Chain elemző</a></li></ol>
