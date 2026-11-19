@@ -518,3 +518,4 @@ footer#foot { border-top: 0; }
 .cols > * { min-width: 0; }
 @media (max-width: 700px) { #cb-steps input, #cb-steps select { min-width: 0; max-width: 100%; } #cb-steps .row2 { flex-wrap: wrap; } }
 .toc > * { flex-shrink: 0; }
+@media (max-width: 760px) { .cbv-arrows { display: none; } }
