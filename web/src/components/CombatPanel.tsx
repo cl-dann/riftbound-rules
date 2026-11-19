@@ -2,15 +2,10 @@ import { useEffect, useState } from 'react';
 import { vsCard } from '../legacy/core';
 import { chainApi, type TrigAdd } from '../legacy/chain';
 import type { PBoard, PUnit } from './Playmat';
+import { ALL, DEF_OPT, cm, need, check, suggest, dealt, lethalHit, type Side, type Opt, type Sug, type CU } from './combatCore';
 
-/* Combat damage kiosztás ellenőrzése a Core Rules 467.2 (Combat Damage Step), 815 (Tank), 826 (Backline),
-   438 (Prevent) és 467.2.c.10 (nem sebezhető unit) alapján. A lapszövegből csak javaslatot teszünk, a döntés a játékosé. */
-
-type Side = 'me' | 'opp';
-type Opt = { tank: boolean; back: boolean; bonus: number; prev: number; nodmg: boolean; repl: boolean; stay: boolean; note: string };
-type Sug = { k: 'tank' | 'back' | 'bonus' | 'prev' | 'repl' | 'nodmg'; v?: number; src: string; txt: string; spell?: boolean };
-type CU = { id: string; uid: string; n: string; side: Side; m: number | null; dmg: number; stun: boolean; opt: Opt; sugs: Sug[] };
-const ALL = 99;
+/* Combat damage kiosztás: a szabálylogika a combatCore.ts-ben (unit tesztelt), itt a felület.
+   A lapszövegből csak javaslatot teszünk, a döntés a játékosé. */
 
 const R = ({ r }: { r: string }) => (
   <span className="cbc-refs">{r.split(/,\s*/).map((x) => <a key={x} className="rref" href="#szabalyok" data-ref={x}>{x}</a>)}</span>
@@ -25,7 +20,9 @@ const KW_LINE = /^\[(Tank|Backline|Assault|Shield)(?: (\d+))?\]/;
 function kwOf(n: string, role: 'atk' | 'def'): Partial<Opt> {
   const lines = txtOf(n).split('\n');
   const val = (k: string) => { for (const l of lines) { const m = KW_LINE.exec(l); if (m && m[1] === k) return m[2] ? +m[2] : 1; } return 0; };
-  return { tank: !!val('Tank'), back: !!val('Backline'), bonus: role === 'atk' ? val('Assault') : val('Shield') };
+  const t = txtOf(n);
+  // "I must be assigned combat damage first/last." a Tank és a Backline szövege (815, 826), keyword nélkül is (például Caitlyn, Patrolling)
+  return { tank: !!val('Tank') || /^I must be assigned combat damage first\./m.test(t), back: !!val('Backline') || /^I must be assigned combat damage last\./m.test(t), bonus: role === 'atk' ? val('Assault') : val('Shield') };
 }
 
 /** Javaslatok egy mondatból: feltételes vagy kapott keyword, Prevent, replacement, nem sebezhető. */
@@ -36,63 +33,12 @@ function sugFrom(src: string, s: string, role: 'atk' | 'def', own: boolean): Sug
   if (/\[Backline\]/.test(s)) out.push({ k: 'back', src, txt: s });
   const b = new RegExp('\\[' + (role === 'atk' ? 'Assault' : 'Shield') + '(?: (\\d+))?\\]').exec(s);
   if (b && !new RegExp('\\b(my|its|their) \\[' + (role === 'atk' ? 'Assault' : 'Shield')).test(s)) out.push({ k: 'bonus', v: b[1] ? +b[1] : 1, src, txt: s });
-  const p = /\bprevent (?:the next )?(\d+|all)\b/i.exec(s);
-  if (p) out.push({ k: 'prev', v: /all/i.test(p[1]) ? ALL : +p[1], src, txt: s });
-  if (/can.t be dealt damage|cannot be dealt damage/i.test(s)) out.push({ k: 'nodmg', src, txt: s });
+  const p = /\bprevent (?:the (?:next|first) )?(\d+|all|it)\b/i.exec(s);
+  if (p) out.push({ k: 'prev', v: /all|it/i.test(p[1]) ? ALL : +p[1], src, txt: s });
+  if (/can.t be dealt damage|cannot be dealt damage|don.t take damage|doesn.t take damage/i.test(s)) out.push({ k: 'nodmg', src, txt: s });
   if (/\binstead\b|would die|would be killed/i.test(s) && !p) out.push({ k: 'repl', src, txt: s });
   return out;
 }
-
-const cm = (u: CU) => (u.m == null ? null : u.m + u.opt.bonus);
-/** Lethal küszöb: marked damage-dzsel együtt legalább a Might, nem nulla (142.4.a, 142.4.b), plusz a Prevent érték (438.5.a).
-    Nem sebezhető unitnál és Prevent All esetén nincs lethal (467.2.c.10, 438.5.b). */
-const need = (u: CU): number | null => {
-  if (u.opt.nodmg || u.opt.prev >= ALL) return Infinity;
-  const m = cm(u); return m == null ? null : Math.max(1, Math.max(1, m) - u.dmg) + u.opt.prev;
-};
-const exempt = (u: CU) => need(u) === Infinity;
-/** Kiosztási prioritás: Tank előbb (815.1.b), Backline utoljára (826.3), a nem sebezhető unit kívül esik a kötelező sorrenden. */
-const tier = (u: CU) => (exempt(u) ? 3 : u.opt.tank ? 0 : u.opt.back ? 2 : 1);
-
-function check(recv: CU[], asg: Record<string, number>, pool: number): { msg: string; r: string }[] {
-  const out: { msg: string; r: string }[] = [];
-  const a = (u: CU) => asg[u.id] || 0;
-  const unk = recv.filter((u) => need(u) == null);
-  if (unk.length) { out.push({ msg: 'Ismeretlen Might: ' + unk.map((u) => u.n).join(', ') + '. Add meg a builderben, enélkül a lethal damage nem számolható.', r: '142.4.b' }); return out; }
-  const sum = recv.reduce((s, u) => s + a(u), 0);
-  if (sum !== pool) out.push({ msg: 'A kiosztott damage összesen ' + sum + ', de az összesített Might ' + pool + '. Pontosan ennyit kell kiosztani.', r: '467.2.c' });
-  const norm = recv.filter((u) => !exempt(u));
-  const short = norm.filter((u) => a(u) < need(u)!);
-  const partial = norm.filter((u) => a(u) > 0 && a(u) < need(u)!);
-  if (partial.length > 1) out.push({ msg: 'Több unit is kapott damage-et lethal alatt: ' + partial.map((u) => u.n + ' (' + a(u) + '/' + need(u) + ')').join(', ') + '. Egy unit lethal damage-ét teljesen ki kell osztani, mielőtt a következő kap.', r: '467.2.c.3' });
-  if (short.length) {
-    const over = norm.filter((u) => a(u) > need(u)!);
-    if (over.length) out.push({ msg: over.map((u) => u.n + ' ' + a(u) + ' damage-et kapott, a lethalhoz ' + need(u) + ' elég').join('; ') + ', miközben ' + short.map((u) => u.n).join(', ') + ' még nem kapott lethal damage-et.', r: '467.2.c.4' });
-    const ex = recv.filter((u) => exempt(u) && a(u) > 0);
-    if (ex.length) out.push({ msg: ex.map((u) => u.n).join(', ') + ' nem sebezhető (vagy minden damage-et megelőz): rá egyetlen damage sem lethal, és nem tartozik a kötelező kiosztásba, így nem kaphat damage-et, amíg ' + short.map((u) => u.n).join(', ') + ' nem kapott lethal damage-et.', r: exempt(ex[0]) && ex[0].opt.nodmg ? '467.2.c.10, 467.2.c.4' : '438.5.b, 467.2.c.4' });
-  }
-  for (const u of norm) {
-    if (!a(u)) continue;
-    const tanks = norm.filter((x) => x !== u && x.opt.tank && a(x) < need(x)!);
-    if (!u.opt.tank && tanks.length) out.push({ msg: u.n + ' Tank nélkül kapott damage-et, de ' + tanks.map((x) => x.n).join(', ') + ' (Tank) még nem kapott lethal damage-et.', r: '815.1.b, 815.1.c.2' });
-    const fronts = norm.filter((x) => x !== u && !x.opt.back && a(x) < need(x)!);
-    if (u.opt.back && !u.opt.tank && fronts.length) out.push({ msg: u.n + ' Backline unit, de ' + fronts.map((x) => x.n).join(', ') + ' (Backline nélkül) még nem kapott lethal damage-et.', r: '826.3, 826.4.b' });
-  }
-  return out;
-}
-
-function suggest(recv: CU[], pool: number): Record<string, number> {
-  const o: Record<string, number> = {};
-  const ord = recv.map((u, i) => [u, i] as const).sort((x, y) => tier(x[0]) - tier(y[0]) || x[1] - y[1]).map((x) => x[0]);
-  let left = pool;
-  for (const u of ord) { if (exempt(u)) { o[u.id] = 0; continue; } const n = need(u) ?? 0; const g = Math.min(n, left); o[u.id] = g; left -= g; }
-  if (left > 0 && ord.length) { const last = [...ord].reverse().find((u) => !exempt(u)) || ord[ord.length - 1]; o[last.id] += left; }
-  return o;
-}
-
-/** Ténylegesen bekövetkező damage a Prevent után (438.2, 438.2.a). */
-const dealt = (u: CU, asg: Record<string, number>) => (u.opt.nodmg ? 0 : Math.max(0, (asg[u.id] || 0) - Math.min(u.opt.prev, ALL)));
-const lethalHit = (u: CU, asg: Record<string, number>) => { const m = cm(u); const t = u.dmg + dealt(u, asg); return !u.opt.nodmg && m != null && t > 0 && t >= m; };
 
 const SUG_L: Record<Sug['k'], string> = { tank: 'Lehet Tank', back: 'Lehet Backline', bonus: 'Lehet', prev: 'Sebzés-megelőzés', repl: 'Replacement effect', nodmg: 'Lehet nem sebezhető' };
 
@@ -153,7 +99,7 @@ function SideTable({ title, units, role, asg, setAsg, setOpt, bonusLbl, assigner
               <td data-l="Tank"><input type="checkbox" checked={u.opt.tank} aria-label={u.n + ' Tank'} onChange={(e) => setOpt(u.id, { tank: e.target.checked })} /></td>
               <td data-l="Backline"><input type="checkbox" checked={u.opt.back} aria-label={u.n + ' Backline'} onChange={(e) => setOpt(u.id, { back: e.target.checked })} /></td>
               <td data-l="Dmg">{u.dmg || 0}</td>
-              <td data-l="Lethal" title={nd === Infinity ? 'Nincs lethal: nem sebezhető vagy minden damage-et megelőz' : ''}>{nd === Infinity ? 'nincs' : nd ?? '?'}</td>
+              <td data-l="Lethal" title={nd === Infinity ? (u.opt.nodmg ? 'Nincs lethal: nem sebezhető, ezért kimarad a kötelező kiosztásból (467.2.c.10)' : 'Nincs elérhető lethal (minden damage-et megelőz), de nem mentes a kötelező kiosztás alól (467.2.c.10)') : ''}>{nd === Infinity ? 'nincs' : nd ?? '?'}</td>
               <td data-l="Kiosztva" className="cbc-as"><input type="number" min={0} max={60} value={asg[u.id] || 0} aria-label={u.n + ' kiosztott damage'} onChange={(e) => setAsg(u.id, Math.max(0, +e.target.value || 0))} /></td>
             </tr>
             <tr className="cbc-xr"><td colSpan={8}><UnitExtra u={u} role={role} setOpt={setOpt} /></td></tr>
@@ -167,8 +113,6 @@ function SideTable({ title, units, role, asg, setAsg, setOpt, bonusLbl, assigner
     </div>
   );
 }
-
-const DEF_OPT: Opt = { tank: false, back: false, bonus: 0, prev: 0, nodmg: false, repl: false, stay: true, note: '' };
 
 export function CombatPanel({ board, frameLabel, bfi, isLast = true }: { board: PBoard; frameLabel: string; bfi?: number[]; isLast?: boolean }) {
   const bfs = board.bfs;
@@ -343,7 +287,8 @@ export function CombatPanel({ board, frameLabel, bfi, isLast = true }: { board: 
           )}
           <p className="note cbc-foot">
             A lethal küszöb a már rajta lévő damage-et és a Prevent értéket is beszámítja (142.4.a, 438.5.a). Az azonos prioritású unitok sorrendjét a kiosztó játékos választja (467.2.c.7), a javaslat a lista sorrendjét követi. A lapszövegből jövő javaslatokat (feltételes vagy kapott keyword, Prevent, replacement) a panel nem kapcsolja be magától: hogy él-e az adott helyzetben, azt a játékos dönti el.
-            {[...A, ...D].some((u) => u.opt.tank && u.opt.back) && ' Tank és Backline ugyanazon a uniton: a kiosztó játékos választja ki, melyik érvényes (467.2.c.8); a panel Tankként számol.'}
+            {[...A, ...D].some((u) => u.opt.tank && u.opt.back) && ' Tank és Backline ugyanazon a uniton: a kiosztó játékos unitonként választja ki, melyik követelményt teljesíti (467.2.c.8, 467.2.c.9); a panel mindkét választást elfogadja, a javaslat Tankként számol.'}
+            {[...A, ...D].some((u) => !u.opt.nodmg && u.opt.prev >= ALL) && <> <span className="cbuns">nyitott kérdés</span> Minden damage-et megelőző unit nem mentes a kötelező kiosztás alól (467.2.c.10 példája), de lethal sem osztható rá. Hogy ilyenkor mennyit kell rá osztani, mielőtt a következő unit kaphat, a Core Rules nem mondja ki; a panel előbb a többi unit lethalját javasolja, a maradékot erre.</>}
           </p>
         </>
       )}

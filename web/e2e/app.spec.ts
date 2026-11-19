@@ -59,6 +59,20 @@ test('Chain: példa lejátszása lépésenként', async ({ page }) => {
   await expect(page.getByText(/Mi változott/i).first()).toBeVisible();
 });
 
+test('Chain: kontrollváltás és csatolatlan gear a Playmaton', async ({ page }) => {
+  await open(page, '#chain');
+  await page.locator('#cb-ex2').click();
+  const next = page.getByRole('button', { name: 'Következő' }).first();
+  for (let i = 0; i < 3; i++) await next.click();
+  await expect(page.locator('.pm2-ubox.opp .pm-lab.ctl').first()).toHaveText('Kontroll átvéve');
+  await page.locator('#cb-ex3').click();
+  await expect(page.locator('.pm2-gears .pm-unit.gear').first()).toBeVisible();
+  await expect(page.locator('.pm2-gears .pm-might')).toHaveCount(0);
+  await next.click(); await next.click();
+  await expect(page.locator('.pm-lab.det').first()).toHaveText('Levált');
+  await expect(page.locator('.cbv-chg')).toContainText('719.5');
+});
+
 test('How to Play: 10 fejezet, ABCD, Try It, régi linkek', async ({ page }) => {
   await open(page, '#hogyan');
   await expect(page.locator('.view.on .learn-side li')).toHaveCount(10);

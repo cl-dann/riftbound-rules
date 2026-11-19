@@ -32,10 +32,12 @@ src/                    Python adat pipeline
 web/                    Vite + React 19 + TypeScript + Tailwind v4 frontend
   src/views/            fülenkénti nézetek
   src/components/       Playmat (pálya), CombatPanel, CardModal, TipLayer
-  src/legacy/           imperatív modulok (core.ts: kártya HTML, deck legalitás, PDF; chain.ts: chain elemző; knowledge.ts: Fogalomtár)
+  src/legacy/           imperatív modulok (core.ts: kártya HTML, deck legalitás, PDF; chain.ts: chain builder (DOM); chainCore.ts: DOM nélküli chain elemző; knowledge.ts: Fogalomtár)
+  src/components/combatCore.ts  combat damage kiosztás szabálylogikája (React nélkül)
   src/generated/        build termék, nincs verziókezelve
   public/prices.json    Cardmarket árak (commitolva, kézzel frissítve)
   e2e/app.spec.ts       Playwright tesztek
+  unit/                 Vitest unit tesztek: Core Rules hivatalos példái (hivatalos.test.ts), combat (combat.test.ts), beépített és korábbi esetek, felismerés, lefedettség, szabályszám-ellenőrzés
 tools/
   HANDOFF.md            munkaállapot, döntések naplója
   audit/                ellenőrző körök briefjei és szkriptjei (RBRIEF.md, gen2.py, lint.py, check.py)
@@ -93,14 +95,15 @@ Frissítés kézzel: GitHub, Actions, "Cardmarket árak", Run workflow. Ez commi
 cd src && python3 build_data.py && python3 export_web.py; rm -f data.json
 cd ../web && npm ci && npm run build          # tsc -b szigorú: a nem használt változó is hiba
 npx vite preview --port 4173                  # előnézet
-npm run test:e2e                              # Playwright, 10 teszt
+npm run test:unit                             # Vitest, a chain elemző és a combat kiosztás (a generált adatot használja)
+npm run test:e2e                              # Playwright, 11 teszt
 ```
 
 Megjegyzés: `npx tsc --noEmit -p .` nem azonos a CI-vel, mindig `npm run build`-del ellenőrizz. Ahol a Playwright saját böngészője nem tölthető le, a rendszer Chrome-ja megadható: `PW_CHROME=/usr/bin/google-chrome npm run test:e2e`.
 
 ## Ismert korlátok
 
-- **Chain elemzés:** a lapszöveg utasításokra bontása és a linked instruction felismerése szöveges heurisztika. A felhasználó a "Így értelmezem a lapot" blokkban felülírhatja, de szokatlan szövegezésnél a felismerés tévedhet. A kontrollváltást az elemző nem követi.
+- **Chain elemzés:** a lapszöveg utasításokra bontása, a műveletfelismerés és a linked instruction felismerése szöveges heurisztika (`chainCore.ts`). Mind az 1101 lap utasításain mérve (`unit/lefedettseg.test.ts`) az utasítások kb. 18%-a nem felismert vagy "bizonytalan" (korábban 65% nem felismert); ezeknél a felület kiírja, hogy nem követi, és a "Így értelmezem a lapot" blokkban kézzel beállítható. A felismert műveletek egy része csak megnevezett, a Playmaton nem követett (pakli művelet, token, XP, pont, költségmódosítás). Kontrollváltás követve: "gain/take control" a resolve-kor, "You control it until I leave the board" (391.5.b), "at end of turn" delayed hatásként listázva, de a kör vége nincs szimulálva. Nem modellezett: választható mód (Choose one), split damage, "for each" szorzó, "Then do this" reflexív trigger, összesített Might részhalmaz (355.11.b), másik zónából kijátszás, a célozhatatlanság chain közbeni megszűnése (758.2). A nem modellezett hivatalos példák `it.todo`-ként szerepelnek a `unit/hivatalos.test.ts`-ben. Triggerek: a "When you play a spell" a spell resolve-jakor triggerel, counter esetén nem (420.4.a, 420.4.a.1); az egyszerre triggerelőket a turn player teszi fel először (383.3.d.1, a builderben állítható), azonos controllernél a sorrendet a felület a játékos döntéseként jelzi (383.3.d); a halálra figyelő triggerek közül a "When another/a (friendly/enemy) unit dies" alak követett, a többit a felület "nem követett" címkével megnevezi. Nyitott kérdés, amit a felület így jelez: minden damage-et megelőző unit kötelező kiosztása combatban (467.2.c.10 példa).
 - **Combat panel:** a feltételes vagy kapott keywordöket, a megelőzést és a helyettesítést javaslatként mutatja, ezeket a felhasználó kapcsolja be. A combat a chain modellen kívül fut.
 - **Áthúzás a Playmaton:** érintőképernyőn koppintásos mozgatással működik, a HTML5 drag csak egérrel.
 - **Cardmarket:** a legújabb kiadás lapjainak egy része még nincs a Cardmarket listájában, ezeknél nincs ár.

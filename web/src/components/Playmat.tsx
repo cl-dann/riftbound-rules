@@ -36,8 +36,13 @@ const STATUS: Record<string, [string, string, string]> = {
   equipped: ['Equipped', 'eq', 'Equipped: Equipment van rajta csatolva, a gear bónusza a unitra hat.'],
   new: ['Új', 'new', 'Ebben a lépésben került ide.'],
   mistarget: ['Mistarget', 'mt', 'Mistarget: a resolve-oló chain elem célpontja volt, de már nem legális célpont, ezért rá a hatás elmarad (359.3.e.9).'],
-  dying: ['Meghal', 'die', 'Ebben a lépésben meghal: a damage elérte a Mightját (143.2.b), a trashbe kerül.'],
+  dying: ['Meghal', 'die', 'Lethal damage van rajta: a damage elérte a Mightját (142.4.b), a következő cleanupban meghal (323.4).'],
+  detached: ['Levált', 'det', 'Levált: ebben a lépésben leválik a unitról (719.5, 436), a helyén marad; battlefielden a következő cleanupban recall-olódik (436.4.a).'],
+  ctrlnew: ['Kontroll átvéve', 'ctl', 'Ebben a lépésben megváltozott az irányítója (191), ezért került a másik oldalra.'],
+  ctrl: ['Átvett', 'ctl', 'Átvett kontroll: nem a tulajdonosa irányítja (191).'],
 };
+/** Dinamikus címke: "kw:Assault 2" alakú státusz a kapott keywordhöz. */
+const statusOf = (s: string): [string, string, string] | undefined => STATUS[s] || (s.startsWith('kw:') ? [s.slice(3), 'buf', 'Ebben a körben kapott keyword: ' + s.slice(3) + '.'] : undefined);
 export const PickCtx = createContext<(u: PUnit, side: 'me' | 'opp', where: string) => void>(() => {});
 
 /** Kattintható célpont a pályán (szituációk "act" lépéseihez). loc: 'base', 'obase' (ellenfél base), 'bf0', 'bf1', ... */
@@ -76,22 +81,22 @@ function Unit({ u, side, changed, where = '', loc = '', i = 0 }: { u: PUnit; sid
   const t: PTarget = { k: 'unit', side, loc, n: u.n, i, ex: !!u.ex };
   const g = ctl ? ctl.glow(t) : '';
   const go = () => (ctl ? ctl.on(t) : pick(u, side, where));
-  const labNames = new Set((u.status || []).map((x) => (STATUS[x]?.[0] || '').toLowerCase()));
+  const labNames = new Set((u.status || []).map((x) => (statusOf(x)?.[0] || '').toLowerCase()));
   const base = u.base ?? (c?.m != null && c.m !== 'None' ? +c.m : u.m);
   const diff = u.m - base;
   const st = u.status || [];
   return (
     <div className={'pm-unit ' + side + (u.ex ? ' ex' : '') + (changed ? ' chg' : '') + (st.includes('dying') ? ' dying' : '') + (u.kind === 'gear' ? ' gear' : '') + gcls(g)} data-uid={u.id} data-fk={side + ':' + u.n}
       onClick={(e) => { e.stopPropagation(); go(); }} onKeyDown={ctl ? keyAct(go) : undefined} role="button" tabIndex={0}
-      aria-label={ctl ? (ctl.label?.(t) || u.n + (side === 'me' ? ', saját unit' : ', ellenfél unit') + ', Might ' + u.m + (u.ex ? ', exhausted' : ', ready')) : undefined} aria-pressed={ctl ? g === 'sel' : undefined}>
-      <div className="pm-labels">{st.map((s) => STATUS[s] ? <span key={s} className={'pm-lab ' + STATUS[s][1]} data-tt={STATUS[s][2]}>{STATUS[s][0]}</span> : null)}{u.token && <span className="pm-lab tmp">Token</span>}{u.kind === 'gear' && <span className="pm-lab eq">Gear</span>}</div>
+      aria-label={ctl ? (ctl.label?.(t) || u.n + (side === 'me' ? ', saját ' : ', ellenfél ') + (u.kind === 'gear' ? 'gear' : 'unit, Might ' + u.m) + (u.ex ? ', exhausted' : ', ready')) : u.kind === 'gear' ? u.n + ', gear' + (u.ex ? ', exhausted' : '') : undefined} aria-pressed={ctl ? g === 'sel' : undefined}>
+      <div className="pm-labels">{st.map((s) => { const x = statusOf(s); return x ? <span key={s} className={'pm-lab ' + x[1]} data-tt={x[2]}>{x[0]}</span> : null; })}{u.token && <span className="pm-lab tmp">Token</span>}</div>
       <span className={c ? 'cl' : ''} data-card={c?.n}>
         {c?.img ? <img src={IMGBASE + c.img} alt={u.n} loading="lazy" /> : <span className="pm-tok">{u.n}</span>}
       </span>
       {u.kind !== 'gear' && <span className={'pm-might' + (diff > 0 ? ' up' : diff < 0 ? ' down' : '')} title={'Might ' + u.m + (diff ? ' (nyomtatva ' + base + ')' : '')}>{u.m}</span>}
       {u.kind !== 'gear' && diff !== 0 && <span className={'pm-delta' + (diff > 0 ? ' up' : ' down')}>{diff > 0 ? '+' : ''}{diff}</span>}
       {!!u.dmg && <span className="pm-dmg" title="Damage">{u.dmg}</span>}
-      <div className="pm-name">{u.n}</div>
+      <div className="pm-name">{u.kind === 'gear' && <span className="pm-gtag">Gear</span>}{u.n}</div>
       {!!((u.mods || []).some((m) => !labNames.has(m.toLowerCase())) || u.gear?.length || u.tag) && (
         <div className="pm-mods">
           {u.tag && <span>{u.tag}</span>}
@@ -201,6 +206,18 @@ function LegendChamp({ s, onZone, sel, side }: { s: PSide; onZone: (z: string) =
   );
 }
 
+/** Unitok és a csatolatlan gearek külön sorban: a gear kisebb, Might jelző nélkül (a csatolt gear a unit alatt, a pm-mods sorban). */
+function UnitRow({ us, side, loc, where, pk }: { us: PUnit[]; side: 'me' | 'opp'; loc: string; where: string; pk: Set<string> | null }) {
+  const units = us.map((u, i) => [u, i] as const).filter(([u]) => u.kind !== 'gear');
+  const gears = us.map((u, i) => [u, i] as const).filter(([u]) => u.kind === 'gear');
+  return (
+    <>
+      <div className="pm2-units">{units.map(([u, i]) => <Unit key={i} u={u} side={side} loc={loc} i={i} where={where} changed={!!pk && !pk.has(key(u))} />)}</div>
+      {gears.length > 0 && <div className="pm2-gears" aria-label="Csatolatlan gearek">{gears.map(([u, i]) => <Unit key={i} u={u} side={side} loc={loc} i={i} where={where} changed={!!pk && !pk.has(key(u))} />)}</div>}
+    </>
+  );
+}
+
 function Base({ s, who, prev, onZone, sel }: { s: PSide; who: 'me' | 'opp'; prev?: PSide; onZone: (z: string) => void; sel: string }) {
   const ctl = useContext(CtlCtx);
   const pk = new Set((prev?.base || []).map(key));
@@ -211,7 +228,7 @@ function Base({ s, who, prev, onZone, sel }: { s: PSide; who: 'me' | 'opp'; prev
       onClick={(e) => { if (ctl) { if (!(e.target as HTMLElement).closest('.pm-unit,button')) ctl.on(t); return; } if (!(e.target as HTMLElement).closest('.cl,button')) onZone('base'); }}
       {...(ctl && g === 'dest' ? { tabIndex: 0, role: 'button', 'aria-label': ctl.label?.(t) || 'Cél: ' + (who === 'me' ? 'saját base' : 'ellenfél base'), onKeyDown: keyAct(() => ctl.on(t)) } : {})}>
       <span className="pm2-wm" aria-hidden>BASE</span>
-      <div className="pm2-units">{(s.base || []).map((u, i) => <Unit key={i} u={u} side={who} loc={who === 'me' ? 'base' : 'obase'} i={i} where={(who === 'me' ? 'Saját' : 'Ellenfél') + ' base'} changed={!!prev && !pk.has(key(u))} />)}</div>
+      <UnitRow us={s.base || []} side={who} loc={who === 'me' ? 'base' : 'obase'} where={(who === 'me' ? 'Saját' : 'Ellenfél') + ' base'} pk={prev ? pk : null} />
     </div>
   );
 }
@@ -223,9 +240,9 @@ function UnitInfo({ u, side, where }: { u: PUnit; side: 'me' | 'opp'; where: str
     <div className="pm-uinfo">
       {c?.img && <img src={IMGBASE + c.img} alt={u.n} onClick={() => window.dispatchEvent(new CustomEvent('rb:open-card', { detail: c.n }))} title="Teljes lapadat" />}
       <div>
-        <b>{u.n}</b> <span className="note">{side === 'me' ? 'saját' : 'ellenfél'} unit · {where}{u.token ? ' · token' : ''}</span>
-        <p>Might: <strong>{u.m}</strong>{u.m !== base && <> (nyomtatva {base}, {u.m > base ? '+' : ''}{u.m - base})</>}{u.dmg ? <>, damage: <strong>{u.dmg}</strong>, ennyi kell még a halálhoz: <strong>{Math.max(0, u.m - u.dmg)}</strong></> : null}{u.ex ? ', exhausted (nem mozoghat Standard Move-val)' : ', ready'}</p>
-        {!!u.status?.length && <ul>{u.status.map((x) => STATUS[x] ? <li key={x}>{STATUS[x][2]}</li> : null)}</ul>}
+        <b>{u.n}</b> <span className="note">{side === 'me' ? 'saját' : 'ellenfél'} {u.kind === 'gear' ? 'gear (nincs csatolva)' : 'unit'} · {where}{u.token ? ' · token' : ''}</span>
+        {u.kind === 'gear' ? <p>{u.ex ? 'Exhausted.' : 'Ready.'} Csatolatlan gear: nincs Mightja a boardon, csak csatolva ad Might bonust (435.1.d).</p> : <p>Might: <strong>{u.m}</strong>{u.m !== base && <> (nyomtatva {base}, {u.m > base ? '+' : ''}{u.m - base})</>}{u.dmg ? <>, damage: <strong>{u.dmg}</strong>, ennyi kell még a halálhoz: <strong>{Math.max(0, u.m - u.dmg)}</strong></> : null}{u.ex ? ', exhausted (nem mozoghat Standard Move-val)' : ', ready'}</p>}
+        {!!u.status?.length && <ul>{u.status.map((x) => statusOf(x) ? <li key={x}>{statusOf(x)![2]}</li> : null)}</ul>}
         {!!u.mods?.length && <p>Módosítók: {u.mods.join(', ')}</p>}
         {!!u.gear?.length && <p>Csatolt Equipment: {u.gear.join(', ')}</p>}
         {c?.sh && <p className="note">{c.sh}</p>}
@@ -344,8 +361,8 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
               <div key={i} className={'pm2-bf' + gcls(zg)} data-zone="bfs" data-bfi={i}
                 onClick={ctl ? (e) => { if (!(e.target as HTMLElement).closest('.pm-unit,button')) ctl.on(zt); } : undefined}
                 {...(ctl && zg === 'dest' ? { tabIndex: 0, role: 'button', 'aria-label': ctl.label?.(zt) || 'Cél: ' + f.name, onKeyDown: keyAct(() => ctl.on(zt)) } : {})}>
-                <div className="pm2-ubox opp"><span className="pm2-uh">Opponent units{!!f.opp?.length && <b className="pm2-msum" title={'Összesített Might: ' + mo + ', ' + f.opp.length + ' unit'}>{mo}<Swords size={12} aria-hidden /></b>}</span>
-                  <div className="pm2-units">{(f.opp || []).map((u, j) => <Unit key={j} u={u} side="opp" loc={'bf' + i} i={j} where={f.name} changed={!!prev && !pko.has(key(u))} />)}</div></div>
+                <div className="pm2-ubox opp"><span className="pm2-uh">Opponent units{!!f.opp?.some((u) => u.kind !== 'gear') && <b className="pm2-msum" title={'Összesített Might: ' + mo + ', ' + f.opp.filter((u) => u.kind !== 'gear').length + ' unit'}>{mo}<Swords size={12} aria-hidden /></b>}</span>
+                  <UnitRow us={f.opp || []} side="opp" loc={'bf' + i} where={f.name} pk={prev ? pko : null} /></div>
                 <div className={'pm2-bfc ' + (f.ctrl || 'none')} data-bfi={i}>
                   <span className="cl" data-card={f.name}>{img(f.name) ? <img src={img(f.name)} alt={f.name} loading="lazy" /> : <span className="pm-tok">{f.name}</span>}</span>
                   <span className="pm2-ctrl">{f.ctrl === 'me' ? 'Te kontrollálod' : f.ctrl === 'opp' ? 'Ellenfél kontrollálja' : 'Senkié'}</span>
@@ -353,8 +370,8 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
                     {f.facedown ? <Card small /> : <span className="pm2-ghost sm" />}<span>Facedown</span>
                   </button>
                 </div>
-                <div className="pm2-ubox me"><span className="pm2-uh">Your units{!!f.me?.length && <b className="pm2-msum" title={'Összesített Might: ' + mm + ', ' + f.me.length + ' unit'}>{mm}<Swords size={12} aria-hidden /></b>}</span>
-                  <div className="pm2-units">{(f.me || []).map((u, j) => <Unit key={j} u={u} side="me" loc={'bf' + i} i={j} where={f.name} changed={!!prev && !pkm.has(key(u))} />)}</div></div>
+                <div className="pm2-ubox me"><span className="pm2-uh">Your units{!!f.me?.some((u) => u.kind !== 'gear') && <b className="pm2-msum" title={'Összesített Might: ' + mm + ', ' + f.me.filter((u) => u.kind !== 'gear').length + ' unit'}>{mm}<Swords size={12} aria-hidden /></b>}</span>
+                  <UnitRow us={f.me || []} side="me" loc={'bf' + i} where={f.name} pk={prev ? pkm : null} /></div>
               </div>
             );
           })}
