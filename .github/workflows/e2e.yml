@@ -1,81 +1,39 @@
 name: Tesztek (ellenőrzők, unit, Playwright)
 
-# PR-en és kézzel fut, a main-re pusholt commitot a deploy.yml futtatja (workflow_call), és csak zöld teszt után élesít.
+# PR-en és kézzel fut; a main-re pusholt commitot a deploy.yml teszteli (tests.yml), és csak zöld teszt után élesít.
+# Kézi indítás update-snapshots bemenettel: a vizuális baseline CI-ban (ubuntu) készül, és commitként az ágra kerül.
 on:
   pull_request:
   workflow_dispatch:
     inputs:
       update-snapshots:
-        description: 'Vizuális baseline újragenerálása (artifactként tölti fel, nem hasonlít)'
+        description: 'Vizuális baseline újragenerálása és commitolása az ágra'
         type: boolean
         default: false
-  workflow_call:
 
 jobs:
-  e2e:
+  test:
+    uses: ./.github/workflows/tests.yml
+    with:
+      update-snapshots: ${{ inputs.update-snapshots || false }}
+
+  baseline:
+    needs: test
+    if: ${{ inputs.update-snapshots }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Python ellenőrzés (ruff)
-        run: |
-          pip install ruff==0.16.9 pytest==9.1.1
-          ruff check src/ tools/
-      - name: Adatok és pytest (a pipeline kétszer fut, a kimenet azonos kell legyen)
-        run: python3 -m pytest src/tests -q
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: web/package-lock.json
-      - name: Kötőjel-ellenőrzés (U+2013, U+2014)
-        run: node scripts/check-dashes.mjs
-      - name: Függőségek
-        working-directory: web
-        run: npm ci
-      - name: Build (tsc -b és vite build), bundle térkép
-        working-directory: web
-        env:
-          ANALYZE: '1'
-        run: npm run build
-      - name: Bundle térkép feltöltése
-        uses: actions/upload-artifact@v4
-        with:
-          name: bundle-stats
-          path: web/stats.html
-          if-no-files-found: warn
-      - name: Unit tesztek
-        working-directory: web
-        run: npx vitest run
-      - name: Playwright
-        working-directory: web
-        run: |
-          npx playwright install --with-deps chromium
-          npx playwright test --reporter=line
-      - name: Vizuális regresszió (1300 és 390 px)
-        if: ${{ !inputs.update-snapshots }}
-        working-directory: web
-        env:
-          VISUAL: '1'
-        run: npx playwright test --project=visual-1300 --project=visual-390 --reporter=line
-      - name: Vizuális baseline generálása
-        if: ${{ inputs.update-snapshots }}
-        working-directory: web
-        env:
-          VISUAL: '1'
-        run: npx playwright test --project=visual-1300 --project=visual-390 --update-snapshots=all --reporter=line
-      - name: Vizuális baseline feltöltése
-        if: ${{ inputs.update-snapshots }}
-        uses: actions/upload-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           name: visual-baseline
           path: web/e2e/__screenshots__
-      - name: Hibás tesztek képei
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-test-results
-          path: web/test-results
-          if-no-files-found: ignore
+      - name: Baseline commit az ágra
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add web/e2e/__screenshots__
+          if git diff --cached --quiet; then echo "Nincs változás"; exit 0; fi
+          git commit -m "Vizuális baseline (CI, ubuntu)" -m "A visual-1300 és visual-390 projekt képei, az e2e.yml update-snapshots futásából (run ${{ github.run_id }})."
+          git push
