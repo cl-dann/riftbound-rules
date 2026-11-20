@@ -13,8 +13,14 @@ export default defineConfig({
   },
   // Alapból a funkcionális tesztek futnak; a mérés (PERF=1) külön projekt.
   projects: [
-    { name: 'e2e', testIgnore: /perf\.spec\.ts/ },
+    { name: 'e2e', testIgnore: /(perf|visual)\.spec\.ts/ },
     ...(process.env.PERF ? [{ name: 'perf', testMatch: /perf\.spec\.ts/, retries: 0 }] : []),
+    // Vizuális regresszió: a baseline csak CI-ban (ubuntu) készül, helyben a renderelés eltér.
+    ...(process.env.VISUAL ? [
+      { name: 'visual-1300', testMatch: /visual\.spec\.ts/, use: { viewport: { width: 1300, height: 900 } } },
+      { name: 'visual-390', testMatch: /visual\.spec\.ts/, use: { viewport: { width: 390, height: 844 }, hasTouch: true } },
+    ] : []),
   ],
+  snapshotPathTemplate: '{testDir}/__screenshots__/{projectName}/{arg}{ext}',
   webServer: { command: 'npx vite preview --port 4174 --strictPort', url: 'http://localhost:4174/', reuseExistingServer: !process.env.CI },
 });

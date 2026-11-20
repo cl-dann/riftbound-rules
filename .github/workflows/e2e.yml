@@ -4,6 +4,11 @@ name: Tesztek (ellenőrzők, unit, Playwright)
 on:
   pull_request:
   workflow_dispatch:
+    inputs:
+      update-snapshots:
+        description: 'Vizuális baseline újragenerálása (artifactként tölti fel, nem hasonlít)'
+        type: boolean
+        default: false
   workflow_call:
 
 jobs:
@@ -49,3 +54,28 @@ jobs:
         run: |
           npx playwright install --with-deps chromium
           npx playwright test --reporter=line
+      - name: Vizuális regresszió (1300 és 390 px)
+        if: ${{ !inputs.update-snapshots }}
+        working-directory: web
+        env:
+          VISUAL: '1'
+        run: npx playwright test --project=visual-1300 --project=visual-390 --reporter=line
+      - name: Vizuális baseline generálása
+        if: ${{ inputs.update-snapshots }}
+        working-directory: web
+        env:
+          VISUAL: '1'
+        run: npx playwright test --project=visual-1300 --project=visual-390 --update-snapshots=all --reporter=line
+      - name: Vizuális baseline feltöltése
+        if: ${{ inputs.update-snapshots }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-baseline
+          path: web/e2e/__screenshots__
+      - name: Hibás tesztek képei
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: web/test-results
+          if-no-files-found: ignore
