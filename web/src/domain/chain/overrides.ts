@@ -1,4 +1,3 @@
-// @ts-nocheck
 /* Laponkénti kézi hatásleírások a Chain elemzőhöz: azok az utasítások, amelyeket az általános szövegfelismerés nem tud
    biztonságosan értelmezni. Minden bejegyzés: re (az utasítás szövegére illeszkedő minta), k (a művelet, amit az elemző végrehajt;
    'note' esetén csak leírja), d (egy mondat a hatásról), refs (a hivatkozott Core Rules szabályok, a rules.json-ból ellenőrizve),

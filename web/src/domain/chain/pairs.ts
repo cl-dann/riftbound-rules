@@ -1,10 +1,10 @@
-// @ts-nocheck
 /* Két lap általános kölcsönhatásai (a chain riport "Kölcsönhatások" része). (a korábbi legacy/core.ts része, S15) */
 import { kwRef } from '../data/store';
-export function vsPairs(A,B){
-  const out=[];const ta=(A.txt||'')+' '+(A.eff||''),tb=(B.txt||'')+' '+(B.eff||'');const refsA=(A.nt||[]).flatMap(n=>n[0].split(',').map(x=>x.trim()));
+import type { Card } from '../data/schema';
+export function vsPairs(A: Card,B: Card){
+  const out: [string, string][]=[];const ta=(A.txt||'')+' '+(A.eff||''),tb=(B.txt||'')+' '+(B.eff||'');const refsA=(A.nt||[]).flatMap(n=>n[0].split(',').map(x=>x.trim()));
   const targets=refsA.some(r=>/^355\.(7|9|10|11)/.test(r));
-  const add=(ref,txt)=>out.push([ref,txt]);
+  const add=(ref: string,txt: string)=>out.push([ref,txt]);
   if(targets&&/can.t be chosen|cannot be chosen/i.test(tb))add('757',A.n+' választást kér, '+B.n+' szövege viszont bizonyos helyzetben kizárja, hogy kiválasszák. Ha a feltétel teljesül (például enemy spell választaná), '+B.n+' nem választható.');
   if(targets&&/\[Deflect/.test(tb))add(kwRef('Deflect')||'356.2.a',B.n+' Deflectje miatt, ha '+A.n+' őt választja, plusz költséget kell fizetni.');
   if(/counter (?:a|an|target|that|it)\b[^.]{0,30}spell|counter (?:a|an) spell/i.test(ta)&&B.t==='Spell')add('426',A.n+' counterelheti '+B.n+'-t, amíg az a chainen vár. A counterelt spell nem hat, és a kifizetett cost nem jár vissza.');

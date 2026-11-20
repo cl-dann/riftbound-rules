@@ -1,13 +1,14 @@
-// @ts-nocheck
 /* Kártya segédek: típussor, hasonló lapok. (a korábbi legacy/core.ts része, S15) */
 import { CARDS, TOPICS } from './store';
-export const typeLine=c=>[...(c.st||[]).filter(s=>s!=='Basic'&&s!=='Token'),c.t,(c.st||[]).includes('Token')?'Token':''].filter(Boolean).join(' ');
+import type { Card } from './schema';
+export const typeLine=(c: Pick<Card, 't' | 'st'>)=>[...(c.st||[]).filter(s=>s!=='Basic'&&s!=='Token'),c.t,(c.st||[]).includes('Token')?'Token':''].filter(Boolean).join(' ');
 export const GENERIC_TAGS=new Set(['Equipment']);
-export function similar(c,n){
+/** A leghasonlóbb n lap: közös kulcsszó, Game Action, tag, típus, domain és Energy alapján. */
+export function similar(c: Card,n: number): [number, Card, string[]][]{
   const kw=new Set(c._kw),act=new Set(c.tp.filter(p=>TOPICS[p[0]].g==='act').map(p=>p[0])),tg=new Set((c.tg||[]).filter(x=>!GENERIC_TAGS.has(x)));
-  const out=[];
+  const out: [number, Card, string[]][]=[];
   CARDS.forEach(o=>{if(o===c||o.n===c.n||o.ban===1)return;
-    let s=0;const why=[];
+    let s=0;const why: string[]=[];
     const sk=o._kw.filter(k=>kw.has(k));if(sk.length){s+=3*sk.length;why.push(...sk);}
     const sa=o.tp.filter(p=>TOPICS[p[0]].g==='act'&&act.has(p[0]));s+=sa.length;
     if(o.t===c.t)s+=2;

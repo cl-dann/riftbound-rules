@@ -7,6 +7,7 @@ import { vsCard } from '../../domain/data/store';
 import { b64e, b64d } from '../../domain/text/b64';
 import {zoneRefOf,analyze,stepInfo,srcCard,abilitiesOf,triggersOf,interp,timingOf,isPermC,actOf,OV_ACTS,OV_N,enterReadyCond} from '../../domain/chain/chainCore';
 import { emit, openCard } from '../../shared/lib/events';
+import type { ChainState } from '../../domain/chain/state';
 const $=(id:string)=>document.getElementById(id) as any;
 const openModal=(c:any)=>openCard(c.n);
 const hideTip=()=>emit('rb:hide-tip');
@@ -31,7 +32,7 @@ export type TrigAdd={n:string;src:string;pl:'A'|'B';eff:string;why:string;loc?:s
 export type CombatOut={bf:string;dead:string[];recall:string[];ctrl:''|'A'|'B';label:string};
 /* A pályás építő (ChainView) ezen keresztül olvassa és írja ugyanazt a CS állapotot, amit a Haladó szerkesztés űrlapja. */
 export const chainApi:{moveUnit?:(uid:string,loc:string)=>string|null;addTriggers?:(list:TrigAdd[],cb:CombatOut)=>void;
-  get?:()=>any;commit?:(fn:(cs:any)=>void,ms?:number)=>void;set?:(cs:any)=>void;moveStep?:(from:number,to:number)=>boolean;delStep?:(j:number)=>void;
+  get?:()=>ChainState;commit?:(fn:(cs:ChainState)=>void,ms?:number)=>void;set?:(cs:ChainState)=>void;moveStep?:(from:number,to:number)=>boolean;delStep?:(j:number)=>void;
   quick?:(el:HTMLElement|null,j:number)=>void;internal?:boolean;stateEl?:(el:HTMLElement|null)=>void;delBd?:(i:number)=>void;openAdv?:(j:number)=>void;last?:any}={};
 /* Közös segédek a CS-hez (a builder űrlapja és a pályás építő is ezeket használja). */
 export const locsOf=(CS:any)=>[['base','Base'],['bf0',(CS.bf[0].n||'1. battlefield')],['bf1',(CS.bf[1].n||'2. battlefield')]];

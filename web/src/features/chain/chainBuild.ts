@@ -5,6 +5,8 @@ import { vsCard, CARDS } from '../../domain/data/store';
 import { norm } from '../../domain/text/norm';
 import { tgOptionsOf, reorderSteps, locLabelOf } from './legacyForm';
 import type { PBoard } from '../../shared/board/Playmat';
+import type { Card } from '../../domain/data/schema';
+import type { ChainState, Step } from '../../domain/chain/state';
 
 export type Arrow = { from: number; to: string };
 export type MtInstr = { t: string; st: 'executed' | 'partial' | 'ignored' | 'negated' | 'skipped'; ref: string; why: string; man?: boolean };
@@ -14,13 +16,13 @@ export type ChainFrame = { label: string; board: PBoard; changes: [string, strin
 const clone = <T,>(x: T): T => JSON.parse(JSON.stringify(x));
 export const sideOf = (p: string) => (p === 'B' ? 'opp' : 'me') as 'me' | 'opp';
 export const plOf = (side: 'me' | 'opp') => (side === 'opp' ? 'B' : 'A');
-export const cardOf = (n?: string | null): any => (n ? vsCard(n) : null);
+export const cardOf = (n?: string | null): Card | null => (n ? vsCard(n) || null : null);
 
 /** A próba-elemzések HTML riport nélkül futnak (a riport itt nem kell, a sorok és frame-ek azonosak). */
 const NOREP = { report: false };
 
 /** A kiinduló helyzet pontosan úgy, ahogy az elemző rajzolja: egy üres Resolve lépéssel futtatva az első frame (340.1: üres chainen nincs mit lefuttatni). */
-export function setupFrame(CS: any): ChainFrame {
+export function setupFrame(CS: ChainState): ChainFrame {
   const c = clone(CS); c.steps = [{ k: 'res' }];
   return analyze(c, NOREP).frames[0] as ChainFrame;
 }
@@ -34,7 +36,7 @@ export function stepFrames(frames: ChainFrame[]): Record<number, number> {
 
 /** Az építő pályája: mindkét battlefield hely látszik (üresen is), a champion, a kéz és a facedown lap a CS építő mezőiből,
     a k. frame-ig kijátszott lapok nélkül. A nyilak battlefield indexe a teljes (két helyes) listára igazodik. */
-export function fullFrame(f: ChainFrame, CS: any, k: number, sf: Record<number, number>): ChainFrame {
+export function fullFrame(f: ChainFrame, CS: ChainState, k: number, sf: Record<number, number>): ChainFrame {
   const played = (pred: (s: any) => boolean) => CS.steps.filter((s: any, j: number) => s.k === 'card' && pred(s) && sf[j] != null && sf[j] <= k);
   const bfi = f.bfi || [];
   const bfs = [0, 1].map((i) => {
@@ -73,7 +75,7 @@ function newRows(a: [string, string][], b: [string, string][]) {
 }
 
 /** Lépés beszúrása a k. helyre (a végére: k = lépésszám); a hivatkozások ugyanúgy átszámozódnak, mint átrendezésnél. */
-export function insertAt(cs: any, k: number, st: any) {
+export function insertAt(cs: ChainState, k: number, st: Step) {
   cs.steps.push(st); const n = cs.steps.length;
   const order = [...Array(n - 1).keys()]; order.splice(Math.max(0, Math.min(k, n - 1)), 0, n - 1);
   reorderSteps(cs, order);
@@ -81,7 +83,7 @@ export function insertAt(cs: any, k: number, st: any) {
 
 /** Egy új lépés a chain k. helyére (alapból a végére): az elemző dönti el, szabályos-e (sebesség, Closed State, költség, forrás állapota).
     A lépés saját frame-jének sorai számítanak. A hiányzó célpont vagy költség-választás nem tiltás: azt utána a pályán választja ki a felhasználó. */
-export function tryStep(CS: any, step: any, at?: number): Legal {
+export function tryStep(CS: ChainState, step: Step, at?: number): Legal {
   const c = clone(CS); const k = at == null ? c.steps.length : at;
   insertAt(c, k, clone(step));
   const r = analyze(c, NOREP);
@@ -95,7 +97,7 @@ export function tryStep(CS: any, step: any, at?: number): Legal {
 
 export type TgOpt = { v: string; label: string; ok: boolean; why?: string; ref?: string };
 /** A j. lépés ti. célpontjának választható értékei, mindegyikre lefuttatva az elemzést: legális-e, és ha nem, miért (355.8). */
-export function targetOpts(CS: any, j: number, ti: number): TgOpt[] {
+export function targetOpts(CS: ChainState, j: number, ti: number): TgOpt[] {
   const s = CS.steps[j]; if (!s) return [];
   const inf: any = stepInfo(CS, s); const p = inf?.list?.[ti]; if (!p) return [];
   const base = clone(CS); base.steps[j].tg = [...(base.steps[j].tg || [])]; base.steps[j].tg[ti] = '';
@@ -104,8 +106,8 @@ export function targetOpts(CS: any, j: number, ti: number): TgOpt[] {
   const xs = all.some((o: any) => o[0] === 'x') ? ['base', 'bf0', 'bf1'].flatMap((loc) => ['A', 'B'].map((pl) => ['x:' + loc + ':' + pl, 'Pályán kívüli ' + p.type + ': ' + (pl === 'A' ? 'saját, ' : 'ellenfél, ') + locLabelOf(CS, loc)])) : [];
   return [...all.filter((o: any) => o[0] !== 'x'), ...xs].map((o: any) => {
     const c = clone(base);
-    if (o[0].startsWith('x:')) { const [, loc, pl] = o[0].split(':'); c.steps[j].tg[ti] = 'x'; c.steps[j].ext = { ...(c.steps[j].ext || {}), [ti]: { ...((c.steps[j].ext || {})[ti] || {}), loc, pl } }; }
-    else c.steps[j].tg[ti] = o[0];
+    if (o[0].startsWith('x:')) { const [, loc, pl] = o[0].split(':'); c.steps[j].tg![ti] = 'x'; c.steps[j].ext = { ...(c.steps[j].ext || {}), [ti]: { ...((c.steps[j].ext || {})[ti] || {}), loc, pl } }; }
+    else c.steps[j].tg![ti] = o[0];
     const nr = newRows(r0, analyze(c, NOREP).rows);
     const bad = nr.find((x) => (BAD.test(x[1]) && !/nincs megadva/.test(x[1])) || /^A trigger \d+\. célpontja \(/.test(x[1]) || /^A play effectnek nincs legális választása/.test(x[1]));
     let why = bad ? reasonOf(bad[1]) : undefined;
@@ -121,7 +123,7 @@ export function slotText(p: any, ti: number) {
 }
 
 /** A lépés rövid neve az idővonalon. */
-export function stepName(CS: any, s: any): { n: string; img?: string; kind: string } {
+export function stepName(CS: ChainState, s: Step): { n: string; img?: string; kind: string } {
   if (s.k === 'res') return { n: 'Resolve', kind: 'a chain teteje lefut' };
   if (s.k === 'end') return { n: 'Kör vége', kind: 'Ending Phase' };
   if (s.k === 'tr') return { n: s.n || '?', img: s.n, kind: 'combat utáni trigger' };
@@ -135,22 +137,22 @@ export function stepName(CS: any, s: any): { n: string; img?: string; kind: stri
 }
 
 /** Abilityk és triggerek egy forráshoz (a csatolt gear szövegével, 136.2.c). */
-export function abilitiesFor(CS: any, src: string) {
-  const c = src[0] === 'L' ? cardOf(CS.lg[src.slice(1)]) : src[0] === 'b' ? cardOf(CS.bd[+src.slice(1)]?.n) : src[0] === 's' ? cardOf(CS.steps[+src.slice(1)]?.n) : null;
+export function abilitiesFor(CS: ChainState, src: string) {
+  const c = src[0] === 'L' ? cardOf(CS.lg[src.slice(1)] as string | undefined) : src[0] === 'b' ? cardOf(CS.bd[+src.slice(1)]?.n) : src[0] === 's' ? cardOf(CS.steps[+src.slice(1)]?.n) : null;
   if (!c) return { c: null, abs: [] as any[], trs: [] as any[] };
   const extra = src[0] === 'b' ? CS.bd.filter((g: any) => g.on === +src.slice(1)).map((g: any) => cardOf(g.n)?.eff || '').join('\n') : '';
   return { c, abs: abilitiesOf(c), trs: triggersOf(c, extra) };
 }
 
-export const hasHidden = (c: any) => !!c && (timingOf(c) === 'hidden' || /^\[Hidden\]/m.test(c.txt || ''));
-export const isPerm = (c: any) => isPermC(c);
+export const hasHidden = (c: Card | null | undefined) => !!c && (timingOf(c) === 'hidden' || /^\[Hidden\]/m.test(c.txt || ''));
+export const isPerm = (c: Card | null | undefined) => isPermC(c);
 
 /** Kártyakereső: típus szerint előszűrve, gépelve szűrhető. */
 export type PickKind = 'legend' | 'champion' | 'battlefield' | 'board' | 'hand' | 'play' | 'hidden' | 'trash' | 'deck';
 export const PICK_TITLE: Record<PickKind, string> = {
   legend: 'Legend', champion: 'Champion (Champion Zone)', battlefield: 'Battlefield', board: 'Unit vagy gear a pályára', hand: 'Lap a kézbe', play: 'Kijátszás a chainre', hidden: 'Hidden lap a facedown helyre', trash: 'Lap a trashbe', deck: 'Lap a deck tetejére',
 };
-const okType = (k: PickKind, c: any) => {
+const okType = (k: PickKind, c: Card) => {
   const t = c.t;
   if (k === 'legend') return t === 'Legend';
   if (k === 'battlefield') return t === 'Battlefield';
@@ -159,10 +161,10 @@ const okType = (k: PickKind, c: any) => {
   if (k === 'hidden') return (t === 'Unit' || t === 'Gear' || t === 'Spell') && hasHidden(c);
   return t === 'Unit' || t === 'Gear' || t === 'Spell';
 };
-export function searchCards(k: PickKind, q: string, limit = 60): any[] {
+export function searchCards(k: PickKind, q: string, limit = 60): Card[] {
   const words = norm(q || '').split(' ').filter(Boolean);
-  const out: any[] = [];
-  for (const c of CARDS as any[]) {
+  const out: Card[] = [];
+  for (const c of CARDS) {
     if (!okType(k, c) || (c.st || []).includes('Token') && k !== 'board') continue;
     if (words.length) { const h = norm(c.n + ' ' + (c.tg || []).join(' ')); if (!words.every((w) => h.includes(w))) continue; }
     out.push(c); if (out.length >= limit) break;
@@ -173,18 +175,18 @@ export function searchCards(k: PickKind, q: string, limit = 60): any[] {
 
 /** A lépés kézből, trashből vagy deckből választó utasításai (a deck felső lapja automatikus, azt nem kell választani). */
 export type ZPick = { xi: number; zr: ZoneRef; t: string };
-export function zonePicks(CS: any, j: number): ZPick[] {
+export function zonePicks(CS: ChainState, j: number): ZPick[] {
   const s = CS.steps[j]; if (!s || s.k === 'res' || s.k === 'end') return [];
   const inf: any = stepInfo(CS, s); if (!inf?.eff) return [];
   return interp(s, inf).map((x: any, xi: number) => ({ xi, zr: zoneRefOf(x.t, inf.c?.n) as ZoneRef, t: x.t })).filter((z: any) => z.zr && !(z.zr.z === 'deck' && z.zr.top && z.zr.act !== 'banishEach'));
 }
 export type ZCand = { id: string; n: string; zone: string; own: string; ok: boolean; why?: string };
 /** A választható lapok a lépés lerakásakor (az elemző pillanatképe), a lap szövegének megkötéseivel ellenőrizve. */
-export function zoneCands(CS: any, j: number, xi: number): ZCand[] {
+export function zoneCands(CS: ChainState, j: number, xi: number): ZCand[] {
   const zp = zonePicks(CS, j).find((z) => z.xi === xi); if (!zp) return [];
   const c = clone(CS); if (c.steps[j].zp) c.steps[j].zp[xi] = [];
   const r: any = analyze(c, NOREP); const snap = r.zsnap?.[j]; if (!snap) return [];
-  const s = CS.steps[j]; const pl = s.k === 'tg' ? (r.objs[s.src]?.ctrl || s.pl || 'A') : (s.pl || 'A');
+  const s = CS.steps[j]; const pl = s.k === 'tg' ? (r.objs[s.src as string]?.ctrl || s.pl || 'A') : (s.pl || 'A');
   if (zp.zr.who === 'each') {
     /* minden játékos a saját lapjai közül (355.10.e, 412.1) */
     if (zp.zr.act === 'banishEach') return ['A', 'B'].flatMap((p) => (snap.deck?.[p] || []).slice(0, zp.zr.n).map((id: string) => ({ id, n: r.objs[id]?.name || id, zone: 'deck', own: p, ok: true })));

@@ -28,36 +28,13 @@
     }
   },
   "src/domain/chain/overrides.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
     "@typescript-eslint/no-explicit-any": {
       "count": 2
-    }
-  },
-  "src/domain/chain/pairs.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
     }
   },
   "src/domain/chain/templates.ts": {
     "@typescript-eslint/no-explicit-any": {
       "count": 3
-    }
-  },
-  "src/domain/data/cards.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    }
-  },
-  "src/domain/data/load.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 1
-    }
-  },
-  "src/domain/data/store.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 8
     }
   },
   "src/domain/deck/edit.ts": {
@@ -68,18 +45,7 @@
       "count": 1
     }
   },
-  "src/domain/deck/legality.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 2
-    }
-  },
   "src/domain/deck/parse.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
     "no-useless-escape": {
       "count": 1
     }
@@ -90,9 +56,6 @@
     }
   },
   "src/domain/rules/refs.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
     "prefer-const": {
       "count": 1
     }
@@ -109,7 +72,7 @@
   },
   "src/features/chain/ChainView.tsx": {
     "@typescript-eslint/no-explicit-any": {
-      "count": 30
+      "count": 21
     }
   },
   "src/features/chain/CombatPanel.tsx": {
@@ -119,7 +82,7 @@
   },
   "src/features/chain/chainBuild.ts": {
     "@typescript-eslint/no-explicit-any": {
-      "count": 47
+      "count": 28
     }
   },
   "src/features/chain/legacyForm.ts": {
@@ -127,7 +90,7 @@
       "count": 1
     },
     "@typescript-eslint/no-explicit-any": {
-      "count": 19
+      "count": 16
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 3
@@ -138,7 +101,7 @@
   },
   "src/features/deck/DeckView.tsx": {
     "@typescript-eslint/no-explicit-any": {
-      "count": 23
+      "count": 4
     }
   },
   "src/features/deck/pdf.ts": {

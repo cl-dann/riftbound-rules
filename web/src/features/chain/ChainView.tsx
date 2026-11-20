@@ -1,4 +1,5 @@
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import type { BoardEntry } from '../../domain/chain/state';
 import { createPortal } from 'react-dom';
 import { ArrowDown, ArrowUp, GripVertical, Plus, X } from 'lucide-react';
 import { initChain, getChainFrames, chainApi, stateKeysOf, tgOptionsOf, locLabelOf, newZid } from './legacyForm';
@@ -133,7 +134,7 @@ function CardPicker({ at, onPick, onClose }: { at: PickAt; onPick: (n: string, s
           {res.map((c, k) => (
             <li key={c.n}><button type="button" onClick={() => onPick(c.n, side)}>
               {c.img ? <img src={IMGBASE + c.img} alt="" loading={k < 12 ? 'eager' : 'lazy'} className={c.t === 'Battlefield' ? 'land' : ''} /> : <span className="cb2-noimg" />}
-              <span className="cb2-rn"><b>{c.n}</b><small>{c.t}{c.e != null && c.e !== '' ? ' · ' + c.e + ' Energy' : ''}{c.p ? ' · ' + c.p + ' Power' : ''}{c.m != null && c.m !== '' && c.t === 'Unit' ? ' · ' + c.m + ' Might' : ''}</small></span>
+              <span className="cb2-rn"><b>{c.n}</b><small>{c.t}{c.e != null ? ' · ' + c.e + ' Energy' : ''}{c.p ? ' · ' + c.p + ' Power' : ''}{c.m != null && c.t === 'Unit' ? ' · ' + c.m + ' Might' : ''}</small></span>
             </button></li>
           ))}
           {!res.length && <li className="note">Nincs találat.</li>}
@@ -172,8 +173,8 @@ function PropsPanel({ i, onClose }: { i: number; onClose: () => void }) {
   const CS = chainApi.get!();
   const b = CS.bd[i]; if (!b) return null;
   const c = cardOf(b.n); const isU = c?.t === 'Unit', isG = c?.t === 'Gear';
-  const set = (fn: (b: any) => void) => chainApi.commit!((cs) => fn(cs.bd[i]));
-  const units = CS.bd.map((x: any, k: number) => [x, k]).filter(([x]: any) => cardOf(x.n)?.t === 'Unit');
+  const set = (fn: (b: BoardEntry) => void) => chainApi.commit!((cs) => fn(cs.bd[i]));
+  const units = CS.bd.map((x, k) => [x, k] as const).filter(([x]) => cardOf(x.n)?.t === 'Unit');
   return (
     <div className="cb2-ov" onClick={onClose}>
       <div className="pb-panel cb2-props" role="dialog" aria-label={'Tulajdonságok: ' + b.n} onClick={(e) => e.stopPropagation()}>
@@ -193,7 +194,7 @@ function PropsPanel({ i, onClose }: { i: number; onClose: () => void }) {
         </div>
         {isU && <label className="cb2-row">Combat jelölés <select defaultValue={b.atk || ''} onChange={(e) => set((x) => { x.atk = e.target.value; })}><option value="">nincs</option><option value="a">attacker</option><option value="d">defender</option></select></label>}
         {isG && <label className="cb2-row">Csatolás <select defaultValue={b.on == null ? '' : String(b.on)} onChange={(e) => set((x) => { x.on = e.target.value === '' ? null : +e.target.value; if (x.on != null) x.loc = CS.bd[x.on].loc; })}>
-          <option value="">nincs felcsatolva</option>{units.map(([x, k]: any) => <option key={k} value={k}>rajta: {(x.pl === 'A' ? 'Te: ' : 'Ellenfél: ') + x.n + ' (' + locLabelOf(CS, x.loc) + ')'}</option>)}</select></label>}
+          <option value="">nincs felcsatolva</option>{units.map(([x, k]) => <option key={k} value={k}>rajta: {(x.pl === 'A' ? 'Te: ' : 'Ellenfél: ') + x.n + ' (' + locLabelOf(CS, x.loc) + ')'}</option>)}</select></label>}
         <button type="button" className="pb-btn primary" onClick={onClose}>Kész</button>
       </div>
     </div>
@@ -265,7 +266,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
   const f = useMemo(() => fullFrame(eff[ci], CS, ci, sf), [eff, ci, sf, csv]); // eslint-disable-line react-hooks/exhaustive-deps
   const prev = useMemo(() => (ci > 0 ? fullFrame(eff[ci - 1], CS, ci - 1, sf).board : undefined), [eff, ci, sf, csv]); // eslint-disable-line react-hooks/exhaustive-deps
   // A lépések rövid neve (idővonal, chain-kártya keresés) egyszer, a CS változásakor számolódik.
-  const names = useMemo(() => CS.steps.map((s: unknown) => stepName(CS, s)), [csv]); // eslint-disable-line react-hooks/exhaustive-deps
+  const names = useMemo(() => CS.steps.map((s) => stepName(CS, s)), [csv]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ---- CS írása ---- */
   const commit = (fn: (cs: any) => void, j: number | 'keep' = 'keep', ms?: number) => { jump.current = j; chainApi.commit!(fn, ms); };
@@ -280,7 +281,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
     const hasZ = !hasT && zonePicks(chainApi.get!(), j).some((z) => zoneCands(chainApi.get!(), j, z.xi).length);
     if (narrow) setWiz((w) => ({ ...(w || { side: 'me' }), st: hasT || hasZ ? 'target' : 'extra', j, hadT: hasT || hasZ })); else setSel(j);
   };
-  const lastPl = () => { const l = CS.steps.slice(0, ins ?? CS.steps.length).reverse().find((s: any) => s.k === 'card' || s.k === 'ab'); return l ? (l.pl === 'A' ? 'opp' : 'me') : 'me'; };
+  const lastPl = () => { const l = CS.steps.slice(0, ins ?? CS.steps.length).reverse().find((s) => s.k === 'card' || s.k === 'ab'); return l ? (l.pl === 'A' ? 'opp' : 'me') : 'me'; };
 
   /* ---- célzás ---- */
   const tOpts = useMemo<TgOpt[]>(() => (mode?.k === 'target' ? targetOpts(CS, mode.j, mode.ti) : []), [mode, csv]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -289,11 +290,11 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
   const chainStep = (ii: number) => {
     const t = (f.board.chain || [])[ii] || '';
     let best: number | null = null;
-    CS.steps.forEach((_s: any, j: number) => { if (sf[j] != null && sf[j] <= ci && t.startsWith(names[j].n)) best = j; });
+    CS.steps.forEach((_s, j) => { if (sf[j] != null && sf[j] <= ci && t.startsWith(names[j].n)) best = j; });
     return best;
   };
   /** A ti. célpont jelenlegi értéke; pályán kívüli célpontnál "x:hely:játékos". */
-  const curTg = (j: number, ti: number) => { const s = CS.steps[j]; const v = (s?.tg || [])[ti] || ''; if (v !== 'x') return v; const e = (s.ext || {})[ti] || {}; return 'x:' + (e.loc || 'bf0') + ':' + (e.pl || ''); };
+  const curTg = (j: number, ti: number) => { const s = CS.steps[j]; const v = (s?.tg || [])[ti] || ''; if (v !== 'x') return v; const e = ((s.ext || {})[ti] || {}) as { loc?: string; pl?: string }; return 'x:' + (e.loc || 'bf0') + ':' + (e.pl || ''); };
   const addV = (t: Extract<PTarget, { k: 'add' }>) => t.z === 'base' ? 'x:base:' + plOf(t.side!) : t.z === 'unit' ? 'x:bf' + t.bfi + ':' + plOf(t.side!) : '';
   const pickTarget = (v: string) => {
     if (mode?.k !== 'target') return;
@@ -416,8 +417,8 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
       ] });
     } else {
       const s = CS.steps[k]; if (!s) return;
-      showMenu({ key: uid + csv, title: s.n, card: s.n, sub: (k + 1) + '. lépésben kijátszva', items: [
-        ...abItems(uid, s.pl), ...moveItems(uid, s.n), ...combatItem(s.loc || 'base', sideOf(s.pl)),
+      showMenu({ key: uid + csv, title: s.n!, card: s.n, sub: (k + 1) + '. lépésben kijátszva', items: [
+        ...abItems(uid, s.pl!), ...moveItems(uid, s.n!), ...combatItem(s.loc || 'base', sideOf(s.pl!)),
         { label: 'Lépés szerkesztése', tone: 'energy', run: () => { close(); setSel(k); } },
         { label: 'A lépés törlése', tone: 'del', run: () => { close(); chainApi.delStep!(k); } },
       ] });
@@ -453,7 +454,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
     const n = bf.fdn || '';
     const items: MItem[] = n ? [playItem({ k: 'card', n, pl: bf.fd, from: 'facedown', loc: 'bf' + b, tg: [], ext: {} }, 'Kijátszás facedown-ból')]
       : [{ label: 'Kijátszás facedown-ból', dis: 'Ismeretlen facedown lap: a nevét a Chain + gombjával add meg, "facedown-ból" forrással.' }];
-    items.push({ label: 'Vissza a kézbe', tone: 'gold', run: () => { close(); commit((cs) => { if (n) cs.hand[bf.fd].push({ id: newZid(cs, 'hand', bf.fd), n }); cs.bf[b].fd = ''; cs.bf[b].fdn = ''; }); } });
+    items.push({ label: 'Vissza a kézbe', tone: 'gold', run: () => { close(); commit((cs) => { if (n) cs.hand![bf.fd as 'A' | 'B']!.push({ id: newZid(cs, 'hand', bf.fd!), n }); cs.bf[b].fd = ''; cs.bf[b].fdn = ''; }); } });
     items.push({ label: 'Eltávolítás', tone: 'del', run: () => { close(); commit((cs) => { cs.bf[b].fd = ''; cs.bf[b].fdn = ''; }); } });
     showMenu({ key: 'fd' + b + csv, title: n || 'Facedown lap', card: n || undefined, sub: (bf.fd === 'A' ? 'saját' : 'ellenfél') + ' facedown, ' + (bf.n || (b + 1) + '. battlefield'), items });
   };
@@ -537,7 +538,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
       if (mode?.k === 'hpick') return t.k === 'hand' && t.side === mode.side && (!mode.unit || cardOf(t.n)?.t === 'Unit') ? 'act' : '';
       if (mode?.k === 'move') {
         if (t.k === 'unit') return t.id === mode.uid ? 'sel' : '';
-        if (t.k === 'zone') { const side = mode.uid[0] === 'b' ? sideOf(CS.bd[+mode.uid.slice(1)].pl) : sideOf(CS.steps[+mode.uid.slice(1)].pl); if (t.loc === 'base' && side === 'opp' || t.loc === 'obase' && side === 'me') return ''; return mode.dests.includes(zoneLoc(t.loc)) ? 'dest' : ''; }
+        if (t.k === 'zone') { const side = mode.uid[0] === 'b' ? sideOf(CS.bd[+mode.uid.slice(1)].pl) : sideOf(CS.steps[+mode.uid.slice(1)].pl!); if (t.loc === 'base' && side === 'opp' || t.loc === 'obase' && side === 'me') return ''; return mode.dests.includes(zoneLoc(t.loc)) ? 'dest' : ''; }
         return '';
       }
       if (mode?.k === 'hide') return t.k === 'fd' && mode.dests.includes(t.bfi) ? 'dest' : '';
@@ -682,7 +683,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
       </div></div>
   ) : null;
   /* ---- mobilos lépés-varázsló (csak keskeny nézetben) ---- */
-  const sideBefore = (at: number | null) => { const l = CS.steps.slice(0, at ?? CS.steps.length).reverse().find((x: any) => x.k === 'card' || x.k === 'ab'); return l ? (l.pl === 'A' ? 'opp' : 'me') : 'me'; };
+  const sideBefore = (at: number | null) => { const l = CS.steps.slice(0, at ?? CS.steps.length).reverse().find((x) => x.k === 'card' || x.k === 'ab'); return l ? (l.pl === 'A' ? 'opp' : 'me') : 'me'; };
   function openWiz(preset?: 'res' | 'end', at: number | null = ins) { setMsg(''); setMenu(null); setPick(null); setMode(null); setSel(null); setWiz({ st: preset ? 'action' : 'card', side: sideBefore(at), preset }); }
   const wizEnd = (msg?: string) => { chainApi.quick!(null, -1); setWiz(null); setIns(null); setMode(null); if (msg) setMsg(msg); };
   const wizCancel = () => { const w = wiz; wizEnd(); if (w?.j != null && CS.steps[w.j]) { jump.current = 'keep'; chainApi.delStep!(w.j); } };
@@ -739,7 +740,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
         <input type="search" className="cb2-q" value={wq} onChange={(e) => setWq(e.target.value)} placeholder="Lap neve" aria-label="Keresés a kijátszható lapok között" />
         {wq && <ul className="cb2-res">{wres.map((c) => (
           <li key={c.n}><button type="button" onClick={() => { setWq(''); setWiz({ ...wiz, st: 'action', pick: c.n, menu: undefined }); }}>
-            {c.img ? <img src={IMGBASE + c.img} alt="" /> : <span className="cb2-noimg" />}<span className="cb2-rn"><b>{c.n}</b><small>{c.t}{c.e != null && c.e !== '' ? ' · ' + c.e + ' Energy' : ''}</small></span>
+            {c.img ? <img src={IMGBASE + c.img} alt="" /> : <span className="cb2-noimg" />}<span className="cb2-rn"><b>{c.n}</b><small>{c.t}{c.e != null ? ' · ' + c.e + ' Energy' : ''}</small></span>
           </button></li>))}{!wres.length && <li className="note">Nincs találat.</li>}</ul>}
         <div className="cb2-wbb"><button type="button" className="btn sec" onClick={() => setWiz({ ...wiz, st: 'action', preset: 'res' })}>Resolve</button><button type="button" className="btn sec" onClick={() => setWiz({ ...wiz, st: 'action', preset: 'end' })}>Kör vége</button></div>
       </>}
@@ -764,7 +765,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
       </>}
     </div>
   );
-  const hasContent = !!(CS.steps.length || CS.bd.length || CS.lg.A || CS.lg.B || CS.bf.some((b: any) => b.n || b.fd) || ['A', 'B'].some((p) => (CS.hand?.[p] || []).length || CS.ch?.[p]));
+  const hasContent = !!(CS.steps.length || CS.bd.length || CS.lg.A || CS.lg.B || CS.bf.some((b) => b.n || b.fd) || (['A', 'B'] as const).some((p) => (CS.hand?.[p] || []).length || CS.ch?.[p]));
   const loadTpl = (id: string) => { const t = TEMPLATES.find((x) => x.id === id)!; setTpl({ open: false }); chainApi.set!(t.cs()); setMsg('Sablon betöltve: ' + t.title + '. Lépésenként a Következő gombbal nézheted végig.'); };
   const setTurn = (v: string) => commit((cs) => { cs.turn = v; }, 'keep', 0);
   const setPhase = (v: string) => commit((cs) => { cs.phase = v; }, 'keep', 0);
@@ -827,7 +828,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
           <h2 className="cb2-h2">Chain lépései</h2>
           {!CS.steps.length && <p className="note">Még nincs lépés. Kattints egy lapra a pályán (Kijátszás, Aktiválás, Trigger), vagy add hozzá alább.</p>}
           <ol className="cb2-steps" onDragOver={(e) => { if (dragJ.current >= 0) e.preventDefault(); }}>
-            {CS.steps.map((s: any, j: number) => {
+            {CS.steps.map((s, j) => {
               const nm = names[j]; const [stt, why] = stepStatus(j);
               return (
                 <Fragment key={j}>
@@ -910,7 +911,7 @@ function StepPanel({ j, csv, onTarget, onClose, bad, onInsert, onHand, onZone }:
           <span className="note">{slotText(p, ti)}</span>
           <span className="cb2-tv"><b>{lbl(ti, (s.tg || [])[ti] || '')}</b>
             <button type="button" className="btn sec" onClick={() => onTarget(ti)}>Kiválasztás a pályán</button>
-            {(s.tg || [])[ti] && <button type="button" className="linkbtn" aria-label={(ti + 1) + '. célpont törlése'} onClick={() => chainApi.commit!((cs) => { cs.steps[j].tg[ti] = ''; }, 0)}><X size={14} /></button>}</span>
+            {(s.tg || [])[ti] && <button type="button" className="linkbtn" aria-label={(ti + 1) + '. célpont törlése'} onClick={() => chainApi.commit!((cs) => { cs.steps[j].tg![ti] = ''; }, 0)}><X size={14} /></button>}</span>
         </div>
       ))}
       {zonePicks(CS, j).map((z) => (
@@ -919,9 +920,9 @@ function StepPanel({ j, csv, onTarget, onClose, bad, onInsert, onHand, onZone }:
             <button type="button" className="btn sec" onClick={() => onZone(z.xi)}>Kiválasztás</button></span></div>))}
       {inf && !list.length && !zonePicks(CS, j).length && s.k === 'card' && inf.c && <p className="note">Ennek a lapnak nincs választandó célpontja.</p>}
       <div className={'cb2-q2 row2' + (hasQ ? '' : ' empty')} ref={qref} />
-      {inf?.c && /\[Show Off\]/.test(inf.c.txt || '') && <div className="cb2-tv"><span className="note">Show Off: {String(s.so || '').startsWith('h:') ? s.so.slice(2) + ' (kézből)' : s.so ? 'board unit' : 'nincs'}</span><button type="button" className="btn sec" onClick={() => onHand('so', 0)}>Unit a kézből</button></div>}
+      {inf?.c && /\[Show Off\]/.test(inf.c.txt || '') && <div className="cb2-tv"><span className="note">Show Off: {String(s.so || '').startsWith('h:') ? s.so!.slice(2) + ' (kézből)' : s.so ? 'board unit' : 'nincs'}</span><button type="button" className="btn sec" onClick={() => onHand('so', 0)}>Unit a kézből</button></div>}
       {inf?.eff ? interp(s, inf).map((y: any, xi: number) => y.act.k === 'playcard' && !y.act.self ? (
-        <div key={xi} className="cb2-tv"><span className="note">Kijátszott lap ({xi + 1}. utasítás): <b>{(s.plc || {})[xi] || 'nincs megadva'}</b></span><button type="button" className="btn sec" onClick={() => onHand('plc', xi)}>Lap a kézből</button></div>) : null) : null}
+        <div key={xi} className="cb2-tv"><span className="note">Kijátszott lap ({xi + 1}. utasítás): <b>{((s.plc || {}) as Record<number, string>)[xi] || 'nincs megadva'}</b></span><button type="button" className="btn sec" onClick={() => onHand('plc', xi)}>Lap a kézből</button></div>) : null) : null}
       <div className="cb2-tv">
         <button type="button" className="btn sec" onClick={() => onInsert(j)}>Beszúrás elé</button>
         <button type="button" className="btn sec" onClick={() => onInsert(j + 1)}>Beszúrás utána</button>

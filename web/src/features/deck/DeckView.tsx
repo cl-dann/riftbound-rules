@@ -9,6 +9,8 @@ import { cardHeadHTML, cardRulesHTML, domDots } from '../../render/html/card';
 import { curveHTML, interactionHTML, legalityHTML } from '../../render/html/deck';
 import { esc } from '../../domain/text/norm';
 import { typeLine } from '../../domain/data/cards';
+import type { Card } from '../../domain/data/schema';
+import type { DeckRow } from '../../domain/deck/types';
 import { Html } from '../../shared/ui/Html';
 import { loadFonts } from '../../domain/data/load';
 import { editDeck, eur, legendOf, priceOf, searchCards, targetSec, type Prices } from '../../domain/deck/edit';
@@ -16,7 +18,7 @@ import { openCard } from '../../shared/lib/events';
 
 function deckTotals(P: Prices | null) {
   let a1 = 0, a7 = 0, n = 0; const miss: string[] = [];
-  if (P) DECK.forEach((s: any) => { if (/side/i.test(s.name)) return; s.rows.forEach((r: any) => { if (!r.card) return; const p = priceOf(r.card, P); n += r.qty; if (!p) { miss.push(r.card.n); return; } a1 += r.qty * (p.a1 ?? p.a7 ?? 0); a7 += r.qty * (p.a7 ?? p.a1 ?? 0); }); });
+  if (P) DECK.forEach((s) => { if (/side/i.test(s.name)) return; s.rows.forEach((r) => { if (!r.card) return; const p = priceOf(r.card, P); n += r.qty; if (!p) { miss.push(r.card.n); return; } a1 += r.qty * (p.a1 ?? p.a7 ?? 0); a7 += r.qty * (p.a7 ?? p.a1 ?? 0); }); });
   return { a1, a7, n, miss };
 }
 
@@ -29,27 +31,27 @@ function priceHTML(P: Prices | null): string {
 function deckHTML(P: Prices | null): string {
   if (!DECK.length) return '<div class="panel pad"><h2>Decklista formátum</h2><p class="note" style="margin:8px 0">Illeszd be a decket a bal oldali mezőbe ebben a formában, aztán nyomd meg a Deck feldolgozása gombot. Szekciónként fejléc kettősponttal, alatta soronként darabszám és pontos angol kártyanév. A legend neve Champion, Legend cím alakban szerepel.</p><pre class="fmt">' + esc(FORMAT) + '</pre></div>';
   const warns: string[] = [], tot: Record<string, number> = {};
-  DECK.forEach((s: any) => s.rows.forEach((r: any) => {
-    if (!r.card) { warns.push('Ismeretlen kártyanév a(z) ' + esc(s.name) + ' szekcióban: <b>' + esc(r.name) + '</b>.' + (r.sug.length ? ' Erre gondoltál? ' + r.sug.map((c: any) => '<button data-fix="' + esc(r.name) + '" data-to="' + esc(c.a.find((a: string) => a.includes(',')) || c.a[0]) + '">' + esc(c.n) + '</button>').join('') : '')); return; }
+  DECK.forEach((s) => s.rows.forEach((r) => {
+    if (!r.card) { warns.push('Ismeretlen kártyanév a(z) ' + esc(s.name) + ' szekcióban: <b>' + esc(r.name) + '</b>.' + (r.sug.length ? ' Erre gondoltál? ' + r.sug.map((c) => '<button data-fix="' + esc(r.name) + '" data-to="' + esc(c.a.find((a: string) => a.includes(',')) || c.a[0]) + '">' + esc(c.n) + '</button>').join('') : '')); return; }
     if (r.card.ban === 1) warns.push('<b>' + esc(r.card.n) + '</b> tiltott Constructedben (' + (r.card.banNew ? r.card.banf : META.ban_updated) + ').');
     else if (r.card.banf) warns.push('<b>' + esc(r.card.n) + '</b> ' + r.card.banf + '-tól tiltott lesz (<a href="' + BF.url + '">Radiance ban list</a>).');
     if (r.card.ban === 2) warns.push('<b>' + esc(r.card.n) + '</b> a 2v2 Constructed formátumban tiltott (' + META.ban_updated + ').');
     if (['Unit', 'Gear', 'Spell'].includes(r.card.t) && !/side/i.test(s.name)) tot[r.card.n] = (tot[r.card.n] || 0) + r.qty;
   }));
   Object.keys(tot).forEach((n) => { if (tot[n] > 3) warns.push('<b>' + esc(n) + '</b>: ' + tot[n] + ' példány a Main Deckben (Champion zónával együtt). A 103.3.b szabály névenként legfeljebb 3 példányt enged.'); });
-  const uniq = new Set<any>(); DECK.forEach((s: any) => s.rows.forEach((r: any) => r.card && uniq.add(r.card)));
+  const uniq = new Set<Card>(); DECK.forEach((s) => s.rows.forEach((r) => r.card && uniq.add(r.card)));
   const ec = [...uniq].filter((c) => c.err != null).length;
   const T = deckTotals(P);
-  let h = '<div class="panel pad"><div class="sum">' + (P && T.n ? '<span class="chip price" title="Cardmarket, névenként a legolcsóbb nyomat, sideboard nélkül. 1 napos átlag: ' + eur(T.a1) + '">Deck ár <b>' + eur(T.a7) + '</b> <small>7 napos átlag' + (T.miss.length ? ', ' + new Set(T.miss).size + ' lap ár nélkül' : '') + '</small></span>' : '') + DECK.map((s: any) => '<span class="chip">' + esc(s.name) + ' <b>' + s.rows.reduce((a: number, r: any) => a + r.qty, 0) + '</b></span>').join('')
+  let h = '<div class="panel pad"><div class="sum">' + (P && T.n ? '<span class="chip price" title="Cardmarket, névenként a legolcsóbb nyomat, sideboard nélkül. 1 napos átlag: ' + eur(T.a1) + '">Deck ár <b>' + eur(T.a7) + '</b> <small>7 napos átlag' + (T.miss.length ? ', ' + new Set(T.miss).size + ' lap ár nélkül' : '') + '</small></span>' : '') + DECK.map((s: any) => '<span class="chip">' + esc(s.name) + ' <b>' + s.rows.reduce((a: number, r: DeckRow) => a + r.qty, 0) + '</b></span>').join('')
     + '<span class="chip okc">' + uniq.size + ' egyedi kártya</span>' + (ec ? '<span class="chip err">' + ec + ' kártyán errata</span>' : '') + '</div>';
   if (warns.length) h += '<ul class="warns">' + warns.map((w) => '<li>' + w + '</li>').join('') + '</ul>';
   h += legalityHTML() + priceHTML(P) + curveHTML() + interactionHTML();
-  DECK.forEach((s: any, si: number) => {
-    h += '<div class="sec-title">' + esc(s.name) + '<span class="count">' + s.rows.reduce((a: number, r: any) => a + r.qty, 0) + ' lap</span></div>';
-    s.rows.forEach((r: any, ri: number) => {
+  DECK.forEach((s, si) => {
+    h += '<div class="sec-title">' + esc(s.name) + '<span class="count">' + s.rows.reduce((a: number, r) => a + r.qty, 0) + ' lap</span></div>';
+    s.rows.forEach((r, ri) => {
       const c = r.card;
       if (!c) { h += '<details class="drow unk"><summary><span class="q">' + r.qty + '</span><span class="nm">' + esc(r.name) + '</span><span class="ty">ismeretlen</span><span class="rs"></span></summary></details>'; return; }
-      const rs = c.tp.map((p: any) => '<span title="' + esc(TOPICS[p[0]].title) + '">' + TOPICS[p[0]].refs[0] + '</span>').join('');
+      const rs = c.tp.map((p) => '<span title="' + esc(TOPICS[p[0]].title) + '">' + TOPICS[p[0]].refs[0] + '</span>').join('');
       h += '<details class="drow" data-s="' + si + '" data-r="' + ri + '"><summary><span class="q">' + r.qty + '</span><span class="nm">' + domDots(c) + ' ' + esc(c.n)
         + (c.err != null ? ' <span class="chip err mini">errata</span>' : '') + (c.ban ? ' <span class="chip ban mini">ban</span>' : c.banf ? ' <span class="chip ban mini">ban ' + c.banf.slice(5) + '</span>' : '')
         + '</span><span class="ty">' + esc(typeLine(c)) + '</span><span class="rs">' + rs + '</span><span class="ctl">' + (() => { const p = priceOf(c, P); return p ? '<span class="pr" title="7 napos átlag, darabár ' + eur(p.a7 ?? p.a1) + '">' + eur(r.qty * (p.a7 ?? p.a1 ?? 0)) + '</span>' : ''; })()
@@ -76,7 +78,7 @@ export function DeckView() {
   const change = (t: string) => { setText(t); clearTimeout(tmr.current); tmr.current = window.setTimeout(() => run(t), 250); };
   const legend = useMemo(() => legendOf(text), [text]);
   const hits = useMemo(() => (q.trim() || ty ? searchCards(q, legend, legalOnly, ty) : []), [q, ty, legend, legalOnly]);
-  const add = (c: any) => change(editDeck(text, targetSec(c, text), c, 1));
+  const add = (c: Card) => change(editDeck(text, targetSec(c, text), c, 1));
   const run = (t = text) => { setDeck(parseDeck(t)); if (t.trim()) { try { localStorage.setItem('rb-deck', t); } catch { /* */ } } setVer((v) => v + 1); };
   useEffect(() => { run(); }, []);
   useEffect(() => {
@@ -102,7 +104,7 @@ export function DeckView() {
 
   const pdf = async () => {
     run();
-    if (!DECK.some((s: any) => s.rows.some((r: any) => r.card))) { setStatus('Nincs felismert kártya a listában, nincs miből PDF-et készíteni.'); return; }
+    if (!DECK.some((s) => s.rows.some((r) => r.card))) { setStatus('Nincs felismert kártya a listában, nincs miből PDF-et készíteni.'); return; }
     try {
       setStatus('PDF készítése...');
       const [fonts, { jsPDF }] = await Promise.all([loadFonts(), import('jspdf')]);
@@ -138,7 +140,7 @@ export function DeckView() {
             </select>
           </div>
           <label className="chk"><input type="checkbox" checked={legalOnly} onChange={(e) => setLegalOnly(e.target.checked)} /> csak a legend Domain Identity-jébe illő és nem tiltott lapok{legend ? ' (' + (legend.d || []).join(' + ') + ')' : ''}</label>
-          {!!hits.length && <ul className="bres">{hits.map((c: any) => { const p = priceOf(c, P); return (
+          {!!hits.length && <ul className="bres">{hits.map((c) => { const p = priceOf(c, P); return (
             <li key={c.n}><button onClick={() => add(c)} title="Hozzáadás a deckhez"><Plus size={13} /><span className="nm" dangerouslySetInnerHTML={{ __html: domDots(c) + ' ' + esc(c.n) }} /><span className="ty">{typeLine(c)}{c.e != null ? ' · ' + c.e : ''}</span><span className="pr">{p ? eur(p.a7 ?? p.a1) : ''}</span></button></li>); })}</ul>}
         </div>
         <label htmlFor="deckin" className="note">Decklista. Szekciófejléc (<code>Legend:</code>, <code>Champion:</code>, <code>MainDeck:</code>, <code>Battlefields:</code>, <code>Rune Pool:</code>, <code>Sideboard:</code>), alatta soronként darabszám és kártyanév.</label>
@@ -164,7 +166,7 @@ export function DeckView() {
           const t = e.target as HTMLElement;
           const sm = t.closest('button[data-sim]') as HTMLElement | null;
           const qb = t.closest('button[data-inc]') as HTMLElement | null;
-          if (qb) { e.preventDefault(); e.stopPropagation(); const c = DECK.flatMap((s: any) => s.rows).find((r: any) => r.card && r.card.n === qb.dataset.card)?.card; if (c) change(editDeck(text, qb.dataset.sec!, c, +qb.dataset.inc!)); return; }
+          if (qb) { e.preventDefault(); e.stopPropagation(); const c = DECK.flatMap((s) => s.rows).find((r) => r.card && r.card.n === qb.dataset.card)?.card; if (c) change(editDeck(text, qb.dataset.sec!, c, +qb.dataset.inc!)); return; }
           if (sm) { openCard(sm.dataset.sim as string); return; }
           const b = t.closest('button[data-fix]') as HTMLElement | null;
           if (b) { const nt = text.split(b.dataset.fix!).join(b.dataset.to!); setText(nt); run(nt); }
