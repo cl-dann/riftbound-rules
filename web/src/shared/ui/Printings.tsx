@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { IMGBASE } from '../legacy/core';
-import { eur, pn, type Prices } from '../views/deckEdit';
+import { IMGBASE } from '../../legacy/core';
+import { eur, pn, type Prices } from '../../domain/deck/edit';
 
 // Az árfájl egyszer töltődik be, minden nézet ugyanazt használja.
 let cache: Promise<Prices | null> | null = null;

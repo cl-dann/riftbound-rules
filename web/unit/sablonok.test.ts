@@ -1,8 +1,8 @@
 /* Chain sablonok: minden sablon betöltött állapotára az elemzés hibátlan (nincs nem szabályos vagy hiányos lépés),
    és a leírásában állított eredmény teljesül. A hivatkozott szabályszámok léteznek. */
 import { describe, expect, it } from 'vitest';
-import { analyze } from '../src/legacy/chainCore';
-import { TEMPLATES } from '../src/legacy/chainTemplates';
+import { analyze } from '../src/domain/chain/chainCore';
+import { TEMPLATES } from '../src/domain/chain/templates';
 import { ruleText } from './util';
 import { vsCard } from '../src/legacy/core';
 

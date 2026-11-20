@@ -1,8 +1,8 @@
 import { LayoutGrid, List, Search, X } from 'lucide-react';
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
-import { Printings } from '../components/Printings';
-import { CARDS, META, cardHeadHTML, cardRulesHTML, domDots, esc, norm, typeLine, IMGBASE } from '../legacy/core';
-import { Html } from '../components/Html';
+import { Printings } from '../../shared/ui/Printings';
+import { CARDS, META, cardHeadHTML, cardRulesHTML, domDots, esc, norm, typeLine, IMGBASE } from '../../legacy/core';
+import { Html } from '../../shared/ui/Html';
 
 const SETS = ['Origins', 'Proving Grounds', 'Spiritforged', 'Unleashed', 'Vendetta', 'Radiance'];
 const DOMAINS = ['Fury', 'Calm', 'Mind', 'Body', 'Chaos', 'Order'];

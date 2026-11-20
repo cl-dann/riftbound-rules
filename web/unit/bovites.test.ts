@@ -2,7 +2,7 @@
    Ahol van hivatalos példa, a teszt elején exampleOf() ellenőrzi a rules.json szövegét. */
 import { describe, expect, it } from 'vitest';
 import { cs, run, exampleOf, ruleText } from './util';
-import { stepInfo, actOf } from '../src/legacy/chainCore';
+import { stepInfo, actOf } from '../src/domain/chain/chainCore';
 const k = (t: string) => actOf(t).k;
 
 describe('1. Choose one: a builderben választott módot követi az elemzés', () => {

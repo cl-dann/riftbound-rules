@@ -1,17 +1,17 @@
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ArrowDown, ArrowUp, GripVertical, Plus, X } from 'lucide-react';
-import { initChain, getChainFrames, chainApi, stateKeysOf, tgOptionsOf, locLabelOf, newZid } from '../legacy/chain';
-import { stepInfo, interp } from '../legacy/chainCore';
-import { TEMPLATES } from '../legacy/chainTemplates';
-import { IMGBASE } from '../legacy/core';
-import { Playmat, type PTarget, type PlayCtl, type Glow } from '../components/Playmat';
-import { CombatPanel } from '../components/CombatPanel';
+import { initChain, getChainFrames, chainApi, stateKeysOf, tgOptionsOf, locLabelOf, newZid } from './legacyForm';
+import { stepInfo, interp } from '../../domain/chain/chainCore';
+import { TEMPLATES } from '../../domain/chain/templates';
+import { IMGBASE } from '../../legacy/core';
+import { Playmat, type PTarget, type PlayCtl, type Glow } from '../../shared/board/Playmat';
+import { CombatPanel } from './CombatPanel';
 import {
   setupFrame, stepFrames, insertAt, zonePicks, zoneCands, type ZCand, fullFrame, tryStep, targetOpts, slotText, stepName, abilitiesFor, hasHidden, isPerm, searchCards, cardOf, sideOf, plOf,
   PICK_TITLE, type ChainFrame, type MtInfo, type MtInstr, type Arrow, type PickKind, type TgOpt, type Legal,
-} from '../components/chainBuild';
-import '../components/practice.css';
+} from './chainBuild';
+import '../../styles/practice.css';
 
 export type { ChainFrame };
 

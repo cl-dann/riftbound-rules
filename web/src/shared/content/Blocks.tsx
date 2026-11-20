@@ -2,7 +2,7 @@
 import { useMemo, useState } from 'react';
 import { AlertTriangle, BookOpen, Check, ChevronLeft, ChevronRight, Clock, Compass, ExternalLink, Info, Lightbulb, Play, RotateCcw, X } from 'lucide-react';
 import { IMGBASE, vsCard } from '../../legacy/core';
-import { Playmat, DEMO_BOARD } from '../../components/Playmat';
+import { Playmat, DEMO_BOARD } from '../board/Playmat';
 import { inline } from './richText';
 
 export { inline };

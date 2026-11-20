@@ -1,9 +1,9 @@
 /* A pályás Chain építő segédei (React nélkül): kiinduló pálya, a lejátszási frame kiegészítése az építő zónáival,
    és a legalitás az elemző (analyze) alapján. Az állapot mindig a builder CS-e; ez a modul csak olvassa vagy másolatot elemez. */
-import { analyze, stepInfo, abilitiesOf, triggersOf, timingOf, isPermC, interp, zoneRefOf, zoneCheck, type ZoneRef } from '../legacy/chainCore';
-import { vsCard, CARDS, norm } from '../legacy/core';
-import { tgOptionsOf, reorderSteps, locLabelOf } from '../legacy/chain';
-import type { PBoard } from './Playmat';
+import { analyze, stepInfo, abilitiesOf, triggersOf, timingOf, isPermC, interp, zoneRefOf, zoneCheck, type ZoneRef } from '../../domain/chain/chainCore';
+import { vsCard, CARDS, norm } from '../../legacy/core';
+import { tgOptionsOf, reorderSteps, locLabelOf } from './legacyForm';
+import type { PBoard } from '../../shared/board/Playmat';
 
 export type Arrow = { from: number; to: string };
 export type MtInstr = { t: string; st: 'executed' | 'partial' | 'ignored' | 'negated' | 'skipped'; ref: string; why: string; man?: boolean };

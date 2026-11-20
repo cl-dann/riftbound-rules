@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
-import { renderTud } from '../legacy/knowledge';
-import { Html } from '../components/Html';
+import { renderTud } from '../../render/html/knowledge';
+import { Html } from '../../shared/ui/Html';
 
 export function KnowledgeView({ hash }: { hash: string }) {
   const html = useMemo(() => renderTud(), []);

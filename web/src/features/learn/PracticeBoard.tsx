@@ -6,13 +6,13 @@
  */
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { ChevronRight, CircleHelp, RotateCcw, Swords, X, Zap } from 'lucide-react';
-import { IMGBASE, vsCard } from '../legacy/core';
-import { inline } from '../shared/content/richText';
+import { IMGBASE, vsCard } from '../../legacy/core';
+import { inline } from '../../shared/content/richText';
 import {
   act, asgConfirm, asgPick, asgReset, asgView, autoNext, glowOf, init, menuFor, mightAt, panelBtn, speedOf, start, step, stateLabel, tgtCancel, tgtConfirm, tgtToggle, tstate,
   locate, groupOf, type ES, type PUnit, type Scn, type Side,
-} from './practiceEngine';
-import './practice.css';
+} from '../../domain/practice/practiceEngine';
+import '../../styles/practice.css';
 
 const imgOf = (n?: string | null) => { const c: any = n ? vsCard(n) : null; return c && c.img ? IMGBASE + c.img : ''; };
 const openCard = (n: string) => window.dispatchEvent(new CustomEvent('rb:open-card', { detail: n }));

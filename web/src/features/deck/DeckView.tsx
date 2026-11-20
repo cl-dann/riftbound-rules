@@ -3,10 +3,10 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   BF, DECK, FORMAT, META, TOPICS, b64d, b64e, buildPDF, cardHeadHTML, cardRulesHTML, curveHTML, domDots, esc,
   interactionHTML, legalityHTML, parseDeck, setDeck, typeLine,
-} from '../legacy/core';
-import { Html } from '../components/Html';
-import { loadFonts } from '../data';
-import { editDeck, eur, legendOf, priceOf, searchCards, targetSec, type Prices } from './deckEdit';
+} from '../../legacy/core';
+import { Html } from '../../shared/ui/Html';
+import { loadFonts } from '../../domain/data/load';
+import { editDeck, eur, legendOf, priceOf, searchCards, targetSec, type Prices } from '../../domain/deck/edit';
 
 function deckTotals(P: Prices | null) {
   let a1 = 0, a7 = 0, n = 0; const miss: string[] = [];

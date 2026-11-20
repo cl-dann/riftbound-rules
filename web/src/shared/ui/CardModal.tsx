@@ -1,7 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { cardHeadHTML, cardRulesHTML, CARDS } from '../legacy/core';
+import { cardHeadHTML, cardRulesHTML, CARDS } from '../../legacy/core';
 import { Html } from './Html';
 import { Printings } from './Printings';
 

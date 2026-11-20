@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { TERMS, esc, typeLine, vsCard, IMGBASE } from '../legacy/core';
+import { TERMS, esc, typeLine, vsCard, IMGBASE } from '../../legacy/core';
 
 /** Egyetlen, globális tooltip: fogalommagyarázat (.gl), kártyakép kártyanéven (.cl), egyszerű szöveg ([data-tt]). */
 export function TipLayer() {

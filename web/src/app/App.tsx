@@ -1,17 +1,17 @@
 import { Suspense, lazy, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { loadData } from './data';
+import { loadData } from '../domain/data/load';
 import { VIEWS, useHash, viewOf } from './router';
-import { CARDS, META, BF, BAN_ACTIVE, RULES, esc, expandAll, refHash, ruleHTML } from './legacy/core';
-import { CardModal } from './components/CardModal';
-import { TipLayer } from './components/TipLayer';
-import { CardsView } from './views/CardsView';
+import { CARDS, META, BF, BAN_ACTIVE, RULES, esc, expandAll, refHash, ruleHTML } from '../legacy/core';
+import { CardModal } from '../shared/ui/CardModal';
+import { TipLayer } from '../shared/ui/TipLayer';
+import { CardsView } from '../features/cards/CardsView';
 
 // A Kártyák nézet azonnal kell; a többi nézet kódja az első megnyitáskor töltődik be (külön chunk).
-const DeckView = lazy(() => import('./views/DeckView').then((m) => ({ default: m.DeckView })));
-const RulesView = lazy(() => import('./views/RulesView').then((m) => ({ default: m.RulesView })));
-const ChainView = lazy(() => import('./views/ChainView').then((m) => ({ default: m.ChainView })));
-const KnowledgeView = lazy(() => import('./views/KnowledgeView').then((m) => ({ default: m.KnowledgeView })));
-const LearnView = lazy(() => import('./views/LearnView').then((m) => ({ default: m.LearnView })));
+const DeckView = lazy(() => import('../features/deck/DeckView').then((m) => ({ default: m.DeckView })));
+const RulesView = lazy(() => import('../features/rules/RulesView').then((m) => ({ default: m.RulesView })));
+const ChainView = lazy(() => import('../features/chain/ChainView').then((m) => ({ default: m.ChainView })));
+const KnowledgeView = lazy(() => import('../features/knowledge/KnowledgeView').then((m) => ({ default: m.KnowledgeView })));
+const LearnView = lazy(() => import('../features/learn/LearnView').then((m) => ({ default: m.LearnView })));
 const Lazy = ({ children }: { children: ReactNode }) => <Suspense fallback={<p className="note">Betöltés…</p>}>{children}</Suspense>;
 
 /** Globális viselkedés a generált HTML blokkokhoz: lusta szabálykitöltés és szabálylinkek. */

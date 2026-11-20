@@ -1,7 +1,7 @@
 /* Teljesítménymérés: a Kártyák fül szűrése (filterCards) tipikus keresésekkel, és a jegyzetek fogalom-kiemelése (glossify).
    Futtatás: npm run bench */
 import { test } from 'vitest';
-import { filterCards } from '../../src/views/CardsView';
+import { filterCards } from '../../src/features/cards/CardsView';
 import { CARDS, notesHTML, qaHTML } from '../../src/legacy/core';
 import { measure } from './measure';
 

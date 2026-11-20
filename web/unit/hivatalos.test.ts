@@ -4,7 +4,7 @@
    A combat damage kiosztás példái a combat.test.ts-ben vannak. */
 import { describe, expect, it } from 'vitest';
 import { cs, run, exampleOf } from './util';
-import { interp, stepInfo } from '../src/legacy/chainCore';
+import { interp, stepInfo } from '../src/domain/chain/chainCore';
 import { CARDS } from '../src/legacy/core';
 
 const insts = (x: ReturnType<typeof run>, re: RegExp) => x.item(re)!.instr.map((i: any) => i.st);

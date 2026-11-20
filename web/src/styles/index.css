@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "./legacy/legacy.css";
+@import "./legacy.css";
 
 /* Téma: Riftbound / League of Legends hangulat (hextech arany, éjkék, türkiz fény), modern felületekkel:
    lekerekített panelek, egységes térköz- és tipográfiai skála, mondatkezdő gombfeliratok.

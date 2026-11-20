@@ -1,9 +1,9 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { ArrowRight, BookOpen, ChevronLeft, ChevronRight, Clock, Compass, Flame, Menu, Play, Zap } from 'lucide-react';
-import { loadLearn } from '../data';
-import { PracticeBoard } from '../components/PracticeBoard';
-import { Blocks, H, inline, readMin, type Block } from '../shared/content/Blocks';
-import type { Scn } from '../components/practiceEngine';
+import { loadLearn } from '../../domain/data/load';
+import { PracticeBoard } from './PracticeBoard';
+import { Blocks, H, inline, readMin, type Block } from '../../shared/content/Blocks';
+import type { Scn } from '../../domain/practice/practiceEngine';
 
 type Chapter = { id: string; section: 'hogyan' | 'lecke'; level?: string; title: string; sub?: string; rules?: string; old?: string[]; blocks: Block[] };
 type Learn = { chapters: Chapter[]; scenarios: Scn[] };

@@ -2,8 +2,8 @@
 /* Chain elemző: imperatív "sziget" a React appban. A React a gyökér elemet adja, ez a modul tölti fel a buildert és kezeli.
    Az elemzés maga a DOM nélküli chainCore.ts-ben van (analyze), ezt hívják a unit tesztek is.
    A kártyalap megnyitása és a tooltip eseményekkel megy a React felé. */
-import {esc,vsCard,b64e,b64d} from './core';
-import {zoneRefOf,analyze,stepInfo,srcCard,abilitiesOf,triggersOf,interp,timingOf,isPermC,actOf,OV_ACTS,OV_N,enterReadyCond} from './chainCore';
+import {esc,vsCard,b64e,b64d} from '../../legacy/core';
+import {zoneRefOf,analyze,stepInfo,srcCard,abilitiesOf,triggersOf,interp,timingOf,isPermC,actOf,OV_ACTS,OV_N,enterReadyCond} from '../../domain/chain/chainCore';
 const $=(id:string)=>document.getElementById(id) as any;
 const openModal=(c:any)=>window.dispatchEvent(new CustomEvent('rb:open-card',{detail:c.n}));
 const hideTip=()=>window.dispatchEvent(new Event('rb:hide-tip'));

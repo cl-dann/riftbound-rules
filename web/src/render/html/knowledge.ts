@@ -1,5 +1,5 @@
 // @ts-nocheck
-import {D,CARDS,META,esc,glossify} from './core';
+import {D,CARDS,META,esc,glossify} from '../../legacy/core';
 /* Szószintű diff (LCS) az errata előtte/utána nézethez. */
 function wdiff(a,b){
   const A=String(a).split(/(\s+)/),B=String(b).split(/(\s+)/),n=A.length,m=B.length;

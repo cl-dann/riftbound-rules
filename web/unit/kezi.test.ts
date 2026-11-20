@@ -3,8 +3,8 @@
    bejegyzések viselkedése lapról lapra, majd a játékállapotból kiértékelt feltételek. */
 import { describe, expect, it } from 'vitest';
 import { cs, run } from './util';
-import { CARD_OV } from '../src/legacy/cardRules';
-import { instrSources, splitInstr, classOf, hiddenWhy } from '../src/legacy/chainCore';
+import { CARD_OV } from '../src/domain/chain/overrides';
+import { instrSources, splitInstr, classOf, hiddenWhy } from '../src/domain/chain/chainCore';
 import { vsCard } from '../src/legacy/core';
 import RULES from '../src/generated/rules.json';
 
