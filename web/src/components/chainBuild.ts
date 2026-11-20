@@ -172,7 +172,7 @@ export type ZPick = { xi: number; zr: ZoneRef; t: string };
 export function zonePicks(CS: any, j: number): ZPick[] {
   const s = CS.steps[j]; if (!s || s.k === 'res' || s.k === 'end') return [];
   const inf: any = stepInfo(CS, s); if (!inf?.eff) return [];
-  return interp(s, inf).map((x: any, xi: number) => ({ xi, zr: zoneRefOf(x.t, inf.c?.n) as ZoneRef, t: x.t })).filter((z: any) => z.zr && !(z.zr.z === 'deck' && z.zr.top));
+  return interp(s, inf).map((x: any, xi: number) => ({ xi, zr: zoneRefOf(x.t, inf.c?.n) as ZoneRef, t: x.t })).filter((z: any) => z.zr && !(z.zr.z === 'deck' && z.zr.top && z.zr.act !== 'banishEach'));
 }
 export type ZCand = { id: string; n: string; zone: string; own: string; ok: boolean; why?: string };
 /** A választható lapok a lépés lerakásakor (az elemző pillanatképe), a lap szövegének megkötéseivel ellenőrizve. */
@@ -181,6 +181,12 @@ export function zoneCands(CS: any, j: number, xi: number): ZCand[] {
   const c = clone(CS); if (c.steps[j].zp) c.steps[j].zp[xi] = [];
   const r: any = analyze(c); const snap = r.zsnap?.[j]; if (!snap) return [];
   const s = CS.steps[j]; const pl = s.k === 'tg' ? (r.objs[s.src]?.ctrl || s.pl || 'A') : (s.pl || 'A');
+  if (zp.zr.who === 'each') {
+    /* minden játékos a saját lapjai közül (355.10.e, 412.1) */
+    if (zp.zr.act === 'banishEach') return ['A', 'B'].flatMap((p) => (snap.deck?.[p] || []).slice(0, zp.zr.n).map((id: string) => ({ id, n: r.objs[id]?.name || id, zone: 'deck', own: p, ok: true })));
+    if (zp.zr.act === 'divine') return [...(snap.board || []), ...(snap.hand?.A || []), ...(snap.hand?.B || [])].map((id: string) => { const ob = r.objs[id]; return { id, n: ob?.name || id, zone: ob?.type === 'zc' ? 'hand' : 'board', own: ob?.type === 'zc' ? ob.own : ob?.ctrl, ok: true }; });
+    return [];
+  }
   if (zp.zr.z === 'among') {
     /* a megnézett lapok: az előző "look at / reveal the top N" utasítás szerinti felső lapok a lépés lerakásakor */
     const inf: any = stepInfo(CS, s); const ins = interp(s, inf);

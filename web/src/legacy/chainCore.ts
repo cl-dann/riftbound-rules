@@ -53,6 +53,8 @@ export function abilitiesOf(c:any){const out:any[]=[];if(!c)return out;
     if(/^when|^at the|^if |^while /i.test(cost))return;
     const tm=/\[Reaction\]/.test(l)?'reaction':/\[Action\]/.test(l)?'action':'none';
     out.push({label:cost.replace(/\[>\]/g,'').trim()+': '+eff.slice(0,60),eff,tm,add:/\[Add\]/.test(eff),cost});});
+  /* Empower: activated ability keyword (827.1, 827.1.b), a lista végén, hogy a korábbi indexek ne változzanak */
+  (c.txt||'').split('\n').forEach((raw:string)=>{const m=/^\[Empower\]\s*((?:\[[^\]]+\])+)/.exec(raw.trim());if(m)out.push({label:'Empower '+m[1]+': Empower me',eff:'Empower me.',tm:'none',add:false,cost:m[1],empower:true});});
   return out;}
 
 /** Triggered abilityk: a lap saját szövege és (csatolt gearnél) az Effect Text. */
@@ -82,6 +84,7 @@ export function phrasesTxt(e:string){
     if(/\[Show Off\]\s*$|showed off\s*$|\bchooses\s*$/i.test(before))continue;
     if(/\bamong them\s*$/i.test(before))continue; // a megnézett lapok közül választás, nem célpont (128.4, 355.10.a) // Show Off választás (832), nem célpont
     if(/^\s*token\b/i.test(tail)||/\b(?:it's|it is|is|was|that's|as|becomes?)\s*$/i.test(before))continue; // feltétel, nem célpont
+    if(/^\s*or (?:units?|gear|spells?) from among them\b/i.test(tail))continue; // a megnézett lapok közül választás, nem célpont
     if(/^\s*(?:from (?:your|their|its owner's|an opponent's|a player's) (?:hand|trash|deck|main deck)|from among|from (?:it|that unit|them|me)\b|in (?:your|their) (?:hand|trash)|you play|they control|in your trash)\b/i.test(tail))continue;
     if(/\b(?:for each|each|reveal|discard|draw)\s*$/i.test(before)&&!/each of\s*$/i.test(before))continue;
     if(ty==='ability'&&!/\bspell or\s*$/i.test(before)&&!/counter|gain control/i.test(e.slice(Math.max(0,m.index-30),m.index)))continue;
@@ -350,13 +353,18 @@ export function costCheck(cc:CostCond|null|undefined,card:any,ctx?:any){if(!cc||
     target: a trash nyilvános zóna, ezért az onnan választott lap célpont, a lerakáskor kell kiválasztani (355.8, 355.10.a, 108.2.d);
     a kéz (108.7.c) és a deck (108.4.e) nem nyilvános: ott a választás nem célpont, a resolve-kor történik (355.10.a, 355.18).
     n: legfeljebb ennyi lap; type: a lap típusa (unit, spell, gear vagy bármi); tags: kötelező tag; act: a művelet; opt: "you may" vagy "up to". */
-export type ZoneRef={z:'trash'|'hand'|'deck'|'among';who:'you'|'they'|'any'|'each';n:number;type:string[];tags:string[];target:boolean;act:string;opt:boolean;top:boolean;t:string;cost?:CostCond|null};
+export type ZoneRef={mightRel?:number;counts?:any;z:'trash'|'hand'|'deck'|'among'|'choose';who:'you'|'they'|'any'|'each';n:number;type:string[];tags:string[];target:boolean;act:string;opt:boolean;top:boolean;t:string;cost?:CostCond|null};
 const ZNUM:any={a:1,an:1,one:1,two:2,three:3,four:4,five:5};
 export function zoneRefOf(t0:string,cardName?:string):ZoneRef|null{const r=zoneRef0(t0,cardName);if(r){const cc=costCondOf(r.t);if(cc)r.cost=cc;}return r;}
 function zoneRef0(t0:string,cardName?:string):ZoneRef|null{const t=stripRem(String(t0||'')).replace(/^[-\u2014\u2013]\s*/,'');let m:any;
   const typesOf=(s:string)=>{const out:string[]=[];if(/\bunits?\b/i.test(s))out.push('unit');if(/\bspells?\b/i.test(s))out.push('spell');if(/\b(gear|equipment)\b/i.test(s))out.push('gear');return out;};
   const nOf=(s:string)=>{const u=/\bup to (\d+|one|two|three|four|five)\b/i.exec(s);if(u)return /^\d+$/.test(u[1])?+u[1]:ZNUM[u[1].toLowerCase()];const d=/\b(\d+|one|two|three)\s+(?:cards?|units?|spells?|gear)\b/i.exec(s);if(d)return /^\d+$/.test(d[1])?+d[1]:ZNUM[d[1].toLowerCase()];return 1;};
   const act=(actOfCard(t,cardName) as any).k;const opt=/\byou may\b|\bup to\b/i.test(t);
+  // "each player": minden játékos a saját lapjai közül választ (355.10.e, 412.1)
+  if((m=/^each player looks at the top (\d+) cards? of their main deck, banishes one of them/i.exec(t)))return {z:'deck',who:'each',n:+m[1],type:[],tags:[],target:false,act:'banishEach',opt:false,top:true,t};
+  if(/^each player reveals the top card of their main deck/i.test(t))return {z:'deck',who:'each',n:1,type:[],tags:[],target:false,act:'revealEach',opt:false,top:true,t};
+  if((m=/^each player chooses (.+?) in their hands?\b/i.exec(t))){const cnt:any={};m[1].replace(/(\d+) (units?|gear|runes?|cards)/gi,(_:string,n:string,k:string)=>{cnt[k.toLowerCase().replace(/s$/,'').replace('gear','gear')]=+n;return '';});
+    return {z:'choose',who:'each',n:99,counts:cnt,type:[],tags:[],target:false,act:'divine',opt:false,top:false,t};}
   // trash: nyilvános zóna, a választott lap célpont (355.10.a); "all" vagy "this/me" nem választás (355.10.d, saját lap)
   if((m=/\bfrom (your|their|any|an opponent's|opponents') trash(?:es)?\b|\bin (your|their) trash\b/i.exec(t))&&!/\b(?:all|each)\b[^.]{0,40}\btrash\b/i.test(t)&&!/\b(?:play|return) (?:this|me)\b/i.test(t)&&!/\bcards? in your trash\b[^.]*\b(?:for each|equal)\b/i.test(t)){
     const w=(m[1]||m[2]).toLowerCase().replace("opponents'","their");const head=t.slice(0,m.index);
@@ -368,12 +376,14 @@ function zoneRef0(t0:string,cardName?:string):ZoneRef|null{const t=stripRem(Stri
   if((m=/\bfrom (your|their) hand\b|\bfrom hand\b/i.exec(t))&&/\bplay\b/i.test(t)&&!/\bplay (?:this|me)\b/i.test(t))return {z:'hand',who:m[1]&&m[1].toLowerCase()==='their'?'they':'you',n:nOf(t.slice(0,m.index)),type:typesOf(t.slice(0,m.index)),tags:[],target:false,act:'playcard',opt,top:false,t};
   if((m=/^(?:then,?\s*)?(?:(they|each player|you may)\s+)?discards? (\d+|one|two)\b/i.exec(t))){const w=(m[1]||'').toLowerCase();return {z:'hand',who:w==='they'?'they':w==='each player'?'each':'you',n:/^\d+$/.test(m[2])?+m[2]:ZNUM[m[2].toLowerCase()],type:[],tags:[],target:false,act:'discard',opt:w==='you may'||opt,top:false,t};}
   // a megnézett vagy felfedett lapok közül választás ("from among them", "Put 1 into your hand", "banish one", "Choose one and banish it")
+  if(/^choose one\.?$/i.test(t))return {z:'among' as any,who:'any',n:1,type:[],tags:[],target:false,act:'choose',opt:false,top:false,t};
   if(/\bfrom among them\b/i.test(t)||/^(?:then,?\s*)?(?:you may )?(?:put 1 into your hand|banish one\b|choose one and banish it)/i.test(t)){const head=t.split(/\bfrom among them\b/i)[0];
     const tags=/\b(Bird|Cat|Dog|Poro)\b/.test(head)?['Bird','Cat','Dog','Poro']:[];
     const tyS=typesOf(head).length?head:t.replace(/\bfrom among them\b/i,'').replace(/\b(?:Energy|Power) cost\b/gi,'');
-    return {z:'among' as any,who:'any',n:1,type:/\bcards?\b/i.test(head)?[]:typesOf(tyS),tags,target:false,act:/\bplay it\b/i.test(t)?'playcard':/\bdraw it\b|\binto your hand\b/i.test(t)?'hand':/\bbanish\b/i.test(t)?'banish':'hand',opt:/\byou may\b/i.test(t),top:false,t};}
+    const mr=/\bMight up to (\d+) more than the killed unit\b/i.exec(t);
+    return {z:'among' as any,...(mr?{mightRel:+mr[1]}:{}),who:'any',n:1,type:/\bcards?\b/i.test(head)?[]:typesOf(tyS),tags,target:false,act:/\bplay it\b/i.test(t)?'playcard':/\bdraw it\b|\binto your hand\b/i.test(t)?'hand':/\bbanish\b/i.test(t)?'banish':'hand',opt:/\byou may\b/i.test(t),top:false,t};}
   // deck: titkos sorrend (108.4.e, 128.3); a felső lap(ok) vagy keresés ("from your Main Deck")
-  if((m=/\btop (card|\d+ cards|two cards|three cards) of (your|their) (?:main )?deck\b/i.exec(t))){const k=m[1].toLowerCase();const n=k==='card'?1:k.startsWith('two')?2:k.startsWith('three')?3:parseInt(k,10);return {z:'deck',who:m[2].toLowerCase()==='their'?'they':'you',n,type:[],tags:[],target:false,act,opt,top:true,t};}
+  if((m=/\btop (card|\d+ cards|two cards|three cards) of (your|their|each opponent's) (?:main )?deck\b/i.exec(t))){const k=m[1].toLowerCase();const n=k==='card'?1:k.startsWith('two')?2:k.startsWith('three')?3:parseInt(k,10);return {z:'deck',who:m[2].toLowerCase()==='your'?'you':'they',n,type:[],tags:[],target:false,act,opt,top:true,t};}
   if((m=/\bfrom your (?:main )?deck\b/i.exec(t))&&/\b(search|play|put|reveal|look)\b/i.test(t))return {z:'deck',who:'you',n:nOf(t.slice(0,m.index)),type:typesOf(t.slice(0,m.index)),tags:[],target:false,act,opt,top:false,t};
   return null;}
 /** Rejtett adatot kérő utasítás, amely a pályás építőben konkrét lap kiválasztásával kiváltható (kéz, deck felső lapja, trash, eldobott lap). */
@@ -386,6 +396,8 @@ export function zoneCheck(zr:ZoneRef,ob:any,pl:string,ctx?:any){const own=zr.who
   if(!own.includes(ob.own||ob.ctrl))return 'nem '+(zr.who==='you'?'a saját':'az ellenfél')+' '+(zr.z==='trash'?'trashében':zr.z==='hand'?'kezében':'deckjében')+' van';
   if(zr.type.length&&!zr.type.includes(String(ob.card.t).toLowerCase()))return 'nem '+zr.type.join(' vagy ')+' ('+ob.card.t+')';
   if(zr.tags.length&&!zr.tags.some(t=>t==='[Hidden]'?/\[Hidden\]/.test(ob.card.txt||''):(ob.card.tg||[]).includes(t)))return 'nem '+zr.tags.join(', ');
+  if(zr.mightRel!=null){const km=ctx?ctx.killedM:null;if(km==null)return 'a feltétel nem ellenőrizhető: a megölt unit Mightja nem elérhető, az erre épülő ellenőrzés null (359.3.e.12)';
+    const m=ob.card.m!=null&&ob.card.m!==''?+ob.card.m:0;if(m>km+zr.mightRel)return 'Mightja '+m+', a feltétel legfeljebb '+(km+zr.mightRel)+' (a megölt unit Mightja '+km+' + '+zr.mightRel+'; visszatekintés, 359.3.e.13)';}
   return costCheck(zr.cost,ob.card,ctx);}
 export const ZONE_HU:any={trash:'trash',hand:'kéz',deck:'deck',banish:'banishment',board:'board',gone:'nem a zónában',played:'kijátszva',chain:'chain'};
 
@@ -435,7 +447,8 @@ export function analyze(CS:any):ChainResult{
       const w=zoneCheck(zr,ob,pl,ctx);if(w)out.push(ob.name+' '+w);});
     return out.join('; ');};
   /** A költségfeltétel változói a választás pillanatában: a forrás Mightja, a játékos pontszáma, a költségként megölt unit nyomtatott költsége. */
-  const zctx=(it:any,s:any)=>{const k=s&&s.costTg&&O[s.costTg]&&O[s.costTg].card?printedCost(O[s.costTg].card):null;return {might:it.src&&onB(it.src)?mightOf(it.src):null,points:scoreOf(it.pl),relE:k?k.e:null,relP:k?k.p:null};};
+  const zctx=(it:any,s:any)=>{const k=s&&s.costTg&&O[s.costTg]&&O[s.costTg].card?printedCost(O[s.costTg].card):null;const kv=s&&s.tg&&s.tg[0]&&O[s.tg[0]]&&O[s.tg[0]].type==='unit'?s.tg[0]:null;const killedM=kv?(onB(kv)?mightOf(kv):O[kv].lk?O[kv].lk.m:null):null;
+    return {might:it.src&&onB(it.src)?mightOf(it.src):null,points:scoreOf(it.pl),relE:k?k.e:null,relP:k?k.p:null,killedM};};
   const cnt:any={};S.forEach((s:any)=>{if(s.k!=='res'&&s.k!=='end')cnt[s.c.n]=(cnt[s.c.n]||0)+1;});
   MAIN.forEach((s:any)=>{const j=s.j;const c=s.c;if(s.k==='res'||s.k==='end')return;
     if(s.k==='ab'||s.k==='tg'){const sc=s.src&&O[s.src];O['s'+j]={id:'s'+j,name:c.n+(s.k==='ab'?' abilityje':' triggere'),card:c,ctrl:s.k==='tg'&&sc?sc.ctrl:s.pl,own:s.k==='tg'&&sc?sc.ctrl:s.pl,zone:'pending',type:'ability',src:s.src,stepJ:j};return;}
@@ -823,6 +836,15 @@ export function analyze(CS:any):ChainResult{
           if(w){if(!PTN.has(key)){PTN.add(key);const h=line('206, 383.2',esc(ob.name)+': "'+esc(L)+'" nem triggerel, mert '+cw.replace(/ \(206\)\.$/,'')+', és ez nem teljesül ('+w.replace(/ \(206\)$/,'')+').',0);if(INRES)rr+=h;else rows+=h;}return;}}
         res.push({kind:'auto',label:ob.name+' triggere',src:id,pl:ob.ctrl,eff,why:'"'+L+'"'+(cw?' Triggerel, mert '+cw.replace(/^[^ ]+/,(x)=>x)+'':''),list:[],tg:[],trigBy:s.c});});});
     return res;};
+  /** "When you play a unit, gear, or activated ability with Energy cost [7] or more" (Nasus): az ability aktiválására, az ability alapköltségével (206.1). */
+  const abTrigs=(s:any)=>{const res:any[]=[];const cost=String(s.ab.cost||'');const e=(cost.match(/\[(\d+)\]/g)||[]).reduce((a:number,x:string)=>a+ +x.slice(1,-1),0);const p=(cost.match(/\[[ACRGBOPY]\]/g)||[]).length;
+    Object.keys(O).forEach(id=>{const ob=O[id];if(!ob.card||!(ob.zone==='board'||ob.zone==='legend'))return;
+      (ob.card.txt||'').split('\n').forEach((l:string)=>{const L=stripRem(l);const m=/^when (you|an opponent|a player) plays? a unit, gear, or activated ability([^,]*),\s*(.*)$/i.exec(L);if(!m)return;
+        const who=m[1].toLowerCase();if(who==='you'&&ob.ctrl!==s.pl)return;if(who==='an opponent'&&ob.ctrl===s.pl)return;
+        const cc=costCondOf(m[2]);const w=cc?costCheck(cc,{e,p},{}):'';const cw=esc(s.c.n)+' abilityjének alapköltsége '+e+' Energy és '+p+' Power; a feltétel: "'+esc(cc?cc.t:m[2].trim())+'" (206.1)';
+        if(w){rows+=line('206.1, 383.2',esc(ob.name)+': "'+esc(L)+'" nem triggerel, mert '+cw+', és ez nem teljesül ('+w.replace(/ \(206\)$/,'')+').',0);return;}
+        res.push({kind:'auto',label:ob.name+' triggere',src:id,pl:ob.ctrl,eff:m[3],why:'"'+L+'" Triggerel, mert '+cw+'.',list:[],tg:[],trigBy:s.c});});});
+    return res;};
   snap('Kiinduló helyzet',[]);
   const itemOf=(s:any)=>{const c=s.c;const perm=s.k==='card'&&isPermC(c);
     const label=s.k==='ab'?c.n+' abilityje':s.k==='tg'?c.n+' triggere':((O['s'+s.j]&&O['s'+s.j].name)||c.n)+(perm?' (play trigger)':'');
@@ -841,7 +863,7 @@ export function analyze(CS:any):ChainResult{
     const verb=s.k==='tg'?Art(c.n)+' triggerel':s.pl==='A'?(ix&&!empty?'Válaszként ':'')+(s.k==='ab'?'aktiválod':'kijátszod'):'Az ellenfél '+(ix&&!empty?'válaszként ':'')+(s.k==='ab'?'aktiválja':'kijátssza');
     const what=s.k==='tg'?'('+esc(s.tr?s.tr.why:'?')+')':s.k==='ab'?art(c.n)+' abilityjét ('+esc(s.ab?s.ab.label:'?')+')':art(c.n)+' lapot';
     const Verb=verb[0].toUpperCase()+verb.slice(1);
-    it=itemOf(s);s.it=it;if(ZC)out.zsnap[s.j]={ctx:zctx(it,s),hand:{A:zoneIds('hand','A'),B:zoneIds('hand','B')},trash:{A:zoneIds('trash','A'),B:zoneIds('trash','B')},deck:{A:zoneIds('deck','A'),B:zoneIds('deck','B')}};
+    it=itemOf(s);s.it=it;if(ZC)out.zsnap[s.j]={board:Object.keys(O).filter((id:string)=>(O[id].type==='unit'||O[id].type==='gear')&&O[id].zone==='board'),ctx:zctx(it,s),hand:{A:zoneIds('hand','A'),B:zoneIds('hand','B')},trash:{A:zoneIds('trash','A'),B:zoneIds('trash','B')},deck:{A:zoneIds('deck','A'),B:zoneIds('deck','B')}};
     let illegal:any=null;
     if(s.k==='ab'&&!s.ab)illegal='nincs kiválasztva ability';
     else if(s.k==='tg'&&!s.tr)illegal='nincs kiválasztva trigger';
@@ -852,6 +874,7 @@ export function analyze(CS:any):ChainResult{
     if(!illegal&&perm&&bfBlocksPlay(O['s'+s.j].loc))illegal=esc(locLabel(O['s'+s.j].loc))+' szövege szerint ide nem játszható ki';
     if(!illegal&&s.k==='ab'&&s.src&&O[s.src]){const sc=O[s.src];
       if(sc.ex&&/\[T\]|\[E\]/.test(s.ab.cost||s.ab.label))illegal='a forrás már exhausted, az [Exhaust] költség nem fizethető ki';
+      else if(s.ab.empower&&sc.emp)illegal='a forrás már Empowered; az Empower csak akkor aktiválható, ha nem az (827.1.b, a lap emlékeztető szövege)';
       else if(/disempower me/i.test(s.ab.cost||'')&&!sc.emp)illegal='a "Disempower me" költséghez a forrásnak Empowered állapotban kell lennie';
       else if(!['board','legend'].includes(sc.zone))illegal='a forrás nincs a boardon';}
     // additional cost: kill
@@ -916,6 +939,7 @@ export function analyze(CS:any):ChainResult{
     if(s.k==='ab'||s.k==='tg'||c.t==='Spell')chain.push(it);
     else if(s.trig&&trigOK)pushTrig(it);
     // unit és gear kijátszása azonnal resolve-ol (337.2), ezért a "When you play" triggerek most triggerelnek; spellnél csak a resolve-kor (420.4.a)
+    if(s.k==='ab'&&s.ab)abTrigs(s).forEach((t:any)=>{pushTrig(t);rows+=line('206.1, 383.2','Trigger: '+esc(O[t.src].name)+' '+t.why,1);story.push(Art(O[t.src].name)+' triggerel az ability aktiválására.');});
     if(perm){playTrigs(s).forEach((t:any)=>{pushTrig(t);rows+=line('420.4.a, 337.2','Trigger: '+esc(O[t.src].name)+' '+t.why+' A '+c.t.toLowerCase()+' kijátszása a resolve-jával befejeződött, ezért most triggerel.',1);story.push(Art(O[t.src].name)+' képessége triggerel erre a kijátszásra, és a chainre kerül.');});}
     else if(s.k==='card'&&playTrigs(s).length)rows+=line('420.4.a, 420.4.a.1','A "When you play a spell" típusú triggerek ('+playTrigs(s).map((t:any)=>esc(t.label)).join(', ')+') csak akkor triggerelnek, amikor '+esc(c.n)+' resolve-ol; ha counterelik, nem triggerelnek.',0);
     // a költségből vagy kijátszásból keletkezett triggerek (Deathknell, leave, play) a kijátszott elem fölé kerülnek
@@ -967,6 +991,7 @@ export function analyze(CS:any):ChainResult{
   const evalCond=(cd:any,it:any,s:any,xi:number,tv:string|null):boolean|null=>{if(!cd)return true;const c=cd.t.toLowerCase();
     if(/^you paid (?:the|my) additional cost/.test(c))return !!(s&&s.addc);if(/^you played this from your hand/.test(c))return (it.from||'hand')==='hand';
     if(cd.how==='hidden'||cd.how==='open'){const v=s&&s.cnd?s.cnd[xi]:null;if(v==='1'||v==='0'){cd.from='field';return v==='1';}
+      if(/^you revealed a card with the lowest energy cost$/i.test(cd.t)&&it.zEachTop&&O[it.zEachTop.A]&&O[it.zEachTop.B]){const eA=printedCost(O[it.zEachTop.A].card).e,eB=printedCost(O[it.zEachTop.B].card).e;const mine=it.pl==='A'?eA:eB,theirs=it.pl==='A'?eB:eA;cd.from='zone';cd.zn=O[it.zEachTop[it.pl]].name+' '+mine+' Energy, a másik '+theirs+' Energy'+(mine===theirs?'; döntetlen: a Core Rules nem dönti el, hogy egyenlő költségnél "a legalacsonyabb"-e (nyitott kérdés, judge dönt; az elemzés igennel számol)':'');if(mine===theirs)cd.tie=true;return mine<=theirs;}
       const zm=/^it's an? (gear|spell|unit)$|^it is a (unit)$/i.exec(cd.t);if(zm&&it.zTop&&O[it.zTop]){cd.from='zone';cd.zn=O[it.zTop].name;return String(O[it.zTop].card.t).toLowerCase()===(zm[1]||zm[2]).toLowerCase();}
       cd.from='default';return false;}
     if(cd.how==='state'){const r=evalState(cd,it,s,tv);return r;}
@@ -1064,6 +1089,7 @@ export function analyze(CS:any):ChainResult{
         if(pc)parts.push('"'+esc(x.t)+'": az előző feltétel ("'+esc(pc.act.cond.t)+'") nem teljesült, ezért az "Otherwise" ág hajtódik végre.');}
       const cd=x.act.cond;if(cd&&cd.how!=='known'&&!(prev&&prev.st==='ignored')){const tv=lastT?lastT.tis.map((ti:number)=>it.tg[ti]).find((v:string)=>v&&O[v]):null;const cv=evalCond(cd,it,s,xi,tv);x.cv=cv===null?true:cv;
         if(cd.how==='open'){fl=2;parts.push('<span class="cbuns">nyitott kérdés</span> ('+esc(cd.refs||'')+')');}
+        if(cd.from==='zone'){parts.push('"'+esc(x.t)+'": a feltétel ("'+esc(cd.t)+'") '+(cv?'teljesül':'nem teljesül')+' '+condSrc(cd)+'.');if(cd.tie){fl=2;parts.push('<span class="cbuns">nyitott kérdés</span>');}}
         if(cv===false){x.st='skipped';x.why='a feltétel ("'+cd.t+'") nem teljesül '+condSrc(cd);parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');if(cd.how==='hidden'&&cd.from==='default')fl=Math.max(fl,1);return;}
         if(cv==null){parts.push('"'+esc(x.t)+'": a feltétel ("'+esc(cd.t)+'") az adott helyzetben nem értékelhető ki (nincs hozzá célpont vagy forrás); az elemzés teljesültnek veszi.');fl=Math.max(fl,1);}
         else parts.push('"'+esc(x.t)+'": a feltétel ("'+esc(cd.t)+'") teljesül '+esc(condSrc(cd))+'.');}
@@ -1121,11 +1147,39 @@ export function analyze(CS:any):ChainResult{
         if(/\bthe friendly unit\b/i.test(x.t))live=live.filter((ti:number)=>O[it.tg[ti]].ctrl===it.pl);else if(/\bthe enemy unit\b/i.test(x.t))live=live.filter((ti:number)=>O[it.tg[ti]].ctrl&&O[it.tg[ti]].ctrl!==it.pl);
         const a=x.act;const sc=allScope(x.t);
         const zr0=ZC&&s?zoneRefOf(x.t,s.c&&s.c.n):null;
-        const zpick=zr0?(s.zp&&s.zp[xi]&&s.zp[xi].length?s.zp[xi]:zr0.z==='deck'&&zr0.top?zoneIds('deck',zr0.who==='they'?other(it.pl):it.pl).slice(0,zr0.n):null):null;
+        const zEach=zr0&&zr0.who==='each'?zr0:null;
+        const zpick=zr0&&!zEach?(s.zp&&s.zp[xi]&&s.zp[xi].length?s.zp[xi]:zr0.z==='deck'&&zr0.top?zoneIds('deck',zr0.who==='they'?other(it.pl):it.pl).slice(0,zr0.n):null):null;
         const amongIt=ZC&&INS.some((y:any)=>{const z=zoneRefOf(y.t);return z&&z.z==='among';});
         const zTopUse=ZC&&it.zTop&&!amongIt&&/\b(?:draw it|put it (?:in|into) your hand)\b/i.test(x.t)&&O[it.zTop]&&O[it.zTop].zone==='deck';
-        const restM=ZC&&it.zLook&&it.zLook.length&&/\b(?:the rest|the remaining cards)\b/i.test(x.t);
-        if(amongIt&&it.zAmongDone&&/^(?:then,?\s*)?(?:you may )?draw it\b/i.test(x.t)){parts.push('"'+esc(x.t)+'": a megnézett lapok közül választott lap már a kézbe került (az előző utasítás része).');}
+        const restM=ZC&&it.zLook&&it.zLook.length&&!(zr0&&zr0.z==='among'&&zpick&&zpick.length)&&/\b(?:the rest|the remaining cards)\b/i.test(x.t);
+        const eachOn=zEach&&(zEach.act==='revealEach'?zoneIds('deck','A').length>0&&zoneIds('deck','B').length>0:!!(s&&s.zp&&s.zp[xi]&&s.zp[xi].length));
+        if(eachOn){/* minden játékos a saját lapjai közül (355.10.e, 412.1); a választás a resolve-kor (355.18) */
+          const ze=zEach as ZoneRef;const turnP=CS.turn||it.pl;
+          if(ze.act==='revealEach'){const tops:any={A:zoneIds('deck','A')[0],B:zoneIds('deck','B')[0]};it.zEachTop=tops;it.zLook=[tops.A,tops.B];it.zTop=tops[it.pl];
+            parts.push('"'+esc(x.t)+'": felfedve (nyilvános, 128.5): '+['A','B'].map((p:string)=>WHOC[p]+': '+esc(O[tops[p]].name)+' ('+printedCost(O[tops[p]].card).e+' Energy)').join('; ')+'; a deck felső lapjai a pályás építőben megadva (108.4.e).');refs.push('128.5','108.4.e');}
+          else if(ze.act==='banishEach'){const ids=s.zp[xi];const ch:any={};const bad:string[]=[];const looks:any={A:zoneIds('deck','A').slice(0,ze.n),B:zoneIds('deck','B').slice(0,ze.n)};
+            ids.forEach((id:string)=>{const ob=O[id];if(!ob||!ob.card){bad.push('a kiválasztott lap már nincs a helyzetben');return;}const p=ob.own;if(!looks[p].includes(id)){bad.push(ob.name+' nincs '+WHO[p]+' felső '+ze.n+' lapja között');return;}if(ch[p]){bad.push(WHOC[p]+' csak egy lapot banishelhet');return;}ch[p]=id;});
+            it.zLook=[...looks.A,...looks.B];it.zEach=ch;
+            ['A','B'].forEach((p:string)=>{if(ch[p]){zcMove(ch[p],'banish');parts.push(WHOC[p]+' banisheli: '+esc(O[ch[p]].name)+' (a saját felső '+ze.n+' lapja közül, 412.1).');}else if(looks[p].length)parts.push(WHOC[p]+' választása nincs megadva.');});
+            if(bad.length){parts.push('Nem számít: '+esc(bad.join('; '))+'.');fl=Math.max(fl,1);}
+            parts.push('Minden játékos a saját megnézett lapjai közül választ, ez nem célpont (355.10.e); a megnézett lapok rejtett adat (128.4).');refs.push('355.10.e','412.1','128.4');}
+          else{const ids=s.zp[xi];const cnt:any=ze.counts||{};const ch:any={A:[],B:[]};const bad:string[]=[];
+            ids.forEach((id:string)=>{const ob=O[id];if(!ob||!ob.card){bad.push('a kiválasztott lap már nincs a helyzetben');return;}const p=ob.type==='zc'?ob.own:ob.ctrl;const k=ob.zone==='hand'?'card':ob.type==='unit'?'unit':ob.type==='gear'?'gear':'';
+              if(!k||(ob.zone!=='hand'&&ob.zone!=='board')){bad.push(ob.name+' nem választható (unit, gear vagy kézben lévő lap kell)');return;}
+              if(ch[p].filter((x:any)=>x.k===k).length>=(cnt[k]||0)){bad.push(WHOC[p]+' legfeljebb '+(cnt[k]||0)+' '+k+' lapot választhat');return;}ch[p].push({id,k});});
+            const keep=new Set([...ch.A,...ch.B].map((x:any)=>x.id));it.zKeep=keep;it.zDivine=true;
+            parts.push('"'+esc(x.t)+'": '+['A','B'].map((p:string)=>WHOC[p]+' választása: '+(ch[p].length?ch[p].map((x:any)=>esc(O[x.id].name)).join(', '):'nincs megadva')).join('; ')+'. Minden játékos a saját lapjai közül választ, ez nem célpont (355.10.e, 412.1); a kézben választott lap rejtett adat (128.4). A rune-ok választását az elemzés nem követi (a builder csak rune-számot ismer).');refs.push('355.10.e','412.1');
+            if(bad.length){parts.push('Nem számít: '+esc(bad.join('; '))+'.');fl=Math.max(fl,1);}}}
+        else if(ZC&&it.zDivine&&/^recycle the rest\.?$/i.test(x.t)){const keep=it.zKeep;const gone:string[]=[];
+          Object.keys(O).forEach(id=>{const ob=O[id];if(keep.has(id))return;if((ob.type==='unit'||ob.type==='gear')&&ob.zone==='board'){leaveBoard(id,'deck');gone.push(ob.name);}else if(ob.type==='zc'&&ob.zone==='hand'){zcMove(id,'deck');ob.ord=900+(ob.ord||0);gone.push(ob.name);}});
+          parts.push('"'+esc(x.t)+'": '+(gone.length?esc(gone.join(', '))+': recycle, a tulajdonos Main Deckjének aljára (417).':'nincs más lap.'));refs.push('417');}
+        else if(ZC&&it.zEach&&/^starting with the next player, each player plays those cards/i.test(x.t)){const order=[other(CS.turn||it.pl),CS.turn||it.pl];
+          order.forEach((p:string)=>{const id=it.zEach[p];if(!id||!O[id]||O[id].zone!=='banish')return;const pc=O[id].card;zcMove(id,'played');
+            if(pc.t==='Unit'||pc.t==='Gear'){const pid='pe'+(s?s.j:'x')+'_'+p;O[pid]={id:pid,name:pc.n,card:pc,ctrl:p,own:p,loc:'base',baseOf:p,m:pc.t==='Unit'&&pc.m!=null?+pc.m:null,dmg:0,mods:[],kws:[],zone:'board',type:pc.t==='Unit'?'unit':'gear',ex:pc.t==='Unit'};EV.push({k:'enter',id:pid,name:pc.n,loc:'base'});parts.push(WHOC[p]+' kijátssza: '+esc(pc.n)+' (base, Energy költség nélkül; 420.3, 356.1.b.2).');}
+            else{pushTrig({kind:'auto',label:pc.n+' (hatásból kijátszott spell)',name:pc.n,src:null,pl:p,eff:effOf(pc),why:'kijátszás hatásból',list:[],tg:[],from:'banish'});parts.push(WHOC[p]+' kijátssza: '+esc(pc.n)+' spell a chainre kerül (420.3.b).');}});
+          refs.push('420.3','356.1.b.2');}
+        else if(amongIt&&it.zAmongDone&&/^(?:then,?\s*)?(?:you may )?draw it\b/i.test(x.t)){parts.push('"'+esc(x.t)+'": a megnézett lapok közül választott lap már a kézbe került (az előző utasítás része).');}
+        else if(ZC&&it.zAmongCard&&O[it.zAmongCard]&&O[it.zAmongCard].zone==='deck'&&/^(?:then,?\s*)?(?:you may )?banish it\b/i.test(x.t)){zcMove(it.zAmongCard,'banish');parts.push('"'+esc(x.t)+'": '+esc(O[it.zAmongCard].name)+' banishelve (108.6).');refs.push('108.6');}
         else if(restM){const rest=it.zLook.filter((id:string)=>O[id]&&O[id].zone==='deck');const toTrash=/\btrash\b/i.test(x.t);
           rest.forEach((id:string)=>{if(toTrash)zcMove(id,'trash');else{O[id].ord=900+(O[id].ord||0);EV.push({k:'zcard',id,name:O[id].name,to:'deck'});}});
           parts.push('"'+esc(x.t)+'": '+(rest.length?rest.map((id:string)=>esc(O[id].name)).join(', ')+(toTrash?' a trashbe kerül (108.2).':': recycle, a Main Deck aljára (417).'):'nincs több megnézett lap.'));refs.push(toTrash?'108.2':'417');}
@@ -1152,13 +1206,17 @@ export function analyze(CS:any):ChainResult{
               const recyc=zp.act==='recycle'||(INS[xi+1]&&/\brecycle (?:them|it)\b/i.test(INS[xi+1].t));
               if(recyc){mv('deck');ob.ord=999;if(INS[xi+1])INS[xi+1].zDone=true;parts.push(esc(ob.name)+': '+zhu+' recycle, a tulajdonosa Main Deckjének aljára kerül (417).');refs.push('417');story.push(Art(ob.name)+' a '+zhu+' a deck aljára kerül (recycle).');}
               else if(zp.act==='hand'){mv('hand');if(zp.z==='among'){it.zAmongDone=true;EV.push({k:'draw',pl:ob.own,n:1});refs.push('414.1');}parts.push(esc(ob.name)+': '+zhu+' a tulajdonosa kezébe kerül.');story.push(Art(ob.name)+' a '+zhu+' kézbe kerül.');}
-              else if(zp.act==='banish'){mv('banish');parts.push(esc(ob.name)+' banishelve ('+zhu+').');refs.push('108.6');story.push(Art(ob.name)+' banishelve.');}
+              else if(zp.act==='choose'){it.zAmongCard=id;parts.push(esc(ob.name)+' kiválasztva a megnézett lapok közül.');}
+              else if(zp.act==='banish'){mv('banish');if(zp.z==='among')it.zAmongCard=id;parts.push(esc(ob.name)+' banishelve ('+zhu+').');refs.push('108.6');story.push(Art(ob.name)+' banishelve.');}
               else if(zp.act==='discard'){mv('trash');it.zDisc=id;EV.push({k:'discard',pl:ob.own,n:1});parts.push(WHOC[ob.own]+' eldobja: '+esc(ob.name)+' (423.1).');refs.push('423.1');story.push(WHOC[ob.own]+' eldobja '+art(ob.name)+' lapot.');}
               else if(zp.act==='playcard'){const pc=ob.card;mv('played');const isP=pc.t==='Unit'||pc.t==='Gear';const to=(s&&s.pll&&s.pll[xi])||(/\bhere\b/i.test(x.t)?srcLoc(it)||'base':'base');refs.push('420.3','420.3.b');
                 if(isP){const pid='p'+(s?s.j:'x')+'_'+xi+'_'+k;O[pid]={id:pid,name:pc.n,card:pc,ctrl:it.pl,own:ob.own||it.pl,loc:to,baseOf:it.pl,m:pc.t==='Unit'&&pc.m!=null?+pc.m:null,dmg:0,mods:[],kws:[],zone:'board',type:pc.t==='Unit'?'unit':'gear',ex:false};const erP=enterReady(pc,it.pl,false,to,undefined,pid);if(pc.t==='Unit')O[pid].ex=!erP.ready;EV.push({k:'enter',id:pid,name:pc.n,loc:to,from:zp.z});
                   parts.push(esc(pc.n)+' kijátszva hatásból ('+zhu+', '+esc(locLabel(to))+'). A '+pc.t.toLowerCase()+' azonnal resolve-ol (337.2)'+(pc.t==='Unit'?(erP.ready?', ready lép be ('+erP.why+')':', exhausted lép be (143.4)'):'')+'.');story.push(Art(pc.n)+' a '+zhu+' a boardra kerül: '+locLabel(to)+'.');}
                 else{pushTrig({kind:'auto',label:pc.n+' (hatásból kijátszott spell)',name:pc.n,src:null,pl:it.pl,eff:effOf(pc),why:'kijátszás hatásból',list:[],tg:[],from:zp.z});parts.push(esc(pc.n)+' spell a '+zhu+' a chainre kerül, és később resolve-ol (420.3.b); célpontjait az elemzés nem követi.');}}
               else{if(zp.z==='deck'&&zp.top&&k===0){it.zTop=id;it.zLook=okIds.slice();parts.push((/\breveals?\b/i.test(x.t)?'Felfedett lapok (nyilvánossá válnak, 128.5)':'Megnézett lapok (rejtett adat, csak a tulajdonos látja, 128.4)')+': '+okIds.map((z:string)=>esc(O[z].name)).join(', ')+'; a deck felső lapjai a pályás építőben megadva (108.4.e).');}parts.push('"'+esc(x.t)+'": '+esc(ob.name)+(zp.z==='deck'?' (a deck '+(ob.ord+1)+'. lapja)':'')+'.');}});
+            if(zp.z==='among'&&/\b(?:the rest|the remaining cards)\b/i.test(x.t)){const rest=(it.zLook||[]).filter((id:string)=>O[id]&&O[id].zone==='deck');const toTrash=/\btrash\b/i.test(x.t.split(/\b(?:the rest|the remaining cards)\b/i).pop()||'');
+              rest.forEach((id:string)=>{if(toTrash)zcMove(id,'trash');else{O[id].ord=900+(O[id].ord||0);EV.push({k:'zcard',id,name:O[id].name,to:'deck'});}});
+              if(rest.length){parts.push(rest.map((id:string)=>esc(O[id].name)).join(', ')+(toTrash?' a trashbe kerül (108.2).':': recycle, a Main Deck aljára (417).'));refs.push(toTrash?'108.2':'417');}}
             x.st=x.st==='partial'?'partial':'executed';}}
         else if(a.k==='draw'||a.k==='channel'||a.k==='discard'){let n=a.n!=null?a.n:1;if(a.each&&a.each.cnt){const k=countEach(a.each.cnt,it,null);if(k!=null){parts.push('Szorzó: '+k+' ('+esc(a.each.txt)+').');n=n*k;}}const verbs:any={draw:['húz',' lapot','414.1'],channel:['channelöl',' rune-t','431.1'],discard:['eldob',' lapot','423.1']};const vb=verbs[a.k];
           let who:any=it.pl;let whoTxt=it.pl==='A'?'Te':'Az ellenfél';
@@ -1192,7 +1250,9 @@ export function analyze(CS:any):ChainResult{
         else if(a.k==='enterReady'){READY[it.pl]=true;parts.push('"'+esc(x.t)+'": a kör hátralevő részében '+WHO[it.pl]+' által kijátszott unitok ready lépnek be (143.4.a).');refs.push('143.4.a');}
         else if(a.k==='spendBuffReady'){const us=Object.keys(O).filter(id=>O[id].zone==='board'&&O[id].type==='unit'&&O[id].ctrl===it.pl&&O[id].bu);us.forEach(id=>{O[id].bu=false;O[id].ex=false;EV.push({k:'ready',id,name:O[id].name,spent:true});});
           parts.push('"'+esc(x.t)+'": '+(us.length?us.map(id=>esc(O[id].name)).join(', ')+': a buff elköltve, ready lesz (416); "you may": a játékos unitonként dönt, az elemzés minden buffolt unitnál igennel számol':'nincs buffolt friendly unit')+'.');refs.push('416');}
-        else if(a.k==='playcard'){const pc=a.self?(it.src&&O[it.src]&&O[it.src].card)||(s&&s.c):vsCard(s&&s.plc?s.plc[xi]:'');
+        else if(a.k==='playcard'){const zac=!a.self&&!(s&&s.plc&&s.plc[xi])&&ZC&&it.zAmongCard&&O[it.zAmongCard]&&['banish','deck'].includes(O[it.zAmongCard].zone)&&/\bplay it\b/i.test(x.t)?it.zAmongCard:null;
+          if(zac){parts.push('A kijátszott lap a megnézett lapok közül választott '+esc(O[zac].name)+'.');zcMove(zac,'played');it.zAmongCard=null;}
+          const pc=zac?O[zac].card:a.self?(it.src&&O[it.src]&&O[it.src].card)||(s&&s.c):vsCard(s&&s.plc?s.plc[xi]:'');
           const pcW=pc&&!a.self?costCheck(costCondOf(x.t),pc,zctx(it,s)):'';
           if(pcW){x.st='negated';x.ref='206, 359.3.e.6';x.why='a megadott lap ('+pc.n+') nem felel meg a költségfeltételnek: '+pcW;parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');refs.push('206');}
           else if(!pc){x.why='a kijátszott lapot a builderben kell megadni';parts.push('"'+esc(x.t)+'": kijátszás hatásból (420.3). Melyik lap? Add meg a builderben (Így értelmezem blokk), és az elemzés követi.');fl=Math.max(fl,1);}
