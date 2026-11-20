@@ -1,34 +1,39 @@
-name: E2E tesztek (Playwright)
+name: Tesztek (ellenőrzők, unit, Playwright)
 
+# PR-en és kézzel fut; a main-re pusholt commitot a deploy.yml teszteli (tests.yml), és csak zöld teszt után élesít.
+# Kézi indítás update-snapshots bemenettel: a vizuális baseline CI-ban (ubuntu) készül, és commitként az ágra kerül.
 on:
-  push:
-    branches: [main]
+  pull_request:
   workflow_dispatch:
+    inputs:
+      update-snapshots:
+        description: 'Vizuális baseline újragenerálása és commitolása az ágra'
+        type: boolean
+        default: false
 
 jobs:
-  e2e:
+  test:
+    uses: ./.github/workflows/tests.yml
+    with:
+      update-snapshots: ${{ inputs.update-snapshots || false }}
+
+  baseline:
+    needs: test
+    if: ${{ inputs.update-snapshots }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/download-artifact@v4
         with:
-          python-version: '3.12'
-      - name: Adatok
-        working-directory: src
+          name: visual-baseline
+          path: web/e2e/__screenshots__
+      - name: Baseline commit az ágra
         run: |
-          python3 build_data.py
-          python3 export_web.py
-          rm -f data.json
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: web/package-lock.json
-      - name: Build és teszt
-        working-directory: web
-        run: |
-          npm ci
-          npx vitest run
-          npx vite build
-          npx playwright install --with-deps chromium
-          npx playwright test --reporter=line
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add web/e2e/__screenshots__
+          if git diff --cached --quiet; then echo "Nincs változás"; exit 0; fi
+          git commit -m "Vizuális baseline (CI, ubuntu)" -m "A visual-1300 és visual-390 projekt képei, az e2e.yml update-snapshots futásából (run ${{ github.run_id }})."
+          git push

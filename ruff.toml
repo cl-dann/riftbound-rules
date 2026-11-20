@@ -1,0 +1,6 @@
+# Python pipeline (src/, tools/): csak hibakereső szabályok, stílust nem kényszerít.
+target-version = "py312"
+line-length = 200
+
+[lint]
+select = ["E9", "F", "B006", "B008"]

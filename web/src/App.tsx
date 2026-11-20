@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { loadData } from './data';
 import { VIEWS, useHash, viewOf } from './router';
 import { CARDS, META, BF, BAN_ACTIVE, RULES, esc, expandAll, refHash, ruleHTML } from './legacy/core';
 import { CardModal } from './components/CardModal';
 import { TipLayer } from './components/TipLayer';
 import { CardsView } from './views/CardsView';
-import { DeckView } from './views/DeckView';
-import { RulesView } from './views/RulesView';
-import { ChainView } from './views/ChainView';
-import { KnowledgeView } from './views/KnowledgeView';
-import { LearnView } from './views/LearnView';
+
+// A Kártyák nézet azonnal kell; a többi nézet kódja az első megnyitáskor töltődik be (külön chunk).
+const DeckView = lazy(() => import('./views/DeckView').then((m) => ({ default: m.DeckView })));
+const RulesView = lazy(() => import('./views/RulesView').then((m) => ({ default: m.RulesView })));
+const ChainView = lazy(() => import('./views/ChainView').then((m) => ({ default: m.ChainView })));
+const KnowledgeView = lazy(() => import('./views/KnowledgeView').then((m) => ({ default: m.KnowledgeView })));
+const LearnView = lazy(() => import('./views/LearnView').then((m) => ({ default: m.LearnView })));
+const Lazy = ({ children }: { children: ReactNode }) => <Suspense fallback={<p className="note">Betöltés…</p>}>{children}</Suspense>;
 
 /** Globális viselkedés a generált HTML blokkokhoz: lusta szabálykitöltés és szabálylinkek. */
 function useGlobalHandlers() {
@@ -58,7 +61,15 @@ function Shell() {
   useGlobalHandlers();
   const [seen, setSeen] = useState(() => new Set([view]));
   useEffect(() => { setSeen((s) => (s.has(view) ? s : new Set(s).add(view))); }, [view]);
-  const errata = CARDS.filter((c: any) => c.err != null).length;
+  const errata = useMemo(() => CARDS.filter((c: any) => c.err != null).length, []);
+  // A lapnév-listák (1101 option) egyszer készülnek, nem minden hash-váltáskor.
+  const datalists = useMemo(() => (
+    <>
+      <datalist id="cardnames">{CARDS.filter((c: any) => c.t !== 'Legend' && c.t !== 'Battlefield').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
+      <datalist id="legnames">{CARDS.filter((c: any) => c.t === 'Legend').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
+      <datalist id="bfnames">{CARDS.filter((c: any) => c.t === 'Battlefield').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
+    </>
+  ), []);
   const [pricesAt, setPricesAt] = useState('');
   useEffect(() => { fetch('./prices.json').then((r) => (r.ok ? r.json() : null)).then((j) => j?.updated && setPricesAt(String(j.updated).slice(0, 10))).catch(() => { /* nincs ár */ }); }, []);
   return (
@@ -80,16 +91,14 @@ function Shell() {
       </nav>
       {/* A már megnyitott nézetek mountolva maradnak, így megőrzik az állapotukat. */}
       <section className={'view' + (view === 'kartyak' ? ' on' : '')}>{seen.has('kartyak') && <CardsView active={view === 'kartyak'} />}</section>
-      <section className={'view' + (view === 'deck' ? ' on' : '')}>{seen.has('deck') && <DeckView />}</section>
-      <section className={'view' + (view === 'szabalyok' ? ' on' : '')}>{seen.has('szabalyok') && <RulesView hash={hash} />}</section>
-      <section className={'view' + (view === 'chain' ? ' on' : '')}>{seen.has('chain') && <ChainView />}</section>
-      <section className={'view' + (view === 'hogyan' ? ' on' : '')}>{seen.has('hogyan') && <LearnView hash={hash} base="hogyan" />}</section>
-      <section className={'view' + (view === 'tanulas' ? ' on' : '')}>{seen.has('tanulas') && <LearnView hash={hash} base="tanulas" />}</section>
-      <section className={'view' + (view === 'kezikonyv' ? ' on' : '')}>{seen.has('kezikonyv') && <KnowledgeView hash={hash} />}</section>
+      <section className={'view' + (view === 'deck' ? ' on' : '')}>{seen.has('deck') && <Lazy><DeckView /></Lazy>}</section>
+      <section className={'view' + (view === 'szabalyok' ? ' on' : '')}>{seen.has('szabalyok') && <Lazy><RulesView hash={hash} /></Lazy>}</section>
+      <section className={'view' + (view === 'chain' ? ' on' : '')}>{seen.has('chain') && <Lazy><ChainView /></Lazy>}</section>
+      <section className={'view' + (view === 'hogyan' ? ' on' : '')}>{seen.has('hogyan') && <Lazy><LearnView hash={hash} base="hogyan" /></Lazy>}</section>
+      <section className={'view' + (view === 'tanulas' ? ' on' : '')}>{seen.has('tanulas') && <Lazy><LearnView hash={hash} base="tanulas" /></Lazy>}</section>
+      <section className={'view' + (view === 'kezikonyv' ? ' on' : '')}>{seen.has('kezikonyv') && <Lazy><KnowledgeView hash={hash} /></Lazy>}</section>
       <Footer />
-      <datalist id="cardnames">{CARDS.filter((c: any) => c.t !== 'Legend' && c.t !== 'Battlefield').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
-      <datalist id="legnames">{CARDS.filter((c: any) => c.t === 'Legend').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
-      <datalist id="bfnames">{CARDS.filter((c: any) => c.t === 'Battlefield').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
+      {datalists}
       <CardModal />
       <TipLayer />
     </div>

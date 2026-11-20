@@ -1,4 +1,4 @@
-import re,json,sys
+import re,json
 src=open('data/rules.txt',encoding='utf-8').read().replace('\f','\n\n')
 lines=src.split('\n')
 IDRE=re.compile(r'^\s*(\d{3}(?:\.(?:\d+|[a-z]))*)\.\s+(\S.*)$')
@@ -19,7 +19,7 @@ for ln in lines:
         if mode=='ex': cur['ex'][-1]+=' '+s
         else:
             # new paragraph vs wrapped line
-            cur['t']+=(' \n' if prev_blank and re.match(r'^[•*\-–]|^\d+\)',s) else ' ')+s
+            cur['t']+=(' \n' if prev_blank and re.match(r'^[•*\-\u2013]|^\d+\)',s) else ' ')+s
     prev_blank=False
 for r in rules:
     r['t']=re.sub(r'[ \t]+',' ',r['t']).strip(); r['ex']=[norm(e) for e in r['ex']]

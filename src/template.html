@@ -1037,7 +1037,7 @@ function abilitiesOf(c){
   const out=[];if(!c)return out;
   (c.txt||'').split('\n').forEach(raw=>{const l=stripRem(raw);
     if(/^\[Equip\]/.test(l)){out.push({label:'Equip',eff:'Attach this to a unit you control.',tm:'none',equip:true});return;}
-    const k=l.indexOf(':');if(k<0)return;const cost=l.slice(0,k),eff=l.slice(k+1).replace(/^\s*\[Reaction\]\s*[,—-]*\s*/,'').trim();
+    const k=l.indexOf(':');if(k<0)return;const cost=l.slice(0,k),eff=l.slice(k+1).replace(/^\s*\[Reaction\]\s*[,\u2014-]*\s*/,'').trim();
     if(/^when|^at the|^if /i.test(cost))return;
     const tm=/\[Reaction\]/.test(l)?'reaction':/\[Action\]/.test(l)?'action':'none';
     out.push({label:cost.replace(/\[>\]/g,'').trim()+': '+eff.slice(0,60),eff,tm,add:/\[Add\]/.test(eff)});});
@@ -1245,7 +1245,7 @@ function runCB(){
   let rr='';const zt={hand:'a tulajdonosa kezébe kerül',trash:'meghal, a trashbe kerül',banish:'banishelődik',base:'a base-be kerül',recall:'visszakerül a base-be (recall)'};
   const stack=chain.slice();const done=[];
   const evTrig=(id,ev)=>{const ob=O[id];if(!ob||!ob.card)return;const t=ob.card.txt||'';
-    if(ev==='die'&&/\[Deathknell\]/.test(t)){const m=/\[Deathknell\]\s*(?:\[>\])?\s*[—-]?\s*([^\n]*)/.exec(t);stack.push({kind:'trig',src:id,pl:ob.ctrl,eff:stripRem(m?m[1]:''),why:'Deathknell',dead:true});}
+    if(ev==='die'&&/\[Deathknell\]/.test(t)){const m=/\[Deathknell\]\s*(?:\[>\])?\s*[\u2014-]?\s*([^\n]*)/.exec(t);stack.push({kind:'trig',src:id,pl:ob.ctrl,eff:stripRem(m?m[1]:''),why:'Deathknell',dead:true});}
     if(ev==='move'&&/when i move/i.test(t)){const m=/when i move[^,]*,\s*([^\n]*)/i.exec(t);stack.push({kind:'trig',src:id,pl:ob.ctrl,eff:stripRem(m?m[1]:''),why:'"When I move"'});}
     Object.keys(O).forEach(k=>{const g=O[k];if(g.on===id&&ev!=='move'&&g.zone==='board'){g.on=null;g.loc='base';rr+=line('719.5',esc(g.name)+' leválik '+esc(ob.name)+' lapról, és a következő cleanupban a base-be kerül.',0);story.push(Art(g.name)+' leválik '+art(ob.name)+' lapról.');}});};
   const applyTo=(v,act,srcName,perm,parts,refs)=>{const ob=O[v];

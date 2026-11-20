@@ -1,0 +1,99 @@
+name: Tesztkör (újrahasznosítható)
+
+# Ellenőrzők, build, unit és Playwright. Hívja: e2e.yml (PR, kézi indítás) és deploy.yml (main, élesítés előtt).
+on:
+  workflow_call:
+    inputs:
+      update-snapshots:
+        description: 'Vizuális baseline újragenerálása (artifactként tölti fel, nem hasonlít)'
+        type: boolean
+        default: false
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Python ellenőrzés (ruff)
+        run: |
+          pip install ruff==0.16.9 pytest==9.1.1
+          ruff check src/ tools/
+      - name: Adatok és pytest (a pipeline kétszer fut, a kimenet azonos kell legyen)
+        run: python3 -m pytest src/tests -q
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            web/package-lock.json
+            web/lint/package-lock.json
+      - name: Kötőjel-ellenőrzés (U+2013, U+2014)
+        run: node scripts/check-dashes.mjs
+      - name: Függőségek
+        working-directory: web
+        run: npm ci
+      - name: Lint (ESLint, dependency-cruiser, knip)
+        working-directory: web
+        run: |
+          npm run lint:install
+          npm run lint
+          npx knip
+      - name: Build (tsc -b és vite build), bundle térkép
+        working-directory: web
+        env:
+          ANALYZE: '1'
+        run: npm run build
+      - name: Bundle térkép feltöltése
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-stats
+          path: web/stats.html
+          if-no-files-found: warn
+      - name: Unit tesztek
+        working-directory: web
+        run: npx vitest run
+      - name: Playwright
+        working-directory: web
+        run: |
+          npx playwright install --with-deps chromium
+          npx playwright test --reporter=line
+      - name: Vizuális regresszió (1300 és 390 px)
+        if: ${{ !inputs.update-snapshots }}
+        working-directory: web
+        env:
+          VISUAL: '1'
+        run: npx playwright test --project=visual-1300 --project=visual-390 --reporter=line
+      - name: Vizuális baseline generálása
+        if: ${{ inputs.update-snapshots }}
+        working-directory: web
+        env:
+          VISUAL: '1'
+        run: npx playwright test --project=visual-1300 --project=visual-390 --update-snapshots=all --reporter=line
+      - name: Vizuális baseline feltöltése
+        if: ${{ inputs.update-snapshots }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-baseline
+          path: web/e2e/__screenshots__
+      - name: Lighthouse CI (mobil, 3 futás, a budget csak figyelmeztet)
+        if: ${{ !inputs.update-snapshots }}
+        continue-on-error: true
+        working-directory: web
+        run: CHROME_PATH="$(node -e "console.log(require('@playwright/test').chromium.executablePath())")" npm run lhci
+      - name: Lighthouse riportok
+        if: ${{ !inputs.update-snapshots }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse
+          path: web/lhci
+          if-no-files-found: ignore
+      - name: Hibás tesztek képei
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: web/test-results
+          if-no-files-found: ignore

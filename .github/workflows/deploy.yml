@@ -15,7 +15,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Piros tesztnél nincs élesítés: a build megvárja a teljes tesztkört (tests.yml).
+  test:
+    uses: ./.github/workflows/tests.yml
+
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,12 +33,14 @@ jobs:
           python3 build_data.py
           python3 export_web.py
           rm -f data.json
+      - name: Kötőjel-ellenőrzés (U+2013, U+2014)
+        run: node scripts/check-dashes.mjs
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: web/package-lock.json
-      - name: Web app build (React + Vite), plusz egyfájlos offline változat
+      - name: Web app build (React + Vite)
         working-directory: web
         run: |
           npm ci

@@ -1,5 +1,5 @@
 import { LayoutGrid, List, Search, X } from 'lucide-react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 import { Printings } from '../components/Printings';
 import { CARDS, META, cardHeadHTML, cardRulesHTML, domDots, esc, norm, typeLine, IMGBASE } from '../legacy/core';
 import { Html } from '../components/Html';
@@ -31,7 +31,7 @@ const lev1 = (a: string, b: string) => {
 };
 const fuzzyName = (n: string, w: string) => w.length >= 4 && n.split(/[^a-z0-9']+/).some((t) => t.length >= 4 && lev1(t, w));
 
-function filterCards(f: F) {
+export function filterCards(f: F) {
   const q = norm(f.q), words = q ? q.split(' ').filter(Boolean) : [];
   const base = (c: any) => {
     if (c.ban === 1 && !f.showBan) return false;
@@ -44,14 +44,16 @@ function filterCards(f: F) {
     if (f.kw && !c._kw.includes(f.kw)) return false;
     return true;
   };
-  const hit = (c: any, w: string) => {
+  // A magyar szinonima szavanként egyszer oldódik fel (korábban laponként).
+  const syns = words.map((w: string) => SYN[w] || Object.entries(SYN).find(([k]) => w.length >= 4 && (w.startsWith(k) || k.startsWith(w)))?.[1]);
+  const hit = (c: any, w: string, i: number) => {
     if (c._s.includes(w) || (f.inText && c._t.includes(w))) return true;
-    const syn = SYN[w] || Object.entries(SYN).find(([k]) => w.length >= 4 && (w.startsWith(k) || k.startsWith(w)))?.[1];
-    return !!syn && syn.some((x) => c._s.includes(x) || c._t.includes(x));
+    const syn = syns[i];
+    return !!syn && syn.some((x: string) => c._s.includes(x) || c._t.includes(x));
   };
-  let res = CARDS.filter((c: any) => base(c) && words.every((w: string) => hit(c, w)));
+  let res = CARDS.filter((c: any) => base(c) && words.every((w: string, i: number) => hit(c, w, i)));
   // Elgépelés: ha nincs találat, egy betű eltéréssel a lapnevekben keresünk.
-  if (!res.length && words.length) res = CARDS.filter((c: any) => base(c) && words.every((w: string) => hit(c, w) || fuzzyName(c._n, w)));
+  if (!res.length && words.length) res = CARDS.filter((c: any) => base(c) && words.every((w: string, i: number) => hit(c, w, i) || fuzzyName(c._n, w)));
   if (q) res.sort((a: any, b: any) => (b._n.startsWith(q) - a._n.startsWith(q)) || (b._n.includes(q) - a._n.includes(q)) || a._n.localeCompare(b._n));
   return res;
 }
@@ -79,16 +81,20 @@ export function CardsView({ active }: { active: boolean }) {
   };
   const [limit, setLimit] = useState(80);
   const moreRef = useRef<HTMLLIElement>(null);
-  // Automatikus továbbtöltés görgetéskor: a "további" sor láthatóvá válásakor bővül a lista.
+  const [sel, setSel] = useState<any>(null);
+  const detailRef = useRef<HTMLDivElement>(null);
+  const qRef = useRef<HTMLInputElement>(null);
+  // A keresőszó késleltetett értéke: gépelés közben a mező azonnal frissül, a szűrés utána fut.
+  const q = useDeferredValue(f.q);
+  const fKey = JSON.stringify({ ...f, q: '' });
+  const res = useMemo(() => filterCards({ ...(JSON.parse(fKey) as F), q }), [fKey, q]);
+  // Automatikus továbbtöltés görgetéskor: a "további" sor láthatóvá válásakor bővül a lista. Az observer csak akkor
+  // épül újra, ha a sor megjelenhet vagy eltűnhet (találatok, limit, nézetmód), nem minden renderkor.
   useEffect(() => {
     const el = moreRef.current; if (!el) return;
     const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) setLimit((l) => l + (mode === 'grid' ? 120 : 200)); }, { rootMargin: '600px' });
     io.observe(el); return () => io.disconnect();
-  });
-  const [sel, setSel] = useState<any>(null);
-  const detailRef = useRef<HTMLDivElement>(null);
-  const qRef = useRef<HTMLInputElement>(null);
-  const res = useMemo(() => filterCards(f), [f]);
+  }, [mode, limit, res]);
   const total = useMemo(() => CARDS.filter((c: any) => c.ban !== 1).length, []);
   const types = useMemo(() => [...new Set(CARDS.map((c: any) => c.t))].sort() as string[], []);
   const kws = useMemo(() => [...new Set(CARDS.flatMap((c: any) => c._kw))].sort() as string[], []);

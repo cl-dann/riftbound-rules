@@ -52,7 +52,6 @@ export function stateKeysOf(CS:any){const k=new Set();const addTxt=t=>{if(/\[Lev
 const ZK={hand:'h',trash:'t',deck:'d'};
 export function normZones(cs:any){if(!cs)return cs;['hand','trash','deck'].forEach(z=>{if(!cs[z])return;['A','B'].forEach(p=>{cs[z][p]=(cs[z][p]||[]).map((e,i)=>typeof e==='string'?{id:'z'+ZK[z]+p+i,n:e}:e&&!e.id?Object.assign({},e,{id:'z'+ZK[z]+p+i}):e);});});return cs;}
 export function newZid(cs:any,z:string,p:string){cs.zseq=(cs.zseq||0)+1;return 'z'+ZK[z]+p+'_'+cs.zseq;}
-export const zName=(e:any)=>typeof e==='string'?e:e&&e.n;
 
 /** Lépések törlése és átrendezése: az "sK" hivatkozásokat (célpont, költség, forrás) az új indexre írja át; a törölt vagy mögé került lépésre mutató hivatkozás törlődik. */
 export function reorderSteps(CS:any,order:number[]){const newOf={};order.forEach((o,ni)=>newOf[o]=ni);

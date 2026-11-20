@@ -1,0 +1,28 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "src/main.tsx",
+    "unit/**/*.test.ts",
+    "unit/**/*.bench.ts",
+    "e2e/**/*.spec.ts"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx}",
+    "unit/**/*.ts",
+    "e2e/**/*.ts"
+  ],
+  "ignore": [
+    "unit/elozo/**",
+    "src/generated/**"
+  ],
+  "ignoreDependencies": [
+    "tailwindcss"
+  ],
+  "rules": {
+    "exports": "warn",
+    "types": "warn",
+    "nsExports": "warn",
+    "nsTypes": "warn",
+    "duplicates": "warn"
+  }
+}
