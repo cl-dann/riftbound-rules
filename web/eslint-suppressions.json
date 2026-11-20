@@ -27,10 +27,10 @@
       "count": 1
     },
     "@typescript-eslint/no-explicit-any": {
-      "count": 221
+      "count": 208
     },
     "@typescript-eslint/no-unused-vars": {
-      "count": 5
+      "count": 6
     },
     "no-empty": {
       "count": 3
@@ -75,6 +75,14 @@
     },
     "@typescript-eslint/no-explicit-any": {
       "count": 6
+    }
+  },
+  "src/domain/chain/engine/state.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    },
+    "@typescript-eslint/no-explicit-any": {
+      "count": 13
     }
   },
   "src/domain/chain/overrides.ts": {
