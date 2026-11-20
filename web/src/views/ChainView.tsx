@@ -263,7 +263,9 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
 
   const ci = Math.max(0, Math.min(i, eff.length - 1));
   const f = useMemo(() => fullFrame(eff[ci], CS, ci, sf), [eff, ci, sf, csv]); // eslint-disable-line react-hooks/exhaustive-deps
-  const prev = ci > 0 ? fullFrame(eff[ci - 1], CS, ci - 1, sf).board : undefined;
+  const prev = useMemo(() => (ci > 0 ? fullFrame(eff[ci - 1], CS, ci - 1, sf).board : undefined), [eff, ci, sf, csv]); // eslint-disable-line react-hooks/exhaustive-deps
+  // A lépések rövid neve (idővonal, chain-kártya keresés) egyszer, a CS változásakor számolódik.
+  const names = useMemo(() => CS.steps.map((s: unknown) => stepName(CS, s)), [csv]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ---- CS írása ---- */
   const commit = (fn: (cs: any) => void, j: number | 'keep' = 'keep', ms?: number) => { jump.current = j; chainApi.commit!(fn, ms); };
@@ -287,7 +289,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
   const chainStep = (ii: number) => {
     const t = (f.board.chain || [])[ii] || '';
     let best: number | null = null;
-    CS.steps.forEach((s: any, j: number) => { if (sf[j] != null && sf[j] <= ci && t.startsWith(stepName(CS, s).n)) best = j; });
+    CS.steps.forEach((_s: any, j: number) => { if (sf[j] != null && sf[j] <= ci && t.startsWith(names[j].n)) best = j; });
     return best;
   };
   /** A ti. célpont jelenlegi értéke; pályán kívüli célpontnál "x:hely:játékos". */
@@ -826,7 +828,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
           {!CS.steps.length && <p className="note">Még nincs lépés. Kattints egy lapra a pályán (Kijátszás, Aktiválás, Trigger), vagy add hozzá alább.</p>}
           <ol className="cb2-steps" onDragOver={(e) => { if (dragJ.current >= 0) e.preventDefault(); }}>
             {CS.steps.map((s: any, j: number) => {
-              const nm = stepName(CS, s); const [stt, why] = stepStatus(j);
+              const nm = names[j]; const [stt, why] = stepStatus(j);
               return (
                 <Fragment key={j}>
                 {j > 0 && <li className="cb2-insrow"><button type="button" className={'cb2-ins' + (ins === j ? ' on' : '')} onClick={() => { setMode(null); if (narrow) { setIns(j); openWiz(undefined, j); } else setIns(ins === j ? null : j); }} aria-label={'Beszúrás a ' + j + '. és a ' + (j + 1) + '. lépés közé'} title="Beszúrás ide"><Plus size={12} /></button></li>}
