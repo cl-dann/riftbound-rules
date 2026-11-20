@@ -1,4 +1,3 @@
-// @ts-nocheck
 /* Kör vége: Ending Step és Expiration Step (a runChain() csoportja, S20) */
 import type { EngineCtx } from './ctx';
 import { esc } from '../../text/norm';

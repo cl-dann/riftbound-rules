@@ -1,4 +1,3 @@
-// @ts-nocheck
 /* Damage és szorzók: Bonus Damage, damage kiosztás, keyword érték, for each számolás (a runChain() csoportja, S20) */
 import type { EngineCtx } from './ctx';
 import { esc } from '../../text/norm';

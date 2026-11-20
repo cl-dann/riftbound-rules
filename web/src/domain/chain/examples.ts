@@ -1,4 +1,3 @@
-// @ts-nocheck
 /* A builder beépített példái (a "Példa betöltése" gombok és a unit tesztek). */
 export const EXAMPLES:any={
   base:()=>({lg:{A:'Kennen, Heart of the Tempest',B:''},bf:[{n:"Vilemaw's Lair",c:'B'},{n:'Zaun Warrens',c:'A'}],

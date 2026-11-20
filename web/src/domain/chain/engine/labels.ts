@@ -1,4 +1,3 @@
-// @ts-nocheck
 /* A chain elemzés címkéi és szöveg segédei (a runChain() és a riport közös része). */
 import { FL, FLT } from '../../rules/flags';
 

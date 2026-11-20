@@ -64,9 +64,6 @@
     }
   },
   "src/domain/chain/engine/damage.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
     "@typescript-eslint/no-explicit-any": {
       "count": 8
     },
@@ -75,9 +72,6 @@
     }
   },
   "src/domain/chain/engine/endOfTurn.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
     "@typescript-eslint/no-explicit-any": {
       "count": 7
     }
@@ -102,9 +96,6 @@
     }
   },
   "src/domain/chain/engine/labels.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
     "@typescript-eslint/no-explicit-any": {
       "count": 4
     }
@@ -159,9 +150,6 @@
     }
   },
   "src/domain/chain/engine/tokens.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
     "@typescript-eslint/no-explicit-any": {
       "count": 2
     },
@@ -181,9 +169,6 @@
     }
   },
   "src/domain/chain/engine/zoneChange.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
     "@typescript-eslint/no-explicit-any": {
       "count": 4
     },
@@ -192,9 +177,6 @@
     }
   },
   "src/domain/chain/examples.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
     "@typescript-eslint/no-explicit-any": {
       "count": 1
     }

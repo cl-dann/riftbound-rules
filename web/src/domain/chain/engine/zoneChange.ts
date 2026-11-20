@@ -1,4 +1,3 @@
-// @ts-nocheck
 /* Zónaváltás és kontroll: kontrollváltás, a board elhagyása, mozgatás (a runChain() csoportja, S20) */
 import type { EngineCtx } from './ctx';
 import { esc } from '../../text/norm';
