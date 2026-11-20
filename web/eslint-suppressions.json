@@ -27,7 +27,7 @@
       "count": 1
     },
     "@typescript-eslint/no-explicit-any": {
-      "count": 208
+      "count": 193
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 6
@@ -39,7 +39,7 @@
       "count": 1
     },
     "no-useless-assignment": {
-      "count": 4
+      "count": 1
     },
     "no-useless-escape": {
       "count": 2
@@ -83,6 +83,17 @@
     },
     "@typescript-eslint/no-explicit-any": {
       "count": 13
+    }
+  },
+  "src/domain/chain/engine/triggers.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    },
+    "@typescript-eslint/no-explicit-any": {
+      "count": 15
+    },
+    "no-useless-assignment": {
+      "count": 3
     }
   },
   "src/domain/chain/overrides.ts": {

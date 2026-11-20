@@ -13,6 +13,7 @@ import { stepInfo } from '../steps';
 import { plainOf, stripRem } from '../text';
 import { ZONE_HU, type ZoneRef, zoneCheck, zoneRefOf } from '../zones';
 import { type ChainResult, type EngineCtx } from './ctx';
+import { installTriggers } from './triggers';
 import { installState } from './state';
 import { installFrames } from './frames';
 import { installObjects } from './objects';
@@ -26,6 +27,7 @@ export function runChain(CS:any):ChainResult{
   installObjects(X);
   installFrames(X);
   installState(X);
+  installTriggers(X);
   X.MT=null;X.MTIDS=new Set<string>();
   X.S=X.CS.steps.map((s:any,j:number)=>{if(s&&(s.k==='res'||s.k==='end'))return {k:s.k,j,pl:s.pl||'A',c:{n:'',t:'',txt:''},tg:[],ext:{},list:[]};const inf=stepInfo(X.CS,s);return inf&&inf.c?Object.assign({},s,inf,{j,tg:(s.tg||[]).slice(),ext:s.ext||{}}):null;}).filter(Boolean);
   X.POST=X.S.filter((s:any)=>s.k==='tr');X.MAIN=X.S.filter((s:any)=>s.k!=='tr');
@@ -77,40 +79,13 @@ export function runChain(CS:any):ChainResult{
   /* Egyszerre triggerelő abilityk (383.3.d, 383.3.d.1): előbb gyűjtjük, majd a turn player teszi fel a sajátjait, utána a többiek; azonos controllernél a sorrendet a controller választja. */
   X.TP=X.CS.turn==='A'||X.CS.turn==='B'?X.CS.turn:(X.MAIN[0]?(X.MAIN[0].k==='tg'?((X.CS.bd[+String(X.MAIN[0].src||'').slice(1)]||{}).pl||X.MAIN[0].pl||'A'):X.MAIN[0].pl):'A');
   X.PEND=[];X.DIED=[];
-  X.pushTrig=(t:any)=>{X.PEND.push(t);};
   /** "When another (non-X) unit you control dies" és társai (383.2.c.2: a forrásnak a boardon kell maradnia). Amit nem ismer fel, azt kiírja. */
-  X.deathWatch=()=>{if(!X.DIED.length)return;const died=X.DIED.splice(0);const unk=new Set<string>();
-    Object.keys(X.O).forEach(wid=>{const W=X.O[wid];if(!W.card||!(W.zone==='board'||W.zone==='legend'))return;
-      (W.card.txt||'').split('\n').map(stripRem).forEach((l:string)=>{const l2=l.replace(/^once each turn,\s*/i,'');
-        if(!/^(?:when|whenever)\b[^,]*\bdies?\b/i.test(l2)||/^when I die\b/i.test(l2))return;
-        const m=/^(?:when|whenever) (another|a|an) (?:non-([A-Za-z]+) )?(friendly |enemy )?units? (you control |an opponent controls )?dies,\s*(.*)$/i.exec(l2);
-        if(!m){unk.add(W.name+': "'+l2+'"');return;}
-        died.forEach(did=>{const D=X.O[did];if(!D||D.type!=='unit')return;if(/another/i.test(m[1])&&did===wid)return;
-          if(m[2]&&((D.card&&(D.card.n+' '+(D.card.tg||[]).join(' ')).toLowerCase().includes(m[2].toLowerCase()))))return;
-          const dc=(D.lk&&D.lk.ctrl)||D.own;const fr=/friendly/i.test(m[3]||'')||/you control/i.test(m[4]||'');const en=/enemy/i.test(m[3]||'')||/opponent/i.test(m[4]||'');
-          if(fr&&dc!==W.ctrl)return;if(en&&dc===W.ctrl)return;
-          X.pushTrig({kind:'auto',label:W.name+' triggere ('+D.name+' meghalt)',name:W.name+' triggere',src:wid,pl:W.ctrl,eff:m[5],why:'"'+l2.split(',')[0]+'"',list:[],tg:[]});
-          X.rr+=X.line('383, 383.2.c.2','<b>'+esc(W.name)+'</b> triggerel, mert '+esc(D.name)+' meghalt, és '+esc(W.name)+' a boardon maradt.',0);X.story.push(Art(W.name)+' triggerel, mert '+D.name+' meghalt.');});});});
-    unk.forEach(u=>{X.rr+=X.line('383','<span class="cbuns">nem követett</span> Halálra figyelő trigger, amelyet az elemzés nem ismer fel: '+esc(u)+'. Ha teljesül, vedd fel kézzel ("Trigger a chainre").',1);});};
-  X.flushPend=(target:any[])=>{X.deathWatch();if(!X.PEND.length)return;const list=X.PEND.splice(0);
-    const byP=(p:string)=>list.filter((t:any)=>(t.pl||'A')===p);const ordered=byP(X.TP).concat(byP(other(X.TP)));
-    const ctrls=[...new Set(list.map((t:any)=>t.pl||'A'))];
-    if(ctrls.length>1){const L=X.line('383.3.d.1','Egyszerre triggerelt: '+ordered.map((t:any)=>esc(t.label)).join(', ')+'. Először a turn player ('+WHO[X.TP]+') teszi fel a sajátjait, utána '+WHO[other(X.TP)]+'; ami később kerül fel, az resolve-ol előbb.',0);X.rows+=L;X.rr+=L;}
-    ctrls.forEach((p:any)=>{const own=byP(p);if(own.length>1){const L=X.line('383.3.d','Egyszerre triggerelt, azonos controller ('+WHO[p]+'): '+own.map((t:any)=>esc(t.label)).join(', ')+'. A sorrendet '+WHO[p]+' választja; az elemzés a felsorolt sorrendben teszi fel (az utolsó resolve-ol először).',1);X.rows+=L;X.rr+=L;}});
-    ordered.forEach((t:any)=>target.push(t));};
   /* ---- zónaváltás, triggerek, kontroll ---- */
   /** Kontrollváltás (191): a lap az új irányítóhoz kerül a Playmaton; "until" esetén a forrás távozásakor visszaáll (391.5.b). */
   X.setCtrl=(id:string,to:string,ref:string,why:string,until?:string)=>{const ob=X.O[id];if(!ob||!to||ob.ctrl===to)return false;const from=ob.ctrl;ob.ctrl=to;if(ob.loc==='base')ob.baseOf=ob.baseOf||from;
     if(until)ob.until={src:until,prev:from};X.NEWCTRL.add(id);X.EV.push({k:'ctrl',id,name:ob.name,from,to});
     Object.values(X.O).forEach((g:any)=>{if(g.on===id&&g.zone==='board'){}});
     X.REC.push([ref,ob.name+': az irányítója '+(from==='A'?'te':'az ellenfél')+' helyett '+(to==='A'?'te':'az ellenfél')+' lesz'+(why?' ('+why+')':'')+'. A Playmaton átkerül a másik oldalra.']);X.ALL.push(X.REC[X.REC.length-1]);return true;};
-  X.leaveTrigs=(id:string,dk:boolean)=>{const ob=X.O[id];if(!ob||!ob.card)return;const t=ob.card.txt||'';const lst:any[]=[];
-    triggersOf(ob.card).forEach((tr:any)=>{
-      if(dk&&(tr.dk||/^when I die\b(?! in combat)/i.test(tr.why)))lst.push([tr,'808.1.d.2, 429.1.a.1.b']);
-      else if(/^when (?:I|this) leaves? the board\b|^when I leave the board\b/i.test(tr.why))lst.push([tr,'383.2.c.3']);});
-    lst.forEach(([tr,ref])=>{X.pushTrig({kind:'auto',label:ob.name+' triggere ('+(tr.dk?'Deathknell':tr.why)+')',name:ob.name+' triggere',sent:true,src:id,pl:ob.ctrl,eff:tr.eff,why:tr.dk?'Deathknell':tr.why,list:[],tg:[],lk:{loc:ob.loc}});
-      X.rr+=X.line(ref,'<b>'+esc(ob.name)+'</b> triggere ('+esc(tr.dk?'Deathknell':tr.why)+') a chainre kerül, mielőtt a lap elhagyja a boardot. A helyét és adatait a játék feljegyzi (383.2.c.3.b).',0);X.story.push(Art(ob.name)+' triggere ('+(tr.dk?'Deathknell':tr.why)+') a chainre kerül.');});
-    void t;};
   /** Lap távozása a boardról: csatolt gear leválik (719.5), a "until I leave the board" kontroll megszűnik (391.5.b), a kontroll visszaáll a tulajdonosra. */
   X.leaveBoard=(id:string,zone:string)=>{const ob=X.O[id];const was=ob.zone==='board';ob.lk={m:X.mightOf(id),ctrl:ob.ctrl,loc:ob.loc,kws:(ob.kws||[]).slice(),alone:ob.zone==='board'?!Object.values(X.O).some((o:any)=>o.id!==id&&o.zone==='board'&&o.type==='unit'&&o.ctrl===ob.ctrl&&o.loc===ob.loc):null};ob.zone=zone;
     if(zone!=='board'){ob.dmg=0;ob.mods=[];ob.kws=[];ob.st=false;ob.bu=false;ob.shields=[];ob.save=null;ob.dbl=false;ob.dieTo=null;ob.baseSet=null;ob.untgt=false;if(ob.on){ob.on=null;}ob.ctrl=ob.own;ob.until=null;}
@@ -334,34 +309,7 @@ export function runChain(CS:any):ChainResult{
   /** "When you play a [type] (that costs / with Energy cost / with Power cost ...)": a kijátszott lap nyomtatott (vagy copied) költsége dönt (206).
       A trashben lévő lap "play this/me from your trash" triggere is figyel (Forbidden Technique, Meticulous Restorationist). A döntés indoka egyszer kerül a sorok közé. */
   X.PTN=new Set<string>();
-  X.playTrigs=(s:any)=>{const res:any[]=[];const ty=s.c.t.toLowerCase();
-    Object.keys(X.O).forEach(id=>{const ob=X.O[id];if(!ob.card||id==='s'+s.j||id===s.objId)return;
-      const fromTrash=ob.zone==='trash'&&X.ZC;if(!(ob.zone==='board'||ob.zone==='legend'||fromTrash))return;
-      (ob.card.txt||'').split('\n').forEach((l:string)=>{const L=stripRem(l);let m:any;let types:string[];let cond='';let eff='';let who='';
-        const mm=/^when (you|an opponent|a player) plays? a unit, gear, or activated ability([^,]*),\s*(.*)$/i.exec(L);
-        if(mm){who=mm[1].toLowerCase();types=['unit','gear'];cond=mm[2];eff=mm[3];}
-        else{m=/^when (you|an opponent|a player) plays? (?:a |an )?(card|spell|unit|gear)s?([^,]*),\s*(.*)$/i.exec(L);if(!m)return;who=m[1].toLowerCase();types=[m[2].toLowerCase()];cond=m[3];eff=m[4];}
-        if(fromTrash&&!/\bfrom your trash\b/i.test(eff))return;
-        if(!fromTrash&&ob.zone==='trash')return;
-        if(who==='you'&&ob.ctrl!==s.pl)return;if(who==='an opponent'&&ob.ctrl===s.pl)return;
-        if(!types.includes('card')&&!types.includes(ty))return;
-        if(/other than your hand/i.test(cond)&&(s.from||'hand')==='hand')return;
-        if(/from your hand/i.test(cond)&&s.from&&s.from!=='hand')return;
-        const cc=costCondOf(cond);let cw='';
-        if(cc){const pc=printedCost(s.c);const w=costCheck(cc,s.c,{});const key=(s.j??'x')+'|'+id;
-          cw=esc(s.c.n)+' nyomtatott költsége '+pc.e+' Energy és '+pc.p+' Power; a feltétel: "'+esc(cc.t||cond.trim())+'" (206).';
-          if(w){if(!X.PTN.has(key)){X.PTN.add(key);const h=X.line('206, 383.2',esc(ob.name)+': "'+esc(L)+'" nem triggerel, mert '+cw.replace(/ \(206\)\.$/,'')+', és ez nem teljesül ('+w.replace(/ \(206\)$/,'')+').',0);if(X.INRES)X.rr+=h;else X.rows+=h;}return;}}
-        res.push({kind:'auto',label:ob.name+' triggere',src:id,pl:ob.ctrl,eff,why:'"'+L+'"'+(cw?' Triggerel, mert '+cw.replace(/^[^ ]+/,(x)=>x)+'':''),list:[],tg:[],trigBy:s.c});});});
-    return res;};
   /** "When you play a unit, gear, or activated ability with Energy cost [7] or more" (Nasus): az ability aktiválására, az ability alapköltségével (206.1). */
-  X.abTrigs=(s:any)=>{const res:any[]=[];const cost=String(s.ab.cost||'');const e=(cost.match(/\[(\d+)\]/g)||[]).reduce((a:number,x:string)=>a+ +x.slice(1,-1),0);const p=(cost.match(/\[[ACRGBOPY]\]/g)||[]).length;
-    Object.keys(X.O).forEach(id=>{const ob=X.O[id];if(!ob.card||!(ob.zone==='board'||ob.zone==='legend'))return;
-      (ob.card.txt||'').split('\n').forEach((l:string)=>{const L=stripRem(l);const m=/^when (you|an opponent|a player) plays? a unit, gear, or activated ability([^,]*),\s*(.*)$/i.exec(L);if(!m)return;
-        const who=m[1].toLowerCase();if(who==='you'&&ob.ctrl!==s.pl)return;if(who==='an opponent'&&ob.ctrl===s.pl)return;
-        const cc=costCondOf(m[2]);const w=cc?costCheck(cc,{e,p},{}):'';const cw=esc(s.c.n)+' abilityjének alapköltsége '+e+' Energy és '+p+' Power; a feltétel: "'+esc(cc?cc.t:m[2].trim())+'" (206.1)';
-        if(w){X.rows+=X.line('206.1, 383.2',esc(ob.name)+': "'+esc(L)+'" nem triggerel, mert '+cw+', és ez nem teljesül ('+w.replace(/ \(206\)$/,'')+').',0);return;}
-        res.push({kind:'auto',label:ob.name+' triggere',src:id,pl:ob.ctrl,eff:m[3],why:'"'+L+'" Triggerel, mert '+cw+'.',list:[],tg:[],trigBy:s.c});});});
-    return res;};
   X.snap('Kiinduló helyzet',[]);
   X.itemOf=(s:any)=>{const c=s.c;const perm=s.k==='card'&&isPermC(c);
     const label=s.k==='ab'?c.n+' abilityje':s.k==='tg'?c.n+' triggere':((X.O['s'+s.j]&&X.O['s'+s.j].name)||c.n)+(perm?' (play trigger)':'');
