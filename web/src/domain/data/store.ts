@@ -21,20 +21,9 @@ export function init(data: Record<string, unknown>){
   CARDS.forEach(c=>{c._kw=c.tp.filter(p=>TOPICS[p[0]].g==='kw').map(p=>TOPICS[p[0]].title);});
   heads.length=0;RULES.forEach((r,i)=>{if(isHead(r))heads.push(i);});
 }
-/** A cards-detail.json tartalma a kártyákba (azonos sorrend). Az objektum ugyanaz marad (a byName és a többi hivatkozás
-    érvényes), a mezők sorrendje pedig a korábbi egyben exportált cards.json-é (pr az img után, sh, nt, qa az ex után),
-    így a kártyát tartalmazó kimenetek (például az elemzés objektumai) JSON-ja változatlan. */
-const AFTER: Record<string, string[]> = { img: ['pr'], ex: ['sh', 'nt', 'qa'] };
-export function mergeDetails(det: Partial<Card>[]){
-  CARDS.forEach((c,i)=>{
-    const d=det[i]||{};const rec=c as unknown as Record<string, unknown>;const src=d as Record<string, unknown>;
-    const entries:[string, unknown][]=[];
-    for(const k of Object.keys(rec)){entries.push([k,rec[k]]);for(const x of AFTER[k]||[])if(x in src)entries.push([x,src[x]]);}
-    for(const k of Object.keys(rec))delete rec[k];
-    for(const [k,v] of entries)rec[k]=v;
-  });
-  DETAILS_READY=true;
-}
+/** A cards-detail.json tartalma a kártyákba (azonos sorrend). Az indexben a részletek helyén null áll, így a kártyaobjektum
+    ugyanaz marad (a byName és a többi hivatkozás érvényes), a mezők sorrendje és alakja sem változik. */
+export function mergeDetails(det: Partial<Card>[]){CARDS.forEach((c,i)=>Object.assign(c,det[i]));DETAILS_READY=true;}
 export const banDate=()=>BAN_ACTIVE?BF.from:META.ban_updated;
 export const heads:number[]=[];
 export const IMGBASE='https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data_live/';

@@ -7,7 +7,8 @@ def w(name,obj):
 # A kártyák két részben: a kereséshez és a rácshoz kellő index (cards.json), és a részletek (jegyzetek, Gyakori kérdések,
 # Röviden, nyomatok), amelyeket a frontend lustán, az első kártyalap vagy nézet előtt tölt be (cards-detail.json, azonos sorrendben).
 DETAIL=('nt','qa','sh','pr')
-w('cards.json',[{k:v for k,v in c.items() if k not in DETAIL} for c in D['cards']])
+# Az indexben a részletek helyén null áll: így a kártyaobjektum mezősorrendje a betöltés előtt és után is ugyanaz.
+w('cards.json',[{k:(None if k in DETAIL else v) for k,v in c.items()} for c in D['cards']])
 w('cards-detail.json',[{k:c[k] for k in DETAIL if k in c} for c in D['cards']])
 w('rules.json',D['rules'])
 w('meta.json',{k:D[k] for k in ('meta','topics','general','extra')})

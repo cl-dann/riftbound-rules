@@ -62,7 +62,7 @@ def test_cards(runs):
         missing = [k for k in CARD_KEYS if k not in c]
         assert not missing, (c.get('n'), missing)
     assert len({(c['n'], c['code']) for c in cards}) == len(cards)
-    assert not any(k in c for c in cards for k in DETAIL_KEYS), 'a részletek a cards-detail.json-ba valók'
+    assert all(c[k] is None for c in cards for k in DETAIL_KEYS), 'a részletek a cards-detail.json-ba valók, az indexben null'
     det = load('cards-detail.json')
     assert len(det) == len(cards)
     for c, d in zip(cards, det):
