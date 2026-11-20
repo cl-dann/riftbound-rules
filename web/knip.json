@@ -4,9 +4,7 @@
     "src/main.tsx",
     "unit/**/*.test.ts",
     "unit/**/*.bench.ts",
-    "unit/golden/capture.mjs",
-    "e2e/**/*.spec.ts",
-    "vitest.capture.config.ts"
+    "e2e/**/*.spec.ts"
   ],
   "project": [
     "src/**/*.{ts,tsx}",
@@ -15,8 +13,7 @@
   ],
   "ignore": [
     "unit/elozo/**",
-    "src/generated/**",
-    "lint/**"
+    "src/generated/**"
   ],
   "ignoreDependencies": [
     "tailwindcss"

@@ -1,4 +1,4 @@
-import { esc, glossify } from '../legacy/core';
+import { esc, glossify } from '../../legacy/core';
 
 /** [[Kártya]] kártyalink, {{123.4}} szabálylink, plusz fogalom-tooltip. */
 export function inline(text: string, seen?: Set<string>) {

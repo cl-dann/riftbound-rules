@@ -127,6 +127,11 @@
       "count": 1
     }
   },
+  "src/shared/content/Blocks.tsx": {
+    "@typescript-eslint/no-explicit-any": {
+      "count": 6
+    }
+  },
   "src/views/CardsView.tsx": {
     "@typescript-eslint/no-explicit-any": {
       "count": 19
@@ -144,7 +149,7 @@
   },
   "src/views/LearnView.tsx": {
     "@typescript-eslint/no-explicit-any": {
-      "count": 8
+      "count": 2
     }
   },
   "src/views/RulesView.tsx": {

@@ -41,19 +41,5 @@
       "severity": "error",
       "name": "logic-no-ui"
     }
-  },
-  {
-    "type": "dependency",
-    "from": "src/views/RulesView.tsx",
-    "to": "src/views/LearnView.tsx",
-    "unresolvedTo": "./LearnView",
-    "dependencyTypes": [
-      "local",
-      "import"
-    ],
-    "rule": {
-      "severity": "error",
-      "name": "view-no-other-view"
-    }
   }
 ]

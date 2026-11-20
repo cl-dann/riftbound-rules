@@ -2,7 +2,7 @@ import { Link2, Search } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { RULES, esc, expand, hashRef, headExtent, heads, refHash, ruleHTML } from '../legacy/core';
 import { Html } from '../components/Html';
-import { Blocks, inline } from './LearnView';
+import { Blocks, inline } from '../shared/content/Blocks';
 import FMT from '../generated/formats.json';
 
 type Shown = { kind: 'head'; i: number } | { kind: 'ref'; ref: string } | { kind: 'search' } | { kind: 'fmt'; id: string };
