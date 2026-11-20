@@ -15,7 +15,7 @@ Fülek (`web/src/router.ts`):
 | `#kartyak` | Kártyák | 1101 lap rácsban; lapnál hivatalos szöveg, errata, "Röviden", Gyakori kérdések, lenyitható "Szabályi részletek", kapcsolódó Core Rules szakaszok |
 | `#deck` | Deck | deck builder, élő legalitás (Core Rules 103), Cardmarket ár, PDF export, megosztható link (`#d=`) |
 | `#szabalyok` | Szabályzat | teljes Core Rules kereshetően (`#r-<szám>`), versenyformátum oldalak (`#fmt-<id>`: Duel, Match, FFA3, FFA4, 2v2) |
-| `#chain` | Chain | chain építő és elemző: pálya-alapú építés (zónánkénti "+" képes keresővel, lapra kattintva akció-menü legalitással és szabályszámmal, célpont a pályán), élő elemzés, lépés-idővonal, lépésenkénti lejátszás Playmaton, mistarget és linked instructions, combat panel, "Haladó szerkesztés" a teljes űrlappal |
+| `#chain` | Chain | chain építő és elemző: pálya-alapú építés (zónánkénti "+" képes keresővel, lapra kattintva akció-menü legalitással és szabályszámmal, célpont a pályán, pályán kívüli unit vagy gear célpont a zóna + gombjával, Show Off és hatásból kijátszott lap a kézből), sablonok témánként (`web/src/legacy/chainTemplates.ts`: counter, Ignored, Negated, trigger sorrend 383.3.d.1, replacement 372, Hidden, kör vége; unit tesztelve), lépés beszúrása a chain közepére hivatkozás-átszámozással, kör és fázis a pálya fejlécében, élő elemzés, lépés-idővonal, lépésenkénti lejátszás Playmaton, mistarget és linked instructions, combat panel, "Haladó szerkesztés" a teljes űrlappal |
 | `#hogyan` | How to Play | 10 fejezetes kezdő útmutató, a learnriftbound.gg felépítését követi |
 | `#tanulas` | Practice | 12 interaktív szituáció (akció-menü, célpont modal, fázispanelek, OUTCOME jó és rossz kimenettel), haladó leckék szintenként (`#tanulas/lecke`) |
 | `#kezikonyv` | Fogalomtár | fogalmak, kulcsszavak, játékmenet lépésábrák, szabályváltozások, errata előtte/utána |
@@ -98,7 +98,7 @@ cd src && python3 build_data.py && python3 export_web.py; rm -f data.json
 cd ../web && npm ci && npm run build          # tsc -b szigorú: a nem használt változó is hiba
 npx vite preview --port 4173                  # előnézet
 npm run test:unit                             # Vitest, a chain elemző és a combat kiosztás (a generált adatot használja)
-npm run test:e2e                              # Playwright, 14 teszt
+npm run test:e2e                              # Playwright, 21 teszt
 ```
 
 Megjegyzés: `npx tsc --noEmit -p .` nem azonos a CI-vel, mindig `npm run build`-del ellenőrizz. Ahol a Playwright saját böngészője nem tölthető le, a rendszer Chrome-ja megadható: `PW_CHROME=/usr/bin/google-chrome npm run test:e2e`.

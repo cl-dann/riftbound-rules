@@ -1026,3 +1026,23 @@ h2.psec small { font-family: var(--f-mono); font-size: 13px; color: var(--muted)
 .pm2.edm .pm2-bfc .pm2-fd .pm2-ghost.sm, .pm2.edm .pm2-bfc .pm2-fd .pm-card.sm { width: 20px; }
 .pm2.edm .pm2-bfc { justify-content: center; }
 .pm2.edm .pm2-field { padding: 10px 12px 10px; gap: 8px; } .pm2.edm .pm2-bfc { row-gap: 2px; }
+/* Chain: sablonok, kör és fázis a pálya fejlécében, beszúrás, pályán kívüli célpont */
+.cb2-tplbar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.cb2-tplbar .note { margin: 0; }
+.cb2-tpls { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.cb2-tpl { display: grid; gap: 6px; align-content: start; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel2); }
+.cb2-tpl > b { font-size: 14.5px; }
+.cb2-tpl .note { margin: 0; font-size: 13px; line-height: 1.45; }
+.cb2-tpl .btn { justify-self: start; padding: 5px 12px; font-size: 13px; }
+.cb2-tpl .cb2-mbtn { justify-content: flex-start; align-items: center; }
+.cb2-tpl .pb-why { margin: 0 !important; }
+.cb2-hdr { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0 0 6px; }
+.cb2-hdr .cb2-seg { margin: 0; }
+.cb2-hdr .cb2-seg button { padding: 2px 10px; font-size: 12.5px; }
+.cb2-insrow { display: flex; justify-content: center; height: 0; position: relative; z-index: 2; }
+.cb2-ins { position: absolute; top: -10px; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; border: 1px dashed var(--line); background: var(--panel); color: var(--muted); cursor: pointer; opacity: .55; }
+.cb2-ins:hover, .cb2-ins:focus-visible, .cb2-ins.on { opacity: 1; border-color: #f5c518; color: #f5c518; border-style: solid; }
+.cb2-steps { gap: 10px; }
+.pm2 .pm2-add.g-act { opacity: 1; border: 2px solid #f5c518 !important; color: #f5c518 !important; box-shadow: 0 0 10px rgba(245,197,24,.45); }
+.pm2 .pm2-add.g-sel { opacity: 1; border: 2px solid #f5c518 !important; background: #f5c518; color: #1a1205 !important; }
+.cb2-sp .cb2-tv .btn { padding: 4px 10px; font-size: 12.5px; }

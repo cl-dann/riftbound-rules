@@ -2,7 +2,7 @@
    és a legalitás az elemző (analyze) alapján. Az állapot mindig a builder CS-e; ez a modul csak olvassa vagy másolatot elemez. */
 import { analyze, stepInfo, abilitiesOf, triggersOf, timingOf, isPermC } from '../legacy/chainCore';
 import { vsCard, CARDS, norm } from '../legacy/core';
-import { tgOptionsOf } from '../legacy/chain';
+import { tgOptionsOf, reorderSteps, locLabelOf } from '../legacy/chain';
 import type { PBoard } from './Playmat';
 
 export type Arrow = { from: number; to: string };
@@ -66,12 +66,21 @@ function newRows(a: [string, string][], b: [string, string][]) {
   return b.filter((r) => { const k = r.join('|'); const n = cnt.get(k) || 0; if (n) { cnt.set(k, n - 1); return false; } return true; });
 }
 
-/** Egy új lépés a chain végére: az elemző dönti el, szabályos-e (sebesség, Closed State, költség, forrás állapota).
-    A hiányzó célpont vagy költség-választás nem tiltás: azt a következő lépésben a pályán választja ki a felhasználó. */
-export function tryStep(CS: any, step: any): Legal {
-  const a = analyze(clone(CS)); const c = clone(CS); c.steps.push(clone(step));
+/** Lépés beszúrása a k. helyre (a végére: k = lépésszám); a hivatkozások ugyanúgy átszámozódnak, mint átrendezésnél. */
+export function insertAt(cs: any, k: number, st: any) {
+  cs.steps.push(st); const n = cs.steps.length;
+  const order = [...Array(n - 1).keys()]; order.splice(Math.max(0, Math.min(k, n - 1)), 0, n - 1);
+  reorderSteps(cs, order);
+}
+
+/** Egy új lépés a chain k. helyére (alapból a végére): az elemző dönti el, szabályos-e (sebesség, Closed State, költség, forrás állapota).
+    A lépés saját frame-jének sorai számítanak. A hiányzó célpont vagy költség-választás nem tiltás: azt utána a pályán választja ki a felhasználó. */
+export function tryStep(CS: any, step: any, at?: number): Legal {
+  const c = clone(CS); const k = at == null ? c.steps.length : at;
+  insertAt(c, k, clone(step));
   const r = analyze(c);
-  const bad = newRows(a.rows, r.rows).find((x) => BAD.test(x[1]));
+  const f = r.frames.find((x: any) => x.sj === k);
+  const bad = (f ? f.changes : []).find((x: any) => BAD.test(x[1]));
   if (!bad) return { ok: true };
   const why = reasonOf(bad[1]);
   if (/nincs megadva/.test(why)) return { ok: true, need: why };
@@ -85,15 +94,19 @@ export function targetOpts(CS: any, j: number, ti: number): TgOpt[] {
   const inf: any = stepInfo(CS, s); const p = inf?.list?.[ti]; if (!p) return [];
   const base = clone(CS); base.steps[j].tg = [...(base.steps[j].tg || [])]; base.steps[j].tg[ti] = '';
   const r0 = analyze(clone(base)).rows;
-  return tgOptionsOf(CS, j, p).slice(1).filter((o: any) => o[0] !== 'x').map((o: any) => {
-    const c = clone(base); c.steps[j].tg[ti] = o[0];
+  const all = tgOptionsOf(CS, j, p).slice(1);
+  const xs = all.some((o: any) => o[0] === 'x') ? ['base', 'bf0', 'bf1'].flatMap((loc) => ['A', 'B'].map((pl) => ['x:' + loc + ':' + pl, 'Pályán kívüli ' + p.type + ': ' + (pl === 'A' ? 'saját, ' : 'ellenfél, ') + locLabelOf(CS, loc)])) : [];
+  return [...all.filter((o: any) => o[0] !== 'x'), ...xs].map((o: any) => {
+    const c = clone(base);
+    if (o[0].startsWith('x:')) { const [, loc, pl] = o[0].split(':'); c.steps[j].tg[ti] = 'x'; c.steps[j].ext = { ...(c.steps[j].ext || {}), [ti]: { ...((c.steps[j].ext || {})[ti] || {}), loc, pl } }; }
+    else c.steps[j].tg[ti] = o[0];
     const nr = newRows(r0, analyze(c).rows);
     const bad = nr.find((x) => (BAD.test(x[1]) && !/nincs megadva/.test(x[1])) || /^A trigger \d+\. célpontja \(/.test(x[1]) || /^A play effectnek nincs legális választása/.test(x[1]));
     let why = bad ? reasonOf(bad[1]) : undefined;
     if (bad && /^A trigger/.test(bad[1])) why = bad[1].replace(/^A trigger \d+\. célpontja \([^)]*\) nem legális:\s*/, '').replace(/;.*$/, '');
     if (bad && /^A play effectnek/.test(bad[1])) why = bad[1].replace(/^[^(]*\(/, '').replace(/\)\..*$/, '');
     return { v: o[0], label: o[1], ok: !bad, why, ref: bad ? bad[0] : undefined };
-  });
+  }).filter((o: TgOpt) => o.ok || !o.v.startsWith('x:'));
 }
 
 /** A célpont-paraméter rövid leírása (a builder célpont-választójának szövegéből). */

@@ -64,7 +64,8 @@ const EditCtx = createContext(false);
 function AddBtn({ t, label }: { t: PTarget; label: string }) {
   const ctl = useContext(CtlCtx); const ed = useContext(EditCtx);
   if (!ctl || !ed) return null;
-  return <button type="button" className="pm2-add" onClick={(e) => { e.stopPropagation(); ctl.on(t); }} aria-label={label} title={label}>+</button>;
+  const g = ctl.glow(t); const l = (g && ctl.label?.(t)) || label;
+  return <button type="button" className={'pm2-add' + gcls(g)} onClick={(e) => { e.stopPropagation(); ctl.on(t); }} aria-label={l} title={l} aria-pressed={g ? g === 'sel' : undefined}>+</button>;
 }
 const gcls = (g: Glow) => (g ? ' g-' + g : '');
 /** Enter vagy szóköz a nem button elemeken is kattintásként működik. */

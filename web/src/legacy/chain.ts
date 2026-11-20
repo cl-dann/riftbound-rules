@@ -9,7 +9,7 @@ const openModal=(c:any)=>window.dispatchEvent(new CustomEvent('rb:open-card',{de
 const hideTip=()=>window.dispatchEvent(new Event('rb:hide-tip'));
 export const CHAIN_MARKUP=`<div class="cb2">
       <div class="cb2-bar">
-        <div class="cb2-ex"><button class="btn sec" id="cb-ex">Példa betöltése</button><button class="linkbtn" id="cb-ex2">Példa: kontrollváltás</button><button class="linkbtn" id="cb-ex3">Példa: gear leválás</button></div>
+        <div class="cb2-ex" id="cb-tplslot"></div><div class="cb2-ex"><button class="btn sec" id="cb-ex">Példa betöltése</button><button class="linkbtn" id="cb-ex2">Példa: kontrollváltás</button><button class="linkbtn" id="cb-ex3">Példa: gear leválás</button></div>
         <div class="cb2-ex"><button class="btn sec" id="cb-link">Helyzet linkként</button><button class="linkbtn" id="cb-clear">Minden törlése</button></div>
         <div class="status" id="cb-linkst" role="status"></div>
       </div>
