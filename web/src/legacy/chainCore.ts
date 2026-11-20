@@ -403,7 +403,9 @@ export const ZONE_HU:any={trash:'trash',hand:'kéz',deck:'deck',banish:'banishme
 
 export type ChainResult={frames:any[];html:string;story:string[];done:any[];rows:[string,string][];ev:any[];objs:any;items:any[];delayed:any[];empty:boolean;zsnap?:any};
 
-export function analyze(CS:any):ChainResult{
+/** opt.report === false: a HTML riport (3. kimenet: vsPairs, glossify, lapnév-gombok) kimarad, html üres; a többi mező azonos.
+    A pályás építő próba-elemzései (tryStep, targetOpts, zoneCands, setupFrame) így hívják. */
+export function analyze(CS:any,opt:{report?:boolean}={}):ChainResult{
   const LOCS=()=>[['base','Base'],['bf0',(CS.bf[0].n||'1. battlefield')],['bf1',(CS.bf[1].n||'2. battlefield')]];
   const locLabel=(l:string)=>(LOCS().find(x=>x[0]===l)||['',l])[1];
   let MT:any=null;const MTIDS=new Set<string>();
@@ -1380,6 +1382,7 @@ export function analyze(CS:any):ChainResult{
   story.push('A chain kiürült.');
   REC.push(['','A chain kiürült.']);if(out.delayed.length)REC.push(['391.2',out.delayed.length+' delayed hatás vár későbbi időpontra: '+out.delayed.map((d:any)=>'"'+d.t+'"'+(d.on.length?' ('+d.on.join(', ')+')':'')).join('; ')]);snap('Végállapot: a chain üres',[]);REC=null;
   // ---- 3. kimenet ----
+  if(opt.report===false)return out;
   const stat:any={ok:['stok','lefutott'],partial:['stok','részben futott le'],fizzle:['stbad','hatás nélkül'],countered:['stbad','counterelve'],removed:['stbad','lekerült']};
   let h='<h2>Chain elemzés</h2><p class="note">Lépésenkénti levezetés a lapok szövegéből és a Core Rules szabályaiból. A "levezetés" címkéjű sorok az oldal következtetései, a judge felülbírálhatja őket.</p>';
   h+='<h3 class="cbsec">A chain lefutása</h3><p class="note" style="margin:0 0 6px">Ebben a sorrendben futottak le a tételek: mindig a legutóbb felrakott először, a közben keletkező triggerek pedig rögtön a tetejére kerülnek.</p><ol class="stack">'+done.map((d:any,i:number)=>{const r=stat[d.res]||['','?'];return '<li><span class="sn">'+(i+1)+'.</span><span class="sc">'+esc(d.name)+'</span><span class="note">'+(d.pl==='A'?'te':'ellenfél')+'</span><span class="'+r[0]+'">'+r[1]+'</span></li>';}).join('')+'</ol>';

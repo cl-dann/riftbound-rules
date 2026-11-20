@@ -15,10 +15,13 @@ export const sideOf = (p: string) => (p === 'B' ? 'opp' : 'me') as 'me' | 'opp';
 export const plOf = (side: 'me' | 'opp') => (side === 'opp' ? 'B' : 'A');
 export const cardOf = (n?: string | null): any => (n ? vsCard(n) : null);
 
+/** A próba-elemzések HTML riport nélkül futnak (a riport itt nem kell, a sorok és frame-ek azonosak). */
+const NOREP = { report: false };
+
 /** A kiinduló helyzet pontosan úgy, ahogy az elemző rajzolja: egy üres Resolve lépéssel futtatva az első frame (340.1: üres chainen nincs mit lefuttatni). */
 export function setupFrame(CS: any): ChainFrame {
   const c = clone(CS); c.steps = [{ k: 'res' }];
-  return analyze(c).frames[0] as ChainFrame;
+  return analyze(c, NOREP).frames[0] as ChainFrame;
 }
 
 /** Melyik frame-ben került a j. lépés a chainre (a frame sj mezője). */
@@ -80,7 +83,7 @@ export function insertAt(cs: any, k: number, st: any) {
 export function tryStep(CS: any, step: any, at?: number): Legal {
   const c = clone(CS); const k = at == null ? c.steps.length : at;
   insertAt(c, k, clone(step));
-  const r = analyze(c);
+  const r = analyze(c, NOREP);
   const f = r.frames.find((x: any) => x.sj === k);
   const bad = (f ? f.changes : []).find((x: any) => BAD.test(x[1]));
   if (!bad) return { ok: true };
@@ -95,14 +98,14 @@ export function targetOpts(CS: any, j: number, ti: number): TgOpt[] {
   const s = CS.steps[j]; if (!s) return [];
   const inf: any = stepInfo(CS, s); const p = inf?.list?.[ti]; if (!p) return [];
   const base = clone(CS); base.steps[j].tg = [...(base.steps[j].tg || [])]; base.steps[j].tg[ti] = '';
-  const r0 = analyze(clone(base)).rows;
+  const r0 = analyze(clone(base), NOREP).rows;
   const all = tgOptionsOf(CS, j, p).slice(1);
   const xs = all.some((o: any) => o[0] === 'x') ? ['base', 'bf0', 'bf1'].flatMap((loc) => ['A', 'B'].map((pl) => ['x:' + loc + ':' + pl, 'Pályán kívüli ' + p.type + ': ' + (pl === 'A' ? 'saját, ' : 'ellenfél, ') + locLabelOf(CS, loc)])) : [];
   return [...all.filter((o: any) => o[0] !== 'x'), ...xs].map((o: any) => {
     const c = clone(base);
     if (o[0].startsWith('x:')) { const [, loc, pl] = o[0].split(':'); c.steps[j].tg[ti] = 'x'; c.steps[j].ext = { ...(c.steps[j].ext || {}), [ti]: { ...((c.steps[j].ext || {})[ti] || {}), loc, pl } }; }
     else c.steps[j].tg[ti] = o[0];
-    const nr = newRows(r0, analyze(c).rows);
+    const nr = newRows(r0, analyze(c, NOREP).rows);
     const bad = nr.find((x) => (BAD.test(x[1]) && !/nincs megadva/.test(x[1])) || /^A trigger \d+\. célpontja \(/.test(x[1]) || /^A play effectnek nincs legális választása/.test(x[1]));
     let why = bad ? reasonOf(bad[1]) : undefined;
     if (bad && /^A trigger/.test(bad[1])) why = bad[1].replace(/^A trigger \d+\. célpontja \([^)]*\) nem legális:\s*/, '').replace(/;.*$/, '');
@@ -179,7 +182,7 @@ export type ZCand = { id: string; n: string; zone: string; own: string; ok: bool
 export function zoneCands(CS: any, j: number, xi: number): ZCand[] {
   const zp = zonePicks(CS, j).find((z) => z.xi === xi); if (!zp) return [];
   const c = clone(CS); if (c.steps[j].zp) c.steps[j].zp[xi] = [];
-  const r: any = analyze(c); const snap = r.zsnap?.[j]; if (!snap) return [];
+  const r: any = analyze(c, NOREP); const snap = r.zsnap?.[j]; if (!snap) return [];
   const s = CS.steps[j]; const pl = s.k === 'tg' ? (r.objs[s.src]?.ctrl || s.pl || 'A') : (s.pl || 'A');
   if (zp.zr.who === 'each') {
     /* minden játékos a saját lapjai közül (355.10.e, 412.1) */
