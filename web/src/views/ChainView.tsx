@@ -1,7 +1,7 @@
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ArrowDown, ArrowUp, GripVertical, Plus, X } from 'lucide-react';
-import { initChain, getChainFrames, chainApi, stateKeysOf, tgOptionsOf, locLabelOf } from '../legacy/chain';
+import { initChain, getChainFrames, chainApi, stateKeysOf, tgOptionsOf, locLabelOf, newZid } from '../legacy/chain';
 import { stepInfo, interp } from '../legacy/chainCore';
 import { TEMPLATES } from '../legacy/chainTemplates';
 import { IMGBASE } from '../legacy/core';
@@ -215,7 +215,7 @@ const EXTRA_SEL = '[data-accel],[data-rep],[data-repn],[data-modek],[data-mode],
 type Mode =
   | { k: 'target'; j: number; ti: number }
   | { k: 'move'; uid: string; n: string; dests: string[]; std: boolean }
-  | { k: 'hide'; side: 'me' | 'opp'; hi: number; n: string; dests: number[] }
+  | { k: 'hide'; side: 'me' | 'opp'; hi: string; n: string; dests: number[] }
   | { k: 'hpick'; j: number; f: 'so' | 'plc'; xi: number; side: 'me' | 'opp'; unit: boolean }
   | { k: 'zpick'; j: number; xi: number }
   | null;
@@ -335,10 +335,10 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
   const zNote = (z: { zr: any }) => (z.zr.target ? 'Célpont a trashből: a trash nyilvános zóna, ezért a lerakáskor kell választani (355.10.a, 355.8).' : z.zr.z === 'hand' ? 'Választás a kézből: a kéz privát, ezért nem célpont, a resolve-kor dől el (355.10.a, 355.18).' : 'Választás a deckből: a deck sorrendje titkos információ (108.4.e, 128.3).') + (z.zr.n > 1 ? ' Legfeljebb ' + z.zr.n + ' lap.' : '');
   const zChips = mode?.k === 'zpick' ? (zCands.length ? zCands.map((o) => (
     <button key={o.id} type="button" className={'cb2-chip' + (o.ok ? '' : ' bad') + (zSel(mode.j, mode.xi).includes(o.id) ? ' on' : '')} aria-pressed={zSel(mode.j, mode.xi).includes(o.id)} title={o.why} onClick={() => toggleZ(o.id)}>
-      {o.n} <small>({o.own === 'A' ? 'saját' : 'ellenfél'} {zoneHu(o.zone)}{o.ok ? '' : ', nem választható'})</small></button>)) : <span className="note">Ebben a zónában nincs lap. A Trash, a Deck és a kéz + gombjával adhatsz hozzá.</span>) : null;
+      {o.n} <small>({o.own === 'A' ? 'saját' : 'ellenfél'} {zoneHu(o.zone)}{o.ok ? '' : ', nem választható: ' + o.why})</small></button>)) : <span className="note">Ebben a zónában nincs lap. A Trash, a Deck és a kéz + gombjával adhatsz hozzá.</span>) : null;
   const zList = (z: 'trash' | 'deck' | 'banish', side: 'me' | 'opp') => {
     const b: any = f.board[side]; const p = plOf(side);
-    if (z === 'deck') return ((CS.deck || {})[p] || []).map((n: string, i: number) => ({ id: 'zd' + p + i, n }));
+    if (z === 'deck') return ((CS.deck || {})[p] || []).map((e: any, i: number) => ({ id: typeof e === 'string' ? 'zd' + p + i : e.id, n: typeof e === 'string' ? e : e.n }));
     if (z === 'banish') return (b.banish || []).map((n: string) => ({ id: '', n }));
     return (b.trash || []).map((n: string, i: number) => ({ id: (b.zids?.trash || [])[i] || '', n }));
   };
@@ -358,7 +358,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
                   {imgOf(x.n) ? <img src={imgOf(x.n)} alt="" /> : <span className="cb2-noimg" />}
                   <span className="cb2-rn"><b>{z === 'deck' ? (k + 1) + '. ' : ''}{x.n}</b>{o && !o.ok && <small>{o.why}</small>}</span>
                   {o && <button type="button" className={'btn' + (on ? '' : ' sec')} disabled={!o.ok} aria-pressed={on} onClick={() => toggleZ(x.id)}>{on ? 'Kiválasztva' : 'Kiválasztás'}</button>}
-                  {/^z[td][AB]\d+$/.test(x.id) && !o && <button type="button" className="linkbtn" aria-label={x.n + ' eltávolítása'} onClick={() => commit((cs) => { cs[z][p].splice(+x.id.slice(3), 1); })}><X size={14} /></button>}
+                  {/^z[td][AB]/.test(x.id) && !o && <button type="button" className="linkbtn" aria-label={x.n + ' eltávolítása'} onClick={() => commit((cs) => { cs[z][p] = cs[z][p].filter((e: any) => e.id !== x.id); })}><X size={14} /></button>}
                 </li>); })}
             {!list.length && <li className="note">Üres.</li>}
           </ul>
@@ -425,8 +425,8 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
   const openHand = (side: 'me' | 'opp', hi0: number, n: string) => {
     const p = plOf(side); const hid = ((f.board[side] as any).zids?.hand || [])[hi0] || '';
     const c = cardOf(n); if (!c) return;
-    if (!/^zh[AB]\d+$/.test(hid)) { showMenu({ key: 'h' + hi0, title: n, card: n, sub: 'egy hatás tette a kézbe', items: [] }); return; }
-    const hi = +hid.slice(3);
+    if (!/^zh[AB]/.test(hid)) { showMenu({ key: 'h' + hi0, title: n, card: n, sub: 'egy hatás tette a kézbe', items: [] }); return; }
+    const hi = hid;
     const st = { k: 'card', n, pl: p, from: 'hand', ...(isPerm(c) ? { loc: 'base' } : {}), tg: [], ext: {} };
     const dests = [0, 1].filter((b) => CS.bf[b].n && CS.bf[b].c === p && !CS.bf[b].fd);
     const hide: MItem = !hasHidden(c) ? { label: 'Elrejtés (Hidden)', dis: 'Csak [Hidden] keywordös lap rejthető el.', ref: '811.1.c' }
@@ -434,12 +434,12 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
       : { label: 'Elrejtés (Hidden)', tone: 'gold', need: 'a battlefield kiválasztása', run: () => { close(); if (dests.length === 1) doHide(side, hi, n, dests[0]); else setMode({ k: 'hide', side, hi, n, dests }); } };
     showMenu({ key: 'h' + side + hi + csv, title: n, card: n, sub: (side === 'me' ? 'saját' : 'ellenfél') + ' kéz', items: [
       playItem(st, 'Kijátszás' + (isPerm(c) ? ' (a base-be; a hely a lépésnél állítható)' : '')), hide,
-      { label: 'Eltávolítás a kézből', tone: 'del', run: () => { close(); commit((cs) => { cs.hand[p].splice(hi, 1); }); } },
+      { label: 'Eltávolítás a kézből', tone: 'del', run: () => { close(); commit((cs) => { cs.hand[p] = cs.hand[p].filter((e: any) => e.id !== hi); }); } },
     ] });
   };
-  const doHide = (side: 'me' | 'opp', hi: number, n: string, b: number) => {
+  const doHide = (side: 'me' | 'opp', hi: string, n: string, b: number) => {
     const p = plOf(side);
-    commit((cs) => { cs.hand[p].splice(hi, 1); cs.bf[b].fd = p; cs.bf[b].fdn = n; });
+    commit((cs) => { cs.hand[p] = cs.hand[p].filter((e: any) => e.id !== hi); cs.bf[b].fd = p; cs.bf[b].fdn = n; });
     setMode(null); setMsg(n + ' elrejtve: facedown itt: ' + (CS.bf[b].n || (b + 1) + '. battlefield') + ' (811.1.b).');
   };
   const openFd = (b: number) => {
@@ -451,7 +451,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
     const n = bf.fdn || '';
     const items: MItem[] = n ? [playItem({ k: 'card', n, pl: bf.fd, from: 'facedown', loc: 'bf' + b, tg: [], ext: {} }, 'Kijátszás facedown-ból')]
       : [{ label: 'Kijátszás facedown-ból', dis: 'Ismeretlen facedown lap: a nevét a Chain + gombjával add meg, "facedown-ból" forrással.' }];
-    items.push({ label: 'Vissza a kézbe', tone: 'gold', run: () => { close(); commit((cs) => { if (n) cs.hand[bf.fd].push(n); cs.bf[b].fd = ''; cs.bf[b].fdn = ''; }); } });
+    items.push({ label: 'Vissza a kézbe', tone: 'gold', run: () => { close(); commit((cs) => { if (n) cs.hand[bf.fd].push({ id: newZid(cs, 'hand', bf.fd), n }); cs.bf[b].fd = ''; cs.bf[b].fdn = ''; }); } });
     items.push({ label: 'Eltávolítás', tone: 'del', run: () => { close(); commit((cs) => { cs.bf[b].fd = ''; cs.bf[b].fdn = ''; }); } });
     showMenu({ key: 'fd' + b + csv, title: n || 'Facedown lap', card: n || undefined, sub: (bf.fd === 'A' ? 'saját' : 'ellenfél') + ' facedown, ' + (bf.n || (b + 1) + '. battlefield'), items });
   };
@@ -496,9 +496,9 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
       if (at.kind === 'legend') cs.lg[p] = n;
       else if (at.kind === 'champion') cs.ch[p] = n;
       else if (at.kind === 'battlefield') cs.bf[at.bfi!].n = n;
-      else if (at.kind === 'hand') cs.hand[p].push(n);
-      else if (at.kind === 'trash') { cs.trash = cs.trash || { A: [], B: [] }; cs.trash[p].push(n); }
-      else if (at.kind === 'deck') { cs.deck = cs.deck || { A: [], B: [] }; cs.deck[p].unshift(n); }
+      else if (at.kind === 'hand') cs.hand[p].push({ id: newZid(cs, 'hand', p), n });
+      else if (at.kind === 'trash') { cs.trash = cs.trash || { A: [], B: [] }; cs.trash[p].push({ id: newZid(cs, 'trash', p), n }); }
+      else if (at.kind === 'deck') { cs.deck = cs.deck || { A: [], B: [] }; cs.deck[p].unshift({ id: newZid(cs, 'deck', p), n }); }
       else if (at.kind === 'hidden') { cs.bf[at.bfi!].fd = p; cs.bf[at.bfi!].fdn = n; }
       else if (at.kind === 'board') cs.bd.push({ n, pl: p, loc: at.loc || 'base', d: 0 });
     });
@@ -639,16 +639,17 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
   const stRef = useRef<HTMLDivElement>(null);
   useEffect(() => { chainApi.stateEl!(sk.length ? stRef.current : null); return () => chainApi.stateEl!(null); }, [sk.length]);
 
+  const tChips = mode?.k === 'target' ? tOpts.map((o) => (
+          <button key={o.v} type="button" className={'cb2-chip' + (o.ok ? '' : ' bad') + (curTg(mode.j, mode.ti) === o.v ? ' on' : '')} onClick={() => pickTarget(o.v)} title={o.ok ? '' : o.why} aria-pressed={curTg(mode.j, mode.ti) === o.v}>
+            {o.label.replace(/^Board: /, '')}{!o.ok && <small> (nem választható{o.why && /\(206\)/.test(o.why) ? ': ' + o.why.replace(/^\d+\. célpont nem választható:\s*/, '') : ''})</small>}
+          </button>
+        )) : null;
   const banner = mode?.k === 'target' && tSlot ? (
     <div className="cb2-mode" role="status">
       <div><b>{stepName(CS, CS.steps[mode.j]).n}: {slotText(tSlot, mode.ti)}</b>{tInf.list.length > 1 && <span className="note"> ({mode.ti + 1} / {tInf.list.length})</span>}
         <span className="note"> Kattints egy kiemelt lapra a pályán, vagy válassz itt:</span></div>
       <div className="cb2-chips">
-        {tOpts.map((o) => (
-          <button key={o.v} type="button" className={'cb2-chip' + (o.ok ? '' : ' bad') + ((CS.steps[mode.j].tg || [])[mode.ti] === o.v ? ' on' : '')} onClick={() => pickTarget(o.v)} title={o.ok ? '' : o.why} aria-pressed={(CS.steps[mode.j].tg || [])[mode.ti] === o.v}>
-            {o.label.replace(/^Board: /, '')}{!o.ok && <small> (nem választható)</small>}
-          </button>
-        ))}
+        {tChips}
         {!tOpts.length && <span className="note">Nincs választható lap a pályán ehhez a célponthoz. A Haladó szerkesztésben megadhatsz pályán kívüli célpontot.</span>}
       </div>
       <div className="cb2-mbtn">
@@ -720,7 +721,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
   const wizSheet = !narrow || !wiz ? null : wiz.st === 'target' ? (
     <div className="cb2-wbar" role="status">
       {mode?.k === 'zpick' && zInfo ? <div className="cb2-wbt"><b>Válassz lapot ({zoneHu(zInfo.zr.z)})</b> <span>"{zInfo.t}"</span>{msg && <small>{msg}</small>}<div className="cb2-chips cb2-wch">{zChips}</div></div> :
-      <div className="cb2-wbt"><b>Válassz célpontot</b>{tSlot && mode?.k === 'target' && <span> {slotText(tSlot, mode.ti)}{tInf.list.length > 1 ? ' (' + (mode.ti + 1) + ' / ' + tInf.list.length + ')' : ''}</span>}{msg && <small>{msg}</small>}</div>}
+      <div className="cb2-wbt"><b>Válassz célpontot</b>{tSlot && mode?.k === 'target' && <span> {slotText(tSlot, mode.ti)}{tInf.list.length > 1 ? ' (' + (mode.ti + 1) + ' / ' + tInf.list.length + ')' : ''}</span>}{msg && <small>{msg}</small>}{tOpts.length > 0 && <div className="cb2-chips cb2-wch">{tChips}</div>}</div>}
       <div className="cb2-wbb">
         <button type="button" className="btn sec" onClick={wizBack}>Vissza</button>
         <button type="button" className="btn sec" onClick={wizCancel}>Mégse</button>
@@ -912,7 +913,7 @@ function StepPanel({ j, csv, onTarget, onClose, bad, onInsert, onHand, onZone }:
       ))}
       {zonePicks(CS, j).map((z) => (
         <div key={'z' + z.xi} className="cb2-tg"><span className="note">"{z.t}": {z.zr.target ? 'célpont a trashből' : z.zr.z === 'hand' ? 'választás a kézből (resolve-kor)' : 'választás a deckből'}</span>
-          <span className="cb2-tv"><b>{((s.zp || {})[z.xi] || []).map((id: string) => chainApi.last?.objs?.[id]?.name || id).join(', ') || 'nincs kiválasztva'}</b>
+          <span className="cb2-tv"><b>{((s.zp || {})[z.xi] || []).map((id: string) => chainApi.last?.objs?.[id]?.name || 'törölt lap, válassz újra').join(', ') || 'nincs kiválasztva'}</b>
             <button type="button" className="btn sec" onClick={() => onZone(z.xi)}>Kiválasztás</button></span></div>))}
       {inf && !list.length && !zonePicks(CS, j).length && s.k === 'card' && inf.c && <p className="note">Ennek a lapnak nincs választandó célpontja.</p>}
       <div className={'cb2-q2 row2' + (hasQ ? '' : ' empty')} ref={qref} />

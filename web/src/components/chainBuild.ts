@@ -48,10 +48,10 @@ export function fullFrame(f: ChainFrame, CS: any, k: number, sf: Record<number, 
     const ch = (CS.ch || {})[p] || '';
     s.champion = ch && !played((x) => x.from === 'champ' && x.n === ch && x.pl === p).length ? ch : null;
     if (!s.zids) {
-      const left = [...((CS.hand || {})[p] || [])];
-      played((x) => (x.from || 'hand') === 'hand' && x.pl === p).forEach((x: any) => { const i = left.indexOf(x.n); if (i >= 0) left.splice(i, 1); });
-      s.zids = { hand: [...left.map((_, i) => 'zh' + p + i), ...(s.hand || []).map(() => '')], trash: [] };
-      s.hand = [...left, ...(s.hand || [])];
+      const left = ((CS.hand || {})[p] || []).map((e: any, i: number) => (typeof e === 'string' ? { id: 'zh' + p + i, n: e } : e));
+      played((x) => (x.from || 'hand') === 'hand' && x.pl === p).forEach((x: any) => { const i = left.findIndex((e: any) => e.n === x.n); if (i >= 0) left.splice(i, 1); });
+      s.zids = { hand: [...left.map((e: any) => e.id), ...(s.hand || []).map(() => '')], trash: [] };
+      s.hand = [...left.map((e: any) => e.n), ...(s.hand || [])];
     }
     return s;
   };
@@ -182,5 +182,5 @@ export function zoneCands(CS: any, j: number, xi: number): ZCand[] {
   const r: any = analyze(c); const snap = r.zsnap?.[j]; if (!snap) return [];
   const s = CS.steps[j]; const pl = s.k === 'tg' ? (r.objs[s.src]?.ctrl || s.pl || 'A') : (s.pl || 'A');
   const owners = zp.zr.who === 'you' ? [pl] : zp.zr.who === 'they' ? [pl === 'A' ? 'B' : 'A'] : ['A', 'B'];
-  return owners.flatMap((p) => (snap[zp.zr.z]?.[p] || []).map((id: string) => { const ob = r.objs[id]; const why = zoneCheck(zp.zr, ob, pl); return { id, n: ob?.name || id, zone: zp.zr.z, own: p, ok: !why, why: why || undefined }; }));
+  return owners.flatMap((p) => (snap[zp.zr.z]?.[p] || []).map((id: string) => { const ob = r.objs[id]; const why = zoneCheck(zp.zr, ob, pl, snap.ctx); return { id, n: ob?.name || id, zone: zp.zr.z, own: p, ok: !why, why: why || undefined }; }));
 }

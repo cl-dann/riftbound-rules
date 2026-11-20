@@ -29,7 +29,7 @@ test('Asztal: trash lap felvétele, célpont a trashből, eldobás a kézből', 
   await trash.click();
   await page.locator('.cb2-zp .cb2-zl li.ok .btn', { hasText: 'Kiválasztás' }).click();
   await expect(page.locator('.cb2-mode')).toHaveCount(0);
-  expect((await getCS(page)).steps[0].zp[0]).toEqual(['ztA0']);
+  { const cs = await getCS(page); expect(cs.steps[0].zp[0]).toEqual([cs.trash.A[0].id]); }
   await page.locator('.cb2-zp .pb-btn', { hasText: 'Kész' }).click();
   await expect(page.locator('#cb-out')).toContainText('355.10.a');
   await page.getByRole('button', { name: 'Következő' }).click();
@@ -43,7 +43,7 @@ test('Asztal: trash lap felvétele, célpont a trashből, eldobás a kézből', 
   await pickCard(page, 'lunar boon', 'Lunar Boon');
   await expect(page.locator('.cb2-mode')).toContainText('355.18');
   await page.locator('.pm2-band.me-bottom .pm2-hc.g-act').click();
-  expect((await getCS(page)).steps[0].zp[0]).toEqual(['zhA0']);
+  { const cs = await getCS(page); expect(cs.steps[0].zp[0]).toEqual([cs.hand.A[0].id]); }
   await expect(page.locator('#cb-out')).toContainText('423.1');
 });
 
@@ -61,7 +61,7 @@ test('Mobil 390 px: trash célpont a varázslóban', async ({ page }) => {
   await expect(page.locator('.cb2-wbar')).toContainText('Válassz lapot (trash)');
   await page.locator('.cb2-wbar .cb2-chip', { hasText: 'Shipyard Skulker' }).click();
   await expect(page.locator('.cb2-wbar, .cb2-sheet')).toHaveCount(0);
-  expect((await getCS(page)).steps[0].zp[0]).toEqual(['ztA0']);
+  { const cs = await getCS(page); expect(cs.steps[0].zp[0]).toEqual([cs.trash.A[0].id]); }
   await expect(page.locator('#cb-out')).toContainText('trashből');
   expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
 });

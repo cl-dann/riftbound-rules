@@ -46,6 +46,13 @@ export function tgOptionsOf(CS:any,j:number,p:any){
 /** Játékállapot mezők, amelyekre a mostani lapok feltételei hivatkoznak. */
 export function stateKeysOf(CS:any){const k=new Set();const addTxt=t=>{if(/\[Level \d+\]|\bXP\b/.test(t))k.add('xp');if(/Victory Score|\bscore\b/i.test(t))k.add('score');if(/\bLegion\b|you've played/i.test(t)){k.add('played');k.add('playedT');}if(/\bcontrol \d+ or (?:fewer|more) runes|exactly \d+ runes/i.test(t))k.add('runes');if(/Rune Deck|couldn't channel|you can't/i.test(t))k.add('runeDeck');if(/you spent/i.test(t))k.add('spent');if(/died this turn/i.test(t))k.add('diedT');};
   CS.steps.forEach(s=>{const inf=stepInfo(CS,s);if(inf&&inf.c)addTxt(inf.c.txt||'');});CS.bd.forEach(b=>{const c=vsCard(b.n);if(c)addTxt(c.txt||'');});['A','B'].forEach(p=>{const c=vsCard(CS.lg[p]);if(c)addTxt(c.txt||'');});return [...k];}
+/** Kéz, trash és deck lapjai állandó azonosítóval ({id, n}). A régi, névlistás forma (sorszámos "zhA0" hivatkozásokkal) betöltéskor ugyanazt az
+    azonosítót kapja, amit az elemző sorszámból képezett, így a régi linkek és sablonok elemzése nem változik. Az új lapok "_" utáni sorszámot kapnak, ez soha nem ismétlődik. */
+const ZK={hand:'h',trash:'t',deck:'d'};
+export function normZones(cs:any){if(!cs)return cs;['hand','trash','deck'].forEach(z=>{if(!cs[z])return;['A','B'].forEach(p=>{cs[z][p]=(cs[z][p]||[]).map((e,i)=>typeof e==='string'?{id:'z'+ZK[z]+p+i,n:e}:e&&!e.id?Object.assign({},e,{id:'z'+ZK[z]+p+i}):e);});});return cs;}
+export function newZid(cs:any,z:string,p:string){cs.zseq=(cs.zseq||0)+1;return 'z'+ZK[z]+p+'_'+cs.zseq;}
+export const zName=(e:any)=>typeof e==='string'?e:e&&e.n;
+
 /** Lépések törlése és átrendezése: az "sK" hivatkozásokat (célpont, költség, forrás) az új indexre írja át; a törölt vagy mögé került lépésre mutató hivatkozás törlődik. */
 export function reorderSteps(CS:any,order:number[]){const newOf={};order.forEach((o,ni)=>newOf[o]=ni);
   const steps=order.map(o=>CS.steps[o]);const fix=(v,ni)=>{const m=/^s(\d+)$/.exec(v||'');if(!m)return v;const t=newOf[+m[1]];return t!=null&&t<=ni?'s'+t:'';};
@@ -278,8 +285,8 @@ const loadEx=k=>{chainApi.internal=false;CS=EXAMPLES[k]();renderCB();runCB();};
 $('cb-ex').addEventListener('click',()=>loadEx('base'));$('cb-ex2').addEventListener('click',()=>loadEx('ctrl'));$('cb-ex3').addEventListener('click',()=>loadEx('gear'));
 $('cb-link').addEventListener('click',async()=>{const u=location.origin+location.pathname+'#c='+b64e(JSON.stringify(CS));const st=$('cb-linkst');
   try{await navigator.clipboard.writeText(u);st.textContent='A link a vágólapra került. Megnyitva ugyanez a helyzet töltődik be.';}catch(e){st.textContent='Másold ki: '+u;}});
-window.__setCS=s=>{CS=s;renderCB();runCB();};window.__getCS=()=>CS;
-chainApi.get=()=>CS;chainApi.set=s=>{chainApi.internal=false;CS=s;renderCB();runCB();};
+window.__setCS=s=>{CS=normZones(s);renderCB();runCB();};window.__getCS=()=>CS;
+chainApi.get=()=>CS;chainApi.set=s=>{chainApi.internal=false;CS=normZones(s);renderCB();runCB();};
 chainApi.commit=(fn,ms)=>{chainApi.internal=true;CS.hand=CS.hand||{A:[],B:[]};CS.ch=CS.ch||{A:'',B:''};fn(CS);renderCB();if(ms===0)runCB();else sched(ms==null?120:ms);};
 chainApi.moveStep=(f,t)=>moveStep(f,t);chainApi.delStep=j=>delStep(j);chainApi.delBd=i=>delBd(i);
 chainApi.openAdv=j=>{const d=$('cb-adv');if(d)d.open=true;const st=CS.steps[j];if(st)OVOPEN.add(st);renderForm();const el=$('cb-steps').querySelector('[data-sj="'+j+'"]');if(el){el.scrollIntoView({block:'start'});const sm=el.querySelector('summary');if(sm)sm.focus();}};
@@ -290,7 +297,7 @@ let SEL=null;chainApi.stateEl=el=>{SEL=el;if(el&&!QBOUND.has(el)){QBOUND.add(el)
 chainApi.quick=(el,j)=>{QEL=el;QJ=j;if(el&&!QBOUND.has(el)){QBOUND.add(el);el.addEventListener('change',onChg);}renderQuick();};
 function notify(){window.dispatchEvent(new CustomEvent('rb:chain-cs'));}
 let TMR=0;function sched(ms=250){clearTimeout(TMR);TMR=setTimeout(runCB,ms);}
-function loadChainFromHash(){const m=/^#c=(.+)$/.exec(location.hash);if(!m)return false;try{CS=JSON.parse(b64d(m[1]));renderCB();runCB();return true;}catch(e){return false;}}
+function loadChainFromHash(){const m=/^#c=(.+)$/.exec(location.hash);if(!m)return false;try{CS=normZones(JSON.parse(b64d(m[1])));renderCB();runCB();return true;}catch(e){return false;}}
 function runCB(){clearTimeout(TMR);const r=analyze(JSON.parse(JSON.stringify(CS)));chainApi.last=r;emitFrames(r.frames);$('cb-out').innerHTML=r.empty?'<p class="note">'+(CS.steps.length?'A lépésekben még nincs felismert lap vagy ability.':'Még nincs lépés: kattints a pályán egy lapra, vagy a Chain zóna + gombjára.')+'</p>':r.html;}
 $('cb-out').addEventListener('click',e=>{const b=e.target.closest('.cl');if(!b)return;const c=vsCard(b.dataset.card);if(c){hideTip();openModal(c);}});
 renderCB();
