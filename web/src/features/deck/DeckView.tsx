@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { BF, META, TOPICS } from '../../domain/data/store';
 import { DECK, setDeck } from '../../domain/deck/legality';
 import { FORMAT, parseDeck } from '../../domain/deck/parse';
-import { b64d, b64e } from '../../domain/text/b64';
+import { b64e } from '../../domain/text/b64';
 import { buildPDF } from './pdf';
 import { cardHeadHTML, cardRulesHTML, domDots } from '../../render/html/card';
 import { curveHTML, interactionHTML, legalityHTML } from '../../render/html/deck';
@@ -13,8 +13,12 @@ import type { Card } from '../../domain/data/schema';
 import type { DeckRow } from '../../domain/deck/types';
 import { Html } from '../../shared/ui/Html';
 import { loadFonts } from '../../domain/data/load';
-import { editDeck, eur, legendOf, priceOf, searchCards, targetSec, type Prices } from '../../domain/deck/edit';
+import { editDeck, eur, legendOf, priceOf, searchCards, targetSec } from '../../domain/deck/edit';
+import type { Prices } from '../../domain/deck/prices';
 import { openCard } from '../../shared/lib/events';
+import { deckFromHash } from '../../domain/deck/link';
+import { hasDeck, readDeck, writeDeck } from '../../shared/lib/storage';
+import { loadPrices } from '../../shared/lib/prices';
 
 function deckTotals(P: Prices | null) {
   let a1 = 0, a7 = 0, n = 0; const miss: string[] = [];
@@ -62,15 +66,15 @@ function deckHTML(P: Prices | null): string {
 }
 
 export function DeckView() {
-  const [text, setText] = useState(() => { const m = /^#d=(.+)$/.exec(location.hash); if (m) { try { return b64d(m[1]); } catch { /* */ } } return ''; });
+  const [text, setText] = useState(() => deckFromHash(location.hash) ?? '');
   const [ver, setVer] = useState(0);
   const [status, setStatus] = useState('');
   const [link, setLink] = useState('');
   const [rel, setRel] = useState(false);
   const [gen, setGen] = useState(false);
-  const hasLast = useMemo(() => { try { return !!localStorage.getItem('rb-deck'); } catch { return false; } }, []);
+  const hasLast = useMemo(() => hasDeck(), []);
   const [P, setP] = useState<Prices | null>(null);
-  useEffect(() => { fetch('./prices.json').then((r) => r.ok ? r.json() : null).then((j) => j && j.cards && setP(j)).catch(() => { /* nincs ár */ }); }, []);
+  useEffect(() => { loadPrices().then((j) => j && j.cards && setP(j)); }, []);
   const [q, setQ] = useState('');
   const [ty, setTy] = useState('');
   const [legalOnly, setLegalOnly] = useState(true);
@@ -79,10 +83,10 @@ export function DeckView() {
   const legend = useMemo(() => legendOf(text), [text]);
   const hits = useMemo(() => (q.trim() || ty ? searchCards(q, legend, legalOnly, ty) : []), [q, ty, legend, legalOnly]);
   const add = (c: Card) => change(editDeck(text, targetSec(c, text), c, 1));
-  const run = (t = text) => { setDeck(parseDeck(t)); if (t.trim()) { try { localStorage.setItem('rb-deck', t); } catch { /* */ } } setVer((v) => v + 1); };
+  const run = (t = text) => { setDeck(parseDeck(t)); if (t.trim()) writeDeck(t); setVer((v) => v + 1); };
   useEffect(() => { run(); }, []);
   useEffect(() => {
-    const on = () => { const m = /^#d=(.+)$/.exec(location.hash); if (m) { try { const t = b64d(m[1]); setText(t); run(t); } catch { /* */ } } };
+    const on = () => { const t = deckFromHash(location.hash); if (t != null) { setText(t); run(t); } };
     window.addEventListener('hashchange', on);
     return () => window.removeEventListener('hashchange', on);
   }, []);
@@ -150,7 +154,7 @@ export function DeckView() {
           <button className="btn sec" onClick={share}><Link2 size={15} /> Megosztható link</button>
         </div>
         <div className="btnrow">
-          {hasLast && <button className="linkbtn" onClick={() => { let t = ''; try { t = localStorage.getItem('rb-deck') || ''; } catch { /* */ } setText(t); run(t); }}><RotateCcw size={13} /> Legutóbbi deck visszatöltése</button>}
+          {hasLast && <button className="linkbtn" onClick={() => { const t = readDeck(); setText(t); run(t); }}><RotateCcw size={13} /> Legutóbbi deck visszatöltése</button>}
           <button className="linkbtn danger" onClick={() => { setText(''); run(''); }}><Trash2 size={13} /> Mező törlése</button>
         </div>
         <div className="btnrow">

@@ -7,6 +7,7 @@ import { esc, norm } from '../../domain/text/norm';
 import { typeLine } from '../../domain/data/cards';
 import { Html } from '../../shared/ui/Html';
 import { on, openCard } from '../../shared/lib/events';
+import { readViewMode, writeViewMode, type CardsViewMode } from '../../shared/lib/storage';
 
 const SETS = ['Origins', 'Proving Grounds', 'Spiritforged', 'Unleashed', 'Vendetta', 'Radiance'];
 const DOMAINS = ['Fury', 'Calm', 'Mind', 'Body', 'Chaos', 'Order'];
@@ -73,7 +74,7 @@ function Badges({ c }: { c: any }) {
 
 export function CardsView({ active }: { active: boolean }) {
   const [f, setF] = useState<F>(EMPTY);
-  const [mode, setMode] = useState<'list' | 'grid'>(() => { try { return (localStorage.getItem('rb-view2') as any) || 'grid'; } catch { return 'grid'; } });
+  const [mode, setMode] = useState<CardsViewMode>(readViewMode);
   const [zoom, setZoom] = useState<{ src: string; x: number; y: number; right: boolean; land: boolean } | null>(null);
   const hoverOn = (e: React.MouseEvent, c: any) => {
     if (!c.img || !window.matchMedia('(hover: hover) and (min-width: 900px)').matches) return;
@@ -104,7 +105,7 @@ export function CardsView({ active }: { active: boolean }) {
   const kws = useMemo(() => [...new Set(CARDS.flatMap((c: any) => c._kw))].sort() as string[], []);
   const dirty = JSON.stringify(f) !== JSON.stringify(EMPTY);
   const up = (p: Partial<F>) => { setF((o) => ({ ...o, ...p })); setLimit(mode === 'grid' ? 60 : 80); };
-  useEffect(() => { try { localStorage.setItem('rb-view2', mode); } catch { /* */ } }, [mode]);
+  useEffect(() => { writeViewMode(mode); }, [mode]);
   // A Kézikönyv kulcsszó gombja ide küld keresést.
   useEffect(() => {
     return on('rb:card-search', (q) => { up({ ...EMPTY, q, inText: true }); location.hash = '#kartyak'; });

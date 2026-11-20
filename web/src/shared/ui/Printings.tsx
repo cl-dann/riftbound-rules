@@ -1,20 +1,15 @@
 import { useEffect, useState } from 'react';
 import { IMGBASE } from '../../domain/data/store';
-import { eur, pn, type Prices } from '../../domain/deck/edit';
-
-// Az árfájl egyszer töltődik be, minden nézet ugyanazt használja.
-let cache: Promise<Prices | null> | null = null;
-export function loadPrices(): Promise<Prices | null> {
-  if (!cache) cache = fetch('./prices.json').then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  return cache;
-}
+import { eur, pn } from '../../domain/deck/edit';
+import type { PriceRow, Prices } from '../../domain/deck/prices';
+import { loadPrices } from '../lib/prices';
 export function usePrices() {
   const [p, setP] = useState<Prices | null>(null);
   useEffect(() => { let on = true; loadPrices().then((x) => on && setP(x)); return () => { on = false; }; }, []);
   return p;
 }
 
-type Row = { a1: number | null; a7: number | null; f1: number | null; f7: number | null; id: number; s?: string | null };
+type Row = PriceRow;
 const SETN: Record<string, string> = { ogn: 'Origins', ogs: 'Proving Grounds', sfd: 'Spiritforged', unl: 'Unleashed', ven: 'Vendetta', rad: 'Radiance' };
 
 /** A nyomat típusa a gyűjtői számból: betűs utótag alternatív kép, a szett méreténél nagyobb szám Overnumbered. */
@@ -41,7 +36,7 @@ function priceCell(r: Row | undefined) {
 }
 
 export function Printings({ card }: { card: any }) {
-  const P = usePrices() as (Prices & { pr?: Record<string, Row>; ex?: Record<string, Row[]> }) | null;
+  const P: Prices | null = usePrices();
   const [big, setBig] = useState<string | null>(null);
   const pr: any[] = card.pr || [];
   const ex: Row[] = (P?.ex && (P.ex[pn(card.n)] || P.ex[pn(card.fk || '')])) || [];

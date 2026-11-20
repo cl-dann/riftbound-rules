@@ -4,10 +4,11 @@
    A kártyalap megnyitása és a tooltip eseményekkel megy a React felé. */
 import { esc } from '../../domain/text/norm';
 import { vsCard } from '../../domain/data/store';
-import { b64e, b64d } from '../../domain/text/b64';
+import { b64e } from '../../domain/text/b64';
 import {zoneRefOf,analyze,stepInfo,srcCard,abilitiesOf,triggersOf,interp,timingOf,isPermC,actOf,OV_ACTS,OV_N,enterReadyCond} from '../../domain/chain/chainCore';
 import { emit, openCard } from '../../shared/lib/events';
 import type { ChainState } from '../../domain/chain/state';
+import { chainFromLink } from '../../domain/chain/link';
 const $=(id:string)=>document.getElementById(id) as any;
 const openModal=(c:any)=>openCard(c.n);
 const hideTip=()=>emit('rb:hide-tip');
@@ -301,7 +302,7 @@ let SEL=null;chainApi.stateEl=el=>{SEL=el;if(el&&!QBOUND.has(el)){QBOUND.add(el)
 chainApi.quick=(el,j)=>{QEL=el;QJ=j;if(el&&!QBOUND.has(el)){QBOUND.add(el);el.addEventListener('change',onChg);}renderQuick();};
 function notify(){emit('rb:chain-cs');}
 let TMR=0;function sched(ms=250){clearTimeout(TMR);TMR=setTimeout(runCB,ms);}
-function loadChainFromHash(){const m=/^#c=(.+)$/.exec(location.hash);if(!m)return false;try{CS=normZones(JSON.parse(b64d(m[1])));renderCB();runCB();return true;}catch(e){return false;}}
+function loadChainFromHash(){const m=/^#c=(.+)$/.exec(location.hash);if(!m)return false;try{const cs=chainFromLink(m[1]);if(!cs)return false;CS=normZones(cs);renderCB();runCB();return true;}catch(e){return false;}}
 function runCB(){clearTimeout(TMR);const r=analyze(JSON.parse(JSON.stringify(CS)));chainApi.last=r;emitFrames(r.frames);$('cb-out').innerHTML=r.empty?'<p class="note">'+(CS.steps.length?'A lépésekben még nincs felismert lap vagy ability.':'Még nincs lépés: kattints a pályán egy lapra, vagy a Chain zóna + gombjára.')+'</p>':r.html;}
 $('cb-out').addEventListener('click',e=>{const b=e.target.closest('.cl');if(!b)return;const c=vsCard(b.dataset.card);if(c){hideTip();openModal(c);}});
 renderCB();

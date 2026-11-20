@@ -1,10 +1,10 @@
 import { CARDS, byName } from '../data/store';
 import { norm } from '../text/norm';
+import type { Prices } from './prices';
 
 // A decklista szövege marad az egyetlen forrás: a builder ezt szerkeszti,
 // így a megosztható link, a PDF és a legalitás-ellenőrzés változatlanul működik.
 
-export type Prices = { updated: string; cards: Record<string, { a1: number | null; a7: number | null; id: number }> };
 
 export const SECS = ['Legend', 'Champion', 'MainDeck', 'Battlefields', 'Rune Pool', 'Sideboard'];
 const secKey = (s: string) => s.toLowerCase().replace(/[^a-z]/g, '').replace(/s$/, '');

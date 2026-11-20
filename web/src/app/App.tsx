@@ -8,6 +8,7 @@ import { ruleHTML } from '../render/html/rules';
 import { CardModal } from '../shared/ui/CardModal';
 import { TipLayer } from '../shared/ui/TipLayer';
 import { CardsView } from '../features/cards/CardsView';
+import { loadPrices } from '../shared/lib/prices';
 
 // A Kártyák nézet azonnal kell; a többi nézet kódja az első megnyitáskor töltődik be (külön chunk).
 const DeckView = lazy(() => import('../features/deck/DeckView').then((m) => ({ default: m.DeckView })));
@@ -74,7 +75,7 @@ function Shell() {
     </>
   ), []);
   const [pricesAt, setPricesAt] = useState('');
-  useEffect(() => { fetch('./prices.json').then((r) => (r.ok ? r.json() : null)).then((j) => j?.updated && setPricesAt(String(j.updated).slice(0, 10))).catch(() => { /* nincs ár */ }); }, []);
+  useEffect(() => { loadPrices().then((j) => j?.updated && setPricesAt(String(j.updated).slice(0, 10))); }, []);
   return (
     <div className="wrap">
       <header className="top">
