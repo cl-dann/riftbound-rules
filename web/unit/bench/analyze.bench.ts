@@ -1,10 +1,10 @@
 /* Teljesítménymérés: analyze() a sablonokon és a beépített példákon, valamint a pályás építő próba-elemzései
    (tryStep, targetOpts, zoneCands, setupFrame), amelyek egy kattintásra sokszor futnak. Futtatás: npm run bench */
 import { test } from 'vitest';
-import { analyze } from '../../src/legacy/chainCore';
-import { EXAMPLES } from '../../src/legacy/chain';
-import { TEMPLATES } from '../../src/legacy/chainTemplates';
-import { setupFrame, targetOpts, tryStep, zoneCands, zonePicks } from '../../src/components/chainBuild';
+import { analyze } from '../../src/domain/chain/chainCore';
+import { EXAMPLES } from '../../src/features/chain/legacyForm';
+import { TEMPLATES } from '../../src/domain/chain/templates';
+import { setupFrame, targetOpts, tryStep, zoneCands, zonePicks } from '../../src/features/chain/chainBuild';
 import { measure } from './measure';
 
 const CASES: (() => any)[] = [...TEMPLATES.map((t) => t.cs), ...Object.values(EXAMPLES) as (() => any)[]];

@@ -1,7 +1,10 @@
 /* Karakterizáció: parseDeck és checkDeck (plusz a legalitás és interakció HTML hash) valódi decklistákon,
    #d= linkeken és rb-deck localStorage értékeken (fixtures.json). */
 import { expect, it } from 'vitest';
-import { b64d, checkDeck, interactionHTML, legalityHTML, parseDeck, setDeck } from '../../src/legacy/core';
+import { b64d } from '../../src/domain/text/b64';
+import { checkDeck, setDeck } from '../../src/domain/deck/legality';
+import { interactionHTML, legalityHTML } from '../../src/render/html/deck';
+import { parseDeck } from '../../src/domain/deck/parse';
 import FIX from './fixtures.json';
 import { block, hash } from './serialize';
 

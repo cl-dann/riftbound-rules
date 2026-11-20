@@ -2,10 +2,10 @@
    példákon, a unit tesztek összes bemenetén (cases.json, npm run golden:capture) és valódi #c= linkeken.
    A refaktor alatt ennek byte-azonosnak kell maradnia. Szándékos változásnál: npx vitest run --project golden -u */
 import { describe, expect, it } from 'vitest';
-import { analyze } from '../../src/legacy/chainCore';
-import { EXAMPLES, normZones } from '../../src/legacy/chain';
-import { TEMPLATES } from '../../src/legacy/chainTemplates';
-import { b64d } from '../../src/legacy/core';
+import { analyze } from '../../src/domain/chain/chainCore';
+import { EXAMPLES, normZones } from '../../src/features/chain/legacyForm';
+import { TEMPLATES } from '../../src/domain/chain/templates';
+import { b64d } from '../../src/domain/text/b64';
 import CASES from './cases.json';
 import FIX from './fixtures.json';
 import { block } from './serialize';

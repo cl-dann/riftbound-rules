@@ -1,10 +1,10 @@
 /* analyze(CS, { report: false }): a HTML riport kimarad, minden más mező azonos a teljes futáséval
    (az S04 golden összes esetén: sablonok, példák, unit bemenetek, #c= linkek). */
 import { expect, it } from 'vitest';
-import { analyze } from '../../src/legacy/chainCore';
-import { EXAMPLES, normZones } from '../../src/legacy/chain';
-import { TEMPLATES } from '../../src/legacy/chainTemplates';
-import { b64d } from '../../src/legacy/core';
+import { analyze } from '../../src/domain/chain/chainCore';
+import { EXAMPLES, normZones } from '../../src/features/chain/legacyForm';
+import { TEMPLATES } from '../../src/domain/chain/templates';
+import { b64d } from '../../src/domain/text/b64';
 import CASES from './cases.json';
 import FIX from './fixtures.json';
 

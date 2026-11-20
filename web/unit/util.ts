@@ -1,5 +1,5 @@
 /* Teszt segédek: helyzet (CS) építése és az elemzés eredményének lekérdezése. */
-import { analyze } from '../src/legacy/chainCore';
+import { analyze } from '../src/domain/chain/chainCore';
 import RULES from '../src/generated/rules.json';
 
 export type Step = Record<string, unknown>;

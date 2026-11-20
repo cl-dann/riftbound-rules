@@ -1,8 +1,8 @@
 /* Feltételes és más lapok által adott ready belépés (143.4, 143.4.a), és a Prevent maradék kijelzése. */
 import { describe, expect, it } from 'vitest';
 import { cs, run, ruleText } from './util';
-import { actOf, enterReadyCond } from '../src/legacy/chainCore';
-import { vsCard } from '../src/legacy/core';
+import { actOf, enterReadyCond } from '../src/domain/chain/chainCore';
+import { vsCard } from '../src/domain/data/store';
 
 const play = (n: string, extra: Record<string, unknown> = {}) => ({ k: 'card', n, pl: 'A', loc: 'base', ...extra });
 

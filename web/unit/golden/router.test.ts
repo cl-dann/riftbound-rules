@@ -1,6 +1,6 @@
 /* A régi és mai hash linkek nézete (router.ts viewOf). */
 import { expect, it } from 'vitest';
-import { viewOf } from '../../src/router';
+import { viewOf } from '../../src/app/router';
 
 const TABLE: [string, string][] = [
   ['', 'kartyak'], ['#', 'kartyak'], ['#kartyak', 'kartyak'], ['#ismeretlen', 'kartyak'], ['#deck', 'deck'], ['#d=TGVnZW5kOg', 'deck'],

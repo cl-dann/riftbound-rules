@@ -1,6 +1,6 @@
 /* A builder beépített példái és a korábban kipróbált helyzetek. */
 import { describe, expect, it } from 'vitest';
-import { EXAMPLES } from '../src/legacy/chain';
+import { EXAMPLES } from '../src/features/chain/legacyForm';
 import { cs, run } from './util';
 
 describe('Beépített példák', () => {

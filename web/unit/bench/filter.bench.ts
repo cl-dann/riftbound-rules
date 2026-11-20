@@ -1,8 +1,9 @@
 /* Teljesítménymérés: a Kártyák fül szűrése (filterCards) tipikus keresésekkel, és a jegyzetek fogalom-kiemelése (glossify).
    Futtatás: npm run bench */
 import { test } from 'vitest';
-import { filterCards } from '../../src/views/CardsView';
-import { CARDS, notesHTML, qaHTML } from '../../src/legacy/core';
+import { filterCards } from '../../src/features/cards/CardsView';
+import { CARDS } from '../../src/domain/data/store';
+import { notesHTML, qaHTML } from '../../src/render/html/card';
 import { measure } from './measure';
 
 const F = { q: '', type: '', dom: '', cost: '', might: '', set: '', kw: '', inText: false, onlyErr: false, showBan: false };

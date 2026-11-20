@@ -1,45 +1,16 @@
 [
   {
     "type": "dependency",
-    "from": "src/components/Printings.tsx",
-    "to": "src/views/deckEdit.ts",
-    "unresolvedTo": "../views/deckEdit",
+    "from": "src/domain/chain/chainCore.ts",
+    "to": "src/render/html/glossary.ts",
+    "unresolvedTo": "../../render/html/glossary",
     "dependencyTypes": [
       "local",
       "import"
     ],
     "rule": {
       "severity": "error",
-      "name": "component-no-view"
-    }
-  },
-  {
-    "type": "dependency",
-    "from": "src/components/chainBuild.ts",
-    "to": "src/legacy/chain.ts",
-    "unresolvedTo": "../legacy/chain",
-    "dependencyTypes": [
-      "local",
-      "import"
-    ],
-    "rule": {
-      "severity": "error",
-      "name": "logic-no-dom-module"
-    }
-  },
-  {
-    "type": "dependency",
-    "from": "src/components/chainBuild.ts",
-    "to": "src/components/Playmat.tsx",
-    "unresolvedTo": "./Playmat",
-    "dependencyTypes": [
-      "local",
-      "type-only",
-      "import"
-    ],
-    "rule": {
-      "severity": "error",
-      "name": "logic-no-ui"
+      "name": "domain-only-domain"
     }
   }
 ]

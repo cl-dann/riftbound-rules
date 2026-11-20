@@ -1,7 +1,7 @@
 /* A független ellenőrzés által talált hibák javításának tesztjei (szabályszámok a rules.json szövegével ellenőrizve). */
 import { describe, expect, it } from 'vitest';
 import { cs, run, exampleOf, ruleText } from './util';
-import { check, DEF_OPT, type CU, type Opt } from '../src/components/combatCore';
+import { check, DEF_OPT, type CU, type Opt } from '../src/domain/combat/combatCore';
 
 const sentry = (pl: string, loc = 'bf0') => ({ n: 'Watchful Sentry', pl, loc });
 

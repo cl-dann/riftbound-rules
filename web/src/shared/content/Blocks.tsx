@@ -1,9 +1,10 @@
 /* Tanulási tartalom blokkjai (How to Play, Practice leckék, versenyformátum oldalak): a LearnView és a RulesView közös része. */
 import { useMemo, useState } from 'react';
 import { AlertTriangle, BookOpen, Check, ChevronLeft, ChevronRight, Clock, Compass, ExternalLink, Info, Lightbulb, Play, RotateCcw, X } from 'lucide-react';
-import { IMGBASE, vsCard } from '../../legacy/core';
-import { Playmat, DEMO_BOARD } from '../../components/Playmat';
+import { IMGBASE, vsCard } from '../../domain/data/store';
+import { Playmat, DEMO_BOARD } from '../board/Playmat';
 import { inline } from './richText';
+import { openCard } from '../lib/events';
 
 export { inline };
 type Cell = [number, string];
@@ -28,7 +29,6 @@ export const H = ({ t, seen, as = 'span', className }: { t: string; seen?: Set<s
   const El = as as any;
   return <El className={className} dangerouslySetInnerHTML={{ __html: inline(t, seen) }} />;
 };
-const openCard = (n: string) => window.dispatchEvent(new CustomEvent('rb:open-card', { detail: n }));
 const imgOf = (n: string) => { const c: any = vsCard(n); return c && c.img ? IMGBASE + c.img : ''; };
 
 /** Olvasási idő: a blokkok szövegéből, kb. 170 szó percenként. */

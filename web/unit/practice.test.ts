@@ -3,8 +3,8 @@
 import { describe, expect, it } from 'vitest';
 import LEARN from '../src/generated/learn.json';
 import RULES from '../src/generated/rules.json';
-import { vsCard } from '../src/legacy/core';
-import { act, asgConfirm, asgPick, asgView, autoNext, init, menuFor, panelBtn, solve, start, step, tgtConfirm, tgtToggle, type ES, type Scn } from '../src/components/practiceEngine';
+import { vsCard } from '../src/domain/data/store';
+import { act, asgConfirm, asgPick, asgView, autoNext, init, menuFor, panelBtn, solve, start, step, tgtConfirm, tgtToggle, type ES, type Scn } from '../src/domain/practice/practiceEngine';
 
 const SC = (LEARN as any).scenarios as Scn[];
 const ids = new Set((RULES as any[]).map((r) => r[0]));
@@ -139,7 +139,7 @@ describe('motor: szabályos menük és rossz döntések', () => {
 describe('Practice forrásfájlok', () => {
   it('nincs em-dash és en-dash, a {{...}} szabályszámok léteznek', async () => {
     const { readFileSync } = await import('node:fs');
-    for (const f of ['src/components/PracticeBoard.tsx', 'src/components/practiceEngine.ts', 'src/components/practice.css', 'src/views/LearnView.tsx', '../tools/learn/scenarios_build.py']) {
+    for (const f of ['src/features/learn/PracticeBoard.tsx', 'src/domain/practice/practiceEngine.ts', 'src/styles/practice.css', 'src/features/learn/LearnView.tsx', '../tools/learn/scenarios_build.py']) {
       const src = readFileSync(f, 'utf8');
       expect(src, f).not.toMatch(/[–—]/);
       for (const m of src.matchAll(/\{\{([\d.a-z, ]+)\}\}/g)) for (const r of m[1].split(/\s*,\s*/)) expect(ids.has(r), f + ': ' + r).toBe(true);

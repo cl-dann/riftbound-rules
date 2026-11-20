@@ -1,6 +1,6 @@
 /* Combat damage kiosztás: a Core Rules 467.2.c hivatalos példái (combatCore.ts). */
 import { describe, expect, it } from 'vitest';
-import { DEF_OPT, ALL, need, exempt, check, suggest, type CU, type Opt } from '../src/components/combatCore';
+import { DEF_OPT, ALL, need, exempt, check, suggest, type CU, type Opt } from '../src/domain/combat/combatCore';
 import { exampleOf } from './util';
 
 const u = (id: string, m: number, o: Partial<Opt> = {}, dmg = 0): CU => ({ id, uid: id, n: id, side: 'opp', m, dmg, stun: false, opt: { ...DEF_OPT, ...o }, sugs: [] });
