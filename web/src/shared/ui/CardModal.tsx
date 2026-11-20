@@ -5,18 +5,16 @@ import { cardHeadHTML, cardRulesHTML } from '../../render/html/card';
 import { CARDS } from '../../domain/data/store';
 import { Html } from './Html';
 import { Printings } from './Printings';
+import { on } from '../lib/events';
 
 /** Kártyalap felugró ablakban. Bármelyik nézet megnyithatja: window 'rb:open-card' esemény, detail = kártyanév. */
 export function CardModal() {
   const [card, setCard] = useState<any>(null);
   useEffect(() => {
-    const on = (e: Event) => {
-      const n = (e as CustomEvent).detail;
+    return on('rb:open-card', (n) => {
       const c = CARDS.find((x: any) => x.n === n);
       if (c) setCard(c);
-    };
-    window.addEventListener('rb:open-card', on);
-    return () => window.removeEventListener('rb:open-card', on);
+    });
   }, []);
   return (
     <Dialog.Root open={!!card} onOpenChange={(o) => !o && setCard(null)}>

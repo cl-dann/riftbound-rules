@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { renderTud } from '../../render/html/knowledge';
 import { Html } from '../../shared/ui/Html';
+import { emit, openCard } from '../../shared/lib/events';
 
 export function KnowledgeView({ hash }: { hash: string }) {
   const html = useMemo(() => renderTud(), []);
@@ -27,9 +28,9 @@ export function KnowledgeView({ hash }: { hash: string }) {
           return;
         }
         const cn = t.closest('button[data-card]') as HTMLElement | null;
-        if (cn) { window.dispatchEvent(new CustomEvent('rb:open-card', { detail: cn.dataset.card })); return; }
+        if (cn) { openCard(cn.dataset.card as string); return; }
         const b = t.closest('button[data-kwq]') as HTMLElement | null;
-        if (b) window.dispatchEvent(new CustomEvent('rb:card-search', { detail: b.dataset.kwq }));
+        if (b) emit('rb:card-search', b.dataset.kwq as string);
       }}>
       <Html html={html} />
     </div>

@@ -12,6 +12,7 @@ import { typeLine } from '../../domain/data/cards';
 import { Html } from '../../shared/ui/Html';
 import { loadFonts } from '../../domain/data/load';
 import { editDeck, eur, legendOf, priceOf, searchCards, targetSec, type Prices } from '../../domain/deck/edit';
+import { openCard } from '../../shared/lib/events';
 
 function deckTotals(P: Prices | null) {
   let a1 = 0, a7 = 0, n = 0; const miss: string[] = [];
@@ -164,7 +165,7 @@ export function DeckView() {
           const sm = t.closest('button[data-sim]') as HTMLElement | null;
           const qb = t.closest('button[data-inc]') as HTMLElement | null;
           if (qb) { e.preventDefault(); e.stopPropagation(); const c = DECK.flatMap((s: any) => s.rows).find((r: any) => r.card && r.card.n === qb.dataset.card)?.card; if (c) change(editDeck(text, qb.dataset.sec!, c, +qb.dataset.inc!)); return; }
-          if (sm) { window.dispatchEvent(new CustomEvent('rb:open-card', { detail: sm.dataset.sim })); return; }
+          if (sm) { openCard(sm.dataset.sim as string); return; }
           const b = t.closest('button[data-fix]') as HTMLElement | null;
           if (b) { const nt = text.split(b.dataset.fix!).join(b.dataset.to!); setText(nt); run(nt); }
         }}

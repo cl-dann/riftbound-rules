@@ -1,6 +1,7 @@
 import { createContext, useContext, useLayoutEffect, useRef, useState, type KeyboardEvent as RKE, type RefObject } from 'react';
 import { Swords } from 'lucide-react';
 import { IMGBASE, vsCard } from '../../domain/data/store';
+import { openCard } from '../lib/events';
 
 export type PUnit = { n: string; m: number; base?: number; ex?: boolean; dmg?: number; tag?: string; status?: string[]; mods?: string[]; gear?: string[]; token?: boolean; id?: string; kind?: 'gear' };
 export type PSide = {
@@ -259,7 +260,7 @@ function UnitInfo({ u, side, where }: { u: PUnit; side: 'me' | 'opp'; where: str
   const base = u.base ?? (c?.m != null && c.m !== 'None' ? +c.m : u.m);
   return (
     <div className="pm-uinfo">
-      {c?.img && <img src={IMGBASE + c.img} alt={u.n} onClick={() => window.dispatchEvent(new CustomEvent('rb:open-card', { detail: c.n }))} title="Teljes lapadat" />}
+      {c?.img && <img src={IMGBASE + c.img} alt={u.n} onClick={() => openCard(c.n)} title="Teljes lapadat" />}
       <div>
         <b>{u.n}</b> <span className="note">{side === 'me' ? 'saját' : 'ellenfél'} {u.kind === 'gear' ? 'gear (nincs csatolva)' : 'unit'} · {where}{u.token ? ' · token' : ''}</span>
         {u.kind === 'gear' ? <p>{u.ex ? 'Exhausted.' : 'Ready.'} Csatolatlan gear: nincs Mightja a boardon, csak csatolva ad Might bonust (435.1.d).</p> : <p>Might: <strong>{u.m}</strong>{u.m !== base && <> (nyomtatva {base}, {u.m > base ? '+' : ''}{u.m - base})</>}{u.dmg ? <>, damage: <strong>{u.dmg}</strong>, ennyi kell még a halálhoz: <strong>{Math.max(0, u.m - u.dmg)}</strong></> : null}{u.ex ? ', exhausted (nem mozoghat Standard Move-val)' : ', ready'}</p>}

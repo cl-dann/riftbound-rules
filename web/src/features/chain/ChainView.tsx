@@ -12,6 +12,7 @@ import {
   PICK_TITLE, type ChainFrame, type MtInfo, type MtInstr, type Arrow, type PickKind, type TgOpt, type Legal,
 } from './chainBuild';
 import '../../styles/practice.css';
+import { emit, on, openCard } from '../../shared/lib/events';
 
 export type { ChainFrame };
 
@@ -20,7 +21,6 @@ const ST_TXT: Record<MtInstr['st'], [string, string]> = {
 };
 const Refs = ({ r }: { r: string }) => <span className="cbv-refs">{r.split(/,\s*/).filter(Boolean).map((x) => <a key={x} className="rref" href="#szabalyok" data-ref={x}>{x}</a>)}</span>;
 const imgOf = (n?: string | null) => { const c = cardOf(n); return c && c.img ? IMGBASE + c.img : ''; };
-const openCard = (n: string) => window.dispatchEvent(new CustomEvent('rb:open-card', { detail: n }));
 
 function MistargetBox({ mt }: { mt: MtInfo }) {
   const rest = mt.instr.some((x) => x.st === 'executed');
@@ -545,7 +545,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
       return '';
     },
     on: (t) => {
-      window.dispatchEvent(new Event('rb:hide-tip'));
+      emit('rb:hide-tip');
       setPlay(false);
       if (narrow && wiz?.st === 'extra') return;
       if (narrow && t.k === 'add' && t.z === 'chain' && mode?.k !== 'target') { openWiz(); return; }
@@ -939,14 +939,12 @@ export function ChainView() {
   const [csv, setCsv] = useState(0);
   const [slot, setSlot] = useState<HTMLElement | null>(null);
   useEffect(() => {
-    const on = (e: Event) => { setFrames(((e as CustomEvent).detail || []) as ChainFrame[]); setCsv((v) => v + 1); };
-    const oc = () => setCsv((v) => v + 1);
-    window.addEventListener('rb:chain-frames', on);
-    window.addEventListener('rb:chain-cs', oc);
+    const offF = on('rb:chain-frames', (f) => { setFrames((f || []) as ChainFrame[]); setCsv((v) => v + 1); });
+    const offC = on('rb:chain-cs', () => setCsv((v) => v + 1));
     if (!done.current && ref.current) { done.current = true; initChain(ref.current); }
     setFrames(getChainFrames() as ChainFrame[]);
     setSlot(ref.current?.querySelector<HTMLElement>('#cb-viz') || null);
-    return () => { window.removeEventListener('rb:chain-frames', on); window.removeEventListener('rb:chain-cs', oc); };
+    return () => { offF(); offC(); };
   }, []);
   return <div ref={ref}>{slot && chainApi.get && createPortal(<ChainEditor frames={frames} csv={csv} />, slot)}</div>;
 }

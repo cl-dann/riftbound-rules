@@ -6,9 +6,10 @@ import { esc } from '../../domain/text/norm';
 import { vsCard } from '../../domain/data/store';
 import { b64e, b64d } from '../../domain/text/b64';
 import {zoneRefOf,analyze,stepInfo,srcCard,abilitiesOf,triggersOf,interp,timingOf,isPermC,actOf,OV_ACTS,OV_N,enterReadyCond} from '../../domain/chain/chainCore';
+import { emit, openCard } from '../../shared/lib/events';
 const $=(id:string)=>document.getElementById(id) as any;
-const openModal=(c:any)=>window.dispatchEvent(new CustomEvent('rb:open-card',{detail:c.n}));
-const hideTip=()=>window.dispatchEvent(new Event('rb:hide-tip'));
+const openModal=(c:any)=>openCard(c.n);
+const hideTip=()=>emit('rb:hide-tip');
 export const CHAIN_MARKUP=`<div class="cb2">
       <div class="cb2-bar">
         <div class="cb2-ex" id="cb-tplslot"></div>
@@ -63,7 +64,7 @@ export function reorderSteps(CS:any,order:number[]){const newOf={};order.forEach
 /* Lejátszási frame-ek: az analyze minden lépés után pillanatképet készít a boardról, a React rész (ChainView) jeleníti meg. */
 let LAST_FRAMES:any[]=[];
 export const getChainFrames=()=>LAST_FRAMES;
-const emitFrames=(f:any[])=>{LAST_FRAMES=f;window.dispatchEvent(new CustomEvent('rb:chain-frames',{detail:f}));};
+const emitFrames=(f:any[])=>{LAST_FRAMES=f;emit('rb:chain-frames',f);};
 
 /** Beépített példák (a "Példa betöltése" gombok és a unit tesztek is ezt használják). */
 export const EXAMPLES:any={
@@ -297,7 +298,7 @@ let QEL=null,QJ=-1;const QBOUND=new WeakSet();
 function renderQuick(){if(QEL)QEL.innerHTML=quickHtml(QJ);if(SEL)SEL.innerHTML=stateKeys().length?stateHtml():'';}
 let SEL=null;chainApi.stateEl=el=>{SEL=el;if(el&&!QBOUND.has(el)){QBOUND.add(el);el.addEventListener('change',onChg);}renderQuick();};
 chainApi.quick=(el,j)=>{QEL=el;QJ=j;if(el&&!QBOUND.has(el)){QBOUND.add(el);el.addEventListener('change',onChg);}renderQuick();};
-function notify(){window.dispatchEvent(new CustomEvent('rb:chain-cs'));}
+function notify(){emit('rb:chain-cs');}
 let TMR=0;function sched(ms=250){clearTimeout(TMR);TMR=setTimeout(runCB,ms);}
 function loadChainFromHash(){const m=/^#c=(.+)$/.exec(location.hash);if(!m)return false;try{CS=normZones(JSON.parse(b64d(m[1])));renderCB();runCB();return true;}catch(e){return false;}}
 function runCB(){clearTimeout(TMR);const r=analyze(JSON.parse(JSON.stringify(CS)));chainApi.last=r;emitFrames(r.frames);$('cb-out').innerHTML=r.empty?'<p class="note">'+(CS.steps.length?'A lépésekben még nincs felismert lap vagy ability.':'Még nincs lépés: kattints a pályán egy lapra, vagy a Chain zóna + gombjára.')+'</p>':r.html;}

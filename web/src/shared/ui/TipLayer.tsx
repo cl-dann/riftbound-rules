@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { TERMS, vsCard, IMGBASE } from '../../domain/data/store';
 import { esc } from '../../domain/text/norm';
 import { typeLine } from '../../domain/data/cards';
+import { on } from '../lib/events';
 
 /** Egyetlen, globális tooltip: fogalommagyarázat (.gl), kártyakép kártyanéven (.cl), egyszerű szöveg ([data-tt]). */
 export function TipLayer() {
@@ -50,11 +51,11 @@ export function TipLayer() {
     const key = (e: KeyboardEvent) => { if (e.key === 'Escape') hide(); };
     document.addEventListener('mouseover', over); document.addEventListener('focusin', focus);
     document.addEventListener('click', click); document.addEventListener('keydown', key);
-    window.addEventListener('scroll', hide, { passive: true }); window.addEventListener('rb:hide-tip', hide);
+    window.addEventListener('scroll', hide, { passive: true }); const offHide = on('rb:hide-tip', hide);
     return () => {
       document.removeEventListener('mouseover', over); document.removeEventListener('focusin', focus);
       document.removeEventListener('click', click); document.removeEventListener('keydown', key);
-      window.removeEventListener('scroll', hide); window.removeEventListener('rb:hide-tip', hide);
+      window.removeEventListener('scroll', hide); offHide();
     };
   }, []);
   return <div id="tip" ref={ref} role="tooltip" hidden />;

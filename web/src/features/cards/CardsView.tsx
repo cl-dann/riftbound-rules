@@ -6,6 +6,7 @@ import { cardHeadHTML, cardRulesHTML, domDots } from '../../render/html/card';
 import { esc, norm } from '../../domain/text/norm';
 import { typeLine } from '../../domain/data/cards';
 import { Html } from '../../shared/ui/Html';
+import { on, openCard } from '../../shared/lib/events';
 
 const SETS = ['Origins', 'Proving Grounds', 'Spiritforged', 'Unleashed', 'Vendetta', 'Radiance'];
 const DOMAINS = ['Fury', 'Calm', 'Mind', 'Body', 'Chaos', 'Order'];
@@ -106,9 +107,7 @@ export function CardsView({ active }: { active: boolean }) {
   useEffect(() => { try { localStorage.setItem('rb-view2', mode); } catch { /* */ } }, [mode]);
   // A Kézikönyv kulcsszó gombja ide küld keresést.
   useEffect(() => {
-    const on = (e: Event) => { up({ ...EMPTY, q: (e as CustomEvent).detail, inText: true }); location.hash = '#kartyak'; };
-    window.addEventListener('rb:card-search', on);
-    return () => window.removeEventListener('rb:card-search', on);
+    return on('rb:card-search', (q) => { up({ ...EMPTY, q, inText: true }); location.hash = '#kartyak'; });
   }, []);
   // Ctrl+K vagy / fókuszálja a keresőt.
   useEffect(() => {
@@ -122,7 +121,7 @@ export function CardsView({ active }: { active: boolean }) {
   }, [active]);
 
   const pick = (c: any) => {
-    if (mode === 'grid') { window.dispatchEvent(new CustomEvent('rb:open-card', { detail: c.n })); return; }
+    if (mode === 'grid') { openCard(c.n); return; }
     setSel(c);
     if (window.innerWidth < 860) detailRef.current?.scrollIntoView({ behavior: 'smooth' });
   };

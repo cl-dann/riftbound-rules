@@ -13,9 +13,9 @@ import {
   locate, groupOf, type ES, type PUnit, type Scn, type Side,
 } from '../../domain/practice/practiceEngine';
 import '../../styles/practice.css';
+import { openCard } from '../../shared/lib/events';
 
 const imgOf = (n?: string | null) => { const c: any = n ? vsCard(n) : null; return c && c.img ? IMGBASE + c.img : ''; };
-const openCard = (n: string) => window.dispatchEvent(new CustomEvent('rb:open-card', { detail: n }));
 const T = ({ t, as = 'span', className }: { t: string; as?: 'span' | 'p' | 'div'; className?: string }) => {
   const El = as as any; return <El className={className} dangerouslySetInnerHTML={{ __html: inline(t) }} />;
 };
