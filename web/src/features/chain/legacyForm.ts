@@ -6,7 +6,7 @@ import { esc } from '../../domain/text/norm';
 import { vsCard } from '../../domain/data/store';
 import { b64e } from '../../domain/text/b64';
 import { zoneRefOf } from '../../domain/chain/zones';
-import { analyze } from '../../domain/chain/chainCore';
+import { analyze } from '../../render/html/chainReport';
 import { stepInfo, srcCard } from '../../domain/chain/steps';
 import { abilitiesOf, triggersOf } from '../../domain/chain/parser';
 import { interp, timingOf, isPermC, actOf, OV_ACTS, OV_N } from '../../domain/chain/actions';

@@ -1,6 +1,6 @@
 /* "From among them" minden felismert lapra, valós lapokkal: a megnézett lapok közül választott lap a lapszöveg szerinti helyre kerül, a többi recycle. */
 import { describe, expect, it } from 'vitest';
-import { analyze } from '../src/domain/chain/chainCore';
+import { analyze } from '../src/render/html/chainReport';
 import { interp } from '../src/domain/chain/actions';
 import { stepInfo } from '../src/domain/chain/steps';
 import { zoneRefOf } from '../src/domain/chain/zones';

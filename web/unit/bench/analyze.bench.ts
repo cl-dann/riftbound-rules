@@ -1,7 +1,7 @@
 /* Teljesítménymérés: analyze() a sablonokon és a beépített példákon, valamint a pályás építő próba-elemzései
    (tryStep, targetOpts, zoneCands, setupFrame), amelyek egy kattintásra sokszor futnak. Futtatás: npm run bench */
 import { test } from 'vitest';
-import { analyze } from '../../src/domain/chain/chainCore';
+import { analyze } from '../../src/render/html/chainReport';
 import { EXAMPLES } from '../../src/features/chain/legacyForm';
 import { TEMPLATES } from '../../src/domain/chain/templates';
 import { setupFrame, targetOpts, tryStep, zoneCands, zonePicks } from '../../src/features/chain/chainBuild';

@@ -2,7 +2,7 @@
    egy hiba reprodukálása: FC_SEED=<seed> npx vitest run unit/invariansok.test.ts */
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
-import { analyze } from '../src/domain/chain/chainCore';
+import { analyze } from '../src/render/html/chainReport';
 import { EXAMPLES, normZones, reorderSteps } from '../src/features/chain/legacyForm';
 import { TEMPLATES } from '../src/domain/chain/templates';
 import { insertAt } from '../src/features/chain/chainBuild';

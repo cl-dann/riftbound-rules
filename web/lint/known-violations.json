@@ -1,16 +1,1 @@
-[
-  {
-    "type": "dependency",
-    "from": "src/domain/chain/chainCore.ts",
-    "to": "src/render/html/glossary.ts",
-    "unresolvedTo": "../../render/html/glossary",
-    "dependencyTypes": [
-      "local",
-      "import"
-    ],
-    "rule": {
-      "severity": "error",
-      "name": "domain-only-domain"
-    }
-  }
-]
+[]

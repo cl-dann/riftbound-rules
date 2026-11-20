@@ -1,6 +1,6 @@
 /* Kéz, deck és trash lapjai mint célpont vagy választás (355.7, 355.9.a, 355.10.a, 355.18, 359.3.e.4-6), valós lapokkal. */
 import { describe, expect, it } from 'vitest';
-import { analyze } from '../src/domain/chain/chainCore';
+import { analyze } from '../src/render/html/chainReport';
 import { zoneRefOf } from '../src/domain/chain/zones';
 import { ruleText } from './util';
 
