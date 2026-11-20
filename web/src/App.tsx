@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState, type ReactNode } from 'react';
+import { Suspense, lazy, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { loadData } from './data';
 import { VIEWS, useHash, viewOf } from './router';
 import { CARDS, META, BF, BAN_ACTIVE, RULES, esc, expandAll, refHash, ruleHTML } from './legacy/core';
@@ -61,7 +61,15 @@ function Shell() {
   useGlobalHandlers();
   const [seen, setSeen] = useState(() => new Set([view]));
   useEffect(() => { setSeen((s) => (s.has(view) ? s : new Set(s).add(view))); }, [view]);
-  const errata = CARDS.filter((c: any) => c.err != null).length;
+  const errata = useMemo(() => CARDS.filter((c: any) => c.err != null).length, []);
+  // A lapnév-listák (1101 option) egyszer készülnek, nem minden hash-váltáskor.
+  const datalists = useMemo(() => (
+    <>
+      <datalist id="cardnames">{CARDS.filter((c: any) => c.t !== 'Legend' && c.t !== 'Battlefield').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
+      <datalist id="legnames">{CARDS.filter((c: any) => c.t === 'Legend').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
+      <datalist id="bfnames">{CARDS.filter((c: any) => c.t === 'Battlefield').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
+    </>
+  ), []);
   const [pricesAt, setPricesAt] = useState('');
   useEffect(() => { fetch('./prices.json').then((r) => (r.ok ? r.json() : null)).then((j) => j?.updated && setPricesAt(String(j.updated).slice(0, 10))).catch(() => { /* nincs ár */ }); }, []);
   return (
@@ -90,9 +98,7 @@ function Shell() {
       <section className={'view' + (view === 'tanulas' ? ' on' : '')}>{seen.has('tanulas') && <Lazy><LearnView hash={hash} base="tanulas" /></Lazy>}</section>
       <section className={'view' + (view === 'kezikonyv' ? ' on' : '')}>{seen.has('kezikonyv') && <Lazy><KnowledgeView hash={hash} /></Lazy>}</section>
       <Footer />
-      <datalist id="cardnames">{CARDS.filter((c: any) => c.t !== 'Legend' && c.t !== 'Battlefield').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
-      <datalist id="legnames">{CARDS.filter((c: any) => c.t === 'Legend').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
-      <datalist id="bfnames">{CARDS.filter((c: any) => c.t === 'Battlefield').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
+      {datalists}
       <CardModal />
       <TipLayer />
     </div>

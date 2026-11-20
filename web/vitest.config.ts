@@ -6,7 +6,7 @@ export default defineConfig({
   test: {
     projects: [
       { test: { name: 'unit', include: ['unit/*.test.ts'], setupFiles: ['unit/setup.ts'], environment: 'node' } },
-      { test: { name: 'golden', include: ['unit/golden/*.test.ts'], setupFiles: ['unit/golden/clock.ts', 'unit/setup.ts'], environment: 'node' } },
+      { test: { name: 'golden', include: ['unit/golden/*.test.ts'], benchmark: { include: [] }, setupFiles: ['unit/golden/clock.ts', 'unit/setup.ts'], environment: 'node' } },
     ],
   },
 });

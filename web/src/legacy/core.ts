@@ -5,11 +5,14 @@ export let D:any, RULES:any[], TOPICS:any[], CARDS:any[], META:any, BF:any, BAN_
 export const TODAY=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');})();
 export const byName=new Map();
 export let top3:number[]=[];
+/** A fogalmak teljes egyezésű regexei: egyszer, az init()-ben fordulnak (a termOf korábban minden találatnál fordította). */
+let TERM_RES:RegExp[]=[];
 export function init(data:any){
   D=data;RULES=D.rules;TOPICS=D.topics;CARDS=D.cards;META=D.meta;BF=META.banfut;BAN_ACTIVE=!!(BF&&TODAY>=BF.from);
   CARDS.forEach(c=>{if(c.banf&&TODAY>=c.banf){c.ban=1;c.banNew=1;}});
   top3=RULES.map(r=>parseInt(r[0].slice(0,3),10));
   TERMS=(D.extra&&D.extra.terms)||[];
+  TERM_RES=TERMS.map(x=>new RegExp('^(?:'+x.m+')$','iu'));
   TRE=TERMS.length?new RegExp('(?<![\\p{L}\\[])('+TERMS.map(x=>x.m).sort((a,b)=>b.length-a.length).join('|')+')(?![\\p{L}])','giu'):null;
   CARDS.forEach(c=>{c._n=norm(c.n);c._s=norm([c.n].concat(c.a,c.tg||[],c.st||[],[c.t]).join(' '));c._t=norm(c.txt||'');[c.n].concat(c.a).forEach(a=>{const k=norm(a);if(!byName.has(k))byName.set(k,c);});});
   CARDS.forEach(c=>{c._kw=c.tp.filter(p=>TOPICS[p[0]].g==='kw').map(p=>TOPICS[p[0]].title);});
@@ -79,7 +82,7 @@ export function topicBlock(tp,why,open){
 }
 export const FL=['szabály','levezetés','nyitott kérdés'];
 export const FLT=['A Core Rules közvetlenül kimondja.','A szabályból és a kártyaszövegből levezetett következmény, nem hivatalos ruling.','A Core Rules nem dönti el egyértelműen, judge döntése kell.'];
-export function termOf(w){const lw=w.toLowerCase();for(const x of TERMS){if(new RegExp('^(?:'+x.m+')$','iu').test(w))return x;}return null;}
+export function termOf(w){for(let i=0;i<TERMS.length;i++){if(TERM_RES[i].test(w))return TERMS[i];}return null;}
 export const NOHL=new Set(['unit','spell','gear','legend']);
 export function glossify(html,seen){
   if(!TRE)return html;seen=seen||new Set();
