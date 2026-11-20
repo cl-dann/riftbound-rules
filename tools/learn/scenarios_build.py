@@ -314,7 +314,7 @@ SC.append({
         free(need=['end'], end={'go': 'o_good'}, hint='Fejezd be a kört az End Turn gombbal.'),
     ],
     'outcomes': {
-        'o_good': good('Lebegtetve, mindkét lap kint', 'Exhaustolt rune is recycle-ölhető {{164.2.b}}, így egy rune Energyt és Powert is adhat. A recycle-ölt rune a Rune Deck aljára kerül {{417.1.b}}, és a Channel Phase-ben onnan jön vissza {{315.3.b}}.'),
+        'o_good': good('Lebegtetve, mindkét lap kint', 'Exhaustolt rune is recycle-ölhető {{164.2.b}}, így egy rune Energyt és Powert is adhat. A recycle-ölt rune a Rune Deck aljára kerül {{417.1.b}}, és csak akkor jön vissza, amikor a channel a Rune Deck tetejéről addig elfogyasztotta a többi rune-t {{431.1}}.'),
         'o_good2': good('Szintén jó', 'A Chemtech Enforcer is elfoglalja a gazdátlan Grove-ot: conquer, 1 pont {{348.2.a.1}}. A Drakehound ready maradt a base-ben.'),
         'o_lost': bad('Elfogyott az Energy', 'A maradék rune-okból már nem fizethető ki mindkét lap. Egy rune vagy Energyt ad exhaustolva {{164.2.a}}, vagy Powert recycle-lel {{164.2.b}}: ha ready rune-t recycle-ölsz, az Energyje elveszik. Előbb exhaust, utána recycle.'),
         'o_chaos': bad('Rossz domain', 'Chaos rune Chaos Powert ad {{164.2.b.1}}, a lapok Fury Powert kérnek {{163.2.a}}. A recycle-ölt rune feleslegesen hagyta el a boardot {{161.2.b}}.'),
@@ -405,7 +405,7 @@ SC.append({
     'fallback': 'o_fb',
     'steps': [
         free(need=['move:Ahri, Inquisitive:bf0', 'move:Vanguard Sergeant:bf0'], partial='o_alone', end={'go': 'o_skip'}),
-        panel('TRIGGERS', 'A Kinkou Temple Contested lett, combat kezdődik. Te vagy az Attacker {{466.2.c.1}}, a designationök most kerülnek fel {{466.2.c.3}}. Egyszerre két trigger lett pending: Ahri támadás triggere és Draven védekezés triggere {{466.2.d}}. Ki teszi fel elsőként a triggerét a chainre?', [
+        panel('TRIGGERS', 'A Kinkou Temple Contested lett, combat kezdődik. Te vagy az Attacker {{466.2.c.1}}, a designationök most kerülnek fel {{466.2.c.3}}. Egyszerre két trigger lett pending: Ahri támadás triggere és Draven védekezés triggere {{466.2.d}}. A Combat Chainre előbb az Attacker rakja fel a triggereit, a Defender utolsóként {{466.2.d.1}}. Ki teszi fel elsőként a triggerét a chainre?', [
             B('Én, a Turn Player', kind='gold'), B('Az ellenfél, mert ő védekezik', 'o_o1'), B('Egyszerre kerülnek fel', 'o_o2')],
               st='showdown', pre=[{'op': 'tag', 'ref': 'Ahri, Inquisitive', 'add': ['Attacker']}, {'op': 'tag', 'ref': 'Vanguard Sergeant', 'add': ['Attacker']}, {'op': 'tag', 'ref': 'Draven, Vanquisher', 'add': ['Defender']}]),
         {'t': 'target', 'tag': 'TARGET', 'title': 'Ahri, Inquisitive: -2 Might', 'text': 'Ahri triggere egy ott álló ellenséges unitot kér. A célpontot akkor választod, amikor a trigger a chainre kerül {{383.3}} {{355.5}}.', 'max': 1,
@@ -431,7 +431,7 @@ SC.append({
         'o_good': good('Demó kész', 'Az egyszerre triggerelő képességeket a Turn Player teszi fel elsőként {{383.3.d.1}}, ezért az ellenfél triggere kerül felülre, és az oldódik fel előbb {{340.1}}. Ahri -2-je így a +2 után jött, Draven 4 Mighttal harcolt.'),
         'o_alone': bad('Egyedül kevés', 'Ahri egyedül 3 Mighttal harcolna a 4 Mightú (a két trigger után is 4) Draven ellen, a Sergeant egyedül, Ahri triggere nélkül a 6 Mightú Draven ellen. Az azonos oldal Mightja összeadódik {{467.2.c}}: együtt 7.'),
         'o_skip': SKIP('Két ready unitod volt, együtt legyőzhették volna Dravent.'),
-        'o_o1': bad('A Turn Player kezd', 'Ha több játékos triggerei egyszerre triggerelnek, a Turn Player kezdi, és Turn Order szerint haladnak {{383.3.d.1}}. A védekező triggere ezért a te triggered fölé kerül.'),
+        'o_o1': bad('A Turn Player kezd', 'Ha több játékos triggerei egyszerre triggerelnek, a Turn Player kezdi, és Turn Order szerint haladnak {{383.3.d.1}}, combatban az Attacker kezd, a Defender az utolsó {{466.2.d.1}}. A védekező triggere ezért a te triggered fölé kerül.'),
         'o_o2': bad('Nem egyszerre', 'A chainre egyesével kerülnek fel, a Turn Playerrel kezdve {{383.3.d.1}}.'),
         'o_lifo': bad('A legújabb az első', 'A chain mindig a legújabb elemmel kezd {{340.1}}: Draven triggere került fel utoljára.'),
         'o_fb': FB,

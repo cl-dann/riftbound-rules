@@ -3753,7 +3753,7 @@
     "o_good": {
      "kind": "good",
      "title": "Lebegtetve, mindkét lap kint",
-     "text": "Exhaustolt rune is recycle-ölhető {{164.2.b}}, így egy rune Energyt és Powert is adhat. A recycle-ölt rune a Rune Deck aljára kerül {{417.1.b}}, és a Channel Phase-ben onnan jön vissza {{315.3.b}}."
+     "text": "Exhaustolt rune is recycle-ölhető {{164.2.b}}, így egy rune Energyt és Powert is adhat. A recycle-ölt rune a Rune Deck aljára kerül {{417.1.b}}, és csak akkor jön vissza, amikor a channel a Rune Deck tetejéről addig elfogyasztotta a többi rune-t {{431.1}}."
     },
     "o_good2": {
      "kind": "good",
@@ -4367,7 +4367,7 @@
     {
      "t": "panel",
      "tag": "TRIGGERS",
-     "text": "A Kinkou Temple Contested lett, combat kezdődik. Te vagy az Attacker {{466.2.c.1}}, a designationök most kerülnek fel {{466.2.c.3}}. Egyszerre két trigger lett pending: Ahri támadás triggere és Draven védekezés triggere {{466.2.d}}. Ki teszi fel elsőként a triggerét a chainre?",
+     "text": "A Kinkou Temple Contested lett, combat kezdődik. Te vagy az Attacker {{466.2.c.1}}, a designationök most kerülnek fel {{466.2.c.3}}. Egyszerre két trigger lett pending: Ahri támadás triggere és Draven védekezés triggere {{466.2.d}}. A Combat Chainre előbb az Attacker rakja fel a triggereit, a Defender utolsóként {{466.2.d.1}}. Ki teszi fel elsőként a triggerét a chainre?",
      "btns": [
       {
        "l": "Én, a Turn Player",
@@ -4619,7 +4619,7 @@
     "o_o1": {
      "kind": "bad",
      "title": "A Turn Player kezd",
-     "text": "Ha több játékos triggerei egyszerre triggerelnek, a Turn Player kezdi, és Turn Order szerint haladnak {{383.3.d.1}}. A védekező triggere ezért a te triggered fölé kerül."
+     "text": "Ha több játékos triggerei egyszerre triggerelnek, a Turn Player kezdi, és Turn Order szerint haladnak {{383.3.d.1}}, combatban az Attacker kezd, a Defender az utolsó {{466.2.d.1}}. A védekező triggere ezért a te triggered fölé kerül."
     },
     "o_o2": {
      "kind": "bad",
