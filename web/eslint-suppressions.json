@@ -27,15 +27,12 @@
       "count": 1
     },
     "@typescript-eslint/no-explicit-any": {
-      "count": 124
+      "count": 22
     },
     "@typescript-eslint/no-unused-vars": {
-      "count": 6
+      "count": 22
     },
     "no-empty": {
-      "count": 1
-    },
-    "no-self-assign": {
       "count": 1
     }
   },
@@ -110,6 +107,20 @@
     },
     "@typescript-eslint/no-explicit-any": {
       "count": 4
+    }
+  },
+  "src/domain/chain/engine/resolve.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    },
+    "@typescript-eslint/no-explicit-any": {
+      "count": 102
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 2
+    },
+    "no-self-assign": {
+      "count": 1
     }
   },
   "src/domain/chain/engine/state.ts": {
