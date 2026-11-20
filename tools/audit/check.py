@@ -8,13 +8,13 @@ for n,v in (O.get('fixes') or {}).items():
     s=v.get('short')
     if s is not None:
         if not isinstance(s,str) or not 60<=len(s)<=420: err.append(n+': short length')
-        if re.search('[–—]',s): err.append(n+': dash in short')
+        if re.search('[\u2013\u2014]',s): err.append(n+': dash in short')
     nt=v.get('notes')
     if nt is not None:
         if not isinstance(nt,list) or not nt: err.append(n+': notes empty');continue
         for p in nt:
             if not (isinstance(p,list) and len(p)==3 and p[1] in (0,1,2) and isinstance(p[2],str)): err.append(n+': bad note '+str(p)[:80]);continue
-            if re.search('[–—]',p[2]): err.append(n+': dash in note')
+            if re.search('[\u2013\u2014]',p[2]): err.append(n+': dash in note')
             for r in str(p[0]).split(','):
                 r=r.strip()
                 if r and r not in R: err.append(n+': unknown rule '+r)

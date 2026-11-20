@@ -1,0 +1,4 @@
+#!/bin/sh
+# Bekapcsolás (egyszer, klónozás után): git config core.hooksPath .githooks
+# (a web/ alatti npm install a prepare szkripttel ezt megteszi)
+exec node "$(git rev-parse --show-toplevel)/scripts/check-dashes.mjs" --staged

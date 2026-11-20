@@ -1,9 +1,10 @@
-name: E2E tesztek (Playwright)
+name: Tesztek (ellenőrzők, unit, Playwright)
 
+# PR-en és kézzel fut, a main-re pusholt commitot a deploy.yml futtatja (workflow_call), és csak zöld teszt után élesít.
 on:
-  push:
-    branches: [main]
+  pull_request:
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   e2e:
@@ -24,11 +25,19 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: web/package-lock.json
-      - name: Build és teszt
+      - name: Kötőjel-ellenőrzés (U+2013, U+2014)
+        run: node scripts/check-dashes.mjs
+      - name: Függőségek
+        working-directory: web
+        run: npm ci
+      - name: Build (tsc -b és vite build)
+        working-directory: web
+        run: npm run build
+      - name: Unit tesztek
+        working-directory: web
+        run: npx vitest run
+      - name: Playwright
         working-directory: web
         run: |
-          npm ci
-          npx vitest run
-          npx vite build
           npx playwright install --with-deps chromium
           npx playwright test --reporter=line

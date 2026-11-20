@@ -12,7 +12,7 @@ for name,notes in N.items():
         if flag not in (0,1,2): err.append(f'{name}: bad flag {flag}')
         for x in refs.split(','):
             if x.strip() not in R: err.append(f'{name}: rule id does not exist: "{x.strip()}"')
-        if '—' in text or '–' in text: err.append(f'{name}: em/en dash in text')
+        if '\u2014' in text or '\u2013' in text: err.append(f'{name}: em/en dash in text')
         if len(text)>330: err.append(f'{name}: note too long ({len(text)} chars)')
         if len(text)<25: err.append(f'{name}: note too short')
 if C:
