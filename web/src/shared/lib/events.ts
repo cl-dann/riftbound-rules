@@ -7,10 +7,6 @@ export type RbEvents = {
   'rb:card-search': string;
   /** A fogalom-tooltip elrejtése. */
   'rb:hide-tip': undefined;
-  /** A chain elemzés lejátszási frame-jei (a legacy builder küldi, a ChainView fogadja). */
-  'rb:chain-frames': unknown[];
-  /** A chain helyzet (CS) megváltozott. */
-  'rb:chain-cs': undefined;
 };
 type Args<K extends keyof RbEvents> = RbEvents[K] extends undefined ? [] : [detail: RbEvents[K]];
 

@@ -3,7 +3,8 @@
 import { expect, it } from 'vitest';
 import { analyze } from '../../src/render/html/chainReport';
 import { runChain } from '../../src/domain/chain/engine/analyze';
-import { EXAMPLES, normZones } from '../../src/features/chain/legacyForm';
+import { EXAMPLES } from '../../src/domain/chain/examples';
+import { normZones } from '../../src/domain/chain/cs';
 import { TEMPLATES } from '../../src/domain/chain/templates';
 import { b64d } from '../../src/domain/text/b64';
 import CASES from './cases.json';

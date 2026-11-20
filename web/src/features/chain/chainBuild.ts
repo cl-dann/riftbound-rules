@@ -7,7 +7,7 @@ import { timingOf, isPermC, interp } from '../../domain/chain/actions';
 import { zoneRefOf, zoneCheck, type ZoneRef } from '../../domain/chain/zones';
 import { vsCard, CARDS } from '../../domain/data/store';
 import { norm } from '../../domain/text/norm';
-import { tgOptionsOf, reorderSteps, locLabelOf } from './legacyForm';
+import { tgOptionsOf, reorderSteps, locLabelOf } from '../../domain/chain/cs';
 import type { PBoard } from '../../shared/board/Playmat';
 import type { Card } from '../../domain/data/schema';
 import type { ChainState, Step } from '../../domain/chain/state';

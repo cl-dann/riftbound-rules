@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { vsCard } from '../../domain/data/store';
-import { chainApi, type TrigAdd } from './legacyForm';
+import { chainActions, type TrigAdd } from './store';
 import type { PBoard, PUnit } from '../../shared/board/Playmat';
 import { ALL, DEF_OPT, cm, need, check, suggest, dealt, lethalHit, type Side, type Opt, type Sug, type CU } from '../../domain/combat/combatCore';
 
@@ -249,7 +249,7 @@ export function CombatPanel({ board, frameLabel, bfi, isLast = true, focus }: { 
     };
   };
   const addTrig = (list: (TrigAdd & { key: string })[]) => {
-    chainApi.addTriggers?.(list.map(({ key: _k, ...t }) => t), cbOut()); // eslint-disable-line @typescript-eslint/no-unused-vars
+    chainActions().addTriggers?.(list.map(({ key: _k, ...t }) => t), cbOut()); // eslint-disable-line @typescript-eslint/no-unused-vars
     setAdded((x) => ({ ...x, ...Object.fromEntries(list.map((t) => [t.key, true])) }));
   };
 

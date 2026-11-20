@@ -3,7 +3,8 @@
    A refaktor alatt ennek byte-azonosnak kell maradnia. Szándékos változásnál: npx vitest run --project golden -u */
 import { describe, expect, it } from 'vitest';
 import { analyze } from '../../src/render/html/chainReport';
-import { EXAMPLES, normZones } from '../../src/features/chain/legacyForm';
+import { EXAMPLES } from '../../src/domain/chain/examples';
+import { normZones } from '../../src/domain/chain/cs';
 import { TEMPLATES } from '../../src/domain/chain/templates';
 import { b64d } from '../../src/domain/text/b64';
 import CASES from './cases.json';

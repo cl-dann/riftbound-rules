@@ -3,7 +3,8 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
 import { analyze } from '../src/render/html/chainReport';
-import { EXAMPLES, normZones, reorderSteps } from '../src/features/chain/legacyForm';
+import { EXAMPLES } from '../src/domain/chain/examples';
+import { normZones, reorderSteps } from '../src/domain/chain/cs';
 import { TEMPLATES } from '../src/domain/chain/templates';
 import { insertAt } from '../src/features/chain/chainBuild';
 import { CARDS } from '../src/domain/data/store';

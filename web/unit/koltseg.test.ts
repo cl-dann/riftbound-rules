@@ -3,7 +3,7 @@
 import { describe, expect, it } from 'vitest';
 import { analyze } from '../src/render/html/chainReport';
 import { costCondOf, costCheck, printedCost } from '../src/domain/chain/cost';
-import { normZones } from '../src/features/chain/legacyForm';
+import { normZones } from '../src/domain/chain/cs';
 import { vsCard } from '../src/domain/data/store';
 import { ruleText, exampleOf } from './util';
 
