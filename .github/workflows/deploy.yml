@@ -40,7 +40,7 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: web/package-lock.json
-      - name: Web app build (React + Vite), plusz egyfájlos offline változat
+      - name: Web app build (React + Vite)
         working-directory: web
         run: |
           npm ci

@@ -23,7 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 src/generated/
-dist-single
 test-results/
 playwright-report/
 bench-results.json

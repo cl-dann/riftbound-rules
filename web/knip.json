@@ -1,7 +1,31 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "entry": ["src/main.tsx", "unit/**/*.test.ts", "unit/**/*.bench.ts", "unit/golden/capture.mjs", "e2e/**/*.spec.ts", "vitest.capture.config.ts"],
-  "project": ["src/**/*.{ts,tsx}", "unit/**/*.ts", "e2e/**/*.ts"],
-  "ignore": ["unit/elozo/**", "src/generated/**", "lint/**"],
-  "ignoreDependencies": ["tailwindcss"]
+  "entry": [
+    "src/main.tsx",
+    "unit/**/*.test.ts",
+    "unit/**/*.bench.ts",
+    "unit/golden/capture.mjs",
+    "e2e/**/*.spec.ts",
+    "vitest.capture.config.ts"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx}",
+    "unit/**/*.ts",
+    "e2e/**/*.ts"
+  ],
+  "ignore": [
+    "unit/elozo/**",
+    "src/generated/**",
+    "lint/**"
+  ],
+  "ignoreDependencies": [
+    "tailwindcss"
+  ],
+  "rules": {
+    "exports": "warn",
+    "types": "warn",
+    "nsExports": "warn",
+    "nsTypes": "warn",
+    "duplicates": "warn"
+  }
 }

@@ -89,7 +89,6 @@ export function locate(b: PBoard, ref: string): Loc | null {
   return null;
 }
 export const unitOf = (b: PBoard, n: string) => locate(b, n)?.u;
-export const locName = (b: PBoard, loc: string) => (loc === 'base' ? 'base' : b.bfs[+loc.slice(2)]?.name || loc);
 /** A célpont-választó csoportfelirata. */
 export function groupOf(b: PBoard, ref: string): string {
   const l = locate(b, ref); if (!l) return '';

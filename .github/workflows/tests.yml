@@ -35,12 +35,12 @@ jobs:
       - name: Függőségek
         working-directory: web
         run: npm ci
-      - name: Lint (ESLint, dependency-cruiser), knip riport
+      - name: Lint (ESLint, dependency-cruiser, knip)
         working-directory: web
         run: |
           npm run lint:install
           npm run lint
-          npx knip --no-exit-code
+          npx knip
       - name: Build (tsc -b és vite build), bundle térkép
         working-directory: web
         env:
