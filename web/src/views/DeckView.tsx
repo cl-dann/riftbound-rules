@@ -143,7 +143,7 @@ export function DeckView() {
         </div>
         <div className="btnrow">
           {hasLast && <button className="linkbtn" onClick={() => { let t = ''; try { t = localStorage.getItem('rb-deck') || ''; } catch { /* */ } setText(t); run(t); }}><RotateCcw size={13} /> Legutóbbi deck visszatöltése</button>}
-          <button className="linkbtn" onClick={() => { setText(''); run(''); }}><Trash2 size={13} /> Mező törlése</button>
+          <button className="linkbtn danger" onClick={() => { setText(''); run(''); }}><Trash2 size={13} /> Mező törlése</button>
         </div>
         <div className="btnrow">
           <label className="chk"><input type="checkbox" checked={rel} onChange={(e) => setRel(e.target.checked)} /> kapcsolódó szabályok szövege is a PDF-ben</label>

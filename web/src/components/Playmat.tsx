@@ -110,7 +110,7 @@ function Unit({ u, side, changed, where = '', loc = '', i = 0 }: { u: PUnit; sid
       {!!((u.mods || []).some((m) => !labNames.has(m.toLowerCase())) || u.gear?.length || u.tag) && (
         <div className="pm-mods">
           {u.tag && <span>{u.tag}</span>}
-          {(u.gear || []).map((g) => <span key={g} className="g"><span className="cl" data-card={g}>{g}</span></span>)}
+          {(u.gear || []).map((g) => <span key={g} className="g" title={g}><span className="cl" data-card={g}>{g}</span></span>)}
           {(u.mods || []).filter((m) => !labNames.has(m.toLowerCase())).map((m, i) => <span key={i}>{m}</span>)}
         </div>
       )}

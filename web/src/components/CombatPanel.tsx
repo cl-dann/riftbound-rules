@@ -263,7 +263,7 @@ export function CombatPanel({ board, frameLabel, bfi, isLast = true, focus }: { 
         <label>Battlefield <select value={bi} onChange={(e) => setBi(+e.target.value)}>{bfs.map((x, k) => <option key={k} value={k}>{x.name || (k + 1) + '. battlefield'} ({(x.me || []).length} saját, {(x.opp || []).length} ellenfél unit)</option>)}</select></label>
         <label>Attacker <select value={atk} onChange={(e) => setAtk(e.target.value as Side)}><option value="me">Te</option><option value="opp">Ellenfél</option></select></label>
         <button type="button" className="btn sec" disabled={!contested} onClick={() => setAsgS({ ...suggest(D, pA), ...suggest(A, pD) })}>Szabályos javaslat</button>
-        <button type="button" className="linkbtn" onClick={() => setAsgS({})}>Kiosztás törlése</button>
+        <button type="button" className="linkbtn danger" onClick={() => setAsgS({})}>Kiosztás törlése</button>
       </div>
       {!contested ? (
         <p className="note"><R r="463, 467.1" /> Ezen a battlefielden nincs mindkét oldalon unit, így itt nincs combat.</p>
