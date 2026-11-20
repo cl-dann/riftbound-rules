@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { TERMS, vsCard, IMGBASE } from '../../domain/data/store';
+import { DETAILS_READY, TERMS, vsCard, IMGBASE } from '../../domain/data/store';
 import { esc } from '../../domain/text/norm';
 import { typeLine } from '../../domain/data/cards';
 import { on } from '../lib/events';
+import { loadDetails } from '../../domain/data/load';
 
 /** Egyetlen, globális tooltip: fogalommagyarázat (.gl), kártyakép kártyanéven (.cl), egyszerű szöveg ([data-tt]). */
 export function TipLayer() {
@@ -26,6 +27,8 @@ export function TipLayer() {
     };
     const showCard = (el: HTMLElement) => {
       const c: any = vsCard(el.dataset.card); if (!c) return; tipFor = el;
+      // Kép nélküli lapnál a Röviden szöveg a részletekben van: ha még nem töltődött be, betöltés után újra rajzol.
+      if (!c.img && !DETAILS_READY) { loadDetails().then(() => { if (tipFor === el) showCard(el); }); }
       tip.innerHTML = '<b>' + esc(c.n) + '</b><span class="note" style="color:inherit;opacity:.8">' + esc(typeLine(c)) + (c.e != null ? ' · Energy ' + c.e : '') + (c.m != null ? ' · Might ' + c.m : '') + '</span>'
         + (c.img ? '<img class="tipimg" alt="" src="' + IMGBASE + c.img + '?w=300">' : '<span style="display:block;margin-top:6px">' + esc(c.sh || c.txt || '') + '</span>')
         + '<span class="rr">Kattints a teljes kártyalaphoz</span>';

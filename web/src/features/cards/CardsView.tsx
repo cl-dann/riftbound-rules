@@ -8,6 +8,7 @@ import { typeLine } from '../../domain/data/cards';
 import { Html } from '../../shared/ui/Html';
 import { on, openCard } from '../../shared/lib/events';
 import { readViewMode, writeViewMode, type CardsViewMode } from '../../shared/lib/storage';
+import { loadDetails } from '../../domain/data/load';
 
 const SETS = ['Origins', 'Proving Grounds', 'Spiritforged', 'Unleashed', 'Vendetta', 'Radiance'];
 const DOMAINS = ['Fury', 'Calm', 'Mind', 'Body', 'Chaos', 'Order'];
@@ -123,8 +124,10 @@ export function CardsView({ active }: { active: boolean }) {
 
   const pick = (c: any) => {
     if (mode === 'grid') { openCard(c.n); return; }
-    setSel(c);
-    if (window.innerWidth < 860) detailRef.current?.scrollIntoView({ behavior: 'smooth' });
+    loadDetails().then(() => {
+      setSel(c);
+      if (window.innerWidth < 860) detailRef.current?.scrollIntoView({ behavior: 'smooth' });
+    });
   };
   const shown = res.slice(0, limit);
   const sel2 = (k: keyof F, label: string, opts: [string, string][]) => (
@@ -205,7 +208,7 @@ export function CardsView({ active }: { active: boolean }) {
       <div className="panel pad detail" ref={detailRef} aria-live="polite"
         onClick={(e) => {
           const s = (e.target as HTMLElement).closest('button[data-sim]') as HTMLElement | null;
-          if (s) { const c = CARDS.find((x: any) => x.n === s.dataset.sim); if (c) { setSel(c); detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }
+          if (s) { const c = CARDS.find((x: any) => x.n === s.dataset.sim); if (c) { setSel(c); detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } } // a részletek itt már betöltve
         }}>
         {sel
           ? <><Html key={sel.n} html={cardHeadHTML(sel, 'h2')} /><Printings key={'p' + sel.n} card={sel} /><Html key={'r' + sel.n} html={'<h3 class="rb-sep">Erre a kártyára érvényes szabályok</h3><p class="note">A szakaszok a Core Rules (' + META.rules_updated + ') eredeti angol szövegét mutatják. Kattintásra nyílnak.</p>' + cardRulesHTML(sel)} /></>

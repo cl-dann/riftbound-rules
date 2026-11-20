@@ -36,8 +36,12 @@ export const MetaSchema = z.strictObject({
   extra: z.strictObject({ glossary: z.array(z.unknown()), flow: z.array(z.unknown()), patchnotes: z.array(z.unknown()), terms: z.array(TermSchema), guide: z.array(z.unknown()) }),
 });
 
+/** A cards.json (index) és a cards-detail.json (részletek) sémája: a teljes CardSchema két része, azonos sorrendben. */
+export const CardIndexSchema = CardSchema.omit({ nt: true, qa: true, sh: true, pr: true });
+export const CardDetailSchema = CardSchema.pick({ nt: true, qa: true, sh: true, pr: true });
 export type CardData = z.infer<typeof CardSchema>;
-/** A kártya az init() után: keresési mezőkkel és a mai napon érvénybe lépett ban jelzésével. */
+/** A kártya az init() után: keresési mezőkkel és a mai napon érvénybe lépett ban jelzésével. A részletek (nt, qa, sh, pr)
+    a loadDetails() után vannak kitöltve (domain/data/load.ts). */
 export type Card = CardData & { _n: string; _s: string; _t: string; _kw: string[]; banNew?: 1 };
 export type Rule = z.infer<typeof RuleSchema>;
 export type Topic = z.infer<typeof TopicSchema>;

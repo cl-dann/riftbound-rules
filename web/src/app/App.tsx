@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { loadData } from '../domain/data/load';
+import { loadData, loadDetails } from '../domain/data/load';
 import { VIEWS, useHash, viewOf } from './router';
 import { CARDS, META, BF, BAN_ACTIVE, RULES } from '../domain/data/store';
 import { esc } from '../domain/text/norm';
@@ -10,12 +10,14 @@ import { TipLayer } from '../shared/ui/TipLayer';
 import { CardsView } from '../features/cards/CardsView';
 import { loadPrices } from '../shared/lib/prices';
 
-// A Kártyák nézet azonnal kell; a többi nézet kódja az első megnyitáskor töltődik be (külön chunk).
-const DeckView = lazy(() => import('../features/deck/DeckView').then((m) => ({ default: m.DeckView })));
-const RulesView = lazy(() => import('../features/rules/RulesView').then((m) => ({ default: m.RulesView })));
-const ChainView = lazy(() => import('../features/chain/ChainView').then((m) => ({ default: m.ChainView })));
-const KnowledgeView = lazy(() => import('../features/knowledge/KnowledgeView').then((m) => ({ default: m.KnowledgeView })));
-const LearnView = lazy(() => import('../features/learn/LearnView').then((m) => ({ default: m.LearnView })));
+// A Kártyák nézet azonnal kell; a többi nézet kódja az első megnyitáskor töltődik be (külön chunk), a kártyák
+// részleteivel együtt (cards-detail.json), mert ezek a nézetek a jegyzeteket, a Röviden szöveget és a nyomatokat is mutatják.
+const withDetails = <T,>(p: Promise<T>) => Promise.all([p, loadDetails()]).then(([m]) => m);
+const DeckView = lazy(() => withDetails(import('../features/deck/DeckView')).then((m) => ({ default: m.DeckView })));
+const RulesView = lazy(() => withDetails(import('../features/rules/RulesView')).then((m) => ({ default: m.RulesView })));
+const ChainView = lazy(() => withDetails(import('../features/chain/ChainView')).then((m) => ({ default: m.ChainView })));
+const KnowledgeView = lazy(() => withDetails(import('../features/knowledge/KnowledgeView')).then((m) => ({ default: m.KnowledgeView })));
+const LearnView = lazy(() => withDetails(import('../features/learn/LearnView')).then((m) => ({ default: m.LearnView })));
 const Lazy = ({ children }: { children: ReactNode }) => <Suspense fallback={<p className="note">Betöltés…</p>}>{children}</Suspense>;
 
 /** Globális viselkedés a generált HTML blokkokhoz: lusta szabálykitöltés és szabálylinkek. */
@@ -113,6 +115,8 @@ export default function App() {
   const [ready, setReady] = useState(false);
   const [err, setErr] = useState('');
   useEffect(() => { loadData().then(() => setReady(true)).catch((e) => setErr(String(e))); }, []);
+  // A részletek a kezdő renderelés után a háttérben töltődnek (a Kártyák rács nem várja meg).
+  useEffect(() => { if (ready) { const t = setTimeout(() => { loadDetails(); }, 300); return () => clearTimeout(t); } }, [ready]);
   if (err) return <div className="wrap"><p className="warns">Az adatok betöltése nem sikerült: {err}</p></div>;
   if (!ready) return <div className="loading"><span className="brand-mark" aria-hidden>R</span><p>Kártyák és szabályok betöltése…</p></div>;
   return <Shell />;
