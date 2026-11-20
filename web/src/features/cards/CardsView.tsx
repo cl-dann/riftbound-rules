@@ -1,7 +1,10 @@
 import { LayoutGrid, List, Search, X } from 'lucide-react';
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 import { Printings } from '../../shared/ui/Printings';
-import { CARDS, META, cardHeadHTML, cardRulesHTML, domDots, esc, norm, typeLine, IMGBASE } from '../../legacy/core';
+import { CARDS, META, IMGBASE } from '../../domain/data/store';
+import { cardHeadHTML, cardRulesHTML, domDots } from '../../render/html/card';
+import { esc, norm } from '../../domain/text/norm';
+import { typeLine } from '../../domain/data/cards';
 import { Html } from '../../shared/ui/Html';
 
 const SETS = ['Origins', 'Proving Grounds', 'Spiritforged', 'Unleashed', 'Vendetta', 'Radiance'];

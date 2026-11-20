@@ -35,14 +35,29 @@
       "count": 2
     }
   },
+  "src/domain/chain/pairs.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    }
+  },
   "src/domain/chain/templates.ts": {
     "@typescript-eslint/no-explicit-any": {
       "count": 3
     }
   },
+  "src/domain/data/cards.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    }
+  },
   "src/domain/data/load.ts": {
     "@typescript-eslint/no-explicit-any": {
       "count": 1
+    }
+  },
+  "src/domain/data/store.ts": {
+    "@typescript-eslint/no-explicit-any": {
+      "count": 8
     }
   },
   "src/domain/deck/edit.ts": {
@@ -53,9 +68,38 @@
       "count": 1
     }
   },
+  "src/domain/deck/legality.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    },
+    "@typescript-eslint/no-explicit-any": {
+      "count": 2
+    }
+  },
+  "src/domain/deck/parse.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    },
+    "no-useless-escape": {
+      "count": 1
+    }
+  },
   "src/domain/practice/practiceEngine.ts": {
     "@typescript-eslint/no-explicit-any": {
       "count": 11
+    }
+  },
+  "src/domain/rules/refs.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    },
+    "prefer-const": {
+      "count": 1
+    }
+  },
+  "src/domain/text/lev.ts": {
+    "prefer-const": {
+      "count": 1
     }
   },
   "src/features/cards/CardsView.tsx": {
@@ -97,6 +141,14 @@
       "count": 23
     }
   },
+  "src/features/deck/pdf.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    },
+    "@typescript-eslint/no-explicit-any": {
+      "count": 2
+    }
+  },
   "src/features/learn/LearnView.tsx": {
     "@typescript-eslint/no-explicit-any": {
       "count": 2
@@ -115,21 +167,22 @@
       "count": 1
     }
   },
-  "src/legacy/core.ts": {
+  "src/render/html/card.ts": {
     "@typescript-eslint/ban-ts-comment": {
       "count": 1
     },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 14
-    },
     "@typescript-eslint/no-unused-vars": {
       "count": 1
-    },
-    "no-useless-escape": {
+    }
+  },
+  "src/render/html/deck.ts": {
+    "@typescript-eslint/ban-ts-comment": {
       "count": 1
-    },
-    "prefer-const": {
-      "count": 2
+    }
+  },
+  "src/render/html/glossary.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
     }
   },
   "src/render/html/knowledge.ts": {
@@ -141,6 +194,14 @@
     },
     "no-constant-condition": {
       "count": 1
+    }
+  },
+  "src/render/html/rules.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    },
+    "@typescript-eslint/no-explicit-any": {
+      "count": 2
     }
   },
   "src/shared/board/Playmat.tsx": {

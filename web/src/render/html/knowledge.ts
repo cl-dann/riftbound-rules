@@ -1,5 +1,7 @@
 // @ts-nocheck
-import {D,CARDS,META,esc,glossify} from '../../legacy/core';
+import { D, CARDS, META } from '../../domain/data/store';
+import { esc } from '../../domain/text/norm';
+import { glossify } from './glossary';
 /* Szószintű diff (LCS) az errata előtte/utána nézethez. */
 function wdiff(a,b){
   const A=String(a).split(/(\s+)/),B=String(b).split(/(\s+)/),n=A.length,m=B.length;

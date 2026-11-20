@@ -2,7 +2,11 @@
 /* Chain elemző magja, DOM nélkül. A builder állapotából (CS: legendek, battlefieldek, board, lépések) kiszámolja a
    lejátszás frame-jeit, a szabálysorokat, az eseménynaplót és a HTML kimenetet. A chain.ts (DOM) és a unit tesztek is ezt hívják.
    A lapszöveg értelmezése szöveges heurisztika; amit nem ismer fel biztosan, azt "bizonytalan" címkével jelöli. */
-import {esc,FL,FLT,glossify,vsCard,vsPairs} from '../../legacy/core';
+import { esc } from '../text/norm';
+import { FL, FLT } from '../rules/flags';
+import { glossify } from '../../render/html/glossary';
+import { vsCard } from '../data/store';
+import { vsPairs } from './pairs';
 import {cardOv} from './overrides';
 
 /* ---------- Szövegelemzés ---------- */

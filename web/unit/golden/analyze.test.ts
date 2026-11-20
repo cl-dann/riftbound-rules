@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { analyze } from '../../src/domain/chain/chainCore';
 import { EXAMPLES, normZones } from '../../src/features/chain/legacyForm';
 import { TEMPLATES } from '../../src/domain/chain/templates';
-import { b64d } from '../../src/legacy/core';
+import { b64d } from '../../src/domain/text/b64';
 import CASES from './cases.json';
 import FIX from './fixtures.json';
 import { block } from './serialize';

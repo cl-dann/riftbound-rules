@@ -1,9 +1,14 @@
 import { FileDown, Link2, Plus, RotateCcw, Trash2 } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import {
-  BF, DECK, FORMAT, META, TOPICS, b64d, b64e, buildPDF, cardHeadHTML, cardRulesHTML, curveHTML, domDots, esc,
-  interactionHTML, legalityHTML, parseDeck, setDeck, typeLine,
-} from '../../legacy/core';
+import { BF, META, TOPICS } from '../../domain/data/store';
+import { DECK, setDeck } from '../../domain/deck/legality';
+import { FORMAT, parseDeck } from '../../domain/deck/parse';
+import { b64d, b64e } from '../../domain/text/b64';
+import { buildPDF } from './pdf';
+import { cardHeadHTML, cardRulesHTML, domDots } from '../../render/html/card';
+import { curveHTML, interactionHTML, legalityHTML } from '../../render/html/deck';
+import { esc } from '../../domain/text/norm';
+import { typeLine } from '../../domain/data/cards';
 import { Html } from '../../shared/ui/Html';
 import { loadFonts } from '../../domain/data/load';
 import { editDeck, eur, legendOf, priceOf, searchCards, targetSec, type Prices } from '../../domain/deck/edit';

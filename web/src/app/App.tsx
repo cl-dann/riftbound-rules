@@ -1,7 +1,10 @@
 import { Suspense, lazy, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { loadData } from '../domain/data/load';
 import { VIEWS, useHash, viewOf } from './router';
-import { CARDS, META, BF, BAN_ACTIVE, RULES, esc, expandAll, refHash, ruleHTML } from '../legacy/core';
+import { CARDS, META, BF, BAN_ACTIVE, RULES } from '../domain/data/store';
+import { esc } from '../domain/text/norm';
+import { expandAll, refHash } from '../domain/rules/refs';
+import { ruleHTML } from '../render/html/rules';
 import { CardModal } from '../shared/ui/CardModal';
 import { TipLayer } from '../shared/ui/TipLayer';
 import { CardsView } from '../features/cards/CardsView';

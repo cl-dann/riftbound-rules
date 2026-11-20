@@ -1,6 +1,9 @@
 /* Karakterizáció: a kártya-HTML függvények kimenete mind az 1101 lapra (hash laponként), és 5 lapra teljes szövegben. */
 import { expect, it } from 'vitest';
-import { CARDS, cardHeadHTML, cardRulesHTML, esc, glossify, notesHTML, qaHTML } from '../../src/legacy/core';
+import { CARDS } from '../../src/domain/data/store';
+import { cardHeadHTML, cardRulesHTML, notesHTML, qaHTML } from '../../src/render/html/card';
+import { esc } from '../../src/domain/text/norm';
+import { glossify } from '../../src/render/html/glossary';
 import { hash } from './serialize';
 
 const fns = (c: any) => ({

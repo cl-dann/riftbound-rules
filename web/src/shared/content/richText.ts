@@ -1,4 +1,5 @@
-import { esc, glossify } from '../../legacy/core';
+import { esc } from '../../domain/text/norm';
+import { glossify } from '../../render/html/glossary';
 
 /** [[Kártya]] kártyalink, {{123.4}} szabálylink, plusz fogalom-tooltip. */
 export function inline(text: string, seen?: Set<string>) {

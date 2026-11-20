@@ -6,7 +6,8 @@ import { analyze } from '../src/domain/chain/chainCore';
 import { EXAMPLES, normZones, reorderSteps } from '../src/features/chain/legacyForm';
 import { TEMPLATES } from '../src/domain/chain/templates';
 import { insertAt } from '../src/features/chain/chainBuild';
-import { CARDS, b64d, b64e } from '../src/legacy/core';
+import { CARDS } from '../src/domain/data/store';
+import { b64d, b64e } from '../src/domain/text/b64';
 import CASES from './golden/cases.json';
 
 const seed = process.env.FC_SEED ? +process.env.FC_SEED : (Date.now() ^ (Math.random() * 0x7fffffff)) | 0;

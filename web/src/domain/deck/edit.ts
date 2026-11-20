@@ -1,4 +1,5 @@
-import { CARDS, byName, norm } from '../../legacy/core';
+import { CARDS, byName } from '../data/store';
+import { norm } from '../text/norm';
 
 // A decklista szövege marad az egyetlen forrás: a builder ezt szerkeszti,
 // így a megosztható link, a PDF és a legalitás-ellenőrzés változatlanul működik.

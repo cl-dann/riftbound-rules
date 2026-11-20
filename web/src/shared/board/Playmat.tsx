@@ -1,6 +1,6 @@
 import { createContext, useContext, useLayoutEffect, useRef, useState, type KeyboardEvent as RKE, type RefObject } from 'react';
 import { Swords } from 'lucide-react';
-import { IMGBASE, vsCard } from '../../legacy/core';
+import { IMGBASE, vsCard } from '../../domain/data/store';
 
 export type PUnit = { n: string; m: number; base?: number; ex?: boolean; dmg?: number; tag?: string; status?: string[]; mods?: string[]; gear?: string[]; token?: boolean; id?: string; kind?: 'gear' };
 export type PSide = {

@@ -3,7 +3,7 @@
 import { describe, expect, it } from 'vitest';
 import LEARN from '../src/generated/learn.json';
 import RULES from '../src/generated/rules.json';
-import { vsCard } from '../src/legacy/core';
+import { vsCard } from '../src/domain/data/store';
 import { act, asgConfirm, asgPick, asgView, autoNext, init, menuFor, panelBtn, solve, start, step, tgtConfirm, tgtToggle, type ES, type Scn } from '../src/domain/practice/practiceEngine';
 
 const SC = (LEARN as any).scenarios as Scn[];

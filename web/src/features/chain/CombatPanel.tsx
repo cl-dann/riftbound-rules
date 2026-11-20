@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { vsCard } from '../../legacy/core';
+import { vsCard } from '../../domain/data/store';
 import { chainApi, type TrigAdd } from './legacyForm';
 import type { PBoard, PUnit } from '../../shared/board/Playmat';
 import { ALL, DEF_OPT, cm, need, check, suggest, dealt, lethalHit, type Side, type Opt, type Sug, type CU } from '../../domain/combat/combatCore';

@@ -2,7 +2,7 @@
    többjátékos választás (355.10.e, 412.1): Promising Future, Divine Judgment, Mechanical Bandit. Valós lapok. */
 import { describe, expect, it } from 'vitest';
 import { analyze, abilitiesOf } from '../src/domain/chain/chainCore';
-import { vsCard } from '../src/legacy/core';
+import { vsCard } from '../src/domain/data/store';
 import { ruleText } from './util';
 
 const base = (o: any) => ({ turn: 'A', lg: { A: '', B: '' }, bf: [{ n: '', c: '' }, { n: '', c: '' }], bd: [], hand: { A: [], B: [] }, trash: { A: [], B: [] }, deck: { A: [], B: [] }, ...o });

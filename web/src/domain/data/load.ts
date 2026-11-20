@@ -1,4 +1,4 @@
-import { init } from '../../legacy/core';
+import { init } from './store';
 
 /** Az adat külön chunkokban töltődik (cards, rules, meta), így az app héja azonnal megjelenik. */
 export async function loadData() {

@@ -6,7 +6,7 @@
  */
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { ChevronRight, CircleHelp, RotateCcw, Swords, X, Zap } from 'lucide-react';
-import { IMGBASE, vsCard } from '../../legacy/core';
+import { IMGBASE, vsCard } from '../../domain/data/store';
 import { inline } from '../../shared/content/richText';
 import {
   act, asgConfirm, asgPick, asgReset, asgView, autoNext, glowOf, init, menuFor, mightAt, panelBtn, speedOf, start, step, stateLabel, tgtCancel, tgtConfirm, tgtToggle, tstate,

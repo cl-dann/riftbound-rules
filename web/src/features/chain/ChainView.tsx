@@ -4,7 +4,7 @@ import { ArrowDown, ArrowUp, GripVertical, Plus, X } from 'lucide-react';
 import { initChain, getChainFrames, chainApi, stateKeysOf, tgOptionsOf, locLabelOf, newZid } from './legacyForm';
 import { stepInfo, interp } from '../../domain/chain/chainCore';
 import { TEMPLATES } from '../../domain/chain/templates';
-import { IMGBASE } from '../../legacy/core';
+import { IMGBASE } from '../../domain/data/store';
 import { Playmat, type PTarget, type PlayCtl, type Glow } from '../../shared/board/Playmat';
 import { CombatPanel } from './CombatPanel';
 import {

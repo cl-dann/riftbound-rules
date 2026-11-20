@@ -1,6 +1,9 @@
 import { Link2, Search } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
-import { RULES, esc, expand, hashRef, headExtent, heads, refHash, ruleHTML } from '../../legacy/core';
+import { RULES, heads } from '../../domain/data/store';
+import { esc } from '../../domain/text/norm';
+import { expand, hashRef, headExtent, refHash } from '../../domain/rules/refs';
+import { ruleHTML } from '../../render/html/rules';
 import { Html } from '../../shared/ui/Html';
 import { Blocks, inline } from '../../shared/content/Blocks';
 import FMT from '../../generated/formats.json';

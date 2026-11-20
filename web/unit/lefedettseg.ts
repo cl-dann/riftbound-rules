@@ -2,7 +2,7 @@
    - coverageOld: a legelső, chainCore előtti felismerés (chain.ts, 2026-11-19 reggel);
    - coveragePrev: az előző commit (5248b99) chainCore-ja, unit/elozo/chainCore_elozo.ts;
    - coverage: a jelenlegi. */
-import { CARDS } from '../src/legacy/core';
+import { CARDS } from '../src/domain/data/store';
 import { instrSources, splitInstr, classOf, hiddenWhy, zoneResolvable } from '../src/domain/chain/chainCore';
 import * as P from './elozo/chainCore_elozo';
 

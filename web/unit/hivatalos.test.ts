@@ -5,7 +5,7 @@
 import { describe, expect, it } from 'vitest';
 import { cs, run, exampleOf } from './util';
 import { interp, stepInfo } from '../src/domain/chain/chainCore';
-import { CARDS } from '../src/legacy/core';
+import { CARDS } from '../src/domain/data/store';
 
 const insts = (x: ReturnType<typeof run>, re: RegExp) => x.item(re)!.instr.map((i: any) => i.st);
 

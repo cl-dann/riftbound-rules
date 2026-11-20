@@ -3,7 +3,7 @@
 import { describe, expect, it } from 'vitest';
 import { analyze, costCondOf, costCheck, printedCost } from '../src/domain/chain/chainCore';
 import { normZones } from '../src/features/chain/legacyForm';
-import { vsCard } from '../src/legacy/core';
+import { vsCard } from '../src/domain/data/store';
 import { ruleText, exampleOf } from './util';
 
 const base = (o: any) => ({ lg: { A: '', B: '' }, bf: [{ n: '', c: '' }, { n: '', c: '' }], bd: [], hand: { A: [], B: [] }, trash: { A: [], B: [] }, deck: { A: [], B: [] }, ...o });

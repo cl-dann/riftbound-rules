@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IMGBASE } from '../../legacy/core';
+import { IMGBASE } from '../../domain/data/store';
 import { eur, pn, type Prices } from '../../domain/deck/edit';
 
 // Az árfájl egyszer töltődik be, minden nézet ugyanazt használja.

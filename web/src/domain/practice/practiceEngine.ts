@@ -11,7 +11,7 @@
  *   auto:   az ellenfél lép, a motor továbblép
  * A lépések sorrendjét a motor őrzi: egy későbbi lépés akciója a korábbi lépésben "rossz sorrend" kimenetet ad.
  */
-import { vsCard } from '../../legacy/core';
+import { vsCard } from '../data/store';
 
 export type Side = 'me' | 'opp';
 export type PUnit = { n: string; m: number; ex?: boolean; dmg?: number; tags?: string[]; gear?: boolean };

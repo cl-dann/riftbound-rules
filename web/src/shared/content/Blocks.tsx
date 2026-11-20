@@ -1,7 +1,7 @@
 /* Tanulási tartalom blokkjai (How to Play, Practice leckék, versenyformátum oldalak): a LearnView és a RulesView közös része. */
 import { useMemo, useState } from 'react';
 import { AlertTriangle, BookOpen, Check, ChevronLeft, ChevronRight, Clock, Compass, ExternalLink, Info, Lightbulb, Play, RotateCcw, X } from 'lucide-react';
-import { IMGBASE, vsCard } from '../../legacy/core';
+import { IMGBASE, vsCard } from '../../domain/data/store';
 import { Playmat, DEMO_BOARD } from '../board/Playmat';
 import { inline } from './richText';
 
