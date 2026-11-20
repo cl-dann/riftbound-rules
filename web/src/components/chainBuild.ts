@@ -1,6 +1,6 @@
 /* A pályás Chain építő segédei (React nélkül): kiinduló pálya, a lejátszási frame kiegészítése az építő zónáival,
    és a legalitás az elemző (analyze) alapján. Az állapot mindig a builder CS-e; ez a modul csak olvassa vagy másolatot elemez. */
-import { analyze, stepInfo, abilitiesOf, triggersOf, timingOf, isPermC } from '../legacy/chainCore';
+import { analyze, stepInfo, abilitiesOf, triggersOf, timingOf, isPermC, interp, zoneRefOf, zoneCheck, type ZoneRef } from '../legacy/chainCore';
 import { vsCard, CARDS, norm } from '../legacy/core';
 import { tgOptionsOf, reorderSteps, locLabelOf } from '../legacy/chain';
 import type { PBoard } from './Playmat';
@@ -47,10 +47,12 @@ export function fullFrame(f: ChainFrame, CS: any, k: number, sf: Record<number, 
     const s: any = { ...f.board[sideOf(p)] };
     const ch = (CS.ch || {})[p] || '';
     s.champion = ch && !played((x) => x.from === 'champ' && x.n === ch && x.pl === p).length ? ch : null;
-    const left = [...((CS.hand || {})[p] || [])];
-    played((x) => (x.from || 'hand') === 'hand' && x.pl === p).forEach((x: any) => { const i = left.indexOf(x.n); if (i >= 0) left.splice(i, 1); });
-    s.handCS = left.length;
-    s.hand = [...left, ...(s.hand || [])];
+    if (!s.zids) {
+      const left = [...((CS.hand || {})[p] || [])];
+      played((x) => (x.from || 'hand') === 'hand' && x.pl === p).forEach((x: any) => { const i = left.indexOf(x.n); if (i >= 0) left.splice(i, 1); });
+      s.zids = { hand: [...left.map((_, i) => 'zh' + p + i), ...(s.hand || []).map(() => '')], trash: [] };
+      s.hand = [...left, ...(s.hand || [])];
+    }
     return s;
   };
   return { ...f, board: { ...f.board, me: side('A'), opp: side('B'), bfs }, arrows, bfi: [0, 1] };
@@ -140,9 +142,9 @@ export const hasHidden = (c: any) => !!c && (timingOf(c) === 'hidden' || /^\[Hid
 export const isPerm = (c: any) => isPermC(c);
 
 /** Kártyakereső: típus szerint előszűrve, gépelve szűrhető. */
-export type PickKind = 'legend' | 'champion' | 'battlefield' | 'board' | 'hand' | 'play' | 'hidden';
+export type PickKind = 'legend' | 'champion' | 'battlefield' | 'board' | 'hand' | 'play' | 'hidden' | 'trash' | 'deck';
 export const PICK_TITLE: Record<PickKind, string> = {
-  legend: 'Legend', champion: 'Champion (Champion Zone)', battlefield: 'Battlefield', board: 'Unit vagy gear a pályára', hand: 'Lap a kézbe', play: 'Kijátszás a chainre', hidden: 'Hidden lap a facedown helyre',
+  legend: 'Legend', champion: 'Champion (Champion Zone)', battlefield: 'Battlefield', board: 'Unit vagy gear a pályára', hand: 'Lap a kézbe', play: 'Kijátszás a chainre', hidden: 'Hidden lap a facedown helyre', trash: 'Lap a trashbe', deck: 'Lap a deck tetejére',
 };
 const okType = (k: PickKind, c: any) => {
   const t = c.t;
@@ -163,4 +165,22 @@ export function searchCards(k: PickKind, q: string, limit = 60): any[] {
   }
   if (words.length) { const w = norm(q); out.sort((a, b) => +!norm(a.n).startsWith(w) - +!norm(b.n).startsWith(w)); }
   return out;
+}
+
+/** A lépés kézből, trashből vagy deckből választó utasításai (a deck felső lapja automatikus, azt nem kell választani). */
+export type ZPick = { xi: number; zr: ZoneRef; t: string };
+export function zonePicks(CS: any, j: number): ZPick[] {
+  const s = CS.steps[j]; if (!s || s.k === 'res' || s.k === 'end') return [];
+  const inf: any = stepInfo(CS, s); if (!inf?.eff) return [];
+  return interp(s, inf).map((x: any, xi: number) => ({ xi, zr: zoneRefOf(x.t, inf.c?.n) as ZoneRef, t: x.t })).filter((z: any) => z.zr && !(z.zr.z === 'deck' && z.zr.top));
+}
+export type ZCand = { id: string; n: string; zone: string; own: string; ok: boolean; why?: string };
+/** A választható lapok a lépés lerakásakor (az elemző pillanatképe), a lap szövegének megkötéseivel ellenőrizve. */
+export function zoneCands(CS: any, j: number, xi: number): ZCand[] {
+  const zp = zonePicks(CS, j).find((z) => z.xi === xi); if (!zp) return [];
+  const c = clone(CS); if (c.steps[j].zp) c.steps[j].zp[xi] = [];
+  const r: any = analyze(c); const snap = r.zsnap?.[j]; if (!snap) return [];
+  const s = CS.steps[j]; const pl = s.k === 'tg' ? (r.objs[s.src]?.ctrl || s.pl || 'A') : (s.pl || 'A');
+  const owners = zp.zr.who === 'you' ? [pl] : zp.zr.who === 'they' ? [pl === 'A' ? 'B' : 'A'] : ['A', 'B'];
+  return owners.flatMap((p) => (snap[zp.zr.z]?.[p] || []).map((id: string) => { const ob = r.objs[id]; const why = zoneCheck(zp.zr, ob, pl); return { id, n: ob?.name || id, zone: zp.zr.z, own: p, ok: !why, why: why || undefined }; }));
 }

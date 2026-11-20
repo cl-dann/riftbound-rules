@@ -3,7 +3,7 @@
    Az elemzés maga a DOM nélküli chainCore.ts-ben van (analyze), ezt hívják a unit tesztek is.
    A kártyalap megnyitása és a tooltip eseményekkel megy a React felé. */
 import {esc,vsCard,b64e,b64d} from './core';
-import {analyze,stepInfo,srcCard,abilitiesOf,triggersOf,interp,timingOf,isPermC,actOf,OV_ACTS,OV_N,enterReadyCond} from './chainCore';
+import {zoneRefOf,analyze,stepInfo,srcCard,abilitiesOf,triggersOf,interp,timingOf,isPermC,actOf,OV_ACTS,OV_N,enterReadyCond} from './chainCore';
 const $=(id:string)=>document.getElementById(id) as any;
 const openModal=(c:any)=>window.dispatchEvent(new CustomEvent('rb:open-card',{detail:c.n}));
 const hideTip=()=>window.dispatchEvent(new Event('rb:hide-tip'));
@@ -28,7 +28,7 @@ export type CombatOut={bf:string;dead:string[];recall:string[];ctrl:''|'A'|'B';l
 /* A pályás építő (ChainView) ezen keresztül olvassa és írja ugyanazt a CS állapotot, amit a Haladó szerkesztés űrlapja. */
 export const chainApi:{moveUnit?:(uid:string,loc:string)=>string|null;addTriggers?:(list:TrigAdd[],cb:CombatOut)=>void;
   get?:()=>any;commit?:(fn:(cs:any)=>void,ms?:number)=>void;set?:(cs:any)=>void;moveStep?:(from:number,to:number)=>boolean;delStep?:(j:number)=>void;
-  quick?:(el:HTMLElement|null,j:number)=>void;stateEl?:(el:HTMLElement|null)=>void;delBd?:(i:number)=>void;openAdv?:(j:number)=>void;last?:any}={};
+  quick?:(el:HTMLElement|null,j:number)=>void;internal?:boolean;stateEl?:(el:HTMLElement|null)=>void;delBd?:(i:number)=>void;openAdv?:(j:number)=>void;last?:any}={};
 /* Közös segédek a CS-hez (a builder űrlapja és a pályás építő is ezeket használja). */
 export const locsOf=(CS:any)=>[['base','Base'],['bf0',(CS.bf[0].n||'1. battlefield')],['bf1',(CS.bf[1].n||'2. battlefield')]];
 export const locLabelOf=(CS:any,l:string)=>(locsOf(CS).find(x=>x[0]===l)||['',l])[1];
@@ -177,7 +177,8 @@ function quickHtml(j){const s=CS.steps[j];if(!s||s.k==='res'||s.k==='end')return
     if(y.det.cond&&(y.det.cond.how==='hidden'||y.det.cond.how==='open'))x+=cbSel('data-cnd="'+id+'" aria-label="'+(xi+1)+'. utasítás feltétele"',[['','feltétel: "'+y.det.cond.t+'" ('+(y.det.cond.how==='open'?'nyitott kérdés, judge dönt':'rejtett adat')+'; alap: nem teljesül)'],['1','teljesül: "'+y.det.cond.t+'"'],['0','nem teljesül: "'+y.det.cond.t+'"']],s.cnd&&s.cnd[xi]!=null?s.cnd[xi]:'');
     if(y.act.field)x+=fieldHtml(s,j,xi,y.act);
     if(y.act.k==='choosePerPlayer')x+=mpHtml(s,j,xi,y.act);
-    if(y.act.k==='playcard'&&!y.act.self)x+='<input type="text" list="cardnames" data-plc="'+id+'" value="'+esc((s.plc&&s.plc[xi])||'')+'" placeholder="Melyik lapot játssza ki?" aria-label="'+(xi+1)+'. utasítás: kijátszott lap">'+cbSel('data-pll="'+id+'" aria-label="Hova kerül"',LOCS(),(s.pll&&s.pll[xi])||'base');});
+    if(y.act.k==='playcard'&&!y.act.self&&zoneRefOf(y.t,c&&c.n))x+=cbSel('data-pll="'+id+'" aria-label="Hova kerül"',LOCS().map(o=>[o[0],'kijátszva ide: '+o[1]]),(s.pll&&s.pll[xi])||'base');
+    else if(y.act.k==='playcard'&&!y.act.self)x+='<input type="text" list="cardnames" data-plc="'+id+'" value="'+esc((s.plc&&s.plc[xi])||'')+'" placeholder="Melyik lapot játssza ki?" aria-label="'+(xi+1)+'. utasítás: kijátszott lap">'+cbSel('data-pll="'+id+'" aria-label="Hova kerül"',LOCS(),(s.pll&&s.pll[xi])||'base');});
   return x;}
 function cbSetStep(j){const s=CS.steps[j];s.tg=[];s.ext={};delete s.ov;delete s.costTg;delete s.split;delete s.cnd;delete s.plc;delete s.pll;delete s.hv;delete s.mp;delete s.sub;}
 function onChg(e){const el=e.target,d=el.dataset;if(!d)return;const sp=v=>v.split('_').map(Number);let re=true;
@@ -272,14 +273,14 @@ chainApi.addTriggers=(list,cb)=>{if(!list.length)return;list.forEach(t=>CS.steps
   CS.steps.forEach(s=>{if(s.k==='tr')s.cb=cb;});renderCB();runCB();};
 $('cb-add').addEventListener('click',()=>{const l=CS.steps[CS.steps.length-1];CS.steps.push({k:'card',n:'',pl:l&&l.pl==='A'?'B':'A',tg:[],ext:{}});renderCB();});
 const EMPTY=()=>({lg:{A:'',B:''},bf:[{n:'',c:''},{n:'',c:''}],bd:[],steps:[],hand:{A:[],B:[]},ch:{A:'',B:''}});
-$('cb-clear').addEventListener('click',()=>{CS=EMPTY();renderCB();runCB();});
-const loadEx=k=>{CS=EXAMPLES[k]();renderCB();runCB();};
+$('cb-clear').addEventListener('click',()=>{chainApi.internal=false;CS=EMPTY();renderCB();runCB();});
+const loadEx=k=>{chainApi.internal=false;CS=EXAMPLES[k]();renderCB();runCB();};
 $('cb-ex').addEventListener('click',()=>loadEx('base'));$('cb-ex2').addEventListener('click',()=>loadEx('ctrl'));$('cb-ex3').addEventListener('click',()=>loadEx('gear'));
 $('cb-link').addEventListener('click',async()=>{const u=location.origin+location.pathname+'#c='+b64e(JSON.stringify(CS));const st=$('cb-linkst');
   try{await navigator.clipboard.writeText(u);st.textContent='A link a vágólapra került. Megnyitva ugyanez a helyzet töltődik be.';}catch(e){st.textContent='Másold ki: '+u;}});
 window.__setCS=s=>{CS=s;renderCB();runCB();};window.__getCS=()=>CS;
-chainApi.get=()=>CS;chainApi.set=s=>{CS=s;renderCB();runCB();};
-chainApi.commit=(fn,ms)=>{CS.hand=CS.hand||{A:[],B:[]};CS.ch=CS.ch||{A:'',B:''};fn(CS);renderCB();if(ms===0)runCB();else sched(ms==null?120:ms);};
+chainApi.get=()=>CS;chainApi.set=s=>{chainApi.internal=false;CS=s;renderCB();runCB();};
+chainApi.commit=(fn,ms)=>{chainApi.internal=true;CS.hand=CS.hand||{A:[],B:[]};CS.ch=CS.ch||{A:'',B:''};fn(CS);renderCB();if(ms===0)runCB();else sched(ms==null?120:ms);};
 chainApi.moveStep=(f,t)=>moveStep(f,t);chainApi.delStep=j=>delStep(j);chainApi.delBd=i=>delBd(i);
 chainApi.openAdv=j=>{const d=$('cb-adv');if(d)d.open=true;const st=CS.steps[j];if(st)OVOPEN.add(st);renderForm();const el=$('cb-steps').querySelector('[data-sj="'+j+'"]');if(el){el.scrollIntoView({block:'start'});const sm=el.querySelector('summary');if(sm)sm.focus();}};
 /* Gyors szerkesztő: a pályás építő lépés-paneljében csak a lap által igényelt mezők (ugyanazok a data- mezők, ugyanaz a kezelő). */

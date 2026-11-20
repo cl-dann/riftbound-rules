@@ -1046,3 +1046,63 @@ h2.psec small { font-family: var(--f-mono); font-size: 13px; color: var(--muted)
 .pm2 .pm2-add.g-act { opacity: 1; border: 2px solid #f5c518 !important; color: #f5c518 !important; box-shadow: 0 0 10px rgba(245,197,24,.45); }
 .pm2 .pm2-add.g-sel { opacity: 1; border: 2px solid #f5c518 !important; background: #f5c518; color: #1a1205 !important; }
 .cb2-sp .cb2-tv .btn { padding: 4px 10px; font-size: 12.5px; }
+
+/* ---------- Chain: mobilos lépés-varázsló (csak keskeny nézetben) ---------- */
+.cb2-sheet, .cb2-wbar { display: none; }
+@media (max-width: 700px) {
+  .cb2-sheet { display: grid; gap: 8px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; max-height: 58vh; overflow: auto; padding: 12px 12px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid var(--accent); border-radius: 14px 14px 0 0; background: var(--panel); box-shadow: 0 -12px 34px rgba(0,0,0,.6); }
+  .cb2-sheet .note { margin: 0; }
+  .cb2-wh { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+  .cb2-wh b { flex: 1 1 140px; min-width: 0; font-size: 15px; overflow-wrap: anywhere; }
+  .cb2-wn { font-family: var(--f-mono); font-size: 12px; color: var(--accent); padding: 2px 6px; border: 1px solid var(--gold-line); border-radius: 4px; }
+  .cb2-sheet .btn, .cb2-wbar .btn, .cb2-sheet .pb-btn { min-height: 44px; }
+  .cb2-sheet .cb2-q { min-height: 44px; margin: 0; }
+  .cb2-sheet .cb2-res { min-height: 0; max-height: 30vh; }
+  .cb2-sheet .cb2-res button, .cb2-sheet .cb2-seg button { min-height: 44px; }
+  .cb2-sheet .cb2-res img { width: 32px; }
+  .cb2-witems { display: grid; gap: 8px; }
+  .cb2-wbb { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cb2-wbb .btn { flex: 1 1 0; }
+  .cb2-wx { display: flex; } .cb2-wx select, .cb2-wx input { min-height: 44px; max-width: 100%; }
+  .cb2-wx label.chk { min-height: 44px; }
+  .cb2-wbar { display: grid; gap: 6px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); border-top: 2px solid #f5c518; background: #12161e; box-shadow: 0 -8px 22px rgba(0,0,0,.6); font-size: 13.5px; line-height: 1.35; }
+  .cb2-wbt small { display: block; color: #ff9f7f; }
+  .cb2-wizpad { height: 58vh; } .cb2-wizpad.sm { height: 120px; }
+  /* érintési célpontok: legalább 44 px */
+  .pm2.edm .pm2-add { width: 44px; height: 44px; }
+  .pm2.edm .pm2-ci { min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 4px; }
+  .pm2.edm .pm2-bfc .pm2-fd { min-height: 44px; min-width: 44px; justify-content: center; }
+  .pm2.edm .pm2-hc, .pm2.edm .pm2-slot { min-height: 44px; }
+  .cb2-sbtn button { width: 44px; height: 44px; }
+  .cb2-sb { min-height: 44px; }
+  .cb2-insrow { height: auto; } .cb2-ins { position: static; width: 44px; height: 44px; opacity: .8; }
+  .cb2-steps { gap: 4px; }
+  .cb2-add .btn, .cb2-hdr .cb2-seg button, .cb2-tl .cbv-ctl .btn { min-height: 44px; }
+}
+.cb2-fab { display: none; }
+@media (max-width: 700px) {
+  .cb2-fab { display: flex; justify-content: flex-end; position: fixed; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 55; pointer-events: none; }
+  .cb2-fab .btn { pointer-events: auto; min-height: 48px; display: inline-flex; align-items: center; gap: 6px; padding: 0 18px; border-radius: 999px; box-shadow: 0 6px 18px rgba(0,0,0,.6); }
+  .cb2-wizpad.sm { height: 80px; }
+}
+@media (max-width: 700px) {
+  .cb2-wh b { flex: 1 1 calc(100% - 70px); }
+  .cb2-wh .btn { flex: 1 1 40%; }
+}
+/* Chain: kéz, trash és deck lapjai */
+.pm2 .pm2-pile.g-act { border-color: #f5c518; box-shadow: 0 0 10px rgba(245,197,24,.45); }
+.cb2-zp { width: min(480px, 100%) !important; display: grid; gap: 8px; }
+.cb2-zl { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; max-height: 46vh; overflow: auto; }
+.cb2-zl li { display: flex; align-items: center; gap: 10px; padding: 4px 6px; border: 1px solid transparent; border-radius: 8px; }
+.cb2-zl li.ok { border-color: rgba(245,197,24,.6); background: rgba(245,197,24,.06); }
+.cb2-zl li.bad { opacity: .7; }
+.cb2-zl img { width: 34px; aspect-ratio: 744/1039; object-fit: cover; border-radius: 4px; flex: none; }
+.cb2-zl .cb2-rn { flex: 1; }
+.cb2-zl .btn { padding: 4px 10px; font-size: 12.5px; }
+.cb2-zl small { color: var(--muted); }
+.cb2-wch { max-height: 96px; margin-top: 4px; }
+@media (max-width: 700px) {
+  .pm2.edm .pm2-pile { min-height: 44px; }
+  .cb2-zl .btn, .cb2-zl .linkbtn { min-height: 44px; min-width: 44px; }
+  .cb2-wch .cb2-chip { min-height: 44px; }
+}

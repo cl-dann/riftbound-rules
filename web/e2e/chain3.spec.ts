@@ -127,11 +127,12 @@ test('Chain építő: mobil 390 px, nincs vízszintes túllógás, a menü és a
   expect(await ov()).toBeLessThanOrEqual(1);
   await page.locator('#cb-ex').click();
   expect(await ov()).toBeLessThanOrEqual(1);
+  // keskeny nézetben az akció-menü és a kereső a lépés-varázsló (bottom sheet) része
   await page.locator('.pm-unit[data-uid="b0"]').click();
-  await expect(page.locator('.cb2-menu')).toBeVisible();
+  await expect(page.locator('.cb2-sheet')).toContainText('2 / 4');
   expect(await ov()).toBeLessThanOrEqual(1);
-  await page.keyboard.press('Escape');
+  await page.locator('.cb2-sheet .btn', { hasText: 'Mégse' }).click();
   await page.locator('.pm2-chain .pm2-add').click();
-  await expect(page.locator('.cb2-pick')).toBeVisible();
+  await expect(page.locator('.cb2-sheet .cb2-q')).toBeVisible();
   expect(await ov()).toBeLessThanOrEqual(1);
 });

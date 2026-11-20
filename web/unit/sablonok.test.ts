@@ -17,7 +17,7 @@ const run = (id: string) => {
 describe('Chain sablonok', () => {
   it.each(TEMPLATES.map((t) => [t.id, t] as const))('%s: valós lapok, létező szabályszámok, hibátlan elemzés', (_id, t) => {
     const cs = t.cs();
-    const names = [...cs.bd.map((b: any) => b.n), ...cs.steps.filter((s: any) => s.n).map((s: any) => s.n), ...cs.bf.map((b: any) => b.fdn || b.n).filter(Boolean)];
+    const names = [...cs.bd.map((b: any) => b.n), ...cs.steps.filter((s: any) => s.n).map((s: any) => s.n), ...cs.bf.map((b: any) => b.fdn || b.n).filter(Boolean), ...['A', 'B'].flatMap((p) => [...((cs.trash || {})[p] || []), ...((cs.hand || {})[p] || [])])];
     names.forEach((n: string) => expect(vsCard(n), n).toBeTruthy());
     t.refs.split(/,\s*/).forEach((ref) => expect(() => ruleText(ref)).not.toThrow());
     const r = analyze(JSON.parse(JSON.stringify(cs)));
@@ -60,5 +60,11 @@ describe('Chain sablonok', () => {
     expect(x.r.items.map((i: any) => i.name)).toEqual(['Star-Crossed', 'Sona, Harmonious triggere (kör vége)']);
     expect(x.text).toMatch(/383\.2\.a\.1/);
     expect(x.r.frames.some((f: any) => /Expiration Step/.test(f.label))).toBe(true);
+  });
+  it('trash: a Morbid Return célpontja elhagyta a trasht, Ignored; a kézbe nem kerül semmi', () => {
+    const x = run('trash');
+    expect(x.item(/^Morbid Return/)!.instr[0].st).toBe('ignored');
+    expect(x.text).toMatch(/359\.3\.e\.5, 359\.3\.e\.6/);
+    expect(x.r.frames[x.r.frames.length - 1].board.me.hand).toEqual([]);
   });
 });

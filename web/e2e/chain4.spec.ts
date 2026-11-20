@@ -14,7 +14,7 @@ test.afterEach(() => { expect(errs).toEqual([]); errs.length = 0; });
 test('Sablonok: betöltés üres pályára azonnal, tartalom mellett megerősítéssel', async ({ page }) => {
   await page.goto('/#chain');
   await page.getByRole('button', { name: 'Sablonok' }).click();
-  await expect(page.locator('.cb2-tpl')).toHaveCount(7);
+  await expect(page.locator('.cb2-tpl')).toHaveCount(8);
   await page.locator('[data-tpl="counter"] .btn', { hasText: 'Betöltés' }).click();
   await expect(page.locator('.cb2-sc')).toHaveCount(2);
   await expect(page.locator('#cb-out')).toContainText('counterelve');

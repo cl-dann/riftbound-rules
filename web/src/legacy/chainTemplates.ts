@@ -56,6 +56,13 @@ export const TEMPLATES: ChainTemplate[] = [
       steps: [card('Void Seeker', 'A', ['b1']), card('Hidden Blade', 'B', ['b0'], { from: 'facedown', loc: 'bf0' })] }),
   },
   {
+    id: 'trash', title: 'Lap a trashből',
+    desc: 'Morbid Return a trashedben lévő Shipyard Skulkert választja: a trash nyilvános, ezért ez célpont, a lerakáskor kell kiválasztani. Az ellenfél Disposal Order-rel recycle-öli ugyanazt a lapot, így a Morbid Return célpontja a resolve-kor már nincs a trashben: Ignored.',
+    refs: '355.10.a, 355.9.a, 359.3.e.5, 359.3.e.6',
+    cs: () => base({ turn: 'A', trash: { A: ['Shipyard Skulker'], B: [] },
+      steps: [card('Morbid Return', 'A', [], { zp: { 0: ['ztA0'] } }), card('Disposal Order', 'B', [], { mode: 0, zp: { 0: ['ztA0'] } })] }),
+  },
+  {
     id: 'endturn', title: 'Kör vége és Expiration Step',
     desc: 'A te körödben Sona battlefielden áll. Kör vége: a trigger a chainre kerül, az ellenfél válaszként Star-Crossed-dal a kezedbe küldi Sonát. A trigger ettől még lefut, mert a feltétele a triggereléskor teljesült; utána Expiration Step.',
     refs: '317.1, 383.2.a.1, 317.2',

@@ -12,11 +12,13 @@ it('lefedettség: 0 nem felismert és 0 bizonytalan utasítás', () => {
   console.log('Előző commit: ' + p.tot + ' utasítás, ' + p.other + ' nem felismert, ' + p.unsure + ' bizonytalan (' + pct(p.other + p.unsure, p.tot) + ')');
   console.log('Most: ' + c.tot + ' utasítás, ' + c.other + ' nem felismert, ' + c.unsure + ' bizonytalan; ' + c.hidden + ' felismert, de rejtett adatot kér; ' + c.open + ' nyitott kérdés; ' + c.costs + ' költségsor');
   console.log('Adatot kér (lap: utasítás | ok):\n' + c.hid.join('\n'));
+  console.log('Ebből a pályán konkrét lap kiválasztásával kiváltható (kéz, deck felső lapja, eldobott lap): ' + c.pick.length + '\n' + c.pick.join('\n'));
   console.log('Nyitott kérdés:\n' + c.opn.join('\n'));
   if (c.bad.length) console.log('Nem felismert vagy bizonytalan:\n' + c.bad.join('\n'));
   expect(c.bad).toEqual([]);
   expect(c.other).toBe(0);
   expect(c.unsure).toBe(0);
   // az "adatot kér" csak rejtett információ (kéz, deck, felfedett lap, builderen kívüli előzmény) miatt
+  expect(c.pick.length).toBeGreaterThan(0);
   for (const h of c.hid) expect(h).toMatch(/\| .*(kéz|deck|felfed|rejtett|előzmény|kijátszott lap|tipp)/i);
 });

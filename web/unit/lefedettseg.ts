@@ -3,7 +3,7 @@
    - coveragePrev: az előző commit (5248b99) chainCore-ja, unit/elozo/chainCore_elozo.ts;
    - coverage: a jelenlegi. */
 import { CARDS } from '../src/legacy/core';
-import { instrSources, splitInstr, classOf, hiddenWhy } from '../src/legacy/chainCore';
+import { instrSources, splitInstr, classOf, hiddenWhy, zoneResolvable } from '../src/legacy/chainCore';
 import * as P from './elozo/chainCore_elozo';
 
 function oldActOf(eff: string): { k: string } {
@@ -37,14 +37,14 @@ export function coveragePrev() {
 export function coverage() {
   let tot = 0, other = 0, unsure = 0, hidden = 0, open = 0, costs = 0;
   const pat: Record<string, number> = {}; const ex: Record<string, string> = {};
-  const bad: string[] = []; const hid: string[] = []; const opn: string[] = [];
+  const bad: string[] = []; const hid: string[] = []; const opn: string[] = []; const pick: string[] = [];
   for (const { c, s } of srcs()) {
     const parts = s.k === 'cost' ? [s.e] : splitInstr(s.e);
     for (const t of parts) {
       tot++;
       if (s.k === 'cost') { costs++; continue; }
       const k = classOf(t, c.n);
-      if (k === 'hidden') { hidden++; hid.push(c.n + ': ' + t + ' | ' + hiddenWhy(t, c.n)); }
+      if (k === 'hidden') { hidden++; hid.push(c.n + ': ' + t + ' | ' + hiddenWhy(t, c.n)); if (zoneResolvable(t, c)) pick.push(c.n + ': ' + t); }
       if (k === 'open') { open++; opn.push(c.n + ': ' + t); }
       if (k === 'other' || k === 'unsure') {
         if (k === 'other') other++; else unsure++;
@@ -55,5 +55,5 @@ export function coverage() {
     }
   }
   const top = Object.entries(pat).sort((a, b) => b[1] - a[1]).slice(0, 20).map(([k, n]) => ({ k, n, ex: ex[k] }));
-  return { tot, other, unsure, hidden, open, costs, known: tot - other - unsure, top, bad, hid, opn };
+  return { tot, other, unsure, hidden, open, costs, known: tot - other - unsure, top, bad, hid, opn, pick };
 }

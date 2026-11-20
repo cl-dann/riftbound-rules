@@ -8,7 +8,7 @@ import { IMGBASE } from '../legacy/core';
 import { Playmat, type PTarget, type PlayCtl, type Glow } from '../components/Playmat';
 import { CombatPanel } from '../components/CombatPanel';
 import {
-  setupFrame, stepFrames, insertAt, fullFrame, tryStep, targetOpts, slotText, stepName, abilitiesFor, hasHidden, isPerm, searchCards, cardOf, sideOf, plOf,
+  setupFrame, stepFrames, insertAt, zonePicks, zoneCands, type ZCand, fullFrame, tryStep, targetOpts, slotText, stepName, abilitiesFor, hasHidden, isPerm, searchCards, cardOf, sideOf, plOf,
   PICK_TITLE, type ChainFrame, type MtInfo, type MtInstr, type Arrow, type PickKind, type TgOpt, type Legal,
 } from '../components/chainBuild';
 import '../components/practice.css';
@@ -144,7 +144,7 @@ function CardPicker({ at, onPick, onClose }: { at: PickAt; onPick: (n: string, s
 }
 
 /* ---------- akció-menü ---------- */
-type MItem = { label: string; run?: () => void; dis?: string; ref?: string; tone?: string; need?: string };
+type MItem = { label: string; run?: () => void; dis?: string; ref?: string; tone?: string; need?: string; step?: boolean };
 type Menu = { title: string; card?: string; sub?: string; items: MItem[]; key: string };
 function ActionMenu({ m, onClose }: { m: Menu; onClose: () => void }) {
   const first = useRef<HTMLButtonElement>(null);
@@ -200,11 +200,24 @@ function PropsPanel({ i, onClose }: { i: number; onClose: () => void }) {
   );
 }
 
+/** Keskeny nézet (mobil): itt a lépéseket a varázsló (bottom sheet) építi. */
+function useNarrow() {
+  const q = '(max-width: 700px)';
+  const [n, setN] = useState(() => typeof matchMedia === 'function' && matchMedia(q).matches);
+  useEffect(() => { if (typeof matchMedia !== 'function') return; const m = matchMedia(q); const on = () => setN(m.matches); m.addEventListener('change', on); return () => m.removeEventListener('change', on); }, []);
+  return n;
+}
+type Wiz = { st: 'card' | 'action' | 'target' | 'extra'; j?: number; menu?: Menu; pick?: string; side: 'me' | 'opp'; preset?: 'res' | 'end'; hadT?: boolean };
+
+/** A varázsló "extra mezők" lépése csak akkor jelenik meg, ha a lapnak ilyen mezője van (a hely és a forrás a lépés-panelben állítható). */
+const EXTRA_SEL = '[data-accel],[data-rep],[data-repn],[data-modek],[data-mode],[data-spl],[data-addc],[data-cost],[data-cnd],[data-hv],[data-mp],[data-plc],[data-so],[data-soh],[data-erd],[data-sub],[data-dest],[data-pay],[data-eloc],[data-ai],[data-ti2],[data-mfrom]';
+
 type Mode =
   | { k: 'target'; j: number; ti: number }
   | { k: 'move'; uid: string; n: string; dests: string[]; std: boolean }
   | { k: 'hide'; side: 'me' | 'opp'; hi: number; n: string; dests: number[] }
   | { k: 'hpick'; j: number; f: 'so' | 'plc'; xi: number; side: 'me' | 'opp'; unit: boolean }
+  | { k: 'zpick'; j: number; xi: number }
   | null;
 
 /** A Chain pályás építője: a pálya a lejátszással, akció-menü, kártyakereső, célzás kattintással, idővonal, lépés-panel. */
@@ -222,6 +235,9 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
   const [msg, setMsg] = useState('');
   const [cfocus, setCfocus] = useState<{ bi: number; atk: 'me' | 'opp'; n: number } | null>(null);
   const [ins, setIns] = useState<number | null>(null);
+  const narrow = useNarrow();
+  const [wiz, setWiz] = useState<Wiz | null>(null);
+  const showMenu = (m: Menu) => { if (narrow) { setMenu(null); setSel(null); setWiz((w) => ({ st: 'action', menu: m, side: w?.side || 'me' })); } else setMenu(m); };
   const [tpl, setTpl] = useState<{ open: boolean; ask?: string }>({ open: false });
   const tplSlot = typeof document !== 'undefined' ? document.getElementById('cb-tplslot') : null;
   const jump = useRef<number | 'keep' | null>(null);
@@ -231,10 +247,10 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
 
   // új frame-ek: az építő után a lépés frame-jére ugrik, különben (példa, link, űrlap) az elejére
   useEffect(() => {
-    const J = jump.current; jump.current = null;
+    const J = jump.current ?? (chainApi.internal ? 'keep' : null); jump.current = null; chainApi.internal = false;
     if (J === 'keep') setI((k) => Math.min(k, eff.length - 1));
     else if (typeof J === 'number') setI(sf[J] ?? Math.max(0, eff.length - 1));
-    else { setI(0); setMode(null); setSel(null); setMenu(null); setIns(null); }
+    else { setI(0); setMode(null); setSel(null); setMenu(null); setIns(null); setWiz(null); }
     setPlay(false);
   }, [frames]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -255,9 +271,12 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
   const addStep = (st: any) => {
     const j = ins == null ? CS.steps.length : Math.min(ins, CS.steps.length);
     commit((cs) => { insertAt(cs, j, st); }, j, 0);
-    close(); setSel(j); setIns(null);
+    close(); if (!narrow) setIns(null);
     const inf: any = stepInfo(chainApi.get!(), chainApi.get!().steps[j]);
-    if (inf?.list?.length) { setMode({ k: 'target', j, ti: 0 }); setMsg(''); } else setMode(null);
+    const hasT = !!inf?.list?.length;
+    if (hasT) { setMode({ k: 'target', j, ti: 0 }); setMsg(''); } else afterTargets(j);
+    const hasZ = !hasT && zonePicks(chainApi.get!(), j).some((z) => zoneCands(chainApi.get!(), j, z.xi).length);
+    if (narrow) setWiz((w) => ({ ...(w || { side: 'me' }), st: hasT || hasZ ? 'target' : 'extra', j, hadT: hasT || hasZ })); else setSel(j);
   };
   const lastPl = () => { const l = CS.steps.slice(0, ins ?? CS.steps.length).reverse().find((s: any) => s.k === 'card' || s.k === 'ab'); return l ? (l.pl === 'A' ? 'opp' : 'me') : 'me'; };
 
@@ -288,17 +307,75 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
     }, j, 0);
     const n = tInf.list.length;
     if (cur === v) return;
-    if (ti + 1 < n) setMode({ k: 'target', j, ti: ti + 1 }); else if (n === 1) { setMode(null); setMsg('Célpont kiválasztva. Válaszolhatsz: kattints egy lapra vagy a Chain + gombjára.'); }
+    if (ti + 1 < n) setMode({ k: 'target', j, ti: ti + 1 }); else if (n === 1) { afterTargets(j); setMsg('Célpont kiválasztva. Válaszolhatsz: kattints egy lapra vagy a Chain + gombjára.'); }
   };
+
+  /* ---- kéz, trash és deck lapjainak választása (355.9.a, 355.10.a, 355.18) ---- */
+  const [zpan, setZpan] = useState<{ z: 'trash' | 'deck' | 'banish'; side: 'me' | 'opp' } | null>(null);
+  const zCands = useMemo<ZCand[]>(() => (mode?.k === 'zpick' ? zoneCands(CS, mode.j, mode.xi) : []), [mode, csv]); // eslint-disable-line react-hooks/exhaustive-deps
+  const zInfo = mode?.k === 'zpick' ? zonePicks(CS, mode.j).find((z) => z.xi === mode.xi) : undefined;
+  const zSel = (j: number, xi: number): string[] => ((CS.steps[j]?.zp || {})[xi] || []);
+  /** A célpontok után: az első olyan zóna-választás, amelyhez van lap a zónában; ha nincs, a lépés kész. */
+  const afterTargets = (j: number, from = 0) => {
+    const zs = zonePicks(chainApi.get!(), j).filter((z) => z.xi >= from);
+    for (const z of zs) { if (zoneCands(chainApi.get!(), j, z.xi).length) { setMode({ k: 'zpick', j, xi: z.xi }); return; } }
+    setMode(null);
+  };
+  const toggleZ = (id: string) => {
+    if (mode?.k !== 'zpick' || !zInfo) return;
+    const o = zCands.find((x) => x.id === id);
+    if (!o) { setMsg('Ez a lap nem választható ehhez: "' + zInfo.t + '".'); return; }
+    if (!o.ok) { setMsg('Nem választható: ' + o.n + ' ' + (o.why || '') + '.'); return; }
+    const { j, xi } = mode; const cur = zSel(j, xi); const n = zInfo.zr.n;
+    const next = cur.includes(id) ? cur.filter((x) => x !== id) : n === 1 ? [id] : cur.length < n ? [...cur, id] : cur;
+    commit((cs) => { const s = cs.steps[j]; s.zp = { ...(s.zp || {}), [xi]: next }; }, j, 0);
+    if (n === 1 && !cur.includes(id)) afterTargets(j, xi + 1);
+  };
+  const zoneHu = (z: string) => (z === 'trash' ? 'trash' : z === 'hand' ? 'kéz' : 'deck');
+  const zNote = (z: { zr: any }) => (z.zr.target ? 'Célpont a trashből: a trash nyilvános zóna, ezért a lerakáskor kell választani (355.10.a, 355.8).' : z.zr.z === 'hand' ? 'Választás a kézből: a kéz privát, ezért nem célpont, a resolve-kor dől el (355.10.a, 355.18).' : 'Választás a deckből: a deck sorrendje titkos információ (108.4.e, 128.3).') + (z.zr.n > 1 ? ' Legfeljebb ' + z.zr.n + ' lap.' : '');
+  const zChips = mode?.k === 'zpick' ? (zCands.length ? zCands.map((o) => (
+    <button key={o.id} type="button" className={'cb2-chip' + (o.ok ? '' : ' bad') + (zSel(mode.j, mode.xi).includes(o.id) ? ' on' : '')} aria-pressed={zSel(mode.j, mode.xi).includes(o.id)} title={o.why} onClick={() => toggleZ(o.id)}>
+      {o.n} <small>({o.own === 'A' ? 'saját' : 'ellenfél'} {zoneHu(o.zone)}{o.ok ? '' : ', nem választható'})</small></button>)) : <span className="note">Ebben a zónában nincs lap. A Trash, a Deck és a kéz + gombjával adhatsz hozzá.</span>) : null;
+  const zList = (z: 'trash' | 'deck' | 'banish', side: 'me' | 'opp') => {
+    const b: any = f.board[side]; const p = plOf(side);
+    if (z === 'deck') return ((CS.deck || {})[p] || []).map((n: string, i: number) => ({ id: 'zd' + p + i, n }));
+    if (z === 'banish') return (b.banish || []).map((n: string) => ({ id: '', n }));
+    return (b.trash || []).map((n: string, i: number) => ({ id: (b.zids?.trash || [])[i] || '', n }));
+  };
+  const zPanel = zpan ? (() => {
+    const { z, side } = zpan; const p = plOf(side); const list = zList(z, side);
+    return (
+      <div className="cb2-ov" onClick={() => setZpan(null)}>
+        <div className="pb-panel cb2-zp" role="dialog" aria-label={(side === 'me' ? 'Saját ' : 'Ellenfél ') + z} onClick={(e) => e.stopPropagation()}>
+          <div className="pb-mh"><span><b>{(side === 'me' ? 'Saját ' : 'Ellenfél ') + (z === 'trash' ? 'trash' : z === 'deck' ? 'Main Deck' : 'banishment')}</b>
+            <small className="note">{z === 'trash' ? 'Nyilvános zóna (108.2.d).' : z === 'deck' ? 'A sorrend titkos (108.4.e): az 1. a felső lap, ez a pályás építő feltételezése.' : 'Nyilvános zóna (108.6.e).'}</small></span>
+            <button type="button" className="pb-x" aria-label="Bezárás" onClick={() => setZpan(null)}><X size={18} /></button></div>
+          {mode?.k === 'zpick' && zInfo && <p className="pb-why cb2-need">"{zInfo.t}": {zNote(zInfo)}</p>}
+          <ul className="cb2-zl">
+            {list.map((x: any, k: number) => { const o = mode?.k === 'zpick' ? zCands.find((c) => c.id === x.id) : undefined; const on = mode?.k === 'zpick' && zSel(mode.j, mode.xi).includes(x.id);
+              return (
+                <li key={k} className={o ? (o.ok ? 'ok' : 'bad') : ''}>
+                  {imgOf(x.n) ? <img src={imgOf(x.n)} alt="" /> : <span className="cb2-noimg" />}
+                  <span className="cb2-rn"><b>{z === 'deck' ? (k + 1) + '. ' : ''}{x.n}</b>{o && !o.ok && <small>{o.why}</small>}</span>
+                  {o && <button type="button" className={'btn' + (on ? '' : ' sec')} disabled={!o.ok} aria-pressed={on} onClick={() => toggleZ(x.id)}>{on ? 'Kiválasztva' : 'Kiválasztás'}</button>}
+                  {/^z[td][AB]\d+$/.test(x.id) && !o && <button type="button" className="linkbtn" aria-label={x.n + ' eltávolítása'} onClick={() => commit((cs) => { cs[z][p].splice(+x.id.slice(3), 1); })}><X size={14} /></button>}
+                </li>); })}
+            {!list.length && <li className="note">Üres.</li>}
+          </ul>
+          {z !== 'banish' && <button type="button" className="pb-btn act" onClick={() => setPick({ kind: z, side })}>{z === 'trash' ? '+ Lap a trashbe' : '+ Lap a deck tetejére'}</button>}
+          <button type="button" className="pb-btn primary" onClick={() => setZpan(null)}>Kész</button>
+        </div>
+      </div>);
+  })() : null;
 
   /* ---- menük ---- */
   const lg = (r: Legal) => (r.ok ? { need: r.need } : { dis: r.why, ref: r.ref });
   const abItems = (src: string, pl: 'A' | 'B'): MItem[] => {
     const { c, abs, trs } = abilitiesFor(CS, src);
     if (!c) return [];
-    const out: MItem[] = abs.map((a: any, ai: number) => { const st = { k: 'ab', src, ai, pl, n: c.n, tg: [], ext: {} }; return { label: 'Aktiválás: ' + String(a.label).slice(0, 70), run: () => addStep(st), ...lg(tryStep(CS, st, ins ?? undefined)) }; });
+    const out: MItem[] = abs.map((a: any, ai: number) => { const st = { k: 'ab', src, ai, pl, n: c.n, tg: [], ext: {} }; return { label: 'Aktiválás: ' + String(a.label).slice(0, 70), step: true, run: () => addStep(st), ...lg(tryStep(CS, st, ins ?? undefined)) }; });
     if (!abs.length) out.push({ label: 'Aktiválás', dis: 'Ennek a lapnak nincs aktiválható abilityje.' });
-    trs.forEach((a: any, ti: number) => { const st = { k: 'tg', src, ti, pl, n: c.n, tg: [], ext: {} }; out.push({ label: 'Trigger a chainre: ' + String(a.label).slice(0, 60), tone: 'gold', run: () => addStep(st), ...lg(tryStep(CS, st, ins ?? undefined)) }); });
+    trs.forEach((a: any, ti: number) => { const st = { k: 'tg', src, ti, pl, n: c.n, tg: [], ext: {} }; out.push({ label: 'Trigger a chainre: ' + String(a.label).slice(0, 60), tone: 'gold', step: true, run: () => addStep(st), ...lg(tryStep(CS, st, ins ?? undefined)) }); });
     return out;
   };
   const moveItems = (uid: string, n: string): MItem[] => {
@@ -330,31 +407,32 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
     const k = +m[2];
     if (m[1] === 'b') {
       const b = CS.bd[k]; if (!b) return;
-      setMenu({ key: uid + csv, title: b.n, card: b.n, sub: (b.pl === 'A' ? 'saját' : 'ellenfél') + ', ' + locLabelOf(CS, b.loc) + ', kiinduló helyzet', items: [
+      showMenu({ key: uid + csv, title: b.n, card: b.n, sub: (b.pl === 'A' ? 'saját' : 'ellenfél') + ', ' + locLabelOf(CS, b.loc) + ', kiinduló helyzet', items: [
         ...abItems(uid, b.pl), ...moveItems(uid, b.n), ...combatItem(b.loc, sideOf(b.pl)),
         { label: 'Tulajdonságok (Might, damage, exhausted, stunned, buff, Empowered, csatolás)', tone: 'energy', run: () => { setMenu(null); setProps(k); } },
         { label: 'Eltávolítás', tone: 'del', run: () => { close(); jump.current = 'keep'; chainApi.delBd!(k); } },
       ] });
     } else {
       const s = CS.steps[k]; if (!s) return;
-      setMenu({ key: uid + csv, title: s.n, card: s.n, sub: (k + 1) + '. lépésben kijátszva', items: [
+      showMenu({ key: uid + csv, title: s.n, card: s.n, sub: (k + 1) + '. lépésben kijátszva', items: [
         ...abItems(uid, s.pl), ...moveItems(uid, s.n), ...combatItem(s.loc || 'base', sideOf(s.pl)),
         { label: 'Lépés szerkesztése', tone: 'energy', run: () => { close(); setSel(k); } },
         { label: 'A lépés törlése', tone: 'del', run: () => { close(); chainApi.delStep!(k); } },
       ] });
     }
   };
-  const playItem = (st: any, label = 'Kijátszás'): MItem => ({ label, run: () => addStep(st), ...lg(tryStep(CS, st, ins ?? undefined)) });
-  const openHand = (side: 'me' | 'opp', hi: number, n: string) => {
-    const p = plOf(side); const csN = (f.board[side] as any).handCS ?? 0;
+  const playItem = (st: any, label = 'Kijátszás'): MItem => ({ label, step: true, run: () => addStep(st), ...lg(tryStep(CS, st, ins ?? undefined)) });
+  const openHand = (side: 'me' | 'opp', hi0: number, n: string) => {
+    const p = plOf(side); const hid = ((f.board[side] as any).zids?.hand || [])[hi0] || '';
     const c = cardOf(n); if (!c) return;
-    if (hi >= csN) { setMenu({ key: 'h' + hi, title: n, card: n, sub: 'egy hatás tette a kézbe', items: [] }); return; }
+    if (!/^zh[AB]\d+$/.test(hid)) { showMenu({ key: 'h' + hi0, title: n, card: n, sub: 'egy hatás tette a kézbe', items: [] }); return; }
+    const hi = +hid.slice(3);
     const st = { k: 'card', n, pl: p, from: 'hand', ...(isPerm(c) ? { loc: 'base' } : {}), tg: [], ext: {} };
     const dests = [0, 1].filter((b) => CS.bf[b].n && CS.bf[b].c === p && !CS.bf[b].fd);
     const hide: MItem = !hasHidden(c) ? { label: 'Elrejtés (Hidden)', dis: 'Csak [Hidden] keywordös lap rejthető el.', ref: '811.1.c' }
       : !dests.length ? { label: 'Elrejtés (Hidden)', dis: 'Elrejteni csak olyan battlefieldre lehet, amit te kontrollálsz, és nincs rajta facedown lap.', ref: '811.1.b' }
       : { label: 'Elrejtés (Hidden)', tone: 'gold', need: 'a battlefield kiválasztása', run: () => { close(); if (dests.length === 1) doHide(side, hi, n, dests[0]); else setMode({ k: 'hide', side, hi, n, dests }); } };
-    setMenu({ key: 'h' + side + hi + csv, title: n, card: n, sub: (side === 'me' ? 'saját' : 'ellenfél') + ' kéz', items: [
+    showMenu({ key: 'h' + side + hi + csv, title: n, card: n, sub: (side === 'me' ? 'saját' : 'ellenfél') + ' kéz', items: [
       playItem(st, 'Kijátszás' + (isPerm(c) ? ' (a base-be; a hely a lépésnél állítható)' : '')), hide,
       { label: 'Eltávolítás a kézből', tone: 'del', run: () => { close(); commit((cs) => { cs.hand[p].splice(hi, 1); }); } },
     ] });
@@ -375,12 +453,12 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
       : [{ label: 'Kijátszás facedown-ból', dis: 'Ismeretlen facedown lap: a nevét a Chain + gombjával add meg, "facedown-ból" forrással.' }];
     items.push({ label: 'Vissza a kézbe', tone: 'gold', run: () => { close(); commit((cs) => { if (n) cs.hand[bf.fd].push(n); cs.bf[b].fd = ''; cs.bf[b].fdn = ''; }); } });
     items.push({ label: 'Eltávolítás', tone: 'del', run: () => { close(); commit((cs) => { cs.bf[b].fd = ''; cs.bf[b].fdn = ''; }); } });
-    setMenu({ key: 'fd' + b + csv, title: n || 'Facedown lap', card: n || undefined, sub: (bf.fd === 'A' ? 'saját' : 'ellenfél') + ' facedown, ' + (bf.n || (b + 1) + '. battlefield'), items });
+    showMenu({ key: 'fd' + b + csv, title: n || 'Facedown lap', card: n || undefined, sub: (bf.fd === 'A' ? 'saját' : 'ellenfél') + ' facedown, ' + (bf.n || (b + 1) + '. battlefield'), items });
   };
   const openLegend = (side: 'me' | 'opp') => {
     const p = plOf(side); const n = CS.lg[p];
     if (!n) { setPick({ kind: 'legend', side }); return; }
-    setMenu({ key: 'L' + p + csv, title: n, card: n, sub: (side === 'me' ? 'saját' : 'ellenfél') + ' legend', items: [
+    showMenu({ key: 'L' + p + csv, title: n, card: n, sub: (side === 'me' ? 'saját' : 'ellenfél') + ' legend', items: [
       ...abItems('L' + p, p),
       { label: 'Csere', tone: 'energy', run: () => { setMenu(null); setPick({ kind: 'legend', side }); } },
       { label: 'Eltávolítás', tone: 'del', run: () => { close(); commit((cs) => { cs.lg[p] = ''; }); } },
@@ -389,7 +467,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
   const openChamp = (side: 'me' | 'opp') => {
     const p = plOf(side); const n = (CS.ch || {})[p];
     if (!n || !f.board[side].champion) { if (!n) setPick({ kind: 'champion', side }); return; }
-    setMenu({ key: 'C' + p + csv, title: n, card: n, sub: (side === 'me' ? 'saját' : 'ellenfél') + ' Champion Zone', items: [
+    showMenu({ key: 'C' + p + csv, title: n, card: n, sub: (side === 'me' ? 'saját' : 'ellenfél') + ' Champion Zone', items: [
       playItem({ k: 'card', n, pl: p, from: 'champ', loc: 'base', tg: [], ext: {} }, 'Kijátszás a Champion Zone-ból'),
       { label: 'Csere', tone: 'energy', run: () => { setMenu(null); setPick({ kind: 'champion', side }); } },
       { label: 'Eltávolítás', tone: 'del', run: () => { close(); commit((cs) => { cs.ch[p] = ''; }); } },
@@ -399,7 +477,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
     const bf = CS.bf[b];
     if (!bf.n) { setPick({ kind: 'battlefield', bfi: b }); return; }
     const ctl = (c: string, l: string): MItem => ({ label: 'Kontroll: ' + l, tone: 'gold', dis: bf.c === c ? 'Most is így áll.' : undefined, run: () => { close(); commit((cs) => { cs.bf[b].c = c; }); } });
-    setMenu({ key: 'bf' + b + csv, title: bf.n, card: bf.n, sub: (b + 1) + '. battlefield', items: [
+    showMenu({ key: 'bf' + b + csv, title: bf.n, card: bf.n, sub: (b + 1) + '. battlefield', items: [
       ctl('A', 'te'), ctl('B', 'ellenfél'), ctl('', 'senki'),
       ...combatItem('bf' + b, bf.c === 'A' ? 'opp' : 'me'),
       { label: 'Csere', tone: 'energy', run: () => { setMenu(null); setPick({ kind: 'battlefield', bfi: b }); } },
@@ -419,6 +497,8 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
       else if (at.kind === 'champion') cs.ch[p] = n;
       else if (at.kind === 'battlefield') cs.bf[at.bfi!].n = n;
       else if (at.kind === 'hand') cs.hand[p].push(n);
+      else if (at.kind === 'trash') { cs.trash = cs.trash || { A: [], B: [] }; cs.trash[p].push(n); }
+      else if (at.kind === 'deck') { cs.deck = cs.deck || { A: [], B: [] }; cs.deck[p].unshift(n); }
       else if (at.kind === 'hidden') { cs.bf[at.bfi!].fd = p; cs.bf[at.bfi!].fdn = n; }
       else if (at.kind === 'board') cs.bd.push({ n, pl: p, loc: at.loc || 'base', d: 0 });
     });
@@ -447,6 +527,11 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
         if (t.k === 'add') return g(addV(t));
         return '';
       }
+      if (mode?.k === 'zpick') {
+        if (t.k === 'hand') { const id = ((f.board[t.side] as any).zids?.hand || [])[t.i]; const o = zCands.find((x) => x.id === id); return !o ? '' : zSel(mode.j, mode.xi).includes(id) ? 'sel' : o.ok ? 'act' : ''; }
+        if (t.k === 'pile') return zCands.some((o) => o.ok && o.zone === t.z && o.own === plOf(t.side)) ? 'act' : '';
+        return '';
+      }
       if (mode?.k === 'hpick') return t.k === 'hand' && t.side === mode.side && (!mode.unit || cardOf(t.n)?.t === 'Unit') ? 'act' : '';
       if (mode?.k === 'move') {
         if (t.k === 'unit') return t.id === mode.uid ? 'sel' : '';
@@ -460,7 +545,11 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
     on: (t) => {
       window.dispatchEvent(new Event('rb:hide-tip'));
       setPlay(false);
+      if (narrow && wiz?.st === 'extra') return;
+      if (narrow && t.k === 'add' && t.z === 'chain' && mode?.k !== 'target') { openWiz(); return; }
       if (t.k === 'add' && mode?.k === 'target' && tOpts.some((o) => o.v === addV(t) && o.ok)) { pickTarget(addV(t)); return; }
+      if (t.k === 'pile') { setZpan({ z: t.z, side: t.side }); return; }
+      if (mode?.k === 'zpick') { if (t.k === 'hand') toggleZ(((f.board[t.side] as any).zids?.hand || [])[t.i] || ''); return; }
       if (mode?.k === 'hpick') {
         if (t.k === 'hand' && ctl.glow(t)) { const m = mode; commit((cs) => { const s = cs.steps[m.j]; if (m.f === 'so') s.so = 'h:' + t.n; else { s.plc = s.plc || {}; s.plc[m.xi] = t.n; } }, m.j, 0); setMode(null); setMsg(t.n + ' kiválasztva a kézből.'); }
         if (t.k !== 'add') return;
@@ -565,8 +654,14 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
       <div className="cb2-mbtn">
         {tInf.list.length > 1 && mode.ti > 0 && <button type="button" className="btn sec" onClick={() => setMode({ ...mode, ti: mode.ti - 1 })}>Előző célpont</button>}
         {tInf.list.length > 1 && mode.ti + 1 < tInf.list.length && <button type="button" className="btn sec" onClick={() => setMode({ ...mode, ti: mode.ti + 1 })}>Következő célpont</button>}
-        <button type="button" className="btn" onClick={() => setMode(null)}>Kész</button>
+        <button type="button" className="btn" onClick={() => afterTargets(mode.j)}>Kész</button>
       </div>
+    </div>
+  ) : mode?.k === 'zpick' && zInfo ? (
+    <div className="cb2-mode" role="status">
+      <div><b>{stepName(CS, CS.steps[mode.j]).n}: "{zInfo.t}"</b> <span className="note">{zNote(zInfo)} Kattints egy kiemelt lapra {zInfo.zr.z === 'hand' ? 'a kézben' : 'a ' + zoneHu(zInfo.zr.z) + ' pakli megnyitásával'}, vagy válassz itt:</span></div>
+      <div className="cb2-chips">{zChips}</div>
+      <div className="cb2-mbtn"><button type="button" className="btn" onClick={() => afterTargets(mode.j, mode.xi + 1)}>Kész</button></div>
     </div>
   ) : mode?.k === 'move' ? (
     <div className="cb2-mode" role="status"><div>Hova kerüljön <b>{mode.n}</b>? Kattints egy kiemelt zónára.</div><div className="cb2-mbtn"><button type="button" className="btn sec" onClick={() => setMode(null)}>Mégse</button></div></div>
@@ -583,6 +678,89 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
         <button type="button" className="btn" onClick={() => setIns(null)}>Mégse</button>
       </div></div>
   ) : null;
+  /* ---- mobilos lépés-varázsló (csak keskeny nézetben) ---- */
+  const sideBefore = (at: number | null) => { const l = CS.steps.slice(0, at ?? CS.steps.length).reverse().find((x: any) => x.k === 'card' || x.k === 'ab'); return l ? (l.pl === 'A' ? 'opp' : 'me') : 'me'; };
+  function openWiz(preset?: 'res' | 'end', at: number | null = ins) { setMsg(''); setMenu(null); setPick(null); setMode(null); setSel(null); setWiz({ st: preset ? 'action' : 'card', side: sideBefore(at), preset }); }
+  const wizEnd = (msg?: string) => { chainApi.quick!(null, -1); setWiz(null); setIns(null); setMode(null); if (msg) setMsg(msg); };
+  const wizCancel = () => { const w = wiz; wizEnd(); if (w?.j != null && CS.steps[w.j]) { jump.current = 'keep'; chainApi.delStep!(w.j); } };
+  const wizBack = () => {
+    const w = wiz!;
+    if (w.st === 'card') { wizCancel(); return; }
+    if (w.st === 'action') { setWiz({ st: 'card', side: w.side }); return; }
+    if (w.st === 'target' || (w.st === 'extra' && !w.hadT)) { setMode(null); setWiz({ ...w, st: 'action', j: undefined }); chainApi.quick!(null, -1); jump.current = 'keep'; chainApi.delStep!(w.j!); return; }
+    chainApi.quick!(null, -1); setWiz({ ...w, st: 'target' }); setMode({ k: 'target', j: w.j!, ti: 0 });
+  };
+  useEffect(() => { if (wiz?.st === 'target' && !mode) setWiz({ ...wiz, st: 'extra' }); }, [mode]); // eslint-disable-line react-hooks/exhaustive-deps
+  // mobilon célzáskor az első legális célpont a látható részre kerül (a sáv fölé)
+  useEffect(() => {
+    if (!narrow || wiz?.st !== 'target' || mode?.k !== 'target') return;
+    const t = window.setTimeout(() => { const el = host.current?.querySelector<HTMLElement>('.g-act, .g-dest'); el?.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 60);
+    return () => window.clearTimeout(t);
+  }, [wiz?.st, mode?.k === 'target' ? mode.ti : -1, tOpts.length]); // eslint-disable-line react-hooks/exhaustive-deps
+  const xref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (wiz?.st !== 'extra' || wiz.j == null) return;
+    chainApi.quick!(xref.current, wiz.j);
+    if (!xref.current?.querySelector(EXTRA_SEL)) wizEnd((wiz.j + 1) + '. lépés az idővonalon: ' + stepName(CS, CS.steps[wiz.j]).n + '.');
+  }, [wiz?.st, wiz?.j]); // eslint-disable-line react-hooks/exhaustive-deps
+  const [wq, setWq] = useState('');
+  const wres = useMemo(() => (wiz?.st === 'card' ? searchCards('play', wq, 30) : []), [wiz?.st, wq]);
+  const pickSt = (n: string, side: 'me' | 'opp') => { const c = cardOf(n); return { k: 'card', n, pl: plOf(side), from: 'hand', ...(isPerm(c) ? { loc: 'base' } : {}), tg: [], ext: {} }; };
+  const wItems: MItem[] = !narrow || !wiz || wiz.st !== 'action' ? [] : wiz.preset
+    ? [{ label: wiz.preset === 'res' ? 'Resolve: a chain teteje most lefut' : 'Kör vége: Ending Phase', ref: wiz.preset === 'res' ? '340.1' : '317.1', step: true, run: () => addStep({ k: wiz.preset }) }]
+    : wiz.pick ? [playItem(pickSt(wiz.pick, wiz.side), 'Kijátszás')] : (wiz.menu?.items || []);
+  const WST = { card: 1, action: 2, target: 3, extra: 4 } as const;
+  const wHead = (t: string) => (
+    <div className="cb2-wh">
+      <span className="cb2-wn">{wiz ? WST[wiz.st] : 1} / 4</span><b>{t}</b>
+      <button type="button" className="btn sec" onClick={wizBack}>Vissza</button>
+      <button type="button" className="btn sec" onClick={wizCancel}>Mégse</button>
+    </div>
+  );
+  const wizSheet = !narrow || !wiz ? null : wiz.st === 'target' ? (
+    <div className="cb2-wbar" role="status">
+      {mode?.k === 'zpick' && zInfo ? <div className="cb2-wbt"><b>Válassz lapot ({zoneHu(zInfo.zr.z)})</b> <span>"{zInfo.t}"</span>{msg && <small>{msg}</small>}<div className="cb2-chips cb2-wch">{zChips}</div></div> :
+      <div className="cb2-wbt"><b>Válassz célpontot</b>{tSlot && mode?.k === 'target' && <span> {slotText(tSlot, mode.ti)}{tInf.list.length > 1 ? ' (' + (mode.ti + 1) + ' / ' + tInf.list.length + ')' : ''}</span>}{msg && <small>{msg}</small>}</div>}
+      <div className="cb2-wbb">
+        <button type="button" className="btn sec" onClick={wizBack}>Vissza</button>
+        <button type="button" className="btn sec" onClick={wizCancel}>Mégse</button>
+        {mode?.k === 'target' && (tInf?.list?.length > 1 || tSlot?.opt) && <button type="button" className="btn" onClick={() => afterTargets(mode.j)}>Kész</button>}
+        {mode?.k === 'zpick' && <button type="button" className="btn" onClick={() => afterTargets(mode.j, mode.xi + 1)}>Kész</button>}
+      </div>
+    </div>
+  ) : (
+    <div className="cb2-sheet" role="dialog" aria-label="Lépés varázsló">
+      {wiz.st === 'card' && <>
+        {wHead(ins != null ? 'Beszúrás ' + (ins === 0 ? 'az 1. lépés elé' : 'a(z) ' + ins + '. lépés után') : 'Új lépés: lap kiválasztása')}
+        <p className="note">Bökj egy lapra a pályán (unit, legend, kéz, facedown), vagy keresd ki a kijátszandó lapot:</p>
+        <input type="search" className="cb2-q" value={wq} onChange={(e) => setWq(e.target.value)} placeholder="Lap neve" aria-label="Keresés a kijátszható lapok között" />
+        {wq && <ul className="cb2-res">{wres.map((c) => (
+          <li key={c.n}><button type="button" onClick={() => { setWq(''); setWiz({ ...wiz, st: 'action', pick: c.n, menu: undefined }); }}>
+            {c.img ? <img src={IMGBASE + c.img} alt="" /> : <span className="cb2-noimg" />}<span className="cb2-rn"><b>{c.n}</b><small>{c.t}{c.e != null && c.e !== '' ? ' · ' + c.e + ' Energy' : ''}</small></span>
+          </button></li>))}{!wres.length && <li className="note">Nincs találat.</li>}</ul>}
+        <div className="cb2-wbb"><button type="button" className="btn sec" onClick={() => setWiz({ ...wiz, st: 'action', preset: 'res' })}>Resolve</button><button type="button" className="btn sec" onClick={() => setWiz({ ...wiz, st: 'action', preset: 'end' })}>Kör vége</button></div>
+      </>}
+      {wiz.st === 'action' && <>
+        {wHead(wiz.preset ? (wiz.preset === 'res' ? 'Resolve' : 'Kör vége') : (wiz.pick || wiz.menu?.title || '') + ': akció')}
+        {wiz.menu?.sub && <p className="note">{wiz.menu.sub}</p>}
+        {wiz.pick && <div className="cb2-seg" role="group" aria-label="Ki játssza ki"><span>Ki:</span>
+          {(['me', 'opp'] as const).map((x) => <button key={x} type="button" aria-pressed={wiz.side === x} className={wiz.side === x ? 'on' : ''} onClick={() => setWiz({ ...wiz, side: x })}>{x === 'me' ? 'Te' : 'Ellenfél'}</button>)}</div>}
+        <div className="cb2-witems">{wItems.map((it, k) => (
+          <div key={k}>
+            <button type="button" className={'pb-btn ' + (it.tone || 'act')} disabled={!!it.dis} onClick={() => { if (!it.step) { setWiz(null); setIns(null); } it.run?.(); }}>{it.label}</button>
+            {it.dis && <p className="pb-why">{it.ref && <Refs r={it.ref} />}{it.dis}</p>}
+            {!it.dis && it.need && <p className="pb-why cb2-need">Utána: {it.need}.</p>}
+          </div>))}
+          {!wItems.length && <p className="note">Ehhez a laphoz nincs akció.</p>}</div>
+        {wiz.menu?.card && <button type="button" className="pb-link" onClick={() => openCard(wiz.menu!.card!)}>Lap részletei</button>}
+      </>}
+      {wiz.st === 'extra' && <>
+        {wHead('A lap beállításai')}
+        <div className="cb2-q2 row2 cb2-wx" ref={xref} />
+        <button type="button" className="pb-btn primary" onClick={() => wizEnd((wiz.j! + 1) + '. lépés az idővonalon.')}>Kész</button>
+      </>}
+    </div>
+  );
   const hasContent = !!(CS.steps.length || CS.bd.length || CS.lg.A || CS.lg.B || CS.bf.some((b: any) => b.n || b.fd) || ['A', 'B'].some((p) => (CS.hand?.[p] || []).length || CS.ch?.[p]));
   const loadTpl = (id: string) => { const t = TEMPLATES.find((x) => x.id === id)!; setTpl({ open: false }); chainApi.set!(t.cs()); setMsg('Sablon betöltve: ' + t.title + '. Lépésenként a Következő gombbal nézheted végig.'); };
   const setTurn = (v: string) => commit((cs) => { cs.turn = v; }, 'keep', 0);
@@ -611,7 +789,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
       )}
       <div className="cb2-main">
         <div className="panel pad cbv cb2-stage">
-          {banner}
+          {!(narrow && wiz) && banner}
           <div className="cb2-hdr">
             <div className="cb2-seg" role="group" aria-label="Kinek a köre"><span>Kör:</span>
               {([['', 'automatikus'], ['A', 'te'], ['B', 'ellenfél']] as const).map(([v, l]) => <button key={v} type="button" aria-pressed={(CS.turn || '') === v} className={(CS.turn || '') === v ? 'on' : ''} onClick={() => setTurn(v)} title={v ? undefined : 'az első lépés játékosáé'}>{l}</button>)}</div>
@@ -650,7 +828,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
               const nm = stepName(CS, s); const [stt, why] = stepStatus(j);
               return (
                 <Fragment key={j}>
-                {j > 0 && <li className="cb2-insrow"><button type="button" className={'cb2-ins' + (ins === j ? ' on' : '')} onClick={() => { setMode(null); setIns(ins === j ? null : j); }} aria-label={'Beszúrás a ' + j + '. és a ' + (j + 1) + '. lépés közé'} title="Beszúrás ide"><Plus size={12} /></button></li>}
+                {j > 0 && <li className="cb2-insrow"><button type="button" className={'cb2-ins' + (ins === j ? ' on' : '')} onClick={() => { setMode(null); if (narrow) { setIns(j); openWiz(undefined, j); } else setIns(ins === j ? null : j); }} aria-label={'Beszúrás a ' + j + '. és a ' + (j + 1) + '. lépés közé'} title="Beszúrás ide"><Plus size={12} /></button></li>}
                 <li className={'cb2-sc' + (sel === j ? ' on' : '') + ' ' + stt + (dropAt === j ? ' drop' : '')} data-step={j} draggable
                   onDragStart={(e) => { dragJ.current = j; e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', 'step:' + j); }}
                   onDragOver={(e) => { if (dragJ.current < 0) return; e.preventDefault(); setDropAt(j); }}
@@ -675,12 +853,12 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
             })}
           </ol>
           <div className="cb2-add">
-            <button type="button" className="btn sec" onClick={() => setPick({ kind: 'play', side: lastPl(), sideFree: true })}><Plus size={14} /> Lap a chainre</button>
-            <button type="button" className="btn sec" onClick={() => addStep({ k: 'res' })} title="Mindkét játékos passzol: a chain teteje most lefut (340.1)">+ Resolve</button>
-            <button type="button" className="btn sec" onClick={() => addStep({ k: 'end' })} title="A chain lefut, majd Ending Phase (317)">+ Kör vége</button>
+            <button type="button" className="btn sec" onClick={() => (narrow ? openWiz() : setPick({ kind: 'play', side: lastPl(), sideFree: true }))}><Plus size={14} /> Lap a chainre</button>
+            <button type="button" className="btn sec" onClick={() => (narrow ? openWiz('res') : addStep({ k: 'res' }))} title="Mindkét játékos passzol: a chain teteje most lefut (340.1)">+ Resolve</button>
+            <button type="button" className="btn sec" onClick={() => (narrow ? openWiz('end') : addStep({ k: 'end' }))} title="A chain lefut, majd Ending Phase (317)">+ Kör vége</button>
           </div>
           {selStep && <StepPanel j={sel!} csv={csv} onTarget={(ti) => setMode({ k: 'target', j: sel!, ti })} onClose={() => setSel(null)} bad={stepStatus(sel!)}
-            onInsert={(k) => { setMode(null); setIns(k); }} onHand={(f, xi) => { const st = CS.steps[sel!]; setIns(null); setMode({ k: 'hpick', j: sel!, f, xi, side: sideOf(st.pl || 'A'), unit: f === 'so' }); }} />}
+            onInsert={(k) => { setMode(null); setIns(k); if (narrow) openWiz(undefined, k); }} onZone={(xi) => setMode({ k: 'zpick', j: sel!, xi })} onHand={(f, xi) => { const st = CS.steps[sel!]; setIns(null); setMode({ k: 'hpick', j: sel!, f, xi, side: sideOf(st.pl || 'A'), unit: f === 'so' }); }} />}
           {sk.length > 0 && <div className="cb2-state" ref={stRef} />}
         </div>
       </div>
@@ -691,6 +869,9 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
       <CombatPanel board={f.board} bfi={f.bfi} isLast={ci === eff.length - 1} frameLabel={(ci + 1) + '. lépés: ' + eff[ci].label} focus={cfocus} />
 
       {menu && <ActionMenu m={menu} onClose={() => setMenu(null)} />}
+      {zPanel}
+      {wizSheet}{narrow && <div className={'cb2-wizpad' + (wiz && wiz.st !== 'target' ? '' : ' sm')} />}
+      {narrow && !wiz && !pick && !menu && props == null && !mode && <div className="cb2-fab"><button type="button" className="btn" onClick={() => openWiz()}><Plus size={16} /> Új lépés</button></div>}
       {pick && <CardPicker at={pick} onPick={onPicked} onClose={() => setPick(null)} />}
       {props != null && <PropsPanel i={props} onClose={() => setProps(null)} />}
     </>
@@ -698,7 +879,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
 }
 
 /** A kiválasztott lépés panelje: ki játssza, célpontok (pályán választva), és csak a lap által igényelt mezők. */
-function StepPanel({ j, csv, onTarget, onClose, bad, onInsert, onHand }: { j: number; csv: number; onTarget: (ti: number) => void; onClose: () => void; bad: ['ok' | 'bad' | 'need' | 'off', string]; onInsert: (k: number) => void; onHand: (f: 'so' | 'plc', xi: number) => void }) {
+function StepPanel({ j, csv, onTarget, onClose, bad, onInsert, onHand, onZone }: { j: number; csv: number; onTarget: (ti: number) => void; onClose: () => void; bad: ['ok' | 'bad' | 'need' | 'off', string]; onInsert: (k: number) => void; onHand: (f: 'so' | 'plc', xi: number) => void; onZone: (xi: number) => void }) {
   const CS = chainApi.get!(); const s = CS.steps[j];
   const qref = useRef<HTMLDivElement>(null);
   const [hasQ, setHasQ] = useState(false);
@@ -729,7 +910,11 @@ function StepPanel({ j, csv, onTarget, onClose, bad, onInsert, onHand }: { j: nu
             {(s.tg || [])[ti] && <button type="button" className="linkbtn" aria-label={(ti + 1) + '. célpont törlése'} onClick={() => chainApi.commit!((cs) => { cs.steps[j].tg[ti] = ''; }, 0)}><X size={14} /></button>}</span>
         </div>
       ))}
-      {inf && !list.length && s.k === 'card' && inf.c && <p className="note">Ennek a lapnak nincs választandó célpontja.</p>}
+      {zonePicks(CS, j).map((z) => (
+        <div key={'z' + z.xi} className="cb2-tg"><span className="note">"{z.t}": {z.zr.target ? 'célpont a trashből' : z.zr.z === 'hand' ? 'választás a kézből (resolve-kor)' : 'választás a deckből'}</span>
+          <span className="cb2-tv"><b>{((s.zp || {})[z.xi] || []).map((id: string) => chainApi.last?.objs?.[id]?.name || id).join(', ') || 'nincs kiválasztva'}</b>
+            <button type="button" className="btn sec" onClick={() => onZone(z.xi)}>Kiválasztás</button></span></div>))}
+      {inf && !list.length && !zonePicks(CS, j).length && s.k === 'card' && inf.c && <p className="note">Ennek a lapnak nincs választandó célpontja.</p>}
       <div className={'cb2-q2 row2' + (hasQ ? '' : ' empty')} ref={qref} />
       {inf?.c && /\[Show Off\]/.test(inf.c.txt || '') && <div className="cb2-tv"><span className="note">Show Off: {String(s.so || '').startsWith('h:') ? s.so.slice(2) + ' (kézből)' : s.so ? 'board unit' : 'nincs'}</span><button type="button" className="btn sec" onClick={() => onHand('so', 0)}>Unit a kézből</button></div>}
       {inf?.eff ? interp(s, inf).map((y: any, xi: number) => y.act.k === 'playcard' && !y.act.self ? (

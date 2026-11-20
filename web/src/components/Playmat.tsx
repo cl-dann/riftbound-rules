@@ -49,6 +49,7 @@ export const PickCtx = createContext<(u: PUnit, side: 'me' | 'opp', where: strin
 export type PTarget =
   | { k: 'unit'; side: 'me' | 'opp'; loc: string; n: string; i: number; ex: boolean; id?: string }
   | { k: 'add'; z: 'base' | 'unit' | 'bfcard' | 'hand' | 'chain'; side?: 'me' | 'opp'; bfi?: number }
+  | { k: 'pile'; z: 'trash' | 'deck' | 'banish'; side: 'me' | 'opp' }
   | { k: 'zone'; loc: string }
   | { k: 'rune'; side: 'me' | 'opp'; d: string }
   | { k: 'legend' | 'champion'; side: 'me' | 'opp' }
@@ -152,15 +153,22 @@ function RuneStacks({ r, onZone, sel, side }: { r?: PSide['runes']; onZone: (z: 
     : <button type="button" data-zone="runes" className={'pm2-runes' + (sel === 'runes' ? ' on' : '')} onClick={() => onZone('runes')} title="Rune-ok">{inner}</button>;
 }
 
-function Piles({ s, onZone, sel, known }: { s: PSide; onZone: (z: string) => void; sel: string; known?: boolean }) {
-  const P = ({ z, l, n, top }: { z: string; l: string; n?: number; top?: string | null }) => (
-    <button type="button" data-zone={z} className={'pm2-pile' + (sel === z ? ' on' : '')} onClick={() => onZone(z)} title={ZONES[z]?.t}>
-      <Card n={top} small /><span>{l}<b>{n ?? 0}</b></span>
-    </button>
-  );
+function Piles({ s, onZone, sel, known, side }: { s: PSide; onZone: (z: string) => void; sel: string; known?: boolean; side: 'me' | 'opp' }) {
+  const ctl = useContext(CtlCtx); const ed = useContext(EditCtx);
+  const P = ({ z, l, n, top }: { z: string; l: string; n?: number; top?: string | null }) => {
+    if (ctl && ed && (z === 'trash' || z === 'deck' || z === 'banish')) {
+      const t: PTarget = { k: 'pile', z, side }; const g = ctl.glow(t);
+      return <button type="button" data-zone={z} className={'pm2-pile' + gcls(g)} onClick={() => ctl.on(t)} aria-label={ctl.label?.(t) || l + ': ' + (n ?? 0) + ' lap, megnyitás'}><Card n={top} small /><span>{l}<b>{n ?? 0}</b></span></button>;
+    }
+    return (
+      <button type="button" data-zone={z} className={'pm2-pile' + (sel === z ? ' on' : '')} onClick={() => onZone(z)} title={ZONES[z]?.t}>
+        <Card n={top} small /><span>{l}<b>{n ?? 0}</b></span>
+      </button>
+    );
+  };
   return (
     <div className="pm2-piles">
-      {!(known && s.deck == null) && <P z="deck" l="Deck" n={s.deck} />}
+      {!(known && s.deck == null && !(ctl && ed)) && <P z="deck" l="Deck" n={s.deck} />}
       {!(known && s.runeDeck == null) && <P z="runeDeck" l="Rune Deck" n={s.runeDeck} />}
       <P z="trash" l="Trash" n={(s.trash || []).length} top={(s.trash || []).slice(-1)[0] || null} />
       <P z="banish" l="Banish" n={(s.banish || []).length} top={(s.banish || []).slice(-1)[0] || null} />
@@ -354,7 +362,7 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
       <div className="pm2-table">
         <div className="pm2-bar opp"><span>Opponent</span>{turn === 'opp' && <span className="pm2-turn">Turn</span>}</div>
         <div className="pm2-band opp-top">
-          <Piles s={b.opp} onZone={onZone} sel={sel} known={onlyKnown} />
+          <Piles s={b.opp} onZone={onZone} sel={sel} known={onlyKnown} side="opp" />
           <Hand s={b.opp} onZone={onZone} sel={sel} known={onlyKnown} side="opp" />
           <RuneStacks r={b.opp.runes} onZone={onZone} sel={sel} side="opp" />
         </div>
@@ -415,7 +423,7 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
         <div className="pm2-band me-bottom">
           <RuneStacks r={b.me.runes} onZone={onZone} sel={sel} side="me" />
           <Hand s={b.me} onZone={onZone} sel={sel} known={onlyKnown} side="me" />
-          <Piles s={b.me} onZone={onZone} sel={sel} known={onlyKnown} />
+          <Piles s={b.me} onZone={onZone} sel={sel} known={onlyKnown} side="me" />
         </div>
         <div className="pm2-bar me"><span>You</span>{turn === 'me' && <span className="pm2-turn">Turn</span>}</div>
       </div>
