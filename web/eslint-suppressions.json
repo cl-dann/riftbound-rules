@@ -257,14 +257,19 @@
       "count": 18
     }
   },
-  "src/features/chain/ChainView.tsx": {
+  "src/features/chain/ChainEditor.tsx": {
     "@typescript-eslint/no-explicit-any": {
-      "count": 21
+      "count": 16
     }
   },
   "src/features/chain/CombatPanel.tsx": {
     "@typescript-eslint/no-explicit-any": {
       "count": 2
+    }
+  },
+  "src/features/chain/StepPanel.tsx": {
+    "@typescript-eslint/no-explicit-any": {
+      "count": 4
     }
   },
   "src/features/chain/chainBuild.ts": {
