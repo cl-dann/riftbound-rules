@@ -1,7 +1,7 @@
 /* A második független ellenőrzés javításai (szabályszámok a rules.json szövegével ellenőrizve). */
 import { describe, expect, it } from 'vitest';
 import { cs, run, ruleText, exampleOf } from './util';
-import { actOf, classOf } from '../src/domain/chain/chainCore';
+import { actOf, classOf } from '../src/domain/chain/actions';
 
 const R = (pl: string, loc = 'bf0') => ({ n: 'Recruit', pl, loc });
 

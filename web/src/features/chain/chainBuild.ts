@@ -1,6 +1,10 @@
 /* A pályás Chain építő segédei (React nélkül): kiinduló pálya, a lejátszási frame kiegészítése az építő zónáival,
    és a legalitás az elemző (analyze) alapján. Az állapot mindig a builder CS-e; ez a modul csak olvassa vagy másolatot elemez. */
-import { analyze, stepInfo, abilitiesOf, triggersOf, timingOf, isPermC, interp, zoneRefOf, zoneCheck, type ZoneRef } from '../../domain/chain/chainCore';
+import { analyze } from '../../domain/chain/chainCore';
+import { stepInfo } from '../../domain/chain/steps';
+import { abilitiesOf, triggersOf } from '../../domain/chain/parser';
+import { timingOf, isPermC, interp } from '../../domain/chain/actions';
+import { zoneRefOf, zoneCheck, type ZoneRef } from '../../domain/chain/zones';
 import { vsCard, CARDS } from '../../domain/data/store';
 import { norm } from '../../domain/text/norm';
 import { tgOptionsOf, reorderSteps, locLabelOf } from './legacyForm';

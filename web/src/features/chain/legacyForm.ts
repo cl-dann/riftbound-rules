@@ -5,7 +5,12 @@
 import { esc } from '../../domain/text/norm';
 import { vsCard } from '../../domain/data/store';
 import { b64e } from '../../domain/text/b64';
-import {zoneRefOf,analyze,stepInfo,srcCard,abilitiesOf,triggersOf,interp,timingOf,isPermC,actOf,OV_ACTS,OV_N,enterReadyCond} from '../../domain/chain/chainCore';
+import { zoneRefOf } from '../../domain/chain/zones';
+import { analyze } from '../../domain/chain/chainCore';
+import { stepInfo, srcCard } from '../../domain/chain/steps';
+import { abilitiesOf, triggersOf } from '../../domain/chain/parser';
+import { interp, timingOf, isPermC, actOf, OV_ACTS, OV_N } from '../../domain/chain/actions';
+import { enterReadyCond } from '../../domain/chain/conditions';
 import { emit, openCard } from '../../shared/lib/events';
 import type { ChainState } from '../../domain/chain/state';
 import { chainFromLink } from '../../domain/chain/link';

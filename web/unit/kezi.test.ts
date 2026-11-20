@@ -4,7 +4,8 @@
 import { describe, expect, it } from 'vitest';
 import { cs, run } from './util';
 import { CARD_OV } from '../src/domain/chain/overrides';
-import { instrSources, splitInstr, classOf, hiddenWhy } from '../src/domain/chain/chainCore';
+import { instrSources, splitInstr } from '../src/domain/chain/parser';
+import { classOf, hiddenWhy } from '../src/domain/chain/actions';
 import { vsCard } from '../src/domain/data/store';
 import RULES from '../src/generated/rules.json';
 

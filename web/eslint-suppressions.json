@@ -4,15 +4,23 @@
       "count": 9
     }
   },
+  "src/domain/chain/actions.ts": {
+    "@typescript-eslint/no-explicit-any": {
+      "count": 10
+    },
+    "no-useless-assignment": {
+      "count": 2
+    }
+  },
   "src/domain/chain/chainCore.ts": {
     "@typescript-eslint/ban-ts-comment": {
       "count": 1
     },
     "@typescript-eslint/no-explicit-any": {
-      "count": 338
+      "count": 285
     },
     "@typescript-eslint/no-unused-vars": {
-      "count": 4
+      "count": 5
     },
     "no-empty": {
       "count": 3
@@ -21,10 +29,20 @@
       "count": 1
     },
     "no-useless-assignment": {
-      "count": 6
+      "count": 4
     },
     "no-useless-escape": {
       "count": 2
+    }
+  },
+  "src/domain/chain/conditions.ts": {
+    "@typescript-eslint/no-explicit-any": {
+      "count": 1
+    }
+  },
+  "src/domain/chain/cost.ts": {
+    "@typescript-eslint/no-explicit-any": {
+      "count": 8
     }
   },
   "src/domain/chain/overrides.ts": {
@@ -32,9 +50,24 @@
       "count": 2
     }
   },
+  "src/domain/chain/parser.ts": {
+    "@typescript-eslint/no-explicit-any": {
+      "count": 12
+    }
+  },
+  "src/domain/chain/steps.ts": {
+    "@typescript-eslint/no-explicit-any": {
+      "count": 11
+    }
+  },
   "src/domain/chain/templates.ts": {
     "@typescript-eslint/no-explicit-any": {
       "count": 3
+    }
+  },
+  "src/domain/chain/zones.ts": {
+    "@typescript-eslint/no-explicit-any": {
+      "count": 12
     }
   },
   "src/domain/deck/edit.ts": {

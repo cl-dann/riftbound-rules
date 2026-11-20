@@ -3,7 +3,7 @@ import { expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import RULES from '../src/generated/rules.json';
 
-const FILES = ['src/domain/chain/chainCore.ts', 'src/domain/chain/overrides.ts', 'src/features/chain/legacyForm.ts', 'src/domain/combat/combatCore.ts', 'src/features/chain/CombatPanel.tsx', 'src/features/chain/ChainView.tsx', 'src/shared/board/Playmat.tsx'];
+const FILES = ['src/domain/chain/chainCore.ts', 'src/domain/chain/text.ts', 'src/domain/chain/parser.ts', 'src/domain/chain/conditions.ts', 'src/domain/chain/actions.ts', 'src/domain/chain/steps.ts', 'src/domain/chain/cost.ts', 'src/domain/chain/zones.ts', 'src/domain/chain/overrides.ts', 'src/features/chain/legacyForm.ts', 'src/domain/combat/combatCore.ts', 'src/features/chain/CombatPanel.tsx', 'src/features/chain/ChainView.tsx', 'src/shared/board/Playmat.tsx'];
 const ids = new Set((RULES as any[]).map((r) => r[0]));
 it('a hivatkozott szabályszámok léteznek', () => {
   const missing: string[] = [];

@@ -1,6 +1,7 @@
 /* A maradt korlátok: trigger költségfeltétele (206, 383.2), "from among them" választás (128.4, 355.18, 417), ismeretlen változó (359.3.e.12, 359.3.e.13). */
 import { describe, expect, it } from 'vitest';
-import { analyze, zoneRefOf } from '../src/domain/chain/chainCore';
+import { analyze } from '../src/domain/chain/chainCore';
+import { zoneRefOf } from '../src/domain/chain/zones';
 import { exampleOf, ruleText } from './util';
 
 const base = (o: any) => ({ lg: { A: '', B: '' }, bf: [{ n: '', c: '' }, { n: '', c: '' }], bd: [], hand: { A: [], B: [] }, trash: { A: [], B: [] }, deck: { A: [], B: [] }, ...o });

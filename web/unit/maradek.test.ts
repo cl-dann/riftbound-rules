@@ -1,7 +1,8 @@
 /* Maradék korlátok: Nasus az ability aktiválására (206.1, 827.1), Baited Hook Might-feltétele (359.3.e.13),
    többjátékos választás (355.10.e, 412.1): Promising Future, Divine Judgment, Mechanical Bandit. Valós lapok. */
 import { describe, expect, it } from 'vitest';
-import { analyze, abilitiesOf } from '../src/domain/chain/chainCore';
+import { analyze } from '../src/domain/chain/chainCore';
+import { abilitiesOf } from '../src/domain/chain/parser';
 import { vsCard } from '../src/domain/data/store';
 import { ruleText } from './util';
 
