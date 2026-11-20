@@ -6,7 +6,7 @@ a jó és rossz kimenetek, a célpont-készletek és az optimális sor itt vanna
     python3 tools/learn/scenarios_build.py
 A motor: web/src/components/practiceEngine.ts, a tesztje: web/unit/practice.test.ts.
 """
-import json, os, copy
+import json, os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 V1 = {s['id']: s for s in json.load(open(os.path.join(ROOT, 'tools/learn/scenarios_v1.json'), encoding='utf-8'))}

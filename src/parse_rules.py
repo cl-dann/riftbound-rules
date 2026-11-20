@@ -1,4 +1,4 @@
-import re,json,sys
+import re,json
 src=open('data/rules.txt',encoding='utf-8').read().replace('\f','\n\n')
 lines=src.split('\n')
 IDRE=re.compile(r'^\s*(\d{3}(?:\.(?:\d+|[a-z]))*)\.\s+(\S.*)$')

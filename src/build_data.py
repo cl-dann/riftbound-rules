@@ -295,7 +295,6 @@ def ok(ref):
 bad=[(n,r) for n,v in NOTES.items() for r,f,t in v for x in r.split(',') if not ok(x)]
 print('bad refs',bad)
 print('qa cards',sum('qa' in c for c in cards),'of',len(QA),'unmatched',[n for n in QA if not any(c['n']==n for c in cards)][:5]); print('review fixes',len(REV)); print('short',sum('sh' in c for c in cards)); print('notes cards',sum('nt' in c for c in cards),'batch notes',len(BN),'of',len(NOTES),'unmatched',[n for n in NOTES if not any(c['n']==n for c in cards)])
-import itertools
 alltxt=' '.join(t for v in NOTES.values() for r,f,t in v)
 print('dash check',[ch for ch in '\u2013\u2014' if ch in alltxt])
 print('img sample',cards[5]['img'])

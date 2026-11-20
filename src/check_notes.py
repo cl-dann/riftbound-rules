@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Validate a notes batch. Usage: python3 check_notes.py batches/batch_03_notes.json batches/batch_03_cards.json"""
-import json,sys,re
+import json,sys
 R={r['id'] for r in json.load(open('data/rules.json'))}
 N=json.load(open(sys.argv[1])); C=json.load(open(sys.argv[2])) if len(sys.argv)>2 else None
 err=[]
