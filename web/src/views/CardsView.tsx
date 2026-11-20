@@ -31,7 +31,7 @@ const lev1 = (a: string, b: string) => {
 };
 const fuzzyName = (n: string, w: string) => w.length >= 4 && n.split(/[^a-z0-9']+/).some((t) => t.length >= 4 && lev1(t, w));
 
-function filterCards(f: F) {
+export function filterCards(f: F) {
   const q = norm(f.q), words = q ? q.split(' ').filter(Boolean) : [];
   const base = (c: any) => {
     if (c.ban === 1 && !f.showBan) return false;

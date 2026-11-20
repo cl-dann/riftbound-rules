@@ -26,3 +26,6 @@ src/generated/
 dist-single
 test-results/
 playwright-report/
+bench-results.json
+perf-results.json
+stats.html

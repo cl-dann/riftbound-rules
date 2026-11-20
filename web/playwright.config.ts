@@ -11,5 +11,10 @@ export default defineConfig({
     viewport: { width: 1300, height: 900 },
     launchOptions: process.env.PW_CHROME ? { executablePath: process.env.PW_CHROME } : {},
   },
+  // Alapból a funkcionális tesztek futnak; a mérés (PERF=1) külön projekt.
+  projects: [
+    { name: 'e2e', testIgnore: /perf\.spec\.ts/ },
+    ...(process.env.PERF ? [{ name: 'perf', testMatch: /perf\.spec\.ts/, retries: 0 }] : []),
+  ],
   webServer: { command: 'npx vite preview --port 4174 --strictPort', url: 'http://localhost:4174/', reuseExistingServer: !process.env.CI },
 });
