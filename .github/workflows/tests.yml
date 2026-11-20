@@ -78,6 +78,18 @@ jobs:
         with:
           name: visual-baseline
           path: web/e2e/__screenshots__
+      - name: Lighthouse CI (mobil, 3 futás, a budget csak figyelmeztet)
+        if: ${{ !inputs.update-snapshots }}
+        continue-on-error: true
+        working-directory: web
+        run: CHROME_PATH="$(node -e "console.log(require('@playwright/test').chromium.executablePath())")" npm run lhci
+      - name: Lighthouse riportok
+        if: ${{ !inputs.update-snapshots }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse
+          path: web/lhci
+          if-no-files-found: ignore
       - name: Hibás tesztek képei
         if: ${{ failure() }}
         uses: actions/upload-artifact@v4

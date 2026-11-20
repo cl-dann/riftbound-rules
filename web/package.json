@@ -19,7 +19,8 @@
     "lint:deps": "lint/node_modules/.bin/depcruise --config lint/.dependency-cruiser.cjs --ignore-known lint/known-violations.json src",
     "lint:deps:baseline": "lint/node_modules/.bin/depcruise --config lint/.dependency-cruiser.cjs --baseline lint/known-violations.json src",
     "knip": "knip",
-    "lint:install": "npm ci --prefix lint"
+    "lint:install": "npm ci --prefix lint",
+    "lhci": "npx -y @lhci/cli@0.16.1 autorun"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.3.1",
