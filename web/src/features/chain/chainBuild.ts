@@ -1,6 +1,6 @@
 /* A pályás Chain építő segédei (React nélkül): kiinduló pálya, a lejátszási frame kiegészítése az építő zónáival,
    és a legalitás az elemző (analyze) alapján. Az állapot mindig a builder CS-e; ez a modul csak olvassa vagy másolatot elemez. */
-import { runChain } from '../../domain/chain/chainCore';
+import { runChain } from '../../domain/chain/engine/analyze';
 import { stepInfo } from '../../domain/chain/steps';
 import { abilitiesOf, triggersOf } from '../../domain/chain/parser';
 import { timingOf, isPermC, interp } from '../../domain/chain/actions';

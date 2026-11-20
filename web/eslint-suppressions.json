@@ -12,12 +12,22 @@
       "count": 2
     }
   },
-  "src/domain/chain/chainCore.ts": {
+  "src/domain/chain/conditions.ts": {
+    "@typescript-eslint/no-explicit-any": {
+      "count": 1
+    }
+  },
+  "src/domain/chain/cost.ts": {
+    "@typescript-eslint/no-explicit-any": {
+      "count": 8
+    }
+  },
+  "src/domain/chain/engine/analyze.ts": {
     "@typescript-eslint/ban-ts-comment": {
       "count": 1
     },
     "@typescript-eslint/no-explicit-any": {
-      "count": 253
+      "count": 240
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 5
@@ -35,14 +45,17 @@
       "count": 2
     }
   },
-  "src/domain/chain/conditions.ts": {
+  "src/domain/chain/engine/ctx.ts": {
     "@typescript-eslint/no-explicit-any": {
-      "count": 1
+      "count": 9
     }
   },
-  "src/domain/chain/cost.ts": {
+  "src/domain/chain/engine/labels.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    },
     "@typescript-eslint/no-explicit-any": {
-      "count": 8
+      "count": 4
     }
   },
   "src/domain/chain/overrides.ts": {

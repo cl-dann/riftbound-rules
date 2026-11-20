@@ -1,36 +1,23 @@
 // @ts-nocheck
 /* Chain elemző magja, DOM nélkül. A builder állapotából (CS: legendek, battlefieldek, board, lépések) kiszámolja a
-   lejátszás frame-jeit, a szabálysorokat, az eseménynaplót és a HTML kimenetet. A chain.ts (DOM) és a unit tesztek is ezt hívják.
+   lejátszás frame-jeit, a szabálysorokat és az eseménynaplót. A legacy builder űrlapja és a unit tesztek a render/html/chainReport.ts analyze()-én át hívják.
    A lapszöveg értelmezése szöveges heurisztika; amit nem ismer fel biztosan, azt "bizonytalan" címkével jelöli. */
-import { esc } from '../text/norm';
-import { FL, FLT } from '../rules/flags';
-import { vsCard } from '../data/store';
-import {cardOv} from './overrides';
-import { OV_LBL, OV_N, allScope, interp, isPermC, timingOf } from './actions';
-import { condOf, enterReadyCond } from './conditions';
-import { COSTVAR, costCheck, costCondOf, printedCost } from './cost';
-import { effOf, numOf, phrasesTxt, triggersOf } from './parser';
-import { stepInfo } from './steps';
-import { plainOf, stripRem } from './text';
-import { ZONE_HU, type ZoneRef, zoneCheck, zoneRefOf } from './zones';
-
-/* ---------- Szövegelemzés ---------- */
-const INS_ST:any={executed:'végrehajtódik',partial:'részben hajtódik végre',ignored:'Ignored',negated:'Negated',skipped:'nem hajtódik végre'};
-const RES:any={ok:'lefutott',partial:'részben futott le',fizzle:'hatás nélkül',countered:'counterelve',removed:'lekerült a chainről'};
-const art=(x:string)=>(/^[aáeéiíoóöőuúüű]/i.test(x)?'az ':'a ')+x;const Art=(x:string)=>{const s=art(x);return s[0].toUpperCase()+s.slice(1);};
-const other=(p:string)=>p==='A'?'B':'A';export const WHO:any={A:'te',B:'az ellenfél'};const WHOC:any={A:'Te',B:'Az ellenfél'};
-const LOCK=(l:string)=>l==='base'?'base':l;
-/** Egy szabálysor HTML-je (szabályszám linkek, szöveg, flag), a chain riport táblázataihoz. */
-export const lineH=(ref:string,txt:string,fl?:number)=>'<tr><td class="r">'+String(ref).split(',').filter(r=>r.trim()).map(r=>'<a href="#szabalyok" data-ref="'+r.trim()+'">'+r.trim()+'</a>').join('')+'</td><td>'+txt+'</td><td class="f">'+(fl!=null?'<span class="fl f'+fl+'" title="'+FLT[fl]+'">'+FL[fl]+'</span>':'')+'</td></tr>';
-
-export type ChainResult={frames:any[];html:string;story:string[];done:any[];rows:[string,string][];ev:any[];objs:any;items:any[];delayed:any[];empty:boolean;zsnap?:any};
-
-/** A chain elemzés közös állapota és függvényei (EngineCtx): a runChain() minden korábbi belső változója és
-    függvénye ennek a mezője, így a csoportok (engine/*) külön modulban élhetnek. */
-export type EngineCtx={CS:any;[k:string]:any};
+import { esc } from '../../text/norm';
+import { vsCard } from '../../data/store';
+import {cardOv} from '../overrides';
+import { OV_LBL, OV_N, allScope, interp, isPermC, timingOf } from '../actions';
+import { condOf, enterReadyCond } from '../conditions';
+import { COSTVAR, costCheck, costCondOf, printedCost } from '../cost';
+import { effOf, numOf, phrasesTxt, triggersOf } from '../parser';
+import { stepInfo } from '../steps';
+import { plainOf, stripRem } from '../text';
+import { ZONE_HU, type ZoneRef, zoneCheck, zoneRefOf } from '../zones';
+import { type ChainResult, type EngineCtx } from './ctx';
+import { INS_ST, RES, art, Art, other, WHO, WHOC, LOCK, lineH } from './labels';
 
 /** A chain lefuttatása a helyzetből (CS): frame-ek, szabálysorok, eseménynapló, objektumok. HTML-t nem készít
     (out.html üres); a riportot a render/html/chainReport.ts analyze() függvénye teszi hozzá. */
+export { type ChainResult, type EngineCtx, WHO, lineH };
 export function runChain(CS:any):ChainResult{
   const X:EngineCtx={CS} as EngineCtx;
   X.LOCS=()=>[['base','Base'],['bf0',(X.CS.bf[0].n||'1. battlefield')],['bf1',(X.CS.bf[1].n||'2. battlefield')]];

@@ -2,7 +2,7 @@
 /* A chain elemzés HTML riportja (a #cb-out tartalma): a lefutás sorrendje, a történet, a végállapot, a függő hatások,
    a battlefieldek hatása, a lapok kölcsönhatásai és a részletes szabálysorok. A domain runChain() adataiból készül
    (S20: korábban az analyze() 3. kimenete). */
-import { runChain, lineH, WHO, type ChainResult } from '../../domain/chain/chainCore';
+import { runChain, lineH, WHO, type ChainResult } from '../../domain/chain/engine/analyze';
 import { isPermC } from '../../domain/chain/actions';
 import { vsPairs } from '../../domain/chain/pairs';
 import { vsCard } from '../../domain/data/store';

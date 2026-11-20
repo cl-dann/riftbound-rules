@@ -2,7 +2,7 @@
    html kivételével azonos vele (az S04 golden összes esetén: sablonok, példák, unit bemenetek, #c= linkek). */
 import { expect, it } from 'vitest';
 import { analyze } from '../../src/render/html/chainReport';
-import { runChain } from '../../src/domain/chain/chainCore';
+import { runChain } from '../../src/domain/chain/engine/analyze';
 import { EXAMPLES, normZones } from '../../src/features/chain/legacyForm';
 import { TEMPLATES } from '../../src/domain/chain/templates';
 import { b64d } from '../../src/domain/text/b64';

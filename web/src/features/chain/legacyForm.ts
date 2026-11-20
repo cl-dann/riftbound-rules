@@ -1,6 +1,6 @@
 // @ts-nocheck
 /* Chain elemző: imperatív "sziget" a React appban. A React a gyökér elemet adja, ez a modul tölti fel a buildert és kezeli.
-   Az elemzés maga a DOM nélküli chainCore.ts-ben van (analyze), ezt hívják a unit tesztek is.
+   Az elemzés a DOM nélküli domain/chain/engine (runChain), a riport a render/html/chainReport.ts (analyze).
    A kártyalap megnyitása és a tooltip eseményekkel megy a React felé. */
 import { esc } from '../../domain/text/norm';
 import { vsCard } from '../../domain/data/store';
