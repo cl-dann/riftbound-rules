@@ -331,8 +331,8 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
     commit((cs) => { const s = cs.steps[j]; s.zp = { ...(s.zp || {}), [xi]: next }; }, j, 0);
     if (n === 1 && !cur.includes(id)) afterTargets(j, xi + 1);
   };
-  const zoneHu = (z: string) => (z === 'trash' ? 'trash' : z === 'hand' ? 'kéz' : 'deck');
-  const zNote = (z: { zr: any }) => (z.zr.target ? 'Célpont a trashből: a trash nyilvános zóna, ezért a lerakáskor kell választani (355.10.a, 355.8).' : z.zr.z === 'hand' ? 'Választás a kézből: a kéz privát, ezért nem célpont, a resolve-kor dől el (355.10.a, 355.18).' : 'Választás a deckből: a deck sorrendje titkos információ (108.4.e, 128.3).') + (z.zr.n > 1 ? ' Legfeljebb ' + z.zr.n + ' lap.' : '');
+  const zoneHu = (z: string) => (z === 'trash' ? 'trash' : z === 'hand' ? 'kéz' : z === 'among' ? 'megnézett lapok' : 'deck');
+  const zNote = (z: { zr: any }) => (z.zr.target ? 'Célpont a trashből: a trash nyilvános zóna, ezért a lerakáskor kell választani (355.10.a, 355.8).' : z.zr.z === 'hand' ? 'Választás a kézből: a kéz privát, ezért nem célpont, a resolve-kor dől el (355.10.a, 355.18).' : z.zr.z === 'among' ? 'Választás a megnézett lapok közül: rejtett adat (128.4), a deck felső lapjai a Deck panelben megadva, sorrendben; a választás a resolve-kor (355.18).' : 'Választás a deckből: a deck sorrendje titkos információ (108.4.e, 128.3).') + (z.zr.n > 1 ? ' Legfeljebb ' + z.zr.n + ' lap.' : '');
   const zChips = mode?.k === 'zpick' ? (zCands.length ? zCands.map((o) => (
     <button key={o.id} type="button" className={'cb2-chip' + (o.ok ? '' : ' bad') + (zSel(mode.j, mode.xi).includes(o.id) ? ' on' : '')} aria-pressed={zSel(mode.j, mode.xi).includes(o.id)} title={o.why} onClick={() => toggleZ(o.id)}>
       {o.n} <small>({o.own === 'A' ? 'saját' : 'ellenfél'} {zoneHu(o.zone)}{o.ok ? '' : ', nem választható: ' + o.why})</small></button>)) : <span className="note">Ebben a zónában nincs lap. A Trash, a Deck és a kéz + gombjával adhatsz hozzá.</span>) : null;
@@ -529,7 +529,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
       }
       if (mode?.k === 'zpick') {
         if (t.k === 'hand') { const id = ((f.board[t.side] as any).zids?.hand || [])[t.i]; const o = zCands.find((x) => x.id === id); return !o ? '' : zSel(mode.j, mode.xi).includes(id) ? 'sel' : o.ok ? 'act' : ''; }
-        if (t.k === 'pile') return zCands.some((o) => o.ok && o.zone === t.z && o.own === plOf(t.side)) ? 'act' : '';
+        if (t.k === 'pile') return zCands.some((o) => o.ok && (o.zone === t.z || (o.zone === 'among' && t.z === 'deck')) && o.own === plOf(t.side)) ? 'act' : '';
         return '';
       }
       if (mode?.k === 'hpick') return t.k === 'hand' && t.side === mode.side && (!mode.unit || cardOf(t.n)?.t === 'Unit') ? 'act' : '';
@@ -660,7 +660,7 @@ function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number }) {
     </div>
   ) : mode?.k === 'zpick' && zInfo ? (
     <div className="cb2-mode" role="status">
-      <div><b>{stepName(CS, CS.steps[mode.j]).n}: "{zInfo.t}"</b> <span className="note">{zNote(zInfo)} Kattints egy kiemelt lapra {zInfo.zr.z === 'hand' ? 'a kézben' : 'a ' + zoneHu(zInfo.zr.z) + ' pakli megnyitásával'}, vagy válassz itt:</span></div>
+      <div><b>{stepName(CS, CS.steps[mode.j]).n}: "{zInfo.t}"</b> <span className="note">{zNote(zInfo)} Kattints egy kiemelt lapra {zInfo.zr.z === 'hand' ? 'a kézben' : 'a ' + (zInfo.zr.z === 'among' ? 'Deck' : zoneHu(zInfo.zr.z)) + ' pakli megnyitásával'}, vagy válassz itt:</span></div>
       <div className="cb2-chips">{zChips}</div>
       <div className="cb2-mbtn"><button type="button" className="btn" onClick={() => afterTargets(mode.j, mode.xi + 1)}>Kész</button></div>
     </div>

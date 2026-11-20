@@ -181,6 +181,14 @@ export function zoneCands(CS: any, j: number, xi: number): ZCand[] {
   const c = clone(CS); if (c.steps[j].zp) c.steps[j].zp[xi] = [];
   const r: any = analyze(c); const snap = r.zsnap?.[j]; if (!snap) return [];
   const s = CS.steps[j]; const pl = s.k === 'tg' ? (r.objs[s.src]?.ctrl || s.pl || 'A') : (s.pl || 'A');
+  if (zp.zr.z === 'among') {
+    /* a megnézett lapok: az előző "look at / reveal the top N" utasítás szerinti felső lapok a lépés lerakásakor */
+    const inf: any = stepInfo(CS, s); const ins = interp(s, inf);
+    const look = ins.slice(0, xi).reverse().map((x: any) => zoneRefOf(x.t, inf.c?.n)).find((z: any) => z && z.z === 'deck' && z.top);
+    if (!look) return [];
+    const lo = look.who === 'they' ? [pl === 'A' ? 'B' : 'A'] : [pl];
+    return lo.flatMap((p) => (snap.deck?.[p] || []).slice(0, look.n).map((id: string) => { const ob = r.objs[id]; const why = zoneCheck(zp.zr, ob, pl, snap.ctx); return { id, n: ob?.name || id, zone: 'among', own: p, ok: !why, why: why || undefined }; }));
+  }
   const owners = zp.zr.who === 'you' ? [pl] : zp.zr.who === 'they' ? [pl === 'A' ? 'B' : 'A'] : ['A', 'B'];
   return owners.flatMap((p) => (snap[zp.zr.z]?.[p] || []).map((id: string) => { const ob = r.objs[id]; const why = zoneCheck(zp.zr, ob, pl, snap.ctx); return { id, n: ob?.name || id, zone: zp.zr.z, own: p, ok: !why, why: why || undefined }; }));
 }
