@@ -4,7 +4,8 @@
 //   - rules.json és rules.txt egészében (Core Rules angol eredeti),
 //   - JSON fájlokban a VERBATIM_KEYS kulcsok értéke (cards.json txt/old, nyers Riot adat, audit idézetek),
 //   - a tiltást ellenőrző sorok (karakterosztály a két kötőjellel),
-//   - LEGACY_FILES: a régi egyfájlos oldal, amely beágyazott kártyaadatot tartalmaz.
+//   - LEGACY_FILES: a régi egyfájlos oldal, amely beágyazott kártyaadatot tartalmaz,
+//   - GENERATED_DIRS: golden tesztek kimenete (a lapszöveget idézi).
 // Futtatás: node scripts/check-dashes.mjs          (minden verziókezelt fájl, plusz web/src/generated ha létezik)
 //           node scripts/check-dashes.mjs --staged (pre-commit: a stage-elt tartalom)
 import { execFileSync } from 'node:child_process';
@@ -16,6 +17,8 @@ const ROOT = execFileSync('git', ['rev-parse', '--show-toplevel'], { encoding: '
 const WHOLE_FILE = new Set(['rules.json', 'rules.txt']);
 const VERBATIM_KEYS = new Set(['txt', 'old', 'text', 'abilityOriginal', 'abilityEffective']);
 const LEGACY_FILES = new Set(['index.html']);
+// Gépi kimenet, amely a lapszöveget szó szerint tartalmazza (golden tesztek).
+const GENERATED_DIRS = ['web/unit/golden/__golden__/'];
 const BINARY = /\.(png|jpe?g|gif|webp|ico|ttf|otf|woff2?|pdf|zip)$/i;
 // A tiltást ellenőrző kód sora (karakterosztály, amely pont a két kötőjelet sorolja fel) nem sértés.
 const DETECTOR = /\[\u2013\u2014\]|\[\u2014\u2013\]/;
@@ -48,7 +51,7 @@ function jsonHits(text) {
 let bad = 0;
 for (const f of files()) {
   const name = basename(f.path);
-  if (BINARY.test(name) || WHOLE_FILE.has(name) || LEGACY_FILES.has(f.path)) continue;
+  if (BINARY.test(name) || WHOLE_FILE.has(name) || LEGACY_FILES.has(f.path) || GENERATED_DIRS.some((d) => f.path.startsWith(d))) continue;
   let text;
   try { text = f.read(); } catch { continue; }
   if (text.includes('\0') || !DASH.test(text)) continue;
