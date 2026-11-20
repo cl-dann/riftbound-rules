@@ -369,7 +369,7 @@ export function analyze(CS:any):ChainResult{
   const pside=(p:string)=>p==='A'?'me':p==='B'?'opp':null;
   const itemName=(it:any)=>it.label;
   const DET=new Set<string>();const NEWCTRL=new Set<string>();
-  const snap=(label:string,items:any[])=>{
+  const snap=(label:string,items:any[],sj?:number)=>{
     const vis=(items||[]).filter((it:any)=>!(it.objId&&O[it.objId]&&O[it.objId].zone==='countered')).slice().reverse();
     const mk=()=>({base:[],trash:[],banish:[],hand:[]});const side:any={A:mk(),B:mk()};const bfs=[0,1].map(i=>({name:CS.bf[i].n||(i+1)+'. battlefield',ctrl:pside(BF['bf'+i].ctrl),me:[],opp:[],i}));
     const shown=new Set<string>();
@@ -398,7 +398,7 @@ export function analyze(CS:any):ChainResult{
       if(shown.has(v))arrows.push({from:ci,to:'u:'+v});else if(ob.type==='gear'&&ob.on&&shown.has(ob.on))arrows.push({from:ci,to:'u:'+ob.on});});});
     const lg=(p:string)=>O['L'+p]?O['L'+p].card.n:undefined;
     const ps=(p:string)=>({legend:lg(p),legendEx:!!(O['L'+p]&&O['L'+p].ex),base:side[p].base,hand:side[p].hand,trash:side[p].trash,banish:side[p].banish});
-    FR.push({label,board:{me:ps('A'),opp:ps('B'),bfs:used.map(({i,...f})=>f),chain:vis.map(itemName)},changes:REC||[],arrows,bfi:used.map(f=>f.i),mt:MT});REC=[];MT=null;MTIDS.clear();DET.clear();NEWCTRL.clear();REPL.clear();};
+    FR.push({label,board:{me:ps('A'),opp:ps('B'),bfs:used.map(({i,...f})=>f),chain:vis.map(itemName)},changes:REC||[],arrows,bfi:used.map(f=>f.i),mt:MT,sj});REC=[];MT=null;MTIDS.clear();DET.clear();NEWCTRL.clear();REPL.clear();};
   // battlefield állandó hatások
   ['bf0','bf1'].forEach(l=>{const b=BF[l];if(b.c){const known=/can.t move from here to base|can.t be played here/i.test(b.c.txt||'');notes.push(line('169',esc(b.c.n)+' ('+(b.ctrl==='A'?'te irányítod':b.ctrl==='B'?'az ellenfél irányítja':'senki nem irányítja')+'): '+esc(stripRem(b.c.txt))+(known?' <b>Ezt az állandó hatást az elemzés figyelembe veszi.</b>':' Ezt a hatást az elemzés nem értékeli ki, ha számít, vedd figyelembe.'),known?0:1));}});
   ALL.length=0;
@@ -805,7 +805,7 @@ export function analyze(CS:any):ChainResult{
     else if(s.k==='card'&&playTrigs(s).length)rows+=line('420.4.a, 420.4.a.1','A "When you play a spell" típusú triggerek ('+playTrigs(s).map((t:any)=>esc(t.label)).join(', ')+') csak akkor triggerelnek, amikor '+esc(c.n)+' resolve-ol; ha counterelik, nem triggerelnek.',0);
     // a költségből vagy kijátszásból keletkezett triggerek (Deathknell, leave, play) a kijátszott elem fölé kerülnek
     if(PEND.length){const n=PEND.length;const lab=PEND.map((t:any)=>esc(t.label)).join(', ');flushPend(chain);rows+=line('337.1.b, 359.3.b, 340.1','A kijátszás közben keletkezett trigger'+(n>1?'ek':'')+' ('+lab+') a chain tetejére kerül'+(n>1?'nek':'')+', ezért előbb resolve-ol'+(n>1?'nak':'')+'.',1);}
-  }finally{const lab=(s.k==='tg'?(s.it?s.it.pl:s.pl):s.pl)==='A'?'Te':'Ellenfél';snap(s.k==='tg'?'Trigger: '+s.c.n+(s.illegal?' (lekerül)':''):lab+': '+(s.k==='ab'?'aktiválás':'kijátszás')+', '+(s.k==='ab'?s.c.n+' abilityje':s.c.n)+(s.illegal?' (nem szabályos, kimarad)':''),chain);}});
+  }finally{const lab=(s.k==='tg'?(s.it?s.it.pl:s.pl):s.pl)==='A'?'Te':'Ellenfél';snap(s.k==='tg'?'Trigger: '+s.c.n+(s.illegal?' (lekerül)':''):lab+': '+(s.k==='ab'?'aktiválás':'kijátszás')+', '+(s.k==='ab'?s.c.n+' abilityje':s.c.n)+(s.illegal?' (nem szabályos, kimarad)':''),chain,s.j);}});
   /* ---- 2. lefutás ---- */
   const done=out.done;
   /** Cleanup (319.5, 323): lethal damage-es unitok meghalnak, csatolatlan gear battlefielden és idegen base-ben álló permanentek recall-olódnak (323.6). */

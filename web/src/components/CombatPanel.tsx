@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { vsCard } from '../legacy/core';
 import { chainApi, type TrigAdd } from '../legacy/chain';
 import type { PBoard, PUnit } from './Playmat';
@@ -114,7 +114,8 @@ function SideTable({ title, units, role, asg, setAsg, setOpt, bonusLbl, assigner
   );
 }
 
-export function CombatPanel({ board, frameLabel, bfi, isLast = true }: { board: PBoard; frameLabel: string; bfi?: number[]; isLast?: boolean }) {
+/** focus: a pályás építő "Combat itt" menüpontja: erre a battlefieldre és attackerre áll, és lenyitja a panelt. */
+export function CombatPanel({ board, frameLabel, bfi, isLast = true, focus }: { board: PBoard; frameLabel: string; bfi?: number[]; isLast?: boolean; focus?: { bi: number; atk: Side; n: number } | null }) {
   const bfs = board.bfs;
   const firstContested = Math.max(0, bfs.findIndex((f) => (f.me || []).length && (f.opp || []).length));
   const [bi, setBi] = useState(firstContested);
@@ -125,7 +126,14 @@ export function CombatPanel({ board, frameLabel, bfi, isLast = true }: { board: 
   const [added, setAdded] = useState<Record<string, boolean>>({});
   const sig = JSON.stringify(f || null);
   useEffect(() => { setAsgS({}); setAdded({}); }, [sig, atk]);
-  useEffect(() => { setAtk(f?.ctrl === 'me' ? 'opp' : 'me'); }, [bi]); // eslint-disable-line react-hooks/exhaustive-deps
+  const wantAtk = useRef<Side | null>(null);
+  const det = useRef<HTMLDetailsElement>(null);
+  useEffect(() => { setAtk(wantAtk.current || (f?.ctrl === 'me' ? 'opp' : 'me')); wantAtk.current = null; }, [bi]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!focus) return;
+    if (focus.bi === bi) setAtk(focus.atk); else { wantAtk.current = focus.atk; setBi(focus.bi); }
+    if (det.current) { det.current.open = true; det.current.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
+  }, [focus?.n]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /** Javaslatforrások: a unit saját szövege, a rá csatolt gear, a saját oldal többi lapja ezen a battlefielden és a legend
       (csak "here", "friendly", "your", "other" hatókörű mondat), a battlefield lap, valamint a trashben lévő, lefutott spellek. */
@@ -248,11 +256,11 @@ export function CombatPanel({ board, frameLabel, bfi, isLast = true }: { board: 
   if (!bfs.length) return null;
   const contested = A.length > 0 && D.length > 0;
   return (
-    <details className="panel pad cbc" open>
-      <summary><h2>Combat kiosztás</h2></summary>
+    <details className="panel pad cbc cb2-blk" ref={det} id="cb-combat">
+      <summary><h2>Combat kiosztás</h2><span className="note">damage kiosztás egy battlefielden</span></summary>
       <p className="note">A lejátszás aktuális lépésének boardjából: <b>{frameLabel}</b>. Válaszd ki a battlefieldet és az attackert, majd oszd ki a damage-et, vagy kérj szabályos javaslatot.</p>
       <div className="cbc-ctl">
-        <label>Battlefield <select value={bi} onChange={(e) => setBi(+e.target.value)}>{bfs.map((x, k) => <option key={k} value={k}>{x.name} ({(x.me || []).length} saját, {(x.opp || []).length} ellenfél unit)</option>)}</select></label>
+        <label>Battlefield <select value={bi} onChange={(e) => setBi(+e.target.value)}>{bfs.map((x, k) => <option key={k} value={k}>{x.name || (k + 1) + '. battlefield'} ({(x.me || []).length} saját, {(x.opp || []).length} ellenfél unit)</option>)}</select></label>
         <label>Attacker <select value={atk} onChange={(e) => setAtk(e.target.value as Side)}><option value="me">Te</option><option value="opp">Ellenfél</option></select></label>
         <button type="button" className="btn sec" disabled={!contested} onClick={() => setAsgS({ ...suggest(D, pA), ...suggest(A, pD) })}>Szabályos javaslat</button>
         <button type="button" className="linkbtn" onClick={() => setAsgS({})}>Kiosztás törlése</button>

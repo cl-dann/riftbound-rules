@@ -15,7 +15,7 @@ Fülek (`web/src/router.ts`):
 | `#kartyak` | Kártyák | 1101 lap rácsban; lapnál hivatalos szöveg, errata, "Röviden", Gyakori kérdések, lenyitható "Szabályi részletek", kapcsolódó Core Rules szakaszok |
 | `#deck` | Deck | deck builder, élő legalitás (Core Rules 103), Cardmarket ár, PDF export, megosztható link (`#d=`) |
 | `#szabalyok` | Szabályzat | teljes Core Rules kereshetően (`#r-<szám>`), versenyformátum oldalak (`#fmt-<id>`: Duel, Match, FFA3, FFA4, 2v2) |
-| `#chain` | Chain | chain építő és elemző: lépésenkénti lejátszás Playmaton, mistarget és linked instructions, combat panel |
+| `#chain` | Chain | chain építő és elemző: pálya-alapú építés (zónánkénti "+" képes keresővel, lapra kattintva akció-menü legalitással és szabályszámmal, célpont a pályán), élő elemzés, lépés-idővonal, lépésenkénti lejátszás Playmaton, mistarget és linked instructions, combat panel, "Haladó szerkesztés" a teljes űrlappal |
 | `#hogyan` | How to Play | 10 fejezetes kezdő útmutató, a learnriftbound.gg felépítését követi |
 | `#tanulas` | Practice | 12 interaktív szituáció (akció-menü, célpont modal, fázispanelek, OUTCOME jó és rossz kimenettel), haladó leckék szintenként (`#tanulas/lecke`) |
 | `#kezikonyv` | Fogalomtár | fogalmak, kulcsszavak, játékmenet lépésábrák, szabályváltozások, errata előtte/utána |
@@ -32,7 +32,7 @@ src/                    Python adat pipeline
 web/                    Vite + React 19 + TypeScript + Tailwind v4 frontend
   src/views/            fülenkénti nézetek
   src/components/       Playmat (pálya, Chain), PracticeBoard (Practice pálya), practiceEngine.ts (szituáció-motor, React nélkül), CombatPanel, CardModal, TipLayer
-  src/legacy/           imperatív modulok (core.ts: kártya HTML, deck legalitás, PDF; chain.ts: chain builder (DOM); chainCore.ts: DOM nélküli chain elemző; knowledge.ts: Fogalomtár)
+  src/legacy/           imperatív modulok (core.ts: kártya HTML, deck legalitás, PDF; chain.ts: chain builder (DOM) és lépésszerkesztő segédek; components/chainBuild.ts: pálya-alapú építés logikája (akció-menü, legalitás egy analyze() másolaton, hivatkozás-átszámozás); chainCore.ts: DOM nélküli chain elemző; knowledge.ts: Fogalomtár)
   src/components/combatCore.ts  combat damage kiosztás szabálylogikája (React nélkül)
   src/generated/        build termék, nincs verziókezelve
   public/prices.json    Cardmarket árak (commitolva, kézzel frissítve)

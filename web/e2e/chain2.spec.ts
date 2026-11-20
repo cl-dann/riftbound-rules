@@ -13,6 +13,7 @@ test('Chain: új lépéstípusok és laponkénti mezők a builderben', async ({ 
   const enc = await page.evaluate((t) => btoa(unescape(encodeURIComponent(t))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''), JSON.stringify(cs));
   await page.goto('/#c=' + enc);
   await page.reload();
+  await page.locator('#cb-adv > summary').click();
   await expect(page.locator('input[data-rep="0"]')).toBeChecked();
   await expect(page.locator('select[data-modek="0_2"]')).toHaveValue('1');
   await expect(page.locator('select[data-so="2"]')).toHaveValue('b2');
@@ -24,7 +25,6 @@ test('Chain: új lépéstípusok és laponkénti mezők a builderben', async ({ 
   await page.locator('[data-ovj="5"] summary').click();
   await expect(page.locator('select[data-mp="5_0_B"]')).toBeVisible();
   await page.selectOption('select[data-mp="5_0_A"]', 'b2');
-  await page.locator('#cb-run').click();
   expect(await page.evaluate(() => (window as any).__getCS().steps[5].mp[0].A)).toBe('b2');
   await expect(page.locator('#cb-out')).toContainText('Sona, Harmonious meghal');
   expect(errors).toEqual([]);

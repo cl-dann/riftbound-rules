@@ -897,3 +897,132 @@ h2.psec small { font-family: var(--f-mono); font-size: 13px; color: var(--muted)
 .lk-page .lesson h3.lh { border-left: 3px solid var(--lv); padding-left: 10px; }
 .scn2 .chhead .crumb { display: flex; gap: 8px; align-items: center; }
 @media (max-width: 560px) { .lvstats { grid-template-columns: 1fr; } .lvstat + .lvstat { border-left: 0; border-top: 1px solid var(--line); } }
+
+/* ---------- Chain: pályás építő (ChainView, ChainEditor) ---------- */
+.cb2 { display: grid; gap: 14px; }
+.cb2-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
+.cb2-ex { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.cb2-bar .status { flex-basis: 100%; min-height: 0; margin: 0; }
+.cb2-bar .status:empty { display: none; }
+.cb2-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); gap: 14px; align-items: start; }
+@media (max-width: 1100px) { .cb2-main { grid-template-columns: minmax(0, 1fr); } }
+.cb2-stage { min-width: 0; }
+.cb2-blk > summary { cursor: pointer; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; list-style: none; }
+.cb2-blk > summary::-webkit-details-marker { display: none; }
+.cb2-blk > summary::before { content: "+"; font-family: var(--f-mono); color: var(--accent); width: 1ch; }
+.cb2-blk[open] > summary::before { content: "-"; }
+.cb2-blk > summary h2 { display: inline; margin: 0; font-size: 18px; }
+.cb2-blk[open] > summary { margin-bottom: 10px; }
+#cb-out > h2:first-child { display: none; }
+.cb2-msg { margin: 8px 0 0; min-height: 1.4em; }
+.pm2.edm .pm-unit { cursor: pointer; }
+.pm2-add { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px dashed #556 !important; color: #8fa0b6 !important; font-size: 20px !important; line-height: 1; opacity: .75; transition: opacity .15s, border-color .15s; }
+.pm2-add:hover, .pm2-add:focus-visible { opacity: 1; border-color: var(--accent) !important; color: var(--accent) !important; }
+.pm2-ghost { position: relative; }
+.pm2-plus { position: absolute; inset: 0; display: grid; place-items: center; font-size: 22px; color: #8fa0b6; }
+.pm2-plus.sm { font-size: 14px; }
+.pm2-bfadd { display: grid; place-items: center; gap: 2px; width: 150px; aspect-ratio: 1039/744; border: 1px dashed #556 !important; border-radius: 6px; color: #8fa0b6 !important; font-size: 12px !important; }
+.pm2-bfadd span { font-size: 24px; line-height: 1; }
+.pm2-bfadd:hover, .pm2-bfadd:focus-visible { border-color: var(--accent) !important; color: var(--accent) !important; }
+.pm2.edm .pm2-chain { min-width: 220px; }
+/* mód sáv: célzás, mozgatás, elrejtés */
+.cb2-mode { position: sticky; top: 0; z-index: 9; display: grid; gap: 8px; margin: 0 0 10px; padding: 10px 12px; border: 1px solid #f5c518; border-radius: 8px; background: #12161e; box-shadow: 0 6px 16px rgba(0,0,0,.55); font-size: 14px; line-height: 1.45; }
+.cb2-chips { display: flex; flex-wrap: wrap; gap: 6px; max-height: 120px; overflow: auto; }
+.cb2-chip { padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(245,197,24,.6); background: rgba(245,197,24,.08); color: var(--ink); font-size: 13px; cursor: pointer; }
+.cb2-chip.on { background: #f5c518; color: #1a1205; border-color: #f5c518; }
+.cb2-chip.bad { border-color: var(--line); color: var(--muted); background: none; }
+.cb2-mbtn { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+/* felugró panelek: kártyakereső, akció-menü, tulajdonságok */
+.cb2-ov { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 12px; background: rgba(2,6,10,.55); }
+.cb2-ov .pb-panel { max-height: min(86vh, 720px); width: min(440px, 100%); }
+.cb2-pick { width: min(560px, 100%) !important; display: flex; flex-direction: column; }
+.cb2-q { width: 100%; margin: 6px 0 8px; padding: 9px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel2); color: var(--ink); font-size: 15px; }
+.cb2-res { list-style: none; margin: 0; padding: 0; overflow: auto; display: grid; gap: 4px; min-height: 120px; }
+.cb2-res button { width: 100%; display: flex; gap: 10px; align-items: center; padding: 5px 8px; border-radius: 8px; border: 1px solid transparent; background: none; color: var(--ink); cursor: pointer; text-align: left; }
+.cb2-res button:hover, .cb2-res button:focus-visible { border-color: var(--accent); background: var(--panel2); }
+.cb2-res img { width: 40px; aspect-ratio: 744/1039; object-fit: cover; border-radius: 4px; flex: none; }
+.cb2-res img.land { width: 56px; aspect-ratio: 1039/744; }
+.cb2-noimg { width: 40px; aspect-ratio: 744/1039; border: 1px dashed var(--line); border-radius: 4px; flex: none; }
+.cb2-rn { display: flex; flex-direction: column; min-width: 0; }
+.cb2-rn small { color: var(--muted); font-size: 12px; }
+.cb2-mimg { width: 44px; border-radius: 5px; flex: none; }
+.pb-mh > span { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.cb2-need { color: var(--muted) !important; }
+.cb2-seg { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 6px 0; font-size: 13px; color: var(--muted); }
+.cb2-seg button { padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel2); color: var(--ink); cursor: pointer; font-size: 13px; }
+.cb2-seg button.on { border-color: var(--accent); background: rgba(200,170,110,.18); color: var(--accent); font-weight: 600; }
+.cb2-grid { display: flex; gap: 12px; margin: 8px 0; font-size: 13px; }
+.cb2-grid input { width: 5em; margin-left: 4px; padding: 3px 6px; }
+.cb2-chks { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 8px 0; }
+.cb2-row { display: flex; gap: 8px; align-items: center; margin: 8px 0; font-size: 13px; color: var(--muted); }
+.cb2-props .pb-btn { margin-top: 10px; }
+/* idővonal */
+.cb2-tl { min-width: 0; }
+.cb2-tl h2 { margin: 0 0 8px; font-size: 18px; }
+.cb2-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.cb2-sc { display: flex; align-items: center; gap: 4px; padding: 4px 6px 4px 2px; border: 1px solid var(--line); border-left: 3px solid #4fcf8a; border-radius: 8px; background: var(--panel2); }
+.cb2-sc.bad { border-left-color: #ff5a4e; }
+.cb2-sc.off { border-left-color: var(--line); }
+.cb2-sc.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.cb2-sc.drop { box-shadow: 0 -3px 0 #f5c518; }
+.cb2-grip { color: var(--muted); cursor: grab; display: grid; }
+.cb2-sb { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; padding: 0; border: 0; background: none; color: var(--ink); cursor: pointer; text-align: left; }
+.cb2-sb .no { font-family: var(--f-mono); color: var(--accent); min-width: 2ch; }
+.cb2-sb img, .cb2-kimg { width: 34px; aspect-ratio: 744/1039; object-fit: cover; border-radius: 4px; flex: none; }
+.cb2-kimg { display: grid; place-items: center; border: 1px dashed var(--line); font-family: var(--f-mono); color: var(--muted); }
+.cb2-st { display: flex; flex-direction: column; min-width: 0; }
+.cb2-st b { font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cb2-st small { font-size: 11.5px; color: var(--muted); }
+.cb2-st .cb2-bad { color: #ff9f7f; white-space: normal; }
+.cb2-sbtn { display: flex; gap: 2px; }
+.cb2-sbtn button { display: grid; place-items: center; width: 26px; height: 26px; text-decoration: none; color: var(--muted); border-radius: 4px; }
+.cb2-sbtn button:hover:not(:disabled) { color: var(--ink); background: rgba(255,255,255,.06); }
+.cb2-sbtn button:disabled { opacity: .3; cursor: default; }
+.cb2-add { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.cb2-add .btn { display: inline-flex; align-items: center; gap: 4px; padding: 6px 10px; font-size: 13px; }
+.cb2-sp { margin-top: 12px; padding: 10px 12px; border: 1px solid var(--accent); border-radius: 8px; background: rgba(200,170,110,.05); display: grid; gap: 6px; }
+.cb2-sph { display: flex; gap: 10px; align-items: center; }
+.cb2-sph img { width: 40px; border-radius: 4px; }
+.cb2-sph > span { display: flex; flex-direction: column; flex: 1; }
+.cb2-sph .pb-x { position: static; }
+.cb2-tg { display: grid; gap: 4px; padding: 6px 0; border-top: 1px solid var(--line); font-size: 13px; }
+.cb2-tv { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.cb2-tv .btn { padding: 4px 10px; font-size: 12.5px; }
+.cb2-q2 { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.cb2-q2.empty { display: none; }
+.cb2-q2 select, .cb2-q2 input[type=text] { max-width: 100%; }
+.cb2-q2 input[type=number] { width: 4.5em; padding: 3px 6px; }
+.cb2-state { margin-top: 12px; font-size: 13px; }
+.cb2-state .row2 { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; align-items: center; }
+.cb2-state input[type=number] { width: 4.5em; padding: 3px 6px; }
+#cb-story ol.flow { margin: 0; }
+@media (max-width: 600px) {
+  .cb2-ov { place-items: end center; padding: 0; }
+  .cb2-ov .pb-panel { width: 100%; max-height: 82vh; border-radius: 14px 14px 0 0; }
+  .cb2-stage.pad, .cb2-tl.pad { padding: 10px; }
+}
+.cb2-tl .cbv-ctl { margin-top: 0; }
+.cb2-tl .cbv-ctl .btn { padding: 6px 10px; font-size: 13px; }
+.cb2-tl .cbv-step { flex-basis: 100%; }
+.cb2-h2 { margin-top: 16px !important; }
+.cb2-tl .cbv-chg { margin: 12px 0; }
+.cb2-tl .cbv-chg li { grid-template-columns: minmax(54px, auto) 1fr; font-size: 13px; }
+.cbc.cb2-blk > summary::after { content: none; }
+.pm2.edm .pm2-band { min-height: 0; }
+.pm2.edm .pm2-band > * { padding: 6px 10px; }
+.pm2.edm .pm2-ubox { min-height: 82px; }
+.pm2.edm .pm2-field { padding: 14px 12px 16px; gap: 10px; }
+.pm2.edm .pm2-base { min-height: 74px; }
+.pm2.edm .pm2-hand { grid-auto-flow: column; gap: 10px; align-items: center; }
+.pm2.edm .pm2-band.opp-top .pm2-hand .pm2-lbl { order: 0; }
+.pb-btn.del { background: rgba(255,90,78,.08); border-color: rgba(255,90,78,.4); color: #ff9d94; }
+.cb2-mimg { aspect-ratio: 744/1039; object-fit: cover; background: #0b1622; }
+.cb2-sc.need { border-left-color: #f5c518; }
+.cb2-st .cb2-need { color: #f5d76e; white-space: normal; }
+/* Chain építő: a facedown hely a battlefield kártya alatt, a kontroll felirat mellett, saját helyen (nem lóg rá semmire) */
+.pm2.edm .pm2-bfc { grid-template-columns: auto auto; column-gap: 10px; align-items: center; }
+.pm2.edm .pm2-bfc > :first-child { grid-column: 1 / -1; justify-self: center; }
+.pm2.edm .pm2-bfc .pm2-fd { position: static; display: inline-flex; align-items: center; gap: 4px; padding: 2px 4px; }
+.pm2.edm .pm2-bfc .pm2-fd .pm2-ghost.sm, .pm2.edm .pm2-bfc .pm2-fd .pm-card.sm { width: 20px; }
+.pm2.edm .pm2-bfc { justify-content: center; }
+.pm2.edm .pm2-field { padding: 10px 12px 10px; gap: 8px; } .pm2.edm .pm2-bfc { row-gap: 2px; }

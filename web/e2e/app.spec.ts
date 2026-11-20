@@ -52,7 +52,6 @@ test('Szabályzat: szabályhivatkozás és versenyformátum oldal', async ({ pag
 test('Chain: példa lejátszása lépésenként', async ({ page }) => {
   await open(page, '#chain');
   await page.locator('#cb-ex').click();
-  await page.locator('#cb-run').click();
   const next = page.getByRole('button', { name: 'Következő' }).first();
   await expect(next).toBeVisible();
   await next.click();
@@ -79,9 +78,12 @@ test('Chain: Choose one mód a builderben és a megosztott linkben', async ({ pa
   const enc = await page.evaluate((t) => btoa(unescape(encodeURIComponent(t))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''), JSON.stringify(cs));
   await page.goto('/#c=' + enc);
   await page.reload();
-  await expect(page.locator('select[data-mode="0"]')).toHaveValue('1');
+  await expect(page.locator('#cb-steps select[data-mode="0"]')).toHaveValue('1');
   await expect(page.locator('#cb-out')).toContainText('Long Sword meghal');
-  await page.selectOption('select[data-mode="0"]', '0');
+  // a pályás építő lépés-paneljében ugyanaz a mező, csak ha a lapnak van módja (Choose one)
+  await page.locator('.cb2-sc .cb2-sb').first().click();
+  await expect(page.locator('.cb2-sp select[data-mode="0"]')).toHaveValue('1');
+  await page.selectOption('.cb2-sp select[data-mode="0"]', '0');
   expect(await page.evaluate(() => (window as any).__getCS().steps[0].mode)).toBe(0);
 });
 
@@ -197,7 +199,7 @@ test('Mobil (390 px): egyik fül sem lóg ki vízszintesen', async ({ page }) =>
   await open(page, '#kartyak');
   for (const t of ['kartyak', 'deck', 'szabalyok', 'chain', 'hogyan', 'hogyan/turn-structure', 'hogyan/resource-system', 'hogyan/spell-speeds', 'hogyan/chain', 'tanulas', 'tanulas/sz/abcd-kor-eleje', 'tanulas/sz/energy-lebegtetes-power-recycle', 'tanulas/sz/tobb-unit-damage-kiosztas', 'tanulas/lecke', 'tanulas/lecke/tempo-es-ertek', 'kezikonyv']) {
     await page.goto('/#' + t);
-    if (t === 'chain') { await page.locator('#cb-ex').click(); await page.locator('#cb-run').click(); }
+    if (t === 'chain') { await page.locator('#cb-ex').click(); }
     await page.waitForTimeout(400);
     const ov = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(ov, t).toBeLessThanOrEqual(1);

@@ -7,7 +7,7 @@ export type PSide = {
   legend?: string; legendEx?: boolean; champion?: string | null; base?: PUnit[]; runes?: { ready: number; exhausted: number; domains?: string[] };
   hand?: string[]; handCount?: number; score?: number; deck?: number; runeDeck?: number; trash?: string[]; banish?: string[];
 };
-export type PBoard = { me: PSide; opp: PSide; bfs: { name: string; ctrl?: string | null; me?: PUnit[]; opp?: PUnit[]; facedown?: string | null }[]; chain?: string[]; note?: string };
+export type PBoard = { me: PSide; opp: PSide; bfs: { name: string; ctrl?: string | null; me?: PUnit[]; opp?: PUnit[]; facedown?: string | null; fdn?: string | null }[]; chain?: string[]; note?: string };
 
 /** A pálya zónái a Core Rules 105-108 alapján. */
 export const ZONES: Record<string, { t: string; d: string; r: string }> = {
@@ -47,7 +47,8 @@ export const PickCtx = createContext<(u: PUnit, side: 'me' | 'opp', where: strin
 
 /** Kattintható célpont a pályán (szituációk "act" lépéseihez). loc: 'base', 'obase' (ellenfél base), 'bf0', 'bf1', ... */
 export type PTarget =
-  | { k: 'unit'; side: 'me' | 'opp'; loc: string; n: string; i: number; ex: boolean }
+  | { k: 'unit'; side: 'me' | 'opp'; loc: string; n: string; i: number; ex: boolean; id?: string }
+  | { k: 'add'; z: 'base' | 'unit' | 'bfcard' | 'hand' | 'chain'; side?: 'me' | 'opp'; bfi?: number }
   | { k: 'zone'; loc: string }
   | { k: 'rune'; side: 'me' | 'opp'; d: string }
   | { k: 'legend' | 'champion'; side: 'me' | 'opp' }
@@ -58,6 +59,13 @@ export type PTarget =
 export type Glow = '' | 'act' | 'sel' | 'dest';
 export type PlayCtl = { on: (t: PTarget) => void; glow: (t: PTarget) => Glow; label?: (t: PTarget) => string };
 const CtlCtx = createContext<PlayCtl | null>(null);
+/** Építő mód (Chain): üres zónákon + gomb, a ctl.on 'add' célponttal. */
+const EditCtx = createContext(false);
+function AddBtn({ t, label }: { t: PTarget; label: string }) {
+  const ctl = useContext(CtlCtx); const ed = useContext(EditCtx);
+  if (!ctl || !ed) return null;
+  return <button type="button" className="pm2-add" onClick={(e) => { e.stopPropagation(); ctl.on(t); }} aria-label={label} title={label}>+</button>;
+}
 const gcls = (g: Glow) => (g ? ' g-' + g : '');
 /** Enter vagy szóköz a nem button elemeken is kattintásként működik. */
 const keyAct = (f: () => void) => (e: RKE) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); f(); } };
@@ -78,7 +86,7 @@ function Unit({ u, side, changed, where = '', loc = '', i = 0 }: { u: PUnit; sid
   const c: any = vsCard(u.n);
   const pick = useContext(PickCtx);
   const ctl = useContext(CtlCtx);
-  const t: PTarget = { k: 'unit', side, loc, n: u.n, i, ex: !!u.ex };
+  const t: PTarget = { k: 'unit', side, loc, n: u.n, i, ex: !!u.ex, id: u.id };
   const g = ctl ? ctl.glow(t) : '';
   const go = () => (ctl ? ctl.on(t) : pick(u, side, where));
   const labNames = new Set((u.status || []).map((x) => (statusOf(x)?.[0] || '').toLowerCase()));
@@ -161,8 +169,9 @@ function Piles({ s, onZone, sel, known }: { s: PSide; onZone: (z: string) => voi
 
 function Hand({ s, onZone, sel, known, side }: { s: PSide; onZone: (z: string) => void; sel: string; known?: boolean; side: 'me' | 'opp' }) {
   const ctl = useContext(CtlCtx);
+  const ed = useContext(EditCtx);
   const n = s.hand ? s.hand.length : s.handCount ?? 0;
-  if (known && !n) return null;
+  if (known && !n && !ed) return null;
   if (ctl) return (
     <div data-zone="hand" className="pm2-hand">
       <span className="pm2-cards">
@@ -171,7 +180,8 @@ function Hand({ s, onZone, sel, known, side }: { s: PSide; onZone: (z: string) =
           const gl = ctl.glow(t);
           return <button key={i} type="button" className={'cl pm2-hc' + gcls(gl)} data-card={h} data-fk={side + ':' + h} onClick={() => ctl.on(t)} aria-label={ctl.label?.(t) || h + ', kézben'} aria-pressed={gl === 'sel'}><Card n={h} /></button>;
         }) : Array.from({ length: n }, (_, i) => <Card key={i} />)}
-        {!n && <span className="pm-empty">üres</span>}
+        {!n && !ed && <span className="pm-empty">üres</span>}
+        <AddBtn t={{ k: 'add', z: 'hand', side }} label={(side === 'me' ? 'Saját' : 'Ellenfél') + ' kéz: lap hozzáadása'} />
       </span>
       <span className="pm2-lbl">Hand · {n}</span>
     </div>
@@ -188,6 +198,8 @@ function Hand({ s, onZone, sel, known, side }: { s: PSide; onZone: (z: string) =
   );
 }
 
+const EdPlus = () => (useContext(EditCtx) ? <span className="pm2-plus" aria-hidden>+</span> : null);
+
 function LegendChamp({ s, onZone, sel, side }: { s: PSide; onZone: (z: string) => void; sel: string; side: 'me' | 'opp' }) {
   const ctl = useContext(CtlCtx);
   const tc: PTarget = { k: 'champion', side }, tl: PTarget = { k: 'legend', side };
@@ -195,11 +207,11 @@ function LegendChamp({ s, onZone, sel, side }: { s: PSide; onZone: (z: string) =
   return (
     <div className="pm2-lc">
       <button type="button" data-zone="champion" className={'pm2-slot' + (sel === 'champion' ? ' on' : '') + gcls(gc)} onClick={() => (ctl ? ctl.on(tc) : onZone('champion'))} aria-label={ctl ? ctl.label?.(tc) || 'Champion: ' + (s.champion || 'üres') : undefined}>
-        {s.champion ? <span className="cl" data-card={s.champion}><Card n={s.champion} /></span> : <span className="pm2-ghost" />}
+        {s.champion ? <span className="cl" data-card={s.champion}><Card n={s.champion} /></span> : <span className="pm2-ghost"><EdPlus /></span>}
         <span className="pm2-badge ch">Champion</span>
       </button>
       <button type="button" data-zone="legend" className={'pm2-slot lg' + (s.legendEx ? ' ex' : '') + (sel === 'legend' ? ' on' : '') + gcls(gl)} onClick={() => (ctl ? ctl.on(tl) : onZone('legend'))} aria-label={ctl ? ctl.label?.(tl) || 'Legend: ' + (s.legend || 'üres') + (s.legendEx ? ', exhausted' : ', ready') : undefined}>
-        {s.legend ? <span className="cl" data-card={s.legend}><Card n={s.legend} /></span> : <span className="pm2-ghost" />}
+        {s.legend ? <span className="cl" data-card={s.legend}><Card n={s.legend} /></span> : <span className="pm2-ghost"><EdPlus /></span>}
         <span className="pm2-badge lg">Legend</span>
       </button>
     </div>
@@ -207,12 +219,12 @@ function LegendChamp({ s, onZone, sel, side }: { s: PSide; onZone: (z: string) =
 }
 
 /** Unitok és a csatolatlan gearek külön sorban: a gear kisebb, Might jelző nélkül (a csatolt gear a unit alatt, a pm-mods sorban). */
-function UnitRow({ us, side, loc, where, pk }: { us: PUnit[]; side: 'me' | 'opp'; loc: string; where: string; pk: Set<string> | null }) {
+function UnitRow({ us, side, loc, where, pk, add }: { us: PUnit[]; side: 'me' | 'opp'; loc: string; where: string; pk: Set<string> | null; add?: PTarget }) {
   const units = us.map((u, i) => [u, i] as const).filter(([u]) => u.kind !== 'gear');
   const gears = us.map((u, i) => [u, i] as const).filter(([u]) => u.kind === 'gear');
   return (
     <>
-      <div className="pm2-units">{units.map(([u, i]) => <Unit key={i} u={u} side={side} loc={loc} i={i} where={where} changed={!!pk && !pk.has(key(u))} />)}</div>
+      <div className="pm2-units">{units.map(([u, i]) => <Unit key={i} u={u} side={side} loc={loc} i={i} where={where} changed={!!pk && !pk.has(key(u))} />)}{add && <AddBtn t={add} label={'Unit vagy gear hozzáadása: ' + where + (side === 'me' ? ', saját' : ', ellenfél')} />}</div>
       {gears.length > 0 && <div className="pm2-gears" aria-label="Csatolatlan gearek">{gears.map(([u, i]) => <Unit key={i} u={u} side={side} loc={loc} i={i} where={where} changed={!!pk && !pk.has(key(u))} />)}</div>}
     </>
   );
@@ -228,7 +240,7 @@ function Base({ s, who, prev, onZone, sel }: { s: PSide; who: 'me' | 'opp'; prev
       onClick={(e) => { if (ctl) { if (!(e.target as HTMLElement).closest('.pm-unit,button')) ctl.on(t); return; } if (!(e.target as HTMLElement).closest('.cl,button')) onZone('base'); }}
       {...(ctl && g === 'dest' ? { tabIndex: 0, role: 'button', 'aria-label': ctl.label?.(t) || 'Cél: ' + (who === 'me' ? 'saját base' : 'ellenfél base'), onKeyDown: keyAct(() => ctl.on(t)) } : {})}>
       <span className="pm2-wm" aria-hidden>BASE</span>
-      <UnitRow us={s.base || []} side={who} loc={who === 'me' ? 'base' : 'obase'} where={(who === 'me' ? 'Saját' : 'Ellenfél') + ' base'} pk={prev ? pk : null} />
+      <UnitRow us={s.base || []} side={who} loc={who === 'me' ? 'base' : 'obase'} where={(who === 'me' ? 'Saját' : 'Ellenfél') + ' base'} pk={prev ? pk : null} add={{ k: 'add', z: 'base', side: who }} />
     </div>
   );
 }
@@ -319,7 +331,7 @@ function useFlip(host: RefObject<HTMLDivElement | null>, dep: unknown) {
 /** onlyKnown: csak az ismert zónák látszanak (a Chain elemzőnél nincs deck, rune és teljes kéz adat). */
 /** hover: egérrel rávive is megjelenik a zóna leírása (How to Play felfedező). infoTop: a leírás a pálya fölött. */
 /** scn: szituáció mód: nincs zónamagyarázó szöveg és megjegyzés a pálya alatt, az üres chain rejtve. ctl: kattintható lépések (sárga kiemelés). */
-export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown = false, hover = false, infoTop = false, scn = false, ctl }: { b: PBoard; prev?: PBoard; explain?: boolean; focus?: string; turn?: 'me' | 'opp' | null; onlyKnown?: boolean; hover?: boolean; infoTop?: boolean; scn?: boolean; ctl?: PlayCtl | null }) {
+export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown = false, hover = false, infoTop = false, scn = false, ctl, edit = false }: { edit?: boolean; b: PBoard; prev?: PBoard; explain?: boolean; focus?: string; turn?: 'me' | 'opp' | null; onlyKnown?: boolean; hover?: boolean; infoTop?: boolean; scn?: boolean; ctl?: PlayCtl | null }) {
   const [sel, setSel] = useState(focus || '');
   const [pu, setPu] = useState<{ u: PUnit; side: 'me' | 'opp'; where: string } | null>(null);
   const onZone = (z: string) => { if (scn) return; setPu(null); setSel(sel === z ? '' : z); };
@@ -333,7 +345,8 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
   return (
     <PickCtx.Provider value={pick}>
     <CtlCtx.Provider value={ctl || null}>
-    <div ref={host} className={'pm2' + (onlyKnown ? ' known' : '') + (infoTop ? ' infotop' : '') + (scn ? ' scnm' : '') + (ctl ? ' actm' : '')} onMouseOver={hover ? (e) => {
+    <EditCtx.Provider value={edit && !!ctl}>
+    <div ref={host} className={'pm2' + (onlyKnown ? ' known' : '') + (infoTop ? ' infotop' : '') + (scn ? ' scnm' : '') + (ctl ? ' actm' : '') + (edit ? ' edm' : '')} onMouseOver={hover ? (e) => {
       const t = e.target as HTMLElement; if (t.closest('.pm-unit')) return;
       const z = t.closest('[data-zone]')?.getAttribute('data-zone'); if (z && z !== sel) { setPu(null); setSel(z); }
     } : undefined}>
@@ -362,16 +375,17 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
                 onClick={ctl ? (e) => { if (!(e.target as HTMLElement).closest('.pm-unit,button')) ctl.on(zt); } : undefined}
                 {...(ctl && zg === 'dest' ? { tabIndex: 0, role: 'button', 'aria-label': ctl.label?.(zt) || 'Cél: ' + f.name, onKeyDown: keyAct(() => ctl.on(zt)) } : {})}>
                 <div className="pm2-ubox opp"><span className="pm2-uh">Opponent units{!!f.opp?.some((u) => u.kind !== 'gear') && <b className="pm2-msum" title={'Összesített Might: ' + mo + ', ' + f.opp.filter((u) => u.kind !== 'gear').length + ' unit'}>{mo}<Swords size={12} aria-hidden /></b>}</span>
-                  <UnitRow us={f.opp || []} side="opp" loc={'bf' + i} where={f.name} pk={prev ? pko : null} /></div>
+                  <UnitRow us={f.opp || []} side="opp" loc={'bf' + i} where={f.name || (i + 1) + '. battlefield'} pk={prev ? pko : null} add={{ k: 'add', z: 'unit', side: 'opp', bfi: i }} /></div>
                 <div className={'pm2-bfc ' + (f.ctrl || 'none')} data-bfi={i}>
-                  <span className="cl" data-card={f.name}>{img(f.name) ? <img src={img(f.name)} alt={f.name} loading="lazy" /> : <span className="pm-tok">{f.name}</span>}</span>
+                  {!f.name && edit && ctl ? <button type="button" className="pm2-bfadd" onClick={(e) => { e.stopPropagation(); ctl.on({ k: 'add', z: 'bfcard', bfi: i }); }} aria-label={(i + 1) + '. battlefield kiválasztása'}><span>+</span>{i + 1}. battlefield</button>
+                    : <span className="cl" data-card={f.name}>{img(f.name) ? <img src={img(f.name)} alt={f.name} loading="lazy" /> : <span className="pm-tok">{f.name}</span>}</span>}
                   <span className="pm2-ctrl">{f.ctrl === 'me' ? 'Te kontrollálod' : f.ctrl === 'opp' ? 'Ellenfél kontrollálja' : 'Senkié'}</span>
                   <button type="button" data-zone="facedown" className={'pm2-fd' + (f.facedown ? ' has ' + f.facedown : '') + (sel === 'facedown' ? ' on' : '') + gcls(fg)} onClick={() => (ctl ? ctl.on(ft) : onZone('facedown'))} title="Facedown Zone" aria-label={ctl ? ctl.label?.(ft) || 'Facedown: ' + f.name + (f.facedown ? ', lefordított lap' : ', üres') : undefined}>
-                    {f.facedown ? <Card small /> : <span className="pm2-ghost sm" />}<span>Facedown</span>
+                    {f.facedown ? <Card small n={f.fdn || undefined} /> : <span className="pm2-ghost sm">{edit && <span className="pm2-plus sm" aria-hidden>+</span>}</span>}<span>Facedown</span>
                   </button>
                 </div>
                 <div className="pm2-ubox me"><span className="pm2-uh">Your units{!!f.me?.some((u) => u.kind !== 'gear') && <b className="pm2-msum" title={'Összesített Might: ' + mm + ', ' + f.me.filter((u) => u.kind !== 'gear').length + ' unit'}>{mm}<Swords size={12} aria-hidden /></b>}</span>
-                  <UnitRow us={f.me || []} side="me" loc={'bf' + i} where={f.name} pk={prev ? pkm : null} /></div>
+                  <UnitRow us={f.me || []} side="me" loc={'bf' + i} where={f.name || (i + 1) + '. battlefield'} pk={prev ? pkm : null} add={{ k: 'add', z: 'unit', side: 'me', bfi: i }} /></div>
               </div>
             );
           })}
@@ -383,6 +397,7 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
                 const gl = ctl.glow(t);
                 return <button key={i} type="button" className={'pm2-ci' + gcls(gl)} data-ci={i} onClick={() => ctl.on(t)}>{i === 0 ? <b>Felül: </b> : null}{t.t}</button>;
               })}
+              <AddBtn t={{ k: 'add', z: 'chain' }} label="Lap kijátszása a chainre" />
             </div>
           ) : (
             <button type="button" data-zone="chain" className={'pm2-chain' + (sel === 'chain' ? ' on' : '')} onClick={() => onZone('chain')}>
@@ -411,6 +426,7 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
         </div>
       )}
     </div>
+    </EditCtx.Provider>
     </CtlCtx.Provider>
     </PickCtx.Provider>
   );
