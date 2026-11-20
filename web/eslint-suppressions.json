@@ -27,7 +27,7 @@
       "count": 1
     },
     "@typescript-eslint/no-explicit-any": {
-      "count": 177
+      "count": 175
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 6
@@ -37,9 +37,6 @@
     },
     "no-self-assign": {
       "count": 1
-    },
-    "no-useless-escape": {
-      "count": 2
     }
   },
   "src/domain/chain/engine/ctx.ts": {
@@ -99,6 +96,17 @@
     },
     "@typescript-eslint/no-explicit-any": {
       "count": 13
+    }
+  },
+  "src/domain/chain/engine/tokens.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    },
+    "@typescript-eslint/no-explicit-any": {
+      "count": 2
+    },
+    "no-useless-escape": {
+      "count": 2
     }
   },
   "src/domain/chain/engine/triggers.ts": {
