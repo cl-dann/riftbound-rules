@@ -115,44 +115,72 @@ test('How to Play és Practice: nincs kvíz, nincs Elolvastam gomb, nincs halad�
     await expect(page.locator('.view.on main.learn-main')).not.toContainText(/completed|teljesítve|elvégezve/i);
   }
   await page.goto('/#tanulas/sz');
-  await expect(page.locator('.view.on .scnlist li')).toHaveCount(10);
+  await expect(page.locator('.view.on .scnlist li')).toHaveCount(12);
   await page.locator('.view.on .scnlist a').first().click();
-  await expect(page.locator('.view.on .chhead .pos')).toHaveText('1 / 10');
+  await expect(page.locator('.view.on .chhead .pos')).toHaveText('1 / 12');
   await page.getByRole('button', { name: 'Szituáció indítása' }).click();
-  await expect(page.locator('.view.on .scn-choice')).toBeVisible();
+  await expect(page.locator('.view.on .pb-panel')).toContainText('TURN-START');
 });
 
-test('Practice: szituációban kattintással mozgatás, rossz kattintásra hibaüzenet, billentyűzettel is', async ({ page }) => {
+test('Practice: akció-menü, célpont modal, fázispanelek, jó OUTCOME és Újrajátszás', async ({ page }) => {
+  await open(page, '#tanulas/sz/spell-hasznalata');
+  const v = page.locator('.view.on');
+  await expect(v.locator('.pb-panel')).toContainText('HELYZET');
+  await v.getByRole('button', { name: 'Szituáció indítása' }).click();
+  // akció-menü: a nem a feladathoz tartozó lap menüpontja szürke, indoklással
+  await v.getByRole('button', { name: 'Incinerate, kézben' }).click();
+  await expect(v.locator('.pb-panel.menu')).toContainText('Incinerate');
+  await v.locator('.pb-panel.menu .pb-x').click();
+  await v.getByRole('button', { name: 'Hextech Ray, kézben' }).click();
+  await expect(v.locator('.pb-panel.menu')).toContainText('1 Energy + 1 Fury Power');
+  await v.locator('.pb-panel.menu').getByRole('button', { name: 'Kijátszás' }).click();
+  // célpont modal: legális és nem legális célpontok, számláló, Megerősítés (n)
+  const t = v.locator('.pb-panel.tgt');
+  await expect(t).toContainText('0 / 1 kiválasztva');
+  await expect(t).toContainText('355.9.b');
+  await t.getByRole('button', { name: /Shipyard Skulker/ }).click();
+  await expect(t).toContainText('1 / 1 kiválasztva');
+  await t.getByRole('button', { name: 'Megerősítés (1)' }).click();
+  // fázispanel: a nem elérhető gomb szürke, indoklással
+  const p = v.locator('.pb-panel');
+  await expect(p).toContainText('CHAIN-OPEN');
+  await expect(p.getByRole('button', { name: 'Még egy spell' })).toBeDisabled();
+  await expect(v.locator('.pb-chain').first()).toContainText('Hextech Ray');
+  await p.getByRole('button', { name: 'Passz' }).click();
+  await p.getByRole('button', { name: 'Chain feloldása' }).click();
+  await p.getByRole('button', { name: /Nem, Closed Stateben/ }).click();
+  // mozgatás: menü, a unit a célhelyre kerül, Mozgás megerősítése
+  await v.getByRole('button', { name: /^Legion Rearguard/ }).click();
+  await v.locator('.pb-panel.menu').getByRole('button', { name: 'Mozgatás: Grove of the God-Willow' }).click();
+  await expect(v.locator('.pb-bf[data-bfi="0"] .pb-ubox.me .pb-card')).toHaveCount(1);
+  await v.getByRole('button', { name: /Mozgás megerősítése/ }).click();
+  await p.getByRole('button', { name: 'Tovább' }).click();
+  await v.getByRole('button', { name: 'End Turn' }).click();
+  const o = v.locator('.pb-panel.out.good');
+  await expect(o).toContainText('OUTCOME');
+  await expect(o).toContainText('Demó kész');
+  await expect(o.getByRole('link', { name: /Következő szituáció/ })).toBeVisible();
+  await o.getByRole('button', { name: 'Újrajátszás' }).click();
+  await expect(v.locator('.pb-panel')).toHaveCount(0);
+  await expect(v.getByRole('button', { name: 'Hextech Ray, kézben' })).toBeVisible();
+});
+
+test('Practice: rossz döntés OUTCOME panelt ad optimális sorral, Újrajátszás', async ({ page }) => {
   await open(page, '#tanulas/sz/egyszeru-combat-conquer');
   const v = page.locator('.view.on');
   await v.getByRole('button', { name: 'Szituáció indítása' }).click();
-  await v.locator('.scn-choice button').first().click();
-  await v.locator('.scn-ctl .btn.hex').click();
-  await expect(v.locator('.scn-actbar')).toBeVisible();
-  await expect(v.locator('.scn-ctl .btn.hex')).toBeDisabled();
-  // rossz kattintás: az ellenfél unitja
-  await v.locator('.pm-unit.opp').first().click();
-  await expect(v.locator('.scn-msg.bad')).toContainText('ellenfél unitja');
-  // kijelölés, a legális célzónák kiemelve
-  const sgt = v.locator('.pm-unit.me', { hasText: 'Vanguard Sergeant' });
-  await expect(sgt).toHaveClass(/g-act/);
-  await sgt.click();
-  await expect(sgt).toHaveClass(/g-sel/);
-  await expect(v.locator('.pm2-bf.g-dest')).toHaveCount(2);
-  // szabályos, de nem a feladat szerinti cél: konkrét üzenet szabályszámmal
-  await v.locator('.pm2-bf[data-bfi="1"]').click({ position: { x: 4, y: 4 } });
-  await expect(v.locator('.scn-msg.bad')).toContainText('144.4.a');
-  // Mégse, majd a jó lépés billentyűzettel
-  await v.getByRole('button', { name: 'Mégse' }).click();
-  await sgt.focus();
-  await page.keyboard.press('Enter');
-  const bf0 = v.locator('.pm2-bf[data-bfi="0"]');
-  await expect(bf0).toHaveClass(/g-dest/);
-  await bf0.focus();
-  await page.keyboard.press('Enter');
-  await expect(v.locator('.scn-actbar.ok')).toBeVisible();
-  await expect(bf0.locator('.pm2-ubox.me .pm-unit')).toHaveCount(1);
-  await expect(v.locator('.scn-ctl .btn.hex')).toBeEnabled();
+  await v.getByRole('button', { name: 'End Turn' }).click();
+  const o = v.locator('.pb-panel.out.bad');
+  await expect(o).toContainText('Kihagyott lehetőség');
+  await expect(o).toContainText('Optimális sor:');
+  await o.getByRole('button', { name: 'Újrajátszás' }).click();
+  // két unit egyetlen mozgással: csak az egyik mozgatása rossz kimenet
+  await page.goto('/#tanulas/sz/tobb-unit-damage-kiosztas');
+  await v.getByRole('button', { name: 'Szituáció indítása' }).click();
+  await v.getByRole('button', { name: /^Petty Officer/ }).click();
+  await v.locator('.pb-panel.menu').getByRole('button', { name: 'Mozgatás: Grove of the God-Willow' }).click();
+  await v.getByRole('button', { name: /Mozgás megerősítése/ }).click();
+  await expect(v.locator('.pb-panel.out.bad')).toContainText('Egyedül kevés');
 });
 
 test('Fogalomtár: játékmenet lépésábra és errata szűrés', async ({ page }) => {
@@ -167,7 +195,7 @@ test('Fogalomtár: játékmenet lépésábra és errata szűrés', async ({ page
 test('Mobil (390 px): egyik fül sem lóg ki vízszintesen', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await open(page, '#kartyak');
-  for (const t of ['kartyak', 'deck', 'szabalyok', 'chain', 'hogyan', 'hogyan/turn-structure', 'hogyan/resource-system', 'hogyan/spell-speeds', 'hogyan/chain', 'tanulas', 'tanulas/sz/abcd-kor-eleje', 'tanulas/lecke', 'kezikonyv']) {
+  for (const t of ['kartyak', 'deck', 'szabalyok', 'chain', 'hogyan', 'hogyan/turn-structure', 'hogyan/resource-system', 'hogyan/spell-speeds', 'hogyan/chain', 'tanulas', 'tanulas/sz/abcd-kor-eleje', 'tanulas/sz/energy-lebegtetes-power-recycle', 'tanulas/sz/tobb-unit-damage-kiosztas', 'tanulas/lecke', 'tanulas/lecke/tempo-es-ertek', 'kezikonyv']) {
     await page.goto('/#' + t);
     if (t === 'chain') { await page.locator('#cb-ex').click(); await page.locator('#cb-run').click(); }
     await page.waitForTimeout(400);

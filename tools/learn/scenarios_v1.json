@@ -1,0 +1,6453 @@
+[
+ {
+  "id": "abcd-kor-eleje",
+  "title": "ABCD: a kör eleje",
+  "level": "kezdo",
+  "intro": "A kör első négy fázisa sorban: Awaken, Beginning, Channel, Draw, és mi változik közben a pályán.",
+  "rules": "315.1-315.4, 316.3, 416.3.a, 431.2.a, 471.2",
+  "steps": [
+   {
+    "say": "Az ellenfél befejezte a körét, most a második köröd kezdődik. A Grove of the God-Willow-t te irányítod, ott áll az exhausted [[Eager Drakehound]]. A boardon 2 rune-od van, mindkettő exhausted.",
+    "board": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Rebel",
+      "base": [],
+      "runes": {
+       "ready": 0,
+       "exhausted": 2,
+       "domains": [
+        "Fury",
+        "Chaos"
+       ]
+      },
+      "hand": [
+       "Hextech Ray",
+       "Incinerate",
+       "Legion Rearguard",
+       "Chemtech Enforcer"
+      ],
+      "deck": 34,
+      "runeDeck": 10,
+      "score": 1,
+      "trash": [],
+      "banish": []
+     },
+     "opp": {
+      "legend": "Draven, Glorious Executioner",
+      "champion": "Draven, Showboat",
+      "base": [
+       {
+        "n": "Shipyard Skulker",
+        "m": 3,
+        "base": 3,
+        "ex": true
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 3,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "handCount": 5,
+      "deck": 33,
+      "runeDeck": 8,
+      "score": 0,
+      "trash": [],
+      "banish": []
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Eager Drakehound",
+         "m": 3,
+         "base": 3,
+         "ex": true
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "A második köröd eleje, te vagy a második játékos. Az első körödben a 3 rune-odból kijátszottad az Eager Drakehoundot (egy Fury rune-t recycle-öltél), és elfoglaltad vele a Grove-ot."
+    },
+    "choice": {
+     "q": "Mi történik először?",
+     "opts": [
+      {
+       "t": "Minden lapod ready lesz",
+       "ok": true,
+       "why": "Az Awaken Phase az első: a Turn Player mindent readyz, amit kontrollál {{315.1.b}}."
+      },
+      {
+       "t": "Húzol 1 lapot",
+       "why": "A Draw Phase a negyedik fázis {{315.4}}."
+      },
+      {
+       "t": "Channelölsz 2 rune-t",
+       "why": "A Channel Phase a harmadik fázis {{315.3}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "A: Awaken. A Drakehound és mindkét rune ready lett {{315.1.b}} {{416.3.a}}. Ez Task, nem döntesz róla {{315.1.a}}.",
+    "board": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Rebel",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 0,
+       "domains": [
+        "Fury",
+        "Chaos"
+       ]
+      },
+      "hand": [
+       "Hextech Ray",
+       "Incinerate",
+       "Legion Rearguard",
+       "Chemtech Enforcer"
+      ],
+      "deck": 34,
+      "runeDeck": 10,
+      "score": 1,
+      "trash": [],
+      "banish": []
+     },
+     "opp": {
+      "legend": "Draven, Glorious Executioner",
+      "champion": "Draven, Showboat",
+      "base": [
+       {
+        "n": "Shipyard Skulker",
+        "m": 3,
+        "base": 3,
+        "ex": true
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 3,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "handCount": 5,
+      "deck": 33,
+      "runeDeck": 8,
+      "score": 0,
+      "trash": [],
+      "banish": []
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Eager Drakehound",
+         "m": 3,
+         "base": 3,
+         "ex": false
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "Awaken után."
+    },
+    "choice": {
+     "q": "Mi történik a Beginning Phase-ben?",
+     "opts": [
+      {
+       "t": "Lefutnak a kör eleji hatások, majd holdolod a Grove-ot",
+       "ok": true,
+       "why": "Előbb a Beginning Step hatásai {{315.2.a.1}}, utána a scoring lépésben a hold {{315.2.b.2}} {{471.2}}."
+      },
+      {
+       "t": "Holdolni csak akkor lehet, ha a kör végén is ott vagy",
+       "why": "A hold a saját Beginning Phase-edben jár, ha akkor te irányítod a battlefieldet {{471.2}}."
+      },
+      {
+       "t": "Előbb channelölsz, utána jön a hold",
+       "why": "A Beginning Phase a Channel Phase előtt van {{315.2}} {{315.3}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "B: Beginning. Holdolod a Grove-ot, ez 1 pont {{471.2}}. A Grove of the God-Willow szövege szerint holdkor húzol 1 lapot, így a kezedbe kerül a [[Cleave]].",
+    "board": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Rebel",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 0,
+       "domains": [
+        "Fury",
+        "Chaos"
+       ]
+      },
+      "hand": [
+       "Hextech Ray",
+       "Incinerate",
+       "Legion Rearguard",
+       "Chemtech Enforcer",
+       "Cleave"
+      ],
+      "deck": 33,
+      "runeDeck": 10,
+      "score": 2,
+      "trash": [],
+      "banish": []
+     },
+     "opp": {
+      "legend": "Draven, Glorious Executioner",
+      "champion": "Draven, Showboat",
+      "base": [
+       {
+        "n": "Shipyard Skulker",
+        "m": 3,
+        "base": 3,
+        "ex": true
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 3,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "handCount": 5,
+      "deck": 33,
+      "runeDeck": 8,
+      "score": 0,
+      "trash": [],
+      "banish": []
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Eager Drakehound",
+         "m": 3,
+         "base": 3,
+         "ex": false
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "Beginning után: hold és a Grove húzása."
+    },
+    "choice": {
+     "q": "Hány rune-t channelölsz most?",
+     "opts": [
+      {
+       "t": "2",
+       "ok": true,
+       "why": "A Channel Phase-ben 2 rune jön a Rune Deck tetejéről {{315.3.b}}."
+      },
+      {
+       "t": "3, mert második játékos vagy",
+       "why": "Az extra rune csak az első Channel Phase-re jár {{487.7}}."
+      },
+      {
+       "t": "1, mert már van 2 rune-od",
+       "why": "A boardon lévő rune-ok száma nem számít, mindig 2 jön {{315.3.b}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "C: Channel. 2 rune került a boardra, ready állapotban {{431.2.a}}. Most 4 rune-od van.",
+    "board": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Rebel",
+      "base": [],
+      "runes": {
+       "ready": 4,
+       "exhausted": 0,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Fury",
+        "Fury"
+       ]
+      },
+      "hand": [
+       "Hextech Ray",
+       "Incinerate",
+       "Legion Rearguard",
+       "Chemtech Enforcer",
+       "Cleave"
+      ],
+      "deck": 33,
+      "runeDeck": 8,
+      "score": 2,
+      "trash": [],
+      "banish": []
+     },
+     "opp": {
+      "legend": "Draven, Glorious Executioner",
+      "champion": "Draven, Showboat",
+      "base": [
+       {
+        "n": "Shipyard Skulker",
+        "m": 3,
+        "base": 3,
+        "ex": true
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 3,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "handCount": 5,
+      "deck": 33,
+      "runeDeck": 8,
+      "score": 0,
+      "trash": [],
+      "banish": []
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Eager Drakehound",
+         "m": 3,
+         "base": 3,
+         "ex": false
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "Channel után."
+    }
+   },
+   {
+    "say": "D: Draw. Húzol 1 lapot {{315.4.b}}: a [[Flash]]. Ha a Main Deck üres lenne, előbb Burn Out jönne, utána mégis húznál {{315.4.b.1}} {{315.4.b.2}}.",
+    "board": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Rebel",
+      "base": [],
+      "runes": {
+       "ready": 4,
+       "exhausted": 0,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Fury",
+        "Fury"
+       ]
+      },
+      "hand": [
+       "Hextech Ray",
+       "Incinerate",
+       "Legion Rearguard",
+       "Chemtech Enforcer",
+       "Cleave",
+       "Flash"
+      ],
+      "deck": 32,
+      "runeDeck": 8,
+      "score": 2,
+      "trash": [],
+      "banish": []
+     },
+     "opp": {
+      "legend": "Draven, Glorious Executioner",
+      "champion": "Draven, Showboat",
+      "base": [
+       {
+        "n": "Shipyard Skulker",
+        "m": 3,
+        "base": 3,
+        "ex": true
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 3,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "handCount": 5,
+      "deck": 33,
+      "runeDeck": 8,
+      "score": 0,
+      "trash": [],
+      "banish": []
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Eager Drakehound",
+         "m": 3,
+         "base": 3,
+         "ex": false
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "Draw után, a Main Phase kezdődik. Rune Pool: 0."
+    },
+    "choice": {
+     "q": "Mi történik a Main Phase elején?",
+     "opts": [
+      {
+       "t": "Kiürül a Rune Pool, a rune-ok ready maradnak",
+       "ok": true,
+       "why": "A Main Phase elején a Rune Pool ürül {{316.3}} {{167}}, a rune-ok állapota nem változik."
+      },
+      {
+       "t": "A rune-ok exhaustolódnak",
+       "why": "A Main Phase eleje csak a Rune Poolt üríti {{316.3}}."
+      },
+      {
+       "t": "Az előző kör megmaradt Energyje még elkölthető",
+       "why": "A kör végén és a Main Phase elején is ürül a pool, a maradék elvész {{167}} {{167.1}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "Main Phase: innentől te döntesz {{316.5.a}}. A Drakehound ready, Standard Move-val léphet {{144.2}}, és 4 rune-ból fizethetsz. A négy fázis összefoglalója a How to Play Turn Structure fejezetében van."
+   }
+  ]
+ },
+ {
+  "id": "egyszeru-combat-conquer",
+  "title": "Egyszerű combat és conquer",
+  "level": "kezdo",
+  "intro": "Egy unit mozgatása ellenséges battlefieldre, a combat damage kiszámítása, a conquer és a következő köri hold.",
+  "rules": "144, 452, 467.2, 142.4.b, 468.5.d, 471, 472",
+  "steps": [
+   {
+    "say": "A te köröd Main Phase-e. A base-edben ready állapotban áll egy [[Vanguard Sergeant]] (4 Might). Az ellenfél a [[Packed Amphitheater]] battlefieldet kontrollálja, ott áll a [[Shipyard Skulker]] (3 Might). Egy unit a Standard Move-val a base-ből bármelyik battlefieldre léphet {{144.4.a}}.",
+    "board": {
+     "me": {
+      "legend": "Garen, Might of Demacia (Starter)",
+      "champion": "Garen, Rugged",
+      "base": [
+       {
+        "n": "Vanguard Sergeant",
+        "m": 4,
+        "base": 4
+       }
+      ],
+      "runes": {
+       "ready": 6,
+       "exhausted": 0,
+       "domains": [
+        "Order",
+        "Order",
+        "Order",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 32,
+      "runeDeck": 6,
+      "score": 1,
+      "trash": [
+       "Daring Poro"
+      ],
+      "banish": [],
+      "hand": [
+       "Petty Officer",
+       "Cull the Weak",
+       "Determined Sentry",
+       "Laurent Duelist",
+       "Mountain Drake"
+      ]
+     },
+     "opp": {
+      "legend": "Pyke, Bloodharbor Ripper",
+      "champion": "Pyke, Returned",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 3,
+       "domains": [
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 33,
+      "runeDeck": 7,
+      "score": 1,
+      "trash": [],
+      "banish": [],
+      "handCount": 5
+     },
+     "bfs": [
+      {
+       "name": "Packed Amphitheater",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Shipyard Skulker",
+         "m": 3,
+         "base": 3,
+         "ex": true
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "A játék 5. köre, te vagy a kezdőjátékos, ez a 3. köröd (6 rune). Eddig 4+3 lapot húztál: 5 a kezedben, a Vanguard Sergeant a base-edben, a Daring Poro a trashben. Az ellenfél 2 körén túl van (3+2 rune): 4+2 lapot húzott, 5 a kezében, a Shipyard Skulker a boardon. A Skulkert az előző körében léptette az Amphitheaterre, ezért exhausted."
+    },
+    "choice": {
+     "q": "Mi a Standard Move ára?",
+     "opts": [
+      {
+       "t": "A unit exhaustolása",
+       "ok": true,
+       "why": "A Standard Move költsége a unit exhaustolása {{144.2}}, rune nem kell hozzá."
+      },
+      {
+       "t": "1 Energy",
+       "ok": false,
+       "why": "Mozgáshoz nem kell Energy: a költség a unit exhaustolása {{144.2}}."
+      },
+      {
+       "t": "Nincs ára, de a unit csak a következő körben harcolhat",
+       "ok": false,
+       "why": "Nincs várakozás: ha ellenséges unit áll a célban, a mozgás után combat következik {{454}}, a költség pedig az exhaust {{144.2}}."
+      }
+     ]
+    }
+   },
+   {
+    "type": "act",
+    "prompt": "Mozgasd a [[Vanguard Sergeant]] unitot Standard Move-val a Packed Amphitheaterre: kattints a unitra, majd a battlefieldre.",
+    "expect": {
+     "kind": "move",
+     "unit": "Vanguard Sergeant",
+     "to": "bf0"
+    },
+    "ok": "A Sergeant exhaustolva átlépett a base-edből a battlefieldre {{144.2}} {{144.4.a}}.",
+    "wrong": {
+     "to:bf1": "A Grove of the God-Willow-ra is szabályosan léphetnél {{144.4.a}}, de ebben a szituációban az ellenfél Amphitheaterét foglalod el."
+    },
+    "after": {
+     "me": {
+      "legend": "Garen, Might of Demacia (Starter)",
+      "champion": "Garen, Rugged",
+      "base": [],
+      "runes": {
+       "ready": 6,
+       "exhausted": 0,
+       "domains": [
+        "Order",
+        "Order",
+        "Order",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 32,
+      "runeDeck": 6,
+      "score": 1,
+      "trash": [
+       "Daring Poro"
+      ],
+      "banish": [],
+      "hand": [
+       "Petty Officer",
+       "Cull the Weak",
+       "Determined Sentry",
+       "Laurent Duelist",
+       "Mountain Drake"
+      ]
+     },
+     "opp": {
+      "legend": "Pyke, Bloodharbor Ripper",
+      "champion": "Pyke, Returned",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 3,
+       "domains": [
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 33,
+      "runeDeck": 7,
+      "score": 1,
+      "trash": [],
+      "banish": [],
+      "handCount": 5
+     },
+     "bfs": [
+      {
+       "name": "Packed Amphitheater",
+       "ctrl": "opp",
+       "me": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4,
+         "ex": true,
+         "status": [
+          "attacker",
+          "new"
+         ],
+         "tag": "Attacker"
+        }
+       ],
+       "opp": [
+        {
+         "n": "Shipyard Skulker",
+         "m": 3,
+         "base": 3,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender",
+         "ex": true
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    }
+   },
+   {
+    "say": "A battlefield Contested lesz, mert nem te kontrollálod {{452}}, és mivel két játékos unitja áll ott, combat kezdődik {{463}}. Te vagy az Attacker, mert te tetted Contesteddé {{466.2.c.1}}, és a combat showdownban nálad a Focus {{466.2.c.1.a}}. Senki nem játszik ki lapot, mindketten passzoltok, a showdown véget ér {{347.2.a}}.",
+    "choice": {
+     "q": "Ki osztja ki előbb a damage-et, és mennyit?",
+     "opts": [
+      {
+       "t": "Te, az Attacker: 4-et, a Sergeant Mightját",
+       "ok": true,
+       "why": "Az attackerek Mightját összeadod {{467.2.a}}, és a kiosztást az Attacker kezdi {{467.2.c}}."
+      },
+      {
+       "t": "A Defender, 3-at",
+       "ok": false,
+       "why": "A kiosztást az Attacker kezdi {{467.2.c}}."
+      },
+      {
+       "t": "A nagyobb Mightú fél, a különbséget, vagyis 1-et",
+       "ok": false,
+       "why": "Nincs különbségszámítás: mindkét fél a teljes Might összegét osztja ki {{467.2.c}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "A kiosztott damage egyszerre érkezik {{467.2.c.1.a}}: a Skulker 4-et, a Sergeant 3-at kap.",
+    "board": {
+     "me": {
+      "legend": "Garen, Might of Demacia (Starter)",
+      "champion": "Garen, Rugged",
+      "base": [],
+      "runes": {
+       "ready": 6,
+       "exhausted": 0,
+       "domains": [
+        "Order",
+        "Order",
+        "Order",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 32,
+      "runeDeck": 6,
+      "score": 1,
+      "trash": [
+       "Daring Poro"
+      ],
+      "banish": [],
+      "hand": [
+       "Petty Officer",
+       "Cull the Weak",
+       "Determined Sentry",
+       "Laurent Duelist",
+       "Mountain Drake"
+      ]
+     },
+     "opp": {
+      "legend": "Pyke, Bloodharbor Ripper",
+      "champion": "Pyke, Returned",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 3,
+       "domains": [
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 33,
+      "runeDeck": 7,
+      "score": 1,
+      "trash": [],
+      "banish": [],
+      "handCount": 5
+     },
+     "bfs": [
+      {
+       "name": "Packed Amphitheater",
+       "ctrl": "opp",
+       "me": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4,
+         "ex": true,
+         "dmg": 3,
+         "status": [
+          "attacker"
+         ],
+         "tag": "Attacker"
+        }
+       ],
+       "opp": [
+        {
+         "n": "Shipyard Skulker",
+         "m": 3,
+         "base": 3,
+         "dmg": 4,
+         "status": [
+          "defender",
+          "dying"
+         ],
+         "tag": "Defender",
+         "ex": true
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    },
+    "choice": {
+     "q": "Ki éli túl a combatot?",
+     "opts": [
+      {
+       "t": "Csak a Sergeant",
+       "ok": true,
+       "why": "Lethal az a nem nulla damage, ami eléri vagy meghaladja a Mightot {{142.4.b}}. A Skulkeren 4 a 3 Mighthoz, a Sergeanton 3 a 4 Mighthoz."
+      },
+      {
+       "t": "Mindketten, mert a damage egyszerre érkezik",
+       "ok": false,
+       "why": "Az egyidejűség nem véd: a Skulkeren lethal damage van {{142.4.b}}, ezért a cleanupban meghal {{323.4}}."
+      },
+      {
+       "t": "Egyikük sem, mert a Sergeant a Skulker teljes Mightját kapta",
+       "ok": false,
+       "why": "A Sergeant a saját 4 Mightjához mérten kapott 3-at, ez nem lethal {{142.4.b}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "A combat cleanupban a Skulker a trashbe kerül {{323.4}}, a Sergeant damage-e gyógyul {{468.1.a.1}}. Egyedül neked maradt unitod, így megnyerted a combatot {{468.3.a}}, és megszerzed a kontrollt. Ez conquer, mert ebben a körben még nem pontoztad ezt a battlefieldet {{468.5.d}} {{471.1}}: 1 pont.",
+    "board": {
+     "me": {
+      "legend": "Garen, Might of Demacia (Starter)",
+      "champion": "Garen, Rugged",
+      "base": [],
+      "runes": {
+       "ready": 6,
+       "exhausted": 0,
+       "domains": [
+        "Order",
+        "Order",
+        "Order",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 32,
+      "runeDeck": 6,
+      "score": 2,
+      "trash": [
+       "Daring Poro"
+      ],
+      "banish": [],
+      "hand": [
+       "Petty Officer",
+       "Cull the Weak",
+       "Determined Sentry",
+       "Laurent Duelist",
+       "Mountain Drake"
+      ]
+     },
+     "opp": {
+      "legend": "Pyke, Bloodharbor Ripper",
+      "champion": "Pyke, Returned",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 3,
+       "domains": [
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 33,
+      "runeDeck": 7,
+      "score": 1,
+      "trash": [
+       "Shipyard Skulker"
+      ],
+      "banish": [],
+      "handCount": 5
+     },
+     "bfs": [
+      {
+       "name": "Packed Amphitheater",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4,
+         "ex": true
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    },
+    "choice": {
+     "q": "Ebben a körben még egyszer pontozhatod a Packed Amphitheatert?",
+     "opts": [
+      {
+       "t": "Nem",
+       "ok": true,
+       "why": "Egy battlefieldet körönként egyszer pontozhatsz, bármelyik módszerrel {{472}}."
+      },
+      {
+       "t": "Igen, ha a Sergeant visszamegy, majd újra belép",
+       "ok": false,
+       "why": "Körönként egyszer pontozható {{472}}, az újbóli elfoglalás nem ad új pontot."
+      },
+      {
+       "t": "Igen, a hold pont még ebben a körben jár",
+       "ok": false,
+       "why": "Hold csak a Beginning Phase-ben történik {{471.2}}, és körönként egyszer pontozhatsz {{472}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "Az ellenfél a saját körében kijátszott egy újabb [[Shipyard Skulker]] lapot a base-ébe, de nem támadott. Jön a te köröd: az Awaken Phase-ben a Sergeant readyzik {{315.1.b}}, a Scoring Stepben holdolod az Amphitheatert {{315.2.b.2}}, ez újabb pont. Utána channelelsz 2 runet és húzol 1 lapot {{315.3.b}} {{315.4.b}}.",
+    "board": {
+     "me": {
+      "legend": "Garen, Might of Demacia (Starter)",
+      "champion": "Garen, Rugged",
+      "base": [],
+      "runes": {
+       "ready": 8,
+       "exhausted": 0,
+       "domains": [
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 3,
+      "trash": [
+       "Daring Poro"
+      ],
+      "banish": [],
+      "hand": [
+       "Petty Officer",
+       "Cull the Weak",
+       "Vanguard Sergeant",
+       "Determined Sentry",
+       "Laurent Duelist",
+       "Mountain Drake"
+      ]
+     },
+     "opp": {
+      "legend": "Pyke, Bloodharbor Ripper",
+      "champion": "Pyke, Returned",
+      "base": [
+       {
+        "n": "Shipyard Skulker",
+        "m": 3,
+        "base": 3,
+        "ex": true
+       }
+      ],
+      "runes": {
+       "ready": 4,
+       "exhausted": 3,
+       "domains": [
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 32,
+      "runeDeck": 5,
+      "score": 1,
+      "trash": [
+       "Shipyard Skulker"
+      ],
+      "banish": [],
+      "handCount": 5
+     },
+     "bfs": [
+      {
+       "name": "Packed Amphitheater",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    },
+    "choice": {
+     "q": "Mi kellett a hold ponthoz?",
+     "opts": [
+      {
+       "t": "Hogy a Scoring Stepben te kontrolláld a battlefieldet",
+       "ok": true,
+       "why": "Hold az, amikor a Beginning Phase-ben megtartod egy battlefield kontrollját {{471.2}}, és ehhez elég, hogy ott unitod álljon {{190.4.a}}."
+      },
+      {
+       "t": "Hogy a Sergeant ready legyen",
+       "ok": false,
+       "why": "A hold a kontrollhoz kötött {{471.2}}, a unit állapota nem számít."
+      },
+      {
+       "t": "Hogy az előző körödben ne mozogj",
+       "ok": false,
+       "why": "Nincs ilyen feltétel: a hold csak a kontrollt nézi {{471.2}}."
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "tobb-unit-damage-kiosztas",
+  "title": "Több unit harca és damage kiosztás",
+  "level": "halado",
+  "intro": "Két attacker két defender ellen: Assault, Shield, Tank, a lethal damage sorrendje és a kiosztás korlátai.",
+  "rules": "467.2.c.3, 467.2.c.4, 815.1.b, 807.1.c, 814.1.c, 142.4.b",
+  "steps": [
+   {
+    "say": "A te köröd. A base-edben ready a [[Petty Officer]] (5 Might, Assault) és a [[Laurent Duelist]] (3 Might, Assault 2). Az ellenfél a Grove-ot tartja egy [[Horns of the Dragon]] (6 Might, Tank) és egy [[Stalwart Poro]] (2 Might, Shield) unittal. Mindkét unitodat egyetlen Standard Move-val viszed a Grove-ra {{144.3}}.",
+    "board": {
+     "me": {
+      "legend": "Garen, Might of Demacia (Starter)",
+      "champion": "Garen, Commander",
+      "base": [
+       {
+        "n": "Petty Officer",
+        "m": 5,
+        "base": 5
+       },
+       {
+        "n": "Laurent Duelist",
+        "m": 3,
+        "base": 3
+       }
+      ],
+      "runes": {
+       "ready": 10,
+       "exhausted": 0,
+       "domains": [
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 2,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Daring Poro",
+       "Determined Sentry",
+       "Cull the Weak"
+      ],
+      "banish": [],
+      "hand": [
+       "Daring Poro",
+       "Mountain Drake"
+      ]
+     },
+     "opp": {
+      "legend": "Leona, Radiant Dawn",
+      "champion": "Leona, Determined",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 6,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Order",
+        "Calm",
+        "Calm",
+        "Order",
+        "Order",
+        "Calm",
+        "Order"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 3,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Crimson Pigeons",
+       "Wielder of Water"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Horns of the Dragon",
+         "m": 6,
+         "base": 6
+        },
+        {
+         "n": "Stalwart Poro",
+         "m": 2,
+         "base": 2
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Black Market",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "A játék 9. köre, te vagy a kezdőjátékos, ez az 5. köröd (10 rune). Eddig 4+5 lapot húztál: 2 a kezedben, 3 unit a boardon, 4 a trashben. Az ellenfél 4 körén túl van (9 rune): 4+4 lapot húzott, és 1-et a Grove of the God-Willow holdjáért; 4 a kezében, 2 unit a Grove-on, 3 a trashben."
+    },
+    "choice": {
+     "q": "Mekkora lesz a Mightjuk a combatban?",
+     "opts": [
+      {
+       "t": "Officer 6, Duelist 5, Poro 3, Horns 6",
+       "ok": true,
+       "why": "Az Assault attackerként adja a bónuszt {{807.1.c}}, a Shield defenderként {{814.1.c}}."
+      },
+      {
+       "t": "Officer 5, Duelist 3, Poro 2, Horns 6",
+       "ok": false,
+       "why": "Az Assault és a Shield a combat designation alatt aktív {{807.1.c}} {{814.1.c}}."
+      },
+      {
+       "t": "Officer 6, Duelist 5, Poro 2, Horns 6",
+       "ok": false,
+       "why": "A Stalwart Poro defenderként +1 Mightot kap a Shield miatt {{814.1.c}}."
+      }
+     ]
+    }
+   },
+   {
+    "type": "act",
+    "prompt": "Mozgasd mindkét unitodat egyetlen Standard Move-val a Grove of the God-Willow-ra: jelöld ki a [[Petty Officer]] és a [[Laurent Duelist]] unitot, majd kattints a battlefieldre.",
+    "expect": {
+     "kind": "move",
+     "units": [
+      "Petty Officer",
+      "Laurent Duelist"
+     ],
+     "to": "bf0"
+    },
+    "ok": "Több unit egyetlen Standard Move-val léphet, ha a céljuk közös {{144.3}} {{144.3.a}}, és az exhaust költségüket egyszerre fizeted {{144.3.c}}.",
+    "wrong": {
+     "unit:Vanguard Sergeant": "A Vanguard Sergeant a Black Marketet tartja. Ha elhagyná, a Black Market kontroll nélkül maradna {{190.4.c}}. Most a két base-ben álló unitod támad."
+    },
+    "after": {
+     "me": {
+      "legend": "Garen, Might of Demacia (Starter)",
+      "champion": "Garen, Commander",
+      "base": [],
+      "runes": {
+       "ready": 10,
+       "exhausted": 0,
+       "domains": [
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 2,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Daring Poro",
+       "Determined Sentry",
+       "Cull the Weak"
+      ],
+      "banish": [],
+      "hand": [
+       "Daring Poro",
+       "Mountain Drake"
+      ]
+     },
+     "opp": {
+      "legend": "Leona, Radiant Dawn",
+      "champion": "Leona, Determined",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 6,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Order",
+        "Calm",
+        "Calm",
+        "Order",
+        "Order",
+        "Calm",
+        "Order"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 3,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Crimson Pigeons",
+       "Wielder of Water"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [
+        {
+         "n": "Petty Officer",
+         "m": 6,
+         "base": 5,
+         "ex": true,
+         "status": [
+          "attacker",
+          "new"
+         ],
+         "tag": "Attacker",
+         "mods": [
+          "Assault +1"
+         ]
+        },
+        {
+         "n": "Laurent Duelist",
+         "m": 5,
+         "base": 3,
+         "ex": true,
+         "status": [
+          "attacker",
+          "new"
+         ],
+         "tag": "Attacker",
+         "mods": [
+          "Assault 2"
+         ]
+        }
+       ],
+       "opp": [
+        {
+         "n": "Horns of the Dragon",
+         "m": 6,
+         "base": 6,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "Tank"
+         ]
+        },
+        {
+         "n": "Stalwart Poro",
+         "m": 3,
+         "base": 2,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "Shield +1"
+         ]
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Black Market",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    }
+   },
+   {
+    "say": "Combat kezdődik, te vagy az Attacker {{466.2.c.1}}. Egyik fél sem játszik ki lapot, a showdown véget ér {{347.2.a}}. Az összesített Mightod 11, az ellenfélé 9 {{467.2.a}} {{467.2.b}}. Te kezded a kiosztást {{467.2.c}}.",
+    "choice": {
+     "q": "Hogyan osztod ki a 11 damage-et?",
+     "opts": [
+      {
+       "t": "6 a Hornsra, 3 a Porora, a maradék 2 bármelyikükre",
+       "ok": true,
+       "why": "A Tank unitra előbb lethal damage-et kell kiosztani {{815.1.b}}, egy unitnak a teljes lethal jár, mielőtt a következő jönne {{467.2.c.3}}, és lethal fölé csak akkor mehetsz, ha már mindenki megkapta a sajátját {{467.2.c.4}}."
+      },
+      {
+       "t": "Előbb 3 a Porora, utána 8 a Hornsra",
+       "ok": false,
+       "why": "A Tank miatt a Hornsnak kell elsőként lethal damage-et kapnia {{815.1.b}}."
+      },
+      {
+       "t": "Mind a 11 a Hornsra",
+       "ok": false,
+       "why": "Lethal fölé csak akkor oszthatsz, ha nincs több unit, akire oszthatnál {{467.2.c.4}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "Kiosztottad: 8 a Hornsra, 3 a Porora. Most az ellenfél osztja ki a 9 damage-ét a te két unitodra. A kiosztás még nem sebzés, a damage csak a végén érkezik, egyszerre {{467.2.c.1}} {{467.2.c.1.a}}.",
+    "board": {
+     "me": {
+      "legend": "Garen, Might of Demacia (Starter)",
+      "champion": "Garen, Commander",
+      "base": [],
+      "runes": {
+       "ready": 10,
+       "exhausted": 0,
+       "domains": [
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 2,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Daring Poro",
+       "Determined Sentry",
+       "Cull the Weak"
+      ],
+      "banish": [],
+      "hand": [
+       "Daring Poro",
+       "Mountain Drake"
+      ]
+     },
+     "opp": {
+      "legend": "Leona, Radiant Dawn",
+      "champion": "Leona, Determined",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 6,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Order",
+        "Calm",
+        "Calm",
+        "Order",
+        "Order",
+        "Calm",
+        "Order"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 3,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Crimson Pigeons",
+       "Wielder of Water"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [
+        {
+         "n": "Petty Officer",
+         "m": 6,
+         "base": 5,
+         "ex": true,
+         "status": [
+          "attacker",
+          "new"
+         ],
+         "tag": "Attacker",
+         "mods": [
+          "Assault +1"
+         ]
+        },
+        {
+         "n": "Laurent Duelist",
+         "m": 5,
+         "base": 3,
+         "ex": true,
+         "status": [
+          "attacker",
+          "new"
+         ],
+         "tag": "Attacker",
+         "mods": [
+          "Assault 2"
+         ]
+        }
+       ],
+       "opp": [
+        {
+         "n": "Horns of the Dragon",
+         "m": 6,
+         "base": 6,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "Tank",
+          "8 damage kiosztva"
+         ]
+        },
+        {
+         "n": "Stalwart Poro",
+         "m": 3,
+         "base": 2,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "Shield +1",
+          "3 damage kiosztva"
+         ]
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Black Market",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "Damage kiosztás folyamatban"
+    },
+    "choice": {
+     "q": "Melyik kiosztás szabályos az ellenfél részéről?",
+     "opts": [
+      {
+       "t": "6 a Petty Officerre, 3 a Duelistre",
+       "ok": true,
+       "why": "Előbb egy unit kap teljes lethal damage-et {{467.2.c.3}}, a maradék 3 mehet a Duelistre."
+      },
+      {
+       "t": "4 az Officerre, 5 a Duelistre, úgy, hogy az Officerrel kezdi",
+       "ok": false,
+       "why": "Az elsőként választott unitnak teljes lethal jár, mielőtt a következőre lépne {{467.2.c.3}}."
+      },
+      {
+       "t": "Mind a 9 a Duelistre",
+       "ok": false,
+       "why": "A Duelist lethalja 5, efölé nem mehet, amíg az Officer még kaphat damage-et {{467.2.c.4}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "A damage egyszerre megérkezik {{467.2.d}}. Az Officeren 6, a Duelisten 3, a Hornson 8, a Poron 3 damage van.",
+    "board": {
+     "me": {
+      "legend": "Garen, Might of Demacia (Starter)",
+      "champion": "Garen, Commander",
+      "base": [],
+      "runes": {
+       "ready": 10,
+       "exhausted": 0,
+       "domains": [
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 2,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Daring Poro",
+       "Determined Sentry",
+       "Cull the Weak"
+      ],
+      "banish": [],
+      "hand": [
+       "Daring Poro",
+       "Mountain Drake"
+      ]
+     },
+     "opp": {
+      "legend": "Leona, Radiant Dawn",
+      "champion": "Leona, Determined",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 6,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Order",
+        "Calm",
+        "Calm",
+        "Order",
+        "Order",
+        "Calm",
+        "Order"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 3,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Crimson Pigeons",
+       "Wielder of Water"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [
+        {
+         "n": "Petty Officer",
+         "m": 6,
+         "base": 5,
+         "ex": true,
+         "dmg": 6,
+         "status": [
+          "attacker",
+          "dying"
+         ],
+         "tag": "Attacker",
+         "mods": [
+          "Assault +1"
+         ]
+        },
+        {
+         "n": "Laurent Duelist",
+         "m": 5,
+         "base": 3,
+         "ex": true,
+         "dmg": 3,
+         "status": [
+          "attacker"
+         ],
+         "tag": "Attacker",
+         "mods": [
+          "Assault 2"
+         ]
+        }
+       ],
+       "opp": [
+        {
+         "n": "Horns of the Dragon",
+         "m": 6,
+         "base": 6,
+         "dmg": 8,
+         "status": [
+          "defender",
+          "dying"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "Tank"
+         ]
+        },
+        {
+         "n": "Stalwart Poro",
+         "m": 3,
+         "base": 2,
+         "dmg": 3,
+         "status": [
+          "defender",
+          "dying"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "Shield +1"
+         ]
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Black Market",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    },
+    "choice": {
+     "q": "Kik halnak meg a cleanupban?",
+     "opts": [
+      {
+       "t": "A Horns, a Stalwart Poro és a Petty Officer",
+       "ok": true,
+       "why": "Az a unit hal meg, amelyen a damage eléri a Mightját {{142.4.b}} {{323.4}}. A Duelisten 3 van az 5 Mightjához."
+      },
+      {
+       "t": "Csak a Horns, mert a Tank megvédi a Porót",
+       "ok": false,
+       "why": "A Tank csak a kiosztás sorrendjét szabja meg {{815.1.b}}, a Poron is lethal damage van {{142.4.b}}."
+      },
+      {
+       "t": "Mind a négy unit",
+       "ok": false,
+       "why": "A Duelist 5 Mightjához 3 damage nem lethal {{142.4.b}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "A combat cleanup gyógyítja a Duelistet {{468.1.a.1}}. Egyedül neked maradt unitod, megnyerted a combatot {{468.3.a}}, conquer, 1 pont {{468.5.d}}. A combat végén az Attacker designation lekerül {{468.7.a}}.",
+    "board": {
+     "me": {
+      "legend": "Garen, Might of Demacia (Starter)",
+      "champion": "Garen, Commander",
+      "base": [],
+      "runes": {
+       "ready": 10,
+       "exhausted": 0,
+       "domains": [
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Order",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 2,
+      "score": 5,
+      "trash": [
+       "Daring Poro",
+       "Daring Poro",
+       "Determined Sentry",
+       "Cull the Weak",
+       "Petty Officer"
+      ],
+      "banish": [],
+      "hand": [
+       "Daring Poro",
+       "Mountain Drake"
+      ]
+     },
+     "opp": {
+      "legend": "Leona, Radiant Dawn",
+      "champion": "Leona, Determined",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 6,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Order",
+        "Calm",
+        "Calm",
+        "Order",
+        "Order",
+        "Calm",
+        "Order"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 3,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Crimson Pigeons",
+       "Wielder of Water",
+       "Horns of the Dragon",
+       "Stalwart Poro"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Laurent Duelist",
+         "m": 3,
+         "base": 3,
+         "ex": true
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Black Market",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    },
+    "choice": {
+     "q": "Mennyi most a Laurent Duelist Mightja?",
+     "opts": [
+      {
+       "t": "3",
+       "ok": true,
+       "why": "Az Assault csak addig ad bónuszt, amíg a unit attacker {{807.1.d.1}}, a designation a combat végén megszűnik {{468.7.a}}."
+      },
+      {
+       "t": "5, a kör végéig",
+       "ok": false,
+       "why": "Az Assault nem \"this turn\" hatás: az Attacker designationhöz kötött {{807.1.d.1}}."
+      },
+      {
+       "t": "5, amíg a Grove-on áll",
+       "ok": false,
+       "why": "A bónusz az Attacker designationhöz kötött {{807.1.d.1}}, ami a combat végén megszűnik {{468.7.a}}."
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "spell-hasznalata",
+  "title": "Spell használata",
+  "level": "kezdo",
+  "intro": "Egy [Action] spell targetje, kifizetése és feloldása, utána egy kiürült battlefield elfoglalása.",
+  "rules": "355.9.b, 164.2, 328.1, 337.4, 339.1, 309.1.a, 323.4, 323.5, 344.2, 348.2.a.1",
+  "steps": [
+   {
+    "type": "act",
+    "say": "A Main Phase-edben vagy. A kezedben a [[Hextech Ray]]: 1 Energy és 1 Fury Power, [Action], 3 damage egy battlefielden álló unitnak. A Grove-on az ellenfél [[Shipyard Skulker]]-je áll (3 Might), a base-ében a [[Bewitching Spirit]].",
+    "board": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Rebel",
+      "base": [
+       {
+        "n": "Legion Rearguard",
+        "m": 2,
+        "base": 2
+       }
+      ],
+      "runes": {
+       "ready": 4,
+       "exhausted": 0,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Chaos",
+        "Chaos"
+       ]
+      },
+      "hand": [
+       "Hextech Ray",
+       "Incinerate"
+      ],
+      "deck": 31,
+      "runeDeck": 8,
+      "score": 3,
+      "trash": [
+       "Chemtech Enforcer"
+      ],
+      "banish": []
+     },
+     "opp": {
+      "legend": "Draven, Glorious Executioner",
+      "champion": "Draven, Showboat",
+      "base": [
+       {
+        "n": "Bewitching Spirit",
+        "m": 2,
+        "base": 2
+       }
+      ],
+      "runes": {
+       "ready": 0,
+       "exhausted": 4,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "handCount": 3,
+      "deck": 30,
+      "runeDeck": 8,
+      "score": 3,
+      "trash": [],
+      "banish": []
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Shipyard Skulker",
+         "m": 3,
+         "base": 3,
+         "ex": true
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Eager Drakehound",
+         "m": 3,
+         "base": 3
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "A Main Phase-ed, Neutral Open állapot. Az ellenfél minden rune-ja exhausted."
+    },
+    "prompt": "Játszd ki a [[Hextech Ray]] lapot egy legális targetre: kattints a lapra a kezedben, válaszd ki a targetet, majd fizesd ki a rune-okkal.",
+    "expect": {
+     "kind": "play",
+     "card": "Hextech Ray",
+     "target": "Shipyard Skulker"
+    },
+    "ok": "A Skulker legális target: a spell battlefielden álló unitot kér {{355.9.b}}. Kijátszáskor előbb a targetet választod {{355.5}}, utána fizetsz {{357}}: egy rune exhaustolása 1 Energy {{164.2.a}}, egy Fury rune recycle-je 1 Fury Power {{164.2.b}} {{164.2.b.1}}. A recycle-ölt rune a Rune Deck aljára kerül {{161.2.b}}. A spell a chainre került {{328.1}}.",
+    "wrong": {
+     "target:Bewitching Spirit": "A Bewitching Spirit a base-ben áll. A base nem battlefield, ezért nem legális target {{355.9.b}}.",
+     "target:Legion Rearguard": "A Legion Rearguard a base-edben áll, nem battlefielden, ezért nem legális target {{355.9.b}}.",
+     "target:Eager Drakehound": "Szabályos target lenne, mert battlefielden áll {{355.9.b}}, de a saját unitodat sebeznéd. Az ellenfél unitját célozd.",
+     "card:Incinerate": "Az [[Incinerate]] csak 2 damage-et ad, a 3 Mightú Skulkerhez ez nem lethal {{143.2.b}}. Most a Hextech Ray a feladat."
+    },
+    "after": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Rebel",
+      "base": [
+       {
+        "n": "Legion Rearguard",
+        "m": 2,
+        "base": 2
+       }
+      ],
+      "runes": {
+       "ready": 2,
+       "exhausted": 1,
+       "domains": [
+        "Chaos",
+        "Fury",
+        "Chaos"
+       ]
+      },
+      "hand": [
+       "Incinerate"
+      ],
+      "deck": 31,
+      "runeDeck": 9,
+      "score": 3,
+      "trash": [
+       "Chemtech Enforcer"
+      ],
+      "banish": []
+     },
+     "opp": {
+      "legend": "Draven, Glorious Executioner",
+      "champion": "Draven, Showboat",
+      "base": [
+       {
+        "n": "Bewitching Spirit",
+        "m": 2,
+        "base": 2
+       }
+      ],
+      "runes": {
+       "ready": 0,
+       "exhausted": 4,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "handCount": 3,
+      "deck": 30,
+      "runeDeck": 8,
+      "score": 3,
+      "trash": [],
+      "banish": []
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Shipyard Skulker",
+         "m": 3,
+         "base": 3,
+         "ex": true
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Eager Drakehound",
+         "m": 3,
+         "base": 3
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [
+      "[[Hextech Ray]] → Shipyard Skulker (te)"
+     ],
+     "note": "Neutral Closed: a chainen ott a Hextech Ray."
+    }
+   },
+   {
+    "say": "A [[Hextech Ray]] a chainen van, a targetje a Skulker.",
+    "choice": {
+     "q": "Ki kapja most a priorityt?",
+     "opts": [
+      {
+       "t": "Te, a chain legfelső elemének gazdája",
+       "ok": true,
+       "why": "A kijátszás után a következő chain elem gazdája kap priorityt {{337.4}}."
+      },
+      {
+       "t": "Az ellenfél, mert ő a target gazdája",
+       "why": "A priority a chain elem gazdájáé {{337.4}}, az ellenfélhez csak a passzod után kerül {{312.2.d}}."
+      },
+      {
+       "t": "Senki, a spell azonnal hat",
+       "why": "Spellre lehet válaszolni, csak a unit és a gear resolve-ol azonnal {{337.2}}."
+      }
+     ]
+    }
+   },
+   {
+    "type": "act",
+    "prompt": "Te kapod a priorityt. Passzolj a pálya fölötti sáv Passz gombjával.",
+    "expect": {
+     "kind": "pass"
+    },
+    "state": "closed",
+    "ok": "Passzolsz, az ellenfél is passzol, hiszen nincs ready rune-ja. Mindenki passzolt, a Hextech Ray resolve-ol {{339.1}}: a Skulker 3 damage-et kap, ez lethal, meghal {{323.4}}. A Grove-on nem maradt ellenséges unit, az ellenfél elveszti az irányítást {{323.5}}.",
+    "after": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Rebel",
+      "base": [
+       {
+        "n": "Legion Rearguard",
+        "m": 2,
+        "base": 2
+       }
+      ],
+      "runes": {
+       "ready": 2,
+       "exhausted": 1,
+       "domains": [
+        "Chaos",
+        "Fury",
+        "Chaos"
+       ]
+      },
+      "hand": [
+       "Incinerate"
+      ],
+      "deck": 31,
+      "runeDeck": 9,
+      "score": 3,
+      "trash": [
+       "Chemtech Enforcer",
+       "Hextech Ray"
+      ],
+      "banish": []
+     },
+     "opp": {
+      "legend": "Draven, Glorious Executioner",
+      "champion": "Draven, Showboat",
+      "base": [
+       {
+        "n": "Bewitching Spirit",
+        "m": 2,
+        "base": 2
+       }
+      ],
+      "runes": {
+       "ready": 0,
+       "exhausted": 4,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "handCount": 3,
+      "deck": 30,
+      "runeDeck": 8,
+      "score": 3,
+      "trash": [
+       "Shipyard Skulker"
+      ],
+      "banish": []
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Eager Drakehound",
+         "m": 3,
+         "base": 3
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "A chain kiürült, a Grove senkié."
+    }
+   },
+   {
+    "choice": {
+     "q": "Ha az ellenfélnek lett volna ready rune-ja és egy [Action] lapja, válaszolhatott volna vele a Hextech Rayre?",
+     "opts": [
+      {
+       "t": "Nem, Closed állapotban csak [Reaction] lap játszható ki",
+       "ok": true,
+       "why": "Amíg a chainen van valami, Closed az állapot {{309.1.a}}."
+      },
+      {
+       "t": "Igen, mert az [Action] bármikor kijátszható",
+       "why": "Az [Action] showdownban ad engedélyt, chainre válaszolni nem lehet vele {{806.1.c.1}} {{309.1.a}}."
+      },
+      {
+       "t": "Igen, de csak a saját körében",
+       "why": "A saját körében sem, Closed állapotban csak [Reaction] jó {{309.1.a}}."
+      }
+     ]
+    }
+   },
+   {
+    "type": "act",
+    "prompt": "Foglald el a Grove of the God-Willow-t: mozgasd oda a [[Legion Rearguard]] unitot.",
+    "expect": {
+     "kind": "move",
+     "unit": "Legion Rearguard",
+     "to": "bf0"
+    },
+    "ok": "A [[Legion Rearguard]] a base-edben ready, Standard Move-val a Grove-ra lép {{144.2}} {{144.4.a}}. A Grove Contested lesz, ellenséges unit nincs ott, így showdown indul {{344.2}}. Senki nem játszik ki semmit, csak a te unitod marad: conquer, 1 pont {{348.2.a}} {{348.2.a.1}}.",
+    "wrong": {
+     "unit:Eager Drakehound": "Az Eager Drakehound a Kinkou Temple-ön áll: Standard Move-val csak a base-be léphetne vissza {{144.4.b}}, battlefieldről battlefieldre nem {{144.4.c.1}}."
+    },
+    "after": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Rebel",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 1,
+       "domains": [
+        "Chaos",
+        "Fury",
+        "Chaos"
+       ]
+      },
+      "hand": [
+       "Incinerate"
+      ],
+      "deck": 31,
+      "runeDeck": 9,
+      "score": 4,
+      "trash": [
+       "Chemtech Enforcer",
+       "Hextech Ray"
+      ],
+      "banish": []
+     },
+     "opp": {
+      "legend": "Draven, Glorious Executioner",
+      "champion": "Draven, Showboat",
+      "base": [
+       {
+        "n": "Bewitching Spirit",
+        "m": 2,
+        "base": 2
+       }
+      ],
+      "runes": {
+       "ready": 0,
+       "exhausted": 4,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "handCount": 3,
+      "deck": 30,
+      "runeDeck": 8,
+      "score": 3,
+      "trash": [
+       "Shipyard Skulker"
+      ],
+      "banish": []
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Legion Rearguard",
+         "m": 2,
+         "base": 2,
+         "ex": true
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Eager Drakehound",
+         "m": 3,
+         "base": 3
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "Conquer: 4 pont."
+    }
+   }
+  ]
+ },
+ {
+  "id": "spell-chain-reaction",
+  "title": "Spell a chainen és Reaction válasz",
+  "level": "kezdo",
+  "intro": "Egy spell, egy counter és egy counter a counterre: a priority sorrendje és a chain feloldása.",
+  "rules": "337.4, 338, 339.1, 340.1, 309.1.a, 426, 164.2",
+  "steps": [
+   {
+    "say": "A te köröd Main Phase-e. Már kijátszottál egy [[Shadowblade Lurker]] lapot, 4 ready runed maradt. A Grove-on az ellenfél [[Wielder of Water]] unitja áll (2 Might). Az ellenfélnek 5 ready runeja van, ami gyanús: Reactionre tartogathat. A [[Hextech Ray]] 1 Energy és 1 Fury Power, az [[Abandon]] 2 Energy.",
+    "board": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Demolitionist",
+      "base": [
+       {
+        "n": "Shadowblade Lurker",
+        "m": 5,
+        "base": 5,
+        "ex": true,
+        "status": [
+         "new"
+        ]
+       }
+      ],
+      "runes": {
+       "ready": 4,
+       "exhausted": 5,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 3,
+      "score": 3,
+      "trash": [
+       "Eager Drakehound",
+       "Shipyard Skulker",
+       "Incinerate",
+       "Falling Star",
+       "Incinerate"
+      ],
+      "banish": [],
+      "hand": [
+       "Hextech Ray",
+       "Abandon"
+      ]
+     },
+     "opp": {
+      "legend": "Ahri, Nine-Tailed Fox",
+      "champion": "Ahri, Inquisitive",
+      "base": [],
+      "runes": {
+       "ready": 5,
+       "exhausted": 3,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Calm",
+        "Mind",
+        "Calm",
+        "Mind",
+        "Mind",
+        "Calm"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 4,
+      "score": 4,
+      "trash": [
+       "Stalwart Poro",
+       "Ravenbloom Student",
+       "Wielder of Water",
+       "Charm"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Wielder of Water",
+         "m": 2,
+         "base": 2
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "A játék 8. köre, te vagy a második játékos, ez a 4. köröd (9 rune). Eddig 4+4 lapot húztál: 2 a kezedben, a Shadowblade Lurker a base-edben, 5 a trashben. Az ellenfél 4 körén túl van (8 rune): 4+4 lapot húzott, és 1-et a Grove of the God-Willow holdjáért; 4 a kezében, a Wielder of Water a Grove-on, 4 a trashben."
+    },
+    "choice": {
+     "q": "Hogyan fizeted ki a Hextech Ray-t, hogy az Abandonra is maradjon?",
+     "opts": [
+      {
+       "t": "Egy Fury runet exhaustolsz Energyért, majd ugyanazt recycle-ölöd Fury Powerért",
+       "ok": true,
+       "why": "Exhaustolva 1 Energy {{164.2.a}}, recycle-lel a rune domainjének Powere {{164.2.b}} {{164.2.b.1}}. Így 3 ready rune marad."
+      },
+      {
+       "t": "Két runet exhaustolsz, 2 Energyért",
+       "ok": false,
+       "why": "A Power költséget Energy nem fizeti {{163.1}} {{163.2}}."
+      },
+      {
+       "t": "Egy Chaos runet recycle-ölsz a Powerért",
+       "ok": false,
+       "why": "Chaos rune Chaos Powert ad {{164.2.b.1}}, a Hextech Ray Fury Powert kér {{163.2.a}}."
+      }
+     ]
+    }
+   },
+   {
+    "type": "act",
+    "prompt": "Játszd ki a [[Hextech Ray]] lapot a Wielderre úgy, hogy az [[Abandon]]ra is maradjon rune.",
+    "expect": {
+     "kind": "play",
+     "card": "Hextech Ray",
+     "target": "Wielder of Water"
+    },
+    "ok": "A [[Hextech Ray]] a Wielderre célozva a chainre került {{328.1}}. Egy rune exhaustolása adta az 1 Energyt {{164.2.a}}, a Fury Powert egy exhausted Fury rune recycle-je {{164.2.b}} {{164.2.b.1}}: exhaustolt rune is recycle-ölhető, így 3 ready rune maradt az Abandonra.",
+    "wrong": {
+     "target:Shadowblade Lurker": "A Shadowblade Lurker a base-edben áll, nem battlefielden, ezért nem legális target {{355.9.b}}.",
+     "card:Abandon": "Az [[Abandon]] spellt counterel, most még nincs a chainen mit counterelni."
+    },
+    "after": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Demolitionist",
+      "base": [
+       {
+        "n": "Shadowblade Lurker",
+        "m": 5,
+        "base": 5,
+        "ex": true,
+        "status": [
+         "new"
+        ]
+       }
+      ],
+      "runes": {
+       "ready": 3,
+       "exhausted": 5,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 3,
+      "trash": [
+       "Eager Drakehound",
+       "Shipyard Skulker",
+       "Incinerate",
+       "Falling Star",
+       "Incinerate"
+      ],
+      "banish": [],
+      "hand": [
+       "Abandon"
+      ]
+     },
+     "opp": {
+      "legend": "Ahri, Nine-Tailed Fox",
+      "champion": "Ahri, Inquisitive",
+      "base": [],
+      "runes": {
+       "ready": 5,
+       "exhausted": 3,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Calm",
+        "Mind",
+        "Calm",
+        "Mind",
+        "Mind",
+        "Calm"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 4,
+      "score": 4,
+      "trash": [
+       "Stalwart Poro",
+       "Ravenbloom Student",
+       "Wielder of Water",
+       "Charm"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Wielder of Water",
+         "m": 2,
+         "base": 2
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [
+      "[[Hextech Ray]] → Wielder of Water (te)"
+     ]
+    }
+   },
+   {
+    "type": "act",
+    "prompt": "Finalizálás után te kapod a priorityt {{337.4}}. Passzolj.",
+    "expect": {
+     "kind": "pass"
+    },
+    "state": "closed",
+    "ok": "Passzoltál {{338.1.b}}. Az ellenfél válaszul kijátssza a [[Wind Wall]] lapot a Hextech Ray-re: 3 rune-t exhaustol, kettőt recycle-öl a Calm Powerért.",
+    "after": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Demolitionist",
+      "base": [
+       {
+        "n": "Shadowblade Lurker",
+        "m": 5,
+        "base": 5,
+        "ex": true,
+        "status": [
+         "new"
+        ]
+       }
+      ],
+      "runes": {
+       "ready": 3,
+       "exhausted": 5,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 3,
+      "trash": [
+       "Eager Drakehound",
+       "Shipyard Skulker",
+       "Incinerate",
+       "Falling Star",
+       "Incinerate"
+      ],
+      "banish": [],
+      "hand": [
+       "Abandon"
+      ]
+     },
+     "opp": {
+      "legend": "Ahri, Nine-Tailed Fox",
+      "champion": "Ahri, Inquisitive",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 4,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Mind",
+        "Calm",
+        "Mind",
+        "Mind"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 6,
+      "score": 4,
+      "trash": [
+       "Stalwart Poro",
+       "Ravenbloom Student",
+       "Wielder of Water",
+       "Charm"
+      ],
+      "banish": [],
+      "handCount": 3
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Wielder of Water",
+         "m": 2,
+         "base": 2
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [
+      "Wind Wall (ellenfél)",
+      "Hextech Ray (te)"
+     ]
+    }
+   },
+   {
+    "type": "act",
+    "prompt": "Válaszolj a [[Wind Wall]] lapra: kattints a kezedben lévő lapra, majd a chainen a targetre.",
+    "expect": {
+     "kind": "play",
+     "card": "Abandon",
+     "target": "Wind Wall"
+    },
+    "state": "closed",
+    "ok": "Létezik chain, ez Closed State, itt Reaction játszható ki {{309.1.a}}, és az [[Abandon]] Reaction {{813.1.c.1}}. Az Abandon a Wind Wallt célozza.",
+    "wrong": {
+     "pass": "Ha most passzolsz, mindenki passzolt, és a Wind Wall feloldódik {{339.1}} {{340.1}}: counterli a Hextech Ray-t.",
+     "target:Hextech Ray": "A saját spelledet counterelnéd. Az Abandon targetje a Wind Wall legyen.",
+     "target:Wielder of Water": "Az Abandon spellt counterel, unit nem lehet a targetje {{355.9.b}}."
+    },
+    "after": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Demolitionist",
+      "base": [
+       {
+        "n": "Shadowblade Lurker",
+        "m": 5,
+        "base": 5,
+        "ex": true,
+        "status": [
+         "new"
+        ]
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 7,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 3,
+      "trash": [
+       "Eager Drakehound",
+       "Shipyard Skulker",
+       "Incinerate",
+       "Falling Star",
+       "Incinerate"
+      ],
+      "banish": [],
+      "hand": []
+     },
+     "opp": {
+      "legend": "Ahri, Nine-Tailed Fox",
+      "champion": "Ahri, Inquisitive",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 4,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Mind",
+        "Calm",
+        "Mind",
+        "Mind"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 6,
+      "score": 4,
+      "trash": [
+       "Stalwart Poro",
+       "Ravenbloom Student",
+       "Wielder of Water",
+       "Charm"
+      ],
+      "banish": [],
+      "handCount": 3
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Wielder of Water",
+         "m": 2,
+         "base": 2
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [
+      "Abandon (te)",
+      "Wind Wall (ellenfél)",
+      "Hextech Ray (te)"
+     ]
+    }
+   },
+   {
+    "say": "Te kapod a priorityt {{337.4}}, és passzolsz, utána az ellenfél is passzol {{339.1}}.",
+    "choice": {
+     "q": "Melyik oldódik fel először?",
+     "opts": [
+      {
+       "t": "Az Abandon",
+       "ok": true,
+       "why": "Mindig a legújabb finalizált elem oldódik fel {{340.1}}."
+      },
+      {
+       "t": "A Hextech Ray, mert az került fel elsőként",
+       "ok": false,
+       "why": "A chain fordított sorrendben oldódik fel: a legújabb elem az első {{340.1}}."
+      },
+      {
+       "t": "Egyszerre mind a három",
+       "ok": false,
+       "why": "Egyszerre egy elem oldódik fel, a legújabb {{340.1}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "Az Abandon counterli a Wind Wallt, ami a trash helyett az ellenfél kezébe kerül vissza, mert a lap szövege felülírja a szabályt {{002}} {{426.1.a}}. A counter a költséget nem adja vissza {{426.1.c}}. A Predict során megnézed a Main Deck felső lapját, és a helyén hagyod {{437}}. A chainen a Hextech Ray maradt, te kapod a priorityt {{340.4}}.",
+    "board": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Demolitionist",
+      "base": [
+       {
+        "n": "Shadowblade Lurker",
+        "m": 5,
+        "base": 5,
+        "ex": true,
+        "status": [
+         "new"
+        ]
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 7,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 3,
+      "trash": [
+       "Eager Drakehound",
+       "Shipyard Skulker",
+       "Incinerate",
+       "Falling Star",
+       "Incinerate",
+       "Abandon"
+      ],
+      "banish": [],
+      "hand": []
+     },
+     "opp": {
+      "legend": "Ahri, Nine-Tailed Fox",
+      "champion": "Ahri, Inquisitive",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 4,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Mind",
+        "Calm",
+        "Mind",
+        "Mind"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 6,
+      "score": 4,
+      "trash": [
+       "Stalwart Poro",
+       "Ravenbloom Student",
+       "Wielder of Water",
+       "Charm"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Wielder of Water",
+         "m": 2,
+         "base": 2
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [
+      "Hextech Ray (te)"
+     ]
+    },
+    "choice": {
+     "q": "Kijátszhatja az ellenfél újra a Wind Wallt a Hextech Ray-re?",
+     "opts": [
+      {
+       "t": "A szabály megengedné, de nem tudja kifizetni: 2 ready runeja legfeljebb 2 Energyt ad",
+       "ok": true,
+       "why": "Energy csak exhaustolással jön, egy rune 1-et ad {{164.2.a}}, a recycle csak Powert ad {{164.2.b}}. A Wind Wall 3 Energyt kér."
+      },
+      {
+       "t": "Nem, egy lapot körönként csak egyszer lehet kijátszani",
+       "ok": false,
+       "why": "Nincs ilyen szabály: Reaction lap Closed Stateben bármikor kijátszható {{813.1.c.1}}, itt a költség a gát {{164.2.a}}."
+      },
+      {
+       "t": "Igen, ingyen, mert a counterelt lap költsége már ki volt fizetve",
+       "ok": false,
+       "why": "A counter nem adja vissza a költséget {{426.1.c}}, az újbóli kijátszás teljes árat kér."
+      }
+     ]
+    }
+   },
+   {
+    "say": "Mindketten passzoltok, a [[Hextech Ray]] feloldódik: 3 damage a Wielderre, ami a 2 Mightjához lethal, a cleanupban meghal {{323.4}}. A Grove-on nem maradt unit, ezért az ellenfél elveszíti a kontrollt {{323.5}}.",
+    "board": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Demolitionist",
+      "base": [
+       {
+        "n": "Shadowblade Lurker",
+        "m": 5,
+        "base": 5,
+        "ex": true,
+        "status": [
+         "new"
+        ]
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 7,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 3,
+      "trash": [
+       "Eager Drakehound",
+       "Shipyard Skulker",
+       "Incinerate",
+       "Falling Star",
+       "Incinerate",
+       "Abandon",
+       "Hextech Ray"
+      ],
+      "banish": [],
+      "hand": []
+     },
+     "opp": {
+      "legend": "Ahri, Nine-Tailed Fox",
+      "champion": "Ahri, Inquisitive",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 4,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Mind",
+        "Calm",
+        "Mind",
+        "Mind"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 6,
+      "score": 4,
+      "trash": [
+       "Stalwart Poro",
+       "Ravenbloom Student",
+       "Wielder of Water",
+       "Charm",
+       "Wielder of Water"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    },
+    "choice": {
+     "q": "Kié most a Grove?",
+     "opts": [
+      {
+       "t": "Senkié",
+       "ok": true,
+       "why": "Aki Open Stateben unit nélkül marad egy battlefielden, elveszíti a kontrollt {{190.4.c}} {{323.5}}."
+      },
+      {
+       "t": "A tiéd, mert a te spelled ölte meg a unitot",
+       "ok": false,
+       "why": "Kontrollt csak unittal lehet alapítani {{190.4}}."
+      },
+      {
+       "t": "Az ellenfélé a kör végéig",
+       "ok": false,
+       "why": "A kontroll a következő cleanupban elvész {{190.4.c}}."
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "energy-lebegtetes-power-recycle",
+  "title": "Energy lebegtetés és Power recycle egy körben",
+  "level": "kezdo",
+  "intro": "Hogyan ad egy rune Energyt és Powert is, meddig marad a poolban az Energy, és hogyan foglalsz el egy kiürült battlefieldet.",
+  "rules": "164.2, 163, 166.1, 167, 417.1.b, 344.2, 348.2.a",
+  "steps": [
+   {
+    "say": "A második köröd Main Phase-e. Az ellenfél kezdett, ezért az első Channel Phase-edben 3 runet kaptál {{487.7}}, most 5 ready runed van: 3 Fury és 2 Chaos. A kezedben: [[Eager Drakehound]] (3 Energy és 1 Fury Power), [[Hextech Ray]] (1 Energy és 1 Fury Power), [[Incinerate]] (2 Energy). A Grove-on az ellenfél [[Void Hatchling]] unitja áll (2 Might).",
+    "board": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Rebel",
+      "base": [
+       {
+        "n": "Chemtech Enforcer",
+        "m": 2,
+        "base": 2
+       }
+      ],
+      "runes": {
+       "ready": 5,
+       "exhausted": 0,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Fury",
+        "Chaos",
+        "Chaos"
+       ]
+      },
+      "deck": 33,
+      "runeDeck": 7,
+      "score": 0,
+      "trash": [
+       "Ruthless Strike",
+       "Cleave"
+      ],
+      "banish": [],
+      "hand": [
+       "Eager Drakehound",
+       "Hextech Ray",
+       "Incinerate"
+      ]
+     },
+     "opp": {
+      "legend": "Draven, Glorious Executioner",
+      "champion": "Draven, Showboat",
+      "base": [
+       {
+        "n": "Bewitching Spirit",
+        "m": 2,
+        "base": 2,
+        "ex": true
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 3,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 33,
+      "runeDeck": 8,
+      "score": 1,
+      "trash": [],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Void Hatchling",
+         "m": 2,
+         "base": 2,
+         "ex": true
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "A játék 4. köre, te vagy a második játékos. Eddig 4+1+1 lapot húztál: 3 a kezedben, a Chemtech Enforcer a base-edben, 2 a trashben (az Enforcer és az ellenfél Bewitching Spiritje miatt dobtad el őket). Az ellenfél is 4+1+1 lapot húzott: 4 a kezében, a Void Hatchling és a Bewitching Spirit a boardon. Ő a Grove conquerjéért kapta az 1 pontját."
+    },
+    "choice": {
+     "q": "Melyik kombinációt tudod kifizetni ebben a körben?",
+     "opts": [
+      {
+       "t": "Drakehound és Hextech Ray: 4 Energy és 2 Fury Power",
+       "ok": true,
+       "why": "4 rune exhaustolása 4 Energy {{164.2.a}}, két Fury rune recycle-je 2 Fury Power {{164.2.b.1}}, és exhaustolt rune is recycle-ölhető {{164.2.b}}."
+      },
+      {
+       "t": "Mindhárom lap: 6 Energy és 2 Fury Power",
+       "ok": false,
+       "why": "5 runeból legfeljebb 5 Energy jön {{164.2.a}}, a recycle csak Powert ad {{164.2.b}}."
+      },
+      {
+       "t": "Drakehound és Hextech Ray, a Powert a két Chaos rune recycle-jével",
+       "ok": false,
+       "why": "Chaos rune Chaos Powert ad {{164.2.b.1}}, a lapok Fury Powert kérnek {{163.2.a}}."
+      }
+     ]
+    }
+   },
+   {
+    "type": "act",
+    "prompt": "Játszd ki az [[Eager Drakehound]] lapot a base-edbe. Exhaustolj egyszerre 4 rune-t: 3 Energy a Drakehoundé, 1 a poolban marad a [[Hextech Ray]] számára. A Fury Powerhez recycle-ölj egy Fury rune-t.",
+    "expect": {
+     "kind": "play",
+     "card": "Eager Drakehound",
+     "to": "base",
+     "pay": {
+      "e": 4,
+      "p": {
+       "Fury": 1
+      }
+     },
+     "payNote": "3 Energy a lapra, 1 Energy a poolban marad."
+    },
+    "ok": "Négy rune exhaustolása 4 Energyt tett a Rune Poolba {{166.1}}. 3 Energyt elköltöttél, a Fury Powerért egy Fury rune-t recycle-öltél: exhaustolt rune is recycle-ölhető {{164.2.b}}. A Drakehound a szövege miatt ready lép be. A poolban 1 Energy maradt.",
+    "wrong": {
+     "card:Hextech Ray": "A Hextech Ray is kifizethető lenne, de előbb a Drakehound jön, a maradék Energy a Ray-re vár.",
+     "card:Incinerate": "Az Incinerate 2 Energy: a Drakehounddal és a Hextech Ray-jel együtt már nem fér bele az 5 rune-ba {{164.2.a}}."
+    },
+    "after": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Rebel",
+      "base": [
+       {
+        "n": "Chemtech Enforcer",
+        "m": 2,
+        "base": 2
+       },
+       {
+        "n": "Eager Drakehound",
+        "m": 3,
+        "base": 3,
+        "status": [
+         "new"
+        ]
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 3,
+       "domains": [
+        "Chaos",
+        "Fury",
+        "Fury",
+        "Chaos"
+       ]
+      },
+      "deck": 33,
+      "runeDeck": 8,
+      "score": 0,
+      "trash": [
+       "Ruthless Strike",
+       "Cleave"
+      ],
+      "banish": [],
+      "hand": [
+       "Hextech Ray",
+       "Incinerate"
+      ]
+     },
+     "opp": {
+      "legend": "Draven, Glorious Executioner",
+      "champion": "Draven, Showboat",
+      "base": [
+       {
+        "n": "Bewitching Spirit",
+        "m": 2,
+        "base": 2,
+        "ex": true
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 3,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 33,
+      "runeDeck": 8,
+      "score": 1,
+      "trash": [],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Void Hatchling",
+         "m": 2,
+         "base": 2,
+         "ex": true
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "Rune Pool: 1 Energy"
+    }
+   },
+   {
+    "choice": {
+     "q": "Mi lesz a maradék 1 Energyvel?",
+     "opts": [
+      {
+       "t": "A kör végéig a poolban marad, később elköltheted",
+       "ok": true,
+       "why": "A Rune Pool a Main Phase elején és a kör végén ürül {{167}} {{317.2.d}}."
+      },
+      {
+       "t": "Azonnal elveszik, mert a lap kijátszása lezárult",
+       "ok": false,
+       "why": "A pool csak a Main Phase elején és a kör végén ürül {{167}}."
+      },
+      {
+       "t": "Átviheted a következő körödbe",
+       "ok": false,
+       "why": "A kör végén a pool kiürül, a maradék elveszik {{317.2.d}} {{167.1}}."
+      }
+     ]
+    }
+   },
+   {
+    "type": "act",
+    "prompt": "Játszd ki a [[Hextech Ray]] lapot a [[Void Hatchling]]re. Az 1 Energy a poolból jön, a Fury Powerhez recycle-ölj egy exhaustolt Fury rune-t.",
+    "expect": {
+     "kind": "play",
+     "card": "Hextech Ray",
+     "target": "Void Hatchling",
+     "pool": 1
+    },
+    "ok": "A [[Hextech Ray]] árát a poolban maradt 1 Energy és egy újabb exhaustolt Fury rune recycle-je fedezi. Az ellenfél nem válaszol, a Hatchling 3 damage-et kap és meghal {{323.4}}. A Grove-on nem maradt unit, az ellenfél elveszíti a kontrollt {{323.5}}.",
+    "wrong": {
+     "target:Bewitching Spirit": "A Bewitching Spirit a base-ben áll. A base nem battlefield, ezért nem legális target {{355.9.b}}.",
+     "energy": "Az 1 Energy már a poolban van, nem kell újabb rune-t exhaustolni {{167}}."
+    },
+    "after": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Rebel",
+      "base": [
+       {
+        "n": "Chemtech Enforcer",
+        "m": 2,
+        "base": 2
+       },
+       {
+        "n": "Eager Drakehound",
+        "m": 3,
+        "base": 3,
+        "status": [
+         "new"
+        ]
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 2,
+       "domains": [
+        "Chaos",
+        "Fury",
+        "Chaos"
+       ]
+      },
+      "deck": 33,
+      "runeDeck": 9,
+      "score": 0,
+      "trash": [
+       "Ruthless Strike",
+       "Cleave",
+       "Hextech Ray"
+      ],
+      "banish": [],
+      "hand": [
+       "Incinerate"
+      ]
+     },
+     "opp": {
+      "legend": "Draven, Glorious Executioner",
+      "champion": "Draven, Showboat",
+      "base": [
+       {
+        "n": "Bewitching Spirit",
+        "m": 2,
+        "base": 2,
+        "ex": true
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 3,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 33,
+      "runeDeck": 8,
+      "score": 1,
+      "trash": [
+       "Void Hatchling"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "Rune Pool: 0"
+    }
+   },
+   {
+    "type": "act",
+    "prompt": "Foglald el a Grove of the God-Willow-t az [[Eager Drakehound]] unittal.",
+    "expect": {
+     "kind": "move",
+     "unit": "Eager Drakehound",
+     "to": "bf0"
+    },
+    "ok": "A Drakehound ready lépett be, így exhaustolva mozoghat {{144.2}}, pedig ebben a körben játszottad ki. A unitok általában azért nem mozognak a kijátszás körében, mert exhaustolva lépnek be {{143.4}}.",
+    "wrong": {
+     "unit:Chemtech Enforcer": "A Chemtech Enforcer is léphetne, de ebben a feladatban a Drakehound foglal."
+    },
+    "after": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Rebel",
+      "base": [
+       {
+        "n": "Chemtech Enforcer",
+        "m": 2,
+        "base": 2
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 2,
+       "domains": [
+        "Chaos",
+        "Fury",
+        "Chaos"
+       ]
+      },
+      "deck": 33,
+      "runeDeck": 9,
+      "score": 1,
+      "trash": [
+       "Ruthless Strike",
+       "Cleave",
+       "Hextech Ray"
+      ],
+      "banish": [],
+      "hand": [
+       "Incinerate"
+      ]
+     },
+     "opp": {
+      "legend": "Draven, Glorious Executioner",
+      "champion": "Draven, Showboat",
+      "base": [
+       {
+        "n": "Bewitching Spirit",
+        "m": 2,
+        "base": 2,
+        "ex": true
+       }
+      ],
+      "runes": {
+       "ready": 1,
+       "exhausted": 3,
+       "domains": [
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Fury"
+       ]
+      },
+      "deck": 33,
+      "runeDeck": 8,
+      "score": 1,
+      "trash": [
+       "Void Hatchling"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Eager Drakehound",
+         "m": 3,
+         "base": 3,
+         "ex": true,
+         "status": [
+          "new"
+         ]
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    }
+   },
+   {
+    "say": "A Grove Contested lesz, és mivel nincs ott ellenséges unit, non-combat showdown nyílik {{344.2}}, a Focus nálad {{345}}. Mindketten passzoltok, egyedül neked van unitod ott, így megszerzed a kontrollt, ez conquer {{348.2.a}} {{348.2.a.1}}: 1 pont.",
+    "choice": {
+     "q": "Hová került a két recycle-ölt Fury rune?",
+     "opts": [
+      {
+       "t": "A Rune Deck aljára, később újra channelelheted őket",
+       "ok": true,
+       "why": "Recycle a runet a Rune Deckbe teszi {{417.1.b}}, a deck aljára {{417.1}}, és a Channel Phase-ben onnan jönnek a runek {{315.3.b}}."
+      },
+      {
+       "t": "A trashbe",
+       "ok": false,
+       "why": "Rune recycle a Rune Deckbe megy {{417.1.b}}."
+      },
+      {
+       "t": "A kör végén visszakerülnek a boardra",
+       "ok": false,
+       "why": "A recycle a Rune Deck aljára teszi őket {{417.1}}, csak channellel jönnek vissza {{431.1}}."
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "mozgas-es-tamadas-trigger",
+  "title": "Mozgás trigger és támadás trigger sorrendje",
+  "level": "halado",
+  "intro": "Mikor kerül a chainre a \"When I move\" és a \"When I attack\" képesség, mikor kezdődik a combat, és mi lesz a Focusszal.",
+  "rules": "448.3.c, 383.3, 462, 466.2.d, 383.4.e.2, 808.1.d.2, 346.1",
+  "steps": [
+   {
+    "say": "A te köröd. A base-edben ready a [[Stellacorn Herder]] (3 Might, mozgáskor húzol 1-et) és a [[Crackshot Corsair]] (3 Might, támadáskor 1 damage egy ott álló ellenséges unitra). A Kinkou Temple-t az ellenfél tartja: [[Vanguard Sergeant]] (4) és [[Watchful Sentry]] (1, Deathknell: húzás). Mindkét unitodat egy Standard Move-val viszed oda {{144.3}}.",
+    "board": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Centered",
+      "base": [
+       {
+        "n": "Stellacorn Herder",
+        "m": 3,
+        "base": 3
+       },
+       {
+        "n": "Crackshot Corsair",
+        "m": 3,
+        "base": 3
+       }
+      ],
+      "runes": {
+       "ready": 8,
+       "exhausted": 0,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 3,
+      "trash": [
+       "Determined Sentry",
+       "Stalwart Poro",
+       "Discipline"
+      ],
+      "banish": [],
+      "hand": [
+       "Playful Phantom",
+       "Mountain Drake",
+       "Zephyr Sage"
+      ]
+     },
+     "opp": {
+      "legend": "Lux, Lady of Luminosity (Starter)",
+      "champion": "Lux, Crownguard",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 5,
+       "domains": [
+        "Order",
+        "Order",
+        "Mind",
+        "Order",
+        "Mind",
+        "Mind",
+        "Order"
+       ]
+      },
+      "deck": 32,
+      "runeDeck": 5,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Ravenbloom Student"
+      ],
+      "banish": [],
+      "handCount": 3
+     },
+     "bfs": [
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        },
+        {
+         "n": "Watchful Sentry",
+         "m": 1,
+         "base": 1
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "A játék 7. köre, te vagy a kezdőjátékos, ez a 4. köröd (8 rune). Eddig 4+4 lapot húztál: 3 a kezedben, 2 unit a base-edben, 3 a trashben. Az ellenfél 3 körén túl van (7 rune): 4+3 lapot húzott, 3 a kezében, 2 unit a Kinkou Temple-ön, 2 a trashben."
+    },
+    "choice": {
+     "q": "Mi történik először a mozgás után?",
+     "opts": [
+      {
+       "t": "A Herder mozgás triggere a chainre kerül és feloldódik, a combat csak utána kezdődik",
+       "ok": true,
+       "why": "A trigger a feltétel teljesülésekor a chainre kerül {{383.3}}, combat pedig csak üres chainnél kezdődhet {{462}}."
+      },
+      {
+       "t": "Azonnal kezdődik a combat, a mozgás trigger a végén jön",
+       "ok": false,
+       "why": "Amíg a chainen elem van, combat nem kezdődik {{462}}."
+      },
+      {
+       "t": "Az ellenfél még a megérkezés előtt reagálhat a mozgásra",
+       "ok": false,
+       "why": "A mozgás azonnali, nem használja a chaint, és nem lehet rá reagálni {{448.3.c}}."
+      }
+     ]
+    }
+   },
+   {
+    "type": "act",
+    "prompt": "Mozgasd mindkét unitodat egyetlen Standard Move-val a Kinkou Temple-re: jelöld ki a [[Stellacorn Herder]] és a [[Crackshot Corsair]] unitot, majd kattints a battlefieldre.",
+    "expect": {
+     "kind": "move",
+     "units": [
+      "Stellacorn Herder",
+      "Crackshot Corsair"
+     ],
+     "to": "bf0"
+    },
+    "ok": "Egyetlen Standard Move, közös célba {{144.3}} {{144.3.a}}. A mozgás nem használja a chaint, és nem lehet rá reagálni {{448.3.c}}, a Herder triggere viszont a chainre kerül {{383.3}}.",
+    "after": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Centered",
+      "base": [],
+      "runes": {
+       "ready": 8,
+       "exhausted": 0,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 3,
+      "trash": [
+       "Determined Sentry",
+       "Stalwart Poro",
+       "Discipline"
+      ],
+      "banish": [],
+      "hand": [
+       "Playful Phantom",
+       "Mountain Drake",
+       "Zephyr Sage"
+      ]
+     },
+     "opp": {
+      "legend": "Lux, Lady of Luminosity (Starter)",
+      "champion": "Lux, Crownguard",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 5,
+       "domains": [
+        "Order",
+        "Order",
+        "Mind",
+        "Order",
+        "Mind",
+        "Mind",
+        "Order"
+       ]
+      },
+      "deck": 32,
+      "runeDeck": 5,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Ravenbloom Student"
+      ],
+      "banish": [],
+      "handCount": 3
+     },
+     "bfs": [
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [
+        {
+         "n": "Stellacorn Herder",
+         "m": 3,
+         "base": 3,
+         "ex": true,
+         "status": [
+          "new"
+         ]
+        },
+        {
+         "n": "Crackshot Corsair",
+         "m": 3,
+         "base": 3,
+         "ex": true,
+         "status": [
+          "new"
+         ]
+        }
+       ],
+       "opp": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        },
+        {
+         "n": "Watchful Sentry",
+         "m": 1,
+         "base": 1
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [
+      "Stellacorn Herder: húzz 1-et (te)"
+     ]
+    }
+   },
+   {
+    "say": "A Kinkou Temple Contested lett {{452}}, a combat staged, de a chainen ott a Herder triggere, ezért még várni kell {{462}}.",
+    "choice": {
+     "q": "Válaszolhat az ellenfél erre a triggerre?",
+     "opts": [
+      {
+       "t": "Igen, Reaction lappal",
+       "ok": true,
+       "why": "Ha létezik chain, Closed State van {{309.1}}, és ilyenkor Reaction játszható ki {{309.1.a}}."
+      },
+      {
+       "t": "Nem, triggered abilityre nem lehet válaszolni",
+       "ok": false,
+       "why": "A trigger ugyanúgy chain elem, mint egy activated ability {{383.3}}, a Closed Stateben Reaction kijátszható {{309.1.a}}."
+      },
+      {
+       "t": "Csak Action lappal",
+       "ok": false,
+       "why": "Closed Stateben csak Reaction játszható ki {{309.1.a}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "Az ellenfél passzol, húzol 1 lapot. A chain kiürült, combat kezdődik {{462}}. Te vagy az Attacker {{466.2.c.1}}, a unitjaid megkapják az Attacker designationt, és ekkor triggerel a Corsair támadás képessége {{383.4.e.2}} {{466.2.d}}.",
+    "board": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Centered",
+      "base": [],
+      "runes": {
+       "ready": 8,
+       "exhausted": 0,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 4,
+      "score": 3,
+      "trash": [
+       "Determined Sentry",
+       "Stalwart Poro",
+       "Discipline"
+      ],
+      "banish": [],
+      "hand": [
+       "Playful Phantom",
+       "Field Musicians",
+       "Mountain Drake",
+       "Zephyr Sage"
+      ]
+     },
+     "opp": {
+      "legend": "Lux, Lady of Luminosity (Starter)",
+      "champion": "Lux, Crownguard",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 5,
+       "domains": [
+        "Order",
+        "Order",
+        "Mind",
+        "Order",
+        "Mind",
+        "Mind",
+        "Order"
+       ]
+      },
+      "deck": 32,
+      "runeDeck": 5,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Ravenbloom Student"
+      ],
+      "banish": [],
+      "handCount": 3
+     },
+     "bfs": [
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [
+        {
+         "n": "Stellacorn Herder",
+         "m": 3,
+         "base": 3,
+         "ex": true,
+         "status": [
+          "attacker"
+         ],
+         "tag": "Attacker"
+        },
+        {
+         "n": "Crackshot Corsair",
+         "m": 3,
+         "base": 3,
+         "ex": true,
+         "status": [
+          "attacker"
+         ],
+         "tag": "Attacker"
+        }
+       ],
+       "opp": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender"
+        },
+        {
+         "n": "Watchful Sentry",
+         "m": 1,
+         "base": 1,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender"
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [
+      "Crackshot Corsair: 1 damage (te)"
+     ]
+    },
+    "choice": {
+     "q": "Kit célozhatsz a Corsair 1 damage-ével?",
+     "opts": [
+      {
+       "t": "Bármelyik ellenséges unitot a Kinkou Temple-en: a Sergeantet vagy a Sentryt",
+       "ok": true,
+       "why": "A [[Crackshot Corsair]] szövege \"an enemy unit here\": bármelyik ott álló ellenséges unit választható. Te a Sentryt választod: az 1 Mightjához az 1 damage lethal {{142.4.b}}, így a cleanupban meghal {{323.4}}, és az ellenfél kisebb Might összeggel oszt {{467.2.b}}."
+      },
+      {
+       "t": "Csak a Sentryt, mert csak neki lethal az 1 damage",
+       "ok": false,
+       "why": "A célpontot a lethal nem korlátozza. Ha a Sergeantet választanád, a rajta maradó 1 damage miatt a combatban már 3 damage is lethal lenne rá {{142.4.b}}, és ennél többet nem is kaphatna, amíg más unit kaphat damage-et {{467.2.c.4}}."
+      },
+      {
+       "t": "Senkit, a trigger csak a combat damage után oldódik fel",
+       "ok": false,
+       "why": "A támadás trigger az Attacker designation után kerül a chainre {{383.4.e.2}}, és a chain a showdownban, a combat damage előtt oldódik fel {{466.2.f}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "A Sentry 1 damage-et kap és a cleanupban meghal. A Deathknell triggere a halála előtt kerül a chainre {{808.1.d.2}}, feloldódik, az ellenfél húz 1 lapot. Ezt a chaint triggered ability nyitotta, ezért a Focus nem adódik tovább {{346.1}}: továbbra is nálad van. Te passzolsz, az ellenfél is, a showdown véget ér {{347.2.a}}. A damage kiosztását te kezded, mint Attacker {{467.2.c}}: a 6 damage-edet a Sergeantre osztod, mert csak ő maradt a Defenderek között.",
+    "board": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Centered",
+      "base": [],
+      "runes": {
+       "ready": 8,
+       "exhausted": 0,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 4,
+      "score": 3,
+      "trash": [
+       "Determined Sentry",
+       "Stalwart Poro",
+       "Discipline"
+      ],
+      "banish": [],
+      "hand": [
+       "Playful Phantom",
+       "Field Musicians",
+       "Mountain Drake",
+       "Zephyr Sage"
+      ]
+     },
+     "opp": {
+      "legend": "Lux, Lady of Luminosity (Starter)",
+      "champion": "Lux, Crownguard",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 5,
+       "domains": [
+        "Order",
+        "Order",
+        "Mind",
+        "Order",
+        "Mind",
+        "Mind",
+        "Order"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 5,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Ravenbloom Student",
+       "Watchful Sentry"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [
+        {
+         "n": "Stellacorn Herder",
+         "m": 3,
+         "base": 3,
+         "ex": true,
+         "status": [
+          "attacker"
+         ],
+         "tag": "Attacker"
+        },
+        {
+         "n": "Crackshot Corsair",
+         "m": 3,
+         "base": 3,
+         "ex": true,
+         "status": [
+          "attacker"
+         ],
+         "tag": "Attacker"
+        }
+       ],
+       "opp": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender"
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "Damage kiosztás következik"
+    },
+    "choice": {
+     "q": "Az ellenfél 4 damage-et oszt ki a két unitodra. Melyik szabályos?",
+     "opts": [
+      {
+       "t": "3 a Herderre, 1 a Corsairre",
+       "ok": true,
+       "why": "Az elsőként választott unit teljes lethalt kap {{467.2.c.3}}, a maradék mehet a következőre."
+      },
+      {
+       "t": "2 a Herderre, 2 a Corsairre",
+       "ok": false,
+       "why": "Mielőtt a következő unitra lép, az elsőnek teljes lethal jár {{467.2.c.3}}."
+      },
+      {
+       "t": "Mind a 4 a Herderre",
+       "ok": false,
+       "why": "Lethal fölé nem mehet, amíg a Corsair még kaphat damage-et {{467.2.c.4}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "A te 6 damage-ed a Sergeantre megy, ő meghal. A Herder 3 damage-et kapott, meghal, a Corsair túléli, és a combat cleanup gyógyítja {{468.1.a.1}}. Megnyerted a combatot, conquer, 1 pont {{468.5.d}}.",
+    "board": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Centered",
+      "base": [],
+      "runes": {
+       "ready": 8,
+       "exhausted": 0,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 4,
+      "score": 4,
+      "trash": [
+       "Determined Sentry",
+       "Stalwart Poro",
+       "Discipline",
+       "Stellacorn Herder"
+      ],
+      "banish": [],
+      "hand": [
+       "Playful Phantom",
+       "Field Musicians",
+       "Mountain Drake",
+       "Zephyr Sage"
+      ]
+     },
+     "opp": {
+      "legend": "Lux, Lady of Luminosity (Starter)",
+      "champion": "Lux, Crownguard",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 5,
+       "domains": [
+        "Order",
+        "Order",
+        "Mind",
+        "Order",
+        "Mind",
+        "Mind",
+        "Order"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 5,
+      "score": 4,
+      "trash": [
+       "Daring Poro",
+       "Ravenbloom Student",
+       "Watchful Sentry",
+       "Vanguard Sergeant"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Crackshot Corsair",
+         "m": 3,
+         "base": 3,
+         "ex": true
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    }
+   }
+  ]
+ },
+ {
+  "id": "vedekezes-mit-tartasz-meg",
+  "title": "Védekezés: mit tartasz meg",
+  "level": "halado",
+  "intro": "Hidden unit elrejtése, rune visszatartása az ellenfél körére, és a Reaction időzítése a combat showdownban.",
+  "rules": "811.1.b, 811.1.d.1, 811.6, 315.1.b, 347, 467.3, 468.5",
+  "steps": [
+   {
+    "type": "act",
+    "say": "A te köröd vége felé jársz. A Grove-ot egy [[Stalwart Poro]] tartja. Az ellenfél base-ében áll egy [[Petty Officer]], ami a következő körében várhatóan rátámad a Grove-ra. A kezedben van egy [[Pakaa Cub]] (Hidden) és egy [[Discipline]] (Reaction). 5 ready és 4 exhaustolt runed van.",
+    "board": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Ascetic",
+      "base": [],
+      "runes": {
+       "ready": 5,
+       "exhausted": 4,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Calm",
+        "Calm",
+        "Body",
+        "Calm",
+        "Body"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 3,
+      "score": 5,
+      "trash": [
+       "Determined Sentry",
+       "Determined Sentry",
+       "Stalwart Poro",
+       "Wielder of Water",
+       "Field Musicians",
+       "Entrenched Boar"
+      ],
+      "banish": [],
+      "hand": [
+       "Pakaa Cub",
+       "Discipline"
+      ]
+     },
+     "opp": {
+      "legend": "Darius, Hand of Noxus",
+      "champion": "Darius, Trifarian",
+      "base": [
+       {
+        "n": "Petty Officer",
+        "m": 5,
+        "base": 5,
+        "ex": true
+       }
+      ],
+      "runes": {
+       "ready": 0,
+       "exhausted": 8,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 5,
+      "trash": [
+       "Daring Poro",
+       "Eager Drakehound",
+       "Incinerate"
+      ],
+      "banish": [],
+      "handCount": 3
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Stalwart Poro",
+         "m": 2,
+         "base": 2
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "A játék 8. köre, te vagy a második játékos, ez a 4. köröd (9 rune). Eddig 4+4 lapot húztál, és 1-et a Grove of the God-Willow e köri holdjáért: 2 a kezedben, a Stalwart Poro a Grove-on, 6 a trashben. Az ellenfél 4 körén túl van (8 rune): 4+4 lapot húzott, 3 a kezében, 2 unit a boardon, 3 a trashben."
+    },
+    "prompt": "Rejtsd el a [[Pakaa Cub]] lapot: kattints rá a kezedben, majd egy kiemelt facedown helyre, és fizesd ki.",
+    "expect": {
+     "kind": "hide",
+     "card": "Pakaa Cub",
+     "to": "fd0"
+    },
+    "ok": "A Hidden költsége 1 tetszőleges domainű Power, és egy általad kontrollált battlefieldre rejthetsz {{811.1.b}}. A recycle exhaustolt runeról is Powert ad {{164.2.b}}.",
+    "wrong": {
+     "energy": "A Hidden ára Power {{811.1.b}}, és Energyvel Power költség nem fizethető {{163.1}} {{163.2}}. Recycle-ölj egy rune-t.",
+     "card:Discipline": "A Discipline-t most nem kell kijátszanod. A Cub legyen rejtve, mire az ellenfél támad."
+    },
+    "after": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Ascetic",
+      "base": [],
+      "runes": {
+       "ready": 5,
+       "exhausted": 3,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Calm",
+        "Calm",
+        "Body",
+        "Calm"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 4,
+      "score": 5,
+      "trash": [
+       "Determined Sentry",
+       "Determined Sentry",
+       "Stalwart Poro",
+       "Wielder of Water",
+       "Field Musicians",
+       "Entrenched Boar"
+      ],
+      "banish": [],
+      "hand": [
+       "Discipline"
+      ]
+     },
+     "opp": {
+      "legend": "Darius, Hand of Noxus",
+      "champion": "Darius, Trifarian",
+      "base": [
+       {
+        "n": "Petty Officer",
+        "m": 5,
+        "base": 5,
+        "ex": true
+       }
+      ],
+      "runes": {
+       "ready": 0,
+       "exhausted": 8,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 5,
+      "trash": [
+       "Daring Poro",
+       "Eager Drakehound",
+       "Incinerate"
+      ],
+      "banish": [],
+      "handCount": 3
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Stalwart Poro",
+         "m": 2,
+         "base": 2
+        }
+       ],
+       "opp": [],
+       "facedown": "me"
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "A játék 8. köre, te vagy a második játékos, ez a 4. köröd (9 rune). Eddig 4+4 lapot húztál, és 1-et a Grove of the God-Willow e köri holdjáért: 2 a kezedben, a Stalwart Poro a Grove-on, 6 a trashben. Az ellenfél 4 körén túl van (8 rune): 4+4 lapot húzott, 3 a kezében, 2 unit a boardon, 3 a trashben."
+    }
+   },
+   {
+    "type": "act",
+    "say": "Az elrejtés nem nyitott chaint {{811.1.c.2}}. Az ellenfél köre: holdolja a Kinkou Temple-t, majd a Petty Officerrel a Grove-ra lép. Combat indul, ő az Attacker, nála a Focus {{466.2.c.1.a}}. A runejaid nem readyztek, mert az csak a saját Awaken Phase-edben történik {{315.1.b}}. A Poro a Shield miatt 3 Mighttal védekezik a 6 ellen {{814.1.c}}. A facedown Cub mostantól Reactiont kapott {{811.6}}. Az ellenfél passzol, így a Focus hozzád kerül {{347.2.b}}.",
+    "board": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Ascetic",
+      "base": [],
+      "runes": {
+       "ready": 5,
+       "exhausted": 3,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Calm",
+        "Calm",
+        "Body",
+        "Calm"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 4,
+      "score": 5,
+      "trash": [
+       "Determined Sentry",
+       "Determined Sentry",
+       "Stalwart Poro",
+       "Wielder of Water",
+       "Field Musicians",
+       "Entrenched Boar"
+      ],
+      "banish": [],
+      "hand": [
+       "Discipline"
+      ]
+     },
+     "opp": {
+      "legend": "Darius, Hand of Noxus",
+      "champion": "Darius, Trifarian",
+      "base": [],
+      "runes": {
+       "ready": 10,
+       "exhausted": 0,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury",
+        "Fury",
+        "Order"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 2,
+      "score": 6,
+      "trash": [
+       "Daring Poro",
+       "Eager Drakehound",
+       "Incinerate"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Stalwart Poro",
+         "m": 3,
+         "base": 2,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "Shield +1"
+         ]
+        }
+       ],
+       "opp": [
+        {
+         "n": "Petty Officer",
+         "m": 6,
+         "base": 5,
+         "ex": true,
+         "status": [
+          "attacker",
+          "new"
+         ],
+         "tag": "Attacker",
+         "mods": [
+          "Assault +1"
+         ]
+        }
+       ],
+       "facedown": "me"
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    },
+    "prompt": "Nálad a Focus. Játszd ki a rejtett [[Pakaa Cub]] lapot: kattints a facedown lapra a Grove-nál, majd a helyére.",
+    "expect": {
+     "kind": "play",
+     "card": "Pakaa Cub",
+     "from": "fd0",
+     "to": "bf0"
+    },
+    "state": "showdown",
+    "ok": "A Hidden lap a következő körtől Reactionnel, a költsége figyelmen kívül hagyásával kijátszható {{811.1.b}}, és arra a battlefieldre kell kerülnie, ahol rejtve volt {{811.1.d.1}}.",
+    "wrong": {
+     "card:Discipline": "A Discipline-t is kijátszhatnád, Reaction {{813.1.b}}, de előbb a Cub kerüljön a Grove-ra.",
+     "pass": "Ha passzolsz, és az ellenfél is passzol, a showdown véget ér {{347.2.a}}, és a 3 Mightú Poro egyedül védekezik a 6 Mightú Officer ellen."
+    },
+    "after": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Ascetic",
+      "base": [],
+      "runes": {
+       "ready": 5,
+       "exhausted": 3,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Calm",
+        "Calm",
+        "Body",
+        "Calm"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 4,
+      "score": 5,
+      "trash": [
+       "Determined Sentry",
+       "Determined Sentry",
+       "Stalwart Poro",
+       "Wielder of Water",
+       "Field Musicians",
+       "Entrenched Boar"
+      ],
+      "banish": [],
+      "hand": [
+       "Discipline"
+      ]
+     },
+     "opp": {
+      "legend": "Darius, Hand of Noxus",
+      "champion": "Darius, Trifarian",
+      "base": [],
+      "runes": {
+       "ready": 10,
+       "exhausted": 0,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury",
+        "Fury",
+        "Order"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 2,
+      "score": 6,
+      "trash": [
+       "Daring Poro",
+       "Eager Drakehound",
+       "Incinerate"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Stalwart Poro",
+         "m": 3,
+         "base": 2,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "Shield +1"
+         ]
+        },
+        {
+         "n": "Pakaa Cub",
+         "m": 3,
+         "base": 3,
+         "ex": true,
+         "status": [
+          "defender",
+          "new"
+         ],
+         "tag": "Defender"
+        }
+       ],
+       "opp": [
+        {
+         "n": "Petty Officer",
+         "m": 6,
+         "base": 5,
+         "ex": true,
+         "status": [
+          "attacker",
+          "new"
+         ],
+         "tag": "Attacker",
+         "mods": [
+          "Assault +1"
+         ]
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    }
+   },
+   {
+    "type": "act",
+    "say": "A Cub unitként azonnal feloldódik {{337.2}}, exhaustolva lép be {{143.4}}, és a következő cleanupban Defender lesz {{466.2.c.3.a}}. A chain lezárult, a Focus az ellenfélhez került {{347.1.b}}. Ő passzol, a Focus újra nálad van {{347.2.b}}. Most 6 Might áll 6 ellen.",
+    "prompt": "Erősítsd meg a védekezést: játszd ki a [[Discipline]] lapot a [[Pakaa Cub]]ra.",
+    "expect": {
+     "kind": "play",
+     "card": "Discipline",
+     "target": "Pakaa Cub"
+    },
+    "state": "showdown",
+    "ok": "Showdownban a Focusos játékos játszhat ki Action vagy Reaction lapot {{347.1}} {{308.1.a}}. A [[Discipline]] a Cubra kerül: +2 Might a kör végéig, és húzol 1 lapot.",
+    "wrong": {
+     "pass": "Ha passzolsz, és az ellenfél is, a showdown véget ér {{347.2.a}}, a combat damage step pedig nem nyit ablakot {{467.3}}: a Discipline-t később már nem játszhatod ki.",
+     "target:Stalwart Poro": "A Porón is szabályos lenne, de ebben a szituációban a Cubot erősíted.",
+     "target:Petty Officer": "Az ellenfél attackerét erősítenéd."
+    },
+    "after": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Ascetic",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 5,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Calm",
+        "Calm",
+        "Body",
+        "Calm"
+       ]
+      },
+      "deck": 29,
+      "runeDeck": 4,
+      "score": 5,
+      "trash": [
+       "Determined Sentry",
+       "Determined Sentry",
+       "Stalwart Poro",
+       "Wielder of Water",
+       "Field Musicians",
+       "Entrenched Boar",
+       "Discipline"
+      ],
+      "banish": [],
+      "hand": [
+       "Playful Phantom"
+      ]
+     },
+     "opp": {
+      "legend": "Darius, Hand of Noxus",
+      "champion": "Darius, Trifarian",
+      "base": [],
+      "runes": {
+       "ready": 10,
+       "exhausted": 0,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury",
+        "Fury",
+        "Order"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 2,
+      "score": 6,
+      "trash": [
+       "Daring Poro",
+       "Eager Drakehound",
+       "Incinerate"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Stalwart Poro",
+         "m": 3,
+         "base": 2,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "Shield +1"
+         ]
+        },
+        {
+         "n": "Pakaa Cub",
+         "m": 5,
+         "base": 3,
+         "ex": true,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "+2 Might a kör végéig"
+         ]
+        }
+       ],
+       "opp": [
+        {
+         "n": "Petty Officer",
+         "m": 6,
+         "base": 5,
+         "ex": true,
+         "status": [
+          "attacker",
+          "new"
+         ],
+         "tag": "Attacker",
+         "mods": [
+          "Assault +1"
+         ]
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "Damage kiosztás folyamatban"
+    }
+   },
+   {
+    "say": "A Focus az ellenfélhez kerül, ő passzol, te is passzolsz: mindenki egymás után passzolt, a showdown véget ér {{347.2.a}}. Az ellenfél, az Attacker kezdi a kiosztást {{467.2.c}}: 6 damage-et oszt ki.",
+    "choice": {
+     "q": "Melyik kiosztás szabályos az ellenfél részéről?",
+     "opts": [
+      {
+       "t": "3 a Porora, 3 a Cubra",
+       "ok": true,
+       "why": "A Poro lethalja 3, azt teljesen megkapja, mielőtt a Cub jönne {{467.2.c.3}}."
+      },
+      {
+       "t": "2 a Porora, 4 a Cubra",
+       "ok": false,
+       "why": "Az elsőként választott unitnak teljes lethal jár, mielőtt a következőre lép {{467.2.c.3}}."
+      },
+      {
+       "t": "Mind a 6 a Porora",
+       "ok": false,
+       "why": "Lethal fölé nem mehet, amíg a Cub még kaphat damage-et {{467.2.c.4}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "Te a 8 damage-edet az egyetlen attackerre, az Officerre osztod. Minden damage egyszerre érkezik {{467.2.d}}: a Poro és az Officer lethal damage-et kapott, a Cubon 3 van az 5 Mightjához.",
+    "board": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Ascetic",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 5,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Calm",
+        "Calm",
+        "Body",
+        "Calm"
+       ]
+      },
+      "deck": 29,
+      "runeDeck": 4,
+      "score": 5,
+      "trash": [
+       "Determined Sentry",
+       "Determined Sentry",
+       "Stalwart Poro",
+       "Wielder of Water",
+       "Field Musicians",
+       "Entrenched Boar",
+       "Discipline"
+      ],
+      "banish": [],
+      "hand": [
+       "Playful Phantom"
+      ]
+     },
+     "opp": {
+      "legend": "Darius, Hand of Noxus",
+      "champion": "Darius, Trifarian",
+      "base": [],
+      "runes": {
+       "ready": 10,
+       "exhausted": 0,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury",
+        "Fury",
+        "Order"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 2,
+      "score": 6,
+      "trash": [
+       "Daring Poro",
+       "Eager Drakehound",
+       "Incinerate"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Stalwart Poro",
+         "m": 3,
+         "base": 2,
+         "dmg": 3,
+         "status": [
+          "defender",
+          "dying"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "Shield +1"
+         ]
+        },
+        {
+         "n": "Pakaa Cub",
+         "m": 5,
+         "base": 3,
+         "ex": true,
+         "dmg": 3,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "+2 Might a kör végéig"
+         ]
+        }
+       ],
+       "opp": [
+        {
+         "n": "Petty Officer",
+         "m": 6,
+         "base": 5,
+         "ex": true,
+         "dmg": 8,
+         "status": [
+          "attacker",
+          "dying"
+         ],
+         "tag": "Attacker",
+         "mods": [
+          "Assault +1"
+         ]
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    }
+   },
+   {
+    "say": "A combat cleanupban a Poro és az Officer meghal, a Cub gyógyul {{468.1.a.1}}. Egyedül neked maradt unitod a Grove-on, megnyerted a combatot {{468.3.a}}.",
+    "board": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Ascetic",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 5,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Calm",
+        "Calm",
+        "Body",
+        "Calm"
+       ]
+      },
+      "deck": 29,
+      "runeDeck": 4,
+      "score": 5,
+      "trash": [
+       "Determined Sentry",
+       "Determined Sentry",
+       "Stalwart Poro",
+       "Wielder of Water",
+       "Field Musicians",
+       "Entrenched Boar",
+       "Discipline",
+       "Stalwart Poro"
+      ],
+      "banish": [],
+      "hand": [
+       "Playful Phantom"
+      ]
+     },
+     "opp": {
+      "legend": "Darius, Hand of Noxus",
+      "champion": "Darius, Trifarian",
+      "base": [],
+      "runes": {
+       "ready": 10,
+       "exhausted": 0,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury",
+        "Order",
+        "Order",
+        "Fury",
+        "Fury",
+        "Order"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 2,
+      "score": 6,
+      "trash": [
+       "Daring Poro",
+       "Eager Drakehound",
+       "Incinerate",
+       "Petty Officer"
+      ],
+      "banish": [],
+      "handCount": 4
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Pakaa Cub",
+         "m": 5,
+         "base": 3,
+         "ex": true,
+         "mods": [
+          "+2 Might a kör végéig"
+         ]
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Vanguard Sergeant",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    },
+    "choice": {
+     "q": "Kapsz pontot ezért a combatért?",
+     "opts": [
+      {
+       "t": "Nem, mert a Grove már a tiéd volt; a pont a következő köröd elején jön holddal",
+       "ok": true,
+       "why": "Kontrollt csak az alapít, aki még nem kontrollálta a battlefieldet, és csak ez lehet conquer {{468.5}} {{468.5.d}}. A hold a Beginning Phase-ben jár {{471.2}}."
+      },
+      {
+       "t": "Igen, 1 pontot conquerért",
+       "ok": false,
+       "why": "Conquer csak akkor van, ha megszerzed egy battlefield kontrollját {{471.1}}, a Grove pedig már a tiéd volt {{468.5}}."
+      },
+      {
+       "t": "Igen, mert defenderként nyertél",
+       "ok": false,
+       "why": "A combat megnyerése önmagában nem ad pontot: pont conquerért vagy holdért jár {{471}}."
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "showdown-action-reaction-ablakok",
+  "title": "Showdown Action és Reaction ablakai",
+  "level": "halado",
+  "intro": "Mit játszhat ki a Focusos játékos, mit a priorityval rendelkező a chain alatt, és hogyan mented ki a unitodat Reactionnel.",
+  "rules": "308.1.a, 309.1.a, 310, 312.2.d, 343.1.a, 346, 347, 467.1, 468.3",
+  "steps": [
+   {
+    "type": "act",
+    "say": "A te köröd. A [[Shadowblade Lurker]] (5 Might) a Grove-ra lépett, ahol az ellenfél [[Profiteer]] unitja (4 Might) áll. Combat showdown indult, te vagy az Attacker, nálad a Focus {{466.2.c.1.a}}. A kezedben: [[Incinerate]] (Action), [[Falling Star]] (nincs kulcsszava), [[Flash]] (Reaction).",
+    "board": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Demolitionist",
+      "base": [],
+      "runes": {
+       "ready": 8,
+       "exhausted": 0,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 4,
+      "trash": [
+       "Pouty Poro",
+       "Cleave",
+       "Legion Rearguard",
+       "Hextech Ray"
+      ],
+      "banish": [],
+      "hand": [
+       "Incinerate",
+       "Falling Star",
+       "Flash"
+      ]
+     },
+     "opp": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Ascetic",
+      "base": [],
+      "runes": {
+       "ready": 5,
+       "exhausted": 2,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Body",
+        "Calm",
+        "Body"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 5,
+      "score": 4,
+      "trash": [
+       "Stalwart Poro",
+       "Entrenched Boar",
+       "Determined Sentry",
+       "Determined Sentry",
+       "Pakaa Cub"
+      ],
+      "banish": [],
+      "handCount": 2
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [
+        {
+         "n": "Shadowblade Lurker",
+         "m": 5,
+         "base": 5,
+         "ex": true,
+         "status": [
+          "attacker",
+          "new"
+         ],
+         "tag": "Attacker"
+        }
+       ],
+       "opp": [
+        {
+         "n": "Profiteer",
+         "m": 4,
+         "base": 4,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender"
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Black Market",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "A játék 7. köre, te vagy a kezdőjátékos, ez a 4. köröd (8 rune). Eddig 4+4 lapot húztál: 3 a kezedben, a Shadowblade Lurker a Grove-on, 4 a trashben. Az ellenfél 3 körén túl van (7 rune): 4+3 lapot húzott, és 1-et a Grove of the God-Willow holdjáért; 2 a kezében, a Profiteer a Grove-on, 5 a trashben."
+    },
+    "prompt": "Sebezd a Profiteert: játszd ki az egyik lapodat, ami showdownban kijátszható.",
+    "expect": {
+     "kind": "play",
+     "card": "Incinerate",
+     "target": "Profiteer"
+    },
+    "state": "showdown",
+    "ok": "Showdownban Action vagy Reaction lap játszható ki {{308.1.a}}, és a Focusos játékos cselekedhet {{347.1}}. Az [[Incinerate]] a Profiteerre célozva a chainre került.",
+    "wrong": {
+     "card:Flash": "A Flash is kijátszható lenne, mert Reaction {{813.1.b}}, de az nem sebez. Most az Incinerate a jó választás.",
+     "target:Shadowblade Lurker": "Szabályos target lenne, de a saját Lurkeredet sebeznéd."
+    },
+    "after": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Demolitionist",
+      "base": [],
+      "runes": {
+       "ready": 6,
+       "exhausted": 2,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 4,
+      "trash": [
+       "Pouty Poro",
+       "Cleave",
+       "Legion Rearguard",
+       "Hextech Ray"
+      ],
+      "banish": [],
+      "hand": [
+       "Falling Star",
+       "Flash"
+      ]
+     },
+     "opp": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Ascetic",
+      "base": [],
+      "runes": {
+       "ready": 5,
+       "exhausted": 2,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Body",
+        "Calm",
+        "Body"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 5,
+      "score": 4,
+      "trash": [
+       "Stalwart Poro",
+       "Entrenched Boar",
+       "Determined Sentry",
+       "Determined Sentry",
+       "Pakaa Cub"
+      ],
+      "banish": [],
+      "handCount": 2
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [
+        {
+         "n": "Shadowblade Lurker",
+         "m": 5,
+         "base": 5,
+         "ex": true,
+         "status": [
+          "attacker",
+          "new"
+         ],
+         "tag": "Attacker"
+        }
+       ],
+       "opp": [
+        {
+         "n": "Profiteer",
+         "m": 4,
+         "base": 4,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender"
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Black Market",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [
+      "Incinerate (te)"
+     ]
+    }
+   },
+   {
+    "say": "Te passzolsz, az ellenfél kapja a priorityt {{338.1.b.1}}. Az ellenfél kezében [[Discipline]] (Reaction) és [[Punch First]] (Action) van.",
+    "choice": {
+     "q": "Melyik lapját játszhatja ki most az ellenfél?",
+     "opts": [
+      {
+       "t": "A Discipline-t",
+       "ok": true,
+       "why": "Létezik chain, ez Showdown Closed State, itt csak Reaction játszható ki {{309.1.a}} {{310.4}}."
+      },
+      {
+       "t": "A Punch Firstöt",
+       "ok": false,
+       "why": "Az Action csak showdown Open Stateben ad engedélyt, Closed Stateben csak Reaction játszható ki {{309.1.a}}."
+      },
+      {
+       "t": "Egyiket sem, mert nem nála van a Focus",
+       "ok": false,
+       "why": "Closed Stateben a priority számít, nem a Focus {{312.2.d}}, és Reactiont kijátszhat {{813.1.c.1}}."
+      }
+     ]
+    }
+   },
+   {
+    "say": "A [[Discipline]] oldódik fel elsőként {{340.1}}: a Profiteer 6 Might, az ellenfél húz 1 lapot. Utána az Incinerate: 2 damage, ami a 6 Mighthoz nem lethal. A chain kiürült, a Focus az ellenfélhez kerül {{346}}.",
+    "board": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Demolitionist",
+      "base": [],
+      "runes": {
+       "ready": 6,
+       "exhausted": 2,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 4,
+      "trash": [
+       "Pouty Poro",
+       "Cleave",
+       "Legion Rearguard",
+       "Hextech Ray",
+       "Incinerate"
+      ],
+      "banish": [],
+      "hand": [
+       "Falling Star",
+       "Flash"
+      ]
+     },
+     "opp": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Ascetic",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 4,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Body",
+        "Calm",
+        "Body"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 5,
+      "score": 4,
+      "trash": [
+       "Stalwart Poro",
+       "Entrenched Boar",
+       "Determined Sentry",
+       "Determined Sentry",
+       "Pakaa Cub",
+       "Discipline"
+      ],
+      "banish": [],
+      "handCount": 2
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [
+        {
+         "n": "Shadowblade Lurker",
+         "m": 5,
+         "base": 5,
+         "ex": true,
+         "status": [
+          "attacker",
+          "new"
+         ],
+         "tag": "Attacker"
+        }
+       ],
+       "opp": [
+        {
+         "n": "Profiteer",
+         "m": 6,
+         "base": 4,
+         "dmg": 2,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "+2 Might a kör végéig"
+         ]
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Black Market",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    }
+   },
+   {
+    "type": "act",
+    "say": "Az ellenfél a Focusszal kijátssza a [[Punch First]] lapot a Profiteerre: +5 Might a kör végéig, ami 11 Mightot jelentene. A Lurker így biztosan meghalna. A chainen a Punch First vár. Előbb az ellenfél kapja a priorityt {{337.4}}, ő passzol, így te kapod {{312.2.d}}.",
+    "board": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Demolitionist",
+      "base": [],
+      "runes": {
+       "ready": 6,
+       "exhausted": 2,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 4,
+      "trash": [
+       "Pouty Poro",
+       "Cleave",
+       "Legion Rearguard",
+       "Hextech Ray",
+       "Incinerate"
+      ],
+      "banish": [],
+      "hand": [
+       "Falling Star",
+       "Flash"
+      ]
+     },
+     "opp": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Ascetic",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 3,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Body",
+        "Calm",
+        "Body"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 7,
+      "score": 4,
+      "trash": [
+       "Stalwart Poro",
+       "Entrenched Boar",
+       "Determined Sentry",
+       "Determined Sentry",
+       "Pakaa Cub",
+       "Discipline"
+      ],
+      "banish": [],
+      "handCount": 1
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [
+        {
+         "n": "Shadowblade Lurker",
+         "m": 5,
+         "base": 5,
+         "ex": true,
+         "status": [
+          "attacker",
+          "new"
+         ],
+         "tag": "Attacker"
+        }
+       ],
+       "opp": [
+        {
+         "n": "Profiteer",
+         "m": 6,
+         "base": 4,
+         "dmg": 2,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "+2 Might a kör végéig"
+         ]
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Black Market",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [
+      "Punch First (ellenfél)"
+     ]
+    },
+    "prompt": "Mentsd meg a Lurkert: játszd ki a [[Flash]] lapot, és mozgasd vele a [[Shadowblade Lurker]] unitot a base-be.",
+    "expect": {
+     "kind": "play",
+     "card": "Flash",
+     "target": "Shadowblade Lurker"
+    },
+    "state": "closed",
+    "ok": "Closed Stateben Reaction játszható ki, akkor is, ha a Focus nem nálad van {{309.1.a}} {{813.1.c.1}}, és a hatás általi mozgás showdownban is megtörténhet {{451}}. A [[Flash]] a chainre került, a Lurkert célozza.",
+    "wrong": {
+     "pass": "Ha passzolsz, a Punch First feloldódik, a Profiteer 11 Might lesz, és a Lurker a combatban meghal. Closed Stateben a priority számít {{312.2.d}}, és Reactiont kijátszhatsz {{813.1.c.1}}.",
+     "target:Profiteer": "A Flash saját (friendly) unitot mozgat a base-be, az ellenfél unitja nem lehet a targetje {{355.9.b}}."
+    },
+    "after": {
+     "me": {
+      "legend": "Jinx, Loose Cannon",
+      "champion": "Jinx, Demolitionist",
+      "base": [
+       {
+        "n": "Shadowblade Lurker",
+        "m": 5,
+        "base": 5,
+        "ex": true,
+        "status": [
+         "new"
+        ]
+       }
+      ],
+      "runes": {
+       "ready": 4,
+       "exhausted": 4,
+       "domains": [
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos"
+       ]
+      },
+      "deck": 31,
+      "runeDeck": 4,
+      "score": 4,
+      "trash": [
+       "Pouty Poro",
+       "Cleave",
+       "Legion Rearguard",
+       "Hextech Ray",
+       "Incinerate",
+       "Flash"
+      ],
+      "banish": [],
+      "hand": [
+       "Falling Star"
+      ]
+     },
+     "opp": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Ascetic",
+      "base": [],
+      "runes": {
+       "ready": 2,
+       "exhausted": 3,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Body",
+        "Calm",
+        "Body"
+       ]
+      },
+      "deck": 30,
+      "runeDeck": 7,
+      "score": 4,
+      "trash": [
+       "Stalwart Poro",
+       "Entrenched Boar",
+       "Determined Sentry",
+       "Determined Sentry",
+       "Pakaa Cub",
+       "Discipline",
+       "Punch First"
+      ],
+      "banish": [],
+      "handCount": 1
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Profiteer",
+         "m": 11,
+         "base": 4,
+         "dmg": 2,
+         "status": [
+          "defender"
+         ],
+         "tag": "Defender",
+         "mods": [
+          "+2 Might a kör végéig",
+          "+5 Might a kör végéig"
+         ]
+        }
+       ],
+       "facedown": null
+      },
+      {
+       "name": "Black Market",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    }
+   },
+   {
+    "say": "A [[Flash]] oldódik fel elsőként: a Lurker a base-be kerül, és a cleanupban elveszíti az Attacker designationt {{323.2.c}}. Utána a Punch First: a Profiteer 11 Might. A Focus hozzád kerül, passzolsz, az ellenfél is passzol, a showdown véget ér {{347.2.a}}.",
+    "choice": {
+     "q": "Hogyan ér véget a combat?",
+     "opts": [
+      {
+       "t": "Combat damage nincs, mert nem maradt attacker; a Grove az ellenfélé marad",
+       "ok": true,
+       "why": "Combat damage csak akkor van, ha attacker és defender is maradt {{467.1}}. Az ellenfélnek egyedül maradt unitja, ő nyeri a combatot {{468.3.a}}, és már ő kontrollálta a battlefieldet {{468.5}}."
+      },
+      {
+       "t": "A Lurker visszatér és harcol, mert Attacker volt",
+       "ok": false,
+       "why": "A base-ben lévő unit elveszíti az Attacker designationt {{323.2.c}}, combat damage csak a battlefielden maradt unitok között van {{467.1}}."
+      },
+      {
+       "t": "A Grove gazdátlan lesz",
+       "ok": false,
+       "why": "Az ellenfél unitja ott maradt, így megtartja a kontrollt {{468.5}}."
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "hold-es-final-point",
+  "title": "Hold pont és a Final Point szabály",
+  "level": "kezdo",
+  "intro": "A köröd eleji hold hogyan nyitja meg a győztes conquert, és mi történik, ha nem holdoltál.",
+  "rules": "315.2.b.2, 471.2, 472, 473.1.b.1, 473.1.a.1, 323.1",
+  "steps": [
+   {
+    "say": "A 8. köröd eleje, az Awaken Phase után. 6 pontod van, az ellenfélnek 7, és a Kinkou Temple-t tartja: ha a következő körében holdol, nyer. A Grove-on a [[Wizened Elder]] áll, a base-edben a [[Playful Phantom]] (5 Might). Jön a Beginning Phase Scoring Stepje.",
+    "board": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Centered",
+      "base": [
+       {
+        "n": "Playful Phantom",
+        "m": 5,
+        "base": 5
+       }
+      ],
+      "runes": {
+       "ready": 12,
+       "exhausted": 0,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 28,
+      "runeDeck": 0,
+      "score": 6,
+      "trash": [
+       "Entrenched Boar",
+       "Stalwart Poro",
+       "Crackshot Corsair",
+       "Stellacorn Herder",
+       "Pakaa Cub",
+       "Discipline",
+       "Discipline",
+       "Pakaa Cub"
+      ],
+      "banish": [],
+      "hand": [
+       "Stalwart Poro"
+      ]
+     },
+     "opp": {
+      "legend": "Pyke, Bloodharbor Ripper",
+      "champion": "Pyke, Dockside Butcher",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 9,
+       "domains": [
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury"
+       ]
+      },
+      "deck": 28,
+      "runeDeck": 0,
+      "score": 7,
+      "trash": [
+       "Pouty Poro",
+       "Void Hatchling",
+       "Hextech Ray",
+       "Noxus Saboteur",
+       "Hextech Ray",
+       "Shipyard Skulker",
+       "Incinerate",
+       "Incinerate"
+      ],
+      "banish": [],
+      "handCount": 2
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Wizened Elder",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Shipyard Skulker",
+         "m": 3,
+         "base": 3
+        }
+       ],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    },
+    "choice": {
+     "q": "Mi történik a Scoring Stepben?",
+     "opts": [
+      {
+       "t": "Holdolod a Grove-ot: 1 pont, és a Grove miatt húzol 1-et",
+       "ok": true,
+       "why": "A Turn Player holdolja az összes kontrollált battlefieldet {{315.2.b.2}} {{471.2}}, a Grove hold hatása húzást ad."
+      },
+      {
+       "t": "Semmi, pontot csak conquerért kapsz",
+       "ok": false,
+       "why": "A hold is pontszerzés {{194.1.a}} {{471.2}}."
+      },
+      {
+       "t": "Csak akkor kapsz pontot, ha a Wizened Elder ready",
+       "ok": false,
+       "why": "A holdhoz csak a kontroll kell {{471.2}}, a unit állapota nem számít."
+      }
+     ]
+    }
+   },
+   {
+    "say": "7 pontod van. A Channel Phase-ben nem kapsz runet, mert a Rune Deck üres {{315.3.b.1}}, a Draw Phase-ben húzol. Main Phase: a Phantommal a Kinkou Temple-re léphetsz, ahol a 3 Mightú [[Shipyard Skulker]] áll.",
+    "board": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Centered",
+      "base": [
+       {
+        "n": "Playful Phantom",
+        "m": 5,
+        "base": 5
+       }
+      ],
+      "runes": {
+       "ready": 12,
+       "exhausted": 0,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 26,
+      "runeDeck": 0,
+      "score": 7,
+      "trash": [
+       "Entrenched Boar",
+       "Stalwart Poro",
+       "Crackshot Corsair",
+       "Stellacorn Herder",
+       "Pakaa Cub",
+       "Discipline",
+       "Discipline",
+       "Pakaa Cub"
+      ],
+      "banish": [],
+      "hand": [
+       "Stalwart Poro",
+       "Mountain Drake",
+       "Zephyr Sage"
+      ]
+     },
+     "opp": {
+      "legend": "Pyke, Bloodharbor Ripper",
+      "champion": "Pyke, Dockside Butcher",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 9,
+       "domains": [
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury"
+       ]
+      },
+      "deck": 28,
+      "runeDeck": 0,
+      "score": 7,
+      "trash": [
+       "Pouty Poro",
+       "Void Hatchling",
+       "Hextech Ray",
+       "Noxus Saboteur",
+       "Hextech Ray",
+       "Shipyard Skulker",
+       "Incinerate",
+       "Incinerate"
+      ],
+      "banish": [],
+      "handCount": 2
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Wizened Elder",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [],
+       "opp": [
+        {
+         "n": "Shipyard Skulker",
+         "m": 3,
+         "base": 3
+        }
+       ],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    },
+    "choice": {
+     "q": "Ha elfoglalod a Kinkou Temple-t, megkapod a győztes pontot?",
+     "opts": [
+      {
+       "t": "Igen, mert a Grove-ot ebben a körben már pontoztad holddal, így minden battlefieldet pontoztál",
+       "ok": true,
+       "why": "Az utolsó pont conquerrel akkor jár, ha ebben a körben minden battlefieldet pontoztál {{473.1.b.1}}, és a hold is pontozás {{471.2}}."
+      },
+      {
+       "t": "Nem, conquerrel az utolsó pont sosem szerezhető meg",
+       "ok": false,
+       "why": "Megszerezhető, ha ebben a körben minden battlefieldet pontoztál {{473.1.b.1}}."
+      },
+      {
+       "t": "Nem, a pont helyett lapot húzol, mert holdot és conquert nem lehet egy körben kombinálni",
+       "ok": false,
+       "why": "Bármelyik út pontozásnak számít {{471}}, és a feltétel csak az, hogy minden battlefieldet pontozz {{473.1.b.1}}."
+      }
+     ]
+    }
+   },
+   {
+    "type": "act",
+    "prompt": "Foglald el a Kinkou Temple-t: mozgasd oda a [[Playful Phantom]] unitot.",
+    "expect": {
+     "kind": "move",
+     "unit": "Playful Phantom",
+     "to": "bf1"
+    },
+    "ok": "A Phantom exhaustolva átlépett a Kinkou Temple-re {{144.2}} {{144.4.a}}.",
+    "wrong": {
+     "unit:Wizened Elder": "A Wizened Elder a Grove-on áll: Standard Move-val csak a base-be léphetne vissza {{144.4.b}}. Ha a Grove-on nem maradna unitod, a következő cleanupban elveszítenéd {{190.4.c}}."
+    },
+    "after": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Centered",
+      "base": [],
+      "runes": {
+       "ready": 12,
+       "exhausted": 0,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 26,
+      "runeDeck": 0,
+      "score": 7,
+      "trash": [
+       "Entrenched Boar",
+       "Stalwart Poro",
+       "Crackshot Corsair",
+       "Stellacorn Herder",
+       "Pakaa Cub",
+       "Discipline",
+       "Discipline",
+       "Pakaa Cub"
+      ],
+      "banish": [],
+      "hand": [
+       "Stalwart Poro",
+       "Mountain Drake",
+       "Zephyr Sage"
+      ]
+     },
+     "opp": {
+      "legend": "Pyke, Bloodharbor Ripper",
+      "champion": "Pyke, Dockside Butcher",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 9,
+       "domains": [
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury"
+       ]
+      },
+      "deck": 28,
+      "runeDeck": 0,
+      "score": 7,
+      "trash": [
+       "Pouty Poro",
+       "Void Hatchling",
+       "Hextech Ray",
+       "Noxus Saboteur",
+       "Hextech Ray",
+       "Shipyard Skulker",
+       "Incinerate",
+       "Incinerate"
+      ],
+      "banish": [],
+      "handCount": 2
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Wizened Elder",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "opp",
+       "me": [
+        {
+         "n": "Playful Phantom",
+         "m": 5,
+         "base": 5,
+         "ex": true,
+         "dmg": 3,
+         "status": [
+          "attacker",
+          "new"
+         ],
+         "tag": "Attacker"
+        }
+       ],
+       "opp": [
+        {
+         "n": "Shipyard Skulker",
+         "m": 3,
+         "base": 3,
+         "dmg": 5,
+         "status": [
+          "defender",
+          "dying"
+         ],
+         "tag": "Defender"
+        }
+       ],
+       "facedown": null
+      }
+     ],
+     "chain": []
+    }
+   },
+   {
+    "say": "Combat indul, te vagy az Attacker {{466.2.c.1}}. A showdownban mindketten passzoltok. A damage egyszerre érkezik {{467.2.c.1.a}}: a Skulker 5-öt, a Phantom 3-at kap."
+   },
+   {
+    "say": "A Skulker meghal, a Phantom gyógyul {{468.1.a.1}}. Conquer {{468.5.d}}: mivel a Grove-ot már pontoztad, megkapod a 8. pontot {{473.1.b.1}}. A következő cleanup ellenőrzi: legalább 8 pontod van, és több, mint az ellenfélnek, tehát nyertél {{323.1}} {{194.2}}.",
+    "board": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Centered",
+      "base": [],
+      "runes": {
+       "ready": 12,
+       "exhausted": 0,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 26,
+      "runeDeck": 0,
+      "score": 8,
+      "trash": [
+       "Entrenched Boar",
+       "Stalwart Poro",
+       "Crackshot Corsair",
+       "Stellacorn Herder",
+       "Pakaa Cub",
+       "Discipline",
+       "Discipline",
+       "Pakaa Cub"
+      ],
+      "banish": [],
+      "hand": [
+       "Stalwart Poro",
+       "Mountain Drake",
+       "Zephyr Sage"
+      ]
+     },
+     "opp": {
+      "legend": "Pyke, Bloodharbor Ripper",
+      "champion": "Pyke, Dockside Butcher",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 9,
+       "domains": [
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury"
+       ]
+      },
+      "deck": 28,
+      "runeDeck": 0,
+      "score": 7,
+      "trash": [
+       "Pouty Poro",
+       "Void Hatchling",
+       "Hextech Ray",
+       "Noxus Saboteur",
+       "Hextech Ray",
+       "Shipyard Skulker",
+       "Incinerate",
+       "Incinerate",
+       "Shipyard Skulker"
+      ],
+      "banish": [],
+      "handCount": 2
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Wizened Elder",
+         "m": 4,
+         "base": 4
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Playful Phantom",
+         "m": 5,
+         "base": 5,
+         "ex": true
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "Győzelem"
+    }
+   },
+   {
+    "say": "Másik idővonal: 7 ponttal kezded a köröd, de az előző körödben a Wizened Eldert a base-be vitted, így a Grove gazdátlan lett, és a köröd elején nem holdoltál semmit. A Draw Phase után 7 pontról foglalod el a Kinkou Temple-t.",
+    "board": {
+     "me": {
+      "legend": "Lee Sin, Blind Monk",
+      "champion": "Lee Sin, Centered",
+      "base": [
+       {
+        "n": "Wizened Elder",
+        "m": 4,
+        "base": 4
+       }
+      ],
+      "runes": {
+       "ready": 12,
+       "exhausted": 0,
+       "domains": [
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Calm",
+        "Body",
+        "Body",
+        "Body",
+        "Body",
+        "Body",
+        "Body"
+       ]
+      },
+      "deck": 27,
+      "runeDeck": 0,
+      "score": 7,
+      "trash": [
+       "Entrenched Boar",
+       "Stalwart Poro",
+       "Crackshot Corsair",
+       "Stellacorn Herder",
+       "Pakaa Cub",
+       "Discipline",
+       "Discipline",
+       "Pakaa Cub"
+      ],
+      "banish": [],
+      "hand": [
+       "Stalwart Poro",
+       "Mountain Drake"
+      ]
+     },
+     "opp": {
+      "legend": "Pyke, Bloodharbor Ripper",
+      "champion": "Pyke, Dockside Butcher",
+      "base": [],
+      "runes": {
+       "ready": 3,
+       "exhausted": 9,
+       "domains": [
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Chaos",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury",
+        "Fury"
+       ]
+      },
+      "deck": 28,
+      "runeDeck": 0,
+      "score": 7,
+      "trash": [
+       "Pouty Poro",
+       "Void Hatchling",
+       "Hextech Ray",
+       "Noxus Saboteur",
+       "Hextech Ray",
+       "Shipyard Skulker",
+       "Incinerate",
+       "Incinerate",
+       "Shipyard Skulker"
+      ],
+      "banish": [],
+      "handCount": 2
+     },
+     "bfs": [
+      {
+       "name": "Grove of the God-Willow",
+       "ctrl": null,
+       "me": [],
+       "opp": [],
+       "facedown": null
+      },
+      {
+       "name": "Kinkou Temple",
+       "ctrl": "me",
+       "me": [
+        {
+         "n": "Playful Phantom",
+         "m": 5,
+         "base": 5,
+         "ex": true
+        }
+       ],
+       "opp": [],
+       "facedown": null
+      }
+     ],
+     "chain": [],
+     "note": "Alternatív idővonal, a conquer pillanata: a Kinkou Temple kontrollja már a tiéd, a conquer eredménye (pont vagy húzás) még nem érkezett meg. A kezedben a Stalwart Poro és a Draw Phase-ben húzott lap van, a Grove holdja nem húzatott."
+    },
+    "choice": {
+     "q": "Mi történik a conquerkor?",
+     "opts": [
+      {
+       "t": "A pont helyett húzol 1 lapot",
+       "ok": true,
+       "why": "Ebben a körben nem pontoztál minden battlefieldet, ezért a pont helyett húzol {{473.1.b.1}}. Ha ugyanebben a körben a Grove-ot is elfoglalod, az a conquer már megadja a 8. pontot."
+      },
+      {
+       "t": "Megkapod a 8. pontot és nyersz",
+       "ok": false,
+       "why": "Az utolsó pont conquerrel csak akkor jár, ha minden battlefieldet pontoztál ebben a körben {{473.1.b.1}}."
+      },
+      {
+       "t": "Nem kapsz pontot és lapot sem",
+       "ok": false,
+       "why": "A pont helyett lapot húzol {{473.1.b.1}}."
+      }
+     ]
+    }
+   }
+  ]
+ }
+]

@@ -17,7 +17,7 @@ Fülek (`web/src/router.ts`):
 | `#szabalyok` | Szabályzat | teljes Core Rules kereshetően (`#r-<szám>`), versenyformátum oldalak (`#fmt-<id>`: Duel, Match, FFA3, FFA4, 2v2) |
 | `#chain` | Chain | chain építő és elemző: lépésenkénti lejátszás Playmaton, mistarget és linked instructions, combat panel |
 | `#hogyan` | How to Play | 10 fejezetes kezdő útmutató, a learnriftbound.gg felépítését követi |
-| `#tanulas` | Practice | szituációk a Playmaton, haladó leckék szintenként |
+| `#tanulas` | Practice | 12 interaktív szituáció (akció-menü, célpont modal, fázispanelek, OUTCOME jó és rossz kimenettel), haladó leckék szintenként (`#tanulas/lecke`) |
 | `#kezikonyv` | Fogalomtár | fogalmak, kulcsszavak, játékmenet lépésábrák, szabályváltozások, errata előtte/utána |
 
 ## Könyvtárszerkezet
@@ -31,7 +31,7 @@ src/                    Python adat pipeline
   data/audit/           ellenőrző körök kimenetei és javításai (lásd lent)
 web/                    Vite + React 19 + TypeScript + Tailwind v4 frontend
   src/views/            fülenkénti nézetek
-  src/components/       Playmat (pálya), CombatPanel, CardModal, TipLayer
+  src/components/       Playmat (pálya, Chain), PracticeBoard (Practice pálya), practiceEngine.ts (szituáció-motor, React nélkül), CombatPanel, CardModal, TipLayer
   src/legacy/           imperatív modulok (core.ts: kártya HTML, deck legalitás, PDF; chain.ts: chain builder (DOM); chainCore.ts: DOM nélküli chain elemző; knowledge.ts: Fogalomtár)
   src/components/combatCore.ts  combat damage kiosztás szabálylogikája (React nélkül)
   src/generated/        build termék, nincs verziókezelve
@@ -40,6 +40,7 @@ web/                    Vite + React 19 + TypeScript + Tailwind v4 frontend
   unit/                 Vitest unit tesztek: Core Rules hivatalos példái (hivatalos.test.ts), combat (combat.test.ts), beépített és korábbi esetek, felismerés, lefedettség, szabályszám-ellenőrzés
 tools/
   HANDOFF.md            munkaállapot, döntések naplója
+  learn/scenarios_build.py  a Practice szituációk generátora (src/data/learn.json "scenarios"), kiinduló pályák: learn/scenarios_v1.json
   audit/                ellenőrző körök briefjei és szkriptjei (RBRIEF.md, gen2.py, lint.py, check.py)
   prices/fetch.py       Cardmarket árletöltő
 .github/workflows/      deploy.yml (build és Pages), e2e.yml (Playwright), prices.yml (kézi árfrissítés)
@@ -64,6 +65,7 @@ Jegyzet formátum (`nt`): `[szabályszámok vesszővel, flag, szöveg]`. Flag: 0
 
 - **Kártya rövid leírás és jegyzetek:** 22 ellenőrző kör agentekkel, a briefek a `tools/audit/RBRIEF.md`-ben. Kész kritérium: két egymást követő kör nem talál hibát. Ez mind az 1101 lapra teljesült (a 22. kör 0 javítás).
 - **Gyakori kérdések:** 3940 kérdés-válasz pár, generálva a már ellenőrzött short és notes alapján, utána egy ellenőrző kör (kb. 260 javítás, 0 törlés). Második ellenőrző kör még nem futott.
+- **Practice szituációk:** adatvezérelt motor (`practiceEngine.ts`): a menüpontok legalitását a Core Rules szerint számolja (Standard Move 144, a lap sebessége és a turn állapota 308.1.a, 309.1.a, költség 164.2), a lépések sorrendjét őrzi, a rossz döntés OUTCOME panelt ad optimális sorral. A `unit/practice.test.ts` minden szituáció elvárt sorát végigjátssza, és ellenőrzi a kimeneteket, szabályszámokat, lapneveket.
 - **How to Play, Practice, formátum oldalak:** saját szöveg a Core Rules alapján, minden állítás mellett szabályszám (`{{szám}}` jelölés). Minden hivatkozott szabályszám létezik a `rules.json`-ban (gépi ellenőrzés, 2026-11-19).
 - Mérvadó forrás mindig a `rules.json` szövege és a lap hivatalos szövege. A `RBRIEF.md` "Ismert, ellenőrzött tények" része sorolja fel azokat a pontokat, amelyeket korábban tévesen hibának jelöltek.
 
@@ -96,7 +98,7 @@ cd src && python3 build_data.py && python3 export_web.py; rm -f data.json
 cd ../web && npm ci && npm run build          # tsc -b szigorú: a nem használt változó is hiba
 npx vite preview --port 4173                  # előnézet
 npm run test:unit                             # Vitest, a chain elemző és a combat kiosztás (a generált adatot használja)
-npm run test:e2e                              # Playwright, 13 teszt
+npm run test:e2e                              # Playwright, 14 teszt
 ```
 
 Megjegyzés: `npx tsc --noEmit -p .` nem azonos a CI-vel, mindig `npm run build`-del ellenőrizz. Ahol a Playwright saját böngészője nem tölthető le, a rendszer Chrome-ja megadható: `PW_CHROME=/usr/bin/google-chrome npm run test:e2e`.

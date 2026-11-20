@@ -84,3 +84,8 @@
 
 - Chain 3. kör (2026-11-19): koppintásos mozgatás (érintő, egér, billentyű), "Így értelmezem a lapot" javítható értelmezés (lépés ov mező, linkben is), combat panel javaslatok (feltételes keyword, prevent, instead, nem sebezhető 467.2.c.10), Ezután triggerel lista, Hozzáadás a Chainhez.
 - Cardmarket ár: kézi frissítés (.github/workflows/prices.yml, Run workflow), prices.json commitolva, fejléc 7 nap után "frissítés esedékes". Heti időzítés a fájlban kikommentezve.
+
+## Practice újraépítés (2026-11-20)
+- A Practice a learnriftbound.gg /scenarios és /learn működését követi: bevezető panel, kattintásra akció-menü, Mozgás megerősítése, fázispanelek, célpont modal, damage kiosztás, OUTCOME (jó és rossz, optimális sor), Újrajátszás, End Turn. Haladásszámláló nincs (döntés).
+- Motor: web/src/components/practiceEngine.ts, pálya: PracticeBoard.tsx (a Chain Playmatja érintetlen). Adat: src/data/learn.json "scenarios", generálás: python3 tools/learn/scenarios_build.py, utána export.
+- 12 szituáció: a korábbi 10 átültetve, új: "Damage kiosztás védekezésben", "When I attack, when I defend".

@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { AlertTriangle, BookOpen, Check, ChevronLeft, ChevronRight, Clock, Compass, ExternalLink, Info, Lightbulb, Play, RotateCcw, X } from 'lucide-react';
+import { AlertTriangle, ArrowRight, BookOpen, Check, ChevronLeft, ChevronRight, Clock, Compass, ExternalLink, Flame, Info, Lightbulb, Menu, Play, RotateCcw, X, Zap } from 'lucide-react';
 import { loadLearn } from '../data';
-import { IMGBASE, esc, glossify, vsCard } from '../legacy/core';
-import { Playmat, DEMO_BOARD, diffBoards } from '../components/Playmat';
-import { autoAfter, useAct, type ActStep, type Runes } from './scenarioAct';
+import { IMGBASE, vsCard } from '../legacy/core';
+import { Playmat, DEMO_BOARD } from '../components/Playmat';
+import { PracticeBoard } from '../components/PracticeBoard';
+import { inline } from '../components/richText';
+import type { Scn } from '../components/practiceEngine';
 
 type Cell = [number, string];
 type Block =
@@ -23,10 +25,7 @@ type Block =
   | { type: 'chainstep'; title?: string; steps: { title: string; text: string; chain: string[]; pri?: string | null; done?: string }[] }
   | { type: 'links'; items: { href: string; title: string; text?: string }[] };
 type Chapter = { id: string; section: 'hogyan' | 'lecke'; level?: string; title: string; sub?: string; rules?: string; old?: string[]; blocks: Block[] };
-type Board = any;
-type Step = ActStep & { say?: string; board?: Board; choice?: { q: string; opts: { t: string; ok?: boolean; why: string }[] } };
-type Scenario = { id: string; title: string; level: string; intro: string; rules?: string; steps: Step[] };
-type Learn = { chapters: Chapter[]; scenarios: Scenario[] };
+type Learn = { chapters: Chapter[]; scenarios: Scn[] };
 
 const LEVELS: [string, string, string][] = [
   ['kezdo', 'Kezdő', 'Az első játékok tipikus félreértései.'],
@@ -35,14 +34,7 @@ const LEVELS: [string, string, string][] = [
 ];
 const lvName = (lv?: string) => LEVELS.find((l) => l[0] === lv)?.[1] || '';
 
-/** [[Kártya]] kártyalink, {{123.4}} szabálylink, plusz fogalom-tooltip. */
-export function inline(text: string, seen?: Set<string>) {
-  let h = esc(text)
-    .replace(/\[\[([^\]]+)\]\]/g, (_, n) => '<span class="cl" data-card="' + n + '">' + n + '</span>')
-    .replace(/\{\{([\d.a-z\-, ]+)\}\}/gi, (_, r) => String(r).split(/\s*,\s*/).map((x: string) => '<a class="rref" href="#szabalyok" data-ref="' + x + '">' + x + '</a>').join(' '));
-  try { h = glossify(h, seen || new Set()); } catch { /* glossify nélkül is olvasható */ }
-  return h;
-}
+export { inline };
 const H = ({ t, seen, as = 'span', className }: { t: string; seen?: Set<string>; as?: 'span' | 'p' | 'div' | 'b'; className?: string }) => {
   const El = as as any;
   return <El className={className} dangerouslySetInnerHTML={{ __html: inline(t, seen) }} />;
@@ -274,109 +266,6 @@ export function Blocks({ blocks }: { blocks: Block[] }) {
   );
 }
 
-function ScenarioView({ s, all }: { s: Scenario; all: Scenario[] }) {
-  const [started, setStarted] = useState(false);
-  const [i, setI] = useState(0);
-  const [pick, setPick] = useState<Record<number, number>>({});
-  const [done, setDone] = useState<Record<number, boolean>>({});
-  const [liveR, setLiveR] = useState<Record<number, Runes>>({});
-  useEffect(() => { setI(0); setPick({}); setDone({}); setLiveR({}); setStarted(false); }, [s.id]);
-  // Állások lépésenként: pre = a lépés eleje, post = a lépés vége (act lépésnél a jó mozdulat utáni állás).
-  // Ha a játékos más domainű rune-okkal fizetett, mint az adatban, a saját rune-jai maradnak a következő lépésekben is, amíg az adat nem változtat rajtuk.
-  const { pre, post } = useMemo(() => {
-    const pre: Board[] = [], post: Board[] = [];
-    const J = (x: unknown) => JSON.stringify(x);
-    const withR = (b: Board, r: Runes) => ({ ...b, me: { ...b.me, runes: r } });
-    let sub: { from: string; to: Runes } | null = null;
-    s.steps.forEach((x, k) => {
-      let p: Board = x.board ?? post[k - 1];
-      if (x.board && sub) { if (J(x.board.me.runes) === sub.from) p = withR(p, sub.to); else sub = null; }
-      pre[k] = p;
-      let q: Board = x.type === 'act' ? autoAfter(p, x) : p;
-      if (x.type === 'act' && x.after && sub) { if (J(x.after.me.runes) === sub.from) q = withR(q, sub.to); else sub = null; }
-      const lr = liveR[k]; const qr = q.me.runes;
-      if (x.type === 'act' && lr && qr && lr.ready === qr.ready && lr.exhausted === qr.exhausted && J(lr) !== J(qr)) { sub = { from: J(qr), to: lr }; q = withR(q, lr); }
-      post[k] = q;
-    });
-    return { pre, post };
-  }, [s, liveR]);
-  const st = s.steps[i];
-  const isAct = st.type === 'act';
-  const dn = !!done[i];
-  const board: Board = isAct && dn ? post[i] : pre[i];
-  const prevBoard: Board | undefined = isAct ? (dn ? pre[i] : undefined) : (i > 0 && st.board ? post[i - 1] : undefined);
-  const changes = prevBoard ? diffBoards(prevBoard, board) : [];
-  const blocked = (!!st.choice && pick[i] == null) || (isAct && !dn);
-  const last = i === s.steps.length - 1;
-  const idx = all.indexOf(s); const nextS = all[idx + 1];
-  const next = () => { if (!started) { setStarted(true); return; } if (blocked) return; if (last) location.hash = nextS ? '#tanulas/sz/' + nextS.id : '#tanulas/sz'; else setI(i + 1); };
-  const back = () => started && i > 0 && setI(i - 1);
-  const nextLabel = last ? (nextS ? <>Következő szituáció <ChevronRight size={16} /></> : <><Check size={16} /> Vissza a listához</>) : <>Tovább <ChevronRight size={16} /></>;
-  const act = useAct({ st, pre: pre[i], k: s.id + ':' + i, done: dn || !started, onDone: (r) => { setDone((d) => ({ ...d, [i]: true })); if (r) setLiveR((m) => ({ ...m, [i]: r })); }, onNext: next, nextLabel, render: (t) => <H t={t} /> });
-  useEffect(() => {
-    const k = (e: KeyboardEvent) => { if ((e.target as HTMLElement).closest('input,textarea')) return; if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') back(); };
-    window.addEventListener('keydown', k); return () => window.removeEventListener('keydown', k);
-  });
-  const ok = st.choice?.opts.find((o) => o.ok);
-  return (
-    <div className="scn">
-      <div className="chhead">
-        <div className="crumb"><a href="#tanulas">Practice</a> › <a href="#tanulas/sz">Szituációk</a> › {s.title}</div>
-        <span className="pos">{idx + 1} / {all.length}</span>
-      </div>
-      <h1 className="chtitle">{s.title}</h1>
-      <H as="p" className="chsub" t={s.intro} />
-      <div className="scn-grid">
-        <div className="scn-boardcol">
-          {started && act.bar}
-          {board && <Playmat key={s.id} b={act.board || board} prev={started ? prevBoard : undefined} turn={(board as any).turn || 'me'} scn ctl={started ? act.ctl : null} />}
-        </div>
-        <aside className={'scn-narr' + (started ? '' : ' pre')}>
-          {!started ? (
-            <>
-              <div className="scn-step"><span>{lvName(s.level) || 'Kezdő'} · {s.steps.length} lépés</span></div>
-              <H as="div" t={s.intro} />
-              {s.rules && <p className="note">Core Rules: <span dangerouslySetInnerHTML={{ __html: inline('{{' + s.rules + '}}') }} /></p>}
-              {pre[0]?.note && <p className="scn-note">{pre[0].note}</p>}
-              <p className="note">A pálya a kiinduló állást mutatja. A kérdéseknél válassz, a pályán végzett lépéseknél kattints a sárgán kiemelt lapokra.</p>
-              <div className="scn-ctl"><span />
-                <button className="btn hex" onClick={() => setStarted(true)}><Play size={16} /> Szituáció indítása</button></div>
-            </>
-          ) : (
-            <>
-              <div className="scn-step"><span>{i + 1}. lépés / {s.steps.length}</span>
-                <div className="scn-dots" aria-hidden>{s.steps.map((_, k) => <i key={k} className={k === i ? 'on' : k < i ? 'seen' : ''} onClick={() => k <= i && setI(k)} />)}</div></div>
-              {st.say && <H as="div" t={st.say} />}
-              {isAct && <div className="scn-task"><b>Feladat</b><H t={st.prompt || ''} /></div>}
-              {isAct && dn && <div className="scn-msg ok scn-okx"><Check size={16} aria-hidden /><H t={st.ok || ''} /></div>}
-              {!!changes.length && (
-                <div className="scn-chg"><b>Mi változott?</b><ul>{changes.map((c, k) => <li key={k}>{c}</li>)}</ul></div>
-              )}
-              {st.board?.note && i > 0 && <p className="scn-note">{st.board.note}</p>}
-              {st.choice && (
-                <div className="scn-choice">
-                  <H as="p" t={st.choice.q} />
-                  <div className="qopts">{st.choice.opts.map((o, k) => {
-                    const cls = pick[i] == null ? '' : o.ok ? 'ok' : k === pick[i] ? 'bad' : '';
-                    return <button key={k} className={cls} disabled={pick[i] != null} onClick={() => setPick({ ...pick, [i]: k })}><H t={o.t} /></button>;
-                  })}</div>
-                  {pick[i] != null && <div className="qwhy"><H t={(st.choice.opts[pick[i]].ok ? 'Helyes. ' : 'Nem jó. ') + st.choice.opts[pick[i]].why} /></div>}
-                  {pick[i] != null && !st.choice.opts[pick[i]].ok && ok && <div className="qwhy"><H t={'A jó válasz: ' + ok.t + '. ' + ok.why} /></div>}
-                </div>
-              )}
-              <div className="scn-ctl">
-                <button className="btn sec" disabled={i === 0} onClick={back}><ChevronLeft size={16} /> Vissza</button>
-                <button className="btn hex" disabled={blocked} onClick={next}>{nextLabel}</button>
-              </div>
-              <p className="note">{isAct ? 'A sárgán kiemelt lapokkal most lehet valamit csinálni. Billentyűzet: Tab a kiemelt lapokon, Enter kiválaszt, Esc mégse, ← → lépések.' : 'Kattints egy unitra a részletekért, a címkékre (Attacker, Buff, ...) mutatva magyarázatot kapsz. Billentyűzet: ← →'}</p>
-            </>
-          )}
-        </aside>
-      </div>
-    </div>
-  );
-}
-
 type Route =
   | { k: 'ch'; id?: string }
   | { k: 'pidx' } | { k: 'sz' } | { k: 'scn'; id: string } | { k: 'lk' } | { k: 'lesson'; id: string };
@@ -460,72 +349,140 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
     );
   }
 
+  return <PracticeView L={L} lessons={lessons} route={route} />;
+}
+
+/* ---------------- Practice: szituációk és leckék ---------------- */
+const LVICON: Record<string, typeof Compass> = { kezdo: Compass, halado: Zap, profi: Flame };
+
+function PracticeSide({ kind, L, lessons, cur }: { kind: 'sz' | 'lk'; L: Learn; lessons: Chapter[]; cur?: string }) {
   const scs = L.scenarios;
-  const cur = route.k === 'scn' || route.k === 'lesson' ? route.id : undefined;
-  const side = <Side title="Practice" cur={cur} groups={[
-    { h: 'Szituációk', items: scs.map((s, i) => ({ id: s.id, href: '#tanulas/sz/' + s.id, t: s.title, n: String(i + 1) })) },
-    ...LEVELS.map(([lv, name]) => ({ h: name + ' leckék', items: lessons.filter((c) => c.level === lv).map((c) => ({ id: c.id, href: '#tanulas/lecke/' + c.id, t: c.title, n: String(lessons.indexOf(c) + 1) })) })).filter((g) => g.items.length),
-  ]} />;
-
-  const scnList = (
-    <ol className="scnlist">{scs.map((s, i) => (
-      <li key={s.id}><a href={'#tanulas/sz/' + s.id}><span className="num">{i + 1}</span><span><b>{s.title}</b><H t={s.intro} /></span><ChevronRight size={16} aria-hidden /></a></li>))}</ol>
+  const pos = kind === 'sz' ? (cur ? (scs.findIndex((s) => s.id === cur) + 1) + ' / ' + scs.length : scs.length + ' szituáció')
+    : (cur ? (lessons.findIndex((c) => c.id === cur) + 1) + ' / ' + lessons.length : lessons.length + ' lecke');
+  const body = (
+    <>
+      <nav className="psub" aria-label="Practice">
+        <a href="#tanulas" aria-current={kind === 'sz' ? 'page' : undefined}>Szituációk</a>
+        <a href="#tanulas/lecke" aria-current={kind === 'lk' ? 'page' : undefined}>Leckék</a>
+      </nav>
+      {kind === 'sz' ? (
+        <>
+          <div className="psd-h"><small>PRACTICE</small><b>Szituációk</b><span>{scs.length} szituáció</span></div>
+          <ol className="psd-list">{scs.map((s, i) => (
+            <li key={s.id}><a href={'#tanulas/sz/' + s.id} aria-current={cur === s.id ? 'page' : undefined}><span className="num">{i + 1}</span>{s.title}</a></li>))}</ol>
+        </>
+      ) : (
+        <>
+          <div className="psd-h"><small>LECKÉK</small><b>Haladó leckék</b><span>{lessons.length} lecke</span></div>
+          {LEVELS.map(([lv, name]) => {
+            const list = lessons.filter((c) => c.level === lv); if (!list.length) return null;
+            return (
+              <div key={lv} className={'psd-lv lv-' + lv}>
+                <h4>{name} <span className="cnt">{list.length}</span></h4>
+                <ol className="psd-list">{list.map((c, i) => (
+                  <li key={c.id}><a href={'#tanulas/lecke/' + c.id} aria-current={cur === c.id ? 'page' : undefined}><span className="num">{String(i + 1).padStart(2, '0')}</span>{c.title}</a></li>))}</ol>
+              </div>);
+          })}
+        </>
+      )}
+    </>
   );
-  const lessonGrid = (
-    <div className="lgroups">{LEVELS.map(([lv, name, d]) => {
-      const list = lessons.filter((c) => c.level === lv); if (!list.length) return null;
-      return (
-        <section key={lv} className="lgroup">
-          <h3>{name} <small>{list.length} lecke · {d}</small></h3>
-          <div className="lkcards">{list.map((c) => (
-            <a key={c.id} className="lkcard" href={'#tanulas/lecke/' + c.id}>
-              <span className="lk-meta"><Clock size={12} aria-hidden /> {readMin(c.blocks)} perc</span>
-              <b>{c.title}</b>
-              {c.sub && <H as="p" t={c.sub} />}
-              <span className="lk-go">Lecke megnyitása <ChevronRight size={14} /></span>
-            </a>))}</div>
-        </section>);
-    })}</div>
+  return (
+    <>
+      <aside className="panel learn-side psd">{body}</aside>
+      <details className="panel learn-side-m psd"><summary><Menu size={16} aria-hidden /> {kind === 'sz' ? 'Szituációk' : 'Leckék'}<span className="pos">{pos}</span></summary>{body}</details>
+    </>
   );
+}
 
-  let main: ReactNode;
-  if (route.k === 'scn') {
-    const s = scs.find((x) => x.id === route.id);
-    if (s) return <div className="learn wide"><main className="panel learn-main"><ScenarioView key={s.id} s={s} all={scs} /></main></div>;
-    main = <><h1 className="chtitle">Nincs ilyen szituáció</h1>{scnList}</>;
-  } else if (route.k === 'lesson') {
-    const ch = lessons.find((c) => c.id === route.id);
-    main = ch ? <ChapterPage ch={ch} list={lessons} hrefOf={(c) => '#tanulas/lecke/' + c.id}
-      crumb={<><a href="#tanulas">Practice</a> › <a href="#tanulas/lecke">Haladó leckék</a> › {lvName(ch.level)} › {ch.title}</>} />
-      : <><h1 className="chtitle">Nincs ilyen lecke</h1>{lessonGrid}</>;
-  } else if (route.k === 'sz') {
-    main = (<><div className="chhead"><div className="crumb"><a href="#tanulas">Practice</a> › Szituációk</div></div>
-      <h1 className="chtitle">Szituációk</h1><p className="chsub">Board state-ek lépésenként, döntésekkel és magyarázattal.</p>{scnList}</>);
-  } else if (route.k === 'lk') {
-    main = (<><div className="chhead"><div className="crumb"><a href="#tanulas">Practice</a> › Haladó leckék</div></div>
-      <h1 className="chtitle">Haladó leckék</h1><p className="chsub">Szintenként csoportosítva, a How to Play után.</p>{lessonGrid}</>);
-  } else {
-    main = (
-      <>
-        <div className="chhead"><div className="crumb">Practice</div></div>
-        <h1 className="chtitle">Practice</h1>
-        <p className="chsub">Szituációk a pályán lépésenként, és haladó leckék szintenként.</p>
-        <div className="pcta">
-          <a className="btn hex" href={'#tanulas/sz/' + (scs[0]?.id || '')}>Első szituáció <ChevronRight size={16} /></a>
-          <a className="btn sec" href="#hogyan">How to Play</a>
-        </div>
-        <h2 className="psec">Szituációk <small>{scs.length}</small></h2>
-        {scnList}
-        <h2 className="psec">Haladó leckék <small>{lessons.length}</small></h2>
-        {lessonGrid}
-        <p className="note" style={{ marginTop: 18 }}>AI által írt, nem hivatalos összefoglaló. A pontos szöveg mindig a hivatkozott szabályszámra kattintva olvasható, versenyen a judge és a Core Rules dönt.</p>
-      </>
+function ScenarioIndex({ L }: { L: Learn }) {
+  const scs = L.scenarios;
+  return (
+    <>
+      <span className="pchip"><Play size={13} aria-hidden /> Practice</span>
+      <h1 className="chtitle">Szituációk</h1>
+      <p className="chsub">Valódi lapokkal felállított pályák. Te lépsz: lapra kattintva megnyílik az akció-menü, a döntésed után a szituáció megmutatja a kimenetet, rossz döntésnél az optimális sort is, szabályszámmal.</p>
+      <div className="pcta">
+        <a className="btn hex" href={'#tanulas/sz/' + (scs[0]?.id || '')}>Első szituáció <ArrowRight size={16} /></a>
+        <span className="note">Kezdés: {scs[0]?.title}</span>
+      </div>
+      <h2 className="psec">Szituációk <small>{scs.length}</small></h2>
+      <ol className="scnlist">{scs.map((s, i) => (
+        <li key={s.id}><a href={'#tanulas/sz/' + s.id}><span className="num">{i + 1}</span><span><b>{s.title}</b><small className="topic">{s.topic}</small><H t={s.intro} /></span><ChevronRight size={16} aria-hidden /></a></li>))}</ol>
+    </>
+  );
+}
+
+function ScenarioPage({ s, all }: { s: Scn; all: Scn[] }) {
+  const idx = all.indexOf(s); const nx = all[idx + 1];
+  return (
+    <div className="scn2">
+      <div className="chhead"><div className="crumb"><span className="pchip sm">Szituáció</span> <span className="ptopic">{s.topic}</span></div><span className="pos">{idx + 1} / {all.length}</span></div>
+      <h1 className="chtitle">{s.title}</h1>
+      <H as="p" className="chsub" t={s.intro} />
+      {s.rules && <p className="chmeta">Core Rules: <span dangerouslySetInnerHTML={{ __html: inline('{{' + s.rules + '}}') }} /></p>}
+      <PracticeBoard scn={s} next={nx ? { href: '#tanulas/sz/' + nx.id, title: nx.title } : undefined} />
+      <Pager prev={all[idx - 1] && { href: '#tanulas/sz/' + all[idx - 1].id, title: all[idx - 1].title }} next={nx && { href: '#tanulas/sz/' + nx.id, title: nx.title }} />
+    </div>
+  );
+}
+
+function LessonIndex({ lessons }: { lessons: Chapter[] }) {
+  return (
+    <>
+      <span className="pchip teal"><BookOpen size={13} aria-hidden /> Leckék</span>
+      <h1 className="chtitle">Haladó leckék</h1>
+      <p className="chsub">Fogalmak és minták a szabályokon túl: tempo, decképítés, showdown és chain. Szintenként csoportosítva, a How to Play után.</p>
+      <div className="lvstats">{LEVELS.map(([lv, name]) => { const n = lessons.filter((c) => c.level === lv).length; const I = LVICON[lv]; return (
+        <div key={lv} className={'lvstat lv-' + lv}><span><I size={14} aria-hidden /> {name}</span><b>{n}</b><small>lecke</small></div>); })}</div>
+      {LEVELS.map(([lv, name, d]) => {
+        const list = lessons.filter((c) => c.level === lv); if (!list.length) return null; const I = LVICON[lv];
+        return (
+          <section key={lv} className={'lvgroup lv-' + lv}>
+            <div className="lvg-h"><span className="dot" /> <b>{name}</b><span className="d">{d}</span><small>{list.length} lecke</small></div>
+            {list.map((c) => (
+              <a key={c.id} className="lkcard2" href={'#tanulas/lecke/' + c.id}>
+                <span className="ic"><I size={16} aria-hidden /></span>
+                <span className="bd"><b>{c.title} <em>{readMin(c.blocks)} perc</em></b>{c.sub && <H as="p" t={c.sub} />}<span className="go">Lecke megnyitása <ArrowRight size={13} /></span></span>
+              </a>))}
+          </section>);
+      })}
+    </>
+  );
+}
+
+function LessonPage({ ch, lessons }: { ch: Chapter; lessons: Chapter[] }) {
+  const same = lessons.filter((c) => c.level === ch.level); const k = same.indexOf(ch);
+  const idx = lessons.indexOf(ch); const prev = lessons[idx - 1], next = lessons[idx + 1];
+  return (
+    <div className={'lk-page lv-' + ch.level}>
+      <div className="lk-meta"><span className="lvbadge">{lvName(ch.level)}</span><span>LECKE {k + 1} / {same.length}</span><span className="r"><Clock size={12} aria-hidden /> kb. {readMin(ch.blocks)} perc olvasás</span></div>
+      <div className="lk-line" aria-hidden />
+      <h1 className="chtitle">{ch.title}</h1>
+      {ch.sub && <H as="p" className="chsub" t={ch.sub} />}
+      <p className="chmeta">Core Rules: <span dangerouslySetInnerHTML={{ __html: inline('{{' + (ch.rules || '') + '}}') }} /></p>
+      <Blocks blocks={ch.blocks} />
+      <Pager prev={prev && { href: '#tanulas/lecke/' + prev.id, title: prev.title }} next={next && { href: '#tanulas/lecke/' + next.id, title: next.title }} />
+    </div>
+  );
+}
+
+function PracticeView({ L, lessons, route }: { L: Learn; lessons: Chapter[]; route: Route }) {
+  const scs = L.scenarios;
+  if (route.k === 'lk' || route.k === 'lesson') {
+    const ch = route.k === 'lesson' ? lessons.find((c) => c.id === route.id) : undefined;
+    return (
+      <div className="learn">
+        <PracticeSide kind="lk" L={L} lessons={lessons} cur={ch?.id} />
+        <main className="panel learn-main">{ch ? <LessonPage ch={ch} lessons={lessons} /> : <LessonIndex lessons={lessons} />}</main>
+      </div>
     );
   }
+  const s = route.k === 'scn' ? scs.find((x) => x.id === route.id) : undefined;
   return (
     <div className="learn">
-      {side}
-      <main className="panel learn-main">{main}</main>
+      <PracticeSide kind="sz" L={L} lessons={lessons} cur={s?.id} />
+      <main className="panel learn-main">{s ? <ScenarioPage key={s.id} s={s} all={scs} /> : <ScenarioIndex L={L} />}</main>
     </div>
   );
 }
