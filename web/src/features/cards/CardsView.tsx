@@ -172,8 +172,8 @@ export function CardsView({ active }: { active: boolean }) {
           </div>
           {dirty && <button className="linkbtn" onClick={() => up(EMPTY)}><X size={13} /> Szűrők törlése</button>}
         </div>
-        <ul className="list" role="listbox" aria-label="Találatok">
-          {!res.length && <li className="pad note">Nincs találat. A banned kártyák alapból rejtve vannak.</li>}
+        <ul className="list" role={mode === 'grid' ? undefined : 'listbox'} aria-label="Találatok">
+          {!res.length && <li className="pad note" role={mode === 'grid' ? undefined : 'none'}>Nincs találat. A banned kártyák alapból rejtve vannak.</li>}
           {mode === 'grid'
             ? shown.map((c: any) => {
                 const stats = [c.e != null ? 'Energy ' + c.e : '', c.m != null ? 'Might ' + c.m : ''].filter(Boolean).join(' · ');
@@ -191,7 +191,7 @@ export function CardsView({ active }: { active: boolean }) {
                 );
               })
             : shown.map((c: any) => (
-                <li key={c.n}>
+                <li key={c.n} role="none">
                   <button role="option" aria-selected={sel === c} onClick={() => pick(c)}>
                     <span className="nm"><span dangerouslySetInnerHTML={{ __html: domDots(c) }} /> {c.n} <Badges c={c} /></span>
                     <span className="ty">{typeLine(c)}</span>
@@ -199,7 +199,7 @@ export function CardsView({ active }: { active: boolean }) {
                 </li>
               ))}
           {res.length > limit && (
-            <li className={mode === 'grid' ? 'more-li' : ''} ref={moreRef}>
+            <li className={mode === 'grid' ? 'more-li' : ''} ref={moreRef} role={mode === 'grid' ? undefined : 'none'}>
               <button className="more" onClick={() => setLimit(limit + (mode === 'grid' ? 120 : 200))}>További {res.length - limit} találat megjelenítése</button>
             </li>
           )}

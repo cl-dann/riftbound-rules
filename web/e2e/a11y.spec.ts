@@ -1,14 +1,10 @@
 /* Akadálymentesség (axe-core) nézetenként: critical és serious szintű új hiba bukik.
-   A meglévő hibák a KNOWN listán vannak (szabály-azonosító nézetenként); javításkor onnan törlendők. */
+   Kivétel a KNOWN listán lehet (szabály-azonosító nézetenként), indoklással. */
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
-const KNOWN: Record<string, string[]> = {
-  kartyak: ['aria-required-children', 'listitem'],
-  chain: ['color-contrast', 'label-content-name-mismatch'],
-  hogyan: ['color-contrast'],
-  'chain-menu': ['color-contrast', 'label-content-name-mismatch'],
-};
+// A kezdeti kivétellista (S06) kiürült: a hibák javítva (S24 után). Új kivétel csak indoklással kerülhet ide.
+const KNOWN: Record<string, string[]> = {};
 
 async function check(page: Page, view: string) {
   const r = await new AxeBuilder({ page }).include('body').analyze();

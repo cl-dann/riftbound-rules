@@ -639,7 +639,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
                   onDrop={(e) => { e.preventDefault(); const from = dragJ.current; dragJ.current = -1; setDropAt(-1); if (from >= 0 && from !== j) mv(from, j); }}
                   onDragEnd={() => { dragJ.current = -1; setDropAt(-1); }}>
                   <span className="cb2-grip" aria-hidden><GripVertical size={14} /></span>
-                  <button type="button" className="cb2-sb" onClick={() => { setSel(sel === j ? null : j); if (sf[j] != null) { setPlay(false); setI(sf[j]); } }} aria-expanded={sel === j} aria-label={(j + 1) + '. lépés szerkesztése: ' + nm.n}>
+                  <button type="button" className="cb2-sb" onClick={() => { setSel(sel === j ? null : j); if (sf[j] != null) { setPlay(false); setI(sf[j]); } }} aria-expanded={sel === j} aria-description={(j + 1) + '. lépés szerkesztése: ' + nm.n}>
                     <span className="no">{j + 1}.</span>
                     {nm.img && imgOf(nm.img) ? <img src={imgOf(nm.img)} alt="" /> : <span className="cb2-kimg">{s.k === 'res' ? 'R' : s.k === 'end' ? 'K' : '?'}</span>}
                     <span className="cb2-st"><b>{nm.n}</b><small>{s.k === 'card' || s.k === 'ab' ? (s.pl === 'A' ? 'Te' : 'Ellenfél') + ', ' : ''}{nm.kind}{j === 0 && s.k === 'card' ? ', első lépés' : ''}</small>
