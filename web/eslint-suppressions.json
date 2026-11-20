@@ -27,7 +27,7 @@
       "count": 1
     },
     "@typescript-eslint/no-explicit-any": {
-      "count": 189
+      "count": 185
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 6
@@ -75,6 +75,14 @@
     },
     "@typescript-eslint/no-explicit-any": {
       "count": 6
+    }
+  },
+  "src/domain/chain/engine/replacement.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    },
+    "@typescript-eslint/no-explicit-any": {
+      "count": 4
     }
   },
   "src/domain/chain/engine/state.ts": {
