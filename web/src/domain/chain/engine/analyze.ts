@@ -13,6 +13,7 @@ import { stepInfo } from '../steps';
 import { plainOf, stripRem } from '../text';
 import { ZONE_HU, type ZoneRef, zoneCheck, zoneRefOf } from '../zones';
 import { type ChainResult, type EngineCtx } from './ctx';
+import { installObjects } from './objects';
 import { INS_ST, RES, art, Art, other, WHO, WHOC, LOCK, lineH } from './labels';
 
 /** A chain lefuttatása a helyzetből (CS): frame-ek, szabálysorok, eseménynapló, objektumok. HTML-t nem készít
@@ -20,50 +21,28 @@ import { INS_ST, RES, art, Art, other, WHO, WHOC, LOCK, lineH } from './labels';
 export { type ChainResult, type EngineCtx, WHO, lineH };
 export function runChain(CS:any):ChainResult{
   const X:EngineCtx={CS} as EngineCtx;
-  X.LOCS=()=>[['base','Base'],['bf0',(X.CS.bf[0].n||'1. battlefield')],['bf1',(X.CS.bf[1].n||'2. battlefield')]];
-  X.locLabel=(l:string)=>(X.LOCS().find(x=>x[0]===l)||['',l])[1];
+  installObjects(X);
   X.MT=null;X.MTIDS=new Set<string>();
   X.S=X.CS.steps.map((s:any,j:number)=>{if(s&&(s.k==='res'||s.k==='end'))return {k:s.k,j,pl:s.pl||'A',c:{n:'',t:'',txt:''},tg:[],ext:{},list:[]};const inf=stepInfo(X.CS,s);return inf&&inf.c?Object.assign({},s,inf,{j,tg:(s.tg||[]).slice(),ext:s.ext||{}}):null;}).filter(Boolean);
   X.POST=X.S.filter((s:any)=>s.k==='tr');X.MAIN=X.S.filter((s:any)=>s.k!=='tr');
   X.out={frames:[],html:'',story:[],done:[],rows:[],ev:[],objs:{},items:[],delayed:[],empty:false};
   if(!X.S.length){X.out.empty=true;return X.out;}
   X.REC=null;X.MAN=false;X.ALL=X.out.rows;X.EV=X.out.ev;
-  X.line=(ref:string,txt:string,fl?:number)=>{const r=[...new Set(String(ref).split(',').map(r=>r.trim()).filter(Boolean))].join(', ');const p=plainOf(txt);if(X.REC)X.REC.push([r,p].concat(X.MAN?[1]:[]));X.ALL.push([r,p]);return lineH(r,txt,fl);};
   X.story=X.out.story;X.rows='';X.rr='';X.notes=[];
   // ---- objektumok ----
   X.O={};X.out.objs=X.O;
-  X.bfC=(n:string)=>{const c=vsCard(n);return c&&c.t==='Battlefield'?c:null;};X.BF={bf0:{c:X.bfC(X.CS.bf[0].n),ctrl:X.CS.bf[0].c},bf1:{c:X.bfC(X.CS.bf[1].n),ctrl:X.CS.bf[1].c}};
-  X.onB=(id:string)=>!!X.O[id]&&X.O[id].zone==='board';
+  X.BF={bf0:{c:X.bfC(X.CS.bf[0].n),ctrl:X.CS.bf[0].c},bf1:{c:X.bfC(X.CS.bf[1].n),ctrl:X.CS.bf[1].c}};
   /** Aktuális Might (layer-egyszerűsítés): nyomtatott vagy megadott + buff + csatolt gear Might bonus + "this turn" módosítók + ismert statikus hatások. Nem boardon: null (359.3.e.12). */
-  X.mightOf=(id:string):number|null=>{const ob=X.O[id];if(!ob||ob.m==null||ob.zone!=='board')return null;let m=(ob.baseSet!=null?ob.baseSet:ob.m)+(ob.bu?(X.BUF2(ob.ctrl)?2:1):0);
-    Object.values(X.O).forEach((g:any)=>{if(g.on===id&&g.zone==='board'&&g.card&&g.card.m)m+=+g.card.m;});
-    const t=(ob.card&&ob.card.txt)||'';let x;
-    if((x=/while there's a stunned enemy unit here, I have \+(\d+) \[S\]/i.exec(t))&&Object.values(X.O).some((u:any)=>u.zone==='board'&&u.type==='unit'&&u.st&&u.ctrl!==ob.ctrl&&u.loc===ob.loc))m+=+x[1];
-    if((x=/^\[Empowered\]\[>\]\s*I have \+(\d+) \[S\]/m.exec(t))&&ob.emp)m+=+x[1];
-    (ob.mods||[]).forEach((md:any)=>{m=m+md.n;if(md.min!=null&&md.n<0)m=Math.max(m,md.min);if(md.dbl)m=m+Math.max(0,m);});
-    return m;};
-  X.BUF2=(p:string)=>typeof X.BUFF2!=='undefined'&&X.BUFF2[p];
-  X.lethal=(id:string)=>{const ob=X.O[id];if(!X.onB(id)||ob.type!=='unit')return false;const m=X.mightOf(id);return m!=null&&ob.dmg>0&&ob.dmg>=m;};
   X.CS.bd.forEach((b:any,i:number)=>{const c=vsCard(b.n);if(!c)return;X.O['b'+i]={id:'b'+i,name:c.n,card:c,ctrl:b.pl,own:b.pl,loc:b.loc,baseOf:b.pl,m:c.t==='Unit'?(b.m!=null?b.m:(c.m!=null?+c.m:null)):null,dmg:b.d||0,dealt:(b.d||0)>0,atk:b.atk||'',ex:!!b.ex,st:!!b.st,bu:!!b.bu,emp:!!b.emp,mods:[],kws:[],zone:'board',type:c.t.toLowerCase()==='unit'?'unit':c.t==='Gear'?'gear':c.t.toLowerCase(),board:true};});
   X.CS.bd.forEach((b:any,i:number)=>{if(X.O['b'+i]&&b.on!=null&&X.O['b'+b.on]&&X.O['b'+i].type==='gear'){X.O['b'+i].on='b'+b.on;X.O['b'+i].loc=X.O['b'+b.on].loc;}});
   ['A','B'].forEach(p=>{const c=vsCard(X.CS.lg[p]);if(c)X.O['L'+p]={id:'L'+p,name:c.n,card:c,ctrl:p,own:p,zone:'legend',type:'legend',emp:false,ex:false};});
   /* Kéz, trash és deck tartalma (a pályás építő mezői, nem kötelező): "zc" objektumok, a többi lapszámítás nem látja őket. Ha nincs megadva, az elemzés változatlan. */
   X.ZC=!!(X.CS.hand||X.CS.trash||X.CS.deck||(X.CS.steps||[]).some((x:any)=>x&&x.zp));X.zcK={hand:'h',trash:'t',deck:'d'};
   if(X.ZC)(['hand','trash','deck'] as const).forEach(z=>['A','B'].forEach(p=>((X.CS[z]||{})[p]||[]).forEach((e:any,i:number)=>{const n=typeof e==='string'?e:e&&e.n;const c=vsCard(n);if(!c)return;const id=typeof e==='string'||!e.id?'z'+X.zcK[z]+p+i:e.id;X.O[id]={id,name:c.n,card:c,own:p,ctrl:p,zone:z,type:'zc',ord:i,gen:0};})));
-  X.zcMove=(id:string,to:string)=>{const ob=X.O[id];if(!ob)return;ob.zone=to;ob.gen=(ob.gen||0)+1;X.EV.push({k:'zcard',id,name:ob.name,to});};
   /** Választható lapok egy zónában: zc objektumok és a játék közben oda került lapok (meghalt unit, lefutott spell a trashben). */
-  X.zoneIds=(z:string,p:string)=>Object.keys(X.O).filter(id=>{const ob=X.O[id];return ob.card&&ob.zone===z&&(ob.own||ob.ctrl)===p&&(ob.type==='zc'||ob.type==='unit'||ob.type==='gear'||ob.type==='spell');}).sort((a,b)=>(X.O[a].ord??99)-(X.O[b].ord??99));
   X.out.zsnap={};
   /** Egy zónából választott lap legális-e (a lap szövegének megkötései: kinek a zónája, típus, tag, darabszám). Üres string: legális. */
-  X.zcWhy=(zr:ZoneRef,ids:string[],pl:string,res:boolean,ctx?:any)=>{const out:string[]=[];
-    if(ids.length>zr.n)out.push('legfeljebb '+zr.n+' lap választható');
-    ids.forEach(id=>{const ob=X.O[id];if(!ob||!ob.card){out.push('nincs megadva: a kiválasztott lap már nincs a helyzetben (törölték), újra kell választani');return;}
-      if(ob.zone!==zr.z){out.push(ob.name+' nincs '+(zr.z==='trash'?'a trashben':zr.z==='hand'?'a kézben':'a deckben')+(res?' a resolve-kor':'')+' (most: '+(ZONE_HU[ob.zone]||ob.zone)+')');return;}
-      const w=zoneCheck(zr,ob,pl,ctx);if(w)out.push(ob.name+' '+w);});
-    return out.join('; ');};
   /** A költségfeltétel változói a választás pillanatában: a forrás Mightja, a játékos pontszáma, a költségként megölt unit nyomtatott költsége. */
-  X.zctx=(it:any,s:any)=>{const k=s&&s.costTg&&X.O[s.costTg]&&X.O[s.costTg].card?printedCost(X.O[s.costTg].card):null;const kv=s&&s.tg&&s.tg[0]&&X.O[s.tg[0]]&&X.O[s.tg[0]].type==='unit'?s.tg[0]:null;const killedM=kv?(X.onB(kv)?X.mightOf(kv):X.O[kv].lk?X.O[kv].lk.m:null):null;
-    return {might:it.src&&X.onB(it.src)?X.mightOf(it.src):null,points:X.scoreOf(it.pl),relE:k?k.e:null,relP:k?k.p:null,killedM};};
   X.cnt={};X.S.forEach((s:any)=>{if(s.k!=='res'&&s.k!=='end')X.cnt[s.c.n]=(X.cnt[s.c.n]||0)+1;});
   X.MAIN.forEach((s:any)=>{const j=s.j;const c=s.c;if(s.k==='res'||s.k==='end')return;
     if(s.k==='ab'||s.k==='tg'){const sc=s.src&&X.O[s.src];X.O['s'+j]={id:'s'+j,name:c.n+(s.k==='ab'?' abilityje':' triggere'),card:c,ctrl:s.k==='tg'&&sc?sc.ctrl:s.pl,own:s.k==='tg'&&sc?sc.ctrl:s.pl,zone:'pending',type:'ability',src:s.src,stepJ:j};return;}
@@ -75,7 +54,6 @@ export function runChain(CS:any):ChainResult{
       const ctrl=e.pl||(p.rel==='enemy'?other(s.pl):p.rel==='friendly'?s.pl:null);
       X.O[id]={id,name:c.n+' célpontja ('+(ctrl==='A'?'a te '+p.type+'od':ctrl==='B'?'az ellenfél '+p.type+'ja':p.type)+')',ctrl,own:ctrl,baseOf:ctrl,loc:e.loc||'bf0',m:e.m!=null?e.m:null,dmg:0,mods:[],kws:[],zone:'board',type:p.type};return id;});
     if(s.cost&&s.costTg==='x'){}});
-  X.nm=(id:string)=>id==='F0'?X.locLabel('bf0'):id==='F1'?X.locLabel('bf1'):X.O[id]?X.O[id].name:id;
   // ---- frame-ek ----
   X.FR=X.out.frames;X.REC=[];
   X.pside=(p:string)=>p==='A'?'me':p==='B'?'opp':null;
