@@ -316,7 +316,7 @@ SC.append({
     'outcomes': {
         'o_good': good('Lebegtetve, mindkét lap kint', 'Exhaustolt rune is recycle-ölhető {{164.2.b}}, így egy rune Energyt és Powert is adhat. A recycle-ölt rune a Rune Deck aljára kerül {{417.1.b}}, és csak akkor jön vissza, amikor a channel a Rune Deck tetejéről addig elfogyasztotta a többi rune-t {{431.1}}.'),
         'o_good2': good('Szintén jó', 'A Chemtech Enforcer is elfoglalja a gazdátlan Grove-ot: conquer, 1 pont {{348.2.a.1}}. A Drakehound ready maradt a base-ben.'),
-        'o_lost': bad('Elfogyott az Energy', 'A maradék rune-okból már nem fizethető ki mindkét lap. Egy rune vagy Energyt ad exhaustolva {{164.2.a}}, vagy Powert recycle-lel {{164.2.b}}: ha ready rune-t recycle-ölsz, az Energyje elveszik. Előbb exhaust, utána recycle.'),
+        'o_lost': bad('Elfogyott az Energy', 'A maradék rune-okból már nem fizethető ki mindkét lap. Egy rune Energyt ad exhaustolva {{164.2.a}}, és Powert recycle-lel {{164.2.b}}, de mindkettőt csak úgy, ha előbb exhaustolod, utána recycle-öled: ha ready rune-t recycle-ölsz, az Energyje elveszik.'),
         'o_chaos': bad('Rossz domain', 'Chaos rune Chaos Powert ad {{164.2.b.1}}, a lapok Fury Powert kérnek {{163.2.a}}. A recycle-ölt rune feleslegesen hagyta el a boardot {{161.2.b}}.'),
         'o_incin': bad('Nem fér bele', 'Az Incinerate 2 Energy: a Drakehounddal és a Hextech Ray-jel együtt már nem fér bele az 5 rune-ba {{164.2.a}}.'),
         'o_pool1': bad('Nem veszik el', 'A Rune Pool csak a Main Phase elején és a kör végén ürül {{167}}.'),

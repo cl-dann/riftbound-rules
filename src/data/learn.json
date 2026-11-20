@@ -3763,7 +3763,7 @@
     "o_lost": {
      "kind": "bad",
      "title": "Elfogyott az Energy",
-     "text": "A maradék rune-okból már nem fizethető ki mindkét lap. Egy rune vagy Energyt ad exhaustolva {{164.2.a}}, vagy Powert recycle-lel {{164.2.b}}: ha ready rune-t recycle-ölsz, az Energyje elveszik. Előbb exhaust, utána recycle."
+     "text": "A maradék rune-okból már nem fizethető ki mindkét lap. Egy rune Energyt ad exhaustolva {{164.2.a}}, és Powert recycle-lel {{164.2.b}}, de mindkettőt csak úgy, ha előbb exhaustolod, utána recycle-öled: ha ready rune-t recycle-ölsz, az Energyje elveszik."
     },
     "o_chaos": {
      "kind": "bad",
