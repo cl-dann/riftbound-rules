@@ -1,0 +1,15 @@
+{
+  "name": "riftbound-lint",
+  "private": true,
+  "description": "ESLint és dependency-cruiser külön csomagban: a typescript-eslint és a dependency-cruiser a TypeScript 6 JS API-ját kéri, a web/ build a TypeScript 7-et (tsgo) használja.",
+  "type": "module",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "dependency-cruiser": "^18.8.0",
+    "eslint": "^10.15.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.14.0",
+    "typescript": "~6.0.0",
+    "typescript-eslint": "^8.73.0"
+  }
+}

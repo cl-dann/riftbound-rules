@@ -27,12 +27,20 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: web/package-lock.json
+          cache-dependency-path: |
+            web/package-lock.json
+            web/lint/package-lock.json
       - name: Kötőjel-ellenőrzés (U+2013, U+2014)
         run: node scripts/check-dashes.mjs
       - name: Függőségek
         working-directory: web
         run: npm ci
+      - name: Lint (ESLint, dependency-cruiser), knip riport
+        working-directory: web
+        run: |
+          npm run lint:install
+          npm run lint
+          npx knip --no-exit-code
       - name: Build (tsc -b és vite build), bundle térkép
         working-directory: web
         env:

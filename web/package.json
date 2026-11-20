@@ -14,7 +14,12 @@
     "check:dashes": "node ../scripts/check-dashes.mjs",
     "bench": "rm -f bench-results.json && vitest bench --run --no-file-parallelism",
     "perf": "rm -f perf-results.json && PERF=1 playwright test --project=perf --reporter=line",
-    "golden:capture": "rm -f /tmp/golden-capture.jsonl && vitest run -c vitest.capture.config.ts && node unit/golden/capture.mjs"
+    "golden:capture": "rm -f /tmp/golden-capture.jsonl && vitest run -c vitest.capture.config.ts && node unit/golden/capture.mjs",
+    "lint": "lint/node_modules/.bin/eslint src && npm run lint:deps",
+    "lint:deps": "lint/node_modules/.bin/depcruise --config lint/.dependency-cruiser.cjs --ignore-known lint/known-violations.json src",
+    "lint:deps:baseline": "lint/node_modules/.bin/depcruise --config lint/.dependency-cruiser.cjs --baseline lint/known-violations.json src",
+    "knip": "knip",
+    "lint:install": "npm ci --prefix lint"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.3.1",
@@ -40,7 +45,7 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
     "fast-check": "^4.10.3",
-    "oxlint": "^1.90.0",
+    "knip": "^6.47.0",
     "rollup-plugin-visualizer": "^7.1.3",
     "typescript": "~7.0.2",
     "vite": "^8.3.6",

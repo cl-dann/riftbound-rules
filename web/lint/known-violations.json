@@ -1,0 +1,59 @@
+[
+  {
+    "type": "dependency",
+    "from": "src/components/Printings.tsx",
+    "to": "src/views/deckEdit.ts",
+    "unresolvedTo": "../views/deckEdit",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "component-no-view"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/components/chainBuild.ts",
+    "to": "src/legacy/chain.ts",
+    "unresolvedTo": "../legacy/chain",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "logic-no-dom-module"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/components/chainBuild.ts",
+    "to": "src/components/Playmat.tsx",
+    "unresolvedTo": "./Playmat",
+    "dependencyTypes": [
+      "local",
+      "type-only",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "logic-no-ui"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "src/views/RulesView.tsx",
+    "to": "src/views/LearnView.tsx",
+    "unresolvedTo": "./LearnView",
+    "dependencyTypes": [
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "view-no-other-view"
+    }
+  }
+]
