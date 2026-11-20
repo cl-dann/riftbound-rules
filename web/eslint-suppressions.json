@@ -27,15 +27,29 @@
       "count": 1
     },
     "@typescript-eslint/no-explicit-any": {
-      "count": 145
+      "count": 124
     },
     "@typescript-eslint/no-unused-vars": {
-      "count": 5
+      "count": 6
     },
     "no-empty": {
-      "count": 2
+      "count": 1
     },
     "no-self-assign": {
+      "count": 1
+    }
+  },
+  "src/domain/chain/engine/build.ts": {
+    "@typescript-eslint/ban-ts-comment": {
+      "count": 1
+    },
+    "@typescript-eslint/no-explicit-any": {
+      "count": 21
+    },
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "no-empty": {
       "count": 1
     }
   },
