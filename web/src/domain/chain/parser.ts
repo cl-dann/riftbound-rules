@@ -1,9 +1,13 @@
 /* Lapszöveg felbontása: utasításforrások, Choose one, költség, abilityk, triggerek, célpont-kifejezések, utasítás felbontás. (a chainCore.ts 1-405. sorából, S19) */
 import { costCondOf } from './cost';
 import { COST_LINE, DK_LINE, KW_HEAD, KW_ONLY, TRIG_LINE, stripRem } from './text';
+import type { Ability, CardLike, CostInfo, TargetParam, Trigger } from './types';
+
+/** Egy utasításforrás: k = opt, cost, trig, act, spell; e a szöveg. */
+export type InstrSource = { k: string; e: string; why?: string; cost?: string };
 
 /** Egy lap utasításforrásai: spell sorok, play effect, triggered és activated abilityk hatása (a lefedettségi statisztikához és a builderhez). */
-export function instrSources(c:any){const out:any[]=[];if(!c)return out;
+export function instrSources(c:CardLike|null|undefined){const out:InstrSource[]=[];if(!c)return out;
   (c.txt||'').split('\n').map(stripRem).filter(Boolean).forEach((l:string)=>{
     if(KW_ONLY.test(l))return;
     if(/^[-\u2014\u2013]\s+\S/.test(l)&&!/^[-\u2014\u2013]\s*\[[^\]]*\](?:\s*\/\s*\[[^\]]*\])+/.test(l)){out.push({k:'opt',e:l.replace(/^[-\u2014\u2013]\s*/,'')});return;}
@@ -16,23 +20,23 @@ export function instrSources(c:any){const out:any[]=[];if(!c)return out;
     if(c.t==='Spell')out.push({k:'spell',e:l.replace(KW_HEAD,'').trim()});
   });return out;}
 
-export const effOf=(c:any)=>stripRem(((c.txt||'').split('\n').map(stripRem).filter((l:string)=>l&&!KW_ONLY.test(l)&&!COST_LINE.test(l)).map((l:string)=>l.replace(KW_HEAD,'').trim()).join(' '))+' '+(c.eff&&c.t==='Spell'?c.eff:''));
+export const effOf=(c:CardLike)=>stripRem(((c.txt||'').split('\n').map(stripRem).filter((l:string)=>l&&!KW_ONLY.test(l)&&!COST_LINE.test(l)).map((l:string)=>l.replace(KW_HEAD,'').trim()).join(' '))+' '+(c.eff&&c.t==='Spell'?c.eff:''));
 
 /** "Choose one" módok: a fejléc sora és a "- " kezdetű opciók (Rocket Barrage, 820.2.a). mode: a választott opció indexe. */
-export function modalSplit(lines:string[],mode:number){const hi=lines.findIndex(l=>/\bchoose one\b(?! of\b)|^do one of the following\b/i.test(l)&&!/based on/i.test(l));const opts:string[]=[];
+export function modalSplit(lines:string[],mode?:number){const hi=lines.findIndex(l=>/\bchoose one\b(?! of\b)|^do one of the following\b/i.test(l)&&!/based on/i.test(l));const opts:string[]=[];
   if(hi>=0){let k=hi+1;while(k<lines.length&&/^[-\u2014\u2013]\s+/.test(lines[k])){opts.push(lines[k].replace(/^[-\u2014\u2013]\s*/,''));k++;}}
   if(!opts.length)return {lines,opts};const md=Math.max(0,Math.min(mode||0,opts.length-1));
   const head=lines[hi].replace(/(?:then,?\s*)?(?:you may )?choose one\b.*$/i,'').trim();
   return {lines:lines.slice(0,hi).concat(head?[head]:[],[opts[md]],lines.slice(hi+opts.length+1)),opts,mode:md,head:lines[hi]};}
 /** Additional cost: kötelező vagy választható kill (Sacrifice, Cruel Patron, Atakhan), illetve fizethető extra költség (Akshan). */
-export function costOf(c:any){const out:any={kill:null,opt:false,txt:''};if(!c)return out;
+export function costOf(c:CardLike|null|undefined){const out:CostInfo={kill:null,opt:false,txt:''};if(!c)return out;
   (c.txt||'').split('\n').map(stripRem).forEach((l:string)=>{let m;
     if((m=/^as an additional cost to play (?:this|me), kill (?:a|another) friendly (\[Mighty\] )?unit/i.exec(l))){out.kill={opt:false,mighty:!!m[1]};out.txt=l;}
     else if(/^you may kill a friendly unit as an additional cost/i.test(l)){out.kill={opt:true,mighty:false};out.txt=l;}
     else if(/you may pay [^.]*as an additional cost|as you play (?:this|me), you may pay|^as an additional cost to play (?:this|me), you may\b/i.test(l)){out.opt=true;out.txt=l;}});
   return out;}
 
-export function abilitiesOf(c:any){const out:any[]=[];if(!c)return out;
+export function abilitiesOf(c:CardLike|null|undefined){const out:Ability[]=[];if(!c)return out;
   (c.txt||'').split('\n').forEach((raw:string)=>{const l=stripRem(raw);
     if(/^\[Equip\]/.test(l)){out.push({label:'Equip',eff:'Attach this to a unit you control.',tm:'none',equip:true,cost:l.replace(/^\[Equip\]\s*/,'')});return;}
     const k=l.indexOf(':');if(k<0)return;const cost=l.slice(0,k),eff=l.slice(k+1).replace(/^\s*\[Reaction\]\s*[,\u2014-]*\s*/,'').trim();
@@ -44,18 +48,18 @@ export function abilitiesOf(c:any){const out:any[]=[];if(!c)return out;
   return out;}
 
 /** Triggered abilityk: a lap saját szövege és (csatolt gearnél) az Effect Text. */
-export function triggersOf(c:any,extraEff?:string){const out:any[]=[];if(!c)return out;
+export function triggersOf(c:CardLike|null|undefined,extraEff?:string){const out:Trigger[]=[];if(!c)return out;
   const lines=(c.txt||'').split('\n').concat(extraEff?[extraEff]:[]).map(stripRem);
-  lines.forEach((l:string,li:number)=>{let m;if(/^[-\u2014\u2013]\s+/.test(l)&&out.length){const last=out[out.length-1];if(last.modal)last.opts.push(l.replace(/^[-\u2014\u2013]\s*/,''));return;}
+  lines.forEach((l:string,li:number)=>{let m;if(/^[-\u2014\u2013]\s+/.test(l)&&out.length){const last=out[out.length-1];if(last.modal)last.opts!.push(l.replace(/^[-\u2014\u2013]\s*/,''));return;}
     if((m=DK_LINE.exec(l))){const e=l.slice(m[0].length);if(e)out.push({label:'['+m[1]+'] '+e.slice(0,50),eff:e,why:m[1],dk:/Deathknell/i.test(m[1])});return;}
     if((m=TRIG_LINE.exec(l))){const why=l.slice(0,m[0].length).replace(/,\s*$/,'');const ef=l.slice(m[0].length);out.push({label:why+': '+ef.slice(0,50),eff:ef,why,modal:/\bchoose one\b(?! of\b)/i.test(ef)&&!/based on/i.test(ef),opts:[]});}void li;});
   return out;}
 
-export const NUMW:any={one:1,two:2,three:3,four:4,five:5,six:6};
+export const NUMW:Record<string,number>={one:1,two:2,three:3,four:4,five:5,six:6};
 export const numOf=(x:string)=>x==null?1:/^\d+$/.test(x)?+x:NUMW[String(x).toLowerCase()]||1;
 /** Célpont-kifejezések: "a unit", "up to two enemy units", "a friendly [Mighty] unit", "an Equipment", "a unit you control at another location". */
 export function phrasesTxt(e:string){
-  const out:any[]=[];
+  const out:TargetParam[]=[];
   const re=/\b(a|an|another|one|two|three|up to (\d+|one|two|three|four|five)|any number of)\s+((?:(?:other|another|friendly|enemy|attacking|defending|exhausted|ready|stunned|equipped|buffed|damaged|detached|attached|\[Mighty\]|Mighty)\s+)*)(units?|gear|spells?|equipment|abilit(?:y|ies))\b/gi;let m;
   const mm=/(\d+) \[S\] or less/i.exec(e);
   if(/\bchoose a battlefield\b/i.test(e))out.push({type:'battlefield',rel:'any',max:null,bf:false,opt:false});
@@ -77,7 +81,7 @@ export function phrasesTxt(e:string){
     const q=m[1].toLowerCase();const totM=/^[^.]*?\bwith total Might (\d+) or less\b/i.exec(tail);const n=m[2]?numOf(m[2]):q==='any number of'?(totM?6:3):(q==='two'?2:q==='three'?3:1);
     const rel=/friendly/.test(adj)||/^\s*(?:you control|of yours)\b/i.test(tail)?'friendly':/enemy/.test(adj)||/^\s*(?:an opponent controls|your opponent controls)\b/i.test(tail)?'enemy':'any';
     const sent=tail.split('.')[0].split(/\b(?:and|or)\s+(?:a|an|another|up to)\b/i)[0];
-    const p:any={type:ty==='ability'?'spell':ty,rel,max:mm&&ty==='unit'?+mm[1]:null,
+    const p:TargetParam={type:ty==='ability'?'spell':ty,rel,max:mm&&ty==='unit'?+mm[1]:null,
       bf:ty!=='spell'&&/^\s*(?:you control\s+)?at (?:a|the same|that) battlefield/i.test(sent)||/^\s*from a battlefield\b/i.test(sent),
       same:/\bat the same (?:battlefield|location)\b/i.test(sent)||!!totM,totalMax:totM?+totM[1]:null,opt:!!m[2]||q==='any number of',
       here:/^\s*(?:you control\s+|an opponent controls\s+)?(?:here|there)\b/i.test(sent),free:/\bat (?:another|a different) location\b/i.test(sent),

@@ -12,6 +12,7 @@
  * A lépések sorrendjét a motor őrzi: egy későbbi lépés akciója a korábbi lépésben "rossz sorrend" kimenetet ad.
  */
 import { vsCard } from '../data/store';
+import type { Card } from '../data/schema';
 
 export type Side = 'me' | 'opp';
 export type PUnit = { n: string; m: number; ex?: boolean; dmg?: number; tags?: string[]; gear?: boolean };
@@ -24,7 +25,12 @@ export type PBf = { name: string; ctrl: Side | null; me: PUnit[]; opp: PUnit[]; 
 export type PChain = { card: string; owner: Side; note?: string };
 export type PBoard = { turn: Side; me: PSide; opp: PSide; bfs: PBf[]; chain: PChain[] };
 
-export type Op = { op: string; [k: string]: any };
+/** Egy pályaművelet a szituáció adatából (learn.json): op a fajta, a többi a paraméterei. */
+export type Op = {
+  op: string; side?: Side; ref?: string; ex?: boolean; to?: string; set?: number; add?: number | string[]; n?: number; rm?: string[];
+  tags?: string[]; bf?: number; card?: string; m?: number; gear?: boolean; fromHand?: boolean; note?: string; d?: string | string[];
+  e?: number; p?: Record<string, number>;
+};
 /** 'next': következő lépés; 'stay': marad a lépésben; bármi más: kimenet (outcome) azonosító. */
 export type Go = string;
 export type TargetSpec = {
@@ -62,12 +68,12 @@ export type ES = {
 };
 
 const clone = <T,>(x: T): T => JSON.parse(JSON.stringify(x));
-const card = (n: string): any => vsCard(n) || {};
+const card = (n: string): Partial<Card> => vsCard(n) || {};
 export const speedOf = (n: string): '' | 'Action' | 'Reaction' => {
   const t: string = card(n).txt || '';
   return /\[Reaction\]/.test(t) ? 'Reaction' : /\[Action\]/.test(t) ? 'Action' : '';
 };
-export const costOf = (n: string) => { const c = card(n); return { e: +c.e || 0, p: +c.p || 0, d: (c.d || []) as string[] }; };
+export const costOf = (n: string) => { const c = card(n); return { e: +c.e! || 0, p: +c.p! || 0, d: (c.d || []) as string[] }; };
 const entersReady = (n: string) => /\bI enter ready\b/.test(card(n).txt || '');
 const isHidden = (n: string) => /\[Hidden\]/.test(card(n).txt || '');
 
@@ -119,32 +125,32 @@ export function applyOps(b0: PBoard, ops: Op[] | undefined): PBoard {
     const side: Side = o.side || 'me';
     const u = o.ref ? unitOf(b, o.ref) : undefined;
     switch (o.op) {
-      case 'move': { const s = sideOfUnit(b, o.ref); const x = removeUnit(b, o.ref); if (x) { if (o.ex !== false) x.ex = true; place(b, s, x, o.to); } break; }
+      case 'move': { const s = sideOfUnit(b, o.ref!); const x = removeUnit(b, o.ref!); if (x) { if (o.ex !== false) x.ex = true; place(b, s, x, o.to!); } break; }
       case 'ready': if (u) u.ex = false; break;
       case 'exhaust': if (u) u.ex = true; break;
-      case 'might': if (u) u.m = o.set ?? u.m + (o.add || 0); break;
-      case 'dmg': if (u) u.dmg = (u.dmg || 0) + o.n; break;
-      case 'kill': removeUnit(b, o.ref); break;
+      case 'might': if (u) u.m = o.set ?? u.m + ((o.add as number | undefined) || 0); break;
+      case 'dmg': if (u) u.dmg = (u.dmg || 0) + o.n!; break;
+      case 'kill': removeUnit(b, o.ref!); break;
       case 'heal': for (const s of ['me', 'opp'] as Side[]) { b[s].base.forEach((x) => delete x.dmg); b.bfs.forEach((f) => f[s].forEach((x) => delete x.dmg)); } break;
-      case 'tag': if (u) { const t = new Set(u.tags || []); (o.add || []).forEach((x: string) => t.add(x)); (o.rm || []).forEach((x: string) => t.delete(x)); u.tags = [...t]; } break;
+      case 'tag': if (u) { const t = new Set(u.tags || []); ((o.add as string[] | undefined) || []).forEach((x: string) => t.add(x)); (o.rm || []).forEach((x: string) => t.delete(x)); u.tags = [...t]; } break;
       case 'untagAll': for (const s of ['me', 'opp'] as Side[]) { b[s].base.forEach((x) => (x.tags = (x.tags || []).filter((t) => !(o.tags || []).includes(t)))); b.bfs.forEach((f) => f[s].forEach((x) => (x.tags = (x.tags || []).filter((t) => !(o.tags || []).includes(t))))); } break;
       case 'untagNew': for (const s of ['me', 'opp'] as Side[]) { b[s].base.forEach((x) => (x.tags = (x.tags || []).filter((t) => t !== 'new'))); b.bfs.forEach((f) => f[s].forEach((x) => (x.tags = (x.tags || []).filter((t) => t !== 'new')))); } break;
       case 'score': b[side].score += o.n ?? 1; break;
-      case 'ctrl': b.bfs[o.bf].ctrl = o.to ?? null; break;
-      case 'draw': if (side === 'me') (b.me.hand ||= []).push(o.card); else b.opp.handCount = (b.opp.handCount || 0) + (o.n ?? 1); break;
-      case 'discard': if (side === 'me') { const i = (b.me.hand || []).indexOf(o.card); if (i >= 0) b.me.hand!.splice(i, 1); } else b.opp.handCount = Math.max(0, (b.opp.handCount || 0) - (o.n ?? 1)); break;
-      case 'unit': place(b, side, { n: o.card, m: o.m ?? (+card(o.card).m || 0), ex: o.ex, tags: o.tags, gear: o.gear }, o.to || 'base'); if (side === 'opp' && o.fromHand) b.opp.handCount = Math.max(0, (b.opp.handCount || 0) - 1); break;
-      case 'chain+': b.chain.push({ card: o.card, owner: side, note: o.note }); if (side === 'opp' && o.fromHand) b.opp.handCount = Math.max(0, (b.opp.handCount || 0) - 1); break;
+      case 'ctrl': b.bfs[o.bf!].ctrl = (o.to as Side | undefined) ?? null; break;
+      case 'draw': if (side === 'me') (b.me.hand ||= []).push(o.card!); else b.opp.handCount = (b.opp.handCount || 0) + (o.n ?? 1); break;
+      case 'discard': if (side === 'me') { const i = (b.me.hand || []).indexOf(o.card!); if (i >= 0) b.me.hand!.splice(i, 1); } else b.opp.handCount = Math.max(0, (b.opp.handCount || 0) - (o.n ?? 1)); break;
+      case 'unit': place(b, side, { n: o.card!, m: o.m ?? (+card(o.card!).m! || 0), ex: o.ex, tags: o.tags, gear: o.gear }, o.to || 'base'); if (side === 'opp' && o.fromHand) b.opp.handCount = Math.max(0, (b.opp.handCount || 0) - 1); break;
+      case 'chain+': b.chain.push({ card: o.card!, owner: side, note: o.note }); if (side === 'opp' && o.fromHand) b.opp.handCount = Math.max(0, (b.opp.handCount || 0) - 1); break;
       case 'chain-': b.chain.pop(); break;
       case 'chain0': b.chain = []; break;
-      case 'channel': for (const d of o.d) b[side].runes.push({ d }); break;
+      case 'channel': for (const d of o.d as string[]) b[side].runes.push({ d }); break;
       case 'runesEx': { let n = o.n ?? 99; for (const r of b[side].runes) { if (n <= 0) break; if (!r.ex && (!o.d || r.d === o.d)) { r.ex = true; n--; } } break; }
       case 'runesReady': b[side].runes.forEach((r) => (r.ex = false)); break;
       case 'recycle': { let n = o.n ?? 1; while (n-- > 0) { const i = b[side].runes.findIndex((r) => r.d === o.d && r.ex); const j = i >= 0 ? i : b[side].runes.findIndex((r) => r.d === o.d); if (j >= 0) b[side].runes.splice(j, 1); } break; }
       case 'legendEx': b[side].legendEx = o.ex !== false; break;
-      case 'turn': b.turn = o.to; break;
+      case 'turn': b.turn = o.to as Side; break;
       case 'pool': b.me.pool = { e: o.e ?? 0, p: o.p ?? {} }; break;
-      case 'fd': b.bfs[o.bf].fd = o.to ?? null; b.bfs[o.bf].fdCard = o.card ?? null; break;
+      case 'fd': b.bfs[o.bf!].fd = (o.to as Side | undefined) ?? null; b.bfs[o.bf!].fdCard = o.card ?? null; break;
       default: break;
     }
   }
@@ -208,7 +214,7 @@ function payFromPool(b0: PBoard, n: string): PBoard {
 /* ---------------- állapot ---------------- */
 export const step = (es: ES): Step | undefined => es.scn.steps[es.i];
 const free = (es: ES) => { const s = step(es); return s && s.t === 'free' ? s : null; };
-export const tstate = (es: ES): TState => { const s: any = step(es); return s?.st || (es.b.chain.length ? 'closed' : 'open'); };
+export const tstate = (es: ES): TState => { const s = step(es) as { st?: TState } | undefined; return s?.st || (es.b.chain.length ? 'closed' : 'open'); };
 
 export function init(scn: Scn): ES {
   const b = clone(scn.board);
@@ -219,7 +225,7 @@ export function start(es: ES): ES { return enter({ ...es, started: true }, 0); }
 function enter(es: ES, i: number): ES {
   const s = es.scn.steps[i];
   if (!s) return es;
-  const b = applyOps(es.b, (s as any).pre);
+  const b = applyOps(es.b, s.pre);
   const n: ES = { ...es, b, i, done: [], pend: [], tgt: undefined, asg: undefined, msg: undefined };
   if (s.t === 'target') n.tgt = { spec: s, sel: [] };
   if (s.t === 'assign') n.asg = [];
@@ -329,7 +335,7 @@ export function glowOf(es: ES, ref: string): '' | 'act' | 'awaken' {
 /* ---------------- akciók ---------------- */
 function laterHas(es: ES, key: string): boolean {
   for (let k = es.i + 1; k < es.scn.steps.length; k++) {
-    const s: any = es.scn.steps[k];
+    const s = es.scn.steps[k];
     if (s.t === 'free' && ((s.need || []).includes(key) || (s.acts && s.acts[key] && (s.acts[key].go || 'stay') === 'next') || (s.acts && s.acts[key] && (s.need || []).length === 0))) return true;
   }
   return false;
@@ -347,14 +353,14 @@ function effect(es: ES, act: string, to?: string): PBoard {
     const n = a1; b = es.scn.pool ? payFromPool(b, n) : autoPay(b, n);
     b = clone(b); b.me.hand!.splice(b.me.hand!.indexOf(n), 1);
     const t = card(n).t;
-    if (t === 'Unit' || t === 'Gear') place(b, 'me', { n, m: +card(n).m || 0, ex: !entersReady(n), tags: ['new'], gear: t === 'Gear' }, to || 'base');
+    if (t === 'Unit' || t === 'Gear') place(b, 'me', { n, m: +card(n).m! || 0, ex: !entersReady(n), tags: ['new'], gear: t === 'Gear' }, to || 'base');
     else b.chain.push({ card: n, owner: 'me' });
   } else if (k === 'hide') {
     b = autoPay(b, a1, { e: 0, p: 1, any: true }); b = clone(b);
     b.me.hand!.splice(b.me.hand!.indexOf(a1), 1); const f = b.bfs[+a2.slice(2)]; f.fd = 'me'; f.fdCard = a1;
   } else if (k === 'playfd') {
     b = clone(b); const f = b.bfs[+a1]; const n = f.fdCard || ''; f.fd = null; f.fdCard = null;
-    place(b, 'me', { n, m: +card(n).m || 0, ex: true, tags: ['new'] }, 'bf' + a1);
+    place(b, 'me', { n, m: +card(n).m! || 0, ex: true, tags: ['new'] }, 'bf' + a1);
   } else if (k === 'energy') {
     b = clone(b); const r = b.me.runes[+a1]; r.ex = true; b.me.pool ||= { e: 0, p: {} }; b.me.pool.e++;
   } else if (k === 'power') {
@@ -397,7 +403,7 @@ export function act(es: ES, a: string): ES {
     if (ref === 'legend') b.me.legendEx = false; else if (l?.zone === 'rune') b.me.runes[l.idx!].ex = false; else if (l?.u && l.side === 'me') l.u.ex = false; else return es;
     const left = b.me.runes.some((r) => r.ex) || b.me.legendEx || b.me.base.some((u) => u.ex) || b.bfs.some((f) => f.me.some((u) => u.ex));
     const n: ES = { ...es, b, done: [...es.done, a] };
-    return left ? n : go(n, 'next', (s as any).do);
+    return left ? n : go(n, 'next', (s as { do?: Op[] }).do);
   }
   if (a === 'end') return go(es, s.end?.go || es.scn.fallback, s.end?.do);
   if (a === 'pass') { if (!s.pass) return es; return go(es, s.pass.go, s.pass.do); }
@@ -417,7 +423,7 @@ export function act(es: ES, a: string): ES {
   }
   if (res?.target) return { ...es, tgt: { spec: res.target, sel: [], act: a, res } };
   if (res?.go && res.go !== 'next' && res.go !== 'stay') return go(es, res.go, res.do);
-  const to = a.startsWith('play:') ? (res as any)?.to : undefined;
+  const to = a.startsWith('play:') ? res?.to : undefined;
   return finishAct(es, key, res, effect(es, a, to));
 }
 function confirmMove(es: ES): ES {
@@ -438,12 +444,12 @@ function confirmMove(es: ES): ES {
 /* ---------------- panel, célpont, kiosztás ---------------- */
 export function panelBtn(es: ES, i: number, kind: 'btn' | 'card' = 'btn'): ES {
   const s = step(es); if (!s || s.t !== 'panel' || es.out || es.tgt) return es;
-  const r: any = kind === 'btn' ? s.btns?.[i] : s.cards?.[i];
+  const r: (Res & { card?: string; dis?: string }) | undefined = kind === 'btn' ? s.btns?.[i] : s.cards?.[i];
   if (!r || r.dis) return es;
   let e2 = es;
   if (kind === 'card') {
-    const tb = timingBlock(r.card, s.st || tstate(es), es.b.turn); if (tb) return msg(es, tb);
-    if ((r.go || 'next') === 'next' || es.scn.outcomes[r.go]?.kind === 'good') { if ((es.b.me.hand || []).includes(r.card)) e2 = { ...es, b: effect(es, 'play:' + r.card) }; }
+    const tb = timingBlock(r.card!, s.st || tstate(es), es.b.turn); if (tb) return msg(es, tb);
+    if ((r.go || 'next') === 'next' || es.scn.outcomes[r.go!]?.kind === 'good') { if ((es.b.me.hand || []).includes(r.card!)) e2 = { ...es, b: effect(es, 'play:' + r.card) }; }
   }
   if (r.target) return { ...e2, tgt: { spec: r.target, sel: [], act: 'panel', res: r, undo: es.b } };
   return go(e2, r.go, r.do);
@@ -466,10 +472,10 @@ export function tgtConfirm(es: ES): ES {
   }
   const ops = [...(spec.do || []), ...((res && res !== spec ? res.do : []) || [])];
   if (a && a !== 'panel' && a !== 'bbtn' && step(es)?.t === 'free') {
-    const b = effect({ ...es, tgt: undefined }, a, (res as any)?.to);
-    return finishAct({ ...es, tgt: undefined }, actKey(es, a), { go: spec.go || (res as any)?.go, do: ops }, b);
+    const b = effect({ ...es, tgt: undefined }, a, res?.to);
+    return finishAct({ ...es, tgt: undefined }, actKey(es, a), { go: spec.go || res?.go, do: ops }, b);
   }
-  return go({ ...es, tgt: undefined }, spec.go || (res as any)?.go || 'next', ops);
+  return go({ ...es, tgt: undefined }, spec.go || res?.go || 'next', ops);
 }
 /** Damage kiosztás: a kiválasztás sorrendjében mindenki lethal damage-et kap (467.2.c.3), a maradék a végén az utolsóra (467.2.c.4). */
 export function asgView(es: ES) {

@@ -1,5 +1,6 @@
 /* A builder beépített példái (a "Példa betöltése" gombok és a unit tesztek). */
-export const EXAMPLES:any={
+import type { ChainState } from './state';
+export const EXAMPLES:Record<string,()=>ChainState>={
   base:()=>({lg:{A:'Kennen, Heart of the Tempest',B:''},bf:[{n:"Vilemaw's Lair",c:'B'},{n:'Zaun Warrens',c:'A'}],
     bd:[{n:'Traveling Merchant',pl:'B',loc:'bf0',d:0},{n:'Long Sword',pl:'B',loc:'bf0',on:0}],
     steps:[{k:'card',n:'Riptide Rex',pl:'A',from:'hand',loc:'base',tg:['b0'],ext:{}},{k:'card',n:'Flash',pl:'B',from:'hand',tg:['b0'],ext:{}},{k:'card',n:'Star-Crossed',pl:'A',from:'hand',tg:['s0','b0'],ext:{}}]}),

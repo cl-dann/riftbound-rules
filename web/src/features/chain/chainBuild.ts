@@ -69,7 +69,7 @@ export type Legal = { ok: boolean; why?: string; ref?: string; need?: string };
 const BAD = /^Nem szabályos:/;
 const reasonOf = (t: string) => t.replace(/^Nem szabályos:\s*/, '').replace(/^[^?]*\?\s*/, '').replace(/\.\s*Kimarad\.?$/, '');
 /** A sorok különbsége (multihalmaz): ami a b-ben új az a-hoz képest. */
-function newRows(a: [string, string][], b: [string, string][]) {
+function newRows(a: [string, string, number?][], b: [string, string, number?][]) {
   const cnt = new Map<string, number>();
   a.forEach((r) => { const k = r.join('|'); cnt.set(k, (cnt.get(k) || 0) + 1); });
   return b.filter((r) => { const k = r.join('|'); const n = cnt.get(k) || 0; if (n) { cnt.set(k, n - 1); return false; } return true; });

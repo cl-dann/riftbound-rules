@@ -1,10 +1,12 @@
 /* Chain sablonok: témánként kész kiinduló helyzet és lépések, valós lapokkal. A pályás építő "Sablonok" listája tölti be,
    a unit teszt (unit/sablonok.test.ts) mindegyikre lefuttatja az elemzést és ellenőrzi a leírásban állított eredményt. */
 
-export type ChainTemplate = { id: string; title: string; desc: string; refs: string; cs: () => any };
+import type { ChainState, ChainStep } from './state';
 
-const base = (o: any) => ({ lg: { A: '', B: '' }, bf: [{ n: '', c: '' }, { n: '', c: '' }], bd: [], steps: [], hand: { A: [], B: [] }, ch: { A: '', B: '' }, ...o });
-const card = (n: string, pl: 'A' | 'B', tg: string[] = [], x: any = {}) => ({ k: 'card', n, pl, from: 'hand', tg, ext: {}, ...x });
+export type ChainTemplate = { id: string; title: string; desc: string; refs: string; cs: () => ChainState };
+
+const base = (o: Partial<ChainState>): ChainState => ({ lg: { A: '', B: '' }, bf: [{ n: '', c: '' }, { n: '', c: '' }], bd: [], steps: [], hand: { A: [], B: [] }, ch: { A: '', B: '' }, ...o });
+const card = (n: string, pl: 'A' | 'B', tg: string[] = [], x: Partial<ChainStep> = {}): ChainStep => ({ k: 'card', n, pl, from: 'hand', tg, ext: {}, ...x });
 
 export const TEMPLATES: ChainTemplate[] = [
   {

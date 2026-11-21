@@ -5,211 +5,56 @@
     }
   },
   "src/domain/chain/actions.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 10
-    },
     "no-useless-assignment": {
       "count": 2
     }
   },
-  "src/domain/chain/conditions.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 1
-    }
-  },
-  "src/domain/chain/cost.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 8
-    }
-  },
-  "src/domain/chain/cs.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 9
-    }
-  },
   "src/domain/chain/engine/analyze.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 15
-    },
-    "@typescript-eslint/no-unused-vars": {
-      "count": 24
-    },
     "no-empty": {
       "count": 1
     }
   },
   "src/domain/chain/engine/build.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 21
-    },
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
     "no-empty": {
       "count": 1
     }
   },
-  "src/domain/chain/engine/ctx.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 9
-    }
-  },
   "src/domain/chain/engine/damage.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 8
-    },
     "no-useless-assignment": {
       "count": 1
     }
   },
-  "src/domain/chain/engine/endOfTurn.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 7
-    }
-  },
-  "src/domain/chain/engine/execute.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 10
-    }
-  },
   "src/domain/chain/engine/frames.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 13
-    },
     "@typescript-eslint/no-unused-vars": {
       "count": 1
-    }
-  },
-  "src/domain/chain/engine/labels.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 4
-    }
-  },
-  "src/domain/chain/engine/objects.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 6
-    }
-  },
-  "src/domain/chain/engine/replacement.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 4
     }
   },
   "src/domain/chain/engine/resolve.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 102
-    },
-    "@typescript-eslint/no-unused-vars": {
-      "count": 2
-    },
     "no-self-assign": {
       "count": 1
     }
   },
-  "src/domain/chain/engine/state.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 13
-    }
-  },
   "src/domain/chain/engine/targeting.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 20
-    },
     "@typescript-eslint/no-unused-vars": {
       "count": 1
     }
   },
   "src/domain/chain/engine/tokens.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 2
-    },
     "no-useless-escape": {
       "count": 2
     }
   },
   "src/domain/chain/engine/triggers.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 15
-    },
     "no-useless-assignment": {
       "count": 3
     }
   },
   "src/domain/chain/engine/zoneChange.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 4
-    },
     "no-empty": {
       "count": 1
     }
   },
-  "src/domain/chain/examples.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 1
-    }
-  },
-  "src/domain/chain/overrides.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 2
-    }
-  },
-  "src/domain/chain/parser.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 12
-    }
-  },
-  "src/domain/chain/steps.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 11
-    }
-  },
-  "src/domain/chain/templates.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 3
-    }
-  },
-  "src/domain/chain/zones.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 12
-    }
-  },
   "src/domain/deck/edit.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 6
-    },
     "no-useless-escape": {
       "count": 1
     }
@@ -217,11 +62,6 @@
   "src/domain/deck/parse.ts": {
     "no-useless-escape": {
       "count": 1
-    }
-  },
-  "src/domain/practice/practiceEngine.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 11
     }
   },
   "src/domain/rules/refs.ts": {
@@ -260,14 +100,8 @@
     }
   },
   "src/features/chain/legacyForm.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 6
-    },
     "@typescript-eslint/no-unused-vars": {
-      "count": 4
+      "count": 3
     },
     "no-empty": {
       "count": 1
@@ -276,14 +110,6 @@
   "src/features/deck/DeckView.tsx": {
     "@typescript-eslint/no-explicit-any": {
       "count": 4
-    }
-  },
-  "src/features/deck/pdf.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 2
     }
   },
   "src/features/learn/LearnView.tsx": {
@@ -304,49 +130,12 @@
       "count": 1
     }
   },
-  "src/render/html/card.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    }
-  },
-  "src/render/html/chainReport.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 18
-    }
-  },
-  "src/render/html/deck.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    }
-  },
-  "src/render/html/glossary.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    }
-  },
   "src/render/html/knowledge.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
     "no-constant-binary-expression": {
       "count": 1
     },
     "no-constant-condition": {
       "count": 1
-    }
-  },
-  "src/render/html/rules.ts": {
-    "@typescript-eslint/ban-ts-comment": {
-      "count": 1
-    },
-    "@typescript-eslint/no-explicit-any": {
-      "count": 2
     }
   },
   "src/shared/board/Playmat.tsx": {

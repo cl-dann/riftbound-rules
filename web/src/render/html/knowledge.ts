@@ -1,9 +1,9 @@
-// @ts-nocheck
+import type { Card } from '../../domain/data/schema';
 import { D, CARDS, META } from '../../domain/data/store';
 import { esc } from '../../domain/text/norm';
 import { glossify } from './glossary';
 /* Szószintű diff (LCS) az errata előtte/utána nézethez. */
-function wdiff(a,b){
+function wdiff(a: string|null, b: string|null){
   const A=String(a).split(/(\s+)/),B=String(b).split(/(\s+)/),n=A.length,m=B.length;
   const L=Array.from({length:n+1},()=>new Int32Array(m+1));
   for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)L[i][j]=A[i]===B[j]?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
@@ -15,7 +15,7 @@ function wdiff(a,b){
 export function renderTud(){
   const X=D.extra||{};
   let h='<div class="subnav">'+'<a class="chip" href="#hogyan">How to Play</a>'+'<a class="chip" href="#tud-olvas" data-scroll="tud-olvas">A magyarázatok olvasása</a>'+(X.terms?'<a class="chip" href="#tud-fog" data-scroll="tud-fog">Fogalmak</a>':'')+(X.glossary?'<a class="chip" href="#tud-kw" data-scroll="tud-kw">Kulcsszavak</a>':'')+(X.flow?'<a class="chip" href="#tud-flow" data-scroll="tud-flow">Játékmenet</a>':'')+(X.patchnotes?'<a class="chip" href="#tud-pn" data-scroll="tud-pn">Szabályváltozások</a>':'')+'<a class="chip" href="#tud-err" data-scroll="tud-err">Errata</a>'+'</div>';
-  const rl=r=>'<a href="#szabalyok" data-ref="'+esc(r)+'">'+esc(r)+'</a>';
+  const rl=(r: string)=>'<a href="#szabalyok" data-ref="'+esc(r)+'">'+esc(r)+'</a>';
   if(false&&X.guide){
     h+='<h2 id="tud-guide" style="margin-top:14px">Kezdő útmutató</h2><p class="note" style="margin:6px 0 12px">Az első játék lépésről lépésre, a Core Rules alapján. AI által írt összefoglaló, nem hivatalos.</p>';
     X.guide.forEach((g,i)=>{h+='<div class="guide"><h3>'+(i+1)+'. '+esc(String(g.title).replace(/^\s*\d+\.\s*/,''))+(g.rules?'<span class="n">'+rl(g.rules)+'</span>':'')+'</h3>'+(g.paras||[]).map(p=>'<p>'+glossify(esc(p))+'</p>').join('')+(g.steps&&g.steps.length?'<ol class="flow">'+g.steps.map(s=>'<li><span>'+esc(s[1])+rl(s[0])+'</span></li>').join('')+'</ol>':'')+'</div>';});
@@ -42,11 +42,11 @@ export function renderTud(){
         +'</div>';});
   }
   {
-    const E=CARDS.filter(c=>c.err!=null&&c.old&&c.old!==c.txt);const seen=new Set();const L=E.filter(c=>!seen.has(c.txt)&&seen.add(c.txt));
+    const E=CARDS.filter(c=>c.err!=null&&c.old&&c.old!==c.txt);const seen=new Set<string|null>();const L=E.filter(c=>!seen.has(c.txt)&&seen.add(c.txt));
     if(L.length){
-      const by={};L.forEach(c=>(by[c.err]=by[c.err]||[]).push(c));
+      const by: Record<string, Card[]>={};L.forEach(c=>(by[c.err!]=by[c.err!]||[]).push(c));
       h+='<h2 id="tud-err" style="margin-top:28px">Errata: előtte és utána</h2><p class="note" style="margin:6px 0 12px">'+L.length+' lap nyomtatott és hatályos szövege egymás mellett. Pirossal a kikerült, zölddel a bekerült szavak. Versenyen mindig a hatályos szöveg érvényes.</p><input type="search" class="errq" placeholder="Szűrés kártyanévre" aria-label="Errata szűrés">';
-      Object.keys(by).forEach(k=>{const a=META.articles[k]||{};
+      Object.keys(by).forEach(k=>{const a: {u?: string; t?: string}=(META.articles as unknown as Record<string, {u?: string; t?: string}|undefined>)[k]||{};
         h+='<div class="errgrp"><h3><a href="'+esc(a.u||'#')+'">'+esc(a.t||'Errata')+'</a><span class="n">'+by[k].length+' lap</span></h3>';
         by[k].sort((x,y)=>x.n.localeCompare(y.n)).forEach(c=>{const [o,nw]=wdiff(c.old,c.txt);
           h+='<div class="errc" data-n="'+esc(c.n.toLowerCase())+'"><button class="errn" data-card="'+esc(c.n)+'">'+esc(c.n)+'</button><div class="errcols"><div><span class="lbl">Nyomtatott</span><p>'+o.replace(/\n/g,'<br>')+'</p></div><div><span class="lbl">Hatályos</span><p>'+nw.replace(/\n/g,'<br>')+'</p></div></div></div>';});

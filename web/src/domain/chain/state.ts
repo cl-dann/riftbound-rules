@@ -29,6 +29,32 @@ export const ChainStateSchema = z.looseObject({
   zseq: z.optional(z.number()),
 });
 export type ZoneEntry = z.infer<typeof ZoneEntrySchema>;
-export type Step = z.infer<typeof StepSchema>;
+export type StepData = z.infer<typeof StepSchema>;
 export type BoardEntry = z.infer<typeof BoardEntrySchema>;
-export type ChainState = z.infer<typeof ChainStateSchema>;
+export type ChainStateData = z.infer<typeof ChainStateSchema>;
+
+/* A builder további lépés- és helyzetmezői (a séma ezeket nem ellenőrzi, csak továbbengedi; a típus a használatukat írja le). */
+/** Combat panel eredménye a combat utáni triggereken. */
+export type CombatResult = { bf: string; dead: string[]; recall: string[]; ctrl: string; label: string };
+export type ChainStep = StepData & {
+  /** Choose one mód (és a Repeat további végrehajtásainak módja). */
+  mode?: number; mode2?: number; mode3?: number; mode4?: number;
+  /** Repeat: kifizetett ismétlések száma (true = 1). */
+  rep?: number | boolean;
+  /** ability index, trigger index (ti a sémában). */
+  ai?: number;
+  /** Rejtett adat utasításonként (hv), "each player chooses" játékosonként (mp), kijátszott lap utasításonként (plc). */
+  hv?: Record<number, number | string | null>; mp?: Record<number, Record<string, string>>; plc?: Record<number, string | null>;
+  /** Osztott damage (split), összesített Might részhalmaz (sub), Show Off forrása (so), Deflect fizetés (defl). */
+  split?: Record<number, number | null>; sub?: number[]; defl?: string[];
+  /** Az értelmezés kézi felülírása utasításonként, feltétel felülírása (cnd). */
+  ov?: Record<number, { k?: string; n?: number | null; lk?: boolean | null } | null>; cnd?: Record<number, boolean | string | null>;
+  accel?: boolean; addc?: boolean; erd?: string; pll?: Record<number, string | null>; mfrom?: string; dest?: string; eff?: string; why?: string; cb?: CombatResult;
+};
+/** A builder helyzete a további mezőkkel: játékállapot (ps), győzelmi pontszám (vs), kör vége (end), fázis. */
+/** A helyzet: a séma szerinti mezők és a builder további mezői. */
+export type ChainState = ChainStateData & {
+  steps: ChainStep[]; ps?: Record<string, Record<string, number | string>>; vs?: number | string; end?: boolean; phase?: string;
+};
+export type Step = ChainStep;
+export type ChainCS = ChainState;

@@ -100,7 +100,7 @@ export function DeckView() {
       if (!d.classList?.contains('drow') || !d.open) return;
       const b = d.querySelector('.body') as HTMLElement; if (!b || b.dataset.done) return;
       const c = DECK[+d.dataset.s!].rows[+d.dataset.r!].card;
-      b.innerHTML = cardHeadHTML(c, 'h3') + cardRulesHTML(c); b.dataset.done = '1';
+      b.innerHTML = cardHeadHTML(c!, 'h3') + cardRulesHTML(c!); b.dataset.done = '1';
     };
     el.addEventListener('toggle', on, true);
     return () => el.removeEventListener('toggle', on, true);

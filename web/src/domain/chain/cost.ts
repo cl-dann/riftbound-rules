@@ -4,7 +4,11 @@
     "Energy cost no more than my Might", "Energy cost less than your points", "no more Energy and no more Power than the killed unit").
     A szám a nyomtatott Energy (131.2.a), a Power szimbólumok száma a nyomtatott Power (131.3.a). e és p: [művelet, érték]; az érték szám vagy változó. */
 export type CostCond={e?:[string,number|string];p?:[string,number|string];t:string};
-export function costCondOf(t0:string):CostCond|null{const t=String(t0||'');let m:any;const c:any={t:''};
+/** A költség-ellenőrzéshez kellő lapmezők (a tokennél a supertype, a hiányzó költség üres string is lehet). */
+export type CostCard={e?:number|string|null;p?:number|string|null;st?:string[]};
+/** A költségfeltétel változói (might, points, relE, relP). */
+export type CostCtx=Record<string,number|null|undefined>;
+export function costCondOf(t0:string):CostCond|null{const t=String(t0||'');let m:RegExpExecArray|null;const c:CostCond={t:''};
   const pw=(x:string)=>(x.match(/\[[A-Z]\]/g)||[]).length;
   if((m=/no more Energy and no more Power than the killed unit/i.exec(t))){c.e=['<=','relE'];c.p=['<=','relP'];c.t=m[0];return c;}
   if((m=/Energy cost no more than my Might/i.exec(t))){c.e=['<=','might'];c.t=m[0];return c;}
@@ -15,12 +19,12 @@ export function costCondOf(t0:string):CostCond|null{const t=String(t0||'');let m
   if(!c.p&&(m=/\bPower cost ((?:\[[A-Z]\])+) or (more|less)\b/i.exec(t))){c.p=[m[2].toLowerCase()==='more'?'>=':'<=',pw(m[1])];c.t=(c.t?c.t+'; ':'')+m[0];}
   return c.e||c.p?c:null;}
 /** A lap nyomtatott költsége (206, 356.1.c): token 0 (185.3.a.1); hiányzó Power rész 0 (131.3.b, levezetés). */
-export const printedCost=(card:any)=>{const tok=/token/i.test(((card&&card.st)||[]).join(' '));return {e:tok?0:+(card&&card.e!=null&&card.e!==''?card.e:0),p:tok?0:+(card&&card.p!=null&&card.p!==''?card.p:0)};};
-export const COSTVAR:any={might:'a forrás Mightja',points:'a játékos pontszáma',relE:'a költségként megölt unit Energy költsége',relP:'a költségként megölt unit Power költsége'};
+export const printedCost=(card:CostCard|null|undefined)=>{const tok=/token/i.test(((card&&card.st)||[]).join(' '));return {e:tok?0:+(card&&card.e!=null&&card.e!==''?card.e:0),p:tok?0:+(card&&card.p!=null&&card.p!==''?card.p:0)};};
+export const COSTVAR:Record<string,string>={might:'a forrás Mightja',points:'a játékos pontszáma',relE:'a költségként megölt unit Energy költsége',relP:'a költségként megölt unit Power költsége'};
 /** Költségfeltétel ellenőrzése a nyomtatott költségen; ctx: a változók (might, points, relE, relP). '' ha megfelel vagy nem ellenőrizhető. */
-export function costCheck(cc:CostCond|null|undefined,card:any,ctx?:any){if(!cc||!card)return '';const pc=printedCost(card);const out:string[]=[];
-  const ok=(op:string,a:number,b:number)=>op==='<='?a<=b:op==='>='?a>=b:op==='<'?a<b:true;const OPH:any={'<=':'legfeljebb','>=':'legalább','<':'kevesebb, mint'};
-  ([['e','Energy költsége'],['p','Power költsége']] as const).forEach(([k,lbl])=>{const r=(cc as any)[k];if(!r)return;let v=r[1];if(typeof v==='string'){const nm=COSTVAR[v]||v;v=ctx?ctx[v]:null;if(v==null){out.push('a feltétel nem ellenőrizhető: '+nm+' nem elérhető, az erre épülő ellenőrzés null (359.3.e.12)');return;}}
+export function costCheck(cc:CostCond|null|undefined,card:CostCard|null|undefined,ctx?:CostCtx){if(!cc||!card)return '';const pc=printedCost(card);const out:string[]=[];
+  const ok=(op:string,a:number,b:number)=>op==='<='?a<=b:op==='>='?a>=b:op==='<'?a<b:true;const OPH:Record<string,string>={'<=':'legfeljebb','>=':'legalább','<':'kevesebb, mint'};
+  ([['e','Energy költsége'],['p','Power költsége']] as const).forEach(([k,lbl])=>{const r=cc[k];if(!r)return;let v:number|string|null|undefined=r[1];if(typeof v==='string'){const nm=COSTVAR[v]||v;v=ctx?ctx[v]:null;if(v==null){out.push('a feltétel nem ellenőrizhető: '+nm+' nem elérhető, az erre épülő ellenőrzés null (359.3.e.12)');return;}}
     if(!ok(r[0],pc[k],+v))out.push(lbl+' '+pc[k]+', a feltétel '+OPH[r[0]]+' '+v);});
   return out.length?out.join('; ')+' (206)':'';}
 

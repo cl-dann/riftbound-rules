@@ -1,8 +1,9 @@
 /* Szorzók és feltételek felismerése (for each, If ..., játékállapot, nyitott kérdés, rejtett adat, enter ready). (a chainCore.ts 1-405. sorából, S19) */
 import { stripRem } from './text';
+import type { CardLike, Cond, EachInfo } from './types';
 /** Utasítás műveletének felismerése. k: a művelet; unsure: miért bizonytalan (ha az). */
 /** Szorzó ("for each", "equal to the number of"): ha a boardról megszámolható, cnt a leírása; ha nem, miss a hiányzó adat. */
-export function eachOf(e:string){let m;
+export function eachOf(e:string):EachInfo{let m;
   if(/\bfor each unit this kills\b/i.test(e))return {cnt:{kills:true},txt:'az ezzel megölt unitok'};
   if(/\bfor each of your \[Mighty\] units\b/i.test(e))return {cnt:{rel:'friendly',type:'unit',mighty:true,where:'',st:''},txt:'a Mighty saját unitok'};
   if((m=/\bfor each (other )?battlefield you (?:or allies )?control\b/i.exec(e)))return {cnt:{bfs:true,other:!!m[1]},txt:'az általad irányított '+(m[1]?'többi ':'')+'battlefieldek'};
@@ -12,7 +13,7 @@ export function eachOf(e:string){let m;
   const miss=/\bhand\b/i.test(e)?'a kézben lévő lapok':/\btrash\b|with this name/i.test(e)?'a trash tartalma':/\bbuffs? spent|\bspent\b/i.test(e)?'az elköltött buffok':/\brevealed\b/i.test(e)?'a felfedett lapok':/\bopponent who\b|\bplayer\b/i.test(e)?'a többi játékos döntése':/\bXP\b|\brunes?\b/i.test(e)?'XP vagy rune-ok':/\btags?\b/i.test(e)?'a unitok tagjei':/\btime\b/i.test(e)?'a kör korábbi eseményei':'a számlált adat';
   return {miss};}
 /** Feltétel ("If ..., "): how = 'known' (az elemzés tudja), 'board' (a boardból kiértékelhető), 'user' (a builderben állítandó, mert nem követett adattól függ). */
-export function condOf(e:string){const m=/^(?:then,?\s*)?if (you've played a non-token unit, a non-token gear, and a spell this turn),/i.exec(e)||/^(?:then,?\s*)?if ([^,]+),/i.exec(e)||/^\[(Level \d+|Legion)\]/i.exec(e);if(!m)return null;const c=m[1];
+export function condOf(e:string):Cond|null{const m=/^(?:then,?\s*)?if (you've played a non-token unit, a non-token gear, and a spell this turn),/i.exec(e)||/^(?:then,?\s*)?if ([^,]+),/i.exec(e)||/^\[(Level \d+|Legion)\]/i.exec(e);if(!m)return null;const c=m[1];
   if(/^(?:you do|this kills|it dies|you played this from your hand|you paid (?:the|my) additional cost|it's an equipment)\b/i.test(c))return {t:c,how:'known'};
   if(/^(?:I'm|it's|this is|it is) \[?empowered\]?$|^it's already buffed$|^it is stunned$|^it's \[?mighty\]?$|^I'm at a battlefield$|^it has \d+ \[S\] or less$|^it's your turn$|^it's not your turn$|^there is exactly one other unit you control here$|^you control (?:a|an|two or more|\d+ or more|exactly \d+|\d+ or more other) (?:other )?(?:friendly )?(?:units?|gear)(?: here| there)?$|^you have (?:exactly \d+|\d+\+|\d+ or more) units (?:here|there|at that battlefield)$|^an enemy unit is alone here$|^it was (?:a|an) (?:friendly|enemy) unit$|^you control this battlefield$|^you have exactly two units there$/i.test(c))return {t:c,how:'board'};
   const op=OPEN_COND.find(x=>x[0].test(c));if(op)return {t:c,how:'open',why:op[1],refs:op[2]};
@@ -40,7 +41,7 @@ export const HIDDEN_COND:[RegExp,string][]=[
 /** Feltételek, amelyeket az elemzés ténylegesen kiértékel. */
 export const KNOWN_COND=/^if (?:you do|you played this from your hand|you paid the additional cost|it's an equipment|this kills|it dies)\b/i;
 /** A lap saját "enter ready" sora: how = 'always', 'board' (a boardról eldönthető), 'user' (nem követett adattól függ, a builderben állítható). */
-export function enterReadyCond(c:any){if(!c||c.t!=='Unit')return null;const L=(c.txt||'').split('\n').map(stripRem).flatMap((l:string)=>/^If you do, I enter ready/i.test(l.split(/(?<=\.)\s+/).pop()||'')?l.split(/(?<=\.)\s+/).slice(-1):[l]);
+export function enterReadyCond(c:CardLike|null|undefined){if(!c||c.t!=='Unit')return null;const L=(c.txt||'').split('\n').map(stripRem).flatMap((l:string)=>/^If you do, I enter ready/i.test(l.split(/(?<=\.)\s+/).pop()||'')?l.split(/(?<=\.)\s+/).slice(-1):[l]);
   for(const l of L){if(!/\benter ready\b/i.test(l)||/^(?:other|your|friendly|units)\b/i.test(l))continue;
     if(/^I enter ready\.?$/i.test(l))return {how:'always',t:l};
     if(/^If you do, I enter ready\.?$/i.test(l))return {how:'addc',t:l};

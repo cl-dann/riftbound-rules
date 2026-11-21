@@ -1,19 +1,20 @@
-// @ts-nocheck
 /* Deck nézet HTML: Energy görbe, legalitás, interakciós térkép. (a korábbi legacy/core.ts része, S15) */
 import { DECK, checkDeck } from '../../domain/deck/legality';
 import { esc } from '../../domain/text/norm';
+import type { Card } from '../../domain/data/schema';
+import type { CardRow } from '../../domain/deck/types';
 export function curveHTML(){
-  const M=DECK.filter(s=>/main|champion/i.test(s.name)).flatMap(s=>s.rows.filter(r=>r.card&&['Unit','Gear','Spell'].includes(r.card.t)));
+  const M=DECK.filter(s=>/main|champion/i.test(s.name)).flatMap(s=>s.rows.filter((r):r is CardRow=>!!r.card&&['Unit','Gear','Spell'].includes(r.card.t)));
   if(!M.length)return '';
-  const b=[0,0,0,0,0,0,0,0],bt=[{},{},{},{},{},{},{},{}];let tot=0,sum=0;
+  const b=[0,0,0,0,0,0,0,0],bt:Record<string,number>[]=[{},{},{},{},{},{},{},{}];let tot=0,sum=0;
   M.forEach(r=>{const e=r.card.e==null?0:Math.min(7,r.card.e);b[e]+=r.qty;bt[e][r.card.t]=(bt[e][r.card.t]||0)+r.qty;tot+=r.qty;sum+=(r.card.e||0)*r.qty;});
   const mx=Math.max(...b,1),H=120;
-  const dom={};M.forEach(r=>(r.card.d||[]).forEach(d=>dom[d]=(dom[d]||0)+r.qty));
+  const dom:Record<string,number>={};M.forEach(r=>(r.card.d||[]).forEach(d=>dom[d]=(dom[d]||0)+r.qty));
   const dl=Object.entries(dom).sort((a,b)=>b[1]-a[1]);const dmx=Math.max(1,...dl.map(x=>x[1]));
-  const typ={};M.forEach(r=>typ[r.card.t]=(typ[r.card.t]||0)+r.qty);
+  const typ:Record<string,number>={};M.forEach(r=>typ[r.card.t]=(typ[r.card.t]||0)+r.qty);
   let h='<h3>Energy görbe<span class="n">Main Deck és Chosen Champion, '+tot+' lap, átlag Energy '+(sum/tot).toFixed(2).replace('.',',')+'</span></h3>';
   h+='<div class="curve" role="img" aria-label="Lapok száma Energy cost szerint">'+b.map((n,i)=>{const det=Object.entries(bt[i]).map(([k,v])=>k+' '+v).join(', ');return '<div class="cb" tabindex="0" data-tt="Energy '+(i===7?'7+':i)+': '+n+' lap'+(det?' ('+det+')':'')+'">'+(n===mx?'<span class="vl">'+n+'</span>':'')+'<div class="bar" style="height:'+(n?Math.max(3,Math.round(n/mx*H)):0)+'px"></div><span class="lb">'+(i===7?'7+':i)+'</span></div>';}).join('')+'</div>';
-  h+='<div class="curvetbl"><details><summary class="note">Táblázatként</summary><table class="im"><tr><th>Energy</th>'+b.map((n,i)=>'<th>'+(i===7?'7+':i)+'</th>').join('')+'</tr><tr><td>Lap</td>'+b.map(n=>'<td>'+n+'</td>').join('')+'</tr></table></details></div>';
+  h+='<div class="curvetbl"><details><summary class="note">Táblázatként</summary><table class="im"><tr><th>Energy</th>'+b.map((_n,i)=>'<th>'+(i===7?'7+':i)+'</th>').join('')+'</tr><tr><td>Lap</td>'+b.map(n=>'<td>'+n+'</td>').join('')+'</tr></table></details></div>';
   h+='<div class="dist"><div><h4>Domain</h4>'+dl.map(([d,n])=>'<div class="hb"><span class="hl"><i class="dot d-'+d+'"></i>'+d+'</span><span class="ht"><span style="width:'+Math.round(n/dmx*100)+'%"></span></span><span class="hn">'+n+'</span></div>').join('')+'<p class="note">Többdomainű lap mindegyik domainjénél számít.</p></div>';
   const tl=Object.entries(typ).sort((a,b)=>b[1]-a[1]);const tmx=Math.max(1,...tl.map(x=>x[1]));
   h+='<div><h4>Típus</h4>'+tl.map(([d,n])=>'<div class="hb"><span class="hl">'+d+'</span><span class="ht"><span style="width:'+Math.round(n/tmx*100)+'%"></span></span><span class="hn">'+n+'</span></div>').join('')+'</div></div>';
@@ -24,7 +25,8 @@ export function legalityHTML(){
   const bad=c.filter(x=>x[0]===false).length;
   return '<h3>Deck legalitás (Core Rules 103)<span class="n">'+(bad?bad+' hiba':'nincs hiba')+'</span></h3><ul class="chk-list">'+c.map(x=>'<li><span class="st '+(x[0]===null?'inf':x[0]?'ok':'bad')+'">'+(x[0]===null?'INFO':x[0]?'OK':'HIBA')+'</span><span>'+(x[1]?'<a href="#szabalyok" data-ref="'+x[1]+'" style="font-family:var(--f-mono);font-size:12px">'+x[1]+'</a> ':'')+esc(x[2])+'</span></li>').join('')+'</ul>';
 }
-export const EVENTS=[
+/** [esemény, szabályszám, kiváltó minta (null: lap típus szerint), reagáló minta] */
+export const EVENTS:[string,string,RegExp|null,RegExp][]=[
  ['Move','421',/\bmove (?:a|an|up to|me|it|that|two|any|them|another|all)\b|\[Ganking\]/i,/when (?:i|you|a friendly unit|an? (?:enemy )?unit)[^.]{0,40}\bmoves?\b/i],
  ['Discard','423',/\bdiscard (?:\d|a|your|that)/i,/when you discard|when i(?:'m| am) discarded/i],
  ['Draw','414',/\bdraws? \d|\bdraw (?:it|a|that)/i,/when you draw/i],
@@ -45,8 +47,8 @@ export const EVENTS=[
  ['Spell kijátszása','420.4',null,/when you play a spell|spells you play|your spells/i],
  ['Gear kijátszása','420.4',null,/when (?:you|an opponent) plays? a gear|friendly gear/i]];
 export function interactionHTML(){
-  const cards=[];DECK.forEach(s=>s.rows.forEach(r=>{if(r.card&&!cards.includes(r.card))cards.push(r.card);}));
-  const rows=[];
+  const cards:Card[]=[];DECK.forEach(s=>s.rows.forEach(r=>{if(r.card&&!cards.includes(r.card))cards.push(r.card);}));
+  const rows:string[]=[];
   EVENTS.forEach(e=>{
     const prod=cards.filter(c=>e[2]===null?(e[0].startsWith('Spell')?c.t==='Spell':c.t==='Gear'):e[2].test(c.txt||''));
     const cons=cards.filter(c=>e[3].test(c.txt||''));
