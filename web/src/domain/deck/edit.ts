@@ -1,6 +1,7 @@
 import { CARDS, byName } from '../data/store';
 import { norm } from '../text/norm';
 import type { Prices } from './prices';
+import type { Card } from '../data/schema';
 
 // A decklista szövege marad az egyetlen forrás: a builder ezt szerkeszti,
 // így a megosztható link, a PDF és a legalitás-ellenőrzés változatlanul működik.
@@ -10,14 +11,14 @@ export const SECS = ['Legend', 'Champion', 'MainDeck', 'Battlefields', 'Rune Poo
 const secKey = (s: string) => s.toLowerCase().replace(/[^a-z]/g, '').replace(/s$/, '');
 
 export const pn = (s: string) => s.toLowerCase().replace(/\([^)]*\)/g, ' ').replace(/[^a-z0-9]+/g, ' ').trim();
-export function priceOf(c: any, P: Prices | null) {
+export function priceOf(c: Card | null | undefined, P: Prices | null) {
   if (!P || !c) return null;
   // A Signature lapokat a Cardmarket a champion neve nélkül listázza (Bullet Time, Miss Fortune -> Bullet Time).
   return P.cards[pn(c.n)] || P.cards[pn((c.a || []).find((a: string) => a.includes(',')) || '')]
     || (c.t !== 'Unit' && c.t !== 'Legend' && c.n.includes(',') ? P.cards[pn(c.n.split(',')[0])] : null) || null;
 }
 
-export function listName(c: any) {
+export function listName(c: Card) {
   return c.t === 'Legend' ? ((c.a || []).find((a: string) => a.includes(',')) || c.n) : c.n;
 }
 
@@ -26,7 +27,7 @@ function parse(text: string): Sec[] {
   const out: Sec[] = []; let cur: Sec | null = null;
   text.split(/\r?\n/).forEach((raw) => {
     const line = raw.trim(); if (!line) return;
-    const h = /^([A-Za-z][A-Za-z \-]*?)\s*:\s*$/.exec(line);
+    const h = /^([A-Za-z][A-Za-z -]*?)\s*:\s*$/.exec(line);
     if (h) { cur = { name: h[1], rows: [] }; out.push(cur); return; }
     if (!cur) { cur = { name: 'MainDeck', rows: [] }; out.push(cur); }
     const m = /^(\d+)\s*[xX]?\s+(.+)$/.exec(line);
@@ -46,7 +47,7 @@ export function legendOf(text: string) {
 }
 
 // Hova kerül egy hozzáadott lap. Champion unit az üres Champion zónába megy, ha a legend tagjével egyezik.
-export function targetSec(c: any, text: string) {
+export function targetSec(c: Card, text: string) {
   if (c.t === 'Legend') return 'Legend';
   if (c.t === 'Battlefield') return 'Battlefields';
   if (c.t === 'Rune') return 'Rune Pool';
@@ -57,7 +58,7 @@ export function targetSec(c: any, text: string) {
   return 'MainDeck';
 }
 
-export function editDeck(text: string, sec: string, c: any, delta: number) {
+export function editDeck(text: string, sec: string, c: Card, delta: number) {
   const secs = parse(text);
   let s = secs.find((x) => secKey(x.name) === secKey(sec));
   if (!s) { s = { name: sec, rows: [] }; secs.push(s); }
@@ -71,8 +72,8 @@ export function editDeck(text: string, sec: string, c: any, delta: number) {
   return dump(secs);
 }
 
-export function searchCards(q: string, legend: any, onlyLegal: boolean, type: string) {
-  const nq = norm(q); const seen = new Set<string>(); const out: any[] = [];
+export function searchCards(q: string, legend: Card | null | undefined, onlyLegal: boolean, type: string) {
+  const nq = norm(q); const seen = new Set<string>(); const out: Card[] = [];
   const id: string[] = legend?.d || [];
   for (const c of CARDS) {
     if (seen.has(c.n) || (c.st || []).includes('Token')) continue;

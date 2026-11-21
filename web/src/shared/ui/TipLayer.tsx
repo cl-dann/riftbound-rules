@@ -26,7 +26,7 @@ export function TipLayer() {
       tip.hidden = false; place(el);
     };
     const showCard = (el: HTMLElement) => {
-      const c: any = vsCard(el.dataset.card); if (!c) return; tipFor = el;
+      const c = vsCard(el.dataset.card); if (!c) return; tipFor = el;
       // Kép nélküli lapnál a Röviden szöveg a részletekben van: ha még nem töltődött be, betöltés után újra rajzol.
       if (!c.img && !DETAILS_READY) { loadDetails().then(() => { if (tipFor === el) showCard(el); }); }
       tip.innerHTML = '<b>' + esc(c.n) + '</b><span class="note" style="color:inherit;opacity:.8">' + esc(typeLine(c)) + (c.e != null ? ' · Energy ' + c.e : '') + (c.m != null ? ' · Might ' + c.m : '') + '</span>'

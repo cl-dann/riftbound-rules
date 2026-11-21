@@ -15,9 +15,9 @@ import {
 import '../../styles/practice.css';
 import { openCard } from '../../shared/lib/events';
 
-const imgOf = (n?: string | null) => { const c: any = n ? vsCard(n) : null; return c && c.img ? IMGBASE + c.img : ''; };
+const imgOf = (n?: string | null) => { const c = n ? vsCard(n) : null; return c && c.img ? IMGBASE + c.img : ''; };
 const T = ({ t, as = 'span', className }: { t: string; as?: 'span' | 'p' | 'div'; className?: string }) => {
-  const El = as as any; return <El className={className} dangerouslySetInnerHTML={{ __html: inline(t) }} />;
+  const El = as as React.ElementType; return <El className={className} dangerouslySetInnerHTML={{ __html: inline(t) }} />;
 };
 const DOMC: Record<string, string> = { Fury: 'var(--fury)', Calm: 'var(--calm)', Mind: 'var(--mind)', Body: 'var(--body)', Chaos: 'var(--chaos)', Order: 'var(--order)' };
 const TAGHU: Record<string, string> = { Attacker: 'Attacker', Defender: 'Defender', new: 'Új' };
@@ -36,7 +36,7 @@ function Card({ n, ex, back, glow, onClick, label, badge, cls = '', land }: Card
 
 function UnitCard({ u, side, es, onCard }: { u: PUnit; side: Side; es: ES; onCard: (ref: string, side: Side) => void }) {
   const g = side === 'me' ? glowOf(es, u.n) : '';
-  const base = +((vsCard(u.n) as any)?.m || 0);
+  const base = +(vsCard(u.n)?.m || 0);
   const tags = (u.tags || []).filter((t) => t !== 'new');
   return (
     <Card n={u.n} ex={u.ex} glow={g} onClick={() => onCard(u.n, side)}
@@ -57,7 +57,7 @@ function Runes({ es, side, onRune }: { es: ES; side: Side; onRune?: (i: number) 
   return (
     <div className={'pb-runes' + (es.scn.pool && side === 'me' ? ' spread' : '')}>
       {Object.entries(groups).map(([d, idx]) => (
-        <div key={d} className="pb-rgroup" style={{ ['--dc' as any]: DOMC[d] || '#888' }}>
+        <div key={d} className="pb-rgroup" style={{ '--dc': DOMC[d] || '#888' } as React.CSSProperties}>
           <span className="pb-rcount" title={d + ': ' + idx.filter((i) => !rs[i].ex).length + ' ready'}>{idx.length}</span>
           <div className="pb-rstack">
             {idx.map((i) => {
@@ -122,7 +122,7 @@ export function PracticeBoard({ scn, next }: { scn: Scn; next?: { href: string; 
   const s = step(es);
   // üzenetek: a motor üzenete és a szabad lépés belépő szövege
   useEffect(() => { if (es.msg) setToast(es.msg); }, [es.nonce, es.msg]);
-  useEffect(() => { if (es.started && s?.t === 'free' && (s as any).toast) setToast((s as any).toast); }, [es.i, es.started]);
+  useEffect(() => { if (es.started && s?.t === 'free' && s.toast) setToast(s.toast); }, [es.i, es.started]);
   useEffect(() => { if (!toast) return; const t = setTimeout(() => setToast(null), 7000); return () => clearTimeout(t); }, [toast]);
   // az ellenfél lépése: rövid várakozás után automatikusan tovább
   useEffect(() => { if (es.started && s?.t === 'auto' && !es.out) { const t = setTimeout(() => setEs((x) => autoNext(x)), 1500); return () => clearTimeout(t); } }, [es.i, es.started, es.out]);

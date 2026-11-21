@@ -1,4 +1,3 @@
-// @ts-nocheck
 /* Kártya részletek HTML (fej, szöveg, jegyzetek, Gyakori kérdések, kapcsolódó szabályok). (a korábbi legacy/core.ts része, S15) */
 import { similar, typeLine } from '../../domain/data/cards';
 import { BF, D, META, TOPICS } from '../../domain/data/store';
@@ -6,14 +5,15 @@ import { FL, FLT } from '../../domain/rules/flags';
 import { esc } from '../../domain/text/norm';
 import { glossify } from './glossary';
 import { GROUPS, topicBlock, whyOf } from './rules';
-export const DOMS={R:'Fury',G:'Calm',B:'Mind',O:'Body',P:'Chaos',Y:'Order'};
-export const SYMT={A:['A','Power, bármely domain'],C:['C','Power, a kártya saját domainje'],S:['Might','Might'],T:['Exhaust','Exhaust (a kártya kimerítése költségként)'],E:['Exhaust','Exhaust (a kártya kimerítése költségként)']};
-export function cardText(t){
+import type { Card } from '../../domain/data/schema';
+export const DOMS:Record<string,string>={R:'Fury',G:'Calm',B:'Mind',O:'Body',P:'Chaos',Y:'Order'};
+export const SYMT:Record<string,[string,string]>={A:['A','Power, bármely domain'],C:['C','Power, a kártya saját domainje'],S:['Might','Might'],T:['Exhaust','Exhaust (a kártya kimerítése költségként)'],E:['Exhaust','Exhaust (a kártya kimerítése költségként)']};
+export function cardText(t:string|null|undefined){
   if(!t)return '<p class="rem">Nincs szabályszöveg.</p>';
-  return t.split('\n').map(line=>{
+  return t.split('\n').map((line:string)=>{
     let h=esc(line);
     h=h.replace(/\(([^()]*)\)/g,'<span class="rem">($1)</span>');
-    h=h.replace(/\[([^\]]+)\]/g,(m,k)=>{
+    h=h.replace(/\[([^\]]+)\]/g,(_m:string,k:string)=>{
       if(/^\d+$/.test(k))return '<span class="sym en" title="Energy '+k+'">'+k+'</span>';
       if(k==='&gt;')return '\u25B8';
       if(k==='&gt;&gt;')return '\u00BB';
@@ -24,25 +24,25 @@ export function cardText(t){
     return '<p>'+h+'</p>';
   }).join('');
 }
-export const domDots=c=>(c.d||[]).map(d=>'<i class="dot d-'+d+'" title="'+d+'"></i>').join('');
-const refLinks=r=>r.split(',').map(x=>x.trim()).filter(Boolean).map(x=>'<a href="#szabalyok" data-ref="'+x+'">'+x+'</a>').join('');
-export function qaHTML(c){
+export const domDots=(c:Pick<Card,'d'>)=>(c.d||[]).map(d=>'<i class="dot d-'+d+'" title="'+d+'"></i>').join('');
+const refLinks=(r:string)=>r.split(',').map(x=>x.trim()).filter(Boolean).map(x=>'<a href="#szabalyok" data-ref="'+x+'">'+x+'</a>').join('');
+export function qaHTML(c:Card){
   if(!c.qa||!c.qa.length)return '';
-  const seen=new Set();
+  const seen=new Set<string>();
   return '<h3>Gyakori kérdések<span class="n">'+c.qa.length+' kérdés, nem hivatalos ruling</span></h3><dl class="qa">'+c.qa.map(x=>'<dt>'+esc(x[0])+'</dt><dd>'+glossify(esc(x[1]),seen)+(x[2]?'<span class="r">'+refLinks(x[2])+'</span>':'')+'</dd>').join('')+'</dl>';
 }
-export function notesHTML(c){
+export function notesHTML(c:Card){
   if(!c.nt)return '<h3>Hogyan érinti ezt a lapot</h3><p class="note">Ehhez a laphoz még nincs kézzel írt, lap-specifikus magyarázat. Lent a rá vonatkozó szabályszakaszok teljes szövege olvasható.</p>';
-  const seen=new Set();
+  const seen=new Set<string>();
   const body='<div class="ntwrap"><table class="nt">'+c.nt.map(n=>'<tr><td class="r">'+n[0].split(',').map(r=>'<a href="#szabalyok" data-ref="'+r.trim()+'">'+r.trim()+'</a>').join('')+'</td><td>'+glossify(esc(n[2]),seen)+'</td><td class="f"><span class="fl f'+n[1]+'" title="'+FLT[n[1]]+'">'+FL[n[1]]+'</span></td></tr>').join('')+'</table></div>';
   if(c.qa&&c.qa.length)return '<details class="tp ntd"><summary><span class="tt">Szabályi részletek</span><span class="why">'+c.nt.length+' pont szabályszámmal, judge szintű pontosítások</span></summary>'+body+'</details>';
   return '<h3>Hogyan érinti ezt a lapot<span class="n">'+c.nt.length+' pont, nem hivatalos ruling</span></h3>'+body;
 }
-export function similarHTML(c){
+export function similarHTML(c:Card){
   const L=similar(c,8);if(!L.length)return '';
-  return '<h3>Hasonló lapok<span class="n">közös kulcsszó, tag, típus és hatás alapján</span></h3><div class="simgrid">'+L.map(([s,o,w])=>'<button class="simc" data-sim="'+esc(o.n)+'"><b>'+domDots(o)+' '+esc(o.n)+'</b><span>'+esc(typeLine(o))+(o.e!=null?' · Energy '+o.e:'')+'</span>'+(w.length?'<span class="w">'+w.map(esc).join(', ')+'</span>':'')+'</button>').join('')+'</div>';
+  return '<h3>Hasonló lapok<span class="n">közös kulcsszó, tag, típus és hatás alapján</span></h3><div class="simgrid">'+L.map(([,o,w])=>'<button class="simc" data-sim="'+esc(o.n)+'"><b>'+domDots(o)+' '+esc(o.n)+'</b><span>'+esc(typeLine(o))+(o.e!=null?' · Energy '+o.e:'')+'</span>'+(w.length?'<span class="w">'+w.map(esc).join(', ')+'</span>':'')+'</button>').join('')+'</div>';
 }
-export function cardRulesHTML(c){
+export function cardRulesHTML(c:Card){
   let h=qaHTML(c)+notesHTML(c)+similarHTML(c);
   if(c.ex&&c.ex.length){
     h+='<h3>A szabályzat név szerint említi<span class="n">'+c.ex.length+' példa</span></h3>';
@@ -59,8 +59,8 @@ export function cardRulesHTML(c){
   gen.forEach(g=>{h+=topicBlock({refs:g.refs,title:g.title,rel:[]},'általános',false);});
   return h;
 }
-export function cardHeadHTML(c,tag){
-  const chips=[];
+export function cardHeadHTML(c:Card,tag:string){
+  const chips:string[]=[];
   chips.push('<span class="chip">'+domDots(c)+esc(typeLine(c))+'</span>');
   if(c.d&&c.d.length)chips.push('<span class="chip">'+esc(c.d.join(' + '))+'</span>');
   if(c.e!=null)chips.push('<span class="chip">Energy <b>'+c.e+'</b></span>');

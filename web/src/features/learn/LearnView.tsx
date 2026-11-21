@@ -68,7 +68,7 @@ function Side({ title, groups, cur, pos }: { title: string; groups: { h?: string
 
 export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'tanulas' | 'hogyan' }) {
   const [L, setL] = useState<Learn | null>(null);
-  useEffect(() => { loadLearn().then((x: any) => setL(x)); }, []);
+  useEffect(() => { loadLearn().then((x) => setL(x as Learn)); }, []);
   const route = parse(hash, base);
   const htp = L ? L.chapters.filter((c) => c.section === 'hogyan') : [];
   const lessons = L ? LEVELS.flatMap(([lv]) => L.chapters.filter((c) => c.section === 'lecke' && c.level === lv)) : [];
@@ -85,7 +85,7 @@ export function LearnView({ hash, base = 'tanulas' }: { hash: string; base?: 'ta
   if (!L) return <div className="panel pad"><p className="note">Betöltés…</p></div>;
 
   if (base === 'hogyan') {
-    const ch = htp.find((c) => c.id === (route as any).id) || htp[0];
+    const ch = htp.find((c) => c.id === (route as { id?: string }).id) || htp[0];
     if (!ch) return <div className="panel pad"><h2>How to Play</h2></div>;
     const side = <Side title="How to Play" cur={ch.id} pos={htp.indexOf(ch) + 1 + ' / ' + htp.length} groups={[{ items: htp.map((c, i) => ({ id: c.id, href: '#hogyan/' + c.id, t: c.title, n: String(i + 1) })) }]} />;
     return (

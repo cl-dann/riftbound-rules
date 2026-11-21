@@ -29,11 +29,15 @@ export const GeneralSchema = z.strictObject({ title: str, refs: z.array(str), fo
 export const TermSchema = z.strictObject({ t: str, m: str, r: str, d: str });
 export const ArticleSchema = z.strictObject({ k: str, t: str, u: str });
 export const BanFutSchema = z.strictObject({ from: str, published: str, title: str, url: str, cards: z.array(str) });
+export const GlossarySchema = z.strictObject({ kw: str, rule: str, kind: str, on: str, short: str, points: z.array(z.tuple([str, str])), stack: str });
+export const FlowSchema = z.strictObject({ title: str, rules: str, steps: z.array(z.strictObject({ name: str, rule: str, text: str })) });
+export const PatchSchema = z.strictObject({ title: str, url: str, date: str, effective: str, changes: z.array(z.strictObject({ rule: str, text: str })) });
+export const GuideSchema = z.strictObject({ title: str, rules: str, paras: z.array(str), steps: z.array(z.tuple([str, str])).optional() });
 export const MetaSchema = z.strictObject({
   meta: z.strictObject({ rules_updated: str, ban_updated: str, cards_snapshot: str, articles: z.array(ArticleSchema), ban: z.array(str), ban2: z.array(str), banfut: BanFutSchema }),
   topics: z.array(TopicSchema),
   general: z.array(GeneralSchema),
-  extra: z.strictObject({ glossary: z.array(z.unknown()), flow: z.array(z.unknown()), patchnotes: z.array(z.unknown()), terms: z.array(TermSchema), guide: z.array(z.unknown()) }),
+  extra: z.strictObject({ glossary: z.array(GlossarySchema), flow: z.array(FlowSchema), patchnotes: z.array(PatchSchema), terms: z.array(TermSchema), guide: z.array(GuideSchema) }),
 });
 
 /** A cards.json (index, a részletek helyén null) és a cards-detail.json (részletek) sémája, azonos sorrendben. */

@@ -3,7 +3,8 @@
    'note' esetén csak leírja), d (egy mondat a hatásról), refs (a hivatkozott Core Rules szabályok, a rules.json-ból ellenőrizve),
    és ha kell: open (a Core Rules nem dönti el, judge dönt, flag 2), hidden (rejtett adat kell hozzá: kéz vagy deck tartalma),
    field (a builderben az érintett lapnál megjelenő kis mező: num vagy sel, alapértékkel és kiírt feltételezéssel). */
-export type CardOv = { re: RegExp; k: string; d: string; refs: string; open?: boolean; hidden?: boolean; field?: any; [x: string]: any };
+import type { CardOv } from './types';
+export type { CardOv };
 
 export const CARD_OV: Record<string, CardOv[]> = {
   'Angle Shot': [{ re: /^Attach that Equipment to that unit or detach/i, k: 'attachOrDetach', d: 'A játékos választja, hogy a kiválasztott Equipmentet a unitra csatolja vagy leválasztja róla.', refs: '435, 436', field: { type: 'sel', label: 'Választás', opts: [['detach', 'detach'], ['attach', 'attach']], def: 'detach' } }],
@@ -80,7 +81,7 @@ export const CARD_OV: Record<string, CardOv[]> = {
 };
 
 /** A lap adott utasítására vonatkozó kézi leírás, ha van. */
-export function cardOv(cardName: string | undefined, t: string): CardOv | null {
+export function cardOv(cardName: string | null | undefined, t: string): CardOv | null {
   if (!cardName) return null;
   const L = CARD_OV[cardName]; if (!L) return null;
   const tt = String(t || '').replace(/^[-\u2014\u2013*]\s*/, '');

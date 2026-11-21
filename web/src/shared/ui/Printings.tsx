@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IMGBASE } from '../../domain/data/store';
+import type { Card } from '../../domain/data/schema';
 import { eur, pn } from '../../domain/deck/edit';
 import type { PriceRow, Prices } from '../../domain/deck/prices';
 import { loadPrices } from '../lib/prices';
@@ -35,10 +36,10 @@ function priceCell(r: Row | undefined) {
   );
 }
 
-export function Printings({ card }: { card: any }) {
+export function Printings({ card }: { card: Card }) {
   const P: Prices | null = usePrices();
   const [big, setBig] = useState<string | null>(null);
-  const pr: any[] = card.pr || [];
+  const pr: Card['pr'] = card.pr || [];
   const ex: Row[] = (P?.ex && (P.ex[pn(card.n)] || P.ex[pn(card.fk || '')])) || [];
   if (!pr.length) return null;
   return (

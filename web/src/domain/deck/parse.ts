@@ -35,7 +35,7 @@ export function parseDeck(text: string){
   const secs: DeckSection[]=[];let cur: DeckSection|null=null;
   text.split(/\r?\n/).forEach(raw=>{
     const line=raw.trim();if(!line)return;
-    let m=/^([A-Za-z][A-Za-z \-]*?)\s*:\s*$/.exec(line);
+    let m=/^([A-Za-z][A-Za-z -]*?)\s*:\s*$/.exec(line);
     if(m){cur={name:m[1],rows:[]};secs.push(cur);return;}
     if(!cur){cur={name:'Lista',rows:[]};secs.push(cur);}
     m=/^(\d+)\s*[xX]?\s+(.+)$/.exec(line);

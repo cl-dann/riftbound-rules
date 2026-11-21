@@ -3,7 +3,10 @@ import { cardOv } from './overrides';
 import { condOf, eachOf } from './conditions';
 import { DELAY_RE, DIRECT_RE, LINK_RE, phrasesTxt, splitInstr } from './parser';
 import { COST_LINE } from './text';
-export function actOf(t:string):any{const e=String(t||'').replace(/^[-\u2014\u2013]\s*/,'');let m;const r:any=(o:any)=>{
+import type { Act, CardLike, CardOv, Instr, StepInfo } from './types';
+/** Az utasítás értelmezésének kézi felülírása a lépésen (Haladó szerkesztés): művelet, darabszám, linked. */
+export type InstrOv = { k?: string; n?: number | null; lk?: boolean | null };
+export function actOf(t:string):Act{const e=String(t||'').replace(/^[-\u2014\u2013]\s*/,'');let m;const r=(o:Act):Act=>{
     if(/\bfor each\b|\bequal to the number of\b/i.test(e)&&!o.unsure){const ea=eachOf(e);if(ea.cnt)o.each=ea;else o.unsure='a szorzóhoz ("for each") hiányzó adat: '+ea.miss+'; ezt az elemzés nem követi';}
     const cd=condOf(e);if(cd)o.cond=cd;
     if(/\binstead\b/i.test(e)&&!o.unsure&&!['saveNext','dieRepl'].includes(o.k)){if(cd)o.alt=true;else o.unsure='replacement ("instead") feltétel nélkül, az elemzés csak jelzi';}
@@ -93,33 +96,33 @@ export function actOf(t:string):any{const e=String(t||'').replace(/^[-\u2014\u20
 }
 
 /** Művelet a lap kézi leírásával (cardRules.ts), ha van, különben az általános felismerés. */
-export function actOfCard(t:string,cardName?:string){const ov=cardOv(cardName,t);if(ov)return Object.assign({},ov,{k:ov.k,ov,re:undefined});return actOf(t);}
+export function actOfCard(t:string,cardName?:string|null):Act{const ov=cardOv(cardName,t);if(ov)return Object.assign({},ov,{k:ov.k,ov,re:undefined});return actOf(t);}
 /** Utasítás besorolása a lefedettséghez: 'other' (nem felismert), 'unsure' (bizonytalan), 'user' (felismert, de a builderben kell megadni egy adatot), 'known'. */
-export function classOf(t:string,cardName?:string){const ov=cardOv(cardName,t);if(ov)return ov.hidden?'hidden':ov.open?'open':'known';
+export function classOf(t:string,cardName?:string|null){const ov=cardOv(cardName,t);if(ov)return ov.hidden?'hidden':ov.open?'open':'known';
   const a=actOf(t);if(a.k==='other')return 'other';if(a.unsure)return 'unsure';
   if(a.cond&&a.cond.how==='hidden')return 'hidden';
   if(a.cond&&a.cond.how==='open')return 'open';
   if(a.k==='playcard'&&(a.from==='hand'||/\b(?:play|plays) it\b/i.test(t)&&!/\bbanish/i.test(t)))return 'hidden';
   return 'known';}
 /** Miért kér adatot egy rejtett információra épülő utasítás (a lefedettségi riporthoz és a mezők címkéjéhez). */
-export function hiddenWhy(t:string,cardName?:string){const ov:any=cardOv(cardName,t);if(ov)return ov.why||'rejtett információ (kéz vagy deck)';const a:any=actOf(t);
+export function hiddenWhy(t:string,cardName?:string|null){const ov:CardOv|null=cardOv(cardName,t);if(ov)return ov.why||'rejtett információ (kéz vagy deck)';const a=actOf(t);
   if(a.cond&&a.cond.how==='hidden')return a.cond.why;if(a.k==='playcard')return 'a kijátszott lap a kézből vagy rejtett zónából jön, a builderben választható';return '';}
 export const allScope=(eff:string)=>{const m=/\b(all|each) (other )?(friendly |enemy )?(units?|gear)\b([^.]{0,30})/i.exec(eff)||/\b(?:to|kill|stun|ready|exhaust|give)\s()(other )?(friendly |enemy )(units|gear)\b((?: here| there| at battlefields?| in (?:your |their )?bases?)[^.]{0,20})/i.exec(eff);if(!m||/\beach of\b/i.test(eff))return null;
   return {rel:(m[3]||'').trim()?m[3].trim().toLowerCase():/^\s*(?:you control|of yours)\b/i.test(m[5]||'')?'friendly':/^\s*(?:an opponent controls|your opponents control)\b/i.test(m[5]||'')?'enemy':'any',type:/gear/i.test(m[4])?'gear':'unit',here:/\bhere\b/i.test(m[5]),there:/\bthere\b/i.test(m[5]),atbf:/at (?:a |each )?battlefields?/i.test(m[5]),inbase:/\bin (?:a |their |your |its )?bases?\b/i.test(m[5]),other:!!m[2]};};
-export function timingOf(c:any){
+export function timingOf(c:CardLike){
   const t=c.txt||'';const kw=(k:string)=>new RegExp('^\\['+k+'\\](?:\\s*\\(|\\s*$|\\s*\\[)','m').test(t);
   if(kw('Reaction')||kw('Quick-Draw'))return 'reaction';
   if(kw('Hidden'))return 'hidden';
   if(kw('Action'))return 'action';
   return c.t==='Spell'?'none':'perm';
 }
-export const isPermC=(c:any)=>c&&(c.t==='Unit'||c.t==='Gear');
+export const isPermC=(c:CardLike|null|undefined)=>c&&(c.t==='Unit'||c.t==='Gear');
 
 /* "Így értelmezem a lapot": felülírható műveletek. */
 export const OV_ACTS=[['kill','kill'],['dmg','damage N'],['base','move to base'],['move','move (cél a lépésnél)'],['hand','return to hand'],['banish','banish'],['recall','recall'],['stun','stun'],['buff','buff'],['might','Might módosítás N'],['ready','ready'],['exhaust','exhaust'],['control','gain control'],['attach','attach'],['detach','detach'],['draw','draw N'],['channel','channel N'],['discard','discard N'],['counter','counter'],['choose','választás (célpont kijelölése)'],['none','semmi'],['other','nem követett hatás']];
-export const OV_LBL:any=Object.fromEntries(OV_ACTS);
+export const OV_LBL:Record<string,string>=Object.fromEntries(OV_ACTS);
 export const OV_N=new Set(['dmg','draw','might','channel','discard']);
-export function interp(s:any,inf:any){const eff=inf.eff||'';const list=inf.list||[];
+export function interp(s:{ov?:Record<number,InstrOv|null>},inf:Partial<StepInfo>):Instr[]{const eff=inf.eff||'';const list=inf.list||[];
   let INS=splitInstr(eff).map(t=>({t,n:phrasesTxt(t).length}));
   if(INS.reduce((x,y)=>x+y.n,0)!==list.length)INS=[{t:eff,n:list.length}];
   let k=0;return INS.map((x,xi)=>{const tis:number[]=[];for(let q=0;q<x.n;q++)tis.push(k++);

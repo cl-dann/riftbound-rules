@@ -3,7 +3,7 @@ import { RULES, heads, top3 } from '../data/store';
 /** Egy hivatkozás ("103.2" vagy tartomány "140-146") a rules.json indexeire bontva. */
 export function expand(ref: string){
   const out: number[]=[];
-  let m=/^(\d{3})-(\d{3})$/.exec(ref);
+  const m=/^(\d{3})-(\d{3})$/.exec(ref);
   if(m){const a=+m[1],b=+m[2];for(let i=0;i<RULES.length;i++)if(top3[i]>=a&&top3[i]<=b)out.push(i);return out;}
   for(let i=0;i<RULES.length;i++){const id=RULES[i][0];if(id===ref||id.startsWith(ref+'.'))out.push(i);}
   return out;

@@ -4,6 +4,8 @@ import { ArrowDown, ArrowUp, GripVertical, Plus, X } from 'lucide-react';
 import { locLabelOf, newZid, stateKeysOf } from '../../domain/chain/cs';
 import { chainActions, chainStore, getCS } from './store';
 import { stepInfo } from '../../domain/chain/steps';
+import type { ChainState, ChainStep, ZoneEntry } from '../../domain/chain/state';
+import type { ZoneRef } from '../../domain/chain/zones';
 import { TEMPLATES } from '../../domain/chain/templates';
 import { IMGBASE } from '../../domain/data/store';
 import { type Glow, type PTarget, type PlayCtl, Playmat } from '../../shared/board/Playmat';
@@ -74,13 +76,13 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
   const names = useMemo(() => CS.steps.map((s) => stepName(CS, s)), [csv]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ---- CS írása ---- */
-  const commit = (fn: (cs: any) => void, j: number | 'keep' = 'keep', ms?: number) => { jump.current = j; chainActions().commit(fn, ms); };
+  const commit = (fn: (cs: ChainState) => void, j: number | 'keep' = 'keep', ms?: number) => { jump.current = j; chainActions().commit(fn, ms); };
   const close = () => { setMenu(null); setPick(null); setProps(null); };
-  const addStep = (st: any) => {
+  const addStep = (st: ChainStep) => {
     const j = ins == null ? CS.steps.length : Math.min(ins, CS.steps.length);
     commit((cs) => { insertAt(cs, j, st); }, j, 0);
     close(); if (!narrow) setIns(null);
-    const inf: any = stepInfo(getCS(), getCS().steps[j]);
+    const inf = stepInfo(getCS(), getCS().steps[j]);
     const hasT = !!inf?.list?.length;
     if (hasT) { setMode({ k: 'target', j, ti: 0 }); setMsg(''); } else afterTargets(j);
     const hasZ = !hasT && zonePicks(getCS(), j).some((z) => zoneCands(getCS(), j, z.xi).length);
@@ -136,13 +138,13 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
     if (n === 1 && !cur.includes(id)) afterTargets(j, xi + 1);
   };
   const zoneHu = (z: string) => (z === 'trash' ? 'trash' : z === 'hand' ? 'kéz' : z === 'among' ? 'megnézett lapok' : 'deck');
-  const zNote = (z: { zr: any }) => (z.zr.target ? 'Célpont a trashből: a trash nyilvános zóna, ezért a lerakáskor kell választani (355.10.a, 355.8).' : z.zr.z === 'hand' ? 'Választás a kézből: a kéz privát, ezért nem célpont, a resolve-kor dől el (355.10.a, 355.18).' : z.zr.z === 'among' ? 'Választás a megnézett lapok közül: rejtett adat (128.4), a deck felső lapjai a Deck panelben megadva, sorrendben; a választás a resolve-kor (355.18).' : 'Választás a deckből: a deck sorrendje titkos információ (108.4.e, 128.3).') + (z.zr.n > 1 ? ' Legfeljebb ' + z.zr.n + ' lap.' : '');
+  const zNote = (z: { zr: ZoneRef }) => (z.zr.target ? 'Célpont a trashből: a trash nyilvános zóna, ezért a lerakáskor kell választani (355.10.a, 355.8).' : z.zr.z === 'hand' ? 'Választás a kézből: a kéz privát, ezért nem célpont, a resolve-kor dől el (355.10.a, 355.18).' : z.zr.z === 'among' ? 'Választás a megnézett lapok közül: rejtett adat (128.4), a deck felső lapjai a Deck panelben megadva, sorrendben; a választás a resolve-kor (355.18).' : 'Választás a deckből: a deck sorrendje titkos információ (108.4.e, 128.3).') + (z.zr.n > 1 ? ' Legfeljebb ' + z.zr.n + ' lap.' : '');
   const zChips = mode?.k === 'zpick' ? (zCands.length ? zCands.map((o) => (
     <button key={o.id} type="button" className={'cb2-chip' + (o.ok ? '' : ' bad') + (zSel(mode.j, mode.xi).includes(o.id) ? ' on' : '')} aria-pressed={zSel(mode.j, mode.xi).includes(o.id)} title={o.why} onClick={() => toggleZ(o.id)}>
       {o.n} <small>({o.own === 'A' ? 'saját' : 'ellenfél'} {zoneHu(o.zone)}{o.ok ? '' : ', nem választható: ' + o.why})</small></button>)) : <span className="note">Ebben a zónában nincs lap. A Trash, a Deck és a kéz + gombjával adhatsz hozzá.</span>) : null;
   const zList = (z: 'trash' | 'deck' | 'banish', side: 'me' | 'opp') => {
-    const b: any = f.board[side]; const p = plOf(side);
-    if (z === 'deck') return ((CS.deck || {})[p] || []).map((e: any, i: number) => ({ id: typeof e === 'string' ? 'zd' + p + i : e.id, n: typeof e === 'string' ? e : e.n }));
+    const b = f.board[side]; const p = plOf(side);
+    if (z === 'deck') return ((CS.deck || {})[p] || []).map((e, i) => ({ id: typeof e === 'string' ? 'zd' + p + i : e.id!, n: typeof e === 'string' ? e : e.n }));
     if (z === 'banish') return (b.banish || []).map((n: string) => ({ id: '', n }));
     return (b.trash || []).map((n: string, i: number) => ({ id: (b.zids?.trash || [])[i] || '', n }));
   };
@@ -156,13 +158,13 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
             <button type="button" className="pb-x" aria-label="Bezárás" onClick={() => setZpan(null)}><X size={18} /></button></div>
           {mode?.k === 'zpick' && zInfo && <p className="pb-why cb2-need">"{zInfo.t}": {zNote(zInfo)}</p>}
           <ul className="cb2-zl">
-            {list.map((x: any, k: number) => { const o = mode?.k === 'zpick' ? zCands.find((c) => c.id === x.id) : undefined; const on = mode?.k === 'zpick' && zSel(mode.j, mode.xi).includes(x.id);
+            {list.map((x, k) => { const o = mode?.k === 'zpick' ? zCands.find((c) => c.id === x.id) : undefined; const on = mode?.k === 'zpick' && zSel(mode.j, mode.xi).includes(x.id);
               return (
                 <li key={k} className={o ? (o.ok ? 'ok' : 'bad') : ''}>
                   {imgOf(x.n) ? <img src={imgOf(x.n)} alt="" /> : <span className="cb2-noimg" />}
                   <span className="cb2-rn"><b>{z === 'deck' ? (k + 1) + '. ' : ''}{x.n}</b>{o && !o.ok && <small>{o.why}</small>}</span>
                   {o && <button type="button" className={'btn' + (on ? '' : ' sec')} disabled={!o.ok} aria-pressed={on} onClick={() => toggleZ(x.id)}>{on ? 'Kiválasztva' : 'Kiválasztás'}</button>}
-                  {/^z[td][AB]/.test(x.id) && !o && <button type="button" className="linkbtn" aria-label={x.n + ' eltávolítása'} onClick={() => commit((cs) => { cs[z][p] = cs[z][p].filter((e: any) => e.id !== x.id); })}><X size={14} /></button>}
+                  {/^z[td][AB]/.test(x.id) && !o && <button type="button" className="linkbtn" aria-label={x.n + ' eltávolítása'} onClick={() => commit((cs) => { const zs = cs[z as 'trash' | 'deck'] as Record<string, ZoneEntry[]>; zs[p] = zs[p].filter((e) => (e as { id?: string }).id !== x.id); })}><X size={14} /></button>}
                 </li>); })}
             {!list.length && <li className="note">Üres.</li>}
           </ul>
@@ -177,9 +179,9 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
   const abItems = (src: string, pl: 'A' | 'B'): MItem[] => {
     const { c, abs, trs } = abilitiesFor(CS, src);
     if (!c) return [];
-    const out: MItem[] = abs.map((a: any, ai: number) => { const st = { k: 'ab', src, ai, pl, n: c.n, tg: [], ext: {} }; return { label: 'Aktiválás: ' + String(a.label).slice(0, 70), step: true, run: () => addStep(st), ...lg(tryStep(CS, st, ins ?? undefined)) }; });
+    const out: MItem[] = abs.map((a, ai) => { const st = { k: 'ab', src, ai, pl, n: c.n, tg: [], ext: {} }; return { label: 'Aktiválás: ' + String(a.label).slice(0, 70), step: true, run: () => addStep(st), ...lg(tryStep(CS, st, ins ?? undefined)) }; });
     if (!abs.length) out.push({ label: 'Aktiválás', dis: 'Ennek a lapnak nincs aktiválható abilityje.' });
-    trs.forEach((a: any, ti: number) => { const st = { k: 'tg', src, ti, pl, n: c.n, tg: [], ext: {} }; out.push({ label: 'Trigger a chainre: ' + String(a.label).slice(0, 60), tone: 'gold', step: true, run: () => addStep(st), ...lg(tryStep(CS, st, ins ?? undefined)) }); });
+    trs.forEach((a, ti) => { const st = { k: 'tg', src, ti, pl, n: c.n, tg: [], ext: {} }; out.push({ label: 'Trigger a chainre: ' + String(a.label).slice(0, 60), tone: 'gold', step: true, run: () => addStep(st), ...lg(tryStep(CS, st, ins ?? undefined)) }); });
     return out;
   };
   const moveItems = (uid: string, n: string): MItem[] => {
@@ -225,9 +227,9 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
       ] });
     }
   };
-  const playItem = (st: any, label = 'Kijátszás'): MItem => ({ label, step: true, run: () => addStep(st), ...lg(tryStep(CS, st, ins ?? undefined)) });
+  const playItem = (st: ChainStep, label = 'Kijátszás'): MItem => ({ label, step: true, run: () => addStep(st), ...lg(tryStep(CS, st, ins ?? undefined)) });
   const openHand = (side: 'me' | 'opp', hi0: number, n: string) => {
-    const p = plOf(side); const hid = ((f.board[side] as any).zids?.hand || [])[hi0] || '';
+    const p = plOf(side); const hid = (f.board[side].zids?.hand || [])[hi0] || '';
     const c = cardOf(n); if (!c) return;
     if (!/^zh[AB]/.test(hid)) { showMenu({ key: 'h' + hi0, title: n, card: n, sub: 'egy hatás tette a kézbe', items: [] }); return; }
     const hi = hid;
@@ -238,12 +240,12 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
       : { label: 'Elrejtés (Hidden)', tone: 'gold', need: 'a battlefield kiválasztása', run: () => { close(); if (dests.length === 1) doHide(side, hi, n, dests[0]); else setMode({ k: 'hide', side, hi, n, dests }); } };
     showMenu({ key: 'h' + side + hi + csv, title: n, card: n, sub: (side === 'me' ? 'saját' : 'ellenfél') + ' kéz', items: [
       playItem(st, 'Kijátszás' + (isPerm(c) ? ' (a base-be; a hely a lépésnél állítható)' : '')), hide,
-      { label: 'Eltávolítás a kézből', tone: 'del', run: () => { close(); commit((cs) => { cs.hand[p] = cs.hand[p].filter((e: any) => e.id !== hi); }); } },
+      { label: 'Eltávolítás a kézből', tone: 'del', run: () => { close(); commit((cs) => { const h = cs.hand as Record<string, ZoneEntry[]>; h[p] = h[p].filter((e) => (e as { id?: string }).id !== hi); }); } },
     ] });
   };
   const doHide = (side: 'me' | 'opp', hi: string, n: string, b: number) => {
     const p = plOf(side);
-    commit((cs) => { cs.hand[p] = cs.hand[p].filter((e: any) => e.id !== hi); cs.bf[b].fd = p; cs.bf[b].fdn = n; });
+    commit((cs) => { const h = cs.hand as Record<string, ZoneEntry[]>; h[p] = h[p].filter((e) => (e as { id?: string }).id !== hi); cs.bf[b].fd = p; cs.bf[b].fdn = n; });
     setMode(null); setMsg(n + ' elrejtve: facedown itt: ' + (CS.bf[b].n || (b + 1) + '. battlefield') + ' (811.1.b).');
   };
   const openFd = (b: number) => {
@@ -253,7 +255,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
       setPick({ kind: 'hidden', bfi: b, side: sideOf(bf.c) }); return;
     }
     const n = bf.fdn || '';
-    const items: MItem[] = n ? [playItem({ k: 'card', n, pl: bf.fd, from: 'facedown', loc: 'bf' + b, tg: [], ext: {} }, 'Kijátszás facedown-ból')]
+    const items: MItem[] = n ? [playItem({ k: 'card', n, pl: bf.fd as 'A' | 'B', from: 'facedown', loc: 'bf' + b, tg: [], ext: {} }, 'Kijátszás facedown-ból')]
       : [{ label: 'Kijátszás facedown-ból', dis: 'Ismeretlen facedown lap: a nevét a Chain + gombjával add meg, "facedown-ból" forrással.' }];
     items.push({ label: 'Vissza a kézbe', tone: 'gold', run: () => { close(); commit((cs) => { if (n) cs.hand![bf.fd as 'A' | 'B']!.push({ id: newZid(cs, 'hand', bf.fd!), n }); cs.bf[b].fd = ''; cs.bf[b].fdn = ''; }); } });
     items.push({ label: 'Eltávolítás', tone: 'del', run: () => { close(); commit((cs) => { cs.bf[b].fd = ''; cs.bf[b].fdn = ''; }); } });
@@ -274,7 +276,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
     showMenu({ key: 'C' + p + csv, title: n, card: n, sub: (side === 'me' ? 'saját' : 'ellenfél') + ' Champion Zone', items: [
       playItem({ k: 'card', n, pl: p, from: 'champ', loc: 'base', tg: [], ext: {} }, 'Kijátszás a Champion Zone-ból'),
       { label: 'Csere', tone: 'energy', run: () => { setMenu(null); setPick({ kind: 'champion', side }); } },
-      { label: 'Eltávolítás', tone: 'del', run: () => { close(); commit((cs) => { cs.ch[p] = ''; }); } },
+      { label: 'Eltávolítás', tone: 'del', run: () => { close(); commit((cs) => { cs.ch![p] = ''; }); } },
     ] });
   };
   const openBf = (b: number) => {
@@ -300,9 +302,9 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
       if (at.kind === 'legend') cs.lg[p] = n;
       else if (at.kind === 'champion') cs.ch[p] = n;
       else if (at.kind === 'battlefield') cs.bf[at.bfi!].n = n;
-      else if (at.kind === 'hand') cs.hand[p].push({ id: newZid(cs, 'hand', p), n });
-      else if (at.kind === 'trash') { cs.trash = cs.trash || { A: [], B: [] }; cs.trash[p].push({ id: newZid(cs, 'trash', p), n }); }
-      else if (at.kind === 'deck') { cs.deck = cs.deck || { A: [], B: [] }; cs.deck[p].unshift({ id: newZid(cs, 'deck', p), n }); }
+      else if (at.kind === 'hand') cs.hand![p]!.push({ id: newZid(cs, 'hand', p), n });
+      else if (at.kind === 'trash') { cs.trash = cs.trash || { A: [], B: [] }; cs.trash[p]!.push({ id: newZid(cs, 'trash', p), n }); }
+      else if (at.kind === 'deck') { cs.deck = cs.deck || { A: [], B: [] }; cs.deck[p]!.unshift({ id: newZid(cs, 'deck', p), n }); }
       else if (at.kind === 'hidden') { cs.bf[at.bfi!].fd = p; cs.bf[at.bfi!].fdn = n; }
       else if (at.kind === 'board') cs.bd.push({ n, pl: p, loc: at.loc || 'base', d: 0 });
     });
@@ -332,7 +334,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
         return '';
       }
       if (mode?.k === 'zpick') {
-        if (t.k === 'hand') { const id = ((f.board[t.side] as any).zids?.hand || [])[t.i]; const o = zCands.find((x) => x.id === id); return !o ? '' : zSel(mode.j, mode.xi).includes(id) ? 'sel' : o.ok ? 'act' : ''; }
+        if (t.k === 'hand') { const id = (f.board[t.side].zids?.hand || [])[t.i]; const o = zCands.find((x) => x.id === id); return !o ? '' : zSel(mode.j, mode.xi).includes(id) ? 'sel' : o.ok ? 'act' : ''; }
         if (t.k === 'pile') return zCands.some((o) => o.ok && (o.zone === t.z || (o.zone === 'among' && t.z === 'deck')) && o.own === plOf(t.side)) ? 'act' : '';
         return '';
       }
@@ -353,7 +355,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
       if (narrow && t.k === 'add' && t.z === 'chain' && mode?.k !== 'target') { openWiz(); return; }
       if (t.k === 'add' && mode?.k === 'target' && tOpts.some((o) => o.v === addV(t) && o.ok)) { pickTarget(addV(t)); return; }
       if (t.k === 'pile') { setZpan({ z: t.z, side: t.side }); return; }
-      if (mode?.k === 'zpick') { if (t.k === 'hand') toggleZ(((f.board[t.side] as any).zids?.hand || [])[t.i] || ''); return; }
+      if (mode?.k === 'zpick') { if (t.k === 'hand') toggleZ((f.board[t.side].zids?.hand || [])[t.i] || ''); return; }
       if (mode?.k === 'hpick') {
         if (t.k === 'hand' && ctl.glow(t)) { const m = mode; commit((cs) => { const s = cs.steps[m.j]; if (m.f === 'so') s.so = 'h:' + t.n; else { s.plc = s.plc || {}; s.plc[m.xi] = t.n; } }, m.j, 0); setMode(null); setMsg(t.n + ' kiválasztva a kézből.'); }
         if (t.k !== 'add') return;
@@ -510,7 +512,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
   }, [wiz?.st, wiz?.j]); // eslint-disable-line react-hooks/exhaustive-deps
   const pickSt = (n: string, side: 'me' | 'opp') => { const c = cardOf(n); return { k: 'card', n, pl: plOf(side), from: 'hand', ...(isPerm(c) ? { loc: 'base' } : {}), tg: [], ext: {} }; };
   const wItems: MItem[] = !narrow || !wiz || wiz.st !== 'action' ? [] : wiz.preset
-    ? [{ label: wiz.preset === 'res' ? 'Resolve: a chain teteje most lefut' : 'Kör vége: Ending Phase', ref: wiz.preset === 'res' ? '340.1' : '317.1', step: true, run: () => addStep({ k: wiz.preset }) }]
+    ? [{ label: wiz.preset === 'res' ? 'Resolve: a chain teteje most lefut' : 'Kör vége: Ending Phase', ref: wiz.preset === 'res' ? '340.1' : '317.1', step: true, run: () => addStep({ k: wiz.preset! }) }]
     : wiz.pick ? [playItem(pickSt(wiz.pick, wiz.side), 'Kijátszás')] : (wiz.menu?.items || []);
   const WST = { card: 1, action: 2, target: 3, extra: 4 } as const;
   const wHead = (t: string) => (

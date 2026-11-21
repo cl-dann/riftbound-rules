@@ -7,6 +7,8 @@ export type PUnit = { n: string; m: number; base?: number; ex?: boolean; dmg?: n
 export type PSide = {
   legend?: string; legendEx?: boolean; champion?: string | null; base?: PUnit[]; runes?: { ready: number; exhausted: number; domains?: string[] };
   hand?: string[]; handCount?: number; score?: number; deck?: number; runeDeck?: number; trash?: string[]; banish?: string[];
+  /** A kéz és a trash lapjainak azonosítói (a chain elemző frame-jéből). */
+  zids?: { hand: string[]; trash: string[] };
 };
 export type PBoard = { me: PSide; opp: PSide; bfs: { name: string; ctrl?: string | null; me?: PUnit[]; opp?: PUnit[]; facedown?: string | null; fdn?: string | null }[]; chain?: string[]; note?: string };
 
@@ -73,7 +75,7 @@ const gcls = (g: Glow) => (g ? ' g-' + g : '');
 /** Enter vagy szóköz a nem button elemeken is kattintásként működik. */
 const keyAct = (f: () => void) => (e: RKE) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); f(); } };
 
-const img = (n?: string | null) => { const c: any = n ? vsCard(n) : null; return c && c.img ? IMGBASE + c.img : ''; };
+const img = (n?: string | null) => { const c = n ? vsCard(n) : null; return c && c.img ? IMGBASE + c.img : ''; };
 const key = (u: PUnit) => u.n + '|' + u.m + '|' + (u.dmg || 0) + '|' + !!u.ex + '|' + (u.status || []).join(',') + '|' + (u.gear || []).join(',');
 
 function Card({ n, ex, small, title }: { n?: string | null; ex?: boolean; small?: boolean; title?: string }) {
@@ -86,14 +88,14 @@ function Card({ n, ex, small, title }: { n?: string | null; ex?: boolean; small?
 }
 
 function Unit({ u, side, changed, where = '', loc = '', i = 0 }: { u: PUnit; side: 'me' | 'opp'; changed: boolean; where?: string; loc?: string; i?: number }) {
-  const c: any = vsCard(u.n);
+  const c = vsCard(u.n);
   const pick = useContext(PickCtx);
   const ctl = useContext(CtlCtx);
   const t: PTarget = { k: 'unit', side, loc, n: u.n, i, ex: !!u.ex, id: u.id };
   const g = ctl ? ctl.glow(t) : '';
   const go = () => (ctl ? ctl.on(t) : pick(u, side, where));
   const labNames = new Set((u.status || []).map((x) => (statusOf(x)?.[0] || '').toLowerCase()));
-  const base = u.base ?? (c?.m != null && c.m !== 'None' ? +c.m : u.m);
+  const base = u.base ?? (c?.m != null && (c.m as unknown) !== 'None' ? +c.m : u.m);
   const diff = u.m - base;
   const st = u.status || [];
   return (
@@ -257,8 +259,8 @@ function Base({ s, who, prev, onZone, sel }: { s: PSide; who: 'me' | 'opp'; prev
 }
 
 function UnitInfo({ u, side, where }: { u: PUnit; side: 'me' | 'opp'; where: string }) {
-  const c: any = vsCard(u.n);
-  const base = u.base ?? (c?.m != null && c.m !== 'None' ? +c.m : u.m);
+  const c = vsCard(u.n);
+  const base = u.base ?? (c?.m != null && (c.m as unknown) !== 'None' ? +c.m : u.m);
   return (
     <div className="pm-uinfo">
       {c?.img && <img src={IMGBASE + c.img} alt={u.n} onClick={() => openCard(c.n)} title="Teljes lapadat" />}
