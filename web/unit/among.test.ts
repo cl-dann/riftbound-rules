@@ -1,6 +1,9 @@
 /* "From among them" minden felismert lapra, valós lapokkal: a megnézett lapok közül választott lap a lapszöveg szerinti helyre kerül, a többi recycle. */
 import { describe, expect, it } from 'vitest';
-import { analyze, interp, stepInfo, zoneRefOf } from '../src/domain/chain/chainCore';
+import { analyze } from '../src/render/html/chainReport';
+import { interp } from '../src/domain/chain/actions';
+import { stepInfo } from '../src/domain/chain/steps';
+import { zoneRefOf } from '../src/domain/chain/zones';
 
 const base = (o: any) => ({ turn: 'A', lg: { A: '', B: '' }, bf: [{ n: '', c: 'A' }, { n: '', c: '' }], bd: [], hand: { A: [], B: [] }, trash: { A: [], B: [] }, deck: { A: [], B: [] }, ...o });
 const amongXi = (cs: any, j: number) => { const s = cs.steps[j]; return interp(s, stepInfo(cs, s)).findIndex((x: any) => zoneRefOf(x.t)?.z === 'among'); };

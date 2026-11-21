@@ -1,8 +1,9 @@
 /* Költségfeltétel hatásból kijátszásnál és választásnál (206, 356.1.c, 185.3.a.1, 131.3.b), valamint a kéz, deck és trash lapjainak
    állandó azonosítója (régi, sorszámos linkek átalakítása azonos eredménnyel). Valós lapok. */
 import { describe, expect, it } from 'vitest';
-import { analyze, costCondOf, costCheck, printedCost } from '../src/domain/chain/chainCore';
-import { normZones } from '../src/features/chain/legacyForm';
+import { analyze } from '../src/render/html/chainReport';
+import { costCondOf, costCheck, printedCost } from '../src/domain/chain/cost';
+import { normZones } from '../src/domain/chain/cs';
 import { vsCard } from '../src/domain/data/store';
 import { ruleText, exampleOf } from './util';
 

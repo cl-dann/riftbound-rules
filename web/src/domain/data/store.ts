@@ -7,6 +7,8 @@ export const TODAY=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.
 export const byName=new Map<string, Card>();
 export let top3:number[]=[];
 export let TERM_RES:RegExp[]=[];
+/** A kártyák részletei (nt, qa, sh, pr) betöltve-e (mergeDetails). */
+export let DETAILS_READY=false;
 /** A generált adatot (kártyák, szabályok, meta) a sémában leírt alakban kapja; a kártyákat kiegészíti és indexeli. */
 export function init(data: Record<string, unknown>){
   D=data as unknown as AppData;RULES=D.rules;TOPICS=D.topics;CARDS=D.cards;META=D.meta;BF=META.banfut;BAN_ACTIVE=!!(BF&&TODAY>=BF.from);
@@ -19,6 +21,9 @@ export function init(data: Record<string, unknown>){
   CARDS.forEach(c=>{c._kw=c.tp.filter(p=>TOPICS[p[0]].g==='kw').map(p=>TOPICS[p[0]].title);});
   heads.length=0;RULES.forEach((r,i)=>{if(isHead(r))heads.push(i);});
 }
+/** A cards-detail.json tartalma a kártyákba (azonos sorrend). Az indexben a részletek helyén null áll, így a kártyaobjektum
+    ugyanaz marad (a byName és a többi hivatkozás érvényes), a mezők sorrendje és alakja sem változik. */
+export function mergeDetails(det: Partial<Card>[]){CARDS.forEach((c,i)=>Object.assign(c,det[i]));DETAILS_READY=true;}
 export const banDate=()=>BAN_ACTIVE?BF.from:META.ban_updated;
 export const heads:number[]=[];
 export const IMGBASE='https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data_live/';

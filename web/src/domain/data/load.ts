@@ -1,4 +1,5 @@
-import { init } from './store';
+import { init, mergeDetails } from './store';
+import type { Card } from './schema';
 
 /** Az adat külön chunkokban töltődik (cards, rules, meta), így az app héja azonnal megjelenik. */
 export async function loadData() {
@@ -11,6 +12,11 @@ export async function loadData() {
   init(D);
   return D;
 }
+
+/** A kártyák részletei (jegyzetek, Gyakori kérdések, Röviden, nyomatok) külön chunkban; minden felhasználó megvárja
+    (a lusta nézetek, a kártyamodál, a lista nézet részletei), az app a kezdő renderelés után a háttérben elindítja. */
+let details: Promise<void> | null = null;
+export const loadDetails = () => (details ||= import('../../generated/cards-detail.json').then((m) => mergeDetails(m.default as Partial<Card>[])));
 
 /** A Tanulás modul tartalma csak a nézet megnyitásakor töltődik be. */
 export const loadLearn = () => import('../../generated/learn.json').then((m) => m.default as unknown);

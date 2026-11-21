@@ -396,7 +396,7 @@ table.ltable td { border-bottom: 1px solid var(--line); padding: 6px 10px; verti
 .pm2-band.me-base { grid-template-columns: minmax(0, 1fr) auto; background: #0d1016; border-top: 1px solid #1a222c; }
 .pm2-band.opp-base > .pm2-lc { border-right: 1px solid #1a222c; } .pm2-band.me-base > .pm2-lc { border-left: 1px solid #1a222c; }
 @media (max-width: 760px) { .pm2-band.opp-top, .pm2-band.me-bottom, .pm2-band.opp-base, .pm2-band.me-base { grid-template-columns: 1fr; } .pm2-band > * { border: 0 !important; } }
-.pm2-lbl, .pm2-uh, .pm2-ftitle { font-family: var(--f-head); font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #6c7686; }
+.pm2-lbl, .pm2-uh, .pm2-ftitle { font-family: var(--f-head); font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #7a8494; }
 .pm2-hand { display: grid; justify-items: center; align-content: center; gap: 6px; }
 .pm2-band.opp-top .pm2-hand { grid-template-rows: auto auto; } .pm2-band.opp-top .pm2-hand .pm2-lbl { order: -1; }
 .pm2-cards { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
@@ -417,7 +417,7 @@ table.ltable td { border-bottom: 1px solid var(--line); padding: 6px 10px; verti
 .pm2-piles { display: grid; grid-template-columns: repeat(2, auto); gap: 4px 8px; align-content: center; }
 .pm2-pile { display: flex; align-items: center; gap: 6px; padding: 2px 4px; border: 1px solid transparent; border-radius: 4px; }
 .pm2-pile .pm-card.sm { width: 24px; }
-.pm2-pile span { display: flex; gap: 5px; font-family: var(--f-head); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #6c7686; }
+.pm2-pile span { display: flex; gap: 5px; font-family: var(--f-head); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #7a8494; }
 .pm2-pile b { font-family: var(--f-mono); color: var(--accent); letter-spacing: 0; }
 .pm2-lc { display: flex; gap: 8px; align-items: center; }
 .pm2-slot { position: relative; display: grid; justify-items: center; }
@@ -428,6 +428,10 @@ table.ltable td { border-bottom: 1px solid var(--line); padding: 6px 10px; verti
 .pm2-ghost.sm { width: 26px; border-radius: 3px; }
 .pm2-base { position: relative; display: grid; place-items: center; min-height: 92px; cursor: pointer; overflow: hidden; }
 .pm2-wm { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--f-display); font-weight: 700; font-size: clamp(34px, 6vw, 58px); letter-spacing: .35em; color: rgba(255,255,255,.035); pointer-events: none; }
+/* A vízjel és a lapháton lévő R betű CSS-ből jön (dekoráció, nem tartalom: így az akadálymentességi ellenőrzés
+   nem tekinti a gomb vagy a zóna szövegének). */
+.pm2-wm::before { content: attr(data-wm); }
+.pm-back::before { content: attr(data-l); }
 .pm2-units { position: relative; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center; min-height: 40px; }
 .pm2-field { position: relative; display: grid; gap: 12px; justify-items: center; padding: 26px 12px 30px; background: radial-gradient(520px 200px at 50% 50%, rgba(200,170,110,.06), transparent 70%), #0a0c11; border-bottom: 1px solid #1a222c; }
 .pm2-ftitle { color: #c99a2e !important; }

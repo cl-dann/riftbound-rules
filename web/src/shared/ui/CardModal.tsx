@@ -6,14 +6,16 @@ import { CARDS } from '../../domain/data/store';
 import { Html } from './Html';
 import { Printings } from './Printings';
 import { on } from '../lib/events';
+import { loadDetails } from '../../domain/data/load';
 
 /** Kártyalap felugró ablakban. Bármelyik nézet megnyithatja: window 'rb:open-card' esemény, detail = kártyanév. */
 export function CardModal() {
   const [card, setCard] = useState<any>(null);
   useEffect(() => {
+    // A lap részletei (jegyzetek, Gyakori kérdések, nyomatok) a megnyitás előtt töltődnek be, ha még nincsenek meg.
     return on('rb:open-card', (n) => {
       const c = CARDS.find((x: any) => x.n === n);
-      if (c) setCard(c);
+      if (c) loadDetails().then(() => setCard(c));
     });
   }, []);
   return (

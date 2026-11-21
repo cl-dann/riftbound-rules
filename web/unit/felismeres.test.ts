@@ -1,6 +1,7 @@
 /* Műveletfelismerés és utasításokra bontás: a gyakori minták, valódi lapszövegekkel. */
 import { describe, expect, it } from 'vitest';
-import { actOf, splitInstr, phrasesTxt, DIRECT_RE, LINK_RE, allScope, instrSources, classOf } from '../src/domain/chain/chainCore';
+import { actOf, allScope, classOf } from '../src/domain/chain/actions';
+import { splitInstr, phrasesTxt, DIRECT_RE, LINK_RE, instrSources } from '../src/domain/chain/parser';
 import { vsCard } from '../src/domain/data/store';
 import { cs, run } from './util';
 

@@ -1,9 +1,10 @@
 /* Minden szabályszám, amelyet a Chain kód kiír, létezik a rules.json-ban; és a kódban nincs em-dash vagy en-dash. */
 import { expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import RULES from '../src/generated/rules.json';
 
-const FILES = ['src/domain/chain/chainCore.ts', 'src/domain/chain/overrides.ts', 'src/features/chain/legacyForm.ts', 'src/domain/combat/combatCore.ts', 'src/features/chain/CombatPanel.tsx', 'src/features/chain/ChainView.tsx', 'src/shared/board/Playmat.tsx'];
+const CHAIN = (readdirSync('src/domain/chain', { recursive: true }) as string[]).filter((f) => f.endsWith('.ts')).map((f) => 'src/domain/chain/' + f).sort();
+const FILES = [...CHAIN, 'src/features/chain/legacyForm.ts', 'src/domain/combat/combatCore.ts', 'src/features/chain/CombatPanel.tsx', 'src/features/chain/ChainView.tsx', 'src/shared/board/Playmat.tsx', 'src/render/html/chainReport.ts'];
 const ids = new Set((RULES as any[]).map((r) => r[0]));
 it('a hivatkozott szabályszámok léteznek', () => {
   const missing: string[] = [];

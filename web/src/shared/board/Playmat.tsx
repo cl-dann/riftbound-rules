@@ -80,7 +80,7 @@ function Card({ n, ex, small, title }: { n?: string | null; ex?: boolean; small?
   const s = img(n);
   return (
     <span className={'pm-card' + (ex ? ' ex' : '') + (small ? ' sm' : '') + (!n ? ' back' : '')} title={title || n || 'Lefordított lap'}>
-      {n && s ? <img src={s} alt={n} loading="lazy" /> : <span className="pm-back">R</span>}
+      {n && s ? <img src={s} alt={n} loading="lazy" /> : <span className="pm-back" aria-hidden="true" data-l="R" />}
     </span>
   );
 }
@@ -99,7 +99,8 @@ function Unit({ u, side, changed, where = '', loc = '', i = 0 }: { u: PUnit; sid
   return (
     <div className={'pm-unit ' + side + (u.ex ? ' ex' : '') + (changed ? ' chg' : '') + (st.includes('dying') ? ' dying' : '') + (u.kind === 'gear' ? ' gear' : '') + gcls(g)} data-uid={u.id} data-fk={side + ':' + u.n}
       onClick={(e) => { e.stopPropagation(); go(); }} onKeyDown={ctl ? keyAct(go) : undefined} role="button" tabIndex={0}
-      aria-label={ctl ? (ctl.label?.(t) || u.n + (side === 'me' ? ', saját ' : ', ellenfél ') + (u.kind === 'gear' ? 'gear' : 'unit, Might ' + u.m) + (u.ex ? ', exhausted' : ', ready')) : u.kind === 'gear' ? u.n + ', gear' + (u.ex ? ', exhausted' : '') : undefined} aria-pressed={ctl ? g === 'sel' : undefined}>
+      // A név a lap látható tartalmából jön (név, Might, jelölések); a szerep és az állapot leírásként (aria-description).
+      aria-description={ctl ? (ctl.label?.(t) || u.n + (side === 'me' ? ', saját ' : ', ellenfél ') + (u.kind === 'gear' ? 'gear' : 'unit, Might ' + u.m) + (u.ex ? ', exhausted' : ', ready')) : u.kind === 'gear' ? u.n + ', gear' + (u.ex ? ', exhausted' : '') : undefined} aria-pressed={ctl ? g === 'sel' : undefined}>
       <div className="pm-labels">{st.map((s) => { const x = statusOf(s); return x ? <span key={s} className={'pm-lab ' + x[1]} data-tt={x[2]}>{x[0]}</span> : null; })}{u.token && <span className="pm-lab tmp">Token</span>}</div>
       <span className={c ? 'cl' : ''} data-card={c?.n}>
         {c?.img ? <img src={IMGBASE + c.img} alt={u.n} loading="lazy" /> : <span className="pm-tok">{u.n}</span>}
@@ -159,7 +160,7 @@ function Piles({ s, onZone, sel, known, side }: { s: PSide; onZone: (z: string) 
   const P = ({ z, l, n, top }: { z: string; l: string; n?: number; top?: string | null }) => {
     if (ctl && ed && (z === 'trash' || z === 'deck' || z === 'banish')) {
       const t: PTarget = { k: 'pile', z, side }; const g = ctl.glow(t);
-      return <button type="button" data-zone={z} className={'pm2-pile' + gcls(g)} onClick={() => ctl.on(t)} aria-label={ctl.label?.(t) || l + ': ' + (n ?? 0) + ' lap, megnyitás'}><Card n={top} small /><span>{l}<b>{n ?? 0}</b></span></button>;
+      return <button type="button" data-zone={z} className={'pm2-pile' + gcls(g)} onClick={() => ctl.on(t)} aria-label={ctl.label?.(t) || l + ' ' + (n ?? 0) + ' lap, megnyitás'}><Card n={top} small /><span>{l} <b>{n ?? 0}</b></span></button>;
     }
     return (
       <button type="button" data-zone={z} className={'pm2-pile' + (sel === z ? ' on' : '')} onClick={() => onZone(z)} title={ZONES[z]?.t}>
@@ -249,7 +250,7 @@ function Base({ s, who, prev, onZone, sel }: { s: PSide; who: 'me' | 'opp'; prev
     <div data-zone="base" className={'pm2-base ' + who + (sel === 'base' ? ' on' : '') + gcls(g)}
       onClick={(e) => { if (ctl) { if (!(e.target as HTMLElement).closest('.pm-unit,button')) ctl.on(t); return; } if (!(e.target as HTMLElement).closest('.cl,button')) onZone('base'); }}
       {...(ctl && g === 'dest' ? { tabIndex: 0, role: 'button', 'aria-label': ctl.label?.(t) || 'Cél: ' + (who === 'me' ? 'saját base' : 'ellenfél base'), onKeyDown: keyAct(() => ctl.on(t)) } : {})}>
-      <span className="pm2-wm" aria-hidden>BASE</span>
+      <span className="pm2-wm" aria-hidden data-wm="BASE" />
       <UnitRow us={s.base || []} side={who} loc={who === 'me' ? 'base' : 'obase'} where={(who === 'me' ? 'Saját' : 'Ellenfél') + ' base'} pk={prev ? pk : null} add={{ k: 'add', z: 'base', side: who }} />
     </div>
   );

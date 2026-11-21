@@ -8,6 +8,7 @@ import { typeLine } from '../../domain/data/cards';
 import { Html } from '../../shared/ui/Html';
 import { on, openCard } from '../../shared/lib/events';
 import { readViewMode, writeViewMode, type CardsViewMode } from '../../shared/lib/storage';
+import { loadDetails } from '../../domain/data/load';
 
 const SETS = ['Origins', 'Proving Grounds', 'Spiritforged', 'Unleashed', 'Vendetta', 'Radiance'];
 const DOMAINS = ['Fury', 'Calm', 'Mind', 'Body', 'Chaos', 'Order'];
@@ -123,8 +124,10 @@ export function CardsView({ active }: { active: boolean }) {
 
   const pick = (c: any) => {
     if (mode === 'grid') { openCard(c.n); return; }
-    setSel(c);
-    if (window.innerWidth < 860) detailRef.current?.scrollIntoView({ behavior: 'smooth' });
+    loadDetails().then(() => {
+      setSel(c);
+      if (window.innerWidth < 860) detailRef.current?.scrollIntoView({ behavior: 'smooth' });
+    });
   };
   const shown = res.slice(0, limit);
   const sel2 = (k: keyof F, label: string, opts: [string, string][]) => (
@@ -169,8 +172,8 @@ export function CardsView({ active }: { active: boolean }) {
           </div>
           {dirty && <button className="linkbtn" onClick={() => up(EMPTY)}><X size={13} /> Szűrők törlése</button>}
         </div>
-        <ul className="list" role="listbox" aria-label="Találatok">
-          {!res.length && <li className="pad note">Nincs találat. A banned kártyák alapból rejtve vannak.</li>}
+        <ul className="list" role={mode === 'grid' ? undefined : 'listbox'} aria-label="Találatok">
+          {!res.length && <li className="pad note" role={mode === 'grid' ? undefined : 'none'}>Nincs találat. A banned kártyák alapból rejtve vannak.</li>}
           {mode === 'grid'
             ? shown.map((c: any) => {
                 const stats = [c.e != null ? 'Energy ' + c.e : '', c.m != null ? 'Might ' + c.m : ''].filter(Boolean).join(' · ');
@@ -188,7 +191,7 @@ export function CardsView({ active }: { active: boolean }) {
                 );
               })
             : shown.map((c: any) => (
-                <li key={c.n}>
+                <li key={c.n} role="none">
                   <button role="option" aria-selected={sel === c} onClick={() => pick(c)}>
                     <span className="nm"><span dangerouslySetInnerHTML={{ __html: domDots(c) }} /> {c.n} <Badges c={c} /></span>
                     <span className="ty">{typeLine(c)}</span>
@@ -196,7 +199,7 @@ export function CardsView({ active }: { active: boolean }) {
                 </li>
               ))}
           {res.length > limit && (
-            <li className={mode === 'grid' ? 'more-li' : ''} ref={moreRef}>
+            <li className={mode === 'grid' ? 'more-li' : ''} ref={moreRef} role={mode === 'grid' ? undefined : 'none'}>
               <button className="more" onClick={() => setLimit(limit + (mode === 'grid' ? 120 : 200))}>További {res.length - limit} találat megjelenítése</button>
             </li>
           )}
@@ -205,7 +208,7 @@ export function CardsView({ active }: { active: boolean }) {
       <div className="panel pad detail" ref={detailRef} aria-live="polite"
         onClick={(e) => {
           const s = (e.target as HTMLElement).closest('button[data-sim]') as HTMLElement | null;
-          if (s) { const c = CARDS.find((x: any) => x.n === s.dataset.sim); if (c) { setSel(c); detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }
+          if (s) { const c = CARDS.find((x: any) => x.n === s.dataset.sim); if (c) { setSel(c); detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } } // a részletek itt már betöltve
         }}>
         {sel
           ? <><Html key={sel.n} html={cardHeadHTML(sel, 'h2')} /><Printings key={'p' + sel.n} card={sel} /><Html key={'r' + sel.n} html={'<h3 class="rb-sep">Erre a kártyára érvényes szabályok</h3><p class="note">A szakaszok a Core Rules (' + META.rules_updated + ') eredeti angol szövegét mutatják. Kattintásra nyílnak.</p>' + cardRulesHTML(sel)} /></>
