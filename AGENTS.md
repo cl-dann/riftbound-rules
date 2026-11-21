@@ -37,8 +37,8 @@ web/                    Vite + React 19 + TypeScript + Tailwind v4 frontend
     data/               store (generált adat, init, élő kötések), load (lusta chunkok: részletek, learn, fontok), schema (zod), cards
     text/               norm, esc, lev, b64
     rules/              szabályszám hivatkozások, fejezetcím, flag címkék
-    chain/              Chain elemző: text, parser, conditions, actions, steps, cost, zones (lapszöveg értelmezés),
-                        engine/ (runChain: ctx, labels, objects, frames, state, triggers, zoneChange, replacement, damage,
+    chain/              Chain elemző: types (közös típusok), text, parser, conditions, actions, steps, cost, zones (lapszöveg értelmezés),
+                        engine/ (runChain: ctx (GameObj, ChainItem, EngineCtx típusok), labels, objects, frames, state, triggers, zoneChange, replacement, damage,
                         tokens, execute, targeting, build, resolve, endOfTurn, analyze), cs (CS segédek), state (zod séma),
                         link (#c=), templates, examples, overrides (laponkénti kézi hatásleírások), pairs
     combat/ deck/ practice/   combat kiosztás, deck (parse, legality, edit, prices, link), Practice szituáció-motor
@@ -132,6 +132,10 @@ npm run golden:capture                        # a unit tesztek analyze() bemenet
 A golden tesztek (`unit/golden/`) a chain elemzés teljes kimenetét, a kártya HTML-t, a deck ellenőrzést, a régi linkeket és a határokat
 (#c=, #d=, rb-deck, rb-view2, prices.json) rögzítik: refaktor után byte-azonosnak kell maradniuk; szándékos változásnál
 `npx vitest run --project golden -u`. A vizuális baseline a CI-ban készül: GitHub, Actions, "Tesztek", Run workflow, update-snapshots.
+
+Típusosság: egyik fájlban sincs `@ts-nocheck`, explicit `any` nincs (a domain strict tsconfiggal fordul), az ESLint baseline-ban 10
+suppression marad (no-useless-assignment 6, no-unused-vars 2, no-constant-condition 1, no-constant-binary-expression 1). Új kódba ne
+kerüljön any vagy suppression; a baseline csak fogyhat (`eslint src --prune-suppressions`).
 
 Megjegyzés: `npx tsc --noEmit -p .` nem azonos a CI-vel, mindig `npm run build`-del ellenőrizz. Ahol a Playwright saját böngészője nem tölthető le, a rendszer Chrome-ja megadható: `PW_CHROME=/usr/bin/google-chrome npm run test:e2e`. A commit előtti hook (`.githooks/pre-commit`, a `npm ci` bekapcsolja) a kötőjel-ellenőrzést futtatja.
 
