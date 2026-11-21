@@ -46,7 +46,7 @@ function deckHTML(P: Prices | null): string {
   const uniq = new Set<Card>(); DECK.forEach((s) => s.rows.forEach((r) => r.card && uniq.add(r.card)));
   const ec = [...uniq].filter((c) => c.err != null).length;
   const T = deckTotals(P);
-  let h = '<div class="panel pad"><div class="sum">' + (P && T.n ? '<span class="chip price" title="Cardmarket, névenként a legolcsóbb nyomat, sideboard nélkül. 1 napos átlag: ' + eur(T.a1) + '">Deck ár <b>' + eur(T.a7) + '</b> <small>7 napos átlag' + (T.miss.length ? ', ' + new Set(T.miss).size + ' lap ár nélkül' : '') + '</small></span>' : '') + DECK.map((s: any) => '<span class="chip">' + esc(s.name) + ' <b>' + s.rows.reduce((a: number, r: DeckRow) => a + r.qty, 0) + '</b></span>').join('')
+  let h = '<div class="panel pad"><div class="sum">' + (P && T.n ? '<span class="chip price" title="Cardmarket, névenként a legolcsóbb nyomat, sideboard nélkül. 1 napos átlag: ' + eur(T.a1) + '">Deck ár <b>' + eur(T.a7) + '</b> <small>7 napos átlag' + (T.miss.length ? ', ' + new Set(T.miss).size + ' lap ár nélkül' : '') + '</small></span>' : '') + DECK.map((s) => '<span class="chip">' + esc(s.name) + ' <b>' + s.rows.reduce((a: number, r: DeckRow) => a + r.qty, 0) + '</b></span>').join('')
     + '<span class="chip okc">' + uniq.size + ' egyedi kártya</span>' + (ec ? '<span class="chip err">' + ec + ' kártyán errata</span>' : '') + '</div>';
   if (warns.length) h += '<ul class="warns">' + warns.map((w) => '<li>' + w + '</li>').join('') + '</ul>';
   h += legalityHTML() + priceHTML(P) + curveHTML() + interactionHTML();
@@ -114,15 +114,15 @@ export function DeckView() {
       const [fonts, { jsPDF }] = await Promise.all([loadFonts(), import('jspdf')]);
       const res = buildPDF(rel, gen, fonts, jsPDF);
       // claude.ai artifactként a böngészős letöltés tiltott, ott a downloads képesség ment.
-      const cl = (window as any).claude;
+      const cl = (window as unknown as { claude?: { use?: (cap: string) => Promise<{ save: (o: { filename: string; data: Blob }) => Promise<void> }> } }).claude;
       if (cl && typeof cl.use === 'function') {
         try { const dl = await cl.use('downloads'); await dl.save({ filename: res.name, data: res.blob }); setStatus('Kész: ' + res.name + ', ' + res.pages + ' oldal.'); return; }
-        catch (e: any) { if (e?.code === 'declined') { setStatus('A mentést elutasítottad, a PDF nem lett letöltve.'); return; } }
+        catch (e) { if ((e as { code?: string } | null)?.code === 'declined') { setStatus('A mentést elutasítottad, a PDF nem lett letöltve.'); return; } }
       }
       const u = URL.createObjectURL(res.blob), a = document.createElement('a');
       a.href = u; a.download = res.name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000);
       setStatus('PDF elkészült (' + res.pages + ' oldal): ' + res.name);
-    } catch (err: any) { setStatus('A PDF készítése nem sikerült: ' + err.message); }
+    } catch (err) { setStatus('A PDF készítése nem sikerült: ' + (err as Error).message); }
   };
   const share = async () => {
     if (!text.trim()) { setStatus('Nincs decklista, amiből link készülhetne.'); return; }

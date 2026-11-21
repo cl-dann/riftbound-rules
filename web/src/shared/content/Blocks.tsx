@@ -26,10 +26,10 @@ export type Block =
   | { type: 'links'; items: { href: string; title: string; text?: string }[] };
 
 export const H = ({ t, seen, as = 'span', className }: { t: string; seen?: Set<string>; as?: 'span' | 'p' | 'div' | 'b'; className?: string }) => {
-  const El = as as any;
+  const El = as as React.ElementType;
   return <El className={className} dangerouslySetInnerHTML={{ __html: inline(t, seen) }} />;
 };
-const imgOf = (n: string) => { const c: any = vsCard(n); return c && c.img ? IMGBASE + c.img : ''; };
+const imgOf = (n: string) => { const c = vsCard(n); return c && c.img ? IMGBASE + c.img : ''; };
 
 /** Olvasási idő: a blokkok szövegéből, kb. 170 szó percenként. */
 export function readMin(blocks: Block[]) {
@@ -79,12 +79,12 @@ const DOMC: Record<string, string> = { Fury: '#ff5a4e', Calm: '#4fcf8a', Mind: '
 
 /** Try It: egy valódi lap kifizetése rune-okkal (exhaust = Energy, recycle = Power). */
 function TryIt({ card, runes }: { card: string; runes: string[] }) {
-  const c: any = vsCard(card);
+  const c = vsCard(card);
   const [ex, setEx] = useState<boolean[]>(() => runes.map(() => false));
   const [rec, setRec] = useState<boolean[]>(() => runes.map(() => false));
   const [fb, setFb] = useState<{ ok: boolean; lines: string[] } | null>(null);
   if (!c) return null;
-  const needE = +c.e || 0, needP = +c.p || 0, doms: string[] = c.d || [];
+  const needE = +c.e! || 0, needP = +c.p! || 0, doms: string[] = c.d || [];
   const energy = ex.filter(Boolean).length;
   const recD = runes.filter((_, i) => rec[i]);
   const goodP = recD.filter((d) => doms.includes(d)).length;
@@ -125,8 +125,8 @@ function TryIt({ card, runes }: { card: string; runes: string[] }) {
           {needP > 0 && (
             <div className="ti-meter">
               <span className="ti-lbl">Power <b>{goodP}</b> / {needP}</span>
-              <div className="ti-pow">{Array.from({ length: needP }, (_, k) => <i key={k} className={k < goodP ? 'f' : ''} style={{ ['--dc' as any]: DOMC[doms[0]] || '#888' }}>{doms[0]}</i>)}
-                {wrongP.map((d, k) => <i key={'w' + k} className="bad" style={{ ['--dc' as any]: DOMC[d] || '#888' }}>{d}</i>)}</div>
+              <div className="ti-pow">{Array.from({ length: needP }, (_, k) => <i key={k} className={k < goodP ? 'f' : ''} style={{ '--dc': DOMC[doms[0]] || '#888' } as React.CSSProperties}>{doms[0]}</i>)}
+                {wrongP.map((d, k) => <i key={'w' + k} className="bad" style={{ '--dc': DOMC[d] || '#888' } as React.CSSProperties}>{d}</i>)}</div>
             </div>
           )}
           <div className="ti-runes">
@@ -216,7 +216,7 @@ export function Blocks({ blocks }: { blocks: Block[] }) {
           case 'cards': return (
             <div key={i}>
               <div className="lcards">
-                {b.names.map((n) => { const c: any = vsCard(n); return c ? (
+                {b.names.map((n) => { const c = vsCard(n); return c ? (
                   <figure key={n} onClick={() => openCard(c.n)} title="Részletek">
                     <img loading="lazy" src={IMGBASE + c.img} alt={c.n} />
                     <figcaption>{c.n}</figcaption>

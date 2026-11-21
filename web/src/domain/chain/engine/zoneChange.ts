@@ -7,7 +7,7 @@ import { art, Art } from './labels';
 export function installZoneChange(X: EngineCtx) {
   X.setCtrl=(id,to,ref,why,until?)=>{const ob=X.O[id];if(!ob||!to||ob.ctrl===to)return false;const from=ob.ctrl;ob.ctrl=to;if(ob.loc==='base')ob.baseOf=ob.baseOf||from;
     if(until)ob.until={src:until,prev:from};X.NEWCTRL.add(id);X.EV.push({k:'ctrl',id,name:ob.name,from,to});
-    Object.values(X.O).forEach((g)=>{if(g.on===id&&g.zone==='board'){}});
+    Object.values(X.O).forEach((g)=>{if(g.on===id&&g.zone==='board'){/* a csatolt gear a unittal együtt vált irányítót */}});
     X.REC!.push([ref,ob.name+': az irányítója '+(from==='A'?'te':'az ellenfél')+' helyett '+(to==='A'?'te':'az ellenfél')+' lesz'+(why?' ('+why+')':'')+'. A Playmaton átkerül a másik oldalra.']);X.ALL.push(X.REC![X.REC!.length-1]);return true;};
   X.leaveBoard=(id,zone)=>{const ob=X.O[id];const was=ob.zone==='board';ob.lk={m:X.mightOf(id),ctrl:ob.ctrl,loc:ob.loc,kws:(ob.kws||[]).slice(),alone:ob.zone==='board'?!Object.values(X.O).some((o)=>o.id!==id&&o.zone==='board'&&o.type==='unit'&&o.ctrl===ob.ctrl&&o.loc===ob.loc):null};ob.zone=zone;
     if(zone!=='board'){ob.dmg=0;ob.mods=[];ob.kws=[];ob.st=false;ob.bu=false;ob.shields=[];ob.save=null;ob.dbl=false;ob.dieTo=null;ob.baseSet=null;ob.untgt=false;if(ob.on){ob.on=null;}ob.ctrl=ob.own;ob.until=null;}

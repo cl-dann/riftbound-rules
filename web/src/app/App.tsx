@@ -29,7 +29,7 @@ function useGlobalHandlers() {
       const box = d.querySelector(':scope > .rules') as HTMLElement | null;
       if (!box || box.dataset.done) return;
       if (box.dataset.ids) {
-        const idx = box.dataset.ids.split('|').map((id) => RULES.findIndex((r: any) => r[0] === id)).filter((i) => i >= 0);
+        const idx = box.dataset.ids.split('|').map((id) => RULES.findIndex((r) => r[0] === id)).filter((i) => i >= 0);
         const nm = box.dataset.hl || '';
         const hl = nm ? new RegExp(nm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/'/g, "['\u2019]"), 'g') : null;
         box.innerHTML = ruleHTML(idx, hl);
@@ -55,7 +55,7 @@ function Footer() {
     <footer id="foot">
       {col('Készítő', '<p><strong>Daneehunter</strong></p><p>Nem hivatalos, rajongói segédeszköz, nem kereskedelmi célú.</p><p>Kérdés vagy hibajelzés: Discordon <strong>daneehunter</strong>, jelölj be bátran.</p>')}
       {col('AI és pontosság', '<p>Az oldal kódja, a kártya és szabály megfeleltetés és a magyar magyarázatok AI segítségével készültek: Claude (Anthropic), Claude Fable 5.2 és Claude Opus 5.5 modell.</p><p>Az AI által írt magyarázat tévedhet. A megfeleltetés automatikus, a "Hogyan érinti ezt a lapot" a Core Rules szövegéből levezetve készült, egyik sem hivatalos ruling: versenyen a judge és a Core Rules dönt.</p>')}
-      {col('Források', '<p>Szabályszöveg: Riftbound Core Rules (Last Updated ' + META.rules_updated + '), angol eredeti, változtatás nélkül.</p><p>Ban lista (' + META.ban_updated + ') a Rules Hubról, ' + BF.from + '-tól: <a href="' + BF.url + '">' + esc(BF.title) + '</a>.</p><p>Errata: ' + META.articles.map((a: any) => '<a href="' + a.u + '">' + esc(a.t) + '</a>').join(', ') + '.</p><p>Kártyaadat: hivatalos Card Gallery közösségi pillanatkép (LouisCourrian/riftbound-cards, ' + META.cards_snapshot + '), a Radiance javítások a nyomtatott lapok alapján. A kártyaképek a Riot hivatalos szerveréről töltődnek be.</p>')}
+      {col('Források', '<p>Szabályszöveg: Riftbound Core Rules (Last Updated ' + META.rules_updated + '), angol eredeti, változtatás nélkül.</p><p>Ban lista (' + META.ban_updated + ') a Rules Hubról, ' + BF.from + '-tól: <a href="' + BF.url + '">' + esc(BF.title) + '</a>.</p><p>Errata: ' + META.articles.map((a) => '<a href="' + a.u + '">' + esc(a.t) + '</a>').join(', ') + '.</p><p>Kártyaadat: hivatalos Card Gallery közösségi pillanatkép (LouisCourrian/riftbound-cards, ' + META.cards_snapshot + '), a Radiance javítások a nyomtatott lapok alapján. A kártyaképek a Riot hivatalos szerveréről töltődnek be.</p>')}
       {col('Jogi', '<p>Riftbound HU was created under Riot Games\' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.</p><p>A Riftbound, a League of Legends, a kártyanevek, kártyaszövegek, kártyaképek és a Core Rules szövege a Riot Games, Inc. tulajdona.</p><p><a href="https://playriftbound.com/">playriftbound.com</a> · <a href="https://playriftbound.com/en-us/rules-hub/">Rules Hub</a> · <a href="https://playriftbound.com/en-us/card-gallery/">Card Gallery</a></p>')}
     </footer>
   );
@@ -67,13 +67,13 @@ function Shell() {
   useGlobalHandlers();
   const [seen, setSeen] = useState(() => new Set([view]));
   useEffect(() => { setSeen((s) => (s.has(view) ? s : new Set(s).add(view))); }, [view]);
-  const errata = useMemo(() => CARDS.filter((c: any) => c.err != null).length, []);
+  const errata = useMemo(() => CARDS.filter((c) => c.err != null).length, []);
   // A lapnév-listák (1101 option) egyszer készülnek, nem minden hash-váltáskor.
   const datalists = useMemo(() => (
     <>
-      <datalist id="cardnames">{CARDS.filter((c: any) => c.t !== 'Legend' && c.t !== 'Battlefield').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
-      <datalist id="legnames">{CARDS.filter((c: any) => c.t === 'Legend').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
-      <datalist id="bfnames">{CARDS.filter((c: any) => c.t === 'Battlefield').map((c: any) => <option key={c.n} value={c.n} />)}</datalist>
+      <datalist id="cardnames">{CARDS.filter((c) => c.t !== 'Legend' && c.t !== 'Battlefield').map((c) => <option key={c.n} value={c.n} />)}</datalist>
+      <datalist id="legnames">{CARDS.filter((c) => c.t === 'Legend').map((c) => <option key={c.n} value={c.n} />)}</datalist>
+      <datalist id="bfnames">{CARDS.filter((c) => c.t === 'Battlefield').map((c) => <option key={c.n} value={c.n} />)}</datalist>
     </>
   ), []);
   const [pricesAt, setPricesAt] = useState('');

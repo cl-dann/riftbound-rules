@@ -74,7 +74,7 @@ export function runChain(CS:ChainState):ChainResult{
     s.tg=s.tg.map((v:string,ti:number)=>{if(v!=='x')return v;const p=s.list[ti];if(!p)return '';const e=s.ext[ti]||{};const id='t'+j+'_'+ti;
       const ctrl=e.pl||(p.rel==='enemy'?other(s.pl):p.rel==='friendly'?s.pl:null);
       X.O[id]={id,name:c.n+' célpontja ('+(ctrl==='A'?'a te '+p.type+'od':ctrl==='B'?'az ellenfél '+p.type+'ja':p.type)+')',ctrl,own:ctrl,baseOf:ctrl,loc:e.loc||'bf0',m:e.m!=null?e.m:null,dmg:0,mods:[],kws:[],zone:'board',type:p.type};return id;});
-    if(s.cost&&s.costTg==='x'){}});
+    if(s.cost&&s.costTg==='x'){/* a költség célpontja a lépésnél (build) */}});
   // ---- frame-ek ----
   X.FR=X.out.frames;X.REC=[];
   X.DET=new Set<string>();X.NEWCTRL=new Set<string>();

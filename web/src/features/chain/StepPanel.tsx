@@ -1,3 +1,4 @@
+import type { TargetParam } from '../../domain/chain/types';
 import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import { tgOptionsOf } from '../../domain/chain/cs';
@@ -16,9 +17,9 @@ export function StepPanel({ j, csv, onTarget, onClose, bad, onInsert, onHand, on
   useEffect(() => () => chainActions().quick(null, -1), []);
   if (!s) return null;
   const nm = stepName(CS, s);
-  const inf: any = s.k === 'res' || s.k === 'end' ? null : stepInfo(CS, s);
-  const list: any[] = inf?.list || [];
-  const lbl = (ti: number, v: string) => { if (!v) return 'nincs kiválasztva'; if (v === 'x') return 'pályán kívüli (Haladó szerkesztés)'; const o = tgOptionsOf(CS, j, list[ti]).find((x: any) => x[0] === v); return o ? String(o[1]).replace(/^Board: /, '') : v; };
+  const inf = s.k === 'res' || s.k === 'end' ? null : stepInfo(CS, s);
+  const list: TargetParam[] = inf?.list || [];
+  const lbl = (ti: number, v: string) => { if (!v) return 'nincs kiválasztva'; if (v === 'x') return 'pályán kívüli (Haladó szerkesztés)'; const o = tgOptionsOf(CS, j, list[ti]).find((x) => x[0] === v); return o ? String(o[1]).replace(/^Board: /, '') : v; };
   const setPl = (p: 'A' | 'B') => chainActions().commit((cs) => { cs.steps[j].pl = p; }, 0);
   return (
     <div className="cb2-sp" aria-label={(j + 1) + '. lépés beállításai'}>
@@ -46,7 +47,7 @@ export function StepPanel({ j, csv, onTarget, onClose, bad, onInsert, onHand, on
       {inf && !list.length && !zonePicks(CS, j).length && s.k === 'card' && inf.c && <p className="note">Ennek a lapnak nincs választandó célpontja.</p>}
       <div className={'cb2-q2 row2' + (hasQ ? '' : ' empty')} ref={qref} />
       {inf?.c && /\[Show Off\]/.test(inf.c.txt || '') && <div className="cb2-tv"><span className="note">Show Off: {String(s.so || '').startsWith('h:') ? s.so!.slice(2) + ' (kézből)' : s.so ? 'board unit' : 'nincs'}</span><button type="button" className="btn sec" onClick={() => onHand('so', 0)}>Unit a kézből</button></div>}
-      {inf?.eff ? interp(s, inf).map((y: any, xi: number) => y.act.k === 'playcard' && !y.act.self ? (
+      {inf?.eff ? interp(s, inf).map((y, xi) => y.act.k === 'playcard' && !y.act.self ? (
         <div key={xi} className="cb2-tv"><span className="note">Kijátszott lap ({xi + 1}. utasítás): <b>{((s.plc || {}) as Record<number, string>)[xi] || 'nincs megadva'}</b></span><button type="button" className="btn sec" onClick={() => onHand('plc', xi)}>Lap a kézből</button></div>) : null) : null}
       <div className="cb2-tv">
         <button type="button" className="btn sec" onClick={() => onInsert(j)}>Beszúrás elé</button>

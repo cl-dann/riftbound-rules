@@ -157,7 +157,7 @@ export function installResolve(X: EngineCtx) {
       if(x.act.k==='attachOrDetach')x.act=Object.assign({},x.act,{k:(x.act.fv||'detach') as string});
       if(x.act.k==='might'&&x.act.onlyThere)x.act=Object.assign({},x.act,{k:'mightOnlyThere'});
       if(x.act.k==='raiseTo'&&prev)it.raiseBase=prev.tis.map((ti:number)=>it.tg[ti]).find((v:string)=>v&&X.O[v]&&X.O[v].zone==='board')||null;
-      if(x.act.k==='payChoice'){x.st=x.act.fv==='1'?'executed':'skipped';x.why=x.act.fv==='1'?'kifizetve':'nem fizette ki (a lapnál állítható, alap: nem)';it.paid=x.act.fv==='1';parts.push('"'+esc(x.t)+'": '+x.why+'.');lastT=lastT;return;}
+      if(x.act.k==='payChoice'){x.st=x.act.fv==='1'?'executed':'skipped';x.why=x.act.fv==='1'?'kifizetve':'nem fizette ki (a lapnál állítható, alap: nem)';it.paid=x.act.fv==='1';parts.push('"'+esc(x.t)+'": '+x.why+'.');return;}
       if(x.act.k==='counterOtherwise'){const tv=INS.slice(0,xi).flatMap((y)=>y.tis).map((ti:number)=>it.tg[ti]).find((v:string)=>v&&X.O[v]&&X.O[v].type==='spell');
         if(it.paid){x.st='skipped';x.why='a költséget kifizette, ezért nincs counter';parts.push('"'+esc(x.t)+'": '+x.why+'.');return;}
         if(tv&&X.O[tv].zone==='chain'){X.O[tv].zone='countered';X.EV.push({k:'counter',id:tv,name:X.O[tv].name});parts.push(esc(X.O[tv].name)+' counterelve (426.1).');refs.push('426.1');x.st='executed';}else{x.st='ignored';x.ref='359.3.e.6';x.why='a spell már nincs a chainen';}return;}

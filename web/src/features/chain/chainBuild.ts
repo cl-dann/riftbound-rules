@@ -8,9 +8,10 @@ import { zoneRefOf, zoneCheck, type ZoneRef } from '../../domain/chain/zones';
 import { vsCard, CARDS } from '../../domain/data/store';
 import { norm } from '../../domain/text/norm';
 import { tgOptionsOf, reorderSteps, locLabelOf } from '../../domain/chain/cs';
-import type { PBoard } from '../../shared/board/Playmat';
+import type { PBoard, PSide } from '../../shared/board/Playmat';
 import type { Card } from '../../domain/data/schema';
-import type { ChainState, Step } from '../../domain/chain/state';
+import type { Ability, TargetParam, Trigger } from '../../domain/chain/types';
+import type { ChainState, ChainStep, Step } from '../../domain/chain/state';
 
 export type Arrow = { from: number; to: string };
 export type MtInstr = { t: string; st: 'executed' | 'partial' | 'ignored' | 'negated' | 'skipped'; ref: string; why: string; man?: boolean };
@@ -19,7 +20,7 @@ export type ChainFrame = { label: string; board: PBoard; changes: [string, strin
 
 const clone = <T,>(x: T): T => JSON.parse(JSON.stringify(x));
 export const sideOf = (p: string) => (p === 'B' ? 'opp' : 'me') as 'me' | 'opp';
-export const plOf = (side: 'me' | 'opp') => (side === 'opp' ? 'B' : 'A');
+export const plOf = (side: 'me' | 'opp'): 'A' | 'B' => (side === 'opp' ? 'B' : 'A');
 export const cardOf = (n?: string | null): Card | null => (n ? vsCard(n) || null : null);
 
 /** A kiinduló helyzet pontosan úgy, ahogy az elemző rajzolja: egy üres Resolve lépéssel futtatva az első frame (340.1: üres chainen nincs mit lefuttatni). */
@@ -38,11 +39,11 @@ export function stepFrames(frames: ChainFrame[]): Record<number, number> {
 /** Az építő pályája: mindkét battlefield hely látszik (üresen is), a champion, a kéz és a facedown lap a CS építő mezőiből,
     a k. frame-ig kijátszott lapok nélkül. A nyilak battlefield indexe a teljes (két helyes) listára igazodik. */
 export function fullFrame(f: ChainFrame, CS: ChainState, k: number, sf: Record<number, number>): ChainFrame {
-  const played = (pred: (s: any) => boolean) => CS.steps.filter((s: any, j: number) => s.k === 'card' && pred(s) && sf[j] != null && sf[j] <= k);
+  const played = (pred: (s: ChainStep) => boolean) => CS.steps.filter((s, j) => s.k === 'card' && pred(s) && sf[j] != null && sf[j] <= k);
   const bfi = f.bfi || [];
   const bfs = [0, 1].map((i) => {
     const pos = bfi.indexOf(i);
-    const b: any = pos >= 0 ? { ...f.board.bfs[pos] } : { name: '', ctrl: CS.bf[i].c === 'A' ? 'me' : CS.bf[i].c === 'B' ? 'opp' : null, me: [], opp: [] };
+    const b: PBoard['bfs'][number] = pos >= 0 ? { ...f.board.bfs[pos] } : { name: '', ctrl: CS.bf[i].c === 'A' ? 'me' : CS.bf[i].c === 'B' ? 'opp' : null, me: [], opp: [] };
     if (!CS.bf[i].n) b.name = '';
     const fd = CS.bf[i].fd; const fdn = CS.bf[i].fdn || null;
     const gone = fdn && played((s) => s.from === 'facedown' && (s.loc || 'bf0') === 'bf' + i && s.n === fdn).length > 0;
@@ -51,14 +52,14 @@ export function fullFrame(f: ChainFrame, CS: ChainState, k: number, sf: Record<n
   });
   const arrows = f.arrows.map((a) => (a.to.startsWith('bf:') ? { ...a, to: 'bf:' + (bfi[+a.to.slice(3)] ?? 0) } : a));
   const side = (p: 'A' | 'B') => {
-    const s: any = { ...f.board[sideOf(p)] };
+    const s: PSide = { ...f.board[sideOf(p)] };
     const ch = (CS.ch || {})[p] || '';
     s.champion = ch && !played((x) => x.from === 'champ' && x.n === ch && x.pl === p).length ? ch : null;
     if (!s.zids) {
-      const left = ((CS.hand || {})[p] || []).map((e: any, i: number) => (typeof e === 'string' ? { id: 'zh' + p + i, n: e } : e));
-      played((x) => (x.from || 'hand') === 'hand' && x.pl === p).forEach((x: any) => { const i = left.findIndex((e: any) => e.n === x.n); if (i >= 0) left.splice(i, 1); });
-      s.zids = { hand: [...left.map((e: any) => e.id), ...(s.hand || []).map(() => '')], trash: [] };
-      s.hand = [...left.map((e: any) => e.n), ...(s.hand || [])];
+      const left = ((CS.hand || {})[p] || []).map((e, i) => (typeof e === 'string' ? { id: 'zh' + p + i, n: e } : e));
+      played((x) => (x.from || 'hand') === 'hand' && x.pl === p).forEach((x) => { const i = left.findIndex((e) => e.n === x.n); if (i >= 0) left.splice(i, 1); });
+      s.zids = { hand: [...left.map((e) => e.id!), ...(s.hand || []).map(() => '')], trash: [] };
+      s.hand = [...left.map((e) => e.n), ...(s.hand || [])];
     }
     return s;
   };
@@ -88,8 +89,8 @@ export function tryStep(CS: ChainState, step: Step, at?: number): Legal {
   const c = clone(CS); const k = at == null ? c.steps.length : at;
   insertAt(c, k, clone(step));
   const r = runChain(c);
-  const f = r.frames.find((x: any) => x.sj === k);
-  const bad = (f ? f.changes : []).find((x: any) => BAD.test(x[1]));
+  const f = r.frames.find((x) => x.sj === k);
+  const bad = (f ? f.changes : []).find((x) => BAD.test(x[1]));
   if (!bad) return { ok: true };
   const why = reasonOf(bad[1]);
   if (/nincs megadva/.test(why)) return { ok: true, need: why };
@@ -100,12 +101,12 @@ export type TgOpt = { v: string; label: string; ok: boolean; why?: string; ref?:
 /** A j. lépés ti. célpontjának választható értékei, mindegyikre lefuttatva az elemzést: legális-e, és ha nem, miért (355.8). */
 export function targetOpts(CS: ChainState, j: number, ti: number): TgOpt[] {
   const s = CS.steps[j]; if (!s) return [];
-  const inf: any = stepInfo(CS, s); const p = inf?.list?.[ti]; if (!p) return [];
+  const inf = stepInfo(CS, s); const p = inf?.list?.[ti]; if (!p) return [];
   const base = clone(CS); base.steps[j].tg = [...(base.steps[j].tg || [])]; base.steps[j].tg[ti] = '';
   const r0 = runChain(clone(base)).rows;
   const all = tgOptionsOf(CS, j, p).slice(1);
-  const xs = all.some((o: any) => o[0] === 'x') ? ['base', 'bf0', 'bf1'].flatMap((loc) => ['A', 'B'].map((pl) => ['x:' + loc + ':' + pl, 'Pályán kívüli ' + p.type + ': ' + (pl === 'A' ? 'saját, ' : 'ellenfél, ') + locLabelOf(CS, loc)])) : [];
-  return [...all.filter((o: any) => o[0] !== 'x'), ...xs].map((o: any) => {
+  const xs = all.some((o) => o[0] === 'x') ? ['base', 'bf0', 'bf1'].flatMap((loc) => ['A', 'B'].map((pl) => ['x:' + loc + ':' + pl, 'Pályán kívüli ' + p.type + ': ' + (pl === 'A' ? 'saját, ' : 'ellenfél, ') + locLabelOf(CS, loc)])) : [];
+  return [...all.filter((o) => o[0] !== 'x'), ...xs].map((o) => {
     const c = clone(base);
     if (o[0].startsWith('x:')) { const [, loc, pl] = o[0].split(':'); c.steps[j].tg![ti] = 'x'; c.steps[j].ext = { ...(c.steps[j].ext || {}), [ti]: { ...((c.steps[j].ext || {})[ti] || {}), loc, pl } }; }
     else c.steps[j].tg![ti] = o[0];
@@ -119,7 +120,7 @@ export function targetOpts(CS: ChainState, j: number, ti: number): TgOpt[] {
 }
 
 /** A célpont-paraméter rövid leírása (a builder célpont-választójának szövegéből). */
-export function slotText(p: any, ti: number) {
+export function slotText(p: TargetParam, ti: number) {
   return (ti + 1) + '. célpont' + (p.opt ? ' (nem kötelező)' : '') + ': ' + (p.rel !== 'any' ? p.rel + ' ' : '') + (p.equipOnly ? 'Equipment' : p.type) + (p.bf ? ', battlefielden' : '') + (p.here ? ', "here"' : '') + (p.free ? ', másik locationön' : '') + (p.max != null ? ', max ' + p.max + ' Might' : '') + (p.mighty ? ', Mighty' : '');
 }
 
@@ -129,7 +130,7 @@ export function stepName(CS: ChainState, s: Step): { n: string; img?: string; ki
   if (s.k === 'end') return { n: 'Kör vége', kind: 'Ending Phase' };
   if (s.k === 'tr') return { n: s.n || '?', img: s.n, kind: 'combat utáni trigger' };
   if (s.k === 'ab' || s.k === 'tg') {
-    const inf: any = stepInfo(CS, s); const n = inf?.c?.n || s.n || '';
+    const inf = stepInfo(CS, s); const n = inf?.c?.n || s.n || '';
     const lbl = s.k === 'ab' ? (inf?.ab?.label || '') : (inf?.tr?.why || '');
     return { n: n ? n : 'nincs forrás', img: n, kind: (s.k === 'ab' ? 'ability' : 'trigger') + (lbl ? ': ' + String(lbl).slice(0, 40) : '') };
   }
@@ -140,8 +141,8 @@ export function stepName(CS: ChainState, s: Step): { n: string; img?: string; ki
 /** Abilityk és triggerek egy forráshoz (a csatolt gear szövegével, 136.2.c). */
 export function abilitiesFor(CS: ChainState, src: string) {
   const c = src[0] === 'L' ? cardOf(CS.lg[src.slice(1)] as string | undefined) : src[0] === 'b' ? cardOf(CS.bd[+src.slice(1)]?.n) : src[0] === 's' ? cardOf(CS.steps[+src.slice(1)]?.n) : null;
-  if (!c) return { c: null, abs: [] as any[], trs: [] as any[] };
-  const extra = src[0] === 'b' ? CS.bd.filter((g: any) => g.on === +src.slice(1)).map((g: any) => cardOf(g.n)?.eff || '').join('\n') : '';
+  if (!c) return { c: null, abs: [] as Ability[], trs: [] as Trigger[] };
+  const extra = src[0] === 'b' ? CS.bd.filter((g) => g.on === +src.slice(1)).map((g) => cardOf(g.n)?.eff || '').join('\n') : '';
   return { c, abs: abilitiesOf(c), trs: triggersOf(c, extra) };
 }
 
@@ -178,15 +179,15 @@ export function searchCards(k: PickKind, q: string, limit = 60): Card[] {
 export type ZPick = { xi: number; zr: ZoneRef; t: string };
 export function zonePicks(CS: ChainState, j: number): ZPick[] {
   const s = CS.steps[j]; if (!s || s.k === 'res' || s.k === 'end') return [];
-  const inf: any = stepInfo(CS, s); if (!inf?.eff) return [];
-  return interp(s, inf).map((x: any, xi: number) => ({ xi, zr: zoneRefOf(x.t, inf.c?.n) as ZoneRef, t: x.t })).filter((z: any) => z.zr && !(z.zr.z === 'deck' && z.zr.top && z.zr.act !== 'banishEach'));
+  const inf = stepInfo(CS, s); if (!inf?.eff) return [];
+  return interp(s, inf).map((x, xi) => ({ xi, zr: zoneRefOf(x.t, inf.c?.n) as ZoneRef, t: x.t })).filter((z) => z.zr && !(z.zr.z === 'deck' && z.zr.top && z.zr.act !== 'banishEach'));
 }
-export type ZCand = { id: string; n: string; zone: string; own: string; ok: boolean; why?: string };
+export type ZCand = { id: string; n: string; zone: string; own: string | null | undefined; ok: boolean; why?: string };
 /** A választható lapok a lépés lerakásakor (az elemző pillanatképe), a lap szövegének megkötéseivel ellenőrizve. */
 export function zoneCands(CS: ChainState, j: number, xi: number): ZCand[] {
   const zp = zonePicks(CS, j).find((z) => z.xi === xi); if (!zp) return [];
   const c = clone(CS); if (c.steps[j].zp) c.steps[j].zp[xi] = [];
-  const r: any = runChain(c); const snap = r.zsnap?.[j]; if (!snap) return [];
+  const r = runChain(c); const snap = r.zsnap?.[j]; if (!snap) return [];
   const s = CS.steps[j]; const pl = s.k === 'tg' ? (r.objs[s.src as string]?.ctrl || s.pl || 'A') : (s.pl || 'A');
   if (zp.zr.who === 'each') {
     /* minden játékos a saját lapjai közül (355.10.e, 412.1) */
@@ -196,12 +197,12 @@ export function zoneCands(CS: ChainState, j: number, xi: number): ZCand[] {
   }
   if (zp.zr.z === 'among') {
     /* a megnézett lapok: az előző "look at / reveal the top N" utasítás szerinti felső lapok a lépés lerakásakor */
-    const inf: any = stepInfo(CS, s); const ins = interp(s, inf);
-    const look = ins.slice(0, xi).reverse().map((x: any) => zoneRefOf(x.t, inf.c?.n)).find((z: any) => z && z.z === 'deck' && z.top);
+    const inf = stepInfo(CS, s)!; const ins = interp(s, inf);
+    const look = ins.slice(0, xi).reverse().map((x) => zoneRefOf(x.t, inf.c?.n)).find((z) => z && z.z === 'deck' && z.top);
     if (!look) return [];
     const lo = look.who === 'they' ? [pl === 'A' ? 'B' : 'A'] : [pl];
     return lo.flatMap((p) => (snap.deck?.[p] || []).slice(0, look.n).map((id: string) => { const ob = r.objs[id]; const why = zoneCheck(zp.zr, ob, pl, snap.ctx); return { id, n: ob?.name || id, zone: 'among', own: p, ok: !why, why: why || undefined }; }));
   }
   const owners = zp.zr.who === 'you' ? [pl] : zp.zr.who === 'they' ? [pl === 'A' ? 'B' : 'A'] : ['A', 'B'];
-  return owners.flatMap((p) => (snap[zp.zr.z]?.[p] || []).map((id: string) => { const ob = r.objs[id]; const why = zoneCheck(zp.zr, ob, pl, snap.ctx); return { id, n: ob?.name || id, zone: zp.zr.z, own: p, ok: !why, why: why || undefined }; }));
+  return owners.flatMap((p) => ((snap as unknown as Record<string, Record<string, string[]> | undefined>)[zp.zr.z]?.[p] || []).map((id: string) => { const ob = r.objs[id]; const why = zoneCheck(zp.zr, ob, pl, snap.ctx); return { id, n: ob?.name || id, zone: zp.zr.z, own: p, ok: !why, why: why || undefined }; }));
 }

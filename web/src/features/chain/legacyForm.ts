@@ -236,7 +236,7 @@ $('cb-steps').addEventListener('toggle',e=>{const d=e.target as HTMLDetailsEleme
 let dragJ=-1;
 const clearDrop=()=>$('cb-steps').querySelectorAll('.cbstep.dropb,.cbstep.dropa').forEach(x=>x.classList.remove('dropb','dropa'));
 $('cb-steps').addEventListener('dragstart',e=>{const tg=e.target as HTMLElement;const h=(tg.closest&&tg.closest('[data-drag]')) as HTMLElement|null;if(!h)return;dragJ=+h.dataset.drag!;e.dataTransfer!.effectAllowed='move';e.dataTransfer!.setData('text/plain','step:'+dragJ);
-  const st=h.closest('.cbstep')!;st.classList.add('dragging');try{e.dataTransfer!.setDragImage(st,20,20);}catch(_){} });
+  const st=h.closest('.cbstep')!;st.classList.add('dragging');try{e.dataTransfer!.setDragImage(st,20,20);}catch{/* régi böngésző: alapértelmezett húzási kép */} });
 $('cb-steps').addEventListener('dragover',e=>{if(dragJ<0)return;const st=(e.target as HTMLElement).closest('.cbstep');if(!st)return;e.preventDefault();e.dataTransfer!.dropEffect='move';
   const r=st.getBoundingClientRect();const after=e.clientY>r.top+r.height/2;clearDrop();st.classList.add(after?'dropa':'dropb');});
 $('cb-steps').addEventListener('drop',e=>{if(dragJ<0)return;const st=(e.target as HTMLElement).closest('.cbstep') as HTMLElement|null;if(!st)return;e.preventDefault();
@@ -256,7 +256,7 @@ $('cb-clear').addEventListener('click',()=>{setInternal(false);setCS(EMPTY());re
 const loadEx=(k:string)=>{setInternal(false);setCS(EXAMPLES[k]());renderCB();runCB();};
 $('cb-ex').addEventListener('click',()=>loadEx('base'));$('cb-ex2').addEventListener('click',()=>loadEx('ctrl'));$('cb-ex3').addEventListener('click',()=>loadEx('gear'));
 $('cb-link').addEventListener('click',async()=>{const u=location.origin+location.pathname+'#c='+b64e(JSON.stringify(CS));const st=$('cb-linkst');
-  try{await navigator.clipboard.writeText(u);st.textContent='A link a vágólapra került. Megnyitva ugyanez a helyzet töltődik be.';}catch(e){st.textContent='Másold ki: '+u;}});
+  try{await navigator.clipboard.writeText(u);st.textContent='A link a vágólapra került. Megnyitva ugyanez a helyzet töltődik be.';}catch{st.textContent='Másold ki: '+u;}});
 const W=window as unknown as {__setCS:(s:ChainState)=>void;__getCS:()=>ChainState};W.__setCS=s=>{setCS(normZones(s));renderCB();runCB();};W.__getCS=()=>CS;
 api.set=s=>{setInternal(false);setCS(normZones(s));renderCB();runCB();};
 api.commit=(fn,ms)=>{setInternal(true);CS.hand=CS.hand||{A:[],B:[]};CS.ch=CS.ch||{A:'',B:''};fn(CS);renderCB();if(ms===0)runCB();else sched(ms==null?120:ms);};
@@ -269,7 +269,7 @@ let SEL:HTMLElement|null=null;api.stateEl=el=>{SEL=el;if(el&&!QBOUND.has(el)){QB
 api.quick=(el,j)=>{QEL=el;QJ=j;if(el&&!QBOUND.has(el)){QBOUND.add(el);el.addEventListener('change',onChg);}renderQuick();};
 function notify(){bumpChain();}
 let TMR:ReturnType<typeof setTimeout>|undefined;function sched(ms=250){clearTimeout(TMR);TMR=setTimeout(runCB,ms);}
-function loadChainFromHash(){const m=/^#c=(.+)$/.exec(location.hash);if(!m)return false;try{const cs=chainFromLink(m[1]);if(!cs)return false;setCS(normZones(cs));renderCB();runCB();return true;}catch(e){return false;}}
+function loadChainFromHash(){const m=/^#c=(.+)$/.exec(location.hash);if(!m)return false;try{const cs=chainFromLink(m[1]);if(!cs)return false;setCS(normZones(cs));renderCB();runCB();return true;}catch{return false;}}
 function runCB(){clearTimeout(TMR);const r=analyze(JSON.parse(JSON.stringify(CS)));chainStore.setState({last:r});emitFrames(r.frames as unknown as ChainFrame[]);$('cb-out').innerHTML=r.empty?'<p class="note">'+(CS.steps.length?'A lépésekben még nincs felismert lap vagy ability.':'Még nincs lépés: kattints a pályán egy lapra, vagy a Chain zóna + gombjára.')+'</p>':r.html;}
 $('cb-out').addEventListener('click',e=>{const b=(e.target as HTMLElement).closest('.cl') as HTMLElement|null;if(!b)return;const c=vsCard(b.dataset.card);if(c){hideTip();openModal(c);}});
 chainStore.setState({api,ready:true});

@@ -3,6 +3,7 @@ import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 import { Printings } from '../../shared/ui/Printings';
 import { CARDS, META, IMGBASE } from '../../domain/data/store';
 import { cardHeadHTML, cardRulesHTML, domDots } from '../../render/html/card';
+import type { Card } from '../../domain/data/schema';
 import { esc, norm } from '../../domain/text/norm';
 import { typeLine } from '../../domain/data/cards';
 import { Html } from '../../shared/ui/Html';
@@ -39,7 +40,7 @@ const fuzzyName = (n: string, w: string) => w.length >= 4 && n.split(/[^a-z0-9']
 
 export function filterCards(f: F) {
   const q = norm(f.q), words = q ? q.split(' ').filter(Boolean) : [];
-  const base = (c: any) => {
+  const base = (c: Card) => {
     if (c.ban === 1 && !f.showBan) return false;
     if (f.type && c.t !== f.type) return false;
     if (f.dom && !(f.dom === 'none' ? !(c.d && c.d.length) : (c.d || []).includes(f.dom))) return false;
@@ -52,19 +53,19 @@ export function filterCards(f: F) {
   };
   // A magyar szinonima szavanként egyszer oldódik fel (korábban laponként).
   const syns = words.map((w: string) => SYN[w] || Object.entries(SYN).find(([k]) => w.length >= 4 && (w.startsWith(k) || k.startsWith(w)))?.[1]);
-  const hit = (c: any, w: string, i: number) => {
+  const hit = (c: Card, w: string, i: number) => {
     if (c._s.includes(w) || (f.inText && c._t.includes(w))) return true;
     const syn = syns[i];
     return !!syn && syn.some((x: string) => c._s.includes(x) || c._t.includes(x));
   };
-  let res = CARDS.filter((c: any) => base(c) && words.every((w: string, i: number) => hit(c, w, i)));
+  let res = CARDS.filter((c) => base(c) && words.every((w: string, i: number) => hit(c, w, i)));
   // Elgépelés: ha nincs találat, egy betű eltéréssel a lapnevekben keresünk.
-  if (!res.length && words.length) res = CARDS.filter((c: any) => base(c) && words.every((w: string, i: number) => hit(c, w, i) || fuzzyName(c._n, w)));
-  if (q) res.sort((a: any, b: any) => (b._n.startsWith(q) - a._n.startsWith(q)) || (b._n.includes(q) - a._n.includes(q)) || a._n.localeCompare(b._n));
+  if (!res.length && words.length) res = CARDS.filter((c) => base(c) && words.every((w: string, i: number) => hit(c, w, i) || fuzzyName(c._n, w)));
+  if (q) res.sort((a, b) => (+b._n.startsWith(q) - +a._n.startsWith(q)) || (+b._n.includes(q) - +a._n.includes(q)) || a._n.localeCompare(b._n));
   return res;
 }
 
-function Badges({ c }: { c: any }) {
+function Badges({ c }: { c: Card }) {
   return (
     <>
       {c.err != null && <span className="chip err mini">errata</span>}
@@ -77,7 +78,7 @@ export function CardsView({ active }: { active: boolean }) {
   const [f, setF] = useState<F>(EMPTY);
   const [mode, setMode] = useState<CardsViewMode>(readViewMode);
   const [zoom, setZoom] = useState<{ src: string; x: number; y: number; right: boolean; land: boolean } | null>(null);
-  const hoverOn = (e: React.MouseEvent, c: any) => {
+  const hoverOn = (e: React.MouseEvent, c: Card) => {
     if (!c.img || !window.matchMedia('(hover: hover) and (min-width: 900px)').matches) return;
     const r = (e.currentTarget as HTMLElement).getBoundingClientRect();
     const m = /-(\d+)x(\d+)\./.exec(c.img); const land = !!m && +m[1] > +m[2];
@@ -87,7 +88,7 @@ export function CardsView({ active }: { active: boolean }) {
   };
   const [limit, setLimit] = useState(80);
   const moreRef = useRef<HTMLLIElement>(null);
-  const [sel, setSel] = useState<any>(null);
+  const [sel, setSel] = useState<Card | null>(null);
   const detailRef = useRef<HTMLDivElement>(null);
   const qRef = useRef<HTMLInputElement>(null);
   // A keresőszó késleltetett értéke: gépelés közben a mező azonnal frissül, a szűrés utána fut.
@@ -101,9 +102,9 @@ export function CardsView({ active }: { active: boolean }) {
     const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) setLimit((l) => l + (mode === 'grid' ? 120 : 200)); }, { rootMargin: '600px' });
     io.observe(el); return () => io.disconnect();
   }, [mode, limit, res]);
-  const total = useMemo(() => CARDS.filter((c: any) => c.ban !== 1).length, []);
-  const types = useMemo(() => [...new Set(CARDS.map((c: any) => c.t))].sort() as string[], []);
-  const kws = useMemo(() => [...new Set(CARDS.flatMap((c: any) => c._kw))].sort() as string[], []);
+  const total = useMemo(() => CARDS.filter((c) => c.ban !== 1).length, []);
+  const types = useMemo(() => [...new Set(CARDS.map((c) => c.t))].sort() as string[], []);
+  const kws = useMemo(() => [...new Set(CARDS.flatMap((c) => c._kw))].sort() as string[], []);
   const dirty = JSON.stringify(f) !== JSON.stringify(EMPTY);
   const up = (p: Partial<F>) => { setF((o) => ({ ...o, ...p })); setLimit(mode === 'grid' ? 60 : 80); };
   useEffect(() => { writeViewMode(mode); }, [mode]);
@@ -122,7 +123,7 @@ export function CardsView({ active }: { active: boolean }) {
     return () => window.removeEventListener('keydown', on);
   }, [active]);
 
-  const pick = (c: any) => {
+  const pick = (c: Card) => {
     if (mode === 'grid') { openCard(c.n); return; }
     loadDetails().then(() => {
       setSel(c);
@@ -131,7 +132,7 @@ export function CardsView({ active }: { active: boolean }) {
   };
   const shown = res.slice(0, limit);
   const sel2 = (k: keyof F, label: string, opts: [string, string][]) => (
-    <select value={f[k] as string} onChange={(e) => up({ [k]: e.target.value } as any)} aria-label={label}>
+    <select value={f[k] as string} onChange={(e) => up({ [k]: e.target.value } as Partial<F>)} aria-label={label}>
       <option value="">{label}</option>
       {opts.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
     </select>
@@ -155,7 +156,7 @@ export function CardsView({ active }: { active: boolean }) {
             {sel2('might', 'Minden Might', Array.from({ length: 7 }, (_, i) => [String(i), 'Might ' + (i === 6 ? '6+' : i)]))}
           </div>
           <div className="row">
-            {sel2('set', 'Minden set', SETS.filter((s) => CARDS.some((c: any) => c.sets.includes(s))).map((s) => [s, s]))}
+            {sel2('set', 'Minden set', SETS.filter((s) => CARDS.some((c) => c.sets.includes(s))).map((s) => [s, s]))}
             {sel2('kw', 'Minden kulcsszó', kws.map((k) => [k, k]))}
           </div>
           <div className="row">
@@ -175,7 +176,7 @@ export function CardsView({ active }: { active: boolean }) {
         <ul className="list" role={mode === 'grid' ? undefined : 'listbox'} aria-label="Találatok">
           {!res.length && <li className="pad note" role={mode === 'grid' ? undefined : 'none'}>Nincs találat. A banned kártyák alapból rejtve vannak.</li>}
           {mode === 'grid'
-            ? shown.map((c: any) => {
+            ? shown.map((c) => {
                 const stats = [c.e != null ? 'Energy ' + c.e : '', c.m != null ? 'Might ' + c.m : ''].filter(Boolean).join(' · ');
                 return (
                   <li key={c.n}>
@@ -190,7 +191,7 @@ export function CardsView({ active }: { active: boolean }) {
                   </li>
                 );
               })
-            : shown.map((c: any) => (
+            : shown.map((c) => (
                 <li key={c.n} role="none">
                   <button role="option" aria-selected={sel === c} onClick={() => pick(c)}>
                     <span className="nm"><span dangerouslySetInnerHTML={{ __html: domDots(c) }} /> {c.n} <Badges c={c} /></span>
@@ -208,7 +209,7 @@ export function CardsView({ active }: { active: boolean }) {
       <div className="panel pad detail" ref={detailRef} aria-live="polite"
         onClick={(e) => {
           const s = (e.target as HTMLElement).closest('button[data-sim]') as HTMLElement | null;
-          if (s) { const c = CARDS.find((x: any) => x.n === s.dataset.sim); if (c) { setSel(c); detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } } // a részletek itt már betöltve
+          if (s) { const c = CARDS.find((x) => x.n === s.dataset.sim); if (c) { setSel(c); detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } } // a részletek itt már betöltve
         }}>
         {sel
           ? <><Html key={sel.n} html={cardHeadHTML(sel, 'h2')} /><Printings key={'p' + sel.n} card={sel} /><Html key={'r' + sel.n} html={'<h3 class="rb-sep">Erre a kártyára érvényes szabályok</h3><p class="note">A szakaszok a Core Rules (' + META.rules_updated + ') eredeti angol szövegét mutatják. Kattintásra nyílnak.</p>' + cardRulesHTML(sel)} /></>

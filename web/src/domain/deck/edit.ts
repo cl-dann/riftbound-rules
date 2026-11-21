@@ -27,7 +27,7 @@ function parse(text: string): Sec[] {
   const out: Sec[] = []; let cur: Sec | null = null;
   text.split(/\r?\n/).forEach((raw) => {
     const line = raw.trim(); if (!line) return;
-    const h = /^([A-Za-z][A-Za-z \-]*?)\s*:\s*$/.exec(line);
+    const h = /^([A-Za-z][A-Za-z -]*?)\s*:\s*$/.exec(line);
     if (h) { cur = { name: h[1], rows: [] }; out.push(cur); return; }
     if (!cur) { cur = { name: 'MainDeck', rows: [] }; out.push(cur); }
     const m = /^(\d+)\s*[xX]?\s+(.+)$/.exec(line);

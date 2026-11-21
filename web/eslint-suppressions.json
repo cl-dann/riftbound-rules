@@ -1,22 +1,7 @@
 {
-  "src/app/App.tsx": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 9
-    }
-  },
   "src/domain/chain/actions.ts": {
     "no-useless-assignment": {
       "count": 2
-    }
-  },
-  "src/domain/chain/engine/analyze.ts": {
-    "no-empty": {
-      "count": 1
-    }
-  },
-  "src/domain/chain/engine/build.ts": {
-    "no-empty": {
-      "count": 1
     }
   },
   "src/domain/chain/engine/damage.ts": {
@@ -29,19 +14,9 @@
       "count": 1
     }
   },
-  "src/domain/chain/engine/resolve.ts": {
-    "no-self-assign": {
-      "count": 1
-    }
-  },
   "src/domain/chain/engine/targeting.ts": {
     "@typescript-eslint/no-unused-vars": {
       "count": 1
-    }
-  },
-  "src/domain/chain/engine/tokens.ts": {
-    "no-useless-escape": {
-      "count": 2
     }
   },
   "src/domain/chain/engine/triggers.ts": {
@@ -49,117 +24,11 @@
       "count": 3
     }
   },
-  "src/domain/chain/engine/zoneChange.ts": {
-    "no-empty": {
-      "count": 1
-    }
-  },
-  "src/domain/deck/edit.ts": {
-    "no-useless-escape": {
-      "count": 1
-    }
-  },
-  "src/domain/deck/parse.ts": {
-    "no-useless-escape": {
-      "count": 1
-    }
-  },
-  "src/domain/rules/refs.ts": {
-    "prefer-const": {
-      "count": 1
-    }
-  },
-  "src/domain/text/lev.ts": {
-    "prefer-const": {
-      "count": 1
-    }
-  },
-  "src/features/cards/CardsView.tsx": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 18
-    }
-  },
-  "src/features/chain/ChainEditor.tsx": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 16
-    }
-  },
-  "src/features/chain/CombatPanel.tsx": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 2
-    }
-  },
-  "src/features/chain/StepPanel.tsx": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 4
-    }
-  },
-  "src/features/chain/chainBuild.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 28
-    }
-  },
-  "src/features/chain/legacyForm.ts": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 3
-    },
-    "no-empty": {
-      "count": 1
-    }
-  },
-  "src/features/deck/DeckView.tsx": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 4
-    }
-  },
-  "src/features/learn/LearnView.tsx": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 2
-    }
-  },
-  "src/features/learn/PracticeBoard.tsx": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 6
-    }
-  },
-  "src/features/rules/RulesView.tsx": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 9
-    },
-    "prefer-const": {
-      "count": 1
-    }
-  },
   "src/render/html/knowledge.ts": {
     "no-constant-binary-expression": {
       "count": 1
     },
     "no-constant-condition": {
-      "count": 1
-    }
-  },
-  "src/shared/board/Playmat.tsx": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 3
-    }
-  },
-  "src/shared/content/Blocks.tsx": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 6
-    }
-  },
-  "src/shared/ui/CardModal.tsx": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 3
-    }
-  },
-  "src/shared/ui/Printings.tsx": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 2
-    }
-  },
-  "src/shared/ui/TipLayer.tsx": {
-    "@typescript-eslint/no-explicit-any": {
       "count": 1
     }
   }

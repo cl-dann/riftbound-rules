@@ -5,7 +5,7 @@ import { vsCard } from '../../data/store';
 import { numOf } from '../parser';
 
 export function installTokens(X: EngineCtx) {
-  X.createTokens=(t,it,parts,refs,times)=>{const m=/\b(?:[Pp]lay|[Cc]reate)s? (a|an|one|two|three|four|five|six|\d+|that many)\s+(ready\s+)?(?:(\d+) \[S\]\s+)?([A-Z][\w'\-]*(?: [A-Z][\w'\-]*)*)(?:\s+(unit|gear))?\s+tokens?(\s+exhausted)?(?:\s+with\s+((?:\[[^\]]+\](?:,?\s*(?:and\s+)?)?)+))?([^.]*)/.exec(t);
+  X.createTokens=(t,it,parts,refs,times)=>{const m=/\b(?:[Pp]lay|[Cc]reate)s? (a|an|one|two|three|four|five|six|\d+|that many)\s+(ready\s+)?(?:(\d+) \[S\]\s+)?([A-Z][\w'-]*(?: [A-Z][\w'-]*)*)(?:\s+(unit|gear))?\s+tokens?(\s+exhausted)?(?:\s+with\s+((?:\[[^\]]+\](?:,?\s*(?:and\s+)?)?)+))?([^.]*)/.exec(t);
     if(!m){parts.push('"'+esc(t)+'": token jön létre (440), az elemzés nem tudja pontosan, milyen.');return;}
     let n=m[1].toLowerCase()==='that many'?0:numOf(m[1]);n=n*(times==null?1:times);const name=m[4];const card=vsCard(name);const kind=m[5]?m[5].toLowerCase():card&&card.t==='Gear'?'gear':'unit';const kws=(m[7]||'').match(/\[([^\]]+)\]/g)||[];const tail=m[8]||'';
     const here=X.srcLoc(it);const loc=/\bto a (?:single )?battlefield\b/i.test(tail)?(it.dest||(it.s&&it.s.dest)||'bf0'):/\bthere\b/i.test(tail)?(it.notedLoc||(it.lk&&it.lk.loc)||here||'base'):/\bhere\b/i.test(tail)?(here||'base'):'base';

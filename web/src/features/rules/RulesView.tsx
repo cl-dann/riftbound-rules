@@ -5,11 +5,13 @@ import { esc } from '../../domain/text/norm';
 import { expand, hashRef, headExtent, refHash } from '../../domain/rules/refs';
 import { ruleHTML } from '../../render/html/rules';
 import { Html } from '../../shared/ui/Html';
-import { Blocks, inline } from '../../shared/content/Blocks';
+import { type Block, Blocks, inline } from '../../shared/content/Blocks';
 import FMT from '../../generated/formats.json';
 
 type Shown = { kind: 'head'; i: number } | { kind: 'ref'; ref: string } | { kind: 'search' } | { kind: 'fmt'; id: string };
-const F: any = FMT;
+type Fmt = (typeof FMT)['formats'][number];
+/** A formátum oldalak adata (formats.json): a blokkok a közös Blocks típusai. */
+const F = FMT as unknown as { intro: string; formats: (Omit<Fmt, 'blocks'> & { blocks: Block[] })[] };
 
 export function RulesView({ hash }: { hash: string }) {
   const [q, setQ] = useState('');
@@ -21,9 +23,9 @@ export function RulesView({ hash }: { hash: string }) {
   const search = useMemo(() => {
     const s = q.trim();
     if (!s) return null;
-    let idx: number[] = []; let hl: RegExp | null = null;
-    if (/^\d{3}[\d.a-z]*$/i.test(s)) { const p = s.replace(/\.$/, ''); RULES.forEach((r: any, i: number) => { if (r[0] === p || r[0].startsWith(p + '.') || (p.length < 3 && r[0].startsWith(p))) idx.push(i); }); }
-    else { const lq = s.toLowerCase(); hl = new RegExp(s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'); RULES.forEach((r: any, i: number) => { if (r[1].toLowerCase().includes(lq) || (r[2] || []).some((e: string) => e.toLowerCase().includes(lq))) idx.push(i); }); }
+    const idx: number[] = []; let hl: RegExp | null = null;
+    if (/^\d{3}[\d.a-z]*$/i.test(s)) { const p = s.replace(/\.$/, ''); RULES.forEach((r, i) => { if (r[0] === p || r[0].startsWith(p + '.') || (p.length < 3 && r[0].startsWith(p))) idx.push(i); }); }
+    else { const lq = s.toLowerCase(); hl = new RegExp(s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'); RULES.forEach((r, i) => { if (r[1].toLowerCase().includes(lq) || (r[2] || []).some((e: string) => e.toLowerCase().includes(lq))) idx.push(i); }); }
     return { idx, hl };
   }, [q]);
 
@@ -32,7 +34,7 @@ export function RulesView({ hash }: { hash: string }) {
   else if (shown.kind === 'head') body = '<h2>' + RULES[shown.i][0] + '. ' + esc(RULES[shown.i][1]) + '</h2><div style="margin-top:12px">' + ruleHTML(headExtent(shown.i)) + '</div>';
   else if (shown.kind === 'ref') {
     const ref = shown.ref, parts = ref.split('-'); let idx: number[] = [];
-    if (parts.length === 2 && !/^\d{3}$/.test(parts[0])) { const a = RULES.findIndex((r: any) => r[0] === parts[0]), b = RULES.findIndex((r: any) => r[0] === parts[1]); if (a >= 0 && b >= a) for (let i = a; i <= b; i++) idx.push(i); }
+    if (parts.length === 2 && !/^\d{3}$/.test(parts[0])) { const a = RULES.findIndex((r) => r[0] === parts[0]), b = RULES.findIndex((r) => r[0] === parts[1]); if (a >= 0 && b >= a) for (let i = a; i <= b; i++) idx.push(i); }
     else idx = expand(ref);
     const par = ref.includes('.') && !ref.includes('-') ? ref.split('.').slice(0, -1).join('.') : '';
     body = '<div class="card-head"><h2 style="margin:0">Szabály ' + esc(ref) + '</h2>' + (par ? '<a class="note" href="' + refHash(par) + '">Szülő: ' + esc(par) + '</a>' : '') + '</div><div style="margin-top:12px">' + ruleHTML(idx) + '</div>';
@@ -47,7 +49,7 @@ export function RulesView({ hash }: { hash: string }) {
         </div>
         <div className="toc">
           <div className="toc-group">Versenyformátumok</div>
-          {F.formats.map((x: any) => (
+          {F.formats.map((x) => (
             <button key={x.id} className={'fmt' + (shown.kind === 'fmt' && shown.id === x.id ? ' on' : '')} onClick={() => { setQ(''); location.hash = '#fmt-' + x.id; }}>
               <span className="id">{x.rules}</span>{x.title}
             </button>
@@ -67,7 +69,7 @@ export function RulesView({ hash }: { hash: string }) {
             <span className="status">{copied}</span>
           </div>
         )}
-        {shown.kind === 'fmt' && !search ? (() => { const x = F.formats.find((y: any) => y.id === shown.id) || F.formats[0]; return (
+        {shown.kind === 'fmt' && !search ? (() => { const x = F.formats.find((y) => y.id === shown.id) || F.formats[0]; return (
           <div className="fmt-page">
             <div className="crumb">Szabályzat › Versenyformátumok</div>
             <h2>{x.title}</h2>
@@ -75,8 +77,8 @@ export function RulesView({ hash }: { hash: string }) {
             <table className="ltable fmt-facts"><tbody>{x.facts.map((r: string[], i: number) => <tr key={i}><th>{r[0]}</th><td dangerouslySetInnerHTML={{ __html: inline(r[1]) }} /></tr>)}</tbody></table>
             <Blocks blocks={x.blocks} />
             <div className="fmt-cmp"><h3>Összehasonlítás</h3>
-              <table className="ltable"><thead><tr><th>Formátum</th>{F.formats.map((y: any) => <th key={y.id}>{y.title}</th>)}</tr></thead>
-                <tbody>{['Victory Score', 'Battlefieldek'].map((k) => <tr key={k}><th>{k}</th>{F.formats.map((y: any) => { const f = y.facts.find((r: string[]) => r[0] === k); return <td key={y.id} dangerouslySetInnerHTML={{ __html: inline(f ? f[1] : '') }} />; })}</tr>)}</tbody></table></div>
+              <table className="ltable"><thead><tr><th>Formátum</th>{F.formats.map((y) => <th key={y.id}>{y.title}</th>)}</tr></thead>
+                <tbody>{['Victory Score', 'Battlefieldek'].map((k) => <tr key={k}><th>{k}</th>{F.formats.map((y) => { const f = y.facts.find((r: string[]) => r[0] === k); return <td key={y.id} dangerouslySetInnerHTML={{ __html: inline(f ? f[1] : '') }} />; })}</tr>)}</tbody></table></div>
           </div>); })() : <Html html={body} />}
       </div>
     </div>

@@ -95,7 +95,7 @@ export function installBuild(X: EngineCtx) {
       else X.rows+=X.line('383.2.a.1','A play trigger feltétele ("if '+esc(s.tcond.t)+'") a kijátszáskor teljesül '+esc(X.condSrc(s.tcond))+', ezért a chainre kerül; a resolve-kor már nem ellenőrzi újra.',0);}
     if(perm&&s.trig&&!trigOK){if(s.cond==='paid')X.rows+=X.line('383.2.a.1','A play effect feltétele ("if you paid the additional cost") nem teljesül, ezért nem triggerel.',0);}
     else if(trigBad){trigOK=false;X.rows+=X.line('403.4, 403.4.a','A play effectnek nincs legális választása ('+trigBad+'). A '+c.t.toLowerCase()+' ettől még a boardra kerül, a trigger lekerül a chainről (403.4; ez nem counter).',0);X.story.push('A play effectnek nincs legális célpontja, ezért a trigger lekerül a chainről.');s.trigBad=trigBad;}
-    if(perm&&s.trig&&!trigOK){}
+    if(perm&&s.trig&&!trigOK){/* nem triggerel, a sor fent már kiírva */}
     else if(s.may&&(s.k==='tg'||perm&&trigOK))X.rows+=X.line('383.3.a, 383.3.a.2','"You may" a triggered ability elején: '+WHO[it.pl]+' a chainre tételkor (finalizálás) dönt'+(it.pl==='A'?'öd':'i')+' el, végrehajtja-e; ha nem, lekerül. Az elemzés igennel számol.',0);
     else if(s.may)X.rows+=X.line('355.18, 355.12','"You may": a döntés a resolve-kor születik (355.18); a célpontokat a kijátszáskor kell kiválasztani, a game action végrehajtásáról szóló döntéstől függetlenül (355.12). Az elemzés igennel számol.',0);
     X.story.push(Verb+' '+what.replace(/<[^>]+>/g,'')+(perm?', ami azonnal ide kerül: '+X.locLabel(X.O['s'+s.j].loc)+(s.trig&&trigOK?', a "When you play" hatása pedig a chainre':''):', ez a chain tetejére kerül')+'.');

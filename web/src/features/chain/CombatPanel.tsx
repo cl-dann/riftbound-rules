@@ -11,7 +11,7 @@ const R = ({ r }: { r: string }) => (
   <span className="cbc-refs">{r.split(/,\s*/).map((x) => <a key={x} className="rref" href="#szabalyok" data-ref={x}>{x}</a>)}</span>
 );
 
-const txtOf = (n?: string | null): string => { const c: any = n ? vsCard(n) : null; return (c && c.txt) || ''; };
+const txtOf = (n?: string | null): string => { const c = n ? vsCard(n) : null; return (c && c.txt) || ''; };
 const clean = (l: string) => l.replace(/\([^()]*\)/g, ' ').replace(/\s+/g, ' ').trim();
 const sentences = (t: string) => t.split('\n').map(clean).filter(Boolean).flatMap((l) => l.split(/(?<=\.)\s+(?=[A-Z[])/));
 const KW_LINE = /^\[(Tank|Backline|Assault|Shield)(?: (\d+))?\]/;
@@ -153,7 +153,7 @@ export function CombatPanel({ board, frameLabel, bfi, isLast = true, focus }: { 
     add(board[side].legend, false, true);
     add(f?.name, false, true);
     const n0 = out.length;
-    [...(board.me.trash || []), ...(board.opp.trash || [])].forEach((t) => { const c: any = vsCard(t); if (c && c.t === 'Spell') add(t, false, false); });
+    [...(board.me.trash || []), ...(board.opp.trash || [])].forEach((t) => { const c = vsCard(t); if (c && c.t === 'Spell') add(t, false, false); });
     out.slice(n0).forEach((s) => { s.spell = true; });
     const seen = new Set<string>();
     return out.filter((s) => { const k = s.k + '|' + s.src + '|' + s.txt; if (seen.has(k)) return false; seen.add(k); return true; });
