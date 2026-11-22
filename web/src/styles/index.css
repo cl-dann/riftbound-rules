@@ -1504,3 +1504,4 @@ details:not(.tp):not(.drow):not(.cb2-blk):not(.cbset):not(.learn-side-m) > summa
 .kwc button { display: inline-flex; align-items: center; min-height: 32px; margin-top: 4px; padding: 0 10px; font-family: var(--f-head); font-size: var(--fs-sm); font-weight: 600; color: #d9d0bd; text-decoration: none; background: transparent; border: 1px solid var(--line); border-radius: var(--r-md); cursor: pointer; transition: background-color var(--t-fast), border-color var(--t-fast); }
 .kwc button:hover { color: var(--ink); background: rgba(240, 230, 210, .06); border-color: var(--gold-line); }
 @media (max-width: 700px) { .kwc button { min-height: 44px; } }
+.rb-share { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 10px 0 4px; } .rb-share .btn { display: inline-flex; align-items: center; gap: 6px; } .rb-share .note { word-break: break-all; }

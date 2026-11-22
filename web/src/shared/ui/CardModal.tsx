@@ -1,8 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { X } from 'lucide-react';
+import { Link2, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { cardHeadHTML, cardRulesHTML } from '../../render/html/card';
 import { CARDS } from '../../domain/data/store';
+import { cardSlug } from '../../domain/data/cards';
 import type { Card } from '../../domain/data/schema';
 import { Html } from './Html';
 import { Printings } from './Printings';
@@ -12,6 +13,25 @@ import { loadDetails } from '../../domain/data/load';
 /** Kártyalap felugró ablakban. Bármelyik nézet megnyithatja: window 'rb:open-card' esemény, detail = kártyanév. */
 export function CardModal() {
   const [card, setCard] = useState<Card | null>(null);
+  const [copied, setCopied] = useState('');
+  useEffect(() => {
+    // Lapoldalról érkezve (card/<slug>/ -> #kartya/<slug>) a kártya-ablak nyílik meg.
+    const fromHash = () => {
+      const m = /^#kartya\/([a-z0-9-]+)$/.exec(location.hash);
+      const c = m && CARDS.find((x) => cardSlug(x.n) === m[1]);
+      if (c) loadDetails().then(() => setCard(c));
+    };
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
+    return () => window.removeEventListener('hashchange', fromHash);
+  }, []);
+  useEffect(() => setCopied(''), [card]);
+  const close = () => { setCard(null); if (/^#kartya\//.test(location.hash)) history.replaceState(null, '', '#kartyak'); };
+  const copyLink = async () => {
+    if (!card) return;
+    const u = new URL('card/' + cardSlug(card.n) + '/', location.href.split('#')[0]).href;
+    try { await navigator.clipboard.writeText(u); setCopied('A link a vágólapra került: ' + u); } catch { setCopied('Másold ki: ' + u); }
+  };
   useEffect(() => {
     // A lap részletei (jegyzetek, Gyakori kérdések, nyomatok) a megnyitás előtt töltődnek be, ha még nincsenek meg.
     return on('rb:open-card', (n) => {
@@ -20,7 +40,7 @@ export function CardModal() {
     });
   }, []);
   return (
-    <Dialog.Root open={!!card} onOpenChange={(o) => !o && setCard(null)}>
+    <Dialog.Root open={!!card} onOpenChange={(o) => !o && close()}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm data-[state=open]:animate-[fade_.15s_ease-out]" />
         <Dialog.Content
@@ -37,6 +57,8 @@ export function CardModal() {
           </Dialog.Close>
           {card && (<>
             <Html html={cardHeadHTML(card, 'h2')} />
+            <p className="rb-share"><button type="button" className="btn sec sm" onClick={copyLink}><Link2 size={14} aria-hidden /> Link másolása</button>
+              <span className="note" role="status">{copied}</span></p>
             <Printings card={card} />
             <Html html={'<h3 class="rb-sep">Erre a kártyára érvényes szabályok</h3>' + cardRulesHTML(card)} />
           </>)}

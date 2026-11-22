@@ -8,6 +8,7 @@ export const VIEWS: [View, string][] = [
 /** A régi hash linkek (#d=, #c=, #r-..., #tud-...) változatlanul működnek. */
 export function viewOf(h: string): View {
   if (/^#d=/.test(h)) return 'deck';
+  if (/^#kartya\//.test(h)) return 'kartyak';
   if (/^#c=/.test(h)) return 'chain';
   if (/^#r-/.test(h) || /^#fmt-/.test(h)) return 'szabalyok';
   if (/^#tud-guide/.test(h) || /^#hogyan/.test(h)) return 'hogyan';

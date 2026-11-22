@@ -2,6 +2,9 @@
 import { CARDS, TOPICS } from './store';
 import type { Card } from './schema';
 export const typeLine=(c: Pick<Card, 't' | 'st'>)=>[...(c.st||[]).filter(s=>s!=='Basic'&&s!=='Token'),c.t,(c.st||[]).includes('Token')?'Token':''].filter(Boolean).join(' ');
+/** A lapoldal URL-je (card/<slug>/) és a #kartya/<slug> útvonal: ékezet és aposztróf nélkül, kisbetűvel, a többi írásjel helyén kötőjel.
+    Azonos a scripts/card-pages.mjs slugOf() függvényével (unit/lapoldal.test.ts). */
+export const cardSlug=(n: string)=>n.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/['\u2019]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 export const GENERIC_TAGS=new Set(['Equipment']);
 /** A leghasonlóbb n lap: közös kulcsszó, Game Action, tag, típus, domain és Energy alapján. */
 export function similar(c: Card,n: number): [number, Card, string[]][]{
