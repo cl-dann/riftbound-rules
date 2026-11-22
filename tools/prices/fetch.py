@@ -107,8 +107,14 @@ def printings(prods, byid):
     gen = os.path.join(os.path.dirname(OUT), '..', 'src', 'generated', 'cards.json')
     cj = json.load(open(gen, encoding='utf-8'))
     cj = cj if isinstance(cj, list) else cj['cards']
+    # A nyomatok ('pr') a lustán betöltött cards-detail.json-ban vannak, a cards.json-nal azonos sorrendben.
+    det = os.path.join(os.path.dirname(gen), 'cards-detail.json')
+    if os.path.exists(det):
+        for card, d in zip(cj, json.load(open(det, encoding='utf-8'))):
+            if not card.get('pr') and d.get('pr'):
+                card['pr'] = d['pr']
     for card in cj:
-        prs = [raw[x[0]] for x in card.get('pr', []) if x[0] in raw]
+        prs = [raw[x[0]] for x in (card.get('pr') or []) if x[0] in raw]
         if not prs:
             continue
         for key in {pn(card['n'])} | {pn(a) for a in card.get('a', []) if ',' in a}:
