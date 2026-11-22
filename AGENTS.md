@@ -39,8 +39,8 @@ web/                    Vite + React 19 + TypeScript + Tailwind v4 frontend
     rules/              szabályszám hivatkozások, fejezetcím, flag címkék
     chain/              Chain elemző: types (közös típusok), text, parser, conditions, actions, steps, cost, zones (lapszöveg értelmezés),
                         engine/ (runChain: ctx (GameObj, ChainItem, EngineCtx típusok), labels, objects, frames, state, triggers, zoneChange, replacement, damage,
-                        tokens, execute, targeting, build, resolve, endOfTurn, analyze), cs (CS segédek), state (zod séma),
-                        link (#c=), templates, examples, overrides (laponkénti kézi hatásleírások), pairs
+                        tokens, execute, targeting, build, resolve (resolveItem0 és lépései), instr (egy utasítás a resolve-kor), endOfTurn,
+                        analyze), cs (CS segédek), state (zod séma), link (#c=), templates, examples, overrides (laponkénti kézi hatásleírások), pairs
     combat/ deck/ practice/   combat kiosztás, deck (parse, legality, edit, prices, link), Practice szituáció-motor
   src/render/html/      HTML string kimenetek: card, rules, glossary, deck, knowledge, chainReport (a chain riport és az analyze())
   src/features/         fülek: cards, deck (+ pdf), rules, chain (ChainView, ChainEditor, StepPanel, ActionMenu, CardPicker,
@@ -132,6 +132,9 @@ npm run golden:capture                        # a unit tesztek analyze() bemenet
 A golden tesztek (`unit/golden/`) a chain elemzés teljes kimenetét, a kártya HTML-t, a deck ellenőrzést, a régi linkeket és a határokat
 (#c=, #d=, rb-deck, rb-view2, prices.json) rögzítik: refaktor után byte-azonosnak kell maradniuk; szándékos változásnál
 `npx vitest run --project golden -u`. A vizuális baseline a CI-ban készül: GitHub, Actions, "Tesztek", Run workflow, update-snapshots.
+
+Függvényméret: az engine-ben egyetlen függvény sem hosszabb 80 sornál; kivétel csak az install<Csoport>() modulkeret, ami a csoport
+függvényeit rendeli az EngineCtx-hez.
 
 Típusosság: egyik fájlban sincs `@ts-nocheck`, explicit `any` nincs (a domain strict tsconfiggal fordul), az ESLint baseline-ban 10
 suppression marad (no-useless-assignment 6, no-unused-vars 2, no-constant-condition 1, no-constant-binary-expression 1). Új kódba ne

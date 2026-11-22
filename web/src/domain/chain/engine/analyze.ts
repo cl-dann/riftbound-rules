@@ -10,6 +10,7 @@ import { plainOf, stripRem } from '../text';
 import type { ChainResult, EngineCtx, EStep, StateFns } from './ctx';
 import { installEndOfTurn } from './endOfTurn';
 import { installResolve } from './resolve';
+import { installInstr } from './instr';
 import { installBuild } from './build';
 import { installTargeting } from './targeting';
 import { installExecute } from './execute';
@@ -29,7 +30,7 @@ export { type ChainResult, type EngineCtx, WHO, lineH };
 export function runChain(CS:ChainState):ChainResult{
   // Minden mező előre, rögzített sorrendben: így az objektum alakja (V8 hidden class) nem változik a futás alatt,
   // a mezőelérés gyors marad (a fokozatosan bővülő, 100 feletti mezős objektum lassú szótár módba váltana).
-  const X=({CS,MT:undefined,MTIDS:undefined,S:undefined,POST:undefined,MAIN:undefined,out:undefined,REC:undefined,MAN:undefined,ALL:undefined,EV:undefined,story:undefined,rows:undefined,rr:undefined,notes:undefined,O:undefined,BF:undefined,ZC:undefined,zcK:undefined,cnt:undefined,FR:undefined,DET:undefined,NEWCTRL:undefined,chain:undefined,stack:undefined,REPL:undefined,READY:undefined,BUFF2:undefined,PREVSA:undefined,READYNEXT:undefined,ST:undefined,PSD:undefined,TP:undefined,PEND:undefined,DIED:undefined,TOKN:undefined,PTN:undefined,done:undefined,guard:undefined,it0:undefined,parts0:undefined,refs1:undefined,tgOut0:undefined,mtT0:undefined,tot0:undefined,legal0:undefined,INRES:undefined,ENDED:undefined,itemOf:undefined,playMain:undefined,cleanup:undefined,bonusDmg:undefined,dealDmg:undefined,kwVal:undefined,countEach:undefined,endStep:undefined,expiration:undefined,applyTo:undefined,pside:undefined,itemName:undefined,snap:undefined,LOCS:undefined,locLabel:undefined,line:undefined,bfC:undefined,onB:undefined,mightOf:undefined,BUF2:undefined,lethal:undefined,zcMove:undefined,zoneIds:undefined,zcWhy:undefined,zctx:undefined,nm:undefined,deathRepl:undefined,killObj:undefined,resolveAll:undefined,evalState:undefined,condSrc:undefined,evalCond:undefined,splitRun:undefined,resolveItem:undefined,resolveItem0:undefined,bfBlocksBase:undefined,bfBlocksPlay:undefined,PSv:undefined,VS:undefined,evSum:undefined,xpOf:undefined,scoreOf:undefined,runesOf:undefined,runeDeckOf:undefined,playedBefore:undefined,enterReady:undefined,selfRef:undefined,srcLoc:undefined,chooseOnlyWhy:undefined,itemEnergy:undefined,tgWhy:undefined,tgWhy0:undefined,legalOpts:undefined,createTokens:undefined,pushTrig:undefined,deathWatch:undefined,flushPend:undefined,leaveTrigs:undefined,playTrigs:undefined,abTrigs:undefined,setCtrl:undefined,leaveBoard:undefined,moveObj:undefined}) as unknown as EngineCtx;
+  const X=({CS,MT:undefined,MTIDS:undefined,S:undefined,POST:undefined,MAIN:undefined,out:undefined,REC:undefined,MAN:undefined,ALL:undefined,EV:undefined,story:undefined,rows:undefined,rr:undefined,notes:undefined,O:undefined,BF:undefined,ZC:undefined,zcK:undefined,cnt:undefined,FR:undefined,DET:undefined,NEWCTRL:undefined,chain:undefined,stack:undefined,REPL:undefined,READY:undefined,BUFF2:undefined,PREVSA:undefined,READYNEXT:undefined,ST:undefined,PSD:undefined,TP:undefined,PEND:undefined,DIED:undefined,TOKN:undefined,PTN:undefined,done:undefined,guard:undefined,it0:undefined,parts0:undefined,refs1:undefined,tgOut0:undefined,mtT0:undefined,tot0:undefined,legal0:undefined,INRES:undefined,ENDED:undefined,itemOf:undefined,playMain:undefined,cleanup:undefined,bonusDmg:undefined,dealDmg:undefined,kwVal:undefined,countEach:undefined,endStep:undefined,expiration:undefined,applyTo:undefined,pside:undefined,itemName:undefined,snap:undefined,LOCS:undefined,locLabel:undefined,line:undefined,bfC:undefined,onB:undefined,mightOf:undefined,BUF2:undefined,lethal:undefined,zcMove:undefined,zoneIds:undefined,zcWhy:undefined,zctx:undefined,nm:undefined,deathRepl:undefined,killObj:undefined,resolveAll:undefined,evalState:undefined,condSrc:undefined,evalCond:undefined,splitRun:undefined,resolveItem:undefined,resolveItem0:undefined,bfBlocksBase:undefined,bfBlocksPlay:undefined,PSv:undefined,VS:undefined,evSum:undefined,xpOf:undefined,scoreOf:undefined,runesOf:undefined,runeDeckOf:undefined,playedBefore:undefined,enterReady:undefined,selfRef:undefined,srcLoc:undefined,chooseOnlyWhy:undefined,itemEnergy:undefined,tgWhy:undefined,tgWhy0:undefined,legalOpts:undefined,createTokens:undefined,pushTrig:undefined,deathWatch:undefined,flushPend:undefined,leaveTrigs:undefined,playTrigs:undefined,abTrigs:undefined,setCtrl:undefined,leaveBoard:undefined,moveObj:undefined,resolveTarget:undefined,resolveTargetX:undefined,resolveSubsets:undefined,resolveFinish:undefined,resolveInstr:undefined,resolvePlain:undefined,resolveZone:undefined,resolveAct:undefined,playEnd:undefined,playRes:undefined,playStep:undefined,playCheck:undefined,playLegal:undefined}) as unknown as EngineCtx;
   installObjects(X);
   installFrames(X);
   installState(X);
@@ -42,6 +43,7 @@ export function runChain(CS:ChainState):ChainResult{
   installTargeting(X);
   installBuild(X);
   installResolve(X);
+  installInstr(X);
   installEndOfTurn(X);
   X.MT=null;X.MTIDS=new Set<string>();
   X.S=X.CS.steps.map((s,j)=>{if(s&&(s.k==='res'||s.k==='end'))return {k:s.k,j,pl:s.pl||'A',c:{n:'',t:'',txt:''},tg:[],ext:{},list:[]};const inf=stepInfo(X.CS,s);return inf&&inf.c?Object.assign({},s,inf,{j,tg:(s.tg||[]).slice(),ext:s.ext||{}}):null;}).filter(Boolean) as EStep[];
@@ -50,6 +52,16 @@ export function runChain(CS:ChainState):ChainResult{
   if(!X.S.length){X.out.empty=true;return X.out;}
   X.REC=null;X.MAN=false;X.ALL=X.out.rows;X.EV=X.out.ev;
   X.story=X.out.story;X.rows='';X.rr='';X.notes=[];
+  setupObjects(X);
+  setupRun(X);
+  X.playMain();X.stack=X.chain.slice();
+  X.resolveAll();
+  runPostCombat(X);
+  finishRun(X);
+  return X.out;
+}
+/** Az objektumok: a board lapjai, a legendek, a kéz, trash és deck lapjai, a lépések lapjai és a pályán kívüli célpontok. */
+function setupObjects(X:EngineCtx){
   // ---- objektumok ----
   X.O={};X.out.objs=X.O;
   X.BF={bf0:{c:X.bfC(X.CS.bf[0].n),ctrl:X.CS.bf[0].c},bf1:{c:X.bfC(X.CS.bf[1].n),ctrl:X.CS.bf[1].c}};
@@ -75,6 +87,9 @@ export function runChain(CS:ChainState):ChainResult{
       const ctrl=e.pl||(p.rel==='enemy'?other(s.pl):p.rel==='friendly'?s.pl:null);
       X.O[id]={id,name:c.n+' célpontja ('+(ctrl==='A'?'a te '+p.type+'od':ctrl==='B'?'az ellenfél '+p.type+'ja':p.type)+')',ctrl,own:ctrl,baseOf:ctrl,loc:e.loc||'bf0',m:e.m!=null?e.m:null,dmg:0,mods:[],kws:[],zone:'board',type:p.type};return id;});
     if(s.cost&&s.costTg==='x'){/* a költség célpontja a lépésnél (build) */}});
+}
+/** A lefutás állapota: frame-ek, battlefield hatások, játékállapot, a turn player és a kiinduló pillanatkép. */
+function setupRun(X:EngineCtx){
   // ---- frame-ek ----
   X.FR=X.out.frames;X.REC=[];
   X.DET=new Set<string>();X.NEWCTRL=new Set<string>();
@@ -130,8 +145,9 @@ export function runChain(CS:ChainState):ChainResult{
   X.it0=null;X.parts0=[];X.refs1=[];X.tgOut0=[];X.mtT0=[];X.tot0={n:0};X.legal0={n:0};
   X.INRES=false;
   X.ENDED=false;
-  X.playMain();X.stack=X.chain.slice();
-  X.resolveAll();
+}
+/** Combat utáni triggerek a Combat panel kiosztása szerint, majd új chain (467, 468). */
+function runPostCombat(X:EngineCtx){
   /* Combat utáni triggerek: a Combat panel kiosztása szerinti eredmény, majd új chain a felvett triggerekkel (célpontokkal). */
   if(X.POST.length){const cb=X.POST[0].cb||{bf:'bf0',dead:[],recall:[],ctrl:'',label:''};const bl=cb.bf==='bf1'?'bf1':'bf0';
     X.story.push('A chain kiürült. Ezután jön a combat '+X.locLabel(bl)+' battlefielden, a Combat panel kiosztása szerint.');
@@ -146,6 +162,9 @@ export function runChain(CS:ChainState):ChainResult{
       if(bad.length){X.REC!.push(['403.4',X.O[id].name+' triggere ('+(s.why||'trigger')+') nem kerülhet a chainre legális választás nélkül: '+plainOf(bad.join('; '))+'. Lekerül (403.4).']);X.story.push(Art(X.O[id].name)+' triggere lekerül, mert nincs legális célpontja.');return;}
       X.pushTrig(it);X.REC!.push([s.why==='Deathknell'?'808.1.c, 808.1.d.2':/Conquer/i.test(s.why||'')?'383.4.c.2':'383.3',X.O[id].name+' triggere ('+(s.why||'trigger')+') a chainre kerül: '+s.eff]);X.story.push(Art(X.O[id].name)+' triggere ('+(s.why||'trigger')+') a chainre kerül.');});
     X.flushPend(X.stack);X.snap('Combat utáni triggerek a chainen',X.stack);X.resolveAll();}
+}
+/** Kör vége (317), a végállapot és a riport adatai. */
+function finishRun(X:EngineCtx){
   /* ---- Kör vége (317), ha a builderben kérik: Ending Step ("at end of turn" delayed és "At the end of your turn" triggerek, 317.1.a, 391.2,
      383.2.a.1), majd Expiration Step (317.2): Ending Special Cleanup, heal, a "this turn" hatások lejárnak, a Rune Pool kiürül. */
   if(X.CS.end&&!X.ENDED){X.endStep();X.resolveAll();}
@@ -155,5 +174,4 @@ export function runChain(CS:ChainState):ChainResult{
   // ---- a riport adatai: a HTML-t a render/html/chainReport.ts készíti; nem felsorolható mező, így a kimenet (JSON) változatlan ----
   Object.defineProperty(X.out,'report',{value:{S:X.S,O:X.O,BF:X.BF,CS:X.CS,done:X.done,story:X.story,notes:X.notes,rows:X.rows,rr:X.rr,delayed:X.out.delayed,locLabel:X.locLabel,mightOf:X.mightOf},enumerable:false});
   void LOCK;
-  return X.out;
 }
