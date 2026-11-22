@@ -1,6 +1,7 @@
 import { LayoutGrid, List, Search, X } from 'lucide-react';
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
-import { Printings } from '../../shared/ui/Printings';
+import { Printings, usePrices } from '../../shared/ui/Printings';
+import { eur, priceOf } from '../../domain/deck/edit';
 import { CARDS, META, IMGBASE } from '../../domain/data/store';
 import { cardHeadHTML, cardRulesHTML, domDots } from '../../render/html/card';
 import type { Card } from '../../domain/data/schema';
@@ -88,6 +89,7 @@ export function CardsView({ active }: { active: boolean }) {
   };
   const [limit, setLimit] = useState(80);
   const moreRef = useRef<HTMLLIElement>(null);
+  const P = usePrices();
   const [sel, setSel] = useState<Card | null>(null);
   const detailRef = useRef<HTMLDivElement>(null);
   const qRef = useRef<HTMLInputElement>(null);
@@ -185,6 +187,7 @@ export function CardsView({ active }: { active: boolean }) {
                         {c.img && <img loading="lazy" alt="" src={IMGBASE + c.img + '?w=300'} onError={(e) => { (e.currentTarget.parentNode as HTMLElement).classList.add('noimg'); e.currentTarget.remove(); }} />}
                         <span className="ph"><b>{c.n}</b><span dangerouslySetInnerHTML={{ __html: domDots(c) + ' ' + esc(typeLine(c)) }} /><span>{stats}</span></span>
                         <span className="bdg"><Badges c={c} /></span>
+                        {(() => { const p = priceOf(c, P); const v = p && (p.a7 ?? p.a1); return v != null ? <span className="pchip" title="Cardmarket, a legolcsóbb nyomat normál ára (7 napos átlag)">{eur(v)}</span> : null; })()}
                       </span>
                       <span className="cap"><b>{c.n}</b><span>{typeLine(c)}{stats ? ' · ' + stats : ''}</span></span>
                     </button>
