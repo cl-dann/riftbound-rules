@@ -1,6 +1,8 @@
 import { CARDS, byName } from '../data/store';
 import { norm } from '../text/norm';
 import type { Prices } from './prices';
+import { prPrice, splitPr, withPr } from './printing';
+import type { DeckRow } from './types';
 import type { Card } from '../data/schema';
 
 // A decklista szövege marad az egyetlen forrás: a builder ezt szerkeszti,
@@ -16,6 +18,11 @@ export function priceOf(c: Card | null | undefined, P: Prices | null) {
   // A Signature lapokat a Cardmarket a champion neve nélkül listázza (Bullet Time, Miss Fortune -> Bullet Time).
   return P.cards[pn(c.n)] || P.cards[pn((c.a || []).find((a: string) => a.includes(',')) || '')]
     || (c.t !== 'Unit' && c.t !== 'Legend' && c.n.includes(',') ? P.cards[pn(c.n.split(',')[0])] : null) || null;
+}
+
+/** A decklista sor ára: a választott nyomat (normál vagy foil), különben névenként a legolcsóbb nyomat normál ára. */
+export function rowPrice(P: Prices | null, r: Pick<DeckRow, 'card' | 'pr' | 'foil'>) {
+  return r.pr ? prPrice(P, r.pr, !!r.foil) : priceOf(r.card, P);
 }
 
 export function listName(c: Card) {
@@ -43,7 +50,7 @@ function dump(secs: Sec[]) {
 
 export function legendOf(text: string) {
   const s = parse(text).find((x) => secKey(x.name) === 'legend');
-  return s?.rows[0] ? byName.get(norm(s.rows[0].name)) || null : null;
+  return s?.rows[0] ? byName.get(norm(splitPr(s.rows[0].name).name)) || null : null;
 }
 
 // Hova kerül egy hozzáadott lap. Champion unit az üres Champion zónába megy, ha a legend tagjével egyezik.
@@ -63,12 +70,21 @@ export function editDeck(text: string, sec: string, c: Card, delta: number) {
   let s = secs.find((x) => secKey(x.name) === secKey(sec));
   if (!s) { s = { name: sec, rows: [] }; secs.push(s); }
   // Legendből és Championból egy lehet: az új lecseréli a régit.
-  if (delta > 0 && (secKey(sec) === 'legend' || secKey(sec) === 'champion')) s.rows = s.rows.filter((r) => byName.get(norm(r.name)) === c);
-  let r = s.rows.find((x) => byName.get(norm(x.name)) === c || norm(x.name) === norm(c.n));
+  if (delta > 0 && (secKey(sec) === 'legend' || secKey(sec) === 'champion')) s.rows = s.rows.filter((r) => byName.get(norm(splitPr(r.name).name)) === c);
+  let r = s.rows.find((x) => byName.get(norm(splitPr(x.name).name)) === c || norm(splitPr(x.name).name) === norm(c.n));
   if (!r) { if (delta <= 0) return text; r = { qty: 0, name: listName(c) }; s.rows.push(r); }
   r.qty = Math.max(0, r.qty + delta);
   if (secKey(sec) === 'legend' || secKey(sec) === 'champion' || c.t === 'Battlefield') r.qty = Math.min(r.qty, 1);
   s.rows = s.rows.filter((x) => x.qty > 0);
+  return dump(secs);
+}
+
+/** A sor nyomatának beállítása (üres kód: alapérték, a legolcsóbb nyomat normál ára). */
+export function setPrinting(text: string, sec: string, c: Card, pr: string | null, foil: boolean) {
+  const secs = parse(text);
+  const s = secs.find((x) => secKey(x.name) === secKey(sec)); if (!s) return text;
+  const r = s.rows.find((x) => byName.get(norm(splitPr(x.name).name)) === c); if (!r) return text;
+  r.name = withPr(r.name, pr, foil);
   return dump(secs);
 }
 

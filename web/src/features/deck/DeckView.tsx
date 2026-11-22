@@ -13,7 +13,8 @@ import type { Card } from '../../domain/data/schema';
 import type { DeckRow } from '../../domain/deck/types';
 import { Html } from '../../shared/ui/Html';
 import { loadFonts } from '../../domain/data/load';
-import { editDeck, eur, legendOf, priceOf, searchCards, targetSec } from '../../domain/deck/edit';
+import { editDeck, eur, legendOf, priceOf, rowPrice, searchCards, setPrinting, targetSec } from '../../domain/deck/edit';
+import { prPrice } from '../../domain/deck/printing';
 import type { Prices } from '../../domain/deck/prices';
 import { openCard } from '../../shared/lib/events';
 import { deckFromHash } from '../../domain/deck/link';
@@ -22,14 +23,26 @@ import { loadPrices } from '../../shared/lib/prices';
 
 function deckTotals(P: Prices | null) {
   let a1 = 0, a7 = 0, n = 0; const miss: string[] = [];
-  if (P) DECK.forEach((s) => { if (/side/i.test(s.name)) return; s.rows.forEach((r) => { if (!r.card) return; const p = priceOf(r.card, P); n += r.qty; if (!p) { miss.push(r.card.n); return; } a1 += r.qty * (p.a1 ?? p.a7 ?? 0); a7 += r.qty * (p.a7 ?? p.a1 ?? 0); }); });
+  if (P) DECK.forEach((s) => { if (/side/i.test(s.name)) return; s.rows.forEach((r) => { if (!r.card) return; const p = rowPrice(P, r); n += r.qty; if (!p) { miss.push(r.card.n); return; } a1 += r.qty * (p.a1 ?? p.a7 ?? 0); a7 += r.qty * (p.a7 ?? p.a1 ?? 0); }); });
   return { a1, a7, n, miss };
 }
 
 function priceHTML(P: Prices | null): string {
   if (!P) return '<div class="prices"><h3>Cardmarket ár</h3><p class="note">Az árak még nem érhetők el. A Cardmarket publikus árlistájából töltődnek be, a frissítés dátuma a fejlécben látszik.</p></div>';
   const { a1, a7, n, miss } = deckTotals(P);
-  return '<div class="prices"><h3>Cardmarket ár<span class="n">' + n + ' lap, sideboard nélkül, névenként a legolcsóbb nyomat</span></h3><div class="ptot"><div><span>1 napos átlag</span><b>' + eur(a1) + '</b></div><div><span>7 napos átlag</span><b>' + eur(a7) + '</b></div></div><p class="note">Frissítve: ' + esc(P.updated.slice(0, 10)) + '. A listaár naponta változik, a pontos ár a Cardmarket termékoldalán ellenőrizhető.' + (miss.length ? ' Ár nélkül: ' + [...new Set(miss)].map(esc).join(', ') + '.' : '') + '</p></div>';
+  return '<div class="prices"><h3>Cardmarket ár<span class="n">' + n + ' lap, sideboard nélkül, a választott nyomat, ennek hiányában névenként a legolcsóbb</span></h3><div class="ptot"><div><span>1 napos átlag</span><b>' + eur(a1) + '</b></div><div><span>7 napos átlag</span><b>' + eur(a7) + '</b></div></div><p class="note">Frissítve: ' + esc(P.updated.slice(0, 10)) + '. A listaár naponta változik, a pontos ár a Cardmarket termékoldalán ellenőrizhető.' + (miss.length ? ' Ár nélkül: ' + [...new Set(miss)].map(esc).join(', ') + '.' : '') + '</p></div>';
+}
+
+/** Nyomat választó a deck sorában: alapérték a legolcsóbb nyomat normál ára, utána nyomatonként normál és foil, áraival. */
+function prSelect(c: Card, r: DeckRow, sec: string, P: Prices | null): string {
+  const pr = c.pr || []; if (!pr.length) return '';
+  const opt = (v: string, l: string) => '<option value="' + esc(v) + '"' + ((r.pr ? r.pr + (r.foil ? ' foil' : '') : '') === v ? ' selected' : '') + '>' + esc(l) + '</option>';
+  const o = [opt('', 'Nyomat: alapérték (legolcsóbb, normál)')];
+  pr.forEach(([code, , set, num, rar]) => [false, true].forEach((foil) => {
+    const p = prPrice(P, code, foil); if (foil && !p) return;
+    o.push(opt(code + (foil ? ' foil' : ''), set + ' ' + num + ', ' + rar + (foil ? ', foil' : ', normál') + (p ? ', ' + eur(p.a7 ?? p.a1) : '')));
+  }));
+  return '<select class="prsel" data-prsec="' + esc(sec) + '" data-card="' + esc(c.n) + '" aria-label="' + esc(c.n) + ' nyomata">' + o.join('') + '</select>';
 }
 
 function deckHTML(P: Prices | null): string {
@@ -46,7 +59,7 @@ function deckHTML(P: Prices | null): string {
   const uniq = new Set<Card>(); DECK.forEach((s) => s.rows.forEach((r) => r.card && uniq.add(r.card)));
   const ec = [...uniq].filter((c) => c.err != null).length;
   const T = deckTotals(P);
-  let h = '<div class="panel pad"><div class="sum">' + (P && T.n ? '<span class="chip price" title="Cardmarket, névenként a legolcsóbb nyomat, sideboard nélkül. 1 napos átlag: ' + eur(T.a1) + '">Deck ár <b>' + eur(T.a7) + '</b> <small>7 napos átlag' + (T.miss.length ? ', ' + new Set(T.miss).size + ' lap ár nélkül' : '') + '</small></span>' : '') + DECK.map((s) => '<span class="chip">' + esc(s.name) + ' <b>' + s.rows.reduce((a: number, r: DeckRow) => a + r.qty, 0) + '</b></span>').join('')
+  let h = '<div class="panel pad"><div class="sum">' + (P && T.n ? '<span class="chip price" title="Cardmarket, a választott nyomat (alapból névenként a legolcsóbb), sideboard nélkül. 1 napos átlag: ' + eur(T.a1) + '">Deck ár <b>' + eur(T.a7) + '</b> <small>7 napos átlag' + (T.miss.length ? ', ' + new Set(T.miss).size + ' lap ár nélkül' : '') + '</small></span>' : '') + DECK.map((s) => '<span class="chip">' + esc(s.name) + ' <b>' + s.rows.reduce((a: number, r: DeckRow) => a + r.qty, 0) + '</b></span>').join('')
     + '<span class="chip okc">' + uniq.size + ' egyedi kártya</span>' + (ec ? '<span class="chip err">' + ec + ' kártyán errata</span>' : '') + '</div>';
   if (warns.length) h += '<ul class="warns">' + warns.map((w) => '<li>' + w + '</li>').join('') + '</ul>';
   h += legalityHTML() + priceHTML(P) + curveHTML() + interactionHTML();
@@ -58,7 +71,7 @@ function deckHTML(P: Prices | null): string {
       const rs = c.tp.map((p) => '<span title="' + esc(TOPICS[p[0]].title) + '">' + TOPICS[p[0]].refs[0] + '</span>').join('');
       h += '<details class="drow" data-s="' + si + '" data-r="' + ri + '"><summary><span class="q">' + r.qty + '</span><span class="nm">' + domDots(c) + ' ' + esc(c.n)
         + (c.err != null ? ' <span class="chip err mini">errata</span>' : '') + (c.ban ? ' <span class="chip ban mini">ban</span>' : c.banf ? ' <span class="chip ban mini">ban ' + c.banf.slice(5) + '</span>' : '')
-        + '</span><span class="ty">' + esc(typeLine(c)) + '</span><span class="rs">' + rs + '</span><span class="ctl">' + (() => { const p = priceOf(c, P); return p ? '<span class="pr" title="7 napos átlag, darabár ' + eur(p.a7 ?? p.a1) + '">' + eur(r.qty * (p.a7 ?? p.a1 ?? 0)) + '</span>' : ''; })()
+        + '</span><span class="ty">' + esc(typeLine(c)) + '</span><span class="rs">' + rs + '</span><span class="ctl">' + prSelect(c, r, s.name, P) + (() => { const p = rowPrice(P, r); return p ? '<span class="pr" title="7 napos átlag, darabár ' + eur(p.a7 ?? p.a1) + '">' + eur(r.qty * (p.a7 ?? p.a1 ?? 0)) + '</span>' : ''; })()
         + '<button class="qb" data-inc="-1" data-sec="' + esc(s.name) + '" data-card="' + esc(c.n) + '" aria-label="Egy példánnyal kevesebb">\u2212</button><button class="qb" data-inc="1" data-sec="' + esc(s.name) + '" data-card="' + esc(c.n) + '" aria-label="Egy példánnyal több">+</button></span></summary><div class="body"></div></details>';
     });
   });
@@ -79,7 +92,9 @@ export function DeckView() {
   const [ty, setTy] = useState('');
   const [legalOnly, setLegalOnly] = useState(true);
   const tmr = useRef<number>(0);
+  const changeRef = useRef<(t: string) => void>(() => {});
   const change = (t: string) => { setText(t); clearTimeout(tmr.current); tmr.current = window.setTimeout(() => run(t), 250); };
+  changeRef.current = change;
   const legend = useMemo(() => legendOf(text), [text]);
   const hits = useMemo(() => (q.trim() || ty ? searchCards(q, legend, legalOnly, ty) : []), [q, ty, legend, legalOnly]);
   const add = (c: Card) => change(editDeck(text, targetSec(c, text), c, 1));
@@ -104,6 +119,20 @@ export function DeckView() {
     };
     el.addEventListener('toggle', on, true);
     return () => el.removeEventListener('toggle', on, true);
+  }, []);
+  // Nyomat választás a deck sorában: a decklista szövegébe kerül ("[kód foil]"), így a link, a mentés és a PDF is látja.
+  const textRef = useRef(text); textRef.current = text;
+  useEffect(() => {
+    const el = outRef.current!;
+    const on = (e: Event) => {
+      const s = e.target as HTMLSelectElement;
+      if (!s.classList?.contains('prsel')) return;
+      const c = DECK.flatMap((x) => x.rows).find((r) => r.card && r.card.n === s.dataset.card)?.card; if (!c) return;
+      const [code, foil] = s.value.split(' ');
+      changeRef.current(setPrinting(textRef.current, s.dataset.prsec!, c, code || null, foil === 'foil'));
+    };
+    el.addEventListener('change', on);
+    return () => el.removeEventListener('change', on);
   }, []);
 
   const pdf = async () => {
@@ -170,6 +199,7 @@ export function DeckView() {
           const t = e.target as HTMLElement;
           const sm = t.closest('button[data-sim]') as HTMLElement | null;
           const qb = t.closest('button[data-inc]') as HTMLElement | null;
+          if (t.closest('select.prsel')) { e.preventDefault(); return; }
           if (qb) { e.preventDefault(); e.stopPropagation(); const c = DECK.flatMap((s) => s.rows).find((r) => r.card && r.card.n === qb.dataset.card)?.card; if (c) change(editDeck(text, qb.dataset.sec!, c, +qb.dataset.inc!)); return; }
           if (sm) { openCard(sm.dataset.sim as string); return; }
           const b = t.closest('button[data-fix]') as HTMLElement | null;

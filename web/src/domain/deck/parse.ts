@@ -3,7 +3,8 @@ import { byName } from '../data/store';
 import { lev } from '../text/lev';
 import { norm } from '../text/norm';
 import type { Card } from '../data/schema';
-import type { DeckSection } from './types';
+import type { DeckRow, DeckSection } from './types';
+import { splitPr } from './printing';
 export const FORMAT=`Legend:
 1 Champion neve, Legend címe
 
@@ -39,9 +40,10 @@ export function parseDeck(text: string){
     if(m){cur={name:m[1],rows:[]};secs.push(cur);return;}
     if(!cur){cur={name:'Lista',rows:[]};secs.push(cur);}
     m=/^(\d+)\s*[xX]?\s+(.+)$/.exec(line);
-    const qty=m?+m[1]:1,name=(m?m[2]:line).trim();
+    const qty=m?+m[1]:1,sp=splitPr((m?m[2]:line).trim()),name=sp.name;
     const c=byName.get(norm(name))||null;
-    cur.rows.push({qty,name,card:c,sug:c?[]:suggest(name)});
+    const row: DeckRow={qty,name,card:c,sug:c?[]:suggest(name)};if(sp.pr){row.pr=sp.pr;row.foil=sp.foil;}
+    cur.rows.push(row);
   });
   return secs;
 }
