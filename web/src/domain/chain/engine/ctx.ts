@@ -4,6 +4,7 @@ import type { Card } from '../../data/schema';
 import type { CardLike, Cond, EachCnt, Instr, StepInfo, TargetParam } from '../types';
 import type { ZoneRef } from '../zones';
 import type { CostCtx } from '../cost';
+import type { allScope } from '../actions';
 
 /** Might módosító (layer-egyszerűsítés): n a változás, min az alsó korlát, dbl a duplázás. */
 export type Mod = { n: number; min?: number | null; dbl?: boolean };
@@ -89,6 +90,23 @@ export type RecRow = [string, string, number?];
 /** A játékállapot számolói (ST), a feltételek kiértékeléséhez. */
 export type StateFns = { xpOf: (p: string) => number; scoreOf: (p: string) => number; VS: () => number; diedT: (p: string, gearToo: boolean) => boolean };
 
+/** Egy chain elem resolve-jának állapota (resolveItem0 és a lépései): t a szabálysor eleje, fl a flag, tot és legal a célpontszámláló,
+    lastT a legutóbbi célpontos utasítás (a linked instructions ehhez kötődnek). */
+export type ResolveRun = {
+  it: ChainItem; s: EStep; perm: boolean; self: GameObj | null; srcName: string; INS: Instr[]; parts: string[]; refs: string[];
+  tgOut: string[]; mtT: MtTarget[]; t: string; fl: number; legal: number; tot: number; lastT: Pick<Instr, 'tis' | 'st' | 'act' | 't'> | null;
+};
+/** Egy lépés kijátszásának állapota (playStep, playCheck, playLegal): a lap, az időzítés, a szöveg eleje, a tétel,
+    a költségként megölt unit (costV), a kötelező trigger-választások (pick) és a play effect legalitási hibája (trigBad). */
+export type PlayRun = {
+  s: EStep; ix: number; c: CardLike; tm: string; perm: boolean | null | undefined; empty: boolean; Verb: string; what: string; it: ChainItem;
+  costV: string | null; pick: [string, string, number][]; trigBad: string | null;
+};
+/** A zónás utasítás jelzői (resolvePlain számolja, resolveZone használja). */
+export type ZoneStep = { zr0: ZoneRef | null; zEach: ZoneRef | null; zpick: string[] | null; amongIt: unknown; zTopUse: unknown; restM: unknown; eachOn: unknown };
+/** A linked utasítás előzménye (ResolveRun.lastT). */
+type PrevInstr = ResolveRun['lastT'];
+
 /** A chain elemzés közös állapota és függvényei (EngineCtx): a runChain() minden korábbi belső változója és
     függvénye ennek a mezője, így a csoportok (engine/*) külön modulban élhetnek. Az install<Csoport>() tölti ki a függvényeket. */
 export type EngineCtx = {
@@ -100,7 +118,8 @@ export type EngineCtx = {
   PSD: Record<string, number | string>; TP: string; PEND: ChainItem[]; DIED: string[]; TOKN: number; PTN: Set<string>; done: Done[];
   guard: number; it0: ChainItem | null; parts0: string[]; refs1: string[]; tgOut0: string[]; mtT0: MtTarget[]; tot0: { n: number };
   legal0: { n: number }; INRES: boolean; ENDED: boolean;
-  itemOf: (s: EStep) => ChainItem; playMain: () => void; cleanup: () => void; bonusDmg: (pl: string) => number;
+  itemOf: (s: EStep) => ChainItem; playMain: () => void; playEnd: () => void; playRes: () => void;
+  playStep: (s: EStep, ix: number) => void; playCheck: (P: PlayRun) => boolean; playLegal: (P: PlayRun) => void; cleanup: () => void; bonusDmg: (pl: string) => number;
   dealDmg: (v: string, n: number, parts: string[], refs: string[], note?: string) => number;
   kwVal: (id: string, kw: string) => number; countEach: (cnt: EachCnt, it: ChainItem, tv?: string | null) => number | null;
   endStep: () => void; expiration: () => void;
@@ -116,6 +135,11 @@ export type EngineCtx = {
   resolveAll: () => void; evalState: (cd: Cond, it: ChainItem, s: EStep | null | undefined, tv: string | null | undefined) => boolean | null;
   condSrc: (cd: Cond) => string; evalCond: (cd: Cond | null | undefined, it: ChainItem, s: EStep | null | undefined, xi: number, tv: string | null | undefined) => boolean | null;
   splitRun: (x: Instr, prev: Pick<Instr, 'tis' | 'st' | 'act' | 't'> | null | undefined) => void; resolveItem: (it: ChainItem) => void; resolveItem0: (it: ChainItem) => void;
+  resolveTarget: (R: ResolveRun, x: Instr, ti: number) => void; resolveTargetX: (R: ResolveRun, x: Instr, ti: number) => void;
+  resolveSubsets: (R: ResolveRun) => void; resolveFinish: (R: ResolveRun) => void; resolveInstr: (R: ResolveRun, x: Instr, xi: number) => void;
+  resolvePlain: (R: ResolveRun, x: Instr, xi: number, prev: PrevInstr, lk: boolean) => void;
+  resolveZone: (R: ResolveRun, x: Instr, xi: number, Z: ZoneStep) => boolean;
+  resolveAct: (R: ResolveRun, x: Instr, xi: number, prev: PrevInstr, lk: boolean, live: number[], a: Instr['act'], sc: ReturnType<typeof allScope>) => void;
   bfBlocksBase: (l: string | null | undefined) => unknown; bfBlocksPlay: (l: string | null | undefined) => unknown; PSv: (p: string, k: string) => number | string;
   VS: () => number; evSum: (k: string, p: string) => number; xpOf: (p: string) => number; scoreOf: (p: string) => number;
   runesOf: (p: string) => number; runeDeckOf: (p: string) => number; playedBefore: (p: string, j: number) => Set<string>;
