@@ -3,7 +3,7 @@ import { Swords } from 'lucide-react';
 import { IMGBASE, vsCard } from '../../domain/data/store';
 import { openCard } from '../lib/events';
 
-export type PUnit = { n: string; m: number; base?: number; ex?: boolean; dmg?: number; tag?: string; status?: string[]; mods?: string[]; gear?: string[]; token?: boolean; id?: string; kind?: 'gear' };
+export type PUnit = { n: string; no?: number; m: number; base?: number; ex?: boolean; dmg?: number; tag?: string; status?: string[]; mods?: string[]; gear?: string[]; token?: boolean; id?: string; kind?: 'gear' };
 export type PSide = {
   legend?: string; legendEx?: boolean; champion?: string | null; base?: PUnit[]; runes?: { ready: number; exhausted: number; domains?: string[] };
   hand?: string[]; handCount?: number; score?: number; deck?: number; runeDeck?: number; trash?: string[]; banish?: string[];
@@ -50,7 +50,7 @@ export const PickCtx = createContext<(u: PUnit, side: 'me' | 'opp', where: strin
 
 /** Kattintható célpont a pályán (szituációk "act" lépéseihez). loc: 'base', 'obase' (ellenfél base), 'bf0', 'bf1', ... */
 export type PTarget =
-  | { k: 'unit'; side: 'me' | 'opp'; loc: string; n: string; i: number; ex: boolean; id?: string }
+  | { k: 'unit'; side: 'me' | 'opp'; loc: string; n: string; no?: number; i: number; ex: boolean; id?: string }
   | { k: 'add'; z: 'base' | 'unit' | 'bfcard' | 'hand' | 'chain'; side?: 'me' | 'opp'; bfi?: number }
   | { k: 'pile'; z: 'trash' | 'deck' | 'banish'; side: 'me' | 'opp' }
   | { k: 'zone'; loc: string }
@@ -91,7 +91,7 @@ function Unit({ u, side, changed, where = '', loc = '', i = 0 }: { u: PUnit; sid
   const c = vsCard(u.n);
   const pick = useContext(PickCtx);
   const ctl = useContext(CtlCtx);
-  const t: PTarget = { k: 'unit', side, loc, n: u.n, i, ex: !!u.ex, id: u.id };
+  const t: PTarget = { k: 'unit', side, loc, n: u.n, no: u.no, i, ex: !!u.ex, id: u.id };
   const g = ctl ? ctl.glow(t) : '';
   const go = () => (ctl ? ctl.on(t) : pick(u, side, where));
   const labNames = new Set((u.status || []).map((x) => (statusOf(x)?.[0] || '').toLowerCase()));
@@ -102,7 +102,7 @@ function Unit({ u, side, changed, where = '', loc = '', i = 0 }: { u: PUnit; sid
     <div className={'pm-unit ' + side + (u.ex ? ' ex' : '') + (changed ? ' chg' : '') + (st.includes('dying') ? ' dying' : '') + (u.kind === 'gear' ? ' gear' : '') + gcls(g)} data-uid={u.id} data-fk={side + ':' + u.n}
       onClick={(e) => { e.stopPropagation(); go(); }} onKeyDown={ctl ? keyAct(go) : undefined} role="button" tabIndex={0}
       // A név a lap látható tartalmából jön (név, Might, jelölések); a szerep és az állapot leírásként (aria-description).
-      aria-description={ctl ? (ctl.label?.(t) || u.n + (side === 'me' ? ', saját ' : ', ellenfél ') + (u.kind === 'gear' ? 'gear' : 'unit, Might ' + u.m) + (u.ex ? ', exhausted' : ', ready')) : u.kind === 'gear' ? u.n + ', gear' + (u.ex ? ', exhausted' : '') : undefined} aria-pressed={ctl ? g === 'sel' : undefined}>
+      aria-description={ctl ? (ctl.label?.(t) || u.n + (u.no ? ' #' + u.no : '') + (side === 'me' ? ', saját ' : ', ellenfél ') + (u.kind === 'gear' ? 'gear' : 'unit, Might ' + u.m) + (u.ex ? ', exhausted' : ', ready')) : u.kind === 'gear' ? u.n + ', gear' + (u.ex ? ', exhausted' : '') : undefined} aria-pressed={ctl ? g === 'sel' : undefined}>
       <div className="pm-labels">{st.map((s) => { const x = statusOf(s); return x ? <span key={s} className={'pm-lab ' + x[1]} data-tt={x[2]}>{x[0]}</span> : null; })}{u.token && <span className="pm-lab tmp">Token</span>}</div>
       <span className={c ? 'cl' : ''} data-card={c?.n}>
         {c?.img ? <img src={IMGBASE + c.img} alt={u.n} loading="lazy" /> : <span className="pm-tok">{u.n}</span>}
@@ -110,7 +110,8 @@ function Unit({ u, side, changed, where = '', loc = '', i = 0 }: { u: PUnit; sid
       {u.kind !== 'gear' && <span className={'pm-might' + (diff > 0 ? ' up' : diff < 0 ? ' down' : '')} title={'Might ' + u.m + (diff ? ' (nyomtatva ' + base + ')' : '')}>{u.m}</span>}
       {u.kind !== 'gear' && diff !== 0 && <span className={'pm-delta' + (diff > 0 ? ' up' : ' down')}>{diff > 0 ? '+' : ''}{diff}</span>}
       {!!u.dmg && <span className="pm-dmg" title="Damage">{u.dmg}</span>}
-      <div className="pm-name">{u.kind === 'gear' && <span className="pm-gtag">Gear</span>}{u.n}</div>
+      {!!u.no && <span className="pm-no" title={'Ebből a lapból több van a pályán; ez a ' + u.no + '. példány'}>#{u.no}</span>}
+      <div className="pm-name">{u.kind === 'gear' && <span className="pm-gtag">Gear</span>}{u.n}{u.no ? ' #' + u.no : ''}</div>
       {!!((u.mods || []).some((m) => !labNames.has(m.toLowerCase())) || u.gear?.length || u.tag) && (
         <div className="pm-mods">
           {u.tag && <span>{u.tag}</span>}

@@ -18,6 +18,8 @@ export type GameObj = {
   save?: { pay: boolean; src: string } | null; dbl?: boolean | null; dieTo?: string | null; baseSet?: number | null; untgt?: boolean | null; prev?: unknown;
   until?: { src: string; prev: string | null } | null; ord?: number; gen?: number; on?: string | null; accel?: boolean; src?: string;
   stepJ?: number; token?: boolean; toHand?: boolean; zone0?: string;
+  /** Példányszám, ha a lapból több van a pályán (instNos). */
+  no?: number;
 };
 /** Egy célpont kézzel megadott adatai a lépésben (ext): játékos, hely, Might. */
 export type ExtEntry = { pl?: string; loc?: string; m?: number | null };
@@ -52,6 +54,8 @@ export type Done = { name: string; pl: string; res: string };
 export type UnitView = {
   id: string; n: string; m: number; dmg: number; ex: boolean; gear: string[]; status: string[]; kind?: string; base?: number;
   mods?: string[]; token?: boolean; tag?: string;
+  /** Példányszám (#1, #2), ha a lapból több van a pályán. */
+  no?: number;
 };
 export type SideView = {
   legend?: string; legendEx: boolean; base: UnitView[]; hand: string[]; trash: string[]; banish: string[];
