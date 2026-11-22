@@ -8,13 +8,22 @@ import type { TargetParam } from './types';
 
 export const locsOf=(CS:ChainState)=>[['base','Base'],['bf0',(CS.bf[0].n||'1. battlefield')],['bf1',(CS.bf[1].n||'2. battlefield')]];
 export const locLabelOf=(CS:ChainState,l:string)=>(locsOf(CS).find(x=>x[0]===l)||['',l])[1];
-export function bdLabelOf(CS:ChainState,i:number){const b=CS.bd[i];const c=vsCard(b.n);return (b.pl==='A'?'Te: ':'Ellenfél: ')+(c?c.n:b.n||'?')+' ('+locLabelOf(CS,b.loc)+')';}
+/** Azonos nevű lapok példányszáma a pályán (#1, #2): előbb a board lapjai, majd a kijátszott unitok és gearek lépésrendben.
+    Csak az a név kap számot, amelyből több példány van; a többi lap neve változatlan. */
+export function instNos(CS:ChainState):Record<string,number>{const seq:[string,string][]=[];
+  CS.bd.forEach((b,i)=>{const c=vsCard(b.n);if(c)seq.push(['b'+i,c.n]);});
+  CS.steps.forEach((s,j)=>{if(s&&s.k==='card'){const c=vsCard(s.n);if(c&&isPermC(c))seq.push(['s'+j,c.n]);}});
+  const cnt:Record<string,number>={};seq.forEach(([,n])=>{cnt[n]=(cnt[n]||0)+1;});
+  const k:Record<string,number>={};const out:Record<string,number>={};seq.forEach(([id,n])=>{if(cnt[n]>1){k[n]=(k[n]||0)+1;out[id]=k[n];}});return out;}
+/** Lapnév a példányszámmal ("Teemo #2"), ha van. */
+export const instName=(n:string,no?:number)=>no?n+' #'+no:n;
+export function bdLabelOf(CS:ChainState,i:number){const b=CS.bd[i];const c=vsCard(b.n);return (b.pl==='A'?'Te: ':'Ellenfél: ')+(c?instName(c.n,instNos(CS)['b'+i]):b.n||'?')+' ('+locLabelOf(CS,b.loc)+')';}
 /** A j. lépés p célpont-paraméteréhez választható értékek (típus szerint; a legalitást az elemzés dönti el). */
 export function tgOptionsOf(CS:ChainState,j:number,p:TargetParam){
   const o:[string,string][]=[['','nincs kiválasztva']];
   if(p.type==='battlefield'){o.push(['F0',locLabelOf(CS,'bf0')],['F1',locLabelOf(CS,'bf1')]);return o;}
   if(p.type!=='spell'){const okT=(t:string)=>p.type==='perm'?(t==='unit'||t==='gear'):t===p.type;CS.bd.forEach((b,i)=>{const c=vsCard(b.n);if(c&&okT(c.t.toLowerCase()))o.push(['b'+i,'Board: '+bdLabelOf(CS,i)]);});
-    for(let k=0;k<=j&&k<CS.steps.length;k++){const s=CS.steps[k];const c=vsCard(s.n);if(s.k==='card'&&isPermC(c)&&okT(c!.t.toLowerCase()))o.push(['s'+k,k===j?'önmaga: '+c!.n+' (355.9.c)':(k+1)+'. lépés: '+c!.n]);}
+    const nos=instNos(CS);for(let k=0;k<=j&&k<CS.steps.length;k++){const s=CS.steps[k];const c=vsCard(s.n);if(s.k==='card'&&isPermC(c)&&okT(c!.t.toLowerCase())){const nm=instName(c!.n,nos['s'+k]);o.push(['s'+k,k===j?'önmaga: '+nm+' (355.9.c)':(k+1)+'. lépés: '+nm+(nos['s'+k]?' ('+(s.pl==='B'?'ellenfél':'te')+', '+locLabelOf(CS,s.loc||(s.from==='facedown'?'bf0':'base'))+')':'')]);}}
     if(p.type!=='perm')o.push(['x','más '+p.type+' (nincs a board listában)']);}
   else for(let k=0;k<j;k++){const s=CS.steps[k];const c=vsCard(s.n);if(s.k==='card'&&c&&c.t==='Spell')o.push(['s'+k,(k+1)+'. lépés: '+c.n]);else if(p.orAb&&(s.k==='ab'||s.k==='tg')){const sc=srcCard(CS,s.src);if(sc)o.push(['s'+k,(k+1)+'. lépés: '+sc.n+(s.k==='ab'?' abilityje':' triggere')]);}}
   return o;

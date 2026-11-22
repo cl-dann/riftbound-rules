@@ -21,6 +21,7 @@ export function installFrames(X: EngineCtx) {
       if(ob.type==='gear'){u.kind='gear';u.base=0;u.m=0;}
       if(ob.type==='unit'&&mt==null){u.base=0;u.mods=['Might ismeretlen'];}
       if(ob.card&&/token/i.test((ob.card.st||[]).join(' ')+' '+(ob.card.tg||[]).join(' ')))u.token=true;
+      if(ob.no)u.no=ob.no;
       shown.add(id);
       if(ob.loc==='base'){const bp=ob.baseOf==='B'?'B':ob.baseOf==='A'?'A':p;side[bp].base.push(Object.assign(u,bp!==p?{tag:'idegen base'}:{}));}else{const f=bfs[ob.loc==='bf1'?1:0];(p==='A'?f.me:f.opp).push(u);}});
     Object.keys(X.O).forEach(id=>{const ob=X.O[id];if(ob.type!=='spell')return;const p=ob.own==='B'?'B':'A';if(ob.zone==='trash'||ob.zone==='countered')side[p].trash.push(ob.card!.n);});

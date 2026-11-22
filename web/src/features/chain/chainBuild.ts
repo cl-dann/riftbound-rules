@@ -7,7 +7,7 @@ import { timingOf, isPermC, interp } from '../../domain/chain/actions';
 import { zoneRefOf, zoneCheck, type ZoneRef } from '../../domain/chain/zones';
 import { vsCard, CARDS } from '../../domain/data/store';
 import { norm } from '../../domain/text/norm';
-import { tgOptionsOf, reorderSteps, locLabelOf } from '../../domain/chain/cs';
+import { instName, instNos, tgOptionsOf, reorderSteps, locLabelOf } from '../../domain/chain/cs';
 import type { PBoard, PSide } from '../../shared/board/Playmat';
 import type { Card } from '../../domain/data/schema';
 import type { Ability, TargetParam, Trigger } from '../../domain/chain/types';
@@ -132,10 +132,10 @@ export function stepName(CS: ChainState, s: Step): { n: string; img?: string; ki
   if (s.k === 'ab' || s.k === 'tg') {
     const inf = stepInfo(CS, s); const n = inf?.c?.n || s.n || '';
     const lbl = s.k === 'ab' ? (inf?.ab?.label || '') : (inf?.tr?.why || '');
-    return { n: n ? n : 'nincs forrás', img: n, kind: (s.k === 'ab' ? 'ability' : 'trigger') + (lbl ? ': ' + String(lbl).slice(0, 40) : '') };
+    return { n: n ? instName(n, s.src ? instNos(CS)[s.src] : undefined) : 'nincs forrás', img: n, kind: (s.k === 'ab' ? 'ability' : 'trigger') + (lbl ? ': ' + String(lbl).slice(0, 40) : '') };
   }
   const c = cardOf(s.n);
-  return { n: c ? c.n : s.n || 'üres lépés', img: c?.n, kind: s.from === 'facedown' ? 'facedown-ból' : s.from === 'champ' ? 'Champion Zone-ból' : 'kijátszás' };
+  return { n: c ? instName(c.n, instNos(CS)['s' + CS.steps.indexOf(s)]) : s.n || 'üres lépés', img: c?.n, kind: s.from === 'facedown' ? 'facedown-ból' : s.from === 'champ' ? 'Champion Zone-ból' : 'kijátszás' };
 }
 
 /** Abilityk és triggerek egy forráshoz (a csatolt gear szövegével, 136.2.c). */

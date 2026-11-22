@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ArrowDown, ArrowUp, GripVertical, Plus, X } from 'lucide-react';
-import { locLabelOf, newZid, stateKeysOf } from '../../domain/chain/cs';
+import { instName, instNos, locLabelOf, newZid, stateKeysOf } from '../../domain/chain/cs';
 import { chainActions, chainStore, getCS } from './store';
 import { stepInfo } from '../../domain/chain/steps';
 import type { ChainState, ChainStep, ZoneEntry } from '../../domain/chain/state';
@@ -213,14 +213,14 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
     const k = +m[2];
     if (m[1] === 'b') {
       const b = CS.bd[k]; if (!b) return;
-      showMenu({ key: uid + csv, title: b.n, card: b.n, sub: (b.pl === 'A' ? 'saját' : 'ellenfél') + ', ' + locLabelOf(CS, b.loc) + ', kiinduló helyzet', items: [
+      showMenu({ key: uid + csv, title: instName(b.n, instNos(CS)[uid]), card: b.n, sub: (b.pl === 'A' ? 'saját' : 'ellenfél') + ', ' + locLabelOf(CS, b.loc) + ', kiinduló helyzet', items: [
         ...abItems(uid, b.pl), ...moveItems(uid, b.n), ...combatItem(b.loc, sideOf(b.pl)),
         { label: 'Tulajdonságok (Might, damage, exhausted, stunned, buff, Empowered, csatolás)', tone: 'energy', run: () => { setMenu(null); setProps(k); } },
         { label: 'Eltávolítás', tone: 'del', run: () => { close(); jump.current = 'keep'; chainActions().delBd(k); } },
       ] });
     } else {
       const s = CS.steps[k]; if (!s) return;
-      showMenu({ key: uid + csv, title: s.n!, card: s.n, sub: (k + 1) + '. lépésben kijátszva', items: [
+      showMenu({ key: uid + csv, title: instName(s.n!, instNos(CS)[uid]), card: s.n, sub: (s.pl === 'B' ? 'ellenfél' : 'saját') + ', ' + locLabelOf(CS, s.loc || (s.from === 'facedown' ? 'bf0' : 'base')) + ', ' + (k + 1) + '. lépésben kijátszva', items: [
         ...abItems(uid, s.pl!), ...moveItems(uid, s.n!), ...combatItem(s.loc || 'base', sideOf(s.pl!)),
         { label: 'Lépés szerkesztése', tone: 'energy', run: () => { close(); setSel(k); } },
         { label: 'A lépés törlése', tone: 'del', run: () => { close(); chainActions().delStep(k); } },
@@ -387,7 +387,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
         else setPick({ kind: 'board', side: t.side, loc: t.z === 'base' ? 'base' : 'bf' + t.bfi, bfi: t.bfi });
       }
     },
-    label: (t) => (t.k === 'add' && mode?.k === 'target' ? 'Pályán kívüli célpont ide' : t.k === 'unit' ? t.n + (t.side === 'me' ? ', saját' : ', ellenfél') + (mode?.k === 'target' ? ', célpontként' : ', akciók') : t.k === 'zone' ? 'Cél: ' + locLabelOf(CS, zoneLoc(t.loc)) : ''),
+    label: (t) => (t.k === 'add' && mode?.k === 'target' ? 'Pályán kívüli célpont ide' : t.k === 'unit' ? t.n + (t.no ? ' #' + t.no : '') + (t.side === 'me' ? ', saját' : ', ellenfél') + (mode?.k === 'target' ? ', célpontként' : ', akciók') : t.k === 'zone' ? 'Cél: ' + locLabelOf(CS, zoneLoc(t.loc)) : ''),
   };
 
   useEffect(() => {
