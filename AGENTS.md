@@ -12,7 +12,7 @@ Fülek (`web/src/app/router.ts`):
 
 | Hash | Fül | Tartalom |
 |---|---|---|
-| `#kartyak` | Kártyák | 1101 lap rácsban; lapnál hivatalos szöveg, errata, "Röviden", Gyakori kérdések, lenyitható "Szabályi részletek", kapcsolódó Core Rules szakaszok |
+| `#kartyak` | Kártyák | 1101 lap rácsban (`#kartya/<slug>` a kártya-ablakot nyitja; megosztható lapoldal: `card/<slug>/`, a kártya-ablak "Link másolása" gombja erre mutat); lapnál hivatalos szöveg, errata, "Röviden", Gyakori kérdések, lenyitható "Szabályi részletek", kapcsolódó Core Rules szakaszok |
 | `#deck` | Deck | deck builder, élő legalitás (Core Rules 103), Cardmarket ár, PDF export, megosztható link (`#d=`) |
 | `#szabalyok` | Szabályzat | teljes Core Rules kereshetően (`#r-<szám>`), versenyformátum oldalak (`#fmt-<id>`: Duel, Match, FFA3, FFA4, 2v2) |
 | `#chain` | Chain | chain építő és elemző: pálya-alapú építés (zónánkénti "+" képes keresővel, lapra kattintva akció-menü legalitással és szabályszámmal, célpont a pályán, pályán kívüli unit vagy gear célpont a zóna + gombjával, Show Off és hatásból kijátszott lap a kézből; kéz, trash és deck tartalma "+" gombbal felvehető, és a lap szövege szerinti kéz-, trash- vagy deckválasztás a pályán vagy a Trash és Deck paklira kattintva, a legális lapok kiemelve), sablonok témánként (`web/src/domain/chain/templates.ts`: counter, Ignored, Negated, trigger sorrend 383.3.d.1, replacement 372, Hidden, lap a trashből, kör vége; unit tesztelve), lépés beszúrása a chain közepére hivatkozás-átszámozással, kör és fázis a pálya fejlécében, keskeny nézetben (max. 700 px) lépés-varázsló alulról felcsúszó panelben (lap, akció ugyanazzal a legalitással, célzás a pályán vékony sávval, extra mezők, Kész; Vissza és Mégse minden lépésnél, "Új lépés" gomb), azonos nevű lapok példányszáma (#1, #2: a board lapjai, majd a kijátszott unitok és gearek lépésrendben; jelvény a lapon, ugyanez a menüben, a célpont-választóban, az idővonalon és az elemzés szövegében, `instNos` a `domain/chain/cs.ts`-ben), élő elemzés, lépés-idővonal, lépésenkénti lejátszás Playmaton, mistarget és linked instructions, combat panel, "Haladó szerkesztés" a teljes űrlappal |
@@ -30,7 +30,9 @@ src/                    Python adat pipeline
   tests/test_export.py  pytest: két futás azonos kimenet, 1101 lap, kötelező kulcsok, index és részletek
   data/                 forrásadatok (cards.json, rules.json, learn.json, formats.json, glossary.json, ...)
   data/audit/           ellenőrző körök kimenetei és javításai (lásd lent)
-scripts/                check-dashes.mjs (U+2013/U+2014 tiltás, pre-commit és CI), check-dist.mjs (nincs abszolút /assets/ a dist-ben)
+scripts/                check-dashes.mjs (U+2013/U+2014 tiltás, pre-commit és CI), check-dist.mjs (nincs abszolút /assets/ a dist-ben),
+                        card-pages.mjs (a build után: dist/card/<slug>/index.html minden laphoz meta, Open Graph, Twitter card és
+                        canonical taggel, átirányítás a #kartya/<slug> útvonalra; sitemap.xml, robots.txt; alap URL: SITE)
 web/                    Vite + React 19 + TypeScript + Tailwind v4 frontend
   src/app/              main, App (Shell, lusta nézetek), router (hash -> nézet, régi linkek)
   src/domain/           React és DOM nélküli logika
@@ -118,11 +120,11 @@ Frissítés kézzel: GitHub, Actions, "Cardmarket árak", Run workflow. Ez commi
 python3 -m pytest src/tests                   # adatépítés kétszer (determinisztikus), web/src/generated/*.json
 ruff check src/ tools/
 cd web && npm ci && npm run lint:install      # függőségek (a lint/ külön csomag)
-npm run build                                 # tsc -b (a domain külön, strict tsconfiggal) és vite build, utána check-dist
+npm run build                                 # tsc -b (a domain külön, strict tsconfiggal), vite build, lapoldalak, check-dist
 npm run lint                                  # ESLint (bulk suppression baseline: eslint-suppressions.json) és dependency-cruiser
 npx knip                                      # nem használt fájl és dependency (exportok csak figyelmeztetés)
-npm run test:unit                             # Vitest: unit (421) és golden (66) projekt, 487 teszt
-npm run test:e2e                              # Playwright, 40 teszt (31 funkcionális, 9 axe nézet)
+npm run test:unit                             # Vitest: unit (423) és golden (66) projekt, 489 teszt
+npm run test:e2e                              # Playwright, 41 teszt (32 funkcionális, 9 axe nézet)
 VISUAL=1 npx playwright test --project=visual-1300 --project=visual-390   # 24 kép, csak CI-ban hasonlít (ubuntu)
 npm run bench                                 # analyze(), tryStep, targetOpts, setupFrame, zoneCands, filterCards, glossify
 npm run perf                                  # kezdő letöltés, első tile, long taskok (4x CPU)
