@@ -7,6 +7,8 @@ Kimenet: web/public/prices.json, névenként a legolcsóbb nyomat 1 és 7 napos 
 Hiba esetén nem ír fájlt, az oldal ilyenkor "ár nem elérhető" állapotot mutat.
 """
 import json, re, sys, urllib.request, datetime, os
+sys.path.insert(0, os.path.dirname(__file__))
+import history  # noqa: E402
 
 BASE = 'https://downloads.s3.cardmarket.com/productCatalog'
 PROBE = ['annie stubborn', 'jinx loose cannon', 'darius trifarian', 'kaisa survivor']
@@ -206,6 +208,8 @@ def main():
     print('EX ahri', ex.get('ahri inquisitive'))
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump(doc, open(OUT, 'w'), separators=(',', ':'))
+    hist = history.update(doc)
+    print('history', len(hist['d']), 'nap,', len(hist['s']), 'nyomat')
     print('prices', len(out))
     try:
         cj = json.load(open(os.path.join(os.path.dirname(OUT), '..', 'src', 'generated', 'cards.json')))
