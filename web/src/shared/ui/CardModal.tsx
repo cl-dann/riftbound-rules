@@ -7,6 +7,7 @@ import { cardSlug } from '../../domain/data/cards';
 import type { Card } from '../../domain/data/schema';
 import { Html } from './Html';
 import { Printings } from './Printings';
+import { LegendFit } from './LegendFit';
 import { on } from '../lib/events';
 import { loadDetails } from '../../domain/data/load';
 
@@ -60,6 +61,7 @@ export function CardModal() {
             <p className="rb-share"><button type="button" className="btn sec sm" onClick={copyLink}><Link2 size={14} aria-hidden /> Link másolása</button>
               <span className="note" role="status">{copied}</span></p>
             <Printings card={card} />
+            <LegendFit card={card} onPick={(c) => { setCard(c); document.querySelector('.rb-modal')?.scrollTo(0, 0); }} />
             <Html html={'<h3 class="rb-sep">Erre a kártyára érvényes szabályok</h3>' + cardRulesHTML(card)} />
           </>)}
         </Dialog.Content>

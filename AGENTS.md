@@ -12,8 +12,8 @@ Fülek (`web/src/app/router.ts`):
 
 | Hash | Fül | Tartalom |
 |---|---|---|
-| `#kartyak` | Kártyák | 1101 lap rácsban (`#kartya/<slug>` a kártya-ablakot nyitja; megosztható lapoldal: `card/<slug>/`, a kártya-ablak "Link másolása" gombja erre mutat); lapnál hivatalos szöveg, errata, "Röviden", Gyakori kérdések, lenyitható "Szabályi részletek", kapcsolódó Core Rules szakaszok |
-| `#deck` | Deck | deck builder, élő legalitás (Core Rules 103), Cardmarket ár, PDF export, megosztható link (`#d=`) |
+| `#kartyak` | Kártyák | 1101 lap rácsban, a legolcsóbb nyomat normál árával (`#kartya/<slug>` a kártya-ablakot nyitja; megosztható lapoldal: `card/<slug>/`, a kártya-ablak "Link másolása" gombja erre mutat); lapnál hivatalos szöveg, nyomatok árral, Cardmarket keresés linkkel és ártörténet diagrammal (legalább 2 frissítés után), "Melyik legenddel játszható" (103.2.b, 103.3.a.2, 103.3.d, 103.4.a.1, 103.5.b), errata, "Röviden", Gyakori kérdések, lenyitható "Szabályi részletek", kapcsolódó Core Rules szakaszok |
+| `#deck` | Deck | deck builder, élő legalitás (Core Rules 103), Cardmarket ár soronként választható nyomattal (alternatív kép, foil, normál; a decklista sorában `[kód foil]` jelöléssel, így a `#d=` link, a mentés és a PDF is látja; jelölés nélkül a legolcsóbb nyomat normál ára), PDF export, megosztható link (`#d=`) |
 | `#szabalyok` | Szabályzat | teljes Core Rules kereshetően (`#r-<szám>`), versenyformátum oldalak (`#fmt-<id>`: Duel, Match, FFA3, FFA4, 2v2) |
 | `#chain` | Chain | chain építő és elemző: pálya-alapú építés (zónánkénti "+" képes keresővel, lapra kattintva akció-menü legalitással és szabályszámmal, célpont a pályán, pályán kívüli unit vagy gear célpont a zóna + gombjával, Show Off és hatásból kijátszott lap a kézből; kéz, trash és deck tartalma "+" gombbal felvehető, és a lap szövege szerinti kéz-, trash- vagy deckválasztás a pályán vagy a Trash és Deck paklira kattintva, a legális lapok kiemelve), sablonok témánként (`web/src/domain/chain/templates.ts`: counter, Ignored, Negated, trigger sorrend 383.3.d.1, replacement 372, Hidden, lap a trashből, kör vége; unit tesztelve), lépés beszúrása a chain közepére hivatkozás-átszámozással, kör és fázis a pálya fejlécében, keskeny nézetben (max. 700 px) lépés-varázsló alulról felcsúszó panelben (lap, akció ugyanazzal a legalitással, célzás a pályán vékony sávval, extra mezők, Kész; Vissza és Mégse minden lépésnél, "Új lépés" gomb), azonos nevű lapok példányszáma (#1, #2: a board lapjai, majd a kijátszott unitok és gearek lépésrendben; jelvény a lapon, ugyanez a menüben, a célpont-választóban, az idővonalon és az elemzés szövegében, `instNos` a `domain/chain/cs.ts`-ben), élő elemzés, lépés-idővonal, lépésenkénti lejátszás Playmaton, mistarget és linked instructions, combat panel, "Haladó szerkesztés" a teljes űrlappal |
 | `#hogyan` | How to Play | 10 fejezetes kezdő útmutató, a learnriftbound.gg felépítését követi |
@@ -60,7 +60,7 @@ tools/
   HANDOFF.md            munkaállapot, döntések naplója
   learn/scenarios_build.py  a Practice szituációk generátora (src/data/learn.json "scenarios"), kiinduló pályák: learn/scenarios_v1.json
   audit/                ellenőrző körök briefjei és szkriptjei (RBRIEF.md, gen2.py, lint.py, check.py)
-  prices/fetch.py       Cardmarket árletöltő
+  prices/fetch.py       Cardmarket árletöltő; history.py: ártörténet hozzáfűzése
 .github/workflows/      tests.yml (teljes tesztkör, workflow_call), e2e.yml (PR és kézi indítás, update-snapshots bemenettel a vizuális
                         baseline-t commitolja), deploy.yml (a tests.yml után build és Pages), prices.yml (kézi árfrissítés)
 ```
@@ -112,19 +112,19 @@ Jegyzet formátum (`nt`): `[szabályszámok vesszővel, flag, szöveg]`. Flag: 0
 
 `tools/prices/fetch.py` a Cardmarket publikus product catalog és price guide letöltéséből dolgozik (`downloads.s3.cardmarket.com`). A Riftbound `idGame` értéke 22, a szkript ismert lapnevekből detektálja. Névenként a legolcsóbb nyomat 1 és 7 napos átlaga (`avg1`, `avg7`) kerül a `web/public/prices.json`-ba. Signature lapoknál a Cardmarket a champion nevét elhagyja, a frontend erre visszaesik (`web/src/domain/deck/edit.ts`, `priceOf`).
 
-Frissítés kézzel: GitHub, Actions, "Cardmarket árak", Run workflow. Ez commitolja az árfájlt és elindítja a deployt. A fejléc mutatja a dátumot, 7 nap után "frissítés esedékes" jelzéssel. Heti időzítés a `prices.yml`-ben kikommentezve.
+Frissítés kézzel: GitHub, Actions, "Cardmarket árak", Run workflow. Ez commitolja az árfájlt és az ártörténetet, majd elindítja a deployt. Ártörténet: `web/public/price-history.json` (`tools/prices/history.py`): minden futás hozzáfűzi a napot (azonos napon felülír), nyomatonként a normál és a foil 7 napos átlagot euró centben, delta kódolva; frissítésenként kb. 6 és 8 KB (gzip kb. 3 KB), a kártya-ablak lustán tölti. A Cardmarket link keresésre mutat a lap nevével, mert az idProduct alapú termék-URL a nyilvános adatokból nem igazolható. A fejléc mutatja a dátumot, 7 nap után "frissítés esedékes" jelzéssel. Heti időzítés a `prices.yml`-ben kikommentezve.
 
 ## Futtatás és ellenőrzés
 
 ```
-python3 -m pytest src/tests                   # adatépítés kétszer (determinisztikus), web/src/generated/*.json
+python3 -m pytest src/tests                   # adatépítés kétszer (determinisztikus), web/src/generated/*.json; ártörténet kódolás
 ruff check src/ tools/
 cd web && npm ci && npm run lint:install      # függőségek (a lint/ külön csomag)
 npm run build                                 # tsc -b (a domain külön, strict tsconfiggal), vite build, lapoldalak, check-dist
 npm run lint                                  # ESLint (bulk suppression baseline: eslint-suppressions.json) és dependency-cruiser
 npx knip                                      # nem használt fájl és dependency (exportok csak figyelmeztetés)
-npm run test:unit                             # Vitest: unit (423) és golden (66) projekt, 489 teszt
-npm run test:e2e                              # Playwright, 41 teszt (32 funkcionális, 9 axe nézet)
+npm run test:unit                             # Vitest: unit (430) és golden (66) projekt, 496 teszt
+npm run test:e2e                              # Playwright, 43 teszt (34 funkcionális, 9 axe nézet)
 VISUAL=1 npx playwright test --project=visual-1300 --project=visual-390   # 24 kép, csak CI-ban hasonlít (ubuntu)
 npm run bench                                 # analyze(), tryStep, targetOpts, setupFrame, zoneCands, filterCards, glossify
 npm run perf                                  # kezdő letöltés, első tile, long taskok (4x CPU)

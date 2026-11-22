@@ -1,7 +1,7 @@
 import type { Card } from '../data/schema';
 
 /** Egy decklista sor: darabszám, a beírt név, a felismert lap (vagy null) és javaslatok elgépelésnél. */
-export type DeckRow = { qty: number; name: string; card: Card | null; sug: Card[] };
+export type DeckRow = { qty: number; name: string; card: Card | null; sug: Card[]; pr?: string; foil?: boolean };
 export type DeckSection = { name: string; rows: DeckRow[] };
 /** Felismert lappal rendelkező sor (a legalitás ezekkel számol). */
 export type CardRow = DeckRow & { card: Card };

@@ -4,6 +4,7 @@ import type { Card } from '../../domain/data/schema';
 import { typeLine } from '../../domain/data/cards';
 import { BF, D, META, RULES, TOPICS } from '../../domain/data/store';
 import { DECK, checkDeck } from '../../domain/deck/legality';
+import { prLabel } from '../../domain/deck/printing';
 import { FL } from '../../domain/rules/flags';
 import { isHead } from '../../domain/rules/head';
 import { expand, expandAll, refLabel } from '../../domain/rules/refs';
@@ -39,7 +40,7 @@ export function buildPDF(withRel=false,withGen=false,fonts: Record<string, strin
   put('Jelölés a kártyaszövegben: [1] Energy, [A] bármely domain Power, [C] a kártya saját domainjének Power-e, [Exhaust] a kártya kimerítése, Might a harci érték. A szabályszöveg az eredeti angol Core Rules szöveg.',{size:8.5,color:[90,98,115],after:2});
   rule();
   put('Deck összetétel',{size:13,style:'bold',before:1});
-  DECK.forEach(s=>{put(s.name+' ('+s.rows.reduce((a,r)=>a+r.qty,0)+')',{size:9.5,style:'bold',before:1.5});s.rows.forEach(r=>put(r.qty+'  '+(r.card?r.card.n:r.name+'  [ismeretlen kártyanév]')+(r.card&&r.card.err!=null?'  [errata]':'')+(r.card&&r.card.ban?'  [BANNED]':r.card&&r.card.banf?'  [BANNED '+r.card.banf+'-tól]':''),{size:9,indent:4}));});
+  DECK.forEach(s=>{put(s.name+' ('+s.rows.reduce((a,r)=>a+r.qty,0)+')',{size:9.5,style:'bold',before:1.5});s.rows.forEach(r=>put(r.qty+'  '+(r.card?r.card.n:r.name+'  [ismeretlen kártyanév]')+(r.card&&r.pr?'  ['+prLabel(r.card,r.pr)+(r.foil?', foil':'')+']':'')+(r.card&&r.card.err!=null?'  [errata]':'')+(r.card&&r.card.ban?'  [BANNED]':r.card&&r.card.banf?'  [BANNED '+r.card.banf+'-tól]':''),{size:9,indent:4}));});
   const lc=checkDeck();if(lc.length){put('Deck legalitás (Core Rules 103)',{size:13,style:'bold',before:3});lc.forEach(x=>put((x[0]===null?'INFO':x[0]?'OK':'HIBA')+'   '+(x[1]?x[1]+'  ':'')+x[2],{size:9,indent:2,color:x[0]===false?[160,50,15]:[20,24,34]}));}
   const seen=new Map<Card, string[]>();
   DECK.forEach(s=>s.rows.forEach(r=>{if(!r.card)return;if(!seen.has(r.card))seen.set(r.card,[]);seen.get(r.card)!.push(r.qty+'x '+s.name);}));

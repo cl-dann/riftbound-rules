@@ -3,6 +3,8 @@ import { IMGBASE } from '../../domain/data/store';
 import type { Card } from '../../domain/data/schema';
 import { eur, pn } from '../../domain/deck/edit';
 import type { PriceRow, Prices } from '../../domain/deck/prices';
+import { SETN } from '../../domain/deck/printing';
+import { PriceChart } from './PriceChart';
 import { loadPrices } from '../lib/prices';
 export function usePrices() {
   const [p, setP] = useState<Prices | null>(null);
@@ -11,7 +13,8 @@ export function usePrices() {
 }
 
 type Row = PriceRow;
-const SETN: Record<string, string> = { ogn: 'Origins', ogs: 'Proving Grounds', sfd: 'Spiritforged', unl: 'Unleashed', ven: 'Vendetta', rad: 'Radiance' };
+/** Cardmarket keresés a lap nevével. A termékoldal idProduct alapú URL-je a Cardmarket nyilvános adataiból nem igazolható, ezért keresésre mutat. */
+export const cmSearch = (n: string) => 'https://www.cardmarket.com/en/Riftbound/Products/Search?searchString=' + encodeURIComponent(n);
 
 /** A nyomat típusa a gyűjtői számból: betűs utótag alternatív kép, a szett méreténél nagyobb szám Overnumbered. */
 function kind(num: string, rar: string) {
@@ -53,10 +56,12 @@ export function Printings({ card }: { card: Card }) {
               <b>{set}</b> <span className="mono">{num}</span>
               <span className="kind">{kind(num, rar)}</span>
               <span className="price">{P ? priceCell(P.pr?.[code]) : <span className="na">ár betöltése</span>}</span>
+              <a className="cmlink" href={cmSearch(card.n)} target="_blank" rel="noopener noreferrer">Cardmarket keresés</a>
             </figcaption>
           </figure>
         ))}
       </div>
+      <PriceChart card={card} />
       {!!ex.length && (
         <details className="pex">
           <summary>További Cardmarket kiadások ({ex.length})</summary>

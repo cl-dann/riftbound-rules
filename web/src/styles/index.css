@@ -1505,3 +1505,29 @@ details:not(.tp):not(.drow):not(.cb2-blk):not(.cbset):not(.learn-side-m) > summa
 .kwc button:hover { color: var(--ink); background: rgba(240, 230, 210, .06); border-color: var(--gold-line); }
 @media (max-width: 700px) { .kwc button { min-height: 44px; } }
 .rb-share { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 10px 0 4px; } .rb-share .btn { display: inline-flex; align-items: center; gap: 6px; } .rb-share .note { word-break: break-all; }
+.tile .pchip { position: absolute; right: 6px; bottom: 6px; padding: 1px 7px; font-family: var(--f-mono); font-size: 11px; font-weight: 700; line-height: 18px; color: var(--accent-hi); background: rgba(6, 16, 26, .88); border: 1px solid var(--gold-line, #785a28); border-radius: 9px; pointer-events: none; }
+.lfit { margin: 18px 0 6px; }
+.lfit h3 { display: flex; align-items: baseline; gap: 10px; } .lfit h3 .n { font-size: var(--fs-sm); color: var(--muted); font-weight: 400; }
+.lfit-why { list-style: none; padding: 0; margin: 6px 0 10px; display: grid; gap: 4px; font-size: var(--fs-sm); }
+.lfit-why li { display: flex; gap: 8px; } .lfit-ref { display: inline-flex; gap: 4px; flex: none; } .lfit-ref a { font-family: var(--f-mono); font-size: 12px; }
+.lfit-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
+.lfit-grid button { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; padding: 4px; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--panel2); color: var(--ink); cursor: pointer; }
+.lfit-grid button:hover, .lfit-grid button:focus-visible { border-color: var(--accent); }
+.lfit-grid img { width: 100%; aspect-ratio: 744 / 1039; object-fit: cover; border-radius: 4px; }
+.lfit-noimg { width: 100%; aspect-ratio: 744 / 1039; background: var(--s3); border-radius: 4px; }
+.lfit-n { font-size: 11px; line-height: 1.25; text-align: center; } .lfit-tag { font-size: 10px; color: var(--accent-hi); border: 1px solid var(--accent-deep); border-radius: 8px; padding: 0 5px; }
+.pcard .cmlink { display: inline-block; margin-top: 4px; font-size: 12px; }
+.pch { margin: 14px 0 6px; }
+.pch h4 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 0 0 6px; } .pch h4 .n { font-size: var(--fs-sm); font-weight: 400; color: var(--muted); }
+.pch-panels { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 380px)); gap: 16px; }
+.pch-panel { margin: 0; } .pch-panel figcaption { font-size: var(--fs-sm); color: var(--muted); margin-bottom: 2px; }
+.pch-plot { position: relative; } .pch-plot svg { display: block; width: 100%; height: auto; outline: none; } .pch-plot svg:focus-visible { box-shadow: 0 0 0 2px var(--accent); border-radius: 4px; }
+.pch-grid { stroke: var(--line); stroke-width: 1; } .pch-ax { fill: var(--muted); font-size: 10px; font-family: var(--f-mono); }
+.pch-line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; } .pch-dot { stroke: var(--panel); stroke-width: 2; }
+.pch-cross { stroke: var(--muted); stroke-width: 1; }
+.pch-tip { position: absolute; top: 0; transform: translateX(-50%); pointer-events: none; z-index: 3; min-width: 140px; padding: 6px 8px; font-size: 12px; background: var(--s0); border: 1px solid var(--line); border-radius: 6px; box-shadow: var(--sh-2); }
+.pch-td { color: var(--muted); font-family: var(--f-mono); margin-bottom: 2px; } .pch-tr { display: flex; align-items: center; gap: 6px; white-space: nowrap; } .pch-tr i { width: 12px; height: 2px; flex: none; } .pch-tr span { color: var(--muted); }
+.pch-leg { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--ink); } .pch-leg i { display: inline-block; width: 14px; height: 2px; vertical-align: middle; margin-right: 6px; }
+.pch-tbl { margin-top: 6px; font-size: 12px; } .pch-tbl table { border-collapse: collapse; } .pch-tbl th, .pch-tbl td { padding: 2px 8px; border-bottom: 1px solid var(--line); text-align: right; font-family: var(--f-mono); } .pch-tbl th:first-child, .pch-tbl td:first-child { text-align: left; }
+.drow .prsel { width: 150px; min-height: 28px; padding: 2px 6px; font-size: 12px; margin-right: 6px; }
+@media (max-width: 620px) { .drow .ctl { grid-column: 2; justify-self: start; flex-wrap: wrap; } .drow .prsel { width: 100%; min-height: 36px; } }

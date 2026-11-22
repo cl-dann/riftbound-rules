@@ -1,7 +1,8 @@
 name: Cardmarket árak
 
 # Kézzel indítható (GitHub, Actions fül, Cardmarket árak, Run workflow). Letölti a Cardmarket
-# publikus árlistáját, a web/public/prices.json-t commitolja, majd elindítja a deployt.
+# publikus árlistáját, a web/public/prices.json-t és az ártörténetet (price-history.json, hozzáfűzés) commitolja,
+# majd elindítja a deployt.
 # A deploy maga nem tölt le árat. Heti időzítéshez a schedule blokkot kell visszatenni:
 #   schedule:
 #     - cron: '17 4 * * 1'
@@ -43,7 +44,7 @@ jobs:
           if [ ! -f web/public/prices.json ]; then echo "Nincs árfájl, nincs teendő"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add web/public/prices.json
+          git add web/public/prices.json web/public/price-history.json
           if git diff --cached --quiet; then echo "Nincs változás"; exit 0; fi
           git commit -m "Cardmarket árak heti frissítése"
           git push
