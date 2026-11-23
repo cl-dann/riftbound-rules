@@ -129,6 +129,8 @@ describe('cardRules: végrehajtó bejegyzések', () => {
     const x = run(cs({ bd: [{ n: 'Sivir, Ambitious', pl: 'A', loc: 'bf0' }, { n: 'Mega-Mech', pl: 'B', loc: 'base' }], steps: [tg] }));
     expect(x.ev('dmg')).toHaveLength(0);
     expect(x.r.html).toMatch(/nyitott kérdés/);
+    // a két értelmezés eredménye egymás mellett
+    expect(x.r.html).toMatch(/1\. értelmezés:.*lethal fölött kiosztott.*2\. értelmezés:.*Mightja fölötti összes damage/);
   });
   it('Curtain Call: három Repeat költség, minden végrehajtás más mód; ugyanaz a mód kétszer szabálytalan', () => {
     const bd = [{ n: 'Shipyard Skulker', pl: 'B', loc: 'bf0' }, { n: 'Mega-Mech', pl: 'B', loc: 'base' }];

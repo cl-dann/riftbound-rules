@@ -6,7 +6,7 @@ import { OV_LBL, allScope } from '../actions';
 import { COSTVAR, costCheck, costCondOf, printedCost } from '../cost';
 import { effOf, numOf, phrasesTxt, triggersOf } from '../parser';
 import { type ZoneRef, zoneCheck, zoneRefOf } from '../zones';
-import { art, Art, other, WHO, WHOC } from './labels';
+import { ALT2, art, Art, other, WHO, WHOC } from './labels';
 
 /** "If it's a unit, play it here" (Ava Achiever, Rek'Sai, Swarm Queen): a hatásból kijátszott unit helye. */
 const HERE_NEXT=/^if it(?:'s| is) a unit, (?:you may )?play it here\b/i;
@@ -28,8 +28,8 @@ export function installInstr(X: EngineCtx) {
         if(pc&&pc.cv===true){x.st='skipped';x.ref='135.2.b.5.a';x.why='az előző feltétel ("'+pc.act.cond!.t+'") teljesült, ezért az "Otherwise" ág nem hajtódik végre';parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');return;}
         if(pc)parts.push('"'+esc(x.t)+'": az előző feltétel ("'+esc(pc.act.cond!.t)+'") nem teljesült, ezért az "Otherwise" ág hajtódik végre.');}
       const cd=x.act.cond;if(cd&&cd.how!=='known'&&!(prev&&prev.st==='ignored')){const tv=R.lastT?R.lastT.tis.map((ti:number)=>it.tg[ti]).find((v:string)=>v&&X.O[v]):null;const cv=X.evalCond(cd,it,s,xi,tv);x.cv=cv===null?true:cv;
-        if(cd.how==='open'){R.fl=2;parts.push('<span class="cbuns">nyitott kérdés</span> ('+esc(cd.refs||'')+')');}
-        if(cd.from==='zone'||cd.from==='zone2'||cd.from==='lk'){parts.push('"'+esc(x.t)+'": a feltétel ("'+esc(cd.t)+'") '+(cv?'teljesül':'nem teljesül')+' '+X.condSrc(cd)+'.');if(cd.tie){R.fl=2;parts.push('<span class="cbuns">nyitott kérdés</span>');}}
+        if(cd.how==='open'){R.fl=2;parts.push('<span class="cbuns">nyitott kérdés</span> ('+esc(cd.refs||'')+')'+ALT2('ha a feltétel teljesül, "'+esc(x.t)+'" végrehajtódik.','ha nem teljesül, az utasítás és a hozzá kötött folytatás elmarad.'));}
+        if(cd.from==='zone'||cd.from==='zone2'||cd.from==='lk'){parts.push('"'+esc(x.t)+'": a feltétel ("'+esc(cd.t)+'") '+(cv?'teljesül':'nem teljesül')+' '+X.condSrc(cd)+'.');if(cd.tie){R.fl=2;parts.push('<span class="cbuns">nyitott kérdés</span>'+ALT2('egyenlő költségnél mindkét lap "a legalacsonyabb", a feltétel teljesül, a lapot húzod (az elemzés ezzel számol).','egyenlő költségnél nincs legalacsonyabb, a feltétel nem teljesül, nem húzol.'));}}
         const zs=cd.from==='zone'||cd.from==='zone2'||cd.from==='lk';
         if(cv===false){x.st='skipped';x.why='a feltétel ("'+cd.t+'") nem teljesül '+X.condSrc(cd);if(!zs)parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');if(cd.how==='hidden'&&cd.from==='default')R.fl=Math.max(R.fl,1);return;}
         if(cv==null){parts.push('"'+esc(x.t)+'": a feltétel ("'+esc(cd.t)+'") az adott helyzetben nem értékelhető ki (nincs hozzá célpont vagy forrás); az elemzés teljesültnek veszi.');R.fl=Math.max(R.fl,1);}
@@ -164,7 +164,7 @@ export function installInstr(X: EngineCtx) {
           const zhu=zp.z==='trash'?'trashből':zp.z==='hand'?'kézből':zp.z==='among'?'megnézett lapok közül':'deckből';
           if(!okIds.length){
             if(zp.target){x.st='ignored';x.ref='359.3.e.5, 359.3.e.6';x.why='a '+zhu+' választott célpont már nem legális: '+bad.join('; ');zpick.forEach((id:string)=>mtT.push({n:X.O[id]?X.O[id].name:id,ok:false,why:bad.join('; ')}));refs.push('359.3.e.5','359.3.e.6');}
-            else{const typed=zp.z!=='trash'&&(zp.type.length>0||zp.tags.length>0);x.st='negated';x.ref='359.3.e.6, 355.18'+(typed?', 128.6.a':'');x.why='a '+zhu+' választás a resolve-kor történik (355.18), de a megadott lap nem választható: '+bad.join('; ')+'; az elemzés helyette nem választ másikat, ezért az utasítás nem hajtódik végre (levezetés: más okból elmaradó utasítás, Negated)'+(typed?'. Nyitott kérdés: a lap típust ír elő egy nem nyilvános zónában, ilyenkor a játékos az utasítást figyelmen kívül hagyhatja, és a 128.6.a ezt "Ignored"-nak nevezi; hogy ez a 359.3.e.6 szerinti Ignored-e, a Core Rules nem dönti el, judge dönt':'');R.fl=Math.max(R.fl,typed?2:1);refs.push('355.18','359.3.e.6');if(typed)refs.push('128.6.a');}
+            else{const typed=zp.z!=='trash'&&(zp.type.length>0||zp.tags.length>0);x.st='negated';x.ref='359.3.e.6, 355.18'+(typed?', 128.6.a':'');x.why='a '+zhu+' választás a resolve-kor történik (355.18), de a megadott lap nem választható: '+bad.join('; ')+'; az elemzés helyette nem választ másikat, ezért az utasítás nem hajtódik végre (levezetés: más okból elmaradó utasítás, Negated)'+(typed?'. Nyitott kérdés: a lap típust ír elő egy nem nyilvános zónában, ilyenkor a játékos az utasítást figyelmen kívül hagyhatja, és a 128.6.a ezt "Ignored"-nak nevezi; hogy ez a 359.3.e.6 szerinti Ignored-e, a Core Rules nem dönti el, judge dönt. 1. értelmezés: Negated, a későbbi linked utasítás végrehajtódik (359.3.e.14.b). 2. értelmezés: Ignored, a későbbi linked utasítás is Ignored (359.3.e.14.a)':'');R.fl=Math.max(R.fl,typed?2:1);refs.push('355.18','359.3.e.6');if(typed)refs.push('128.6.a');}
             parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');X.story.push(Art(srcName)+': a '+zhu+' választott lap már nem választható, a "'+x.t+'" utasítás elmarad.');}
           else{if(bad.length){x.st='partial';x.ref=zp.target?'359.3.e.8':'359.3.e.11';x.why='csak a még legális lapokra hat ('+bad.join('; ')+')';parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');}
             if(zp.target)parts.push('A '+zhu+' választott lap célpont, mert a trash nyilvános zóna; a lerakáskor kellett kiválasztani (355.10.a, 355.8, 108.2.d).');

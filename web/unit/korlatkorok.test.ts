@@ -105,6 +105,7 @@ describe('2. kör: copy effectek (446.1, 446.3, 479.1.b, 479.1.b.1, 479.1.c)', (
     const x = run(cs({ turn: 'A', bd, steps: [eq, { k: 'res' }] }));
     expect(x.o('b1')).toMatchObject({ name: 'Mountain Drake (Shipyard Skulker, másolat)', m: 10 });
     expect(x.text).toMatch(/nyitott kérdés.*Shady Spectacles választása.*judge dönt/);
+    expect(x.text).toMatch(/1\. értelmezés: célzás: .*Deflect.*2\. értelmezés: nem célzás/);
     expect(x.r.rows.find((r: any) => /Shady Spectacles választása/.test(r.join(' ')))!.join(' ')).toMatch(/f2|nyitott/);
     expect(x.o('b0').on).toBe('b1');
     const y = run(cs({ turn: 'A', bd, steps: [eq, { k: 'res' }, { k: 'card', n: 'Vengeance', pl: 'A', tg: ['b1'] }, { k: 'res' }] }));
@@ -462,5 +463,16 @@ describe('10. kör: combat a chain modellben (466.2.d.1, 468.3.a)', () => {
         { k: 'tr', n: 'Draven, Glorious Executioner', src: 'LA', pl: 'A', eff: 'draw 1.', why: 'When you win a combat', tg: [], ext: {}, cb: { bf: 'bf0', dead: ['b1'], recall: [], ctrl: 'A', label: 'combat' } }] }))) as any;
     expect(r.items.map((i: any) => i.name)).toEqual(['Overzealous Fan triggere', 'Draven, Vanquisher triggere', 'Draven, Glorious Executioner triggere (When you win a combat)']);
     expect(r.ev.filter((e: any) => e.k === 'draw')).toEqual([{ k: 'draw', pl: 'A', n: 1 }]);
+  });
+});
+
+describe('11. kör: flag 2 esetek, a két értelmezés egymás mellett', () => {
+  it('Ezreal: egy spell két enemy célponttal, Weaponmaster [C] költség, Sivir open feltétel', () => {
+    const tx = (o: any) => (analyze(JSON.parse(JSON.stringify({ lg: { A: '', B: '' }, bf: [{ n: '', c: '' }, { n: '', c: '' }], bd: [], hand: { A: [], B: [] }, ch: { A: '', B: '' }, ...o }))) as any).rows.map((x: any) => x.join(' ')).join('\n');
+    expect(tx({ turn: 'A', lg: { A: 'Ezreal, Prodigal Explorer', B: '' }, bd: [{ n: 'Fizz, Trickster', pl: 'B', loc: 'bf0' }, { n: 'Soaring Scout', pl: 'B', loc: 'bf0' }],
+      steps: [{ k: 'card', n: 'Falling Star', pl: 'A', tg: ['b0', 'b1'], ext: {} }, { k: 'ab', src: 'LA', ai: 0, n: 'Ezreal, Prodigal Explorer', pl: 'A', tg: [] }] }))
+      .toMatch(/1\. értelmezés: két választás: az ability aktiválható.*2\. értelmezés: egy választás: az ability nem aktiválható/);
+    expect(tx({ turn: 'A', lg: { A: 'Azir, Emperor of the Sands', B: '' }, steps: [{ k: 'card', n: "Doran's Shield", pl: 'A', tg: [], ext: {} }, { k: 'res' }, { k: 'ab', src: 'LA', ai: 0, n: 'Azir, Emperor of the Sands', pl: 'A', tg: [] }] }))
+      .toMatch(/ha igen, a költség \[A\]-val csökken.*ha nem, a teljes \[C\] fizetendő/);
   });
 });

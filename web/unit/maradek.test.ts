@@ -90,5 +90,6 @@ describe('3. Többjátékos választás (355.10.e, 412.1)', () => {
     expect(l.last.me.hand).toEqual([]);
     const t = run(cs('Shipyard Skulker', 'Pickpocket'));
     expect(t.text).toMatch(/döntetlen: a Core Rules nem dönti el/);
+    expect(t.text).toMatch(/1\. értelmezés: egyenlő költségnél mindkét lap .*a lapot húzod.*2\. értelmezés: egyenlő költségnél nincs legalacsonyabb/);
   });
 });
