@@ -38,6 +38,10 @@ export type EStep = ChainStep & StepInfo & {
 export type PlaySrc = { c: CardLike; j: number; pl: string; from?: string; objId?: string };
 /** Egy elem a chainen: lépésből (step), triggerből (auto) vagy késleltetett hatásból; a resolve közben jelölések kerülnek rá. */
 export type ChainItem = {
+  /** "Once each turn" trigger forrása (383.3.e.1) */
+  once?: string;
+  /** Weaponmaster trigger [C] Equip költséggel (nyitott kérdés, 821.1.c.3) */
+  wm?: boolean;
   kind: string; label: string; name?: string; pl: string; eff: string; list: TargetParam[]; tg: string[]; src?: string | null;
   s?: EStep; perm?: boolean | null; from?: string | null; loc?: string | null; objId?: string | null; dest?: string; ov?: ChainStep['ov'];
   pays?: unknown; may?: boolean; isTg?: boolean; isTr?: boolean; evPlay?: number; ev0?: number; soM?: number | null; soName?: string;
@@ -94,7 +98,7 @@ export type ChainResult = {
 /** Az enterReady() eredménye. */
 export type ReadyInfo = { ready: boolean; why: string; note?: string };
 /** A halál helyettesítése (deathRepl). */
-export type DeathRepl = { by: string | null; txt: string | undefined; dieTo?: string; save?: boolean; self?: boolean };
+export type DeathRepl = { boss?: boolean; by: string | null; txt: string | undefined; dieTo?: string; save?: boolean; self?: boolean };
 /** Szabálysor: [szabályszámok, szöveg, (kézi jelölés)]. */
 export type RecRow = [string, string, number?];
 /** A játékállapot számolói (ST), a feltételek kiértékeléséhez. */
@@ -126,7 +130,7 @@ export type EngineCtx = {
   MAN: boolean; ALL: RecRow[]; EV: Ev[]; story: string[]; rows: string; rr: string; notes: string[]; O: Record<string, GameObj>;
   BF: Record<string, BfState>; ZC: boolean; zcK: Record<string, string>; cnt: Record<string, number>; FR: Frame[]; DET: Set<string>;
   NEWCTRL: Set<string>; chain: ChainItem[]; stack: ChainItem[]; REPL: Set<string>; READY: Record<string, boolean>;
-  BUFF2: Record<string, boolean>; PREVSA: { on: boolean }; READYNEXT: Record<string, boolean>; ACCELNEXT: Record<string, boolean>; ZIL: Record<string, boolean>; LASTON: Record<string, string>; LKX: Record<string, { st: boolean; bu: boolean }>; MORDE: Record<string, boolean>; RDK: Record<string, boolean>; RPK: Record<string, boolean>; RSEQ: number; CHEX: Record<string, number>; ST: StateFns;
+  BUFF2: Record<string, boolean>; PREVSA: { on: boolean }; READYNEXT: Record<string, boolean>; ACCELNEXT: Record<string, boolean>; ZIL: Record<string, boolean>; LASTON: Record<string, string>; LKX: Record<string, { st: boolean; bu: boolean }>; MORDE: Record<string, boolean>; ONCET: Record<string, boolean>; CHOSE: Record<string, { items: number; objs: number }>; RDK: Record<string, boolean>; RPK: Record<string, boolean>; RSEQ: number; CHEX: Record<string, number>; ST: StateFns;
   PSD: Record<string, number | string>; TP: string; PEND: ChainItem[]; DIED: string[]; TOKN: number; PTN: Set<string>; done: Done[];
   guard: number; it0: ChainItem | null; parts0: string[]; refs1: string[]; tgOut0: string[]; mtT0: MtTarget[]; tot0: { n: number };
   legal0: { n: number }; INRES: boolean; ENDED: boolean;
@@ -168,7 +172,7 @@ export type EngineCtx = {
   channelRunes: (p: string, n: number, ex: boolean) => string; recycleRunes: (ids: string[]) => void; poolIds: (p: string) => string[]; autoTg: (item: ChainItem) => string; fxEnter: (pc: CardLike, pl: string, to: string, pid: string, s: EStep | null | undefined, fromHand: boolean) => ReadyInfo;
   equipCopy: (G: GameObj, U: GameObj, srcId: string | undefined, pl: string, parts: string[], refs: string[]) => void; copyEnd: () => string[];
   pushTrig: (t: ChainItem) => void; deathWatch: () => void; flushPend: (target: ChainItem[]) => void;
-  leaveTrigs: (id: string, dk: boolean) => void; playTrigs: (s: PlaySrc) => ChainItem[]; abTrigs: (s: EStep) => ChainItem[];
+  leaveTrigs: (id: string, dk: boolean) => void; playTrigs: (s: PlaySrc) => ChainItem[]; abTrigs: (s: EStep) => ChainItem[]; chooseTrigs: (it: ChainItem, spell: boolean) => ChainItem[]; ambushOK: (s: EStep, c: CardLike) => boolean; ambushWhy: (s: EStep, c: CardLike) => string; wmTrig: (uid: string, pl: string, pick: string | null) => { it: ChainItem | null; txt: string } | null; readyTrigs: (id: string, by: string, parts: string[]) => void;
   setCtrl: (id: string, to: string | null, ref: string, why: string, until?: string) => boolean; leaveBoard: (id: string, zone: string) => void;
   moveObj: (id: string, to: string, parts: string[], refs: string[], srcName: string, toBase?: string) => 'ok' | 'neg';
 };
