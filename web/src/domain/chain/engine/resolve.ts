@@ -38,18 +38,23 @@ export function installResolve(X: EngineCtx) {
     if((m=/^there are (\d+) or more units there$/i.exec(c))){const f=(it.tg||[]).find((v:string)=>v==='F0'||v==='F1');const l=f==='F1'?'bf1':'bf0';return cntU((o)=>o.type==='unit'&&o.loc===l)>=+m[1];}
     if(/^it's your turn and you played this from face down$/i.test(c))return X.TP===pl&&it.from==='facedown';
     return null;};
-  X.condSrc=(cd)=>cd.how==='open'?(cd.from==='field'?'(nyitott kérdés, judge dönt: '+cd.why+'; a lapnál így megadva)':'(nyitott kérdés, judge dönt: '+cd.why+'; feltételezés: nem teljesül, a lapnál állítható)'):cd.how==='hidden'?(cd.from==='field'?'(a lapnál megadva)':cd.from==='zone'?'(a deck felső lapja a pályás építőben megadva: '+cd.zn+', 108.4.e, 128.3)':'(feltételezés: nem teljesül; '+(cd.why||'rejtett adat')+', a lapnál állítható)'):cd.how==='state'?'(játékállapotból'+(cd.val?': '+cd.val:'')+'; a kezdőérték a builderben állítható)':'(a boardon ellenőrizve)';
-  X.evalCond=(cd,it,s,xi,tv)=>{if(!cd)return true;const c=cd.t.toLowerCase();
+  X.condSrc=(cd)=>cd.how==='open'?(cd.from==='field'?'(nyitott kérdés, judge dönt: '+cd.why+'; a lapnál így megadva)':'(nyitott kérdés, judge dönt: '+cd.why+'; feltételezés: nem teljesül, a lapnál állítható)'):cd.how==='hidden'?(cd.from==='field'?'(a lapnál megadva)':cd.from==='zone'?'(a deck felső lapja a pályás építőben megadva: '+cd.zn+', 108.4.e, 128.3)':cd.from==='zone2'?'(a pályás építőben megadott lapok alapján: '+cd.zn+')':'(feltételezés: nem teljesül; '+(cd.why||'rejtett adat')+', a lapnál állítható)'):cd.how==='state'?'(játékállapotból'+(cd.val?': '+cd.val:'')+'; a kezdőérték a builderben állítható)':'(a boardon ellenőrizve)';
+  X.evalCond=(cd,it,s,xi,tv)=>{if(!cd)return true;const c=cd.t.toLowerCase();let m:RegExpExecArray|null;
     if(/^you paid (?:the|my) additional cost/.test(c))return !!(s&&s.addc);if(/^you played this from your hand/.test(c))return (it.from||'hand')==='hand';
     if(cd.how==='hidden'||cd.how==='open'){const v=s&&s.cnd?s.cnd[xi]:null;if(v==='1'||v==='0'){cd.from='field';return v==='1';}
       if(/^you revealed a card with the lowest energy cost$/i.test(cd.t)&&it.zEachTop&&X.O[it.zEachTop.A]&&X.O[it.zEachTop.B]){const eA=printedCost(X.O[it.zEachTop.A].card).e,eB=printedCost(X.O[it.zEachTop.B].card).e;const mine=it.pl==='A'?eA:eB,theirs=it.pl==='A'?eB:eA;cd.from='zone';cd.zn=X.O[it.zEachTop[it.pl]].name+' '+mine+' Energy, a másik '+theirs+' Energy'+(mine===theirs?'; döntetlen: a Core Rules nem dönti el, hogy egyenlő költségnél "a legalacsonyabb"-e (nyitott kérdés, judge dönt; az elemzés igennel számol)':'');if(mine===theirs)cd.tie=true;return mine<=theirs;}
-      const zm=/^it's an? (gear|spell|unit)$|^it is a (unit)$/i.exec(cd.t);if(zm&&it.zTop&&X.O[it.zTop]){cd.from='zone';cd.zn=X.O[it.zTop].name;return String(X.O[it.zTop].card!.t).toLowerCase()===(zm[1]||zm[2]).toLowerCase();}
+      const zm=/^it's an? (gear|spell|unit)$|^it is a (unit)$/i.exec(cd.t);
+      /* az előző utasítás hatásból kijátszott lapja (Ava Achiever: a kézből, Rek'Sai: a banishelt lap) */
+      if(zm&&it.zLastT){cd.from='zone2';cd.zn=it.zLastN+' ('+it.zLastT+')';return it.zLastT===(zm[1]||zm[2]).toLowerCase();}
+      if(/^you revealed a Bird\b/i.test(cd.t)&&X.ZC&&it.zLook){const ob=it.zRev?X.O[it.zRev]:null;cd.from='zone2';cd.zn=ob?ob.name+(ob.card&&(ob.card.tg||[]).length?' ('+(ob.card.tg||[]).join(', ')+')':''):'nem fedett fel lapot';return !!(ob&&ob.card)&&['Bird','Cat','Dog','Poro'].some((t)=>(ob.card!.tg||[]).includes(t));}
+      if(/^it has that type$/i.test(cd.t)&&it.zGuess&&it.zTop&&X.O[it.zTop]){const t=String(X.O[it.zTop].card!.t).toLowerCase();cd.from='zone2';cd.zn='tipp: '+it.zGuess+', felfedve: '+X.O[it.zTop].name+' ('+t+')';return t===it.zGuess;}
+      if((m=/^you have exactly (\d+) cards in hand and exactly (\d+) units at battlefields$/i.exec(cd.t))&&X.ZC){const h=X.zoneIds('hand',it.pl).length;const u=Object.values(X.O).filter((o)=>o.zone==='board'&&o.type==='unit'&&o.ctrl===it.pl&&o.loc&&o.loc!=='base').length;cd.from='zone2';cd.zn='kéz: '+h+' lap (a pályás építőben megadott kéz, 128.4), battlefielden: '+u+' unit';return h===+m[1]&&u===+m[2];}
+      if(zm&&it.zTop&&X.O[it.zTop]){cd.from='zone';cd.zn=X.O[it.zTop].name;return String(X.O[it.zTop].card!.t).toLowerCase()===(zm[1]||zm[2]).toLowerCase();}
       cd.from='default';return false;}
     if(cd.how==='state'){const r=X.evalState(cd,it,s,tv);return r;}
     if(cd.how!=='board')return null;
     const T=tv&&X.O[tv]?X.O[tv]:null;const S=it.src&&X.O[it.src!]?X.O[it.src!]:null;const here=S&&S.zone==='board'?S.loc:null;
     const cntU=(f:(o:GameObj)=>unknown)=>Object.values(X.O).filter((o)=>o.zone==='board'&&f(o)).length;
-    let m:RegExpExecArray|null;
     if(/empowered/.test(c))return /^(?:i'm|this is)/.test(c)?!!(S&&S.emp):!!(T&&T.emp);
     if(/already buffed/.test(c))return !!(T&&T.bu);if(/is stunned/.test(c))return !!(T&&T.st);
     if(/mighty/.test(c)){const mt=T?X.mightOf(T.id):null;return mt==null?null:mt>=5;}

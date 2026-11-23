@@ -61,8 +61,8 @@ export const numOf=(x:string)=>x==null?1:/^\d+$/.test(x)?+x:NUMW[String(x).toLow
 /** A régi (feltétel-tagmondatot is célpontnak vevő) felismerés, csak a régi lépések célpont-indexeinek átszámolásához (migrateTg). */
 let LEGACY=false;
 export function withLegacyPhrases<T>(f:()=>T):T{const o=LEGACY;LEGACY=true;try{return f();}finally{LEGACY=o;}}
-/** Feltétel-tagmondatban ("if", "only if", "unless", "while" a mondatrész elejétől) álló kifejezés nem célpont: a feltétel a játékállapotot írja le. */
-const inCondClause=(e:string,at:number)=>{const pre=e.slice(0,at);const cut=Math.max(pre.lastIndexOf('.'),pre.lastIndexOf(','),pre.lastIndexOf(';'));return /\b(?:if|unless|while)\b/i.test(pre.slice(cut+1));};
+/** Feltétel-tagmondatban ("if", "only if", "unless", "while", "when" a mondatrész elejétől) álló kifejezés nem célpont: a feltétel a játékállapotot írja le. */
+const inCondClause=(e:string,at:number)=>{const pre=e.slice(0,at);const cut=Math.max(pre.lastIndexOf('.'),pre.lastIndexOf(','),pre.lastIndexOf(';'));return /\b(?:if|unless|while|when|whenever)\b/i.test(pre.slice(cut+1));};
 export function phrasesTxt(e:string){
   const out:TargetParam[]=[];
   const re=/\b(a|an|another|one|two|three|up to (\d+|one|two|three|four|five)|any number of)\s+((?:(?:other|another|friendly|enemy|attacking|defending|exhausted|ready|stunned|equipped|buffed|damaged|detached|attached|\[Mighty\]|Mighty)\s+)*)(units?|gear|spells?|equipment|abilit(?:y|ies))\b/gi;let m;

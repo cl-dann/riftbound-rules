@@ -6,6 +6,8 @@ import { vsCard } from '../src/domain/data/store';
 import { migrateTg, normZones } from '../src/domain/chain/cs';
 import { cs, ruleText, run } from './util';
 import { sweep } from './leltar';
+import { coverage } from './lefedettseg';
+import { analyze } from '../src/render/html/chainReport';
 
 const listOf = (n: string) => stepInfo({ turn: 'A', lg: { A: '', B: '' }, bf: [{ n: '', c: '' }, { n: '', c: '' }], bd: [], steps: [] } as never, { k: 'card', n, pl: 'A', tg: [], ext: {} } as never)!.list;
 
@@ -114,6 +116,92 @@ describe('2. kör: copy effectek (446.1, 446.3, 479.1.b, 479.1.b.1, 479.1.c)', (
     const CS = cs({ bd: [{ n: 'Watchful Sentry', pl: 'A', loc: 'base' }, { n: 'Svellsongur', pl: 'A', loc: 'base', on: 0 }], steps: [] });
     expect(attachedEff(CS as never, 'b0')).toMatch(/Deathknell/);
     expect(triggersOf(vsCard('Watchful Sentry')!, attachedEff(CS as never, 'b0')).filter((t) => t.why === 'Deathknell')).toHaveLength(2);
+  });
+});
+
+describe('3. kör: rejtett adat a pályás építőben megadott lapokból (108.4.e, 128.4, 128.5)', () => {
+  const zb = (o: any) => ({ turn: 'A', lg: { A: '', B: '' }, bf: [{ n: '', c: 'A' }, { n: '', c: '' }], bd: [], hand: { A: [], B: [] }, trash: { A: [], B: [] }, deck: { A: [], B: [] }, ...o });
+  const dk = (...n: string[]) => ({ A: n.map((x, i) => ({ id: 'zdA_' + (i + 1), n: x })), B: [] });
+  const hd = (...n: string[]) => ({ A: n.map((x, i) => ({ id: 'zhA_' + (i + 1), n: x })), B: [] });
+  const go = (c: any) => { const r = analyze(JSON.parse(JSON.stringify(c))); return { r, text: r.rows.map((x) => x.join(' ')).join('\n'), o: (id: string) => r.objs[id] }; };
+  it('Ivern, Nurturer: a felfedett unit tagje dönt (Poro: van [Buff], nem Bird/Cat/Dog/Poro: nincs)', () => {
+    const ivern = (top: string) => go(zb({ deck: dk('Long Sword', top), bd: [{ n: 'Mega-Mech', pl: 'A', loc: 'base' }], steps: [{ k: 'card', n: 'Ivern, Nurturer', pl: 'A', loc: 'base', tg: ['b0'], ext: {}, zp: { 1: ['zdA_2'] } }] }));
+    const yes = ivern('Daring Poro');
+    expect(yes.text).toMatch(/"you revealed a Bird"\) teljesül \(a pályás építőben megadott lapok alapján: Daring Poro \(.*Poro/);
+    expect(yes.o('b0').bu).toBe(true);
+    const no = ivern('Shipyard Skulker');
+    expect(no.text).toMatch(/"you revealed a Bird"\) nem teljesül \(a pályás építőben megadott lapok alapján: Shipyard Skulker/);
+    expect(no.o('b0').bu).toBe(false);
+  });
+  it('Ava Achiever: a kézből kijátszott [Hidden] unit ide kerül ("If it\'s a unit, play it here")', () => {
+    const x = go(zb({ hand: hd('Bedeviling Stranger'), bd: [{ n: 'Ava Achiever', pl: 'A', loc: 'bf0' }], steps: [{ k: 'tg', src: 'b0', ti: 0, pl: 'A', n: 'Ava Achiever', tg: [], ext: {}, zp: { 0: ['zhA_1'] } }] }));
+    expect(Object.values(x.r.objs).find((o: any) => o.name === 'Bedeviling Stranger' && o.zone === 'board')).toMatchObject({ loc: 'bf0' });
+    expect(x.text).toMatch(/a lap unit, az előző utasítással már ide került \(1\. battlefield\)/);
+  });
+  it('Pakaa Protector: nem unit felső lap a trashbe, +2 Might; unit: kézbe, nincs +2 (135.2.b.5.a)', () => {
+    const pk = (top: string) => go(zb({ deck: dk(top), bd: [{ n: 'Pakaa Protector', pl: 'A', loc: 'bf0' }], steps: [{ k: 'tg', src: 'b0', ti: 0, pl: 'A', n: 'Pakaa Protector', tg: [], ext: {} }] }));
+    const sp = pk('Flash');
+    expect(sp.o('zdA_1').zone).toBe('trash');
+    expect(sp.text).toMatch(/Pakaa Protector Mightja 4 → 6/);
+    const un = pk('Shipyard Skulker');
+    expect(un.o('zdA_1').zone).toBe('hand');
+    expect(un.text).not.toMatch(/Mightja 4 → 6/);
+  });
+  it('Ravenbloom Conservatory: spell a kézbe, más recycle (417)', () => {
+    const rv = (top: string) => go(zb({ deck: dk(top, 'Block'), steps: [{ k: 'tr', n: 'Ravenbloom Conservatory', src: null, pl: 'A', eff: "reveal the top card of your Main Deck. If it's a spell, put it in your hand. Otherwise, recycle it.", why: 'When you defend here', tg: [], ext: {} }] }));
+    expect(rv('Flash').r.objs.zdA_1.zone).toBe('hand');
+    const u = rv('Shipyard Skulker');
+    expect(u.r.objs.zdA_1).toMatchObject({ zone: 'deck' });
+    expect(u.r.objs.zdA_1.ord).toBeGreaterThanOrEqual(900);
+  });
+  it('Forgotten Relic: [Burn 1] a felső lapot a trashbe teszi; unit esetén annak Mightja, más lapnál nincs reflexív hatás', () => {
+    const fr = (top: string) => go(zb({ deck: dk(top), bd: [{ n: 'Forgotten Relic', pl: 'A', loc: 'base' }, { n: 'Daring Poro', pl: 'A', loc: 'base' }], steps: [{ k: 'tg', src: 'b0', ti: 0, pl: 'A', n: 'Forgotten Relic', tg: ['b1'], ext: {} }] }));
+    const u = fr('Mega-Mech');
+    expect(u.o('zdA_1').zone).toBe('trash');
+    expect(u.text).toMatch(/Daring Poro \+8 Might ebben a körben \(az égetett unit Mightja\)/);
+    const s = fr('Flash');
+    expect(s.text).toMatch(/az égetett lap \(Flash\) nem unit/);
+    expect(s.text).not.toMatch(/Daring Poro \+/);
+  });
+  it('Teemo, Strategist: a felfedett 5 lap [Hidden] lapjai adják a damage-et, utána recycle', () => {
+    const x = go(zb({ deck: dk('Ava Achiever', 'Flash', 'Back Off', 'Mega-Mech', 'Shipyard Skulker'), bd: [{ n: 'Teemo, Strategist', pl: 'A', loc: 'bf0' }, { n: 'Mega-Mech', pl: 'B', loc: 'bf0' }], steps: [{ k: 'tg', src: 'b0', ti: 0, pl: 'A', n: 'Teemo, Strategist', tg: ['b1'], ext: {} }] }));
+    expect(x.text).toMatch(/közül 2 \[Hidden\] lap: Ava Achiever, Back Off/);
+    expect(x.o('b1').dmg).toBe(2);
+    expect(x.o('zdA_1').ord).toBeGreaterThanOrEqual(900);
+  });
+  it('Scrutinizing Scope: az ellenfél tippje (a lapnál) és a felfedett lap típusa dönt; a felfedés nem recycle-öl előre', () => {
+    const sc = (guess: string) => go(zb({ deck: dk('Flash'), bd: [{ n: 'Scrutinizing Scope', pl: 'A', loc: 'base' }], steps: [{ k: 'ab', src: 'b0', ai: 0, pl: 'A', n: 'Scrutinizing Scope', tg: [], ext: {}, hv: { 1: guess } }] }));
+    const hit = sc('spell');
+    expect(hit.text).toMatch(/tipp: spell, felfedve: Flash \(spell\)/);
+    expect(hit.o('zdA_1').zone).toBe('deck');
+    const miss = sc('unit');
+    expect(miss.o('zdA_1').zone).toBe('hand');
+  });
+  it('Gutter Palace: a megadott kéz mérete és a battlefielden álló unitok száma', () => {
+    const units = ['Mega-Mech', 'Shipyard Skulker', 'Daring Poro', 'Blastcone Fae'].map((n) => ({ n, pl: 'A', loc: 'bf0' }));
+    const gp = (h: string[]) => go(zb({ hand: hd(...h), bd: [{ n: 'Gutter Palace', pl: 'A', loc: 'base' }, ...units], steps: [{ k: 'tr', n: 'Gutter Palace', src: 'b0', pl: 'A', eff: 'if you have exactly 4 cards in hand and exactly 4 units at battlefields, you win the game.', why: 'At the start of your Beginning Phase', tg: [], ext: {} }] }));
+    expect(gp(['Flash', 'Flash', 'Flash', 'Flash']).text).toMatch(/teljesül \(a pályás építőben megadott lapok alapján: kéz: 4 lap/);
+    expect(gp(['Flash']).text).toMatch(/nem teljesül \(a pályás építőben megadott lapok alapján: kéz: 1 lap/);
+  });
+  it('Invert Timelines: mindkét játékos eldobja a megadott kezét (423.1), majd mindkettő húz 4-et', () => {
+    const x = go(zb({ hand: { A: [{ id: 'zhA_1', n: 'Flash' }], B: [{ id: 'zhB_1', n: 'Block' }] }, steps: [{ k: 'card', n: 'Invert Timelines', pl: 'A', tg: [], ext: {} }] }));
+    expect(x.o('zhA_1').zone).toBe('trash');
+    expect(x.o('zhB_1').zone).toBe('trash');
+    expect(x.r.ev.filter((e: any) => e.k === 'draw').map((e: any) => [e.pl, e.n]).sort()).toEqual([['A', 4], ['B', 4]]);
+  });
+  it('Divine Judgment: a rune-ok száma a megtartott 2-re csökken, a többi recycle a Rune Deckbe (417)', () => {
+    const x = go(zb({ ps: { A: { runes: 5, runeDeck: 3 }, B: { runes: 1 } }, bd: [{ n: 'Mega-Mech', pl: 'A', loc: 'base' }], steps: [{ k: 'card', n: 'Divine Judgment', pl: 'A', tg: [], ext: {}, zp: { 0: ['b0'] } }] }));
+    expect(x.text).toMatch(/Te rune-jai: 5 → 2, a többi 3 recycle a Rune Deck aljára \(417\)/);
+    expect(x.text).not.toMatch(/Az ellenfél rune-jai/);
+  });
+  it('Clocktower Guardian (Deathknell, lépés nélküli trigger): a banishelt felső lapot kijátssza', () => {
+    const x = go(zb({ deck: dk('Shipyard Skulker'), bd: [{ n: 'Clocktower Guardian', pl: 'A', loc: 'base' }], steps: [{ k: 'card', n: 'Vengeance', pl: 'A', tg: ['b0'], ext: {} }, { k: 'res' }] }));
+    expect(x.o('zdA_1').zone).toBe('played');
+    expect(Object.values(x.r.objs).some((o: any) => o.name === 'Shipyard Skulker' && o.zone === 'board')).toBe(true);
+  });
+  it('lefedettség: az "adatot kér" utasítások közül csak a builderen kívüli adat marad (Jhin előzmény, Twisted Fate rune deck)', () => {
+    const c = coverage();
+    expect(c.hid.filter((h) => !c.pick.some((p) => h.startsWith(p))).map((h) => h.split(':')[0])).toEqual(['Jhin, Virtuoso', 'Twisted Fate, Gambler']);
   });
 });
 
