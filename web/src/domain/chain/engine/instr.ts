@@ -106,7 +106,7 @@ export function installInstr(X: EngineCtx) {
         const zpick=zr0&&!zEach?(s&&s.zp&&s.zp[xi]&&s.zp[xi].length?s.zp[xi]:zr0.z==='deck'&&zr0.top?X.zoneIds('deck',zr0.who==='they'?other(it.pl):it.pl).slice(0,zr0.n):null):null;
         const amongIt=X.ZC&&INS.some((y)=>{const z=zoneRefOf(y.t);return z&&z.z==='among';});
         const zTopUse=X.ZC&&it.zTop&&!amongIt&&/\b(?:draw it|put it (?:in|into) your hand)\b/i.test(x.t)&&X.O[it.zTop]&&X.O[it.zTop].zone==='deck';
-        const restM=X.ZC&&it.zLook&&it.zLook.length&&!(zr0&&zr0.z==='among'&&zpick&&zpick.length)&&/\b(?:the rest|the remaining cards|the revealed cards)\b/i.test(x.t);
+        const restM=X.ZC&&it.zLook&&it.zLook.length&&!(zr0&&zr0.z==='among'&&zpick&&zpick.length)&&/\b(?:the rest|the remaining cards|the revealed cards|any you didn't banish)\b/i.test(x.t);
         const eachOn=zEach&&(zEach.act==='revealEach'?X.zoneIds('deck','A').length>0&&X.zoneIds('deck','B').length>0:!!(s&&s.zp&&s.zp[xi]&&s.zp[xi].length));
         if(!X.resolveZone(R,x,xi,{zr0,zEach,zpick,amongIt,zTopUse,restM,eachOn}))X.resolveAct(R,x,xi,prev,lk,live,a,sc);};
   /** Kéz, deck és trash: játékosonkénti választás (355.10.e, 412.1), from among them, recycle, a választott lap végigkövetve (355.9.a, 355.10.a, 355.18). Igaz, ha az utasítás zónás volt. */
@@ -141,7 +141,8 @@ export function installInstr(X: EngineCtx) {
           refs.push('420.3','356.1.b.2');}
         else if(amongIt&&it.zAmongDone&&/^(?:then,?\s*)?(?:you may )?draw it\b/i.test(x.t)){parts.push('"'+esc(x.t)+'": a megnézett lapok közül választott lap már a kézbe került (az előző utasítás része).');}
         else if(X.ZC&&it.zAmongCard&&X.O[it.zAmongCard]&&X.O[it.zAmongCard].zone==='deck'&&/^(?:then,?\s*)?(?:you may )?banish it\b/i.test(x.t)){X.zcMove(it.zAmongCard,'banish');parts.push('"'+esc(x.t)+'": '+esc(X.O[it.zAmongCard].name)+' banishelve (108.6).');refs.push('108.6');}
-        else if(restM){const rest=it.zLook!.filter((id:string)=>X.O[id]&&X.O[id].zone==='deck');const toTrash=/\btrash\b/i.test(x.t);
+        else if(restM){const rest=it.zLook!.filter((id:string)=>X.O[id]&&X.O[id].zone==='deck');const toTrash=/\btrash\b/i.test(x.t);const toHand=/^draw any you didn't banish\b/i.test(x.t);
+          if(toHand){rest.forEach((id:string)=>X.zcMove(id,'hand'));parts.push('"'+esc(x.t)+'": '+(rest.length?rest.map((id:string)=>esc(X.O[id].name)).join(', ')+' a kézbe kerül (húzás, 414).':'nincs több megnézett lap.'));refs.push('414');return true;}
           rest.forEach((id:string)=>{if(toTrash)X.zcMove(id,'trash');else{X.O[id].ord=900+(X.O[id].ord||0);X.EV.push({k:'zcard',id,name:X.O[id].name,to:'deck'});}});
           parts.push('"'+esc(x.t)+'": '+(rest.length?rest.map((id:string)=>esc(X.O[id].name)).join(', ')+(toTrash?' a trashbe kerül (108.2).':': recycle, a Main Deck aljára (417).'):'nincs több megnézett lap.'));refs.push(toTrash?'108.2':'417');}
         else if(zr0&&zr0.act==='chrono'){/* Chronobreak: "Banish that many units you control, then for each, its owner plays that unit back" (428, 420.3, 359.3.e.4) */
@@ -303,7 +304,7 @@ export function installInstr(X: EngineCtx) {
           if(lv.length===2&&pt.length===2){const [p1,p2]=lv;const m1=X.mightOf(p1),m2=X.mightOf(p2);
             ([[p1,m2,p2],[p2,m1,p1]] as [string,number|null,string][]).forEach(([v,n,by])=>{if(n==null)return;X.dealDmg(v,n,parts,refs,'forrás: '+X.O[by].name+', 418.6.b.3');});refs.push('418.6.b.3');X.story.push(Art(X.O[p1].name)+' és '+art(X.O[p2].name)+' sebzi egymást ('+m1+' és '+m2+' Might).');}
           else{x.st='ignored';x.ref='359.3.e.14.a, 359.3.e.12';x.why='a két kiválasztott unit közül legalább egy nem érvényes célpont, a Mightja nem elérhető';}}
-        else if(lk&&live.length&&!['other','playcard','token','deck','xp','score','choose','runes','add'].includes(a.k)&&!((a.k==='empower'||a.k==='disempower')&&X.selfRef(x.t))){const gl=live.filter((ti:number)=>X.O[it.tg[ti]].type==='gear');const tl=(a.k==='detach'||a.k==='attach')&&gl.length?gl:live;
+        else if(lk&&live.length&&!['other','playcard','token','deck','xp','score','choose','runes','add','restrict'].includes(a.k)&&!((a.k==='empower'||a.k==='disempower')&&X.selfRef(x.t))){const gl=live.filter((ti:number)=>X.O[it.tg[ti]].type==='gear');const tl=(a.k==='detach'||a.k==='attach')&&gl.length?gl:live;
           if(a.k==='attach'&&gl.length&&live.length>gl.length&&!a.toSelf){const u=live.find((ti:number)=>X.O[it.tg[ti]].type==='unit');const G=X.O[it.tg[gl[0]]],U=X.O[it.tg[u!]];if(G.on===U.id){parts.push(esc(G.name)+' már ezen a uniton van, a csatolásnak nincs hatása (435.1.g, 435.1.i); az elemzés ezt Negated-nek veszi (levezetés).');x.st='negated';x.ref='359.3.e.6';it.flL=true;}else{G.on=U.id;G.loc=U.loc;X.EV.push({k:'attach',id:G.id,name:G.name,to:U.id});parts.push('Felcsatolva: '+esc(G.name)+' → '+esc(U.name)+' (435).');refs.push('435');}}
           else tl.forEach((ti:number)=>{const r=X.applyTo(it.tg[ti],Object.assign({t:x.t},a),it,parts,refs);if(r==='neg'){x.st='negated';x.ref='359.3.e.6';}else if(r==='ign'){x.st='ignored';x.ref=a.k==='ctrlUntil'?'359.3.e.16':'359.3.e.6';x.why=a.k==='ctrlUntil'?'a delayed kontroll időtartama már véget ért, mielőtt létrejött volna':'a végrehajtáshoz szükséges információ nem elérhető';}});}
         else if(lk&&prev&&!live.length&&a.k!=='other'){x.st='ignored';x.ref='359.3.e.14.a';x.why='a hivatkozott célpont nem érvényes, ezért nincs mire hatnia';}

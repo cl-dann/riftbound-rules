@@ -40,12 +40,17 @@ export function installBuild(X: EngineCtx) {
     if(perm&&c.t==='Unit'&&X.ACCELNEXT[s.pl]){X.ACCELNEXT[s.pl]=false;X.O['s'+s.j].accelG=true;} // a kijátszáskor kapja meg (805.1.b), nem a belépéskor
     X.playLegal(P);};
   /** A kijátszás legalitása (358, 355.8, 403.4): igaz, ha a lépés itt véget ér (nem szabályos, vagy azonnal resolve-ol). */
+  /* Ambush (822.1.b): a unit [Reaction]-t kap, amíg olyan battlefieldre játsszák ki, ahol a játékos unitot kontrollál; ha ott nincs unitja, nem (822.3) */
+  X.ambushOK=(s,c)=>{if(s.k!=='card'||!c||c.t!=='Unit'||!/^\[Ambush\]/m.test(c.txt||''))return false;const loc=s.loc||'base';if(loc==='base')return false;
+    return Object.values(X.O).some((o)=>o.zone==='board'&&o.type==='unit'&&o.ctrl===s.pl&&o.loc===loc);};
+  X.ambushWhy=(s,c)=>{if(s.k!=='card'||!c||c.t!=='Unit'||!/^\[Ambush\]/m.test(c.txt||''))return '';const loc=s.loc||'base';
+    return 'a lap [Ambush], de csak olyan battlefieldre kap [Reaction]-t, ahol unitod van (822.1.b, 822.3); '+(loc==='base'?'a base nem battlefield':esc(X.locLabel(loc))+' helyen nincs unitod')+', ezért amíg van valami a chainen, nem jöhet';};
   X.playCheck=(P)=>{const {s,c,tm,perm,empty,Verb,what,it,pick}=P;
     let illegal:string|null=null;
     if(s.k==='ab'&&!s.ab)illegal='nincs kiválasztva ability';
     else if(s.k==='tg'&&!s.tr)illegal='nincs kiválasztva trigger';
     else if(s.k==='ab'&&s.ab!.add){X.rows+=X.line('430.2, 337.2',esc(Verb)+' '+what+'. Erőforrást ad: azonnal resolve-ol, nem kerül a chainre, és nem lehet rá válaszolni.',0);X.story.push(Verb+' '+what+': azonnal erőforrást ad, nem kerül a chainre.');return true;}
-    else if(s.k!=='tg'&&!empty&&!(tm==='reaction'||tm==='hidden'&&s.from==='facedown')&&(s.illTiming=true))illegal=(s.k==='ab'?'az ability':'a lap')+' nem [Reaction]'+(tm==='hidden'?' (kézből; csak facedown-ból kapna [Reaction]-t)':'')+', ezért amíg van valami a chainen, nem jöhet';
+    else if(s.k!=='tg'&&!empty&&!(tm==='reaction'||tm==='hidden'&&s.from==='facedown'||X.ambushOK(s,c))&&(s.illTiming=true))illegal=X.ambushWhy(s,c)||(s.k==='ab'?'az ability':'a lap')+' nem [Reaction]'+(tm==='hidden'?' (kézből; csak facedown-ból kapna [Reaction]-t)':'')+', ezért amíg van valami a chainen, nem jöhet';
     if(!illegal&&s.k==='tg'&&s.src&&X.O[s.src!]&&!['board','legend'].includes(X.O[s.src!].zone)&&!s.tr!.dk)illegal='a trigger forrása nincs a boardon';
     if(!illegal&&s.repBad){illegal=s.repBad;}
     if(!illegal&&perm&&X.bfBlocksPlay(X.O['s'+s.j].loc))illegal=esc(X.locLabel(X.O['s'+s.j].loc))+' szövege szerint ide nem játszható ki';
@@ -54,6 +59,11 @@ export function installBuild(X: EngineCtx) {
       else if(s.ab!.empower&&sc.emp)illegal='a forrás már Empowered; az Empower csak akkor aktiválható, ha nem az (827.1.b, a lap emlékeztető szövege)';
       else if(/disempower me/i.test(s.ab!.cost||'')&&!sc.emp)illegal='a "Disempower me" költséghez a forrásnak Empowered állapotban kell lennie';
       else if(!['board','legend'].includes(sc.zone))illegal='a forrás nincs a boardon';}
+    /* Ezreal, Prodigal Explorer: "Use only if you've chosen enemy units and/or gear twice this turn with spells or unit abilities" (355.7: a választás célzás) */
+    if(!illegal&&s.k==='ab'&&s.src&&X.O[s.src!]&&/use only if you've chosen enemy units and\/or gear twice this turn/i.test(X.O[s.src!].card!.txt||'')){const ch=X.CHOSE[s.pl!]||{items:0,objs:0};
+      if(ch.items>=2)X.rows+=X.line('355.7','A feltétel ("Use only if you\'ve chosen enemy units and/or gear twice this turn with spells or unit abilities") teljesül: ebben a körben '+ch.items+' spell vagy unit ability választott enemy unitot vagy geart.',0);
+      else if(ch.objs>=2){X.rows+=X.line('355.7','<span class="cbuns">nyitott kérdés</span> A feltétel ("chosen ... twice"): egyetlen spell vagy ability választott '+ch.objs+' enemy célpontot. A Core Rules nem dönti el, hogy ez egy vagy két választásnak számít; az elemzés aktiválhatónak veszi (két választás). Ha egynek számít, az ability nem aktiválható.',2);}
+      else illegal='a feltétel ("Use only if you\'ve chosen enemy units and/or gear twice this turn with spells or unit abilities") nem teljesül: ebben a körben eddig '+ch.items+' spell vagy unit ability választott enemy unitot vagy geart';}
     // additional cost: kill
     const ck=s.k==='card'&&s.cost&&s.cost.kill;
     if(!illegal&&ck&&(!ck.opt||s.addc)){P.costV=s.costTg||'';if(!P.costV)illegal='az additional cost kill célpontja nincs megadva';else{const ob=X.O[P.costV];
@@ -88,8 +98,9 @@ export function installBuild(X: EngineCtx) {
   X.playLegal=(P)=>{const {s,c,tm,perm,empty,Verb,what,it,pick}=P;
     // legális
     if(X.ZC&&s.k==='card'&&['hand','trash',undefined,null,''].includes(s.from)){const fz=s.from==='trash'?'trash':'hand';const zid=Object.keys(X.O).find(id=>X.O[id].type==='zc'&&X.O[id].zone===fz&&X.O[id].own===s.pl&&X.O[id].card!.n===c.n);if(zid)X.zcMove(zid,'played');}
-    const timingTxt=s.k==='tg'?'a játék teszi a chainre, priority nem kell hozzá':!empty?(tm==='reaction'?'[Reaction], ezért válaszként jöhet':'facedown-ból [Reaction]-ként jön'):(tm==='none'&&c.t==='Spell'?'üres chain mellett, a saját körödben':'üres chain mellett');
-    X.rows+=X.line(s.k==='tg'?'383.3, 401':!empty?(tm==='reaction'?(s.k==='ab'?'813.1.c.2':'813.1.c.1'):'811.6'):(s.k==='ab'?'381':c.t==='Spell'?'155':'337.2'),esc(Verb)+' '+what+' ('+timingTxt+').'+(s.from&&s.from!=='hand'&&s.k==='card'?' Honnan: '+({facedown:'facedown',trash:'trash',champ:'Champion Zone',other:'nem kézből'} as Record<string,string>)[s.from]+'.':''),0);
+    const amb=s.k==='card'&&!empty&&tm!=='reaction'&&X.ambushOK(s,c);
+    const timingTxt=s.k==='tg'?'a játék teszi a chainre, priority nem kell hozzá':!empty?(amb?'[Ambush]: olyan battlefieldre játssza ki, ahol unitja van, ezért [Reaction]-ként jön':tm==='reaction'?'[Reaction], ezért válaszként jöhet':'facedown-ból [Reaction]-ként jön'):(tm==='none'&&c.t==='Spell'?'üres chain mellett, a saját körödben':'üres chain mellett');
+    X.rows+=X.line(s.k==='tg'?'383.3, 401':!empty?(amb?'822.1.b':tm==='reaction'?(s.k==='ab'?'813.1.c.2':'813.1.c.1'):'811.6'):(s.k==='ab'?'381':c.t==='Spell'?'155':'337.2'),esc(Verb)+' '+what+' ('+timingTxt+').'+(s.from&&s.from!=='hand'&&s.k==='card'?' Honnan: '+({facedown:'facedown',trash:'trash',champ:'Champion Zone',other:'nem kézből'} as Record<string,string>)[s.from]+'.':''),0);
     pick.forEach((a)=>{X.rows+=X.line(a[0],a[1],a[2]);});
     if(s.modes&&s.modes.length)X.rows+=X.line('355.3','Választott mód ("Choose one"): '+esc(s.modes[Math.max(0,Math.min(s.mode||0,s.modes.length-1))].replace(/\.$/,''))+'. A mód a kijátszáskor dől el, a builderben állítható.',0);
     if(s.rep&&s.repModes)X.rows+=X.line('820.1.d.1, 820.2'+(s.modes&&s.modes.length?', 820.2.a':''),'[Repeat] költség kifizetve '+(s.rep>1?s.rep+' alkalommal ('+s.repN+' külön költségből)':'')+': a hatás a resolve-kor '+(s.rep>1?s.rep+' további alkalommal':'még egyszer')+' végrehajtódik'+(s.modes&&s.modes.length?', a további végrehajtások módja: '+s.repModes.slice(1).map((m:number)=>esc(s.modes![Math.max(0,Math.min(m,s.modes!.length-1))].replace(/\.$/,''))).join('; ')+' (más mód és más célpont is választható)':'')+'. A célpontok sorrendje a végrehajtás sorrendje.',0);
@@ -101,7 +112,11 @@ export function installBuild(X: EngineCtx) {
     if(perm){X.O['s'+s.j].zone='board';const er=X.enterReady(c,s.pl,!!s.accel,X.O['s'+s.j].loc,s.erd,'s'+s.j,!!s.addc);if(c.t==='Unit')X.O['s'+s.j].ex=!er.ready;X.EV.push({k:'enter',id:'s'+s.j,name:c.n,loc:X.O['s'+s.j].loc});X.rows+=X.line('337.2'+(c.t==='Unit'?(er.ready?', 143.4.a':', 143.4'):''),'A '+c.t.toLowerCase()+' azonnal resolve-ol és ide kerül: '+esc(X.locLabel(X.O['s'+s.j].loc))+'.'+(c.t==='Unit'?(er.ready?' Ready lép be ('+er.why+').':' Exhausted lép be (143.4).')+(er.note?' '+er.note:''):'')+(s.trig?' A "When you play" hatása triggerként a chainre kerül (355.5.b).':''),er.note&&/bizonytalan|nem követett/.test(er.note)?1:0);}
     else if(X.O['s'+s.j])X.O['s'+s.j].zone='chain';
     s.tg.forEach((v:string,ti:number)=>{if(v)X.rows+=X.line('355.7','<span class="stok">'+(ti+1)+'. célpont:</span> '+esc(X.nm(v))+(X.O[v]&&X.O[v].loc?' ('+esc(X.locLabel(X.O[v].loc))+(X.mightOf(v)!=null?', '+X.mightOf(v)+' Might':'')+')':'')+'.',0);});
-    const defl=s.tg.filter((v:string)=>v&&X.O[v]&&X.O[v].card&&X.O[v].type!=='ability'&&X.O[v].type!=='spell'&&X.O[v].ctrl!==it!.pl&&/\[Deflect/.test(X.O[v].card.txt||'')).map((v:string)=>{const m=/\[Deflect(?: (\d+))?\]/.exec(X.O[v].card!.txt!);return X.O[v].name+' ('+(m&&m[1]?m[1]:1)+')';});
+    /* Deflect a lap szövegéből; a [Level N] sorban csak a controller N+ XP-je mellett aktív (824.1.c) */
+    const dfl=(v:string)=>{let n=0;let off='';(X.O[v].card!.txt||'').split('\n').forEach((l:string)=>{const m=/\[Deflect(?: (\d+))?\]/.exec(l);if(!m)return;const lv=/^\[Level (\d+)\]/i.exec(l);if(lv&&X.xpOf(X.O[v].ctrl!)<+lv[1]){off='[Level '+lv[1]+'] (XP: '+X.xpOf(X.O[v].ctrl!)+')';return;}n+=m[1]?+m[1]:1;});return {n,off};};
+    const tgD=s.tg.filter((v:string)=>v&&X.O[v]&&X.O[v].card&&X.O[v].type!=='ability'&&X.O[v].type!=='spell'&&X.O[v].ctrl!==it!.pl&&/\[Deflect/.test(X.O[v].card.txt||''));
+    tgD.filter((v:string)=>!dfl(v).n&&dfl(v).off).forEach((v:string)=>{X.rows+=X.line('824.1.c, 809.1.c',esc(X.O[v].name)+' Deflectje a '+esc(dfl(v).off)+' feltételhez kötött, és ez nem teljesül, ezért a kiválasztásáért nem kell plusz Powert fizetni.',0);});
+    const defl=tgD.filter((v:string)=>dfl(v).n>0).map((v:string)=>X.O[v].name+' ('+dfl(v).n+')');
     if(defl.length){s.defl=defl;X.rows+=X.line('809.1.c, 356.2.a','Deflect: '+esc(defl.join(', '))+' kiválasztásáért ennyi plusz Powert kell fizetni additional costként.',0);}
     let trigOK=!perm||!s.trig||s.cond!=='paid'||s.addc;
     if(perm&&s.trig&&s.cond==='facedown'&&s.from!=='facedown'){trigOK=false;X.rows+=X.line('383.2.a','A play trigger feltétele ("When you play me from face down") nem teljesül: nem facedown-ból játszották ki, ezért nem triggerel.',0);}
@@ -116,9 +131,13 @@ export function installBuild(X: EngineCtx) {
     X.story.push(Verb+' '+what.replace(/<[^>]+>/g,'')+(perm?', ami azonnal ide kerül: '+X.locLabel(X.O['s'+s.j].loc)+(s.trig&&trigOK?', a "When you play" hatása pedig a chainre':''):', ez a chain tetejére kerül')+'.');
     if(it.isTg&&s.tr&&s.tr.dk){it.dk=true;it.sent=!!(X.O[s.src!]&&X.O[s.src!].zone==='trash');}
     if(s.k==='ab'||s.k==='tg'||c.t==='Spell')X.chain.push(it);
+    { const su=s.src&&X.O[s.src]?X.O[s.src].type:'';const en=(it.tg||[]).filter((v:string)=>v&&X.O[v]&&X.O[v].zone==='board'&&(X.O[v].type==='unit'||X.O[v].type==='gear')&&X.O[v].ctrl!==it.pl);
+      if(en.length&&(s.k==='card'&&c.t==='Spell'||(s.k==='ab'||s.k==='tg')&&su==='unit')){const ch=X.CHOSE[it.pl]||(X.CHOSE[it.pl]={items:0,objs:0});ch.items++;ch.objs+=en.length;} }
+    if((s.k==='ab'||c.t==='Spell')&&it.tg&&it.tg.length)X.chooseTrigs(it,s.k==='card').forEach((t)=>{X.pushTrig(t);X.rows+=X.line('383.4.b, 383.4.b.2','Trigger: '+esc(t.label)+' '+t.why+'. A célpont kiválasztásakor triggerel, és a kiváltó elem fölé kerül.',0);X.story.push(Art(X.O[t.src!].name)+' triggerel a célpont kiválasztására.');});
     else if(s.trig&&trigOK)X.pushTrig(it);
     // unit és gear kijátszása azonnal resolve-ol (337.2), ezért a "When you play" triggerek most triggerelnek; spellnél csak a resolve-kor (420.4.a)
     if(s.k==='ab'&&s.ab)X.abTrigs(s).forEach((t)=>{X.pushTrig(t);X.rows+=X.line('206.1, 383.2','Trigger: '+esc(X.O[t.src!].name)+' '+t.why,1);X.story.push(Art(X.O[t.src!].name)+' triggerel az ability aktiválására.');});
+    if(perm&&c.t==='Unit'){const w=X.wmTrig('s'+s.j,s.pl!,(s.wm as string|undefined)||(s.tg||[]).find((v:string)=>X.O[v]&&X.O[v].type==='gear')||null);if(w){if(w.it)X.pushTrig(w.it);X.rows+=X.line('821.1.c, 821.1.c.3',w.txt,w.it&&w.it.wm?2:0);}}
     if(perm){X.playTrigs(s).forEach((t)=>{X.pushTrig(t);X.rows+=X.line('420.4.a, 337.2','Trigger: '+esc(X.O[t.src!].name)+' '+t.why+' A '+c.t.toLowerCase()+' kijátszása a resolve-jával befejeződött, ezért most triggerel.',1);X.story.push(Art(X.O[t.src!].name)+' képessége triggerel erre a kijátszásra, és a chainre kerül.');});}
     else if(s.k==='card'&&X.playTrigs(s).length)X.rows+=X.line('420.4.a, 420.4.a.1','A "When you play a spell" típusú triggerek ('+X.playTrigs(s).map((t)=>esc(t.label)).join(', ')+') csak akkor triggerelnek, amikor '+esc(c.n)+' resolve-ol; ha counterelik, nem triggerelnek.',0);
     // a költségből vagy kijátszásból keletkezett triggerek (Deathknell, leave, play) a kijátszott elem fölé kerülnek

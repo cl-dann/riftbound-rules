@@ -53,6 +53,8 @@ export type ChainStep = StepData & {
   ov?: Record<number, { k?: string; n?: number | null; lk?: boolean | null } | null>; cnd?: Record<number, boolean | string | null>;
   /** a hatásból kijátszott lap play triggerének célpontjai (ha nincs megadva, az első legális választás) */
   ptg?: string[];
+  /** Weaponmaster: a választott Equipment (821.1.c) */
+  wm?: string;
   accel?: boolean; addc?: boolean; erd?: string; pll?: Record<number, string | null>; mfrom?: string; dest?: string; eff?: string; why?: string; cb?: CombatResult;
 };
 /** A builder helyzete a további mezőkkel: játékállapot (ps), győzelmi pontszám (vs), kör vége (end), fázis. */
