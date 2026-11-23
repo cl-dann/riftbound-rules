@@ -1,0 +1,53 @@
+[
+ {
+  "n": "Acceleration Gate",
+  "a": [
+   "Acceleration Gate"
+  ],
+  "t": "Spell"
+ },
+ {
+  "n": "Acceptable Losses",
+  "a": [
+   "Acceptable Losses"
+  ],
+  "t": "Spell"
+ },
+ {
+  "n": "Adaptatron",
+  "a": [
+   "Adaptatron"
+  ],
+  "t": "Unit"
+ },
+ {
+  "n": "Affectionate Poro",
+  "a": [
+   "Affectionate Poro"
+  ],
+  "t": "Unit"
+ },
+ {
+  "n": "Akali, Rogue Assassin",
+  "a": [
+   "Akali, Rogue Assassin",
+   "Rogue Assassin"
+  ],
+  "t": "Legend"
+ },
+ {
+  "n": "Darius, Trifarian",
+  "a": [
+   "Darius, Trifarian"
+  ],
+  "t": "Unit"
+ },
+ {
+  "n": "Jinx, Loose Cannon",
+  "a": [
+   "Jinx, Loose Cannon",
+   "Loose Cannon"
+  ],
+  "t": "Legend"
+ }
+]

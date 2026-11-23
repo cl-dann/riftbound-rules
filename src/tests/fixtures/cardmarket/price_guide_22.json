@@ -1,0 +1,110 @@
+{
+ "version": 1,
+ "createdAt": "2026-11-22T02:44:20+0100",
+ "priceGuides": [
+  {
+   "idProduct": 898104,
+   "idCategory": 1,
+   "avg1": 1.49,
+   "avg7": 2.33,
+   "avg1-foil": 0.92,
+   "avg7-foil": 1.25
+  },
+  {
+   "idProduct": 847346,
+   "idCategory": 1,
+   "avg1": 0.44,
+   "avg7": 0.36,
+   "avg1-foil": 3.49,
+   "avg7-foil": 2.78
+  },
+  {
+   "idProduct": 847176,
+   "idCategory": 1,
+   "avg1": 0.16,
+   "avg7": 0.23,
+   "avg1-foil": 1.22,
+   "avg7-foil": 1.31
+  },
+  {
+   "idProduct": 897962,
+   "idCategory": 1,
+   "avg1": 0.03,
+   "avg7": 0.05,
+   "avg1-foil": 0.4,
+   "avg7-foil": 0.22
+  },
+  {
+   "idProduct": 898093,
+   "idCategory": 1,
+   "avg1": 0.15,
+   "avg7": 0.16,
+   "avg1-foil": 0.14,
+   "avg7-foil": 0.07
+  },
+  {
+   "idProduct": 898141,
+   "idCategory": 1,
+   "avg1": 312,
+   "avg7": 312,
+   "avg1-foil": 260,
+   "avg7-foil": 277.6
+  },
+  {
+   "idProduct": 898161,
+   "idCategory": 1,
+   "avg1": 2299,
+   "avg7": 459.86,
+   "avg1-foil": 1350,
+   "avg7-foil": 2093.22
+  },
+  {
+   "idProduct": 847142,
+   "idCategory": 1,
+   "avg1": 0.89,
+   "avg7": 1.5,
+   "avg1-foil": 1.16,
+   "avg7-foil": 1.21
+  },
+  {
+   "idProduct": 847143,
+   "idCategory": 1,
+   "avg1": 4.98,
+   "avg7": 6.9,
+   "avg1-foil": 5.04,
+   "avg7-foil": 4.6
+  },
+  {
+   "idProduct": 847451,
+   "idCategory": 1,
+   "avg1": 0.15,
+   "avg7": 0.23,
+   "avg1-foil": 0.17,
+   "avg7-foil": 0.23
+  },
+  {
+   "idProduct": 847503,
+   "idCategory": 1,
+   "avg1": 44.99,
+   "avg7": 44.99,
+   "avg1-foil": 97,
+   "avg7-foil": 111.3
+  },
+  {
+   "idProduct": 847504,
+   "idCategory": 1,
+   "avg1": 575,
+   "avg7": 630.83,
+   "avg1-foil": 1300,
+   "avg7-foil": 1982
+  },
+  {
+   "idProduct": 871239,
+   "idCategory": 1,
+   "avg1": null,
+   "avg7": null,
+   "avg1-foil": 1500,
+   "avg7-foil": 1054.75
+  }
+ ]
+}

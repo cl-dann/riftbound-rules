@@ -1,0 +1,118 @@
+{
+ "version": 1,
+ "createdAt": "2026-11-22T02:44:20+0100",
+ "products": [
+  {
+   "idProduct": 898104,
+   "name": "Acceleration Gate",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 6301,
+   "idMetacard": 0
+  },
+  {
+   "idProduct": 847346,
+   "name": "Acceptable Losses",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 5900,
+   "idMetacard": 0
+  },
+  {
+   "idProduct": 847176,
+   "name": "Adaptatron",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 5900,
+   "idMetacard": 0
+  },
+  {
+   "idProduct": 897962,
+   "name": "Affectionate Poro",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 6301,
+   "idMetacard": 0
+  },
+  {
+   "idProduct": 898093,
+   "name": "Akali, Rogue Assassin",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 6301,
+   "idMetacard": 0
+  },
+  {
+   "idProduct": 898141,
+   "name": "Akali, Rogue Assassin",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 6301,
+   "idMetacard": 0
+  },
+  {
+   "idProduct": 898161,
+   "name": "Akali, Rogue Assassin",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 6301,
+   "idMetacard": 0
+  },
+  {
+   "idProduct": 847142,
+   "name": "Darius, Trifarian",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 5900,
+   "idMetacard": 0
+  },
+  {
+   "idProduct": 847143,
+   "name": "Darius, Trifarian",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 5900,
+   "idMetacard": 0
+  },
+  {
+   "idProduct": 847451,
+   "name": "Jinx, Loose Cannon",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 5900,
+   "idMetacard": 0
+  },
+  {
+   "idProduct": 847503,
+   "name": "Jinx, Loose Cannon",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 5900,
+   "idMetacard": 0
+  },
+  {
+   "idProduct": 847504,
+   "name": "Jinx, Loose Cannon",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 5900,
+   "idMetacard": 0
+  },
+  {
+   "idProduct": 871239,
+   "name": "Jinx, Loose Cannon",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 5900,
+   "idMetacard": 0
+  },
+  {
+   "idProduct": 999001,
+   "name": "Fury Rune",
+   "idCategory": 1,
+   "categoryName": "Riftbound Single",
+   "idExpansion": 5900,
+   "idMetacard": 0
+  }
+ ]
+}
