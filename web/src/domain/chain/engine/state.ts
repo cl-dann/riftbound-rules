@@ -5,6 +5,8 @@ import { enterReadyCond } from '../conditions';
 import { stripRem } from '../text';
 import { other } from './labels';
 
+/** A saját magára vonatkozó "enter ready" sor (Bandle Soldier, Scorchclaw, Entrenched Boar): más unit belépésére nem hat. */
+const SELF_READY=/\b(?:I|me)\b[^.]*enter ready|enter ready\b[^.]*\bme\b/i;
 export function installState(X: EngineCtx) {
   X.bfBlocksBase=(l)=>X.BF[l!]&&X.BF[l!].c&&/can.t move from here to base/i.test(X.BF[l!].c!.txt||'');
   X.bfBlocksPlay=(l)=>X.BF[l!]&&X.BF[l!].c&&/can.t be played here/i.test(X.BF[l!].c!.txt||'');
@@ -50,7 +52,9 @@ export function installState(X: EngineCtx) {
       else if(/^Other units enter ready\b/i.test(l))yes(o.name+': "'+l+'", 143.4.a');
       else if(/^Your tokens enter ready\b/i.test(l)&&o.ctrl===pl&&isTok)yes(o.name+': "'+l+'", 143.4.a');
       else if(/^Units you play to battlefields you control enter ready\b/i.test(l)&&o.ctrl===pl&&loc&&loc!=='base'&&X.BF[loc]&&X.BF[loc].ctrl===pl)yes(o.name+': "'+l+'", 143.4.a');
-      else if(/enter ready\b/i.test(l)&&o.ctrl===pl&&!/^I enter ready|^If |^I enter ready if/i.test(l)&&!/^(?:Other friendly units|Other units|Your tokens|Units you play to battlefields you control) enter ready/i.test(l))nt.push(o.name+' ("'+l+'")');});});
+      /* Master Yi, Wuju Master: "[Level 11] Your units enter ready" a controller XP-jéből (a Játékállapot kezdőértéke plusz a lépések) */
+      else if(/^\[Level (\d+)\]\s*(?:\[>\]\s*)?Your units enter ready\b/i.test(l)&&o.ctrl===pl){const lv=+(/^\[Level (\d+)\]/i.exec(l)![1]);if(X.xpOf(pl)>=lv)yes(o.name+': "'+l+'" (XP: '+X.xpOf(pl)+'), 143.4.a');}
+      else if(/enter ready\b/i.test(l)&&!SELF_READY.test(l)&&o.ctrl===pl&&!/^I enter ready|^If |^I enter ready if/i.test(l)&&!/^(?:Other friendly units|Other units|Your tokens|Units you play to battlefields you control) enter ready/i.test(l))nt.push(o.name+' ("'+l+'")');});});
     if(nt.length&&!out.ready)out.note=(out.note?out.note+' ':'')+'<span class="cbuns">nem követett ready belépés</span>: '+esc(nt.join(', '))+'; ha él, a unit ready lép be.';
     return out;};
 }
