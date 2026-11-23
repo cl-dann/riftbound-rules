@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { vsCard } from '../../domain/data/store';
-import { chainActions, type TrigAdd } from './store';
+import { chainActions, getCS, type TrigAdd } from './store';
+import { abilitiesFor } from './chainBuild';
+import { combatTrigs, isCombatOpenTrig } from '../../domain/combat/combatTrig';
+import type { ChainStep } from '../../domain/chain/state';
 import type { PBoard, PUnit } from '../../shared/board/Playmat';
 import { ALL, DEF_OPT, cm, need, check, suggest, dealt, lethalHit, type Side, type Opt, type Sug, type CU } from '../../domain/combat/combatCore';
 
@@ -215,6 +218,17 @@ export function CombatPanel({ board, frameLabel, bfi, isLast = true, focus }: { 
       const m = /^\[Deathknell\]\s*(?:\[>\])?\s*[^A-Za-z[]*\s*(.*)$/.exec(clean(l));
       if (m) trig.push({ key: 'dk:' + u.id, n: u.n, src: u.uid, pl: u.side === 'me' ? 'A' : 'B', eff: m[1], why: 'Deathknell', loc, r: '808.1.c' });
     }
+    /* "When I die in combat" a combatban meghaló unitokon */
+    for (const u of dead) for (const t of combatTrigs(txtOf(u.n), 'dieInCombat')) trig.push({ key: 'dc:' + u.id, n: u.n, src: u.uid, pl: u.side === 'me' ? 'A' : 'B', eff: t.eff, why: 'When I die in combat', loc, r: '468.3.b, 383.2.c.3' });
+    /* combat győzelem (468.3.a): csak ha egyedül a győztes játékosnak maradt unitja; No Result esetén nincs győztes (468.3.d) */
+    const won: Side | null = sA.length && !sD.length ? atk : sD.length && !sA.length ? def : null;
+    if (won) {
+      const pl = won === 'me' ? 'A' : 'B';
+      for (const u of (won === atk ? sA : sD)) for (const t of combatTrigs(txtOf(u.n), 'winI')) trig.push({ key: 'wi:' + u.id + t.line, n: u.n, src: u.uid, pl, eff: t.eff, why: 'When I win a combat', loc, r: '468.3.a, 468.3.c' });
+      const wl = board[won].legend; const wc: { n: string; src: string }[] = wl ? [{ n: wl, src: 'L' + pl }] : [];
+      (board[won].base || []).forEach((x) => wc.push({ n: x.n, src: x.id || '' })); bfs.forEach((b) => ((b[won] || []) as PUnit[]).forEach((x) => wc.push({ n: x.n, src: x.id || '' })));
+      for (const c of wc) for (const t of combatTrigs(txtOf(c.n), 'winYou')) trig.push({ key: 'wy:' + c.n + c.src + t.line, n: c.n, src: c.src, pl, eff: t.eff, why: 'When you win a combat', loc, r: '468.3.a' });
+    }
     const w = winner as Side | null;
     if (w && conquer) {
       const pl = w === 'me' ? 'A' : 'B';
@@ -255,6 +269,15 @@ export function CombatPanel({ board, frameLabel, bfi, isLast = true, focus }: { 
 
   if (!bfs.length) return null;
   const contested = A.length > 0 && D.length > 0;
+  /* Attack és defend triggerek (383.4.e, 383.4.f): a combat megnyitásakor a chainre, előbb az attacker, utána a defender teszi fel (466.2.d.1) */
+  const adTrig: { key: string; n: string; why: string; pl: 'A' | 'B'; st: ChainStep }[] = [];
+  if (contested) for (const [u, role] of [...A.map((u) => [u, 'atk'] as const), ...D.map((u) => [u, 'def'] as const)]) {
+    if (!/^(?:[bs]\d+|L[AB])$/.test(u.uid)) continue;
+    const { c, trs } = abilitiesFor(getCS(), u.uid); if (!c) continue;
+    trs.forEach((t, ti) => { const w = String(t.why || ''); const ok = isCombatOpenTrig(w, role);
+      if (ok) adTrig.push({ key: 'ad:' + u.uid + ':' + ti, n: c.n, why: w, pl: u.side === 'me' ? 'A' : 'B', st: { k: 'tg', src: u.uid, ti, pl: u.side === 'me' ? 'A' : 'B', n: c.n, tg: [], ext: {} } }); });
+  }
+  const addAD = () => chainActions().commit((cs) => { const at = cs.steps.findIndex((x) => x.k === 'tr'); const ins = adTrig.map((t) => JSON.parse(JSON.stringify(t.st)) as ChainStep); cs.steps.splice(at < 0 ? cs.steps.length : at, 0, ...ins); setAdded((a) => ({ ...a, ...Object.fromEntries(adTrig.map((t) => [t.key, true])) })); });
   return (
     <details className="panel pad cbc cb2-blk" ref={det} id="cb-combat">
       <summary><h2>Combat kiosztás</h2><span className="note">damage kiosztás egy battlefielden</span></summary>
@@ -269,6 +292,10 @@ export function CombatPanel({ board, frameLabel, bfi, isLast = true, focus }: { 
         <p className="note"><R r="463, 467.1" /> Ezen a battlefielden nincs mindkét oldalon unit, így itt nincs combat.</p>
       ) : (
         <>
+          {adTrig.length > 0 && <div className="cbc-trig" data-ad="1"><b>A combat megnyitásakor triggerel</b>
+            <ul>{adTrig.map((t) => <li key={t.key}><R r="383.4.e, 383.4.f, 466.2.d.1" /><span><span className="cl" data-card={t.n}>{t.n}</span> ({t.pl === 'A' ? 'te' : 'ellenfél'}): {t.why}</span>{added[t.key] && <span className="cbc-on">hozzáadva</span>}</li>)}</ul>
+            {adTrig.some((t) => !added[t.key]) && <button type="button" className="btn sec cbc-apply" onClick={addAD}>Attack és defend triggerek a chainre</button>}
+            <p className="note">A combat showdown chainje: a triggereket az attacker teszi fel először, utána a defender (466.2.d.1), ezért a defenderé resolve-ol előbb. A lépések a combat utáni triggerek elé kerülnek; a chain lefutása után jön a combat damage.</p></div>}
           <p className="cbc-sum"><R r="467.2.a, 467.2.b, 424.1.b, 143.2.c, 807.1.c, 814.1.c" /> Attacker összesített Might: <b>{pA}</b> ({who(atk)}), defender összesített Might: <b>{pD}</b> ({who(def)}). Stunned unit nem ad damage-et, a negatív Might 0-nak számít. Az Assault csak attackernél, a Shield csak defendernél ad Mightot.</p>
           <div className="cbc-grid">
             <SideTable title={'Defender unitok (' + who(def) + ')'} units={D} role="def" asg={asg} setAsg={setAsg} setOpt={setOpt} bonusLbl="Shield" assigner={who(atk) + ' (attacker)'} pool={pA} errs={any ? eD : []} />
@@ -289,7 +316,7 @@ export function CombatPanel({ board, frameLabel, bfi, isLast = true, focus }: { 
                     {!isLast && <p className="note"><span className="cbuns">figyelem</span> A kiosztás nem a Végállapot lépés boardjából készült, a triggerek viszont a chain lefutása után jönnek. Pontosabb, ha a lejátszás utolsó lépésén osztod ki a damage-et.</p>}
                     <p className="note">A Conquer triggerek csak akkor jönnek, ha a kontrollszerzés valóban Conquer (ebben a körben még nem scorolta a battlefieldet). A felvett trigger a builder végére kerül: a chain lefutása után a lejátszás a fenti combat eredményt alkalmazza, majd a triggereket egy új chainen futtatja.</p>
                   </>
-                ) : <p className="note">Nem látok Deathknell vagy Conquer triggert a meghaló, illetve a conquerelő játékos lapjain.</p>}
+                ) : <p className="note">Nem látok Deathknell, Conquer vagy combat győzelemre szóló triggert a meghaló, a győztes, illetve a conquerelő játékos lapjain.</p>}
               </div>
             </div>
           )}
