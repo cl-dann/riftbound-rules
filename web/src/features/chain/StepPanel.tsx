@@ -17,7 +17,7 @@ export function StepPanel({ j, csv, onTarget, onClose, bad, onInsert, onHand, on
   useEffect(() => () => chainActions().quick(null, -1), []);
   if (!s) return null;
   const nm = stepName(CS, s);
-  const inf = s.k === 'res' || s.k === 'end' ? null : stepInfo(CS, s);
+  const inf = s.k === 'res' || s.k === 'end' || s.k === 'next' ? null : stepInfo(CS, s);
   const list: TargetParam[] = inf?.list || [];
   const lbl = (ti: number, v: string) => { if (!v) return 'nincs kiválasztva'; if (v === 'x') return 'pályán kívüli (Haladó szerkesztés)'; const o = tgOptionsOf(CS, j, list[ti]).find((x) => x[0] === v); return o ? String(o[1]).replace(/^Board: /, '') : v; };
   const setPl = (p: 'A' | 'B') => chainActions().commit((cs) => { cs.steps[j].pl = p; }, 0);
@@ -28,6 +28,7 @@ export function StepPanel({ j, csv, onTarget, onClose, bad, onInsert, onHand, on
       {bad[0] === 'bad' && <p className="pb-why">Nem szabályos, kimarad: {bad[1]}</p>}{bad[0] === 'need' && <p className="pb-why cb2-need">{bad[1]}</p>}
       {s.k === 'res' && <p className="note">Mindkét játékos passzol: a chain legfelső eleme most resolve-ol (340.1), a következő lépések már erre az állapotra épülnek.</p>}
       {s.k === 'end' && <p className="note">A chain lefut, majd jön az Ending Phase: a kör végi hatások triggerelnek (317.1), utána Expiration Step (317.2).</p>}
+      {s.k === 'next' && <p className="note">A kör véget ér (317), utána a következő játékos köre a Main Phase elejéig: Awaken (315.1), Beginning Phase a Temporary és a hold triggerekkel (315.2, 816.1.b, 383.4.d), Channel (315.3), Draw (315.4), a Main Phase eleji és a "start of your next Main Phase" delayed triggerek (391.2). Ez az utolsó lépés.</p>}
       {(s.k === 'card' || s.k === 'ab') && (
         <div className="cb2-seg" role="group" aria-label="Ki játssza"><span>Ki:</span>
           {(['A', 'B'] as const).map((p) => <button key={p} type="button" aria-pressed={s.pl === p} className={s.pl === p ? 'on' : ''} onClick={() => setPl(p)}>{p === 'A' ? 'Te' : 'Ellenfél'}</button>)}</div>

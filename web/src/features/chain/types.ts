@@ -5,7 +5,7 @@ export type PickAt = { kind: PickKind; side?: 'me' | 'opp'; loc?: string; bfi?: 
 /* ---------- akció-menü ---------- */
 export type MItem = { label: string; run?: () => void; dis?: string; ref?: string; tone?: string; need?: string; step?: boolean };
 export type Menu = { title: string; card?: string; sub?: string; items: MItem[]; key: string };
-export type Wiz = { st: 'card' | 'action' | 'target' | 'extra'; j?: number; menu?: Menu; pick?: string; side: 'me' | 'opp'; preset?: 'res' | 'end'; hadT?: boolean };
+export type Wiz = { st: 'card' | 'action' | 'target' | 'extra'; j?: number; menu?: Menu; pick?: string; side: 'me' | 'opp'; preset?: 'res' | 'end' | 'next'; hadT?: boolean };
 export type Mode =
   | { k: 'target'; j: number; ti: number }
   | { k: 'move'; uid: string; n: string; dests: string[]; std: boolean }

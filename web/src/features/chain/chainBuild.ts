@@ -128,6 +128,7 @@ export function slotText(p: TargetParam, ti: number) {
 export function stepName(CS: ChainState, s: Step): { n: string; img?: string; kind: string } {
   if (s.k === 'res') return { n: 'Resolve', kind: 'a chain teteje lefut' };
   if (s.k === 'end') return { n: 'Kör vége', kind: 'Ending Phase' };
+  if (s.k === 'next') return { n: 'Következő kör', kind: 'a kör eleje a Main Phase-ig' };
   if (s.k === 'tr') return { n: s.n || '?', img: s.n, kind: 'combat utáni trigger' };
   if (s.k === 'ab' || s.k === 'tg') {
     const inf = stepInfo(CS, s); const n = inf?.c?.n || s.n || '';
@@ -179,7 +180,7 @@ export function searchCards(k: PickKind, q: string, limit = 60): Card[] {
 /** A lépés kézből, trashből vagy deckből választó utasításai (a deck felső lapja automatikus, azt nem kell választani). */
 export type ZPick = { xi: number; zr: ZoneRef; t: string };
 export function zonePicks(CS: ChainState, j: number): ZPick[] {
-  const s = CS.steps[j]; if (!s || s.k === 'res' || s.k === 'end') return [];
+  const s = CS.steps[j]; if (!s || s.k === 'res' || s.k === 'end' || s.k === 'next') return [];
   const inf = stepInfo(CS, s); if (!inf?.eff) return [];
   return interp(s, inf).map((x, xi) => ({ xi, zr: zoneRefOf(x.t, inf.c?.n) as ZoneRef, t: x.t })).filter((z) => z.zr && !(z.zr.z === 'deck' && z.zr.top && z.zr.act !== 'banishEach'));
 }

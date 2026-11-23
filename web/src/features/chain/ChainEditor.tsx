@@ -516,12 +516,13 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
         <button type="button" className="btn sec" onClick={() => setPick({ kind: 'play', side: lastPl(), sideFree: true })}>Lap kereséssel</button>
         <button type="button" className="btn sec" onClick={() => addStep({ k: 'res' })}>Resolve</button>
         <button type="button" className="btn sec" onClick={() => addStep({ k: 'end' })}>Kör vége</button>
+        <button type="button" className="btn sec" onClick={() => addStep({ k: 'next' })}>Következő kör</button>
         <button type="button" className="btn" onClick={() => setIns(null)}>Mégse</button>
       </div></div>
   ) : null;
   /* ---- mobilos lépés-varázsló (csak keskeny nézetben) ---- */
   const sideBefore = (at: number | null) => { const l = CS.steps.slice(0, at ?? CS.steps.length).reverse().find((x) => x.k === 'card' || x.k === 'ab'); return l ? (l.pl === 'A' ? 'opp' : 'me') : 'me'; };
-  function openWiz(preset?: 'res' | 'end', at: number | null = ins) { setMsg(''); setMenu(null); setPick(null); setMode(null); setSel(null); setWiz({ st: preset ? 'action' : 'card', side: sideBefore(at), preset }); }
+  function openWiz(preset?: 'res' | 'end' | 'next', at: number | null = ins) { setMsg(''); setMenu(null); setPick(null); setMode(null); setSel(null); setWiz({ st: preset ? 'action' : 'card', side: sideBefore(at), preset }); }
   const wizEnd = (msg?: string) => { chainActions().quick(null, -1); setWiz(null); setIns(null); setMode(null); if (msg) setMsg(msg); };
   const wizCancel = () => { const w = wiz; wizEnd(); if (w?.j != null && CS.steps[w.j]) { jump.current = 'keep'; chainActions().delStep(w.j); } };
   const wizBack = () => {
@@ -545,7 +546,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
   }, [wiz?.st, wiz?.j]); // eslint-disable-line react-hooks/exhaustive-deps
   const pickSt = (n: string, side: 'me' | 'opp') => { const c = cardOf(n); return { k: 'card', n, pl: plOf(side), from: 'hand', ...(isPerm(c) ? { loc: 'base' } : {}), tg: [], ext: {} }; };
   const wItems: MItem[] = !narrow || !wiz || wiz.st !== 'action' ? [] : wiz.preset
-    ? [{ label: wiz.preset === 'res' ? 'Resolve: a chain teteje most lefut' : 'Kör vége: Ending Phase', ref: wiz.preset === 'res' ? '340.1' : '317.1', step: true, run: () => addStep({ k: wiz.preset! }) }]
+    ? [{ label: wiz.preset === 'res' ? 'Resolve: a chain teteje most lefut' : wiz.preset === 'next' ? 'Következő kör: a kör vége után a következő kör eleje a Main Phase-ig' : 'Kör vége: Ending Phase', ref: wiz.preset === 'res' ? '340.1' : wiz.preset === 'next' ? '315' : '317.1', step: true, run: () => addStep({ k: wiz.preset! }) }]
     : wiz.pick ? [playItem(pickSt(wiz.pick, wiz.side), 'Kijátszás')] : (wiz.menu?.items || []);
   const WST = { card: 1, action: 2, target: 3, extra: 4 } as const;
   const wHead = (t: string) => (
@@ -576,10 +577,10 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
           <li key={c.n}><button type="button" onClick={() => { setWq(''); setWiz({ ...wiz, st: 'action', pick: c.n, menu: undefined }); }}>
             {c.img ? <img src={IMGBASE + c.img} alt="" /> : <span className="cb2-noimg" />}<span className="cb2-rn"><b>{c.n}</b><small>{c.t}{c.e != null ? ' · ' + c.e + ' Energy' : ''}</small></span>
           </button></li>))}{!wres.length && <li className="note">Nincs találat.</li>}</ul>}
-        <div className="cb2-wbb"><button type="button" className="btn sec" onClick={() => setWiz({ ...wiz, st: 'action', preset: 'res' })}>Resolve</button><button type="button" className="btn sec" onClick={() => setWiz({ ...wiz, st: 'action', preset: 'end' })}>Kör vége</button></div>
+        <div className="cb2-wbb"><button type="button" className="btn sec" onClick={() => setWiz({ ...wiz, st: 'action', preset: 'res' })}>Resolve</button><button type="button" className="btn sec" onClick={() => setWiz({ ...wiz, st: 'action', preset: 'end' })}>Kör vége</button><button type="button" className="btn sec" onClick={() => setWiz({ ...wiz, st: 'action', preset: 'next' })}>Következő kör</button></div>
       </>}
       {wiz.st === 'action' && <>
-        {wHead(wiz.preset ? (wiz.preset === 'res' ? 'Resolve' : 'Kör vége') : (wiz.pick || wiz.menu?.title || '') + ': akció')}
+        {wHead(wiz.preset ? (wiz.preset === 'res' ? 'Resolve' : wiz.preset === 'next' ? 'Következő kör' : 'Kör vége') : (wiz.pick || wiz.menu?.title || '') + ': akció')}
         {wiz.menu?.sub && <p className="note">{wiz.menu.sub}</p>}
         {wiz.pick && <div className="cb2-seg" role="group" aria-label="Ki játssza ki"><span>Ki:</span>
           {(['me', 'opp'] as const).map((x) => <button key={x} type="button" aria-pressed={wiz.side === x} className={wiz.side === x ? 'on' : ''} onClick={() => setWiz({ ...wiz, side: x })}>{x === 'me' ? 'Te' : 'Ellenfél'}</button>)}</div>}
@@ -680,7 +681,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
                   <span className="cb2-grip" aria-hidden><GripVertical size={14} /></span>
                   <button type="button" className="cb2-sb" onClick={() => { setSel(sel === j ? null : j); if (sf[j] != null) { setPlay(false); setI(sf[j]); } }} aria-expanded={sel === j} aria-description={(j + 1) + '. lépés szerkesztése: ' + nm.n}>
                     <span className="no">{j + 1}.</span>
-                    {nm.img && imgOf(nm.img) ? <img src={imgOf(nm.img)} alt="" /> : <span className="cb2-kimg">{s.k === 'res' ? 'R' : s.k === 'end' ? 'K' : '?'}</span>}
+                    {nm.img && imgOf(nm.img) ? <img src={imgOf(nm.img)} alt="" /> : <span className="cb2-kimg">{s.k === 'res' ? 'R' : s.k === 'end' ? 'K' : s.k === 'next' ? 'Ú' : '?'}</span>}
                     <span className="cb2-st"><b>{nm.n}</b><small>{s.k === 'card' || s.k === 'ab' ? (s.pl === 'A' ? 'Te' : 'Ellenfél') + ', ' : ''}{nm.kind}{j === 0 && s.k === 'card' ? ', első lépés' : ''}</small>
                       {(stt === 'bad' || stt === 'need') && <small className={'cb2-' + stt}>{why}</small>}</span>
                   </button>
@@ -698,6 +699,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
             <button type="button" className="btn sec" onClick={() => (narrow ? openWiz() : setPick({ kind: 'play', side: lastPl(), sideFree: true }))}><Plus size={14} /> Lap a chainre</button>
             <button type="button" className="btn sec" onClick={() => (narrow ? openWiz('res') : addStep({ k: 'res' }))} title="Mindkét játékos passzol: a chain teteje most lefut (340.1)">+ Resolve</button>
             <button type="button" className="btn sec" onClick={() => (narrow ? openWiz('end') : addStep({ k: 'end' }))} title="A chain lefut, majd Ending Phase (317)">+ Kör vége</button>
+            <button type="button" className="btn sec" onClick={() => (narrow ? openWiz('next') : addStep({ k: 'next' }))} title="A kör vége után a következő kör eleje: Awaken, Beginning (hold), Channel, Draw, a Main Phase eleje (315, 391.2)">+ Következő kör</button>
           </div>
           {selStep && <StepPanel j={sel!} csv={csv} onTarget={(ti) => setMode({ k: 'target', j: sel!, ti })} onClose={() => setSel(null)} bad={stepStatus(sel!)}
             onInsert={(k) => { setMode(null); setIns(k); if (narrow) openWiz(undefined, k); }} onZone={(xi) => setMode({ k: 'zpick', j: sel!, xi })} onHand={(f, xi) => { const st = CS.steps[sel!]; setIns(null); setMode({ k: 'hpick', j: sel!, f, xi, side: sideOf(st.pl || 'A'), unit: f === 'so' }); }} />}
