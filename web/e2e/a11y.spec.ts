@@ -31,7 +31,7 @@ test('axe: kártyamodál', async ({ page }) => {
 
 test('axe: Chain akció-menü', async ({ page }) => {
   await page.goto('/#chain');
-  await page.locator('#cb-ex').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex').click();
   await page.locator('.pm-unit[data-uid="b0"]').first().click();
   await expect(page.locator('.cb2-menu').first()).toBeVisible();
   await check(page, 'chain-menu');

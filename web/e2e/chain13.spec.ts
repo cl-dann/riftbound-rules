@@ -1,18 +1,23 @@
 import { expect, test } from '@playwright/test';
 
-/* Nehéz példák: a panel kategóriánként, kereshetően, jelvénnyel; egy példa betöltése asztalon és keskeny nézetben. */
+/* Példák: egyetlen panel (beépített példák, sablonok, gyakori kérdések) kategóriánként, kereshetően, jelvénnyel; egy példa betöltése asztalon és keskeny nézetben. */
 const errs: string[] = [];
 test.beforeEach(({ page }) => { page.on('pageerror', (e) => errs.push(e.message)); });
 test.afterEach(() => { expect(errs).toEqual([]); errs.length = 0; });
 
 for (const w of [1300, 390]) {
-  test('Nehéz példák: keresés és betöltés (' + w + ' px)', async ({ page }) => {
+  test('Példák: keresés és betöltés (' + w + ' px)', async ({ page }) => {
     await page.setViewportSize({ width: w, height: w > 700 ? 900 : 844 });
     await page.goto('/#chain');
-    await page.getByRole('button', { name: 'Nehéz példák' }).click();
-    const panel = page.getByRole('region', { name: 'Nehéz példák' });
+    await page.getByRole('button', { name: 'Példák', exact: true }).click();
+    const panel = page.getByRole('region', { name: 'Példák', exact: true });
     await expect(panel).toContainText('Legendek: felhasználói tier list, 2026-11-23');
     await expect(panel.locator('.cb2-hex').first()).toBeVisible();
+    // egy helyen: beépített példák, sablonok (a Rek'Sai sablonokkal) és a kérdés formájú példák; a "nehéz" szó nem szerepel
+    await expect(panel.locator('#cb-ex')).toBeVisible();
+    await expect(panel.locator('[data-tpl="counter"]')).toBeVisible();
+    await expect(panel.locator('[data-tpl="reksai-queen"]')).toBeVisible();
+    await expect(panel).not.toContainText(/nehéz/i);
     await expect(panel.locator('[data-hex="yi-defy"] .cb2-tier').first()).toContainText('Master Yi · S (2v2-ben tiltott)');
     await panel.getByRole('searchbox').fill('Kennen Switcheroo');
     await expect(panel.locator('.cb2-hex')).toHaveCount(1);
@@ -29,9 +34,9 @@ for (const w of [1300, 390]) {
   });
 }
 
-test('Nehéz példák: flag 2 példa mindkét értelmezéssel', async ({ page }) => {
+test('Példák: flag 2 példa mindkét értelmezéssel', async ({ page }) => {
   await page.goto('/#chain');
-  await page.getByRole('button', { name: 'Nehéz példák' }).click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click();
   const ex = page.locator('[data-hex="azir-weaponmaster"]');
   await ex.locator('summary').click();
   await expect(ex.locator('.cb2-hex-alt li')).toHaveCount(2);

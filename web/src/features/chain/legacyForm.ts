@@ -19,14 +19,12 @@ import type { ChainFrame } from './chainBuild';
 import { chainFromLink } from '../../domain/chain/link';
 import { bumpChain, chainStore, type ChainActions } from './store';
 import { locsOf, locLabelOf, bdLabelOf, tgOptionsOf, stateKeysOf, normZones, reorderSteps } from '../../domain/chain/cs';
-import { EXAMPLES } from '../../domain/chain/examples';
 const $=(id:string)=>document.getElementById(id) as HTMLElement;
 const openModal=(c:Card)=>openCard(c.n);
 const hideTip=()=>emit('rb:hide-tip');
 export const CHAIN_MARKUP=`<div class="cb2">
       <div class="cb2-bar">
         <div class="cb2-ex" id="cb-tplslot"></div>
-        <div class="cb2-exs" role="group" aria-label="Példa betöltése"><span class="cb2-tbl">Példák:</span><div class="seg cb2-exseg"><button type="button" id="cb-ex" title="Példa betöltése: alap chain">Alap</button><button type="button" id="cb-ex2" title="Példa betöltése: kontrollváltás">Kontrollváltás</button><button type="button" id="cb-ex3" title="Példa betöltése: gear leválás">Gear leválás</button></div></div>
         <div class="cb2-tbr"><button type="button" class="btn sec" id="cb-link">Helyzet linkként</button><button type="button" class="btn ghost danger" id="cb-clear">Minden törlése</button></div>
         <div class="status" id="cb-linkst" role="status"></div>
       </div>
@@ -255,8 +253,7 @@ api.addTriggers=(list,cb)=>{if(!list.length)return;list.forEach(t=>CS.steps.push
 $('cb-add').addEventListener('click',()=>{const l=CS.steps[CS.steps.length-1];CS.steps.push({k:'card',n:'',pl:l&&l.pl==='A'?'B':'A',tg:[],ext:{}});renderCB();});
 const EMPTY=()=>({lg:{A:'',B:''},bf:[{n:'',c:''},{n:'',c:''}],bd:[],steps:[],hand:{A:[],B:[]},ch:{A:'',B:''}});
 $('cb-clear').addEventListener('click',()=>{setInternal(false);setCS(EMPTY());renderCB();runCB();});
-const loadEx=(k:string)=>{setInternal(false);setCS(EXAMPLES[k]());renderCB();runCB();};
-$('cb-ex').addEventListener('click',()=>loadEx('base'));$('cb-ex2').addEventListener('click',()=>loadEx('ctrl'));$('cb-ex3').addEventListener('click',()=>loadEx('gear'));
+
 $('cb-link').addEventListener('click',async()=>{const u=location.origin+location.pathname+'#c='+b64e(JSON.stringify(CS));const st=$('cb-linkst');
   try{await navigator.clipboard.writeText(u);st.textContent='A link a vágólapra került. Megnyitva ugyanez a helyzet töltődik be.';}catch{st.textContent='Másold ki: '+u;}});
 const W=window as unknown as {__setCS:(s:ChainState)=>void;__getCS:()=>ChainState};W.__setCS=s=>{setCS(normZones(s));renderCB();runCB();};W.__getCS=()=>CS;

@@ -9,7 +9,7 @@ for (const w of [1300, 390]) {
   test("Rek'Sai sablon (" + w + ' px)', async ({ page }) => {
     await page.setViewportSize({ width: w, height: w > 700 ? 900 : 844 });
     await page.goto('/#chain');
-    await page.getByRole('button', { name: 'Sablonok' }).click();
+    await page.getByRole('button', { name: 'Példák', exact: true }).click();
     await page.locator('[data-tpl="reksai-sanctum"] .btn', { hasText: 'Betöltés' }).click();
     const out = page.locator('#cb-out');
     await expect(out).toContainText('Chemtech Enforcer: megnézett lapok közül recycle');

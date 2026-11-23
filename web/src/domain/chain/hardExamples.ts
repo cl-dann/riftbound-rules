@@ -1,4 +1,4 @@
-/* "Nehéz példák": gyakori, nehéz szabálykérdések valós helyzetekben, a felhasználói tier list (2026-11-23) S és A legendjeihez.
+/* Kérdés formájú példák (a "Példák" panelben): gyakori szabálykérdések valós helyzetekben, a felhasználói tier list (2026-11-23) S és A legendjeihez.
    A lapok versenyen játszott decklistákból valók (a hivatalos Riot "Top Decks" cikkek, playriftbound.com; ahol nincs ilyen deck,
    a riftbound.gg guide), a példa leírása megnevezi a forrás decket, a linket és a dátumot. A 2026-11-23-án kitiltott lapok
    (Riven, Broken Blade; Zhonya's Hourglass; Stellacorn Herder; Nocturne, Horrifying; Rhasa the Sunderer; Brynhir Thundersong;
