@@ -77,7 +77,8 @@ export function phrasesTxt(e:string){
     const before=e.slice(Math.max(0,m.index-14),m.index);const tail=e.slice(m.index+m[0].length,m.index+m[0].length+90);const adj=(m[3]||'').toLowerCase();
     if(/\bplay\s*$/i.test(before)&&(/^[^.]*?\btokens?\b/i.test(tail)||/^\s*(?:from|you control|with)\b/i.test(tail)||ty==='spell'))continue; // kijátszás vagy token, nem célpont
     if(/\[Show Off\]\s*$|showed off\s*$|\bchooses\s*$/i.test(before))continue;
-    if(!LEGACY&&inCondClause(e,m.index))continue; // feltétel-tagmondat, nem célpont
+    const notTg=(i:number,tl:string)=>inCondClause(e,i)||/^\s*banished with (?:this|me)\b/i.test(tl); // feltétel-tagmondat; a forrással banishelt lap (nem a board lapja)
+    if(!LEGACY&&notTg(m.index,tail))continue;
     if(/\bamong them\s*$/i.test(before))continue; // a megnézett lapok közül választás, nem célpont (128.4, 355.10.a) // Show Off választás (832), nem célpont
     if(/^\s*token\b/i.test(tail)||/\b(?:it's|it is|is|was|that's|as|becomes?)\s*$/i.test(before))continue; // feltétel, nem célpont
     if(/^\s*or (?:units?|gear|spells?) from among them\b/i.test(tail))continue; // a megnézett lapok közül választás, nem célpont
@@ -92,7 +93,7 @@ export function phrasesTxt(e:string){
       same:/\bat the same (?:battlefield|location)\b/i.test(sent)||!!totM,totalMax:totM?+totM[1]:null,opt:!!m[2]||q==='any number of',
       here:/^\s*(?:you control\s+|an opponent controls\s+)?(?:here|there)\b/i.test(sent),free:/\bat (?:another|a different) location\b/i.test(sent),
       base:/^\s*(?:you control\s+)?in (?:a|your|their|its owner's) base\b/i.test(sent),eq:/equipped/.test(adj)||raw==='equipment',equipOnly:raw==='equipment',
-      ...(costCondOf(sent)?{cost:costCondOf(sent)}:{}),mighty:/mighty/.test(adj),another:q==='another'||/\bother\b/.test(adj),attacking:/attacking/.test(adj),stunned:/stunned/.test(adj),any:q==='any number of',orAb:ty==='spell'&&/^\s*or abilit/i.test(tail),chooseOnly:/^[^.]*\bthat chooses it and no other friendly unit\b/i.test(tail),...(LEGACY&&inCondClause(e,m.index)?{cond:true}:{}),...(/^\s*(?:you control\s+|an opponent controls\s+)?there\b/i.test(sent)?{there:true}:{})};
+      ...(costCondOf(sent)?{cost:costCondOf(sent)}:{}),mighty:/mighty/.test(adj),another:q==='another'||/\bother\b/.test(adj),attacking:/attacking/.test(adj),stunned:/stunned/.test(adj),any:q==='any number of',orAb:ty==='spell'&&/^\s*or abilit/i.test(tail),chooseOnly:/^[^.]*\bthat chooses it and no other friendly unit\b/i.test(tail),...(LEGACY&&notTg(m.index,tail)?{cond:true}:{}),...(/^\s*(?:you control\s+|an opponent controls\s+)?there\b/i.test(sent)?{there:true}:{})};
     for(let i=0;i<Math.min(n,totM?6:3);i++)out.push(Object.assign({},p,{opt:p.opt||(i>0&&!!m[2])}));}
   if(splitP){const dn=/\bdeal (\d+) damage split\b/i.exec(e);const slots=dn?Math.min(10,+dn[1]+3):10;for(let i=0;i<slots;i++)out.push(Object.assign({},splitP));}
   return out;

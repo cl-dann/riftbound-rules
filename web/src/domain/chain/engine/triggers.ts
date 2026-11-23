@@ -29,7 +29,9 @@ export function installTriggers(X: EngineCtx) {
     ctrls.forEach((p)=>{const own=byP(p);if(own.length>1){const L=X.line('383.3.d','Egyszerre triggerelt, azonos controller ('+WHO[p]+'): '+own.map((t)=>esc(t.label)).join(', ')+'. A sorrendet '+WHO[p]+' választja; az elemzés a felsorolt sorrendben teszi fel (az utolsó resolve-ol először).',1);X.rows+=L;X.rr+=L;}});
     ordered.forEach((t)=>target.push(t));};
   X.leaveTrigs=(id,dk)=>{const ob=X.O[id];if(!ob||!ob.card)return;const t=ob.card.txt||'';const lst:[Trigger,string][]=[];
-    triggersOf(ob.card).forEach((tr)=>{
+    /* a csatolt Equipment Effect Textje a unit Rules Textjéhez fűződik (435.1.c, 136.2.c), így a belőle jövő Deathknell is triggerel */
+    const gEff=Object.values(X.O).filter((g)=>g.on===id&&g.zone==='board'&&g.card&&g.card.eff).map((g)=>g.card!.eff).join('\n');
+    triggersOf(ob.card,gEff||undefined).forEach((tr)=>{
       if(dk&&(tr.dk||/^when I die\b(?! in combat)/i.test(tr.why)))lst.push([tr,'808.1.d.2, 429.1.a.1.b']);
       else if(/^when (?:I|this) leaves? the board\b|^when I leave the board\b/i.test(tr.why))lst.push([tr,'383.2.c.3']);});
     lst.forEach(([tr,ref])=>{X.pushTrig({kind:'auto',label:ob.name+' triggere ('+(tr.dk?'Deathknell':tr.why)+')',name:ob.name+' triggere',sent:true,src:id,pl:ob.ctrl!,eff:tr.eff,why:tr.dk?'Deathknell':tr.why,list:[],tg:[],lk:{loc:ob.loc}});
@@ -52,7 +54,7 @@ export function installTriggers(X: EngineCtx) {
         if(cc){const pc=printedCost(s.c);const w=costCheck(cc,s.c,{});const key=(s.j??'x')+'|'+id;
           cw=esc(s.c.n)+' nyomtatott költsége '+pc.e+' Energy és '+pc.p+' Power; a feltétel: "'+esc(cc.t||cond.trim())+'" (206).';
           if(w){if(!X.PTN.has(key)){X.PTN.add(key);const h=X.line('206, 383.2',esc(ob.name)+': "'+esc(L)+'" nem triggerel, mert '+cw.replace(/ \(206\)\.$/,'')+', és ez nem teljesül ('+w.replace(/ \(206\)$/,'')+').',0);if(X.INRES)X.rr+=h;else X.rows+=h;}return;}}
-        res.push({kind:'auto',label:ob.name+' triggere',src:id,pl:ob.ctrl!,eff,why:'"'+L+'"'+(cw?' Triggerel, mert '+cw.replace(/^[^ ]+/,(x)=>x)+'':''),list:[],tg:[],trigBy:s.c});});});
+        res.push({kind:'auto',label:ob.name+' triggere',src:id,pl:ob.ctrl!,eff,why:'"'+L+'"'+(cw?' Triggerel, mert '+cw.replace(/^[^ ]+/,(x)=>x)+'':''),list:[],tg:[],trigBy:s.c,trigId:s.objId||(s.j!=null&&s.j>=0?'s'+s.j:undefined)});});});
     return res;};
   X.abTrigs=(s)=>{const res:ChainItem[]=[];const cost=String(s.ab!.cost||'');const e=(cost.match(/\[(\d+)\]/g)||[]).reduce((a:number,x:string)=>a+ +x.slice(1,-1),0);const p=(cost.match(/\[[ACRGBOPY]\]/g)||[]).length;
     Object.keys(X.O).forEach(id=>{const ob=X.O[id];if(!ob.card||!(ob.zone==='board'||ob.zone==='legend'))return;
