@@ -1,3 +1,4 @@
+import { refHash } from '../../domain/rules/refs';
 import { useEffect, useRef, useState } from 'react';
 import { vsCard } from '../../domain/data/store';
 import { chainActions, getCS, type TrigAdd } from './store';
@@ -11,7 +12,7 @@ import { ALL, DEF_OPT, cm, need, check, suggest, dealt, lethalHit, type Side, ty
    A lapszövegből csak javaslatot teszünk, a döntés a játékosé. */
 
 const R = ({ r }: { r: string }) => (
-  <span className="cbc-refs">{r.split(/,\s*/).map((x) => <a key={x} className="rref" href="#szabalyok" data-ref={x}>{x}</a>)}</span>
+  <span className="cbc-refs">{r.split(/,\s*/).map((x) => <a key={x} className="rref" href={refHash(x)} data-ref={x}>{x}</a>)}</span>
 );
 
 const txtOf = (n?: string | null): string => { const c = n ? vsCard(n) : null; return (c && c.txt) || ''; };
