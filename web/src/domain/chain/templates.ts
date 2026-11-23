@@ -27,10 +27,10 @@ export const TEMPLATES: ChainTemplate[] = [
   },
   {
     id: 'negated', title: 'Mistarget nélkül: Negated',
-    desc: "Hidden Blade az ellenfél unitjára, de az ellenfél Zhonya's Hourglass-a helyettesíti a halált. A célpont legális marad, a kill más okból marad el, ezért Negated, a linked \"draws 2\" pedig végrehajtódik.",
+    desc: "Hidden Blade az ellenfél unitjára, de a unitra csatolt Guardian Angel helyettesíti a halált (\"If I would die, kill Guardian Angel instead\"). A célpont legális marad, a kill más okból marad el, ezért Negated, a linked \"draws 2\" pedig végrehajtódik.",
     refs: '359.3.e.6, 359.3.e.14.b',
     cs: () => base({ turn: 'A',
-      bd: [{ n: 'Shipyard Skulker', pl: 'B', loc: 'bf0', d: 0 }, { n: "Zhonya's Hourglass", pl: 'B', loc: 'base', d: 0 }],
+      bd: [{ n: 'Shipyard Skulker', pl: 'B', loc: 'bf0', d: 0 }, { n: 'Guardian Angel', pl: 'B', loc: 'bf0', d: 0, on: 0 }],
       steps: [card('Hidden Blade', 'A', ['b0'])] }),
   },
   {
@@ -71,5 +71,29 @@ export const TEMPLATES: ChainTemplate[] = [
     cs: () => base({ turn: 'A',
       bd: [{ n: 'Sona, Harmonious', pl: 'A', loc: 'bf0', d: 0 }, { n: 'Shipyard Skulker', pl: 'B', loc: 'bf0', d: 0 }],
       steps: [{ k: 'end' }, card('Star-Crossed', 'B', ['b1', 'b0'])] }),
+  },
+  {
+    id: 'reksai-sanctum', title: "Rek'Sai, Void Burrower és The Candlelit Sanctum: két conquer trigger",
+    desc: "Gem Jammer Standard Move-val (144) a senki által nem irányított, üres Sanctumra megy: nincs showdown, Establish Control és conquer (468.5, 468.5.d, 471.1), mindkét conquer trigger a tiéd (473.2.a). A sorrendet te választod (383.3.d): előbb a Rek'Sai legend, fölé a Sanctum, így a Sanctum resolve-ol előbb. A Rek'Sai \"you may\" döntése és az exhaust költség már a chainre tételkor, a finalizáláskor eldől (383.3.a, 383.3.b), még a Sanctum előtt. Minden resolve előtt mindkét játékos kap priority-t (340.1). A Sanctum: megnézed a felső 2 lapot (128.4, privát), a Chemtech Enforcert recycle-ölöd (417; kettőnél véletlen sorrendben, 417.5), a Bilgewater Tracker marad felül. A Rek'Sai: felfedi a Trackert és a Dangerous Duót (a \"You may banish one\" a resolve-kor dől el, 383.3.a.3), a Trackert banisheled (428.1) és kijátszod a Sanctumra (420.3, 420.3.b, 355.2.a); Rek'Sai, Breacher Accelerate-et ad a nem kézből kijátszott unitnak (805.1.b), ezért ready lép be. Unitként a finalizálás után azonnal resolve-ol (337.2), itt nincs reakció-ablak; a maradék recycle (417.4). A Tracker play triggere a chain tetejére kerül (420.4.a), erre az ellenfél [Reaction] lapot játszhat (309.1.a, 340.4): Ki Barrier az Amateur Demolitionistre. Előbb a Ki Barrier, utána a Tracker trigger resolve-ol: a Demolitionist damage-ét megelőzi, a Fallen Feline 1 damage-et kap. Fordított sorrendben (Sanctum alul) a Rek'Sai fedne fel előbb, és a Sanctum a megmaradt deck tetejét rendezné.",
+    refs: '468.5.d, 471.1, 473.2.a, 383.3.d, 383.3.a, 383.3.b, 383.3.a.3, 128.4, 417.4, 417.5, 428.1, 420.3.b, 355.2.a, 805.1.b, 337.2, 420.4.a, 309.1.a, 340.4',
+    cs: () => base({ turn: 'A', lg: { A: "Rek'Sai, Void Burrower", B: '' }, bf: [{ n: 'The Candlelit Sanctum', c: '' }, { n: '', c: 'B' }],
+      bd: [{ n: "Rek'Sai, Breacher", pl: 'A', loc: 'base', d: 0 }, { n: 'Gem Jammer', pl: 'A', loc: 'bf0', d: 0, ex: true }, { n: 'Amateur Demolitionist', pl: 'B', loc: 'bf1', d: 0 }, { n: 'Fallen Feline', pl: 'B', loc: 'bf1', d: 0 }],
+      hand: { A: [], B: [{ id: 'zhB_1', n: 'Ki Barrier' }] }, trash: { A: [], B: [] },
+      deck: { A: [{ id: 'zdA_1', n: 'Bilgewater Tracker' }, { id: 'zdA_2', n: 'Chemtech Enforcer' }, { id: 'zdA_3', n: 'Dangerous Duo' }], B: [] }, zseq: 3,
+      steps: [
+        { k: 'tr', n: "Rek'Sai, Void Burrower", src: 'LA', pl: 'A', eff: 'you may exhaust me to reveal the top 2 cards of your Main Deck. You may banish one, then play it. Recycle the rest.', why: 'When you conquer', tg: [], ext: {}, zp: { 1: ['zdA_1'] }, pll: { 2: 'bf0' }, accel: true, ptg: ['b2', 'b3'], cb: { bf: 'bf0', dead: [], recall: [], ctrl: 'A', label: 'Gem Jammer conquer' } },
+        { k: 'tr', n: 'The Candlelit Sanctum', pl: 'A', eff: "look at the top two cards of your Main Deck. You may recycle one or both of them. Put those you don't back in any order.", why: 'When you conquer here', tg: [], ext: {}, zp: { 1: ['zdA_2'] } },
+        { k: 'res' }, { k: 'res' },
+        card('Ki Barrier', 'B', ['b2']),
+        { k: 'res' }, { k: 'res' }] }),
+  },
+  {
+    id: 'reksai-queen', title: "Rek'Sai, Swarm Queen: \"play it here\" a támadott battlefieldre",
+    desc: "Rek'Sai, Swarm Queen megtámadja az ellenfél battlefieldjét, a \"When I attack\" trigger a chainre kerül. A \"you may reveal\" a finalizáláskor dől el (383.3.a), a többi \"you may\" a resolve-kor (383.3.a.3). Felfedi a felső 2 lapot, a Shipyard Skulkert banisheli (428.1) és kijátssza (420.3.b); unitként \"here\", a támadott battlefieldre kerül, bár azt az ellenfél irányítja, mert a lap erre engedélyt ad (355.2.b; a helyet a lap a kijátszáskor, a finalizáláskor nézi, 420.3.b.2). A maradék recycle (417.4).",
+    refs: '383.3.a, 383.3.a.3, 428.1, 420.3.b, 420.3.b.2, 355.2.b, 417.4',
+    cs: () => base({ turn: 'A', bf: [{ n: '', c: '' }, { n: '', c: 'B' }],
+      bd: [{ n: "Rek'Sai, Swarm Queen", pl: 'A', loc: 'bf1', d: 0, atk: 'a' }, { n: 'Mega-Mech', pl: 'B', loc: 'bf1', d: 0, atk: 'd' }],
+      trash: { A: [], B: [] }, deck: { A: [{ id: 'zdA_1', n: 'Shipyard Skulker' }, { id: 'zdA_2', n: 'Flash' }], B: [] }, zseq: 2,
+      steps: [{ k: 'tg', src: 'b0', ti: 0, pl: 'A', n: "Rek'Sai, Swarm Queen", tg: [], ext: {}, zp: { 1: ['zdA_1'] } }, { k: 'res' }] }),
   },
 ];
