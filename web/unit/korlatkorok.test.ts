@@ -112,7 +112,7 @@ describe('2. kör: copy effectek (446.1, 446.3, 479.1.b, 479.1.b.1, 479.1.c)', (
     expect(z.o('b1').name).toBe('Shipyard Skulker');
     expect(z.o('b0').on).toBe('b1');
   });
-  it('Svellsongur: a csatolt unit szövege az Equipment Effect Textje, így a unit triggerei kétszer szerepelnek (435.1.d)', () => {
+  it('Svellsongur: a csatolt unit szövege az Equipment Effect Textje, így a unit triggerei kétszer szerepelnek (435.1.c, 136.2.c)', () => {
     const CS = cs({ bd: [{ n: 'Watchful Sentry', pl: 'A', loc: 'base' }, { n: 'Svellsongur', pl: 'A', loc: 'base', on: 0 }], steps: [] });
     expect(attachedEff(CS as never, 'b0')).toMatch(/Deathknell/);
     expect(triggersOf(vsCard('Watchful Sentry')!, attachedEff(CS as never, 'b0')).filter((t) => t.why === 'Deathknell')).toHaveLength(2);
@@ -205,6 +205,64 @@ describe('3. kör: rejtett adat a pályás építőben megadott lapokból (108.4
   });
 });
 
+describe('4. kör: "banished with", hatásból kijátszott lapok célpontjai, Chronobreak, Dancing Grenade', () => {
+  const zb = (o: any) => ({ turn: 'A', lg: { A: '', B: '' }, bf: [{ n: '', c: 'A' }, { n: '', c: '' }], bd: [], hand: { A: [], B: [] }, trash: { A: [], B: [] }, deck: { A: [], B: [] }, ...o });
+  const go = (c: any) => { const r = analyze(JSON.parse(JSON.stringify(c))); return { r, text: r.rows.map((x) => x.join(' ')).join('\n'), o: (id: string) => r.objs[id] }; };
+  const onBoard = (x: ReturnType<typeof go>, n: string) => Object.values(x.r.objs).filter((o: any) => o.name === n && o.zone === 'board');
+  it('a szabály: kijátszás hatásból (420.3), a célpont a kijátszáskor (355.8), banishment (108.6)', () => {
+    expect(ruleText('420.3')).toMatch(/Played as part of their resolution/);
+    expect(ruleText('355.8')).toMatch(/valid choices must be made for all targets/);
+    expect(ruleText('136.2.c')).toMatch(/appended to the Rules Text/);
+  });
+  it('Cursed Sarcophagus: a trash unitjai vele banishelődnek, a [T] ability a megadott lapot kijátssza (a költséget fizetni kell)', () => {
+    const tr = { A: [{ id: 'ztA_1', n: 'Shipyard Skulker' }, { id: 'ztA_2', n: 'Flash' }, { id: 'ztA_3', n: 'Mega-Mech' }], B: [] };
+    const x = go(zb({ trash: tr, steps: [{ k: 'card', n: 'Cursed Sarcophagus', pl: 'A', tg: [], ext: {} }, { k: 'res' }, { k: 'ab', src: 's0', ai: 0, pl: 'A', n: 'Cursed Sarcophagus', tg: [], ext: {}, plc: { 0: 'Mega-Mech' } }, { k: 'res' }] }));
+    expect(x.o('ztA_1')).toMatchObject({ zone: 'banish', banWith: 's0' });
+    expect(x.o('ztA_2').zone).toBe('trash');
+    expect(onBoard(x, 'Mega-Mech')).toHaveLength(1);
+    expect(x.text).toMatch(/Mega-Mech kijátszva a banishmentből \(Base, a költségét ki kell fizetni\)/);
+    // a [T] ability nem kér board célpontot (a "unit banished with this" nem a board lapja)
+    expect(stepInfo(cs({ bd: [{ n: 'Cursed Sarcophagus', pl: 'A', loc: 'base' }], steps: [] }) as never, { k: 'ab', src: 'b0', ai: 0, pl: 'A', n: 'Cursed Sarcophagus', tg: [], ext: {} } as never)!.list).toHaveLength(0);
+  });
+  it('The Zero Drive: a csatolt unit Equipment-ből kapott Deathknellje triggerel (435.1.c, 136.2.c), banishelődik vele, és az ability kijátssza', () => {
+    const x = go(zb({ bd: [{ n: 'Shipyard Skulker', pl: 'A', loc: 'base' }, { n: 'The Zero Drive', pl: 'A', loc: 'base', on: 0 }], steps: [{ k: 'card', n: 'Vengeance', pl: 'A', tg: ['b0'], ext: {} }, { k: 'res' }, { k: 'res' }, { k: 'ab', src: 'b1', ai: 1, pl: 'A', n: 'The Zero Drive', tg: [], ext: {} }, { k: 'res' }] }));
+    expect(x.text).toMatch(/a Deathknell The Zero Drive Effect Textjéből jön, így "banished with" The Zero Drive/);
+    expect(onBoard(x, 'Shipyard Skulker')).toHaveLength(1);
+    expect(x.text).toMatch(/Shipyard Skulker kijátszva a banishmentből \(Base, költség nélkül\)/);
+  });
+  it('Jhin, Virtuoso: a [4] fölötti spellek vele banishelődnek; a 4. után a trashbe kerülnek, channel 4 és draw 1, előtte a folytatás sem fut', () => {
+    const steps: any[] = []; for (let i = 0; i < 4; i++) steps.push({ k: 'card', n: 'Vengeance', pl: 'A', tg: ['b' + i], ext: {} }, { k: 'res' }, { k: 'res' });
+    const x = go(zb({ lg: { A: 'Jhin, Virtuoso' }, ps: { A: { spent: 5 } }, bd: [0, 1, 2, 3].map(() => ({ n: 'Mega-Mech', pl: 'B', loc: 'bf0' })), steps }));
+    expect(x.text).toMatch(/ebben a helyzetben 3 spell banishelve vele.*"draw 1\.": az előző feltételes utasítás folytatása/s);
+    expect(x.text).toMatch(/ebben a helyzetben 4 spell banishelve vele/);
+    expect(x.r.ev.filter((e: any) => ['draw', 'channel'].includes(e.k)).map((e: any) => [e.k, e.n])).toEqual([['channel', 4], ['draw', 1]]);
+    expect(Object.values(x.r.objs).filter((o: any) => /^Vengeance/.test(o.name) && o.zone === 'trash')).toHaveLength(4);
+  });
+  it('hatásból kijátszott spell (Fizz, Death from Below): a célpont az első legális választás, a többi felsorolva (355.8)', () => {
+    const x = go(zb({ bd: [{ n: 'Shipyard Skulker', pl: 'B', loc: 'bf0' }, { n: 'Blastcone Fae', pl: 'B', loc: 'bf0' }], steps: [{ k: 'card', n: 'Death from Below', pl: 'A', tg: ['b0'], ext: {} }, { k: 'res' }, { k: 'res' }] }));
+    expect(x.text).toMatch(/Death from Below spell a chainre kerül.*az elemzés az első legális választással számol: 1\. célpont: Blastcone Fae/s);
+    expect(x.o('b1').zone).toBe('trash');
+  });
+  it('Chronobreak: a kifizetett Power számú választott saját unit banishelődik és új objektumként visszatér ugyanoda (428, 420.3, 359.3.e.4)', () => {
+    const x = go(zb({ bd: [{ n: 'Mega-Mech', pl: 'A', loc: 'bf0', d: 3 }, { n: 'Blastcone Fae', pl: 'A', loc: 'base' }, { n: 'Mega-Mech', pl: 'B', loc: 'bf0' }], steps: [{ k: 'card', n: 'Chronobreak', pl: 'A', tg: [], ext: {}, hv: { 0: 1 }, zp: { 0: ['b0', 'b1', 'b2'] } }, { k: 'res' }] }));
+    expect(x.o('b0').zone).toBe('gone');
+    expect(x.o('b0r')).toMatchObject({ zone: 'board', loc: 'bf0', dmg: 0 });
+    expect(x.o('b1').zone).toBe('board');
+    expect(x.o('b2').zone).toBe('board');
+  });
+  it('Dancing Grenade: az újrakijátszó a célpont irányítója, a második példány +1 Bonus Damage-et kap (715.1); további újrakijátszás nincs', () => {
+    const x = go(zb({ bd: [{ n: 'Mountain Drake', pl: 'B', loc: 'bf0' }], steps: [{ k: 'card', n: 'Dancing Grenade', pl: 'A', tg: ['b0'], ext: {} }, { k: 'res' }, { k: 'res' }] }));
+    expect(x.text).toMatch(/Az újrakijátszó a célpont irányítója \(az ellenfél\)/);
+    expect(x.o('b0').dmg).toBe(5);
+    expect(x.text).toMatch(/a további újrakijátszás ismét "may" döntés/);
+  });
+  it('Temporal Breach: az újra kijátszott unit play triggere is célpontot kap (403.4.b)', () => {
+    const x = go(zb({ bd: [{ n: 'Blastcone Fae', pl: 'A', loc: 'bf0' }, { n: 'Mega-Mech', pl: 'B', loc: 'bf0' }], steps: [{ k: 'card', n: 'Temporal Breach', pl: 'A', tg: ['b0'], ext: {} }, { k: 'res' }, { k: 'res' }] }));
+    expect(x.text).toMatch(/A play effectje is triggerel \(403\.4\.b\); az elemzés az első legális választással számol/);
+    expect(x.text).not.toMatch(/nem követi/);
+  });
+});
+
 describe('Futásidejű leltár', () => {
   it('a még nem követett utasítások listája (minden kör szűkíti)', () => {
     const h = sweep();
@@ -212,5 +270,6 @@ describe('Futásidejű leltár', () => {
     expect([...new Set(h.map((x) => x.n))].sort()).toEqual(LELTAR);
   });
 });
-/* A leltár szerint még nem követett lapok (a lefutás egyszerű pályán, üres kéz, trash és deck mellett). */
-const LELTAR = ['Chronobreak', 'Cursed Sarcophagus', 'Dancing Grenade', 'Death from Below', 'Forbidden Technique', 'Iascylla', 'Temporal Breach'];
+/* A leltár szerint még nem követett lapok (a lefutás egyszerű pályán, üres kéz, trash és deck mellett). Iascylla: a következő kör Main Phase-ére
+   szóló késleltetett trigger (391.2); a builder egy kört elemez. */
+const LELTAR = ['Iascylla'];
