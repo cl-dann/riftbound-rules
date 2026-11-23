@@ -1,8 +1,8 @@
 /* Egy művelet végrehajtása egy célponton (applyTo) (a runChain() csoportja, S20) */
 import { COPY_EQUIP } from '../steps';
-import type { EngineCtx, ReadyInfo } from './ctx';
+import type { ChainItem, EngineCtx, ReadyInfo } from './ctx';
 import { esc } from '../../text/norm';
-import { triggersOf } from '../parser';
+import { phrasesTxt, triggersOf } from '../parser';
 import { stripRem } from '../text';
 import { art, Art, WHO, WHOC } from './labels';
 
@@ -55,7 +55,7 @@ export function installExecute(X: EngineCtx) {
       parts.push(esc(ob.name)+': a tulajdonosa újra kijátssza ('+esc(X.locLabel(to))+(act.free?', a költség figyelmen kívül':'')+'). Ez új objektum (359.3.e.4)'+unitEnt+'; a kijátszás nem a kézből történik (420.3).'+(erR&&erR.note?' '+erR.note:''));refs.push('420.3','359.3.e.4',erR&&erR.ready?'143.4.a':'143.4');
       X.story.push(Art(ob.name)+' újra a boardra kerül: '+X.locLabel(to)+'.');
       X.playTrigs({c:ob.card!,j:-1,pl:ob.own!,from:'other',objId:nid}).forEach((t)=>{X.pushTrig(t);parts.push('Triggerel: '+esc(t.label)+' (420.4.a).');});
-      const own=triggersOf(ob.card).find((t)=>/^when you play (?:me|this)\b/i.test(t.why));if(own){X.pushTrig({kind:'auto',label:ob.name+' play triggere',name:ob.name+' play triggere',src:nid,pl:ob.own!,eff:own.eff,why:own.why,list:[],tg:[]});parts.push('A play effectje is triggerel; célpontját a játékos választja, az elemzés nem követi.');}
+      const own=triggersOf(ob.card).find((t)=>/^when you play (?:me|this)\b/i.test(t.why));if(own){const ti0:ChainItem={kind:'auto',label:ob.name+' play triggere',name:ob.name+' play triggere',src:nid,pl:ob.own!,eff:own.eff,why:own.why,list:phrasesTxt(own.eff),tg:[]};const tt=X.autoTg(ti0);X.pushTrig(ti0);parts.push('A play effectje is triggerel'+(tt?' (403.4.b); '+tt:'.'));}
       return;}
     case 'might':case 'mightEq':case 'double':{let n=act.n;if(act.each&&act.each.cnt&&act.k==='might'){const k=X.countEach(act.each.cnt,it,v);if(k!=null){parts.push('Szorzó: '+k+' ('+esc(act.each.txt)+').');n=n!*k;}}if(act.k==='mightEq'){n=it.lkMight!=null?it.lkMight:null;if(n==null){parts.push(esc(ob.name)+': a Might értéke a korábbi célponttól függ, ami nem elérhető, ezért Ignored (359.3.e.12).');refs.push('359.3.e.12');return 'ign';}}
       const before=X.mightOf(v);if(act.k==='double'){ob.mods!.push({n:Math.max(0,before||0)});refs.push('433');}else ob.mods!.push({n:n!,min:act.min});const after=X.mightOf(v);X.EV.push({k:'might',id:v,name:ob.name,from:before,to:after});

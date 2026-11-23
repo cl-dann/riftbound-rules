@@ -7,6 +7,8 @@ import { printedCost } from '../cost';
 import { numOf, phrasesTxt } from '../parser';
 import { INS_ST, RES, art, Art, other, WHO } from './labels';
 
+/** A következő körre szóló késleltetett hatás ("at the start of your next Main Phase", "until your next Ending Phase"). */
+const NEXT_TURN=/\b(?:at the start of|until) your next\b/i;
 export function installResolve(X: EngineCtx) {
   X.resolveAll=()=>{while(X.stack.length&&X.guard++<80){const it=X.stack.pop()!;const d0=X.done.length;try{X.resolveItem(it);X.flushPend(X.stack);}finally{const dn=X.done.length>d0?X.done[X.done.length-1]:null;X.snap('Resolve: '+it.label+(dn?', '+(RES[dn.res]||dn.res):''),X.stack);X.cleanup();}}};
   X.evalState=(cd,it,s,tv)=>{const c=cd.t;const pl=it.pl;let m:RegExpExecArray|null;const T=tv&&X.O[tv]?X.O[tv]:null;const S=it.src&&X.O[it.src!]?X.O[it.src!]:null;const here=S&&S.zone==='board'?S.loc:null;
@@ -38,7 +40,7 @@ export function installResolve(X: EngineCtx) {
     if((m=/^there are (\d+) or more units there$/i.exec(c))){const f=(it.tg||[]).find((v:string)=>v==='F0'||v==='F1');const l=f==='F1'?'bf1':'bf0';return cntU((o)=>o.type==='unit'&&o.loc===l)>=+m[1];}
     if(/^it's your turn and you played this from face down$/i.test(c))return X.TP===pl&&it.from==='facedown';
     return null;};
-  X.condSrc=(cd)=>cd.how==='open'?(cd.from==='field'?'(nyitott kérdés, judge dönt: '+cd.why+'; a lapnál így megadva)':'(nyitott kérdés, judge dönt: '+cd.why+'; feltételezés: nem teljesül, a lapnál állítható)'):cd.how==='hidden'?(cd.from==='field'?'(a lapnál megadva)':cd.from==='zone'?'(a deck felső lapja a pályás építőben megadva: '+cd.zn+', 108.4.e, 128.3)':cd.from==='zone2'?'(a pályás építőben megadott lapok alapján: '+cd.zn+')':'(feltételezés: nem teljesül; '+(cd.why||'rejtett adat')+', a lapnál állítható)'):cd.how==='state'?'(játékállapotból'+(cd.val?': '+cd.val:'')+'; a kezdőérték a builderben állítható)':'(a boardon ellenőrizve)';
+  X.condSrc=(cd)=>cd.how==='open'?(cd.from==='field'?'(nyitott kérdés, judge dönt: '+cd.why+'; a lapnál így megadva)':'(nyitott kérdés, judge dönt: '+cd.why+'; feltételezés: nem teljesül, a lapnál állítható)'):cd.how==='hidden'?(cd.from==='field'?'(a lapnál megadva)':cd.from==='zone'?'(a deck felső lapja a pályás építőben megadva: '+cd.zn+', 108.4.e, 128.3)':cd.from==='zone2'?'(a pályás építőben megadott lapok alapján: '+cd.zn+')':cd.from==='lk'?'('+cd.zn+')':'(feltételezés: nem teljesül; '+(cd.why||'rejtett adat')+', a lapnál állítható)'):cd.how==='state'?'(játékállapotból'+(cd.val?': '+cd.val:'')+'; a kezdőérték a builderben állítható)':'(a boardon ellenőrizve)';
   X.evalCond=(cd,it,s,xi,tv)=>{if(!cd)return true;const c=cd.t.toLowerCase();let m:RegExpExecArray|null;
     if(/^you paid (?:the|my) additional cost/.test(c))return !!(s&&s.addc);if(/^you played this from your hand/.test(c))return (it.from||'hand')==='hand';
     if(cd.how==='hidden'||cd.how==='open'){const v=s&&s.cnd?s.cnd[xi]:null;if(v==='1'||v==='0'){cd.from='field';return v==='1';}
@@ -46,6 +48,9 @@ export function installResolve(X: EngineCtx) {
       const zm=/^it's an? (gear|spell|unit)$|^it is a (unit)$/i.exec(cd.t);
       /* az előző utasítás hatásból kijátszott lapja (Ava Achiever: a kézből, Rek'Sai: a banishelt lap) */
       if(zm&&it.zLastT){cd.from='zone2';cd.zn=it.zLastN+' ('+it.zLastT+')';return it.zLastT===(zm[1]||zm[2]).toLowerCase();}
+      /* "if it had N [S] or less": a célpont utolsó ismert Mightja, visszatekintéssel (359.3.e.13) */
+      if((m=/^it had (\d+) \[S\] or less$/i.exec(cd.t))&&tv&&X.O[tv]){const T=X.O[tv];const mt=T.zone!=='board'&&T.lk&&T.lk.m!=null?T.lk.m:X.mightOf(tv);if(mt!=null){cd.from='lk';cd.zn=T.name+' utolsó ismert Mightja '+mt+' (visszatekintés, 359.3.e.13)';return mt<=+m[1];}}
+      if(/^there are four spells banished with me$/i.test(cd.t)&&it.src){const n=Object.values(X.O).filter((o)=>o.banWith===it.src&&o.zone==='banish'&&o.card&&o.card.t==='Spell').length;cd.from='zone2';cd.zn='ebben a helyzetben '+n+' spell banishelve vele; a korábban banisheltek builderen kívüli előzmény, feltételezés: 0';return n>=4;}
       if(/^you revealed a Bird\b/i.test(cd.t)&&X.ZC&&it.zLook){const ob=it.zRev?X.O[it.zRev]:null;cd.from='zone2';cd.zn=ob?ob.name+(ob.card&&(ob.card.tg||[]).length?' ('+(ob.card.tg||[]).join(', ')+')':''):'nem fedett fel lapot';return !!(ob&&ob.card)&&['Bird','Cat','Dog','Poro'].some((t)=>(ob.card!.tg||[]).includes(t));}
       if(/^it has that type$/i.test(cd.t)&&it.zGuess&&it.zTop&&X.O[it.zTop]){const t=String(X.O[it.zTop].card!.t).toLowerCase();cd.from='zone2';cd.zn='tipp: '+it.zGuess+', felfedve: '+X.O[it.zTop].name+' ('+t+')';return t===it.zGuess;}
       if((m=/^you have exactly (\d+) cards in hand and exactly (\d+) units at battlefields$/i.exec(cd.t))&&X.ZC){const h=X.zoneIds('hand',it.pl).length;const u=Object.values(X.O).filter((o)=>o.zone==='board'&&o.type==='unit'&&o.ctrl===it.pl&&o.loc&&o.loc!=='base').length;cd.from='zone2';cd.zn='kéz: '+h+' lap (a pályás építőben megadott kéz, 128.4), battlefielden: '+u+' unit';return h===+m[1]&&u===+m[2];}
@@ -96,12 +101,15 @@ export function installResolve(X: EngineCtx) {
     if(perm&&self&&self.zone!=='board'){X.story.push(Art(srcName)+' már nincs a boardon, de a play triggere a chainen maradt, ezért lefut.');t+='A forrás már nincs a boardon, de a trigger független objektum, ezért lefut (355.9.c). A forrásra vonatkozó információ ("me", "here", "my") a végrehajtáskor nem elérhető, az erre épülő utasítás Ignored (359.3.f.2, 359.3.e.6). ';fl=1;}
     if(it.endTrig&&it.src&&X.O[it.src!]&&!['board','legend'].includes(X.O[it.src!].zone)){t+='A forrás már nincs a boardon, de a trigger feltétele a triggereléskor teljesült, ezért a trigger lefut (383.2.a.1). ';refs.push('383.2.a.1');}
     if(it.kind==='step'&&s.k==='ab'&&it.src&&X.O[it.src!]&&!['board','legend'].includes(X.O[it.src!].zone)){t+='Az ability forrása már nincs a boardon, de az ability ettől még lefut (355.9.c). ';fl=1;}
-    const INS=it.kind==='step'?interp(s,s):interp({},{eff:it.eff,list:it.list&&it.list.length?it.list:phrasesTxt(it.eff||''),c:(it.src&&X.O[it.src!]?X.O[it.src!].card:null) as CardLike});X.MAN=INS.some((x)=>x.manual);if(it.pre&&it.pre.length&&INS[0])INS[0].lk=true;
+    const INS=it.kind==='step'?interp(s,s):interp({},{eff:it.eff,list:it.list&&it.list.length?it.list:phrasesTxt(it.eff||''),c:(it.src&&X.O[it.src!]?X.O[it.src!].card:it.fxCard||null) as CardLike});X.MAN=INS.some((x)=>x.manual);if(it.pre&&it.pre.length&&INS[0])INS[0].lk=true;
     const parts:string[]=[];const tgOut:string[]=[];const mtT:MtTarget[]=[];let lastT:Pick<Instr,'tis'|'st'|'act'|'t'>|null=null;if(it.pre&&it.pre.length){const base=(it.tg||[]).length;it.tg=(it.tg||[]).concat(it.pre);it.list=(it.list||[]).concat(it.pre.map((v:string)=>({type:X.O[v]?X.O[v].type:'unit',rel:'any',max:null,bf:false,opt:true,pre:true} as TargetParam)));it.pre.forEach((_,i)=>{tgOut[base+i]='ok';});lastT={tis:it.pre.map((_,i)=>base+i),st:'executed',act:{k:'pre'},t:'(a delayed hatás létrehozásakor megjelölt célpont)'};}X.it0=it;X.parts0=parts;X.refs1=refs;X.tgOut0=tgOut;X.mtT0=mtT;
     const R:ResolveRun={it,s,perm,self,srcName,INS,parts,refs,tgOut,mtT,t,fl,legal:0,tot:0,lastT};
     X.resolveSubsets(R);
     // "If ..., X instead": a feltétel teljesülése esetén az előző utasítás helyett ez hajtódik végre (369.1)
     INS.forEach((x,xi)=>{if(x.act.k==='counterToHand'){const b=INS.slice(0,xi).reverse().find((y)=>y.act.k==='counter');if(b){b.act=Object.assign({},b.act,{toHand:true});x.prep='a counterelt spell a kézbe kerül';}}
+      /* Dancing Grenade: az újra kijátszott példány Bonus Damage-et kap annyival, ahányszor ez a spell ebben a körben már damage-et osztott (715.1; levezetés: az "If they do" az újra kijátszásra vonatkozik) */
+      if(/additional Bonus Damage for each time this spell has dealt damage this turn/i.test(x.t)&&it.fxCard){const b=INS.slice(0,xi).reverse().find((y)=>y.act.k==='dmg');const k=X.out.items.filter((q)=>q.name.replace(/ \(hatásból kijátszott spell\)$/,'')===it.fxCard!.n&&q.instr.some((z)=>z.k==='dmg'&&z.st==='executed')).length;
+        if(b&&k){b.act=Object.assign({},b.act,{bonus:k});x.prep='Bonus Damage: '+k+' (ennyiszer osztott damage-et ez a spell ebben a körben ebben az elemzésben)';}}
       if(x.act.k==='bonusTrashName'){const b=INS.slice(0,xi).reverse().find((y)=>y.act.k==='dmg');const fv=s&&s.hv&&s.hv[xi]!=null&&s.hv[xi]!==''?+s.hv[xi]:0;const nm2=(it.s&&it.s.c&&it.s.c.n)||'';const tc=Object.values(X.O).filter((o)=>o.zone==='trash'&&o.own===it.pl&&o.card&&o.card.n===nm2&&o.id!==it.objId).length;
         if(b){b.act=Object.assign({},b.act,{bonus:fv+tc});x.prep='Bonus Damage: '+(fv+tc)+' ('+fv+' a lapnál megadott korábbi, '+tc+' ebben az elemzésben a trashbe került példány)';}}});
     INS.forEach((x,xi)=>{if(!x.act.alt)return;let pi=xi-1;while(pi>=0&&INS[pi].act.alt)pi--;const base=INS[pi];if(!base)return;
@@ -120,6 +128,7 @@ export function installResolve(X: EngineCtx) {
       if(['draw','channel','discard','choose','deck','xp','score','pay','showoff','fight','win','perm'].includes(xa.k)){tgOut[ti]='ok';if(xa.k==='choose')parts.push(esc(ob.name)+' kiválasztva.');return;}
       if(xa.k==='copy'){tgOut[ti]='ok';const made=R.made||[];if(made.length){X.copyOnto(made,v,parts,refs);R.copied=made;}else parts.push('"'+esc(x.t)+'": nincs ebben a resolve-ban létrehozott token, ami '+esc(ob.name)+' másolatává válhatna.');return;}
       if(xa.k==='note'){tgOut[ti]='ok';if(!x.noted){x.noted=1;parts.push((xa.open?'<span class="cbuns">nyitott kérdés</span> ':'')+esc(ob.name)+': "'+esc(x.t)+'": '+esc(xa.d||'')+(xa.refs?' ('+xa.refs+')':'')+'.');if(xa.refs)xa.refs.split(/,\s*/).forEach((r:string)=>refs.push(r));}R.fl=Math.max(R.fl,xa.open?2:1);return;}
+      if(xa.k==='delayed'&&NEXT_TURN.test(x.t)){tgOut[ti]='ok';parts.push(esc(ob.name)+': "'+esc(x.t)+'": késleltetett hatás a következő körre (391.2, 391.4); létrejön, de a builder egy kört elemez, ezért a lefutását nem követi.');refs.push('391.2');R.fl=Math.max(R.fl,1);return;}
       if(xa.k==='other'||xa.k==='delayed'||xa.k==='playcard'||xa.k==='replay'||xa.k==='token'){tgOut[ti]='ok';parts.push(esc(ob.name)+': "'+esc(x.t)+'" lefut, ezt az elemzés nem követi részletesen.');R.fl=Math.max(R.fl,1);return;}
       const r=X.applyTo(v,Object.assign({t:x.t},xa),it,parts,refs);tgOut[ti]=r==='neg'?'neg':r==='ign'?'ign':'ok';if(r==='ign')R.legal--;};
   /** A választott részhalmazból kimaradt célpont (355.11.b) Ignored, a többi végrehajtódik. */
