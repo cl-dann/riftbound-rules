@@ -10,7 +10,7 @@ export function srcCard(CS:ChainCS,src:string|undefined):CardLike|null|undefined
   if(src[0]==='b'){const b=CS.bd[+src.slice(1)];return b?vsCard(b.n):null;}
   if(src[0]==='s'){const s=CS.steps[+src.slice(1)];return s&&s.k==='card'?vsCard(s.n):null;}return null;}
 /** A forrásra csatolt gearek Effect Textje (136.2.c): a trigger listába ez is bekerül. */
-/** Svellsongur: a csatolt unit szövege az Equipment Effect Textje lesz (479.1.b), ezt a unit megkapja (435.1.d), így a triggerei kétszer szerepelnek. */
+/** Svellsongur: a csatolt unit szövege az Equipment Effect Textje lesz (479.1.b), ezt a unit megkapja (435.1.c, 136.2.c), így a triggerei kétszer szerepelnek. */
 const COPY_TEXT=/copy that unit's text to this Equipment's effect text/i;
 /** Shady Spectacles: "As this is attached to a unit, choose another friendly unit": a csatoláskor választott unit (2. hely, választható). */
 export const COPY_EQUIP=/becomes a copy of that unit for as long as this is attached/i;

@@ -13,7 +13,7 @@ export function installZoneChange(X: EngineCtx) {
     if(zone!=='board'){ob.dmg=0;ob.mods=[];ob.kws=[];ob.st=false;ob.bu=false;ob.shields=[];ob.save=null;ob.dbl=false;ob.dieTo=null;ob.baseSet=null;ob.untgt=false;if(ob.on){ob.on=null;}ob.ctrl=ob.own;ob.until=null;}
     X.EV.push({k:'zone',id,name:ob.name,to:zone});
     if(!was)return;
-    Object.keys(X.O).forEach(k=>{const g=X.O[k];if(g.on===id&&g.zone==='board'){g.on=null;g.loc=ob.lk!.loc;X.DET.add(k);X.EV.push({k:'detach',id:k,name:g.name,from:id});
+    Object.keys(X.O).forEach(k=>{const g=X.O[k];if(g.on===id&&g.zone==='board'){g.on=null;X.LASTON[k]=id;g.loc=ob.lk!.loc;X.DET.add(k);X.EV.push({k:'detach',id:k,name:g.name,from:id});
       X.REC!.push(['719.5, 436.4',g.name+' leválik '+ob.name+' lapról, és a helyén marad ('+X.locLabel(g.loc)+').'+(g.loc!=='base'?' Battlefielden álló, csatolatlan gear: a következő cleanupban recall-olódik (436.4.a, 323.6).':'')]);X.ALL.push(X.REC![X.REC!.length-1]);
       X.story.push(Art(g.name)+' leválik '+art(ob.name)+' lapról'+(g.loc!=='base'?', és a következő cleanupban a base-be kerül':'')+'.');}});
     Object.keys(X.O).forEach(k=>{const g=X.O[k];if(g.until&&g.until.src===id&&g.zone==='board'){const prev=g.until.prev;g.until=null;X.setCtrl(k,prev,'391.5.b, 391.5.a',ob.name+' elhagyta a boardot, a "until I leave the board" kontroll véget ért');X.story.push(Art(g.name)+' irányítása visszakerül, mert '+ob.name+' elhagyta a boardot.');}});};

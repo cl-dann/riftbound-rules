@@ -1,10 +1,10 @@
 /* Egy utasítás végrehajtása a resolve-kor: feltételek, linked instructions, célpontok, zónák és műveletek (a resolveItem0 lépései) */
-import type { EngineCtx } from './ctx';
+import type { ChainItem, EngineCtx } from './ctx';
 import { esc } from '../../text/norm';
 import { vsCard } from '../../data/store';
 import { OV_LBL, allScope } from '../actions';
 import { COSTVAR, costCheck, costCondOf, printedCost } from '../cost';
-import { effOf, numOf, triggersOf } from '../parser';
+import { effOf, numOf, phrasesTxt, triggersOf } from '../parser';
 import { type ZoneRef, zoneCheck, zoneRefOf } from '../zones';
 import { art, Art, other, WHO, WHOC } from './labels';
 
@@ -21,14 +21,14 @@ export function installInstr(X: EngineCtx) {
         parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');if(x.act.cond!.how==='hidden'&&x.act.cond!.from==='default')R.fl=Math.max(R.fl,1);return;}
       const cf=/^if you played this from your hand\b/i.test(x.t)?(it.from||'hand')==='hand':/^if you paid the additional cost\b/i.test(x.t)?!!(s&&s.addc):null;
       if(cf===false){x.st='skipped';x.ref='135.2.b.7';x.why='a feltétel ("'+x.t.split(',')[0]+'") nem teljesül, a resolve-kor ellenőrizve';return;}
-      if(xi>0&&INS[xi-1].act.otherwise&&INS[xi-1].st==='skipped'&&/^[a-z]/.test(x.t)){x.st='skipped';x.ref=INS[xi-1].ref;x.why='az "Otherwise" ág folytatása (" and "), az ág nem hajtódik végre';return;}
+      if(xi>0&&(INS[xi-1].act.otherwise||INS[xi-1].act.cond)&&INS[xi-1].st==='skipped'&&/^[a-z]/.test(x.t)){x.st='skipped';x.ref=INS[xi-1].ref;x.why=INS[xi-1].act.otherwise?'az "Otherwise" ág folytatása (" and "), az ág nem hajtódik végre':'az előző feltételes utasítás folytatása (", " vagy " and "), a feltétel nem teljesül';parts.push('"'+esc(x.t)+'": '+x.why+'.');return;}
       if(x.act.otherwise){const pc=INS.slice(0,xi).reverse().find((y)=>y.act.cond&&!y.act.otherwise&&y.cv!=null);
         if(pc&&pc.cv===true){x.st='skipped';x.ref='135.2.b.5.a';x.why='az előző feltétel ("'+pc.act.cond!.t+'") teljesült, ezért az "Otherwise" ág nem hajtódik végre';parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');return;}
         if(pc)parts.push('"'+esc(x.t)+'": az előző feltétel ("'+esc(pc.act.cond!.t)+'") nem teljesült, ezért az "Otherwise" ág hajtódik végre.');}
       const cd=x.act.cond;if(cd&&cd.how!=='known'&&!(prev&&prev.st==='ignored')){const tv=R.lastT?R.lastT.tis.map((ti:number)=>it.tg[ti]).find((v:string)=>v&&X.O[v]):null;const cv=X.evalCond(cd,it,s,xi,tv);x.cv=cv===null?true:cv;
         if(cd.how==='open'){R.fl=2;parts.push('<span class="cbuns">nyitott kérdés</span> ('+esc(cd.refs||'')+')');}
-        if(cd.from==='zone'||cd.from==='zone2'){parts.push('"'+esc(x.t)+'": a feltétel ("'+esc(cd.t)+'") '+(cv?'teljesül':'nem teljesül')+' '+X.condSrc(cd)+'.');if(cd.tie){R.fl=2;parts.push('<span class="cbuns">nyitott kérdés</span>');}}
-        const zs=cd.from==='zone'||cd.from==='zone2';
+        if(cd.from==='zone'||cd.from==='zone2'||cd.from==='lk'){parts.push('"'+esc(x.t)+'": a feltétel ("'+esc(cd.t)+'") '+(cv?'teljesül':'nem teljesül')+' '+X.condSrc(cd)+'.');if(cd.tie){R.fl=2;parts.push('<span class="cbuns">nyitott kérdés</span>');}}
+        const zs=cd.from==='zone'||cd.from==='zone2'||cd.from==='lk';
         if(cv===false){x.st='skipped';x.why='a feltétel ("'+cd.t+'") nem teljesül '+X.condSrc(cd);if(!zs)parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');if(cd.how==='hidden'&&cd.from==='default')R.fl=Math.max(R.fl,1);return;}
         if(cv==null){parts.push('"'+esc(x.t)+'": a feltétel ("'+esc(cd.t)+'") az adott helyzetben nem értékelhető ki (nincs hozzá célpont vagy forrás); az elemzés teljesültnek veszi.');R.fl=Math.max(R.fl,1);}
         else if(!zs)parts.push('"'+esc(x.t)+'": a feltétel ("'+esc(cd.t)+'") teljesül '+esc(X.condSrc(cd))+'.');}
@@ -36,8 +36,8 @@ export function installInstr(X: EngineCtx) {
         let times=1;const tm=/do this (\w+) times/i.exec(x.t);if(tm)times=numOf(tm[1]);
         if(/for each unit this kills/i.test(x.t)){times=(it.hit||[]).filter((v:string)=>X.lethal(v)||X.O[v].zone==='trash').length;x.why='reflexív trigger, annyiszor kerül a chainre, ahány unitot ez megölt ('+times+'; a lethal damage-es unitok a következő cleanupban halnak meg, 429.5.c)';}
         else x.why='reflexív trigger ("do this"), külön chain elemként kerül a chainre (388.1)';
-        if(x.act.cond&&x.act.cond.how!=='known'){const cv=X.evalCond(x.act.cond,it,s,xi,null);if(cv===false){times=0;x.why='a reflexív trigger feltétele nem teljesül';}}
-        for(let q=0;q<times;q++)X.pushTrig({kind:'auto',label:srcName+' reflexív triggere',name:srcName+' reflexív triggere',src:it.src,pl:it.pl,eff:x.act.body!,why:'do this',list:x.tis.map((ti:number)=>it.list[ti]),tg:x.tis.map((ti:number)=>it.tg[ti]),from:it.from,loc:it.loc,perm:false});
+        if(x.act.cond&&x.act.cond.how!=='known'){const tv=R.lastT?R.lastT.tis.map((ti:number)=>it.tg[ti]).find((v:string)=>v&&X.O[v]):null;const cv=X.evalCond(x.act.cond,it,s,xi,tv);if(cv===false){times=0;x.why='a reflexív trigger feltétele nem teljesül';}}
+        for(let q=0;q<times;q++)X.pushTrig({kind:'auto',label:srcName+' reflexív triggere',name:srcName+' reflexív triggere',src:it.src,pl:it.pl,eff:x.act.body!,why:'do this',list:x.tis.map((ti:number)=>it.list[ti]),tg:x.tis.map((ti:number)=>it.tg[ti]),from:it.from,loc:it.loc,perm:false,selfObj:it.selfObj||it.objId||undefined,fxCard:it.fxCard||(it.kind==='step'&&s&&s.c?s.c:undefined)});
         parts.push('Reflexív trigger: "'+esc(x.act.body)+'"'+(times!==1?' ('+times+' alkalommal)':'')+' a chainre kerül, és ez után resolve-ol (388, 388.1).');refs.push('388');if(x.tis.length)R.lastT=x;return;}
       if(x.act.field)x.act.fv=s&&s.hv&&s.hv[xi]!=null&&s.hv[xi]!==''?s.hv[xi]:x.act.field.def;
       /* az eldobott lap a pályás építőben kiválasztva: a rejtett adat helyett a lap tényleges értéke */
@@ -98,7 +98,7 @@ export function installInstr(X: EngineCtx) {
         if(/\bthe friendly unit\b/i.test(x.t))live=live.filter((ti:number)=>X.O[it.tg[ti]].ctrl===it.pl);else if(/\bthe enemy unit\b/i.test(x.t))live=live.filter((ti:number)=>X.O[it.tg[ti]].ctrl&&X.O[it.tg[ti]].ctrl!==it.pl);
         const a=x.act;const sc=allScope(x.t);
         /* a lépés nélküli tétel (Deathknell és más automatikus trigger) is látja a deck megadott felső lapjait */
-        const zr0=X.ZC?zoneRefOf(x.t,s?s.c&&s.c.n:(it.src&&X.O[it.src]&&X.O[it.src].card?X.O[it.src].card!.n:null)):null;
+        const zr0=X.ZC||/^banish that many units you control\b/i.test(x.t)?zoneRefOf(x.t,s?s.c&&s.c.n:(it.src&&X.O[it.src]&&X.O[it.src].card?X.O[it.src].card!.n:null)):null;
         const zEach=zr0&&zr0.who==='each'?zr0:null;
         const zpick=zr0&&!zEach?(s&&s.zp&&s.zp[xi]&&s.zp[xi].length?s.zp[xi]:zr0.z==='deck'&&zr0.top?X.zoneIds('deck',zr0.who==='they'?other(it.pl):it.pl).slice(0,zr0.n):null):null;
         const amongIt=X.ZC&&INS.some((y)=>{const z=zoneRefOf(y.t);return z&&z.z==='among';});
@@ -132,13 +132,19 @@ export function installInstr(X: EngineCtx) {
         else if(X.ZC&&it.zEach&&/^starting with the next player, each player plays those cards/i.test(x.t)){const order=[other(X.CS.turn||it.pl),X.CS.turn||it.pl];
           order.forEach((p:string)=>{const id=it.zEach![p];if(!id||!X.O[id]||X.O[id].zone!=='banish')return;const pc=X.O[id].card!;X.zcMove(id,'played');
             if(pc.t==='Unit'||pc.t==='Gear'){const pid='pe'+(s?s.j:'x')+'_'+p;X.O[pid]={id:pid,name:pc.n,card:pc,ctrl:p,own:p,loc:'base',baseOf:p,m:pc.t==='Unit'&&pc.m!=null?+pc.m:null,dmg:0,mods:[],kws:[],zone:'board',type:pc.t==='Unit'?'unit':'gear',ex:pc.t==='Unit'};X.EV.push({k:'enter',id:pid,name:pc.n,loc:'base'});parts.push(WHOC[p]+' kijátssza: '+esc(pc.n)+' (base, Energy költség nélkül; 420.3, 356.1.b.2).');}
-            else{X.pushTrig({kind:'auto',label:pc.n+' (hatásból kijátszott spell)',name:pc.n,src:null,pl:p,eff:effOf(pc),why:'kijátszás hatásból',list:[],tg:[],from:'banish'});parts.push(WHOC[p]+' kijátssza: '+esc(pc.n)+' spell a chainre kerül (420.3.b).');}});
+            else{parts.push(WHOC[p]+' kijátssza: '+esc(pc.n)+' spell a chainre kerül (420.3.b).'+X.fxSpell(pc,p,'banish'));}});
           refs.push('420.3','356.1.b.2');}
         else if(amongIt&&it.zAmongDone&&/^(?:then,?\s*)?(?:you may )?draw it\b/i.test(x.t)){parts.push('"'+esc(x.t)+'": a megnézett lapok közül választott lap már a kézbe került (az előző utasítás része).');}
         else if(X.ZC&&it.zAmongCard&&X.O[it.zAmongCard]&&X.O[it.zAmongCard].zone==='deck'&&/^(?:then,?\s*)?(?:you may )?banish it\b/i.test(x.t)){X.zcMove(it.zAmongCard,'banish');parts.push('"'+esc(x.t)+'": '+esc(X.O[it.zAmongCard].name)+' banishelve (108.6).');refs.push('108.6');}
         else if(restM){const rest=it.zLook!.filter((id:string)=>X.O[id]&&X.O[id].zone==='deck');const toTrash=/\btrash\b/i.test(x.t);
           rest.forEach((id:string)=>{if(toTrash)X.zcMove(id,'trash');else{X.O[id].ord=900+(X.O[id].ord||0);X.EV.push({k:'zcard',id,name:X.O[id].name,to:'deck'});}});
           parts.push('"'+esc(x.t)+'": '+(rest.length?rest.map((id:string)=>esc(X.O[id].name)).join(', ')+(toTrash?' a trashbe kerül (108.2).':': recycle, a Main Deck aljára (417).'):'nincs több megnézett lap.'));refs.push(toTrash?'108.2':'417');}
+        else if(zr0&&zr0.act==='chrono'){/* Chronobreak: "Banish that many units you control, then for each, its owner plays that unit back" (428, 420.3, 359.3.e.4) */
+          const n=+(x.act.fv||0);const ids=(s&&s.zp&&s.zp[xi])||[];const ok=ids.filter((id:string)=>X.O[id]&&X.O[id].zone==='board'&&X.O[id].type==='unit'&&X.O[id].ctrl===it.pl).slice(0,n);
+          parts.push('"'+esc(x.t)+'": a kifizetett Power '+n+' (a lapnál megadva); '+(ids.length?'a választott saját unitok: '+ok.map((id:string)=>esc(X.O[id].name)).join(', ')+(ids.length>ok.length?' (a többi nem választható: nem saját unit a boardon, vagy több, mint a kifizetett Power)':''):'a saját unitokat a pályán kell kiválasztani')+'.');
+          if(INS[xi+1]&&/\bplays that unit back\b/i.test(INS[xi+1].t))INS[xi+1].zDone=true;
+          ok.forEach((id:string)=>{X.applyTo(id,{t:x.t,k:'banish'},it,parts,refs);X.applyTo(id,{t:x.t,k:'replay',to:'same',free:true},it,parts,refs);});
+          if(!ids.length)R.fl=Math.max(R.fl,1);x.st='executed';}
         else if(X.ZC&&x.act.otherwise&&it.zTop&&X.O[it.zTop]&&X.O[it.zTop].zone==='deck'&&/^otherwise,?\s*(?:put it (?:in|into) your trash|recycle it)\b/i.test(x.t)){const ob=X.O[it.zTop];const tr=/trash/i.test(x.t);if(tr)X.zcMove(ob.id,'trash');else{ob.ord=900+(ob.ord||0);X.EV.push({k:'zcard',id:ob.id,name:ob.name,to:'deck'});}
           parts.push('"'+esc(x.t)+'": '+esc(ob.name)+(tr?' a trashbe kerül (108.2).':': recycle, a Main Deck aljára (417).'));refs.push(tr?'108.2':'417');}
         else if(zTopUse){const ob=X.O[it.zTop!];X.zcMove(ob.id,'hand');X.EV.push({k:'draw',pl:ob.own,n:1});parts.push('"'+esc(x.t)+'": '+esc(ob.name)+' a deckből a kézbe kerül (a deck felső lapja a pályás építőben megadva).');refs.push('414.1');}
@@ -171,7 +177,7 @@ export function installInstr(X: EngineCtx) {
                 it.zLastT=String(pc.t).toLowerCase();it.zLastN=pc.n;if(pc.t==='Unit'&&HERE_NEXT.test((INS[xi+1]||{t:''}).t)){to=X.srcLoc(it)||to;INS[xi+1].zDone=true;}refs.push('420.3','420.3.b');
                 if(isP){const pid='p'+(s?s.j:'x')+'_'+xi+'_'+k;X.O[pid]={id:pid,name:pc.n,card:pc,ctrl:it.pl,own:ob.own||it.pl,loc:to,baseOf:it.pl,m:pc.t==='Unit'&&pc.m!=null?+pc.m:null,dmg:0,mods:[],kws:[],zone:'board',type:pc.t==='Unit'?'unit':'gear',ex:false};const erP=X.enterReady(pc,it.pl,false,to,undefined,pid);if(pc.t==='Unit')X.O[pid].ex=!erP.ready;X.EV.push({k:'enter',id:pid,name:pc.n,loc:to,from:zp.z});
                   parts.push(esc(pc.n)+' kijátszva hatásból ('+zhu+', '+esc(X.locLabel(to))+'). A '+pc.t.toLowerCase()+' azonnal resolve-ol (337.2)'+(pc.t==='Unit'?(erP.ready?', ready lép be ('+erP.why+')':', exhausted lép be (143.4)'):'')+'.');X.story.push(Art(pc.n)+' a '+zhu+' a boardra kerül: '+X.locLabel(to)+'.');}
-                else{X.pushTrig({kind:'auto',label:pc.n+' (hatásból kijátszott spell)',name:pc.n,src:null,pl:it.pl,eff:effOf(pc),why:'kijátszás hatásból',list:[],tg:[],from:zp.z});parts.push(esc(pc.n)+' spell a '+zhu+' a chainre kerül, és később resolve-ol (420.3.b); célpontjait az elemzés nem követi.');}}
+                else{parts.push(esc(pc.n)+' spell a '+zhu+' a chainre kerül, és később resolve-ol (420.3.b).'+X.fxSpell(pc,it.pl,zp.z));}}
               else{if(zp.z==='deck'&&zp.top&&k===0){it.zTop=id;it.zLook=okIds.slice();parts.push((/\breveals?\b/i.test(x.t)?'Felfedett lapok (nyilvánossá válnak, 128.5)':'Megnézett lapok (rejtett adat, csak a tulajdonos látja, 128.4)')+': '+okIds.map((z:string)=>esc(X.O[z].name)).join(', ')+'; a deck felső lapjai a pályás építőben megadva (108.4.e).');}parts.push('"'+esc(x.t)+'": '+esc(ob.name)+(zp.z==='deck'?' (a deck '+(ob.ord!+1)+'. lapja)':'')+'.');}});
             if(zp.z==='among'&&/\b(?:the rest|the remaining cards)\b/i.test(x.t)){const rest=(it.zLook||[]).filter((id:string)=>X.O[id]&&X.O[id].zone==='deck');const toTrash=/\btrash\b/i.test(x.t.split(/\b(?:the rest|the remaining cards)\b/i).pop()||'');
               rest.forEach((id:string)=>{if(toTrash)X.zcMove(id,'trash');else{X.O[id].ord=900+(X.O[id].ord||0);X.EV.push({k:'zcard',id,name:X.O[id].name,to:'deck'});}});
@@ -179,12 +185,43 @@ export function installInstr(X: EngineCtx) {
             x.st=x.st==='partial'?'partial':'executed';}}
         else return false;
         return true;};
+  /** Hatásból kijátszott spell a chainre (420.3, 420.3.b): a célpontokat kijátszáskor választják (355.8); az elemzés a legális választások közül
+      az elsővel számol, és felsorolja a többit. Visszaadja a mondatot a célpontokról. */
+  X.fxSpell=(pc,pl,from)=>{const eff=effOf(pc);const item:ChainItem={kind:'auto',label:pc.n+' (hatásból kijátszott spell)',name:pc.n,src:null,pl,eff,why:'kijátszás hatásból',list:phrasesTxt(eff),tg:[],from,fxCard:pc};
+    const t=X.autoTg(item);X.pushTrig(item);return t?' A célpontokat kijátszáskor választják (355.8); '+t:'';};
+  /** A hatásból kijátszott lap célpontjai (spell vagy play trigger, 355.8, 403.4.b): az első legális választás, a többi felsorolva. */
+  X.autoTg=(item)=>{const out:string[]=[];item.list.forEach((p,ti)=>{const o=X.legalOpts(item,p,ti);if(o.length){item.tg[ti]=o[0];out.push((ti+1)+'. célpont: '+esc(X.nm(o[0]))+(o.length>1?' (választható helyette: '+o.slice(1,6).map((v)=>esc(X.nm(v))).join(', ')+')':''));}else if(!p.opt)out.push((ti+1)+'. célpontnak nincs legális választása');});
+    return out.length?'az elemzés az első legális választással számol: '+out.join('; ')+'.':'';};
+  /** "Play a unit / all units banished with this" (Cursed Sarcophagus, The Zero Drive): a forrással banishelt lapok közül (108.6, 420.3). */
+  X.playBanished=(R,x,xi)=>{const {it,s,parts,refs}=R;const src=it.src||it.objId||null;const all=/\ball units\b/i.test(x.t);const free=/ignoring their costs?/i.test(x.t);
+    const cands=Object.keys(X.O).filter((id)=>{const o=X.O[id];return src&&o.banWith===src&&o.zone==='banish'&&o.card&&o.card.t==='Unit';});
+    const plc=s&&s.plc?s.plc[xi]:'';const pick=all?cands:plc?cands.filter((id)=>X.O[id].card!.n===plc).slice(0,1):cands.length===1?cands:[];
+    if(!cands.length){x.st='executed';x.why='nincs ezzel banishelt unit';parts.push('"'+esc(x.t)+'": '+(X.ZC?'nincs ezzel a lappal banishelt unit ebben a helyzetben':'a banishelt lapokat a pályás építőben megadott trash adja (a "banish ... from your trash" hatással)')+'.');return;}
+    if(!pick.length){x.why='több banishelt unit közül kell választani';parts.push('"'+esc(x.t)+'": '+cands.length+' banishelt unit közül választ ('+cands.map((id)=>esc(X.O[id].name)).join(', ')+'); add meg a lapnál (Így értelmezem blokk), és az elemzés követi.');R.fl=Math.max(R.fl,1);return;}
+    pick.forEach((id,k)=>{const o=X.O[id];const pc=o.card!;if(o.type==='zc')X.zcMove(id,'played');else{o.zone='played';o.gen=(o.gen||0)+1;}const pid='pb'+(s?s.j:'x')+'_'+xi+'_'+k;
+      X.O[pid]={id:pid,name:pc.n,card:pc,ctrl:it.pl,own:o.own||it.pl,loc:'base',baseOf:it.pl,m:pc.m!=null?+pc.m:null,dmg:0,mods:[],kws:[],zone:'board',type:'unit',ex:false};const er=X.enterReady(pc,it.pl,false,'base',undefined,pid);X.O[pid].ex=!er.ready;X.EV.push({k:'enter',id:pid,name:pc.n,loc:'base',from:'banish'});
+      parts.push(esc(pc.n)+' kijátszva a banishmentből (Base'+(free?', költség nélkül':', a költségét ki kell fizetni')+'). A unit azonnal resolve-ol (337.2), '+(er.ready?'ready lép be':'exhausted lép be (143.4)')+'.');
+      X.playTrigs({c:pc,j:-1,pl:it.pl,from:'other',objId:pid}).forEach((t)=>{X.pushTrig(t);parts.push('Triggerel: '+esc(t.label)+' (420.4.a).');});});
+    refs.push('420.3','108.6');x.st='executed';};
   /** A művelet a célpont nélküli, a linked és az "all/each" utasításokra. */
   X.resolveAct=(R,x,xi,prev,lk,live,a,sc)=>{const {it,s,srcName,parts,refs}=R;
         const bm=X.ZC?/^\[Burn (\d+)\]/i.exec(x.t):null;
         if(bm){const ids=X.zoneIds('deck',it.pl).slice(0,+bm[1]);it.zBurn=ids;ids.forEach((id:string)=>X.zcMove(id,'trash'));parts.push('"'+esc(x.t)+'": '+(ids.length?ids.map((id:string)=>esc(X.O[id].name)).join(', ')+' a deck tetejéről a trashbe kerül (a Burn emlékeztető szövege; a felső lap a pályás építőben megadva, 108.4.e)':'a deck a pályás építőben üres')+'.');refs.push('108.4.e');return;}
+        if(x.zDone&&a.k==='replay'){parts.push('"'+esc(x.t)+'": az előző utasítással együtt megtörtént.');return;}
+        if(X.ZC&&/^banish all units from your trash\b/i.test(x.t)){const src=it.src||it.objId||null;const ids=Object.keys(X.O).filter((id)=>{const o=X.O[id];return o.zone==='trash'&&(o.own||o.ctrl)===it.pl&&o.card&&o.card.t==='Unit';});
+          ids.forEach((id)=>{const o=X.O[id];if(o.type==='zc')X.zcMove(id,'banish');else{o.zone='banish';o.gen=(o.gen||0)+1;}o.banWith=src;});
+          parts.push('"'+esc(x.t)+'": '+(ids.length?ids.map((id)=>esc(X.O[id].name)).join(', ')+' banishelve, "'+esc(srcName.replace(/ (?:play )?triggere$/,''))+'" lapjával (108.6, 355.10.d)':'nincs unit a trashben (a pályás építőben megadva)')+'.');refs.push('108.6','355.10.d');return;}
+        if(/^(?:if [^,]+,\s*)?(?:you may )?banish it\b/i.test(x.t)&&!x.tis.length&&!live.length&&it.trigId&&X.O[it.trigId]&&X.O[it.trigId].zone==='trash'){const o=X.O[it.trigId];o.zone='banish';o.gen=(o.gen||0)+1;o.banWith=it.src||null;X.EV.push({k:'zcard',id:o.id,name:o.name,to:'banish'});
+          parts.push('"'+esc(x.t)+'": '+esc(o.name)+' a trashből banishelve, '+esc(X.O[it.src!]?X.O[it.src!].name:'a forrás')+' lapjával (108.6); "you may", az elemzés igennel számol.');refs.push('108.6');return;}
+        if(a.k==='playcard'&&/\bbanished with (?:this|me)\b/i.test(x.t)){X.playBanished(R,x,xi);return;}
+        /* Deathknell "Banish me": a forrás már a trashben van (808.1.d), onnan banishelődik; ha a Deathknell egy Equipment Effect Textjéből jött (The Zero Drive), "banished with" azzal (136.2.d) */
+        if(a.k==='banish'&&/^banish me\b/i.test(x.t)&&it.why==='Deathknell'&&it.src&&X.O[it.src]&&X.O[it.src].zone==='trash'){const o=X.O[it.src];o.zone='banish';o.gen=(o.gen||0)+1;X.EV.push({k:'zcard',id:o.id,name:o.name,to:'banish'});
+          const g=Object.values(X.O).find((q)=>X.LASTON[q.id]===o.id&&q.card&&/banished with this/i.test(q.card.txt||'')&&/banish me/i.test(q.card.eff||''));if(g)o.banWith=g.id;
+          parts.push('"'+esc(x.t)+'": '+esc(o.name)+' a trashből banishelve (108.6)'+(g?'; a Deathknell '+esc(g.name)+' Effect Textjéből jön, így "banished with" '+esc(g.name)+' (136.2.c, 136.2.d)':'')+'.');refs.push('108.6');if(g)refs.push('136.2.c','136.2.d');return;}
         if(a.k==='discardHand'){if(X.ZC){['A','B'].forEach((p:string)=>{const ids=X.zoneIds('hand',p);ids.forEach((id:string)=>X.zcMove(id,'trash'));if(ids.length)X.EV.push({k:'discard',pl:p,n:ids.length});parts.push(WHOC[p]+' eldobja a kezét: '+(ids.length?ids.map((id:string)=>esc(X.O[id].name)).join(', '):'üres')+' (423.1; a kéz a pályás építőben megadva, 128.4).');});refs.push('423.1');}
           else{parts.push('"'+esc(x.t)+'": '+esc(a.d||'')+' ('+(a.refs||'')+').');R.fl=Math.max(R.fl,1);}return;}
+        if(/\bput each in its trash\b/i.test(x.t)&&it.src){const bs=Object.values(X.O).filter((o)=>o.banWith===it.src&&o.zone==='banish');bs.forEach((o)=>{o.zone='trash';o.gen=(o.gen||0)+1;o.banWith=null;X.EV.push({k:'zcard',id:o.id,name:o.name,to:'trash'});});
+          if(bs.length)parts.push(bs.map((o)=>esc(o.name)).join(', ')+': a banishmentből a trashbe kerül.');}
         if(a.k==='draw'||a.k==='channel'||a.k==='discard'){let n=a.n!=null?a.n:1;let mult=false;if(a.each&&a.each.cnt){const k=X.countEach(a.each.cnt,it,null);if(k!=null){parts.push('Szorzó: '+k+' ('+esc(a.each.txt)+').');n=n*k;mult=true;}}const verbs:Record<string,[string,string,string]>={draw:['húz',' lapot','414.1'],channel:['channelöl',' rune-t','431.1'],discard:['eldob',' lapot','423.1']};const vb=verbs[a.k];
           let who:string|null|undefined=it.pl;let whoTxt=it.pl==='A'?'Te':'Az ellenfél';
           if(/\b(its|their) (controller|owner)s?\b/i.test(x.t)){if(prev&&live.length){const ob=X.O[it.tg[live[0]]];const own=/owner/i.test(x.t);who=own?ob.own:(ob.zone==='board'?ob.ctrl:(ob.lk&&ob.lk.ctrl)||ob.own);whoTxt='A célpont '+(own?'tulajdonosa':'irányítója')+' ('+WHO[who!]+')';}
@@ -223,22 +260,23 @@ export function installInstr(X: EngineCtx) {
         else if(a.k==='enterReady'){X.READY[it.pl]=true;parts.push('"'+esc(x.t)+'": a kör hátralevő részében '+WHO[it.pl]+' által kijátszott unitok ready lépnek be (143.4.a).');refs.push('143.4.a');}
         else if(a.k==='spendBuffReady'){const us=Object.keys(X.O).filter(id=>X.O[id].zone==='board'&&X.O[id].type==='unit'&&X.O[id].ctrl===it.pl&&X.O[id].bu);us.forEach(id=>{X.O[id].bu=false;X.O[id].ex=false;X.EV.push({k:'ready',id,name:X.O[id].name,spent:true});});
           parts.push('"'+esc(x.t)+'": '+(us.length?us.map(id=>esc(X.O[id].name)).join(', ')+': a buff elköltve, ready lesz (416); "you may": a játékos unitonként dönt, az elemzés minden buffolt unitnál igennel számol':'nincs buffolt friendly unit')+'.');refs.push('416');}
+        else if(a.k==='playcard'&&a.self&&it.fxCard&&/\bplay this spell again\b/i.test(x.t)){parts.push('"'+esc(x.t)+'": a további újrakijátszás ismét "may" döntés; az elemzés itt nem játssza ki újra (különben a lánc nem érne véget).');R.fl=Math.max(R.fl,1);}
         else if(a.k==='playcard'&&x.zDone){parts.push('"'+esc(x.t)+'": a lap unit, az előző utasítással már ide került ('+esc(X.locLabel(X.srcLoc(it)||'base'))+').');}
         else if(a.k==='playcard'){const zac=!a.self&&!(s&&s.plc&&s.plc[xi])&&X.ZC&&it.zAmongCard&&X.O[it.zAmongCard]&&['banish','deck'].includes(X.O[it.zAmongCard].zone)&&/\bplay it\b/i.test(x.t)?it.zAmongCard:null;
           if(zac){parts.push('A kijátszott lap az előző utasítással választott vagy banishelt '+esc(X.O[zac].name)+'.');X.zcMove(zac,'played');it.zAmongCard=null;}
-          const pc=zac?X.O[zac].card:a.self?(it.src&&X.O[it.src!]&&X.O[it.src!].card)||(s&&s.c):vsCard(s&&s.plc?s.plc[xi]:'');
+          const sid=it.src||it.selfObj;const pc=zac?X.O[zac].card:a.self?(sid&&X.O[sid]&&X.O[sid].card)||(s&&s.c)||it.fxCard:vsCard(s&&s.plc?s.plc[xi]:'');
           const pcW=pc&&!a.self?costCheck(costCondOf(x.t),pc,X.zctx(it,s)):'';
           if(pcW){x.st='negated';x.ref='206, 359.3.e.6';x.why='a megadott lap ('+pc!.n+') nem felel meg a költségfeltételnek: '+pcW;parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');refs.push('206');}
           else if(!pc){x.why='a kijátszott lapot a builderben kell megadni';parts.push('"'+esc(x.t)+'": kijátszás hatásból (420.3). Melyik lap? Add meg a builderben (Így értelmezem blokk), és az elemzés követi.');R.fl=Math.max(R.fl,1);}
-          else{if(a.self&&it.src&&X.O[it.src!]&&X.O[it.src!].zone==='trash'){const so0=X.O[it.src!];if(so0.type==='zc')X.zcMove(it.src!,'played');else{so0.zone='gone';so0.gen=(so0.gen||0)+1;}parts.push(esc(pc.n)+' a trashből kerül kijátszásra.');}
+          else{if(a.self&&sid&&X.O[sid]&&X.O[sid].zone==='trash'){const so0=X.O[sid];if(so0.type==='zc')X.zcMove(sid,'played');else{so0.zone='gone';so0.gen=(so0.gen||0)+1;}parts.push(esc(pc.n)+' a trashből kerül kijátszásra.');}
             const pid='p'+(s?s.j:'x')+'_'+xi;const isP=pc.t==='Unit'||pc.t==='Gear';let to=(s&&s.pll&&s.pll[xi])||(/\bhere\b/i.test(x.t)?X.srcLoc(it)||'base':'base');
             it.zLastT=String(pc.t).toLowerCase();it.zLastN=pc.n;if(pc.t==='Unit'&&HERE_NEXT.test((R.INS[xi+1]||{t:''}).t)){to=X.srcLoc(it)||to;R.INS[xi+1].zDone=true;}
             refs.push('420.3','420.3.b');
             if(isP){X.O[pid]={id:pid,name:pc.n,card:pc,ctrl:it.pl,own:it.pl,loc:to,baseOf:it.pl,m:pc.t==='Unit'&&pc.m!=null?+pc.m:null,dmg:0,mods:[],kws:[],zone:'board',type:pc.t==='Unit'?'unit':'gear',ex:false};const erP=X.enterReady(pc,it.pl,false,to,undefined,pid);if(pc.t==='Unit')X.O[pid].ex=!erP.ready;X.EV.push({k:'enter',id:pid,name:pc.n,loc:to,from:a.from});
               parts.push(esc(pc.n)+' kijátszva hatásból ('+({trash:'trashből',hand:'kézből',banish:'banishmentből',other:'nem kézből'} as Record<string,string>)[a.from!]+', '+esc(X.locLabel(to))+(a.free?', költség nélkül':'')+'). A '+pc.t.toLowerCase()+' azonnal resolve-ol (337.2)'+(pc.t==='Unit'?(erP.ready?', ready lép be ('+erP.why+')':', exhausted lép be (143.4)'):'')+'.'+(erP.note?' '+erP.note:''));X.story.push(Art(pc.n)+' hatásból a boardra kerül: '+X.locLabel(to)+'.');
               X.playTrigs({c:pc,j:-1,pl:it.pl,from:a.from==='hand'?'hand':'other',objId:pid}).forEach((t)=>{X.pushTrig(t);parts.push('Triggerel: '+esc(t.label)+' (420.4.a).');});
-              const own=triggersOf(pc).find((t)=>/^when you play (?:me|this)\b/i.test(t.why));if(own){X.pushTrig({kind:'auto',label:pc.n+' play triggere',name:pc.n+' play triggere',src:pid,pl:it.pl,eff:own.eff,why:own.why,list:[],tg:[]});parts.push(esc(pc.n)+' play effectje is triggerel; a célpontját az elemzés nem követi.');}}
-            else{X.pushTrig({kind:'auto',label:pc.n+' (hatásból kijátszott spell)',name:pc.n,src:null,pl:it.pl,eff:effOf(pc),why:'kijátszás hatásból',list:[],tg:[],from:a.from});parts.push(esc(pc.n)+' spell a chainre kerül, és később resolve-ol (420.3.b); célpontjait az elemzés nem követi.');}}}
+              const own=triggersOf(pc).find((t)=>/^when you play (?:me|this)\b/i.test(t.why));if(own){const ti0:ChainItem={kind:'auto',label:pc.n+' play triggere',name:pc.n+' play triggere',src:pid,pl:it.pl,eff:own.eff,why:own.why,list:phrasesTxt(own.eff),tg:[]};const tt=X.autoTg(ti0);X.pushTrig(ti0);parts.push(esc(pc.n)+' play effectje is triggerel'+(tt?' (403.4.b); '+tt:'.'));}}
+            else{const fxPl=/^its controller\b/i.test(x.t)&&it.tg[0]&&X.O[it.tg[0]]&&X.O[it.tg[0]].ctrl?X.O[it.tg[0]].ctrl!:it.pl;parts.push((fxPl!==it.pl?'Az újrakijátszó a célpont irányítója ('+WHO[fxPl]+'). ':'')+esc(pc.n)+' spell a chainre kerül, és később resolve-ol (420.3.b).'+X.fxSpell(pc,fxPl,a.from||'other'));}}}
         else if(a.k==='none'){if(x.manual)parts.push('"'+esc(x.t)+'": a kézi értelmezés szerint nem csinál semmit.');}
         else if(a.k==='delayed'){X.out.delayed.push({t:x.t,who:it.pl,src:srcName,srcId:it.src||it.objId||null,on:live.map((ti:number)=>X.O[it.tg[ti]].name),ids:live.map((ti:number)=>it.tg[ti]),n:X.EV.slice(it.ev0||0).filter((e)=>e.k==='zone'&&e.to==='trash'&&X.O[e.id!]&&X.O[e.id!].type!=='spell').length});X.EV.push({k:'delayed',t:x.t});parts.push('Delayed ability jön létre: "'+esc(x.t)+'". A megadott időpontban triggerel, és akkor kerül a chainre (391.2, 392); ez a mostani chainen kívül esik, ezért az elemzés itt nem futtatja le.');refs.push('391.2','392');X.story.push('Delayed hatás jön létre: "'+x.t+'" (később fut le).');}
         else if(a.k==='loseCtrl'){const ids=(prev?prev.tis.map((ti:number)=>it.tg[ti]):[]).filter((v:string)=>v&&X.O[v]&&X.O[v].zone==='board');

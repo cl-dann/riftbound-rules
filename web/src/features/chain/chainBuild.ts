@@ -195,6 +195,7 @@ export function zoneCands(CS: ChainState, j: number, xi: number): ZCand[] {
     if (zp.zr.act === 'divine') return [...(snap.board || []), ...(snap.hand?.A || []), ...(snap.hand?.B || [])].map((id: string) => { const ob = r.objs[id]; return { id, n: ob?.name || id, zone: ob?.type === 'zc' ? 'hand' : 'board', own: ob?.type === 'zc' ? ob.own : ob?.ctrl, ok: true }; });
     return [];
   }
+  if (zp.zr.act === 'chrono') return (snap.board || []).filter((id: string) => r.objs[id]?.type === 'unit').map((id: string) => { const ob = r.objs[id]; const ok = ob?.ctrl === pl; return { id, n: ob?.name || id, zone: 'board', own: ob?.ctrl, ok, why: ok ? undefined : 'nem a saját unitod' }; });
   if (zp.zr.z === 'among') {
     /* a megnézett lapok: az előző "look at / reveal the top N" utasítás szerinti felső lapok a lépés lerakásakor */
     const inf = stepInfo(CS, s)!; const ins = interp(s, inf);

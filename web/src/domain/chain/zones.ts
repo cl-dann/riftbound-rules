@@ -12,6 +12,8 @@ export function zoneRef0(t0:string,cardName?:string|null):ZoneRef|null{const t=s
   const typesOf=(s:string)=>{const out:string[]=[];if(/\bunits?\b/i.test(s))out.push('unit');if(/\bspells?\b/i.test(s))out.push('spell');if(/\b(gear|equipment)\b/i.test(s))out.push('gear');return out;};
   const nOf=(s:string)=>{const u=/\bup to (\d+|one|two|three|four|five)\b/i.exec(s);if(u)return /^\d+$/.test(u[1])?+u[1]:ZNUM[u[1].toLowerCase()];const d=/\b(\d+|one|two|three)\s+(?:cards?|units?|spells?|gear)\b/i.exec(s);if(d)return /^\d+$/.test(d[1])?+d[1]:ZNUM[d[1].toLowerCase()];return 1;};
   const act=actOfCard(t,cardName).k;const opt=/\byou may\b|\bup to\b/i.test(t);
+  // Chronobreak: a kifizetett Power számú saját unit a resolve-kor választva (nem célpont, 355.10.d mintájára a mennyiség a költségtől függ)
+  if(/^banish that many units you control\b/i.test(t))return {z:'choose',who:'you',n:99,type:['unit'],tags:[],target:false,act:'chrono',opt:false,top:false,t};
   // "each player": minden játékos a saját lapjai közül választ (355.10.e, 412.1)
   if((m=/^each player looks at the top (\d+) cards? of their main deck, banishes one of them/i.exec(t)))return {z:'deck',who:'each',n:+m[1],type:[],tags:[],target:false,act:'banishEach',opt:false,top:true,t};
   if(/^each player reveals the top card of their main deck/i.test(t))return {z:'deck',who:'each',n:1,type:[],tags:[],target:false,act:'revealEach',opt:false,top:true,t};
