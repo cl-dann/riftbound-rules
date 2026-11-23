@@ -17,6 +17,10 @@ export type TargetParam = {
   cost?: CostCond | null; split?: boolean;
   /** csak a régi felismerésben (withLegacyPhrases): feltétel-tagmondatbeli kifejezés, az új felismerés kihagyja */
   cond?: boolean;
+  /** "there": a trigger feltételéből feljegyzett location (359.3.f.3), ha van */
+  there?: boolean;
+  /** Shady Spectacles: a csatoláskor választott, másolandó unit; nem az utasítás célpontja */
+  copySrc?: boolean;
 };
 /** Feltétel ("If ..."): how = known, state, board, user, open, hidden; key a játékállapot kulcsa. */
 export type Cond = { t: string; how: string; why?: string; key?: string; from?: string; val?: unknown; refs?: string; zn?: string; tie?: boolean };
@@ -33,7 +37,7 @@ export type Act = {
   k: string; n?: number | null; unless?: boolean; next?: boolean; who?: string; split?: boolean; unsure?: string; inner?: string;
   self?: boolean; free?: boolean; from?: string; re?: RegExp; d?: string; refs?: string; field?: OvField; ov?: CardOv; cond?: Cond | null;
   pick?: boolean | string; otherwise?: boolean; hidden?: boolean; alt?: boolean; min?: number | null; opts?: string[]; act?: string;
-  kw?: string; all?: string[]; fromPrev?: boolean; scope?: string; until?: string; toSelf?: boolean; to?: string; each?: EachInfo;
+  kw?: string; all?: string[]; fromPrev?: boolean; exhSelf?: boolean; scope?: string; until?: string; toSelf?: boolean; to?: string; each?: EachInfo;
   body?: string; tags?: string[]; onlyThere?: boolean; distinct?: boolean; rel?: string; open?: boolean; pay?: boolean;
   t?: string; fv?: string | number; bonus?: number; toHand?: boolean; tokenText?: string;
   [k: string]: unknown;
