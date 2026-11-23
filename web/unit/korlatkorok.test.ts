@@ -1,6 +1,8 @@
 /* Chain korlátok javítása körönként, valós lapokkal. A futásidejű leltár (unit/leltar.ts) őrzi, mely utasításokat nem követi még az elemzés. */
 import { describe, expect, it } from 'vitest';
-import { stepInfo } from '../src/domain/chain/steps';
+import { attachedEff, stepInfo } from '../src/domain/chain/steps';
+import { triggersOf } from '../src/domain/chain/parser';
+import { vsCard } from '../src/domain/data/store';
 import { migrateTg, normZones } from '../src/domain/chain/cs';
 import { cs, ruleText, run } from './util';
 import { sweep } from './leltar';
@@ -52,6 +54,66 @@ describe("1. kör: Firelights' Hideout, a következő unit Accelerate-et kap (80
     const x = run(cs({ turn: 'A', bf: [{ n: "Firelights' Hideout" }], steps: [{ k: 'tr', n: "Firelights' Hideout", src: null, pl: 'A', eff: 'the next unit you play this turn has [Accelerate].', why: 'When you conquer here' }, { k: 'end' }] }));
     expect(x.text).not.toMatch(/spell a chainre kerül/);
     expect(x.text).toMatch(/Accelerate-et kap \(805\.1\.b\); ha a kijátszáskor kifizetik, ready lép be \(805\.6\)/);
+  });
+});
+
+describe('2. kör: copy effectek (446.1, 446.3, 479.1.b, 479.1.b.1, 479.1.c)', () => {
+  const tokens = (x: ReturnType<typeof run>) => Object.values(x.r.objs).filter((o: any) => o.token) as any[];
+  it('a szabály: a copy a másolható (nyomtatott vagy másolt) jellemzőket veszi át, a későbbi módosításokat nem', () => {
+    expect(ruleText('479.1.b')).toMatch(/all traits of the Game Object are replaced/);
+    expect(ruleText('479.1.b.1')).toMatch(/printed.*copied.*traits/);
+    expect(ruleText('479.1.c')).toMatch(/distinct from the actual traits/);
+    expect(ruleText('446.3')).toMatch(/created as a Copy/);
+  });
+  it('Mirror Image: a token a választott unit másolata (nyomtatott Might, damage nélkül), a [Temporary] a tokené', () => {
+    const x = run(cs({ turn: 'A', bd: [{ n: 'Mountain Drake', pl: 'B', loc: 'bf0', d: 3 }], steps: [{ k: 'card', n: 'Mirror Image', pl: 'A', tg: ['b0'] }, { k: 'res' }] }));
+    const [t] = tokens(x);
+    expect(t).toMatchObject({ name: 'Mountain Drake (másolat)', m: 10, dmg: 0, ctrl: 'A', loc: 'base', ex: false, kws: ['Temporary'] });
+    expect(t.card.n).toBe('Mountain Drake');
+    expect(x.o('b0').kws).toEqual([]);
+    expect(x.text).toMatch(/A token Mountain Drake másolata lesz.*\(446\.1, 479\.1\.b, 479\.1\.b\.1, 479\.1\.c\)/);
+  });
+  it('Mirror Image: ha a választott unit elhagyja a boardot, mistarget, a copy és a [Temporary] Ignored (359.3.e.14.a)', () => {
+    const x = run(cs({ turn: 'A', bd: [{ n: 'Shipyard Skulker', pl: 'B', loc: 'bf0' }], steps: [{ k: 'card', n: 'Mirror Image', pl: 'A', tg: ['b0'] }, { k: 'card', n: 'Gust', pl: 'B', tg: ['b0'] }, { k: 'res' }, { k: 'res' }] }));
+    const [t] = tokens(x);
+    expect(t.name).toBe('Reflection token');
+    expect(x.r.items.find((i: any) => i.name === 'Mirror Image').instr.map((i: any) => i.st)).toEqual(['ignored', 'executed', 'ignored', 'ignored']);
+  });
+  it('Keeper of Masks: a két Reflection token Keeper of Masks másolata', () => {
+    const x = run(cs({ turn: 'A', steps: [{ k: 'card', n: 'Keeper of Masks', pl: 'A', loc: 'bf0' }, { k: 'res' }] }));
+    expect(tokens(x).map((t) => [t.name, t.m, t.loc])).toEqual([['Keeper of Masks (másolat)', 1, 'bf0'], ['Keeper of Masks (másolat)', 1, 'bf0']]);
+  });
+  it('LeBlanc, Deceiver: a token ott jön létre, ahol a conquer volt (359.3.f.3), egy másik ott álló unit másolata, [Temporary]', () => {
+    const cb = { bf: 'bf0', dead: [], recall: [], ctrl: 'A', label: 'teszt' };
+    const x = run(cs({ turn: 'A', lg: { A: 'LeBlanc, Deceiver' }, bd: [{ n: 'Mountain Drake', pl: 'B', loc: 'bf0' }, { n: 'Mega-Mech', pl: 'A', loc: 'bf0' }], steps: [{ k: 'tr', n: 'LeBlanc, Deceiver', src: 'LA', pl: 'A', eff: 'you may discard 1 and exhaust me to play a ready Reflection unit token there. Then do this: It becomes a copy of another unit there. Give it [Temporary].', why: 'When you conquer or hold', tg: ['b1'], cb }] }));
+    expect(tokens(x).map((t) => [t.name, t.m, t.loc, t.kws])).toEqual([['Mega-Mech (másolat)', 8, 'bf0', ['Temporary']]]);
+    expect(x.o('LA').ex).toBe(true);
+    expect(x.o('b1').kws).toEqual([]);
+  });
+  it('Zilean, Time Mage battlefielden: körönként egyszer egy további token-másolat (369.1, 446.3)', () => {
+    const z = (loc: string) => run(cs({ turn: 'A', bd: [{ n: 'Zilean, Time Mage', pl: 'A', loc }], steps: [{ k: 'card', n: 'Recruit the Vanguard', pl: 'A' }, { k: 'res' }, { k: 'card', n: 'Recruit the Vanguard', pl: 'A' }, { k: 'res' }] }));
+    expect(tokens(z('bf0'))).toHaveLength(9);
+    expect(tokens(z('base'))).toHaveLength(8);
+    expect(z('bf0').text).toMatch(/Zilean, Time Mage \(replacement, körönként egyszer\)/);
+  });
+  it('Shady Spectacles: csatoláskor a választott másik friendly unit másolata, a csatolás végéig (a cleanup visszaállítja)', () => {
+    const bd = [{ n: 'Shady Spectacles', pl: 'A', loc: 'base' }, { n: 'Shipyard Skulker', pl: 'A', loc: 'base' }, { n: 'Mountain Drake', pl: 'A', loc: 'bf0' }];
+    const eq = { k: 'ab', src: 'b0', ai: 0, pl: 'A', n: 'Shady Spectacles', tg: ['b1', 'b2'] };
+    const x = run(cs({ turn: 'A', bd, steps: [eq, { k: 'res' }] }));
+    expect(x.o('b1')).toMatchObject({ name: 'Mountain Drake (Shipyard Skulker, másolat)', m: 10 });
+    expect(x.o('b0').on).toBe('b1');
+    const y = run(cs({ turn: 'A', bd, steps: [eq, { k: 'res' }, { k: 'card', n: 'Vengeance', pl: 'A', tg: ['b1'] }, { k: 'res' }] }));
+    expect(y.o('b1')).toMatchObject({ name: 'Shipyard Skulker', zone: 'trash', m: 3 });
+    expect(y.changes).toMatch(/a copy effect véget ér/);
+    // választás nélkül (régi lépés, egy célpont) nincs copy, a csatolás ugyanaz
+    const z = run(cs({ turn: 'A', bd, steps: [{ ...eq, tg: ['b1'] }, { k: 'res' }] }));
+    expect(z.o('b1').name).toBe('Shipyard Skulker');
+    expect(z.o('b0').on).toBe('b1');
+  });
+  it('Svellsongur: a csatolt unit szövege az Equipment Effect Textje, így a unit triggerei kétszer szerepelnek (435.1.d)', () => {
+    const CS = cs({ bd: [{ n: 'Watchful Sentry', pl: 'A', loc: 'base' }, { n: 'Svellsongur', pl: 'A', loc: 'base', on: 0 }], steps: [] });
+    expect(attachedEff(CS as never, 'b0')).toMatch(/Deathknell/);
+    expect(triggersOf(vsCard('Watchful Sentry')!, attachedEff(CS as never, 'b0')).filter((t) => t.why === 'Deathknell')).toHaveLength(2);
   });
 });
 
