@@ -69,6 +69,14 @@ describe('Chain sablonok', () => {
   });
 });
 
+describe('Következő kör sablon', () => {
+  it('nextturn: Temporary, hold triggerek, delayed trigger a Main Phase elején', () => {
+    const x = run('nextturn');
+    expect(x.r.items.map((i: any) => i.name)).toEqual(['Sprite triggere (Temporary, 816.1.b)', 'Grove of the God-Willow triggere (hold)', 'Vex, Gloomist triggere (hold)', 'Iascylla triggere (hold)', 'Iascylla triggere (delayed, Main Phase eleje)']);
+    expect(x.r.objs.b2.loc).toBe('bf0');
+  });
+});
+
 describe("Rek'Sai sablonok: a lefutás sorrendje és állapotai", () => {
   const changes = (r: any) => r.frames.flatMap((f: any) => f.changes.map((c: any) => c.join(' '))).join('\n');
   it('Sanctum fölül: előbb a Sanctum, utána a Rek\'Sai, majd a Ki Barrier és a Tracker trigger', () => {

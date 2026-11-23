@@ -32,8 +32,8 @@ test('Asztal: trash lap felvétele, célpont a trashből, eldobás a kézből', 
   { const cs = await getCS(page); expect(cs.steps[0].zp[0]).toEqual([cs.trash.A[0].id]); }
   await page.locator('.cb2-zp .pb-btn', { hasText: 'Kész' }).click();
   await expect(page.locator('#cb-out')).toContainText('355.10.a');
-  await page.getByRole('button', { name: 'Következő' }).click();
-  await page.getByRole('button', { name: 'Következő' }).click();
+  await page.getByRole('button', { name: 'Következő', exact: true }).click();
+  await page.getByRole('button', { name: 'Következő', exact: true }).click();
   await expect(page.locator('.pm2-band.me-bottom .pm2-hand')).toContainText('Hand · 1');
   // Lunar Boon: a kéz privát, a választás a resolve-kor; a kiemelt kézlapra kattintva
   await page.locator('#cb-clear').click();
