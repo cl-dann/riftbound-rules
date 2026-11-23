@@ -36,7 +36,8 @@ export function installEndOfTurn(X: EngineCtx) {
     const mine=()=>Object.keys(X.O).filter((id)=>{const o=X.O[id];return !!o.card&&(o.zone==='board'||o.zone==='legend')&&o.ctrl===NP;});
     const push=(id:string|null,name:string,eff0:string,why:string,lab:string,x:Partial<ChainItem>={})=>{let eff=eff0;
       /* "you may exhaust me to ...": a döntés és az exhaust költség a chainre tételkor (383.3.a, 383.3.b) */
-      const may=/^you may exhaust me to\s+/i.exec(eff);if(may&&id&&X.O[id]){if(X.O[id].ex){X.rr+=X.line('383.3.b',esc(name+': "'+why+'" triggerelne, de már exhausted, az exhaust költség nem fizethető ki, ezért nem kerül a chainre.'),0);return;}
+      const may=/^you may exhaust me to\s+/i.exec(eff);if(may&&id&&X.O[id]&&!X.mayDec(name+' triggere ('+lab+')',name)){X.rr+=X.line('383.3.a.2',esc(name+': "'+why+'": a játékos nem él vele (a lépésnél beállítva), ezért nem kerül a chainre.'),0);return;}
+      if(may&&id&&X.O[id]){if(X.O[id].ex){X.rr+=X.line('383.3.b',esc(name+': "'+why+'" triggerelne, de már exhausted, az exhaust költség nem fizethető ki, ezért nem kerül a chainre.'),0);return;}
         X.O[id].ex=true;eff=eff.slice(may[0].length);eff=eff.charAt(0).toUpperCase()+eff.slice(1);X.rr+=X.line('383.3.a, 383.3.b',esc(name+' triggere: a "you may" döntés (igen) és az exhaust költség a chainre tételkor; '+name+' exhausted lesz.'),0);}
       /* a késleltetett rész választása a delayed trigger lefutásakor történik (391.2), nem most */
       const later=/\bat the start of your next\b/i.test(eff);

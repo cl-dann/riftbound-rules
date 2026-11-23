@@ -9,7 +9,7 @@ import { lineH } from './labels';
 export function installObjects(X: EngineCtx) {
   X.LOCS=()=>[['base','Base'],['bf0',(X.CS.bf[0].n||'1. battlefield')],['bf1',(X.CS.bf[1].n||'2. battlefield')]];
   X.locLabel=(l)=>(X.LOCS().find(x=>x[0]===l)||['',l as string])[1];
-  X.line=(ref,txt,fl?)=>{const r=[...new Set(String(ref).split(',').map(r=>r.trim()).filter(Boolean))].join(', ');const p=plainOf(txt);if(X.REC)X.REC.push(X.MAN?[r,p,1]:[r,p]);X.ALL.push([r,p]);return lineH(r,txt,fl);};
+  X.line=(ref,txt,fl?,extra?)=>{const r=[...new Set(String(ref).split(',').map(r=>r.trim()).filter(Boolean))].join(', ');const p=plainOf(txt);if(X.REC)X.REC.push(X.MAN?[r,p,1]:[r,p]);X.ALL.push([r,p]);return lineH(r,txt,fl,extra);};
   X.bfC=(n)=>{const c=vsCard(n);return c&&c.t==='Battlefield'?c:null;};
   X.onB=(id)=>!!X.O[id]&&X.O[id].zone==='board';
   X.mightOf=(id)=>{const ob=X.O[id];if(!ob||ob.m==null||ob.zone!=='board')return null;let m=(ob.baseSet!=null?ob.baseSet:ob.m)+(ob.bu?(X.BUF2(ob.ctrl)?2:1):0);
