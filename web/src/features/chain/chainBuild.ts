@@ -7,7 +7,7 @@ import { timingOf, isPermC, interp } from '../../domain/chain/actions';
 import { zoneRefOf, zoneCheck, type ZoneRef } from '../../domain/chain/zones';
 import { vsCard, CARDS } from '../../domain/data/store';
 import { norm } from '../../domain/text/norm';
-import { instName, instNos, tgOptionsOf, reorderSteps, locLabelOf } from '../../domain/chain/cs';
+import { instName, instNos, tgOptionsOf, reorderSteps, locLabelOf, newZid } from '../../domain/chain/cs';
 import type { PBoard, PSide } from '../../shared/board/Playmat';
 import type { Card } from '../../domain/data/schema';
 import type { Ability, TargetParam, Trigger } from '../../domain/chain/types';
@@ -208,4 +208,20 @@ export function zoneCands(CS: ChainState, j: number, xi: number): ZCand[] {
   }
   const owners = zp.zr.who === 'you' ? [pl] : zp.zr.who === 'they' ? [pl === 'A' ? 'B' : 'A'] : ['A', 'B'];
   return owners.flatMap((p) => ((snap as unknown as Record<string, Record<string, string[]> | undefined>)[zp.zr.z]?.[p] || []).map((id: string) => { const ob = r.objs[id]; const why = zoneCheck(zp.zr, ob, pl, snap.ctx); return { id, n: ob?.name || id, zone: zp.zr.z, own: p, ok: !why, why: why || undefined }; }));
+}
+
+/** A kereséssel választott, pályán nem lévő lap a lépés játékosának kezébe kerül, és onnan játssza ki: ugyanaz a helyzet, mintha a kéz + gombjával tette volna a kézbe. */
+export function handPlay(cs: ChainState, st: ChainStep) {
+  if (st.k !== 'card' || st.from !== 'hand' || !st.n || !st.pl) return;
+  cs.hand = cs.hand || { A: [], B: [] }; (cs.hand[st.pl] ||= []).push({ id: newZid(cs, 'hand', st.pl), n: st.n });
+}
+/** Alap unit célpontnak (szöveg nélküli unit), ha nincs legális célpont: a célpont szerinti oldalra és helyre kerül, és a lépés ti. célpontja lesz. */
+export const BASIC_UNIT = 'Shipyard Skulker';
+export function addBasicTarget(cs: ChainState, j: number, ti: number, slot: { rel: string; here?: boolean }) {
+  const s = cs.steps[j]; const pl = (s.pl || 'A') as 'A' | 'B';
+  const side: 'A' | 'B' = slot.rel === 'friendly' ? pl : pl === 'A' ? 'B' : 'A';
+  const loc = slot.here && s.loc && s.loc !== 'base' ? s.loc : 'bf0';
+  const id = 'b' + cs.bd.length;
+  cs.bd.push({ n: BASIC_UNIT, pl: side, loc, d: 0 }); s.tg = s.tg || []; s.tg[ti] = id;
+  return { id, side, loc };
 }

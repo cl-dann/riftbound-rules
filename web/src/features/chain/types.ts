@@ -1,7 +1,7 @@
 import type { PickKind } from './chainBuild';
 
 /* ---------- kártyakereső ---------- */
-export type PickAt = { kind: PickKind; side?: 'me' | 'opp'; loc?: string; bfi?: number; sideFree?: boolean };
+export type PickAt = { kind: PickKind; side?: 'me' | 'opp'; loc?: string; bfi?: number; sideFree?: boolean; replace?: number };
 /* ---------- akció-menü ---------- */
 export type MItem = { label: string; run?: () => void; dis?: string; ref?: string; tone?: string; need?: string; step?: boolean };
 export type Menu = { title: string; card?: string; sub?: string; items: MItem[]; key: string };
