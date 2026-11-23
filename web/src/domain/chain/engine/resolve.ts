@@ -106,14 +106,15 @@ export function installResolve(X: EngineCtx) {
     X.resolveFinish(R);};
   /** Egy célpont végrehajtása az utasításon (359.3.e: a legalitás a resolve-kor). */
   X.resolveTarget=(R,x,ti)=>{const {it,perm,srcName,parts,refs,tgOut,mtT}=R;
-    const p=it.list[ti];const v=it.tg[ti];if(!v)return;R.tot++;if(v==='F0'||v==='F1'){R.legal++;tgOut[ti]='ok';return;}const ob=X.O[v];
+    const p=it.list[ti];const v=it.tg[ti];if(!v)return;if(p&&p.copySrc){tgOut[ti]='ok';return;}R.tot++;if(v==='F0'||v==='F1'){R.legal++;tgOut[ti]='ok';return;}const ob=X.O[v];
       const wS=X.tgWhy(it,p,v,ti,'res');
       if(wS.length){tgOut[ti]='ign';mtT.push({n:ob.name,ok:false,why:wS.join(', ')});if(ob.zone==='board')X.MTIDS.add(v);X.EV.push({k:'mistarget',id:v,name:ob.name,item:srcName});
         parts.push('<span class="stbad">'+(ti+1)+'. célpont illegális</span> ('+esc(ob.name)+' '+wS.join(', ')+'): mistarget, rá a hatás elmarad (359.3.e.2, 359.3.e.5).');refs.push('359.3.e.9');X.story.push(Art(srcName)+(perm?' triggere':'')+' sorra kerül, de '+(it.list.length>1?((ti===0||ti===4)?'az ':'a ')+(ti+1)+'.':'a')+' célpontja ('+ob.name+') '+wS.join(', ').replace(/ \([0-9.,a-z ]+\)/g,'')+': mistarget, rá a hatás elmarad.');return;}
       R.legal++;mtT.push({n:ob.name,ok:true});const xa=x.act;if(it.prot758&&it.prot758.length){parts.push([...new Set(it.prot758)].join(' ')+'.');refs.push(/758\.2\.a/.test(it.prot758.join(''))?'758.2.a':'758.2');it.prot758=[];}
       if(xa.k==='counter'&&ob.type==='spell'&&xa.unless&&it.pays){tgOut[ti]='neg';parts.push(esc(ob.name)+' irányítója kifizeti a kért költséget, ezért a counter nem történik meg.');X.story.push(Art(srcName)+' lefut, de '+art(ob.name)+' gazdája kifizeti a kért költséget, így a spell marad.');return;}
       if(['draw','channel','discard','choose','deck','xp','score','pay','showoff','fight','win','perm'].includes(xa.k)){tgOut[ti]='ok';if(xa.k==='choose')parts.push(esc(ob.name)+' kiválasztva.');return;}
-      if(xa.k==='note'||xa.k==='copy'){tgOut[ti]='ok';if(!x.noted){x.noted=1;parts.push((xa.open?'<span class="cbuns">nyitott kérdés</span> ':'')+esc(ob.name)+': "'+esc(x.t)+'": '+esc(xa.d||'')+(xa.refs?' ('+xa.refs+')':'')+'.');if(xa.refs)xa.refs.split(/,\s*/).forEach((r:string)=>refs.push(r));}R.fl=Math.max(R.fl,xa.open?2:1);return;}
+      if(xa.k==='copy'){tgOut[ti]='ok';const made=R.made||[];if(made.length){X.copyOnto(made,v,parts,refs);R.copied=made;}else parts.push('"'+esc(x.t)+'": nincs ebben a resolve-ban létrehozott token, ami '+esc(ob.name)+' másolatává válhatna.');return;}
+      if(xa.k==='note'){tgOut[ti]='ok';if(!x.noted){x.noted=1;parts.push((xa.open?'<span class="cbuns">nyitott kérdés</span> ':'')+esc(ob.name)+': "'+esc(x.t)+'": '+esc(xa.d||'')+(xa.refs?' ('+xa.refs+')':'')+'.');if(xa.refs)xa.refs.split(/,\s*/).forEach((r:string)=>refs.push(r));}R.fl=Math.max(R.fl,xa.open?2:1);return;}
       if(xa.k==='other'||xa.k==='delayed'||xa.k==='playcard'||xa.k==='replay'||xa.k==='token'){tgOut[ti]='ok';parts.push(esc(ob.name)+': "'+esc(x.t)+'" lefut, ezt az elemzés nem követi részletesen.');R.fl=Math.max(R.fl,1);return;}
       const r=X.applyTo(v,Object.assign({t:x.t},xa),it,parts,refs);tgOut[ti]=r==='neg'?'neg':r==='ign'?'ign':'ok';if(r==='ign')R.legal--;};
   /** A választott részhalmazból kimaradt célpont (355.11.b) Ignored, a többi végrehajtódik. */

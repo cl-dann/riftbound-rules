@@ -124,6 +124,7 @@ export function installBuild(X: EngineCtx) {
     // a költségből vagy kijátszásból keletkezett triggerek (Deathknell, leave, play) a kijátszott elem fölé kerülnek
     if(X.PEND.length){const n=X.PEND.length;const lab=X.PEND.map((t)=>esc(t.label)).join(', ');X.flushPend(X.chain);X.rows+=X.line('337.1.b, 359.3.b, 340.1','A kijátszás közben keletkezett trigger'+(n>1?'ek':'')+' ('+lab+') a chain tetejére kerül'+(n>1?'nek':'')+', ezért előbb resolve-ol'+(n>1?'nak':'')+'.',1);}};
   X.cleanup=()=>{const dead=Object.keys(X.O).filter(id=>X.lethal(id));const parts:string[]=[];const refs:string[]=[];const names:string[]=[];
+    X.copyEnd().forEach((t)=>{X.REC!.push(['479.1.b',t]);X.ALL.push(X.REC![X.REC!.length-1]);});
     dead.forEach(id=>{const r=X.killObj(id,'lethal damage, cleanup',parts,refs);names.push(X.O[id].name+(r==='neg'?' (helyettesítve)':''));});
     if(dead.length){X.REC!.push(['323.4, 142.4.b, 429.1.a.2','Cleanup: '+plainOf(parts.join(' '))]);X.ALL.push(X.REC![X.REC!.length-1]);}
     const rc=Object.keys(X.O).filter(id=>{const g=X.O[id];return g.zone==='board'&&!g.on&&((g.type==='gear'&&g.loc!=='base')||(g.loc==='base'&&g.baseOf&&g.ctrl&&g.baseOf!==g.ctrl));});

@@ -10,7 +10,11 @@ export function srcCard(CS:ChainCS,src:string|undefined):CardLike|null|undefined
   if(src[0]==='b'){const b=CS.bd[+src.slice(1)];return b?vsCard(b.n):null;}
   if(src[0]==='s'){const s=CS.steps[+src.slice(1)];return s&&s.k==='card'?vsCard(s.n):null;}return null;}
 /** A forrásra csatolt gearek Effect Textje (136.2.c): a trigger listába ez is bekerül. */
-export function attachedEff(CS:ChainCS,src:string|undefined){if(!src||src[0]!=='b')return '';const i=+src.slice(1);return CS.bd.filter((g)=>g.on===i).map((g)=>{const c=vsCard(g.n);return c&&c.eff?c.eff:'';}).filter(Boolean).join('\n');}
+/** Svellsongur: a csatolt unit szövege az Equipment Effect Textje lesz (479.1.b), ezt a unit megkapja (435.1.d), így a triggerei kétszer szerepelnek. */
+const COPY_TEXT=/copy that unit's text to this Equipment's effect text/i;
+/** Shady Spectacles: "As this is attached to a unit, choose another friendly unit": a csatoláskor választott unit (2. hely, választható). */
+export const COPY_EQUIP=/becomes a copy of that unit for as long as this is attached/i;
+export function attachedEff(CS:ChainCS,src:string|undefined){if(!src||src[0]!=='b')return '';const i=+src.slice(1);return CS.bd.filter((g)=>g.on===i).map((g)=>{const c=vsCard(g.n);if(c&&COPY_TEXT.test(c.txt||'')){const u=vsCard(CS.bd[i].n);return u&&u.txt?u.txt:'';}return c&&c.eff?c.eff:'';}).filter(Boolean).join('\n');}
 export function stepInfo(CS:ChainCS,s:ChainStep):StepInfo|null{
   if(s.k==='tr'){const c=vsCard(s.n)||{n:s.n||'?',t:'',txt:''};const eff=stripRem(s.eff||'');return {c,eff,list:phrasesTxt(eff),trig:false,isTr:true,may:/^you may\b/i.test(eff)};}
   if(s.k==='tg'){const c=srcCard(CS,s.src);if(!c)return null;const tr=triggersOf(c,attachedEff(CS,s.src))[s.ti||0];if(!tr)return {c,tr:null,eff:'',list:[],isTg:true};
@@ -18,7 +22,7 @@ export function stepInfo(CS:ChainCS,s:ChainStep):StepInfo|null{
     return {c,tr,eff,list:phrasesTxt(eff),isTg:true,killSelf,may:/^you may\b/i.test(tr.eff),modes};}
   const c=vsCard(s.n);if(!c)return null;
   if(s.k==='ab'){const sc=srcCard(CS,s.src);const ab=abilitiesOf(sc)[s.ai||0];if(!ab)return {c,ab:null,eff:'',list:[],trig:false,isAb:true};
-    return {c:sc!,ab,eff:ab.eff,list:ab.add?[]:ab.equip?[{type:'unit',rel:'friendly',max:null,bf:false,opt:false}]:phrasesTxt(ab.eff),trig:false,isAb:true,may:/^you may\b/i.test(ab.eff)};}
+    return {c:sc!,ab,eff:ab.eff,list:ab.add?[]:ab.equip?[{type:'unit',rel:'friendly',max:null,bf:false,opt:false},...(COPY_EQUIP.test(sc!.txt||'')?[{type:'unit',rel:'friendly',max:null,bf:false,opt:true,another:true,copySrc:true}]:[])]:phrasesTxt(ab.eff),trig:false,isAb:true,may:/^you may\b/i.test(ab.eff)};}
   const cost=costOf(c);
   let pt=/(?:^|\n)\s*when you play (?:me|this)( from face down)?(?: or [^,.]*)?[,.]\s*([^\n]*)/i.exec(c.txt||'');const fdOnly=!!(pt&&pt[1]);if(pt)pt=[pt[0],pt[2]] as unknown as RegExpExecArray;
   let ptE=pt?stripRem(pt[1]):'';

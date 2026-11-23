@@ -18,6 +18,10 @@ export type GameObj = {
   save?: { pay: boolean; src: string } | null; dbl?: boolean | null; dieTo?: string | null; baseSet?: number | null; untgt?: boolean | null; prev?: unknown;
   until?: { src: string; prev: string | null } | null; ord?: number; gen?: number; on?: string | null; accel?: boolean; accelG?: boolean; src?: string;
   stepJ?: number; token?: boolean; toHand?: boolean; zone0?: string;
+  /** Copy effect (479.1.b): a másolt lap nyomtatott (vagy maga is másolt) jellemzői. */
+  copyOf?: CardLike | null;
+  /** Shady Spectacles: a copy effectet adó Equipment és a másolás előtti jellemzők */
+  copyBy?: string | null; orig?: { card: CardLike | null | undefined; name: string; m: number | null | undefined } | null;
   /** Példányszám, ha a lapból több van a pályán (instNos). */
   no?: number;
 };
@@ -99,6 +103,8 @@ export type StateFns = { xpOf: (p: string) => number; scoreOf: (p: string) => nu
 export type ResolveRun = {
   it: ChainItem; s: EStep; perm: boolean; self: GameObj | null; srcName: string; INS: Instr[]; parts: string[]; refs: string[];
   tgOut: string[]; mtT: MtTarget[]; t: string; fl: number; legal: number; tot: number; lastT: Pick<Instr, 'tis' | 'st' | 'act' | 't'> | null;
+  /** az ebben a resolve-ban létrehozott tokenek, és a copy effecttel másolattá vált tokenek */
+  made?: string[]; copied?: string[];
 };
 /** Egy lépés kijátszásának állapota (playStep, playCheck, playLegal): a lap, az időzítés, a szöveg eleje, a tétel,
     a költségként megölt unit (costV), a kötelező trigger-választások (pick) és a play effect legalitási hibája (trigBad). */
@@ -118,7 +124,7 @@ export type EngineCtx = {
   MAN: boolean; ALL: RecRow[]; EV: Ev[]; story: string[]; rows: string; rr: string; notes: string[]; O: Record<string, GameObj>;
   BF: Record<string, BfState>; ZC: boolean; zcK: Record<string, string>; cnt: Record<string, number>; FR: Frame[]; DET: Set<string>;
   NEWCTRL: Set<string>; chain: ChainItem[]; stack: ChainItem[]; REPL: Set<string>; READY: Record<string, boolean>;
-  BUFF2: Record<string, boolean>; PREVSA: { on: boolean }; READYNEXT: Record<string, boolean>; ACCELNEXT: Record<string, boolean>; ST: StateFns;
+  BUFF2: Record<string, boolean>; PREVSA: { on: boolean }; READYNEXT: Record<string, boolean>; ACCELNEXT: Record<string, boolean>; ZIL: Record<string, boolean>; ST: StateFns;
   PSD: Record<string, number | string>; TP: string; PEND: ChainItem[]; DIED: string[]; TOKN: number; PTN: Set<string>; done: Done[];
   guard: number; it0: ChainItem | null; parts0: string[]; refs1: string[]; tgOut0: string[]; mtT0: MtTarget[]; tot0: { n: number };
   legal0: { n: number }; INRES: boolean; ENDED: boolean;
@@ -153,7 +159,9 @@ export type EngineCtx = {
   tgWhy: (it: ChainItem, p: TargetParam, v: string, ti: number, phase: string) => string[];
   tgWhy0: (it: ChainItem, p: TargetParam, v: string, ti: number, phase: string) => string[];
   legalOpts: (it: ChainItem, p: TargetParam, ti: number) => string[];
-  createTokens: (t: string, it: ChainItem, parts: string[], refs: string[], times: number) => void;
+  createTokens: (t: string, it: ChainItem, parts: string[], refs: string[], times: number) => string[];
+  copyOnto: (ids: string[], srcId: string, parts: string[], refs: string[]) => void;
+  equipCopy: (G: GameObj, U: GameObj, srcId: string | undefined, pl: string, parts: string[], refs: string[]) => void; copyEnd: () => string[];
   pushTrig: (t: ChainItem) => void; deathWatch: () => void; flushPend: (target: ChainItem[]) => void;
   leaveTrigs: (id: string, dk: boolean) => void; playTrigs: (s: PlaySrc) => ChainItem[]; abTrigs: (s: EStep) => ChainItem[];
   setCtrl: (id: string, to: string | null, ref: string, why: string, until?: string) => boolean; leaveBoard: (id: string, zone: string) => void;
