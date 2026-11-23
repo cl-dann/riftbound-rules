@@ -67,12 +67,13 @@ test('kézlap törlése után nincs elcsúszás: a kiválasztás az azonosítót
   await page.locator('.pm2-band.me-bottom .pm2-hc').first().click();
   await page.locator('.cb2-menu .pb-btn', { hasText: 'Eltávolítás a kézből' }).click();
   cs = await getCS(page);
-  expect(cs.hand.A.map((e: any) => e.n)).toEqual(['Void Seeker']);
+  // a kereséssel kijátszott Lunar Boon magától a kézbe került (onnan játszotta ki)
+  expect(cs.hand.A.map((e: any) => e.n)).toEqual(['Void Seeker', 'Lunar Boon']);
   expect(cs.steps[0].zp[0]).toEqual([vid]);
   await expect(page.locator('#cb-out')).toContainText('eldobja: Void Seeker');
   // a kiválasztott lap törlése: a lépés hiányos, nem kerül más lap a helyére
   await page.locator('.cbv-dots i').first().click();
-  await expect(page.locator('.pm2-band.me-bottom .pm2-hc')).toHaveCount(1);
+  await expect(page.locator('.pm2-band.me-bottom .pm2-hc')).toHaveCount(2);
   await page.locator('.pm2-band.me-bottom .pm2-hc').first().click();
   await page.locator('.cb2-menu .pb-btn', { hasText: 'Eltávolítás a kézből' }).click();
   await expect(page.locator('.cb2-sc.need')).toContainText('Hiányzik');
