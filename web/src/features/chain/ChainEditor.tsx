@@ -7,6 +7,8 @@ import { stepInfo } from '../../domain/chain/steps';
 import type { ChainState, ChainStep, ZoneEntry } from '../../domain/chain/state';
 import type { ZoneRef } from '../../domain/chain/zones';
 import { TEMPLATES } from '../../domain/chain/templates';
+import { HardExamples } from './HardExamples';
+import { hardBadge } from '../../domain/chain/hardExamples';
 import { IMGBASE } from '../../domain/data/store';
 import { type Glow, type PTarget, type PlayCtl, Playmat } from '../../shared/board/Playmat';
 import { CombatPanel } from './CombatPanel';
@@ -47,6 +49,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
   const { wiz, setWiz, wq, setWq, wres, xref } = useWizard();
   const showMenu = (m: Menu) => { if (narrow) { setMenu(null); setSel(null); setWiz((w) => ({ st: 'action', menu: m, side: w?.side || 'me' })); } else setMenu(m); };
   const [tpl, setTpl] = useState<{ open: boolean; ask?: string }>({ open: false });
+  const [hard, setHard] = useState(false);
   const tplSlot = typeof document !== 'undefined' ? document.getElementById('cb-tplslot') : null;
   const jump = useRef<number | 'keep' | null>(null);
   const host = useRef<HTMLDivElement>(null);
@@ -606,7 +609,11 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
 
   return (
     <>
-      {tplSlot && createPortal(<button type="button" className="btn sec" aria-expanded={tpl.open} title="Kész helyzetek témánként: counter, mistarget, trigger sorrend, replacement, Hidden, kör vége" onClick={() => setTpl({ open: !tpl.open })}>Sablonok</button>, tplSlot)}
+      {tplSlot && createPortal(<>
+        <button type="button" className="btn sec" aria-expanded={tpl.open} title="Kész helyzetek témánként: counter, mistarget, trigger sorrend, replacement, Hidden, kör vége" onClick={() => { setTpl({ open: !tpl.open }); setHard(false); }}>Sablonok</button>
+        <button type="button" className="btn sec" aria-expanded={hard} title="Gyakori, nehéz szabálykérdések a meta legendjeivel, valós decklisták lapjaival" onClick={() => { setHard(!hard); setTpl({ open: false }); }}>Nehéz példák</button>
+      </>, tplSlot)}
+      {hard && <HardExamples hasContent={hasContent} onLoad={(e) => { setHard(false); chainActions().set(e.cs()); setMsg('Példa betöltve: ' + e.lg.map(hardBadge).join(', ') + '. ' + e.q + ' Lépésenként a Következő gombbal nézheted végig.'); }} />}
       {tpl.open && (
         <div className="panel pad cb2-tpls" role="region" aria-label="Sablonok">
           {TEMPLATES.map((t) => (
