@@ -47,7 +47,7 @@ export type Instr = {
   t: string; n: number; tis: number[]; det: Act; act: Act; lk: boolean; detLk: boolean; dir: boolean; manual: boolean;
   unsure: string[]; st: string; ref: string; why: string;
   /** A resolve jelölései: előkészítés, a feltétel értéke, az alternatíva. */
-  prep?: string; cv?: boolean | null; altBy?: string; altUsed?: boolean; noted?: number; zDone?: boolean;
+  prep?: string; cv?: boolean | null; altBy?: string; altUsed?: boolean; noted?: number; dlMade?: number; zDone?: boolean;
   /** "based on" felsorolás egy pontja (Twisted Fate, Hwei): a döntő utasítás indexe és a pont kulcsa */
   basedOn?: { xi: number; key: string };
 };

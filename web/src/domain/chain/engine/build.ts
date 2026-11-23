@@ -17,6 +17,8 @@ export function installBuild(X: EngineCtx) {
     return {kind:'step',s,label,name:s.k==='ab'||s.k==='tg'?abn:so&&so.no?so.name:c.n,pl:s.k==='tg'?((X.O[s.src!]&&X.O[s.src!].ctrl)||s.pl):s.pl,eff:s.eff,list:s.list,tg:s.tg,src,perm,from:s.k==='card'?s.from:null,loc:s.k==='card'?(s.loc||(s.from==='facedown'?'bf0':'base')):null,objId:s.k==='card'||s.k==='ab'||s.k==='tg'?'s'+s.j:null,dest:s.dest,ov:s.ov,pays:s.pays,may:s.may,isTg:s.k==='tg',evPlay:X.EV.length,soM:s.so?(String(s.so).startsWith('h:')?((vsCard(String(s.so).slice(2))||{}).m??null):(X.O[s.so]?X.mightOf(s.so):null)):null,soName:s.so?(String(s.so).startsWith('h:')?String(s.so).slice(2)+' (kézből felfedve)':(X.O[s.so]?X.O[s.so].name:'')):'',notedLoc:s.k==='tg'&&s.tr&&/\bmove from a location\b/i.test(s.tr.why||'')?(s.mfrom||'base'):null};};
   X.playMain=()=>X.MAIN.forEach((s,ix)=>{
     if(s.k==='end'){X.playEnd();return;}
+    if(X.NEXT){X.rows+=X.line('315','<span class="stbad">Nem szabályos:</span> a "Következő kör" az utolsó lépés: az elemzés a következő kör Main Phase-ének elején megáll, az utána felvett lépés kimarad.',0);return;}
+    if(s.k==='next'){X.playEnd();X.NEXT=true;return;}
     if(s.k==='res'){X.playRes();return;}
     try{X.playStep(s,ix);}finally{const lab=(s.k==='tg'?(s.it?s.it.pl:s.pl):s.pl)==='A'?'Te':'Ellenfél';X.snap(s.k==='tg'?'Trigger: '+s.c.n+(s.illegal?' (lekerül)':''):lab+': '+(s.k==='ab'?'aktiválás':'kijátszás')+', '+(s.k==='ab'?s.c.n+' abilityje':s.c.n)+(s.illegal?' (nem szabályos, kimarad)':''),X.chain,s.j);}});
   /** Kör vége: a chain lefut, majd Ending Step (317.1); a további lépések a kör végi triggerekre válaszolnak. */
