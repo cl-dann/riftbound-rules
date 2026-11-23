@@ -42,13 +42,13 @@ export type ChainItem = {
   notedLoc?: string | null; why?: string; sent?: boolean; lk?: { loc?: string }; trigBy?: CardLike; dk?: boolean;
   zpGen?: Record<string, number>; rdBefore?: number; dropT?: Set<number>; prot758?: string[]; pre?: string[]; lkMight?: number | null;
   hit?: string[]; flL?: boolean; mp?: Record<string, string>; raiseBase?: string | null; paid?: boolean; kwSrc?: string | null; endTrig?: boolean;
-  coNote?: string; zAmongCard?: string | null; zAmongDone?: boolean; zTop?: string; zLook?: string[]; zEach?: Record<string, string>;
+  coNote?: string; zAmongCard?: string | null; zRunes?: number | null; zRev?: string; zLastT?: string; zLastN?: string; zGuess?: string; zBurn?: string[]; zAmongDone?: boolean; zTop?: string; zLook?: string[]; zEach?: Record<string, string>;
   zEachTop?: Record<string, string>; zDisc?: string; zDivine?: boolean; zKeep?: Set<string>; dl?: boolean;
 };
 /** Egy esemény a naplóban (EV): k a fajta, a többi a fajta adatai. */
 export type Ev = {
   k: string; id?: string; name?: string; pl?: string | null; n?: number; t?: string; from?: string | number | null; to?: string | number | null; loc?: string;
-  by?: string | null; item?: string; baseOf?: string | null; cleanup?: boolean; replay?: boolean; spent?: boolean; kw?: string; all?: string[];
+  by?: string | null; item?: string; baseOf?: string | null; cleanup?: boolean; replay?: boolean; spent?: boolean; kw?: string; all?: string[]; recycle?: boolean;
 };
 /** Késleltetett hatás (391.2). */
 export type Delayed = { t: string; who: string; src: string; srcId: string | null; on: string[]; ids: string[]; n?: number; done?: boolean };

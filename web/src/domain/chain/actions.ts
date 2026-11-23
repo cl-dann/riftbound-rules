@@ -38,7 +38,7 @@ export function actOf(t:string):Act{const e=String(t||'').replace(/^[-\u2014\u20
   if(/^swap the Mights of two units\b/i.test(e))return r({k:'swapMight'});
   if(/\bplaces? it on the top or bottom of (?:their|its owner's|your) Main Deck\b/i.test(e))return r({k:'todeck'});
   if(/^(?:then,?\s*)?(?:you may )?(?:name a (?:card|spell|unit)|they guess a card type)\b/i.test(e))return {k:'choose'};
-  if(/^(?:you may )?put (?:a card|the top \d+ cards?|the rest|those you don't|it) [^.]*\b(?:main deck|trash|hand)\b|^put those you don't\b|^(?:you may )?return your chosen champion\b|\breveal from among\b|\breveal cards from the top\b/i.test(e))return r({k:'deck'});
+  if(/^(?:if it's an? (?:unit|gear|spell),\s*)?(?:you may )?put (?:a card|the top \d+ cards?|the rest|those you don't|it) [^.]*\b(?:main deck|trash|hand)\b|^put those you don't\b|^(?:you may )?return your chosen champion\b|\breveal from among\b|\breveal cards from the top\b/i.test(e))return r({k:'deck'});
   if(/\breduce (?:its|this spell's) (?:energy )?cost\b|\bcost is reduced\b/i.test(e))return {k:'costmod'};
   if((m=/\bgive [^.]*?([+\-\u2013])\[S\][^.]*\bequal to the number of\b/i.exec(e)))return r({k:'might',n:m[1]==='+'?1:-1,self:false});
   if((m=/^each player (discards|draws) (\d+)\b/i.exec(e)))return {k:m[1].toLowerCase()==='discards'?'discard':'draw',n:+m[2],eachPlayer:true};
