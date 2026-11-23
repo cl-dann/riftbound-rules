@@ -371,6 +371,16 @@ describe('7. kör: Rune Deck és rune pool tartalma, Jhin előzménye (417, 431.
   });
 });
 
+describe('8. kör: frame-enkénti számlálók a Playmathoz (XP, pont, rune pool, Rune Deck)', () => {
+  it('a Mobilize channelje a rune-ok számát növeli, a Rune Deck mérete csökken; a régi mezők változatlanok', () => {
+    const x = run({ ...cs({ turn: 'A', steps: [{ k: 'card', n: 'Mobilize', pl: 'A' }, { k: 'res' }] }), ps: { A: { runes: 3, runeDeck: 9, xp: 2, score: 4 } } } as never);
+    const fr = x.r.frames.map((f: any) => f.board.me);
+    expect(fr[0]).toMatchObject({ xp: 2, score: 4, runeDeck: 9, runes: { ready: 3, exhausted: 0, domains: [] } });
+    expect(fr[fr.length - 1]).toMatchObject({ runeDeck: 8, runes: { ready: 3, exhausted: 1 } });
+    expect(x.r.frames[0].board.opp).toMatchObject({ xp: 0, score: 0 });
+  });
+});
+
 describe('Futásidejű leltár', () => {
   it('a még nem követett utasítások listája (minden kör szűkíti)', () => {
     const h = sweep();

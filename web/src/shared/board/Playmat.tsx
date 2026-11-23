@@ -6,7 +6,7 @@ import { openCard } from '../lib/events';
 export type PUnit = { n: string; no?: number; m: number; base?: number; ex?: boolean; dmg?: number; tag?: string; status?: string[]; mods?: string[]; gear?: string[]; token?: boolean; id?: string; kind?: 'gear' };
 export type PSide = {
   legend?: string; legendEx?: boolean; champion?: string | null; base?: PUnit[]; runes?: { ready: number; exhausted: number; domains?: string[] };
-  hand?: string[]; handCount?: number; score?: number; deck?: number; runeDeck?: number; trash?: string[]; banish?: string[];
+  hand?: string[]; handCount?: number; score?: number; xp?: number; deck?: number; runeDeck?: number; trash?: string[]; banish?: string[];
   /** A kéz és a trash lapjainak azonosítói (a chain elemző frame-jéből). */
   zids?: { hand: string[]; trash: string[] };
 };
@@ -125,9 +125,11 @@ function Unit({ u, side, changed, where = '', loc = '', i = 0 }: { u: PUnit; sid
 
 const DOMC: Record<string, string> = { Fury: '#ff5a4e', Calm: '#4fcf8a', Mind: '#5fa1ff', Body: '#f59a45', Chaos: '#b07ef2', Order: '#e9cb4d' };
 
-function RuneStacks({ r, onZone, sel, side }: { r?: PSide['runes']; onZone: (z: string) => void; sel: string; side: 'me' | 'opp' }) {
+function RuneStacks({ r, pr, onZone, sel, side }: { r?: PSide['runes']; pr?: PSide['runes']; onZone: (z: string) => void; sel: string; side: 'me' | 'opp' }) {
   const ctl = useContext(CtlCtx);
   if (!r) return null;
+  /* változás az előző frame-hez képest: a rune-ok száma vagy a ready/exhausted arány */
+  const chg = !!pr && (pr.ready !== r.ready || pr.exhausted !== r.exhausted || (pr.domains || []).join() !== (r.domains || []).join()) ? ' chg' : '';
   const doms = r.domains || [];
   const total = r.ready + r.exhausted;
   const groups: Record<string, { ready: number; ex: number }> = {};
@@ -135,7 +137,7 @@ function RuneStacks({ r, onZone, sel, side }: { r?: PSide['runes']; onZone: (z: 
   // Színenként egy kupac: a ready lapok elöl, az exhausted lapok elforgatva a kupac végén. A kulcs a pozíció, így exhaustkor ugyanaz az elem fordul el (animáció).
   const stack = (d: string, g: { ready: number; ex: number }) => (
     <>
-      {Array.from({ length: g.ready + g.ex }, (_, i) => <span key={i} className={'pm2-rune' + (i >= g.ready ? ' ex' : '')} style={{ marginLeft: i ? -30 : 0 }}><img src={img(d + ' Rune')} alt={d + ' Rune' + (i >= g.ready ? ' exhausted' : '')} loading="lazy" /></span>)}
+      {Array.from({ length: g.ready + g.ex }, (_, i) => <span key={i} className={'pm2-rune' + (i >= g.ready ? ' ex' : '') + (d === '?' ? ' unk' : '')} style={{ marginLeft: i ? -30 : 0 }}>{d === '?' ? <span className="pm2-runeq" aria-label={'ismeretlen domainű rune' + (i >= g.ready ? ', exhausted' : '')}>?</span> : <img src={img(d + ' Rune')} alt={d + ' Rune' + (i >= g.ready ? ' exhausted' : '')} loading="lazy" />}</span>)}
       <b className="pm2-cnt" style={{ background: DOMC[d] || '#555' }} title={g.ready + ' ready, ' + g.ex + ' exhausted'}>{g.ready}</b>
     </>
   );
@@ -154,19 +156,22 @@ function RuneStacks({ r, onZone, sel, side }: { r?: PSide['runes']; onZone: (z: 
     </>
   );
   return ctl
-    ? <div data-zone="runes" className="pm2-runes">{inner}</div>
-    : <button type="button" data-zone="runes" className={'pm2-runes' + (sel === 'runes' ? ' on' : '')} onClick={() => onZone('runes')} title="Rune-ok">{inner}</button>;
+    ? <div data-zone="runes" className={'pm2-runes' + chg}>{inner}</div>
+    : <button type="button" data-zone="runes" className={'pm2-runes' + (sel === 'runes' ? ' on' : '') + chg} onClick={() => onZone('runes')} title="Rune-ok">{inner}</button>;
 }
 
-function Piles({ s, onZone, sel, known, side }: { s: PSide; onZone: (z: string) => void; sel: string; known?: boolean; side: 'me' | 'opp' }) {
+function Piles({ s, ps, onZone, sel, known, side }: { s: PSide; ps?: PSide; onZone: (z: string) => void; sel: string; known?: boolean; side: 'me' | 'opp' }) {
   const ctl = useContext(CtlCtx); const ed = useContext(EditCtx);
+  /* a darabszám változása az előző frame-hez képest */
+  const cnt = (z: string, x?: PSide) => (!x ? undefined : z === 'trash' ? (x.trash || []).length : z === 'banish' ? (x.banish || []).length : z === 'deck' ? x.deck : z === 'runeDeck' ? x.runeDeck : undefined);
   const P = ({ z, l, n, top }: { z: string; l: string; n?: number; top?: string | null }) => {
+    const chg = ps && cnt(z, ps) !== cnt(z, s) ? ' chg' : '';
     if (ctl && ed && (z === 'trash' || z === 'deck' || z === 'banish' || z === 'runeDeck')) {
       const t: PTarget = { k: 'pile', z, side }; const g = ctl.glow(t);
-      return <button type="button" data-zone={z} className={'pm2-pile' + gcls(g)} onClick={() => ctl.on(t)} aria-label={ctl.label?.(t) || l + ' ' + (n ?? 0) + ' lap, megnyitás'}><Card n={top} small /><span>{l} <b>{n ?? 0}</b></span></button>;
+      return <button type="button" data-zone={z} className={'pm2-pile' + gcls(g) + chg} onClick={() => ctl.on(t)} aria-label={ctl.label?.(t) || l + ' ' + (n ?? 0) + ' lap, megnyitás'}><Card n={top} small /><span>{l} <b>{n ?? 0}</b></span></button>;
     }
     return (
-      <button type="button" data-zone={z} className={'pm2-pile' + (sel === z ? ' on' : '')} onClick={() => onZone(z)} title={ZONES[z]?.t}>
+      <button type="button" data-zone={z} className={'pm2-pile' + (sel === z ? ' on' : '') + chg} onClick={() => onZone(z)} title={ZONES[z]?.t}>
         <Card n={top} small /><span>{l}<b>{n ?? 0}</b></span>
       </button>
     );
@@ -351,7 +356,9 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
   const onZone = (z: string) => { if (scn) return; setPu(null); setSel(sel === z ? '' : z); };
   const info = sel ? ZONES[sel] : null;
   const pick = (u: PUnit, side: 'me' | 'opp', where: string) => { setSel(''); setPu(pu && pu.u === u ? null : { u, side, where }); };
-  const score = (who: 'me' | 'opp') => { const v = b[who].score; return v == null ? null : <button type="button" data-zone="score" className={'pm2-pts ' + who} onClick={() => onZone('score')}>{v}<small>pts</small></button>; };
+  const score = (who: 'me' | 'opp') => { const v = b[who].score; const x = b[who].xp; const pv = prev?.[who]; if (v == null) return null;
+    const c1 = pv && pv.score !== v ? ' chg' : '', c2 = pv && pv.xp !== x ? ' chg' : '';
+    return <button type="button" data-zone="score" className={'pm2-pts ' + who} onClick={() => onZone('score')}><span className={'pm2-pv' + c1}>{v}<small>pts</small></span>{x != null && <span className={'pm2-xp' + c2}>{x}<small>XP</small></span>}</button>; };
   const host = useRef<HTMLDivElement>(null);
   useFlip(host, b);
   useLayoutEffect(() => { if (ctl) setPu(null); }, [ctl]);
@@ -367,9 +374,9 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
       <div className="pm2-table">
         <div className="pm2-bar opp"><span>Opponent</span>{turn === 'opp' && <span className="pm2-turn">Turn</span>}</div>
         <div className="pm2-band opp-top">
-          <Piles s={b.opp} onZone={onZone} sel={sel} known={onlyKnown} side="opp" />
+          <Piles s={b.opp} ps={prev?.opp} onZone={onZone} sel={sel} known={onlyKnown} side="opp" />
           <Hand s={b.opp} onZone={onZone} sel={sel} known={onlyKnown} side="opp" />
-          <RuneStacks r={b.opp.runes} onZone={onZone} sel={sel} side="opp" />
+          <RuneStacks r={b.opp.runes} pr={prev?.opp.runes} onZone={onZone} sel={sel} side="opp" />
         </div>
         <div className="pm2-band opp-base">
           <LegendChamp s={b.opp} onZone={onZone} sel={sel} side="opp" />
@@ -426,9 +433,9 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
           <LegendChamp s={b.me} onZone={onZone} sel={sel} side="me" />
         </div>
         <div className="pm2-band me-bottom">
-          <RuneStacks r={b.me.runes} onZone={onZone} sel={sel} side="me" />
+          <RuneStacks r={b.me.runes} pr={prev?.me.runes} onZone={onZone} sel={sel} side="me" />
           <Hand s={b.me} onZone={onZone} sel={sel} known={onlyKnown} side="me" />
-          <Piles s={b.me} onZone={onZone} sel={sel} known={onlyKnown} side="me" />
+          <Piles s={b.me} ps={prev?.me} onZone={onZone} sel={sel} known={onlyKnown} side="me" />
         </div>
         <div className="pm2-bar me"><span>You</span>{turn === 'me' && <span className="pm2-turn">Turn</span>}</div>
       </div>

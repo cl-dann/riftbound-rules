@@ -78,7 +78,10 @@ test('Chain: combat panel', async ({ page }) => {
   await page.locator('.pm-unit[data-uid="b0"]').first().click();
   await menuBtn(page, 'Combat ezen a battlefielden').click();
   await expect(page.locator('#cb-combat')).toHaveAttribute('open', '');
-  await page.locator('#cb-combat').scrollIntoViewIfNeeded();
+  // determinisztikus nézet: a keskeny nézet lépés-paneljei bezárva, a combat panel teteje a nézet tetején
+  await expect(page.locator('.cb2-sheet')).toHaveCount(0);
+  await page.locator('#cb-combat').evaluate((el) => el.scrollIntoView({ block: 'start' }));
+  await page.waitForTimeout(300);
   await shot(page, 'chain-combat');
 });
 
