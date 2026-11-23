@@ -73,6 +73,14 @@ export const TEMPLATES: ChainTemplate[] = [
       steps: [{ k: 'end' }, card('Star-Crossed', 'B', ['b1', 'b0'])] }),
   },
   {
+    id: 'nextturn', title: 'Következő kör: hold és delayed trigger (Iascylla)',
+    desc: 'Az ellenfél köre véget ér, jön a te köröd. Awaken: minden objektumod ready lesz. Beginning Phase: a Sprite Temporary miatt a scoring előtt meghal. Scoring: holdolod a Grove of the God-Willow-t, a hold triggerek a chainre kerülnek; az Iascylla triggere delayed triggert hoz létre, ami a Main Phase elején az ellenfél unitját ide mozgatja.',
+    refs: '315.1.b, 816.1.b, 315.2.b.2, 383.4.d, 391.2',
+    cs: () => base({ turn: 'B', lg: { A: 'Vex, Gloomist', B: '' }, bf: [{ n: 'Grove of the God-Willow', c: 'A' }, { n: '', c: '' }],
+      bd: [{ n: 'Iascylla', pl: 'A', loc: 'bf0', d: 0, ex: true }, { n: 'Sprite', pl: 'A', loc: 'base', d: 0 }, { n: 'Fizz, Trickster', pl: 'B', loc: 'bf1', d: 0 }],
+      steps: [{ k: 'next' }] }),
+  },
+  {
     id: 'reksai-sanctum', title: "Rek'Sai, Void Burrower és The Candlelit Sanctum: két conquer trigger",
     desc: "Gem Jammer Standard Move-val (144) a senki által nem irányított, üres Sanctumra megy: nincs showdown, Establish Control és conquer (468.5, 468.5.d, 471.1), mindkét conquer trigger a tiéd (473.2.a). A sorrendet te választod (383.3.d): előbb a Rek'Sai legend, fölé a Sanctum, így a Sanctum resolve-ol előbb. A Rek'Sai \"you may\" döntése és az exhaust költség már a chainre tételkor, a finalizáláskor eldől (383.3.a, 383.3.b), még a Sanctum előtt. Minden resolve előtt mindkét játékos kap priority-t (340.1). A Sanctum: megnézed a felső 2 lapot (128.4, privát), a Chemtech Enforcert recycle-ölöd (417; kettőnél véletlen sorrendben, 417.5), a Bilgewater Tracker marad felül. A Rek'Sai: felfedi a Trackert és a Dangerous Duót (a \"You may banish one\" a resolve-kor dől el, 383.3.a.3), a Trackert banisheled (428.1) és kijátszod a Sanctumra (420.3, 420.3.b, 355.2.a); Rek'Sai, Breacher Accelerate-et ad a nem kézből kijátszott unitnak (805.1.b), ezért ready lép be. Unitként a finalizálás után azonnal resolve-ol (337.2), itt nincs reakció-ablak; a maradék recycle (417.4). A Tracker play triggere a chain tetejére kerül (420.4.a), erre az ellenfél [Reaction] lapot játszhat (309.1.a, 340.4): Ki Barrier az Amateur Demolitionistre. Előbb a Ki Barrier, utána a Tracker trigger resolve-ol: a Demolitionist damage-ét megelőzi, a Fallen Feline 1 damage-et kap. Fordított sorrendben (Sanctum alul) a Rek'Sai fedne fel előbb, és a Sanctum a megmaradt deck tetejét rendezné.",
     refs: '468.5.d, 471.1, 473.2.a, 383.3.d, 383.3.a, 383.3.b, 383.3.a.3, 128.4, 417.4, 417.5, 428.1, 420.3.b, 355.2.a, 805.1.b, 337.2, 420.4.a, 309.1.a, 340.4',

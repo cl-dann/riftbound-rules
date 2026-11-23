@@ -388,6 +388,49 @@ describe('Futásidejű leltár', () => {
     expect([...new Set(h.map((x) => x.n))].sort()).toEqual(LELTAR);
   });
 });
-/* A leltár szerint még nem követett lapok (a lefutás egyszerű pályán, üres kéz, trash és deck mellett). Iascylla: a következő kör Main Phase-ére
-   szóló késleltetett trigger (391.2); a builder egy kört elemez. */
-const LELTAR = ['Iascylla'];
+/* A leltár szerint még nem követett lapok (a lefutás egyszerű pályán, üres kéz, trash és deck mellett). Üres: az Iascylla következő kör
+   Main Phase-ére szóló delayed triggere létrejön, és a "Következő kör" lépés lefuttatja (391.2). */
+const LELTAR: string[] = [];
+
+describe('9. kör: Következő kör eleje (315, 391.2)', () => {
+  const nx = (o: any) => analyze(JSON.parse(JSON.stringify({ lg: { A: '', B: '' }, bf: [{ n: '', c: '' }, { n: '', c: '' }], bd: [], hand: { A: [], B: [] }, ch: { A: '', B: '' }, ...o }))) as any;
+  const txt = (r: any) => r.rows.map((x: any) => x.join(' ')).join('\n');
+  it('a szabályok: Awaken, Beginning, Scoring, Channel, Draw; delayed trigger; Temporary', () => {
+    expect(ruleText('315.1.b')).toMatch(/readies all Game Objects they control/);
+    expect(ruleText('315.2.b.2')).toMatch(/Holds all Battlefields they Control/);
+    expect(ruleText('315.3.b')).toMatch(/channels 2 runes/);
+    expect(ruleText('391.2')).toMatch(/specific time of the turn/);
+    expect(ruleText('816.1.b')).toMatch(/before scoring, kill this/);
+  });
+  it('Iascylla: hold, delayed trigger, a Main Phase elején az enemy unit ide mozog; a Sprite Temporary miatt a scoring előtt meghal', () => {
+    const r = nx({ turn: 'B', lg: { A: 'Vex, Gloomist', B: '' }, bf: [{ n: 'Grove of the God-Willow', c: 'A' }, { n: '', c: '' }],
+      bd: [{ n: 'Iascylla', pl: 'A', loc: 'bf0', ex: true }, { n: 'Sprite', pl: 'A', loc: 'base' }, { n: 'Fizz, Trickster', pl: 'B', loc: 'bf1' }], steps: [{ k: 'next' }] });
+    expect(r.items.map((i: any) => i.name)).toEqual(['Sprite triggere (Temporary, 816.1.b)', 'Grove of the God-Willow triggere (hold)', 'Vex, Gloomist triggere (hold)', 'Iascylla triggere (hold)', 'Iascylla triggere (delayed, Main Phase eleje)']);
+    expect(r.objs.b2.loc).toBe('bf0');
+    expect(r.objs.b1.zone).toBe('trash');
+    expect(r.objs.b0.ex).toBe(false);
+    expect(r.objs.LA.ex).toBe(true);
+    const t = txt(r);
+    expect(t).toMatch(/Holdolod: Grove of the God-Willow, 1 pontot kapsz/);
+    expect(t).toMatch(/Channel Phase: Te channelöl 2 rune-t/);
+    expect(t).toMatch(/Delayed trigger jön létre/);
+    const last = r.frames[r.frames.length - 1].board.me;
+    expect(last).toMatchObject({ score: 1, runes: { ready: 2, exhausted: 0 } });
+    expect(r.delayed).toEqual([]);
+  });
+  it('a következő kör az ellenfélé: az ő Awaken és hold lépése, a te delayed hatásod nem fut le', () => {
+    const r = nx({ turn: 'A', bf: [{ n: '', c: 'B' }, { n: '', c: '' }], bd: [{ n: 'Vilemaw', pl: 'B', loc: 'bf0', ex: true }], steps: [{ k: 'end' }, { k: 'next' }] });
+    expect(r.items.map((i: any) => i.name)).toEqual(['Vilemaw triggere (hold)']);
+    expect(txt(r)).toMatch(/Az ellenfél holdolja: 1\. battlefield, 1 pontot kap/);
+    expect(r.frames[r.frames.length - 1].board.opp.score).toBe(1);
+  });
+  it('a "Következő kör" után felvett lépés kimarad', () => {
+    const r = nx({ turn: 'A', steps: [{ k: 'next' }, { k: 'card', n: 'Stupefy', pl: 'A', tg: [], ext: {} }] });
+    expect(txt(r)).toMatch(/a "Következő kör" az utolsó lépés/);
+    expect(r.items).toEqual([]);
+  });
+  it('a régi "Kör vége" helyzet változatlan: nincs következő kör', () => {
+    const r = nx({ turn: 'A', steps: [{ k: 'end' }] });
+    expect(txt(r)).not.toMatch(/Következő kör/);
+  });
+});
