@@ -26,7 +26,7 @@ export function installState(X: EngineCtx) {
     return got.length?' A poolba kerül: '+got.join(', ')+(ex?' (exhausted)':'')+(X.RDK[p]?'':'; a Rune Deck tartalma nincs megadva, ezért a domain ismeretlen')+'.':' A Rune Deck üres, nincs mit channelölni.';};
   /** Recycle (417): a rune-ok a Rune Deck aljára kerülnek. */
   X.recycleRunes=(ids)=>{ids.forEach((id)=>{const o=X.O[id];if(!o)return;o.zone='runedeck';o.ex=false;o.ord=900+(++X.RSEQ);o.gen=(o.gen||0)+1;X.EV.push({k:'zcard',id,name:o.name,to:'runedeck'});});};
-  X.playedBefore=(p,j)=>{const out=new Set<string>();X.MAIN.forEach((t)=>{if(t.k==='card'&&t.j<j&&t.pl===p&&!t.illegal&&t.c){const tok=/token/i.test((t.c.st||[]).join(' '));out.add((tok?'token':'')+t.c.t.toLowerCase());}});
+  X.playedBefore=(p,j)=>{const out=new Set<string>();[...X.MAIN,...(X.AFTER||[])].forEach((t)=>{if(t.k==='card'&&t.j<j&&t.pl===p&&!t.illegal&&t.c){const tok=/token/i.test((t.c.st||[]).join(' '));out.add((tok?'token':'')+t.c.t.toLowerCase());}});
     String(X.PSv(p,'playedT')||'').split(',').filter(Boolean).forEach((x:string)=>out.add(x));return out;};
   X.enterReady=(c,pl,accel,loc?,erd?,selfId?,addc?)=>{const out:ReadyInfo={ready:false,why:'',note:''};if(!c||c.t!=='Unit')return out;
     const yes=(w:string)=>{out.ready=true;out.why=out.why||w;};

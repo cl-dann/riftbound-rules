@@ -30,6 +30,8 @@ export function zoneRef0(t0:string,cardName?:string|null):ZoneRef|null{const t=s
   if((m=/\bfrom (your|their) hand\b|\bfrom hand\b/i.exec(t))&&/\bplay\b/i.test(t)&&!/\bplay (?:this|me)\b/i.test(t))return {z:'hand',who:m[1]&&m[1].toLowerCase()==='their'?'they':'you',n:nOf(t.slice(0,m.index)),type:typesOf(t.slice(0,m.index)),tags:[],target:false,act:'playcard',opt,top:false,t};
   if((m=/^(?:then,?\s*)?(?:(they|each player|you may)\s+)?discards? (\d+|one|two)\b/i.exec(t))){const w=(m[1]||'').toLowerCase();return {z:'hand',who:w==='they'?'they':w==='each player'?'each':'you',n:/^\d+$/.test(m[2])?+m[2]:ZNUM[m[2].toLowerCase()],type:[],tags:[],target:false,act:'discard',opt:w==='you may'||opt,top:false,t};}
   // a megnézett vagy felfedett lapok közül választás ("from among them", "Put 1 into your hand", "banish one", "Choose one and banish it")
+  // The Candlelit Sanctum: a megnézett lapok közül 0, 1 vagy 2 recycle (417, 417.5)
+  if(/^(?:you may )?recycle one or both of them\b/i.test(t))return {z:'among',who:'any',n:2,type:[],tags:[],target:false,act:'recycle',opt:true,top:false,t};
   if(/^choose one\.?$/i.test(t))return {z:'among',who:'any',n:1,type:[],tags:[],target:false,act:'choose',opt:false,top:false,t};
   if(/\bfrom among them\b/i.test(t)||/^(?:then,?\s*)?(?:you may )?(?:put 1 into your hand|banish one\b|choose one and banish it)/i.test(t)){const head=t.split(/\bfrom among them\b/i)[0];
     const tags=/\b(Bird|Cat|Dog|Poro)\b/.test(head)?['Bird','Cat','Dog','Poro']:[];
