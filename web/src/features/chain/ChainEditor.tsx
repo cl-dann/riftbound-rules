@@ -119,7 +119,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
   };
 
   /* ---- kéz, trash és deck lapjainak választása (355.9.a, 355.10.a, 355.18) ---- */
-  const [zpan, setZpan] = useState<{ z: 'trash' | 'deck' | 'banish'; side: 'me' | 'opp' } | null>(null);
+  const [zpan, setZpan] = useState<{ z: 'trash' | 'deck' | 'banish' | 'runeDeck'; side: 'me' | 'opp' } | null>(null);
   const zSel = (j: number, xi: number): string[] => ((CS.steps[j]?.zp || {})[xi] || []);
   /** A célpontok után: az első olyan zóna-választás, amelyhez van lap a zónában; ha nincs, a lépés kész. */
   const afterTargets = (j: number, from = 0) => {
@@ -148,8 +148,36 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
     if (z === 'banish') return (b.banish || []).map((n: string) => ({ id: '', n }));
     return (b.trash || []).map((n: string, i: number) => ({ id: (b.zids?.trash || [])[i] || '', n }));
   };
-  const zPanel = zpan ? (() => {
-    const { z, side } = zpan; const p = plOf(side); const list = zList(z, side);
+  /* Rune Deck és rune pool (a builder feltételezése): ha üres, a Játékállapot darabszáma számít (régi viselkedés) */
+  const rList = (k: 'runeDeck' | 'runePool', p: 'A' | 'B') => ((CS[k] || {})[p] || []).map((e, i) => (typeof e === 'string' ? { id: 'z' + (k === 'runeDeck' ? 'r' : 'p') + p + i, n: e, ex: false } : { id: e.id!, n: e.n, ex: !!(e as { ex?: boolean }).ex }));
+  const rPanel = zpan && zpan.z === 'runeDeck' ? (() => {
+    const { side } = zpan; const p = plOf(side);
+    const sec = (k: 'runeDeck' | 'runePool') => { const L = rList(k, p); return (
+      <>
+        <h4 className="cb2-zh">{k === 'runeDeck' ? 'Rune Deck' : 'Rune pool'} <small className="note">{k === 'runeDeck' ? 'Az 1. a felső rune, a sorrend a pályás építő feltételezése. Ha üres, a Játékállapot "Rune Deck mérete" számít.' : 'A kontrollált rune-ok. Ha üres, a Játékállapot "Rune-ok száma" számít.'}</small></h4>
+        <ul className="cb2-zl">
+          {L.map((x, i) => (
+            <li key={x.id}>{imgOf(x.n) ? <img src={imgOf(x.n)} alt="" /> : <span className="cb2-noimg" />}
+              <span className="cb2-rn"><b>{k === 'runeDeck' ? (i + 1) + '. ' : ''}{x.n}</b></span>
+              {k === 'runePool' && <label className="chk"><input type="checkbox" checked={x.ex} onChange={(e) => commit((cs) => { const L2 = cs.runePool![p]!; const ent = L2.find((q) => typeof q !== 'string' && q.id === x.id) as { ex?: boolean } | undefined; if (ent) ent.ex = e.target.checked; })} /> exhausted</label>}
+              <button type="button" className="linkbtn" aria-label={x.n + ' eltávolítása'} onClick={() => commit((cs) => { const zs = cs[k]!; zs[p] = (zs[p] || []).filter((q) => typeof q === 'string' || q.id !== x.id); })}><X size={14} /></button>
+            </li>))}
+          {!L.length && <li className="note">Nincs megadva.</li>}
+        </ul>
+        <button type="button" className="pb-btn act" onClick={() => setPick({ kind: k, side })}>{k === 'runeDeck' ? '+ Rune a Rune Deck tetejére' : '+ Rune a poolba'}</button>
+      </>); };
+    return (
+      <div className="cb2-ov" onClick={() => setZpan(null)}>
+        <div className="pb-panel cb2-zp" role="dialog" aria-label={(side === 'me' ? 'Saját ' : 'Ellenfél ') + 'rune-ok'} onClick={(e) => e.stopPropagation()}>
+          <div className="pb-mh"><span><b>{(side === 'me' ? 'Saját ' : 'Ellenfél ') + 'Rune Deck és rune pool'}</b></span>
+            <button type="button" className="pb-x" aria-label="Bezárás" onClick={() => setZpan(null)}><X size={18} /></button></div>
+          {sec('runeDeck')}{sec('runePool')}
+          <button type="button" className="pb-btn primary" onClick={() => setZpan(null)}>Kész</button>
+        </div>
+      </div>);
+  })() : null;
+  const zPanel = zpan && zpan.z !== 'runeDeck' ? (() => {
+    const { side } = zpan; const z = zpan.z as 'trash' | 'deck' | 'banish'; const p = plOf(side); const list = zList(z, side);
     return (
       <div className="cb2-ov" onClick={() => setZpan(null)}>
         <div className="pb-panel cb2-zp" role="dialog" aria-label={(side === 'me' ? 'Saját ' : 'Ellenfél ') + z} onClick={(e) => e.stopPropagation()}>
@@ -305,6 +333,8 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
       else if (at.kind === 'hand') cs.hand![p]!.push({ id: newZid(cs, 'hand', p), n });
       else if (at.kind === 'trash') { cs.trash = cs.trash || { A: [], B: [] }; cs.trash[p]!.push({ id: newZid(cs, 'trash', p), n }); }
       else if (at.kind === 'deck') { cs.deck = cs.deck || { A: [], B: [] }; cs.deck[p]!.unshift({ id: newZid(cs, 'deck', p), n }); }
+      else if (at.kind === 'runeDeck') { cs.runeDeck = cs.runeDeck || { A: [], B: [] }; (cs.runeDeck[p] ||= []).unshift({ id: newZid(cs, 'runeDeck', p), n }); }
+      else if (at.kind === 'runePool') { cs.runePool = cs.runePool || { A: [], B: [] }; (cs.runePool[p] ||= []).push({ id: newZid(cs, 'runePool', p), n }); }
       else if (at.kind === 'hidden') { cs.bf[at.bfi!].fd = p; cs.bf[at.bfi!].fdn = n; }
       else if (at.kind === 'board') cs.bd.push({ n, pl: p, loc: at.loc || 'base', d: 0 });
     });
@@ -674,7 +704,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
       <CombatPanel board={f.board} bfi={f.bfi} isLast={ci === eff.length - 1} frameLabel={(ci + 1) + '. lépés: ' + eff[ci].label} focus={cfocus} />
 
       {menu && <ActionMenu m={menu} onClose={() => setMenu(null)} />}
-      {zPanel}
+      {zPanel}{rPanel}
       {wizSheet}{narrow && <div className={'cb2-wizpad' + (wiz && wiz.st !== 'target' ? '' : ' sm')} />}
       {narrow && !wiz && !pick && !menu && props == null && !mode && <div className="cb2-fab"><button type="button" className="btn" onClick={() => openWiz()}><Plus size={16} /> Új lépés</button></div>}
       {pick && <CardPicker at={pick} onPick={onPicked} onClose={() => setPick(null)} />}

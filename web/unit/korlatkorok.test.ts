@@ -201,9 +201,9 @@ describe('3. kör: rejtett adat a pályás építőben megadott lapokból (108.4
     expect(x.o('zdA_1').zone).toBe('played');
     expect(Object.values(x.r.objs).some((o: any) => o.name === 'Shipyard Skulker' && o.zone === 'board')).toBe(true);
   });
-  it('lefedettség: az "adatot kér" utasítások közül csak a builderen kívüli adat marad (Jhin előzmény, Twisted Fate rune deck)', () => {
+  it('lefedettség: minden "adatot kér" utasítás kiváltható a pályán megadott lapokkal vagy a Játékállapottal (Twisted Fate: Rune Deck, Jhin: korábbi banish, 7. kör)', () => {
     const c = coverage();
-    expect(c.hid.filter((h) => !c.pick.some((p) => h.startsWith(p))).map((h) => h.split(':')[0])).toEqual(['Jhin, Virtuoso', 'Twisted Fate, Gambler']);
+    expect(c.hid.filter((h) => !c.pick.some((p) => h.startsWith(p))).map((h) => h.split(':')[0])).toEqual([]);
   });
 });
 
@@ -319,6 +319,55 @@ describe('5. kör: halálra figyelő triggerek, ready belépés, Mordekaiser (38
     expect(x.o('b1').zone).toBe('board');
     const solo = run(cs({ turn: 'A', bd: [{ n: 'Mordekaiser, Twice Slain', pl: 'A', loc: 'bf0' }], steps: [{ k: 'card', n: 'Vengeance', pl: 'A', tg: ['b0'] }, { k: 'res' }] }));
     expect(solo.o('b0').zone).toBe('trash');
+  });
+});
+
+describe('7. kör: Rune Deck és rune pool tartalma, Jhin előzménye (417, 431.1)', () => {
+  const zb = (o: any) => ({ turn: 'A', lg: { A: '', B: '' }, bf: [{ n: '', c: 'A' }, { n: '', c: '' }], bd: [], hand: { A: [], B: [] }, trash: { A: [], B: [] }, deck: { A: [], B: [] }, ...o });
+  const go = (c: any) => { const r = analyze(JSON.parse(JSON.stringify(c))); return { r, text: r.rows.map((x) => x.join(' ')).join('\n'), o: (id: string) => r.objs[id], last: r.frames[r.frames.length - 1].board }; };
+  const rd = (...n: string[]) => ({ A: n.map((x, i) => ({ id: 'zrA_' + (i + 1), n: x })), B: [] });
+  const tf = (deck?: any) => go(zb({ ...(deck ? { runeDeck: deck } : {}), bd: [{ n: 'Twisted Fate, Gambler', pl: 'A', loc: 'bf0' }, { n: 'Mega-Mech', pl: 'B', loc: 'bf0' }, { n: 'Blastcone Fae', pl: 'B', loc: 'bf0' }], steps: [{ k: 'tg', src: 'b0', ti: 0, pl: 'A', n: 'Twisted Fate, Gambler', tg: [], ext: {} }] }));
+  it('a szabály: channel és recycle', () => {
+    expect(ruleText('431.1')).toBeTruthy();
+    expect(ruleText('417')).toMatch(/Recycle/);
+  });
+  it('Twisted Fate, Gambler: a megadott Rune Deck felső rune-ja dönt, recycle az aljára; Fury: 2 damage a célpontra, 1 a többi enemy unitra itt', () => {
+    const x = tf(rd('Fury Rune', 'Mind Rune'));
+    expect(x.text).toMatch(/felfedve Fury Rune/);
+    expect(x.o('zrA_1')).toMatchObject({ zone: 'runedeck' });
+    expect(x.o('zrA_1').ord).toBeGreaterThanOrEqual(900);
+    expect([x.o('b1').dmg, x.o('b2').dmg]).toEqual([2, 1]);
+    const m = tf(rd('Mind Rune'));
+    expect(m.r.ev.filter((e: any) => e.k === 'draw')).toHaveLength(1);
+    expect(m.o('b1').dmg).toBe(0);
+    // Rune Deck tartalom nélkül a régi viselkedés: a mező alapértéke ("más"), egyik pont sem
+    const n = tf();
+    expect(n.o('b1').dmg).toBe(0);
+    expect(n.r.ev.filter((e: any) => e.k === 'draw')).toHaveLength(0);
+  });
+  it('channel: a megadott Rune Deck felső lapjai a poolba kerülnek, a darabszámok ebből számolnak', () => {
+    const x = go(zb({ runeDeck: rd('Calm Rune', 'Body Rune', 'Fury Rune'), runePool: { A: [{ id: 'zpA_1', n: 'Mind Rune' }], B: [] }, steps: [{ k: 'card', n: 'Mobilize', pl: 'A', tg: [], ext: {} }, { k: 'res' }] }));
+    expect(x.o('zrA_1')).toMatchObject({ zone: 'runes', ex: true });
+    expect(x.last.me.runeDeck).toBe(2);
+    expect(x.last.me.runes).toEqual({ ready: 1, exhausted: 1, domains: ['Mind', 'Calm'] });
+  });
+  it('Divine Judgment: a megadott poolból a választott 2 rune marad a domainjével, a többi a Rune Deck aljára', () => {
+    const pool = { A: ['Fury Rune', 'Calm Rune', 'Mind Rune', 'Body Rune'].map((n, i) => ({ id: 'zpA_' + (i + 1), n })), B: [] };
+    const x = go(zb({ runePool: pool, runeDeck: rd('Order Rune'), bd: [{ n: 'Mega-Mech', pl: 'A', loc: 'base' }], steps: [{ k: 'card', n: 'Divine Judgment', pl: 'A', tg: [], ext: {}, zp: { 0: ['b0', 'zpA_2', 'zpA_4'] } }] }));
+    expect(x.text).toMatch(/Te rune-jai: marad Calm Rune, Body Rune; recycle a Rune Deck aljára: Fury Rune, Mind Rune \(417\)/);
+    expect(x.last.me.runes.domains).toEqual(['Calm', 'Body']);
+    expect(x.last.me.runeDeck).toBe(3);
+  });
+  it('Coalesced Energy jellegű "recycle all your runes" és Hwei gear pontja: ready up to 2 runes a poolban', () => {
+    const x = go(zb({ hand: { A: [{ id: 'zhA_1', n: 'Long Sword' }], B: [] }, deck: { A: [{ id: 'zdA_1', n: 'Flash' }], B: [] }, runePool: { A: [{ id: 'zpA_1', n: 'Calm Rune', ex: true }, { id: 'zpA_2', n: 'Fury Rune', ex: true }, { id: 'zpA_3', n: 'Body Rune', ex: true }], B: [] },
+      bd: [{ n: 'Hwei, Brooding Painter', pl: 'A', loc: 'bf0' }], steps: [{ k: 'tg', src: 'b0', ti: 0, pl: 'A', n: 'Hwei, Brooding Painter', tg: [], ext: {}, zp: { 1: ['zhA_1'] } }] }));
+    expect(x.text).toMatch(/"Ready up to 2 runes\.": Calm Rune, Fury Rune ready lesz/);
+    expect(x.last.me.runes).toMatchObject({ ready: 2, exhausted: 1 });
+  });
+  it('Jhin, Virtuoso: a Játékállapotban megadott korábbi banish (3) és egy új spell már négy', () => {
+    const x = go(zb({ lg: { A: 'Jhin, Virtuoso' }, ps: { A: { spent: 5, jhinBan: 3 } }, bd: [{ n: 'Mega-Mech', pl: 'B', loc: 'bf0' }], steps: [{ k: 'card', n: 'Vengeance', pl: 'A', tg: ['b0'], ext: {} }, { k: 'res' }, { k: 'res' }] }));
+    expect(x.text).toMatch(/ebben a helyzetben 1 spell banishelve vele, korábban 3 \(a Játékállapotban megadott feltételezés, alap 0\)/);
+    expect(x.r.ev.filter((e: any) => e.k === 'channel').map((e: any) => e.n)).toEqual([4]);
   });
 });
 

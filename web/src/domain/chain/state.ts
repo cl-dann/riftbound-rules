@@ -25,6 +25,8 @@ export const ChainStateSchema = z.looseObject({
   steps: z.array(StepSchema),
   turn: z.optional(str),
   hand: z.optional(ZonesSchema), trash: z.optional(ZonesSchema), deck: z.optional(ZonesSchema),
+  /** Rune Deck (felső lap elöl) és rune pool tartalma (rune lapok, a poolban ex = exhausted); ha nincs megadva, a Játékállapot darabszáma számít. */
+  runeDeck: z.optional(ZonesSchema), runePool: z.optional(ZonesSchema),
   ch: z.optional(z.looseObject({ A: z.optional(str), B: z.optional(str) })),
   zseq: z.optional(z.number()),
 });

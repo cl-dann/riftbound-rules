@@ -100,7 +100,7 @@ function targetSel(s:ChainStep,j:number,inf:Partial<StepInfo>,noT?:boolean){let 
   if(inf.eff&&actOf(inf.eff).unless)x+=cbSel('data-pay="'+j+'"',[['0','A célzott spell gazdája nem fizet'],['1','A célzott spell gazdája kifizeti']],s.pays?'1':'0');
   return x;}
 /** Játékállapot kezdőértékei: csak azok a mezők látszanak, amelyekre a mostani lapok feltételei hivatkoznak. */
-const PSF:Record<string,string>={xp:'Kezdő XP',score:'Kezdő pontszám',runes:'Rune-ok száma',runeDeck:'Rune Deck mérete',played:'Korábban a körben kijátszott lapok száma',playedT:'Korábban kijátszott típusok (unit, gear, spell, vesszővel)',spent:'Elköltött Energy',diedT:'Korábban a körben meghalt unit (1 = igen)'};
+const PSF:Record<string,string>={xp:'Kezdő XP',score:'Kezdő pontszám',runes:'Rune-ok száma',runeDeck:'Rune Deck mérete',played:'Korábban a körben kijátszott lapok száma',playedT:'Korábban kijátszott típusok (unit, gear, spell, vesszővel)',spent:'Elköltött Energy',diedT:'Korábban a körben meghalt unit (1 = igen)',jhinBan:'Jhinnel korábban banishelt spellek (feltételezés, alap 0)'};
 function stateKeys(){return stateKeysOf(CS);}
 function stateHtml(){const ks=stateKeys();const ps=CS.ps||{};let h='<details class="cbset"'+(ks.length?' open':'')+'><summary>Játékállapot (kezdőértékek)</summary>';
   if(!ks.length)h+='<div class="tl">A mostani lapok nem hivatkoznak a játékállapotra (XP, pont, rune, korábbi kijátszás).</div>';

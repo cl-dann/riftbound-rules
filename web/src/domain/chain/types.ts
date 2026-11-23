@@ -48,6 +48,8 @@ export type Instr = {
   unsure: string[]; st: string; ref: string; why: string;
   /** A resolve jelölései: előkészítés, a feltétel értéke, az alternatíva. */
   prep?: string; cv?: boolean | null; altBy?: string; altUsed?: boolean; noted?: number; zDone?: boolean;
+  /** "based on" felsorolás egy pontja (Twisted Fate, Hwei): a döntő utasítás indexe és a pont kulcsa */
+  basedOn?: { xi: number; key: string };
 };
 /** Activated ability (abilitiesOf). */
 export type Ability = { label: string; eff: string; tm: string; cost: string; add?: boolean; empower?: boolean; equip?: boolean };
