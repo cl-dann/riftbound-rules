@@ -8,6 +8,7 @@ import { cs, ruleText, run } from './util';
 import { sweep } from './leltar';
 import { coverage } from './lefedettseg';
 import { analyze } from '../src/render/html/chainReport';
+import { combatTrigs, isCombatOpenTrig } from '../src/domain/combat/combatTrig';
 
 const listOf = (n: string) => stepInfo({ turn: 'A', lg: { A: '', B: '' }, bf: [{ n: '', c: '' }, { n: '', c: '' }], bd: [], steps: [] } as never, { k: 'card', n, pl: 'A', tg: [], ext: {} } as never)!.list;
 
@@ -432,5 +433,34 @@ describe('9. kör: Következő kör eleje (315, 391.2)', () => {
   it('a régi "Kör vége" helyzet változatlan: nincs következő kör', () => {
     const r = nx({ turn: 'A', steps: [{ k: 'end' }] });
     expect(txt(r)).not.toMatch(/Következő kör/);
+  });
+});
+
+describe('10. kör: combat a chain modellben (466.2.d.1, 468.3.a)', () => {
+  const txt = (n: string) => vsCard(n)!.txt;
+  it('a szabályok: attack és defend triggerek sorrendje, combat győzelem', () => {
+    expect(ruleText('466.2.d.1')).toMatch(/Attacking player, who has Focus, places Triggered Abilities on the Chain first/);
+    expect(ruleText('468.3.a')).toMatch(/won a combat/);
+  });
+  it('combat triggerek valós lapokon', () => {
+    expect(combatTrigs(txt('Draven, Vanquisher'), 'winI').map((t) => t.eff)).toEqual(['play a Gold gear token exhausted.']);
+    expect(combatTrigs(txt('Draven, Glorious Executioner'), 'winYou').map((t) => t.eff)).toEqual(['draw 1.']);
+    expect(combatTrigs(txt("Kha'Zix, Voidreaver"), 'winYou').map((t) => t.eff)).toEqual(['gain 1 XP.']);
+    expect(combatTrigs(txt('Draven, Audacious'), 'winI').map((t) => t.eff)).toEqual(['you score 1 point.']);
+    expect(combatTrigs(txt('Draven, Audacious'), 'dieInCombat').map((t) => t.eff)).toEqual(['choose an opponent. They score 1 point.']);
+    expect(combatTrigs(txt('Overzealous Fan'), 'defend')).toHaveLength(1);
+    expect(combatTrigs(txt('Overzealous Fan'), 'attack')).toHaveLength(0);
+    expect(combatTrigs(txt('Ezreal, Dashing'), 'attack')).toHaveLength(1);
+    expect(combatTrigs(txt('Ezreal, Dashing'), 'defend')).toHaveLength(1);
+    expect(isCombatOpenTrig('When I attack or defend', 'def')).toBe(true);
+    expect(isCombatOpenTrig('When I defend', 'atk')).toBe(false);
+  });
+  it('attack és defend trigger a chainen: az attackeré kerül fel először, a defenderé resolve-ol előbb; utána a győzelem triggere', () => {
+    const r = analyze(JSON.parse(JSON.stringify({ turn: 'A', lg: { A: 'Draven, Glorious Executioner', B: '' }, bf: [{ n: '', c: 'B' }, { n: '', c: '' }], hand: { A: [], B: [] }, ch: { A: '', B: '' },
+      bd: [{ n: 'Draven, Vanquisher', pl: 'A', loc: 'bf0' }, { n: 'Overzealous Fan', pl: 'B', loc: 'bf0' }],
+      steps: [{ k: 'tg', src: 'b0', ti: 1, pl: 'A', n: 'Draven, Vanquisher', tg: [], ext: {} }, { k: 'tg', src: 'b1', ti: 0, pl: 'B', n: 'Overzealous Fan', tg: [], ext: {} },
+        { k: 'tr', n: 'Draven, Glorious Executioner', src: 'LA', pl: 'A', eff: 'draw 1.', why: 'When you win a combat', tg: [], ext: {}, cb: { bf: 'bf0', dead: ['b1'], recall: [], ctrl: 'A', label: 'combat' } }] }))) as any;
+    expect(r.items.map((i: any) => i.name)).toEqual(['Overzealous Fan triggere', 'Draven, Vanquisher triggere', 'Draven, Glorious Executioner triggere (When you win a combat)']);
+    expect(r.ev.filter((e: any) => e.k === 'draw')).toEqual([{ k: 'draw', pl: 'A', n: 1 }]);
   });
 });
