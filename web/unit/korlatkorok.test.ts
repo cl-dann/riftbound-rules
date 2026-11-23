@@ -263,6 +263,63 @@ describe('4. kör: "banished with", hatásból kijátszott lapok célpontjai, Ch
   });
 });
 
+describe('5. kör: halálra figyelő triggerek, ready belépés, Mordekaiser (383.2.c.2, 143.4.a, 369.1)', () => {
+  const kill = (bd: any[], tg: string, extra: any = {}) => run({ ...cs({ turn: 'A', bd, steps: [{ k: 'card', n: 'Vengeance', pl: 'A', tg: [tg] }, { k: 'res' }, { k: 'res' }] }), ...extra });
+  const trig = (x: ReturnType<typeof run>, n: string) => x.r.items.some((i: any) => i.name.startsWith(n + ' triggere'));
+  it('Demacian Illuminators: "one or more friendly units die", egy trigger, célpont a buffhoz', () => {
+    const x = kill([{ n: 'Demacian Illuminators', pl: 'A', loc: 'base' }, { n: 'Shipyard Skulker', pl: 'A', loc: 'base' }], 'b1');
+    expect(trig(x, 'Demacian Illuminators')).toBe(true);
+    expect(x.o('b0').bu).toBe(true);
+  });
+  it('Nasus, Guardian of Knowledge: csak az itt meghalt enemy unitra (channel 1)', () => {
+    const here = kill([{ n: 'Nasus, Guardian of Knowledge', pl: 'A', loc: 'bf0' }, { n: 'Shipyard Skulker', pl: 'B', loc: 'bf0' }], 'b1');
+    expect(here.r.ev.filter((e: any) => e.k === 'channel')).toHaveLength(1);
+    const away = kill([{ n: 'Nasus, Guardian of Knowledge', pl: 'A', loc: 'bf0' }, { n: 'Shipyard Skulker', pl: 'B', loc: 'base' }], 'b1');
+    expect(trig(away, 'Nasus, Guardian of Knowledge')).toBe(false);
+  });
+  it('Pyke, Returned: csak ha Pyke battlefielden áll', () => {
+    expect(trig(kill([{ n: 'Pyke, Returned', pl: 'A', loc: 'bf0' }, { n: 'Shipyard Skulker', pl: 'B', loc: 'base' }], 'b1'), 'Pyke, Returned')).toBe(true);
+    expect(trig(kill([{ n: 'Pyke, Returned', pl: 'A', loc: 'base' }, { n: 'Shipyard Skulker', pl: 'B', loc: 'base' }], 'b1'), 'Pyke, Returned')).toBe(false);
+  });
+  it('Storm Raptor: a stunned enemy unit itt (utolsó ismert állapot)', () => {
+    expect(trig(kill([{ n: 'Storm Raptor', pl: 'A', loc: 'bf0' }, { n: 'Shipyard Skulker', pl: 'B', loc: 'bf0', st: true }], 'b1'), 'Storm Raptor')).toBe(true);
+    expect(trig(kill([{ n: 'Storm Raptor', pl: 'A', loc: 'bf0' }, { n: 'Shipyard Skulker', pl: 'B', loc: 'bf0' }], 'b1'), 'Storm Raptor')).toBe(false);
+  });
+  it('Vanguard Helm: a buffolt friendly unit halála, a buff egy másik friendly unitra kerül', () => {
+    const x = kill([{ n: 'Vanguard Helm', pl: 'A', loc: 'base' }, { n: 'Shipyard Skulker', pl: 'A', loc: 'base', bu: true }, { n: 'Mega-Mech', pl: 'A', loc: 'base' }], 'b1');
+    expect(trig(x, 'Vanguard Helm')).toBe(true);
+    expect(x.o('b2').bu).toBe(true);
+    expect(trig(kill([{ n: 'Vanguard Helm', pl: 'A', loc: 'base' }, { n: 'Shipyard Skulker', pl: 'A', loc: 'base' }, { n: 'Mega-Mech', pl: 'A', loc: 'base' }], 'b1'), 'Vanguard Helm')).toBe(false);
+  });
+  it('Sivir, Battle Mistress (legend): "one or more enemy units die", ready', () => {
+    const x = run(cs({ turn: 'A', lg: { A: 'Sivir, Battle Mistress' }, bd: [{ n: 'Shipyard Skulker', pl: 'B', loc: 'base' }], steps: [{ k: 'card', n: 'Vengeance', pl: 'A', tg: ['b0'] }, { k: 'res' }, { k: 'res' }] }));
+    expect(trig(x, 'Sivir, Battle Mistress')).toBe(true);
+  });
+  it('Battlefield Armorer: battlefielden meghalt friendly gear, "it" a gear', () => {
+    const x = run(cs({ turn: 'A', bd: [{ n: 'Battlefield Armorer', pl: 'A', loc: 'bf0' }, { n: 'Mega-Mech', pl: 'A', loc: 'bf0' }, { n: 'Long Sword', pl: 'A', loc: 'bf0', on: 1 }],
+      steps: [{ k: 'tr', n: 'Stalwart Goatherd', src: null, pl: 'B', eff: 'kill a gear.', why: 'x', tg: ['b2'] }] }));
+    expect(x.changes).toMatch(/Battlefield Armorer triggerel, mert Long Sword meghalt/);
+    expect(x.changes).toMatch(/Long Sword a tulajdonosa kezébe kerül/);
+  });
+  it('Master Yi, Wuju Master: XP 11-től a unitok ready lépnek be; a saját magára vonatkozó sor (Bandle Soldier) nem ad hamis jelzést', () => {
+    const y = run({ ...cs({ lg: { A: 'Master Yi, Wuju Master' }, steps: [{ k: 'card', n: 'Shipyard Skulker', pl: 'A' }] }), ps: { A: { xp: 11 } } } as never);
+    expect(y.o('s0').ex).toBe(false);
+    const b = run(cs({ bd: [{ n: 'Bandle Soldier', pl: 'A', loc: 'base' }], steps: [{ k: 'card', n: 'Shipyard Skulker', pl: 'A' }] }));
+    expect(b.text).not.toMatch(/nem követett ready belépés/);
+  });
+  it('Mordekaiser, Twice Slain: körönként egyszer egy másik friendly unit hal meg helyette, ő gyógyulva, exhausted a base-be kerül', () => {
+    const x = run(cs({ turn: 'A', bd: [{ n: 'Mordekaiser, Twice Slain', pl: 'A', loc: 'bf0', d: 2 }, { n: 'Mega-Mech', pl: 'A', loc: 'base' }, { n: 'Shipyard Skulker', pl: 'A', loc: 'base' }],
+      steps: [{ k: 'card', n: 'Vengeance', pl: 'A', tg: ['b0'] }, { k: 'res' }, { k: 'card', n: 'Vengeance', pl: 'A', tg: ['b0'] }, { k: 'res' }] }));
+    expect(x.text).toMatch(/a legkisebb Mightú másik friendly unitot öli meg: Shipyard Skulker \(választható helyette: Mega-Mech\)/);
+    expect(x.o('b2').zone).toBe('trash');
+    // a második kill már nem helyettesíthető (körönként egyszer)
+    expect(x.o('b0').zone).toBe('trash');
+    expect(x.o('b1').zone).toBe('board');
+    const solo = run(cs({ turn: 'A', bd: [{ n: 'Mordekaiser, Twice Slain', pl: 'A', loc: 'bf0' }], steps: [{ k: 'card', n: 'Vengeance', pl: 'A', tg: ['b0'] }, { k: 'res' }] }));
+    expect(solo.o('b0').zone).toBe('trash');
+  });
+});
+
 describe('Futásidejű leltár', () => {
   it('a még nem követett utasítások listája (minden kör szűkíti)', () => {
     const h = sweep();

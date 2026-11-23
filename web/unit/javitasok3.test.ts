@@ -57,10 +57,12 @@ describe('2. Más lapok által adott ready belépés', () => {
     expect(run(cs({ bd: [{ n: 'Renata Glasc, Industrialist', pl: 'A', loc: 'base' }], steps: [play('Recruit')] })).o('s0').ex).toBe(false);
     expect(run(cs({ bd: [{ n: 'Renata Glasc, Industrialist', pl: 'A', loc: 'base' }], steps: [play('Shipyard Skulker')] })).o('s0').ex).toBe(true);
   });
-  it('nem követett ready belépés (Master Yi legend, [Level 11]): a felület megnevezi', () => {
+  it('Master Yi legend, [Level 11] "Your units enter ready": az XP-ből számolva (korábban nem követett, korlátok 5. kör)', () => {
     const x = run(cs({ lg: { A: 'Master Yi, Wuju Master' }, steps: [play('Shipyard Skulker')] }));
     expect(x.o('s0').ex).toBe(true);
-    expect(x.text).toMatch(/nem követett ready belépés: Master Yi, Wuju Master/);
+    expect(x.text).not.toMatch(/nem követett ready belépés/);
+    const y = run({ ...cs({ lg: { A: 'Master Yi, Wuju Master' }, steps: [play('Shipyard Skulker')] }), ps: { A: { xp: 11 } } } as never);
+    expect(y.o('s0').ex).toBe(false);
   });
   it('Bushwhack és Sun Disc felismerése', () => {
     expect(actOf('Friendly units enter ready this turn.').k).toBe('enterReady');
