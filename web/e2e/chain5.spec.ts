@@ -63,14 +63,14 @@ test('Varázsló: a példa chain felépítése 390 px-en, azonos elemzéssel', a
   const cs = await getCS(page);
   expect(cs.steps.map((s: any) => [s.n, s.pl, s.tg.filter(Boolean)])).toEqual([['Riptide Rex', 'A', ['b0']], ['Flash', 'B', ['b0']], ['Star-Crossed', 'A', ['s0', 'b0']]]);
   const mine = await page.locator('#cb-out').textContent();
-  await page.locator('#cb-ex').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex').click();
   await expect(page.locator('#cb-out')).toHaveText(mine!);
   expect(await ov(page)).toBeLessThanOrEqual(1);
 });
 
 test('Varázsló: Vissza minden lépésnél, a Mégse nem hagy félkész lépést, Resolve és beszúrás', async ({ page }) => {
   await page.goto('/#chain');
-  await page.locator('#cb-ex').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex').click();
   // nem Reaction spell a nem üres chain mellett: az akció szürke, okkal és szabályszámmal
   await page.locator('.pm2-chain .pm2-add').click();
   await wizCard(page, 'void seeker', 'Void Seeker');

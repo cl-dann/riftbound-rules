@@ -9,7 +9,7 @@ for (const w of [1300, 390]) {
   test('Void Rush: a banish átállítása Falling Starra (' + w + ' px)', async ({ page }) => {
     await page.setViewportSize({ width: w, height: w > 700 ? 900 : 844 });
     await page.goto('/#chain');
-    await page.getByRole('button', { name: 'Nehéz példák' }).click();
+    await page.getByRole('button', { name: 'Példák', exact: true }).click();
     const ex = page.locator('[data-hex="reksai-voidrush"]');
     await ex.locator('summary').click();
     await ex.getByRole('button', { name: 'Betöltés' }).click();
