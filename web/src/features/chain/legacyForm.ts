@@ -142,6 +142,8 @@ function renderForm(){
 function renderCB(){renderForm();renderQuick();notify();}
 /** A pályás építő lépés-paneljének mezői: csak az, amit a lap igényel (honnan, Accelerate, additional cost, mód, Repeat, kiosztás, feltételek, rejtett adat). */
 function quickHtml(j:number){const s=CS.steps[j];if(!s||s.k==='res'||s.k==='end')return '';const inf:Partial<StepInfo>=SI(s)||{list:[]};const c=inf.c;s.ext=s.ext||{};let x='';
+  /* hatásból kijátszott unit (Rek'Sai, Breacher: a nem kézből kijátszott friendly unitnak Accelerate, 805.1.b) */
+  if(s.k!=='card'&&/\bplay it\b/i.test(inf.eff||'')&&CS.bd.some(b=>b.pl===(s.pl||'A')&&/Friendly units played from anywhere other than a player's hand have \[Accelerate\]/i.test((vsCard(b.n)||{txt:''}).txt||'')))x+='<label class="chk"><input type="checkbox" data-accel="'+j+'"'+(s.accel?' checked':'')+'> A hatásból kijátszott unit Accelerate-je kifizetve (Rek\'Sai, Breacher, 805.1.b)</label>';
   if(s.k==='card'&&c){const hid=timingOf(c)==='hidden';
     if(hid||(s.from&&s.from!=='hand'))x+=cbSel('data-from="'+j+'" aria-label="Honnan"',[['hand','kézből'],['facedown','facedown-ból (Hidden)'],['trash','trashből'],['champ','Champion Zone-ból'],['other','máshonnan']],s.from||(hid?'facedown':'hand'));
     if(isPermC(c)||s.from==='facedown')x+=cbSel('data-loc="'+j+'" aria-label="Hova"',LOCS().map(o=>[o[0],'ide kerül: '+o[1]]),s.loc||(s.from==='facedown'?'bf0':'base'));

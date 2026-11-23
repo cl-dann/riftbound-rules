@@ -122,7 +122,7 @@ type PrevInstr = ResolveRun['lastT'];
 /** A chain elemzés közös állapota és függvényei (EngineCtx): a runChain() minden korábbi belső változója és
     függvénye ennek a mezője, így a csoportok (engine/*) külön modulban élhetnek. Az install<Csoport>() tölti ki a függvényeket. */
 export type EngineCtx = {
-  CS: ChainState; MT: MtView | null; MTIDS: Set<string>; S: EStep[]; POST: EStep[]; MAIN: EStep[]; out: ChainResult; REC: RecRow[] | null;
+  CS: ChainState; MT: MtView | null; MTIDS: Set<string>; S: EStep[]; POST: EStep[]; MAIN: EStep[]; AFTER: EStep[]; out: ChainResult; REC: RecRow[] | null;
   MAN: boolean; ALL: RecRow[]; EV: Ev[]; story: string[]; rows: string; rr: string; notes: string[]; O: Record<string, GameObj>;
   BF: Record<string, BfState>; ZC: boolean; zcK: Record<string, string>; cnt: Record<string, number>; FR: Frame[]; DET: Set<string>;
   NEWCTRL: Set<string>; chain: ChainItem[]; stack: ChainItem[]; REPL: Set<string>; READY: Record<string, boolean>;
@@ -165,7 +165,7 @@ export type EngineCtx = {
   copyOnto: (ids: string[], srcId: string, parts: string[], refs: string[]) => void;
   playBanished: (R: ResolveRun, x: Instr, xi: number) => void; fxSpell: (pc: CardLike, pl: string, from: string) => string; mordeVictims: (id: string) => string[];
   expandBased: (it: ChainItem, INS: Instr[]) => void;
-  channelRunes: (p: string, n: number, ex: boolean) => string; recycleRunes: (ids: string[]) => void; poolIds: (p: string) => string[]; autoTg: (item: ChainItem) => string;
+  channelRunes: (p: string, n: number, ex: boolean) => string; recycleRunes: (ids: string[]) => void; poolIds: (p: string) => string[]; autoTg: (item: ChainItem) => string; fxEnter: (pc: CardLike, pl: string, to: string, pid: string, s: EStep | null | undefined, fromHand: boolean) => ReadyInfo;
   equipCopy: (G: GameObj, U: GameObj, srcId: string | undefined, pl: string, parts: string[], refs: string[]) => void; copyEnd: () => string[];
   pushTrig: (t: ChainItem) => void; deathWatch: () => void; flushPend: (target: ChainItem[]) => void;
   leaveTrigs: (id: string, dk: boolean) => void; playTrigs: (s: PlaySrc) => ChainItem[]; abTrigs: (s: EStep) => ChainItem[];

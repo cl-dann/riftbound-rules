@@ -51,6 +51,8 @@ export type ChainStep = StepData & {
   split?: Record<number, number | null>; sub?: number[]; defl?: string[];
   /** Az értelmezés kézi felülírása utasításonként, feltétel felülírása (cnd). */
   ov?: Record<number, { k?: string; n?: number | null; lk?: boolean | null } | null>; cnd?: Record<number, boolean | string | null>;
+  /** a hatásból kijátszott lap play triggerének célpontjai (ha nincs megadva, az első legális választás) */
+  ptg?: string[];
   accel?: boolean; addc?: boolean; erd?: string; pll?: Record<number, string | null>; mfrom?: string; dest?: string; eff?: string; why?: string; cb?: CombatResult;
 };
 /** A builder helyzete a további mezőkkel: játékállapot (ps), győzelmi pontszám (vs), kör vége (end), fázis. */

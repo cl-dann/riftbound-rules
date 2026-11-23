@@ -7,7 +7,7 @@ import { other } from './labels';
 export function installTargeting(X: EngineCtx) {
   X.selfRef=(t)=>/\b(?:me|myself)\b(?! to\b)|\b(?:kill|banish|recall|exhaust|ready) this\b|\bI (?:get|gain|have)\b/i.test(t)&&!/\bto me\b/i.test(t);
   X.srcLoc=(it,phase?)=>phase==='play'&&it.perm?it.loc:it.src&&X.O[it.src!]&&X.O[it.src!].zone==='board'?X.O[it.src!].loc:null;
-  X.chooseOnlyWhy=(it,ob,_phase)=>{const mine=(it.tg||[])[0];const st=X.MAIN.find((x)=>'s'+x.j===ob.id);const tg=st?(st.tg||[]):[];
+  X.chooseOnlyWhy=(it,ob,_phase)=>{const mine=(it.tg||[])[0];const st=[...X.MAIN,...(X.AFTER||[])].find((x)=>'s'+x.j===ob.id);const tg=st?(st.tg||[]):[];
     const cnt=tg.filter((v:string)=>v&&X.O[v]&&X.O[v].type==='unit'&&X.O[v].zone==='board'&&X.O[v].ctrl===it.pl);const gone=tg.filter((v:string)=>v&&X.O[v]&&X.O[v].type==='unit'&&X.O[v].zone!=='board');
     const N=esc(ob.name);const out:string[]=[];
     if(!mine||!tg.includes(mine))out.push(N+' nem választja ki '+(mine&&X.O[mine]?esc(X.O[mine].name)+' lapot':'a kiválasztott friendly unitot'));
