@@ -17,6 +17,7 @@ export function actOf(t:string):Act{const e=String(t||'').replace(/^[-\u2014\u20
   if(/^the next unit you play this turn\b[^.]*\bcan be played to any battlefield\b/i.test(e))return {k:'perm'};
   if(/^(?:units you play this turn|friendly units) enter ready(?: this turn)?\b/i.test(e))return {k:'enterReady'};
   if(/(?:^|\u2014\s*)the next unit you play this turn enters ready\b/i.test(e))return r({k:'nextReady'});
+  if(/^the next unit you play this turn has \[Accelerate\]/i.test(e))return {k:'nextAccel'};
   if(/^for each friendly unit, you may spend its buff to ready it\b/i.test(e))return {k:'spendBuffReady'};
   if(/^ignore \[deflect\] while paying\b/i.test(e))return {k:'costmod'};
   if(/\bthat many\b/i.test(e))return {k:/\bbanish\b/i.test(e)?'banish':'other',unsure:'a mennyiség a kifizetett költségtől ("that many") függ, ezt az elemzés nem követi'};

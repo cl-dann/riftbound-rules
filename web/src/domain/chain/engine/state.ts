@@ -19,7 +19,9 @@ export function installState(X: EngineCtx) {
     String(X.PSv(p,'playedT')||'').split(',').filter(Boolean).forEach((x:string)=>out.add(x));return out;};
   X.enterReady=(c,pl,accel,loc?,erd?,selfId?,addc?)=>{const out:ReadyInfo={ready:false,why:'',note:''};if(!c||c.t!=='Unit')return out;
     const yes=(w:string)=>{out.ready=true;out.why=out.why||w;};
+    const gr=!!(selfId&&X.O[selfId]&&X.O[selfId].accelG);
     if(accel&&/^\[Accelerate\]/m.test(c.txt||''))yes('Accelerate kifizetve, 143.4.a, 805.6');
+    else if(accel&&gr)yes('a kapott Accelerate kifizetve (Firelights\' Hideout: "the next unit you play this turn has [Accelerate]"), 805.1.b, 805.6');
     const ec=enterReadyCond(c);
     if(ec){if(ec.how==='always')yes('"I enter ready", 369.3');
       else if(ec.how==='addc'){if(addc)yes('"'+ec.t+'": az additional cost kifizetve, 143.4.a');else out.note='"'+esc(ec.t)+'": az additional cost nincs kifizetve, ezért exhausted lép be.';}
