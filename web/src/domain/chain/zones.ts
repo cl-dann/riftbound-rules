@@ -41,8 +41,13 @@ export function zoneRef0(t0:string,cardName?:string|null):ZoneRef|null{const t=s
 /** Rejtett adatot kérő utasítás, amely a pályás építőben konkrét lap kiválasztásával kiváltható (kéz, deck felső lapja, trash, eldobott lap). */
 export function zoneResolvable(t:string,c:CardLike|null|undefined){if(zoneRefOf(t,c&&c.n))return true;const a=actOfCard(t,c&&c.n);
   if(a.field&&/eldobott lap/i.test(a.field.label||''))return true;
-  if(a.cond&&a.cond.how==='hidden'&&/^it's an? (?:gear|spell|unit)$|^it is a unit$/i.test(a.cond.t)&&/\btop card of (?:your|their) main deck\b/i.test((c&&c.txt)||''))return true;
-  return false;}
+  if(a.cond&&a.cond.how==='hidden'&&/^it's an? (?:gear|spell|unit)$|^it is a unit$/i.test(a.cond.t)&&/\btop (?:card|\d+ cards) of (?:your|their) main deck\b|\bfrom your hand\b/i.test((c&&c.txt)||''))return true;
+  if(a.cond&&a.cond.how==='hidden'&&/^(?:you revealed a Bird|it has that type|you have exactly \d+ cards in hand|you revealed a card with the lowest Energy cost)/i.test(a.cond.t))return true;
+  // "play it": a megnézett, felfedett vagy banishelt lap (from among them, a deck felső lapja, trash), a pályás építőben megadva
+  if(a.k==='playcard'&&/\bplay it\b/i.test(t)&&/\bfrom among them\b|\btop (?:card|\d+ cards) of (?:your|their|each opponent's) main deck\b|\bin your trash\b|\breveals the top card\b/i.test((c&&c.txt)||''))return true;
+  // a felfedett, égetett vagy kézben lévő lapból számolt érték (Pakaa, Ravenbloom, Forgotten Relic, Teemo, Invert Timelines)
+  return ZONE_DERIVED.test(stripRem(String(t||'')));}
+const ZONE_DERIVED=/^(?:Starting with the next player, each player plays those cards|Otherwise, put it in your trash|If it's a spell, put it in your hand|When you burn a unit this way|Deal 1 to that unit for each card with \[Hidden\] revealed this way|Each player discards their hand)/i;
 /** A zónából választott lap megfelel-e a lap szövegének (kinek a zónája, típus, tag); '' ha igen. A zóna-tagságot a hívó ellenőrzi. */
 export function zoneCheck(zr:ZoneRef,ob:ZoneObj|null|undefined,pl:string,ctx?:CostCtx){const own=zr.who==='you'?[pl]:zr.who==='they'?[pl==='A'?'B':'A']:['A','B'];if(!ob||!ob.card)return 'ismeretlen lap';
   if(!own.includes((ob.own||ob.ctrl) as string))return 'nem '+(zr.who==='you'?'a saját':'az ellenfél')+' '+(zr.z==='trash'?'trashében':zr.z==='hand'?'kezében':'deckjében')+' van';
