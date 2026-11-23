@@ -116,6 +116,15 @@ Frissítés kézzel: GitHub, Actions, "Cardmarket árak", Run workflow. Ez commi
 
 ## Futtatás és ellenőrzés
 
+Push előtt kötelező: `cd web && npm run verify` (`scripts/verify.mjs`). Ugyanazokat a lépéseket futtatja, ugyanabban a sorrendben, mint a
+`tests.yml`: ruff, pytest, kötőjelek (a nem verziókezelt fájlokra is), lint:install, lint, knip, build, unit és golden, Playwright e2e és
+axe, végül a visual-1300 és visual-390 projekt pixel-összevetés nélkül (`--ignore-snapshots`, mert a baseline ubuntun készül). A Playwright
+`CI=1`-gyel fut (retries 1, nem használ már futó preview szervert), és a rendszer Chrome-ját használja (`PW_CHROME`, alap:
+`/usr/bin/google-chrome`). Az első piros lépésnél megáll. Push csak zöld verify után; szándékos vizuális változásnál előbb az e2e.yml
+workflow_dispatch update-snapshots fusson az ágra (a baseline-t a CI commitolja), és a bot commitja húzandó le a push előtt. Ha a CI mégis
+piros, nincs vak újrapush: előbb `gh run view <id> --log-failed`, és a különbség helyben kiderítendő. Az e2e.yml futásai ágonként
+`concurrency` csoportban vannak (`tests-<ref>`), az újabb futás leállítja a korábbit.
+
 ```
 python3 -m pytest src/tests                   # adatépítés kétszer (determinisztikus), web/src/generated/*.json; ártörténet kódolás;
                                               # árletöltő párosítás mentett Cardmarket mintán (src/tests/fixtures/cardmarket)

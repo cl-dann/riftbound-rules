@@ -11,6 +11,11 @@ on:
         type: boolean
         default: false
 
+# Ugyanarra az ágra érkező újabb futás leállítja a korábbit (nincs párhuzamos, elavult piros futás).
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     uses: ./.github/workflows/tests.yml
