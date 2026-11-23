@@ -42,6 +42,10 @@ export type ChainItem = {
   once?: string;
   /** a hatása egy delayed trigger létrehozása (391.2), a választás a lefutásakor */
   mkDelay?: boolean;
+  /** a lépésnél beállított "nem él vele" a resolve-kori "you may" utasításra (355.18) */
+  mayNo?: boolean; mayDone?: boolean;
+  /** a resolve kezdetén a döntési pontok száma (a sor a resolve közben keletkezett döntéseket mutatja) */
+  ch0?: number;
   /** Weaponmaster trigger [C] Equip költséggel (nyitott kérdés, 821.1.c.3) */
   wm?: boolean;
   kind: string; label: string; name?: string; pl: string; eff: string; list: TargetParam[]; tg: string[]; src?: string | null;
@@ -50,7 +54,7 @@ export type ChainItem = {
   notedLoc?: string | null; why?: string; sent?: boolean; lk?: { loc?: string }; trigBy?: CardLike; trigId?: string; fxCard?: CardLike; selfObj?: string; dk?: boolean;
   zpGen?: Record<string, number>; rdBefore?: number; dropT?: Set<number>; prot758?: string[]; pre?: string[]; lkMight?: number | null;
   hit?: string[]; flL?: boolean; fl2?: boolean; mp?: Record<string, string>; raiseBase?: string | null; paid?: boolean; kwSrc?: string | null; endTrig?: boolean;
-  coNote?: string; zAmongCard?: string | null; zRunes?: number | null; zRuneId?: string; zRuneD?: string; basedVal?: Record<number, unknown>; zRev?: string; zLastT?: string; zLastN?: string; zGuess?: string; zBurn?: string[]; zAmongDone?: boolean; zTop?: string; zLook?: string[]; zEach?: Record<string, string>;
+  coNote?: string; zAmongCard?: string | null; zNone?: boolean; zRunes?: number | null; zRuneId?: string; zRuneD?: string; basedVal?: Record<number, unknown>; zRev?: string; zLastT?: string; zLastN?: string; zGuess?: string; zBurn?: string[]; zAmongDone?: boolean; zTop?: string; zLook?: string[]; zEach?: Record<string, string>;
   zEachTop?: Record<string, string>; zDisc?: string; zDivine?: boolean; zKeep?: Set<string>; dl?: boolean;
 };
 /** Egy esemény a naplóban (EV): k a fajta, a többi a fajta adatai. */
@@ -59,6 +63,9 @@ export type Ev = {
   by?: string | null; item?: string; baseOf?: string | null; cleanup?: boolean; replay?: boolean; spent?: boolean; kw?: string; all?: string[]; recycle?: boolean;
 };
 /** Késleltetett hatás (391.2). */
+/** Döntési pont: a játékos választása, amivel az elemzés számol; a lépés-panel választót mutat hozzá.
+    kind: tg (célpont, a lépés dec mezője), may ("you may", dec), zp (kéz, deck, trash, megnézett lapok, a lépés zp mezője), wm (Weaponmaster Equipment). */
+export type ChoicePoint = { j: number; kind: 'tg' | 'may' | 'zp' | 'wm'; key: string; xi?: number; label: string; item: string; opts: { v: string; n: string }[]; cur: string; auto: boolean; none?: string };
 export type Delayed = { t: string; who: string; src: string; srcId: string | null; on: string[]; ids: string[]; n?: number; done?: boolean; /** a trigger feljegyzett locationje ("this battlefield", 359.3.f.3) */ loc?: string };
 /** Egy lefutott elem eredménye. */
 export type Done = { name: string; pl: string; res: string };
@@ -95,7 +102,7 @@ export type Report = {
 };
 export type ChainResult = {
   frames: Frame[]; html: string; story: string[]; done: Done[]; rows: RecRow[]; ev: Ev[]; objs: Record<string, GameObj>;
-  items: ItemView[]; delayed: Delayed[]; empty: boolean; zsnap?: Record<number, ZSnap>; report?: Report;
+  items: ItemView[]; delayed: Delayed[]; empty: boolean; zsnap?: Record<number, ZSnap>; report?: Report; choices?: ChoicePoint[];
 };
 /** Az enterReady() eredménye. */
 export type ReadyInfo = { ready: boolean; why: string; note?: string };
@@ -132,7 +139,7 @@ export type EngineCtx = {
   MAN: boolean; ALL: RecRow[]; EV: Ev[]; story: string[]; rows: string; rr: string; notes: string[]; O: Record<string, GameObj>;
   BF: Record<string, BfState>; ZC: boolean; zcK: Record<string, string>; cnt: Record<string, number>; FR: Frame[]; DET: Set<string>;
   NEWCTRL: Set<string>; chain: ChainItem[]; stack: ChainItem[]; REPL: Set<string>; READY: Record<string, boolean>;
-  BUFF2: Record<string, boolean>; PREVSA: { on: boolean }; READYNEXT: Record<string, boolean>; ACCELNEXT: Record<string, boolean>; ZIL: Record<string, boolean>; LASTON: Record<string, string>; LKX: Record<string, { st: boolean; bu: boolean }>; MORDE: Record<string, boolean>; ONCET: Record<string, boolean>; NEXT: boolean; CHOSE: Record<string, { items: number; objs: number }>; RDK: Record<string, boolean>; RPK: Record<string, boolean>; RSEQ: number; CHEX: Record<string, number>; ST: StateFns;
+  BUFF2: Record<string, boolean>; PREVSA: { on: boolean }; READYNEXT: Record<string, boolean>; ACCELNEXT: Record<string, boolean>; ZIL: Record<string, boolean>; LASTON: Record<string, string>; LKX: Record<string, { st: boolean; bu: boolean }>; MORDE: Record<string, boolean>; ONCET: Record<string, boolean>; CH: ChoicePoint[]; CURJ: number; decOf: (key: string) => string | undefined; choice: (cp: Omit<ChoicePoint, 'j'> & { j?: number }) => ChoicePoint; mayDec: (label: string, item: string) => boolean; NEXT: boolean; CHOSE: Record<string, { items: number; objs: number }>; RDK: Record<string, boolean>; RPK: Record<string, boolean>; RSEQ: number; CHEX: Record<string, number>; ST: StateFns;
   PSD: Record<string, number | string>; TP: string; PEND: ChainItem[]; DIED: string[]; TOKN: number; PTN: Set<string>; done: Done[];
   guard: number; it0: ChainItem | null; parts0: string[]; refs1: string[]; tgOut0: string[]; mtT0: MtTarget[]; tot0: { n: number };
   legal0: { n: number }; INRES: boolean; ENDED: boolean;
@@ -144,7 +151,7 @@ export type EngineCtx = {
   applyTo: (v: string, act: Instr['act'], it: ChainItem, parts: string[], refs: string[]) => string | void;
   pside: (p: string | null | undefined) => 'me' | 'opp' | null; itemName: (it: ChainItem) => string;
   snap: (label: string, items: ChainItem[], sj?: number) => void; LOCS: () => [string, string][]; locLabel: (l: string | null | undefined) => string;
-  line: (ref: string, txt: string, fl?: number | null) => string; bfC: (n: string | undefined) => Card | null; onB: (id: string) => boolean;
+  line: (ref: string, txt: string, fl?: number | null, extra?: string) => string; bfC: (n: string | undefined) => Card | null; onB: (id: string) => boolean;
   mightOf: (id: string) => number | null; BUF2: (p: string | null) => boolean; lethal: (id: string) => boolean;
   zcMove: (id: string, to: string) => void; zoneIds: (z: string, p: string) => string[];
   zcWhy: (zr: ZoneRef, ids: string[], pl: string, res: boolean, ctx?: CostCtx) => string; zctx: (it: ChainItem, s: EStep | null | undefined) => CostCtx;
@@ -174,7 +181,7 @@ export type EngineCtx = {
   channelRunes: (p: string, n: number, ex: boolean) => string; recycleRunes: (ids: string[]) => void; poolIds: (p: string) => string[]; autoTg: (item: ChainItem) => string; fxEnter: (pc: CardLike, pl: string, to: string, pid: string, s: EStep | null | undefined, fromHand: boolean) => ReadyInfo;
   equipCopy: (G: GameObj, U: GameObj, srcId: string | undefined, pl: string, parts: string[], refs: string[]) => void; copyEnd: () => string[];
   pushTrig: (t: ChainItem) => void; deathWatch: () => void; flushPend: (target: ChainItem[]) => void;
-  leaveTrigs: (id: string, dk: boolean) => void; playTrigs: (s: PlaySrc) => ChainItem[]; abTrigs: (s: EStep) => ChainItem[]; chooseTrigs: (it: ChainItem, spell: boolean) => ChainItem[]; nextTurn: () => void; ambushOK: (s: EStep, c: CardLike) => boolean; ambushWhy: (s: EStep, c: CardLike) => string; wmTrig: (uid: string, pl: string, pick: string | null) => { it: ChainItem | null; txt: string } | null; readyTrigs: (id: string, by: string, parts: string[]) => void;
+  leaveTrigs: (id: string, dk: boolean) => void; playTrigs: (s: PlaySrc) => ChainItem[]; abTrigs: (s: EStep) => ChainItem[]; chooseTrigs: (it: ChainItem, spell: boolean) => ChainItem[]; nextTurn: () => void; ambushOK: (s: EStep, c: CardLike) => boolean; ambushWhy: (s: EStep, c: CardLike) => string; wmTrig: (uid: string, pl: string, pick: string | null, j?: number) => { it: ChainItem | null; txt: string } | null; readyTrigs: (id: string, by: string, parts: string[]) => void;
   setCtrl: (id: string, to: string | null, ref: string, why: string, until?: string) => boolean; leaveBoard: (id: string, zone: string) => void;
   moveObj: (id: string, to: string, parts: string[], refs: string[], srcName: string, toBase?: string) => 'ok' | 'neg';
 };

@@ -25,6 +25,7 @@ import { useNarrow } from './hooks/useNarrow';
 import { useChainLegality } from './hooks/useChainLegality';
 import { useWizard } from './hooks/useWizard';
 import { StepPanel } from './StepPanel';
+import { StepChoices } from './StepChoices';
 import '../../styles/practice.css';
 
 /** A varázsló "extra mezők" lépése csak akkor jelenik meg, ha a lapnak ilyen mezője van (a hely és a forrás a lépés-panelben állítható). */
@@ -595,6 +596,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
       </>}
       {wiz.st === 'extra' && <>
         {wHead('A lap beállításai')}
+        <StepChoices j={wiz.j!} csv={csv} />
         <div className="cb2-q2 row2 cb2-wx" ref={xref} />
         <button type="button" className="pb-btn primary" onClick={() => wizEnd((wiz.j! + 1) + '. lépés az idővonalon.')}>Kész</button>
       </>}

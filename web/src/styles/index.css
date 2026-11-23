@@ -1139,6 +1139,18 @@ h2.psec small { font-family: var(--f-mono); font-size: 13px; color: var(--muted)
 .cb2-tpl .btn { justify-self: start; padding: 5px 12px; font-size: 13px; }
 .cb2-tpl .cb2-mbtn { justify-content: flex-start; align-items: center; }
 .cb2-tpl .pb-why { margin: 0 !important; }
+/* Resolve sor: számozott lépések, szabálylinkek, döntések, részletek */
+.cbsteps { margin: 4px 0 2px; padding-left: 20px; }
+.cbsteps li { margin: 1px 0; }
+.cbr { font-size: 11px; opacity: .85; white-space: nowrap; }
+.cbr a { margin-right: 4px; }
+.cbch { margin: 4px 0; font-size: 12.5px; }
+.cbdet { margin-top: 4px; font-size: 12.5px; }
+.cbdet > summary { cursor: pointer; }
+.cb2-dec { display: grid; gap: 6px; margin: 6px 0; }
+.cb2-decl { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 13px; }
+.cb2-decl select { max-width: 100%; }
+.cb2-auto { font-size: 11.5px; padding: 1px 7px; border: 1px dashed var(--line); border-radius: 999px; }
 /* Nyitott kérdés: a két értelmezés egymás mellett */
 .cbalt { display: block; margin-top: 4px; padding: 4px 8px; border-left: 2px dashed var(--line); font-size: 12.5px; }
 /* Chain: nehéz példák (kategóriánként, kereshető, legend jelvénnyel) */

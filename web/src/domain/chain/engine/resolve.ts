@@ -101,7 +101,7 @@ export function installResolve(X: EngineCtx) {
   X.resolveItem=(it)=>{const rec0=X.REC!.length;const all0=X.ALL.length;const ir0=X.INRES;X.INRES=true;try{X.resolveItem0(it);}finally{X.INRES=ir0;
       /* az elem saját sora kerüljön előre a "Mi változott?" listában, utána a közben történt mellékhatások (leválás, kontroll) */
       if(X.REC!.length>rec0+1&&X.ALL.length>all0+1){const a=X.REC!.pop()!;X.REC!.splice(rec0,0,a);const b=X.ALL.pop()!;X.ALL.splice(all0,0,b);}}};
-  X.resolveItem0=(it)=>{it.rdBefore=X.runeDeckOf(it.pl);it.ev0=X.EV.length;const s=(it.s||null) as EStep;const perm=!!it.perm;const self=it.objId?X.O[it.objId]:null;const srcName=it.name||it.label;
+  X.resolveItem0=(it)=>{it.ch0=X.CH.length;it.rdBefore=X.runeDeckOf(it.pl);it.ev0=X.EV.length;const s=(it.s||null) as EStep;const perm=!!it.perm;const self=it.objId?X.O[it.objId]:null;const srcName=it.name||it.label;
     const head='<b>'+esc(srcName)+'</b>'+(perm?' play triggere':it.kind==='auto'?' ('+esc(it.why)+')':'')+' resolve-ol. ';
     if(self&&self.zone==='countered'){if(self.toHand){self.zone='hand';self.zone0='countered';}const pt=it.kind==='step'&&s&&s.k==='card'?X.playTrigs(s):[];X.rr+=X.line('426.1'+(pt.length?', 420.4.a.1, 426.1.b':''),head+(self.type==='ability'?'Counterelték: nem csinál semmit, lekerül a chainről és megszűnik.':'Counterelték: nem csinál semmit, '+(self.toHand?'a tulajdonosa kezébe kerül':'a trashbe kerül')+', a költség nem jár vissza, és nem számít kijátszottnak.')+(pt.length?' Ezért nem triggerel: '+pt.map((tr)=>esc(tr.label)).join(', ')+'.':''),0);X.story.push(Art(srcName)+' sorra kerülne, de counterelték: nem történik semmi.');X.done.push({name:srcName,pl:it.pl,res:'countered'});X.out.items.push({name:srcName,res:'countered',instr:[],targets:[]});return;}
     if((it.kind==='auto'&&it.why==='Deathknell'&&it.sent===false)||(it.isTg&&it.dk&&!it.sent)){X.rr+=X.line('808.1.d.1, 808.1.d',head+'A forrás nem került a trashbe (nem halt meg), ezért a trigger lekerül a chainről.',0);X.done.push({name:it.label,pl:it.pl,res:'removed'});X.out.items.push({name:it.label,res:'removed',instr:[],targets:[]});return;}
@@ -182,5 +182,8 @@ export function installResolve(X: EngineCtx) {
     if(it.kind==='step'&&s&&s.k==='card'&&s.c.t==='Spell'){const pt=X.playTrigs(s);pt.forEach((tr)=>X.pushTrig(tr));if(pt.length){parts.push('A kijátszás most fejeződött be a resolve-val, ezért triggerel: '+pt.map((tr)=>esc(tr.label)).join(', ')+' (420.4.a; akkor is, ha egyik utasítás sem hajtódott végre, 359.3.e.10).');refs.push('420.4.a');}}
     const res=(R.tot&&!R.legal)?'fizzle':(R.tot&&R.legal<R.tot)?'partial':'ok';
     X.done.push({name:it.label,pl:it.pl,res});X.out.items.push({name:it.label,res,instr:INS.map((x)=>({t:x.t,k:x.act.k,st:x.st,ref:x.ref,lk:x.lk})),targets:mtT});
-    if(it.flL)R.fl=Math.max(R.fl,1);if(it.fl2)R.fl=2;X.rr+=X.line(refs.join(','),R.t+parts.join(' '),R.fl);X.MAN=false;};
+    if(it.flL)R.fl=Math.max(R.fl,1);if(it.fl2)R.fl=2;const cps=X.CH.slice(it.ch0||0).filter((c,k,a)=>a.findIndex((d)=>d.key===c.key&&d.j===c.j)===k);
+    const chx=cps.length?'<p class="cbch">'+cps.map((c)=>{const v=c.cur==='-'?(c.none||'nem választ'):c.cur?(c.opts.find((o)=>o.v===c.cur)||{n:X.nm(c.cur)}).n:'nincs megadva';cps.forEach(()=>{});return esc(c.label.replace(/ \("[^]*$/,''))+': '+esc(v)+' ('+(c.auto?'automatikus választás':'a te választásod')+')';}).join('<br>')+'</p>':'';
+    cps.forEach((c)=>{const v=c.cur==='-'?(c.none||'nem választ'):c.cur?(c.opts.find((o)=>o.v===c.cur)||{n:X.nm(c.cur)}).n:'';if(v)X.story.push(c.label.replace(/ \("[^]*$/,'')+': '+v+' ('+(c.auto?'automatikus választás':'a te választásod')+').');});
+    X.rr+=X.line(refs.join(','),R.t+parts.join(' '),R.fl,chx);X.MAN=false;};
 }

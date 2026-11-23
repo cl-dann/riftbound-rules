@@ -7,6 +7,7 @@ import { stepInfo } from '../../domain/chain/steps';
 import { interp } from '../../domain/chain/actions';
 import { slotText, stepName, zonePicks } from './chainBuild';
 import { imgOf } from './bits';
+import { StepChoices } from './StepChoices';
 
 /** A kiválasztott lépés panelje: ki játssza, célpontok (pályán választva), és csak a lap által igényelt mezők. */
 export function StepPanel({ j, csv, onTarget, onClose, bad, onInsert, onHand, onZone }: { j: number; csv: number; onTarget: (ti: number) => void; onClose: () => void; bad: ['ok' | 'bad' | 'need' | 'off', string]; onInsert: (k: number) => void; onHand: (f: 'so' | 'plc', xi: number) => void; onZone: (xi: number) => void }) {
@@ -29,6 +30,7 @@ export function StepPanel({ j, csv, onTarget, onClose, bad, onInsert, onHand, on
       {s.k === 'res' && <p className="note">Mindkét játékos passzol: a chain legfelső eleme most resolve-ol (340.1), a következő lépések már erre az állapotra épülnek.</p>}
       {s.k === 'end' && <p className="note">A chain lefut, majd jön az Ending Phase: a kör végi hatások triggerelnek (317.1), utána Expiration Step (317.2).</p>}
       {s.k === 'next' && <p className="note">A kör véget ér (317), utána a következő játékos köre a Main Phase elejéig: Awaken (315.1), Beginning Phase a Temporary és a hold triggerekkel (315.2, 816.1.b, 383.4.d), Channel (315.3), Draw (315.4), a Main Phase eleji és a "start of your next Main Phase" delayed triggerek (391.2). Ez az utolsó lépés.</p>}
+      <StepChoices j={j} csv={csv} />
       {(s.k === 'card' || s.k === 'ab') && (
         <div className="cb2-seg" role="group" aria-label="Ki játssza"><span>Ki:</span>
           {(['A', 'B'] as const).map((p) => <button key={p} type="button" aria-pressed={s.pl === p} className={s.pl === p ? 'on' : ''} onClick={() => setPl(p)}>{p === 'A' ? 'Te' : 'Ellenfél'}</button>)}</div>

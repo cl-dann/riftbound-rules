@@ -55,6 +55,7 @@ export function installTriggers(X: EngineCtx) {
           if(m){if(m[2].toLowerCase()!==T.type)return;if(/friendly/i.test(m[1]||'')&&T.ctrl!==W.ctrl)return;if(/enemy/i.test(m[1]||'')&&T.ctrl===W.ctrl)return;eff=m[3];}
           else if((m=/^when you choose (?:or ready )?me( with a spell)?,\s*(.*)$/i.exec(L))){if(v!==wid||(m[1]&&!spell))return;eff=m[2];}else return;
           const may=/^you may exhaust me (?:and pay (\[[^\]]+\](?:\[[^\]]+\])*) )?to\s+/i.exec(eff);
+          if(may&&!X.mayDec(W.name+' triggere ('+T.name+' kiválasztva)',W.name)){X.rows+=X.line('383.3.a.2',esc(W.name)+': "'+esc(L)+'": a játékos nem él vele (a lépésnél beállítva), ezért nem kerül a chainre.',0);return;}
           if(may){if(W.ex){X.rows+=X.line('383.3.b, 383.3.b.1',esc(W.name)+': "'+esc(L)+'" triggerelne ('+esc(T.name)+' kiválasztva), de már exhausted, az exhaust költség nem fizethető ki, ezért nem kerül a chainre.',0);return;}
             W.ex=true;X.rows+=X.line('383.3.a, 383.3.b',esc(W.name)+' triggere: a "you may" döntés (igen) és a költség (exhaust'+(may[1]?' és '+esc(may[1]):'')+') a chainre tételkor; '+esc(W.name)+' exhausted lesz.',0);eff=eff.slice(may[0].length);}
           res.push({kind:'auto',label:W.name+' triggere ('+T.name+' kiválasztva)',name:W.name+' triggere',src:wid,pl:W.ctrl!,eff,why:'"'+L+'"',list:phrasesTxt(eff),tg:[],pre:[v]});});});});
@@ -66,11 +67,14 @@ export function installTriggers(X: EngineCtx) {
   /* Weaponmaster (821.1.c): play effect, a unit sajátja vagy a legend adja ("Sand Soldiers you play have [Weaponmaster]"); a választott Equipment (lépés wm mezője,
      különben az első friendly Equipment, elöl a csatolatlan) a unitra csatolódik. Az Equip költség [A]-val csökken (821.1.c); [A] nélküli költség nem csökken (821.1.c.3);
      a [C] (a lap domainjének Powere, 135.2.e.6) "tartalmaz-e" [A]-t, nyitott kérdés (flag 2). */
-  X.wmTrig=(uid,pl,pick)=>{const U=X.O[uid];if(!U||!U.card||U.type!=='unit')return null;
+  X.wmTrig=(uid,pl,pick,j)=>{const U=X.O[uid];if(!U||!U.card||U.type!=='unit')return null;
     const own=/^\[Weaponmaster\]/m.test(U.card.txt||'');const L=X.O['L'+pl];const gr=L&&L.card&&/^Sand Soldiers you play have \[Weaponmaster\]/m.test(L.card.txt||'')&&/\bSand Soldier\b/.test(U.name)?L.name:'';
     if(!own&&!gr)return null;
     const eqs=Object.keys(X.O).filter((g)=>{const G=X.O[g];return G.zone==='board'&&G.type==='gear'&&G.ctrl===pl&&G.card&&(G.card.tg||[]).includes('Equipment')&&G.on!==uid;}).sort((a,b)=>(X.O[a].on?1:0)-(X.O[b].on?1:0));
-    const eq=pick&&eqs.includes(pick)?pick:eqs[0];const src=own?'':' ('+gr+' adja)';
+    const src=own?'':' ('+gr+' adja)';
+    if(eqs.length)X.choice({...(j!=null?{j}:{}),kind:'wm',key:'wm',label:U.name+' [Weaponmaster]: Equipment',item:U.name,opts:eqs.map((v)=>({v,n:X.O[v].name})),cur:pick==='-'?'-':pick&&eqs.includes(pick)?pick:eqs[0],auto:!(pick&&(pick==='-'||eqs.includes(pick))),none:'nem él vele'});
+    if(pick==='-')return {it:null,txt:esc(U.name)+' [Weaponmaster]'+esc(src)+': a játékos nem él vele (a lépésnél beállítva, 821.1.c "you may").'};
+    const eq=pick&&eqs.includes(pick)?pick:eqs[0];
     if(!eq)return {it:null,txt:esc(U.name)+' [Weaponmaster]'+esc(src)+': nincs választható friendly Equipment, a play effect nem csinál semmit (821.1.c).'};
     const G=X.O[eq];const ec=(/\[Equip\]\s*((?:\[[^\]]+\])+)/.exec(G.card!.txt||'')||['',''])[1];
     const cst=!ec?'nincs Equip költsége, ezért nem fizethető ki, a csatolás elmarad (821.1.c.4)':/\[A\]/.test(ec)?'az Equip költség ('+ec+') [A]-val csökken (821.1.c)':/\[C\]/.test(ec)?'<span class="cbuns">nyitott kérdés</span> az Equip költség '+ec+'; a [C] a lap domainjének Powere (135.2.e.6), és a Core Rules nem dönti el, hogy ez "tartalmaz-e" [A]-t: ha igen, a költség [A]-val csökken ('+ec.replace('[C]','')+(ec.replace('[C]','')?'':'0')+'), ha nem, a teljes '+ec+' fizetendő, csökkentés nélkül (821.1.c.3); a csatolás mindkét esetben megtörténik':'az Equip költség ('+ec+') nem tartalmaz [A]-t, ezért nem csökken, de kifizethető (821.1.c.3)';

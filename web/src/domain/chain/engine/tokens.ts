@@ -11,7 +11,7 @@ export function installTokens(X: EngineCtx) {
     /* Zilean, Time Mage (replacement, 369.1): körönként egyszer, ha a controllere token unitot játszana ki, mialatt Zilean battlefielden áll,
        helyette a token és egy további másolata (446.3) jön létre. "You may": az elemzés úgy számol, hogy él vele. */
     const zil=kind==='unit'&&n>0&&!X.ZIL[it.pl]?Object.values(X.O).find((o)=>o.zone==='board'&&o.ctrl===it.pl&&o.card&&o.card.n==='Zilean, Time Mage'&&o.loc&&o.loc!=='base'):null;
-    if(zil){X.ZIL[it.pl]=true;n+=1;parts.push(esc(zil.name)+' (replacement, körönként egyszer): a token mellett egy további másolata is létrejön (369.1, 446.3); "you may", az elemzés úgy számol, hogy él vele.');refs.push('369.1','446.3');}
+    if(zil&&X.mayDec(zil.name+' replacement',zil.name)){X.ZIL[it.pl]=true;n+=1;parts.push(esc(zil.name)+' (replacement, körönként egyszer): a token mellett egy további másolata is létrejön (369.1, 446.3); "you may", az elemzés úgy számol, hogy él vele.');refs.push('369.1','446.3');}
     const here=X.srcLoc(it);const loc=/\bto a (?:single )?battlefield\b/i.test(tail)?(it.dest||(it.s&&it.s.dest)||'bf0'):/\bthere\b/i.test(tail)?(it.notedLoc||(it.lk&&it.lk.loc)||here||'base'):/\bhere\b/i.test(tail)?(here||'base'):'base';
     const ids:string[]=[];for(let q=0;q<n;q++){const id='k'+(++X.TOKN);const extra=kws.filter((k:string)=>!(card&&(card.txt||'').includes(k))).join('\n');const c=card?(extra?Object.assign({},card,{txt:(card.txt||'')+'\n'+extra}):card):{n:name,t:kind==='unit'?'Unit':'Gear',m:m[3]?+m[3]:null,st:['Token'],tg:[],txt:extra};
       const er=kind==='unit'?X.enterReady(Object.assign({},c,{t:'Unit',st:['Token']}),it.pl,false,loc,undefined,id):{ready:false,why:''};if(q===0&&er.why&&!m[2]&&!m[6])parts.push('Ready lép be: '+esc(er.why)+'.');
@@ -20,7 +20,7 @@ export function installTokens(X: EngineCtx) {
     if(it.notedLoc&&/\bthere\b/i.test(tail)){parts.push('A "there" a trigger feltételéből a triggereléskor feljegyzett location ('+esc(X.locLabel(it.notedLoc))+'), a forrás későbbi mozgása nem számít (359.3.f.3).');refs.push('359.3.f.3');}
     parts.push(n+' db '+esc(name)+' '+kind+' token jön létre ('+esc(X.locLabel(loc))+(m[2]?', ready':m[6]?', exhausted':kind==='unit'?(X.O[ids[0]]&&!X.O[ids[0]].ex?', ready (143.4.a)':', exhausted (143.4)'):'')+(kws.length?', '+kws.join(' '):'')+') (350.2, 440.2).');refs.push('350.2','440.2');
     if(n)X.story.push(n+' '+name+' token kerül ide: '+X.locLabel(loc)+'.');
-    ids.forEach(id=>{if(X.O[id].type==='unit'){X.playTrigs({c:X.O[id].card!,j:-1,pl:it.pl,from:'other',objId:id}).forEach((tr)=>X.pushTrig(tr));const w=X.wmTrig(id,it.pl,(it.s&&(it.s.wm as string|undefined))||null);if(w){if(w.it)X.pushTrig(w.it);if(w.it&&w.it.wm)it.fl2=true;parts.push(w.txt);refs.push('821.1.c');}}});return ids;};
+    ids.forEach(id=>{if(X.O[id].type==='unit'){X.playTrigs({c:X.O[id].card!,j:-1,pl:it.pl,from:'other',objId:id}).forEach((tr)=>X.pushTrig(tr));const w=X.wmTrig(id,it.pl,(it.s&&(it.s.wm as string|undefined))||null,it.s?it.s.j:undefined);if(w){if(w.it)X.pushTrig(w.it);if(w.it&&w.it.wm)it.fl2=true;parts.push(w.txt);refs.push('821.1.c');}}});return ids;};
   /** Copy effect (446.1, 479.1.b): a tokenek a forrás másolatai lesznek. A másolható jellemzők a nyomtatottak, vagy ha a forrás maga is másolat,
       a másoltak; tokennél a létrehozáskoriak (479.1.b.1). A Might módosítások, buffok, damage és kapott keywordök nem másolódnak (479.1.c).
       A token token marad, a play effectek nem futnak le (a lap már a boardon van; a Reflection emlékeztető szövege). */
