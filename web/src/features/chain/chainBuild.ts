@@ -150,12 +150,13 @@ export const hasHidden = (c: Card | null | undefined) => !!c && (timingOf(c) ===
 export const isPerm = (c: Card | null | undefined) => isPermC(c);
 
 /** Kártyakereső: típus szerint előszűrve, gépelve szűrhető. */
-export type PickKind = 'legend' | 'champion' | 'battlefield' | 'board' | 'hand' | 'play' | 'hidden' | 'trash' | 'deck';
+export type PickKind = 'legend' | 'champion' | 'battlefield' | 'board' | 'hand' | 'play' | 'hidden' | 'trash' | 'deck' | 'runeDeck' | 'runePool';
 export const PICK_TITLE: Record<PickKind, string> = {
-  legend: 'Legend', champion: 'Champion (Champion Zone)', battlefield: 'Battlefield', board: 'Unit vagy gear a pályára', hand: 'Lap a kézbe', play: 'Kijátszás a chainre', hidden: 'Hidden lap a facedown helyre', trash: 'Lap a trashbe', deck: 'Lap a deck tetejére',
+  legend: 'Legend', champion: 'Champion (Champion Zone)', battlefield: 'Battlefield', board: 'Unit vagy gear a pályára', hand: 'Lap a kézbe', play: 'Kijátszás a chainre', hidden: 'Hidden lap a facedown helyre', trash: 'Lap a trashbe', deck: 'Lap a deck tetejére', runeDeck: 'Rune a Rune Deck tetejére', runePool: 'Rune a rune poolba',
 };
 const okType = (k: PickKind, c: Card) => {
   const t = c.t;
+  if (k === 'runeDeck' || k === 'runePool') return t === 'Rune';
   if (k === 'legend') return t === 'Legend';
   if (k === 'battlefield') return t === 'Battlefield';
   if (k === 'champion') return t === 'Unit' && (c.st || []).includes('Champion');

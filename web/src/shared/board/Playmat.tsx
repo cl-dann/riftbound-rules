@@ -52,7 +52,7 @@ export const PickCtx = createContext<(u: PUnit, side: 'me' | 'opp', where: strin
 export type PTarget =
   | { k: 'unit'; side: 'me' | 'opp'; loc: string; n: string; no?: number; i: number; ex: boolean; id?: string }
   | { k: 'add'; z: 'base' | 'unit' | 'bfcard' | 'hand' | 'chain'; side?: 'me' | 'opp'; bfi?: number }
-  | { k: 'pile'; z: 'trash' | 'deck' | 'banish'; side: 'me' | 'opp' }
+  | { k: 'pile'; z: 'trash' | 'deck' | 'banish' | 'runeDeck'; side: 'me' | 'opp' }
   | { k: 'zone'; loc: string }
   | { k: 'rune'; side: 'me' | 'opp'; d: string }
   | { k: 'legend' | 'champion'; side: 'me' | 'opp' }
@@ -161,7 +161,7 @@ function RuneStacks({ r, onZone, sel, side }: { r?: PSide['runes']; onZone: (z: 
 function Piles({ s, onZone, sel, known, side }: { s: PSide; onZone: (z: string) => void; sel: string; known?: boolean; side: 'me' | 'opp' }) {
   const ctl = useContext(CtlCtx); const ed = useContext(EditCtx);
   const P = ({ z, l, n, top }: { z: string; l: string; n?: number; top?: string | null }) => {
-    if (ctl && ed && (z === 'trash' || z === 'deck' || z === 'banish')) {
+    if (ctl && ed && (z === 'trash' || z === 'deck' || z === 'banish' || z === 'runeDeck')) {
       const t: PTarget = { k: 'pile', z, side }; const g = ctl.glow(t);
       return <button type="button" data-zone={z} className={'pm2-pile' + gcls(g)} onClick={() => ctl.on(t)} aria-label={ctl.label?.(t) || l + ' ' + (n ?? 0) + ' lap, megnyitás'}><Card n={top} small /><span>{l} <b>{n ?? 0}</b></span></button>;
     }
@@ -174,7 +174,7 @@ function Piles({ s, onZone, sel, known, side }: { s: PSide; onZone: (z: string) 
   return (
     <div className="pm2-piles">
       {!(known && s.deck == null && !(ctl && ed)) && <P z="deck" l="Deck" n={s.deck} />}
-      {!(known && s.runeDeck == null) && <P z="runeDeck" l="Rune Deck" n={s.runeDeck} />}
+      {!(known && s.runeDeck == null && !(ctl && ed)) && <P z="runeDeck" l="Rune Deck" n={s.runeDeck} />}
       <P z="trash" l="Trash" n={(s.trash || []).length} top={(s.trash || []).slice(-1)[0] || null} />
       <P z="banish" l="Banish" n={(s.banish || []).length} top={(s.banish || []).slice(-1)[0] || null} />
     </div>
