@@ -16,7 +16,7 @@ for (const w of [1300, 390]) {
     await expect(page.locator('.pm2-pts.me')).toContainText('1pts');
     await expect(page.locator('.pm2-pts.me')).toContainText('3XP');
     await expect(me.locator('[data-zone="runeDeck"]')).toContainText('9');
-    const next = page.locator('button', { hasText: 'Következő' });
+    const next = page.getByRole('button', { name: 'Következő', exact: true });
     for (let k = 0; k < 6 && !(await me.locator('[data-zone="runeDeck"]').textContent())?.includes('8'); k++) await next.click();
     await expect(me.locator('[data-zone="runeDeck"]')).toContainText('8');
     await expect(me.locator('[data-zone="runeDeck"].chg')).toHaveCount(1);
