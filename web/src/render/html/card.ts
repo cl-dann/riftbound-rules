@@ -6,6 +6,7 @@ import { esc } from '../../domain/text/norm';
 import { glossify } from './glossary';
 import { GROUPS, topicBlock, whyOf } from './rules';
 import type { Card } from '../../domain/data/schema';
+import { refHash } from '../../domain/rules/refs';
 export const DOMS:Record<string,string>={R:'Fury',G:'Calm',B:'Mind',O:'Body',P:'Chaos',Y:'Order'};
 export const SYMT:Record<string,[string,string]>={A:['A','Power, bármely domain'],C:['C','Power, a kártya saját domainje'],S:['Might','Might'],T:['Exhaust','Exhaust (a kártya kimerítése költségként)'],E:['Exhaust','Exhaust (a kártya kimerítése költségként)']};
 export function cardText(t:string|null|undefined){
@@ -25,7 +26,7 @@ export function cardText(t:string|null|undefined){
   }).join('');
 }
 export const domDots=(c:Pick<Card,'d'>)=>(c.d||[]).map(d=>'<i class="dot d-'+d+'" title="'+d+'"></i>').join('');
-const refLinks=(r:string)=>r.split(',').map(x=>x.trim()).filter(Boolean).map(x=>'<a href="#szabalyok" data-ref="'+x+'">'+x+'</a>').join('');
+const refLinks=(r:string)=>r.split(',').map(x=>x.trim()).filter(Boolean).map(x=>'<a href="'+refHash(x)+'" data-ref="'+x+'">'+x+'</a>').join('');
 export function qaHTML(c:Card){
   if(!c.qa||!c.qa.length)return '';
   const seen=new Set<string>();
@@ -34,7 +35,7 @@ export function qaHTML(c:Card){
 export function notesHTML(c:Card){
   if(!c.nt)return '<h3>Hogyan érinti ezt a lapot</h3><p class="note">Ehhez a laphoz még nincs kézzel írt, lap-specifikus magyarázat. Lent a rá vonatkozó szabályszakaszok teljes szövege olvasható.</p>';
   const seen=new Set<string>();
-  const body='<div class="ntwrap"><table class="nt">'+c.nt.map(n=>'<tr><td class="r">'+n[0].split(',').map(r=>'<a href="#szabalyok" data-ref="'+r.trim()+'">'+r.trim()+'</a>').join('')+'</td><td>'+glossify(esc(n[2]),seen)+'</td><td class="f"><span class="fl f'+n[1]+'" title="'+FLT[n[1]]+'">'+FL[n[1]]+'</span></td></tr>').join('')+'</table></div>';
+  const body='<div class="ntwrap"><table class="nt">'+c.nt.map(n=>'<tr><td class="r">'+n[0].split(',').map(r=>'<a href="'+refHash(r)+'" data-ref="'+r.trim()+'">'+r.trim()+'</a>').join('')+'</td><td>'+glossify(esc(n[2]),seen)+'</td><td class="f"><span class="fl f'+n[1]+'" title="'+FLT[n[1]]+'">'+FL[n[1]]+'</span></td></tr>').join('')+'</table></div>';
   if(c.qa&&c.qa.length)return '<details class="tp ntd"><summary><span class="tt">Szabályi részletek</span><span class="why">'+c.nt.length+' pont szabályszámmal, judge szintű pontosítások</span></summary>'+body+'</details>';
   return '<h3>Hogyan érinti ezt a lapot<span class="n">'+c.nt.length+' pont, nem hivatalos ruling</span></h3>'+body;
 }

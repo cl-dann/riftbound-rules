@@ -2,6 +2,7 @@ import type { Card } from '../../domain/data/schema';
 import { D, CARDS, META } from '../../domain/data/store';
 import { esc } from '../../domain/text/norm';
 import { glossify } from './glossary';
+import { refHash } from '../../domain/rules/refs';
 /* Szószintű diff (LCS) az errata előtte/utána nézethez. */
 function wdiff(a: string|null, b: string|null){
   const A=String(a).split(/(\s+)/),B=String(b).split(/(\s+)/),n=A.length,m=B.length;
@@ -15,7 +16,7 @@ function wdiff(a: string|null, b: string|null){
 export function renderTud(){
   const X=D.extra||{};
   let h='<div class="subnav">'+'<a class="chip" href="#hogyan">How to Play</a>'+'<a class="chip" href="#tud-olvas" data-scroll="tud-olvas">A magyarázatok olvasása</a>'+(X.terms?'<a class="chip" href="#tud-fog" data-scroll="tud-fog">Fogalmak</a>':'')+(X.glossary?'<a class="chip" href="#tud-kw" data-scroll="tud-kw">Kulcsszavak</a>':'')+(X.flow?'<a class="chip" href="#tud-flow" data-scroll="tud-flow">Játékmenet</a>':'')+(X.patchnotes?'<a class="chip" href="#tud-pn" data-scroll="tud-pn">Szabályváltozások</a>':'')+'<a class="chip" href="#tud-err" data-scroll="tud-err">Errata</a>'+'</div>';
-  const rl=(r: string)=>'<a href="#szabalyok" data-ref="'+esc(r)+'">'+esc(r)+'</a>';
+  const rl=(r: string)=>'<a href="'+esc(refHash(r))+'" data-ref="'+esc(r)+'">'+esc(r)+'</a>';
   if(false&&X.guide){
     h+='<h2 id="tud-guide" style="margin-top:14px">Kezdő útmutató</h2><p class="note" style="margin:6px 0 12px">Az első játék lépésről lépésre, a Core Rules alapján. AI által írt összefoglaló, nem hivatalos.</p>';
     X.guide.forEach((g,i)=>{h+='<div class="guide"><h3>'+(i+1)+'. '+esc(String(g.title).replace(/^\s*\d+\.\s*/,''))+(g.rules?'<span class="n">'+rl(g.rules)+'</span>':'')+'</h3>'+(g.paras||[]).map(p=>'<p>'+glossify(esc(p))+'</p>').join('')+(g.steps&&g.steps.length?'<ol class="flow">'+g.steps.map(s=>'<li><span>'+esc(s[1])+rl(s[0])+'</span></li>').join('')+'</ol>':'')+'</div>';});

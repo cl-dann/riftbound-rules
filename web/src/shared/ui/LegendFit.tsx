@@ -2,8 +2,9 @@ import { useMemo } from 'react';
 import { CARDS, IMGBASE } from '../../domain/data/store';
 import type { Card } from '../../domain/data/schema';
 import { legendsFor } from '../../domain/deck/legends';
+import { refHash } from '../../domain/rules/refs';
 
-const refLinks = (r: string) => r.split(/,\s*/).map((x) => <a key={x} href="#szabalyok" data-ref={x}>{x}</a>);
+const refLinks = (r: string) => r.split(/,\s*/).map((x) => <a key={x} href={refHash(x)} data-ref={x}>{x}</a>);
 
 /** "Melyik legenddel játszható": a Core Rules deck-építési szabályai (103) szerint, a legendek kártyaképével; kattintásra a legend lapja nyílik. */
 export function LegendFit({ card, onPick }: { card: Card; onPick: (c: Card) => void }) {

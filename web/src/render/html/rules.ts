@@ -15,7 +15,7 @@ export function ruleHTML(idxs:number[],hl:RegExp|null=null){
     return '<div class="rule dp'+dp+(isHead(r)?' h':'')+'" data-rid="'+r[0]+'"><a class="id" href="'+refHash(r[0])+'" title="Link erre a szabályra">'+r[0]+'.</a><div class="tx">'+tx+ex+'</div></div>';
   }).join('');
 }
-export const relLinks=(rel:string[]|undefined)=>rel&&rel.length?'<div class="rel">Kapcsolódó: '+rel.map(r=>'<a href="#szabalyok" data-ref="'+r+'">'+r+'</a>').join('')+'</div>':'';
+export const relLinks=(rel:string[]|undefined)=>rel&&rel.length?'<div class="rel">Kapcsolódó: '+rel.map(r=>'<a href="'+refHash(r)+'" data-ref="'+r+'">'+r+'</a>').join('')+'</div>':'';
 export function whyOf(tp:Topic,m:string){
   if(tp.g==='kw')return 'kulcsszó a kártyán: <code>'+esc(m)+'</code>';
   if(tp.g==='type')return esc(tp.why);
