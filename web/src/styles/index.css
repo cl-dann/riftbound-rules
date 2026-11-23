@@ -1531,3 +1531,8 @@ details:not(.tp):not(.drow):not(.cb2-blk):not(.cbset):not(.learn-side-m) > summa
 .pch-tbl { margin-top: 6px; font-size: 12px; } .pch-tbl table { border-collapse: collapse; } .pch-tbl th, .pch-tbl td { padding: 2px 8px; border-bottom: 1px solid var(--line); text-align: right; font-family: var(--f-mono); } .pch-tbl th:first-child, .pch-tbl td:first-child { text-align: left; }
 .drow .prsel { width: 150px; min-height: 28px; padding: 2px 6px; font-size: 12px; margin-right: 6px; }
 @media (max-width: 620px) { .drow .ctl { grid-column: 2; justify-self: start; flex-wrap: wrap; } .drow .prsel { width: 100%; min-height: 36px; } }
+/* Chain: frame-enkénti számlálók (XP, pont, rune pool, paklik), az előző frame-hez képesti változás kiemelve */
+.pm2-pts .pm2-pv, .pm2-pts .pm2-xp { display: inline-flex; align-items: baseline; gap: 3px; border-radius: 4px; padding: 0 3px; }
+.pm2-pts .pm2-xp { margin-left: 8px; color: #c9b27a; font-size: 13px; }
+.pm2-pv.chg, .pm2-xp.chg, .pm2-pile.chg, .pm2-runes.chg { box-shadow: 0 0 0 2px var(--accent); animation: chg 1.2s ease-out 2; }
+.pm2-runeq { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: #2a3442; color: #9aa6b6; font-family: var(--f-mono); font-weight: 700; border-radius: 3px; }
