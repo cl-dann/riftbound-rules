@@ -6,7 +6,7 @@ import { OV_LBL, OV_N, interp } from '../actions';
 import { printedCost } from '../cost';
 import { numOf, phrasesTxt } from '../parser';
 import { stripRem as stripRemT } from '../text';
-import { INS_ST, RES, art, Art, other, WHO } from './labels';
+import { ALT2, INS_ST, RES, art, Art, other, WHO } from './labels';
 
 /** A következő körre szóló késleltetett hatás ("at the start of your next Main Phase", "until your next Ending Phase"). */
 const NEXT_TURN=/\b(?:at the start of|until) your next\b/i;
@@ -141,7 +141,7 @@ export function installResolve(X: EngineCtx) {
       if(xa.k==='counter'&&ob.type==='spell'&&xa.unless&&it.pays){tgOut[ti]='neg';parts.push(esc(ob.name)+' irányítója kifizeti a kért költséget, ezért a counter nem történik meg.');X.story.push(Art(srcName)+' lefut, de '+art(ob.name)+' gazdája kifizeti a kért költséget, így a spell marad.');return;}
       if(['draw','channel','discard','choose','deck','xp','score','pay','showoff','fight','win','perm'].includes(xa.k)){tgOut[ti]='ok';if(xa.k==='choose')parts.push(esc(ob.name)+' kiválasztva.');return;}
       if(xa.k==='copy'){tgOut[ti]='ok';const made=R.made||[];if(made.length){X.copyOnto(made,v,parts,refs);R.copied=made;}else parts.push('"'+esc(x.t)+'": nincs ebben a resolve-ban létrehozott token, ami '+esc(ob.name)+' másolatává válhatna.');return;}
-      if(xa.k==='note'){tgOut[ti]='ok';if(!x.noted){x.noted=1;parts.push((xa.open?'<span class="cbuns">nyitott kérdés</span> ':'')+esc(ob.name)+': "'+esc(x.t)+'": '+esc(xa.d||'')+(xa.refs?' ('+xa.refs+')':'')+'.');if(xa.refs)xa.refs.split(/,\s*/).forEach((r:string)=>refs.push(r));}R.fl=Math.max(R.fl,xa.open?2:1);return;}
+      if(xa.k==='note'){tgOut[ti]='ok';if(!x.noted){x.noted=1;parts.push((xa.open?'<span class="cbuns">nyitott kérdés</span> ':'')+esc(ob.name)+': "'+esc(x.t)+'": '+esc(xa.d||'')+(xa.refs?' ('+xa.refs+')':'')+'.'+(xa.alt2?ALT2(esc(xa.alt2[0]),esc(xa.alt2[1])):''));if(xa.refs)xa.refs.split(/,\s*/).forEach((r:string)=>refs.push(r));}R.fl=Math.max(R.fl,xa.open?2:1);return;}
       if(xa.k==='delayed'&&NEXT_TURN.test(x.t)){tgOut[ti]='ok';if(!x.dlMade){x.dlMade=1;X.out.delayed.push({t:x.t,who:it.pl,src:srcName,srcId:it.src||it.objId||null,on:[],ids:[],...(it.notedLoc?{loc:it.notedLoc}:{})});}parts.push(esc(ob.name)+': "'+esc(x.t)+'": delayed trigger jön létre a következő körre (391.2, 391.4); a választás a lefutásakor történik, a lefutását a "Következő kör" lépés mutatja.');refs.push('391.2');R.fl=Math.max(R.fl,1);return;}
       if(xa.k==='other'||xa.k==='delayed'||xa.k==='playcard'||xa.k==='replay'||xa.k==='token'){tgOut[ti]='ok';parts.push(esc(ob.name)+': "'+esc(x.t)+'" lefut, ezt az elemzés nem követi részletesen.');R.fl=Math.max(R.fl,1);return;}
       const r=X.applyTo(v,Object.assign({t:x.t},xa),it,parts,refs);tgOut[ti]=r==='neg'?'neg':r==='ign'?'ign':'ok';if(r==='ign')R.legal--;};

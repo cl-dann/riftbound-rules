@@ -8,3 +8,5 @@ export const other=(p:string)=>p==='A'?'B':'A';export const WHO:Record<string,st
 export const LOCK=(l:string)=>l==='base'?'base':l;
 /** Egy szabálysor HTML-je (szabályszám linkek, szöveg, flag), a chain riport táblázataihoz. */
 export const lineH=(ref:string,txt:string,fl?:number|null)=>'<tr><td class="r">'+String(ref).split(',').filter(r=>r.trim()).map(r=>'<a href="#szabalyok" data-ref="'+r.trim()+'">'+r.trim()+'</a>').join('')+'</td><td>'+txt+'</td><td class="f">'+(fl!=null?'<span class="fl f'+fl+'" title="'+FLT[fl]+'">'+FL[fl]+'</span>':'')+'</td></tr>';
+/** Nyitott kérdés (flag 2): a két értelmezés eredménye egymás mellett. */
+export const ALT2=(a:string,b:string)=>' <span class="cbalt"><b>1. értelmezés:</b> '+a+' <b>2. értelmezés:</b> '+b+'</span>';

@@ -7,7 +7,7 @@ import { interp, isPermC, timingOf } from '../actions';
 import { costCheck, costCondOf } from '../cost';
 import { plainOf } from '../text';
 import { zoneRefOf } from '../zones';
-import { RES, art, Art, WHO } from './labels';
+import { ALT2, RES, art, Art, WHO } from './labels';
 
 export function installBuild(X: EngineCtx) {
   X.itemOf=(s)=>{const c=s.c;const perm=s.k==='card'&&isPermC(c);
@@ -64,7 +64,7 @@ export function installBuild(X: EngineCtx) {
     /* Ezreal, Prodigal Explorer: "Use only if you've chosen enemy units and/or gear twice this turn with spells or unit abilities" (355.7: a választás célzás) */
     if(!illegal&&s.k==='ab'&&s.src&&X.O[s.src!]&&/use only if you've chosen enemy units and\/or gear twice this turn/i.test(X.O[s.src!].card!.txt||'')){const ch=X.CHOSE[s.pl!]||{items:0,objs:0};
       if(ch.items>=2)X.rows+=X.line('355.7','A feltétel ("Use only if you\'ve chosen enemy units and/or gear twice this turn with spells or unit abilities") teljesül: ebben a körben '+ch.items+' spell vagy unit ability választott enemy unitot vagy geart.',0);
-      else if(ch.objs>=2){X.rows+=X.line('355.7','<span class="cbuns">nyitott kérdés</span> A feltétel ("chosen ... twice"): egyetlen spell vagy ability választott '+ch.objs+' enemy célpontot. A Core Rules nem dönti el, hogy ez egy vagy két választásnak számít; az elemzés aktiválhatónak veszi (két választás). Ha egynek számít, az ability nem aktiválható.',2);}
+      else if(ch.objs>=2){X.rows+=X.line('355.7','<span class="cbuns">nyitott kérdés</span> A feltétel ("chosen ... twice"): egyetlen spell vagy ability választott '+ch.objs+' enemy célpontot. A Core Rules nem dönti el, hogy ez egy vagy két választásnak számít; az elemzés aktiválhatónak veszi (két választás).'+ALT2('két választás: az ability aktiválható, húzol 1-et.','egy választás: az ability nem aktiválható, a lépés nem szabályos.'),2);}
       else illegal='a feltétel ("Use only if you\'ve chosen enemy units and/or gear twice this turn with spells or unit abilities") nem teljesül: ebben a körben eddig '+ch.items+' spell vagy unit ability választott enemy unitot vagy geart';}
     // additional cost: kill
     const ck=s.k==='card'&&s.cost&&s.cost.kill;
