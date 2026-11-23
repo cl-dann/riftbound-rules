@@ -15,6 +15,8 @@ export type TargetParam = {
   here?: boolean; free?: boolean; base?: boolean; eq?: boolean; mighty?: boolean; another?: boolean;
   equipOnly?: boolean; attacking?: boolean; stunned?: boolean; any?: boolean; orAb?: boolean; chooseOnly?: boolean;
   cost?: CostCond | null; split?: boolean;
+  /** csak a régi felismerésben (withLegacyPhrases): feltétel-tagmondatbeli kifejezés, az új felismerés kihagyja */
+  cond?: boolean;
 };
 /** Feltétel ("If ..."): how = known, state, board, user, open, hidden; key a játékállapot kulcsa. */
 export type Cond = { t: string; how: string; why?: string; key?: string; from?: string; val?: unknown; refs?: string; zn?: string; tie?: boolean };
