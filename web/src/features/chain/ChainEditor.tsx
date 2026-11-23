@@ -12,7 +12,7 @@ import { hardBadge } from '../../domain/chain/hardExamples';
 import { IMGBASE } from '../../domain/data/store';
 import { type Glow, type PTarget, type PlayCtl, Playmat } from '../../shared/board/Playmat';
 import { CombatPanel } from './CombatPanel';
-import { type ChainFrame, type Legal, abilitiesFor, cardOf, fullFrame, hasHidden, insertAt, isPerm, plOf, setupFrame, sideOf, slotText, stepFrames, stepName, tryStep, zoneCands, zonePicks } from './chainBuild';
+import { BASIC_UNIT, addBasicTarget, handPlay, type ChainFrame, type Legal, abilitiesFor, cardOf, fullFrame, hasHidden, insertAt, isPerm, plOf, setupFrame, sideOf, slotText, stepFrames, stepName, tryStep, zoneCands, zonePicks } from './chainBuild';
 import { emit, openCard } from '../../shared/lib/events';
 import type { MItem, Menu, Mode, PickAt } from './types';
 import { Refs, imgOf } from './bits';
@@ -81,9 +81,10 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
   /* ---- CS írása ---- */
   const commit = (fn: (cs: ChainState) => void, j: number | 'keep' = 'keep', ms?: number) => { jump.current = j; chainActions().commit(fn, ms); };
   const close = () => { setMenu(null); setPick(null); setProps(null); };
-  const addStep = (st: ChainStep) => {
+  /** toHand: a kereséssel választott, pályán nem lévő lap előbb a lépés játékosának kezébe kerül, és onnan játssza ki (ugyanaz, mintha kézzel tette volna a kézbe) */
+  const addStep = (st: ChainStep, toHand = false) => {
     const j = ins == null ? CS.steps.length : Math.min(ins, CS.steps.length);
-    commit((cs) => { insertAt(cs, j, st); }, j, 0);
+    commit((cs) => { if (toHand) handPlay(cs, st); insertAt(cs, j, st); }, j, 0);
     close(); if (!narrow) setIns(null);
     const inf = stepInfo(getCS(), getCS().steps[j]);
     const hasT = !!inf?.list?.length;
@@ -119,6 +120,18 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
     const n = tInf.list.length;
     if (cur === v) return;
     if (ti + 1 < n) setMode({ k: 'target', j, ti: ti + 1 }); else if (n === 1) { afterTargets(j); setMsg('Célpont kiválasztva. Válaszolhatsz: kattints egy lapra vagy a Chain + gombjára.'); }
+  };
+
+  /** "Célpont hozzáadása": ha nincs legális célpont és unit kell, egy alap unit (Shipyard Skulker, szöveg nélküli unit) kerül a szükséges
+      oldalra és helyre, és ez lesz a célpont; a lap a "Csere másik lapra" menüponttal valós lapra írható át. */
+  const canAddTg = mode?.k === 'target' && !!tSlot && tSlot.type === 'unit' && !tOpts.some((o) => o.ok && !o.v.startsWith('x:'));
+  const addTarget = () => {
+    if (mode?.k !== 'target' || !tSlot) return;
+    const j = mode.j, ti = mode.ti; let r = { side: 'B', loc: 'bf0' };
+    commit((cs) => { r = addBasicTarget(cs, j, ti, tSlot); }, j, 0);
+    setMsg('Célpont hozzáadva: ' + BASIC_UNIT + ' (' + (r.side === 'A' ? 'saját' : 'ellenfél') + ', ' + locLabelOf(getCS(), r.loc) + '). A lapra kattintva valós lapra cserélheted.');
+    const n = tInf.list.length;
+    if (ti + 1 < n) setMode({ k: 'target', j, ti: ti + 1 }); else afterTargets(j);
   };
 
   /* ---- kéz, trash és deck lapjainak választása (355.9.a, 355.10.a, 355.18) ---- */
@@ -246,6 +259,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
       const b = CS.bd[k]; if (!b) return;
       showMenu({ key: uid + csv, title: instName(b.n, instNos(CS)[uid]), card: b.n, sub: (b.pl === 'A' ? 'saját' : 'ellenfél') + ', ' + locLabelOf(CS, b.loc) + ', kiinduló helyzet', items: [
         ...abItems(uid, b.pl), ...moveItems(uid, b.n), ...combatItem(b.loc, sideOf(b.pl)),
+        { label: 'Csere másik lapra', tone: 'energy', run: () => { setMenu(null); setPick({ kind: 'board', side: sideOf(b.pl), loc: b.loc, replace: k }); } },
         { label: 'Tulajdonságok (Might, damage, exhausted, stunned, buff, Empowered, csatolás)', tone: 'energy', run: () => { setMenu(null); setProps(k); } },
         { label: 'Eltávolítás', tone: 'del', run: () => { close(); jump.current = 'keep'; chainActions().delBd(k); } },
       ] });
@@ -258,7 +272,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
       ] });
     }
   };
-  const playItem = (st: ChainStep, label = 'Kijátszás'): MItem => ({ label, step: true, run: () => addStep(st), ...lg(tryStep(CS, st, ins ?? undefined)) });
+  const playItem = (st: ChainStep, label = 'Kijátszás', toHand = false): MItem => ({ label, step: true, run: () => addStep(st, toHand), ...lg(tryStep(CS, st, ins ?? undefined)) });
   const openHand = (side: 'me' | 'opp', hi0: number, n: string) => {
     const p = plOf(side); const hid = (f.board[side].zids?.hand || [])[hi0] || '';
     const c = cardOf(n); if (!c) return;
@@ -325,9 +339,10 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
     const at = pick!; const p = plOf(side);
     if (at.kind === 'play') {
       const c = cardOf(n);
-      addStep({ k: 'card', n, pl: p, from: 'hand', ...(isPerm(c) ? { loc: 'base' } : {}), tg: [], ext: {} });
+      addStep({ k: 'card', n, pl: p, from: 'hand', ...(isPerm(c) ? { loc: 'base' } : {}), tg: [], ext: {} }, true);
       return;
     }
+    if (at.kind === 'board' && at.replace != null) { const k = at.replace; commit((cs) => { if (cs.bd[k]) cs.bd[k].n = n; }); setPick(null); setMsg('Lecserélve: ' + n + '.'); return; }
     commit((cs) => {
       cs.hand = cs.hand || { A: [], B: [] }; cs.ch = cs.ch || { A: '', B: '' };
       if (at.kind === 'legend') cs.lg[p] = n;
@@ -490,7 +505,8 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
         <span className="note"> Kattints egy kiemelt lapra a pályán, vagy válassz itt:</span></div>
       <div className="cb2-chips">
         {tChips}
-        {!tOpts.length && <span className="note">Nincs választható lap a pályán ehhez a célponthoz. A Haladó szerkesztésben megadhatsz pályán kívüli célpontot.</span>}
+        {!tOpts.length && <span className="note">Nincs választható lap a pályán ehhez a célponthoz.{tSlot.type === 'spell' || tSlot.type === 'ability' ? ' Spell vagy ability célponthoz a chainen lévő elemek közül választhatsz; most nincs ilyen.' : ''}</span>}
+        {canAddTg && <button type="button" className="btn" onClick={addTarget}>Célpont hozzáadása</button>}
       </div>
       <div className="cb2-mbtn">
         {tInf.list.length > 1 && mode.ti > 0 && <button type="button" className="btn sec" onClick={() => setMode({ ...mode, ti: mode.ti - 1 })}>Előző célpont</button>}
@@ -547,7 +563,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
   const pickSt = (n: string, side: 'me' | 'opp') => { const c = cardOf(n); return { k: 'card', n, pl: plOf(side), from: 'hand', ...(isPerm(c) ? { loc: 'base' } : {}), tg: [], ext: {} }; };
   const wItems: MItem[] = !narrow || !wiz || wiz.st !== 'action' ? [] : wiz.preset
     ? [{ label: wiz.preset === 'res' ? 'Resolve: a chain teteje most lefut' : wiz.preset === 'next' ? 'Következő kör: a kör vége után a következő kör eleje a Main Phase-ig' : 'Kör vége: Ending Phase', ref: wiz.preset === 'res' ? '340.1' : wiz.preset === 'next' ? '315' : '317.1', step: true, run: () => addStep({ k: wiz.preset! }) }]
-    : wiz.pick ? [playItem(pickSt(wiz.pick, wiz.side), 'Kijátszás')] : (wiz.menu?.items || []);
+    : wiz.pick ? [playItem(pickSt(wiz.pick, wiz.side), 'Kijátszás (a lap a kézbe kerül, onnan)', true)] : (wiz.menu?.items || []);
   const WST = { card: 1, action: 2, target: 3, extra: 4 } as const;
   const wHead = (t: string) => (
     <div className="cb2-wh">
@@ -559,7 +575,7 @@ export function ChainEditor({ frames, csv }: { frames: ChainFrame[]; csv: number
   const wizSheet = !narrow || !wiz ? null : wiz.st === 'target' ? (
     <div className="cb2-wbar" role="status">
       {mode?.k === 'zpick' && zInfo ? <div className="cb2-wbt"><b>Válassz lapot ({zoneHu(zInfo.zr.z)})</b> <span>"{zInfo.t}"</span>{msg && <small>{msg}</small>}<div className="cb2-chips cb2-wch">{zChips}</div></div> :
-      <div className="cb2-wbt"><b>Válassz célpontot</b>{tSlot && mode?.k === 'target' && <span> {slotText(tSlot, mode.ti)}{tInf.list.length > 1 ? ' (' + (mode.ti + 1) + ' / ' + tInf.list.length + ')' : ''}</span>}{msg && <small>{msg}</small>}{tOpts.length > 0 && <div className="cb2-chips cb2-wch">{tChips}</div>}</div>}
+      <div className="cb2-wbt"><b>Válassz célpontot</b>{tSlot && mode?.k === 'target' && <span> {slotText(tSlot, mode.ti)}{tInf.list.length > 1 ? ' (' + (mode.ti + 1) + ' / ' + tInf.list.length + ')' : ''}</span>}{msg && <small>{msg}</small>}{tOpts.length > 0 && <div className="cb2-chips cb2-wch">{tChips}</div>}{canAddTg && <div className="cb2-chips cb2-wch"><button type="button" className="btn" onClick={addTarget}>Célpont hozzáadása</button></div>}</div>}
       <div className="cb2-wbb">
         <button type="button" className="btn sec" onClick={wizBack}>Vissza</button>
         <button type="button" className="btn sec" onClick={wizCancel}>Mégse</button>
