@@ -3,7 +3,7 @@ import type { ChainItem, EngineCtx } from './ctx';
 import type { Trigger } from '../types';
 import { esc } from '../../text/norm';
 import { costCheck, costCondOf, printedCost } from '../cost';
-import { triggersOf } from '../parser';
+import { phrasesTxt, triggersOf } from '../parser';
 import { stripRem } from '../text';
 import { Art, other, WHO } from './labels';
 
@@ -13,14 +13,20 @@ export function installTriggers(X: EngineCtx) {
     Object.keys(X.O).forEach(wid=>{const W=X.O[wid];if(!W.card||!(W.zone==='board'||W.zone==='legend'))return;
       (W.card.txt||'').split('\n').map(stripRem).forEach((l:string)=>{const l2=l.replace(/^once each turn,\s*/i,'');
         if(!/^(?:when|whenever)\b[^,]*\bdies?\b/i.test(l2)||/^when I die\b/i.test(l2))return;
-        const m=/^(?:when|whenever) (another|a|an) (?:non-([A-Za-z]+) )?(friendly |enemy )?units? (you control |an opponent controls )?dies,\s*(.*)$/i.exec(l2);
+        /* halálra figyelő trigger (383.2.c.2): "(another|a|an|one or more) (non-X) (stunned|buffed) (friendly|enemy) unit|gear (here) (at a battlefield) (you control|an opponent controls) dies (while I'm at a battlefield)" */
+        const m=/^(?:when|whenever) (one or more|another|a|an) (?:non-([A-Za-z]+) )?(stunned |buffed )?(friendly |enemy )?(units?|gear) (here )?(at a battlefield )?(you control |an opponent controls )?(?:dies|die)( while I'm at a battlefield)?,\s*(.*)$/i.exec(l2);
         if(!m){unk.add(W.name+': "'+l2+'"');return;}
-        died.forEach(did=>{const D=X.O[did];if(!D||D.type!=='unit')return;if(/another/i.test(m[1])&&did===wid)return;
+        if(m[9]&&!(W.zone==='board'&&W.loc&&W.loc!=='base'))return;
+        const many=/one or more/i.test(m[1]);const gear=/gear/i.test(m[5]);let fired=false;
+        died.forEach(did=>{const D=X.O[did];if(!D||D.type!==(gear?'gear':'unit'))return;if(/another/i.test(m[1])&&did===wid)return;if(many&&fired)return;
           if(m[2]&&((D.card&&(D.card.n+' '+(D.card.tg||[]).join(' ')).toLowerCase().includes(m[2].toLowerCase()))))return;
-          const dc=(D.lk&&D.lk.ctrl)||D.own;const fr=/friendly/i.test(m[3]||'')||/you control/i.test(m[4]||'');const en=/enemy/i.test(m[3]||'')||/opponent/i.test(m[4]||'');
-          if(fr&&dc!==W.ctrl)return;if(en&&dc===W.ctrl)return;
-          X.pushTrig({kind:'auto',label:W.name+' triggere ('+D.name+' meghalt)',name:W.name+' triggere',src:wid,pl:W.ctrl!,eff:m[5],why:'"'+l2.split(',')[0]+'"',list:[],tg:[]});
-          X.rr+=X.line('383, 383.2.c.2','<b>'+esc(W.name)+'</b> triggerel, mert '+esc(D.name)+' meghalt, és '+esc(W.name)+' a boardon maradt.',0);X.story.push(Art(W.name)+' triggerel, mert '+D.name+' meghalt.');});});});
+          const dc=(D.lk&&D.lk.ctrl)||D.own;const fr=/friendly/i.test(m[4]||'')||/you control/i.test(m[8]||'');const en=/enemy/i.test(m[4]||'')||/opponent/i.test(m[8]||'');
+          if(fr&&dc!==W.ctrl)return;if(en&&dc===W.ctrl)return;const dl=D.lk&&D.lk.loc;const lx=X.LKX[did]||{st:false,bu:false};
+          if(m[6]&&!(W.zone==='board'&&dl===W.loc))return;if(m[7]&&!(dl&&dl!=='base'))return;
+          if(/stunned/i.test(m[3]||'')&&!lx.st)return;if(/buffed/i.test(m[3]||'')&&!lx.bu)return;
+          fired=true;const lab=many?'egy vagy több unit meghalt':D.name+' meghalt';
+          const tri:ChainItem={kind:'auto',label:W.name+' triggere ('+lab+')',name:W.name+' triggere',src:wid,pl:W.ctrl!,eff:m[10],why:'"'+l2.split(',')[0]+'"',list:phrasesTxt(m[10]),tg:[],...(gear?{pre:[did]}:{})};const tt=X.autoTg(tri);X.pushTrig(tri);
+          X.rr+=X.line('383, 383.2.c.2','<b>'+esc(W.name)+'</b> triggerel, mert '+esc(many?'egy vagy több unit':D.name)+' meghalt'+(m[6]?' itt':'')+(m[3]?' ('+m[3].trim()+' volt, utolsó ismert állapot)':'')+', és '+esc(W.name)+' a boardon maradt.'+(many?' Egyszerre több halál egyetlen triggert ad ("one or more").':'')+(tt?' Célpont (403.4.b): '+tt:''),0);X.story.push(Art(W.name)+' triggerel, mert '+(many?'egységek haltak meg':D.name+' meghalt')+'.');});});});
     unk.forEach(u=>{X.rr+=X.line('383','<span class="cbuns">nem követett</span> Halálra figyelő trigger, amelyet az elemzés nem ismer fel: '+esc(u)+'. Ha teljesül, vedd fel kézzel ("Trigger a chainre").',1);});};
   X.flushPend=(target)=>{X.deathWatch();if(!X.PEND.length)return;const list=X.PEND.splice(0);
     const byP=(p:string)=>list.filter((t)=>(t.pl||'A')===p);const ordered=byP(X.TP).concat(byP(other(X.TP)));
