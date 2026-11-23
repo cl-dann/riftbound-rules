@@ -1,4 +1,5 @@
 /* Egy művelet végrehajtása egy célponton (applyTo) (a runChain() csoportja, S20) */
+import { COPY_EQUIP } from '../steps';
 import type { EngineCtx, ReadyInfo } from './ctx';
 import { esc } from '../../text/norm';
 import { triggersOf } from '../parser';
@@ -73,7 +74,8 @@ export function installExecute(X: EngineCtx) {
       const G=X.O[gear],U=X.O[unit];if(!G||!U||G.type!=='gear'||U.type!=='unit'||!X.onB(gear)||!X.onB(unit)){parts.push('A csatolás nem hajtható végre.');return 'neg';}
       if(!(G.card&&(G.card.tg||[]).includes('Equipment'))){parts.push(esc(G.name)+' nem Equipment, ezért nem csatolódik.');return 'neg';}
       if(G.on===unit){parts.push(esc(G.name)+' már ezen a uniton van, a csatolásnak nincs hatása (435.1.g, 435.1.i); az elemzés ezt Negated-nek veszi (levezetés, a 416.1.b és 415.1.b mintájára).');refs.push('435.1.g','435.1.i');it.flL=true;return 'neg';}
-      G.on=unit;G.loc=U.loc;X.EV.push({k:'attach',id:gear,name:G.name,to:unit});parts.push('Felcsatolva: '+esc(G.name)+' → '+esc(U.name)+', a unit megkapja a Might bónuszát'+(G.card.eff?' és Effect Textjét':'')+' (435.1.c, 435.1.d).');refs.push('435','435.4');X.story.push(Art(G.name)+' felcsatolódik '+art(U.name)+' lapra.');return;}
+      G.on=unit;G.loc=U.loc;X.EV.push({k:'attach',id:gear,name:G.name,to:unit});parts.push('Felcsatolva: '+esc(G.name)+' → '+esc(U.name)+', a unit megkapja a Might bónuszát'+(G.card.eff?' és Effect Textjét':'')+' (435.1.c, 435.1.d).');refs.push('435','435.4');X.story.push(Art(G.name)+' felcsatolódik '+art(U.name)+' lapra.');
+      if(COPY_EQUIP.test(G.card.txt||''))X.equipCopy(G,U,it.tg[1],it.pl,parts,refs);return;}
     case 'detach':{const gs=ob.type==='gear'?[ob]:Object.values(X.O).filter((g)=>g.on===v&&g.zone==='board');if(!gs.length){parts.push(esc(ob.name)+': nincs leválasztható gear (436.1.a.1).');refs.push('436.1.a.1');return 'neg';}
       const g=gs[0];const top=X.O[g.on!];if(!top){parts.push(esc(g.name)+' nincs csatolva (436.1.a.1).');refs.push('436.1.a.1');return 'neg';}g.on=null;g.loc=top.loc;X.DET.add(g.id);X.EV.push({k:'detach',id:g.id,name:g.name,from:top.id});
       parts.push(esc(g.name)+' leválik '+esc(top.name)+' lapról, a helye '+esc(X.locLabel(g.loc))+' (436.4)'+(g.loc!=='base'?'; battlefielden csatolatlan gear a következő cleanupban recall-olódik (436.4.a)':'')+'.');refs.push('436.4');X.story.push(Art(g.name)+' leválik '+art(top.name)+' lapról.');return;}
