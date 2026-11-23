@@ -78,11 +78,10 @@ test('Chain: combat panel', async ({ page }) => {
   await page.locator('.pm-unit[data-uid="b0"]').first().click();
   await menuBtn(page, 'Combat ezen a battlefielden').click();
   await expect(page.locator('#cb-combat')).toHaveAttribute('open', '');
-  // determinisztikus nézet: a keskeny nézet lépés-paneljei bezárva, a combat panel teteje a nézet tetején
+  // csak a combat panel képe: a teljes oldal görgetési helyzete és a pálya animációi a CI-ban futásonként eltértek
   await expect(page.locator('.cb2-sheet')).toHaveCount(0);
-  await page.locator('#cb-combat').evaluate((el) => el.scrollIntoView({ block: 'start' }));
-  await page.waitForTimeout(300);
-  await shot(page, 'chain-combat');
+  await page.evaluate(() => document.fonts.ready);
+  await expect(page.locator('#cb-combat')).toHaveScreenshot('chain-combat.png', { animations: 'disabled', caret: 'hide', maxDiffPixelRatio: 0.002 });
 });
 
 test('Practice: kiértékelés', async ({ page }) => {
