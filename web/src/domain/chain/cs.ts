@@ -30,17 +30,17 @@ export function tgOptionsOf(CS:ChainState,j:number,p:TargetParam){
   return o;
 }
 /** Játékállapot mezők, amelyekre a mostani lapok feltételei hivatkoznak. */
-export function stateKeysOf(CS:ChainState){const k=new Set<string>();const addTxt=(t:string)=>{if(/\[Level \d+\]|\bXP\b/.test(t))k.add('xp');if(/Victory Score|\bscore\b|\byour points\b/i.test(t))k.add('score');if(/\bLegion\b|you've played/i.test(t)){k.add('played');k.add('playedT');}if(/\bcontrol \d+ or (?:fewer|more) runes|exactly \d+ runes/i.test(t))k.add('runes');if(/Rune Deck|couldn't channel|you can't/i.test(t))k.add('runeDeck');if(/you spent/i.test(t))k.add('spent');if(/died this turn/i.test(t))k.add('diedT');};
+export function stateKeysOf(CS:ChainState){const k=new Set<string>();const addTxt=(t:string)=>{if(/\bspells banished with me\b/i.test(t))k.add('jhinBan');if(/\[Level \d+\]|\bXP\b/.test(t))k.add('xp');if(/Victory Score|\bscore\b|\byour points\b/i.test(t))k.add('score');if(/\bLegion\b|you've played/i.test(t)){k.add('played');k.add('playedT');}if(/\bcontrol \d+ or (?:fewer|more) runes|exactly \d+ runes/i.test(t))k.add('runes');if(/Rune Deck|couldn't channel|you can't/i.test(t))k.add('runeDeck');if(/you spent/i.test(t))k.add('spent');if(/died this turn/i.test(t))k.add('diedT');};
   CS.steps.forEach(s=>{const inf=stepInfo(CS,s);if(inf&&inf.c)addTxt(inf.c.txt||'');});CS.bd.forEach(b=>{const c=vsCard(b.n);if(c)addTxt(c.txt||'');});['A','B'].forEach(p=>{const c=vsCard(CS.lg[p]);if(c)addTxt(c.txt||'');});return [...k];}
 /** Kéz, trash és deck lapjai állandó azonosítóval ({id, n}). A régi, névlistás forma (sorszámos "zhA0" hivatkozásokkal) betöltéskor ugyanazt az
     azonosítót kapja, amit az elemző sorszámból képezett, így a régi linkek és sablonok elemzése nem változik. Az új lapok "_" utáni sorszámot kapnak, ez soha nem ismétlődik. */
-const ZK:Record<string,string>={hand:'h',trash:'t',deck:'d'};
+const ZK:Record<string,string>={hand:'h',trash:'t',deck:'d',runeDeck:'r',runePool:'p'};
 /** Régi lépések célpontjai: a feltétel-tagmondat kifejezése ("if an enemy unit has died", "if you have exactly two units there") korábban
     célpont-helyet kapott. Ha a lépés tg tömbje hosszabb az új listánál, a régi lista feltétel-helyeit kihagyva íródik át, így a régi #c= linkek
     célpontjai ugyanarra a kifejezésre mutatnak. Új lépésnél (tg legfeljebb az új lista hossza) nem változtat. */
 export function migrateTg(cs:ChainState){cs.steps.forEach(s=>{if(!s.tg||!s.tg.length)return;const inf=stepInfo(cs,s);if(!inf||s.tg.length<=inf.list.length)return;
   const old=withLegacyPhrases(()=>stepInfo(cs,s));if(!old||old.list.length!==s.tg.length||!old.list.some(p=>p.cond))return;s.tg=s.tg.filter((_,i)=>!old.list[i].cond);});}
-export function normZones<T extends ChainState|null|undefined>(cs:T):T{if(!cs)return cs;migrateTg(cs);(['hand','trash','deck'] as const).forEach(z=>{const zs=cs[z];if(!zs)return;(['A','B'] as const).forEach(p=>{zs[p]=(zs[p]||[]).map((e,i)=>typeof e==='string'?{id:'z'+ZK[z]+p+i,n:e}:e&&!e.id?Object.assign({},e,{id:'z'+ZK[z]+p+i}):e);});});return cs;}
+export function normZones<T extends ChainState|null|undefined>(cs:T):T{if(!cs)return cs;migrateTg(cs);(['hand','trash','deck','runeDeck','runePool'] as const).forEach(z=>{const zs=cs[z];if(!zs)return;(['A','B'] as const).forEach(p=>{zs[p]=(zs[p]||[]).map((e,i)=>typeof e==='string'?{id:'z'+ZK[z]+p+i,n:e}:e&&!e.id?Object.assign({},e,{id:'z'+ZK[z]+p+i}):e);});});return cs;}
 export function newZid(cs:ChainState,z:string,p:string){cs.zseq=(cs.zseq||0)+1;return 'z'+ZK[z]+p+'_'+cs.zseq;}
 
 /** Lépések törlése és átrendezése: az "sK" hivatkozásokat (célpont, költség, forrás) az új indexre írja át; a törölt vagy mögé került lépésre mutató hivatkozás törlődik. */

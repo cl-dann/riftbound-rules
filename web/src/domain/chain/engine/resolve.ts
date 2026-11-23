@@ -5,6 +5,7 @@ import { esc } from '../../text/norm';
 import { OV_LBL, OV_N, interp } from '../actions';
 import { printedCost } from '../cost';
 import { numOf, phrasesTxt } from '../parser';
+import { stripRem as stripRemT } from '../text';
 import { INS_ST, RES, art, Art, other, WHO } from './labels';
 
 /** A következő körre szóló késleltetett hatás ("at the start of your next Main Phase", "until your next Ending Phase"). */
@@ -50,7 +51,7 @@ export function installResolve(X: EngineCtx) {
       if(zm&&it.zLastT){cd.from='zone2';cd.zn=it.zLastN+' ('+it.zLastT+')';return it.zLastT===(zm[1]||zm[2]).toLowerCase();}
       /* "if it had N [S] or less": a célpont utolsó ismert Mightja, visszatekintéssel (359.3.e.13) */
       if((m=/^it had (\d+) \[S\] or less$/i.exec(cd.t))&&tv&&X.O[tv]){const T=X.O[tv];const mt=T.zone!=='board'&&T.lk&&T.lk.m!=null?T.lk.m:X.mightOf(tv);if(mt!=null){cd.from='lk';cd.zn=T.name+' utolsó ismert Mightja '+mt+' (visszatekintés, 359.3.e.13)';return mt<=+m[1];}}
-      if(/^there are four spells banished with me$/i.test(cd.t)&&it.src){const n=Object.values(X.O).filter((o)=>o.banWith===it.src&&o.zone==='banish'&&o.card&&o.card.t==='Spell').length;cd.from='zone2';cd.zn='ebben a helyzetben '+n+' spell banishelve vele; a korábban banisheltek builderen kívüli előzmény, feltételezés: 0';return n>=4;}
+      if(/^there are four spells banished with me$/i.test(cd.t)&&it.src){const n=Object.values(X.O).filter((o)=>o.banWith===it.src&&o.zone==='banish'&&o.card&&o.card.t==='Spell').length;const pre=+X.PSv(it.pl,'jhinBan')||0;cd.from='zone2';cd.zn='ebben a helyzetben '+n+' spell banishelve vele, korábban '+pre+' (a Játékállapotban megadott feltételezés, alap 0)';return n+pre>=4;}
       if(/^you revealed a Bird\b/i.test(cd.t)&&X.ZC&&it.zLook){const ob=it.zRev?X.O[it.zRev]:null;cd.from='zone2';cd.zn=ob?ob.name+(ob.card&&(ob.card.tg||[]).length?' ('+(ob.card.tg||[]).join(', ')+')':''):'nem fedett fel lapot';return !!(ob&&ob.card)&&['Bird','Cat','Dog','Poro'].some((t)=>(ob.card!.tg||[]).includes(t));}
       if(/^it has that type$/i.test(cd.t)&&it.zGuess&&it.zTop&&X.O[it.zTop]){const t=String(X.O[it.zTop].card!.t).toLowerCase();cd.from='zone2';cd.zn='tipp: '+it.zGuess+', felfedve: '+X.O[it.zTop].name+' ('+t+')';return t===it.zGuess;}
       if((m=/^you have exactly (\d+) cards in hand and exactly (\d+) units at battlefields$/i.exec(cd.t))&&X.ZC){const h=X.zoneIds('hand',it.pl).length;const u=Object.values(X.O).filter((o)=>o.zone==='board'&&o.type==='unit'&&o.ctrl===it.pl&&o.loc&&o.loc!=='base').length;cd.from='zone2';cd.zn='kéz: '+h+' lap (a pályás építőben megadott kéz, 128.4), battlefielden: '+u+' unit';return h===+m[1]&&u===+m[2];}
@@ -89,6 +90,14 @@ export function installResolve(X: EngineCtx) {
     if(legalT.length>T)refs0.push('355.14.h','355.14.h.1');
     legalT.forEach((ti:number)=>{const v=X.it0!.tg[ti];if(!asg[ti]){X.parts0.push(esc(X.O[v].name)+' nem kap damage-et, kiesik a célpontok közül (355.14.h).');return;}const d=X.dealDmg(v,asg[ti],X.parts0,refs0);if(d>0){X.it0!.hit=(X.it0!.hit||[]).concat([v]);X.story.push(Art(X.it0!.name||X.it0!.label)+' '+d+' damage-et oszt '+art(X.O[v].name)+' lapra (osztott damage).');}});
     refs0.forEach(r=>X.refs1.push(r));x.st=legalT.length<x.tis.filter((ti:number)=>X.it0!.tg[ti]).length?'partial':'executed';x.ref='355.14';x.why=x.st==='partial'?'csak a legális célpontokra':'';};
+  /** "Do one of the following based on ...": a lap felsorolt pontjai ("* [R] ...", "* Spell ...") az utasítás után kerülnek, és csak a döntő érték szerinti pont hajtódik végre (a lap szövege, 388.1.b). */
+  X.expandBased=(it,INS)=>{const xi=INS.findIndex((x)=>/\bbased on\b/i.test(x.t)&&x.act.field&&x.act.field.type==='sel');if(xi<0||xi!==INS.length-1)return;
+    const card=(it.kind==='step'&&it.s&&it.s.c)||(it.src&&X.O[it.src]?X.O[it.src].card:null)||it.fxCard;if(!card)return;
+    const bl=(card.txt||'').split('\n').map((l:string)=>/^\*\s*(\[[A-Z]\]|[A-Za-z]+)\s*[\u2014\u2013-]\s*(.+)$/.exec(l.trim())).filter((m):m is RegExpExecArray=>!!m);if(!bl.length)return;
+    it.list=(it.list||[]).slice();it.tg=(it.tg||[]).slice();const add:Instr[]=[];
+    bl.forEach((m)=>{const key=m[1].replace(/[[\]]/g,'').toLowerCase();const eff=stripRemT(m[2]).replace(/ and (\d+) to all other enemy units here\./i,'. Deal $1 to all other enemy units here.');const L=phrasesTxt(eff);const base=it.list.length;
+      interp({},{eff,list:L,c:card}).forEach((y)=>{y.tis=y.tis.map((t:number)=>t+base);y.basedOn={xi,key};add.push(y);});it.list=it.list.concat(L);L.forEach(()=>it.tg.push(''));});
+    INS.splice(xi+1,0,...add);};
   X.resolveItem=(it)=>{const rec0=X.REC!.length;const all0=X.ALL.length;const ir0=X.INRES;X.INRES=true;try{X.resolveItem0(it);}finally{X.INRES=ir0;
       /* az elem saját sora kerüljön előre a "Mi változott?" listában, utána a közben történt mellékhatások (leválás, kontroll) */
       if(X.REC!.length>rec0+1&&X.ALL.length>all0+1){const a=X.REC!.pop()!;X.REC!.splice(rec0,0,a);const b=X.ALL.pop()!;X.ALL.splice(all0,0,b);}}};
@@ -102,6 +111,7 @@ export function installResolve(X: EngineCtx) {
     if(it.endTrig&&it.src&&X.O[it.src!]&&!['board','legend'].includes(X.O[it.src!].zone)){t+='A forrás már nincs a boardon, de a trigger feltétele a triggereléskor teljesült, ezért a trigger lefut (383.2.a.1). ';refs.push('383.2.a.1');}
     if(it.kind==='step'&&s.k==='ab'&&it.src&&X.O[it.src!]&&!['board','legend'].includes(X.O[it.src!].zone)){t+='Az ability forrása már nincs a boardon, de az ability ettől még lefut (355.9.c). ';fl=1;}
     const INS=it.kind==='step'?interp(s,s):interp({},{eff:it.eff,list:it.list&&it.list.length?it.list:phrasesTxt(it.eff||''),c:(it.src&&X.O[it.src!]?X.O[it.src!].card:it.fxCard||null) as CardLike});X.MAN=INS.some((x)=>x.manual);if(it.pre&&it.pre.length&&INS[0])INS[0].lk=true;
+    X.expandBased(it,INS);
     const parts:string[]=[];const tgOut:string[]=[];const mtT:MtTarget[]=[];let lastT:Pick<Instr,'tis'|'st'|'act'|'t'>|null=null;if(it.pre&&it.pre.length){const base=(it.tg||[]).length;it.tg=(it.tg||[]).concat(it.pre);it.list=(it.list||[]).concat(it.pre.map((v:string)=>({type:X.O[v]?X.O[v].type:'unit',rel:'any',max:null,bf:false,opt:true,pre:true} as TargetParam)));it.pre.forEach((_,i)=>{tgOut[base+i]='ok';});lastT={tis:it.pre.map((_,i)=>base+i),st:'executed',act:{k:'pre'},t:'(a delayed hatás létrehozásakor megjelölt célpont)'};}X.it0=it;X.parts0=parts;X.refs1=refs;X.tgOut0=tgOut;X.mtT0=mtT;
     const R:ResolveRun={it,s,perm,self,srcName,INS,parts,refs,tgOut,mtT,t,fl,legal:0,tot:0,lastT};
     X.resolveSubsets(R);

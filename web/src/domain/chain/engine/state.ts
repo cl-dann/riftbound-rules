@@ -15,8 +15,17 @@ export function installState(X: EngineCtx) {
   X.evSum=(k,p)=>X.EV.filter((e)=>e.k===k&&e.pl===p).reduce((a:number,e)=>a+(e.n||0),0);
   X.xpOf=(p)=>+X.PSv(p,'xp')+X.evSum('xp',p);
   X.scoreOf=(p)=>+X.PSv(p,'score')+X.evSum('score',p);
-  X.runesOf=(p)=>+X.PSv(p,'runes')+X.evSum('channel',p);
-  X.runeDeckOf=(p)=>Math.max(0,+X.PSv(p,'runeDeck')-X.evSum('channel',p));
+  X.runesOf=(p)=>X.RPK&&X.RPK[p]?X.poolIds(p).length:+X.PSv(p,'runes')+X.evSum('channel',p);
+  X.runeDeckOf=(p)=>X.RDK&&X.RDK[p]?X.zoneIds('runedeck',p).length:Math.max(0,+X.PSv(p,'runeDeck')-X.evSum('channel',p));
+  X.poolIds=(p)=>Object.keys(X.O).filter((id)=>X.O[id].zone==='runes'&&X.O[id].own===p);
+  /** Channel (431.1): a megadott Rune Deck felső lapjai a poolba kerülnek (exhausted, ha a szöveg így mondja); megadott pool és ismeretlen Rune Deck mellett ismeretlen domainű rune kerül a poolba. A mondatot adja vissza. */
+  X.channelRunes=(p,n,ex)=>{if(!(X.RDK[p]||X.RPK[p])||n<=0)return '';const got:string[]=[];
+    if(X.RDK[p]){X.zoneIds('runedeck',p).slice(0,n).forEach((id)=>{const o=X.O[id];o.zone='runes';o.ex=ex;o.gen=(o.gen||0)+1;got.push(o.name);});}
+    else for(let i=0;i<n;i++){const id='zrx'+p+'_'+(++X.RSEQ);X.O[id]={id,name:'Rune',card:{n:'Rune',t:'Rune'},own:p,ctrl:p,zone:'runes',type:'zc',ord:900+X.RSEQ,gen:0,ex};got.push('rune');}
+    if(!X.RPK[p])return got.length?' A Rune Deck felső lapjai: '+got.join(', ')+'.':'';
+    return got.length?' A poolba kerül: '+got.join(', ')+(ex?' (exhausted)':'')+(X.RDK[p]?'':'; a Rune Deck tartalma nincs megadva, ezért a domain ismeretlen')+'.':' A Rune Deck üres, nincs mit channelölni.';};
+  /** Recycle (417): a rune-ok a Rune Deck aljára kerülnek. */
+  X.recycleRunes=(ids)=>{ids.forEach((id)=>{const o=X.O[id];if(!o)return;o.zone='runedeck';o.ex=false;o.ord=900+(++X.RSEQ);o.gen=(o.gen||0)+1;X.EV.push({k:'zcard',id,name:o.name,to:'runedeck'});});};
   X.playedBefore=(p,j)=>{const out=new Set<string>();X.MAIN.forEach((t)=>{if(t.k==='card'&&t.j<j&&t.pl===p&&!t.illegal&&t.c){const tok=/token/i.test((t.c.st||[]).join(' '));out.add((tok?'token':'')+t.c.t.toLowerCase());}});
     String(X.PSv(p,'playedT')||'').split(',').filter(Boolean).forEach((x:string)=>out.add(x));return out;};
   X.enterReady=(c,pl,accel,loc?,erd?,selfId?,addc?)=>{const out:ReadyInfo={ready:false,why:'',note:''};if(!c||c.t!=='Unit')return out;
