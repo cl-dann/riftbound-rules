@@ -103,6 +103,8 @@ describe('2. kör: copy effectek (446.1, 446.3, 479.1.b, 479.1.b.1, 479.1.c)', (
     const eq = { k: 'ab', src: 'b0', ai: 0, pl: 'A', n: 'Shady Spectacles', tg: ['b1', 'b2'] };
     const x = run(cs({ turn: 'A', bd, steps: [eq, { k: 'res' }] }));
     expect(x.o('b1')).toMatchObject({ name: 'Mountain Drake (Shipyard Skulker, másolat)', m: 10 });
+    expect(x.text).toMatch(/nyitott kérdés.*Shady Spectacles választása.*judge dönt/);
+    expect(x.r.rows.find((r: any) => /Shady Spectacles választása/.test(r.join(' ')))!.join(' ')).toMatch(/f2|nyitott/);
     expect(x.o('b0').on).toBe('b1');
     const y = run(cs({ turn: 'A', bd, steps: [eq, { k: 'res' }, { k: 'card', n: 'Vengeance', pl: 'A', tg: ['b1'] }, { k: 'res' }] }));
     expect(y.o('b1')).toMatchObject({ name: 'Shipyard Skulker', zone: 'trash', m: 3 });

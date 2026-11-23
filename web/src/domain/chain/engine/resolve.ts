@@ -168,5 +168,5 @@ export function installResolve(X: EngineCtx) {
     if(it.kind==='step'&&s&&s.k==='card'&&s.c.t==='Spell'){const pt=X.playTrigs(s);pt.forEach((tr)=>X.pushTrig(tr));if(pt.length){parts.push('A kijátszás most fejeződött be a resolve-val, ezért triggerel: '+pt.map((tr)=>esc(tr.label)).join(', ')+' (420.4.a; akkor is, ha egyik utasítás sem hajtódott végre, 359.3.e.10).');refs.push('420.4.a');}}
     const res=(R.tot&&!R.legal)?'fizzle':(R.tot&&R.legal<R.tot)?'partial':'ok';
     X.done.push({name:it.label,pl:it.pl,res});X.out.items.push({name:it.label,res,instr:INS.map((x)=>({t:x.t,k:x.act.k,st:x.st,ref:x.ref,lk:x.lk})),targets:mtT});
-    if(it.flL)R.fl=Math.max(R.fl,1);X.rr+=X.line(refs.join(','),R.t+parts.join(' '),R.fl);X.MAN=false;};
+    if(it.flL)R.fl=Math.max(R.fl,1);if(it.fl2)R.fl=2;X.rr+=X.line(refs.join(','),R.t+parts.join(' '),R.fl);X.MAN=false;};
 }

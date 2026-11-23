@@ -43,7 +43,7 @@ export type ChainItem = {
   pays?: unknown; may?: boolean; isTg?: boolean; isTr?: boolean; evPlay?: number; ev0?: number; soM?: number | null; soName?: string;
   notedLoc?: string | null; why?: string; sent?: boolean; lk?: { loc?: string }; trigBy?: CardLike; trigId?: string; fxCard?: CardLike; selfObj?: string; dk?: boolean;
   zpGen?: Record<string, number>; rdBefore?: number; dropT?: Set<number>; prot758?: string[]; pre?: string[]; lkMight?: number | null;
-  hit?: string[]; flL?: boolean; mp?: Record<string, string>; raiseBase?: string | null; paid?: boolean; kwSrc?: string | null; endTrig?: boolean;
+  hit?: string[]; flL?: boolean; fl2?: boolean; mp?: Record<string, string>; raiseBase?: string | null; paid?: boolean; kwSrc?: string | null; endTrig?: boolean;
   coNote?: string; zAmongCard?: string | null; zRunes?: number | null; zRev?: string; zLastT?: string; zLastN?: string; zGuess?: string; zBurn?: string[]; zAmongDone?: boolean; zTop?: string; zLook?: string[]; zEach?: Record<string, string>;
   zEachTop?: Record<string, string>; zDisc?: string; zDivine?: boolean; zKeep?: Set<string>; dl?: boolean;
 };
