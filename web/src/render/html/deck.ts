@@ -3,6 +3,7 @@ import { DECK, checkDeck } from '../../domain/deck/legality';
 import { esc } from '../../domain/text/norm';
 import type { Card } from '../../domain/data/schema';
 import type { CardRow } from '../../domain/deck/types';
+import { refHash } from '../../domain/rules/refs';
 export function curveHTML(){
   const M=DECK.filter(s=>/main|champion/i.test(s.name)).flatMap(s=>s.rows.filter((r):r is CardRow=>!!r.card&&['Unit','Gear','Spell'].includes(r.card.t)));
   if(!M.length)return '';
@@ -23,7 +24,7 @@ export function curveHTML(){
 export function legalityHTML(){
   const c=checkDeck();if(!c.length)return '';
   const bad=c.filter(x=>x[0]===false).length;
-  return '<h3>Deck legalitás (Core Rules 103)<span class="n">'+(bad?bad+' hiba':'nincs hiba')+'</span></h3><ul class="chk-list">'+c.map(x=>'<li><span class="st '+(x[0]===null?'inf':x[0]?'ok':'bad')+'">'+(x[0]===null?'INFO':x[0]?'OK':'HIBA')+'</span><span>'+(x[1]?'<a href="#szabalyok" data-ref="'+x[1]+'" style="font-family:var(--f-mono);font-size:12px">'+x[1]+'</a> ':'')+esc(x[2])+'</span></li>').join('')+'</ul>';
+  return '<h3>Deck legalitás (Core Rules 103)<span class="n">'+(bad?bad+' hiba':'nincs hiba')+'</span></h3><ul class="chk-list">'+c.map(x=>'<li><span class="st '+(x[0]===null?'inf':x[0]?'ok':'bad')+'">'+(x[0]===null?'INFO':x[0]?'OK':'HIBA')+'</span><span>'+(x[1]?'<a href="'+refHash(x[1])+'" data-ref="'+x[1]+'" style="font-family:var(--f-mono);font-size:12px">'+x[1]+'</a> ':'')+esc(x[2])+'</span></li>').join('')+'</ul>';
 }
 /** [esemény, szabályszám, kiváltó minta (null: lap típus szerint), reagáló minta] */
 export const EVENTS:[string,string,RegExp|null,RegExp][]=[
@@ -52,7 +53,7 @@ export function interactionHTML(){
   EVENTS.forEach(e=>{
     const prod=cards.filter(c=>e[2]===null?(e[0].startsWith('Spell')?c.t==='Spell':c.t==='Gear'):e[2].test(c.txt||''));
     const cons=cards.filter(c=>e[3].test(c.txt||''));
-    if(cons.length&&(prod.length||/^(Conquer|Hold)$/.test(e[0])))rows.push('<tr><td><a href="#szabalyok" data-ref="'+e[1]+'" style="font-family:var(--f-mono);font-size:12px;font-weight:400">'+e[1]+'</a> '+e[0]+'</td><td>'+(prod.length?prod.map(c=>esc(c.n)).join(', '):'<span class="rem">a battlefield megszerzése</span>')+'</td><td>'+cons.map(c=>esc(c.n)).join(', ')+'</td></tr>');
+    if(cons.length&&(prod.length||/^(Conquer|Hold)$/.test(e[0])))rows.push('<tr><td><a href="'+refHash(e[1])+'" data-ref="'+e[1]+'" style="font-family:var(--f-mono);font-size:12px;font-weight:400">'+e[1]+'</a> '+e[0]+'</td><td>'+(prod.length?prod.map(c=>esc(c.n)).join(', '):'<span class="rem">a battlefield megszerzése</span>')+'</td><td>'+cons.map(c=>esc(c.n)).join(', ')+'</td></tr>');
   });
   if(!rows.length)return '';
   return '<h3>Interakciós térkép<span class="n">automatikus, szövegminta alapján</span></h3><div class="ntwrap"><table class="im"><tr><th>Esemény</th><th>Ezek a lapok váltják ki</th><th>Ezek a lapok reagálnak rá</th></tr>'+rows.join('')+'</table></div><p class="note">A térkép azt mutatja, mely lapok szövege hoz létre és melyeké figyel egy eseményt. A pontos feltételeket a lapok saját magyarázata és a hivatkozott szabály adja.</p>';

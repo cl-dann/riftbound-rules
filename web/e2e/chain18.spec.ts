@@ -14,8 +14,10 @@ for (const w of [1300, 390]) {
     await ex.locator('summary').click();
     await ex.getByRole('button', { name: 'Betöltés' }).click();
     const out = page.locator('#cb-out');
-    await expect(out.locator('.cbch')).toContainText('Banish: Noxus Hopeful (a te választásod)');
-    await expect(out.locator('.cbsteps').first()).toBeAttached();
+    const steps = out.locator('.cbsteps').first();
+    await expect(steps).toContainText('Banish: Noxus Hopeful (a te választásod)');
+    await expect(steps.locator('.cbcost')).toHaveText('Költség: 4 - 2 (Legion) - 2 (Void Rush) = 0 Energy.');
+    await expect(out.locator('.cberr').first()).toHaveText('(errata szöveg szerint)');
     await expect(out.locator('details.cbdet').first()).not.toHaveAttribute('open', '');
     await expect(out.locator('.cbr a').first()).toHaveAttribute('href', /^#r-\d/);
     // a lépés választója
@@ -26,7 +28,8 @@ for (const w of [1300, 390]) {
     await expect(out).toContainText('Noxus Hopeful a kézbe kerül');
     await expect(out).toContainText('Falling Star spell a chainre kerül');
     await expect(out).toContainText('Falling Star (kijátszás hatásból) resolve-ol');
-    await expect(out.locator('.cbch').first()).toContainText('Banish: Falling Star (a te választásod)');
+    await expect(out.locator('.cbsteps').first()).toContainText('Banish: Falling Star (a te választásod)');
+    await expect(out.locator('.cbsteps').first().locator('.cbcost')).toHaveText('Költség: 2 - 2 (Void Rush) = 0 Energy, és 2 Power.');
     // a hatásból kijátszott Falling Star célpontjai automatikusak és módosíthatók
     await expect(page.locator('.cb2-sp .cb2-auto').first()).toHaveText('automatikus, módosítható');
   });

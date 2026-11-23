@@ -2,6 +2,7 @@ import { createContext, useContext, useLayoutEffect, useRef, useState, type Keyb
 import { Swords } from 'lucide-react';
 import { IMGBASE, vsCard } from '../../domain/data/store';
 import { openCard } from '../lib/events';
+import { refHash } from '../../domain/rules/refs';
 
 export type PUnit = { n: string; no?: number; m: number; base?: number; ex?: boolean; dmg?: number; tag?: string; status?: string[]; mods?: string[]; gear?: string[]; token?: boolean; id?: string; kind?: 'gear' };
 export type PSide = {
@@ -442,7 +443,7 @@ export function Playmat({ b, prev, explain = true, focus, turn = 'me', onlyKnown
       {b.note && !scn && <p className="pm-note">{b.note}</p>}
       {explain && (!scn || pu) && (
         <div className="pm-info" aria-live="polite">
-          {pu ? <UnitInfo {...pu} /> : info ? (<><b>{info.t}</b> <span>{info.d}</span> <span className="note">Core Rules: {info.r.split(/,\s*/).map((r) => <a key={r} className="rref" href="#szabalyok" data-ref={r}>{r}</a>)}</span></>)
+          {pu ? <UnitInfo {...pu} /> : info ? (<><b>{info.t}</b> <span>{info.d}</span> <span className="note">Core Rules: {info.r.split(/,\s*/).map((r) => <a key={r} className="rref" href={refHash(r)} data-ref={r}>{r}</a>)}</span></>)
             : <span className="note">Kattints a pálya bármelyik zónájára (Legend, Champion, Base, Runes, Deck, Trash, battlefield, Facedown, Hand, Chain, pontszám), és itt megjelenik, mire való.</span>}
         </div>
       )}

@@ -322,6 +322,26 @@ describe('5. kör: halálra figyelő triggerek, ready belépés, Mordekaiser (38
     const solo = run(cs({ turn: 'A', bd: [{ n: 'Mordekaiser, Twice Slain', pl: 'A', loc: 'bf0' }], steps: [{ k: 'card', n: 'Vengeance', pl: 'A', tg: ['b0'] }, { k: 'res' }] }));
     expect(solo.o('b0').zone).toBe('trash');
   });
+  it('Mordekaiser, Twice Slain: a megölt friendly unit választható (dec mező), beállítás nélkül a legkisebb Mightú', () => {
+    const base = { turn: 'A', bd: [{ n: 'Mordekaiser, Twice Slain', pl: 'A', loc: 'bf0', d: 2 }, { n: 'Mega-Mech', pl: 'A', loc: 'base' }, { n: 'Shipyard Skulker', pl: 'A', loc: 'base' }] };
+    const auto = analyze(JSON.parse(JSON.stringify(cs({ ...base, steps: [{ k: 'card', n: 'Vengeance', pl: 'A', tg: ['b0'] }] })))) as any;
+    const cp = auto.choices.find((c: any) => c.key === 'morde:b0');
+    expect(cp).toMatchObject({ auto: true, cur: 'b2' });
+    expect(cp.opts.map((o: any) => o.n)).toEqual(['Shipyard Skulker', 'Mega-Mech']);
+    const x = run(cs({ ...base, steps: [{ k: 'card', n: 'Vengeance', pl: 'A', tg: ['b0'], dec: { 'morde:b0': 'b1' } }] }));
+    expect(x.text).toMatch(/ezt a másik friendly unitot öli meg \(a te választásod\): Mega-Mech/);
+    expect(x.o('b1').zone).toBe('trash');
+    expect(x.o('b2').zone).toBe('board');
+  });
+  it('Overt Operation: a buff elköltése "you may" választóval; nem él vele: a buff marad, a unit exhausted marad', () => {
+    const bd = [{ d: 0, n: 'Shipyard Skulker', pl: 'A', loc: 'base', bu: true, ex: true }];
+    const auto = analyze(JSON.parse(JSON.stringify(cs({ turn: 'A', bd, steps: [{ k: 'card', n: 'Overt Operation', pl: 'A' }] })))) as any;
+    const cp = auto.choices.find((c: any) => c.kind === 'may' && /buff elköltése/.test(c.label));
+    expect(cp).toMatchObject({ auto: true, cur: '1' });
+    const no = run(cs({ turn: 'A', bd, steps: [{ k: 'card', n: 'Overt Operation', pl: 'A', dec: { [cp.key]: '0' } }] }));
+    expect(no.text).toMatch(/nem él vele \(a lépésnél beállítva\), egyik buff sem költődik el/);
+    expect(no.o('b0').ex).toBe(true);
+  });
 });
 
 describe('7. kör: Rune Deck és rune pool tartalma, Jhin előzménye (417, 431.1)', () => {
