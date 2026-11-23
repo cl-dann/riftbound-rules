@@ -51,7 +51,7 @@ test('Szabályzat: szabályhivatkozás és versenyformátum oldal', async ({ pag
 
 test('Chain: példa lejátszása lépésenként', async ({ page }) => {
   await open(page, '#chain');
-  await page.locator('#cb-ex').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex').click();
   const next = page.getByRole('button', { name: 'Következő' }).first();
   await expect(next).toBeVisible();
   await next.click();
@@ -60,11 +60,11 @@ test('Chain: példa lejátszása lépésenként', async ({ page }) => {
 
 test('Chain: kontrollváltás és csatolatlan gear a Playmaton', async ({ page }) => {
   await open(page, '#chain');
-  await page.locator('#cb-ex2').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex2').click();
   const next = page.getByRole('button', { name: 'Következő' }).first();
   for (let i = 0; i < 3; i++) await next.click();
   await expect(page.locator('.pm2-ubox.opp .pm-lab.ctl').first()).toHaveText('Kontroll átvéve');
-  await page.locator('#cb-ex3').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex3').click();
   await expect(page.locator('.pm2-gears .pm-unit.gear').first()).toBeVisible();
   await expect(page.locator('.pm2-gears .pm-might')).toHaveCount(0);
   await next.click(); await next.click();
@@ -199,7 +199,7 @@ test('Mobil (390 px): egyik fül sem lóg ki vízszintesen', async ({ page }) =>
   await open(page, '#kartyak');
   for (const t of ['kartyak', 'deck', 'szabalyok', 'chain', 'hogyan', 'hogyan/turn-structure', 'hogyan/resource-system', 'hogyan/spell-speeds', 'hogyan/chain', 'tanulas', 'tanulas/sz/abcd-kor-eleje', 'tanulas/sz/energy-lebegtetes-power-recycle', 'tanulas/sz/tobb-unit-damage-kiosztas', 'tanulas/lecke', 'tanulas/lecke/tempo-es-ertek', 'kezikonyv']) {
     await page.goto('/#' + t);
-    if (t === 'chain') { await page.locator('#cb-ex').click(); }
+    if (t === 'chain') { await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex').click(); }
     await page.waitForTimeout(400);
     const ov = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(ov, t).toBeLessThanOrEqual(1);

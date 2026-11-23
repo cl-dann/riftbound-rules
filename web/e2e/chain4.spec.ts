@@ -13,12 +13,12 @@ test.afterEach(() => { expect(errs).toEqual([]); errs.length = 0; });
 
 test('Sablonok: betöltés üres pályára azonnal, tartalom mellett megerősítéssel', async ({ page }) => {
   await page.goto('/#chain');
-  await page.getByRole('button', { name: 'Sablonok' }).click();
-  await expect(page.locator('.cb2-tpl')).toHaveCount(11);
+  await page.getByRole('button', { name: 'Példák', exact: true }).click();
+  await expect(page.locator('[data-tpl]')).toHaveCount(11);
   await page.locator('[data-tpl="counter"] .btn', { hasText: 'Betöltés' }).click();
   await expect(page.locator('.cb2-sc')).toHaveCount(2);
   await expect(page.locator('#cb-out')).toContainText('counterelve');
-  await page.getByRole('button', { name: 'Sablonok' }).click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click();
   await page.locator('[data-tpl="ignored"] .btn', { hasText: 'Betöltés' }).click();
   await expect(page.locator('[data-tpl="ignored"]')).toContainText('A mostani helyzet elvész');
   expect((await getCS(page)).steps[1].n).toBe('Wind Wall');
@@ -30,7 +30,7 @@ test('Sablonok: betöltés üres pályára azonnal, tartalom mellett megerősít
 
 test('Beszúrás a chain közepére: a lépés-hivatkozások átszámozódnak', async ({ page }) => {
   await page.goto('/#chain');
-  await page.locator('#cb-ex').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex').click();
   // Resolve az 1. és a 2. lépés közé az idővonal + gombjával
   await page.getByRole('button', { name: 'Beszúrás a 1. és a 2. lépés közé' }).click();
   await expect(page.locator('.cb2-mode')).toContainText('1. lépés után');
@@ -53,7 +53,7 @@ test('Beszúrás a chain közepére: a lépés-hivatkozások átszámozódnak', 
 
 test('Kör és fázis a pálya fejlécében, szinkronban a Haladó szerkesztéssel', async ({ page }) => {
   await page.goto('/#chain');
-  await page.locator('#cb-ex').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex').click();
   await page.locator('.cb2-hdr button', { hasText: 'ellenfél' }).click();
   expect((await getCS(page)).turn).toBe('B');
   await expect(page.locator('#cb-steps select[data-turn]')).toHaveValue('B');

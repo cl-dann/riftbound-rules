@@ -15,9 +15,10 @@ export function installReplacement(X: EngineCtx) {
     if(ob.save)return {by:null,save:true,txt:ob.save.src+': heal, exhaust, recall instead'};
     /* Mordekaiser, Twice Slain: körönként egyszer, ha van másik friendly unit, amit megölhet (különben a replacement nem hajtható végre) */
     if(ob.card&&MORDE_RE.test(ob.card.txt||'')&&(X.MORDE[id]||!X.mordeVictims(id).length))return null;
+    if(ob.card&&MORDE_RE.test(ob.card.txt||'')&&!X.mayDec(ob.name+' replacement',ob.name))return null;
     if(ob.card&&/\bif I would die\b/i.test(ob.card.txt||''))return {by:id,txt:stripRem((/[^\n]*if I would die[^\n]*/i.exec(ob.card.txt!)||[''])[0]),self:true};
     const ga=Object.values(X.O).find((g)=>g.on===id&&g.zone==='board'&&g.card&&/\bif I would die\b/i.test(g.card.eff||''));if(ga)return {by:ga.id,txt:ga.card!.eff};
-    const bs=X.O['L'+ob.ctrl];if(ob.bu&&bs&&bs.zone==='legend'&&!bs.ex&&bs.card&&BOSS_RE.test(bs.card.txt||''))return {by:bs.id,boss:true,txt:stripRem((BOSS_RE.exec(bs.card.txt!)||[''])[0])};
+    const bs=X.O['L'+ob.ctrl];if(ob.bu&&bs&&bs.zone==='legend'&&!bs.ex&&bs.card&&BOSS_RE.test(bs.card.txt||'')&&X.mayDec(bs.name+' replacement ('+ob.name+')',bs.name))return {by:bs.id,boss:true,txt:stripRem((BOSS_RE.exec(bs.card.txt!)||[''])[0])};
     const zh=Object.values(X.O).find((g)=>g.zone==='board'&&g.id!==id&&!g.on&&g.ctrl===ob.ctrl&&g.card&&/\bif a friendly unit would die, kill this instead\b/i.test(g.card.txt||''));if(zh)return {by:zh.id,txt:stripRem((/[^\n]*would die[^\n]*/i.exec(zh.card!.txt!)||[''])[0])};
     return null;};
   X.killObj=(id,why,parts,refs,srcName?)=>{const ob=X.O[id];const rp=X.deathRepl(id);

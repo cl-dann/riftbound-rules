@@ -48,7 +48,7 @@ test('kártyamodál', async ({ page }) => {
 
 test('Chain: akció-menü', async ({ page }) => {
   await go(page, '#chain');
-  await page.locator('#cb-ex').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex').click();
   await page.locator('.pm-unit[data-uid="b0"]').first().click();
   await expect(page.locator('.cb2-menu, .cb2-sheet').first()).toBeVisible();
   await shot(page, 'chain-action-menu');
@@ -56,7 +56,7 @@ test('Chain: akció-menü', async ({ page }) => {
 
 test('Chain: célzás (keskeny nézetben a varázsló lépései is)', async ({ page }) => {
   await go(page, '#chain');
-  await page.locator('#cb-ex').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex').click();
   await page.locator('.pm2-chain .pm2-add').click();
   if (narrow(page)) {
     await expect(page.locator('.cb2-sheet')).toContainText('1 / 4');
@@ -74,7 +74,7 @@ test('Chain: célzás (keskeny nézetben a varázsló lépései is)', async ({ p
 
 test('Chain: combat panel', async ({ page }) => {
   await go(page, '#chain');
-  await page.locator('#cb-ex2').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex2').click();
   await page.locator('.pm-unit[data-uid="b0"]').first().click();
   await menuBtn(page, 'Combat ezen a battlefielden').click();
   await expect(page.locator('#cb-combat')).toHaveAttribute('open', '');

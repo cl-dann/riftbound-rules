@@ -65,7 +65,7 @@ test('Chain építő: a példa felépítése a pályán kattintással, élő ele
   await expect(page.locator('#cb-out')).toContainText('Star-Crossed');
   await expect(page.locator('.cb2-sc')).toHaveCount(3);
   const mine = await page.locator('#cb-out').textContent();
-  await page.locator('#cb-ex').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex').click();
   await expect(page.locator('#cb-out')).toHaveText(mine!);
   // sorrendcsere nyíllal: Flash fel, a lépésre mutató célpont hivatkozás követi
   await page.getByRole('button', { name: '2. lépés feljebb' }).click();
@@ -90,7 +90,7 @@ test('Chain építő: akció-menü legalitása, kijátszás kézből, Standard M
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/#chain');
   // saját kéz: egy nem Reaction unit; a példa chainje mellett kézből válaszként nem jöhet (Closed State)
-  await page.locator('#cb-ex').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex').click();
   await page.locator('.pm2-band.me-bottom .pm2-hand .pm2-add').click();
   await pickCard(page, 'riptide rex', 'Riptide Rex');
   await page.locator('.pm2-band.me-bottom .pm2-hc').first().click();
@@ -125,7 +125,7 @@ test('Chain építő: mobil 390 px, nincs vízszintes túllógás, a menü és a
   await page.goto('/#chain');
   const ov = () => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   expect(await ov()).toBeLessThanOrEqual(1);
-  await page.locator('#cb-ex').click();
+  await page.getByRole('button', { name: 'Példák', exact: true }).click(); await page.locator('#cb-ex').click();
   expect(await ov()).toBeLessThanOrEqual(1);
   // keskeny nézetben az akció-menü és a kereső a lépés-varázsló (bottom sheet) része
   await page.locator('.pm-unit[data-uid="b0"]').click();

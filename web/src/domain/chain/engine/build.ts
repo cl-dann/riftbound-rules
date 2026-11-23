@@ -15,7 +15,7 @@ export function installBuild(X: EngineCtx) {
     const label=s.k==='ab'||s.k==='tg'?abn:((so&&so.name)||c.n)+(perm?' (play trigger)':'');
     const src=s.k==='ab'||s.k==='tg'?s.src:perm?'s'+s.j:null;
     return {kind:'step',s,label,name:s.k==='ab'||s.k==='tg'?abn:so&&so.no?so.name:c.n,pl:s.k==='tg'?((X.O[s.src!]&&X.O[s.src!].ctrl)||s.pl):s.pl,eff:s.eff,list:s.list,tg:s.tg,src,perm,from:s.k==='card'?s.from:null,loc:s.k==='card'?(s.loc||(s.from==='facedown'?'bf0':'base')):null,objId:s.k==='card'||s.k==='ab'||s.k==='tg'?'s'+s.j:null,dest:s.dest,ov:s.ov,pays:s.pays,may:s.may,isTg:s.k==='tg',evPlay:X.EV.length,soM:s.so?(String(s.so).startsWith('h:')?((vsCard(String(s.so).slice(2))||{}).m??null):(X.O[s.so]?X.mightOf(s.so):null)):null,soName:s.so?(String(s.so).startsWith('h:')?String(s.so).slice(2)+' (kézből felfedve)':(X.O[s.so]?X.O[s.so].name:'')):'',notedLoc:s.k==='tg'&&s.tr&&/\bmove from a location\b/i.test(s.tr.why||'')?(s.mfrom||'base'):null};};
-  X.playMain=()=>X.MAIN.forEach((s,ix)=>{
+  X.playMain=()=>X.MAIN.forEach((s,ix)=>{X.CURJ=s.j;
     if(s.k==='end'){X.playEnd();return;}
     if(X.NEXT){X.rows+=X.line('315','<span class="stbad">Nem szabályos:</span> a "Következő kör" az utolsó lépés: az elemzés a következő kör Main Phase-ének elején megáll, az utána felvett lépés kimarad.',0);return;}
     if(s.k==='next'){X.playEnd();X.NEXT=true;return;}
@@ -127,6 +127,10 @@ export function installBuild(X: EngineCtx) {
       else X.rows+=X.line('383.2.a.1','A play trigger feltétele ("if '+esc(s.tcond.t)+'") a kijátszáskor teljesül '+esc(X.condSrc(s.tcond))+', ezért a chainre kerül; a resolve-kor már nem ellenőrzi újra.',0);}
     if(perm&&s.trig&&!trigOK){if(s.cond==='paid')X.rows+=X.line('383.2.a.1','A play effect feltétele ("if you paid the additional cost") nem teljesül, ezért nem triggerel.',0);}
     else if(P.trigBad){trigOK=false;X.rows+=X.line('403.4, 403.4.a','A play effectnek nincs legális választása ('+P.trigBad+'). A '+c.t.toLowerCase()+' ettől még a boardra kerül, a trigger lekerül a chainről (403.4; ez nem counter).',0);X.story.push('A play effectnek nincs legális célpontja, ezért a trigger lekerül a chainről.');s.trigBad=P.trigBad;}
+    /* "you may" döntés a lépés-panelben (dec "may:step"); beállítás nélkül igen (automatikus) */
+    if(s.may&&!(perm&&s.trig&&!trigOK)){const d=X.decOf('may:step');X.choice({j:s.j,kind:'may',key:'may:step',label:(it.name||it.label)+': "you may"',item:it.name||it.label,opts:[{v:'1',n:'él vele'},{v:'0',n:'nem él vele'}],cur:d==='0'?'0':'1',auto:d!=='0'&&d!=='1'});
+      if(d==='0'){if(s.k==='tg'||perm&&trigOK){X.rows+=X.line('383.3.a, 383.3.a.2','"You may" a triggered ability elején: a játékos nem él vele (a lépésnél beállítva), ezért lekerül, és nem számít triggereltnek.',0);if(s.k==='tg'){s.illegal='nem él vele';return;}trigOK=false;}
+        else{it.mayNo=true;X.rows+=X.line('355.18','"You may": a játékos a resolve-kor nem él vele (a lépésnél beállítva).',0);}}}
     if(perm&&s.trig&&!trigOK){/* nem triggerel, a sor fent már kiírva */}
     else if(s.may&&(s.k==='tg'||perm&&trigOK))X.rows+=X.line('383.3.a, 383.3.a.2','"You may" a triggered ability elején: '+WHO[it.pl]+' a chainre tételkor (finalizálás) dönt'+(it.pl==='A'?'öd':'i')+' el, végrehajtja-e; ha nem, lekerül. Az elemzés igennel számol.',0);
     else if(s.may)X.rows+=X.line('355.18, 355.12','"You may": a döntés a resolve-kor születik (355.18); a célpontokat a kijátszáskor kell kiválasztani, a game action végrehajtásáról szóló döntéstől függetlenül (355.12). Az elemzés igennel számol.',0);
@@ -139,7 +143,7 @@ export function installBuild(X: EngineCtx) {
     else if(s.trig&&trigOK)X.pushTrig(it);
     // unit és gear kijátszása azonnal resolve-ol (337.2), ezért a "When you play" triggerek most triggerelnek; spellnél csak a resolve-kor (420.4.a)
     if(s.k==='ab'&&s.ab)X.abTrigs(s).forEach((t)=>{X.pushTrig(t);X.rows+=X.line('206.1, 383.2','Trigger: '+esc(X.O[t.src!].name)+' '+t.why,1);X.story.push(Art(X.O[t.src!].name)+' triggerel az ability aktiválására.');});
-    if(perm&&c.t==='Unit'){const w=X.wmTrig('s'+s.j,s.pl!,(s.wm as string|undefined)||(s.tg||[]).find((v:string)=>X.O[v]&&X.O[v].type==='gear')||null);if(w){if(w.it)X.pushTrig(w.it);X.rows+=X.line('821.1.c, 821.1.c.3',w.txt,w.it&&w.it.wm?2:0);}}
+    if(perm&&c.t==='Unit'){const w=X.wmTrig('s'+s.j,s.pl!,(s.wm as string|undefined)||(s.tg||[]).find((v:string)=>X.O[v]&&X.O[v].type==='gear')||null,s.j);if(w){if(w.it)X.pushTrig(w.it);X.rows+=X.line('821.1.c, 821.1.c.3',w.txt,w.it&&w.it.wm?2:0);}}
     if(perm){X.playTrigs(s).forEach((t)=>{X.pushTrig(t);X.rows+=X.line('420.4.a, 337.2','Trigger: '+esc(X.O[t.src!].name)+' '+t.why+' A '+c.t.toLowerCase()+' kijátszása a resolve-jával befejeződött, ezért most triggerel.',1);X.story.push(Art(X.O[t.src!].name)+' képessége triggerel erre a kijátszásra, és a chainre kerül.');});}
     else if(s.k==='card'&&X.playTrigs(s).length)X.rows+=X.line('420.4.a, 420.4.a.1','A "When you play a spell" típusú triggerek ('+X.playTrigs(s).map((t)=>esc(t.label)).join(', ')+') csak akkor triggerelnek, amikor '+esc(c.n)+' resolve-ol; ha counterelik, nem triggerelnek.',0);
     // a költségből vagy kijátszásból keletkezett triggerek (Deathknell, leave, play) a kijátszott elem fölé kerülnek

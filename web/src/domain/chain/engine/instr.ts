@@ -13,6 +13,7 @@ const HERE_NEXT=/^if it(?:'s| is) a unit, (?:you may )?play it here\b/i;
 export function installInstr(X: EngineCtx) {
   /** Egy utasítás: bizonytalan felismerés, "instead" (369.1), feltételek (135.2.b), reflexív trigger (388), előkészítő műveletek, linked instructions (359.3.e.14). */
   X.resolveInstr=(R,x,xi)=>{const {it,s,srcName,INS,parts,refs,tgOut,mtT}=R;
+      if(it.mayNo&&/^(?:then,? )?you may\b/i.test(x.t)&&!it.mayDone){it.mayDone=true;x.st='skipped';x.ref='355.18';x.why='a játékos nem él vele (a lépésnél beállítva)';parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');return;}
       const dir=x.dir;const lk=x.lk;const prev=lk?R.lastT:null;
       if(x.basedOn){const v=it.basedVal?it.basedVal[x.basedOn.xi]:null;if(v==null||String(v).toLowerCase()!==x.basedOn.key){x.st='skipped';x.why='a döntő érték ('+(v==null||v==='x'?'egyik pont sem':String(v))+') nem ezt a pontot választja';return;}
         x.tis.forEach((ti:number)=>{if(it.tg[ti])return;const o=X.legalOpts(it,it.list[ti],ti);if(o.length){it.tg[ti]=o[0];parts.push('"'+esc(x.t)+'": célpont az első legális választás: '+esc(X.nm(o[0]))+(o.length>1?' (választható helyette: '+o.slice(1,6).map((q)=>esc(X.nm(q))).join(', ')+')':'')+'.');}});}
@@ -92,7 +93,7 @@ export function installInstr(X: EngineCtx) {
       else X.resolvePlain(R,x,xi,prev,lk);
       if(x.tis.length||['control','choose'].includes(x.act.k)&&x.tis.length)R.lastT=x;};
   /** A nem linked-Ignored utasítás: a hivatkozott célpontok, majd a zónás választás vagy a művelet. */
-  X.resolvePlain=(R,x,xi,prev,lk)=>{const {it,s,INS,tgOut}=R;
+  X.resolvePlain=(R,x,xi,prev,lk)=>{const {it,s,INS,tgOut,parts,srcName}=R;
       x.st='executed';
         if(prev&&prev.st==='negated'){x.ref='359.3.e.14.b';x.why='linked instruction, a korábbi Negated lett, de erre nem hat (nem hivatkozik közvetlenül a game actionre)';}
         else if(prev&&prev.st==='partial'){x.ref='359.3.e.14.a';x.why='linked instruction: csak a legális célpontokra vonatkozik';}
@@ -108,6 +109,12 @@ export function installInstr(X: EngineCtx) {
         const zTopUse=X.ZC&&it.zTop&&!amongIt&&/\b(?:draw it|put it (?:in|into) your hand)\b/i.test(x.t)&&X.O[it.zTop]&&X.O[it.zTop].zone==='deck';
         const restM=X.ZC&&it.zLook&&it.zLook.length&&!(zr0&&zr0.z==='among'&&zpick&&zpick.length)&&/\b(?:the rest|the remaining cards|the revealed cards|any you didn't banish)\b/i.test(x.t);
         const eachOn=zEach&&(zEach.act==='revealEach'?X.zoneIds('deck','A').length>0&&X.zoneIds('deck','B').length>0:!!(s&&s.zp&&s.zp[xi]&&s.zp[xi].length));
+        /* döntési pont a zónás választáshoz (megnézett lapok, kéz, deck): a lépés zp mezője; "-" = a játékos nem él vele */
+        if(zr0&&!zEach&&s&&!(zr0.z==='deck'&&zr0.top)&&!zr0.target&&['among','hand','deck'].includes(zr0.z)){const pl0=zr0.who==='they'?other(it.pl):it.pl;
+          const cand=(zr0.z==='among'?(it.zLook||[]):X.zoneIds(zr0.z,pl0)).filter((id:string)=>X.O[id]&&X.O[id].card&&(zr0.z!=='among'||X.O[id].zone==='deck')&&!zoneCheck(zr0,X.O[id],it.pl,X.zctx(it,s)));
+          const LBL:Record<string,string>={banish:'Banish',hand:'Kézbe',choose:'Választás',recycle:'Recycle',discard:'Eldobás',playcard:'Kijátszás'};const may=/\b(?:you may|up to)\b/i.test(x.t);
+          if(cand.length||(zpick&&zpick.length))X.choice({j:s.j,kind:'zp',key:'zp:'+xi,xi,label:(LBL[zr0.act]||'Választás')+' ("'+x.t.slice(0,60)+'")',item:srcName,opts:cand.map((v:string)=>({v,n:X.O[v].name})),cur:zpick&&zpick.length?zpick[0]:'',auto:false,...(may?{none:'nem él vele'}:{})});}
+        if(zpick&&zpick[0]==='-'){x.st='skipped';x.ref='355.18';x.why='a játékos nem él vele ("you may", a lépésnél beállítva)';it.zNone=true;parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');X.story.push(Art(srcName)+': "'+x.t+'": nem él vele.');return;}
         if(!X.resolveZone(R,x,xi,{zr0,zEach,zpick,amongIt,zTopUse,restM,eachOn}))X.resolveAct(R,x,xi,prev,lk,live,a,sc);};
   /** Kéz, deck és trash: játékosonkénti választás (355.10.e, 412.1), from among them, recycle, a választott lap végigkövetve (355.9.a, 355.10.a, 355.18). Igaz, ha az utasítás zónás volt. */
   X.resolveZone=(R,x,xi,Z)=>{const {it,s,srcName,INS,parts,refs,mtT}=R;const {zr0,zEach,zpick,amongIt,zTopUse,restM,eachOn}=Z;
@@ -198,7 +205,13 @@ export function installInstr(X: EngineCtx) {
   X.fxSpell=(pc,pl,from)=>{const eff=effOf(pc);const item:ChainItem={kind:'auto',label:pc.n+' (hatásból kijátszott spell)',name:pc.n,src:null,pl,eff,why:'kijátszás hatásból',list:phrasesTxt(eff),tg:[],from,fxCard:pc};
     const t=X.autoTg(item);X.pushTrig(item);return t?' A célpontokat kijátszáskor választják (355.8); '+t:'';};
   /** A hatásból kijátszott lap célpontjai (spell vagy play trigger, 355.8, 403.4.b): az első legális választás, a többi felsorolva. */
-  X.autoTg=(item)=>{const out:string[]=[];item.list.forEach((p,ti)=>{const o=X.legalOpts(item,p,ti);const pre=item.tg[ti];if(pre&&o.includes(pre)){out.push((ti+1)+'. célpont: '+esc(X.nm(pre))+' (a lépésnél megadva)');return;}if(pre)item.tg[ti]='';if(o.length){item.tg[ti]=o[0];out.push((ti+1)+'. célpont: '+esc(X.nm(o[0]))+(o.length>1?' (választható helyette: '+o.slice(1,6).map((v)=>esc(X.nm(v))).join(', ')+')':''));}else if(!p.opt)out.push((ti+1)+'. célpontnak nincs legális választása');});
+  X.autoTg=(item)=>{const out:string[]=[];item.list.forEach((p,ti)=>{const o=X.legalOpts(item,p,ti);const pre=item.tg[ti];if(pre&&o.includes(pre)){out.push((ti+1)+'. célpont: '+esc(X.nm(pre))+' (a lépésnél megadva)');return;}if(pre)item.tg[ti]='';
+      /* döntési pont: a lépés dec mezőjében választható célpont; beállítás nélkül az első legális (automatikus) */
+      const key='tg:'+item.label+'#'+ti;const d=X.decOf(key);const opts=o.map((v)=>({v,n:X.nm(v)}));
+      if(o.length&&d==='-'&&p.opt){X.choice({kind:'tg',key,label:item.label+': '+(ti+1)+'. célpont',item:item.name||item.label,opts,cur:'-',auto:false,none:'nem választ'});out.push((ti+1)+'. célpont: nincs (a lépésnél beállítva)');return;}
+      if(o.length){const pick=d&&o.includes(d)?d:o[0];item.tg[ti]=pick;X.choice({kind:'tg',key,label:item.label+': '+(ti+1)+'. célpont',item:item.name||item.label,opts,cur:pick,auto:pick!==d,...(p.opt?{none:'nem választ'}:{})});
+        if(pick===d){out.push((ti+1)+'. célpont: '+esc(X.nm(pick))+' (a lépésnél megadva)');return;}
+        out.push((ti+1)+'. célpont: '+esc(X.nm(o[0]))+(o.length>1?' (választható helyette: '+o.slice(1,6).map((v)=>esc(X.nm(v))).join(', ')+')':''));}else if(!p.opt)out.push((ti+1)+'. célpontnak nincs legális választása');});
     return out.length?(out.every((t)=>/a lépésnél megadva/.test(t))?'':'az elemzés az első legális választással számol: ')+out.join('; ')+'.':'';};
   /** Hatásból kijátszott unit belépése: Accelerate, ha a lapnak van, vagy egy friendly lap adja a nem kézből kijátszott unitoknak (Rek'Sai, Breacher); a kifizetést a lépés "accel" mezője jelzi (805.1.b). */
   X.fxEnter=(pc,pl,to,pid,s,fromHand)=>{const er=X.enterReady(pc,pl,!!(s&&s.accel),to,undefined,pid);if(er.ready||pc.t!=='Unit')return er;
@@ -285,6 +298,7 @@ export function installInstr(X: EngineCtx) {
           const sid=it.src||it.selfObj;const pc=zac?X.O[zac].card:a.self?(sid&&X.O[sid]&&X.O[sid].card)||(s&&s.c)||it.fxCard:vsCard(s&&s.plc?s.plc[xi]:'');
           const pcW=pc&&!a.self?costCheck(costCondOf(x.t),pc,X.zctx(it,s)):'';
           if(pcW){x.st='negated';x.ref='206, 359.3.e.6';x.why='a megadott lap ('+pc!.n+') nem felel meg a költségfeltételnek: '+pcW;parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');refs.push('206');}
+          else if(!pc&&it.zNone){x.st='skipped';x.why='nincs választott lap, mert a játékos nem élt az előző választással';parts.push('"'+esc(x.t)+'": '+esc(x.why)+'.');}
           else if(!pc){x.why='a kijátszott lapot a builderben kell megadni';parts.push('"'+esc(x.t)+'": kijátszás hatásból (420.3). Melyik lap? Add meg a builderben (Így értelmezem blokk), és az elemzés követi.');R.fl=Math.max(R.fl,1);}
           else{if(a.self&&sid&&X.O[sid]&&X.O[sid].zone==='trash'){const so0=X.O[sid];if(so0.type==='zc')X.zcMove(sid,'played');else{so0.zone='gone';so0.gen=(so0.gen||0)+1;}parts.push(esc(pc.n)+' a trashből kerül kijátszásra.');}
             const pid='p'+(s?s.j:'x')+'_'+xi;const isP=pc.t==='Unit'||pc.t==='Gear';let to=(s&&s.pll&&s.pll[xi])||(/\bhere\b/i.test(x.t)?X.srcLoc(it)||'base':'base');

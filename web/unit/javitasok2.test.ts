@@ -65,7 +65,7 @@ describe('5. Szabályszámok', () => {
     const rb = run(cs({ bd: [{ n: 'Long Sword', pl: 'B', loc: 'base' }], steps: [{ k: 'card', n: 'Rocket Barrage', pl: 'A', mode: 1, tg: ['b0'] }] }));
     expect(rb.text).toMatch(/^355\.3 Választott mód/m);
     const tw = run(cs({ steps: [{ k: 'card', n: 'Time Warp', pl: 'A' }] }));
-    expect(tw.r.html).toMatch(/extra kör \(735\)/);
+    expect(tw.r.html).toMatch(/extra kör[^<]*<span class="cbr"><a href="#r-735"/);
     const sm = run(cs({ bd: [{ n: 'Shipyard Skulker', pl: 'B', loc: 'bf0' }], steps: [{ k: 'card', n: 'Smite', pl: 'A', tg: ['b0'] }] }));
     expect(sm.changes + sm.text).toMatch(/383\.2\.c\.3\.a/);
     expect(sm.changes + sm.text).not.toMatch(/808\.1\.d\.1/);
