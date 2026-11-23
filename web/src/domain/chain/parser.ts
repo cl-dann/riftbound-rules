@@ -58,6 +58,11 @@ export function triggersOf(c:CardLike|null|undefined,extraEff?:string){const out
 export const NUMW:Record<string,number>={one:1,two:2,three:3,four:4,five:5,six:6};
 export const numOf=(x:string)=>x==null?1:/^\d+$/.test(x)?+x:NUMW[String(x).toLowerCase()]||1;
 /** Célpont-kifejezések: "a unit", "up to two enemy units", "a friendly [Mighty] unit", "an Equipment", "a unit you control at another location". */
+/** A régi (feltétel-tagmondatot is célpontnak vevő) felismerés, csak a régi lépések célpont-indexeinek átszámolásához (migrateTg). */
+let LEGACY=false;
+export function withLegacyPhrases<T>(f:()=>T):T{const o=LEGACY;LEGACY=true;try{return f();}finally{LEGACY=o;}}
+/** Feltétel-tagmondatban ("if", "only if", "unless", "while" a mondatrész elejétől) álló kifejezés nem célpont: a feltétel a játékállapotot írja le. */
+const inCondClause=(e:string,at:number)=>{const pre=e.slice(0,at);const cut=Math.max(pre.lastIndexOf('.'),pre.lastIndexOf(','),pre.lastIndexOf(';'));return /\b(?:if|unless|while)\b/i.test(pre.slice(cut+1));};
 export function phrasesTxt(e:string){
   const out:TargetParam[]=[];
   const re=/\b(a|an|another|one|two|three|up to (\d+|one|two|three|four|five)|any number of)\s+((?:(?:other|another|friendly|enemy|attacking|defending|exhausted|ready|stunned|equipped|buffed|damaged|detached|attached|\[Mighty\]|Mighty)\s+)*)(units?|gear|spells?|equipment|abilit(?:y|ies))\b/gi;let m;
@@ -72,6 +77,7 @@ export function phrasesTxt(e:string){
     const before=e.slice(Math.max(0,m.index-14),m.index);const tail=e.slice(m.index+m[0].length,m.index+m[0].length+90);const adj=(m[3]||'').toLowerCase();
     if(/\bplay\s*$/i.test(before)&&(/^[^.]*?\btokens?\b/i.test(tail)||/^\s*(?:from|you control|with)\b/i.test(tail)||ty==='spell'))continue; // kijátszás vagy token, nem célpont
     if(/\[Show Off\]\s*$|showed off\s*$|\bchooses\s*$/i.test(before))continue;
+    if(!LEGACY&&inCondClause(e,m.index))continue; // feltétel-tagmondat, nem célpont
     if(/\bamong them\s*$/i.test(before))continue; // a megnézett lapok közül választás, nem célpont (128.4, 355.10.a) // Show Off választás (832), nem célpont
     if(/^\s*token\b/i.test(tail)||/\b(?:it's|it is|is|was|that's|as|becomes?)\s*$/i.test(before))continue; // feltétel, nem célpont
     if(/^\s*or (?:units?|gear|spells?) from among them\b/i.test(tail))continue; // a megnézett lapok közül választás, nem célpont
@@ -86,7 +92,7 @@ export function phrasesTxt(e:string){
       same:/\bat the same (?:battlefield|location)\b/i.test(sent)||!!totM,totalMax:totM?+totM[1]:null,opt:!!m[2]||q==='any number of',
       here:/^\s*(?:you control\s+|an opponent controls\s+)?(?:here|there)\b/i.test(sent),free:/\bat (?:another|a different) location\b/i.test(sent),
       base:/^\s*(?:you control\s+)?in (?:a|your|their|its owner's) base\b/i.test(sent),eq:/equipped/.test(adj)||raw==='equipment',equipOnly:raw==='equipment',
-      ...(costCondOf(sent)?{cost:costCondOf(sent)}:{}),mighty:/mighty/.test(adj),another:q==='another'||/\bother\b/.test(adj),attacking:/attacking/.test(adj),stunned:/stunned/.test(adj),any:q==='any number of',orAb:ty==='spell'&&/^\s*or abilit/i.test(tail),chooseOnly:/^[^.]*\bthat chooses it and no other friendly unit\b/i.test(tail)};
+      ...(costCondOf(sent)?{cost:costCondOf(sent)}:{}),mighty:/mighty/.test(adj),another:q==='another'||/\bother\b/.test(adj),attacking:/attacking/.test(adj),stunned:/stunned/.test(adj),any:q==='any number of',orAb:ty==='spell'&&/^\s*or abilit/i.test(tail),chooseOnly:/^[^.]*\bthat chooses it and no other friendly unit\b/i.test(tail),...(LEGACY&&inCondClause(e,m.index)?{cond:true}:{})};
     for(let i=0;i<Math.min(n,totM?6:3);i++)out.push(Object.assign({},p,{opt:p.opt||(i>0&&!!m[2])}));}
   if(splitP){const dn=/\bdeal (\d+) damage split\b/i.exec(e);const slots=dn?Math.min(10,+dn[1]+3):10;for(let i=0;i<slots;i++)out.push(Object.assign({},splitP));}
   return out;

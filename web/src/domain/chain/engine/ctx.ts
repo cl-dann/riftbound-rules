@@ -16,7 +16,7 @@ export type GameObj = {
   loc?: string; baseOf?: string | null; m?: number | null; dmg?: number; dealt?: boolean; atk?: string; ex?: boolean; st?: boolean;
   bu?: boolean; emp?: boolean; mods?: Mod[]; kws?: string[]; board?: boolean; lk?: LastKnown | null; shields?: { n: number; next?: boolean; used?: boolean }[] | null;
   save?: { pay: boolean; src: string } | null; dbl?: boolean | null; dieTo?: string | null; baseSet?: number | null; untgt?: boolean | null; prev?: unknown;
-  until?: { src: string; prev: string | null } | null; ord?: number; gen?: number; on?: string | null; accel?: boolean; src?: string;
+  until?: { src: string; prev: string | null } | null; ord?: number; gen?: number; on?: string | null; accel?: boolean; accelG?: boolean; src?: string;
   stepJ?: number; token?: boolean; toHand?: boolean; zone0?: string;
   /** Példányszám, ha a lapból több van a pályán (instNos). */
   no?: number;
@@ -118,7 +118,7 @@ export type EngineCtx = {
   MAN: boolean; ALL: RecRow[]; EV: Ev[]; story: string[]; rows: string; rr: string; notes: string[]; O: Record<string, GameObj>;
   BF: Record<string, BfState>; ZC: boolean; zcK: Record<string, string>; cnt: Record<string, number>; FR: Frame[]; DET: Set<string>;
   NEWCTRL: Set<string>; chain: ChainItem[]; stack: ChainItem[]; REPL: Set<string>; READY: Record<string, boolean>;
-  BUFF2: Record<string, boolean>; PREVSA: { on: boolean }; READYNEXT: Record<string, boolean>; ST: StateFns;
+  BUFF2: Record<string, boolean>; PREVSA: { on: boolean }; READYNEXT: Record<string, boolean>; ACCELNEXT: Record<string, boolean>; ST: StateFns;
   PSD: Record<string, number | string>; TP: string; PEND: ChainItem[]; DIED: string[]; TOKN: number; PTN: Set<string>; done: Done[];
   guard: number; it0: ChainItem | null; parts0: string[]; refs1: string[]; tgOut0: string[]; mtT0: MtTarget[]; tot0: { n: number };
   legal0: { n: number }; INRES: boolean; ENDED: boolean;

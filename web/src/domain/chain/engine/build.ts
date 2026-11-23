@@ -37,6 +37,7 @@ export function installBuild(X: EngineCtx) {
     const it=X.itemOf(s);s.it=it;if(X.ZC)X.out.zsnap![s.j]={board:Object.keys(X.O).filter((id:string)=>(X.O[id].type==='unit'||X.O[id].type==='gear')&&X.O[id].zone==='board'),ctx:X.zctx(it,s),hand:{A:X.zoneIds('hand','A'),B:X.zoneIds('hand','B')},trash:{A:X.zoneIds('trash','A'),B:X.zoneIds('trash','B')},deck:{A:X.zoneIds('deck','A'),B:X.zoneIds('deck','B')}};
     const P:PlayRun={s,ix,c,tm,perm,empty,Verb,what,it,costV:null,pick:[],trigBad:null};
     if(X.playCheck(P))return;
+    if(perm&&c.t==='Unit'&&X.ACCELNEXT[s.pl]){X.ACCELNEXT[s.pl]=false;X.O['s'+s.j].accelG=true;} // a kijátszáskor kapja meg (805.1.b), nem a belépéskor
     X.playLegal(P);};
   /** A kijátszás legalitása (358, 355.8, 403.4): igaz, ha a lépés itt véget ér (nem szabályos, vagy azonnal resolve-ol). */
   X.playCheck=(P)=>{const {s,c,tm,perm,empty,Verb,what,it,pick}=P;

@@ -2,6 +2,7 @@
    átrendezése (a builder űrlapja, a pályás építő és a tesztek közös része; korábban a chain.ts, majd a legacyForm.ts). */
 import { vsCard } from '../data/store';
 import { isPermC } from './actions';
+import { withLegacyPhrases } from './parser';
 import { srcCard, stepInfo } from './steps';
 import type { ChainState } from './state';
 import type { TargetParam } from './types';
@@ -34,7 +35,12 @@ export function stateKeysOf(CS:ChainState){const k=new Set<string>();const addTx
 /** Kéz, trash és deck lapjai állandó azonosítóval ({id, n}). A régi, névlistás forma (sorszámos "zhA0" hivatkozásokkal) betöltéskor ugyanazt az
     azonosítót kapja, amit az elemző sorszámból képezett, így a régi linkek és sablonok elemzése nem változik. Az új lapok "_" utáni sorszámot kapnak, ez soha nem ismétlődik. */
 const ZK:Record<string,string>={hand:'h',trash:'t',deck:'d'};
-export function normZones<T extends ChainState|null|undefined>(cs:T):T{if(!cs)return cs;(['hand','trash','deck'] as const).forEach(z=>{const zs=cs[z];if(!zs)return;(['A','B'] as const).forEach(p=>{zs[p]=(zs[p]||[]).map((e,i)=>typeof e==='string'?{id:'z'+ZK[z]+p+i,n:e}:e&&!e.id?Object.assign({},e,{id:'z'+ZK[z]+p+i}):e);});});return cs;}
+/** Régi lépések célpontjai: a feltétel-tagmondat kifejezése ("if an enemy unit has died", "if you have exactly two units there") korábban
+    célpont-helyet kapott. Ha a lépés tg tömbje hosszabb az új listánál, a régi lista feltétel-helyeit kihagyva íródik át, így a régi #c= linkek
+    célpontjai ugyanarra a kifejezésre mutatnak. Új lépésnél (tg legfeljebb az új lista hossza) nem változtat. */
+export function migrateTg(cs:ChainState){cs.steps.forEach(s=>{if(!s.tg||!s.tg.length)return;const inf=stepInfo(cs,s);if(!inf||s.tg.length<=inf.list.length)return;
+  const old=withLegacyPhrases(()=>stepInfo(cs,s));if(!old||old.list.length!==s.tg.length||!old.list.some(p=>p.cond))return;s.tg=s.tg.filter((_,i)=>!old.list[i].cond);});}
+export function normZones<T extends ChainState|null|undefined>(cs:T):T{if(!cs)return cs;migrateTg(cs);(['hand','trash','deck'] as const).forEach(z=>{const zs=cs[z];if(!zs)return;(['A','B'] as const).forEach(p=>{zs[p]=(zs[p]||[]).map((e,i)=>typeof e==='string'?{id:'z'+ZK[z]+p+i,n:e}:e&&!e.id?Object.assign({},e,{id:'z'+ZK[z]+p+i}):e);});});return cs;}
 export function newZid(cs:ChainState,z:string,p:string){cs.zseq=(cs.zseq||0)+1;return 'z'+ZK[z]+p+'_'+cs.zseq;}
 
 /** Lépések törlése és átrendezése: az "sK" hivatkozásokat (célpont, költség, forrás) az új indexre írja át; a törölt vagy mögé került lépésre mutató hivatkozás törlődik. */
